@@ -61,7 +61,7 @@ eg: <type>[optional scope]: <description>
 - **build**: Thay đổi liên quan đến hệ thống hoặc các thư viên bên ngoài (Ảnh hưởng đến tiến trình build)
 - **ci**: Thay đổi liên quan đến cấu hình CI…
 - **chore**: Những sửa đổi nhỏ nhặt không liên quan tới code.
-- **BREAKING** CHANGE: Những commit mới footer là BREAKING CHANGE thể hiện những thay đổi gây ảnh hướng lớn đến source code ví dụ thay đổi kiểu dữ liệu, cách lấy dữ liệu… => Qua đó cảnh báo mọi người để tránh phát sinh các vấn đề.
+- **BREAKING CHANGE**: Những commit mới footer là BREAKING CHANGE thể hiện những thay đổi gây ảnh hướng lớn đến source code ví dụ thay đổi kiểu dữ liệu, cách lấy dữ liệu… => Qua đó cảnh báo mọi người để tránh phát sinh các vấn đề.
 
 ## License
 
