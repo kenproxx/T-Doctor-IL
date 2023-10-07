@@ -1,0 +1,122 @@
+body {
+    font-family: "Mulish", sans-serif;
+}
+a {
+    text-decoration: none;
+}
+.header {
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    padding: 29px 76px 29px 77px;
+    gap: 54px;
+    position: fixed;
+    background: white;
+    z-index: 10;
+}
+.header-left {
+    width: 177px;
+    height: 42px;
+}
+.header-center {
+    gap: 24px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.header-center a {
+    color: black;
+}
+
+.header-center a:hover {
+    color: #45c3d2;
+}
+.header-right {
+    gap: 8px;
+}
+
+.header-right a {
+    color: #45c3d2;
+}
+
+.header-right .account_control{
+    border: none;
+    outline: none;
+    background: white;
+    font-weight: 800;
+    font-size: 16px;
+    color: #45c3d2;
+}
+.banner {
+    height: 280px;
+    margin-top: 116px;
+    padding-left: 1px;
+    background-color: grey;
+}
+.section1 {
+    height: 647px;
+    margin: 25px 0;
+}
+.section1__side {
+    width: 161px;
+    background-color: #d9d9d9;
+}
+.section1-main {
+    width: calc(100vw - 320px - 40px);
+}
+.section1__item {
+    flex: 1;
+    max-width: 100%;
+    background-color: #f3f3f3;
+    border-radius: 16px;
+}
+.section1_link {
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    color: black;
+}
+.section1-content {
+    height: 500px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.content__item {
+    padding: 10px;
+    background-color: #ffff;
+    border-radius: 16px;
+}
+.content__item p {
+    color: #929292;
+
+}
+.content__item-link {
+    color: #424242 !important;
+    text-align: right;
+    cursor: pointer;
+}
+.content__item__image {
+    width: 173px;
+    height: 137px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.content__item__describe{
+    height: 45px;
+    overflow: hidden;
+}
+.nav-tabs .nav-item{
+
+}
+.nav-item{
+    color: black;
+    border-bottom: 2px solid transparent;
+    transition: color 0.3s,
+    border-bottom 0.3s;
+}
+.nav-item:focus {
+    color: rgba(69, 195, 210, 1);
+    border-bottom: 2px solid rgba(69, 195, 210, 1);
+
+}
+
