@@ -43,35 +43,25 @@ Recommend to install this preset on a project that you are starting from scratch
 
 If you found this project useful, then please consider giving it a :star:
 
-## Preview
+## Conventional commits
 
-`login`
+eg: <type>[optional scope]: <description>
 
-<img src="https://imgur.com/YjGp6Sbl.png">
+[optional body]
 
-***
+[optional footer(s)]
 
-`register`
-
-<img src="https://imgur.com/Wj09cu4l.png">
-
-***
-
-`dashboard`
-
-<img src="https://imgur.com/CrmOfT5l.png">
-
-***
-
-`profile`
-
-<img src="https://imgur.com/5t4eS1rl.png">
-
-***
-
-`logout`
-
-<img src="https://imgur.com/d9JclOYl.png">
+- **feat**: Những thay đổi cho tính năng mới.
+- **fix**: Những thay đổi liên quan đến sửa lỗi trong ứng dụng, hệ thống.
+- **docs**: Những thay đổi liên quan đến sửa đổi document trong repo.
+- **style**: Những thay đổi không làm thay đổi ý nghĩa của code như căn hàng, xuống dòng ở cuối file…
+- **refactor**: Tối ưu source code, có thể liên quan logic. Ví dụ như xoá code thừa, tối giản code, đổi tên biến …
+- **perf**: Thay đổi giúp tăng hiệu năng.
+- **test**: Thêm hoặc sửa các testcase trong hệ thống.
+- **build**: Thay đổi liên quan đến hệ thống hoặc các thư viên bên ngoài (Ảnh hưởng đến tiến trình build)
+- **ci**: Thay đổi liên quan đến cấu hình CI…
+- **chore**: Những sửa đổi nhỏ nhặt không liên quan tới code.
+- **BREAKING** CHANGE: Những commit mới footer là BREAKING CHANGE thể hiện những thay đổi gây ảnh hướng lớn đến source code ví dụ thay đổi kiểu dữ liệu, cách lấy dữ liệu… => Qua đó cảnh báo mọi người để tránh phát sinh các vấn đề.
 
 ## License
 
