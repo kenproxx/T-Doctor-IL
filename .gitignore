@@ -12,6 +12,8 @@ yarn-error.log
 
 /.phpunit.cache
 
+.idea
+storage/logs
 
 # Created by https://www.toptal.com/developers/gitignore/api/laravel,phpstorm
 # Edit at https://www.toptal.com/developers/gitignore?templates=laravel,phpstorm
