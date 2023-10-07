@@ -30,4 +30,7 @@ Route::group(['prefix' => 'profile'], function () {
 Route::get('/about', function () {
     return view('about');
 })->name('about');
-Route::get('/new',[\App\Http\Controllers\fronend\HomeController::class,'index'])->name('index.new');
+
+Route::group(['prefix' => 'news'],  function () {
+    Route::get('', [\App\Http\Controllers\fronend\HomeController::class,'index'])->name('index.new');
+});
