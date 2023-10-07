@@ -16,7 +16,7 @@
         <button class="account_control" id="show_login" data-bs-toggle="modal" data-bs-target="#exampleModal-login">Sign in</button>
         <div></div>
         |
-        <button class="account_control" id="show_register">Sign up</button>
+        <button class="account_control" id="show_register" data-bs-toggle="modal" data-bs-target="#exampleModal-register">Sign up</button>
     </div>
     <div class="modal fade" id="exampleModal-login" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

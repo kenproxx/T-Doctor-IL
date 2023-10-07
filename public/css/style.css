@@ -24,10 +24,12 @@ a {
 
 .header-center a {
     color: black;
+    text-decoration: none;
 }
 
 .header-center a:hover {
     color: #45c3d2;
+    text-decoration: none;
 }
 .header-right {
     gap: 8px;
@@ -105,6 +107,12 @@ a {
     height: 45px;
     overflow: hidden;
 }
+.banner1{
+    height: 280px;
+    margin-top: 25px;
+    padding-left: 1px;
+    background-color: grey;
+}
 .nav-tabs .nav-item{
 
 }
@@ -117,9 +125,61 @@ a {
 .nav-item:focus {
     color: rgba(69, 195, 210, 1);
     border-bottom: 2px solid rgba(69, 195, 210, 1);
+}
+.content-item #address h2{
+    font-size: 32px;
+    font-weight: 800;
+}
+.content-item #address p{
+    font-size: 18px;
+    font-weight: 600;
+    color: #929292;
+}
+#map-location .content-item{
+    justify-items: center;
+    width: 1170px;
+    height: 570px;
+}
+#map-location .content-item #address{
+    width: 770px;
+    height:502px;
+}
+#map-location .content-item #describe {
+    width: 370px;
+    height: 417px;
+}
+#describe .describe-item h3{
+    font-size: 24px;
+    font-weight: 800;
+}
+#describe .describe-item p{
+    font-size: 18px;
+    font-weight: 600;
+    color: #929292;
 
 }
-
+.btn-visit{
+    border: none;
+    outline: none;
+    width: 370px;
+    height: 48px;
+    padding: 14px 10px 14px 10px;
+    border-radius: 8px;
+    gap: 10px;
+    background: #424242;
+    color: white;
+    font-weight: 600;
+}
+#doctor-information{
+    background: #F3F3F3;
+    height: 1441px;
+    justify-content: center;
+    text-align: center;
+}
+#list-option .option-menu{
+    width: 769px;
+    height: 42px;
+}
 /* footer */
 footer {
     z-index: 0;
