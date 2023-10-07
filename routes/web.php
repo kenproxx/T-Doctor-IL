@@ -28,3 +28,4 @@ Route::put('/profile', 'ProfileController@update')->name('profile.update');
 Route::get('/about', function () {
     return view('about');
 })->name('about');
+Route::get('/new',[\App\Http\Controllers\fronend\HomeController::class,'index'])->name('index.new');
