@@ -1,0 +1,93 @@
+
+.popup .btn-close{
+    position: absolute;
+    top: 24px;
+    left: 730px;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    line-height: 15px;
+    cursor: pointer;
+}
+.popup .form .form-element{
+    margin: 48px 0 16px;
+}
+
+.popup .form .form-element label{
+    font-weight: 800;
+    font-size: 14px;
+}
+.popup .form .form-element a{
+    float: right;
+    text-decoration: none;
+    color: black;
+    font-weight: 800;
+    font-size: 14px;
+}
+.popup .form .form-element input[type="text"],
+.popup .form .form-element input[type="password"]{
+    width: 100%;
+    height: 56px;
+    padding: 20px 16px 20px 16px;
+    border-radius: 8px;
+    border: 1px;
+    gap: 10px;
+    outline: none;
+    background: #F3F3F3;
+}
+.popup .form .form-element input[type="checkbox"]{
+    width: 18px;
+    height: 18px;
+    top: 3px;
+    left: 3px;
+    border: 2px;
+    margin-right: 5px;
+}
+.popup .form .form-element button{
+    width: 270px;
+    height: 56px;
+    padding: 18px 24px 18px 24px;
+    border-radius: 8px;
+    gap: 10px;
+    outline: none;
+    border: none;
+    background: #45C3D2;
+    font-size: 18px;
+    font-weight: 800;
+    color: white;
+}
+
+.popup .form .form-signin button{
+    width: 64px;
+    height: 64px;
+    border: none;
+    outline: none;
+    background: white;
+}
+.popup .form .form-signin button img{
+    width: 64px;
+    height: 64px;
+
+}
+.modal-backdrop.show{
+    z-index: 1;!important;
+}
+
+.modal-dialog{
+    width: 770px!important;
+}
+.modal-content{
+    z-index: 10;!important;
+}
+.other_sign{
+    text-align: center;
+    position: relative;
+}
+.other_sign hr{
+    position: absolute;
+    top: -5px;
+    right: 0;
+    left: 0;
+    border-top: 1px solid black;
+
+}
