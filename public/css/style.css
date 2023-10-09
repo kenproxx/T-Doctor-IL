@@ -1,6 +1,7 @@
-body {
+*{
     font-family: "Mulish", sans-serif;
 }
+
 a {
     text-decoration: none;
 }
@@ -17,17 +18,19 @@ a {
     height: 42px;
 }
 .header-center {
-    gap: 24px;
+    gap: 15px;
     font-size: 16px;
     font-weight: 600;
 }
 
 .header-center a {
     color: black;
+    text-decoration: none;
 }
 
 .header-center a:hover {
     color: #45c3d2;
+    text-decoration: none;
 }
 .header-right {
     gap: 8px;
@@ -110,6 +113,12 @@ a {
     height: 45px;
     overflow: hidden;
 }
+.banner1{
+    height: 280px;
+    margin-top: 25px;
+    padding-left: 1px;
+    background-color: grey;
+}
 .nav-tabs .nav-item{
 
 }
@@ -122,9 +131,152 @@ a {
 .nav-item:focus {
     color: rgba(69, 195, 210, 1);
     border-bottom: 2px solid rgba(69, 195, 210, 1);
-
 }
-
+.content-item #address h2{
+    font-size: 32px;
+    font-weight: 800;
+}
+.content-item #address p{
+    font-size: 18px;
+    font-weight: 600;
+    color: #929292;
+}
+/*Map*/
+#map-location .content-item{
+    justify-items: center;
+    width: 1170px;
+    height: 570px;
+}
+#map-location .content-item #address{
+    width: 770px;
+    height:502px;
+}
+#map-location .content-item #describe {
+    width: 370px;
+    height: 417px;
+}
+#map-location .content-item #describe .btn-visit{
+    border: none;
+    outline: none;
+    width: 370px;
+    height: 48px;
+    padding: 14px 10px 14px 10px;
+    border-radius: 8px;
+    gap: 10px;
+    background: #424242;
+    color: white;
+    font-weight: 600;
+}
+/*Recruitment*/
+#recruitment .content-item{
+    justify-items: center;
+    width: 1170px;
+    height: 570px;
+}
+#recruitment .content-item #address{
+    width: 770px;
+    height:502px;
+}
+#recruitment .content-item #describe {
+    width: 370px;
+    height: 498px;
+}
+.recruitment__item{
+    width: 692px;
+    height: 153px;
+    padding: 8px;
+    border-radius: 12px;
+    border: 1px;
+    gap: 12px;
+}
+/*Flea-market*/
+#flea-market .content-item{
+    justify-items: center;
+    width: 1170px;
+    height: 570px;
+}
+#flea-market .content-item #address{
+    width: 770px;
+    height:502px;
+}
+#flea-market .content-item #describe {
+    width: 370px;
+    height: 498px;
+}
+flea__item{
+    width: 692px;
+    height: 153px;
+    padding: 8px;
+    border-radius: 12px;
+    border: 1px;
+    gap: 12px;
+}
+#describe .describe-item h3{
+    font-size: 24px;
+    font-weight: 800;
+}
+#describe .describe-item p{
+    font-size: 18px;
+    font-weight: 600;
+    color: #929292;
+}
+#myTab{
+    display: flex;
+    justify-content: center;
+    gap: 99px;
+}
+.nav-link{
+    background: #45C3D2;
+}
+.sign--up{
+    display: flex;
+    justify-content: center;
+}
+.sign--up a{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    gap: 10px;
+    text-decoration: none;
+}
+.btn-see-all{
+    border: none;
+    outline: none;
+    width: 370px;
+    height: 48px;
+    padding: 14px 10px 14px 10px;
+    border-radius: 8px;
+    gap: 10px;
+    background: #424242;
+    color: white;
+    font-weight: 600;
+}
+/*doctor*/
+#doctor-information{
+    background: #F3F3F3;
+    height: 1441px;
+    justify-content: center;
+    text-align: center;
+}
+#doctor-information #list-option .option-menu{
+    width: 769px;
+    height: 42px;
+}
+/*online shopping*/
+#item-information{
+    background: #F3F3F3;
+    height: 1441px;
+    justify-content: center;
+    text-align: center;
+}
+#item-information #list-option .option-menu{
+    width: 769px;
+    height: 42px;
+}
+.container {
+    width: 269px;
+    height: 391px;
+}
 /* footer */
 footer {
     z-index: 0;
@@ -208,3 +360,49 @@ footer {
     }
 }
 /* end footer */
+/*recruitment screen*/
+#filter{
+    width: 1170px;
+    height: 48px;
+    margin-top: 10px;
+}
+
+#filter button{
+    width: 53px;
+    height: 48px;
+    border: snow;
+    outline: none;
+    color: white;
+    background: black;
+    border-radius: 10px;
+}
+.filter_search input{
+    width: 467px;
+    height: 48px;
+    border: none;
+    outline: none;
+}
+.filter_option {
+    padding: 15px;
+}
+#search_position{
+    border: none;
+    outline: none;
+}
+#rank #title{
+    width: 1173px;
+    height: 60px;
+    background: grey;
+}
+.rank_title{
+    position: relative;
+}
+
+.rank_title h2{
+    position: absolute;
+    left: 30px;
+    top: 20px;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}
