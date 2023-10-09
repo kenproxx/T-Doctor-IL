@@ -395,15 +395,271 @@
                 </ul>
             </div>
         </div>
+        <div id="list-doctor" class="d-flex justify-content-evenly container">
+            <div class="col-3 card" style="width: 15rem;">
+                <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <div class="col-3 card" style="width: 15rem;">
+                <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <div class="col-3 card" style="width: 15rem;">
+                <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <div class="col-3 card" style="width: 15rem;">
+                <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
     </div>
     <div class="banner1">
         <!-- Add content for your banner here -->
     </div>
-    <div class="banner1">
-        <!-- Add content for your banner here -->
+    <div id="recruitment_board" class="d-flex justify-content-center">
+        <div class="content-item d-flex justify-content-center" >
+            <div id="recruitment" class="p-2 w-100">
+                <h2>Recruitment</h2>
+                <p>Hire staffs cheaper, find your staffs faster</p>
+                <div>
+                    <div class="section1-content mt-1">
+                        <div class="">
+                            <div class="recruitment__item d-flex ">
+                                <img
+                                    class="content__item__image"
+                                    src="{{asset('img/icons_logo/image 1.jpeg')}}"
+                                    alt=""
+                                />
+                                <div>
+                                    <h6>
+                                        Nhận liền tay voucher khám online trị giá 250k từ Phòng
+                                        khám Med247
+                                    </h6>
+                                    <div class="content__item__describe">
+                                        Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
+                                        kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
+                                        đầy. Dù đã có ...
+                                    </div>
+                                    <p class="content__item-link">Read</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="recruitment__item d-flex ">
+                                <img
+                                    class="content__item__image"
+                                    src="{{asset('img/icons_logo/image 1.jpeg')}}"
+                                    alt=""
+                                />
+                                <div>
+                                    <h6>
+                                        Nhận liền tay voucher khám online trị giá 250k từ Phòng
+                                        khám Med247
+                                    </h6>
+                                    <div class="content__item__describe">
+                                        Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
+                                        kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
+                                        đầy. Dù đã có ...
+                                    </div>
+                                    <p class="content__item-link">Read</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="recruitment__item d-flex ">
+                                <img
+                                    class="content__item__image"
+                                    src="{{asset('img/icons_logo/image 1.jpeg')}}"
+                                    alt=""
+                                />
+                                <div>
+                                    <h6>
+                                        Nhận liền tay voucher khám online trị giá 250k từ Phòng
+                                        khám Med247
+                                    </h6>
+                                    <div class="content__item__describe">
+                                        Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
+                                        kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
+                                        đầy. Dù đã có ...
+                                    </div>
+                                    <p class="content__item-link">Read</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="recruitment__item d-flex ">
+                                <img
+                                    class="content__item__image"
+                                    src="{{asset('img/icons_logo/image 1.jpeg')}}"
+                                    alt=""
+                                />
+                                <div>
+                                    <h6>
+                                        Nhận liền tay voucher khám online trị giá 250k từ Phòng
+                                        khám Med247
+                                    </h6>
+                                    <div class="content__item__describe">
+                                        Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
+                                        kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
+                                        đầy. Dù đã có ...
+                                    </div>
+                                    <p class="content__item-link">Read</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="describe" class="mt-auto p-2 align-self-baseline">
+                <div class="describe-item">
+                    <h3>24/7 AVAILABLE</h3>
+                    <p>You can find available clinics/pharmacies</p>
+                </div>
+                <div class="describe-item">
+                    <h3>HOME CARE SERVICE</h3>
+                    <p>Don't come to us! We will come to you!</p>
+                </div>
+                <div class="describe-item">
+                    <h3>MANY LOCATION</h3>
+                    <p>More than 1500 Doctors, 1000 Pharmacists, 1000 Hospitals always wait for you</p>
+                </div>
+                <button class="btn-see-all mt-auto p-2">See all</button>
+            </div>
+        </div>
     </div>
     <div class="banner1">
         <!-- Add content for your banner here -->
+    </div>
+    <div id="flea_market_board" class="d-flex justify-content-center">
+        <div class="content-item d-flex justify-content-center">
+            <div id="flea-market" class="p-2 w-100">
+                <h2>Flea market</h2>
+                <p>Hire staffs cheaper, find your staffs faster</p>
+                <div>
+                    <div class="section1-content mt-1 container row">
+                        <div class="col-2 card" style="width: 10rem;">
+                            <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                        </div>
+                        <div class="col-2 card" style="width: 10rem;">
+                            <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                        </div>
+                        <div class="col-2 card" style="width: 10rem;">
+                            <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="describe" class="mt-auto p-2">
+                    <div class="describe-item">
+                        <h3>24/7 AVAILABLE</h3>
+                        <p>You can find available clinics/pharmacies</p>
+                    </div>
+                    <div class="describe-item">
+                        <h3>HOME CARE SERVICE</h3>
+                        <p>Don't come to us! We will come to you!</p>
+                    </div>
+                    <div class="describe-item">
+                        <h3>MANY LOCATION</h3>
+                        <p>More than 1500 Doctors, 1000 Pharmacists, 1000 Hospitals always wait for you</p>
+                    </div>
+                <button class="btn-see-all mt-auto p-2">See all</button>
+            </div>
+        </div>
+    </div>
+    <div class="banner1">
+        <!-- Add content for your banner here -->
+    </div>
+    <div id="item-information">
+        <h1>Buy online</h1>
+        <p>Don't struggle finding, we are always ready for you</p>
+        <div id="list-option" class="d-flex justify-content-around ">
+            <div class="option-menu">
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Popular</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Recommended</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">New product</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Hot deal</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="list-item" class="d-flex justify-content-evenly container">
+            <div class="col-3 card" style="width: 18rem;">
+                <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <div class="col-3 card" style="width: 18rem;">
+                <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <div class="col-3 card" style="width: 18rem;">
+                <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+            <div class="col-3 card" style="width: 18rem;">
+                <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
     </div>
     </body>
 @endsection
