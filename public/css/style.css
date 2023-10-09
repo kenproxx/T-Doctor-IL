@@ -156,7 +156,25 @@ a {
     font-size: 18px;
     font-weight: 600;
     color: #929292;
-
+}
+#myTab{
+    display: flex;
+    justify-content: center;
+    gap: 99px;
+}
+.nav-link{
+    background: #45C3D2;
+}
+.sign--up{
+    display: flex;
+    justify-content: center;
+}
+.sign--up a{
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    gap: 10px;
+    text-decoration: none;
 }
 .btn-visit{
     border: none;
