@@ -15,4 +15,8 @@ class RecruitmentController extends Controller
     {
         return view('RecruitmentDetails.apply');
     }
+    public function addCv()
+    {
+        return view('RecruitmentDetails.add-cv');
+    }
 }
