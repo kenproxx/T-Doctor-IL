@@ -26,8 +26,11 @@ body {
             height:237px ;
             border-radius: 8px;
             background: lightgray 50% / cover no-repeat;
-
         }
+    }
+
+    .apply-text {
+        margin-top: 12px;
     }
     .apply-bt {
         border-radius: 8px;
