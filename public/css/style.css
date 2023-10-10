@@ -72,7 +72,9 @@ a {
 }
 .section1__item {
     flex: 1;
-    max-width: 100%;
+    width: 528px;
+    height: 615px;
+    margin: 16px;
     background-color: #f3f3f3;
     border-radius: 16px;
 }
@@ -225,8 +227,23 @@ flea__item{
     justify-content: center;
     gap: 99px;
 }
-.nav-link{
-    background: #45C3D2;
+.nav .nav-item .nav-link.active{
+    background: #F3F3F3;
+    color: #45C3D2;
+    border-bottom: solid;
+    font-size: 18px;
+    font-weight: 800;
+    border-radius: 0;
+    width: 174px;
+    height: 42px;
+    text-align: center;
+
+}
+.nav .nav-item .nav-link{
+    color: black;
+    font-weight: 400;
+    font-size: 16px;
+    text-align: center;
 }
 .sign--up{
     display: flex;
@@ -261,6 +278,23 @@ flea__item{
 #doctor-information #list-option .option-menu{
     width: 769px;
     height: 42px;
+    margin-bottom: 16px;
+}
+#doctor-information #list-option .option-menu .nav{
+    width: 769px;
+    height: 42px;
+}
+#doctor-information #list-option .option-menu .nav .nav-item .nav-link.active{
+    background: #F3F3F3;
+    color: #45C3D2;
+    border-bottom: solid;
+    font-size: 18px;
+    font-weight: 800;
+    border-radius: 0;
+    width: 174px;
+    height: 42px;
+    text-align: center;
+
 }
 /*online shopping*/
 #item-information{
@@ -272,6 +306,23 @@ flea__item{
 #item-information #list-option .option-menu{
     width: 769px;
     height: 42px;
+    margin-bottom: 16px;
+}
+#item-information #list-option .option-menu .nav{
+    width: 769px;
+    height: 42px;
+}
+#item-information #list-option .option-menu .nav .nav-item .nav-link.active{
+    background: #F3F3F3;
+    color: #45C3D2;
+    border-bottom: solid;
+    font-size: 18px;
+    font-weight: 800;
+    border-radius: 0;
+    width: 174px;
+    height: 42px;
+    text-align: center;
+
 }
 .container {
     width: 269px;
@@ -400,6 +451,9 @@ footer {
 #rank .rank_title img{
     position: absolute;
     top: 0;
+}
+#rank a{
+
 }
 .rank_title h2{
     position: absolute;

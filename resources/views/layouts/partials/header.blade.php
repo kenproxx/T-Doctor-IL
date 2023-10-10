@@ -20,7 +20,7 @@
     </div>
     <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
+            <div class="modal-content" id="modal_login">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
                     <span aria-hidden="true">&times;</span>
@@ -70,12 +70,11 @@
     </div>
     <div class="modal fade" id="modalRegister" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="modal-content" id="modal_register">
+                <div class="modal-header" >
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
                     <span aria-hidden="true">&times;</span>
                 </div>
-
                 <div class="modal-body">
                     <div class="popup">
                         <div class="form">
