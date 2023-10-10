@@ -117,7 +117,7 @@ a {
 }
 .banner1{
     height: 280px;
-    margin-top: 25px;
+    /*margin-top: 25px;*/
     padding-left: 1px;
     background-color: grey;
 }

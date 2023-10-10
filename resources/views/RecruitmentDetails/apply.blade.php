@@ -18,7 +18,9 @@
                 </div>
                 <div class="d-flex">
                     <button class="apply-bt apply-bt_delete">Delete</button>
-                    <button class="apply-bt apply-bt_edit">Edit</button>
+                    <form action="{{ route('recruitment.add.cv') }}">
+                        <button type="submit" class="apply-bt apply-bt_edit">Edit</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -35,7 +37,9 @@
                 </div>
                 <div class="d-flex">
                     <button class="apply-bt apply-bt_delete">Delete</button>
-                    <button class="apply-bt apply-bt_edit">Edit</button>
+                    <form action="{{ route('recruitment.add.cv') }}">
+                        <button type="submit" class="apply-bt apply-bt_edit">Edit</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -52,7 +56,9 @@
                 </div>
                 <div class="d-flex">
                     <button class="apply-bt apply-bt_delete">Delete</button>
-                    <button class="apply-bt apply-bt_edit">Edit</button>
+                    <form action="{{ route('recruitment.add.cv') }}">
+                        <button type="submit" class="apply-bt apply-bt_edit">Edit</button>
+                    </form>
                 </div>
             </div>
         </div>
