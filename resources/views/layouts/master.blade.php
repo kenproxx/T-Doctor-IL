@@ -47,7 +47,7 @@
 <body>
 
 <!-- Header -->
-@include('layouts.partials.header')
+{{--@include('layouts.partials.header')--}}
 
     @yield('content')
 
