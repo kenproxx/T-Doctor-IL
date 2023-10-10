@@ -384,15 +384,18 @@ footer {
     border: none;
     outline: none;
 }
-#rank #title{
+#rank{
     width: 1173px;
     height: 60px;
     background: grey;
 }
-.rank_title{
+#rank .rank_title{
     position: relative;
 }
-
+#rank .rank_title img{
+    position: absolute;
+    top: 0;
+}
 .rank_title h2{
     position: absolute;
     left: 30px;
@@ -400,4 +403,65 @@ footer {
     color: white;
     padding-left: 20px;
     padding-right: 20px;
+}
+/*header_2*/
+.nav_1 {
+    width: 415px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    gap: 58px;
+    margin-left: 77px;
+}
+.nav_1 .navbar-brand{
+    padding: 58px;
+
+}
+.nav_1 .navbar-brand h5{
+    margin-left: 58px;
+     color: #45C3D2;
+ }
+.nav_2{
+    width: 320px;
+    height: 22px;
+}
+
+.nav_2 a{
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+}
+.nav_2 a:hover{
+    color: #45C3D2;
+    text-decoration: underline;
+}
+.nav_3{
+    width: 328px;
+    height: 52px;
+    margin-right: 77px;
+}
+.nav_3 .btn_option button{
+    background: #45C3D2;
+    color: white;
+    width: 120px;
+    height: 52px;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    margin-right: 24px;
+}
+.nav_3 .btn_user button{
+    width: 40px;
+    height: 40px;
+    outline: none;
+    border: none;
+    position: relative;
+    border-radius: 100%;
+    text-align: center;
+}
+.nav_3 .btn_user button img{
+    position: absolute;
+    top: 0;
+    left: 0;
 }
