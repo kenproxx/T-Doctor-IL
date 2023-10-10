@@ -75,14 +75,14 @@
             <div id="rank" class="d-flex">
                     <div class="rank_title p-2">
                         <img src="{{asset('img/premium_rank.png')}}" width="398px" height="60px">
-                        <h2>PLATINUM</h2>
+                        <h2>PREMIUM</h2>
                     </div>
                     <div class="ms-auto p-2 "><a href="#">See all</a></div>
             </div>
             <div id="rank" class="d-flex">
                     <div class="rank_title p-2">
                         <img src="{{asset('img/silver_rank.png')}}" width="398px" height="60px">
-                        <h2>PLATINUM</h2>
+                        <h2>SILVER</h2>
                     </div>
                     <div class="ms-auto p-2 "><a href="#">See all</a></div>
             </div>

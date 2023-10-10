@@ -21,28 +21,30 @@
         </div>
     </div>
     <div>
-        <div class="section1 d-flex gap-3">
+        <div class="section1 d-flex justify-content-evenly">
             <div class="section1__side"></div>
-            <div class="section1-main d-flex gap-4">
+            <div class="section1-main d-flex">
                 <div class="section1__item order-1">
                     <div class="section1-label position-relative">
                         <h3 class="py-3 text-center">WHAT’S FREE?</h3>
                         <a href="#"><p class="section1_link">See all</p></a>
                     </div>
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Free today</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Free with mission</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Discounted service</button>
-                        </li>
-                    </ul>
+                    <div class="d-flex justify-content-center">
+                        <ul class="nav nav-pills nav-fill">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Free today</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Free with mission</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Discounted service</a>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="section1-content mt-5">
+                            <div class="section1-content">
                                 <div class="px-5 py-2">
                                     <div class="content__item d-flex gap-3">
                                         <img
@@ -131,7 +133,7 @@
 
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="section1-content mt-5">
+                            <div class="section1-content">
                                 <div class="px-5 py-2">
                                     <div class="content__item d-flex gap-3">
                                         <img
@@ -315,14 +317,16 @@
                         <a href="#"><p class="section1_link">See all</p></a>
 
                     </div>
-                    <ul class="nav nav-tabs" id="myTab1" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="home-tab1" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">News</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab1" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Events</button>
-                        </li>
-                    </ul>
+                    <div class="d-flex justify-content-center">
+                        <ul class="nav nav-pills nav-fill">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">New</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Even</a>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="section1-content mt-5">
                         <div class="px-5 py-2">
                             <div class="content__item d-flex gap-3">
@@ -382,10 +386,10 @@
     <div id="doctor-information">
         <h1>Find a doctor</h1>
         <div id="list-option" class="d-flex justify-content-around ">
-            <div class="option-menu">
-                <ul class="nav justify-content-center">
+            <div class="option-menu d-flex justify-content-center">
+                <ul class="nav nav-pills nav-fill">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">24/7 Available</a>
+                        <a class="nav-link active" aria-current="page" href="#">24/7 Available</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Find my medicine</a>
@@ -605,10 +609,10 @@
         <h1>Buy online</h1>
         <p>Don't struggle finding, we are always ready for you</p>
         <div id="list-option" class="d-flex justify-content-around ">
-            <div class="option-menu">
-                <ul class="nav justify-content-center">
+            <div class="option-menu d-flex justify-content-center">
+                <ul class="nav nav-pills nav-fill">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Popular</a>
+                        <a class="nav-link active" aria-current="page" href="#">Popular</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Recommended</a>
