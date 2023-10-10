@@ -4,7 +4,7 @@
         <img src="{{asset('img/icons_logo/image 1.png')}}" alt="logo">
     </div>
     <div class="header-center d-flex">
-        <a href="{{route('index.recruitment')}}">Recruitment</a>
+        <a href="{{route('recruitment.index')}}">Recruitment</a>
         <a href="#">Real market</a>
         <a href="#">Examination</a>
         <a href="#">New/Events</a>
