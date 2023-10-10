@@ -288,11 +288,6 @@ flea__item{
     font-weight: 600;
     color: #929292;
 }
-#myTab{
-    display: flex;
-    justify-content: center;
-    gap: 99px;
-}
 .nav .nav-item .nav-link.active{
     background: #F3F3F3;
     color: #45C3D2;
@@ -312,15 +307,20 @@ flea__item{
     text-align: center;
 }
 .sign--up{
-    display: flex;
-    justify-content: center;
+    margin-top: 40px;
 }
 .sign--up a{
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-    gap: 10px;
-    text-decoration: none;
+    text-decoration: underline;
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #45C3D2;
+}
+.sign--up p{
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 .btn-see-all{
     border: none;
