@@ -402,27 +402,43 @@
         </div>
         <div id="list-doctor" class="d-flex justify-content-evenly container">
             <div class="col-3 card" style="width: 15rem;">
-                <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+                <i class="bi bi-heart"></i>
+                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                   <h5 class="card-title">BS Đô Văn Định</h5>
+                    <p  class="card-text">respiratory doctor</p>
+                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
+                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
                 </div>
             </div>
             <div class="col-3 card" style="width: 15rem;">
-                <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+                <i class="bi bi-heart"></i>
+                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                   <h5 class="card-title">BS Đô Văn Định</h5>
+                    <p  class="card-text">respiratory doctor</p>
+                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
+                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
                 </div>
             </div>
             <div class="col-3 card" style="width: 15rem;">
-                <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+                <i class="bi bi-heart"></i>
+                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                   <h5 class="card-title">BS Đô Văn Định</h5>
+                    <p  class="card-text">respiratory doctor</p>
+                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
+                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
                 </div>
             </div>
             <div class="col-3 card" style="width: 15rem;">
-                <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+                <i class="bi bi-heart"></i>
+                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                   <h5 class="card-title">BS Đô Văn Định</h5>
+                    <p  class="card-text">respiratory doctor</p>
+                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
+                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
                 </div>
             </div>
         </div>
@@ -444,13 +460,13 @@
         <!-- Add content for your banner here -->
     </div>
     <div id="recruitment_board" class="d-flex justify-content-center">
-        <div class="content-item d-flex justify-content-center" >
+        <div id="content-bkg" class="content-item d-flex justify-content-center " >
             <div id="recruitment" class="p-2 w-100">
                 <h2>Recruitment</h2>
                 <p>Hire staffs cheaper, find your staffs faster</p>
                 <div>
-                    <div class="section1-content mt-1">
-                        <div class="">
+                    <div class="section1-content">
+                        <div class="item-bkg">
                             <div class="recruitment__item d-flex ">
                                 <img
                                     class="content__item__image"
@@ -471,7 +487,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="">
+                        <div class="item-bkg">
                             <div class="recruitment__item d-flex ">
                                 <img
                                     class="content__item__image"
@@ -492,7 +508,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="">
+                        <div class="item-bkg">
                             <div class="recruitment__item d-flex ">
                                 <img
                                     class="content__item__image"
@@ -513,7 +529,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="">
+                        <div class="item-bkg">
                             <div class="recruitment__item d-flex ">
                                 <img
                                     class="content__item__image"
@@ -537,55 +553,8 @@
                     </div>
                 </div>
             </div>
-            <div id="describe" class="mt-auto p-2 align-self-baseline">
-                <div class="describe-item">
-                    <h3>24/7 AVAILABLE</h3>
-                    <p>You can find available clinics/pharmacies</p>
-                </div>
-                <div class="describe-item">
-                    <h3>HOME CARE SERVICE</h3>
-                    <p>Don't come to us! We will come to you!</p>
-                </div>
-                <div class="describe-item">
-                    <h3>MANY LOCATION</h3>
-                    <p>More than 1500 Doctors, 1000 Pharmacists, 1000 Hospitals always wait for you</p>
-                </div>
-                <button class="btn-see-all mt-auto p-2">See all</button>
-            </div>
-        </div>
-    </div>
-    <div class="banner1">
-        <!-- Add content for your banner here -->
-    </div>
-    <div id="flea_market_board" class="d-flex justify-content-center">
-        <div class="content-item d-flex justify-content-center">
-            <div id="flea-market" class="p-2 w-100">
-                <h2>Flea market</h2>
-                <p>Hire staffs cheaper, find your staffs faster</p>
-                <div>
-                    <div class="section1-content mt-1 container row">
-                        <div class="col-2 card" style="width: 10rem;">
-                            <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            </div>
-                        </div>
-                        <div class="col-2 card" style="width: 10rem;">
-                            <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            </div>
-                        </div>
-                        <div class="col-2 card" style="width: 10rem;">
-                            <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="describe" class="mt-auto p-2">
+            <div id="describe" class="d-flex align-items-center flex-column mb-3">
+                <div class="p-5 w-100">
                     <div class="describe-item">
                         <h3>24/7 AVAILABLE</h3>
                         <p>You can find available clinics/pharmacies</p>
@@ -598,7 +567,120 @@
                         <h3>MANY LOCATION</h3>
                         <p>More than 1500 Doctors, 1000 Pharmacists, 1000 Hospitals always wait for you</p>
                     </div>
-                <button class="btn-see-all mt-auto p-2">See all</button>
+                </div>
+                <div class="mt-auto p-2">
+                    <button class="btn-see-all ">See all</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="banner1">
+        <!-- Add content for your banner here -->
+    </div>
+    <div id="flea_market_board" class="d-flex justify-content-center">
+        <div id="content-bkg" class="content-item d-flex justify-content-center ">
+            <div id="flea-market" class="p-2 w-100">
+                <h2>Flea market</h2>
+                <p>Hire staffs cheaper, find your staffs faster</p>
+                <div class="section1-content">
+                    <div class="container row">
+                        <div class="col-2 card" style="width: 188px; height: 342px">
+                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
+                                <p class="card-text">Location: <b>Hanoi</b></p>
+                                <h4>599.000</h4>
+                            </div>
+                        </div>
+                        <div class="col-2 card" style="width: 188px; height: 342px">
+                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
+                                <p class="card-text">Location: <b>Hanoi</b></p>
+                                <h4>599.000</h4>
+                            </div>
+                        </div>
+                        <div class="col-2 card" style="width:188px; height: 342px">
+                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
+                                <p class="card-text">Location: <b>Hanoi</b></p>
+                                <h4>599.000</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container row">
+                        <div class="col-2 card" style="width: 188px; height: 342px">
+                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
+                                <p class="card-text">Location: <b>Hanoi</b></p>
+                                <h4>599.000</h4>
+                            </div>
+                        </div>
+                        <div class="col-2 card" style="width: 188px; height: 342px">
+                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
+                                <p class="card-text">Location: <b>Hanoi</b></p>
+                                <h4>599.000</h4>
+                            </div>
+                        </div>
+                        <div class="col-2 card" style="width:188px; height: 342px">
+                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
+                                <p class="card-text">Location: <b>Hanoi</b></p>
+                                <h4>599.000</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container row">
+                        <div class="col-2 card" style="width: 188px; height: 342px">
+                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
+                                <p class="card-text">Location: <b>Hanoi</b></p>
+                                <h4>599.000</h4>
+                            </div>
+                        </div>
+                        <div class="col-2 card" style="width: 188px; height: 342px">
+                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
+                                <p class="card-text">Location: <b>Hanoi</b></p>
+                                <h4>599.000</h4>
+                            </div>
+                        </div>
+                        <div class="col-2 card" style="width:188px; height: 342px">
+                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
+                                <p class="card-text">Location: <b>Hanoi</b></p>
+                                <h4>599.000</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="describe" class="d-flex align-items-center flex-column mb-3">
+                <div class="p-5 w-100">
+                    <div class="describe-item">
+                        <h3>24/7 AVAILABLE</h3>
+                        <p>You can find available clinics/pharmacies</p>
+                    </div>
+                    <div class="describe-item">
+                        <h3>HOME CARE SERVICE</h3>
+                        <p>Don't come to us! We will come to you!</p>
+                    </div>
+                    <div class="describe-item">
+                        <h3>MANY LOCATION</h3>
+                        <p>More than 1500 Doctors, 1000 Pharmacists, 1000 Hospitals always wait for you</p>
+                    </div>
+                </div>
+                <div class="mt-auto p-2">
+                    <button class="btn-see-all ">See all</button>
+                </div>
             </div>
         </div>
     </div>
@@ -626,29 +708,42 @@
                 </ul>
             </div>
         </div>
+
         <div id="list-item" class="d-flex justify-content-evenly container">
-            <div class="col-3 card" style="width: 18rem;">
-                <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+            <div class="card" style="width: 237px; height: 361px">
+                <i class="bi bi-heart-fill" style="color: red"></i>
+                <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px" height= "237px">
                 <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
+                    <p class="card-text">Location: <b>Hanoi</b></p>
+                    <h4>599.000</h4>
                 </div>
             </div>
-            <div class="col-3 card" style="width: 18rem;">
-                <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+            <div class="card" style="width: 237px; height: 361px">
+                <i class="bi bi-heart"></i>
+                <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px" height= "237px">
                 <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
+                    <p class="card-text">Location: <b>Hanoi</b></p>
+                    <h4>599.000</h4>
                 </div>
             </div>
-            <div class="col-3 card" style="width: 18rem;">
-                <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+            <div class="card" style="width: 237px; height: 361px">
+                <i class="bi bi-heart"></i>
+                <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px" height= "237px">
                 <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
+                    <p class="card-text">Location: <b>Hanoi</b></p>
+                    <h4>599.000</h4>
                 </div>
             </div>
-            <div class="col-3 card" style="width: 18rem;">
-                <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+            <div class="card" style="width: 237px; height: 361px">
+                <i class="bi bi-heart"></i>
+                <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px" height= "237px">
                 <div class="card-body">
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
+                    <p class="card-text">Location: <b>Hanoi</b></p>
+                    <h4>599.000</h4>
                 </div>
             </div>
         </div>
