@@ -31,26 +31,25 @@
                         <div class="frame-12">
                             <p class="p"><span class="span">Email </span> <span class="text-wrapper-6">*</span></p>
                             <div>
-                                <input class="frame-13">
+                                <input class="frame-13" placeholder="example123">
                             </div>
                         </div>
                         <div class="frame-12">
                             <p class="p"><span class="span">Date of birth </span> <span class="text-wrapper-6">*</span></p>
-                            <div class="frame-15">
-                                <div class="frame-14"><div class="text-wrapper-5">VD:29-03-2003</div></div>
-                                <img class="calendar-date" src="img/calendar-date.svg" />
+                            <div class="">
+                                <input class="frame-15" type="date">
                             </div>
                         </div>
                         <div class="frame-12">
                             <p class="p"><span class="span">Sexs </span> <span class="text-wrapper-6">*</span></p>
                             <div class="frame-16">
                                 <div class="frame-17">
-                                    <div class="web-tick-box"></div>
-                                    <div class="text-wrapper-7">man</div>
+                                    <input type="radio" class="web-tick-box">
+                                    <label class="text-wrapper-7">man</label>
                                 </div>
                                 <div class="frame-18">
-                                    <div class="web-tick-box"></div>
-                                    <div class="text-wrapper-8">women</div>
+                                    <input type="radio" class="web-tick-box">
+                                    <label class="text-wrapper-8">women</label>
                                 </div>
                             </div>
                         </div>
@@ -59,25 +58,18 @@
                         <div class="frame-12">
                             <p class="p"><span class="span">Phone number </span> <span class="text-wrapper-6">*</span></p>
                             <div class="frame-19">
-                                <div class="web-nhp-liu">
-                                    <div class="frame-20">
-                                        <div class="flag-icon"><img class="vn-vietnam" src="img/vn-vietnam.svg" /></div>
-                                        <div class="text-wrapper-9">+84</div>
-                                    </div>
-                                    <img class="icon-caretdown" src="img/caret-down.svg" />
-                                </div>
-                                <div class="frame-21">
-                                    <div class="frame-14"><div class="text-wrapper-5">0123456789</div></div>
-                                </div>
+                                <select class="web-nhp-liu">
+                                    <option><img src="{{asset('img/icons_logo/vietnam.png')}}" alt="#">+84</option>
+                                    <option>+85</option>
+                                </select>
+                                <input class="frame-21" placeholder="0123456789">
                             </div>
                         </div>
                         <div class="frame-12">
                             <p class="p"><span class="span">Nation </span> <span class="text-wrapper-6">*</span></p>
-                            <div class="web">
-                                <div class="frame-22">
-                                    <div class="text-wrapper-5">Please choose....</div>
-                                    <div class="web-icon-chevron"></div>
-                                </div>
+                            <div class="">
+                                <input class="web frame-22" placeholder="Please choose....">
+
                             </div>
                         </div>
                         <div class="frame-12">
