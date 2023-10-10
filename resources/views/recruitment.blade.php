@@ -65,21 +65,41 @@
             </div>
         </div>
         <div class="recruitment_rank d-flex flex-column">
-            <div id="rank" class="d-flex">
+            <div id="rank" class="d-flex container">
                     <div class="rank_title p-2">
                         <img src="{{asset('img/platinum_rank.png')}}" width="398px" height="60px">
                         <h2>PLATINUM</h2>
                     </div>
                     <div class="ms-auto p-2 "><a href="#">See all</a></div>
+                <div class="section1-content mt-1 container row">
+                    <div class="col-2 card" style="width: 369px; height: 417px">
+                        <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                    <div class="col-2 card" style="width: 369px; height: 417px">
+                        <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                    <div class="col-2 card" style="width: 369px; height: 417px">
+                        <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="rank" class="d-flex">
+            <div id="rank" class="d-flex container">
                     <div class="rank_title p-2">
                         <img src="{{asset('img/premium_rank.png')}}" width="398px" height="60px">
                         <h2>PREMIUM</h2>
                     </div>
                     <div class="ms-auto p-2 "><a href="#">See all</a></div>
             </div>
-            <div id="rank" class="d-flex">
+            <div id="rank" class="d-flex container">
                     <div class="rank_title p-2">
                         <img src="{{asset('img/silver_rank.png')}}" width="398px" height="60px">
                         <h2>SILVER</h2>
