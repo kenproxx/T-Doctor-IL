@@ -10,4 +10,9 @@ class RecruitmentController extends Controller
     public function index(){
         return view('recruitment');
     }
+
+    public function apply()
+    {
+        return view('RecruitmentDetails.apply');
+    }
 }
