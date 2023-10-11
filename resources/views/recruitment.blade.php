@@ -1,15 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Home')
 @section('content')
-    <head>
-        <meta charset="UTF-8">
-        <title>TDOCTOR</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,400;1,700&family=Inter:wght@400;500;600;700&family=Mulish:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Nunito+Sans:wght@400;500&family=Poppins:wght@300&family=Roboto+Slab:wght@400;500&family=Roboto:wght@500&family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
-    </head>
-    <body>
+
     <header class="header d-flex justify-content-around container-fluid align-items-center ">
         <div class="nav_1">
             <nav class="navbar">
@@ -39,15 +31,9 @@
 
         </div>
     </header>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="banner">
-                <!-- Add content for your banner here -->
-            </div>
-        </div>
-    </div>
+    @include('component.banner')
     <div class="container">
-        <div class="d-flex justify-content-evenly">
+        <div class="d-flex">
             <div id="filter" class="d-flex justify-content-around ">
                 <div class="d-flex flex-fill">
                     <div class="filter_option"><p>Category</p></div>
@@ -64,49 +50,193 @@
                 <div class="flex-fill"><button><i class="bi bi-filter"></i></button></div>
             </div>
         </div>
-        <div class="recruitment_rank d-flex flex-column">
-            <div id="rank" class="d-flex container">
-                    <div class="rank_title p-2">
+        <div class="recruitment_rank d-flex flex-column container">
+            <div id="recruitment_ctn" class="flex-column">
+                <div id="rank" class="d-flex">
+                    <div class="rank_title p-0">
                         <img src="{{asset('img/platinum_rank.png')}}" width="398px" height="60px">
                         <h2>PLATINUM</h2>
                     </div>
-                    <div class="ms-auto p-2 "><a href="#">See all</a></div>
-                <div class="section1-content mt-1 container row">
-                    <div class="col-2 card" style="width: 369px; height: 417px">
-                        <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <div class="ms-auto p-2"><a href="#">See all</a></div>
+                </div>
+                <div id="ctn" class="d-flex">
+                    <div class="card">
+                        <div id="crd_ctn">
+                            <div id="card-image">
+                                <i class="bi bi-heart"></i>
+                                <img src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
+                            </div>
+                            <div class="card-body">
+                                <div id="time">
+                                <i class="bi bi-clock"></i>
+                                    <div class="time-txt">9/18/2023</div>
+                                </div>
+                                <h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6>
+                                <p>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCTĐịa điểm làm việc: 77
+                                    Hoàng Hoa Thám, Phường 13, Quận Tân Bình, TPHCM</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-2 card" style="width: 369px; height: 417px">
-                        <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <div class="card">
+                        <div id="crd_ctn">
+                            <div id="card-image">
+                                <i class="bi bi-heart"></i>
+                                <img src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
+                            </div>
+                            <div class="card-body">
+                                <div id="time">
+                                <i class="bi bi-clock"></i>
+                                    <div class="time-txt">9/18/2023</div>
+                                </div>
+                                <h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6>
+                                <p>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCTĐịa điểm làm việc: 77
+                                    Hoàng Hoa Thám, Phường 13, Quận Tân Bình, TPHCM</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-2 card" style="width: 369px; height: 417px">
-                        <img src="{{asset('img/icons_logo/image 1.png')}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <div class="card">
+                        <div id="crd_ctn">
+                            <div id="card-image">
+                                <i class="bi bi-heart"></i>
+                                <img src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
+                            </div>
+                            <div class="card-body">
+                                <div id="time">
+                                <i class="bi bi-clock"></i>
+                                    <div class="time-txt">9/18/2023</div>
+                                </div>
+                                <h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6>
+                                <p>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCTĐịa điểm làm việc: 77
+                                    Hoàng Hoa Thám, Phường 13, Quận Tân Bình, TPHCM</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="rank" class="d-flex container">
-                    <div class="rank_title p-2">
+            <div id="recruitment_ctn" class="flex-column">
+                <div id="rank" class="d-flex">
+                    <div class="rank_title p-0">
                         <img src="{{asset('img/premium_rank.png')}}" width="398px" height="60px">
                         <h2>PREMIUM</h2>
                     </div>
-                    <div class="ms-auto p-2 "><a href="#">See all</a></div>
+                    <div class="ms-auto p-2"><a href="#">See all</a></div>
+                </div>
+                <div id="ctn" class="d-flex">
+                    <div class="card">
+                        <div id="crd_ctn">
+                            <div id="card-image">
+                                <i class="bi bi-heart"></i>
+                                <img src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
+                            </div>
+                            <div class="card-body">
+                                <div id="time">
+                                <i class="bi bi-clock"></i>
+                                    <div class="time-txt">9/18/2023</div>
+                                </div>
+                                <h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6>
+                                <p>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCTĐịa điểm làm việc: 77
+                                    Hoàng Hoa Thám, Phường 13, Quận Tân Bình, TPHCM</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div id="crd_ctn">
+                            <div id="card-image">
+                                <i class="bi bi-heart"></i>
+                                <img src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
+                            </div>
+                            <div class="card-body">
+                                <div id="time">
+                                <i class="bi bi-clock"></i>
+                                    <div class="time-txt">9/18/2023</div>
+                                </div>
+                                <h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6>
+                                <p>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCTĐịa điểm làm việc: 77
+                                    Hoàng Hoa Thám, Phường 13, Quận Tân Bình, TPHCM</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div id="crd_ctn">
+                            <div id="card-image">
+                                <i class="bi bi-heart"></i>
+                                <img src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
+                            </div>
+                            <div class="card-body">
+                                <div id="time">
+                                <i class="bi bi-clock"></i>
+                                    <div class="time-txt">9/18/2023</div>
+                                </div>
+                                <h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6>
+                                <p>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCTĐịa điểm làm việc: 77
+                                    Hoàng Hoa Thám, Phường 13, Quận Tân Bình, TPHCM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div id="rank" class="d-flex container">
-                    <div class="rank_title p-2">
+            <div id="recruitment_ctn" class="flex-column">
+                <div id="rank" class="d-flex">
+                    <div class="rank_title p-0">
                         <img src="{{asset('img/silver_rank.png')}}" width="398px" height="60px">
                         <h2>SILVER</h2>
                     </div>
-                    <div class="ms-auto p-2 "><a href="#">See all</a></div>
+                    <div class="ms-auto p-2"><a href="#">See all</a></div>
+                </div>
+                <div id="ctn" class="d-flex">
+                    <div class="card">
+                        <div id="crd_ctn">
+                            <div id="card-image">
+                                <i class="bi bi-heart"></i>
+                                <img src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
+                            </div>
+                            <div class="card-body">
+                                <div id="time">
+                                <i class="bi bi-clock"></i>
+                                    <div class="time-txt">9/18/2023</div>
+                                </div>
+                                <h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6>
+                                <p>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCTĐịa điểm làm việc: 77
+                                    Hoàng Hoa Thám, Phường 13, Quận Tân Bình, TPHCM</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div id="crd_ctn">
+                            <div id="card-image">
+                                <i class="bi bi-heart"></i>
+                                <img src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
+                            </div>
+                            <div class="card-body">
+                                <div id="time">
+                                <i class="bi bi-clock"></i>
+                                    <div class="time-txt">9/18/2023</div>
+                                </div>
+                                <h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6>
+                                <p>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCTĐịa điểm làm việc: 77
+                                    Hoàng Hoa Thám, Phường 13, Quận Tân Bình, TPHCM</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div id="crd_ctn">
+                            <div id="card-image">
+                                <i class="bi bi-heart"></i>
+                                <img src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
+                            </div>
+                            <div class="card-body">
+                                <div id="time">
+                                <i class="bi bi-clock"></i>
+                                    <div class="time-txt">9/18/2023</div>
+                                </div>
+                                <h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6>
+                                <p>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCTĐịa điểm làm việc: 77
+                                    Hoàng Hoa Thám, Phường 13, Quận Tân Bình, TPHCM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    </body>
 @endsection
