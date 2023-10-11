@@ -12,6 +12,7 @@ a {
     position: fixed;
     background: white;
     z-index: 10;
+    top: 0;
 }
 .header-left {
     width: 177px;
@@ -47,12 +48,6 @@ a {
     font-weight: 800;
     font-size: 16px;
     color: #45c3d2;
-}
-.banner {
-    height: 280px;
-    margin-top: 116px;
-    padding-left: 1px;
-    background-color: grey;
 }
 .banner1{
     height: 280px;

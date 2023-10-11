@@ -137,6 +137,23 @@
                                             <input id="remember-me" type="checkbox">
                                             <label for="remember-me">Agree to Terms of Service and Privacy Policy</label>
                                         </div>
+                                        <div class="form-element text-center">
+                                            <button>Login</button>
+                                        </div>
+                                        <div class="other_sign">
+                                            <div class="text-center">
+                                                Or
+                                            </div>
+
+                                            <hr>
+                                        </div>
+
+                                        <div class="form-signin" style="display: flex; justify-content: space-around" >
+                                            <button type="button" class="login-with-btn"><img src="{{asset('img/icons_logo/facebook_logo.png')}}"/></button>
+                                            <button type="button" class="login-with-btn"><img src="{{asset('img/icons_logo/google_logo.png')}}"/></button>
+                                            <button type="button" class="login-with-btn"><img src="{{asset('img/icons_logo/apple_logo.png')}}"/></button>
+                                            <button type="button" class="login-with-btn"><img src="{{asset('img/icons_logo/kakao-talk_logo.png')}}"/></button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="Pharmacist" role="tabpanel" aria-labelledby="Pharmacist-tab">
@@ -192,12 +209,10 @@
                                 <a href="" data-toggle="modal" data-target="#staticBackdrop" data-dismiss="modal">Log in</a>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </header>
 
