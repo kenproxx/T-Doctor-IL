@@ -1,18 +1,18 @@
 *{
     font-family: "Mulish", sans-serif;
 }
-
 a {
     text-decoration: none;
 }
 .header {
+    height: 100px;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-    padding: 29px 76px 29px 77px;
-    gap: 54px;
     position: fixed;
     background: white;
     z-index: 10;
     top: 0;
+    right: 0;
+    left: 0;
 }
 .header-left {
     width: 177px;
@@ -604,18 +604,7 @@ footer {
 }
 /*end-recruitment scene*/
 /*header_2*/
-.nav_1 {
-    width: 415px;
-    height: 42px;
-    display: flex;
-    align-items: center;
-    gap: 58px;
-    margin-left: 77px;
-}
-.nav_1 .navbar-brand{
-    padding: 58px;
 
-}
 .nav_1 .navbar-brand h5{
     margin-left: 58px;
      color: #45C3D2;

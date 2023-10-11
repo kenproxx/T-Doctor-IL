@@ -11,7 +11,7 @@
     </div>
     <div class="nav_2 d-flex justify-content-between">
         <a href="#">My job</a>
-        <a href="#">My CV</a>
+        <a href="{{route('recruitment.apply')}}">My CV</a>
         <a href="#">Match Up</a>
     </div>
     <div class=" nav_3 d-flex ">
