@@ -110,11 +110,25 @@ a {
 .content__item__describe{
     height: 45px;
     overflow: hidden;
+    margin-bottom: 20px;
 }
 .card .bi-heart{
     position: absolute;
     left: 200px;
-    top: 10px;
+    top: 20px;
+}
+#list-doctor .card{
+    padding: 16px;
+    margin-left: 31px;
+    width: 237px;
+    height: 359px;
+    border-radius: 16px;
+}
+#list-doctor .card .card-body h5{
+    margin-bottom: 0;
+}
+#list-doctor .card .card-body p{
+    margin-bottom: 0;
 }
 #list-doctor .card-body .card-title{
     text-align: left;
@@ -123,7 +137,7 @@ a {
     font-weight: 800;
 }
 #list-doctor .card-body .card-text{
-    font-size: 18px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 400;
     text-align: left;
@@ -138,6 +152,14 @@ a {
 #list-doctor .card-body .card-text_1 b{
     color: black;
 
+}
+
+#list-item .card{
+    padding: 16px;
+    width: 237px;
+    height: 361px;
+    border-radius: 16px;
+    margin-left: 31px;
 }
 #list-item .card .bi-heart{
     position: absolute;
