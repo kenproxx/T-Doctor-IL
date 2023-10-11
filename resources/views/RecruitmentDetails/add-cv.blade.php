@@ -234,7 +234,7 @@
     </div>
     <div class="d-flex justify-content-center">
         <button class="add-cv-bt apply-bt_delete">Save draft</button>
-        <form action="{{ route('recruitment.add.cv') }}">
+        <form action="{{ route('recruitment.apply') }}">
             <button type="submit" class="add-cv-bt apply-bt_edit">Complete</button>
         </form>
     </div>
