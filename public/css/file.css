@@ -1,3 +1,70 @@
+.container {
+  min-width: 1440px;
+}
+
+.header .header-detail {
+  height: 100px;
+  align-items: center;
+}
+.header .header-detail--left {
+  align-items: end;
+}
+.header .header-detail--left .logo {
+  height: 42px;
+}
+.header .header-detail--left .logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.header .header-detail--left .back {
+  font-size: 24px;
+  font-weight: 800;
+  color: rgb(69, 195, 210);
+}
+.header .header-detail--center a {
+  font-size: 16px;
+  color: black;
+  font-weight: 500;
+}
+.header .header-detail--center a.active {
+  text-decoration: revert;
+  color: rgb(69, 195, 210);
+}
+.header .header-detail--center a:hover {
+  text-decoration: revert;
+  color: rgb(69, 195, 210);
+}
+.header .header-detail--right {
+  align-items: center;
+  justify-content: right;
+}
+.header .header-detail--right .option {
+  width: 120px;
+  height: 52px;
+  background: #45C3D2;
+  margin-right: 24px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+}
+.header .header-detail--right .option a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+.header .header-detail--right .user {
+  width: 40px;
+  height: 40px;
+}
+.header .header-detail--right .user img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
 .banner {
   margin-top: 100px;
   height: 280px;
@@ -187,6 +254,11 @@
 }
 .recruitment-details--content--right .form-2 .div-4 .div-5 .text-wrapper-3 {
   gap: 10px;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 20px;
+  text-align: left;
+  margin-bottom: 5px;
 }
 .recruitment-details--content--right .form-2 .div-4 .div-5 .frame-wrapper {
   background: #f3f3f3;

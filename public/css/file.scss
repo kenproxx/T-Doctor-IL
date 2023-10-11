@@ -1,3 +1,72 @@
+.container{
+    min-width: 1440px;
+}
+.header{
+    .header-detail{
+        height: 100px;
+        align-items: center;
+        &--left{
+            align-items: end;
+            .logo{
+                height: 42px;
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            .back{
+                font-size: 24px;
+                font-weight: 800;
+                color: rgba(69, 195, 210, 1);
+            }
+        }
+        &--center{
+            a{
+                font-size: 16px;
+                color: black;
+                font-weight: 500;
+                &.active{
+                    text-decoration: revert;
+                    color: rgba(69, 195, 210, 1);
+                }
+                &:hover{
+                    text-decoration: revert;
+                    color: rgba(69, 195, 210, 1);
+                }
+            }
+        }
+        &--right{
+                align-items: center;
+                justify-content: right;
+            .option{
+                width: 120px;
+                height: 52px;
+                background: #45C3D2;
+                margin-right: 24px;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                a{
+                    text-decoration: none;
+                    color: white;
+                    font-size: 16px;
+                    font-weight: 600;
+                    text-align: center;
+                }
+            }
+            .user{
+                width: 40px;
+                height: 40px;
+                img{
+                    height: 100%;
+                    width: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+}
 .banner{
     margin-top: 100px;
     height: 280px;
@@ -195,6 +264,11 @@
                         margin-bottom: 10px;
                         .text-wrapper-3{
                             gap: 10px;
+                            font-size: 16px;
+                            font-weight: 800;
+                            line-height: 20px;
+                            text-align: left;
+                            margin-bottom: 5px;
                         }
                         .frame-wrapper {
                             background: #f3f3f3;
