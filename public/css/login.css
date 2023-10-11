@@ -7,21 +7,11 @@
 }
 #modal_register{
     width: 770px;
-    height: 972px;
     border-radius: 16px;
     background: #FFF;
     right: 110px;
 }
-.popup .btn-close{
-    position: absolute;
-    top: 24px;
-    left: 730px;
-    width: 24px;
-    height: 24px;
-    text-align: center;
-    line-height: 15px;
-    cursor: pointer;
-}
+
 .popup .form .form-element{
     margin: 16px;
 }
@@ -39,7 +29,7 @@
 }
 .popup .form .form-element input[type="text"],
 .popup .form .form-element input[type="password"]{
-    width: 100%;
+    width: 570px;
     height: 56px;
     padding: 20px 16px 20px 16px;
     border-radius: 8px;
@@ -91,15 +81,87 @@
 .modal-content{
     z-index: 10;!important;
 }
+#staticBackdrop .modal-dialog .modal-content .modal-body .popup .form{
+    width: 570px;
+    height: 531px;
+    margin-top: 115px;
+
+}
+#staticBackdrop .modal-dialog .modal-content .modal-body .popup .tab-content .tab-pane{
+    width: 570px;
+    height: 531px;
+}
+#modalRegister .modal-dialog .modal-content .modal-body .popup{
+    margin-top: 48px;
+}
+#modalRegister .modal-dialog .modal-content .modal-body .popup .form{
+    width: 597px;
+    margin: auto;
+}
+#modalRegister .modal-dialog .modal-content .modal-body .popup .form .user-option {
+    width: 597px;
+    height: 48px;
+    border-style: solid;
+    border-color: #EAEAEA;
+    border-radius: 8px;
+}
+#modalRegister .modal-dialog .modal-content .modal-body .popup .form .user-option .nav .nav-item .active{
+    background: #45C3D2;
+    color: white;
+    width: 199px;
+    height: 48px;
+    border-radius: 8px;
+}
+#modalRegister .modal-dialog .modal-content .modal-body .popup .form .user-option .nav .nav-item{
+    color: black;
+    width: 199px;
+    height: 48px;
+    border-radius: 8px;
+}
+#myTab{
+    width: 597px;
+    height: 48px;
+}
+#other-option{
+    width: 597px;
+    margin: auto;
+}
+#other-option .form-element button{
+    width: 270px;
+    height: 56px;
+    padding: 18px 24px 18px 24px;
+    border-radius: 8px;
+    outline: none;
+    border: none;
+    background: #45C3D2;
+    font-size: 18px;
+    font-weight: 800;
+    color: white;
+}
+#other-option .form-signin {
+    margin-top: 40px;
+}
+#other-option .form-signin button{
+    width: 64px;
+    height: 64px;
+    border: none;
+    outline: none;
+    background: white;
+}
 .other_sign{
+    margin-top: 16px;
     text-align: center;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.other_sign hr{
-    position: absolute;
-    top: -5px;
-    right: 0;
-    left: 0;
-    border-top: 1px solid black;
-
+.other_sign .text-center{
+    padding: 16px;
+}
+.other_sign .line {
+    width: 248px;
+    height: 1px;
+    background-color: #000;
+    margin: 5px 0;
 }

@@ -49,6 +49,11 @@ a {
     font-size: 16px;
     color: #45c3d2;
 }
+.banner1{
+    height: 280px;
+    padding-left: 1px;
+    background-color: grey;
+}
 .section1 {
     height: 647px;
     margin: 25px 0;
@@ -63,7 +68,7 @@ a {
 .section1__item {
     flex: 1;
     width: 528px;
-    height: 615px;
+    height: 646px;
     margin: 16px;
     background-color: #f3f3f3;
     border-radius: 16px;
@@ -80,6 +85,7 @@ a {
     display: flex;
     flex-direction: column;
     gap: 10px;
+
 }
 .content__item {
     padding: 10px;
@@ -105,9 +111,59 @@ a {
     height: 45px;
     overflow: hidden;
 }
+.card i{
+    position: absolute;
+    left: 200px;
+    top: 10px;
+}
+#list-doctor .card-body .card-title{
+    text-align: left;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 800;
+}
+#list-doctor .card-body .card-text{
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    text-align: left;
+}
+#list-doctor .card-body .card-text_1{
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    color: #929292;
+    text-align: left;
+}
+#list-doctor .card-body .card-text_1 b{
+    color: black;
+
+}
+#list-item .card i{
+    position: absolute;
+    left: 200px;
+    top: 10px;
+}
+#list-item .card-body .card-title{
+    width: 150px;
+    font-size: 18px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+#list-item .card-body .card-text{
+    text-align: left;
+}
+#list-item .card-body h4{
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    text-align: left;
+}
 .banner1{
     height: 280px;
-    margin-top: 25px;
+    /*margin-top: 25px;*/
     padding-left: 1px;
     background-color: grey;
 }
@@ -123,6 +179,18 @@ a {
 .nav-item:focus {
     color: rgba(69, 195, 210, 1);
     border-bottom: 2px solid rgba(69, 195, 210, 1);
+}
+#content-bkg{
+    width: 1170px;
+    background: #F3F3F3;
+    border-radius: 16px;
+    margin-top: 24px;
+}
+.item-bkg{
+    background: white;
+    border-radius: 8px;
+    width: 692px;
+    height: 153px;
 }
 .content-item #address h2{
     font-size: 32px;
@@ -162,7 +230,7 @@ a {
 /*Recruitment*/
 #recruitment .content-item{
     justify-items: center;
-    width: 1170px;
+    width: 692px;
     height: 570px;
 }
 #recruitment .content-item #address{
@@ -195,6 +263,9 @@ a {
     width: 370px;
     height: 498px;
 }
+#flea-market .section1-content .container .card{
+    margin-right: 16px;
+}
 flea__item{
     width: 692px;
     height: 153px;
@@ -211,11 +282,6 @@ flea__item{
     font-size: 18px;
     font-weight: 600;
     color: #929292;
-}
-#myTab{
-    display: flex;
-    justify-content: center;
-    gap: 99px;
 }
 .nav .nav-item .nav-link.active{
     background: #F3F3F3;
@@ -236,15 +302,20 @@ flea__item{
     text-align: center;
 }
 .sign--up{
-    display: flex;
-    justify-content: center;
+    margin-top: 40px;
 }
 .sign--up a{
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
-    gap: 10px;
-    text-decoration: none;
+    text-decoration: underline;
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #45C3D2;
+}
+.sign--up p{
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 .btn-see-all{
     border: none;
@@ -314,6 +385,7 @@ flea__item{
     text-align: center;
 
 }
+
 /* footer */
 footer {
     z-index: 0;

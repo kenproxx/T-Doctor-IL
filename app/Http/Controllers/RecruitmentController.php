@@ -11,6 +11,15 @@ class RecruitmentController extends Controller
         return view('recruitment');
     }
 
+    public function apply()
+    {
+        return view('RecruitmentDetails.apply');
+    }
+    public function addCv()
+    {
+        return view('RecruitmentDetails.add-cv');
+    }
+
     public function recruitment_detail(){
         return view('recruitment_details');
     }
