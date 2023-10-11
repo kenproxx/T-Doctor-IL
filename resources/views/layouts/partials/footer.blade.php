@@ -1,4 +1,4 @@
-<footer class="d-block">
+<footer class="d-block mt-5">
     <div class=" d-flex">
         <header>
             <h2><svg width="177" height="42" viewBox="0 0 177 42" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

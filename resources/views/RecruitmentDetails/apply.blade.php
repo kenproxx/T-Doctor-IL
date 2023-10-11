@@ -1,9 +1,9 @@
 @extends('layouts.master')
 @section('title', 'Home')
 @section('content')
+    @include('layouts.partials.headerRecruitment')
 <body>
-    <div class="banner1">
-    </div>
+    @include('component.banner')
     <div class="container d-flex">
         <div class="apply-mr border apply-border">
             <div class="apply-margin">
