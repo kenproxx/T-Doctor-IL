@@ -36,6 +36,7 @@ Route::group(['prefix' => 'recruitment'],  function () {
     Route::get('/index', [\App\Http\Controllers\RecruitmentController::class, 'index'])->name('recruitment.index');
     Route::get('/apply', [\App\Http\Controllers\RecruitmentController::class, 'apply'])->name('recruitment.apply');
     Route::get('/add-cv', [\App\Http\Controllers\RecruitmentController::class, 'addCv'])->name('recruitment.add.cv');
+    Route::get('/edit-cv', [\App\Http\Controllers\RecruitmentController::class, 'editCv'])->name('recruitment.edit.cv');
 });
 
 Route::get('/recruitment', [\App\Http\Controllers\RecruitmentController::class, 'index'])->name('index.recruitment');
