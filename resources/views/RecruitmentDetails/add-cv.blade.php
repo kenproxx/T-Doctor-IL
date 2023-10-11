@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Home')
 @section('content')
-    @include('layouts.partials.headerRecruitment')
+    @include('layouts.partials.header_2')
 
 <body>
 
