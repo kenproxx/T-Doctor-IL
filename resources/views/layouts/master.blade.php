@@ -25,10 +25,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <link rel="stylesheet" href="{{asset('css/login.css')}}">
+    <link rel="stylesheet" href="{{asset('css/file.css')}}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
@@ -45,14 +43,10 @@
     @endif
 </div>
 <body>
-
-<!-- Header -->
-{{--@include('layouts.partials.header')--}}
-
+<div id="content">
     @yield('content')
-
-@include('layouts.partials.footer')
-
+    @include('layouts.partials.footer')
+</div>
 <!-- Back to top -->
 <div class="btn-back-to-top" id="myBtn">
     <span class="symbol-btn-back-to-top">

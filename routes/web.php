@@ -14,13 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/login', 'AuthController@index')->name('login');
 
 Route::group(['prefix' => 'profile'], function () {
     Route::get('', 'ProfileController@index')->name('profile');
@@ -36,3 +34,5 @@ Route::group(['prefix' => 'news'],  function () {
 });
 
 Route::get('/recruitment', [\App\Http\Controllers\RecruitmentController::class, 'index'])->name('index.recruitment');
+Route::get('/recruitment_detail', [\App\Http\Controllers\RecruitmentController::class, 'recruitment_detail'])->name('index.recruitment_detail');
+

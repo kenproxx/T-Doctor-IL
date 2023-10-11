@@ -1,4 +1,3 @@
-
 <header class="header d-flex justify-content-around container-fluid align-items-center ">
     <div class="header-left">
         <img src="{{asset('img/icons_logo/image 1.png')}}" alt="logo">
@@ -225,13 +224,11 @@
                                 <a href="">Do you already have an account?</a>
                                 <a href="">Log in</a>
                             </div>
-                            </div>
-
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </header>
 

@@ -1,0 +1,232 @@
+.banner {
+  margin-top: 100px;
+  height: 280px;
+}
+.banner img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.recruitment-details {
+  margin-top: 40px;
+}
+.recruitment-details--title {
+  font-size: 32px;
+  font-weight: 800;
+}
+.recruitment-details--content {
+  margin: 30px 0;
+}
+.recruitment-details--content--left {
+  width: 100%;
+  height: 441px;
+}
+.recruitment-details--content--left .main {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+.recruitment-details--content--left img {
+  border-radius: 8px;
+}
+.recruitment-details--content--left .list {
+  overflow-x: auto;
+}
+.recruitment-details--content--left .list .item {
+  width: 140px;
+  height: 79px;
+  margin-right: 16px;
+}
+.recruitment-details--content--left .list .itemimg {
+  width: 100%;
+  height: 100%;
+}
+.recruitment-details--content--right {
+  height: fit-content;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(234, 234, 234);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.recruitment-details--content--right .form-1 .div .title {
+  font-size: 16px;
+  font-weight: 700;
+}
+.recruitment-details--content--right .form-1 .div .text-wrapper {
+  border: none;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px 5px 10px;
+  background: rgb(234, 234, 234);
+  border-radius: 8px;
+}
+.recruitment-details--content--right .form-1 .div-2 {
+  margin: 24px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgb(191, 191, 191);
+  width: 100%;
+}
+.recruitment-details--content--right .form-1 .div-2 .image {
+  width: 57px;
+  height: 57px;
+  object-fit: cover;
+}
+.recruitment-details--content--right .form-1 .div-2 .text-wrapper-2 {
+  color: #000;
+  font-size: 24px;
+  font-weight: 800;
+}
+.recruitment-details--content--right .form-1 .div-3 {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+.recruitment-details--content--right .form-1 .div-3 .div-4 {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 32px;
+}
+.recruitment-details--content--right .form-1 .div-3 .div-4 .img-wrapper {
+  display: inline-flex;
+  align-items: flex-start;
+  padding: 8px;
+  background: rgb(69, 195, 210);
+  border-radius: 37px;
+}
+.recruitment-details--content--right .form-1 .div-3 .div-4 .img-wrapper .img {
+  width: 24px;
+  height: 24px;
+}
+.recruitment-details--content--right .form-1 .div-3 .div-4 .div-5 .text-wrapper-3 {
+  color: rgb(146, 146, 146);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+.recruitment-details--content--right .form-1 .div-3 .div-4 .div-5 .text-wrapper-4 {
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 20px;
+  letter-spacing: 0em;
+}
+.recruitment-details--content--right .form-1 .div-7 {
+  margin-top: 24px;
+}
+.recruitment-details--content--right .form-1 .div-7 .div-wrapper {
+  border: none;
+  display: flex;
+  padding: 11px 0;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(214, 214, 214);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+  width: 47%;
+}
+.recruitment-details--content--right .form-1 .div-7 .text-wrapper-5 {
+  border: none;
+  padding: 11px 0;
+  width: 47%;
+  border-radius: 8px;
+  background: var(--secon1, #45C3D2);
+  color: var(--White, #FFF);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 800;
+}
+.recruitment-details--content--right .form-2 .div .text-wrapper {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 30px;
+  margin-bottom: 16px;
+}
+.recruitment-details--content--right .form-2 .div .div-2 {
+  gap: 33px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgb(191, 191, 191);
+  width: 100%;
+}
+.recruitment-details--content--right .form-2 .div .div-2 .div-wrapper {
+  height: 56px;
+  width: 56px;
+  background-color: #f3f3f3;
+  border-radius: 8px;
+  line-height: 56px;
+  text-align: center;
+}
+.recruitment-details--content--right .form-2 .div .div-2 .div-wrapper .text-wrapper-2 {
+  font-size: 16px;
+  font-weight: 800;
+  text-align: center;
+}
+.recruitment-details--content--right .form-2 .div .div-2 .div-wrapper i {
+  font-size: 25px;
+  font-weight: 800;
+}
+.recruitment-details--content--right .form-2 .div .div-2 button {
+  border: none;
+}
+.recruitment-details--content--right .form-2 .div-3 {
+  margin-top: 16px;
+}
+.recruitment-details--content--right .form-2 .div-3 .text-wrapper {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+.recruitment-details--content--right .form-2 .div-4 .div-5 {
+  margin-bottom: 10px;
+}
+.recruitment-details--content--right .form-2 .div-4 .div-5 .text-wrapper-3 {
+  gap: 10px;
+}
+.recruitment-details--content--right .form-2 .div-4 .div-5 .frame-wrapper {
+  background: #f3f3f3;
+  border-radius: 8px;
+  border: 1px solid rgb(191, 191, 191);
+  color: rgb(146, 146, 146);
+  font-size: 16px;
+  width: 100%;
+  padding: 16px;
+}
+.recruitment-details--content--right .form-2 .div-7 {
+  margin-top: 24px;
+}
+.recruitment-details--content--right .form-2 .div-7 .div-wrapper {
+  border: none;
+  display: flex;
+  padding: 11px 0;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(214, 214, 214);
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  text-align: center;
+  width: 47%;
+}
+.recruitment-details--content--right .form-2 .div-7 .text-wrapper-5 {
+  border: none;
+  padding: 11px 0;
+  width: 47%;
+  border-radius: 8px;
+  background: var(--secon1, #45C3D2);
+  color: var(--White, #FFF);
+  text-align: center;
+  font-size: 14px;
+  font-weight: 800;
+}
+.recruitment-details--text hr {
+  border: 1px solid rgb(191, 191, 191);
+  margin: 16px 0;
+}
+
+/*# sourceMappingURL=file.css.map */
