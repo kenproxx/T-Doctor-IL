@@ -12,7 +12,6 @@
 
     </head>
     <body>
-    @include('layouts.partials.header')
     <div class="container-fluid">
         <div class="row">
             <div class="banner">
