@@ -24,7 +24,7 @@ class RecruitmentController extends Controller
         return view('RecruitmentDetails.edit-cv');
     }
 
-    public function recruitment_detail(){
+    public function detail(){
         return view('recruitment_details');
     }
 }
