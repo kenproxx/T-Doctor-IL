@@ -98,6 +98,7 @@
             <div class="col-md-4 pr-0">
                 <div class="border ac-info">
                     <div class="text-font-24 m-0">Basic information</div>
+                    <div class="justify-content-md-center avatar-info"><img src="{{ asset('img/recruitment-img/avt-info.png') }}"></div>
                     <div class="">
                         <div class="">
                             <div class="text-font-16">
@@ -141,7 +142,7 @@
                         courses you have attended.
                     </p>
                 </div>
-                <div class="d-flex">
+                <div class="d-flex mt-4">
                     <img class="plus-img" src="{{asset('img/recruitment-img/ac_plus.png')}}">
                     <div class="color_text-add">Add education</div>
                 </div>
@@ -168,7 +169,7 @@
                         interested in.
                     </p>
                 </div>
-                <div class="d-flex">
+                <div class="d-flex mt-4">
                     <img class="plus-img" src="{{asset('img/recruitment-img/ac_plus.png')}}">
                     <div class="color_text-add">Add Skill</div>
                 </div>
@@ -211,7 +212,7 @@
                     <p class="border-top">
                     </p>
                 </div>
-                <div class="d-flex">
+                <div class="d-flex mt-4">
                     <img class="plus-img" src="{{asset('img/recruitment-img/ac_plus.png')}}">
                     <div class="color_text-add">Add Certificate and license</div>
                 </div>

@@ -247,7 +247,21 @@ body {
     }
 }
 /* end Recruitment details/ apply */
+a, input, button {
+    &&:hover {
+        cursor: pointer;
+        text-decoration: none;
+    }
+}
 /* add cv */
+.avatar-info {
+    display: flex;
+    && img {
+        width: 120px;
+        margin: 24px 0;
+        justify-content: center;
+    }
+}
 .content-add {
     margin-top: 40px;
 }
