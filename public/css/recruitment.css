@@ -174,8 +174,8 @@
     --body-5-semibold-font-style: normal;
 }
 p {
-    padding: 0;
-    margin: 0;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 .mt-2rem {
 margin-top: 2rem;
@@ -231,6 +231,30 @@ body {
         border: none;
         margin-top: 24px;
     }
+    .button-cancel {
+        border-radius: 8px;
+        height: 40px;
+        width: 160px;
+        color: #f7f7f7;
+        border: none;
+        background: #D6D6D6;
+        margin-right: 16px;
+    }
+    .button-save {
+        border-radius: 8px;
+        height: 40px;
+        width: 160px;
+        color: #f7f7f7;
+        border: none;
+        background: #45C3D2;
+    }
+    .margin-200 {
+        margin-right: 200px;
+        margin-top: 10px;
+    }
+    .margin-top-220 {
+        margin-top: 220px;
+    }
     .apply-bt_delete {
         background:  #D6D6D6;
         margin-right: 16px;
@@ -275,6 +299,19 @@ a, input, button {
     font-size: 24px;
     margin-top: 24px;
     font-weight: 800;
+}
+.ac-choose {
+    height: 56px;
+    width: 100%;
+    padding: 0px 16px 0px 8px;
+    background-color: #f3f3f3;
+    border-radius: 8px;
+    border: 1px solid #eaeaea;
+    color: #929292;
+    margin-right: 5px;
+}
+.mt-110 {
+    margin-top: 110px !important;
 }
 .text-font-16 {
     font-size: 16px;
