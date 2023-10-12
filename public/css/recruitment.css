@@ -180,6 +180,9 @@ p {
 .mt-2rem {
 margin-top: 2rem;
 }
+.mr-24 {
+    margin-right: 24px;
+}
 .fs-14 {
     font-size: 14px;
 }
@@ -267,7 +270,6 @@ body {
         width: 269px;
         text-align: center;
         height: auto;
-        padding-top: 183px;
     }
 }
 /* end Recruitment details/ apply */
