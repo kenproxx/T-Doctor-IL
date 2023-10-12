@@ -5,7 +5,7 @@
     </div>
     <div class="header-center d-flex">
         <a href="{{route('recruitment.index')}}">Recruitment</a>
-        <a href="#">Real market</a>
+        <a href="{{route('flea-market.index')}}">Flea market</a>
 {{--        <a href="{{route('examination.index')}}">Examination</a>--}}
         <a href="#">New/Events</a>
         <a href="#">Online Medicine</a>

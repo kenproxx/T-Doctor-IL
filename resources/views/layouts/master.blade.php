@@ -27,6 +27,7 @@
     <link rel="stylesheet" href="{{asset('css/login.css')}}">
     <link rel="stylesheet" href="{{asset('css/file.css')}}">
     <link rel="stylesheet" href="{{asset('css/recruitment.css')}}">
+    <link rel="stylesheet" href="{{asset('css/flea-market.css')}}">
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
