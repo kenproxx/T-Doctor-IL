@@ -27,13 +27,15 @@
                     </div>
                     <div class="popup d-lg-flex justify-content-center">
                         <div class="form">
+                            <form action="{{ route('login') }}" method="post">
+                                @csrf
                             <div class="form-element">
                                 <label for="user">Phone/Email</label>
-                                <input id="user" type="text" placeholder="exmaple123">
+                                <input id="user" type="text" name="email" placeholder="exmaple123">
                             </div>
                             <div class="form-element">
                                 <label for="password">Password</label>
-                                <input id="password" type="password" placeholder="********">
+                                <input id="password" type="password" name="password" placeholder="********">
                             </div>
                             <div class="form-element">
                                 <input id="remember-me" type="checkbox">
@@ -41,8 +43,9 @@
                                 <a href="#">Forgot password?</a>
                             </div>
                             <div class="form-element text-center">
-                                <button>Login</button>
+                                <button type="submit">Login</button>
                             </div>
+                            </form>
                             <div class="other_sign">
                                 <div class="line"></div>
                                 <div class="text-center">
