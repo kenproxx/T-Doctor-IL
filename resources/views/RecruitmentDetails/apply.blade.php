@@ -64,12 +64,15 @@
             </div>
         </div>
 
-        <div class=" border apply-border" style="background: #D9D9D9">
-            <a href="{{ route('recruitment.add.cv') }}">
-                <div class="apply-margin apply-add">
-                    <strong>Add new CV</strong>
-                </div>
+        <div class=" border apply-border row" style="background: #D9D9D9">
+            <a href="{{ route('recruitment.add.cv') }}" >
+            <div class="row align-items-center h-100">
+                    <div class="apply-margin apply-add">
+                        <strong style="color: black; font-size: 24px">Add new CV</strong>
+                    </div>
+            </div>
             </a>
+
 
         </div>
 

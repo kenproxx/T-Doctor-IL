@@ -18,12 +18,7 @@
             <div class="flex-fill"><button><i class="bi bi-filter"></i></button></div>
         </div>
     </div>
-    <div id="list-doctor" class="d-flex container">
-        <div class="list--doctor p-0">
-            <h2>Best doctor</h2>
-        </div>
-        <div class="ms-auto p-2"><a href="{{route('examination.best_doctor')}}">See all</a></div>
-    </div>
+    <a class="back" href="{{route('examination.index')}}"><h5><i class="bi bi-arrow-left"></i> Best doctor</h5></a>
     <hr>
     <div id="list-doctor" class="d-flex justify-content-evenly container">
         <div class="card">
@@ -151,13 +146,6 @@
             </div>
         </div>
     </div>
-    <div id="list-doctor" class="d-flex container">
-        <div class="list--doctor p-0">
-            <h2>New doctor</h2>
-        </div>
-        <div class="ms-auto p-2"><a href="{{route('examination.new_doctor')}}">See all</a></div>
-    </div>
-    <hr>
     <div id="list-doctor" class="d-flex justify-content-evenly container">
             <div class="card">
                 <i class="bi bi-heart"></i>
@@ -284,13 +272,6 @@
                 </div>
             </div>
         </div>
-    <div id="list-doctor" class="d-flex container">
-        <div class="list--doctor p-0">
-            <h2>24/7 Available doctor</h2>
-        </div>
-        <div class="ms-auto p-2"><a href="{{route('examination.available_doctor')}}">See all</a></div>
-    </div>
-    <hr>
     <div id="list-doctor" class="d-flex justify-content-evenly container">
         <div class="card">
             <i class="bi bi-heart"></i>

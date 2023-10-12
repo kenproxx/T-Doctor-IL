@@ -39,12 +39,19 @@ Route::group(['prefix' => 'recruitment'],  function () {
     Route::get('/detail', [\App\Http\Controllers\RecruitmentController::class, 'detail'])->name('recruitment_detail');
     Route::get('/edit-cv', [\App\Http\Controllers\RecruitmentController::class, 'editCv'])->name('recruitment.edit.cv');
 });
-Route::group(['prefix' => 'examination'],  function (){
+Route::group(['prefix' => 'examination'], function (){
     Route::get('/index',[\App\Http\Controllers\ExaminationController::class,'index'])->name('examination.index');
+    Route::get('/best-doctor', [\App\Http\Controllers\ExaminationController::class,'bestDoctor'])->name('examination.best_doctor');
+    Route::get('/new-doctor', [\App\Http\Controllers\ExaminationController::class,'newDoctor'])->name('examination.new_doctor');
+    Route::get('/available-doctor', [\App\Http\Controllers\ExaminationController::class,'availableDoctor'])->name('examination.available_doctor');
 });
 
 Route::group(['prefix' => 'medicine'],  function () {
     Route::get('/', [\App\Http\Controllers\MedicineController::class, 'index'])->name('medicine');
     Route::get('/detail', [\App\Http\Controllers\MedicineController::class, 'detail'])->name('medicine.detail');
+
+});
+Route::group(['prefix' => 'flea-market'], function (){
+    Route::get('/',[\App\Http\Controllers\FleaMarketController::class,'index'])->name('flea-market.index');
 
 });

@@ -397,7 +397,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="section1-content">
@@ -806,11 +805,11 @@
     </div>
     <div id="flea_market_board" class="d-flex justify-content-center">
         <div id="content-bkg" class="content-item d-flex justify-content-center ">
-            <div id="flea-market" class="p-2 w-50">
+            <div id="flea-market" class="p-2 w-100">
                 <h2>Flea market</h2>
                 <p>Hire staffs cheaper, find your staffs faster</p>
                 <div class="section1-content">
-                    <div class="container row">
+                    <div class="d-flex justify-content-around">
                         <div class="card" style="width: 188px; height: 342px">
                             <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -836,7 +835,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="container row">
+                    <div class="d-flex justify-content-around">
                         <div class="card" style="width: 188px; height: 342px">
                             <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -862,7 +861,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="container row">
+                    <div class="d-flex justify-content-around">
                         <div class="card" style="width: 188px; height: 342px">
                             <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
                             <div class="card-body">

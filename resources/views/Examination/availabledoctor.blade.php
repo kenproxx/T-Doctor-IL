@@ -18,12 +18,7 @@
             <div class="flex-fill"><button><i class="bi bi-filter"></i></button></div>
         </div>
     </div>
-    <div id="list-doctor" class="d-flex container">
-        <div class="list--doctor p-0">
-            <h2>Best doctor</h2>
-        </div>
-        <div class="ms-auto p-2"><a href="{{route('examination.best_doctor')}}">See all</a></div>
-    </div>
+    <a class="back" href="{{route('examination.index')}}"><h5><i class="bi bi-arrow-left"></i> 24/7 Available doctor</h5></a>
     <hr>
     <div id="list-doctor" class="d-flex justify-content-evenly container">
         <div class="card">
@@ -151,146 +146,132 @@
             </div>
         </div>
     </div>
-    <div id="list-doctor" class="d-flex container">
-        <div class="list--doctor p-0">
-            <h2>New doctor</h2>
+    <div id="list-doctor" class="d-flex justify-content-evenly container">
+        <div class="card">
+            <i class="bi bi-heart"></i>
+            <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">BS Đô Văn Định</h5>
+                <p  class="card-text">respiratory doctor</p>
+                <p  class="card-text_1">Location: <b>Hanoi</b></p>
+                <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+            </div>
         </div>
-        <div class="ms-auto p-2"><a href="{{route('examination.new_doctor')}}">See all</a></div>
+        <div class="card">
+            <i class="bi bi-heart"></i>
+            <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">BS Đô Văn Định</h5>
+                <p  class="card-text">respiratory doctor</p>
+                <p  class="card-text_1">Location: <b>Hanoi</b></p>
+                <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+            </div>
+        </div>
+        <div class="card">
+            <i class="bi bi-heart"></i>
+            <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">BS Đô Văn Định</h5>
+                <p  class="card-text">respiratory doctor</p>
+                <p  class="card-text_1">Location: <b>Hanoi</b></p>
+                <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+            </div>
+        </div>
+        <div class="card">
+            <i class="bi bi-heart"></i>
+            <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">BS Đô Văn Định</h5>
+                <p  class="card-text">respiratory doctor</p>
+                <p  class="card-text_1">Location: <b>Hanoi</b></p>
+                <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+            </div>
+        </div>
     </div>
-    <hr>
     <div id="list-doctor" class="d-flex justify-content-evenly container">
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Đô Văn Định</h5>
-                    <p  class="card-text">respiratory doctor</p>
-                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
-            </div>
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Đô Văn Định</h5>
-                    <p  class="card-text">respiratory doctor</p>
-                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
-            </div>
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Đô Văn Định</h5>
-                    <p  class="card-text">respiratory doctor</p>
-                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
-            </div>
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Đô Văn Định</h5>
-                    <p  class="card-text">respiratory doctor</p>
-                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
+        <div class="card">
+            <i class="bi bi-heart"></i>
+            <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">BS Đô Văn Định</h5>
+                <p  class="card-text">respiratory doctor</p>
+                <p  class="card-text_1">Location: <b>Hanoi</b></p>
+                <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
             </div>
         </div>
-    <div id="list-doctor" class="d-flex justify-content-evenly container">
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Đô Văn Định</h5>
-                    <p  class="card-text">respiratory doctor</p>
-                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
-            </div>
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Đô Văn Định</h5>
-                    <p  class="card-text">respiratory doctor</p>
-                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
-            </div>
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Đô Văn Định</h5>
-                    <p  class="card-text">respiratory doctor</p>
-                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
-            </div>
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Đô Văn Định</h5>
-                    <p  class="card-text">respiratory doctor</p>
-                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
+        <div class="card">
+            <i class="bi bi-heart"></i>
+            <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">BS Đô Văn Định</h5>
+                <p  class="card-text">respiratory doctor</p>
+                <p  class="card-text_1">Location: <b>Hanoi</b></p>
+                <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
             </div>
         </div>
-    <div id="list-doctor" class="d-flex justify-content-evenly container">
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Đô Văn Định</h5>
-                    <p  class="card-text">respiratory doctor</p>
-                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
-            </div>
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Đô Văn Định</h5>
-                    <p  class="card-text">respiratory doctor</p>
-                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
-            </div>
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Đô Văn Định</h5>
-                    <p  class="card-text">respiratory doctor</p>
-                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
-            </div>
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Đô Văn Định</h5>
-                    <p  class="card-text">respiratory doctor</p>
-                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
+        <div class="card">
+            <i class="bi bi-heart"></i>
+            <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">BS Đô Văn Định</h5>
+                <p  class="card-text">respiratory doctor</p>
+                <p  class="card-text_1">Location: <b>Hanoi</b></p>
+                <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
             </div>
         </div>
-    <div id="list-doctor" class="d-flex container">
-        <div class="list--doctor p-0">
-            <h2>24/7 Available doctor</h2>
+        <div class="card">
+            <i class="bi bi-heart"></i>
+            <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">BS Đô Văn Định</h5>
+                <p  class="card-text">respiratory doctor</p>
+                <p  class="card-text_1">Location: <b>Hanoi</b></p>
+                <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+            </div>
         </div>
-        <div class="ms-auto p-2"><a href="{{route('examination.available_doctor')}}">See all</a></div>
     </div>
-    <hr>
+    <div id="list-doctor" class="d-flex justify-content-evenly container">
+        <div class="card">
+            <i class="bi bi-heart"></i>
+            <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">BS Đô Văn Định</h5>
+                <p  class="card-text">respiratory doctor</p>
+                <p  class="card-text_1">Location: <b>Hanoi</b></p>
+                <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+            </div>
+        </div>
+        <div class="card">
+            <i class="bi bi-heart"></i>
+            <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">BS Đô Văn Định</h5>
+                <p  class="card-text">respiratory doctor</p>
+                <p  class="card-text_1">Location: <b>Hanoi</b></p>
+                <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+            </div>
+        </div>
+        <div class="card">
+            <i class="bi bi-heart"></i>
+            <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">BS Đô Văn Định</h5>
+                <p  class="card-text">respiratory doctor</p>
+                <p  class="card-text_1">Location: <b>Hanoi</b></p>
+                <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+            </div>
+        </div>
+        <div class="card">
+            <i class="bi bi-heart"></i>
+            <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">BS Đô Văn Định</h5>
+                <p  class="card-text">respiratory doctor</p>
+                <p  class="card-text_1">Location: <b>Hanoi</b></p>
+                <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+            </div>
+        </div>
+    </div>
     <div id="list-doctor" class="d-flex justify-content-evenly container">
         <div class="card">
             <i class="bi bi-heart"></i>
@@ -419,4 +400,3 @@
     </div>
 
 @endsection
-

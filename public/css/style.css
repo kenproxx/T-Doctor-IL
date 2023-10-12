@@ -8,7 +8,7 @@ a {
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     position: fixed;
     background: white;
-    z-index: 10;
+    z-index: 1;
     top: 0;
     right: 0;
     left: 0;
@@ -208,7 +208,12 @@ a {
     width: 1170px;
     background: #F3F3F3;
     border-radius: 16px;
+    padding: 24px;
     margin-top: 24px;
+    margin-bottom: 24px;
+}
+#content-bkg .p-2 h2{
+    margin: 0;
 }
 .item-bkg{
     background: white;
@@ -276,7 +281,7 @@ a {
 /*Flea-market*/
 #flea-market .content-item{
     justify-items: center;
-    width: 1170px;
+    width: 692px;
     height: 570px;
 }
 #flea-market .content-item #address{
@@ -287,8 +292,36 @@ a {
     width: 370px;
     height: 498px;
 }
-#flea-market .section1-content .container .card{
+#flea-market .section1-content .d-flex .card{
     margin-right: 16px;
+    border-radius: 16px;
+    padding-right: 16px;
+}
+#flea-market .section1-content .d-flex .card .card-body{
+    padding: 0;
+    margin-top: 17px;
+}
+#flea-market .section1-content .d-flex .card .card-body .card-title{
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 17px;
+}
+#flea-market .section1-content .d-flex .card .card-body .card-text{
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 17px;
+    color: #929292;
+}
+#flea-market .section1-content .d-flex .card .card-body .card-text b{
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 17px;
+    color: #000000;
+}
+#flea-market .section1-content .d-flex .card .card-body h4{
+    font-size: 18px;
+    font-weight: 800;
+    margin-top: 17px;
 }
 flea__item{
     width: 692px;
@@ -378,7 +411,10 @@ flea__item{
     width: 174px;
     height: 42px;
     text-align: center;
-
+}
+#doctor-information #list-doctor .card .card-body{
+    padding: 0;
+    margin-top: 12px;
 }
 /*online shopping*/
 #item-information{
@@ -390,6 +426,10 @@ flea__item{
     width: 769px;
     height: 42px;
     margin-bottom: 16px;
+}
+#item-information #list-item .card .card-body{
+    padding: 0;
+    margin-top: 12px;
 }
 #item-information #list-option .option-menu .nav{
     width: 769px;
@@ -583,6 +623,9 @@ footer {
     font-weight: 400;
     color: #929292;
 }
+.recruitment_rank #recruitment_ctn #ctn .card #crd_ctn .card-body{
+    padding: 0;
+}
 .recruitment_rank #recruitment_ctn #ctn .card #crd_ctn .card-image{
     width: 337px;
     height: 237px;
@@ -600,9 +643,35 @@ footer {
 }
 .recruitment_rank #recruitment_ctn #ctn .card .bi-heart{
     position: absolute;
-    left: 290px;
+    left: 330px;
     top: 20px;
     width: 24px;
     height: 24px;
 }
-/*end-recruitment scene*/
+/*end recruitment scene*/
+.filter_search{
+    border-radius: 8px;
+    background: #F3F3F3;
+    padding-left: 16px;
+}
+.filter_search #filter_search{
+    border-radius: 8px;
+    background: #F3F3F3;
+}
+/*examination scene*/
+#list-title{
+    width: 1170px;
+    height: 60px;
+    background: #0f6848;
+    border-bottom: black;
+    margin-bottom: 24px;
+}
+#list-title .list--doctor{
+    background: #0c85d0;
+    margin-right: auto;
+}
+#list-title .list--doctor p{
+    font-size: 32px;
+    font-weight: 800;
+}
+/*end examination scene*/

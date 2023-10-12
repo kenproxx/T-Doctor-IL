@@ -11,4 +11,14 @@ class ExaminationController extends Controller
     {
         return view('examination.index');
     }
+
+    public function bestDoctor(){
+        return view('examination.bestdoctor');
+    }
+    public function newDoctor(){
+        return view('examination.newdoctor');
+    }
+    public function availableDoctor(){
+        return view('examination.availabledoctor');
+    }
 }

@@ -146,7 +146,7 @@
                     courses you have attended.
                 </p>
             </div>
-            <a href="">
+            <a href="#" data-toggle="modal" data-target="#modalRegisterMore">
                 <div class="d-flex mt-4">
                     <img class="plus-img" src="{{asset('img/recruitment-img/ac_plus.png')}}">
                     <div class="color_text-add">Add education</div>
@@ -154,11 +154,11 @@
             </a>
 
         </div>
-        <div class="border-note d-flex mt-5">
+        <div class="border-note d-flex mt-2rem">
             <div class="col-md-11">
                 <div class="text-wrapper mt-2"><strong>Thiết kế đồ hoạ</strong></div>
                 <p class="p">Trường cao đẳng FPT - Cao đẳng</p>
-                <p class="p">Từ tháng 9/2021 - 9/2023</p>
+                <p class="mb-2">Từ tháng 9/2021 - 9/2023</p>
             </div>
             <div class="col-md-1 mt-2rem"><i class="fa-solid fa-pencil mr-3"></i> <i
                     class="fa-regular fa-trash-can"></i>
@@ -176,7 +176,7 @@
                     interested in.
                 </p>
             </div>
-            <a href="">
+            <a href="#" data-toggle="modal" data-target="#modalAddSkill">
                 <div class="d-flex mt-4">
                     <img class="plus-img" src="{{asset('img/recruitment-img/ac_plus.png')}}">
                     <div class="color_text-add">Add Skill</div>
@@ -184,28 +184,28 @@
             </a>
         </div>
         <div class="d-flex">
-            <div class="border-note d-flex mt-5 col-md-3 mr-3">
-                <div class="col-md-11 p-0">
+            <div class="border-note d-flex mt-4 col-md-3 mt-2rem mr-24">
+                <div class="col-md-11 p-0 mb-1">
                     <div class="text-wrapper mt-2"><strong>Web Design</strong></div>
                     <p class="fs-12">Mức Độ Thành Thạo:<strong class="fs-14">Competently</strong></p>
                 </div>
-                <div class="col-md-1 mt-2rem p-0"><i class="fa-regular fa-trash-can"></i>
+                <div class="col-md-1 mt-4 p-0"><i class="fa-regular fa-trash-can"></i>
                 </div>
             </div>
-            <div class="border-note d-flex mt-5 col-md-3 mr-3">
-                <div class="col-md-11 p-0">
+            <div class="border-note d-flex mt-4 col-md-3 mt-2rem mr-24">
+                <div class="col-md-11 p-0 mb-1">
                     <div class="text-wrapper mt-2"><strong>Web Design</strong></div>
                     <p class="fs-12">Mức Độ Thành Thạo:<strong class="fs-14">Competently</strong></p>
                 </div>
-                <div class="col-md-1 mt-2rem p-0"><i class="fa-regular fa-trash-can"></i>
+                <div class="col-md-1 mt-4 p-0"><i class="fa-regular fa-trash-can"></i>
                 </div>
             </div>
-            <div class="border-note d-flex mt-5 col-md-3 mr-3">
-                <div class="col-md-11 p-0">
+            <div class="border-note d-flex mt-4 col-md-3 mt-2rem mr-24">
+                <div class="col-md-11 p-0 mb-1">
                     <div class="text-wrapper mt-2"><strong>Web Design</strong></div>
                     <p class="fs-12">Mức Độ Thành Thạo:<strong class="fs-14">Competently</strong></p>
                 </div>
-                <div class="col-md-1 mt-2rem p-0"><i class="fa-regular fa-trash-can"></i>
+                <div class="col-md-1 mt-4 p-0"><i class="fa-regular fa-trash-can"></i>
                 </div>
             </div>
         </div>
@@ -221,7 +221,7 @@
                 <p class="border-top">
                 </p>
             </div>
-            <a href="">
+            <a href="#" data-toggle="modal" data-target="#modalLicense">
                 <div class="d-flex mt-4">
                     <img class="plus-img" src="{{asset('img/recruitment-img/ac_plus.png')}}">
                     <div class="color_text-add">Add Certificate and license</div>
@@ -229,7 +229,7 @@
             </a>
 
         </div>
-        <div class="border-note d-flex mt-5 justify-content-between">
+        <div class="border-note d-flex mt-4 justify-content-between">
             <div class="col-md-8 d-flex">
                 <div class="ac-license"><img src="{{asset('img/recruitment-img/license.png')}}"></div>
                 <div class=" d-flex">
@@ -251,42 +251,245 @@
             <button type="submit" class="add-cv-bt apply-bt_edit">Complete</button>
         </form>
     </div>
-</div><!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
+    <!-- Modal add education -->
+    <div class="modal fade" id="modalRegisterMore" tabindex="-1" role="dialog"
+         aria-labelledby="modalRegisterMoreLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width: 770px; height: 886px">
+                <div class="modal-header">
+                    <h5 class="modal-title text-font-24 mt-0"
+                        id="modalRegisterMoreLabel">Add education</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form action="" method="post"
+                              enctype="multipart/form-data"
+                              class="form-horizontal row" role="form">
+                            @csrf
+                            <div class="col-12 rm-pd-on-mobile">
+                                <div class="form-group">
+                                    <div class="text-font-16">Specializesd <span class="red-color">*</span></div>
+                                    <input type="text" class="ac-email mt-2"
+                                           placeholder="example123" required>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-md-6 pl-0">
+                                        <div class="form-group">
+                                            <div class="text-font-16 mt-4">School <span class="red-color">*</span></div>
+                                            <input type="text" class="ac-email mt-2"
+                                                   placeholder="example123" required>
+                                        </div>
+                                        <div>
+                                            <div class="text-font-16 mt-4">Graduate <span class="red-color">*</span>
+                                            </div>
+                                            <div class="d-flex">
+                                                <div class="col-md-6 p-0 mt-2">
+                                                    <input type="radio" name="Graduate">
+                                                    <label><strong>Graduate</strong></label>
+                                                </div>
+                                                <div class="col-md-6 p-0 mt-2">
+                                                    <input type="radio" name="Graduate">
+                                                    <label><strong>Undergraduates</strong></label>
+                                                </div>
+                                            </div>
 
-<a href="#" id="openModal">Mở modal</a>
 
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="text-font-16 mt-4">From month <span class="red-color">*</span>
+                                            </div>
+                                            <input type="month" class="ac-birth mt-2" name="phone" id="phone"
+                                                   placeholder=""
+                                                   required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 pr-0">
+                                        <div class="form-group">
+                                            <div class="text-font-16 mt-4">Degree</div>
+                                            <select class="ac-choose mt-2">
+                                                <option>Please choose....</option>
+                                                <option></option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="text-font-16 mt-4 mt-110">To month <span
+                                                    class="red-color">*</span></div>
+                                            <input type="month" class="ac-email mt-2"
+                                                   placeholder=""
+                                                   required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 rm-pd-on-mobile">
+                                <div class="form-group">
+                                    <div class="text-font-16 mt-4">Achievement</div>
+                                    <textarea class="ac-textarea mt-3"
+                                              placeholder="Enter an introduction about yourself"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-12 justify-content-between d-flex">
+                                <div class="col-md-5 mt-2"><span class="red-color">*</span> <span
+                                        class="">Required Information</span></div>
+                                <div class="col-md-7 row justify-content-end">
+                                    <button type="button" class="button-cancel"
+                                            data-dismiss="modal">Cancel
+                                    </button>
+                                    <button type="submit"
+                                            class="button-save">Save
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="modal-body">
-                ...
+        </div>
+    </div>
+    <!-- Modal add Skill -->
+    <div class="modal fade" id="modalAddSkill" tabindex="-1" role="dialog"
+         aria-labelledby="modalRegisterMoreLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width: 770px; height: 540px">
+                <div class="modal-header">
+                    <h5 class="modal-title text-font-24 mt-0"
+                        id="modalRegisterMoreLabel">Add Skill</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form action="" method="post"
+                              enctype="multipart/form-data"
+                              class="form-horizontal row" role="form">
+                            @csrf
+                            <div class="col-12 rm-pd-on-mobile">
+                                <div class="form-group">
+                                    <div class="text-font-16">Skill name <span class="red-color">*</span></div>
+                                    <input type="text" class="ac-email mt-2"
+                                           placeholder="example123" required>
+                                </div>
+                                <div>
+                                    <div class="text-font-16 mt-4">Level <span class="red-color">*</span></div>
+                                    <div class="col-md-6 d-flex">
+                                        <div class="col-md-6 p-0 mt-2">
+                                            <input type="radio" name="Level">
+                                            <label><strong>Base</strong></label>
+                                        </div>
+                                        <div class="col-md-6 p-0 mt-2">
+                                            <input type="radio" name="Level">
+                                            <label><strong>Competently</strong></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 justify-content-between d-flex row margin-top-220">
+                                <div class="col-md-5 mt-2"><span class="red-color">*</span> <span
+                                        class="">Required Information</span></div>
+                                <div class="col-md-7 row justify-content-end">
+                                    <button type="button" class="button-cancel"
+                                            data-dismiss="modal">Cancel
+                                    </button>
+                                    <button type="submit"
+                                            class="button-save">Save
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+    </div>
+    <!-- Modal Add Certificate and license -->
+    <div class="modal fade" id="modalLicense" tabindex="-1" role="dialog"
+         aria-labelledby="modalRegisterMoreLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width: 770px; height: 620px">
+                <div class="modal-header">
+                    <h5 class="modal-title text-font-24 mt-0"
+                        id="modalRegisterMoreLabel">Add Certificate and license</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <form action="" method="post"
+                              enctype="multipart/form-data"
+                              class="form-horizontal row" role="form">
+                            @csrf
+                            <div class="col-12 rm-pd-on-mobile">
+                                <div class="form-group">
+                                    <div class="text-font-16">Name of Certificate/License <span
+                                            class="red-color">*</span></div>
+                                    <input type="text" class="ac-email mt-2"
+                                           placeholder="example123" required>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="col-md-6 pl-0">
+                                        <div class="form-group">
+                                            <div class="text-font-16 mt-4">licensing unit <span
+                                                    class="red-color">*</span></div>
+                                            <input type="text" class="ac-email mt-2"
+                                                   placeholder="Enter keywords to search" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 pl-0">
+                                        <div class="form-group">
+                                            <div class="text-font-16 mt-4">From month <span class="red-color">*</span></div>
+                                            <input type="month" class="ac-birth mt-2" name="phone" id="phone"
+                                                   placeholder=""
+                                                   required>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                    <div class="col-12 rm-pd-on-mobile">
+                        <div class="form-group">
+                            <div class="text-font-16 mt-4">Attention</div>
+                            <textarea class="ac-textarea mt-3"
+                                      placeholder="Enter an introduction about yourself" style="height: 172px"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-12 justify-content-between d-flex">
+                        <div class="col-md-5 mt-2"><span class="red-color">*</span> <span
+                                class="">Required Information</span></div>
+                        <div class="col-md-7 row justify-content-end">
+                            <button type="button" class="button-cancel"
+                                    data-dismiss="modal">Cancel
+                            </button>
+                            <button type="submit"
+                                    class="button-save">Save
+                            </button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 </div>
-</body>
-</html>
 
+
+</div>
 </body>
+
 @endsection
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script>
     $(document).ready(function() {
         $("#openModal").click(function() {
-            $('#staticBackdrop').modal('show');
+            $('#staticBackdropEducation').modal('show');
         });
     });
 </script>
+
+</body>
+</html>
+
