@@ -653,6 +653,7 @@ footer {
     border-radius: 8px;
     background: #F3F3F3;
     padding-left: 16px;
+    margin-right: auto;
 }
 .filter_search #filter_search{
     border-radius: 8px;
@@ -662,16 +663,34 @@ footer {
 #list-title{
     width: 1170px;
     height: 60px;
-    background: #0f6848;
-    border-bottom: black;
+    border-bottom: 1px solid black;
     margin-bottom: 24px;
 }
 #list-title .list--doctor{
-    background: #0c85d0;
     margin-right: auto;
 }
 #list-title .list--doctor p{
     font-size: 32px;
     font-weight: 800;
 }
+#examination-scene #list-title .p-2{
+    padding:0 30px 0 0;
+}
+#examination-scene #list-title .p-2 a{
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+    margin: 30px;
+}
 /*end examination scene*/
+#title #list-title .list--doctor .back p{
+    font-size: 32px;
+    font-weight: 800;
+    color: black;
+}
+#title #list-title .list--doctor .back p i{
+    font-size: 32px;
+    font-weight: 800;
+    color: black;
+    margin-right: 26px;;
+}

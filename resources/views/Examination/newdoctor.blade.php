@@ -3,13 +3,13 @@
 @section('content')
     @include('layouts.partials.header_2')
     @include('component.banner')
-    <div class="d-flex justify-content-evenly">
-        <div id="filter" class="d-flex justify-content-around ">
+    <div class="d-flex justify-content-center">
+        <div id="filter" class="d-flex ">
             <div class="d-flex flex-fill">
-                <div class="filter_option"><p>Category</p></div>
-                <div class="filter_option"><p>Location</p></div>
-                <div class="filter_option"><p>Hospital</p></div>
-                <div class="filter_option"><p>Experience</p></div>
+                <div class="filter_option"><p>Category <i class="bi bi-chevron-expand"></i></p></div>
+                <div class="filter_option"><p>Position <i class="bi bi-chevron-expand"></i></p></div>
+                <div class="filter_option"><p>Location <i class="bi bi-chevron-expand"></i></p></div>
+                <div class="filter_option"><p>Experience <i class="bi bi-chevron-expand"></i></p></div>
             </div>
             <div class="filter_search flex-fill">
                 <label for="filter_search"><i class="bi bi-search"></i></label>
@@ -18,9 +18,14 @@
             <div class="flex-fill"><button><i class="bi bi-filter"></i></button></div>
         </div>
     </div>
-    <a class="back" href="{{route('examination.index')}}"><h5><i class="bi bi-arrow-left"></i> New doctor</h5></a>
-    <hr>
-    <div id="list-doctor" class="d-flex justify-content-evenly container">
+    <div id="title" class="d-flex justify-content-center">
+        <div id="list-title" class="d-flex">
+            <div class="list--doctor p-0">
+                <a class="back" href="{{route('examination.index')}}"><p><i class="bi bi-arrow-left"></i>New doctor</p></a>
+            </div>
+        </div>
+    </div>
+    <div id="list-doctor" class="d-flex justify-content-center container">
         <div class="card">
             <i class="bi bi-heart"></i>
             <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
@@ -62,7 +67,7 @@
             </div>
         </div>
     </div>
-    <div id="list-doctor" class="d-flex justify-content-evenly container">
+    <div id="list-doctor" class="d-flex justify-content-center container">
         <div class="card">
             <i class="bi bi-heart"></i>
             <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
@@ -104,7 +109,7 @@
             </div>
         </div>
     </div>
-    <div id="list-doctor" class="d-flex justify-content-evenly container">
+    <div id="list-doctor" class="d-flex justify-content-center container">
         <div class="card">
             <i class="bi bi-heart"></i>
             <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
@@ -146,7 +151,7 @@
             </div>
         </div>
     </div>
-    <div id="list-doctor" class="d-flex justify-content-evenly container">
+    <div id="list-doctor" class="d-flex justify-content-center container">
         <div class="card">
             <i class="bi bi-heart"></i>
             <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
@@ -188,7 +193,7 @@
             </div>
         </div>
     </div>
-    <div id="list-doctor" class="d-flex justify-content-evenly container">
+    <div id="list-doctor" class="d-flex justify-content-center container">
         <div class="card">
             <i class="bi bi-heart"></i>
             <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
@@ -230,7 +235,7 @@
             </div>
         </div>
     </div>
-    <div id="list-doctor" class="d-flex justify-content-evenly container">
+    <div id="list-doctor" class="d-flex justify-content-center container">
         <div class="card">
             <i class="bi bi-heart"></i>
             <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
@@ -272,7 +277,7 @@
             </div>
         </div>
     </div>
-    <div id="list-doctor" class="d-flex justify-content-evenly container">
+    <div id="list-doctor" class="d-flex justify-content-center container">
         <div class="card">
             <i class="bi bi-heart"></i>
             <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
@@ -314,7 +319,7 @@
             </div>
         </div>
     </div>
-    <div id="list-doctor" class="d-flex justify-content-evenly container">
+    <div id="list-doctor" class="d-flex justify-content-center container">
         <div class="card">
             <i class="bi bi-heart"></i>
             <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
@@ -356,7 +361,7 @@
             </div>
         </div>
     </div>
-    <div id="list-doctor" class="d-flex justify-content-evenly container">
+    <div id="list-doctor" class="d-flex justify-content-center container">
         <div class="card">
             <i class="bi bi-heart"></i>
             <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
@@ -398,5 +403,4 @@
             </div>
         </div>
     </div>
-
 @endsection
