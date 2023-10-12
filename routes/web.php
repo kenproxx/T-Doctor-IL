@@ -44,3 +44,4 @@ Route::group(['prefix' => 'examination'],  function (){
 
 });
 
+Route::get('/online_medicine', [\App\Http\Controllers\MedicineController::class, 'index'])->name('online_medicine');
