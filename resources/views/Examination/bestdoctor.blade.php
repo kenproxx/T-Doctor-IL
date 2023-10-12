@@ -18,12 +18,7 @@
             <div class="flex-fill"><button><i class="bi bi-filter"></i></button></div>
         </div>
     </div>
-    <div id="list-doctor" class="d-flex container">
-        <div class="list--doctor p-0">
-            <h2>Best doctor</h2>
-        </div>
-        <div class="ms-auto p-2"><a href="#">See all</a></div>
-    </div>
+    <a class="back" href="{{route('examination.index')}}"><h5><i class="bi bi-arrow-left"></i> Best doctor</h5></a>
     <hr>
     <div id="list-doctor" class="d-flex justify-content-evenly container">
         <div class="card">
