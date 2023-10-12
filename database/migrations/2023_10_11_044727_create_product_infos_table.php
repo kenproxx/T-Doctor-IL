@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
 
             $table->mediumText('name');
+            $table->mediumText('name_en')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->string('brand_name')->nullable()->comment('Tên thương hiệu');
+            $table->string('brand_name_en')->nullable()->comment('Tên thương hiệu');
             $table->unsignedBigInteger('province_id')->nullable();
             $table->longText('thumbnail');
             $table->string('gallery')->nullable();

@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
 
             $table->string('name')->comment('Tên chứng chỉ');
+            $table->string('name_en')->comment('Tên chứng chỉ = tiếng anh')->nullable();
             $table->string('licensing_unit')->comment('Đơn vị cấp (Tên trung tâm/ trường đại học)');
+            $table->string('licensing_unit_en')->comment('Đơn vị cấp (Tên trung tâm/ trường đại học) = tiếng anh')->nullable();
             $table->string('from_month')->comment('Tháng cấp');
             $table->string('description')->nullable();
 

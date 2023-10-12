@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
 
             $table->string('title')->comment('Tiêu đề công việc');
+            $table->string('title_en')->comment('Tiêu đề công việc = tiếng anh')->nullable();
             $table->string('position')->comment('Chức vụ');
+            $table->string('position_en')->comment('Chức vụ = tiếng anh')->nullable();
             $table->string('type_employment')->comment('Loại nhân viên (Thời vụ/ Full-time/ Part-time)');
             $table->string('type_experience')->comment('Loại kinh nghiệm (Không yêu cầu/ không cần kinh nghiệm/ cần kinh nghiệm)');
             $table->integer('year_of_experience')->nullable()->comment('Số năm kinh nghiệm');

@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
 
             $table->string('name')->comment('Tên ứng viên');
+            $table->string('name_en')->comment('Tên ứng viên = tiếng anh')->nullable();
             $table->string('job_title')->comment('Tên công việc');
+            $table->string('job_title_en')->comment('Tên công việc = tiếng anh')->nullable();
             $table->string('position')->comment('Chức vụ');
             $table->string('year_of_experience')->comment('Số năm kinh nghiệm');
             $table->string('email');

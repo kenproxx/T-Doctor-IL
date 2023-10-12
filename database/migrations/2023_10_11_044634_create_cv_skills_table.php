@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->string('name')->comment('Tên kỹ năng');
+            $table->string('name_en')->comment('Tên kỹ năng = tiếng anh')->nullable();
             $table->string('level')->comment('Mức thành thạo');
 
             $table->unsignedBigInteger('created_by')->nullable();

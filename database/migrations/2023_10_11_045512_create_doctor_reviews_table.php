@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
 
             $table->string('title');
+            $table->string('title_en')->nullable();
             $table->longText('description')->nullable();
+            $table->longText('description_en')->nullable();
             $table->tinyInteger('number_star')->nullable()->default('5');
             $table->nestedSet();
 
