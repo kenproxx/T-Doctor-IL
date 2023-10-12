@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="line"></div>
                             </div>
-                            <div class="form-signin" style="display: flex; justify-content: space-around" >
+                            <div class="form-signin d-flex justify-content-around" >
                                 <button type="button" class="login-with-btn"><img src="{{asset('img/icons_logo/facebook_logo.png')}}"/></button>
                                 <button type="button" class="login-with-btn"><img src="{{asset('img/icons_logo/google_logo.png')}}"/></button>
                                 <button type="button" class="login-with-btn"><img src="{{asset('img/icons_logo/apple_logo.png')}}"/></button>
@@ -76,7 +76,7 @@
                     <div class="popup">
                         <div class="form">
                             <div class="user-option">
-                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <ul class="nav" id="myTab" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" id="User-tab" data-toggle="tab" href="#User" role="tab" aria-controls="home" aria-selected="true">User</a>
                                     </li>
@@ -136,23 +136,6 @@
                                         <div class="form-element">
                                             <input id="remember-me" type="checkbox">
                                             <label for="remember-me">Agree to Terms of Service and Privacy Policy</label>
-                                        </div>
-                                        <div class="form-element text-center">
-                                            <button>Login</button>
-                                        </div>
-                                        <div class="other_sign">
-                                            <div class="text-center">
-                                                Or
-                                            </div>
-
-                                            <hr>
-                                        </div>
-
-                                        <div class="form-signin" style="display: flex; justify-content: space-around" >
-                                            <button type="button" class="login-with-btn"><img src="{{asset('img/icons_logo/facebook_logo.png')}}"/></button>
-                                            <button type="button" class="login-with-btn"><img src="{{asset('img/icons_logo/google_logo.png')}}"/></button>
-                                            <button type="button" class="login-with-btn"><img src="{{asset('img/icons_logo/apple_logo.png')}}"/></button>
-                                            <button type="button" class="login-with-btn"><img src="{{asset('img/icons_logo/kakao-talk_logo.png')}}"/></button>
                                         </div>
                                     </div>
                                 </div>
