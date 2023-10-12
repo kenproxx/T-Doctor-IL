@@ -40,3 +40,4 @@ Route::group(['prefix' => 'recruitment'],  function () {
     Route::get('/edit-cv', [\App\Http\Controllers\RecruitmentController::class, 'editCv'])->name('recruitment.edit.cv');
 });
 
+Route::get('/online_medicine', [\App\Http\Controllers\MedicineController::class, 'index'])->name('online_medicine');
