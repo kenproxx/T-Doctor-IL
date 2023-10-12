@@ -8,7 +8,8 @@ INSERT INTO administrative_regions (id,name,name_en,code_name,code_name_en) VALU
 	 (5,'Duyên hải Nam Trung Bộ','South Central Coast','duyen_hai_nam_trung_bo','south_central_coast'),
 	 (6,'Tây Nguyên','Central Highlands','tay_nguyen','central_highlands'),
 	 (7,'Đông Nam Bộ','Southeast','dong_nam_bo','southeast'),
-	 (8,'Đồng bằng sông Cửu Long','Mekong River Delta','dong_bang_song_cuu_long','southwest');
+	 (8,'Đồng bằng sông Cửu Long','Mekong River Delta','dong_bang_song_cuu_long','southwest'),
+	 (9,'Nước ngoài','International','international','international');
 
 -- DATA for administrative_units
 INSERT INTO administrative_units (id,full_name,full_name_en,short_name,short_name_en,code_name,code_name_en) VALUES
