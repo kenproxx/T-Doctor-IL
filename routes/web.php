@@ -39,5 +39,9 @@ Route::group(['prefix' => 'recruitment'],  function () {
     Route::get('/detail', [\App\Http\Controllers\RecruitmentController::class, 'detail'])->name('recruitment_detail');
     Route::get('/edit-cv', [\App\Http\Controllers\RecruitmentController::class, 'editCv'])->name('recruitment.edit.cv');
 });
+Route::group(['prefix' => 'examination'],  function (){
+    Route::get('/index',[\App\Http\Controllers\ExaminationController::class,'index'])->name('examination.index');
+
+});
 
 Route::get('/online_medicine', [\App\Http\Controllers\MedicineController::class, 'index'])->name('online_medicine');
