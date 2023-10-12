@@ -27,7 +27,7 @@
                     </div>
                     <div class="popup d-lg-flex justify-content-center">
                         <div class="form">
-                            <form action="{{ route('login') }}" method="post">
+                            <form action="{{ route('auth.login') }}" method="post">
                                 @csrf
                             <div class="form-element">
                                 <label for="user">Phone/Email</label>
@@ -92,20 +92,21 @@
                                 </ul>
                             </div>
                             <div class="tab-content" id="myTabContent">
+                                <form action="{{ route('auth.register') }}" method="post"></form>
                                 <div class="tab-pane fade show active" id="User" role="tabpanel" aria-labelledby="User-tab">
                                     <div>
                                         <div class="form-element">
                                             <label for="user">Phone/Email</label>
-                                            <input id="user" type="text" placeholder="exmaple123">
+                                            <input id="email" name="email" type="text" placeholder="exmaple123">
                                         </div>
 
                                         <div class="form-element">
                                             <label for="password">Password</label>
-                                            <input id="password" type="password" placeholder="********">
+                                            <input id="password" name="password" type="password" placeholder="********">
                                         </div>
                                         <div class="form-element">
                                             <label for="cfrm_password">Enter the Password</label>
-                                            <input id="cfrm_password" type="password" placeholder="********">
+                                            <input id="password_confirmation" name="password_confirmation" type="password" placeholder="********">
                                         </div>
                                         <div class="form-element">
                                             <input id="remember-me" type="checkbox">
@@ -171,12 +172,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="form-element text-center">
+                                    <button type="submit">Sign up</button>
+                                </div>
                             </div>
                         </div>
                         <div id="other-option">
-                            <div class="form-element text-center">
-                                <button>Sign up</button>
-                            </div>
+
                             <div class="other_sign">
                                 <div class="line"></div>
                                 <div class="text-center">

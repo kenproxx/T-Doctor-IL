@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,10 +17,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index')->name('home');
 
-Auth::routes();
+//Auth::routes();
 
 Route::get('/login', 'AuthController@index')->name('login');
 
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('login', [AuthController::class, 'login'])->name('auth.login');
+    Route::post('register', [AuthController::class, 'register'])->name('auth.register');
+});
 Route::group(['prefix' => 'profile'], function () {
     Route::get('', 'ProfileController@index')->name('profile');
     Route::put('', 'ProfileController@update')->name('profile.update');
