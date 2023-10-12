@@ -33,10 +33,10 @@ return new class extends Migration
             $table->date('application_deadline')->comment('Hạn ứng tuyển');
 
             $table->string('status_post')->nullable()->default('1')->comment('Trạng thái bài viết');
-            $table->unsignedInteger('company_id')->comment('ID công ty');
+            $table->unsignedBigInteger('company_id')->comment('ID công ty');
 
-            $table->unsignedInteger('created_by')->nullable();
-            $table->unsignedInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

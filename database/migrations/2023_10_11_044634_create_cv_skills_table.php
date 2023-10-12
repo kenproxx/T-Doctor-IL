@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('name')->comment('Tên kỹ năng');
             $table->string('level')->comment('Mức thành thạo');
 
-            $table->unsignedInteger('created_by')->nullable();
-            $table->unsignedInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

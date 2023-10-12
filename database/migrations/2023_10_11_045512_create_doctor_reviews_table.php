@@ -19,8 +19,8 @@ return new class extends Migration
             $table->tinyInteger('number_star')->nullable()->default('5');
             $table->nestedSet();
 
-            $table->unsignedInteger('created_by')->nullable();
-            $table->unsignedInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

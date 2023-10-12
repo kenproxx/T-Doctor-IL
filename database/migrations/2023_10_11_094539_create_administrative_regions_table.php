@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('code_name')->nullable();
             $table->string('code_name_en')->nullable();
 
-            $table->unsignedInteger('created_by')->nullable();
-            $table->unsignedInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

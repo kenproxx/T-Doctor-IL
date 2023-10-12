@@ -31,13 +31,13 @@ return new class extends Migration
             $table->string('commune_id')->nullable();
             $table->string('detail_address')->nullable();
 
-            $table->unsignedInteger('user_id')->nullable();
-            $table->unsignedInteger('education_id')->nullable();
-            $table->unsignedInteger('skill_id')->nullable();
-            $table->unsignedInteger('certificate_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('education_id')->nullable();
+            $table->unsignedBigInteger('skill_id')->nullable();
+            $table->unsignedBigInteger('certificate_id')->nullable();
 
-            $table->unsignedInteger('created_by')->nullable();
-            $table->unsignedInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

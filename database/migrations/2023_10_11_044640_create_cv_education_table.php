@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('is_graduate')->comment('Đã tốt nghiệp/ Chưa tốt nghiệp');
             $table->string('description')->nullable();
 
-            $table->unsignedInteger('created_by')->nullable();
-            $table->unsignedInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

@@ -19,8 +19,8 @@ return new class extends Migration
             $table->mediumText('short_description')->nullable();
             $table->longText('full_description')->nullable();
 
-            $table->unsignedInteger('created_by')->nullable();
-            $table->unsignedInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }

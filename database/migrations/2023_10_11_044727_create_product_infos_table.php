@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
 
             $table->mediumText('name');
-            $table->unsignedInteger('category_id')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->string('brand_name')->nullable()->comment('Tên thương hiệu');
-            $table->unsignedInteger('province_id')->nullable();
+            $table->unsignedBigInteger('province_id')->nullable();
             $table->longText('thumbnail');
             $table->string('gallery')->nullable();
             $table->integer('price');
@@ -25,8 +25,8 @@ return new class extends Migration
             $table->integer('ads_plan')->comment('Cấp quảng cáo');
             $table->integer('ads_period')->comment('Thời gian Quảng cáo');
 
-            $table->unsignedInteger('created_by')->nullable();
-            $table->unsignedInteger('updated_by')->nullable();
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
         });
     }
