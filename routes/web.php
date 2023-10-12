@@ -46,3 +46,4 @@ Route::group(['prefix' => 'examination'], function (){
     Route::get('/available-doctor', [\App\Http\Controllers\ExaminationController::class,'availableDoctor'])->name('examination.available_doctor');
 });
 
+Route::get('/online_medicine', [\App\Http\Controllers\MedicineController::class, 'index'])->name('online_medicine');

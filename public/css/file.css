@@ -228,11 +228,22 @@
   border-radius: 8px;
   line-height: 56px;
   text-align: center;
+  cursor: pointer;
 }
 .recruitment-details--content--right .form-2 .div .div-2 .div-wrapper .text-wrapper-2 {
   font-size: 16px;
   font-weight: 800;
   text-align: center;
+}
+.recruitment-details--content--right .form-2 .div .div-2 .div-wrapper:hover {
+  background: rgb(69, 195, 210);
+  color: white;
+  border-radius: 8px;
+}
+.recruitment-details--content--right .form-2 .div .div-2 .div-wrapper.active {
+  background: rgb(69, 195, 210);
+  color: white;
+  border-radius: 8px;
 }
 .recruitment-details--content--right .form-2 .div .div-2 .div-wrapper i {
   font-size: 25px;
@@ -240,6 +251,7 @@
 }
 .recruitment-details--content--right .form-2 .div .div-2 button {
   border: none;
+  padding: 0;
 }
 .recruitment-details--content--right .form-2 .div-3 {
   margin-top: 16px;
