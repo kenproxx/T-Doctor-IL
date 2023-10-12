@@ -12,6 +12,7 @@ a {
     top: 0;
     right: 0;
     left: 0;
+    height: 100px;
 }
 .header-left {
     width: 177px;
@@ -122,6 +123,8 @@ a {
     width: 237px;
     height: 359px;
     border-radius: 16px;
+    margin-bottom: 30px;
+
 }
 #list-doctor .card .card-body h5{
     margin-bottom: 0;
@@ -541,9 +544,7 @@ footer {
     padding-left: 20px;
     padding-right: 20px;
 }
-#rank .p-2{
-    margin-right: 40px;
-}
+
 #rank .p-2 a{
     color: black;
     text-decoration: none;
@@ -568,6 +569,9 @@ footer {
 }
 .recruitment_rank #recruitment_ctn #ctn .card #crd_ctn{
     padding: 16px;
+}
+.recruitment_rank #recruitment_ctn #ctn .card #crd_ctn a{
+    color: black;
 }
 .recruitment_rank #recruitment_ctn #ctn .card #crd_ctn h6{
     font-size: 18px;

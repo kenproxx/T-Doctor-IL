@@ -2,7 +2,7 @@
 @section('title', 'Home')
 @section('content')
 
-   @include('layouts.partials.header_2')
+    @include('layouts.partials.header_2')
     @include('component.banner')
     <div class="container">
         <div class="d-flex">
@@ -25,11 +25,12 @@
         <div class="recruitment_rank d-flex flex-column container">
             <div id="recruitment_ctn" class="flex-column">
                 <div id="rank" class="d-flex">
-                    <div class="rank_title p-0">
+                    <div class="col-10 rank_title p-0">
                         <img src="{{asset('img/platinum_rank.png')}}" width="398px" height="60px">
                         <h2>PLATINUM</h2>
                     </div>
-                    <div class="ms-auto p-2"><a href="#">See all</a></div>
+                    <div class="col-1 ms-auto p-2"><a href="">See all</a></div>
+
                 </div>
                 <div id="ctn" class="d-flex">
                     <div class="card">
@@ -43,7 +44,7 @@
                                 <i class="bi bi-clock"></i>
                                     <div class="time-txt">9/18/2023</div>
                                 </div>
-                                <h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6>
+                                <a href="{{route('recruitment_detail')}}"><h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6></a>
                                 <p>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCTĐịa điểm làm việc: 77
                                     Hoàng Hoa Thám, Phường 13, Quận Tân Bình, TPHCM</p>
                             </div>
@@ -60,7 +61,7 @@
                                 <i class="bi bi-clock"></i>
                                     <div class="time-txt">9/18/2023</div>
                                 </div>
-                                <h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6>
+                                <a href="{{route('recruitment_detail')}}"><h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6></a>
                                 <p>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCTĐịa điểm làm việc: 77
                                     Hoàng Hoa Thám, Phường 13, Quận Tân Bình, TPHCM</p>
                             </div>
@@ -77,7 +78,7 @@
                                 <i class="bi bi-clock"></i>
                                     <div class="time-txt">9/18/2023</div>
                                 </div>
-                                <h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6>
+                                <a href="{{route('recruitment_detail')}}"><h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6></a>
                                 <p>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCTĐịa điểm làm việc: 77
                                     Hoàng Hoa Thám, Phường 13, Quận Tân Bình, TPHCM</p>
                             </div>
@@ -87,11 +88,11 @@
             </div>
             <div id="recruitment_ctn" class="flex-column">
                 <div id="rank" class="d-flex">
-                    <div class="rank_title p-0">
+                    <div class="col-10 rank_title p-0">
                         <img src="{{asset('img/premium_rank.png')}}" width="398px" height="60px">
                         <h2>PREMIUM</h2>
                     </div>
-                    <div class="ms-auto p-2"><a href="#">See all</a></div>
+                    <div class="col-1 ms-auto p-2"><a href="{{route('recruitment_detail')}}">See all</a></div>
                 </div>
                 <div id="ctn" class="d-flex">
                     <div class="card">
@@ -105,7 +106,7 @@
                                 <i class="bi bi-clock"></i>
                                     <div class="time-txt">9/18/2023</div>
                                 </div>
-                                <h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6>
+                                <a href="{{route('recruitment_detail')}}"><h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6></a>
                                 <p>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCTĐịa điểm làm việc: 77
                                     Hoàng Hoa Thám, Phường 13, Quận Tân Bình, TPHCM</p>
                             </div>
@@ -122,7 +123,7 @@
                                 <i class="bi bi-clock"></i>
                                     <div class="time-txt">9/18/2023</div>
                                 </div>
-                                <h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6>
+                                <a href="{{route('recruitment_detail')}}"><h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6></a>
                                 <p>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCTĐịa điểm làm việc: 77
                                     Hoàng Hoa Thám, Phường 13, Quận Tân Bình, TPHCM</p>
                             </div>
@@ -139,7 +140,7 @@
                                 <i class="bi bi-clock"></i>
                                     <div class="time-txt">9/18/2023</div>
                                 </div>
-                                <h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6>
+                                <a href="{{route('recruitment_detail')}}"><h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6></a>
                                 <p>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCTĐịa điểm làm việc: 77
                                     Hoàng Hoa Thám, Phường 13, Quận Tân Bình, TPHCM</p>
                             </div>
@@ -149,11 +150,12 @@
             </div>
             <div id="recruitment_ctn" class="flex-column">
                 <div id="rank" class="d-flex">
-                    <div class="rank_title p-0">
+                    <div class="col-10 rank_title p-0">
                         <img src="{{asset('img/silver_rank.png')}}" width="398px" height="60px">
                         <h2>SILVER</h2>
                     </div>
-                    <div class="ms-auto p-2"><a href="#">See all</a></div>
+                    <div class="col-1 ms-auto p-2"><a href="{{route('recruitment_detail')}}">See all</a></div>
+
                 </div>
                 <div id="ctn" class="d-flex">
                     <div class="card">
@@ -167,7 +169,7 @@
                                 <i class="bi bi-clock"></i>
                                     <div class="time-txt">9/18/2023</div>
                                 </div>
-                                <h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6>
+                                <a href="{{route('recruitment_detail')}}"><h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6></a>
                                 <p>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCTĐịa điểm làm việc: 77
                                     Hoàng Hoa Thám, Phường 13, Quận Tân Bình, TPHCM</p>
                             </div>
@@ -184,7 +186,7 @@
                                 <i class="bi bi-clock"></i>
                                     <div class="time-txt">9/18/2023</div>
                                 </div>
-                                <h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6>
+                                <a href="{{route('recruitment_detail')}}"><h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6></a>
                                 <p>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCTĐịa điểm làm việc: 77
                                     Hoàng Hoa Thám, Phường 13, Quận Tân Bình, TPHCM</p>
                             </div>
@@ -201,7 +203,7 @@
                                 <i class="bi bi-clock"></i>
                                     <div class="time-txt">9/18/2023</div>
                                 </div>
-                                <h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6>
+                                <a href="{{route('recruitment_detail')}}"><h6>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT</h6></a>
                                 <p>Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCTĐịa điểm làm việc: 77
                                     Hoàng Hoa Thám, Phường 13, Quận Tân Bình, TPHCM</p>
                             </div>

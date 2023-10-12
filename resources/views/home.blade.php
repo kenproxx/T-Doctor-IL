@@ -627,7 +627,7 @@
                 </ul>
             </div>
         </div>
-        <div id="list-doctor" class="d-flex justify-content-evenly container">
+        <div id="list-doctor" class="d-flex justify-content-center container">
             <div class="card">
                 <i class="bi bi-heart"></i>
                 <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
@@ -806,7 +806,7 @@
     </div>
     <div id="flea_market_board" class="d-flex justify-content-center">
         <div id="content-bkg" class="content-item d-flex justify-content-center ">
-            <div id="flea-market" class="p-2 w-100">
+            <div id="flea-market" class="p-2 w-50">
                 <h2>Flea market</h2>
                 <p>Hire staffs cheaper, find your staffs faster</p>
                 <div class="section1-content">
@@ -936,7 +936,7 @@
             </div>
         </div>
 
-        <div id="list-item" class="d-flex justify-content-evenly container">
+        <div id="list-item" class="d-flex justify-content-center container">
             <div class="card" style="width: 237px; height: 361px">
                 <i class="bi bi-heart"></i>
                 <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px" height= "237px">
