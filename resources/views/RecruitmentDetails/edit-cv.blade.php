@@ -331,10 +331,10 @@
                                                   placeholder="Enter an introduction about yourself"></textarea>
                                     </div>
                                 </div>
-                                <div class="col-12 d-flex">
-                                    <div class="margin-200"><span class="red-color">*</span> <span class="">Required Information</span>
-                                    </div>
-                                    <div class=" justify-content-end">
+                                <div class="col-md-12 justify-content-between d-flex">
+                                    <div class="col-md-5 mt-2"><span class="red-color">*</span> <span
+                                            class="">Required Information</span></div>
+                                    <div class="col-md-7 row justify-content-end">
                                         <button type="button" class="button-cancel"
                                                 data-dismiss="modal">Cancel
                                         </button>
@@ -387,10 +387,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="margin-top-220 col-12 d-flex">
-                                    <div class="margin-200"><span class="red-color">*</span> <span class="">Required Information</span>
-                                    </div>
-                                    <div class=" justify-content-end">
+                                <div class="col-md-12 justify-content-between d-flex row margin-top-220">
+                                    <div class="col-md-5 mt-2"><span class="red-color">*</span> <span
+                                            class="">Required Information</span></div>
+                                    <div class="col-md-7 row justify-content-end">
                                         <button type="button" class="button-cancel"
                                                 data-dismiss="modal">Cancel
                                         </button>
@@ -457,10 +457,10 @@
                                                   placeholder="Enter an introduction about yourself" style="height: 172px"></textarea>
                                     </div>
                                 </div>
-                                <div class="col-12 d-flex">
-                                    <div class="margin-200"><span class="red-color">*</span> <span
+                                <div class="col-md-12 justify-content-between d-flex">
+                                    <div class="col-md-5 mt-2"><span class="red-color">*</span> <span
                                             class="">Required Information</span></div>
-                                    <div class=" justify-content-end">
+                                    <div class="col-md-7 row justify-content-end">
                                         <button type="button" class="button-cancel"
                                                 data-dismiss="modal">Cancel
                                         </button>
