@@ -10,14 +10,30 @@
                 <div class="col-md-8 recruitment-details--content--left">
                     <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="show" class="main">
                     <div class="list d-flex">
-                        <img class="item" src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
-                        <img class="item" src="{{asset('/img/favicon.png')}}" alt="">
-                        <img class="item" src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
-                        <img class="item" src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
-                        <img class="item" src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
-                        <img class="item" src="{{asset('/img/favicon.png')}}" alt="">
-                        <img class="item" src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
-                        <img class="item" src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
+                        <div class="item">
+                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('/img/favicon.png')}}" alt="">
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('/img/favicon.png')}}" alt="">
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('/img/favicon.png')}}" alt="">
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('/img/favicon.png')}}" alt="">
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4 recruitment-details--content--right">
@@ -77,7 +93,6 @@
                             <button class="div-wrapper">Company page</button>
                             <button id="button-apply" class="text-wrapper-5">Apply</button>
                         </div>
-
                     </div>
                     <div class="form-2 d-none" id="form-apply">
                         <div class="div">

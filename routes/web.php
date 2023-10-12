@@ -41,7 +41,10 @@ Route::group(['prefix' => 'recruitment'],  function () {
 });
 Route::group(['prefix' => 'examination'],  function (){
     Route::get('/index',[\App\Http\Controllers\ExaminationController::class,'index'])->name('examination.index');
-
 });
 
-Route::get('/online_medicine', [\App\Http\Controllers\MedicineController::class, 'index'])->name('online_medicine');
+Route::group(['prefix' => 'medicine'],  function () {
+    Route::get('/', [\App\Http\Controllers\MedicineController::class, 'index'])->name('medicine');
+    Route::get('/detail', [\App\Http\Controllers\MedicineController::class, 'detail'])->name('medicine.detail');
+
+});
