@@ -569,6 +569,9 @@ footer {
 .recruitment_rank #recruitment_ctn #ctn .card #crd_ctn{
     padding: 16px;
 }
+.recruitment_rank #recruitment_ctn #ctn .card #crd_ctn a{
+    color: black;
+}
 .recruitment_rank #recruitment_ctn #ctn .card #crd_ctn h6{
     font-size: 18px;
     font-weight: 800;
