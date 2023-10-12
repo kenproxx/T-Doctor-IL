@@ -114,8 +114,6 @@
                         <div class="div-7 d-flex justify-content-between">
                             <button class="div-wrapper" id="button-back">Cancel</button>
                             <button  class="text-wrapper-5" data-toggle="modal" data-target=".bd-example-modal-lg">Apply</button>
-                            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                            </div>
                         </div>
                     </div>
                 </div>
