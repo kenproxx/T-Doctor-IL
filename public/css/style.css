@@ -122,6 +122,8 @@ a {
     width: 237px;
     height: 359px;
     border-radius: 16px;
+    margin-bottom: 30px;
+
 }
 #list-doctor .card .card-body h5{
     margin-bottom: 0;
