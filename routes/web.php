@@ -45,8 +45,13 @@ Route::group(['prefix' => 'examination'], function (){
     Route::get('/new-doctor', [\App\Http\Controllers\ExaminationController::class,'newDoctor'])->name('examination.new_doctor');
     Route::get('/available-doctor', [\App\Http\Controllers\ExaminationController::class,'availableDoctor'])->name('examination.available_doctor');
 });
+
+Route::group(['prefix' => 'medicine'],  function () {
+    Route::get('/', [\App\Http\Controllers\MedicineController::class, 'index'])->name('medicine');
+    Route::get('/detail', [\App\Http\Controllers\MedicineController::class, 'detail'])->name('medicine.detail');
+
+});
 Route::group(['prefix' => 'flea-market'], function (){
     Route::get('/',[\App\Http\Controllers\FleaMarketController::class,'index'])->name('flea-market.index');
 
 });
-Route::get('/online_medicine', [\App\Http\Controllers\MedicineController::class, 'index'])->name('online_medicine');

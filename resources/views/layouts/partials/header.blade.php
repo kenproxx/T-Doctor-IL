@@ -8,7 +8,7 @@
         <a href="{{route('flea-market.index')}}">Flea market</a>
 {{--        <a href="{{route('examination.index')}}">Examination</a>--}}
         <a href="#">New/Events</a>
-        <a href="#">Online Medicine</a>
+        <a href="{{route('medicine')}}">Online Medicine</a>
         <a href="#">Clinic/Pharmacies</a>
         <a href="#">What's free?</a>
     </div>

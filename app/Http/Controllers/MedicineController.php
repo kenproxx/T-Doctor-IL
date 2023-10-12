@@ -10,4 +10,9 @@ class MedicineController extends Controller
     {
         return view('online_Medicine');
     }
+
+    public function detail()
+    {
+        return view('product_details');
+    }
 }
