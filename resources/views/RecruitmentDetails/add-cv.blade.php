@@ -154,11 +154,11 @@
             </a>
 
         </div>
-        <div class="border-note d-flex mt-5">
+        <div class="border-note d-flex mt-2rem">
             <div class="col-md-11">
                 <div class="text-wrapper mt-2"><strong>Thiết kế đồ hoạ</strong></div>
                 <p class="p">Trường cao đẳng FPT - Cao đẳng</p>
-                <p class="p">Từ tháng 9/2021 - 9/2023</p>
+                <p class="mb-2">Từ tháng 9/2021 - 9/2023</p>
             </div>
             <div class="col-md-1 mt-2rem"><i class="fa-solid fa-pencil mr-3"></i> <i
                     class="fa-regular fa-trash-can"></i>
@@ -184,28 +184,28 @@
             </a>
         </div>
         <div class="d-flex">
-            <div class="border-note d-flex mt-5 col-md-3 mr-3">
-                <div class="col-md-11 p-0">
+            <div class="border-note d-flex mt-4 col-md-3 mt-2rem mr-24">
+                <div class="col-md-11 p-0 mb-1">
                     <div class="text-wrapper mt-2"><strong>Web Design</strong></div>
                     <p class="fs-12">Mức Độ Thành Thạo:<strong class="fs-14">Competently</strong></p>
                 </div>
-                <div class="col-md-1 mt-2rem p-0"><i class="fa-regular fa-trash-can"></i>
+                <div class="col-md-1 mt-4 p-0"><i class="fa-regular fa-trash-can"></i>
                 </div>
             </div>
-            <div class="border-note d-flex mt-5 col-md-3 mr-3">
-                <div class="col-md-11 p-0">
+            <div class="border-note d-flex mt-4 col-md-3 mt-2rem mr-24">
+                <div class="col-md-11 p-0 mb-1">
                     <div class="text-wrapper mt-2"><strong>Web Design</strong></div>
                     <p class="fs-12">Mức Độ Thành Thạo:<strong class="fs-14">Competently</strong></p>
                 </div>
-                <div class="col-md-1 mt-2rem p-0"><i class="fa-regular fa-trash-can"></i>
+                <div class="col-md-1 mt-4 p-0"><i class="fa-regular fa-trash-can"></i>
                 </div>
             </div>
-            <div class="border-note d-flex mt-5 col-md-3 mr-3">
-                <div class="col-md-11 p-0">
+            <div class="border-note d-flex mt-4 col-md-3 mt-2rem mr-24">
+                <div class="col-md-11 p-0 mb-1">
                     <div class="text-wrapper mt-2"><strong>Web Design</strong></div>
                     <p class="fs-12">Mức Độ Thành Thạo:<strong class="fs-14">Competently</strong></p>
                 </div>
-                <div class="col-md-1 mt-2rem p-0"><i class="fa-regular fa-trash-can"></i>
+                <div class="col-md-1 mt-4 p-0"><i class="fa-regular fa-trash-can"></i>
                 </div>
             </div>
         </div>
@@ -229,7 +229,7 @@
             </a>
 
         </div>
-        <div class="border-note d-flex mt-5 justify-content-between">
+        <div class="border-note d-flex mt-4 justify-content-between">
             <div class="col-md-8 d-flex">
                 <div class="ac-license"><img src="{{asset('img/recruitment-img/license.png')}}"></div>
                 <div class=" d-flex">
