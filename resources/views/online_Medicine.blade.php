@@ -93,33 +93,11 @@
             </div>
             <div class="col-md-9 medicine-list--item">
                 <div class="page row ">
-                    <div class="col-md-4 item">
-                        @include('component.products')
-                    </div>
-                    <div class="col-md-4 item">
-                        @include('component.products')
-                    </div>
-                    <div class="col-md-4 item">
-                        @include('component.products')
-                    </div>
-                    <div class="col-md-4 item">
-                        @include('component.products')
-                    </div>
-                    <div class="col-md-4 item">
-                        @include('component.products')
-                    </div>
-                    <div class="col-md-4 item">
-                        @include('component.products')
-                    </div>
-                    <div class="col-md-4 item">
-                        @include('component.products')
-                    </div>
-                    <div class="col-md-4 item">
-                        @include('component.products')
-                    </div>
-                    <div class="col-md-4 item">
-                        @include('component.products')
-                    </div>
+                    @for($i = 0; $i < 12; $i++)
+                        <div class="col-md-4 item">
+                            @include('component.products')
+                        </div>
+                    @endfor
                 </div>
                 <nav aria-label="Page navigation example" class="d-flex justify-content-center">
                     <ul class="pagination">
