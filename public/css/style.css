@@ -465,7 +465,11 @@ footer {
     justify-content: center;
     padding: 3rem 8%;
     height: 480px;
-
+.bottom-footer {
+    && p{
+        color: white;
+    }
+}
     & header {
         width: 100%;
         position: relative;

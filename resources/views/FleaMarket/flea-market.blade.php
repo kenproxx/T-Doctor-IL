@@ -92,193 +92,28 @@
             </div>
             <div class="col-md-9">
                 <div class="img-union"><img src="{{asset('img/flea-market/platinum.png')}}"></div>
-                <div class=" d-flex">
-                    <div class="col-md-4">
-                        <a href="{{route('flea.market.product.detail')}}">
-                            <div class="border-radius-product d-block">
-                                <div class="justify-content-end row">
-                                    <i class="bi bi-heart"></i>
-                                </div>
-                                <div>
-                                    <img src="{{asset('img/item_shopping.png')}}">
-                                </div>
-                                <div>
-                                    <div class="flea-content-product"><strong>Máy tạo oxy 5 lít Reiwa K5BW</strong>
-                                    </div>
-                                    <p>Location: <strong>Ha Noi</strong></p>
-                                    <div class="flea-prise">
-                                        <strong>599,000 VND</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="border-radius-product d-block">
-                                <div class="justify-content-end row">
-                                    <i class="bi bi-heart"></i>
-                                </div>
-                                <div>
-                                    <img src="{{asset('img/item_shopping.png')}}">
-                                </div>
-                                <div>
-                                    <div class="flea-content-product"><strong>Máy tạo oxy 5 lít Reiwa K5BW</strong>
-                                    </div>
-                                    <p>Location: <strong>Ha Noi</strong></p>
-                                    <div class="flea-prise">
-                                        <strong>599,000 VND</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="border-radius-product d-block">
-                                <div class="justify-content-end row">
-                                    <i class="bi bi-heart"></i>
-                                </div>
-                                <div>
-                                    <img src="{{asset('img/item_shopping.png')}}">
-                                </div>
-                                <div>
-                                    <div class="flea-content-product"><strong>Máy tạo oxy 5 lít Reiwa K5BW</strong>
-                                    </div>
-                                    <p>Location: <strong>Ha Noi</strong></p>
-                                    <div class="flea-prise">
-                                        <strong>599,000 VND</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                <div class="page row ">
+                    @for($i = 0; $i < 3; $i++)
+                        <div class="col-md-4 item">
+                            @include('component.products')
+                        </div>
+                    @endfor
                 </div>
-                <div class="img-union mt-60"><img src="{{asset('img/flea-market/premium.png')}}"></div>
-                <div class=" d-flex">
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="border-radius-product d-block">
-                                <div class="justify-content-end row">
-                                    <i class="bi bi-heart"></i>
-                                </div>
-                                <div>
-                                    <img src="{{asset('img/item_shopping.png')}}">
-                                </div>
-                                <div>
-                                    <div class="flea-content-product"><strong>Máy tạo oxy 5 lít Reiwa K5BW</strong>
-                                    </div>
-                                    <p>Location: <strong>Ha Noi</strong></p>
-                                    <div class="flea-prise">
-                                        <strong>599,000 VND</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="border-radius-product d-block">
-                                <div class="justify-content-end row">
-                                    <i class="bi bi-heart"></i>
-                                </div>
-                                <div>
-                                    <img src="{{asset('img/item_shopping.png')}}">
-                                </div>
-                                <div>
-                                    <div class="flea-content-product"><strong>Máy tạo oxy 5 lít Reiwa K5BW</strong>
-                                    </div>
-                                    <p>Location: <strong>Ha Noi</strong></p>
-                                    <div class="flea-prise">
-                                        <strong>599,000 VND</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="border-radius-product d-block">
-                                <div class="justify-content-end row">
-                                    <i class="bi bi-heart"></i>
-                                </div>
-                                <div>
-                                    <img src="{{asset('img/item_shopping.png')}}">
-                                </div>
-                                <div>
-                                    <div class="flea-content-product"><strong>Máy tạo oxy 5 lít Reiwa K5BW</strong>
-                                    </div>
-                                    <p>Location: <strong>Ha Noi</strong></p>
-                                    <div class="flea-prise">
-                                        <strong>599,000 VND</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                <div class="img-union mt-45"><img src="{{asset('img/flea-market/premium.png')}}"></div>
+                <div class="page row ">
+                    @for($i = 0; $i < 3; $i++)
+                        <div class="col-md-4 item">
+                            @include('component.products')
+                        </div>
+                    @endfor
                 </div>
-                <div class="img-union mt-60"><img src="{{asset('img/flea-market/silver.png')}}"></div>
-                <div class=" d-flex">
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="border-radius-product d-block">
-                                <div class="justify-content-end row">
-                                    <i class="bi bi-heart"></i>
-                                </div>
-                                <div>
-                                    <img src="{{asset('img/item_shopping.png')}}">
-                                </div>
-                                <div>
-                                    <div class="flea-content-product"><strong>Máy tạo oxy 5 lít Reiwa K5BW</strong>
-                                    </div>
-                                    <p>Location: <strong>Ha Noi</strong></p>
-                                    <div class="flea-prise">
-                                        <strong>599,000 VND</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="border-radius-product d-block">
-                                <div class="justify-content-end row">
-                                    <i class="bi bi-heart"></i>
-                                </div>
-                                <div>
-                                    <img src="{{asset('img/item_shopping.png')}}">
-                                </div>
-                                <div>
-                                    <div class="flea-content-product"><strong>Máy tạo oxy 5 lít Reiwa K5BW</strong>
-                                    </div>
-                                    <p>Location: <strong>Ha Noi</strong></p>
-                                    <div class="flea-prise">
-                                        <strong>599,000 VND</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="#">
-                            <div class="border-radius-product d-block">
-                                <div class="justify-content-end row">
-                                    <i class="bi bi-heart"></i>
-                                </div>
-                                <div>
-                                    <img src="{{asset('img/item_shopping.png')}}">
-                                </div>
-                                <div>
-                                    <div class="flea-content-product"><strong>Máy tạo oxy 5 lít Reiwa K5BW</strong>
-                                    </div>
-                                    <p>Location: <strong>Ha Noi</strong></p>
-                                    <div class="flea-prise">
-                                        <strong>599,000 VND</strong>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
+                <div class="img-union mt-45"><img src="{{asset('img/flea-market/silver.png')}}"></div>
+                <div class="page row ">
+                    @for($i = 0; $i < 3; $i++)
+                        <div class="col-md-4 item">
+                            @include('component.products')
+                        </div>
+                    @endfor
                 </div>
             </div>
         </div>

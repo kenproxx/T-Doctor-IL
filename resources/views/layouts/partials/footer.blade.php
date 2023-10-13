@@ -120,7 +120,7 @@
         </aside>
     </div>
     <div>
-        <div class="">
+        <div class=" bottom-footer">
             <div class="border-top">
                 <div class="mt-5 d-flex">
                     <p class="w-25">©2022 Company Name. All rights reserved</p>

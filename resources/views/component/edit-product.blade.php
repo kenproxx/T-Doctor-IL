@@ -1,7 +1,6 @@
 <div class="product-item">
     <div class="img-pro">
         <img src="{{asset('img/flea-market/product2.png')}}" alt="">
-        <i class="bi bi-heart"></i>
     </div>
     <div class="content-pro">
         <div class="name-product" style="height: auto">
