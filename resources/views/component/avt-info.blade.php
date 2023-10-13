@@ -32,7 +32,7 @@
             <a href="" class="col text-center" style="color: var(--Grey-Dark, #929292);">
                 Review
             </a>
-            <a href="" class="col text-center " style="color: var(--Grey-Dark, #929292);">
+            <a href="{{route('flea.market.wish.list')}}" class="col text-center " style="color: var(--Grey-Dark, #929292);">
                 Wish list
             </a>
         </div>
