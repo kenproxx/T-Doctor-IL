@@ -1,4 +1,8 @@
-a{
+a {
+    color: black;
+}
+
+p {
     color: black;
 }
 .container {
@@ -6,6 +10,9 @@ a{
         margin-top: 70px;
     }
 
+    .mt-30 {
+        margin-top: 30px;
+    }
     .mt-88 {
         margin-top: 88px;
     }
@@ -13,6 +20,15 @@ a{
         margin-top: 60px !important;
     }
 
+    .mb-42 {
+        margin-bottom: 42px;
+    }
+    .mb-30 {
+        margin-bottom: 30px;
+    }
+    .width-88 {
+        width: 88px;
+    }
     .img-union {
         margin: 16px;
 
@@ -22,7 +38,64 @@ a{
 
         }
     }
+.text-center-info {
+    color: var(--secon1, #45C3D2);
+    text-align: center;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+    .name-product {
+        color: black;
+        font-size: 18px;
+        font-weight: 800;
+        -webkit-line-clamp: 3;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
 
+    .name {
+        color: var(--Black, #1A202C);
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: normal;
+    }
+
+    .hanoi {
+        color: var(--Black, #1A202C);
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: normal;
+    }
+
+    .location-info {
+        color: var(--Grey-Dark, #929292);
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+
+    .margin-info {
+        p {
+            display: flex;
+            margin-right: 32px !important;
+            color: var(--Black, #1A202C);
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+
+            span {
+                margin-left: 16px !important;
+            }
+
+        }
+    }
     .flea-content {
         color: #000000;
         font-size: 48px;

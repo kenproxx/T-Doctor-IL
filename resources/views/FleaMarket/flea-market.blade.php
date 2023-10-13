@@ -17,10 +17,10 @@
                 <form action="#" class="col-md-4 flea-button mr-3">
                 <button class="flea-btn">Sell my product</button>
                 </form>
-                <form action="{{route('flea.market.product.detail')}}" class="col-md-4 flea-button mr-3">
+                <form action="{{route('flea.market.my.store')}}" class="col-md-4 flea-button mr-3">
                     <button class="flea-btn" >Go to my store</button>
                 </form>
-                <form action="#" class="col-md-4 flea-button">
+                <form action="{{route('flea.market.wish.list')}}" class="col-md-4 flea-button">
                 <button class="flea-btn">Wish list</button>
                 </form>
             </div>
@@ -78,7 +78,7 @@
                 <div class="img-union"><img src="{{asset('img/flea-market/platinum.png')}}"></div>
                 <div class=" d-flex">
                     <div class="col-md-4">
-                        <a href="#">
+                        <a href="{{route('flea.market.product.detail')}}">
                             <div class="border-radius-product d-block">
                                 <div class="justify-content-end row">
                                     <i class="bi bi-heart"></i>

@@ -8,7 +8,7 @@
             <div class="recruitment-details--title"><i class="fa-solid fa-arrow-left"></i> Product details</div>
             <div class="row recruitment-details--content">
                 <div class="col-md-8 recruitment-details--content--left">
-                    <img src="{{asset('/img/flea-market/product.png')}}" alt="show" class="main">
+                    <img style="width: 100%" src="{{asset('/img/flea-market/product.png')}}" alt="show" class="main">
                     <div class="list d-flex">
                         <div class="item">
                             <img src="{{asset('/img/flea-market/product.png')}}" alt="">
