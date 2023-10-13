@@ -12,7 +12,7 @@
                 <a class="active" href="{{ route('examination.index') }}">Find a doctor</a>
                 <a  href="{{ route('examination.findmymedicine') }}">Find my medicine</a>
                 <a href="#">Mentoring</a>
-                <a href="">My personal doctor</a>
+                <a href="{{ route('examination.mypersonaldoctor') }}">My personal doctor</a>
             </div>
             <div class="col-md-3 header-detail--right d-flex">
                 <div class="user-1">
