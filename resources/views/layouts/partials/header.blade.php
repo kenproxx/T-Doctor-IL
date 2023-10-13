@@ -9,7 +9,7 @@
 {{--        <a href="{{route('examination.index')}}">Examination</a>--}}
         <a href="#">New/Events</a>
         <a href="{{route('medicine')}}">Online Medicine</a>
-        <a href="#">Clinic/Pharmacies</a>
+        <a href="{{route('clinic')}}">Clinic/Pharmacies</a>
         <a href="#">What's free?</a>
     </div>
     <div class="header-right d-flex ">
