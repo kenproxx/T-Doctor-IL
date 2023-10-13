@@ -44,6 +44,13 @@ Route::group(['prefix' => 'examination'], function (){
     Route::get('/best-doctor', [\App\Http\Controllers\ExaminationController::class,'bestDoctor'])->name('examination.best_doctor');
     Route::get('/new-doctor', [\App\Http\Controllers\ExaminationController::class,'newDoctor'])->name('examination.new_doctor');
     Route::get('/available-doctor', [\App\Http\Controllers\ExaminationController::class,'availableDoctor'])->name('examination.available_doctor');
+    Route::get('/find-my-medicine', [\App\Http\Controllers\ExaminationController::class,'findMyMedicine'])->name('examination.findmymedicine');
+    Route::get('/best-pharmacists', [\App\Http\Controllers\ExaminationController::class,'bestPharmacists'])->name('examination.bestpharmacists');
+    Route::get('/new-pharmacists', [\App\Http\Controllers\ExaminationController::class,'newPharmacists'])->name('examination.newpharmacists');
+    Route::get('/available-pharmacists', [\App\Http\Controllers\ExaminationController::class,'availablePharmacists'])->name('examination.availablepharmacists');
+    Route::get('/hot-deal-medicine', [\App\Http\Controllers\ExaminationController::class,'hotDealMedicine'])->name('examination.hotdealmedicine');
+    Route::get('/new-medicine', [\App\Http\Controllers\ExaminationController::class,'newMedicine'])->name('examination.newmedicine');
+    Route::get('/recommended', [\App\Http\Controllers\ExaminationController::class,'recommended'])->name('examination.recommended');
 });
 
 Route::group(['prefix' => 'medicine'],  function () {
