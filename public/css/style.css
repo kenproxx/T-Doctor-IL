@@ -557,7 +557,7 @@ footer {
     float: right;
 }
 .filter_search input{
-    width: 467px;
+    width: 440px;
     height: 48px;
     border: none;
     outline: none;
@@ -659,8 +659,7 @@ footer {
 .filter_search{
     border-radius: 8px;
     background: #F3F3F3;
-    padding-left: 16px;
-    margin-right: 55px;
+    padding-left: 16px;;
 }
 .filter_search #filter_search{
     border-radius: 8px;
