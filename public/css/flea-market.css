@@ -18,6 +18,9 @@ p {
 .container .mt-60 {
   margin-top: 60px !important;
 }
+.container .mt-45 {
+  margin-top: 45px !important;
+}
 .container .mb-42 {
   margin-bottom: 42px;
 }
@@ -28,7 +31,7 @@ p {
   width: 88px;
 }
 .container .img-union {
-  margin: 16px;
+  margin-bottom: 16px;
 }
 .container .img-union img {
   max-width: 100%;
@@ -232,6 +235,7 @@ p {
   line-height: normal;
 }
 .container .flea-adv {
+  margin: 0;
   color: var(--Black, #1A202C);
   text-align: center;
   font-size: 18px;
