@@ -5,10 +5,12 @@
     @include('component.banner')
     <div class="recruitment-details ">
         <div class="container">
-            <div class="recruitment-details--title"><i class="fa-solid fa-arrow-left"></i> Recruitment details</div>
+            <a href="{{route('recruitment.index')}}" class="recruitment-details--title"><i class="fa-solid fa-arrow-left"></i> Recruitment details</a>
             <div class="row recruitment-details--content">
                 <div class="col-md-8 recruitment-details--content--left">
-                    <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="show" class="main">
+                    <div class="img-main">
+                        <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="show" class="main">
+                    </div>
                     <div class="list d-flex">
                         <div class="item">
                             <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
