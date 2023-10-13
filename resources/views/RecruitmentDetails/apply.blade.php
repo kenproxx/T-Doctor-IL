@@ -3,7 +3,7 @@
 @section('content')
     @include('layouts.partials.header_2')
 
-<body>
+    <body>
     @include('component.banner')
     <div class="container d-flex">
         <div class="apply-mr border apply-border">
@@ -63,23 +63,17 @@
                 </div>
             </div>
         </div>
-
         <div class=" border apply-border row" style="background: #D9D9D9">
-            <a href="{{ route('recruitment.add.cv') }}" >
-            <div class="row align-items-center h-100">
+            <a href="{{ route('recruitment.add.cv') }}">
+                <div class="row align-items-center h-100">
                     <div class="apply-margin apply-add">
                         <strong style="color: black; font-size: 24px">Add new CV</strong>
                     </div>
-            </div>
+                </div>
             </a>
-
-
         </div>
 
 
-
-
-
     </div>
-</body>
+    </body>
 @endsection
