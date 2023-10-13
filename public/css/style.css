@@ -124,10 +124,16 @@ a {
     height: 359px;
     border-radius: 16px;
     margin-bottom: 30px;
-
 }
-#list-doctor .card .card-body h5{
+#list-doctor .card:hover{
+    border-radius: 16px;
+    border: 1px solid  #45C3D2;
+    background: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+#list-doctor .card .card-body a h5{
     margin-bottom: 0;
+    color: black;
 }
 #list-doctor .card .card-body p{
     margin-bottom: 0;
@@ -299,6 +305,7 @@ a {
 }
 #flea-market .section1-content .d-flex .card .card-body{
     padding: 0;
+    padding-left: 16px;
     margin-top: 17px;
 }
 #flea-market .section1-content .d-flex .card .card-body .card-title{
