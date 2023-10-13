@@ -9,38 +9,42 @@ class ExaminationController extends Controller
 {
     public function index()
     {
-        return view('examination.index');
+        return view('Examination.index');
+    }
+    public function infoDoctor()
+    {
+        return view('Examination.infodoctor');
     }
 
     public function bestDoctor(){
-        return view('examination.bestdoctor');
+        return view('Examination.bestdoctor');
     }
     public function newDoctor(){
-        return view('examination.newdoctor');
+        return view('Examination.newdoctor');
     }
     public function availableDoctor(){
-        return view('examination.availabledoctor');
+        return view('Examination.availabledoctor');
     }
     public function findMyMedicine(){
-        return view('examination.findmymedicine');
+        return view('Examination.findmymedicine');
     }
     public function bestPharmacists(){
-        return view('examination.bestpharmacists');
+        return view('Examination.bestpharmacists');
     }
     public function newPharmacists(){
-        return view('examination.newpharmacists');
+        return view('Examination.newpharmacists');
     }
     public function availablePharmacists(){
-        return view('examination.availablepharmacists');
+        return view('Examination.availablepharmacists');
     }
     public function hotDealMedicine(){
-        return view('examination.hotdealmedicine');
+        return view('Examination.hotdealmedicine');
     }
     public function newMedicine(){
-        return view('examination.newmedicine');
+        return view('Examination.newmedicine');
     }
     public function recommended(){
-        return view('examination.recommended');
+        return view('Examination.recommended');
     }
 
 }
