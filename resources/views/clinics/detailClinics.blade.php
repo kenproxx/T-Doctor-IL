@@ -20,7 +20,6 @@
 
         <div class="detail-clinics">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.4779394253983!2d105.75396807499916!3d20.973470389675743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313453005de9eab7%3A0x9050a578a1b5975e!2zVGhlIFRlcnJhIEFuIEjGsG5nIC0gVOG7kSBI4buvdSwgSMOgIMSQw7RuZw!5e0!3m2!1sen!2s!4v1697177853055!5m2!1sen!2s" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
         </div>
 
         <div class="other-clinics">

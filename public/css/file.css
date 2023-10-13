@@ -1,7 +1,8 @@
-.container {
-  min-width: 1440px;
+@media (min-width: 1500px) {
+  .container {
+    min-width: 1440px;
+  }
 }
-
 .header .header-detail {
   height: 100px;
   align-items: center;
@@ -428,6 +429,10 @@
   justify-content: center;
   align-items: center;
   margin-right: 20px;
+  border: none;
+}
+.medicine-search--center .shopping-bag:focus {
+  border: none;
 }
 .medicine-search--center .shopping-bag .fa-bag-shopping {
   font-size: 32px;
@@ -555,6 +560,10 @@
   justify-content: center;
   align-items: center;
   margin-right: 20px;
+  border: none;
+}
+.clinic-search--center .shopping-bag:focus {
+  border: none;
 }
 .clinic-search--center .shopping-bag .fa-bag-shopping {
   font-size: 32px;
@@ -644,6 +653,67 @@
 .detail-clinics iframe {
   width: 100%;
   height: 80vh;
+}
+
+.modal-cart .modal-dialog {
+  max-width: 700px;
+}
+.modal-cart .modal-dialog .modal-content .modal-header {
+  border-bottom: none;
+}
+.modal-cart .modal-dialog .modal-content .modal-header .modal-title {
+  font-size: 24px;
+  font-weight: 800;
+}
+.modal-cart .modal-dialog .modal-content .modal-body {
+  height: 75vh;
+  overflow-y: auto;
+  padding: 0 30px;
+  border-bottom: none;
+  display: grid;
+  gap: 16px;
+}
+.modal-cart .modal-dialog .modal-content .modal-body .product-cart {
+  border-radius: 8px;
+  padding: 10px 16px;
+  border: 1px solid rgb(234, 234, 234);
+}
+.modal-cart .modal-dialog .modal-content .modal-body .product-cart .img {
+  width: 100px;
+  height: 100px;
+}
+.modal-cart .modal-dialog .modal-content .modal-body .product-cart .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.modal-cart .modal-dialog .modal-content .modal-body .product-cart .title .title-name {
+  font-size: 18px;
+  font-weight: 800;
+}
+.modal-cart .modal-dialog .modal-content .modal-body .product-cart .title .price {
+  font-size: 18px;
+  font-weight: 600;
+}
+.modal-cart .modal-dialog .modal-content .modal-footer {
+  border-top: none;
+}
+.modal-cart .modal-dialog .modal-content .modal-footer .cancel {
+  width: 161px;
+  font-size: 14px;
+  font-weight: 800;
+  background: rgb(214, 214, 214);
+  border-radius: 8px;
+  height: 40px;
+}
+.modal-cart .modal-dialog .modal-content .modal-footer .pay {
+  width: 161px;
+  font-size: 14px;
+  font-weight: 800;
+  background: rgb(69, 195, 210);
+  color: white;
+  border-radius: 8px;
+  height: 40px;
 }
 
 /*# sourceMappingURL=file.css.map */
