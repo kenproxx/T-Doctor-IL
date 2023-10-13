@@ -5,46 +5,46 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class ExaminationController extends Controller
+class examinationController extends Controller
 {
     public function index()
     {
-        return view('Examination.index');
+        return view('examination.index');
     }
     public function infoDoctor()
     {
-        return view('Examination.infodoctor');
+        return view('examination.infodoctor');
     }
 
     public function bestDoctor(){
-        return view('Examination.bestdoctor');
+        return view('examination.bestdoctor');
     }
     public function newDoctor(){
-        return view('Examination.newdoctor');
+        return view('examination.newdoctor');
     }
     public function availableDoctor(){
-        return view('Examination.availabledoctor');
+        return view('examination.availabledoctor');
     }
     public function findMyMedicine(){
-        return view('Examination.findmymedicine');
+        return view('examination.findmymedicine');
     }
     public function bestPharmacists(){
-        return view('Examination.bestpharmacists');
+        return view('examination.bestpharmacists');
     }
     public function newPharmacists(){
-        return view('Examination.newpharmacists');
+        return view('examination.newpharmacists');
     }
     public function availablePharmacists(){
-        return view('Examination.availablepharmacists');
+        return view('examination.availablepharmacists');
     }
     public function hotDealMedicine(){
-        return view('Examination.hotdealmedicine');
+        return view('examination.hotdealmedicine');
     }
     public function newMedicine(){
-        return view('Examination.newmedicine');
+        return view('examination.newmedicine');
     }
     public function recommended(){
-        return view('Examination.recommended');
+        return view('examination.recommended');
     }
 
 }
