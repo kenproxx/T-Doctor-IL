@@ -101,8 +101,7 @@
 #modalRegister .modal-dialog .modal-content .modal-body .popup .form .user-option {
     width: 597px;
     height: 48px;
-    border-style: solid;
-    border-color: #EAEAEA;
+    border:1px solid #EAEAEA;
     border-radius: 8px;
 }
 #modalRegister .modal-dialog .modal-content .modal-body .popup .form .user-option .nav .nav-item .active{

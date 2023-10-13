@@ -557,7 +557,7 @@ footer {
     float: right;
 }
 .filter_search input{
-    width: 467px;
+    width: 440px;
     height: 48px;
     border: none;
     outline: none;
@@ -659,8 +659,7 @@ footer {
 .filter_search{
     border-radius: 8px;
     background: #F3F3F3;
-    padding-left: 16px;
-    margin-right: 55px;
+    padding-left: 16px;;
 }
 .filter_search #filter_search{
     border-radius: 8px;
@@ -670,7 +669,7 @@ footer {
 #list-title{
     width: 1170px;
     height: 60px;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #D6D6D6;
     margin-bottom: 24px;
 }
 #list-title .list--doctor{
@@ -699,8 +698,57 @@ footer {
     font-size: 32px;
     font-weight: 800;
     color: black;
-    margin-right: 26px;;
+    margin-right: 26px;
 }
+/*info-doc*/
+#show_inf #inf-doctor #about #dess{
+    margin-top: 24px;
+    display: flex;
+}
+#show_inf #inf-doctor #about #dess p{
+    color:#929292;
+    font-size: 24px;
+    font-weight: 400;
+}
+#show_inf #inf-doctor #about #dess span{
+    color: #000;
+    font-size: 24px;
+    font-weight: 800;
+    margin-left: 10px;
+}
+#show_inf #inf-doctor #about #opt_btn{
+    display: flex;
+    width: 670px;
+    align-items: flex-start;
+    gap: 30px;
+    position: relative;
+}
+#show_inf #inf-doctor #about #opt_btn button{
+    width: 203px;
+    height: 50px;
+    display: flex;
+    padding: 15px 50px;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: none;
+    gap: 10px;
+    flex: 1 0 0;
+    border-radius: 8px;
+    background: #424242;
+    color: white;
+    font-size: 16px;
+    font-weight: 800;
+    margin-top: 32px;
+}
+#show_inf #inf-doctor #about #opt_btn button:hover{
+    background: #45C3D2;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+#show_inf #review{
+    margin-top: 20px;
+}
+/*info-doc end*/
 .user-1{
     margin-right: 16px;
 }
