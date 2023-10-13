@@ -41,6 +41,7 @@ Route::group(['prefix' => 'recruitment'],  function () {
 });
 Route::group(['prefix' => 'examination'], function (){
     Route::get('/index',[\App\Http\Controllers\ExaminationController::class,'index'])->name('examination.index');
+    Route::get('/doctor-info',[\App\Http\Controllers\ExaminationController::class,'infoDoctor'])->name('examination.doctor_info');
     Route::get('/best-doctor', [\App\Http\Controllers\ExaminationController::class,'bestDoctor'])->name('examination.best_doctor');
     Route::get('/new-doctor', [\App\Http\Controllers\ExaminationController::class,'newDoctor'])->name('examination.new_doctor');
     Route::get('/available-doctor', [\App\Http\Controllers\ExaminationController::class,'availableDoctor'])->name('examination.available_doctor');
