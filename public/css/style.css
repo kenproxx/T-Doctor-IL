@@ -660,7 +660,7 @@ footer {
     border-radius: 8px;
     background: #F3F3F3;
     padding-left: 16px;
-    margin-right: auto;
+    margin-right: 55px;
 }
 .filter_search #filter_search{
     border-radius: 8px;
@@ -700,4 +700,13 @@ footer {
     font-weight: 800;
     color: black;
     margin-right: 26px;;
+}
+.user-1{
+    margin-right: 16px;
+}
+.box--1{
+    margin-right: 30px;
+}
+.box--2{
+    margin-right: auto;
 }
