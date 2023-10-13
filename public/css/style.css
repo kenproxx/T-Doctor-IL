@@ -121,7 +121,6 @@ a {
     padding: 16px;
     margin-left: 31px;
     width: 237px;
-    height: 359px;
     border-radius: 16px;
     margin-bottom: 30px;
 }
@@ -757,4 +756,10 @@ footer {
 }
 .box--3{
     gap: 130px;
+}
+.card-body{
+    padding: 0!important;
+    display: grid;
+    gap: 8px;
+    margin-top: 8px;
 }
