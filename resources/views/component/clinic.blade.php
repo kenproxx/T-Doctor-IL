@@ -1,5 +1,5 @@
 <div class="clinic-item">
-    <a href="{{route('clinic.detail')}}" class="name">
+    <a href="{{route('clinic.detail')}}">
         Phòng khám tai mũi họng Đông Á
     </a>
     <div class="time d-flex">

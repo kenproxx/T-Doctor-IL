@@ -459,6 +459,13 @@
   text-align: center;
   align-items: center;
 }
+.medicine-search--right .div-wrapper button {
+  border-radius: 8px;
+  background: rgb(66, 66, 66);
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+}
 .medicine-search--right .div-wrapper a {
   font-size: 16px;
   font-weight: 500;
@@ -486,6 +493,9 @@
   position: absolute;
   top: 0;
   right: 0;
+}
+.product-item .img-pro #bi-heart-fill {
+  color: rgb(255, 0, 0);
 }
 .product-item .content-pro .name-pro a {
   color: black;
@@ -604,7 +614,7 @@
   display: grid;
   gap: 8px;
 }
-.clinic-item .name {
+.clinic-item a {
   font-size: 18px;
   font-weight: 800;
   color: black;
@@ -617,7 +627,7 @@
   color: rgb(69, 195, 210);
 }
 .clinic-item .location {
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-size: 16px;
   font-weight: 600;
 }
@@ -628,7 +638,7 @@
   color: rgb(69, 195, 210);
 }
 .clinic-item .service {
-  text-transform: uppercase;
+  text-transform: capitalize;
   font-size: 16px;
   font-weight: 600;
 }
@@ -677,6 +687,7 @@
   border-radius: 8px;
   padding: 10px 16px;
   border: 1px solid rgb(234, 234, 234);
+  align-items: center;
 }
 .modal-cart .modal-dialog .modal-content .modal-body .product-cart .img {
   width: 100px;
