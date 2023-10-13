@@ -15,10 +15,11 @@
                         <input type="search" name="focus" placeholder="Search" id="search-input" value="">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </form>
-                    <div class="shopping-bag">
+                    <button type="button" data-toggle="modal" data-target="#exampleModal" class="shopping-bag">
                         <i class="fa-solid fa-bag-shopping"></i>
                         <div class="text-wrapper">1</div>
-                    </div>
+                    </button>
+                    @include('component.modal-cart')
                 </div>
                 <div class="medicine-search--right col-md-3 d-flex row justify-content-between">
                     <div class="col-md-6 ">

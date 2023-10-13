@@ -1,5 +1,7 @@
-.container {
-    min-width: 1440px;
+@media (min-width: 1500px){
+    .container {
+        min-width: 1440px;
+    }
 }
 
 .header {
@@ -527,6 +529,11 @@
             justify-content: center;
             align-items: center;
             margin-right: 20px;
+            border: none;
+            &:focus{
+                border: none;
+            }
+
 
             .fa-bag-shopping {
                 font-size: 32px;
@@ -674,6 +681,10 @@
             justify-content: center;
             align-items: center;
             margin-right: 20px;
+            border: none;
+            &:focus{
+                border: none;
+            }
 
             .fa-bag-shopping {
                 font-size: 32px;
@@ -778,5 +789,73 @@
     iframe{
         width: 100%;
         height: 80vh;
+    }
+}
+
+.modal-cart{
+    .modal-dialog{
+        max-width: 700px;
+        .modal-content{
+            .modal-header{
+                border-bottom: none;
+                .modal-title{
+                    font-size: 24px;
+                    font-weight: 800;
+                }
+            }
+            .modal-body{
+                height: 75vh;
+                overflow-y: auto;
+                padding: 0 30px;
+                border-bottom: none;
+                display: grid;
+                gap: 16px;
+                .product-cart{
+                    border-radius: 8px;
+                    padding: 10px 16px;
+                    border: 1px solid rgba(234, 234, 234, 1);
+                    .img{
+                        width: 100px;
+                        height: 100px;
+                        img{
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+                    .title{
+                        .title-name{
+                            font-size: 18px;
+                            font-weight: 800;
+                        }
+                        .price{
+                            font-size: 18px;
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+            .modal-footer{
+                border-top: none;
+                .cancel{
+                    width: 161px;
+                    font-size: 14px;
+                    font-weight: 800;
+                    background: rgba(214, 214, 214, 1);
+                    border-radius: 8px;
+                    height: 40px;
+                }
+                .pay{
+                    width: 161px;
+                    font-size: 14px;
+                    font-weight: 800;
+                    background: rgba(69, 195, 210, 1);
+                    color: white;
+                    border-radius: 8px;
+                    height: 40px;
+
+                }
+            }
+        }
     }
 }

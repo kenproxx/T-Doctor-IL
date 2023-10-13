@@ -5,8 +5,8 @@
     @include('component.banner')
     <div id="examination-scene" class="container ">
         <div class="d-flex justify-content-center">
-            <div id="filter" class="d-flex ">
-                <div class="box--1 d-flex flex-fill">
+            <div id="filter" class="box--3 d-flex ">
+                <div class="d-flex flex-fill">
                     <div class="filter_option"><p>Category <i class="bi bi-chevron-expand"></i></p></div>
                     <div class="filter_option"><p>Position <i class="bi bi-chevron-expand"></i></p></div>
                     <div class="filter_option"><p>Location <i class="bi bi-chevron-expand"></i></p></div>
@@ -16,7 +16,6 @@
                     <label for="filter_search"><i class="bi bi-search"></i></label>
                     <input type="text" name="filter_search" id="filter_search" placeholder="Search for anything.....">
                 </div>
-                <div class="flex-fill"><button><i class="bi bi-filter"></i></button></div>
             </div>
         </div>
         <div class="d-flex justify-content-center">

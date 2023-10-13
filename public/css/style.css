@@ -705,8 +705,8 @@ footer {
     margin-right: 16px;
 }
 .box--1{
-    margin-right: 30px;
+   gap: 380px;
 }
-.box--2{
-    margin-right: auto;
+.box--3{
+    gap: 130px;
 }

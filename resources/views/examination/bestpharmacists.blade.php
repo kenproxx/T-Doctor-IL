@@ -4,8 +4,8 @@
     @include('layouts.partials.header_3')
     @include('component.banner')
     <div class="d-flex justify-content-center">
-        <div id="filter" class="d-flex ">
-            <div class="box--2 d-flex flex-fill">
+        <div id="filter" class="box--1 d-flex ">
+            <div class="d-flex flex-fill">
                 <div class="filter_option"><p>Category <i class="bi bi-chevron-expand"></i></p></div>
                 <div class="filter_option"><p>Location <i class="bi bi-chevron-expand"></i></p></div>
             </div>
@@ -13,13 +13,12 @@
                 <label for="filter_search"><i class="bi bi-search"></i></label>
                 <input type="text" name="filter_search" id="filter_search" placeholder="Search for anything.....">
             </div>
-            <div class="flex-fill"><button><i class="bi bi-filter"></i></button></div>
         </div>
     </div>
-    <div id="title"  class="d-flex justify-content-center">
+    <div id="title" class="d-flex justify-content-center">
         <div id="list-title" class="d-flex">
             <div class="list--doctor p-0">
-                <a class="back" href="{{route('examination.findmymedicine')}}"><p><i class="bi bi-arrow-left"></i> 24/7 Available Pharmacists</p></a>
+                <a class="back" href="{{route('examination.findmymedicine')}}"><p><i class="bi bi-arrow-left"></i>Best Pharmacists</p></a>
             </div>
         </div>
     </div>
@@ -63,3 +62,4 @@
     </div>
 
 @endsection
+

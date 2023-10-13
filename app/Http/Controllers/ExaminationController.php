@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class ExaminationController extends Controller
+class examinationController extends Controller
 {
     public function index()
     {
         return view('examination.index');
+    }
+    public function infoDoctor()
+    {
+        return view('examination.infodoctor');
     }
 
     public function bestDoctor(){
@@ -41,6 +45,9 @@ class ExaminationController extends Controller
     }
     public function recommended(){
         return view('examination.recommended');
+    }
+    public function myPersonalDoctor(){
+        return view('examination.mypersonaldoctor');
     }
 
 }
