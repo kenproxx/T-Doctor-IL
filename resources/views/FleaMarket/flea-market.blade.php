@@ -92,7 +92,7 @@
                 <div class="page row ">
                     @for($i = 0; $i < 3; $i++)
                         <div class="col-md-4 item">
-                            @include('component.products')
+                            @include('FleaMarket.tab-product-flea')
                         </div>
                     @endfor
                 </div>
@@ -100,7 +100,7 @@
                 <div class="page row ">
                     @for($i = 0; $i < 3; $i++)
                         <div class="col-md-4 item">
-                            @include('component.products')
+                            @include('FleaMarket.tab-product-flea')
                         </div>
                     @endfor
                 </div>
@@ -108,7 +108,7 @@
                 <div class="page row ">
                     @for($i = 0; $i < 3; $i++)
                         <div class="col-md-4 item">
-                            @include('component.products')
+                            @include('FleaMarket.tab-product-flea')
                         </div>
                     @endfor
                 </div>

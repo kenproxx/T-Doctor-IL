@@ -16,7 +16,7 @@
         </div>
         <div class="col-md-2">
             <div class="d-flex col-md-4">
-                <form action="#" class=" flea-button mr-3">
+                <form action="{{route('flea.market.sell.product')}}" class=" flea-button mr-3">
                     <button class="flea-btn width-88">Sell my product</button>
                 </form>
             </div>
