@@ -32,7 +32,7 @@
                 </p>
 
             </a>
-            <a href="" class="col text-center" style="color: var(--Grey-Dark, #929292);">
+            <a href="{{route('flea.market.review')}}" class="col text-center" style="color: var(--Grey-Dark, #929292);">
                 <p class="mb-2 text-center-info">Review</p>
             </a>
             <a href="{{route('flea.market.wish.list')}}" class="col text-center " style="color: var(--Grey-Dark, #929292);">

@@ -393,4 +393,36 @@ input[type=range]::-moz-range-thumb {
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
 }
 
+.avt-review img {
+  height: 54px;
+  margin-right: 8px;
+}
+.avt-review strong {
+  color: var(--Black, #000);
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.text-description strong {
+  font-weight: 800;
+}
+.text-description p {
+  font-weight: 400;
+}
+
+.icon-reply {
+  margin-bottom: 24px;
+}
+.icon-reply i {
+  color: #929292;
+  margin-right: 8px;
+}
+
+.border-bottom-review {
+  border-bottom: 1px solid #D6D6D6;
+}
+
 /*# sourceMappingURL=flea-market.css.map */
