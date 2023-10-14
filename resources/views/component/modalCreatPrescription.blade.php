@@ -1,4 +1,4 @@
-<div class="modal modal-cart fade" id="modalCreatPrescription" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal modal-cart modalCreatPrescription fade" id="modalCreatPrescription" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,28 +8,66 @@
                 </button>
             </div>
             <div class="modal-body">
-                @for($i=0; $i<6; $i++)
-                    <div class="product-cart row">
-                        <div class="col-2 img">
-                            <img src="{{asset('img/Rectangle 23798.png')}}" alt="">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="title">
+                            Medicine name
                         </div>
-                        <div class="col-8 title">
-                            <div class="title-name">
-                                Menevit Viên Uống Hỗ Trợ Sinh Lý Nam Giới, Tăng Khả Năng Có Con 90 Viên
-                            </div>
-                            <div class="price">
-                                599,000 VND/box
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <form>
-                                <div class="value-button" id="decrease" onclick="decreaseValue()" value="Decrease Value">-</div>
-                                <input id="number" value="0" />
-                                <div class="value-button" id="increase" onclick="increaseValue()" value="Increase Value">+</div>
-                            </form>
-                        </div>
+                        <input type="text" placeholder="example123">
                     </div>
-                @endfor
+                    <div class="col-3 d-flex align-items-end">
+                        <select name="pets" id="pet-select">
+                            <option value="">Box</option>
+                            <option value="">Blister</option>
+                            <option value="">Pellets</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="title">
+                            School <i style="color: rgba(255, 0, 0, 1)" class="fa-solid fa-asterisk"></i>
+                        </div>
+                        <input type="text">
+                    </div>
+                    <div class="col-6">
+                        <div class="title">
+                            Degree <i style="color: rgba(255, 0, 0, 1)" class="fa-solid fa-asterisk"></i>
+                        </div>
+                        <select name="pets" id="pet-select">
+                            <option value="">Please choose....</option>
+                            <option value="">Please choose....</option>
+                            <option value="">Please choose....</option>
+                            <option value="">Please choose....</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="title">
+                            From month <i style="color: rgba(255, 0, 0, 1)" class="fa-solid fa-asterisk"></i>
+                        </div>
+                        <input class="ac-birth" type="date">
+                    </div>
+                    <div class="col-6">
+                        <div class="title">
+                            To month <i style="color: rgba(255, 0, 0, 1)" class="fa-solid fa-asterisk"></i>
+                        </div>
+                        <input class="ac-birth" type="date">
+                    </div>
+                </div>
+                <div class="add-img">
+                    <div class="title">
+                        Achievement
+                        <p>Please upload a photo of your prescription (maximum 5 photos)</p>
+                    </div>
+                    <button type="button">
+                        <i class="fa-solid fa-plus"></i>
+
+{{--                        Tải ảnh lên bỏ thẻ i thay img --}}
+{{--                        <img src="{{asset('img/Rectangle 23810.png')}}" alt="">--}}
+                    </button>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
