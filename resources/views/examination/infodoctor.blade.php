@@ -77,23 +77,24 @@
             </div>
         </div>
         <div id="rv_doc" class="d-flex justify-content-center">
-            <div id="rv-ctn">
-                <div class="d-flex">
-                    <div class="d-flex">
+            <div id="rv-ctn" class="justify-content-center">
+                <div id="user_rv" class="d-flex">
+                    <div id="user" class="d-flex">
                         <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
                         <p>Trần Đình Phi</p>
                     </div>
-                    <div>
+                    <div id="time">
                         <p>10:20 07/04/2023</p>
                     </div>
                 </div>
-                <div class="flex-column">
+                <div class="cmt flex-column">
                     <p><b>"Dịch vụ cực tốt"</b><br>
                         Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho bạn bè cùng sử dụng :D
                     </p>
+                    <button><i class="bi bi-reply-fill"></i> Reply</button>
                 </div>
             </div>
-            <div id="line"></div>
+            <div id="line" class="justify-content-center"></div>
         </div>
     </div>
 

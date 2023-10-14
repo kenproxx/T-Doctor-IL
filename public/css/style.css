@@ -140,18 +140,15 @@ a {
 #list-doctor .card-body .card-title{
     text-align: left;
     font-size: 18px;
-    font-style: normal;
     font-weight: 800;
 }
 #list-doctor .card-body .card-text{
     font-size: 16px;
-    font-style: normal;
     font-weight: 400;
     text-align: left;
 }
 #list-doctor .card-body .card-text_1{
     font-size: 16px;
-    font-style: normal;
     font-weight: 400;
     color: #929292;
     text-align: left;
@@ -185,9 +182,8 @@ a {
 }
 #list-item .card-body h4{
     font-size: 24px;
-    font-style: normal;
     font-weight: 800;
-    line-height: normal;
+
     text-align: left;
 }
 .banner1{
@@ -376,9 +372,8 @@ flea__item{
 }
 .sign--up p{
     font-size: 18px;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
+
 }
 .btn-see-all{
     border: none;
@@ -750,6 +745,43 @@ footer {
 }
 #show_inf #review{
     margin-top: 20px;
+}
+#show_inf #rv_doc #rv-ctn {
+    width: 1170px;
+    margin-bottom: 24px;
+    background: #0c85d0;
+}
+#show_inf #rv_doc #rv-ctn #user_rv #user{
+    align-items: center;
+    gap: 8px;
+    margin-right: auto;
+}
+#show_inf #rv_doc #rv-ctn #user_rv #user p{
+    color: black;
+    font-size: 24px;
+    font-weight: 800;
+}
+#show_inf #rv_doc #rv-ctn #user_rv #time{
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+}
+#show_inf #rv_doc #rv-ctn #user_rv #time p{
+    color: #000;
+    font-size: 14px;
+    font-weight: 400;
+}
+#show_inf #rv_doc #rv-ctn .cmt button {
+    border: none;
+    outline: none;
+    background: white;
+    float: right;
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: 600;
+}
+#show_inf #rv_doc #rv-ctn .cmt button .bi-reply-fill{
+    color: #929292;
 }
 /*info-doc end*/
 .user-1{

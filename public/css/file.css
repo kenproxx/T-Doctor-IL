@@ -525,8 +525,8 @@
   color: black;
   font-size: 18px;
   font-weight: 800;
-  height: 80px;
-  -webkit-line-clamp: 3;
+  height: 55px;
+  -webkit-line-clamp: 2;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
@@ -794,6 +794,57 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.medicine-list--item .tabMystore {
+  border-bottom: none;
+  margin-bottom: 32px;
+}
+.medicine-list--item .tabMystore .nav-item a {
+  width: 100% !important;
+  background: white !important;
+  border: none;
+}
+.medicine-list--item .tabMystore .nav-item a.active {
+  border-bottom: 3px solid !important;
+}
+
+.rv_item {
+  padding: 10px;
+  border-bottom: 1px solid rgb(214, 214, 214);
+}
+.rv_item .rv-header {
+  margin-bottom: 10px;
+}
+.rv_item .rv-header--left {
+  align-items: center;
+}
+.rv_item .rv-header--left .avt {
+  width: 54px;
+  height: 54px;
+  border-radius: 30px;
+}
+.rv_item .rv-header--left .avt img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.rv_item .rv-header--left p {
+  font-size: 24px;
+  font-weight: 800;
+}
+.rv_item .rv-header--right {
+  display: flex;
+  align-self: flex-end;
+  font-size: 14px;
+  font-weight: 400;
+}
+.rv_item .content {
+  font-size: 16px;
+}
+
+.pagination {
+  margin-top: 20px;
 }
 
 /*# sourceMappingURL=file.css.map */
