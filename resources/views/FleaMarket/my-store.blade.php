@@ -2,14 +2,13 @@
 @section('title', 'Flea Market')
 @section('content')
     @include('layouts.partials.headerFleaMarket')
-    <body>
     @include('component.banner')
-    <div class="container mt-70">
-        <div class="d-flex mt-88">
+    <div class="container">
+        <div class="d-flex">
             <div class="col-md-3 mr-2">
                 <div class="">
                     <div class="flea-adv row align-items-center justify-content-center">
-                        <div class="">ADVERTISEMENT</div>
+                        <img src="" alt="">
                     </div>
                 </div>
                 <div class="">
@@ -20,12 +19,39 @@
             </div>
             <div class="col-md-9 medicine-list--item">
                 @include('component.avt-info')
-                <div class="page row ">
-                    @for($i = 0; $i < 12; $i++)
-                        <div class="col-md-4 item">
-                            @include('component.edit-product')
+                <ul class="nav nav-tabs row tabMystore" role="tablist">
+                    <li class="nav-item col-4">
+                        <a class="nav-link active" id="productList-tab" data-toggle="tab" href="#productList" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                    </li>
+                    <li class="nav-item col-4">
+                        <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="profile" aria-selected="false">Review</a>
+                    </li>
+                    <li class="nav-item col-4">
+                        <a class="nav-link" id="wishList-tab" data-toggle="tab" href="#wishList" role="tab" aria-controls="contact" aria-selected="false">Wish List</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="productList" role="tabpanel" aria-labelledby="productList-tab">
+                        <div class="page row">
+                            @for($i = 0; $i < 12; $i++)
+                                <div class="col-md-4 item">
+                                    @include('component.edit-product')
+                                </div>
+                            @endfor
                         </div>
-                    @endfor
+                    </div>
+                    <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+                        @include('component.review-item')
+                    </div>
+                    <div class="tab-pane fade" id="wishList" role="tabpanel" aria-labelledby="wishList-tab">
+                        <div class="row">
+                            @for($i = 0; $i < 12; $i++)
+                                <div class="col-md-4 item">
+                                    @include('component.product-wish')
+                                </div>
+                            @endfor
+                        </div>
+                    </div>
                 </div>
                 <nav aria-label="Page navigation example" class="d-flex justify-content-center">
                     <ul class="pagination">
@@ -49,5 +75,4 @@
             </div>
         </div>
     </div>
-    </body>
 @endsection

@@ -1,6 +1,4 @@
-<div>
     <div class=" row d-flex align-content-center mb-42">
-
         <div class="col-md-2 d-flex justify-content-center">
             <img STYLE="width: 148px" src="{{asset('img/flea-market/avatar-phi.png')}}">
         </div>
@@ -24,18 +22,3 @@
             </div>
         </div>
     </div>
-    <div class="mb-30">
-        <div class="border-bottom row align-items-center ">
-            <a href="{{route('flea.market.my.store')}}" class="col text-center-info active">
-                Product list
-            </a>
-            <a href="" class="col text-center" style="color: var(--Grey-Dark, #929292);">
-                Review
-            </a>
-            <a href="{{route('flea.market.wish.list')}}" class="col text-center " style="color: var(--Grey-Dark, #929292);">
-                Wish list
-            </a>
-        </div>
-
-    </div>
-</div>

@@ -30,7 +30,7 @@
                 @include('component.modalCreatPrescription')
                 <div class="col-md-6">
                     <div class="div-wrapper">
-                        <a href="{{route('flea.market.wish.list')}}">Wish list</a>
+                        <a href="{{route('medicine.wishList')}}">Wish list</a>
                     </div>
                 </div>
             </div>
