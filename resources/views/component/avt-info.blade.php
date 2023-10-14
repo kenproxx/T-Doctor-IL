@@ -1,6 +1,4 @@
-<div>
     <div class=" row d-flex align-content-center mb-42">
-
         <div class="col-md-2 d-flex justify-content-center">
             <img STYLE="width: 148px" src="{{asset('img/flea-market/avatar-phi.png')}}">
         </div>
@@ -24,6 +22,8 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
+=======
     <div class="mb-30">
         <div class="border-bottom row align-items-center ">
             <a href="{{route('flea.market.my.store')}}" class="col active-border">
@@ -42,3 +42,4 @@
 
     </div>
 </div>
+>>>>>>> d9861c74ae845156d67d66becd3e62877c376fc1
