@@ -11,7 +11,7 @@
                 <input placeholder="Search for anything…">
             </div>
             <div class="d-flex col-md-4 justify-content-between align-items-center">
-                <form action="#" class="col-md-4 flea-button mr-3">
+                <form action="{{route('flea.market.sell.product')}}" class="col-md-4 flea-button mr-3">
                 <button class="flea-btn">Sell my product</button>
                 </form>
                 <form action="{{route('flea.market.my.store')}}" class="col-md-4 flea-button mr-3">
