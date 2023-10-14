@@ -7,14 +7,11 @@
     <div class="container mt-70">
         <div class="d-flex mt-70">
             <div class="col-md-3 flea-content ">Flea market</div>
-            <div class="col-md-4 flea-search d-flex">
+            <div class="col-md-5 flea-search d-flex align-items-center">
                 <input placeholder="Search for anything…">
-                <div class="icons-icon-fill">
-                    <div class="icons-filter"><img class="icon" src="{{asset('img/flea-market/filter.png')}}"/></div>
-                </div>
             </div>
-            <div class="d-flex col-md-4">
-                <form action="#" class="col-md-4 flea-button mr-3">
+            <div class="d-flex col-md-4 justify-content-between align-items-center">
+                <form action="{{route('flea.market.sell.product')}}" class="col-md-4 flea-button mr-3">
                 <button class="flea-btn">Sell my product</button>
                 </form>
                 <form action="{{route('flea.market.my.store')}}" class="col-md-4 flea-button mr-3">

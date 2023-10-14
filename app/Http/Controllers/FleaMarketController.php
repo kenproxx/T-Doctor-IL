@@ -41,17 +41,17 @@ class FleaMarketController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function review()
     {
-        //
+        return view('FleaMarket.review');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function sellProduct()
     {
-        //
+        return view('FleaMarket.sell-my-product');
     }
 
     /**

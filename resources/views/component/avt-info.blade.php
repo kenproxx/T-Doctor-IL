@@ -22,3 +22,24 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
+=======
+    <div class="mb-30">
+        <div class="border-bottom row align-items-center ">
+            <a href="{{route('flea.market.my.store')}}" class="col active-border">
+                <p class="mb-2 text-center-info">
+                    Product list
+                </p>
+
+            </a>
+            <a href="{{route('flea.market.review')}}" class="col text-center" style="color: var(--Grey-Dark, #929292);">
+                <p class="mb-2 text-center-info">Review</p>
+            </a>
+            <a href="{{route('flea.market.wish.list')}}" class="col text-center " style="color: var(--Grey-Dark, #929292);">
+                <p class="mb-2 text-center-info">Wish list</p>
+            </a>
+        </div>
+
+    </div>
+</div>
+>>>>>>> d9861c74ae845156d67d66becd3e62877c376fc1

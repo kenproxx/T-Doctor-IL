@@ -1,6 +1,9 @@
 a {
     color: black;
 }
+a:hover {
+    color: black;
+}
 
 p {
     color: black;
@@ -28,6 +31,9 @@ p {
     }
     .mb-30 {
         margin-bottom: 30px;
+    }
+    .mb-80 {
+        margin-bottom: 80px;
     }
     .width-88 {
         width: 88px;
@@ -65,6 +71,7 @@ p {
         font-style: normal;
         font-weight: 800;
         line-height: normal;
+        margin-bottom: 7px;
     }
 
     .hanoi {
@@ -81,6 +88,7 @@ p {
         font-style: normal;
         font-weight: 600;
         line-height: normal;
+        margin-bottom: 18px;
     }
 
     .margin-info {
@@ -113,7 +121,7 @@ p {
             padding-left: 16px;
             border-radius: 8px;
             background: #F3F3F3;
-            width: 365px;
+            width: 100%;
             height: 48px;
             border: none;
             color: #626264;
@@ -147,7 +155,9 @@ p {
             left: 0;
         }
     }
-
+.active-border {
+    border-bottom: 3px solid rgb(69, 195, 210);
+}
     .flea-button {
         display: flex;
         padding: 6px 16px;
@@ -156,13 +166,15 @@ p {
         gap: 10px;
         border-radius: 8px;
         background: var(--Grey-Balck, #424242);
-        width: 120px;
+        max-width: 120px;
         color: var(--White, #FFF);
         text-align: center;
         font-size: 16px;
         font-style: normal;
         font-weight: 600;
         line-height: normal;
+        max-height: 52px;
+        height: 52px;
     }
 
     .border-radius {
@@ -392,4 +404,57 @@ input[type="range"]::-moz-range-thumb {
     -moz-appearance: none;
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.05);
 }
-
+.avt-review {
+    img {
+        height: 54px;
+        margin-right: 8px;
+    }
+    strong {
+        color: var(--Black, #000);
+        text-align: center;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: normal;
+    }
+}
+.text-description {
+    strong {
+        font-weight: 800;
+    }
+    p {
+        font-weight: 400;
+    }
+}
+.icon-reply {
+    margin-bottom: 24px;
+    i{
+        color: #929292;
+        margin-right: 8px;
+    }
+}
+.border-bottom-review {
+    border-bottom: 1px solid #D6D6D6;
+}
+.no-brand {
+    border-radius: 8px;
+    background: var(--Grey-Light, #D6D6D6);
+    display: flex;
+    width: 133px;
+    height: 56px;
+    justify-content: center;
+    align-items: center;
+    margin-left: 16px;
+}
+.b-radius {
+    border: 2px solid #D9D9D9;
+    border-radius: 10px;
+}
+.text-wrapper-input {
+     input[type=radio] {
+        box-sizing: border-box;
+        padding: 0;
+        height: 36px;
+        width: 21px;
+    }
+}
