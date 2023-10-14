@@ -1,10 +1,8 @@
 @extends('layouts.master')
 @section('title', 'Home')
 @section('content')
-    @include('layouts.partials.header_2')
 
-<body>
-
+@include('layouts.partials.header_2')
 <div class="col-md-12 banner-add_cv p-0">
     <img src="{{ asset('img/icons_logo/banner.png') }}">
 </div>
@@ -478,7 +476,6 @@
 
 
 </div>
-</body>
 
 @endsection
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
