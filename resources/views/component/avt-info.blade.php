@@ -26,14 +26,17 @@
     </div>
     <div class="mb-30">
         <div class="border-bottom row align-items-center ">
-            <a href="{{route('flea.market.my.store')}}" class="col text-center-info active">
-                Product list
+            <a href="{{route('flea.market.my.store')}}" class="col active-border">
+                <p class="mb-2 text-center-info">
+                    Product list
+                </p>
+
             </a>
             <a href="" class="col text-center" style="color: var(--Grey-Dark, #929292);">
-                Review
+                <p class="mb-2 text-center-info">Review</p>
             </a>
             <a href="{{route('flea.market.wish.list')}}" class="col text-center " style="color: var(--Grey-Dark, #929292);">
-                Wish list
+                <p class="mb-2 text-center-info">Wish list</p>
             </a>
         </div>
 
