@@ -10,7 +10,7 @@
             </div>
             <div class="col-md-4 header-detail--center d-flex justify-content-sm-around">
                 <a class="active" href="{{route('flea-market.index')}}">My store</a>
-                <a href="#">Sell my product</a>
+                <a href="{{route('flea.market.sell.product')}}">Sell my product</a>
                 <a href="{{route('flea.market.wish.list')}}">Wish list</a>
             </div>
             <div class="col-md-4 header-detail--right d-flex">
