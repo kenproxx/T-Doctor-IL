@@ -801,3 +801,12 @@ footer {
 .card-img-top{
     height: 237px!important;
 }
+.delete-1{
+    border-radius: 8px;
+    height: 40px;
+    width: 203px;
+    color: #626262;
+    background: #D6D6D6;
+    border: none;
+    margin-top: 24px;
+}
