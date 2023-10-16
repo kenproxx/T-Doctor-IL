@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Home')
 @section('content')
-    @include('layouts.partials.header_2')
+    @include('layouts.partials.header_3')
     @include('component.banner')
     <div id="show_inf" class="container">
         <div id="title" class="d-flex justify-content-center">
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div id="about" style="width: 670px; height: 670px; margin-left: 15px">
-                <h5 style="font-size: 48px; font-weight: 800;">BS VÕ VĂN ĐỊNH</h5>
+                <h5 style="font-size: 48px; font-weight: 800;">BS ĐÔ VĂN ĐỊNH</h5>
                 <div id="dess">
                     <p>Hospital: </p>
                     <span> Tan Trieu Department of General Radiology (radiation department 5) - K Hospital </span>
