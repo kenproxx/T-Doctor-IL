@@ -53,6 +53,7 @@ Route::group(['prefix' => 'examination'], function (){
     Route::get('/new-medicine', [\App\Http\Controllers\ExaminationController::class,'newMedicine'])->name('examination.newmedicine');
     Route::get('/recommended', [\App\Http\Controllers\ExaminationController::class,'recommended'])->name('examination.recommended');
     Route::get('/my-personal-doctor', [\App\Http\Controllers\ExaminationController::class,'myPersonalDoctor'])->name('examination.mypersonaldoctor');
+    Route::get('/mentoring', [\App\Http\Controllers\ExaminationController::class,'mentoring'])->name('examination.mentoring');
 });
 
 Route::group(['prefix' => 'medicine'],  function () {
