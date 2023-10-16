@@ -296,22 +296,21 @@ a {
 #flea-market .section1-content .d-flex .card{
     margin-right: 16px;
     border-radius: 16px;
-    padding-right: 16px;
+    padding: 16px;
 }
 #flea-market .section1-content .d-flex .card .card-body{
     padding: 0;
-    padding-left: 16px;
     margin-top: 17px;
 }
 #flea-market .section1-content .d-flex .card .card-body .card-title{
     font-size: 16px;
     font-weight: 800;
-    margin-bottom: 17px;
+    /*margin-bottom: 17px;*/
 }
 #flea-market .section1-content .d-flex .card .card-body .card-text{
     font-size: 16px;
     font-weight: 400;
-    margin-bottom: 17px;
+    /*margin-bottom: 17px;*/
     color: #929292;
 }
 #flea-market .section1-content .d-flex .card .card-body .card-text b{
@@ -749,7 +748,7 @@ footer {
 #show_inf #rv_doc #rv-ctn {
     width: 1170px;
     margin-bottom: 24px;
-    background: #0c85d0;
+    border-bottom: 1px solid #D6D6D6;
 }
 #show_inf #rv_doc #rv-ctn #user_rv #user{
     align-items: center;
@@ -777,6 +776,7 @@ footer {
     background: white;
     float: right;
     margin-top: 8px;
+    margin-bottom: 24px;
     font-size: 16px;
     font-weight: 600;
 }

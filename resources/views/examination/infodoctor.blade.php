@@ -94,8 +94,8 @@
                     <button><i class="bi bi-reply-fill"></i> Reply</button>
                 </div>
             </div>
-            <div id="line" class="justify-content-center"></div>
         </div>
+
     </div>
 
 @endsection
