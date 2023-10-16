@@ -29,7 +29,7 @@
                 <i class="bi bi-heart"></i>
                 <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <a href=""><h5 class="card-title">BS Đô Văn Định</h5></a>
+                    <a href="{{route('examination.doctor_info')}}"><h5 class="card-title">BS Đô Văn Định</h5></a>
                     <p class="card-text">respiratory doctor</p>
                     <p class="card-text_1">Location: <b>Hanoi</b></p>
                     <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
@@ -39,7 +39,7 @@
                 <i class="bi bi-heart"></i>
                 <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <a href=""><h5 class="card-title">BS Đô Văn Định</h5></a>
+                    <a href="{{route('examination.doctor_info')}}"><h5 class="card-title">BS Đô Văn Định</h5></a>
                     <p class="card-text_1">Location: <b>Hanoi</b></p>
                     <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
                 </div>
@@ -48,7 +48,7 @@
                 <i class="bi bi-heart"></i>
                 <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <a href=""><h5 class="card-title">BS Đô Văn Định</h5></a>
+                    <a href="{{route('examination.doctor_info')}}"><h5 class="card-title">BS Đô Văn Định</h5></a>
                     <p class="card-text_1">Location: <b>Hanoi</b></p>
                     <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
                 </div>
@@ -57,7 +57,7 @@
                 <i class="bi bi-heart"></i>
                 <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <a href=""><h5 class="card-title">BS Đô Văn Định</h5></a>
+                    <a href="{{route('examination.doctor_info')}}"><h5 class="card-title">BS Đô Văn Định</h5></a>
                     <p class="card-text">respiratory doctor</p>
                     <p class="card-text_1">Location: <b>Hanoi</b></p>
                     <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
