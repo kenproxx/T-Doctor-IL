@@ -11,7 +11,7 @@
             <div class="col-md-6 header-detail--center d-flex justify-content-sm-around">
                 <a class="active" href="{{ route('examination.index') }}">Find a doctor</a>
                 <a  href="{{ route('examination.findmymedicine') }}">Find my medicine</a>
-                <a href="#">Mentoring</a>
+                <a href="{{route('examination.mentoring')}}">Mentoring</a>
                 <a href="{{ route('examination.mypersonaldoctor') }}">My personal doctor</a>
             </div>
             <div class="col-md-2 header-detail--right d-flex">

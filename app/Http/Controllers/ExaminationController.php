@@ -49,5 +49,8 @@ class examinationController extends Controller
     public function myPersonalDoctor(){
         return view('examination.mypersonaldoctor');
     }
+    public function mentoring(){
+        return view('examination.mentoring');
+    }
 
 }
