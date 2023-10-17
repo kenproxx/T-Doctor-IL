@@ -876,3 +876,7 @@ footer {
     border: none;
     margin-top: 24px;
 }
+.container .flea-adv{
+    width: 270px!important;
+    height: 682px!important;
+}
