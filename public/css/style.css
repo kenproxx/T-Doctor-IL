@@ -8,10 +8,11 @@ a {
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     position: fixed;
     background: white;
-    z-index: 10;
+    z-index: 1;
     top: 0;
     right: 0;
     left: 0;
+    height: 100px;
 }
 .header-left {
     width: 177px;
@@ -120,11 +121,18 @@ a {
     padding: 16px;
     margin-left: 31px;
     width: 237px;
-    height: 359px;
     border-radius: 16px;
+    margin-bottom: 30px;
 }
-#list-doctor .card .card-body h5{
+#list-doctor .card:hover{
+    border-radius: 16px;
+    border: 1px solid  #45C3D2;
+    background: white;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+#list-doctor .card .card-body a h5{
     margin-bottom: 0;
+    color: black;
 }
 #list-doctor .card .card-body p{
     margin-bottom: 0;
@@ -132,18 +140,15 @@ a {
 #list-doctor .card-body .card-title{
     text-align: left;
     font-size: 18px;
-    font-style: normal;
     font-weight: 800;
 }
 #list-doctor .card-body .card-text{
     font-size: 16px;
-    font-style: normal;
     font-weight: 400;
     text-align: left;
 }
 #list-doctor .card-body .card-text_1{
     font-size: 16px;
-    font-style: normal;
     font-weight: 400;
     color: #929292;
     text-align: left;
@@ -177,9 +182,8 @@ a {
 }
 #list-item .card-body h4{
     font-size: 24px;
-    font-style: normal;
     font-weight: 800;
-    line-height: normal;
+
     text-align: left;
 }
 .banner1{
@@ -205,7 +209,12 @@ a {
     width: 1170px;
     background: #F3F3F3;
     border-radius: 16px;
+    padding: 24px;
     margin-top: 24px;
+    margin-bottom: 24px;
+}
+#content-bkg .p-2 h2{
+    margin: 0;
 }
 .item-bkg{
     background: white;
@@ -273,7 +282,7 @@ a {
 /*Flea-market*/
 #flea-market .content-item{
     justify-items: center;
-    width: 1170px;
+    width: 692px;
     height: 570px;
 }
 #flea-market .content-item #address{
@@ -284,8 +293,36 @@ a {
     width: 370px;
     height: 498px;
 }
-#flea-market .section1-content .container .card{
+#flea-market .section1-content .d-flex .card{
     margin-right: 16px;
+    border-radius: 16px;
+    padding: 16px;
+}
+#flea-market .section1-content .d-flex .card .card-body{
+    padding: 0;
+    margin-top: 17px;
+}
+#flea-market .section1-content .d-flex .card .card-body .card-title{
+    font-size: 16px;
+    font-weight: 800;
+    /*margin-bottom: 17px;*/
+}
+#flea-market .section1-content .d-flex .card .card-body .card-text{
+    font-size: 16px;
+    font-weight: 400;
+    /*margin-bottom: 17px;*/
+    color: #929292;
+}
+#flea-market .section1-content .d-flex .card .card-body .card-text b{
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 17px;
+    color: #000000;
+}
+#flea-market .section1-content .d-flex .card .card-body h4{
+    font-size: 18px;
+    font-weight: 800;
+    margin-top: 17px;
 }
 flea__item{
     width: 692px;
@@ -334,9 +371,8 @@ flea__item{
 }
 .sign--up p{
     font-size: 18px;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
+
 }
 .btn-see-all{
     border: none;
@@ -375,7 +411,10 @@ flea__item{
     width: 174px;
     height: 42px;
     text-align: center;
-
+}
+#doctor-information #list-doctor .card .card-body{
+    padding: 0;
+    margin-top: 12px;
 }
 /*online shopping*/
 #item-information{
@@ -387,6 +426,10 @@ flea__item{
     width: 769px;
     height: 42px;
     margin-bottom: 16px;
+}
+#item-information #list-item .card .card-body{
+    padding: 0;
+    margin-top: 12px;
 }
 #item-information #list-option .option-menu .nav{
     width: 769px;
@@ -416,7 +459,11 @@ footer {
     justify-content: center;
     padding: 3rem 8%;
     height: 480px;
-
+.bottom-footer {
+    && p{
+        color: white;
+    }
+}
     & header {
         width: 100%;
         position: relative;
@@ -507,7 +554,7 @@ footer {
     float: right;
 }
 .filter_search input{
-    width: 467px;
+    width: 440px;
     height: 48px;
     border: none;
     outline: none;
@@ -567,6 +614,9 @@ footer {
 .recruitment_rank #recruitment_ctn #ctn .card #crd_ctn{
     padding: 16px;
 }
+.recruitment_rank #recruitment_ctn #ctn .card #crd_ctn a{
+    color: black;
+}
 .recruitment_rank #recruitment_ctn #ctn .card #crd_ctn h6{
     font-size: 18px;
     font-weight: 800;
@@ -576,6 +626,9 @@ footer {
     font-size: 16px;
     font-weight: 400;
     color: #929292;
+}
+.recruitment_rank #recruitment_ctn #ctn .card #crd_ctn .card-body{
+    padding: 0;
 }
 .recruitment_rank #recruitment_ctn #ctn .card #crd_ctn .card-image{
     width: 337px;
@@ -594,9 +647,232 @@ footer {
 }
 .recruitment_rank #recruitment_ctn #ctn .card .bi-heart{
     position: absolute;
-    left: 290px;
+    left: 330px;
     top: 20px;
     width: 24px;
     height: 24px;
 }
-/*end-recruitment scene*/
+/*end recruitment scene*/
+.filter_search{
+    border-radius: 8px;
+    background: #F3F3F3;
+    padding-left: 16px;;
+}
+.filter_search #filter_search{
+    border-radius: 8px;
+    background: #F3F3F3;
+}
+/*examination scene*/
+#list-title{
+    width: 1170px;
+    height: 60px;
+    border-bottom: 1px solid #D6D6D6;
+    margin-bottom: 24px;
+}
+#list-title .list--doctor{
+    margin-right: auto;
+}
+#list-title .list--doctor p{
+    font-size: 32px;
+    font-weight: 800;
+}
+#examination-scene #list-title .p-2{
+    padding:0 30px 0 0;
+}
+#examination-scene #list-title .p-2 a{
+    font-size: 18px;
+    font-weight: 600;
+    color: black;
+    margin: 30px;
+}
+/*end examination scene*/
+#title #list-title .list--doctor .back p{
+    font-size: 32px;
+    font-weight: 800;
+    color: black;
+}
+#title #list-title .list--doctor .back p i{
+    font-size: 32px;
+    font-weight: 800;
+    color: black;
+    margin-right: 26px;
+}
+/*info-doc*/
+#show_inf #inf-doctor #about #dess{
+    margin-top: 24px;
+    display: flex;
+}
+#show_inf #inf-doctor #about #dess p{
+    color:#929292;
+    font-size: 24px;
+    font-weight: 400;
+}
+#show_inf #inf-doctor #about #dess span{
+    color: #000;
+    font-size: 24px;
+    font-weight: 800;
+    margin-left: 10px;
+}
+#show_inf #inf-doctor #about #opt_btn{
+    display: flex;
+    width: 670px;
+    align-items: flex-start;
+    gap: 30px;
+    position: relative;
+}
+#show_inf #inf-doctor #about #opt_btn button{
+    width: 203px;
+    height: 50px;
+    display: flex;
+    padding: 15px 50px;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: none;
+    gap: 10px;
+    flex: 1 0 0;
+    border-radius: 8px;
+    background: #424242;
+    color: white;
+    font-size: 16px;
+    font-weight: 800;
+    margin-top: 32px;
+}
+#show_inf #inf-doctor #about #opt_btn button:hover{
+    background: #45C3D2;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+#show_inf #review{
+    margin-top: 20px;
+}
+#show_inf #rv_doc #rv-ctn {
+    width: 1170px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #D6D6D6;
+}
+#show_inf #rv_doc #rv-ctn #user_rv #user{
+    align-items: center;
+    gap: 8px;
+    margin-right: auto;
+}
+#show_inf #rv_doc #rv-ctn #user_rv #user p{
+    color: black;
+    font-size: 24px;
+    font-weight: 800;
+}
+#show_inf #rv_doc #rv-ctn #user_rv #time{
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+}
+#show_inf #rv_doc #rv-ctn #user_rv #time p{
+    color: #000;
+    font-size: 14px;
+    font-weight: 400;
+}
+#show_inf #rv_doc #rv-ctn .cmt button {
+    border: none;
+    outline: none;
+    background: white;
+    float: right;
+    margin-top: 8px;
+    margin-bottom: 24px;
+    font-size: 16px;
+    font-weight: 600;
+}
+#show_inf #rv_doc #rv-ctn .cmt button .bi-reply-fill{
+    color: #929292;
+}
+/*info-doc end*/
+/*mentoring scene*/
+#mentoring .nav{
+    margin-bottom: 30px;
+}
+#mentoring .nav .tab.active{
+    border-bottom: 4px solid #45C3D2;
+    color: #45C3D2;
+    width: 174px;
+    height: 41px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 800;
+}
+#mentoring .nav .tab{
+    color: #929292;
+    width: 174px;
+    height: 41px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+}
+#mentoring #mentor_doc #mentor-qus{
+    border-bottom: 1px solid #D6D6D6;
+    margin-bottom: 24px;
+}
+#mentoring #mentor_doc #mentor-qus #user_qus #user{
+    align-items: center;
+    gap: 8px;
+    margin-right: auto;
+}
+#mentoring #mentor_doc #mentor-qus #user_qus #user p{
+    color: black;
+    font-size: 24px;
+    font-weight: 800;
+}
+#mentoring #mentor_doc #mentor-qus #user_qus #tags button {
+    display: flex;
+    width: 92px;
+    padding: 4px 17px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 65px;
+    background: #F3F3F3;
+    border: none;
+    outline: none;
+    color: #000;
+    font-size: 18px;
+    font-weight: 600;
+}
+#mentoring #mentor_doc #mentor-qus .qus p{
+    color: #000;
+    font-size: 18px;
+    font-weight: 600;
+}
+#mentoring #mentor_doc #mentor-qus .qus .qus_sts{
+    margin-bottom: 16px;
+    margin-top: 16px;
+}
+#mentoring #mentor_doc #mentor-qus .qus .qus_sts .qus_view{
+    margin-right: 40px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #424242;
+}
+/*mentoring scene end*/
+.user-1{
+    margin-right: 16px;
+}
+.box--1{
+   gap: 380px;
+}
+.box--3{
+    gap: 130px;
+}
+.card-body{
+    padding: 0!important;
+    gap: 8px;
+    margin-top: 12px;
+}
+.card-img-top{
+    height: 237px!important;
+}
+.delete-1{
+    border-radius: 8px;
+    height: 40px;
+    width: 203px;
+    color: #626262;
+    background: #D6D6D6;
+    border: none;
+    margin-top: 24px;
+}

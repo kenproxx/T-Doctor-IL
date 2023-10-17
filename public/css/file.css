@@ -1,7 +1,8 @@
-.container {
-  min-width: 1440px;
+@media (min-width: 1500px) {
+  .container {
+    min-width: 1440px;
+  }
 }
-
 .header .header-detail {
   height: 100px;
   align-items: center;
@@ -68,6 +69,7 @@
 .banner {
   margin-top: 100px;
   height: 280px;
+  margin-bottom: 40px;
 }
 .banner img {
   height: 100%;
@@ -75,40 +77,39 @@
   object-fit: cover;
 }
 
-.recruitment-details {
-  margin-top: 40px;
-}
 .recruitment-details--title {
   font-size: 32px;
   font-weight: 800;
+  margin-top: 20px;
+  color: black;
 }
 .recruitment-details--content {
   margin: 30px 0;
 }
-.recruitment-details--content--left {
+.recruitment-details--content--left .img-main {
   width: 100%;
   height: 441px;
-}
-.recruitment-details--content--left .main {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
   margin-bottom: 16px;
 }
-.recruitment-details--content--left img {
+.recruitment-details--content--left .img-main img {
+  width: 100%;
+  height: 100%;
   border-radius: 8px;
 }
 .recruitment-details--content--left .list {
   overflow-x: auto;
 }
 .recruitment-details--content--left .list .item {
-  width: 140px;
   height: 79px;
   margin-right: 16px;
 }
-.recruitment-details--content--left .list .itemimg {
-  width: 100%;
+.recruitment-details--content--left .list .item img {
+  width: 140px;
   height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid rgb(234, 234, 234);
 }
 .recruitment-details--content--right {
   height: fit-content;
@@ -117,6 +118,46 @@
   background-color: rgb(255, 255, 255);
   border: 1px solid rgb(234, 234, 234);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+.recruitment-details--content--right .product-details .body .text-wrapper {
+  font-size: 24px;
+  font-weight: 800;
+}
+.recruitment-details--content--right .product-details .body .price {
+  font-size: 32px;
+  font-weight: 800;
+  margin-top: 24px;
+}
+.recruitment-details--content--right .product-details .body .brand-name {
+  margin-top: 24px;
+}
+.recruitment-details--content--right .product-details .body .brand-name .text-wrapper-2 {
+  font-size: 24px;
+  font-weight: 400;
+  margin-right: 10px;
+}
+.recruitment-details--content--right .product-details .body .brand-name .text-wrapper-3 {
+  font-size: 25px;
+  font-weight: 800;
+}
+.recruitment-details--content--right .product-details .button {
+  margin-top: 24px;
+}
+.recruitment-details--content--right .product-details .button button {
+  width: 100%;
+  border: none;
+  font-size: 14px;
+  font-weight: 800;
+  height: 50px;
+}
+.recruitment-details--content--right .product-details .button button.div-wrapper {
+  border-radius: 8px;
+  background: rgb(214, 214, 214);
+}
+.recruitment-details--content--right .product-details .button button.text-wrapper-5 {
+  border-radius: 8px;
+  background: rgb(69, 195, 210);
+  color: white;
 }
 .recruitment-details--content--right .form-1 .div .title {
   font-size: 16px;
@@ -228,11 +269,22 @@
   border-radius: 8px;
   line-height: 56px;
   text-align: center;
+  cursor: pointer;
 }
 .recruitment-details--content--right .form-2 .div .div-2 .div-wrapper .text-wrapper-2 {
   font-size: 16px;
   font-weight: 800;
   text-align: center;
+}
+.recruitment-details--content--right .form-2 .div .div-2 .div-wrapper:hover {
+  background: rgb(69, 195, 210);
+  color: white;
+  border-radius: 8px;
+}
+.recruitment-details--content--right .form-2 .div .div-2 .div-wrapper.active {
+  background: rgb(69, 195, 210);
+  color: white;
+  border-radius: 8px;
 }
 .recruitment-details--content--right .form-2 .div .div-2 .div-wrapper i {
   font-size: 25px;
@@ -240,6 +292,7 @@
 }
 .recruitment-details--content--right .form-2 .div .div-2 button {
   border: none;
+  padding: 0;
 }
 .recruitment-details--content--right .form-2 .div-3 {
   margin-top: 16px;
@@ -299,6 +352,499 @@
 .recruitment-details--text hr {
   border: 1px solid rgb(191, 191, 191);
   margin: 16px 0;
+}
+
+.medicine {
+  margin-top: 30px;
+}
+.medicine-list {
+  margin-top: 20px;
+}
+.medicine-list--filter .filter {
+  border: 1px solid rgb(234, 234, 234);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 32px;
+}
+.medicine-list--filter .filter-header {
+  margin-bottom: 24px;
+}
+.medicine-list--filter .filter-header .text-wrapper {
+  font-size: 16px;
+  font-weight: 800;
+}
+.medicine-list--filter .filter-header i {
+  color: rgb(146, 146, 146);
+}
+.medicine-list--filter .filter-body .item {
+  margin-bottom: 8px;
+}
+.medicine-list--filter .filter-body .item input {
+  background: rgb(69, 195, 210);
+  border: 1.5px solid rgb(69, 195, 210);
+  margin-right: 20px;
+}
+.medicine-list--filter .filter-body .item .text-all {
+  font-size: 16px;
+  font-weight: 800;
+}
+.medicine-list--filter .filter-body .item .text {
+  color: rgb(146, 146, 146);
+  font-size: 16px;
+}
+.medicine-list--filter .price {
+  border: 1px solid rgb(234, 234, 234);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 16px;
+}
+.medicine-list--filter .price .text-wrapper {
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+.medicine-list--filter .price .price-input {
+  display: flex;
+  margin: 30px 0;
+}
+.medicine-list--filter .price .price-input .field input {
+  border-radius: 8px;
+  border: 1px solid rgb(191, 191, 191);
+  background: rgb(243, 243, 243);
+}
+.medicine-list--filter .price .price-input .separator {
+  color: rgb(191, 191, 191);
+}
+
+.medicine-search {
+  align-items: center;
+}
+.medicine-search--left .title {
+  font-size: 16px;
+  font-weight: 600;
+}
+.medicine-search--center .search-box {
+  position: relative;
+}
+.medicine-search--center .search-box input {
+  width: 100%;
+  padding-left: 8%;
+  height: 48px;
+  background: rgb(247, 247, 247);
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(98, 98, 100);
+  border-radius: 8px;
+  border: none;
+}
+.medicine-search--center .search-box i {
+  position: absolute;
+  left: 30px;
+  top: 15px;
+}
+.medicine-search--center .shopping-bag {
+  position: relative;
+  height: auto;
+  width: 48px;
+  background: rgb(247, 247, 247);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  border: none;
+}
+.medicine-search--center .shopping-bag:focus {
+  border: none;
+}
+.medicine-search--center .shopping-bag .fa-bag-shopping {
+  font-size: 32px;
+}
+.medicine-search--center .text-wrapper {
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  color: white;
+  background: rgb(255, 0, 0);
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+  height: 18px;
+  width: 18px;
+  text-align: center;
+}
+.medicine-search--right .div-wrapper {
+  height: 48px;
+  background: rgb(66, 66, 66);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.medicine-search--right .div-wrapper button {
+  border-radius: 8px;
+  background: rgb(66, 66, 66);
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+}
+.medicine-search--right .div-wrapper a {
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+}
+
+.product-item {
+  margin-bottom: 30px;
+  padding: 16px;
+  border: 1px solid rgb(234, 234, 234);
+  border-radius: 16px;
+}
+.product-item .img-pro {
+  height: 237px;
+  margin-bottom: 10px;
+  position: relative;
+}
+.product-item .img-pro img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.product-item .img-pro i {
+  font-size: 24px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.product-item .img-pro #bi-heart-fill {
+  color: rgb(255, 0, 0);
+}
+.product-item .content-pro .name-pro a {
+  color: black;
+  font-size: 18px;
+  font-weight: 800;
+  height: 55px;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.product-item .content-pro .location-pro {
+  margin: 5px 0;
+  font-size: 16px;
+}
+.product-item .content-pro .location-pro p {
+  margin-left: 5px;
+  font-weight: 800;
+}
+.product-item .content-pro .price-pro {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.clinics-list .clinics-header {
+  margin-bottom: 16px;
+}
+.clinics-list .clinics-header .near {
+  font-size: 18px;
+  font-weight: 800;
+}
+.clinics-list .clinics-header a {
+  font-size: 18px;
+  font-weight: 600;
+  color: black;
+}
+
+.clinic-search {
+  margin-bottom: 40px;
+  align-items: center;
+}
+.clinic-search--left .title {
+  font-size: 16px;
+  font-weight: 600;
+}
+.clinic-search--center .search-box {
+  position: relative;
+}
+.clinic-search--center .search-box input {
+  width: 100%;
+  padding-left: 8%;
+  height: 48px;
+  background: rgb(247, 247, 247);
+  font-size: 14px;
+  font-weight: 400;
+  color: rgb(98, 98, 100);
+  border-radius: 8px;
+  border: none;
+}
+.clinic-search--center .search-box i {
+  position: absolute;
+  left: 30px;
+  top: 15px;
+}
+.clinic-search--center .shopping-bag {
+  position: relative;
+  height: auto;
+  width: 48px;
+  background: rgb(247, 247, 247);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+  border: none;
+}
+.clinic-search--center .shopping-bag:focus {
+  border: none;
+}
+.clinic-search--center .shopping-bag .fa-bag-shopping {
+  font-size: 32px;
+}
+.clinic-search--center .text-wrapper {
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  color: white;
+  background: rgb(255, 0, 0);
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+  height: 18px;
+  width: 18px;
+  text-align: center;
+}
+.clinic-search--right .div-wrapper {
+  height: 48px;
+  background: rgb(66, 66, 66);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+.clinic-search--right .div-wrapper a {
+  font-size: 16px;
+  font-weight: 500;
+  color: white;
+}
+
+.clinic-item {
+  border: 1px solid rgb(234, 234, 234);
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  display: grid;
+  gap: 8px;
+}
+.clinic-item a {
+  font-size: 18px;
+  font-weight: 800;
+  color: black;
+}
+.clinic-item .time {
+  font-size: 12px;
+  font-weight: 500;
+}
+.clinic-item .time p {
+  color: rgb(69, 195, 210);
+}
+.clinic-item .location {
+  text-transform: capitalize;
+  font-size: 16px;
+  font-weight: 600;
+}
+.clinic-item .location i {
+  font-size: 16px;
+}
+.clinic-item .location span {
+  color: rgb(69, 195, 210);
+}
+.clinic-item .service {
+  text-transform: capitalize;
+  font-size: 16px;
+  font-weight: 600;
+}
+.clinic-item .star i {
+  color: rgb(255, 193, 7);
+}
+.clinic-item .img-detail .img-item {
+  height: 80px;
+}
+.clinic-item .img-detail .img-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.other-clinics .title {
+  font-size: 48px;
+  font-weight: 800;
+  margin: 44px 0;
+}
+
+.detail-clinics iframe {
+  width: 100%;
+  height: 80vh;
+}
+
+.modal-cart .modal-dialog {
+  max-width: 700px;
+}
+.modal-cart .modal-dialog .modal-content .modal-header {
+  border-bottom: none;
+}
+.modal-cart .modal-dialog .modal-content .modal-header .modal-title {
+  font-size: 24px;
+  font-weight: 800;
+}
+.modal-cart .modal-dialog .modal-content .modal-body {
+  max-height: 75vh;
+  overflow-y: auto;
+  padding: 0 30px;
+  border-bottom: none;
+  display: grid;
+  gap: 16px;
+}
+.modal-cart .modal-dialog .modal-content .modal-body .product-cart {
+  border-radius: 8px;
+  padding: 10px 16px;
+  border: 1px solid rgb(234, 234, 234);
+  align-items: center;
+}
+.modal-cart .modal-dialog .modal-content .modal-body .product-cart .img {
+  width: 100px;
+  height: 100px;
+}
+.modal-cart .modal-dialog .modal-content .modal-body .product-cart .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.modal-cart .modal-dialog .modal-content .modal-body .product-cart .title .title-name {
+  font-size: 18px;
+  font-weight: 800;
+}
+.modal-cart .modal-dialog .modal-content .modal-body .product-cart .title .price {
+  font-size: 18px;
+  font-weight: 600;
+}
+.modal-cart .modal-dialog .modal-content .modal-footer {
+  border-top: none;
+}
+.modal-cart .modal-dialog .modal-content .modal-footer .cancel {
+  width: 161px;
+  font-size: 14px;
+  font-weight: 800;
+  background: rgb(214, 214, 214);
+  border-radius: 8px;
+  height: 40px;
+}
+.modal-cart .modal-dialog .modal-content .modal-footer .pay {
+  width: 161px;
+  font-size: 14px;
+  font-weight: 800;
+  background: rgb(69, 195, 210);
+  color: white;
+  border-radius: 8px;
+  height: 40px;
+}
+
+.modalCreatPrescription .title {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.modalCreatPrescription .title p {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgb(146, 146, 146);
+}
+.modalCreatPrescription input {
+  padding: 20px 16px;
+  border-radius: 8px;
+  background: rgb(243, 243, 243);
+  border: 1px solid rgb(191, 191, 191);
+  height: 56px;
+  width: 100%;
+}
+.modalCreatPrescription select {
+  border-radius: 8px;
+  height: 56px;
+  width: 100%;
+  padding: 10px;
+  background: rgb(243, 243, 243);
+  border: 1px solid rgb(191, 191, 191);
+  color: #929292;
+}
+.modalCreatPrescription .add-img button {
+  width: 220px;
+  height: 220px;
+  border-radius: 8px;
+  border: 2px dashed rgb(146, 146, 146);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modalCreatPrescription .add-img button i {
+  color: rgb(146, 146, 146);
+  font-size: 60px;
+}
+.modalCreatPrescription .add-img button img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.medicine-list--item .tabMystore {
+  border-bottom: none;
+  margin-bottom: 32px;
+}
+.medicine-list--item .tabMystore .nav-item a {
+  width: 100% !important;
+  background: white !important;
+  border: none;
+}
+.medicine-list--item .tabMystore .nav-item a.active {
+  border-bottom: 3px solid !important;
+}
+
+.rv_item {
+  padding: 10px;
+  border-bottom: 1px solid rgb(214, 214, 214);
+}
+.rv_item .rv-header {
+  margin-bottom: 10px;
+}
+.rv_item .rv-header--left {
+  align-items: center;
+}
+.rv_item .rv-header--left .avt {
+  width: 54px;
+  height: 54px;
+  border-radius: 30px;
+}
+.rv_item .rv-header--left .avt img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.rv_item .rv-header--left p {
+  font-size: 24px;
+  font-weight: 800;
+}
+.rv_item .rv-header--right {
+  display: flex;
+  align-self: flex-end;
+  font-size: 14px;
+  font-weight: 400;
+}
+.rv_item .content {
+  font-size: 16px;
+}
+
+.pagination {
+  margin-top: 20px;
 }
 
 /*# sourceMappingURL=file.css.map */
