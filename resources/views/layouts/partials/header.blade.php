@@ -1,7 +1,7 @@
 
 <header class="header d-flex justify-content-around container-fluid align-items-center ">
     <div class="header-left">
-        <a href="{{route('home')}}"><img src="{{asset('img/icons_logo/image 1.png')}}" alt="logo"></a>
+        <a href="{{route('home')}}"><img class="w-100" src="{{asset('img/icons_logo/logo-new.png')}}" alt="logo"></a>
     </div>
     <div class="header-center d-flex">
         <a href="{{route('recruitment.index')}}">Recruitment</a>

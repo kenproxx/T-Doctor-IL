@@ -31,6 +31,7 @@ Route::get('/about', function () {
 
 Route::group(['prefix' => 'news'],  function () {
     Route::get('', [\App\Http\Controllers\fronend\HomeController::class,'index'])->name('index.new');
+    Route::get('detail', [\App\Http\Controllers\fronend\HomeController::class,'detail'])->name('detail.new');
 });
 Route::group(['prefix' => 'recruitment'],  function () {
     Route::get('/index', [\App\Http\Controllers\RecruitmentController::class, 'index'])->name('recruitment.index');

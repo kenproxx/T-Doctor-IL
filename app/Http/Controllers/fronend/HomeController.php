@@ -12,7 +12,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('layouts.tab-news-events');
+        return view('News-event.News');
+    }
+
+    public function detail ()
+    {
+        return view('News-event.detail-news');
     }
 
     /**

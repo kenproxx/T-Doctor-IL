@@ -1,0 +1,36 @@
+.text-gray {
+  color: var(--Grey-Dark, #929292);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.fs-16px {
+  color: #424242;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+
+.fs-12px {
+  color: #929292;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.border-8px {
+  border-radius: 12px;
+  border: 1px solid #EAEAEA;
+  background: #FFF;
+  padding: 8px;
+}
+
+.color-Grey-Dark {
+  color: #929292;
+}
+
+/*# sourceMappingURL=news.css.map */
