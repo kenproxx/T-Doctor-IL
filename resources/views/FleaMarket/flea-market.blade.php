@@ -83,7 +83,9 @@
                 </div>
                 <div class="mt-100">
                     <div class="flea-adv row align-items-center justify-content-center">
-                        <div class="">ADVERTISEMENT</div>
+                        <div class="">
+                            <img src="{{asset('img/image 16.png')}}" alt="" style="width: 270px;height: 682px">
+                        </div>
                     </div>
                 </div>
             </div>

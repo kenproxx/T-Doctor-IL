@@ -503,7 +503,6 @@
   border-radius: 16px;
 }
 .product-item .img-pro {
-  height: 237px;
   margin-bottom: 10px;
   position: relative;
 }
@@ -555,6 +554,9 @@
   font-size: 18px;
   font-weight: 600;
   color: black;
+}
+.clinics-list .margin-bottom-32 {
+  margin-bottom: 32px;
 }
 
 .clinic-search {

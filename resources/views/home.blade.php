@@ -5,7 +5,9 @@
     @include('component.banner')
     <div>
         <div class="section1 d-flex justify-content-evenly">
-            <div class="section1__side"></div>
+            <div class="section1__side">
+                <img src="{{asset('img/image 16.png')}}" alt="" style="width: 161px;height: 647px">
+            </div>
             <div class="section1-main d-flex">
                 <div class="section1__item order-1">
                     <div class="section1-label position-relative">
@@ -578,11 +580,13 @@
                     </div>
                 </div>
             </div>
-            <div class="section1__side"></div>
+            <div class="section1__side">
+                <img src="{{asset('img/image 16.png')}}" alt="" style="width: 161px;height: 647px">
+            </div>
         </div>
     </div>
     <div class="banner1">
-        <!-- Add content for your banner here -->
+        <img src="{{asset('img/image 12.png')}}" alt="" style="width: 1439px;height: 280px">
     </div>
     <div id="map-location" class="d-flex justify-content-center">
         <div class="content-item d-flex justify-content-center" >
@@ -683,7 +687,7 @@
         </nav>
     </div>
     <div class="banner1">
-        <!-- Add content for your banner here -->
+        <img src="{{asset('img/image 12.png')}}" alt="" style="width: 1439px;height: 280px">
     </div>
     <div id="recruitment_board" class="d-flex justify-content-center">
         <div id="content-bkg" class="content-item d-flex justify-content-center " >
@@ -801,7 +805,7 @@
         </div>
     </div>
     <div class="banner1">
-        <!-- Add content for your banner here -->
+        <img src="{{asset('img/image 12.png')}}" alt="" style="width: 1439px;height: 280px">
     </div>
     <div id="flea_market_board" class="d-flex justify-content-center">
         <div id="content-bkg" class="content-item d-flex justify-content-center ">
@@ -911,7 +915,7 @@
         </div>
     </div>
     <div class="banner1">
-        <!-- Add content for your banner here -->
+        <img src="{{asset('img/image 12.png')}}" alt="" style="width: 1439px;height: 280px">
     </div>
     <div id="item-information">
         <h1>Buy online</h1>
