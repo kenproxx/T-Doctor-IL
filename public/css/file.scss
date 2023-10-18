@@ -605,7 +605,6 @@
     border: 1px solid rgba(234, 234, 234, 1);
     border-radius: 16px;
     .img-pro{
-        height: 237px;
         margin-bottom: 10px;
         position: relative;
         img{
@@ -663,6 +662,9 @@
             font-weight: 600;
             color: black;
         }
+    }
+    .margin-bottom-32 {
+        margin-bottom: 32px;
     }
 }
 
