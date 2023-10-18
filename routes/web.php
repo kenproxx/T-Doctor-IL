@@ -31,6 +31,7 @@ Route::get('/about', function () {
 
 Route::group(['prefix' => 'news'],  function () {
     Route::get('', [\App\Http\Controllers\fronend\HomeController::class,'index'])->name('index.new');
+    Route::get('detail', [\App\Http\Controllers\fronend\HomeController::class,'detail'])->name('detail.new');
 });
 Route::group(['prefix' => 'recruitment'],  function () {
     Route::get('/index', [\App\Http\Controllers\RecruitmentController::class, 'index'])->name('recruitment.index');
@@ -76,5 +77,14 @@ Route::group(['prefix' => 'flea-market'], function (){
     Route::get('sell-product',[\App\Http\Controllers\FleaMarketController::class,'sellProduct'])->name('flea.market.sell.product');
     Route::get('edit-product',[\App\Http\Controllers\FleaMarketController::class,'editProduct'])->name('flea.market.edit.product');
     Route::get('product-detail',[\App\Http\Controllers\FleaMarketController::class,'productDetail'])->name('flea.market.product.detail');
+});
+Route::group(['prefix' => 'what-free'],  function () {
+    Route::get('/', [\App\Http\Controllers\WhatFreeToDay::class, 'index'])->name('what.free');
+    Route::get('/to-day', [\App\Http\Controllers\WhatFreeToDay::class, 'toDay'])->name('what.free.to.day');
+    Route::get('/wit-mission', [\App\Http\Controllers\WhatFreeToDay::class, 'withMission'])->name('what.free.with.mission');
+    Route::get('/discounted-sevice', [\App\Http\Controllers\WhatFreeToDay::class, 'discountedSevice'])->name('what.free.discounted.service');
+    Route::get('/detail', [\App\Http\Controllers\WhatFreeToDay::class, 'detail'])->name('what.free.detail');
+    Route::get('/detail', [\App\Http\Controllers\WhatFreeToDay::class, 'detail'])->name('what.free.detail');
+    Route::get('/campaign', [\App\Http\Controllers\WhatFreeToDay::class, 'campaign'])->name('what.free.campaign');
 
 });

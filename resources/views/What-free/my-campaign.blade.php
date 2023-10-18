@@ -1,35 +1,20 @@
 @extends('layouts.master')
-@section('title', 'Flea Market')
+@section('title', 'My Campaign')
 @section('content')
-    @include('layouts.partials.headerFleaMarket')
+    @include('layouts.partials.header')
     @include('component.banner')
     <div class="container">
         <div class="d-flex">
-            <div class="col-md-3 mr-2">
-                <div class="">
-                    <div class="flea-adv row align-items-center justify-content-center">
-                        <img src="{{asset('img/image 16.png')}}" alt="" style="width: 270px;height: 682px">
-                    </div>
-                </div>
-                <div class="">
-                    <div class="flea-adv row align-items-center justify-content-center">
-                        <div class="">
-                            <img src="{{asset('img/image 16.png')}}" alt="" style="width: 270px;height: 682px">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-9 medicine-list--item">
-                @include('component.avt-info')
-                <ul class="nav nav-tabs row tabMystore" role="tablist">
+            <div class="col-md-12 medicine-list--item">
+                <ul class="nav nav-tabs row tabMystore col-md-6" role="tablist">
                     <li class="nav-item col-4">
-                        <a class="nav-link active" id="productList-tab" data-toggle="tab" href="#productList" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                        <a class="nav-link active" id="productList-tab" data-toggle="tab" href="#productList" role="tab" aria-controls="home" aria-selected="true">My campaign</a>
                     </li>
                     <li class="nav-item col-4">
-                        <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="profile" aria-selected="false">Review</a>
+                        <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="profile" aria-selected="false">Interested campaign</a>
                     </li>
                     <li class="nav-item col-4">
-                        <a class="nav-link" id="wishList-tab" data-toggle="tab" href="#wishList" role="tab" aria-controls="contact" aria-selected="false">Wish List</a>
+                        <a class="nav-link" id="wishList-tab" data-toggle="tab" href="#wishList" role="tab" aria-controls="contact" aria-selected="false">My SNS</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">

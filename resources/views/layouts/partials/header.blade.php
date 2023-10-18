@@ -1,3 +1,4 @@
+
 <header >
     <div class="header d-flex justify-content-around container-fluid align-items-center " >
         <div class="header-left">
@@ -18,6 +19,19 @@
             |
             <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">Sign Up</button>
         </div>
+
+<header class="header d-flex justify-content-around container-fluid align-items-center ">
+    <div class="header-left">
+        <a href="{{route('home')}}"><img class="w-100" src="{{asset('img/icons_logo/logo-new.png')}}" alt="logo"></a>
+    </div>
+    <div class="header-center d-flex">
+        <a href="{{route('recruitment.index')}}">Recruitment</a>
+        <a href="{{route('flea-market.index')}}">Flea market</a>
+        <a href="{{route('examination.index')}}">Examination</a>
+        <a href="{{route('index.new')}}">New/Events</a>
+        <a href="{{route('medicine')}}">Online Medicine</a>
+        <a href="{{route('clinic')}}">Clinic/Pharmacies</a>
+        <a href="{{route('what.free')}}">What's free?</a>
     </div>
     <div class="header-mobile row d-flex">
         <nav class="navbar bg-light fixed-top">
