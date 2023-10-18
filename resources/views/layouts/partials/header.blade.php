@@ -7,10 +7,10 @@
         <a href="{{route('recruitment.index')}}">Recruitment</a>
         <a href="{{route('flea-market.index')}}">Flea market</a>
         <a href="{{route('examination.index')}}">Examination</a>
-        <a href="#">New/Events</a>
+        <a href="{{route('index.new')}}">New/Events</a>
         <a href="{{route('medicine')}}">Online Medicine</a>
         <a href="{{route('clinic')}}">Clinic/Pharmacies</a>
-        <a href="#">What's free?</a>
+        <a href="{{route('what.free')}}">What's free?</a>
     </div>
     <div class="header-right d-flex ">
         <button class="account_control" id="show_login" data-toggle="modal" data-target="#staticBackdrop">Log In</button>
