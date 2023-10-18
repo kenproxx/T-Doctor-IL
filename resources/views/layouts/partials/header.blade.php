@@ -1,4 +1,25 @@
 
+<header >
+    <div class="header d-flex justify-content-around container-fluid align-items-center " >
+        <div class="header-left">
+            <a href="{{route('home')}}"><img src="{{asset('img/icons_logo/image 1.png')}}" alt="logo"></a>
+        </div>
+        <div class="header-center d-flex">
+            <a href="{{route('recruitment.index')}}">Recruitment</a>
+            <a href="{{route('flea-market.index')}}">Flea market</a>
+            <a href="{{route('examination.index')}}">Examination</a>
+            <a href="#">New/Events</a>
+            <a href="{{route('medicine')}}">Online Medicine</a>
+            <a href="{{route('clinic')}}">Clinic/Pharmacies</a>
+            <a href="#">What's free?</a>
+        </div>
+        <div class="header-right d-flex ">
+            <button class="account_control" id="show_login" data-toggle="modal" data-target="#staticBackdrop">Log In</button>
+            <div></div>
+            |
+            <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">Sign Up</button>
+        </div>
+
 <header class="header d-flex justify-content-around container-fluid align-items-center ">
     <div class="header-left">
         <a href="{{route('home')}}"><img class="w-100" src="{{asset('img/icons_logo/logo-new.png')}}" alt="logo"></a>
@@ -12,11 +33,52 @@
         <a href="{{route('clinic')}}">Clinic/Pharmacies</a>
         <a href="{{route('what.free')}}">What's free?</a>
     </div>
-    <div class="header-right d-flex ">
-        <button class="account_control" id="show_login" data-toggle="modal" data-target="#staticBackdrop">Log In</button>
-        <div></div>
-        |
-        <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">Sign Up</button>
+    <div class="header-mobile row d-flex">
+        <nav class="navbar bg-light fixed-top">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <hr>
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Recruitment</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Flea market</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Examination</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">New/Events</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Online Medicine</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Clinic/Pharmacies</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">What's free?</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="header-right d-flex ">
+            <button class="account_control" id="show_login" data-toggle="modal" data-target="#staticBackdrop">Log In</button>
+            <div></div>
+            |
+            <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">Sign Up</button>
+        </div>
     </div>
 </header>
 <div class="modal fade" id="staticBackdrop" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
