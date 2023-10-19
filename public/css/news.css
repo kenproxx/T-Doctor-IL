@@ -55,12 +55,10 @@
   border-radius: 8px;
   background: var(--Black, #000);
   display: flex;
-  padding: 6px 16px;
   justify-content: center;
   align-items: center;
   gap: 10px;
   color: white;
-  font-size: 16px;
   font-style: normal;
   font-weight: 800;
   line-height: normal;
