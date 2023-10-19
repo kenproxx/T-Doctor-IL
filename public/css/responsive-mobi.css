@@ -50,6 +50,9 @@ img {
   footer .info-footer {
     display: block;
   }
+  footer .info-tab {
+    display: block !important;
+  }
   footer .mt-4 {
     margin-top: 16px !important;
   }
