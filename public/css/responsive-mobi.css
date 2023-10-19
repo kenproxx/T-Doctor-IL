@@ -50,10 +50,39 @@ img {
   footer .info-footer {
     display: block;
   }
+  footer .info-tab {
+    display: block !important;
+  }
   footer .mt-4 {
     margin-top: 16px !important;
   }
   /* END FOOTER */
+  /* WHAT FREE */
+  .mobile-hidden {
+    display: none;
+  }
+  #search-input {
+    padding-left: 15%;
+  }
+  .button-black {
+    padding: 6px 9px;
+    font-size: 14px;
+    margin-right: 5px !important;
+  }
+  .text-content-product {
+    font-size: 16px;
+  }
+  .flea-text-gray {
+    font-size: 14px;
+  }
+  .recruitment-details--title {
+    font-size: 18px;
+    padding: 16px;
+  }
+  .recruitment-details--content {
+    margin: 16px 0;
+  }
+  /* END WHAT FREE */
 }
 @media (min-width: 780px) {
   .container {
@@ -61,6 +90,10 @@ img {
   }
   .info-footer {
     display: flex;
+  }
+  .button-black {
+    padding: 6px 16px;
+    font-size: 16px;
   }
 }
 

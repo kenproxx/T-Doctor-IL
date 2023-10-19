@@ -5,7 +5,9 @@
     @include('component.banner')
     <div class="recruitment-details ">
         <div class="container">
-            <a href="{{route('recruitment.index')}}" class="recruitment-details--title"><i class="fa-solid fa-arrow-left"></i> What’s free details</a>
+            @include('What-free.header-wFree')
+
+            <a href="{{route('what.free')}}" class="recruitment-details--title"><i class="fa-solid fa-arrow-left"></i> What’s free details</a>
             <div class="row recruitment-details--content">
                 <div class="col-md-8 recruitment-details--content--left">
                     <div class="text-content-product">Nha khoa Blossom - Tặng 700.000đ tiền mặt và voucher 3.000.000đ khi quay video check-in trải nghiệm trên Tiktok và Re-up Reels Facebook</div>

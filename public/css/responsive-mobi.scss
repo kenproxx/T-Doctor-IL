@@ -8,35 +8,37 @@ img {
         width: 100%;
     }
     /* HEADER */
-    .w-100px {
-        width: 100px;
-    }
-    .header-pc {
-        display: none !important;
-    }
-    .header-mobile {
-        display: block !important;
-    }
-    .button-nav-header {
-        border-radius: 8px;
-        background: var(--White-Light, #F3F3F3);
-        display: flex;
-        width: 300px;
-        padding: 10px 12px;
-        align-items: center;
-        color: var(--Grey-Balck, #424242);
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 800;
-        line-height: normal;
-    }
-    #offcanvasNavbarLabel{
-        width: 33%;
-    }
-    .offcanvas-start {
-        width: 85% !important;
-    }
+        .w-100px {
+            width: 100px;
+        }
+        .header-pc {
+            display: none !important;
+        }
+        .header-mobile {
+            display: block !important;
+        }
+        .button-nav-header {
+            border-radius: 8px;
+            background: var(--White-Light, #F3F3F3);
+            display: flex;
+            width: 300px;
+            padding: 10px 12px;
+            align-items: center;
+            color: var(--Grey-Balck, #424242);
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+        }
+        #offcanvasNavbarLabel{
+            width: 33%;
+        }
+        .offcanvas-start {
+            width: 85% !important;
+        }
+
     /* END HEADER */
+
     /* FOOTER */
     footer {
         padding: 30px 16px;
@@ -49,11 +51,41 @@ img {
         .info-footer {
             display: block;
         }
+        .info-tab {
+            display: block !important;
+        }
         .mt-4 {
             margin-top: 16px!important;
         }
     }
     /* END FOOTER */
+
+    /* WHAT FREE */
+    .mobile-hidden {
+        display: none;
+    }
+    #search-input{
+        padding-left: 15%;
+    }
+    .button-black {
+        padding: 6px 9px;
+        font-size: 14px;
+        margin-right: 5px !important;
+    }
+    .text-content-product {
+        font-size: 16px;
+    }
+    .flea-text-gray {
+        font-size: 14px;
+    }
+    .recruitment-details--title {
+        font-size: 18px;
+        padding: 16px;
+    }
+    .recruitment-details--content {
+        margin: 16px 0;
+    }
+    /* END WHAT FREE */
 }
 
 @media (max-width: 779px) {
@@ -67,6 +99,11 @@ img {
     }
     .info-footer {
         display: flex;
+    }
+    .button-black {
+        padding: 6px 16px;
+        font-size: 16px;
+
     }
 
 }

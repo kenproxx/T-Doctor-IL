@@ -110,33 +110,36 @@
                     <li>Facebook</li>
                 </ul>
             </aside>
-            <div class="">
+            <div class="d-none container info-tab">
+                <div class="">
+                    <div class="text-arena-p text-white">
+                        <div class="mb-3"><strong>TDOCTOR </strong><i class="fa-solid fa-chevron-up"></i></div>
+                        <div class="mb-2"><span>How it works</span></div>
+                        <div class="mb-2"><span>Featured</span></div>
+                        <div class="mb-2"><span>Partnership</span></div>
+                        <div class="mb-2"><span>Bussiness Relation</span></div>
+                    </div>
+                </div>
                 <div class="text-arena-p text-white">
-                    <div class="mb-3"><strong>TDOCTOR </strong><i class="fa-solid fa-chevron-up"></i></div>
-                    <div class="mb-2"><span>How it works</span></div>
-                    <div class="mb-2"><span>Featured</span></div>
-                    <div class="mb-2"><span>Partnership</span></div>
-                    <div class="mb-2"><span>Bussiness Relation</span></div>
+                    <div class="">
+                        <div class="mb-3"><strong>Community </strong><i class="fa-solid fa-chevron-up"></i></div>
+                        <div class="mb-2"><span>Events</span></div>
+                        <div class="mb-2"><span>Blog</span></div>
+                        <div class="mb-2"><span>Podcast</span></div>
+                        <div class="mb-2"><span>Invite a friend</span></div>
+                    </div>
+                </div>
+                <div class="text-arena-p text-white">
+                    <div class="">
+                        <div class="mb-3"><strong>Socials </strong><i class="fa-solid fa-chevron-up"></i></div>
+                        <div class="mb-2"><span>Facebook</span></div>
+                        <div class="mb-2"><span>Twitter</span></div>
+                        <div class="mb-2"><span>Instagram</span></div>
+                        <div class="mb-2"><span>Kakaotalk</span></div>
+                    </div>
                 </div>
             </div>
-            <div class="text-arena-p text-white">
-                <div class="">
-                    <div class="mb-3"><strong>Community </strong><i class="fa-solid fa-chevron-up"></i></div>
-                    <div class="mb-2"><span>Events</span></div>
-                    <div class="mb-2"><span>Blog</span></div>
-                    <div class="mb-2"><span>Podcast</span></div>
-                    <div class="mb-2"><span>Invite a friend</span></div>
-                </div>
-            </div>
-            <div class="text-arena-p text-white">
-                <div class="">
-                    <div class="mb-3"><strong>Socials </strong><i class="fa-solid fa-chevron-up"></i></div>
-                    <div class="mb-2"><span>Facebook</span></div>
-                    <div class="mb-2"><span>Twitter</span></div>
-                    <div class="mb-2"><span>Instagram</span></div>
-                    <div class="mb-2"><span>Kakaotalk</span></div>
-                </div>
-            </div>
+
         </div>
         <div>
             <div class=" bottom-footer">
