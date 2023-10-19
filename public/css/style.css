@@ -458,7 +458,7 @@ footer {
     display: flex;
     justify-content: center;
     padding: 3rem 8%;
-    height: 480px;
+    /*height: 480px;*/
 .bottom-footer {
     && p{
         color: white;
