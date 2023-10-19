@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="{{asset('css/recruitment.css')}}">
     <link rel="stylesheet" href="{{asset('css/flea-market.css')}}">
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
+    <link rel="stylesheet" href="{{asset('css/responsive-mobi.css')}}">
     <link rel="stylesheet" href="{{asset('css/news.css')}}">
 
 
