@@ -8,16 +8,16 @@ img {
     width: 100%;
   }
   /* HEADER */
-  header .w-100px {
+  .w-100px {
     width: 100px;
   }
-  header .header-pc {
+  .header-pc {
     display: none !important;
   }
-  header .header-mobile {
+  .header-mobile {
     display: block !important;
   }
-  header .button-nav-header {
+  .button-nav-header {
     border-radius: 8px;
     background: var(--White-Light, #F3F3F3);
     display: flex;
@@ -30,10 +30,10 @@ img {
     font-weight: 800;
     line-height: normal;
   }
-  header #offcanvasNavbarLabel {
+  #offcanvasNavbarLabel {
     width: 33%;
   }
-  header .offcanvas-start {
+  .offcanvas-start {
     width: 85% !important;
   }
   /* END HEADER */
@@ -68,6 +68,19 @@ img {
     padding: 6px 9px;
     font-size: 14px;
     margin-right: 5px !important;
+  }
+  .text-content-product {
+    font-size: 16px;
+  }
+  .flea-text-gray {
+    font-size: 14px;
+  }
+  .recruitment-details--title {
+    font-size: 18px;
+    padding: 16px;
+  }
+  .recruitment-details--content {
+    margin: 16px 0;
   }
   /* END WHAT FREE */
 }
