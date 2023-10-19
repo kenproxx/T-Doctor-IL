@@ -4,8 +4,8 @@
             <a href="{{route('home')}}"><img class="w-100" src="{{asset('img/icons_logo/logo-new.png')}}" alt="logo"></a>
         </div>
         <div class="header-center d-flex">
-            <a href="{{route('recruitment.index')}}">Recruitment</a>
-            <a href="{{route('flea-market.index')}}">Flea market</a>
+            <a href="{{route('recruitment.index')}}" hidden="">Recruitment</a>
+            <a href="{{route('flea-market.index')}}" hidden="">Flea market</a>
             <a href="{{route('examination.index')}}">Examination</a>
             <a href="{{route('index.new')}}">New/Events</a>
             <a href="{{route('medicine')}}">Online Medicine</a>
@@ -50,10 +50,10 @@
     </div>
     <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-            <li class="nav-item button-nav-header mb-3">
+            <li class="nav-item button-nav-header mb-3" hidden="">
                 <a class="nav-link" href="{{route('recruitment.index')}}">Recruitment</a>
             </li>
-            <li class="nav-item button-nav-header mb-3">
+            <li class="nav-item button-nav-header mb-3" hidden="">
                 <a class="nav-link" href="{{route('flea-market.index')}}">Flea market</a>
             </li>
             <li class="nav-item button-nav-header mb-3">

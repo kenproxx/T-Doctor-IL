@@ -37,6 +37,9 @@ p {
 .container .width-88 {
   width: 88px;
 }
+.container .w-200 {
+  width: 200px;
+}
 .container .img-union {
   margin-bottom: 16px;
 }
@@ -450,6 +453,15 @@ input[type=range]::-moz-range-thumb {
   padding: 0;
   height: 36px;
   width: 21px;
+}
+
+.address-footer {
+  color: var(--White, #FFF);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.32px;
 }
 
 /*# sourceMappingURL=flea-market.css.map */

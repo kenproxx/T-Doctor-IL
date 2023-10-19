@@ -1,6 +1,7 @@
-
+img {
+    width: 100%;
+}
 @media (max-width: 480px) {
-
     .container {
         max-width: 480px;
         width: 100%;
@@ -35,6 +36,17 @@
         width: 85% !important;
     }
     /* END HEADER */
+    footer {
+        aside{
+            display: none;
+        }
+        .border-top {
+            border: none!important;
+        }
+        .info-footer {
+            display: block;
+        }
+    }
 }
 
 @media (max-width: 779px) {
@@ -44,7 +56,10 @@
 
 @media (min-width: 780px) {
     .container {
-        min-width: 100%;
+        min-width: 1440px;
+    }
+    .info-footer {
+        display: flex;
     }
 
 }
