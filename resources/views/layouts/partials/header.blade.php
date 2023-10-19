@@ -12,18 +12,17 @@
             <a href="{{route('clinic')}}">Clinic/Pharmacies</a>
             <a href="{{route('what.free')}}">What's free?</a>
         </div>
-        <div class="header-right d-flex ">
+        <div class="header-right d-flex align-items-center">
             <button class="account_control" id="show_login" data-toggle="modal" data-target="#staticBackdrop">Log In</button>
-            <div></div>
-            |
+            <div>|</div>
             <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">Sign Up</button>
         </div>
     </div>
     <div class="header-mobile row d-flex d-none">
-        <nav class="navbar bg-light fixed-top d-flex">
+        <nav class="navbar bg-lights fixed-top d-flex">
             <div class="w-100 d-flex justify-content-between">
                 <div>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                    <button class="navbar-toggler border-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                 </div>
@@ -32,10 +31,9 @@
                         <img class="w-100px" src="{{asset('img/icons_logo/logo-new.png')}}">
                     </a>
                 </div>
-                <div class="header-right d-flex ">
+                <div class="header-right d-flex align-items-center">
                     <button class="account_control" id="show_login" data-toggle="modal" data-target="#staticBackdrop">Log In</button>
-                    <div></div>
-                    |
+                    <div>|</div>
                     <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">Sign Up</button>
                 </div>
             </div>
@@ -45,7 +43,7 @@
 {{-- header modal--}}
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel"><img class="w-100" src="{{asset('img/icons_logo/logo-new.png')}}"></h5>
+        <a href="{{route('home')}}" class="offcanvas-title" id="offcanvasNavbarLabel"><img class="w-100" src="{{asset('img/icons_logo/logo-new.png')}}"></a>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
