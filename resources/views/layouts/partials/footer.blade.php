@@ -5,7 +5,7 @@
                 <div class="w-200 mb-3"><img src="{{ asset('img/icons_logo/logo-new.png') }}">
                 </div>
                 <p class="address-footer">V7B07 Shophouse Terra An Hưng, Đường Nguyễn Thanh Bình, Hà Đông, Hà Nội</p>
-                <div class="d-flex">
+                <div class="d-flex mt-3">
                     <a href="#"><svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g filter="url(#filter0_d_18_4306)">
                                 <circle cx="34.7999" cy="21.7999" r="16.7999" fill="#1A202C"/>
@@ -112,40 +112,38 @@
             </aside>
             <div class="">
                 <div class="text-arena-p text-white">
-                    <div><strong>TDOCTOR</strong></div>
-                    <div><span>How it works</span></div>
-                    <div><span>Featured</span></div>
-                    <div><span>Partnership</span></div>
-                    <div><span>Bussiness Relation</span></div>
+                    <div class="mb-3"><strong>TDOCTOR </strong><i class="fa-solid fa-chevron-up"></i></div>
+                    <div class="mb-2"><span>How it works</span></div>
+                    <div class="mb-2"><span>Featured</span></div>
+                    <div class="mb-2"><span>Partnership</span></div>
+                    <div class="mb-2"><span>Bussiness Relation</span></div>
                 </div>
             </div>
             <div class="text-arena-p text-white">
                 <div class="">
-                    <div><strong>Community</strong></div>
-                    <div><span>Events</span></div>
-                    <div><span>Blog</span></div>
-                    <div><span>Podcast</span></div>
-                    <div><span>Invite a friend</span></div>
+                    <div class="mb-3"><strong>Community </strong><i class="fa-solid fa-chevron-up"></i></div>
+                    <div class="mb-2"><span>Events</span></div>
+                    <div class="mb-2"><span>Blog</span></div>
+                    <div class="mb-2"><span>Podcast</span></div>
+                    <div class="mb-2"><span>Invite a friend</span></div>
                 </div>
             </div>
             <div class="text-arena-p text-white">
                 <div class="">
-                    <div><strong>Socials</strong></div>
-                    <div><span>Facebook</span></div>
-                    <div><span>Twitter</span></div>
-                    <div><span>Instagram</span></div>
-                    <div><span>Kakaotalk</span></div>
+                    <div class="mb-3"><strong>Socials </strong><i class="fa-solid fa-chevron-up"></i></div>
+                    <div class="mb-2"><span>Facebook</span></div>
+                    <div class="mb-2"><span>Twitter</span></div>
+                    <div class="mb-2"><span>Instagram</span></div>
+                    <div class="mb-2"><span>Kakaotalk</span></div>
                 </div>
             </div>
-
-
         </div>
         <div>
             <div class=" bottom-footer">
                 <div class="border-top">
-                    <div class="mt-5 d-flex">
-                        <p class="w-25">©2022 Company Name. All rights reserved</p>
-                        <div class="d-flex justify-content-end w-75">
+                    <div class="mt-4 d-flex justify-content-between">
+                        <div><p>©2022 Company Name. All rights reserved</p></div>
+                        <div class="d-flex text-bottom">
                             <p class="mr-5">Privacy & Policy</p>
                             <p>Terms & Condition</p>
                         </div>
