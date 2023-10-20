@@ -1,6 +1,5 @@
 .text-gray {
   color: var(--Grey-Dark, #929292);
-  font-size: 18px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;

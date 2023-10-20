@@ -9,8 +9,12 @@ img {
     }
     /* HEADER */
         .w-100px {
-            width: 100px;
+            width: 80px;
+            height: 24px;
         }
+    .banner {
+        margin-top: 65px;
+    }
         .header-pc {
             display: none !important;
         }
@@ -85,8 +89,35 @@ img {
     .recruitment-details--content {
         margin: 16px 0;
     }
-    /* END WHAT FREE */
+    .flea-content-product {
+        font-size: 16px;
+    }
+    .text-gray {
+        font-size: 12px;
+    }
+    .ac-text_content {
+        font-size: 18px;
+    }
+    .clinics-header a {
+        font-size: 12px;
+    }
+    .header-right .account_control {
+        font-size: 10px;
+    }
+    .navbar-toggler-icon {
+        width: 24px;
+        height: 24px;
+    }
+    .clinic-search--center .search-box {
+        padding-left: 0;
+    }
+    .clinic-search--center .search-box i {
+        left: 15px;
+    }
+
 }
+
+    /* END WHAT FREE */
 
 @media (max-width: 779px) {
 
@@ -105,5 +136,20 @@ img {
         font-size: 16px;
 
     }
-
+    .flea-content-product {
+        font-size: 18px;
+    }
+    .text-gray {
+        font-size: 18px;
+    }
+    .ac-text_content {
+        font-size: 32px;
+    }
+    .clinics-header a {
+        font-size: 18px;
+    }
+    .clinic-search--left {
+        display: flex;
+    }
 }
+
