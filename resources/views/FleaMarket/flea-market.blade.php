@@ -1,11 +1,12 @@
 @extends('layouts.master')
 @section('title', 'Flea Market')
 @section('content')
-    @include('layouts.partials.headerFleaMarket')
+    @include('layouts.partials.header')
     <body>
     @include('component.banner')
     <div class="container mt-70">
-        <div class="d-flex mt-70">
+        @include('What-free.header-wFree')
+        <div class="d-flex mt-70 mobile-hidden">
             <div class="col-md-3 flea-content ">Flea market</div>
             <div class="col-md-5 flea-search d-flex align-items-center">
                 <input placeholder="Search for anything…">
@@ -23,7 +24,7 @@
             </div>
         </div>
         <div class="d-flex mt-88">
-            <div class="col-md-3 ">
+            <div class="col-md-3  mobile-hidden">
                 <div class="border-radius ">
                     <div class="flea-text">Filter</div>
                     <div>
@@ -93,23 +94,23 @@
                 <div class="img-union"><img src="{{asset('img/flea-market/platinum.png')}}"></div>
                 <div class="page row ">
                     @for($i = 0; $i < 3; $i++)
-                        <div class="col-md-4 item">
+                        <div class="col-md-4 col-6 item">
                             @include('FleaMarket.tab-product-flea')
                         </div>
                     @endfor
                 </div>
-                <div class="img-union mt-45"><img src="{{asset('img/flea-market/premium.png')}}"></div>
+                <div class="img-union "><img src="{{asset('img/flea-market/premium.png')}}"></div>
                 <div class="page row ">
                     @for($i = 0; $i < 3; $i++)
-                        <div class="col-md-4 item">
+                        <div class="col-md-4 col-6 item">
                             @include('FleaMarket.tab-product-flea')
                         </div>
                     @endfor
                 </div>
-                <div class="img-union mt-45"><img src="{{asset('img/flea-market/silver.png')}}"></div>
+                <div class="img-union"><img src="{{asset('img/flea-market/silver.png')}}"></div>
                 <div class="page row ">
                     @for($i = 0; $i < 3; $i++)
-                        <div class="col-md-4 item">
+                        <div class="col-md-4 col-6 item">
                             @include('FleaMarket.tab-product-flea')
                         </div>
                     @endfor

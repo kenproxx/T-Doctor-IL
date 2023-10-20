@@ -14,6 +14,7 @@ img {
   }
   .banner {
     margin-top: 65px;
+    margin-bottom: 10px;
   }
   .header-pc {
     display: none !important;
@@ -63,7 +64,7 @@ img {
   /* END FOOTER */
   /* WHAT FREE */
   .mobile-hidden {
-    display: none;
+    display: none !important;
   }
   #search-input {
     padding-left: 15%;
@@ -82,9 +83,10 @@ img {
   .recruitment-details--title {
     font-size: 18px;
     padding: 16px;
+    margin-top: 0;
   }
   .recruitment-details--content {
-    margin: 16px 0;
+    margin: 0;
   }
   .flea-content-product {
     font-size: 16px;
@@ -145,6 +147,9 @@ img {
     height: 32px;
     display: flex;
   }
+  .clinic-search {
+    margin-bottom: 24px;
+  }
   /* end what free/campaign */
   /* END WHAT FREE */
   .w-45 {
@@ -153,6 +158,80 @@ img {
   .edit-button {
     display: block;
   }
+  /* CLINIC */
+  .other-clinics .title {
+    font-size: 18px;
+    margin: 8px 0;
+  }
+  .clinic-item {
+    border-radius: 8px;
+    border: 1px solid var(--secon1, #45C3D2);
+    background: var(--White, #FFF);
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  .clinic-item a {
+    font-size: 16px;
+  }
+  .clinic-item .location {
+    font-size: 14px;
+  }
+  .clinic-item .service {
+    font-size: 14px;
+  }
+  .clinic-item .img-detail .img-item img {
+    border-radius: 8px;
+    background: url(<path-to-image>), lightgray 50%/cover no-repeat;
+  }
+  /* END CLINIC */
+  /* FLEA MARKET */
+  .container .mt-88 {
+    margin-top: 32px;
+  }
+  .container .img-union {
+    margin-bottom: 12px;
+    margin-top: 12px;
+  }
+  .container .col-md-9 .img-union {
+    margin-top: 0;
+  }
+  .container .content-pro .name-pro a {
+    font-size: 14px;
+  }
+  .container .recruitment-details {
+    display: flex;
+    padding: 0;
+    margin-bottom: 16px;
+  }
+  .container .recruitment-details .list {
+    height: 168px;
+    overflow-y: auto;
+    padding: 0;
+  }
+  .container .recruitment-details .item img {
+    border-radius: 8px;
+  }
+  .container .recruitment-details .main {
+    padding-left: 0;
+  }
+  .container .mt-110 {
+    margin-top: 0;
+  }
+  .container .mo-ta {
+    margin-top: 16px;
+  }
+  .container .mo-ta .list-mo-ta li {
+    font-size: 14px;
+  }
+  .container .form-1 .flea-prise {
+    font-size: 16px;
+  }
+  .container .form-1 .text-content-product {
+    margin-top: 16px;
+  }
+  .container .form-1 p {
+    margin-top: 16px;
+  }
+  /* END FLEA MARKET */
 }
 @media (min-width: 780px) {
   .container {
@@ -196,6 +275,28 @@ img {
   .rv_item p {
     font-size: 24px;
   }
+  /* FLEA MARKET */
+  .container .img-union {
+    margin-bottom: 16px;
+    margin-top: 45px;
+  }
+  .container .list {
+    display: flex;
+    overflow-x: auto;
+    padding: 0;
+  }
+  .container .item {
+    margin: 16px;
+  }
+  .container .item img {
+    height: 80px;
+    width: 140px;
+    border-radius: 8px;
+  }
+  .container .form-1 p {
+    margin-top: 24px;
+  }
+  /* END FLEA MARKET */
 }
 
 /*# sourceMappingURL=responsive-mobi.css.map */

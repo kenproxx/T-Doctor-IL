@@ -6,7 +6,7 @@
         </div>
         <div class="header-center d-flex">
             <a href="{{route('recruitment.index')}}" hidden="">Recruitment</a>
-            <a href="{{route('flea-market.index')}}" hidden="">Flea market</a>
+            <a href="{{route('flea-market.index')}}">Flea market</a>
             <a href="{{route('examination.index')}}">Examination</a>
             <a href="{{route('index.new')}}">New/Events</a>
             <a href="{{route('medicine')}}">Online Medicine</a>
@@ -60,7 +60,7 @@
             <li class="nav-item button-nav-header mb-3" hidden="">
                 <a class="nav-link" href="{{route('recruitment.index')}}">Recruitment</a>
             </li>
-            <li class="nav-item button-nav-header mb-3" hidden="">
+            <li class="nav-item button-nav-header mb-3">
                 <a class="nav-link" href="{{route('flea-market.index')}}">Flea market</a>
             </li>
             <li class="nav-item button-nav-header mb-3">

@@ -99,6 +99,7 @@
 }
 .recruitment-details--content--left .list {
   overflow-x: auto;
+  display: flex;
 }
 .recruitment-details--content--left .list .item {
   height: 79px;
@@ -524,7 +525,6 @@
   color: black;
   font-size: 18px;
   font-weight: 800;
-  height: 55px;
   -webkit-line-clamp: 2;
   display: -webkit-box;
   -webkit-box-orient: vertical;

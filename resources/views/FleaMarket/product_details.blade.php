@@ -1,44 +1,63 @@
 @extends('layouts.master')
 @section('title', 'Flea Market')
 @section('content')
-    @include('layouts.partials.headerFleaMarket')
+    @include('layouts.partials.header')
     @include('component.banner')
+    <style>
+        .selected {
+            border: 2px solid black;
+            background: rgba(0, 0, 0, 0.2);
+            opacity: 0.5;
+        }
+
+    </style>
     <div class="recruitment-details ">
         <div class="container">
             <div class="recruitment-details--title"><i class="fa-solid fa-arrow-left"></i> Product details</div>
             <div class="row recruitment-details--content">
-                <div class="col-md-8 recruitment-details--content--left">
-                    <img style="width: 100%" src="{{asset('/img/flea-market/product.png')}}" alt="show" class="main">
-                    <div class="list d-flex">
+                <div class="col-md-8 recruitment-details ">
+                    <img style="width: 100%" src="{{asset('/img/flea-market/product.png')}}" alt="show"
+                         class="main col-10 col-md-12">
+                    <div class="list col-2 col-md-12">
                         <div class="item">
-                            <img src="{{asset('/img/flea-market/product.png')}}" alt="">
+                            <img src="{{asset('/img/flea-market/product.png')}}" alt="" class="border">
                         </div>
                         <div class="item">
-                            <img src="{{asset('/img/flea-market/product.png')}}" alt="">
+                            <img src="{{asset('/img/flea-market/product.png')}}" alt="" class="border">
                         </div>
                         <div class="item">
-                            <img src="{{asset('/img/flea-market/product.png')}}" alt="">
+                            <img src="{{asset('/img/flea-market/product.png')}}" alt="" class="border">
                         </div>
                         <div class="item">
-                            <img src="{{asset('/img/flea-market/product.png')}}" alt="">
+                            <img src="{{asset('/img/flea-market/product.png')}}" alt="" class="border">
                         </div>
                         <div class="item">
-                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
+                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="" class="border">
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="" class="border">
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="" class="border">
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 recruitment-details--content--right">
                     <div class="form-1" id="form-hospital">
                         <div>
-                            <strong class="flea-prise">Máy massage cổ Pangao PG-2601B51 giúp xoa dịu đốt sống cổ, thư giãn giảm căng thẳng,
+                            <strong class="flea-prise">Máy massage cổ Pangao PG-2601B51 giúp xoa dịu đốt sống cổ, thư
+                                giãn giảm căng thẳng,
                                 thoải mái</strong>
-                            <div class="text-content-product mt-4">
+                            <div class="text-content-product">
                                 <strong class="">599,000 VND</strong>
                             </div>
 
-                            <p style="margin-top: 24px !important;color: #929292">Location:<strong class="flea-prise"> Ha Noi</strong></p>
-                            <p style="margin-top: 24px !important;color: #929292">Category:<strong class="flea-prise"> Massage machine</strong></p>
-                            <p style="margin-top: 24px !important;color: #929292">Brand name:<strong class="flea-prise"> OMRON</strong></p>
+                            <p style="color: #929292">Location:<strong class="flea-prise">
+                                    Ha Noi</strong></p>
+                            <p style="color: #929292">Category:<strong class="flea-prise">
+                                    Massage machine</strong></p>
+                            <p style="color: #929292">Brand name:<strong class="flea-prise">
+                                    OMRON</strong></p>
                         </div>
                         <div class="div-7 d-flex justify-content-between">
                             <a href="" class="div-wrapper">
@@ -85,7 +104,6 @@
                                 </ul>
                             </div>
                             {{-- End nội dung mô tả--}}
-
                         </div>
                     </div>
                 </div>
@@ -95,5 +113,14 @@
                     $(".main").attr("src", $(this).attr('src'));
                 })
             </script>
-
-        </div>@endsection
+            <script>
+                $('.list .item img').click(function () {
+                    $('.list .item img').removeClass('selected');
+                    $(this).removeClass('border');
+                    $(this).addClass('selected');
+                    $(".main").attr("src", $(this).attr('src'));
+                })
+            </script>
+        </div>
+    </div>
+@endsection
