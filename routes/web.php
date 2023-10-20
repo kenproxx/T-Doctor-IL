@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\ProductInfoController;
@@ -96,6 +98,11 @@ Route::middleware(['auth'])->group(function () {
 
 });
 /* List Api*/
+//Auth
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('/login', [LoginController::class, 'login'])->name('api.user.login');
+    Route::post('/register', [RegisterController::class, 'register'])->name('api.user.register');
+});
 //Product
 Route::group(['prefix' => 'products'], function () {
     Route::get('', [ProductInfoController::class, 'index'])->name('product.list');
@@ -107,6 +114,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'role.admin'], function () {
     require_once __DIR__ . '/admin.php';
 });
 
-Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'api', 'middleware' => 'jwt'], function () {
     require_once __DIR__ . '/backend.php';
 });
