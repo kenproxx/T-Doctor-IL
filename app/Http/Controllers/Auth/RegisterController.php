@@ -23,17 +23,29 @@ class RegisterController extends Controller
             $member = $request->input('member');
 
             switch ($member) {
-                case 'Business member':
-                    $role = Role::where('name', \App\Enums\Role::BUSINESS)->first();
+                case 'PHARMACEUTICAL_COMPANIES':
+                    $role = Role::where('name', \App\Enums\Role::PHARMACEUTICAL_COMPANIES)->first();
+                    $type = TypeUser::PHARMACEUTICAL_COMPANIES;
+                    break;
+                case 'HOSPITALS':
+                    $role = Role::where('name', \App\Enums\Role::HOSPITALS)->first();
                     $type = TypeUser::HOSPITALS;
                     break;
-                case 'Medical services':
-                    $role = Role::where('name', \App\Enums\Role::MEDICAL)->first();
-                    $type = TypeUser::DOCTORS;
+                case 'CLINICS':
+                    $role = Role::where('name', \App\Enums\Role::CLINICS)->first();
+                    $type = TypeUser::CLINICS;
+                    break;
+                case 'PHARMACIES':
+                    $role = Role::where('name', \App\Enums\Role::PHARMACIES)->first();
+                    $type = TypeUser::PHARMACIES;
+                    break;
+                case 'SPAS':
+                    $role = Role::where('name', \App\Enums\Role::SPAS)->first();
+                    $type = TypeUser::SPAS;
                     break;
                 default:
-                    $role = Role::where('name', \App\Enums\Role::NORMAL)->first();
-                    $type = TypeUser::PAITENTS;
+                    $role = Role::where('name', \App\Enums\Role::OTHERS)->first();
+                    $type = TypeUser::OTHERS;
                     break;
             }
 
