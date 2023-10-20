@@ -1,5 +1,5 @@
 <div class="rv_item">
-    <div class="d-flex justify-content-between rv-header">
+    <div class="d-flex justify-content-between rv-header align-items-center">
         <div class="d-flex rv-header--left">
             <div class="avt">
                 <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">

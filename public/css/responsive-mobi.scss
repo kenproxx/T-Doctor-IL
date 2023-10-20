@@ -140,6 +140,26 @@ img {
             }
         }
     }
+    .rv_item {
+        .avt {
+            img {
+                width: 32px;
+                height: 32px;
+            }
+
+        }
+        p {
+             font-size: 16px;
+            padding-left: 8px;
+
+         }
+        .rv-header--right {
+            align-content: center;
+            height: 32px;
+            display: flex;
+        }
+    }
+
 
     /* end what free/campaign */
 
@@ -194,6 +214,18 @@ img {
     }
     .edit-button {
         display: flex;
+    }
+    .rv_item {
+        .avt {
+            img {
+                width: 32px;
+                height: 32px;
+            }
+
+        }
+        p {
+            font-size: 24px;
+        }
     }
 }
 

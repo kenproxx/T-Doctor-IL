@@ -132,6 +132,19 @@ img {
   .product-item .content-pro .edit-button .apply-bt {
     margin-top: 12px;
   }
+  .rv_item .avt img {
+    width: 32px;
+    height: 32px;
+  }
+  .rv_item p {
+    font-size: 16px;
+    padding-left: 8px;
+  }
+  .rv_item .rv-header--right {
+    align-content: center;
+    height: 32px;
+    display: flex;
+  }
   /* end what free/campaign */
   /* END WHAT FREE */
   .w-45 {
@@ -175,6 +188,13 @@ img {
   }
   .edit-button {
     display: flex;
+  }
+  .rv_item .avt img {
+    width: 32px;
+    height: 32px;
+  }
+  .rv_item p {
+    font-size: 24px;
   }
 }
 
