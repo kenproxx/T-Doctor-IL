@@ -14,6 +14,7 @@ img {
         }
     .banner {
         margin-top: 65px;
+        margin-bottom: 10px;
     }
         .header-pc {
             display: none !important;
@@ -66,7 +67,7 @@ img {
 
     /* WHAT FREE */
     .mobile-hidden {
-        display: none;
+        display: none !important;
     }
     #search-input{
         padding-left: 15%;
@@ -159,8 +160,9 @@ img {
             display: flex;
         }
     }
-
-
+    .clinic-search {
+        margin-bottom: 24px;
+    }
     /* end what free/campaign */
 
     /* END WHAT FREE */
@@ -171,6 +173,68 @@ img {
     .edit-button {
         display: block;
     }
+    /* CLINIC */
+    .other-clinics {
+        .title {
+            font-size: 18px;
+            margin: 8px 0;
+        }
+    }
+    .clinic-item {
+        border-radius: 8px;
+        border: 1px solid var(--secon1, #45C3D2);
+        background: var(--White, #FFF);
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+
+        a {
+            font-size: 16px;
+        }
+
+        .location {
+            font-size: 14px;
+        }
+
+        .service {
+            font-size: 14px;
+        }
+
+        .img-detail {
+            .img-item img {
+                border-radius: 8px;
+                background: url(<path-to-image>), lightgray 50% / cover no-repeat;
+            }
+        }
+    }
+    /* END CLINIC */
+
+    /* FLEA MARKET */
+    .container {
+        .mt-88 {
+            margin-top: 32px;
+        }
+        .img-union {
+            margin-bottom: 12px;
+            margin-top: 12px;
+        }
+        .col-md-9 {
+            .img-union {
+                margin-top: 0;
+            }
+        }
+        .content-pro {
+            .name-pro {
+                a{
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+
+    /* END FLEA MARKET */
+
+
+
+
 }
 
 
@@ -227,5 +291,17 @@ img {
             font-size: 24px;
         }
     }
+
+    /* FLEA MARKET */
+    .container {
+        .mt-88 {
+        }
+        .img-union {
+            margin-bottom: 16px;
+            margin-top: 45px;
+        }
+    }
+
+    /* END FLEA MARKET */
 }
 
