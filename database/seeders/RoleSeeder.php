@@ -14,9 +14,22 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         $roles = [
-            ['name' => Role::BUSINESS],
-            ['name' => Role::MEDICAL],
-            ['name' => Role::NORMAL],
+//            ['name' => Role::BUSINESS],
+//            ['name' => Role::MEDICAL],
+//            ['name' => Role::NORMAL],
+            ['name' => Role::PHARMACEUTICAL_COMPANIES],
+            ['name' => Role::HOSPITALS],
+            ['name' => Role::CLINICS],
+            ['name' => Role::PHARMACIES],
+            ['name' => Role::SPAS],
+            ['name' => Role::OTHERS],
+            ['name' => Role::DOCTORS],
+            ['name' => Role::PHAMACISTS],
+            ['name' => Role::THERAPISTS],
+            ['name' => Role::ESTHETICIANS],
+            ['name' => Role::NURSES],
+            ['name' => Role::PAITENTS],
+            ['name' => Role::NORMAL_PEOPLE],
             ['name' => Role::ADMIN],
         ];
 

@@ -16,9 +16,9 @@ class UserRoleSeeder extends Seeder
     public function run(): void
     {
         $adminRole = Role::where('name', \App\Enums\Role::ADMIN)->first();
-        $normalRole = Role::where('name', \App\Enums\Role::NORMAL)->first();
-        $medicalRole = Role::where('name', \App\Enums\Role::MEDICAL)->first();
-        $businessRole = Role::where('name', \App\Enums\Role::BUSINESS)->first();
+        $normalRole = Role::where('name', \App\Enums\Role::PAITENTS)->first();
+        $medicalRole = Role::where('name', \App\Enums\Role::DOCTORS)->first();
+        $businessRole = Role::where('name', \App\Enums\Role::HOSPITALS)->first();
 
         $admin = User::where('email', 'admin@gmail.com')->first();
         $normal = User::where('email', 'normal@gmail.com')->first();

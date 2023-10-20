@@ -162,9 +162,12 @@
                                             <label for="member">Member</label>
                                             <select id="member" name="member" class="form-select">
                                                 <option>Choose...</option>
-                                                <option>Business member</option>
-                                                <option>Medical services</option>
-                                                <option>Normal member</option>
+                                                <option value="PHARMACEUTICAL_COMPANIES">PHARMACEUTICAL COMPANIES</option>
+                                                <option value="HOSPITALS">HOSPITALS</option>
+                                                <option value="CLINICS">CLINICS</option>
+                                                <option value="PHARMACIES">PHARMACIES</option>
+                                                <option value="SPAS">SPAS</option>
+                                                <option value="OTHERS">OTHERS</option>
                                             </select>
                                         </div>
                                         <div class="form-element">
