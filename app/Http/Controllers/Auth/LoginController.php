@@ -2,45 +2,46 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function login(Request $request)
     {
-        $this->middleware('guest')->except('logout');
-    }
+        try {
+            $loginRequest = $request->input('login_request');
+            $password = $request->input('password');
 
-    protected function redirectTo()
-    {
-        session()->flash('success', 'You are logged in!');
-        return $this->redirectTo;
+            $credentials = [
+                'email' => $loginRequest,
+                'password' => $password,
+            ];
+
+            $user = User::where('email', $loginRequest)->first();
+            if (!$user) {
+                return response("User not found!", 404);
+            } else {
+                if ($user && $user->status == UserStatus::INACTIVE) {
+                    return response("User not active!", 400);
+                } else if ($user && $user->status == UserStatus::BLOCKED) {
+                    return response("User has been blocked!", 400);
+                }
+            }
+
+            if (Auth::attempt($credentials)) {
+                $token = JWTAuth::fromUser($user);
+                $response = $user->toArray();
+                $response['accessToken'] = $token;
+                return response()->json($response);
+            }
+            return response("Login fail!", 400);
+        } catch (\Exception $exception) {
+            return response("Login error!", 400);
+        }
     }
 }

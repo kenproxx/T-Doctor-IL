@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\fronend\HomeController;
+use App\Http\Controllers\frontend\HomeController;
+use App\Http\Controllers\ProductInfoController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -94,8 +97,23 @@ Route::group(['prefix' => 'what-free'], function () {
 Route::middleware(['auth'])->group(function () {
 
 });
+/* List Api*/
+//Auth
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('/login', [LoginController::class, 'login'])->name('api.user.login');
+    Route::post('/register', [RegisterController::class, 'register'])->name('api.user.register');
+});
+//Product
+Route::group(['prefix' => 'products'], function () {
+    Route::get('', [ProductInfoController::class, 'index'])->name('product.list');
+    Route::get('/{id}', [ProductInfoController::class, 'show'])->name('product.detail');
+});
 
 // Admin
 Route::group(['prefix' => 'admin', 'middleware' => 'role.admin'], function () {
     require_once __DIR__ . '/admin.php';
+});
+
+Route::group(['prefix' => 'api', 'middleware' => 'jwt'], function () {
+    require_once __DIR__ . '/backend.php';
 });
