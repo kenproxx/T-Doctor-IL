@@ -15,7 +15,7 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-between">
+        <div class="justify-content-between edit-button">
             <button class="apply-bt apply-bt_delete w-45">Delete</button>
             <form action="{{ route('recruitment.edit.cv') }}" class="w-45">
                 <button type="submit" class="apply-bt apply-bt_edit w-100">Edit</button>

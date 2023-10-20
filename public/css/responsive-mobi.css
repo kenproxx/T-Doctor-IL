@@ -111,8 +111,36 @@ img {
   .clinic-search--center .search-box i {
     left: 15px;
   }
+  .name-product {
+    font-size: 16px;
+  }
+  /* what free/campaign */
+  .product-item {
+    padding: 8px;
+    margin-bottom: 16px;
+  }
+  .product-item .content-pro .name-product {
+    font-size: 14px;
+  }
+  .product-item .content-pro .location-pro {
+    font-size: 10px !important;
+    margin: 3px 0;
+  }
+  .product-item .content-pro .price-pro {
+    font-size: 18px !important;
+  }
+  .product-item .content-pro .edit-button .apply-bt {
+    margin-top: 12px;
+  }
+  /* end what free/campaign */
+  /* END WHAT FREE */
+  .w-45 {
+    width: 100%;
+  }
+  .edit-button {
+    display: block;
+  }
 }
-/* END WHAT FREE */
 @media (min-width: 780px) {
   .container {
     min-width: 1440px;
@@ -137,6 +165,15 @@ img {
     font-size: 18px;
   }
   .clinic-search--left {
+    display: flex;
+  }
+  .name-product {
+    font-size: 18px;
+  }
+  .w-45 {
+    width: 45% !important;
+  }
+  .edit-button {
     display: flex;
   }
 }
