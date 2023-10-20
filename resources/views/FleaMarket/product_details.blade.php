@@ -7,9 +7,9 @@
         <div class="container">
             <div class="recruitment-details--title"><i class="fa-solid fa-arrow-left"></i> Product details</div>
             <div class="row recruitment-details--content">
-                <div class="col-md-8 recruitment-details--content--left">
-                    <img style="width: 100%" src="{{asset('/img/flea-market/product.png')}}" alt="show" class="main">
-                    <div class="list d-flex">
+                <div class="col-md-8 recruitment-details ">
+                    <img style="width: 100%" src="{{asset('/img/flea-market/product.png')}}" alt="show" class="main col-10 col-md-12">
+                    <div class="list col-2 col-md-12">
                         <div class="item">
                             <img src="{{asset('/img/flea-market/product.png')}}" alt="">
                         </div>
@@ -21,6 +21,21 @@
                         </div>
                         <div class="item">
                             <img src="{{asset('/img/flea-market/product.png')}}" alt="">
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
+                        </div>
+                        <div class="item">
+                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
                         </div>
                         <div class="item">
                             <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
