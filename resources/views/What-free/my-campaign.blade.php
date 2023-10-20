@@ -21,7 +21,7 @@
                     <div class="tab-pane fade show active" id="productList" role="tabpanel" aria-labelledby="productList-tab">
                         <div class="page row">
                             @for($i = 0; $i < 12; $i++)
-                                <div class="col-md-4 item">
+                                <div class="col-md-4 col-6 item">
                                     @include('component.edit-product')
                                 </div>
                             @endfor

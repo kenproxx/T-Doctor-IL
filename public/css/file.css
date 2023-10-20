@@ -551,7 +551,6 @@
   font-weight: 800;
 }
 .clinics-list .clinics-header a {
-  font-size: 18px;
   font-weight: 600;
   color: black;
 }
@@ -822,17 +821,12 @@
   align-items: center;
 }
 .rv_item .rv-header--left .avt {
-  width: 54px;
-  height: 54px;
   border-radius: 30px;
 }
 .rv_item .rv-header--left .avt img {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
 }
 .rv_item .rv-header--left p {
-  font-size: 24px;
   font-weight: 800;
 }
 .rv_item .rv-header--right {
@@ -840,6 +834,7 @@
   align-self: flex-end;
   font-size: 14px;
   font-weight: 400;
+  align-items: center;
 }
 .rv_item .content {
   font-size: 16px;

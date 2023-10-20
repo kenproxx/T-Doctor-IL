@@ -229,7 +229,6 @@ body {
     .apply-bt {
         border-radius: 8px;
         height: 40px;
-        width: 110px;
         color: #f7f7f7;
         border: none;
         margin-top: 24px;
@@ -260,7 +259,6 @@ body {
     }
     .apply-bt_delete {
         background:  #D6D6D6;
-        margin-right: 16px;
         color: #929292;
     }
     .apply-bt_edit {
@@ -292,7 +290,6 @@ a, input, button {
     margin-top: 40px;
 }
 .ac-text_content {
-    font-size: 32px;
     font-style: normal;
     font-weight: 800;
     line-height: normal;

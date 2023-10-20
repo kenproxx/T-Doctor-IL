@@ -9,7 +9,11 @@ img {
   }
   /* HEADER */
   .w-100px {
-    width: 100px;
+    width: 80px;
+    height: 24px;
+  }
+  .banner {
+    margin-top: 65px;
   }
   .header-pc {
     display: none !important;
@@ -82,7 +86,73 @@ img {
   .recruitment-details--content {
     margin: 16px 0;
   }
+  .flea-content-product {
+    font-size: 16px;
+  }
+  .text-gray {
+    font-size: 12px;
+  }
+  .ac-text_content {
+    font-size: 18px;
+  }
+  .clinics-header a {
+    font-size: 12px;
+  }
+  .header-right .account_control {
+    font-size: 10px;
+  }
+  .navbar-toggler-icon {
+    width: 24px;
+    height: 24px;
+  }
+  .clinic-search--center .search-box {
+    padding-left: 0;
+  }
+  .clinic-search--center .search-box i {
+    left: 15px;
+  }
+  .name-product {
+    font-size: 16px;
+  }
+  /* what free/campaign */
+  .product-item {
+    padding: 8px;
+    margin-bottom: 16px;
+  }
+  .product-item .content-pro .name-product {
+    font-size: 14px;
+  }
+  .product-item .content-pro .location-pro {
+    font-size: 10px !important;
+    margin: 3px 0;
+  }
+  .product-item .content-pro .price-pro {
+    font-size: 18px !important;
+  }
+  .product-item .content-pro .edit-button .apply-bt {
+    margin-top: 12px;
+  }
+  .rv_item .avt img {
+    width: 32px;
+    height: 32px;
+  }
+  .rv_item p {
+    font-size: 16px;
+    padding-left: 8px;
+  }
+  .rv_item .rv-header--right {
+    align-content: center;
+    height: 32px;
+    display: flex;
+  }
+  /* end what free/campaign */
   /* END WHAT FREE */
+  .w-45 {
+    width: 100%;
+  }
+  .edit-button {
+    display: block;
+  }
 }
 @media (min-width: 780px) {
   .container {
@@ -94,6 +164,37 @@ img {
   .button-black {
     padding: 6px 16px;
     font-size: 16px;
+  }
+  .flea-content-product {
+    font-size: 18px;
+  }
+  .text-gray {
+    font-size: 18px;
+  }
+  .ac-text_content {
+    font-size: 32px;
+  }
+  .clinics-header a {
+    font-size: 18px;
+  }
+  .clinic-search--left {
+    display: flex;
+  }
+  .name-product {
+    font-size: 18px;
+  }
+  .w-45 {
+    width: 45% !important;
+  }
+  .edit-button {
+    display: flex;
+  }
+  .rv_item .avt img {
+    width: 32px;
+    height: 32px;
+  }
+  .rv_item p {
+    font-size: 24px;
   }
 }
 
