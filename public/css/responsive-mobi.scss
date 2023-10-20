@@ -238,6 +238,11 @@ img {
                 overflow-y: auto;
                 padding: 0;
             }
+            .item {
+                img {
+                    border-radius: 8px;
+                }
+            }
             .main {
                 padding-left: 0;
             }
@@ -245,6 +250,28 @@ img {
         .mt-110 {
             margin-top: 0;
         }
+        .mo-ta {
+            margin-top: 16px;
+            .list-mo-ta {
+                li {
+                    font-size: 14px;
+                }
+
+            }
+        }
+        .form-1 {
+            .flea-prise {
+                font-size: 16px;
+            }
+            .text-content-product {
+                margin-top: 16px;
+            }
+            p {
+                margin-top: 16px;
+            }
+
+        }
+
     }
 
     /* END FLEA MARKET */
@@ -319,6 +346,25 @@ img {
         }
         .list {
             display: flex;
+            overflow-x: auto;
+            padding: 0;
+        }
+        .item {
+            margin: 16px;
+            img {
+                height: 80px;
+                width: 140px;
+                border-radius: 8px;
+            }
+        }
+        .form-1 {
+            .flea-prise {
+            }
+
+            p {
+                margin-top: 24px;
+            }
+
         }
     }
 
