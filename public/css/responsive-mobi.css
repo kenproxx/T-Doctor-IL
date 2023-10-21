@@ -180,7 +180,6 @@ img {
   }
   .clinic-item .img-detail .img-item img {
     border-radius: 8px;
-    background: url(<path-to-image>), lightgray 50%/cover no-repeat;
   }
   /* END CLINIC */
   /* FLEA MARKET */
@@ -234,9 +233,6 @@ img {
   /* END FLEA MARKET */
 }
 @media (min-width: 780px) {
-  .container {
-    min-width: 1440px;
-  }
   .info-footer {
     display: flex;
   }
