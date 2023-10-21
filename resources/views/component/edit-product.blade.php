@@ -1,5 +1,5 @@
 <div class="product-item">
-    <div class="img-pro">
+    <div class="img-pro justify-content-center d-flex">
         <img src="{{asset('img/flea-market/product2.png')}}" alt="">
     </div>
     <div class="content-pro">

@@ -4,8 +4,11 @@
     @include('layouts.partials.header')
     <body>
     @include('component.banner')
+
     <div class="container mt-70">
-        @include('What-free.header-wFree')
+        <div class="container pc-hidden">
+            @include('What-free.header-wFree')
+        </div>
         <div class="d-flex mt-70 mobile-hidden">
             <div class="col-md-3 flea-content ">Flea market</div>
             <div class="col-md-5 flea-search d-flex align-items-center">

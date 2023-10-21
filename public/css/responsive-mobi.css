@@ -8,6 +8,9 @@ img {
     width: 100%;
   }
   /* HEADER */
+  .d-mb-flex {
+    display: flex !important;
+  }
   .w-100px {
     width: 80px;
     height: 24px;
@@ -230,12 +233,35 @@ img {
   .container .form-1 p {
     margin-top: 16px;
   }
-  .container .font-12 {
+  .container .font-12-mobi {
     font-size: 12px;
   }
-  /* END FLEA MARKET */
+  .container .font-14-mobi {
+    font-size: 14px;
+  }
+  .container .font-18-mobi {
+    font-size: 18px;
+  }
+  .container .location-info {
+    margin-bottom: 8px;
+  }
+  .container .img-info {
+    width: 68px;
+    height: 68px;
+  }
+  .container .pc-hidden .flea-button {
+    font-size: 14px;
+    width: 90px;
+  }
+  .mb-42 {
+    margin-top: 30px;
+  }
 }
+/* END FLEA MARKET */
 @media (min-width: 780px) {
+  .pc-hidden {
+    display: none !important;
+  }
   .info-footer {
     display: flex;
   }
@@ -284,16 +310,18 @@ img {
     overflow-x: auto;
     padding: 0;
   }
-  .container .item {
-    margin: 16px;
+  .container .item-detail img {
+    width: 148px;
   }
   .container .item img {
-    height: 80px;
-    width: 140px;
+    width: 100%;
     border-radius: 8px;
   }
   .container .form-1 p {
     margin-top: 24px;
+  }
+  .container .img-info {
+    width: 148px;
   }
   /* END FLEA MARKET */
 }
