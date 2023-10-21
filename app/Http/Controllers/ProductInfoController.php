@@ -2,64 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ProductStatus;
 use App\Models\ProductInfo;
-use Illuminate\Http\Request;
 
 class ProductInfoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $products = ProductInfo::where('status', ProductStatus::ACTIVE)->get();
+        return response()->json($products);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(ProductInfo $productInfo)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ProductInfo $productInfo)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, ProductInfo $productInfo)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ProductInfo $productInfo)
-    {
-        //
+        $product = ProductInfo::find($id);
+        if (!$product || $product->status != ProductStatus::ACTIVE) {
+            return response("Product not found", 404);
+        }
+        return response()->json($product);
     }
 }
