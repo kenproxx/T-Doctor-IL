@@ -230,6 +230,9 @@ img {
   .container .form-1 p {
     margin-top: 16px;
   }
+  .container .font-12 {
+    font-size: 12px;
+  }
   /* END FLEA MARKET */
 }
 @media (min-width: 780px) {

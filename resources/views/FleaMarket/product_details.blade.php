@@ -5,8 +5,7 @@
     @include('component.banner')
     <style>
         .selected {
-            border: 2px solid black;
-            background: rgba(0, 0, 0, 0.2);
+            border: 2px solid black !important;
             opacity: 0.5;
         }
 
@@ -115,9 +114,10 @@
             </script>
             <script>
                 $('.list .item img').click(function () {
-                    $('.list .item img').removeClass('selected');
-                    $(this).removeClass('border');
-                    $(this).addClass('selected');
+                    // Remove border from all images within the "list" class
+                    $('.list .item img').css('border');
+                    // Add a border to the clicked image
+                    $(this).css('border', '2px solid red'); // You can customize the border style
                     $(".main").attr("src", $(this).attr('src'));
                 })
             </script>
