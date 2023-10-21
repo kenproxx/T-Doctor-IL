@@ -1,11 +1,11 @@
 @extends('layouts.master')
 @section('title', 'Flea Market')
 @section('content')
-    @include('layouts.partials.headerFleaMarket')
+    @include('layouts.partials.header')
     @include('component.banner')
     <div class="container">
         <div class="d-flex">
-            <div class="col-md-3 mr-2">
+            <div class="col-md-3 mr-2 mobile-hidden">
                 <div class="">
                     <div class="flea-adv row align-items-center justify-content-center">
                         <img src="{{asset('img/image 16.png')}}" alt="" style="width: 270px;height: 682px">
@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-9 medicine-list--item">
+            <div class="col-md-9 medicine-list--item col-12">
                 @include('component.avt-info')
                 <ul class="nav nav-tabs row tabMystore" role="tablist">
                     <li class="nav-item col-4">
@@ -36,7 +36,7 @@
                     <div class="tab-pane fade show active" id="productList" role="tabpanel" aria-labelledby="productList-tab">
                         <div class="page row">
                             @for($i = 0; $i < 12; $i++)
-                                <div class="col-md-4 item">
+                                <div class="col-md-4 item col-6">
                                     @include('component.edit-product')
                                 </div>
                             @endfor

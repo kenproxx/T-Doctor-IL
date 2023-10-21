@@ -6,7 +6,6 @@
     <style>
         .selected {
             border: 2px solid black;
-            background: rgba(0, 0, 0, 0.2);
             opacity: 0.5;
         }
 
@@ -19,25 +18,25 @@
                     <img style="width: 100%" src="{{asset('/img/flea-market/product.png')}}" alt="show"
                          class="main col-10 col-md-12">
                     <div class="list col-2 col-md-12">
-                        <div class="item">
+                        <div class="item-detail">
                             <img src="{{asset('/img/flea-market/product.png')}}" alt="" class="border">
                         </div>
-                        <div class="item">
+                        <div class="item-detail">
                             <img src="{{asset('/img/flea-market/product.png')}}" alt="" class="border">
                         </div>
-                        <div class="item">
+                        <div class="item-detail">
                             <img src="{{asset('/img/flea-market/product.png')}}" alt="" class="border">
                         </div>
-                        <div class="item">
+                        <div class="item-detail">
                             <img src="{{asset('/img/flea-market/product.png')}}" alt="" class="border">
                         </div>
-                        <div class="item">
+                        <div class="item-detail">
                             <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="" class="border">
                         </div>
-                        <div class="item">
+                        <div class="item-detail">
                             <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="" class="border">
                         </div>
-                        <div class="item">
+                        <div class="item-detail">
                             <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="" class="border">
                         </div>
                     </div>
@@ -114,8 +113,8 @@
                 })
             </script>
             <script>
-                $('.list .item img').click(function () {
-                    $('.list .item img').removeClass('selected');
+                $('.list .item-detail img').click(function () {
+                    $('.list .item-detail img').removeClass('selected');
                     $(this).removeClass('border');
                     $(this).addClass('selected');
                     $(".main").attr("src", $(this).attr('src'));
