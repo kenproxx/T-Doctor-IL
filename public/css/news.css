@@ -1,5 +1,6 @@
 .text-gray {
   color: var(--Grey-Dark, #929292);
+  font-size: 18px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -44,8 +45,8 @@
   height: 48px;
   border: snow;
   outline: none;
-  color: white;
-  background: black;
+  color: black;
+  background: #F3F3F3;
   border-radius: 10px;
   float: right;
 }
@@ -114,6 +115,8 @@
   line-height: normal;
 }
 
-
+.w-45 {
+  width: 45% !important;
+}
 
 /*# sourceMappingURL=news.css.map */

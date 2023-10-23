@@ -272,13 +272,18 @@ img {
                 margin-top: 16px;
             }
         }
-
+        .font-10-mobi {
+            font-size: 10px;
+        }
         .font-12-mobi {
             font-size: 12px;
         }
 
         .font-14-mobi {
             font-size: 14px;
+        }
+        .font-16-mobi {
+            font-size: 16px;
         }
 
         .font-18-mobi {
@@ -300,6 +305,18 @@ img {
                 width: 90px;
             }
         }
+    }
+    .content-add {
+        padding: 16px;
+        margin-top: 0;
+        .no-brand {
+            font-size: 14px;
+        }
+        .text-wrapper-input input[type=radio] {
+            height: 16px;
+            width: 16px;
+        }
+
     }
     .mb-42 {
         margin-top: 30px;
