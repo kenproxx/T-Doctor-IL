@@ -110,38 +110,98 @@
                     <li>Facebook</li>
                 </ul>
             </aside>
-            <div class="d-none container info-tab">
-                <div class="">
-                    <div class="text-arena-p text-white">
-                        <div class="mb-3"><strong>TDOCTOR </strong><i class="fa-solid fa-chevron-up"></i></div>
-                        <div class="mb-2"><span>How it works</span></div>
-                        <div class="mb-2"><span>Featured</span></div>
-                        <div class="mb-2"><span>Partnership</span></div>
-                        <div class="mb-2"><span>Bussiness Relation</span></div>
-                    </div>
+            <div class="status">
+                <input type="checkbox" id="status1" class="status_input" />
+                <div class="current_status">
+                    <span class="status_color" style="--status_color: #11d10a"></span>
+                    <p class="status_message mt-0 font-16-600">TDOCTOR</p>
+                    <span class="expand">
+					<label for="status1">
+						<span class="material-symbols-outlined"> <i class="fa-solid fa-angle-down"></i> </span>
+					</label>
+				</span>
                 </div>
-                <div class="text-arena-p text-white">
-                    <div class="">
-                        <div class="mb-3"><strong>Community </strong><i class="fa-solid fa-chevron-up"></i></div>
-                        <div class="mb-2"><span>Events</span></div>
-                        <div class="mb-2"><span>Blog</span></div>
-                        <div class="mb-2"><span>Podcast</span></div>
-                        <div class="mb-2"><span>Invite a friend</span></div>
-                    </div>
-                </div>
-                <div class="text-arena-p text-white">
-                    <div class="">
-                        <div class="mb-3"><strong>Socials </strong><i class="fa-solid fa-chevron-up"></i></div>
-                        <div class="mb-2"><span>Facebook</span></div>
-                        <div class="mb-2"><span>Twitter</span></div>
-                        <div class="mb-2"><span>Instagram</span></div>
-                        <div class="mb-2"><span>Kakaotalk</span></div>
-                    </div>
-                </div>
+                <ul class="other">
+                    <li class="other_card">
+                        <span class="status_color" style="--status_color: #d1ba0a"></span>
+                        <p class="status_message">How it works</p>
+                    </li>
+                    <li class="other_card">
+                        <span class="status_color" style="--status_color: #d1140a"></span>
+                        <p class="status_message">Featured</p>
+                    </li>
+                    <li class="other_card">
+                        <span class="status_color" style="--status_color: #a4a4a4"></span>
+                        <p class="status_message">Partnership</p>
+                    </li>
+                    <li class="other_card">
+                        <span class="status_color" style="--status_color: #a4a4a4"></span>
+                        <p class="status_message">Bussiness Relation</p>
+                    </li>
+                </ul>
             </div>
-
+            <div class="status mt-3">
+                <input type="checkbox" id="status2" class="status_input" />
+                <div class="current_status">
+                    <span class="status_color" style="--status_color: #11d10a"></span>
+                    <p class="font-16-600 status_message mt-0 ">Community</p>
+                    <span class="expand">
+					<label for="status2">
+						<span class="material-symbols-outlined"> <i class="fa-solid fa-angle-down"></i> </span>
+					</label>
+				</span>
+                </div>
+                <ul class="other">
+                    <li class="other_card">
+                        <span class="status_color" style="--status_color: #d1ba0a"></span>
+                        <p class="status_message">Events</p>
+                    </li>
+                    <li class="other_card">
+                        <span class="status_color" style="--status_color: #d1140a"></span>
+                        <p class="status_message">Blog</p>
+                    </li>
+                    <li class="other_card">
+                        <span class="status_color" style="--status_color: #a4a4a4"></span>
+                        <p class="status_message">Podcast</p>
+                    </li>
+                    <li class="other_card">
+                        <span class="status_color" style="--status_color: #a4a4a4"></span>
+                        <p class="status_message">Invite a friend</p>
+                    </li>
+                </ul>
+            </div>
+            <div class="status mt-3">
+                <input type="checkbox" id="status3" class="status_input" />
+                <div class="current_status">
+                    <span class="status_color" style="--status_color: #11d10a"></span>
+                    <p class="status_message mt-0 font-16-600">Socials</p>
+                    <span class="expand">
+					<label for="status3">
+						<span class="material-symbols-outlined"> <i class="fa-solid fa-angle-down"></i> </span>
+					</label>
+				</span>
+                </div>
+                <ul class="other">
+                    <li class="other_card">
+                        <span class="status_color" style="--status_color: #d1ba0a"></span>
+                        <p class="status_message">Facebook</p>
+                    </li>
+                    <li class="other_card">
+                        <span class="status_color" style="--status_color: #d1140a"></span>
+                        <p class="status_message">Twitter</p>
+                    </li>
+                    <li class="other_card">
+                        <span class="status_color" style="--status_color: #a4a4a4"></span>
+                        <p class="status_message">Instagram</p>
+                    </li>
+                    <li class="other_card">
+                        <span class="status_color" style="--status_color: #a4a4a4"></span>
+                        <p class="status_message">Kakaotalk</p>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div>
+        <div class="mt-3">
             <div class=" bottom-footer">
                 <div class="border-top">
                     <div class="mt-4 d-flex justify-content-between">
