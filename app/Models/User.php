@@ -39,31 +39,6 @@ class User extends Authenticatable  implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * Get the user's full name.
-     *
-     * @return string
-     */
-    public function getFullNameAttribute()
-    {
-        if (is_null($this->last_name)) {
-            return "{$this->name}";
-        }
-
-        return "{$this->name} {$this->last_name}";
-    }
-
-    /**
-     * Set the user's password.
-     *
-     * @param string $value
-     * @return void
-     */
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = bcrypt($value);
-    }
-
     public function roles()
     {
         return $this->belongsToMany(Role::class);
