@@ -5,8 +5,9 @@
     <body>
     @include('component.banner')
     <div class="container mt-70">
+        <div class="pc-hidden">@include('What-free.header-wFree')</div>
         <div class="d-flex mt-88">
-            <div class="col-md-3 ">
+            <div class="col-md-3 mobile-hidden">
                 <div class="border-radius ">
                     <div class="flea-text">Filter</div>
                     <div>
@@ -52,7 +53,7 @@
             <div class="col-md-9 medicine-list--item">
                 <div class="page row ">
                     @for($i = 0; $i < 12; $i++)
-                        <div class="col-md-4 item">
+                        <div class="col-md-4 col-6 item">
                             @include('component.product-wish')
                         </div>
                     @endfor

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\TypeUser;
 use App\Enums\UserStatus;
-use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -39,6 +39,8 @@ class AuthController extends Controller
             }
 
             if (Auth::attempt($credentials)) {
+                $token = JWTAuth::fromUser($user);
+                setCookie('accessToken', $token);
                 toast('Welcome ' . $user->email, 'success', 'top-left');
                 return redirect(route('home'));
             } else {
@@ -110,5 +112,13 @@ class AuthController extends Controller
     {
         Auth::logout();
         return redirect('/');
+    }
+
+    public function setCookie($name, $value)
+    {
+        $minutes = 3600;
+        $response = new Response('Set Cookie');
+        $response->withCookie(cookie($name, $value, $minutes));
+        return $response;
     }
 }

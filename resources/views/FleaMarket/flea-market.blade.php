@@ -113,28 +113,12 @@
             </div>
             <div class="col-md-9">
                 <div class="img-union"><img src="{{asset('img/flea-market/platinum.png')}}"></div>
-                <div class="page row ">
-                    @for($i = 0; $i < 3; $i++)
-                        <div class="col-md-4 col-6 item">
-                            @include('FleaMarket.tab-product-flea')
-                        </div>
-                    @endfor
-                </div>
+                @include('FleaMarket.tab-product-flea')
                 <div class="img-union "><img src="{{asset('img/flea-market/premium.png')}}"></div>
                 <div class="page row ">
-                    @for($i = 0; $i < 3; $i++)
-                        <div class="col-md-4 col-6 item">
-                            @include('FleaMarket.tab-product-flea')
-                        </div>
-                    @endfor
                 </div>
                 <div class="img-union"><img src="{{asset('img/flea-market/silver.png')}}"></div>
                 <div class="page row ">
-                    @for($i = 0; $i < 3; $i++)
-                        <div class="col-md-4 col-6 item">
-                            @include('FleaMarket.tab-product-flea')
-                        </div>
-                    @endfor
                 </div>
             </div>
         </div>
