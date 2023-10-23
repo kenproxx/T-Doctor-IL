@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Enums\TypeUser;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MainController;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,32 +23,7 @@ class RegisterController extends Controller
             $passwordConfirm = $request->input('passwordConfirm');
             $member = $request->input('member');
 
-            switch ($member) {
-                case 'PHARMACEUTICAL_COMPANIES':
-                    $role = Role::where('name', \App\Enums\Role::PHARMACEUTICAL_COMPANIES)->first();
-                    $type = TypeUser::PHARMACEUTICAL_COMPANIES;
-                    break;
-                case 'HOSPITALS':
-                    $role = Role::where('name', \App\Enums\Role::HOSPITALS)->first();
-                    $type = TypeUser::HOSPITALS;
-                    break;
-                case 'CLINICS':
-                    $role = Role::where('name', \App\Enums\Role::CLINICS)->first();
-                    $type = TypeUser::CLINICS;
-                    break;
-                case 'PHARMACIES':
-                    $role = Role::where('name', \App\Enums\Role::PHARMACIES)->first();
-                    $type = TypeUser::PHARMACIES;
-                    break;
-                case 'SPAS':
-                    $role = Role::where('name', \App\Enums\Role::SPAS)->first();
-                    $type = TypeUser::SPAS;
-                    break;
-                default:
-                    $role = Role::where('name', \App\Enums\Role::OTHERS)->first();
-                    $type = TypeUser::OTHERS;
-                    break;
-            }
+            $myUser = (new MainController())->switchMember($member);
 
             $user = new User();
             $oldUser = User::where('email', $email)->first();
@@ -66,20 +42,20 @@ class RegisterController extends Controller
             $user->username = $username;
             $user->phone = '';
             $user->address_code = '';
-            $user->type = $type;
+            $user->type = $myUser[1];
             $user->status = UserStatus::ACTIVE;
 
             $success = $user->save();
 
             $roleItem = [
-                'role_id' => $role->id,
+                'role_id' => $myUser[0]->id,
                 'user_id' => $user->id
             ];
 
             $success = DB::table('role_users')->insert($roleItem);
             if ($success) {
                 $response = $user->toArray();
-                $response['role'] = $role->name;
+                $response['role'] = $myUser[0]->name;
                 return response()->json($response);
             }
             return response('Register fail!', 400);
