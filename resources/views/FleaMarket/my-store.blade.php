@@ -23,13 +23,13 @@
                 @include('component.avt-info')
                 <ul class="nav nav-tabs row tabMystore" role="tablist">
                     <li class="nav-item col-4">
-                        <a class="nav-link active" id="productList-tab" data-toggle="tab" href="#productList" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                        <a class="nav-link active font-14-mobi" id="productList-tab" data-toggle="tab" href="#productList" role="tab" aria-controls="home" aria-selected="true">Home</a>
                     </li>
                     <li class="nav-item col-4">
-                        <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="profile" aria-selected="false">Review</a>
+                        <a class="nav-link font-14-mobi" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="profile" aria-selected="false">Review</a>
                     </li>
                     <li class="nav-item col-4">
-                        <a class="nav-link" id="wishList-tab" data-toggle="tab" href="#wishList" role="tab" aria-controls="contact" aria-selected="false">Wish List</a>
+                        <a class="nav-link font-14-mobi" id="wishList-tab" data-toggle="tab" href="#wishList" role="tab" aria-controls="contact" aria-selected="false">Wish List</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -48,7 +48,7 @@
                     <div class="tab-pane fade" id="wishList" role="tabpanel" aria-labelledby="wishList-tab">
                         <div class="row">
                             @for($i = 0; $i < 12; $i++)
-                                <div class="col-md-4 item">
+                                <div class="col-md-4 col-6 item">
                                     @include('component.product-wish')
                                 </div>
                             @endfor

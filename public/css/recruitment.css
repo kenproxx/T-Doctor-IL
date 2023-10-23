@@ -333,7 +333,6 @@ a, input, button {
     .add-cv_text {
         display: inline-flex;
         align-items: center;
-        margin-left: -15px;
     }
 
     .ac-textarea {

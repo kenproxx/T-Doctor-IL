@@ -233,11 +233,17 @@ img {
   .container .form-1 p {
     margin-top: 16px;
   }
+  .container .font-10-mobi {
+    font-size: 10px;
+  }
   .container .font-12-mobi {
     font-size: 12px;
   }
   .container .font-14-mobi {
-    font-size: 14px;
+    font-size: 14px !important;
+  }
+  .container .font-16-mobi {
+    font-size: 16px;
   }
   .container .font-18-mobi {
     font-size: 18px;
@@ -252,6 +258,17 @@ img {
   .container .pc-hidden .flea-button {
     font-size: 14px;
     width: 90px;
+  }
+  .content-add {
+    padding: 16px;
+    margin-top: 0;
+  }
+  .content-add .no-brand {
+    font-size: 14px;
+  }
+  .content-add .text-wrapper-input input[type=radio] {
+    height: 16px;
+    width: 16px;
   }
   .mb-42 {
     margin-top: 30px;
