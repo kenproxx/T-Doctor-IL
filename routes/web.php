@@ -20,6 +20,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@home')->name('homeAdmin');
+Route::get('/list-products', 'HomeController@listProduct')->name('homeAdmin.list.product');
+
+Route::group(['prefix' => 'product'], function () {
+    Route::delete('/delete/{id}', [ProductInfoController::class, 'delete'])->name('product.delete');
+//    Route::put('', 'ProfileController@update')->name('profile.update');
+});
 
 Route::get('/login', 'AuthController@index')->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('loginProcess');
