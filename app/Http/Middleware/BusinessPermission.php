@@ -26,7 +26,7 @@ class BusinessPermission
                 || $roleNames->contains('PHAMACISTS')
                 ||$roleNames->contains('THERAPISTS')
                 || $roleNames->contains('ESTHETICIANS')
-                || $roleNames->contains('NURSES ') ) {
+                || $roleNames->contains('NURSES') ) {
                 return $next($request);
             }
         } catch (Exception $e) {

@@ -53,7 +53,7 @@ class BackendProductInfoController extends Controller
 
             $success = $product->save();
             if ($success) {
-                return response()->json($success);
+                return response()->json($product);
             }
             return response('Create error', 400);
         } catch (\Exception $exception) {
