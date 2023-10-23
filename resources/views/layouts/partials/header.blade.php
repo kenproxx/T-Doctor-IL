@@ -14,11 +14,24 @@
             <a href="{{route('what.free')}}">What's free?</a>
         </div>
         <div class="header-right d-flex align-items-center">
-            <button class="account_control" id="show_login" data-toggle="modal" data-target="#staticBackdrop">Log In
-            </button>
-            <div>|</div>
-            <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">Sign Up
-            </button>
+            @if(\Illuminate\Support\Facades\Auth::check())
+                <div class="dropdown">
+                    <div class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                        {{\Illuminate\Support\Facades\Auth::user()->username}}
+                    </div>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="{{route('logoutProcess')}}">Logout</a>
+                    </div>
+                </div>
+            @else
+                <button class="account_control" id="show_login" data-toggle="modal" data-target="#staticBackdrop">Log In
+                </button>
+                <div>|</div>
+                <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">Sign Up
+                </button>
+            @endif
         </div>
     </div>
     <div class="header-mobile row d-flex d-none">
@@ -36,13 +49,24 @@
                     </a>
                 </div>
                 <div class="header-right d-flex align-items-center">
-                    <button class="account_control" id="show_login" data-toggle="modal" data-target="#staticBackdrop">
-                        Log In
-                    </button>
-                    <div>|</div>
-                    <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">Sign
-                        Up
-                    </button>
+                    @if(\Illuminate\Support\Facades\Auth::check())
+                        <div class="dropdown">
+                            <div class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                                {{\Illuminate\Support\Facades\Auth::user()->username}}
+                            </div>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="{{route('logoutProcess')}}">Logout</a>
+                            </div>
+                        </div>
+                    @else
+                        <button class="account_control" id="show_login" data-toggle="modal" data-target="#staticBackdrop">Log In
+                        </button>
+                        <div>|</div>
+                        <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">Sign Up
+                        </button>
+                    @endif
                 </div>
             </div>
         </nav>
@@ -95,7 +119,7 @@
                         <div class="form">
                             <div class="form-element">
                                 <label for="email">Email</label>
-                                <input id="email" name="login_request" type="text" placeholder="exmaple@gmail.com">
+                                <input id="email" name="email" type="text" placeholder="exmaple@gmail.com">
                             </div>
                             <div class="form-element">
                                 <label for="password">Password</label>
