@@ -22,11 +22,12 @@ class MedicalPermission
             $roles = $user->roles;
             $roleNames = $roles->pluck('name');
 
-            if ($roleNames->contains('DOCTORS')
-                || $roleNames->contains('PHAMACISTS')
-                ||$roleNames->contains('THERAPISTS')
-                || $roleNames->contains('ESTHETICIANS')
-                || $roleNames->contains('NURSES ') ) {
+            if ($roleNames->contains('PHARMACEUTICAL COMPANIES')
+                || $roleNames->contains('HOSPITALS')
+                ||$roleNames->contains('CLINICS')
+                || $roleNames->contains('PHARMACIES')
+                || $roleNames->contains('SPAS')
+                || $roleNames->contains('OTHERS')) {
                 return $next($request);
             }
         } catch (Exception $e) {
