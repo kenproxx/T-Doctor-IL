@@ -4,16 +4,6 @@
 
 <script>
     $(document).ready(function () {
-        $('#button-heart').on('click', function () {
-            $('#bi-heart').addClass('d-none')
-            $('#bi-heart-fill').removeClass('d-none')
-        })
-
-        $('#button-heart-fill').on('click', function () {
-            $('#bi-heart').removeClass('d-none')
-            $('#bi-heart-fill').addClass('d-none')
-        })
-
         var token = `{{ $_COOKIE['accessToken'] }}`;
         callListProduct(token);
 
@@ -67,5 +57,16 @@
 
             await $('#listProducts').empty().append(html);
         }
+    });
+    $(document).ready(function () {
+        $('#button-heart').on('click', function () {
+            $('#bi-heart').addClass('d-none')
+            $('#bi-heart-fill').removeClass('d-none')
+        })
+
+        $('#button-heart-fill').on('click', function () {
+            $('#bi-heart').removeClass('d-none')
+            $('#bi-heart-fill').addClass('d-none')
+        })
     });
 </script>

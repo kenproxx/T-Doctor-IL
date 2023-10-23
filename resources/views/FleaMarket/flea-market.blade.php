@@ -115,8 +115,7 @@
                 <div class="img-union"><img src="{{asset('img/flea-market/platinum.png')}}"></div>
                 @include('FleaMarket.tab-product-flea')
                 <div class="img-union "><img src="{{asset('img/flea-market/premium.png')}}"></div>
-                <div class="page row ">
-                </div>
+                @include('FleaMarket.tab-product-flea')
                 <div class="img-union"><img src="{{asset('img/flea-market/silver.png')}}"></div>
                 <div class="page row ">
                 </div>
