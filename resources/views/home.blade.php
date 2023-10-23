@@ -6,7 +6,13 @@
     <div>
         <div class="section1 d-flex justify-content-evenly">
             <div class="section1__side">
-                <img src="{{asset('img/image 16.png')}}" alt="" style="width: 161px;height: 647px">
+                <div class="section1__side_1">
+                    <img src="{{asset('img/image 16.png')}}" alt="" style="width:165px; height: 313px">
+                </div>
+                <div class="section1__side_2">
+                    <img src="{{asset('img/image 16.png')}}" alt="" style="width:165px; height: 313px">
+                </div>
+
             </div>
             <div class="section1-main d-flex">
                 <div class="section1__item order-1">
@@ -307,7 +313,7 @@
                                 <a class="nav-link active" aria-current="page" href="#">New</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Even</a>
+                                <a class="nav-link" href="#">Event</a>
                             </li>
                         </ul>
                     </div>
@@ -580,8 +586,14 @@
                     </div>
                 </div>
             </div>
+
             <div class="section1__side">
-                <img src="{{asset('img/image 16.png')}}" alt="" style="width: 161px;height: 647px">
+                <div class="section1__side_1">
+                    <img src="{{asset('img/image 16.png')}}" alt="" style="width:165px; height: 313px">
+                </div>
+                <div class="section1__side_2">
+                    <img src="{{asset('img/image 16.png')}}" alt="" style="width:165px; height: 313px">
+                </div>
             </div>
         </div>
     </div>

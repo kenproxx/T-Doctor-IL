@@ -50,7 +50,7 @@ a {
     color: #45c3d2;
 }
 .banner1{
-    height: 280px;
+    margin-top: 16px;
     padding-left: 1px;
     background-color: grey;
 }
@@ -59,8 +59,7 @@ a {
     margin: 25px 0;
 }
 .section1__side {
-    width: 161px;
-    background-color: #d9d9d9;
+    width: 164px;
 }
 .section1-main {
     width: calc(100vw - 320px - 40px);
@@ -80,11 +79,10 @@ a {
     color: black;
 }
 .section1-content {
-    height: 500px;
+    height: 528px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
 
 }
 .content__item {
@@ -219,8 +217,8 @@ a {
 .item-bkg{
     background: white;
     border-radius: 8px;
-    width: 692px;
     height: 153px;
+    margin: 5px;
 }
 .content-item #address h2{
     font-size: 32px;
@@ -272,12 +270,12 @@ a {
     height: 498px;
 }
 .recruitment__item{
-    width: 692px;
     height: 153px;
     padding: 8px;
     border-radius: 12px;
     border: 1px;
     gap: 12px;
+    margin-bottom: 24px;
 }
 /*Flea-market*/
 #flea-market .content-item{
@@ -342,21 +340,21 @@ flea__item{
     color: #929292;
 }
 .nav .nav-item .nav-link.active{
-    background: #F3F3F3;
+    background: transparent;
     color: #45C3D2;
     border-bottom: solid;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 800;
     border-radius: 0;
-    width: 174px;
-    height: 42px;
+    width: 125px;
+    height: 34px;
     text-align: center;
 
 }
 .nav .nav-item .nav-link{
     color: black;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
 }
 .sign--up{
@@ -990,4 +988,7 @@ span.material-symbols-outlined {
 .container .flea-adv{
     width: 270px!important;
     height: 682px!important;
+}
+.section1__side_2{
+    margin-top: 18px;
 }
