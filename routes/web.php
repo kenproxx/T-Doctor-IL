@@ -110,7 +110,7 @@ Route::group(['prefix' => 'auth'], function () {
 //Product
 Route::group(['prefix' => 'products'], function () {
     Route::get('', [ProductInfoController::class, 'index'])->name('product.list');
-    Route::get('/{id}', [ProductInfoController::class, 'show'])->name('product.detail');
+    Route::get('/detail/{id}', [ProductInfoController::class, 'show'])->name('product.detail');
     Route::get('/create', [ProductInfoController::class, 'createProduct'])->name('product.create.product');
     Route::get('/edit/{id}', [ProductInfoController::class, 'edit'])->name('product.edit');
     Route::put('/update/{id}', [ProductInfoController::class, 'update'])->name('product.update');
