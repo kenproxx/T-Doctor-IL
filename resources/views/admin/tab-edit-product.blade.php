@@ -19,7 +19,7 @@
         <div>
             <div>
                 <label>name</label>
-                <input type="text" class="form-control" id="email" name="name" value="{{$product->name}}">
+                <input type="text" class="form-control" id="name" name="name" value="{{$product->name}}">
             </div>
             <div>
                 <label>name_en</label>
@@ -86,18 +86,18 @@
                     'Authorization': `Bearer ${token}`
                 };
                 let item = {
-                    name: "tttttt",
-                    name_en: "New Pr3ot33",
-                    category_id: 1,
-                    brand_name: "HA NOI33",
-                    brand_name_en: "HA NOI33",
-                    province_id: 93,
-                    thumbnail: "rdjrtsjsr",
-                    gallery: "gallery33",
-                    price: 1535,
-                    price_unit: "VND",
-                    ads_plan: 0,
-                    ads_period: 0,
+                    name: $('#name').val(),
+                    name_en: $('#name_en').val(),
+                    category_id: $('#category_id').val(),
+                    brand_name: $('#brand_name').val(),
+                    brand_name_en: $('#brand_name_en').val(),
+                    province_id: $('#province_id').val(),
+                    thumbnail: $('#thumbnail').val(),
+                    gallery: $('#gallery').val(),
+                    price: $('#price').val(),
+                    price_unit: $('#price_unit').val(),
+                    ads_plan: $('#ads_plan').val(),
+                    ads_period: $('#ads_period').val(),
                     status: "ACTIVE"
                 };
 
