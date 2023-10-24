@@ -6,10 +6,6 @@ use App\Enums\ClinicStatus;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Clinic;
-use App\Models\Commune;
-use App\Models\District;
-use App\Models\Nation;
-use App\Models\Province;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -51,6 +47,7 @@ class BackendClinicController extends Controller
 
             $name = $request->input('name');
             $name_en = $request->input('name_en');
+            $name_laos = $request->input('name_laos');
             $address_detail = $request->input('address_detail');
             $address_detail_en = $request->input('address_detail_en');
             $user_id = $request->input('user_id');
@@ -66,6 +63,7 @@ class BackendClinicController extends Controller
 
             $clinic->name = $name;
             $clinic->name_en = $name_en ?? '';
+            $clinic->name_laos = $name_laos ?? '';
             $clinic->address_detail = $address_detail;
             $clinic->address_detail_en = $address_detail_en ?? '';
             $clinic->user_id = $user_id;
@@ -123,12 +121,13 @@ class BackendClinicController extends Controller
 
             $name = $request->input('name') ?? $clinic->name;
             $name_en = $request->input('name_en') ?? $clinic->name_en;
+            $name_laos = $request->input('name_laos') ?? $clinic->name_en;
             $address_detail = $request->input('address_detail') ?? $clinic->address_detail;
             $address_detail_en = $request->input('address_detail_en') ?? $clinic->address_detail_en;
-            $nation_id = $request->input('nation_id') ?? $clinic->nation_id;
-            $province_id = $request->input('province_id') ?? $clinic->province_id;
-            $district_id = $request->input('district_id') ?? $clinic->district_id;
-            $commune_id = $request->input('commune_id') ?? $clinic->commune_id;
+            $nation_id = $request->input('nation_id');
+            $province_id = $request->input('province_id');
+            $district_id = $request->input('district_id');
+            $commune_id = $request->input('commune_id');
             $open_date = $request->input('open_date') ?? $clinic->open_date;
             $close_date = $request->input('close_date') ?? $clinic->close_date;
             $introduce = $request->input('introduce') ?? $clinic->introduce;
@@ -137,6 +136,7 @@ class BackendClinicController extends Controller
 
             $clinic->name = $name;
             $clinic->name_en = $name_en ?? '';
+            $clinic->name_laos = $name_laos ?? '';
             $clinic->address_detail = $address_detail;
             $clinic->address_detail_en = $address_detail_en ?? '';
 
@@ -147,7 +147,7 @@ class BackendClinicController extends Controller
                 'commune_id' => $commune_id
             ];
 
-            $clinic->address = $address;
+            $clinic->address = implode(',', $address);
 
             $clinic->open_date = $open_date ?? Carbon::now()->addHours(7);
             $clinic->close_date = $close_date ?? Carbon::now()->addHours(7)->addDay();
@@ -164,7 +164,6 @@ class BackendClinicController extends Controller
             return response($exception, 400);
         }
     }
-
 
     public function delete($id)
     {
