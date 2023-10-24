@@ -18,6 +18,8 @@ class VerifyCsrfToken extends Middleware
         '/api/wish-lists/**',
         '/api/clinics/**',
         '/api/questions/**',
+        '/api/answers/**',
+        '/api/reviews/**',
         'auth/*'
     ];
 }
