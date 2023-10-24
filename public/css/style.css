@@ -50,9 +50,10 @@ a {
     color: #45c3d2;
 }
 .banner1{
+    width: 1439px;
+    height: 390px;
     margin-top: 16px;
     padding-left: 1px;
-    background-color: grey;
 }
 .section1 {
     height: 647px;
@@ -185,10 +186,9 @@ a {
     text-align: left;
 }
 .banner1{
-    height: 280px;
+    height: 390px;
     /*margin-top: 25px;*/
     padding-left: 1px;
-    background-color: grey;
 }
 .nav-tabs .nav-item{
 
