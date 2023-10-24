@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\backend\BackendClinicController;
 use App\Http\Controllers\backend\BackendProductInfoController;
+use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\backend\BackendWishListController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,17 @@ Route::group(['prefix' => 'clinics'], function () {
     Route::get('/user/{id}', [BackendClinicController::class, 'getAllByUserId'])->name('api.backend.clinics.user');
     Route::get('/detail/{id}', [BackendClinicController::class, 'detail'])->name('api.backend.clinics.detail');
     Route::post('/create', [BackendClinicController::class, 'create'])->name('api.backend.clinics.create');
-    Route::post('/update/{id}', [BackendClinicController::class, 'update'])->name('api.backend.clinics.update');
+    Route::put('/update/{id}', [BackendClinicController::class, 'update'])->name('api.backend.clinics.update');
     Route::delete('/delete/{id}', [BackendClinicController::class, 'delete'])->name('api.backend.clinics.delete');
+});
+
+Route::group(['prefix' => 'questions'], function () {
+    Route::get('/list', [BackendQuestionController::class, 'getAll'])->name('api.backend.questions.list');
+    Route::get('/user/{id}', [BackendQuestionController::class, 'getAllByUserId'])->name('api.backend.questions.user');
+    Route::get('/detail/{id}', [BackendQuestionController::class, 'detail'])->name('api.backend.questions.detail');
+    Route::post('/create', [BackendQuestionController::class, 'create'])->name('api.backend.questions.create');
+    Route::put('/change/{id}', [BackendQuestionController::class, 'upgradeStatus'])->name('api.backend.questions.change.status');
+    Route::put('/update/{id}', [BackendQuestionController::class, 'update'])->name('api.backend.questions.update');
+    Route::delete('/delete/{id}', [BackendQuestionController::class, 'delete'])->name('api.backend.questions.delete');
+    Route::delete('/delete-list', [BackendQuestionController::class, 'deleteMultil'])->name('api.backend.questions.delete.list');
 });
