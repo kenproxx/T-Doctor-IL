@@ -11,16 +11,14 @@
         </tr>
         </thead>
         <tbody id="ProductsAdmin">
-
         </tbody>
     </table>
 </div>
-<script>
-    $(document).ready(function () {
-        var token = `{{ $_COOKIE['accessToken'] }}`;
-        callListProduct(token);
-        console.log(token);
 
+<script>
+    var token = `{{ $_COOKIE['accessToken'] }}`;
+    $(document).ready(function () {
+        callListProduct(token);
         async function callListProduct(token) {
             let accessToken = `Bearer ` + token;
             await $.ajax({
@@ -30,7 +28,6 @@
                     "Authorization": accessToken
                 },
                 success: function (response) {
-                    console.log(response)
                     renderProduct(response);
                 },
                 error: function (exception) {
@@ -38,23 +35,52 @@
                 }
             });
         }
+    });
 
-        async function renderProduct(res) {
-            let html = ``;
-            for (let i = 0; i < res.length; i++) {
-                let item = res[i];
-                console.log(item.id);
-                let rowNumber = i + 1;
-                html = html + `<tr>
+    async function renderProduct(res, id) {
+        let html = ``;
+
+        for (let i = 0; i < res.length; i++) {
+            let urlEdit = `{{route('product.edit', ['id' => ':id'])}}`;
+            urlEdit = urlEdit.replace(':id', res[i].id);
+            let item = res[i];
+            let rowNumber = i + 1;
+            html = html + `<tr>
             <th scope="row">${rowNumber}</th>
             <td>${item.thumbnail}</td>
             <td>${item.name}</td>
             <td>${item.province_id}</td>
             <td>${item.price} ${item.price_unit}</td>
-            <td><a href="#">Edit</a> | <a href="{{route('product.delete'+ item.id)}}">Delete</a></td>
+            <td><a href="${urlEdit}"> Edit</a> | <a href="#" onclick="checkDelete(${item.id})">Delete</a></td>
         </tr>`;
-            }
-            await $('#ProductsAdmin').empty().append(html);
         }
-    });
+        await $('#ProductsAdmin').empty().append(html);
+    }
+
+    async function deleteProduct(token, id) {
+        let accessToken = `Bearer ` + token;
+        let urlDelete = `{{route('api.backend.products.delete', ['id' => ':id'])}}`;
+        urlDelete = urlDelete.replace(':id', id);
+        await $.ajax({
+            url: urlDelete,
+            method: 'DELETE',
+            headers: {
+                "Authorization": accessToken
+            },
+            success: function (response) {
+               alert('Delete Success!');
+               window.location.reload();
+            },
+            error: function (exception) {
+                console.log(exception)
+            }
+        });
+    }
+
+    function checkDelete(value) {
+        if (confirm("Press a button!") == true) {
+            deleteProduct(token, value)
+        }
+    }
+
 </script>
