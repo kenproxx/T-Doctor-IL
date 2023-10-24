@@ -12,4 +12,20 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function home()
+    {
+        $users = User::count();
+
+        $widget = [
+            'users' => $users,
+            //...
+        ];
+
+        return view('admin.home-admin', compact('widget'));
+    }
+
+    public function listProduct()
+    {
+        return view('admin.list-product');
+    }
 }

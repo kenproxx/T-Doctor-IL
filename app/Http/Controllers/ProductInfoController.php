@@ -21,4 +21,16 @@ class ProductInfoController extends Controller
         }
         return response()->json($product);
     }
+
+    public function delete($id)
+    {
+        $product = ProductInfo::find($id);
+        if (!$product || $product->status == ProductStatus::DELETED) {
+            return redirect(route('api.backend.products.list'));
+        }
+        $product->status == ProductStatus::DELETED;
+        $product->save();
+        alert()->success('Success', 'Delete news success!');
+        return redirect(route('admin.news.list'));
+    }
 }
