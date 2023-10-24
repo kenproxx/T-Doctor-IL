@@ -20,23 +20,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'HomeController@index')->name('home');
-Route::get('/home', 'HomeController@home')->name('homeAdmin');
-Route::get('/list-products', 'HomeController@listProduct')->name('homeAdmin.list.product');
-
 
 Route::get('/login', 'AuthController@index')->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('loginProcess');
 Route::post('/register', [AuthController::class, 'register'])->name('registerProcess');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logoutProcess');
 
-Route::group(['prefix' => 'profile'], function () {
-    Route::get('', 'ProfileController@index')->name('profile');
-    Route::put('', 'ProfileController@update')->name('profile.update');
-});
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
 
 Route::group(['prefix' => 'news'], function () {
     Route::get('', [HomeController::class, 'index'])->name('index.new');
@@ -110,18 +100,19 @@ Route::group(['prefix' => 'auth'], function () {
 //Product
 Route::group(['prefix' => 'products'], function () {
     Route::get('', [ProductInfoController::class, 'index'])->name('product.list');
-    Route::get('/detail/{id}', [ProductInfoController::class, 'show'])->name('product.detail');
-    Route::get('/create', [ProductInfoController::class, 'createProduct'])->name('product.create.product');
-    Route::get('/edit/{id}', [ProductInfoController::class, 'edit'])->name('product.edit');
-    Route::put('/update/{id}', [ProductInfoController::class, 'update'])->name('product.update');
 
 });
 
-// Admin
-Route::group(['prefix' => 'admin', 'middleware' => 'role.admin'], function () {
-    require_once __DIR__ . '/admin.php';
-});
+
+//Route::group(['prefix' => 'admin', 'middleware' => 'role.admin'], function () {
+//    require_once __DIR__ . '/admin.php';
+//});
 
 Route::group(['prefix' => 'api', 'middleware' => 'jwt'], function () {
     require_once __DIR__ . '/backend.php';
+});
+
+// Admin
+Route::group(['prefix' => 'admin'], function () {
+    require_once __DIR__ . '/admin.php';
 });
