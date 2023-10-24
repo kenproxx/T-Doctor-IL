@@ -28,4 +28,8 @@ class HomeController extends Controller
     {
         return view('admin.list-product');
     }
+    public function listClinics()
+    {
+        return view('admin.list-clinics');
+    }
 }

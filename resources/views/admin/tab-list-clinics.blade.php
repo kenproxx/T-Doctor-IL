@@ -3,19 +3,16 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Thumbnail</th>
             <th scope="col">Name</th>
-            <th scope="col">Location</th>
+            <th scope="col">Address</th>
             <th scope="col">Prise</th>
             <th scope="col">Edit</th>
         </tr>
         </thead>
-        <tbody id="ProductsAdmin">
-
+        <tbody id="ClinicsAdmin">
         </tbody>
     </table>
 </div>
-
 <script>
     var token = `{{ $_COOKIE['accessToken'] }}`;
     $(document).ready(function () {
@@ -23,7 +20,7 @@
         async function callListProduct(token) {
             let accessToken = `Bearer ` + token;
             await $.ajax({
-                url: `{{route('api.backend.products.list')}}`,
+                url: `{{route('api.backend.clinics.list')}}`,
                 method: 'GET',
                 headers: {
                     "Authorization": accessToken
@@ -55,7 +52,7 @@
             <td><a href="${urlEdit}"> Edit</a> | <a href="#" onclick="checkDelete(${item.id})">Delete</a></td>
         </tr>`;
         }
-        await $('#ProductsAdmin').empty().append(html);
+        await $('#ClinicsAdmin').empty().append(html);
     }
 
     async function deleteProduct(token, id) {
@@ -69,8 +66,8 @@
                 "Authorization": accessToken
             },
             success: function (response) {
-               alert('Delete Success!');
-               window.location.reload();
+                alert('Delete Success!');
+                window.location.reload();
             },
             error: function (exception) {
                 console.log(exception)
