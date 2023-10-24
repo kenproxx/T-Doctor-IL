@@ -1,3 +1,3 @@
 <div class="banner">
-    <img src="{{asset('img/Rectangle 23815.png')}}" alt="" style="width: 1439px; height: 390px">
+    <img src="{{asset('img/Rectangle 23815.png')}}" alt="">
 </div>
