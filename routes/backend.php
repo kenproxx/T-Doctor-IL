@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\BackendAnswerController;
 use App\Http\Controllers\backend\BackendClinicController;
 use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
+use App\Http\Controllers\backend\BackendReviewController;
 use App\Http\Controllers\backend\BackendWishListController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,4 +53,16 @@ Route::group(['prefix' => 'answers'], function () {
     Route::put('/change/{id}', [BackendAnswerController::class, 'changeStatus'])->name('api.backend.answers.change.status');
     Route::put('/update/{id}', [BackendAnswerController::class, 'update'])->name('api.backend.answers.update');
     Route::delete('/delete/{id}', [BackendAnswerController::class, 'delete'])->name('api.backend.answers.delete');
+});
+
+Route::group(['prefix' => 'reviews'], function () {
+    Route::get('/list', [BackendReviewController::class, 'getAll'])->name('api.backend.reviews.list');
+    Route::get('/clinic/{id}', [BackendReviewController::class, 'getAllByClinicId'])->name('api.backend.reviews.clinic');
+    Route::get('/user/{id}', [BackendReviewController::class, 'getAllByUserId'])->name('api.backend.reviews.user');
+    Route::get('/all-by-user/{id}', [BackendReviewController::class, 'getAllMainUser'])->name('api.backend.reviews.all.by.user');
+    Route::get('/detail/{id}', [BackendReviewController::class, 'detail'])->name('api.backend.reviews.detail');
+    Route::post('/create', [BackendReviewController::class, 'create'])->name('api.backend.reviews.create');
+    Route::put('/change/{id}', [BackendReviewController::class, 'changeStatus'])->name('api.backend.reviews.change.status');
+//    Route::put('/update/{id}', [BackendReviewController::class, 'update'])->name('api.backend.reviews.update');
+    Route::delete('/delete/{id}', [BackendReviewController::class, 'delete'])->name('api.backend.reviews.delete');
 });
