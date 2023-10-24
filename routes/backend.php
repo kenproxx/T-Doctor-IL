@@ -23,7 +23,7 @@ Route::group(['prefix' => 'wish-lists'], function () {
 
 Route::group(['prefix' => 'clinics'], function () {
     Route::get('/list', [BackendClinicController::class, 'getAll'])->name('api.backend.clinics.list');
-    Route::get('/user/{id}', [BackendClinicController::class, 'getAllByUserId'])->name('api.backend.clinics.list');
+    Route::get('/user/{id}', [BackendClinicController::class, 'getAllByUserId'])->name('api.backend.clinics.user');
     Route::get('/detail/{id}', [BackendClinicController::class, 'detail'])->name('api.backend.clinics.detail');
     Route::post('/create', [BackendClinicController::class, 'create'])->name('api.backend.clinics.create');
     Route::post('/update/{id}', [BackendClinicController::class, 'update'])->name('api.backend.clinics.update');
