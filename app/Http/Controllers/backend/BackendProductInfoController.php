@@ -25,8 +25,25 @@ class BackendProductInfoController extends Controller
             $brand_name = $request->input('brand_name');
             $brand_name_en = $request->input('brand_name_en');
             $province_id = $request->input('province_id');
-            $thumbnail = $request->input('thumbnail');
-            $gallery = $request->input('gallery');
+
+            if ($request->hasFile('thumbnail')) {
+                $item = $request->file('thumbnail');
+                $itemPath = $item->store('product', 'public');
+                $thumbnail = asset('storage/' . $itemPath);
+            } else {
+                $thumbnail = '';
+            }
+
+            if ($request->hasFile('gallery')) {
+                $galleryPaths = array_map(function ($image) {
+                    $itemPath = $image->store('gallery', 'public');
+                    return asset('storage/' . $itemPath);
+                }, $request->file('gallery'));
+                $gallery = implode(',', $galleryPaths);
+            } else {
+                $gallery = '';
+            }
+
             $price = $request->input('price');
             $price_unit = $request->input('price_unit');
             $ads_plan = $request->input('ads_plan');
@@ -84,8 +101,25 @@ class BackendProductInfoController extends Controller
             $brand_name = $request->input('brand_name');
             $brand_name_en = $request->input('brand_name_en');
             $province_id = $request->input('province_id');
-            $thumbnail = $request->input('thumbnail');
-            $gallery = $request->input('gallery');
+
+            if ($request->hasFile('thumbnail')) {
+                $item = $request->file('thumbnail');
+                $itemPath = $item->store('product', 'public');
+                $thumbnail = asset('storage/' . $itemPath);
+            } else {
+                $thumbnail = $product->thumbnail;
+            }
+
+            if ($request->hasFile('gallery')) {
+                $galleryPaths = array_map(function ($image) {
+                    $itemPath = $image->store('gallery', 'public');
+                    return asset('storage/' . $itemPath);
+                }, $request->file('gallery'));
+                $gallery = implode(',', $galleryPaths);
+            } else {
+                $gallery = $product->gallery;
+            }
+
             $price = $request->input('price');
             $price_unit = $request->input('price_unit');
             $ads_plan = $request->input('ads_plan');

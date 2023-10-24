@@ -1,0 +1,171 @@
+<?php
+
+namespace App\Http\Controllers\backend;
+
+use App\Enums\AnswerStatus;
+use App\Http\Controllers\Controller;
+use App\Models\Answer;
+use Illuminate\Http\Request;
+
+class BackendAnswerController extends Controller
+{
+    public function getAll(Request $request)
+    {
+        $status = $request->input('status');
+        if (!$status) {
+            $answers = Answer::where('status', '!=', AnswerStatus::DELETED)->get();
+        } else {
+            $answers = Answer::where('status', $status)->get();
+        }
+        return response()->json($answers);
+    }
+
+    public function getAllByQuestion($id, Request $request)
+    {
+        $status = $request->input('status');
+        if (!$status) {
+            $answers = Answer::where('status', '!=', AnswerStatus::DELETED)->where('question_id', $id)->get();
+        } else {
+            $answers = Answer::where('status', $status)->where('question_id', $id)->get();
+        }
+        return response()->json($answers);
+    }
+
+    public function getAllByAnswer($id, Request $request)
+    {
+        $status = $request->input('status');
+        if (!$status) {
+            $answers = Answer::where('status', '!=', AnswerStatus::DELETED)->where('answer_parent', $id)->get();
+        } else {
+            $answers = Answer::where('status', $status)->where('question_id', $id)->get();
+        }
+        return response()->json($answers);
+    }
+
+    public function create(Request $request)
+    {
+        try {
+            $answer = new Answer();
+
+            $content = $request->input('content');
+            $content_en = $request->input('content_en');
+            $content_laos = $request->input('content_laos');
+            $user_id = $request->input('user_id');
+            $status = $request->input('status');
+
+            $question_id = $request->input('question_id');
+            $answer_parent = $request->input('answer_parent');
+            if ($answer_parent) {
+                $answer->answer_parent = $answer_parent;
+            }
+
+            if ($question_id) {
+                $answer->question_id = $question_id;
+            }
+
+            $answer->content = $content;
+            $answer->content_en = $content_en;
+            $answer->content_laos = $content_laos;
+            $answer->user_id = $user_id;
+            $answer->status = $status;
+
+            $success = $answer->save();
+            if ($success) {
+                return response()->json($answer);
+            }
+            return response('Create question error!', 400);
+        } catch (\Exception $exception) {
+            return response($exception, 400);
+        }
+    }
+
+    public function detail($id)
+    {
+        $answer = Answer::find($id);
+        if (!$answer || $answer->status == AnswerStatus::DELETED) {
+            return response('Not found', 404);
+        }
+
+        return response()->json($answer);
+    }
+
+    public function changeStatus($id, Request $request)
+    {
+        try {
+            $answer = Answer::find($id);
+            if (!$answer || $answer->status == AnswerStatus::DELETED) {
+                return response('Not found', 404);
+            }
+            $status = $request->input('status');
+            if (!$status) {
+                $status = AnswerStatus::APPROVED;
+            }
+            $answer->status = $status;
+            $success = $answer->save();
+            if ($success) {
+                return response()->json($answer);
+            }
+            return response('Create question error!', 400);
+        } catch (\Exception $exception) {
+            return response($exception, 400);
+        }
+    }
+
+    public function update($id, Request $request)
+    {
+        try {
+            $answer = Answer::find($id);
+
+            if (!$answer || $answer->status == AnswerStatus::DELETED) {
+                return response('Not found', 404);
+            }
+            $content = $request->input('content');
+            $content_en = $request->input('content_en');
+            $content_laos = $request->input('content_laos');
+            $user_id = $request->input('user_id');
+            $status = $request->input('status');
+
+            $question_id = $request->input('question_id');
+            $answer_parent = $request->input('answer_parent');
+            if ($answer_parent) {
+                $answer->answer_parent = $answer_parent;
+            }
+
+            if ($question_id) {
+                $answer->question_id = $question_id;
+            }
+
+            $answer->content = $content;
+            $answer->content_en = $content_en;
+            $answer->content_laos = $content_laos;
+            $answer->user_id = $user_id;
+            $answer->status = $status;
+
+            $success = $answer->save();
+            if ($success) {
+                return response()->json($answer);
+            }
+            return response('Create question error!', 400);
+        } catch (\Exception $exception) {
+            return response($exception, 400);
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+            $answer = Answer::find($id);
+            if (!$answer || $answer->status == AnswerStatus::DELETED) {
+                return response('Not found', 404);
+            }
+            $answer->status = AnswerStatus::DELETED;
+            $success = $answer->save();
+            if ($success) {
+                return response()->json($answer);
+            }
+            return response('Delete question error!', 400);
+        } catch (\Exception $exception) {
+            return response($exception, 400);
+        }
+    }
+}

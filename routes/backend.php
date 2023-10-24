@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\backend\BackendAnswerController;
 use App\Http\Controllers\backend\BackendClinicController;
 use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
@@ -40,4 +41,15 @@ Route::group(['prefix' => 'questions'], function () {
     Route::put('/update/{id}', [BackendQuestionController::class, 'update'])->name('api.backend.questions.update');
     Route::delete('/delete/{id}', [BackendQuestionController::class, 'delete'])->name('api.backend.questions.delete');
     Route::delete('/delete-list', [BackendQuestionController::class, 'deleteMultil'])->name('api.backend.questions.delete.list');
+});
+
+Route::group(['prefix' => 'answers'], function () {
+    Route::get('/list', [BackendAnswerController::class, 'getAll'])->name('api.backend.answers.list');
+    Route::get('/question/{id}', [BackendAnswerController::class, 'getAllByQuestion'])->name('api.backend.answers.question');
+    Route::get('/parent/{id}', [BackendAnswerController::class, 'getAllByAnswer'])->name('api.backend.answers.parent');
+    Route::get('/detail/{id}', [BackendAnswerController::class, 'detail'])->name('api.backend.answers.detail');
+    Route::post('/create', [BackendAnswerController::class, 'create'])->name('api.backend.answers.create');
+    Route::put('/change/{id}', [BackendAnswerController::class, 'changeStatus'])->name('api.backend.answers.change.status');
+    Route::put('/update/{id}', [BackendAnswerController::class, 'update'])->name('api.backend.answers.update');
+    Route::delete('/delete/{id}', [BackendAnswerController::class, 'delete'])->name('api.backend.answers.delete');
 });
