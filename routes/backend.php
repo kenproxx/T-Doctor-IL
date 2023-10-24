@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\backend\BackendClinicController;
 use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendWishListController;
 use Illuminate\Support\Facades\Route;
@@ -18,4 +19,13 @@ Route::group(['prefix' => 'wish-lists'], function () {
     Route::post('/create', [BackendWishListController::class, 'create'])->name('api.backend.wish.lists.create');
     Route::delete('/delete/{id}', [BackendWishListController::class, 'delete'])->name('api.backend.wish.lists.delete');
     Route::delete('/delete-list', [BackendWishListController::class, 'deleteMultil'])->name('api.backend.wish.lists.delete.listId');
+});
+
+Route::group(['prefix' => 'clinics'], function () {
+    Route::get('/list', [BackendClinicController::class, 'getAll'])->name('api.backend.clinics.list');
+    Route::get('/user/{id}', [BackendClinicController::class, 'getAllByUserId'])->name('api.backend.clinics.list');
+    Route::get('/detail/{id}', [BackendClinicController::class, 'detail'])->name('api.backend.clinics.detail');
+    Route::post('/create', [BackendClinicController::class, 'create'])->name('api.backend.clinics.create');
+    Route::post('/update/{id}', [BackendClinicController::class, 'update'])->name('api.backend.clinics.update');
+    Route::delete('/delete/{id}', [BackendClinicController::class, 'delete'])->name('api.backend.clinics.delete');
 });
