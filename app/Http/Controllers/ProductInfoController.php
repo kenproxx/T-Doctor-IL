@@ -22,15 +22,17 @@ class ProductInfoController extends Controller
         return response()->json($product);
     }
 
-    public function delete($id)
+    public function createProduct()
+    {
+        return view('admin.tab-create-products');
+    }
+
+    public function edit($id)
     {
         $product = ProductInfo::find($id);
         if (!$product || $product->status == ProductStatus::DELETED) {
-            return redirect(route('api.backend.products.list'));
+            return redirect(route('homeAdmin.list.product'));
         }
-        $product->status == ProductStatus::DELETED;
-        $product->save();
-        alert()->success('Success', 'Delete news success!');
-        return redirect(route('admin.news.list'));
+        return view('admin.tab-edit-product', compact('product'));
     }
 }

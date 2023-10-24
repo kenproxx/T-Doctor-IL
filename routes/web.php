@@ -23,10 +23,6 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/home', 'HomeController@home')->name('homeAdmin');
 Route::get('/list-products', 'HomeController@listProduct')->name('homeAdmin.list.product');
 
-Route::group(['prefix' => 'product'], function () {
-    Route::delete('/delete/{id}', [ProductInfoController::class, 'delete'])->name('product.delete');
-//    Route::put('', 'ProfileController@update')->name('profile.update');
-});
 
 Route::get('/login', 'AuthController@index')->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('loginProcess');
@@ -115,6 +111,10 @@ Route::group(['prefix' => 'auth'], function () {
 Route::group(['prefix' => 'products'], function () {
     Route::get('', [ProductInfoController::class, 'index'])->name('product.list');
     Route::get('/{id}', [ProductInfoController::class, 'show'])->name('product.detail');
+    Route::get('/create', [ProductInfoController::class, 'createProduct'])->name('product.create.product');
+    Route::get('/edit/{id}', [ProductInfoController::class, 'edit'])->name('product.edit');
+    Route::put('/update/{id}', [ProductInfoController::class, 'update'])->name('product.update');
+
 });
 
 // Admin
