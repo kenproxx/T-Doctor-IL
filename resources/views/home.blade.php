@@ -598,7 +598,7 @@
         </div>
     </div>
     <div class="banner1">
-        <img src="{{asset('img/image 12.png')}}" alt="" style="width: 1439px;height: 280px">
+        <img src="{{asset('img/Rectangle 23815.png')}}" alt="">
     </div>
     <div id="map-location" class="d-flex justify-content-center">
         <div class="content-item d-flex justify-content-center" >
@@ -699,7 +699,7 @@
         </nav>
     </div>
     <div class="banner1">
-        <img src="{{asset('img/image 12.png')}}" alt="" style="width: 1439px;height: 280px">
+        <img src="{{asset('img/Rectangle 23815.png')}}" alt="" >
     </div>
     <div id="recruitment_board" class="d-flex justify-content-center">
         <div id="content-bkg" class="content-item d-flex justify-content-center " >
@@ -817,7 +817,7 @@
         </div>
     </div>
     <div class="banner1">
-        <img src="{{asset('img/image 12.png')}}" alt="" style="width: 1439px;height: 280px">
+        <img src="{{asset('img/Rectangle 23815.png')}}" alt="" style="">
     </div>
     <div id="flea_market_board" class="d-flex justify-content-center">
         <div id="content-bkg" class="content-item d-flex justify-content-center ">
@@ -927,7 +927,7 @@
         </div>
     </div>
     <div class="banner1">
-        <img src="{{asset('img/image 12.png')}}" alt="" style="width: 1439px;height: 280px">
+        <img src="{{asset('img/Rectangle 23815.png')}}" alt="">
     </div>
     <div id="item-information">
         <h1>Buy online</h1>

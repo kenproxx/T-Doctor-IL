@@ -16,6 +16,8 @@ class VerifyCsrfToken extends Middleware
         '/api/products/update/*',
         '/api/products/delete/*',
         '/api/wish-lists/**',
+        '/api/clinics/**',
+        '/api/questions/**',
         'auth/*'
     ];
 }
