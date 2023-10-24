@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('content');
             $table->string('content_en');
             $table->string('content_laos');
-            $table->unsignedBigInteger('question_id');
+            $table->integer('question_id')->nullable();
             $table->unsignedBigInteger('answer_parent');
             $table->unsignedBigInteger('user_id');
             $table->string('status')->default(AnswerStatus::PENDING);

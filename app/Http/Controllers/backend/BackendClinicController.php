@@ -58,7 +58,17 @@ class BackendClinicController extends Controller
             $open_date = $request->input('open_date');
             $close_date = $request->input('close_date');
             $introduce = $request->input('introduce');
-            $gallery = $request->input('gallery');
+
+            if ($request->hasFile('gallery')) {
+                $galleryPaths = array_map(function ($image) {
+                    $itemPath = $image->store('gallery', 'public');
+                    return asset('storage/' . $itemPath);
+                }, $request->file('gallery'));
+                $gallery = implode(',', $galleryPaths);
+            } else {
+                $gallery = '';
+            }
+
             $status = $request->input('status');
 
             $clinic->name = $name;
@@ -131,8 +141,17 @@ class BackendClinicController extends Controller
             $open_date = $request->input('open_date') ?? $clinic->open_date;
             $close_date = $request->input('close_date') ?? $clinic->close_date;
             $introduce = $request->input('introduce') ?? $clinic->introduce;
-            $gallery = $request->input('gallery') ?? $clinic->gallery;
             $status = $request->input('status') ?? $clinic->status;
+
+            if ($request->hasFile('gallery')) {
+                $galleryPaths = array_map(function ($image) {
+                    $itemPath = $image->store('gallery', 'public');
+                    return asset('storage/' . $itemPath);
+                }, $request->file('gallery'));
+                $gallery = implode(',', $galleryPaths);
+            } else {
+                $gallery = $clinic->gallery;
+            }
 
             $clinic->name = $name;
             $clinic->name_en = $name_en ?? '';
