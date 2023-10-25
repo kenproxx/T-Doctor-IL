@@ -1,3 +1,9 @@
+<style>
+    td {
+        overflow: hidden;
+        max-width: 300px;
+    }
+</style>
 <div class="">
     <table class="table table-striped">
         <thead>

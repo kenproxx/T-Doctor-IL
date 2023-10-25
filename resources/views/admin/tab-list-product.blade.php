@@ -1,9 +1,16 @@
+<style>
+    td {
+        overflow: hidden;
+        max-width: 300px;
+    }
+</style>
 <div class="">
     <table class="table table-striped">
         <thead>
         <tr>
             <th scope="col">#</th>
             <th scope="col">Thumbnail</th>
+            <th scope="col">Gallery</th>
             <th scope="col">Name</th>
             <th scope="col">Location</th>
             <th scope="col">Prise</th>
@@ -49,6 +56,7 @@
             html = html + `<tr>
             <th scope="row">${rowNumber}</th>
             <td>${item.thumbnail}</td>
+            <td>${item.gallery}</td>
             <td>${item.name}</td>
             <td>${item.province_id}</td>
             <td>${item.price} ${item.price_unit}</td>
