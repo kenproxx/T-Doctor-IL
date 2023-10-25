@@ -29,6 +29,46 @@ class BackendProductInfoController extends Controller
         return response()->json($products);
     }
 
+    public function search(Request $request)
+    {
+        $name = $request->input('name');
+        $min_price = $request->input('min_price');
+        $max_price = $request->input('max_price');
+        $status = $request->input('status');
+        $category_id = $request->input('category_id');
+
+        $categories = explode(',', $category_id);
+
+        $query = [];
+
+        if ($name) {
+            $str = ['name', 'like', '%' . $name . '%'];
+            array_push($query, $str);
+        }
+        if ($status) {
+            $str = ['status', '=', $status];
+            array_push($query, $str);
+        }
+
+        if ($min_price) {
+            $str = ['price', '>=', $min_price];
+            array_push($query, $str);
+        }
+        if ($max_price) {
+            $str = ['price', '<=', $max_price];
+            array_push($query, $str);
+        }
+
+        if ($category_id) {
+            $products = ProductInfo::where($query)->whereIn('category_id', $categories)->get();
+        } elseif (!$name && !$status && !$min_price && !$max_price) {
+            $products = ProductInfo::where('status', '!=', ProductStatus::DELETED)->get();
+        } else {
+            $products = ProductInfo::where($query)->get();
+        }
+        return response()->json($products);
+    }
+
     public function getByClinicMain(Request $request, $id)
     {
         $status = $request->input('status');
