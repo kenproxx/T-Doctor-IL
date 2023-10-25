@@ -13,15 +13,6 @@ class ClinicController extends Controller
     {
         return view('clinics.listClinics');
     }
-//    public function show($id)
-//    {
-//        dd($id);
-//        $clinics = Clinic::find($id);
-//        if (!$clinics || $clinics->status != ClinicStatus::ACTIVE) {
-//            return response("Product not found", 404);
-//        }
-//        return response()->json($clinics);
-//    }
 
     public function detail()
     {

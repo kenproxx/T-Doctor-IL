@@ -59,7 +59,8 @@
             </div>
             <div>
                 <label>gallery</label>
-                <input type="text" class="form-control" id="gallery" name="gallery" value="{{$clinics->gallery}}">
+                <input type="file" class="form-control" id="gallery" name="gallery" value="{{$clinics->gallery}}">
+                <img src="{{$clinics->gallery}}" class="img w-100">
             </div>
             <div>
                 <label>status</label>

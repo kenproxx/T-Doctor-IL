@@ -3,6 +3,7 @@
         <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Gallery</th>
             <th scope="col">Name</th>
             <th scope="col">Address</th>
             <th scope="col">open_date</th>
@@ -46,6 +47,7 @@
             let rowNumber = i + 1;
             html = html + `<tr>
             <th scope="row">${rowNumber}</th>
+            <td>${item.gallery}</td>
             <td>${item.name}</td>
             <td>${item.address_detail}</td>
             <td>${item.open_date}</td>
