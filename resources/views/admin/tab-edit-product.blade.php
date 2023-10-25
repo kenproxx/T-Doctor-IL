@@ -3,7 +3,7 @@
 @section('main-content')
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">{{ __('Edit') }}</h1>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('Create') }}</h1>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -12,10 +12,9 @@
             </button>
         </div>
     @endif
-    <form method="post" action="{{ route('api.backend.products.update', ['id' => $product->id]) }}">
+    <form id="form" method="post" action="{{ route('api.backend.products.update', ['id' => $product->id]) }}" enctype="multipart/form-data">
         @csrf
-        @method('PUT')
-
+        @method('POST')
         <div>
             <div>
                 <label>name</label>
@@ -31,6 +30,11 @@
                        value="{{$product->brand_name}}">
             </div>
             <div>
+                <label>category_id</label>
+                <input type="text" class="form-control" id="category_id" name="category_id"
+                       value="{{$product->category_id}}">
+            </div>
+            <div>
                 <label>brand_name_en</label>
                 <input type="text" class="form-control" id="brand_name_en" name="brand_name_en"
                        value="{{$product->brand_name_en}}">
@@ -42,11 +46,18 @@
             </div>
             <div>
                 <label>thumbnail</label>
-                <input type="text" class="form-control" id="thumbnail" name="thumbnail" value="{{$product->thumbnail}}">
+                <input type="file" class="form-control" id="thumbnail" name="thumbnail" multiple accept="image/*">
+                <img width="50px" src="{{$product->thumbnail}}">
             </div>
             <div>
                 <label>gallery</label>
-                <input type="text" class="form-control" id="gallery" name="gallery" value="{{$product->gallery}}">
+                <input type="file" class="form-control" id="gallery" name="gallery[]" multiple accept="image/*">
+                @php
+                    $galleryArray = explode(',', $product->gallery);
+                @endphp
+                @foreach($galleryArray as $productImg)
+                    <img width="50px" src="{{$productImg}}">
+                @endforeach
             </div>
             <div>
                 <label>price</label>
@@ -75,40 +86,48 @@
                 <input type="text" class="form-control" id="user_id" name="user_id" value="{{Auth::user()->id}}">
             </div>
         </div>
-        <button type="button" class="btn btn-primary up-date-button">Lưu</button>
+        <button type="button" class="btn btn-primary mt-md-4" id="editProducts">Lưu</button>
     </form>
-
     <script>
         const token = `{{ $_COOKIE['accessToken'] }}`;
         $(document).ready(function () {
-            $('.up-date-button').on('click', function () {
+            $('#editProducts').on('click', function () {
                 const headers = {
                     'Authorization': `Bearer ${token}`
                 };
-                let item = {
-                    name: $('#name').val(),
-                    name_en: $('#name_en').val(),
-                    category_id: $('#category_id').val(),
-                    brand_name: $('#brand_name').val(),
-                    brand_name_en: $('#brand_name_en').val(),
-                    province_id: $('#province_id').val(),
-                    thumbnail: $('#thumbnail').val(),
-                    gallery: $('#gallery').val(),
-                    price: $('#price').val(),
-                    price_unit: $('#price_unit').val(),
-                    ads_plan: $('#ads_plan').val(),
-                    ads_period: $('#ads_period').val(),
-                    status: "ACTIVE"
-                };
+                const formDataEdit = new FormData();
 
-                let value = JSON.stringify(item);
+                const fieldNames = [
+                    "name", "name_en", "category_id", "brand_name",
+                    "brand_name_en", "province_id", "price",
+                    "price_unit", "ads_plan", "ads_period", "user_id"
+                ];
 
-                    try {
+                fieldNames.forEach(fieldName => {
+                    formDataEdit.append(fieldName, $(`#${fieldName}`).val());
+                });
+
+
+                var filedata = document.getElementById("gallery");
+                var i = 0, len = filedata.files.length, file;
+                for (i; i < len; i++) {
+                    file = filedata.files[i];
+                    formDataEdit.append('gallery[]', file);
+                }
+                const photoGallery = $('#gallery')[0].files;
+                const photo = $('#thumbnail')[0].files[0];
+                formDataEdit.append('thumbnail', photo);
+                formDataEdit.append('status', 'ACTIVE');
+
+                try {
                     $.ajax({
                         url: `{{route('api.backend.products.update',$product->id)}}`,
-                        method: 'PUT',
+                        method: 'POST',
                         headers: headers,
-                        data: item,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: formDataEdit,
                         success: function (response) {
                             alert('success');
                             window.location.reload();
@@ -123,64 +142,4 @@
             })
         })
     </script>
-
-    {{--    <script>--}}
-    {{--        var token = `{{ $_COOKIE['accessToken'] }}`;--}}
-    {{--        $(document).ready(function () {--}}
-    {{--            callEditProduct(token);--}}
-
-    {{--            async function callEditProduct(token) {--}}
-    {{--                $("#submitBtn").click(function (e) {--}}
-    {{--                    console.log(12331)--}}
-    {{--                    e.preventDefault();--}}
-    {{--                    let urlUpdate = `{{ route('api.backend.products.update', ['id' => $product->id]) }}`;--}}
-    {{--                    let accessToken = `Bearer ` + token;--}}
-
-    {{--                    var priceValue = $("#price").val();--}}
-    {{--                    var priceUnitValue = $("#price_unit").val();--}}
-    {{--                    var name = $("#name").val();--}}
-    {{--                    var name_en = $("#name_en").val();--}}
-    {{--                    var brand_name = $("#brand_name").val();--}}
-    {{--                    var brand_name_en = $("#brand_name_en").val();--}}
-    {{--                    var province_id = $("#province_id").val();--}}
-    {{--                    var thumbnail = $("#thumbnail").val();--}}
-    {{--                    var gallery = $("#gallery").val();--}}
-    {{--                    var ads_period = $("#ads_period").val();--}}
-    {{--                    var ads_plan = $("#ads_plan").val();--}}
-    {{--                    var user_id = $("#user_id").val();--}}
-    {{--                    var status = $("#status").val();--}}
-
-    {{--                    await $.ajax({--}}
-    {{--                        url: urlUpdate,--}}
-    {{--                        method: 'PUT',--}}
-    {{--                        headers: {--}}
-    {{--                            "Authorization": accessToken--}}
-    {{--                        },--}}
-    {{--                        data: {--}}
-    {{--                            price: priceValue,--}}
-    {{--                            price_unit: priceUnitValue,--}}
-    {{--                            name: name,--}}
-    {{--                            name_en: name_en,--}}
-    {{--                            brand_name: brand_name,--}}
-    {{--                            brand_name_en: brand_name_en,--}}
-    {{--                            province_id: province_id,--}}
-    {{--                            thumbnail: thumbnail,--}}
-    {{--                            gallery: gallery,--}}
-    {{--                            ads_period: ads_period,--}}
-    {{--                            ads_plan: ads_plan,--}}
-    {{--                            user_id: user_id,--}}
-    {{--                            status: status--}}
-    {{--                        },--}}
-    {{--                        success: function (response) {--}}
-    {{--                            console.log(response);--}}
-    {{--                        },--}}
-    {{--                        error: function (exception) {--}}
-    {{--                            console.log(exception);--}}
-    {{--                        }--}}
-    {{--                    });--}}
-    {{--                });--}}
-    {{--            }--}}
-    {{--        });--}}
-
-    {{--    </script>--}}
 @endsection

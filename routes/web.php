@@ -75,7 +75,7 @@ Route::group(['prefix' => 'flea-market'], function () {
     Route::get('review', [\App\Http\Controllers\FleaMarketController::class, 'review'])->name('flea.market.review');
     Route::get('sell-product', [\App\Http\Controllers\FleaMarketController::class, 'sellProduct'])->name('flea.market.sell.product');
     Route::get('edit-product', [\App\Http\Controllers\FleaMarketController::class, 'editProduct'])->name('flea.market.edit.product');
-    Route::get('product-detail', [\App\Http\Controllers\FleaMarketController::class, 'productDetail'])->name('flea.market.product.detail');
+    Route::get('product-detail/{id}', [\App\Http\Controllers\FleaMarketController::class, 'productDetail'])->name('flea.market.product.detail');
 });
 Route::group(['prefix' => 'what-free'], function () {
     Route::get('/', [\App\Http\Controllers\WhatFreeToDay::class, 'index'])->name('what.free');

@@ -3,42 +3,39 @@
 @section('content')
     @include('layouts.partials.header')
     @include('component.banner')
+
+    @php
+    $pr = (new \App\Http\Controllers\backend\BackendProductInfoController())->show($id);
+    $pr_json = json_decode($pr->getContent());
+    $galleryArray = explode(',', $pr_json->gallery);
+
+    @endphp
     <style>
         .selected {
             border: 2px solid black;
             opacity: 0.5;
         }
-
     </style>
+{{--    @dd($productDetail)--}}
     <div class="recruitment-details ">
         <div class="container">
             <div class="recruitment-details--title"><i class="fa-solid fa-arrow-left"></i> Product details</div>
             <div class="row recruitment-details--content">
                 <div class="col-md-8 recruitment-details ">
-                    <img style="width: 100%" src="{{asset('/img/flea-market/product.png')}}" alt="show"
-                         class="main col-10 col-md-12">
+                    @if(!empty($pr_json->thumbnail))
+                        <img style="width: 100%" src="{{asset($pr_json->thumbnail)}}" alt="show"
+                             class="main col-10 col-md-12">
+                    @else
+                        <img style="width: 100%" src="{{asset('img/flea-market/photo.png')}}" alt="show" class="main col-10 col-md-12">
+                        <p>No Thumbnail Available</p>
+                    @endif
                     <div class="list col-2 col-md-12">
-                        <div class="item-detail">
-                            <img src="{{asset('/img/flea-market/product.png')}}" alt="" class="border">
-                        </div>
-                        <div class="item-detail">
-                            <img src="{{asset('/img/flea-market/product.png')}}" alt="" class="border">
-                        </div>
-                        <div class="item-detail">
-                            <img src="{{asset('/img/flea-market/product.png')}}" alt="" class="border">
-                        </div>
-                        <div class="item-detail">
-                            <img src="{{asset('/img/flea-market/product.png')}}" alt="" class="border">
-                        </div>
-                        <div class="item-detail">
-                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="" class="border">
-                        </div>
-                        <div class="item-detail">
-                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="" class="border">
-                        </div>
-                        <div class="item-detail">
-                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="" class="border">
-                        </div>
+                        @foreach($galleryArray as $pr_gallery)
+                            <div class="item-detail">
+                                <img src="{{asset($pr_gallery)}}" alt="" class="border">
+                            </div>
+                        @endforeach
+
                     </div>
                 </div>
                 <div class="col-md-4 recruitment-details--content--right">
