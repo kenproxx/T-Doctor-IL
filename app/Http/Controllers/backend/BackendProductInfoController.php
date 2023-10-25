@@ -4,7 +4,9 @@ namespace App\Http\Controllers\backend;
 
 use App\Enums\ProductStatus;
 use App\Http\Controllers\Controller;
+use App\Models\Clinic;
 use App\Models\ProductInfo;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -23,6 +25,39 @@ class BackendProductInfoController extends Controller
             $products = ProductInfo::where('status', $status)->where('created_by', $id)->get();
         } else {
             $products = ProductInfo::where('status', '!=', ProductStatus::DELETED)->where('created_by', $id)->get();
+        }
+        return response()->json($products);
+    }
+
+    public function getByClinicMain(Request $request, $id)
+    {
+        $status = $request->input('status');
+        $clinic = Clinic::find($id);
+        if ($status) {
+            $products = ProductInfo::where('status', $status)->where('created_by', $clinic->user_id)->get();
+        } else {
+            $products = ProductInfo::where('status', '!=', ProductStatus::DELETED)->where('', $clinic->user_id)->get();
+        }
+        return response()->json($products);
+    }
+
+    public function getByClinic(Request $request, $id)
+    {
+        $status = $request->input('status');
+        if ($status) {
+            $products = DB::table('product_infos')
+                ->join('clinics', 'clinics.user_id', '=', 'product_infos.created_by')
+                ->where('clinics.id', $id)
+                ->where('product_infos.status', '=', $status)
+                ->select('product_infos.*')
+                ->get();
+        } else {
+            $products = DB::table('product_infos')
+                ->join('clinics', 'clinics.user_id', '=', 'product_infos.created_by')
+                ->where('clinics.user_id', $id)
+                ->where('product_infos.status', '!=', ProductStatus::DELETED)
+                ->select('product_infos.*')
+                ->get();
         }
         return response()->json($products);
     }
