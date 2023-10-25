@@ -13,14 +13,15 @@ class ClinicController extends Controller
     {
         return view('clinics.listClinics');
     }
-    public function show($id)
-    {
-        $clinics = Clinic::find($id);
-        if (!$clinics || $clinics->status != ClinicStatus::ACTIVE) {
-            return response("Product not found", 404);
-        }
-        return response()->json($clinics);
-    }
+//    public function show($id)
+//    {
+//        dd($id);
+//        $clinics = Clinic::find($id);
+//        if (!$clinics || $clinics->status != ClinicStatus::ACTIVE) {
+//            return response("Product not found", 404);
+//        }
+//        return response()->json($clinics);
+//    }
 
     public function detail()
     {
@@ -32,8 +33,12 @@ class ClinicController extends Controller
         return view('admin.tab-create-clinics');
     }
 
-    public function edit()
+    public function edit($id)
     {
-        return view('admin.tab-edit-clinics');
+        $clinics = Clinic::find($id);
+        if (!$clinics || $clinics->status != ClinicStatus::ACTIVE) {
+            return response("Product not found", 404);
+        }
+        return view('admin.tab-edit-clinics',compact('clinics'));
     }
 }

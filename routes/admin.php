@@ -20,8 +20,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', 'HomeController@home')->name('homeAdmin');
 Route::group(['prefix' => 'home'], function () {
-    Route::get('/', 'HomeController@home')->name('homeAdmin');
     Route::get('/list-products', 'HomeController@listProduct')->name('homeAdmin.list.product');
     Route::get('/list-clinics', 'HomeController@listClinics')->name('homeAdmin.list.clinics');
 });
