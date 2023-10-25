@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'products'], function () {
     Route::get('/list', [BackendProductInfoController::class, 'index'])->name('api.backend.products.list');
+    Route::get('/search', [BackendProductInfoController::class, 'search'])->name('api.backend.products.search');
     Route::get('/detail/{id}', [BackendProductInfoController::class, 'show'])->name('api.backend.products.detail');
     Route::get('/user/{id}', [BackendProductInfoController::class, 'getByUser'])->name('api.backend.products.user');
     Route::get('/clinic/{id}', [BackendProductInfoController::class, 'getByClinic'])->name('api.backend.products.clinic');
