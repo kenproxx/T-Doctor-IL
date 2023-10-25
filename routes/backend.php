@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\BackendAnswerController;
+use App\Http\Controllers\backend\BackendCategoryController;
 use App\Http\Controllers\backend\BackendClinicController;
 use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
@@ -67,4 +68,14 @@ Route::group(['prefix' => 'reviews'], function () {
     Route::put('/change/{id}', [BackendReviewController::class, 'changeStatus'])->name('api.backend.reviews.change.status');
 //    Route::put('/update/{id}', [BackendReviewController::class, 'update'])->name('api.backend.reviews.update');
     Route::delete('/delete/{id}', [BackendReviewController::class, 'delete'])->name('api.backend.reviews.delete');
+});
+
+Route::group(['prefix' => 'categories'], function () {
+    Route::get('/list', [BackendCategoryController::class, 'getAll'])->name('api.backend.categories.list');
+    Route::get('/detail/{id}', [BackendCategoryController::class, 'detail'])->name('api.backend.categories.detail');
+    Route::get('/user/{id}', [BackendCategoryController::class, 'getAllByUser'])->name('api.backend.categories.user');
+//    Route::get('/clinic/{id}', [BackendCategoryController::class, 'getByClinic'])->name('api.backend.categories.clinic');
+    Route::post('/create', [BackendCategoryController::class, 'create'])->name('api.backend.categories.create');
+    Route::put('/update/{id}', [BackendCategoryController::class, 'update'])->name('api.backend.categories.update');
+    Route::delete('/delete/{id}', [BackendCategoryController::class, 'delete'])->name('api.backend.categories.delete');
 });
