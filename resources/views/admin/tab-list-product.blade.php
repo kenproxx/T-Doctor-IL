@@ -2,6 +2,7 @@
     td {
         overflow: hidden;
         max-width: 300px;
+        height: 80px;
     }
 </style>
 <div class="">
@@ -53,10 +54,17 @@
             urlEdit = urlEdit.replace(':id', res[i].id);
             let item = res[i];
             let rowNumber = i + 1;
+
+            let gallery = item.gallery;
+            let arrayGallery = gallery.split(',')
+            let img = ``;
+            for (let j = 0; j < arrayGallery.length; j++) {
+                img = img + `<img class="mr-2 w-auto h-100" src="${arrayGallery[j]}" alt="">`;
+            }
             html = html + `<tr>
             <th scope="row">${rowNumber}</th>
-            <td>${item.thumbnail}</td>
-            <td>${item.gallery}</td>
+            <td><img class="mr-2 w-auto h-100" src="${item.thumbnail}" alt=""></td>
+            <td>${img}</td>
             <td>${item.name}</td>
             <td>${item.province_id}</td>
             <td>${item.price} ${item.price_unit}</td>
