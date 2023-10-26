@@ -5,7 +5,15 @@
     @include('component.banner')
     <div>
         <div class="section1 d-flex justify-content-evenly">
-            <div class="section1__side"></div>
+            <div class="section1__side">
+                <div class="section1__side_1">
+                    <img src="{{asset('img/image 16.png')}}" alt="" style="width:165px; height: 313px">
+                </div>
+                <div class="section1__side_2">
+                    <img src="{{asset('img/image 16.png')}}" alt="" style="width:165px; height: 313px">
+                </div>
+
+            </div>
             <div class="section1-main d-flex">
                 <div class="section1__item order-1">
                     <div class="section1-label position-relative">
@@ -305,7 +313,7 @@
                                 <a class="nav-link active" aria-current="page" href="#">New</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Even</a>
+                                <a class="nav-link" href="#">Event</a>
                             </li>
                         </ul>
                     </div>
@@ -578,11 +586,19 @@
                     </div>
                 </div>
             </div>
-            <div class="section1__side"></div>
+
+            <div class="section1__side">
+                <div class="section1__side_1">
+                    <img src="{{asset('img/image 16.png')}}" alt="" style="width:165px; height: 313px">
+                </div>
+                <div class="section1__side_2">
+                    <img src="{{asset('img/image 16.png')}}" alt="" style="width:165px; height: 313px">
+                </div>
+            </div>
         </div>
     </div>
     <div class="banner1">
-        <!-- Add content for your banner here -->
+        <img src="{{asset('img/Rectangle 23815.png')}}" alt="">
     </div>
     <div id="map-location" class="d-flex justify-content-center">
         <div class="content-item d-flex justify-content-center" >
@@ -683,7 +699,7 @@
         </nav>
     </div>
     <div class="banner1">
-        <!-- Add content for your banner here -->
+        <img src="{{asset('img/Rectangle 23815.png')}}" alt="" >
     </div>
     <div id="recruitment_board" class="d-flex justify-content-center">
         <div id="content-bkg" class="content-item d-flex justify-content-center " >
@@ -801,7 +817,7 @@
         </div>
     </div>
     <div class="banner1">
-        <!-- Add content for your banner here -->
+        <img src="{{asset('img/Rectangle 23815.png')}}" alt="" style="">
     </div>
     <div id="flea_market_board" class="d-flex justify-content-center">
         <div id="content-bkg" class="content-item d-flex justify-content-center ">
@@ -911,7 +927,7 @@
         </div>
     </div>
     <div class="banner1">
-        <!-- Add content for your banner here -->
+        <img src="{{asset('img/Rectangle 23815.png')}}" alt="">
     </div>
     <div id="item-information">
         <h1>Buy online</h1>

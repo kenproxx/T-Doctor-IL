@@ -9,5 +9,5 @@ use Illuminate\Database\Eloquent\Model;
 class ProductInfo extends Model
 {
     use HasFactory;
-    use CreatedUpdatedBy;
+//    use CreatedUpdatedBy;
 }

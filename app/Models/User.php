@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable  implements JWTSubject
 {
     use HasFactory, Notifiable;
 
@@ -18,6 +18,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'last_name', 'email', 'password',
+        'username', 'phone', 'address_code', 'status','type',
     ];
 
     /**
@@ -38,28 +39,18 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * Get the user's full name.
-     *
-     * @return string
-     */
-    public function getFullNameAttribute()
+    public function roles()
     {
-        if (is_null($this->last_name)) {
-            return "{$this->name}";
-        }
-
-        return "{$this->name} {$this->last_name}";
+        return $this->belongsToMany(Role::class);
     }
 
-    /**
-     * Set the user's password.
-     *
-     * @param string $value
-     * @return void
-     */
-    public function setPasswordAttribute($value)
+    public function getJWTIdentifier()
     {
-        $this->attributes['password'] = bcrypt($value);
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }

@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\fronend;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Answer;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class AnswerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('layouts.tab-news-events');
+        //
     }
 
     /**
@@ -34,7 +34,7 @@ class HomeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Answer $answer)
     {
         //
     }
@@ -42,7 +42,7 @@ class HomeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Answer $answer)
     {
         //
     }
@@ -50,7 +50,7 @@ class HomeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Answer $answer)
     {
         //
     }
@@ -58,7 +58,7 @@ class HomeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Answer $answer)
     {
         //
     }

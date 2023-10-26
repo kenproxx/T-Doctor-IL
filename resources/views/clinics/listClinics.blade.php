@@ -4,22 +4,10 @@
     @include('layouts.partials.header')
     @include('component.banner')
 <div class="container">
-    <div class="row clinic-search">
-        <div class="clinic-search--left col-md-6 d-flex justify-content-around">
-            <div class="title">Category <i class="bi bi-arrow-down-up"></i></div>
-            <div class="title">Location <i class="bi bi-arrow-down-up"></i></div>
-            <div class="title">Theme <i class="bi bi-arrow-down-up"></i></div>
-        </div>
-        <div class="clinic-search--center col-md-6 row d-flex justify-content-between">
-            <form class="search-box col-md-10">
-                <input type="search" name="focus" placeholder="Search" id="search-input" value="">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </form>
-        </div>
-    </div>
+    @include('What-free.header-wFree')
     <div class="clinics-list">
         <div class="clinics-header row">
-            <div class="col-4 d-flex justify-content-between">
+            <div class=" d-flex justify-content-between">
                 <span class="near">Suggestions near you</span>
                 <span>
                     <a href="">See all</a>

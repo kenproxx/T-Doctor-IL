@@ -105,7 +105,7 @@
     &--content {
         margin: 30px 0;
 
-        &--left {
+         &--left {
             .img-main {
                 width: 100%;
                 height: 441px;
@@ -120,7 +120,7 @@
 
             .list {
                 overflow-x: auto;
-
+                display: flex;
                 .item {
                     height: 79px;
                     margin-right: 16px;
@@ -605,7 +605,6 @@
     border: 1px solid rgba(234, 234, 234, 1);
     border-radius: 16px;
     .img-pro{
-        height: 237px;
         margin-bottom: 10px;
         position: relative;
         img{
@@ -629,7 +628,7 @@
                 color: black;
                 font-size: 18px;
                 font-weight: 800;
-                height: 55px;
+                //height: 55px;
                 -webkit-line-clamp: 2;
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
@@ -659,10 +658,12 @@
             font-weight: 800;
         }
         a{
-            font-size: 18px;
             font-weight: 600;
             color: black;
         }
+    }
+    .margin-bottom-32 {
+        margin-bottom: 32px;
     }
 }
 
@@ -967,17 +968,12 @@
         &--left{
             align-items: center;
             .avt{
-                width: 54px;
-                height: 54px;
                 border-radius: 30px;
                 img{
-                    width: 100%;
-                    height: 100%;
                     object-fit: cover;
                 }
             }
             p{
-                font-size: 24px;
                 font-weight: 800;
             }
         }
@@ -986,6 +982,7 @@
             align-self: flex-end;
             font-size: 14px;
             font-weight: 400;
+            align-items: center;
         }
     }
     .content{

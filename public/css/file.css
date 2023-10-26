@@ -68,13 +68,12 @@
 
 .banner {
   margin-top: 100px;
-  height: 280px;
+  height: 390px;
   margin-bottom: 40px;
 }
 .banner img {
   height: 100%;
   width: 100%;
-  object-fit: cover;
 }
 
 .recruitment-details--title {
@@ -99,6 +98,7 @@
 }
 .recruitment-details--content--left .list {
   overflow-x: auto;
+  display: flex;
 }
 .recruitment-details--content--left .list .item {
   height: 79px;
@@ -503,7 +503,6 @@
   border-radius: 16px;
 }
 .product-item .img-pro {
-  height: 237px;
   margin-bottom: 10px;
   position: relative;
 }
@@ -525,7 +524,6 @@
   color: black;
   font-size: 18px;
   font-weight: 800;
-  height: 55px;
   -webkit-line-clamp: 2;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -552,9 +550,11 @@
   font-weight: 800;
 }
 .clinics-list .clinics-header a {
-  font-size: 18px;
   font-weight: 600;
   color: black;
+}
+.clinics-list .margin-bottom-32 {
+  margin-bottom: 32px;
 }
 
 .clinic-search {
@@ -820,17 +820,12 @@
   align-items: center;
 }
 .rv_item .rv-header--left .avt {
-  width: 54px;
-  height: 54px;
   border-radius: 30px;
 }
 .rv_item .rv-header--left .avt img {
-  width: 100%;
-  height: 100%;
   object-fit: cover;
 }
 .rv_item .rv-header--left p {
-  font-size: 24px;
   font-weight: 800;
 }
 .rv_item .rv-header--right {
@@ -838,6 +833,7 @@
   align-self: flex-end;
   font-size: 14px;
   font-weight: 400;
+  align-items: center;
 }
 .rv_item .content {
   font-size: 16px;

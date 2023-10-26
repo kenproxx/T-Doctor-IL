@@ -1,40 +1,42 @@
 @extends('layouts.master')
 @section('title', 'Flea Market')
 @section('content')
-    @include('layouts.partials.headerFleaMarket')
+    @include('layouts.partials.header')
     @include('component.banner')
     <div class="container">
         <div class="d-flex">
-            <div class="col-md-3 mr-2">
+            <div class="col-md-3 mr-2 mobile-hidden">
                 <div class="">
                     <div class="flea-adv row align-items-center justify-content-center">
-                        <img src="" alt="">
+                        <img src="{{asset('img/image 16.png')}}" alt="" style="width: 270px;height: 682px">
                     </div>
                 </div>
                 <div class="">
                     <div class="flea-adv row align-items-center justify-content-center">
-                        <div class="">ADVERTISEMENT</div>
+                        <div class="">
+                            <img src="{{asset('img/image 16.png')}}" alt="" style="width: 270px;height: 682px">
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-9 medicine-list--item">
+            <div class="col-md-9 medicine-list--item col-12">
                 @include('component.avt-info')
                 <ul class="nav nav-tabs row tabMystore" role="tablist">
                     <li class="nav-item col-4">
-                        <a class="nav-link active" id="productList-tab" data-toggle="tab" href="#productList" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                        <a class="nav-link active font-14-mobi" id="productList-tab" data-toggle="tab" href="#productList" role="tab" aria-controls="home" aria-selected="true">Home</a>
                     </li>
                     <li class="nav-item col-4">
-                        <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="profile" aria-selected="false">Review</a>
+                        <a class="nav-link font-14-mobi" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="profile" aria-selected="false">Review</a>
                     </li>
                     <li class="nav-item col-4">
-                        <a class="nav-link" id="wishList-tab" data-toggle="tab" href="#wishList" role="tab" aria-controls="contact" aria-selected="false">Wish List</a>
+                        <a class="nav-link font-14-mobi" id="wishList-tab" data-toggle="tab" href="#wishList" role="tab" aria-controls="contact" aria-selected="false">Wish List</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="productList" role="tabpanel" aria-labelledby="productList-tab">
                         <div class="page row">
                             @for($i = 0; $i < 12; $i++)
-                                <div class="col-md-4 item">
+                                <div class="col-md-4 item col-6">
                                     @include('component.edit-product')
                                 </div>
                             @endfor
@@ -46,7 +48,7 @@
                     <div class="tab-pane fade" id="wishList" role="tabpanel" aria-labelledby="wishList-tab">
                         <div class="row">
                             @for($i = 0; $i < 12; $i++)
-                                <div class="col-md-4 item">
+                                <div class="col-md-4 col-6 item">
                                     @include('component.product-wish')
                                 </div>
                             @endfor
