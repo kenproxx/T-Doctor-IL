@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Enums\AnswerStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Answer;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BackendAnswerController extends Controller
@@ -62,6 +63,13 @@ class BackendAnswerController extends Controller
             if ($question_id) {
                 $answer->question_id = $question_id;
             }
+
+            $user = User::find($user_id);
+            if (!$user) {
+                return response('User not found!', 404);
+            }
+
+            $answer->name = $user->username;
 
             $answer->content = $content;
             $answer->content_en = $content_en;
@@ -134,6 +142,13 @@ class BackendAnswerController extends Controller
             if ($question_id) {
                 $answer->question_id = $question_id;
             }
+
+            $user = User::find($user_id);
+            if (!$user) {
+                return response('User not found!', 404);
+            }
+
+            $answer->name = $user->username;
 
             $answer->content = $content;
             $answer->content_en = $content_en;
