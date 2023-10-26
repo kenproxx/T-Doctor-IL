@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Coupon;
 use App\Models\CouponApply;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class BackendCouponApplyController extends Controller
 {
@@ -67,19 +68,27 @@ class BackendCouponApplyController extends Controller
                 return response('Coupon not found!', 404);
             }
 
-            $coupon->registered = $coupon->registered + 1;
-            $coupon->max_register = $coupon->max_register - 1;
-
             if ($coupon->max_register == 0) {
-                $coupon->status = CouponStatus::INACTIVE;
+                return response('The number of subscribers has reached the maximum!', 400);
             }
 
-            $success = $couponApply->save();
-            if ($success) {
-                $coupon->save();
-                return response()->json($couponApply);
+            if ($coupon->endDate > Carbon::now()->addHours(7) && $coupon->startDate < Carbon::now()->addHours(7)) {
+                $coupon->registered = $coupon->registered + 1;
+                $coupon->max_register = $coupon->max_register - 1;
+
+                if ($coupon->max_register == 0) {
+                    $coupon->status = CouponStatus::INACTIVE;
+                }
+
+                $success = $couponApply->save();
+
+                if ($success) {
+                    $coupon->save();
+                    return response()->json($couponApply);
+                }
+                return response('Create error!', 400);
             }
-            return response('Update error!', 400);
+            return response('Coupon not active!', 400);
         } catch (\Exception $exception) {
             return response($exception, 400);
         }
@@ -119,14 +128,27 @@ class BackendCouponApplyController extends Controller
                     return response('Coupon not found!', 404);
                 }
 
-                $coupon->registered = $coupon->registered + 1;
-                $coupon->max_register = $coupon->max_register - 1;
-
                 if ($coupon->max_register == 0) {
-                    $coupon->status = CouponStatus::INACTIVE;
+                    return response('The number of subscribers has reached the maximum!', 400);
                 }
 
-                $coupon->save();
+                if ($coupon->endDate > Carbon::now()->addHours(7) && $coupon->startDate < Carbon::now()->addHours(7)) {
+                    $coupon->registered = $coupon->registered + 1;
+                    $coupon->max_register = $coupon->max_register - 1;
+
+                    if ($coupon->max_register == 0) {
+                        $coupon->status = CouponStatus::INACTIVE;
+                    }
+
+                    $success = $couponApply->save();
+
+                    if ($success) {
+                        $coupon->save();
+                        return response()->json($couponApply);
+                    }
+                    return response('Update error!', 400);
+                }
+                return response('Coupon not active!', 400);
             }
 
             $success = $couponApply->save();
@@ -148,6 +170,15 @@ class BackendCouponApplyController extends Controller
             }
 
             $couponApply->status = CouponApplyStatus::DELETED;
+
+            $coupon = Coupon::find($couponApply->coupon_id);
+
+            if ($coupon->endDate > Carbon::now()->addHours(7) && $coupon->startDate < Carbon::now()->addHours(7)) {
+                $coupon->registered = $coupon->registered - 1;
+                $coupon->max_register = $coupon->max_register + 1;
+                $coupon->save();
+            }
+
             $success = $couponApply->save();
             if ($success) {
                 return response('Delete success!', 200);

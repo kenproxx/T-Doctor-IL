@@ -34,7 +34,7 @@ class BackendCouponController extends Controller
 
     public function getByCode($code)
     {
-        $coupon = Coupon::where('code', $code)->first();
+        $coupon = Coupon::where('code', 'like', '%' . $code . '%')->first();
         if (!$coupon || $coupon->status == CouponStatus::DELETED) {
             return response('Not found', 404);
         }
@@ -84,6 +84,8 @@ class BackendCouponController extends Controller
         if (!$coupon || $coupon->status == CouponStatus::DELETED) {
             return response('Not found', 404);
         }
+        $coupon->views = $coupon->views + 1;
+        $coupon->save();
         return response()->json($coupon);
     }
 
@@ -150,6 +152,10 @@ class BackendCouponController extends Controller
         $short_description_en = $request->input('short_description_en');
         $short_description_laos = $request->input('short_description_laos');
 
+        $startDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $assign_to = $request->input('assign_to');
+
         $registered = $request->input('registered');
         $views = $request->input('views');
         $max_register = $request->input('max_register');
@@ -170,6 +176,10 @@ class BackendCouponController extends Controller
         $coupon->short_description = $short_description;
         $coupon->short_description_en = $short_description_en;
         $coupon->short_description_laos = $short_description_laos;
+
+        $coupon->startDate = $startDate;
+        $coupon->endDate = $endDate;
+        $coupon->assign_to = $assign_to;
 
         $coupon->registered = $registered;
         $coupon->views = $views;
