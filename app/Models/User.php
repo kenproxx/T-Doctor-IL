@@ -53,4 +53,11 @@ class User extends Authenticatable  implements JWTSubject
     {
         return [];
     }
+
+    public static function getNameByID($id)
+    {
+        $user = User::where('id', $id)->first();
+        return $user->name . ' ' . $user->last_name;
+    }
+
 }
