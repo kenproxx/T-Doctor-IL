@@ -31,8 +31,7 @@ Route::get('/about', function () {
 })->name('about');
 
 Route::group(['prefix' => 'profile'], function () {
-    Route::get('', 'ProfileController@index')->name('profile');
-    Route::put('', 'ProfileController@update')->name('profile.update');
+
 });
 
 

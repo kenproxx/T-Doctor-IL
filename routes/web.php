@@ -26,6 +26,8 @@ Route::post('/login', [AuthController::class, 'login'])->name('loginProcess');
 Route::post('/register', [AuthController::class, 'register'])->name('registerProcess');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logoutProcess');
 
+Route::get('', 'ProfileController@index')->name('profile');
+Route::put('', 'ProfileController@update')->name('profile.update');
 
 
 Route::group(['prefix' => 'news'], function () {
