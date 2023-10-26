@@ -59,8 +59,13 @@
             </div>
             <div>
                 <label>gallery</label>
-                <input type="file" class="form-control" id="gallery" name="gallery" value="{{$clinics->gallery}}">
-                <img src="{{$clinics->gallery}}" class="img w-100">
+                <input type="file" class="form-control" id="gallery" name="gallery" >
+                @php
+                    $galleryArray = explode(',', $clinics->gallery);
+                @endphp
+                @foreach($galleryArray as $productImg)
+                    <img width="50px" src="{{$productImg}}">
+                @endforeach
             </div>
             <div>
                 <label>status</label>
@@ -89,30 +94,37 @@
                 const headers = {
                     'Authorization': `Bearer ${token}`
                 };
-                let item = {
-                    name: $('#name').val(),
-                    name_en: $('#name_en').val(),
-                    address_detail: $('#address_detail').val(),
-                    address_detail_en: $('#address_detail_en').val(),
-                    nation_id: $('#nation_id').val(),
-                    province_id: $('#province_id').val(),
-                    district_id: $('#district_id').val(),
-                    gallery: $('#gallery').val(),
-                    commune_id: $('#commune_id').val(),
-                    open_date: $('#open_date').val(),
-                    close_date: $('#close_date').val(),
-                    introduce: $('#introduce').val(),
-                    status: "ACTIVE"
-                };
+                const formData = new FormData();
+                formData.append("name", $('#name').val());
+                formData.append("name_en", $('#name_en').val());
+                formData.append("address_detail", $('#address_detail').val());
+                formData.append("address_detail_en", $('#address_detail_en').val());
+                formData.append("province_id", $('#province_id').val());
+                formData.append("nation_id", $('#nation_id').val());
+                formData.append("district_id", $('#district_id').val());
+                formData.append("commune_id", $('#commune_id').val());
+                formData.append("introduce", $('#introduce').val());
+                formData.append("open_date", $('#open_date').val());
+                formData.append("close_date", $('#close_date').val());
+                formData.append("user_id", $('#user_id').val());
+                formData.append('status', 'ACTIVE');
+                var filedata = document.getElementById("gallery");
+                var i = 0, len = filedata.files.length, img, reader, file;
+                for (i; i < len; i++) {
+                    file = filedata.files[i];
+                    formData.append('gallery[]', file);
+                }
 
-                let value = JSON.stringify(item);
 
                 try {
                     $.ajax({
-                        url: `{{route('api.backend.clinics.update',$clinics->id)}}`,
-                        method: 'PUT',
+                        url: `{{route('api.backend.clinics.edit',$clinics->id)}}`,
+                        method: 'POST',
                         headers: headers,
-                        data: item,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: formData,
                         success: function (response) {
                             alert('success');
                             window.location.reload();

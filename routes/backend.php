@@ -37,6 +37,7 @@ Route::group(['prefix' => 'clinics'], function () {
     Route::get('/detail/{id}', [BackendClinicController::class, 'detail'])->name('api.backend.clinics.detail');
     Route::post('/create', [BackendClinicController::class, 'create'])->name('api.backend.clinics.create');
     Route::put('/update/{id}', [BackendClinicController::class, 'update'])->name('api.backend.clinics.update');
+    Route::post('/edit/{id}', [BackendClinicController::class, 'update'])->name('api.backend.clinics.edit');
     Route::delete('/delete/{id}', [BackendClinicController::class, 'delete'])->name('api.backend.clinics.delete');
 });
 
