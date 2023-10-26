@@ -56,10 +56,10 @@
                 <label>price</label>
                 <input type="text" class="form-control" id="price" name="price" value="">
             </div>
-            <div>
+            <div hidden="">
                 <label>price_unit</label>
                 <input type="text" class="form-control" id="price_unit" name="price_unit"
-                       value="">
+                       value="VND">
             </div>
             <div>
                 <label>ads_plan</label>

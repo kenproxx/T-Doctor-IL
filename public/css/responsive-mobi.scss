@@ -127,6 +127,13 @@ img {
     .product-item {
         padding: 8px;
         margin-bottom: 16px;
+            .img-pro{
+                height: 146px;
+                img{
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
         .content-pro {
             .name-product {
                 font-size: 14px;
@@ -236,7 +243,7 @@ img {
             padding: 0;
             margin-bottom: 16px;
             .list {
-                height: 168px;
+                height: 100%;
                 overflow-y: auto;
                 padding: 0;
             }
@@ -247,6 +254,12 @@ img {
             }
             .main {
                 padding-left: 0;
+            }
+            .border-radius-1px {
+                img{
+                    width: auto;
+                    height: auto;
+                }
             }
         }
         .mt-110 {
@@ -392,14 +405,34 @@ img {
             margin-bottom: 16px;
             margin-top: 45px;
         }
+        .recruitment-details {
+            .border-radius-1px {
+                img{
+                    width: auto;
+                    height: 383px;
+                }
+            }
+        }
+        .product-item {
+            .img-pro{
+                height: 237px;
+                img{
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
         .list {
             display: flex;
             overflow-x: auto;
             padding: 0;
         }
         .item-detail {
-            img{
-                width: 148px;
+            width: 140px;
+            height: 80px;
+            img {
+                width: auto;
+                height: 100%;
             }
         }
         .item {

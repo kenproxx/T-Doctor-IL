@@ -68,12 +68,13 @@
 
 .banner {
   margin-top: 100px;
-  height: 390px;
+  height: 280px;
   margin-bottom: 40px;
 }
 .banner img {
   height: 100%;
   width: 100%;
+  object-fit: cover;
 }
 
 .recruitment-details--title {
