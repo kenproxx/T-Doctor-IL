@@ -121,7 +121,7 @@
 
                 try {
                     $.ajax({
-                        url: `{{route('api.backend.products.update',$product->id)}}`,
+                        url: `{{route('api.backend.product.updatePost',$product->id)}}`,
                         method: 'POST',
                         headers: headers,
                         contentType: false,
