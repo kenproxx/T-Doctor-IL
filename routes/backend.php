@@ -9,6 +9,7 @@ use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\backend\BackendReviewController;
 use App\Http\Controllers\backend\BackendWishListController;
+use App\Http\Controllers\restapi\admin\AdminDoctorInfoApi;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'products'], function () {
@@ -101,4 +102,13 @@ Route::group(['prefix' => 'coupons-apply'], function () {
     Route::post('/create', [BackendCouponApplyController::class, 'create'])->name('api.backend.coupons-apply.create');
     Route::put('/update/{id}', [BackendCouponApplyController::class, 'update'])->name('api.backend.coupons-apply.update');
     Route::delete('/delete/{id}', [BackendCouponApplyController::class, 'delete'])->name('api.backend.coupons-apply.delete');
+});
+
+Route::group(['prefix' => 'doctors-info'], function () {
+    Route::get('/list', [AdminDoctorInfoApi::class, 'getAll'])->name('api.backend.coupons-apply.list');
+    Route::get('/detail/{id}', [AdminDoctorInfoApi::class, 'detail'])->name('api.backend.coupons-apply.detail');
+    Route::get('/user/{id}', [AdminDoctorInfoApi::class, 'findByUser'])->name('api.backend.coupons-apply.user');
+    Route::post('/create', [AdminDoctorInfoApi::class, 'create'])->name('api.backend.coupons-apply.create');
+    Route::put('/update/{id}', [AdminDoctorInfoApi::class, 'update'])->name('api.backend.coupons-apply.update');
+    Route::delete('/delete/{id}', [AdminDoctorInfoApi::class, 'delete'])->name('api.backend.coupons-apply.delete');
 });
