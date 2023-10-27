@@ -36,7 +36,7 @@
                 <form action="{{route('flea.market.sell.product')}}" class="col-md-4 flea-button mr-3">
                 <button class="flea-btn">Sell my product</button>
                 </form>
-                <form action="{{route('flea.market.my.store')}}" class="col-md-4 flea-button mr-3">
+                <form action="{{route('flea.market.my.store' )}}" class="col-md-4 flea-button mr-3">
                     <button class="flea-btn" >Go to my store</button>
                 </form>
                 <form action="{{route('flea.market.wish.list')}}" class="col-md-4 flea-button">
@@ -114,6 +114,7 @@
             <div class="col-md-9">
                 <div class="img-union"><img src="{{asset('img/flea-market/platinum.png')}}"></div>
                 @include('FleaMarket.tab-product-flea')
+
                 <div class="img-union "><img src="{{asset('img/flea-market/premium.png')}}"></div>
                 <div class="img-union"><img src="{{asset('img/flea-market/silver.png')}}"></div>
                 <div class="page row ">
@@ -195,6 +196,37 @@
         </div>
     </div>
     </body>
+    <script>
+            let token = `{{ $_COOKIE['accessToken'] }}`;
+            let user_id = ` {{Auth::user()->id}} `;
+            console.log(token)
+
+            $('.button-heart').click(function (event) {
+                event.preventDefault();
+                console.log(111111)
+                $(this).find('.bi-heart').toggleClass('text-danger');
+
+                let productId = $(this).data('product-id');
+                let isFavorite = $(this).data('favorite');
+
+                $.ajax({
+                    url: '{{ route('api.backend.wish.lists.create') }}',
+                    method: 'POST',
+                    data: {
+                        product_id: productId,
+                        user_id: user_id,
+                    },
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                    },
+                    success: function (response) {
+                    },
+                    error: function (exception) {
+                        console.log(exception);
+                    }
+                });
+            });
+    </script>
     <script>
         const rangeInput = document.querySelectorAll(".range-input input"),
             priceInput = document.querySelectorAll(".price-input input"),
