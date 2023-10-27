@@ -46,6 +46,7 @@ Route::group(['prefix' => 'questions'], function () {
     Route::put('/update/{id}', [BackendQuestionController::class, 'update'])->name('api.backend.questions.update');
     Route::delete('/delete/{id}', [BackendQuestionController::class, 'delete'])->name('api.backend.questions.delete');
     Route::delete('/delete-list', [BackendQuestionController::class, 'deleteMultil'])->name('api.backend.questions.delete.list');
+    Route::get('/get-list', [BackendQuestionController::class, 'custom_getlist'])->name('api.backend.questions.custome.list');
 });
 
 Route::group(['prefix' => 'answers'], function () {

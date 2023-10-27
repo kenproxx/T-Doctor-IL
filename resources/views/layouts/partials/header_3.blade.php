@@ -19,7 +19,7 @@
                     <img src="{{asset('img/user-circle.png')}}">
                 </div>
                 <div class="option">
-                    <a href="#">Ask a question</a>
+                    <a href="{{ route('examination.mentoring.create') }}">Ask a question</a>
                 </div>
             </div>
         </div>

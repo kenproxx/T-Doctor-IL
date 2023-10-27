@@ -50,7 +50,10 @@ class examinationController extends Controller
         return view('examination.mypersonaldoctor');
     }
     public function mentoring(){
-        return view('examination.mentoring');
+        return view('examination.mentoring.mentoring');
+    }
+    public function createMentoring(){
+        return view('examination.mentoring.create');
     }
 
 }
