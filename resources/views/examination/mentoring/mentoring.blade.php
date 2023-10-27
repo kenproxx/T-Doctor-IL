@@ -18,15 +18,6 @@
 
         @include('examination.mentoring.jquery-comment')
 
-        <style type="text/css">
-            body {
-                padding: 20px;
-                margin: 0px;
-                font-size: 14px;
-                font-family: "Arial", Georgia, Serif;
-            }
-        </style>
-
         <!-- Init jquery-comments -->
         <script type="text/javascript">
             let data;
@@ -120,11 +111,8 @@
             <a class="tab" href="#">Pets</a>
             <a class="tab" href="#">Other</a>
         </div>
-
+        <div id="comments-container"></div>
     </div>
 
-    <body class="container">
-    <div id="comments-container"></div>
-    </body>
 
 @endsection
