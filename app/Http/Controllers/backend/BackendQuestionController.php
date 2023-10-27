@@ -193,6 +193,9 @@ class BackendQuestionController extends Controller
         $listQuestion = Question::where('status', QuestionStatus::APPROVED)->get();
 
         foreach ($listQuestion as $question) {
+
+            $listAnswer = Answer::where('question_id', $question->id)->get();
+
             $item = [
                 'id' => $question->id,
                 'parent' => null,
@@ -205,10 +208,13 @@ class BackendQuestionController extends Controller
                 'created' => $question->created_at,
                 'modified' => $question->updated_at,
                 'fullname' => User::getNameByID($question->user_id),
+                'comment_count' => $listAnswer->count(),
+                'view_count' => $question->views,
                 'profile_picture_url' => 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png',
             ];
+
             array_push($list, $item);
-            $listAnswer = Answer::where('question_id', $question->id)->get();
+
             foreach ($listAnswer as $answer) {
                 $item = [
                     'id' => $answer->id,
@@ -226,6 +232,7 @@ class BackendQuestionController extends Controller
                 ];
                 array_push($list, $item);
             }
+
         }
 
 
