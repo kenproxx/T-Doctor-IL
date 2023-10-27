@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\FleaMarket;
 use App\Models\ProductInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class FleaMarketController extends Controller
@@ -57,7 +58,9 @@ class FleaMarketController extends Controller
      */
     public function sellProduct()
     {
-        return view('FleaMarket.sell-my-product');
+        $user = Auth::user();
+
+        return view('FleaMarket.sell-my-product',compact('user'));
     }
 
     /**
