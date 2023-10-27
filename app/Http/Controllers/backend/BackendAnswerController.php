@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Enums\AnswerStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Answer;
+use App\Models\Question;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -77,6 +78,8 @@ class BackendAnswerController extends Controller
             $answer->user_id = $user_id;
             $answer->status = $status;
 
+            $answer->id = $this->getMaxID();
+
             $success = $answer->save();
             if ($success) {
                 return response()->json($answer);
@@ -85,6 +88,14 @@ class BackendAnswerController extends Controller
         } catch (\Exception $exception) {
             return response($exception, 400);
         }
+    }
+
+    public function getMaxID()
+    {
+        $questionID = Question::max('id') + 1;
+        $answerID = Answer::max('id') + 1;
+
+        return $questionID > $answerID ? $questionID : $answerID;
     }
 
     public function detail($id)

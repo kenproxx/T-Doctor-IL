@@ -56,9 +56,9 @@ class BackendQuestionController extends Controller
             if (!$user) {
                 return response('User not found!', 404);
             }
-
             $question->name = $user->username;
             $question->views = 0;
+            $question->id = $this->getMaxID();
 
             $success = $question->save();
             if ($success) {
@@ -68,6 +68,14 @@ class BackendQuestionController extends Controller
         } catch (\Exception $exception) {
             return response($exception, 400);
         }
+    }
+
+    public function getMaxID()
+    {
+        $questionID = Question::max('id') + 1;
+        $answerID = Answer::max('id') + 1;
+
+        return $questionID > $answerID ? $questionID : $answerID;
     }
 
     public function getAllByUserId(Request $request, $id)
