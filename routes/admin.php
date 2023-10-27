@@ -30,9 +30,6 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-Route::group(['prefix' => 'profile'], function () {
-
-});
 
 
 

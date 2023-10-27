@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class ClinicController extends Controller
 {
+    public function show($id)
+    {
+        $clinics = Clinic::find($id);
+        if (!$clinics || $clinics->status != ClinicStatus::ACTIVE) {
+            return response("Product not found", 404);
+        }
+        return response()->json($clinics,$id);
+    }
 
     public function index()
     {
