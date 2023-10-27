@@ -1977,6 +1977,7 @@ https://github.com/Viima/jquery-comments/tree/master
 
             toggleReplies: function(ev) {
                 var el = $(ev.currentTarget);
+                this.calcView(el.parents('.comment').first().data().id);
                 el.siblings('.togglable-reply').toggleClass('visible');
                 this.setToggleAllButtonText(el, true);
             },
@@ -1994,6 +1995,8 @@ https://github.com/Viima/jquery-comments/tree/master
                 } else {
                     parentId = parrent.parents('li.comment').first().data().id;
                 }
+
+                this.calcView(parentId);
 
                 // Remove existing field
                 var replyField = outermostParent.find('.child-comments > .commenting-field');
@@ -3149,6 +3152,17 @@ https://github.com/Viima/jquery-comments/tree/master
                     return isAllowedToDelete;
                 }
                 return false;
+            },
+
+            calcView: function (questionId) {
+                let url = `{{ route('examination.mentoring.calc.view', ['id' => ':id']) }}`;
+                url = url.replace(':id', questionId);
+
+                try {
+                    fetch(url)
+                } catch (error) {
+                    throw error;
+                }
             },
 
             setToggleAllButtonText: function(toggleAllButton, toggle) {
