@@ -3,6 +3,8 @@
 use App\Http\Controllers\backend\BackendAnswerController;
 use App\Http\Controllers\backend\BackendCategoryController;
 use App\Http\Controllers\backend\BackendClinicController;
+use App\Http\Controllers\backend\BackendCouponApplyController;
+use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\backend\BackendReviewController;
@@ -16,6 +18,7 @@ Route::group(['prefix' => 'products'], function () {
     Route::get('/user/{id}', [BackendProductInfoController::class, 'getByUser'])->name('api.backend.products.user');
     Route::get('/clinic/{id}', [BackendProductInfoController::class, 'getByClinic'])->name('api.backend.products.clinic');
     Route::post('/create', [BackendProductInfoController::class, 'store'])->name('api.backend.products.create');
+    Route::post('/edit/{id}', [BackendProductInfoController::class, 'update'])->name('api.backend.product.updatePost');
     Route::put('/update/{id}', [BackendProductInfoController::class, 'update'])->name('api.backend.products.update');
     Route::delete('/delete/{id}', [BackendProductInfoController::class, 'destroy'])->name('api.backend.products.delete');
 });
@@ -34,6 +37,7 @@ Route::group(['prefix' => 'clinics'], function () {
     Route::get('/detail/{id}', [BackendClinicController::class, 'detail'])->name('api.backend.clinics.detail');
     Route::post('/create', [BackendClinicController::class, 'create'])->name('api.backend.clinics.create');
     Route::put('/update/{id}', [BackendClinicController::class, 'update'])->name('api.backend.clinics.update');
+    Route::post('/edit/{id}', [BackendClinicController::class, 'update'])->name('api.backend.clinics.edit');
     Route::delete('/delete/{id}', [BackendClinicController::class, 'delete'])->name('api.backend.clinics.delete');
 });
 
@@ -80,4 +84,24 @@ Route::group(['prefix' => 'categories'], function () {
     Route::post('/create', [BackendCategoryController::class, 'create'])->name('api.backend.categories.create');
     Route::put('/update/{id}', [BackendCategoryController::class, 'update'])->name('api.backend.categories.update');
     Route::delete('/delete/{id}', [BackendCategoryController::class, 'delete'])->name('api.backend.categories.delete');
+});
+
+Route::group(['prefix' => 'coupons'], function () {
+    Route::get('/list', [BackendCouponController::class, 'getAll'])->name('api.backend.coupons.list');
+    Route::get('/detail/{id}', [BackendCouponController::class, 'detail'])->name('api.backend.coupons.detail');
+    Route::get('/code/{id}', [BackendCouponController::class, 'getByCode'])->name('api.backend.coupons.code');
+    Route::get('/user/{id}', [BackendCouponController::class, 'getAllByUserID'])->name('api.backend.coupons.user');
+    Route::get('/search', [BackendCouponController::class, 'search'])->name('api.backend.coupons.clinic');
+    Route::post('/create', [BackendCouponController::class, 'create'])->name('api.backend.coupons.create');
+    Route::put('/update/{id}', [BackendCouponController::class, 'update'])->name('api.backend.coupons.update');
+    Route::delete('/delete/{id}', [BackendCouponController::class, 'delete'])->name('api.backend.coupons.delete');
+});
+
+Route::group(['prefix' => 'coupons-apply'], function () {
+    Route::get('/list', [BackendCouponApplyController::class, 'getAll'])->name('api.backend.coupons-apply.list');
+    Route::get('/detail/{id}', [BackendCouponApplyController::class, 'detail'])->name('api.backend.coupons-apply.detail');
+    Route::get('/user/{id}', [BackendCouponApplyController::class, 'getAllByUser'])->name('api.backend.coupons-apply.user');
+    Route::post('/create', [BackendCouponApplyController::class, 'create'])->name('api.backend.coupons-apply.create');
+    Route::put('/update/{id}', [BackendCouponApplyController::class, 'update'])->name('api.backend.coupons-apply.update');
+    Route::delete('/delete/{id}', [BackendCouponApplyController::class, 'delete'])->name('api.backend.coupons-apply.delete');
 });

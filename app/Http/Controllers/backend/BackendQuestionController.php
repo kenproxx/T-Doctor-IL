@@ -28,6 +28,8 @@ class BackendQuestionController extends Controller
         if (!$question || $question->status == QuestionStatus::DELETED) {
             return response('Not found', 404);
         }
+        $question->views = $question->views + 1;
+        $question->save();
         return response()->json($question);
     }
 
@@ -40,13 +42,23 @@ class BackendQuestionController extends Controller
             $content_en = $request->input('content_en');
             $content_laos = $request->input('content_laos');
             $user_id = $request->input('user_id');
+            $category_id = $request->input('category_id');
             $status = $request->input('status');
 
             $question->content = $content;
+            $question->category_id = $category_id;
             $question->content_en = $content_en;
             $question->content_laos = $content_laos;
             $question->user_id = $user_id;
             $question->status = $status;
+
+            $user = User::find($user_id);
+            if (!$user) {
+                return response('User not found!', 404);
+            }
+
+            $question->name = $user->username;
+            $question->views = 0;
 
             $success = $question->save();
             if ($success) {
@@ -110,12 +122,14 @@ class BackendQuestionController extends Controller
             $content_en = $request->input('content_en');
             $content_laos = $request->input('content_laos');
             $user_id = $request->input('user_id');
+            $category_id = $request->input('category_id');
             $status = $request->input('status');
 
             $question->content = $content;
             $question->content_en = $content_en;
             $question->content_laos = $content_laos;
             $question->user_id = $user_id;
+            $question->category_id = $category_id;
             $question->status = $status;
 
             $success = $question->save();

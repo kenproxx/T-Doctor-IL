@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FleaMarket;
+use App\Models\ProductInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class FleaMarketController extends Controller
 {
@@ -11,15 +14,18 @@ class FleaMarketController extends Controller
      */
     public function index()
     {
-        return view('FleaMarket.flea-market');
+        $productFleaMarkets = DB::table('product_infos')->get();
+
+        return view('FleaMarket.flea-market',compact('productFleaMarkets'));
+
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function productDetail()
+    public function productDetail($id)
     {
-        return view('FleaMarket.product_details');
+        return view('FleaMarket.product_details',compact('id'));
     }
 
     /**

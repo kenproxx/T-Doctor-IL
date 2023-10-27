@@ -19,7 +19,7 @@
         <div>
             <div>
                 <label>name</label>
-                <input type="text" class="form-control" id="name" name="name" value="">
+                <input type="text" class="form-control" id="name" name="name" required value="">
             </div>
             <div>
                 <label>name_en</label>
@@ -27,7 +27,7 @@
             </div>
             <div>
                 <label>address_detail</label>
-                <input type="text" class="form-control" id="address_detail" name="address_detail"
+                <input type="text" class="form-control" id="address_detail" required name="address_detail"
                        value="">
             </div>
             <div>
@@ -54,12 +54,12 @@
             </div>
             <div>
                 <label>introduce</label>
-                <input type="text" class="form-control" id="introduce" name="introduce"
+                <input type="text" class="form-control" id="introduce" name="introduce" required
                        value="">
             </div>
             <div>
                 <label>gallery</label>
-                <input type="text" class="form-control" id="gallery" name="gallery" value="">
+                <input type="file" class="form-control" id="gallery" name="gallery[]" required multiple accept="image/*">
             </div>
             <div>
                 <label>status</label>
@@ -71,14 +71,14 @@
             </div>
             <div>
                 <label>open_date</label>
-                <input type="datetime-local" class="form-control" id="open_date" name="open_date" value="">
+                <input type="datetime-local" class="form-control" id="open_date" name="open_date" required value="">
             </div>
             <div>
                 <label>close_date</label>
                 <input type="datetime-local" class="form-control" id="close_date" name="close_date" value="">
             </div>
         </div>
-        <button type="button" class="btn btn-primary up-date-button">Lưu</button>
+        <button type="button" class="btn btn-primary up-date-button mt-4">Lưu</button>
     </form>
 
     <script>
@@ -88,31 +88,37 @@
                 const headers = {
                     'Authorization': `Bearer ${token}`
                 };
-                let item = {
-                    name: $('#name').val(),
-                    name_en: $('#name_en').val(),
-                    address_detail: $('#address_detail').val(),
-                    address_detail_en: $('#address_detail_en').val(),
-                    nation_id: $('#nation_id').val(),
-                    province_id: $('#province_id').val(),
-                    gallery: $('#gallery').val(),
-                    district_id: $('#district_id').val(),
-                    commune_id: $('#commune_id').val(),
-                    introduce: $('#introduce').val(),
-                    open_date: $('#open_date').val(),
-                    close_date: $('#close_date').val(),
-                    user_id: $('#user_id').val(),
-                    status: "ACTIVE"
-                };
+                const formData = new FormData();
+                formData.append("name", $('#name').val());
+                formData.append("name_en", $('#name_en').val());
+                formData.append("address_detail", $('#address_detail').val());
+                formData.append("address_detail_en", $('#address_detail_en').val());
+                formData.append("province_id", $('#province_id').val());
+                formData.append("nation_id", $('#nation_id').val());
+                formData.append("district_id", $('#district_id').val());
+                formData.append("commune_id", $('#commune_id').val());
+                formData.append("introduce", $('#introduce').val());
+                formData.append("open_date", $('#open_date').val());
+                formData.append("close_date", $('#close_date').val());
+                formData.append("user_id", $('#user_id').val());
+                formData.append("status", 'ACTIVE');
 
-                let value = JSON.stringify(item);
+                var filedata = document.getElementById("gallery");
+                var i = 0, len = filedata.files.length, img, reader, file;
+                for (i; i < len; i++) {
+                    file = filedata.files[i];
+                    formData.append('gallery[]', file);
+                }
 
                 try {
                     $.ajax({
                         url: `{{route('api.backend.clinics.create')}}`,
                         method: 'POST',
                         headers: headers,
-                        data: item,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: formData,
                         success: function (response) {
                             alert('success');
                             window.location.reload();

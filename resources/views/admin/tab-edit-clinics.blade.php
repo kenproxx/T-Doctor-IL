@@ -19,51 +19,57 @@
         <div>
             <div>
                 <label>name</label>
-                <input type="text" class="form-control" id="name" name="name" value="">
+                <input type="text" class="form-control" id="name" name="name" value="{{$clinics->name}}">
             </div>
             <div>
                 <label>name_en</label>
-                <input type="text" class="form-control" id="name_en" name="name_en" value="">
+                <input type="text" class="form-control" id="name_en" name="name_en" value="{{$clinics->name_en}}">
             </div>
             <div>
                 <label>address_detail</label>
                 <input type="text" class="form-control" id="address_detail" name="address_detail"
-                       value="">
+                       value="{{$clinics->address_detail}}">
             </div>
             <div>
                 <label>address_detail_en</label>
                 <input type="text" class="form-control" id="address_detail_en" name="address_detail_en"
-                       value="">
+                       value="{{$clinics->name}}">
             </div>
             <div>
                 <label>nation_id</label>
                 <input type="text" class="form-control" id="nation_id" name="nation_id"
-                       value="">
+                       value="{{$clinics->address_detail_en}}">
             </div>
             <div>
                 <label>province_id</label>
-                <input type="text" class="form-control" id="province_id" name="province_id" value="">
+                <input type="text" class="form-control" id="province_id" name="province_id" value="{{$clinics->province_id}}">
             </div>
             <div>
                 <label>district_id</label>
-                <input type="text" class="form-control" id="district_id" name="district_id" value="">
+                <input type="text" class="form-control" id="district_id" name="district_id" value="{{$clinics->district_id}}">
             </div>
             <div>
                 <label>commune_id</label>
-                <input type="text" class="form-control" id="commune_id" name="commune_id" value="">
+                <input type="text" class="form-control" id="commune_id" name="commune_id" value="{{$clinics->commune_id}}">
             </div>
             <div>
                 <label>introduce</label>
                 <input type="text" class="form-control" id="introduce" name="introduce"
-                       value="">
+                       value="{{$clinics->introduce}}">
             </div>
             <div>
                 <label>gallery</label>
-                <input type="text" class="form-control" id="gallery" name="gallery" value="">
+                <input type="file" class="form-control" id="gallery" name="gallery" >
+                @php
+                    $galleryArray = explode(',', $clinics->gallery);
+                @endphp
+                @foreach($galleryArray as $productImg)
+                    <img width="50px" src="{{$productImg}}">
+                @endforeach
             </div>
             <div>
                 <label>status</label>
-                <input type="text" class="form-control" id="status" name="status" value="">
+                <input type="text" class="form-control" id="status" name="status" value="{{$clinics->status}}">
             </div>
             <div hidden="">
                 <label>User</label>
@@ -71,14 +77,14 @@
             </div>
             <div>
                 <label>open_date</label>
-                <input type="datetime-local" class="form-control" id="open_date" name="open_date" value="">
+                <input type="datetime-local" class="form-control" id="open_date" name="open_date" value="{{$clinics->open_date}}">
             </div>
             <div>
                 <label>close_date</label>
-                <input type="datetime-local" class="form-control" id="close_date" name="close_date" value="">
+                <input type="datetime-local" class="form-control" id="close_date" name="close_date" value="{{$clinics->close_date}}">
             </div>
         </div>
-        <button type="button" class="btn btn-primary up-date-button">Lưu</button>
+        <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
     </form>
 
     <script>
@@ -88,30 +94,37 @@
                 const headers = {
                     'Authorization': `Bearer ${token}`
                 };
-                let item = {
-                    name: $('#name').val(),
-                    name_en: $('#name_en').val(),
-                    category_id: $('#category_id').val(),
-                    brand_name: $('#brand_name').val(),
-                    brand_name_en: $('#brand_name_en').val(),
-                    province_id: $('#province_id').val(),
-                    thumbnail: $('#thumbnail').val(),
-                    gallery: $('#gallery').val(),
-                    price: $('#price').val(),
-                    price_unit: $('#price_unit').val(),
-                    ads_plan: $('#ads_plan').val(),
-                    ads_period: $('#ads_period').val(),
-                    status: "ACTIVE"
-                };
+                const formData = new FormData();
+                formData.append("name", $('#name').val());
+                formData.append("name_en", $('#name_en').val());
+                formData.append("address_detail", $('#address_detail').val());
+                formData.append("address_detail_en", $('#address_detail_en').val());
+                formData.append("province_id", $('#province_id').val());
+                formData.append("nation_id", $('#nation_id').val());
+                formData.append("district_id", $('#district_id').val());
+                formData.append("commune_id", $('#commune_id').val());
+                formData.append("introduce", $('#introduce').val());
+                formData.append("open_date", $('#open_date').val());
+                formData.append("close_date", $('#close_date').val());
+                formData.append("user_id", $('#user_id').val());
+                formData.append('status', 'ACTIVE');
+                var filedata = document.getElementById("gallery");
+                var i = 0, len = filedata.files.length, img, reader, file;
+                for (i; i < len; i++) {
+                    file = filedata.files[i];
+                    formData.append('gallery[]', file);
+                }
 
-                let value = JSON.stringify(item);
 
                 try {
                     $.ajax({
-                        url: `{{route('api.backend.clinics.update',$clinics->id)}}`,
-                        method: 'PUT',
+                        url: `{{route('api.backend.clinics.edit',$clinics->id)}}`,
+                        method: 'POST',
                         headers: headers,
-                        data: item,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: formData,
                         success: function (response) {
                             alert('success');
                             window.location.reload();

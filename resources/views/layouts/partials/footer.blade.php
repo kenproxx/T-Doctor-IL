@@ -110,7 +110,8 @@
                     <li>Facebook</li>
                 </ul>
             </aside>
-            <div class="status">
+
+            <div class="status pc-hidden">
                 <input type="checkbox" id="status1" class="status_input" />
                 <div class="current_status">
                     <span class="status_color" style="--status_color: #11d10a"></span>
@@ -140,7 +141,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="status mt-3">
+            <div class="status mt-3 pc-hidden">
                 <input type="checkbox" id="status2" class="status_input" />
                 <div class="current_status">
                     <span class="status_color" style="--status_color: #11d10a"></span>
@@ -170,7 +171,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="status mt-3">
+            <div class="status mt-3 pc-hidden">
                 <input type="checkbox" id="status3" class="status_input" />
                 <div class="current_status">
                     <span class="status_color" style="--status_color: #11d10a"></span>

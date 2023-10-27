@@ -26,6 +26,8 @@ Route::post('/login', [AuthController::class, 'login'])->name('loginProcess');
 Route::post('/register', [AuthController::class, 'register'])->name('registerProcess');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logoutProcess');
 
+Route::get('', 'ProfileController@index')->name('profile');
+Route::put('', 'ProfileController@update')->name('profile.update');
 
 
 Route::group(['prefix' => 'news'], function () {
@@ -76,7 +78,7 @@ Route::group(['prefix' => 'flea-market'], function () {
     Route::get('review', [\App\Http\Controllers\FleaMarketController::class, 'review'])->name('flea.market.review');
     Route::get('sell-product', [\App\Http\Controllers\FleaMarketController::class, 'sellProduct'])->name('flea.market.sell.product');
     Route::get('edit-product', [\App\Http\Controllers\FleaMarketController::class, 'editProduct'])->name('flea.market.edit.product');
-    Route::get('product-detail', [\App\Http\Controllers\FleaMarketController::class, 'productDetail'])->name('flea.market.product.detail');
+    Route::get('product-detail/{id}', [\App\Http\Controllers\FleaMarketController::class, 'productDetail'])->name('flea.market.product.detail');
 });
 Route::group(['prefix' => 'what-free'], function () {
     Route::get('/', [\App\Http\Controllers\WhatFreeToDay::class, 'index'])->name('what.free');
