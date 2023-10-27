@@ -7,6 +7,17 @@ For all details and documentation:
 http://viima.github.io/jquery-comments/
 https://github.com/Viima/jquery-comments/tree/master
 */
+    html {
+        font-size: 18px;
+    }
+    body {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .comment-header .whitespace-nowrap {
+        white-space: nowrap;
+    }
 
     .jquery-comments * {
         box-sizing: border-box;
@@ -138,8 +149,8 @@ https://github.com/Viima/jquery-comments/tree/master
         float: left;
         width: 3.6rem;
         height: 3.6rem;
-        max-width: 50px;
-        max-height: 50px;
+        max-width: 54px;
+        max-height: 54px;
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
@@ -438,6 +449,7 @@ https://github.com/Viima/jquery-comments/tree/master
 
     .jquery-comments ul.dropdown li .name_user {
         font-weight: bold;
+        font-size: 24px;
     }
 
     .jquery-comments ul.dropdown li .details.no-email {
@@ -511,10 +523,8 @@ https://github.com/Viima/jquery-comments/tree/master
     }
 
     .jquery-comments ul.main li.comment time {
-        float: right;
         line-height: 1.4em;
-        margin-left: .5em;
-        font-size: 0.8em;
+        margin-left: 1rem;
         color: #666;
     }
 
@@ -529,6 +539,7 @@ https://github.com/Viima/jquery-comments/tree/master
 
     .jquery-comments ul.main li.comment .comment-header .name_user {
         font-weight: bold;
+        font-size: 24px;
     }
 
     .jquery-comments ul.main li.comment .comment-header .reply-to {
@@ -555,7 +566,6 @@ https://github.com/Viima/jquery-comments/tree/master
 
     .jquery-comments ul.main li.comment .wrapper{
         line-height: 1.4em;
-        overflow: hidden;
     }
 
     .jquery-comments.mobile ul.main li.comment .child-comments li.comment .wrapper{
@@ -566,6 +576,7 @@ https://github.com/Viima/jquery-comments/tree/master
     .jquery-comments ul.main li.comment .wrapper .content {
         white-space: pre-line;
         word-break: break-word;
+        font-size: 18px;
     }
 
     .jquery-comments ul.main li.comment .wrapper .content time.edited {
@@ -604,12 +615,12 @@ https://github.com/Viima/jquery-comments/tree/master
 
     /* Actions */
     .jquery-comments.mobile ul.main li.comment .actions {
-        font-size: 1em;
     }
 
     .jquery-comments ul.main li.comment .actions > * {
-        color: #999;
-        font-weight: bold;
+        color: #424242;
+        font-weight: 600;
+        font-size: 1rem;
     }
 
     .jquery-comments ul.main li.comment .actions .action {
@@ -618,7 +629,6 @@ https://github.com/Viima/jquery-comments/tree/master
         margin-left: 1em;
         margin-right: 1em;
         line-height: 1.5em;
-        font-size: 0.9em;
     }
 
     .jquery-comments ul.main li.comment .actions .action:first-child {
@@ -803,6 +813,11 @@ https://github.com/Viima/jquery-comments/tree/master
  *     https://github.com/Viima/jquery-comments/tree/master
  */
 
+    const token = `{{ $_COOKIE['accessToken'] }}`;
+    const headers = {
+        'Authorization': `Bearer ${token}`
+    };
+
     (function (factory) {
         if (typeof define === 'function' && define.amd) {
             // AMD. Register as an anonymous module.
@@ -934,7 +949,7 @@ https://github.com/Viima/jquery-comments/tree/master
                     popularText: 'Popular',
                     attachmentsText: 'Attachments',
                     sendText: 'Send',
-                    replyText: 'Reply',
+                    commentText: 'Comment',
                     editText: 'Edit',
                     editedText: 'Edited',
                     youText: 'You',
@@ -951,14 +966,15 @@ https://github.com/Viima/jquery-comments/tree/master
                     // Functionalities
                     enableReplying: true,
                     enableEditing: true,
-                    enableUpvoting: true,
+                    enableUpvoting: false,
                     enableCountView: true,
+                    enableDateView: true,
                     enableDeleting: true,
                     enableAttachments: false,
                     enableHashtags: false,
                     enablePinging: false,
                     enableDeletingCommentWithReplies: false,
-                    enableNavigation: true,
+                    enableNavigation: false,
                     postCommentOnEnter: true,
                     forceResponsive: false,
                     readOnly: false,
@@ -973,7 +989,7 @@ https://github.com/Viima/jquery-comments/tree/master
                     textareaRows: 2,
                     textareaRowsOnFocus: 2,
                     textareaMaxRows: 5,
-                    maxRepliesVisible: 2,
+                    maxRepliesVisible: 0,
 
                     fieldMappings: {
                         id: 'id',
@@ -1001,7 +1017,6 @@ https://github.com/Viima/jquery-comments/tree/master
                     timeFormatter: function(time) {return new Date(time).toLocaleDateString()}
                 }
             },
-
 
             // Initialization
             // ==============
@@ -1743,6 +1758,8 @@ https://github.com/Viima/jquery-comments/tree/master
                 // Reverse mapping
                 commentJSON = this.applyExternalMappings(commentJSON);
 
+                console.log(commentJSON);
+
                 var success = function(commentJSON) {
                     self.createComment(commentJSON);
                     commentingField.find('.close').trigger('click');
@@ -2138,6 +2155,9 @@ https://github.com/Viima/jquery-comments/tree/master
                 }
             },
 
+
+
+
             createProfilePictureElement: function(src, userId) {
                 if(src) {
                     var profilePicture = $('<div/>').css({
@@ -2157,6 +2177,8 @@ https://github.com/Viima/jquery-comments/tree/master
             createMainCommentingFieldElement: function() {
                 return this.createCommentingFieldElement(undefined, undefined, true);
             },
+
+
 
             createCommentingFieldElement: function(parentId, existingCommentId, isMain) {
                 var self = this;
@@ -2283,7 +2305,6 @@ https://github.com/Viima/jquery-comments/tree/master
                 // Populate the element
                 textareaWrapper.append(closeButton).append(textarea).append(controlRow);
                 commentingField.append(profilePicture).append(textareaWrapper);
-
 
                 if(parentId) {
 
@@ -2592,17 +2613,17 @@ https://github.com/Viima/jquery-comments/tree/master
 
                 // Comment header element
                 var commentHeaderEl = $('<div/>', {
-                    'class': 'comment-header',
+                    'class': 'comment-header pl-2',
                 });
 
                 // Name element
                 var nameEl = $('<span/>', {
-                    'class': 'name_user',
+                    'class': 'name_user whitespace-nowrap d-flex',
                     'data-user-id': commentModel.creator,
                     'text': commentModel.createdByCurrentUser ? this.options.textFormatter(this.options.youText) : commentModel.fullname
                 });
-                commentHeaderEl.append(nameEl);
 
+                commentHeaderEl.append(nameEl);
 
                 // Highlight admin names
                 if(commentModel.createdByAdmin) nameEl.addClass('highlight-font-bold');
@@ -2626,8 +2647,8 @@ https://github.com/Viima/jquery-comments/tree/master
                             replyIcon.addClass('image');
                         }
 
-                        replyTo.prepend(replyIcon);
-                        commentHeaderEl.append(replyTo);
+                        // replyTo.prepend(replyIcon);
+                        // commentHeaderEl.append(replyTo);
                     }
                 }
 
@@ -2745,16 +2766,19 @@ https://github.com/Viima/jquery-comments/tree/master
                 });
 
                 // Reply
-                var reply = $('<button/>', {
+                var comment = $('<button/>', {
                     'class': 'action reply',
                     'type': 'button',
-                    text: this.options.textFormatter(this.options.replyText)
+                    text: this.options.textFormatter(this.options.commentText),
                 });
                 // Reply
-                var view = $('<button/>', {
-                    'class': 'action reply',
-                    'type': 'text',
+                var view = $('<span/>', {
+                    'type': 'text px-1',
                     text: this.options.textFormatter("View")
+                });
+                var time_create = $('<time/>', {
+                    text: this.options.textFormatter("Date: ") + this.options.timeFormatter(commentModel.created),
+                    'data-original': commentModel.created
                 });
 
                 // Upvote icon
@@ -2770,8 +2794,9 @@ https://github.com/Viima/jquery-comments/tree/master
                 var upvotes = this.createUpvoteElement(commentModel);
 
                 // Append buttons for actions that are enabled
-                if(this.options.enableReplying) actions.append(reply);
+                if(this.options.enableReplying) actions.append(comment);
                 if(this.options.enableCountView) actions.append(view);
+                if(this.options.enableDateView) actions.append(time_create);
                 if(this.options.enableUpvoting) actions.append(upvotes);
 
                 if(commentModel.createdByCurrentUser || this.options.currentUserIsAdmin) {
@@ -2792,7 +2817,27 @@ https://github.com/Viima/jquery-comments/tree/master
                 wrapper.append(content);
                 wrapper.append(attachments);
                 wrapper.append(actions);
-                commentWrapper.append(profilePicture).append(time).append(commentHeaderEl).append(wrapper);
+
+                var headerComment = $('<div/>', {
+                    'class': 'd-flex align-items-center justify-content-between',
+                });
+
+                var avatarAndName = $('<div/>', {
+                    'class': 'd-flex align-items-center',
+                });
+
+
+                var categoryName = $('<span/>', {
+                    'class': 'name_user',
+                    'data-user-id': commentModel.created,
+                    'text': "Heathcare"
+                });
+
+                avatarAndName.append(profilePicture).append(commentHeaderEl);
+
+                headerComment.append(avatarAndName).append(categoryName);
+
+                commentWrapper.append(headerComment).append(wrapper);
                 return commentWrapper;
             },
 
