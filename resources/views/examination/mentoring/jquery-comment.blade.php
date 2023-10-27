@@ -952,7 +952,7 @@ https://github.com/Viima/jquery-comments/tree/master
                     commentText: 'Comment',
                     editText: 'Edit',
                     editedText: 'Edited',
-                    youText: 'You',
+                    youText: '{{ \App\Models\User::getNameByID(\Illuminate\Support\Facades\Auth::id()) }}',
                     saveText: 'Save',
                     deleteText: 'Delete',
                     newText: 'New',
@@ -1759,6 +1759,7 @@ https://github.com/Viima/jquery-comments/tree/master
                 commentJSON = this.applyExternalMappings(commentJSON);
 
                 console.log(commentJSON);
+                this.saveCommentToDB(commentJSON);
 
                 var success = function(commentJSON) {
                     self.createComment(commentJSON);
@@ -1775,6 +1776,40 @@ https://github.com/Viima/jquery-comments/tree/master
                 };
 
                 this.options.postComment(commentJSON, success, error);
+            },
+
+            saveCommentToDB: function (commentInput) {
+                const headers = {
+                    'Authorization': `Bearer ${token}`
+                };
+                const formData = new FormData();
+                formData.append("content", commentInput.content);
+                formData.append("content_en", commentInput.content);
+                formData.append("content_laos", commentInput.content);
+                formData.append("question_id", commentInput.parent);
+                formData.append("answer_parent", commentInput.parent);
+                formData.append("status", '{{ \App\Enums\AnswerStatus::APPROVED }}');
+                formData.append("user_id", '{{ Auth::user()->id }}');
+                formData.append("name", '{{ \App\Models\User::getNameByID(Auth::user()->id)  }}');
+
+
+                try {
+                    $.ajax({
+                        url: `{{route('api.backend.answers.create')}}`,
+                        method: 'POST',
+                        headers: headers,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: formData,
+                        success: function (response) {
+                        },
+                        error: function (exception) {
+                        }
+                    });
+                } catch (error) {
+                    throw error;
+                }
             },
 
             createComment: function(commentJSON) {
@@ -1940,8 +1975,16 @@ https://github.com/Viima/jquery-comments/tree/master
             replyButtonClicked: function(ev) {
                 var replyButton = $(ev.currentTarget);
                 var outermostParent = replyButton.parents('li.comment').last();
-                var parentId = replyButton.parents('.comment').first().data().id;
+                // var parentId = replyButton.parents('.comment').first().data().id;
 
+                var parrent = replyButton.parents('.comment');
+                var parentId = 0;
+
+                if (parrent.length == 1) {
+                    parentId = parrent.first().data().id;
+                } else {
+                    parentId = parrent.parents('li.comment').first().data().id;
+                }
 
                 // Remove existing field
                 var replyField = outermostParent.find('.child-comments > .commenting-field');
