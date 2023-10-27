@@ -14,13 +14,7 @@
                 </span>
             </div>
         </div>
-        <div class="body row">
-            @for($i = 0; $i < 6; $i++)
-                <div class="col-md-4">
-                    @include('component.clinic')
-                </div>
-            @endfor
-        </div>
+        @include('component.clinic')
     </div>
     <div class="other-clinics">
         <div class="title">
