@@ -4,7 +4,9 @@ namespace App\Http\Controllers\backend;
 
 use App\Enums\QuestionStatus;
 use App\Http\Controllers\Controller;
+use App\Models\Answer;
 use App\Models\Question;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BackendQuestionController extends Controller
@@ -162,4 +164,50 @@ class BackendQuestionController extends Controller
 //        }
 //    }
 
+    public function custom_getlist()
+    {
+        $list = [];
+
+        $listQuestion = Question::where('status', QuestionStatus::APPROVED)->get();
+
+        foreach ($listQuestion as $question) {
+            $item = [
+                'id' => $question->id,
+                'parent' => null,
+                'content' => $question->content,
+                'content_en' => $question->content_en,
+                'content_laos' => $question->content_laos,
+                'pings' => null,
+                'attachments' => '',
+                'creator' => $question->user_id,
+                'created' => $question->created_at,
+                'modified' => $question->updated_at,
+                'fullname' => User::getNameByID($question->user_id),
+                'profile_picture_url' => 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png',
+            ];
+            array_push($list, $item);
+            $listAnswer = Answer::where('question_id', $question->id)->get();
+            foreach ($listAnswer as $answer) {
+                $item = [
+                    'id' => $answer->id,
+                    'parent' => $question->id,
+                    'content' => $answer->content,
+                    'content_en' => $answer->content_en,
+                    'content_laos' => $answer->content_laos,
+                    'pings' => null,
+                    'attachments' => '',
+                    'creator' => $answer->user_id,
+                    'created' => $answer->created_at,
+                    'modified' => $answer->updated_at,
+                    'fullname' => User::getNameByID($answer->user_id),
+                    'profile_picture_url' => 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png',
+                ];
+                array_push($list, $item);
+            }
+        }
+
+
+        return response()->json($list);
+
+    }
 }
