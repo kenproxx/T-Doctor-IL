@@ -21,8 +21,9 @@
                             <div class="text-font-16 mt-4 font-14-mobi">
                                 <p><span>Product name </span><span class="red-color"> *</span></p>
                                 <div class="w-100 mt-2">
-                                    <input class="ac-email font-16-mobi" name="name" id="name" value=""
-                                           placeholder="example123" required>
+                                    <input class="ac-email font-16-mobi checkValid" required name="name" id="name"
+                                           value=""
+                                           placeholder="example123">
                                 </div>
                             </div>
                         </div>
@@ -32,18 +33,22 @@
                                     <p><span>Category </span><span class="red-color"> *</span></p>
                                     <div class="w-100 mt-md-2">
 
-                                        <select class="ac-choose font-16-mobi mt-2" name="category_id" id="category_id">
+                                        <select class="ac-choose font-16-mobi mt-2" name="category_id checkValid"
+                                                required id="category_id">
                                             <option value="">Please choose....</option>
-                                            <option value="">123</option>
+                                            <option value="1">123</option>
+                                            <option value="2">123</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="text-font-16 font-14-mobi mt-md-4 mt-3">
                                     <p><span>Location </span> <span class="red-color">*</span></p>
                                     <div class="w-100 mt-2">
-                                        <select class="ac-choose font-16-mobi mt-2" name="province_id">
+                                        <select class="ac-choose font-16-mobi mt-2" name="province_id checkValid"
+                                                required>
                                             <option value="">Please choose....</option>
-                                            <option value="">123</option>
+                                            <option value="1">123</option>
+                                            <option value="2">123</option>
                                         </select>
                                     </div>
                                 </div>
@@ -52,18 +57,22 @@
                                 <div class="text-font-16 font-14-mobi mt-md-4 mt-3">
                                     <p><span>Brand name </span></p>
                                     <div class="w-100 mt-2 d-flex col-12 p-0">
-                                        <div class="p-0 col-md-9 mt-2 col-8"><input class="web ac-nation font-16-mobi "
-                                                                                    style="max-width: 100%"
-                                                                                    name="brand_name" id="brand_name"
-                                                                                    placeholder="0123456789"></div>
-                                        <div class="pr-0 col-md-3 mt-2 col-4"><a href="" class=" no-brand ">No
-                                                Brand </a></div>
+                                        <div class="p-0 col-md-9 mt-2 col-8">
+                                            <input class="web ac-nation font-16-mobi" style="max-width: 100%"
+                                                   name="brand_name" id="brand_name" placeholder="0123456789">
+                                        </div>
+                                        <div class="pr-0 col-md-3 mt-2 col-4">
+                                            <a href="#" id="disabledInput" class="no-brand">No Brand</a>
+                                        </div>
                                     </div>
+                                    <small class="fs-12">If you don't remember the brand name, you can leave it blank or
+                                        click to select no brand</small>
                                 </div>
                                 <div class="text-font-16 font-14-mobi mt-md-4 mt-3">
                                     <p><span>Price </span> <span class="red-color">*</span></p>
                                     <div class="w-100 mt-2">
-                                        <input class="web ac-nation font-16-mobi mt-2" name="price" id="price"
+                                        <input class="web ac-nation font-16-mobi mt-2" name="price checkValid" required
+                                               id="price"
                                                placeholder="Please choose....">
                                     </div>
                                 </div>
@@ -76,7 +85,7 @@
                         <div class="text-font-24 font-14-mobi mt-md-4 mt-3">Detailed description</div>
                     </div>
                     <div class="mt-md-3 mt-2 font-16-mobi">
-                        <textarea class="ac-textarea mt-md-3" name="description" id="description"
+                        <textarea class="ac-textarea mt-md-3 checkValid" required name="description" id="description"
                                   placeholder="Enter an introduction about yourself"></textarea>
                     </div>
                     <div class="d-flex mt-2 font-10-mobi">
@@ -90,10 +99,19 @@
                     <div class="text-font-24 font-14-mobi">Photo</div>
                     <div class="d-flex mt-2">
                         <div class=" pl-0 d-flex">
-                            <div class="d-flex" id="galleryPreviews"></div>
-                            <a id="galleryButton" class="p-0"><img class=" p-0" width="200px" height="200px"
-                                                                        src="{{asset('img/flea-market/add-photo.png')}}">
-                            </a>
+{{--                            <div class="d-flex" id="galleryPreviews"></div>--}}
+{{--                            <a id="galleryButton" class="p-0"><img class=" p-0" width="200px" height="200px"--}}
+{{--                                                                        src="{{asset('img/flea-market/add-photo.png')}}">--}}
+{{--                                <input type="file" class="form-control" id="gallery" name="gallery[]" multiple accept="image/*">--}}
+{{--                            </a>--}}
+                            <div class="p-0 d-flex">
+                                <label for="gallery" class="p-0">
+                                    <img class="p-0" width="200px" height="200px" src="{{asset('img/flea-market/add-photo.png')}}">
+                                </label>
+                                <input type="file" id="gallery" name="gallery[]" style="display: none;" multiple accept="image/*">
+                                <button id="chooseImageBtn" type="button" style="display: none">Chọn ảnh</button>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -118,19 +136,19 @@
                     <p><span>Advetisement period</span><span class="red-color">*</span></p>
                     <div class="mt-2 d-flex font-12-mobi">
                         <div class="text-wrapper-input col-md-3 d-flex pl-0">
-                            <input type="radio" class="web-tick-box" name="ads_period" id="ads_period" value="1">
+                            <input type="radio" class="web-tick-box" name="ads_period" value="1">
                             <label class="ml-2"><strong>5 Day</strong></label>
                         </div>
                         <div class="col-md-3 d-flex text-wrapper-input pl-0 ">
-                            <input type="radio" class="web-tick-box" name="ads_period" id="ads_period" value="2">
+                            <input type="radio" class="web-tick-box" name="ads_period" value="2">
                             <label class=" ml-2"><strong>10 Day</strong></label>
                         </div>
                         <div class="col-md-3 d-flex text-wrapper-input pl-0">
-                            <input type="radio" class="web-tick-box" name="ads_period" id="ads_period" value="3">
+                            <input type="radio" class="web-tick-box" name="ads_period" value="3">
                             <label class=" ml-2"><strong>15 Day</strong></label>
                         </div>
                         <div class="col-md-3 d-flex text-wrapper-input pl-0">
-                            <input type="radio" class="web-tick-box" name="ads_period" id="ads_period" value="4">
+                            <input type="radio" class="web-tick-box" name="ads_period" value="4">
                             <label class=" ml-2"><strong>20 Day</strong></label>
                         </div>
                     </div>
@@ -141,7 +159,9 @@
                     <button type="submit" class="add-cv-bt w-100 apply-bt_delete">Cancel</button>
                 </div>
                 <div class="col-3">
-                    <button type="button" class="add-cv-bt w-100 apply-bt_edit create-button">Register</button>
+                    <button type="button" id="submitButton" class="add-cv-bt w-100 apply-bt_edit create-button">
+                        Register
+                    </button>
                 </div>
             </div>
         </form>
@@ -149,41 +169,91 @@
     </div>
     </body>
     <script>
-        const token = `{{ $_COOKIE['accessToken'] }}`;
-        let imgGallery = [];
-        document.getElementById('galleryButton').addEventListener('click', function () {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-            input.multiple = true;
-            // Lắng nghe sự kiện change của thẻ input
-            input.addEventListener('change', function () {
-                imgGallery = this.files;
-                const imagePreviews = document.getElementById('galleryPreviews');
-                imagePreviews.innerHTML = ''; // Xóa các hình ảnh hiển thị trước
-                // Lặp qua danh sách các tệp đã chọn
-                for (let i = 0; i < 4; i++) {
-                    const file = this.files[i];
-
-                        // Tạo một thẻ <img> để hiển thị hình ảnh
-                        const image = document.createElement('img');
-                        image.src = URL.createObjectURL(file); // Tạo URL dựa trên tệp
-                        image.alt = 'Preview Image';
-                        image.style.maxHeight = '200px';
-                        image.style.maxWidth = '200px';
-                        image.style.paddingRight = '8px';
-                        imagePreviews.appendChild(image);
-
-                }
-                console.log(imgGallery)
-            });
-            input.click();
+        document.getElementById('chooseImageBtn').addEventListener('click', function () {
+            document.getElementById('gallery').click();
         });
+
+        document.getElementById('gallery').addEventListener('change', function () {
+            // Xử lý các hình ảnh đã chọn ở đây
+            const selectedImages = this.files;
+            for (let i = 0; i < selectedImages.length; i++) {
+                console.log(`Đã chọn hình ảnh: ${selectedImages[i].name}`);
+            }
+        });
+
+    </script>
+    <script>
+        document.getElementById('disabledInput').addEventListener('click', function (event) {
+            event.preventDefault();
+
+            const inputElement = document.getElementById('brand_name');
+
+            if (inputElement.disabled) {
+                inputElement.disabled = false;
+                alert('You can enter the brand name')
+            } else {
+                inputElement.disabled = true;
+                alert('You can not enter the brand name')
+            }
+        });
+    </script>
+    <script>
+        document.getElementById('submitButton').addEventListener('click', function () {
+            const inputElements = document.getElementsByClassName('checkValid');
+            for (let i = 0; i < inputElements.length; i++) {
+                const inputElement = inputElements[i];
+                if (!inputElement.checkValidity()) {
+                    alert('Please fill out the required field in element ' + (i + 1));
+                    return;
+                }
+            }
+            alert('Form is valid. Submitting...');
+        });
+    </script>
+    <script>
+        const token = `{{ $_COOKIE['accessToken'] }}`;
+        // let imgGallery = [];
+        // document.getElementById('galleryButton').addEventListener('click', function () {
+        //     const input = document.createElement('input');
+        //     input.type = 'file';
+        //     input.accept = 'image/*';
+        //     input.multiple = true;
+        //     // Lắng nghe sự kiện change của thẻ input
+        //     input.addEventListener('change', function () {
+        //         imgGallery = this.files;
+        //         const imagePreviews = document.getElementById('galleryPreviews');
+        //         imagePreviews.innerHTML = '';
+        //
+        //         for (let i = 0; i < 4; i++) {
+        //             const file = this.files[i];
+        //
+        //                 // Tạo một thẻ <img> để hiển thị hình ảnh
+        //                 const image = document.createElement('img');
+        //                 image.src = URL.createObjectURL(file); // Tạo URL dựa trên tệp
+        //                 image.alt = 'Preview Image';
+        //                 image.style.maxHeight = '200px';
+        //                 image.style.maxWidth = '200px';
+        //                 image.style.paddingRight = '8px';
+        //                 imagePreviews.appendChild(image);
+        //         }
+        //     });
+        //     input.click();
+        // });
+        let selectedValue = '';
         document.querySelectorAll('input[name="ads_period"]').forEach(function(radio) {
             radio.addEventListener('change', function() {
                 if (this.checked) {
-                    const selectedValue = this.value;
-                    console.log('Selected value: ' + selectedValue);
+                    selectedValue = this.value;
+                    console.log(selectedValue);
+                }
+            });
+        });
+        let selectedValueAdd = '';
+        document.querySelectorAll('input[name="ads_plan"]').forEach(function (radio) {
+            radio.addEventListener('change', function () {
+                if (this.checked) {
+                    selectedValueAdd = this.value;
+                    console.log(selectedValueAdd);
                 }
             });
         });
@@ -192,25 +262,29 @@
                 const headers = {
                     'Authorization': `Bearer ${token}`
                 };
+
+                console.log(selectedValue)
                 const formData = new FormData();
                 formData.append("name", $('#name').val());
                 formData.append("name_en", $('#name').val());
                 formData.append("category_id", $('#category_id').val());
                 formData.append("brand_name", $('#brand_name').val());
                 formData.append("brand_name_en", $('#brand_name').val());
-                formData.append("province_id", '1');
+                formData.append("province_id", $('#province_id').val());
                 formData.append("price", $('#price').val());
                 formData.append("price_unit", 'VND');
-                formData.append("ads_plan", $('#ads_plan').val());
+                formData.append("ads_plan", (selectedValueAdd));
                 formData.append("description", $('#description').val());
-                formData.append("ads_period", $('#ads_period').val());
+                formData.append("ads_period", (selectedValue));
                 formData.append("user_id", {{Auth::user()->id}});
-                formData.append("gallery", imgGallery);
-
-                console.log(imgGallery)
-
+                var filedata = document.getElementById("gallery");
+                var i = 0, len = filedata.files.length, img, reader, file;
+                for (i; i < len; i++) {
+                    file = filedata.files[i];
+                    formData.append('gallery[]', file);
+                }
+                console.log('gallery[]', file);
                 formData.append('status', 'ACTIVE');
-                console.log(formData)
                 try {
                     $.ajax({
                         url: `{{route('api.backend.products.create')}}`,
@@ -225,15 +299,12 @@
                             window.location.reload();
                         },
                         error: function (exception) {
-                            console.log(exception)
                         }
                     });
                 } catch (error) {
-                    console.log(error);
                     throw error;
                 }
-            })
-
+            });
         })
     </script>
 @endsection

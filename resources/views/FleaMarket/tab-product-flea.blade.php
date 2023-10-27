@@ -4,7 +4,13 @@
 
 
 <script>
+
+    function addProductToWishList() {
+        console.log(123);
+    }
+
     $(document).ready(function () {
+
         var token = `{{ $_COOKIE['accessToken'] }}`;
         callListProduct(token);
         async function callListProduct(token) {
@@ -34,11 +40,11 @@
                 <div class="product-item">
                     <div class="img-pro">
                         <img src="${item.thumbnail}" alt="">
-                        <a class="button-heart" data-product-id="${item.id}" data-favorite="false">
+                        <a class="button-heart" data-product-id="${item.id}" data-favorite="false" onclick="addProductToWishList()">
                             <i id="bi-heart" class="bi bi-heart"></i>
                         </a>
-                        <a class="button-heart-fill" data-product-id="${item.id}" data-favorite="true">
-                            <i id="bi-heart-fill" class="bi bi-heart-fill d-none"></i>
+                        <a class="button-heart-fill" data-product-id="${item.id}" data-favorite="true" onclick="addProductToWishList()">
+                            <i id="bi-heart-fill" class="bi bi-heart-fill d-none" ></i>
                         </a>
                     </div>
                     <div class="content-pro">
@@ -60,5 +66,7 @@
 
             $('#listProducts').empty().append(html);
         }
+
+
     });
 </script>
