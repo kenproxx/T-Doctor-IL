@@ -22,9 +22,9 @@ class ClinicController extends Controller
         return view('clinics.listClinics');
     }
 
-    public function detail()
+    public function detail($id)
     {
-        return view('clinics.detailClinics');
+        return view('clinics.detailClinics',compact('id'));
     }
 
     public function create()

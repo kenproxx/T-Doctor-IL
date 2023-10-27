@@ -67,7 +67,7 @@ Route::group(['prefix' => 'medicine'], function () {
 });
 Route::group(['prefix' => 'clinic'], function () {
     Route::get('/', [\App\Http\Controllers\ClinicController::class, 'index'])->name('clinic');
-    Route::get('/detail', [\App\Http\Controllers\ClinicController::class, 'detail'])->name('clinic.detail');
+    Route::get('/detail/{id}', [\App\Http\Controllers\ClinicController::class, 'detail'])->name('clinic.detail');
 
 });
 

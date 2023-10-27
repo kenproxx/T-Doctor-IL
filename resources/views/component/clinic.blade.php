@@ -29,20 +29,20 @@
 
         async function renderClinics(res) {
             let html = ``;
+            const baseUrl = '{{ route("clinic.detail", ["id" => ":id"]) }}';
             for (let i = 0; i < res.length; i++) {
-                let urlDetail = `{{route('clinic.detail', ['id' => ':id'])}}`;
-                urlDetail = urlDetail.replace(':id', res[i].id);
                 let item = res[i];
-                console.log(res[i].id );
-
+                let urlDetail = baseUrl.replace(':id', item.id);
+                console.log(urlDetail)
                 let gallery = item.gallery;
                 let arrayGallery = gallery.split(',')
+
                 let img = ``;
                 for (let j = 0; j < arrayGallery.length; j++) {
                     img = img + `<img class="mr-2 w-auto h-100" src="${arrayGallery[j]}" alt="">`;
                 }
 
-                html = html + `<div class="col-md-4">
+                html = html + `<div class="col-md-4 mb-md-3">
     <div class="clinic-item">
         <a href="${urlDetail}">
           ${item.name}
