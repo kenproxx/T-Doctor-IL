@@ -57,6 +57,7 @@ Route::group(['prefix' => 'examination'], function () {
     Route::get('/my-personal-doctor', [\App\Http\Controllers\ExaminationController::class, 'myPersonalDoctor'])->name('examination.mypersonaldoctor');
     Route::get('/mentoring', [\App\Http\Controllers\ExaminationController::class, 'mentoring'])->name('examination.mentoring');
     Route::get('/ask-a-question', [\App\Http\Controllers\ExaminationController::class, 'createMentoring'])->name('examination.mentoring.create');
+    Route::get('/calc-view-comment/{id}', [\App\Http\Controllers\CalcViewQuestionController::class, 'calcView'])->name('examination.mentoring.calc.view');
 });
 
 Route::group(['prefix' => 'medicine'], function () {
@@ -65,6 +66,7 @@ Route::group(['prefix' => 'medicine'], function () {
     Route::get('/wish-list', [\App\Http\Controllers\MedicineController::class, 'wishList'])->name('medicine.wishList');
 
 });
+
 Route::group(['prefix' => 'clinic'], function () {
     Route::get('/', [\App\Http\Controllers\ClinicController::class, 'index'])->name('clinic');
     Route::get('/detail/{id}', [\App\Http\Controllers\ClinicController::class, 'detail'])->name('clinic.detail');
