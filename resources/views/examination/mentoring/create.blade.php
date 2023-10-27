@@ -19,7 +19,7 @@
                           placeholder="Enter question here"></textarea>
             </div>
             <div class="form-group">
-                <label for="category">Password</label>
+                <label for="category">Select Category</label>
                 <select class="custom-select" id="category">
                     <option selected value="0">Choose...</option>
                     <option value="1">Heath</option>
@@ -64,8 +64,7 @@
                     processData: false,
                     data: formData,
                     success: function (response) {
-                        alert('success');
-                        window.location.reload();
+                        window.location.href = '{{ route('examination.mentoring') }}'
                     },
                     error: function (exception) {
                     }

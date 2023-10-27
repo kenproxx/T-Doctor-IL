@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Enums\QuestionStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Answer;
+use App\Models\CalcViewQuestion;
 use App\Models\Question;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -195,9 +196,9 @@ class BackendQuestionController extends Controller
         foreach ($listQuestion as $question) {
 
             $listAnswer = Answer::where('question_id', $question->id)->get();
-
+            $question_id = $question->id;
             $item = [
-                'id' => $question->id,
+                'id' => $question_id,
                 'parent' => null,
                 'content' => $question->content,
                 'content_en' => $question->content_en,
@@ -209,7 +210,7 @@ class BackendQuestionController extends Controller
                 'modified' => $question->updated_at,
                 'fullname' => User::getNameByID($question->user_id),
                 'comment_count' => $listAnswer->count(),
-                'view_count' => $question->views,
+                'view_count' => CalcViewQuestion::getViewQuestion($question_id)->views ?? 0,
                 'profile_picture_url' => 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png',
             ];
 
