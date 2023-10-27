@@ -20,13 +20,7 @@
         <div class="title">
             Other Clinics/Pharmacies
         </div>
-        <div class="body row">
-            @for($i = 0; $i < 12; $i++)
-                <div class="col-md-4">
                     @include('component.clinic')
-                </div>
-            @endfor
-        </div>
         <div class="text-center">
             <nav aria-label="Page navigation example" class="d-flex justify-content-center">
                 <ul class="pagination">
