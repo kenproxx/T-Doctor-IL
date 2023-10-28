@@ -1,12 +1,15 @@
-<style>
-    /*jquery-comments.js 1.5.0
-
-(c) 2017 Joona Tykkyläinen, Viima Solutions Oy
-jquery-comments may be freely distributed under the MIT license.
-For all details and documentation:
-http://viima.github.io/jquery-comments/
-https://github.com/Viima/jquery-comments/tree/master
+/*!     jquery-comments.js 1.5.0
+*
+*     (c) 2017 Joona Tykkyläinen, Viima Solutions Oy
+*     jquery-comments may be freely distributed under the MIT license.
+*     For all details and documentation:
+*     http://viima.github.io/jquery-comments/
+*
+*     https://github.com/Viima/jquery-comments/tree/master
 */
+
+<style>
+
     html {
         font-size: 18px;
     }
@@ -807,17 +810,8 @@ https://github.com/Viima/jquery-comments/tree/master
 
 
 <script>
-    /*!     jquery-comments.js 1.5.0
- *
- *     (c) 2017 Joona Tykkyläinen, Viima Solutions Oy
- *     jquery-comments may be freely distributed under the MIT license.
- *     For all details and documentation:
- *     http://viima.github.io/jquery-comments/
- *
- *     https://github.com/Viima/jquery-comments/tree/master
- */
 
-    const token = `{{ $_COOKIE['accessToken'] }}`;
+    const token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
     const headers = {
         'Authorization': `Bearer ${token}`
     };
@@ -1753,7 +1747,21 @@ https://github.com/Viima/jquery-comments/tree/master
                 commentingField.remove();
             },
 
+            isLogin: function () {
+                if (!token) {
+                    swal({
+                        title: "Chưa đăng nhập",
+                        text: "Xin hãy đăng nhập trước",
+                        icon: "error",
+                        button: "OK",
+                    }).then(function () {
+                        window.location.href = '{{ route('home') }}';
+                    });
+                }
+            },
+
             postComment: function(ev) {
+                this.isLogin();
                 var self = this;
                 var sendButton = $(ev.currentTarget);
                 var commentingField = sendButton.parents('.commenting-field').first();
@@ -1767,7 +1775,6 @@ https://github.com/Viima/jquery-comments/tree/master
                 // Reverse mapping
                 commentJSON = this.applyExternalMappings(commentJSON);
 
-                console.log(commentJSON);
                 this.saveCommentToDB(commentJSON);
 
                 var success = function(commentJSON) {
@@ -1788,9 +1795,6 @@ https://github.com/Viima/jquery-comments/tree/master
             },
 
             saveCommentToDB: function (commentInput) {
-                const headers = {
-                    'Authorization': `Bearer ${token}`
-                };
                 const formData = new FormData();
                 formData.append("content", commentInput.content);
                 formData.append("content_en", commentInput.content);
@@ -1798,9 +1802,8 @@ https://github.com/Viima/jquery-comments/tree/master
                 formData.append("question_id", commentInput.parent);
                 formData.append("answer_parent", commentInput.parent);
                 formData.append("status", '{{ \App\Enums\AnswerStatus::APPROVED }}');
-                formData.append("user_id", '{{ Auth::user()->id }}');
-                formData.append("name", '{{ \App\Models\User::getNameByID(Auth::user()->id)  }}');
-
+                formData.append("user_id", '{{ Auth::user()->id ?? '' }}');
+                formData.append("name", '{{ \App\Models\User::getNameByID(Auth::user()->id ?? '' )  }}');
 
                 try {
                     $.ajax({

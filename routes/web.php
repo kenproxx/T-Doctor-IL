@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\ProductInfoController;
 use Illuminate\Support\Facades\Auth;
@@ -58,6 +59,10 @@ Route::group(['prefix' => 'examination'], function () {
     Route::get('/mentoring', [\App\Http\Controllers\ExaminationController::class, 'mentoring'])->name('examination.mentoring');
     Route::get('/ask-a-question', [\App\Http\Controllers\ExaminationController::class, 'createMentoring'])->name('examination.mentoring.create');
     Route::get('/calc-view-comment/{id}', [\App\Http\Controllers\CalcViewQuestionController::class, 'calcView'])->name('examination.mentoring.calc.view');
+});
+
+Route::group(['prefix' => 'questions'], function () {
+    Route::get('/get-list', [BackendQuestionController::class, 'custom_getlist'])->name('questions.custome.list');
 });
 
 Route::group(['prefix' => 'medicine'], function () {

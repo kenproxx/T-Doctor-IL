@@ -111,6 +111,7 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
+        setCookie('accessToken', null);
         return redirect('/');
     }
 

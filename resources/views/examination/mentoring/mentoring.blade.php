@@ -23,7 +23,7 @@
             let data;
 
             $.ajax({
-                url: `{{route('api.backend.questions.custome.list')}}`,
+                url: `{{route('questions.custome.list')}}`,
                 method: 'GET',
                 headers: headers,
                 success: function (response) {
