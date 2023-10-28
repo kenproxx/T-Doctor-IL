@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Flea Market')
 @section('content')
-    @include('layouts.partials.headerFleaMarket')
+    @include('layouts.partials.header')
     <body>
     @include('component.banner')
 
@@ -196,37 +196,40 @@
         </div>
     </div>
     </body>
-    <script>
-            let token = `{{ $_COOKIE['accessToken'] }}`;
-            let user_id = ` {{Auth::user()->id}} `;
-            console.log(token)
+{{--    <script>--}}
+{{--        if (window.location.href.indexOf("flea-market") > -1) {--}}
+{{--            --}}{{--let token = `{{ $_COOKIE['accessToken'] }}`;--}}
+{{--            --}}{{--let user_id = ` {{Auth::user()->id}} `;--}}
+{{--            // console.log(token)--}}
 
-            $('.button-heart').click(function (event) {
-                event.preventDefault();
-                console.log(111111)
-                $(this).find('.bi-heart').toggleClass('text-danger');
+{{--            $('.button-heart').click(function (event) {--}}
+{{--                event.preventDefault();--}}
+{{--                $(this).find('.bi-heart').toggleClass('text-danger');--}}
 
-                let productId = $(this).data('product-id');
-                let isFavorite = $(this).data('favorite');
+{{--                let productId = $(this).data('product-id');--}}
+{{--                let isFavorite = $(this).data('favorite');--}}
 
-                $.ajax({
-                    url: '{{ route('api.backend.wish.lists.create') }}',
-                    method: 'POST',
-                    data: {
-                        product_id: productId,
-                        user_id: user_id,
-                    },
-                    headers: {
-                        "Authorization": `Bearer ${token}`,
-                    },
-                    success: function (response) {
-                    },
-                    error: function (exception) {
-                        console.log(exception);
-                    }
-                });
-            });
-    </script>
+{{--                $.ajax({--}}
+{{--                    url: '{{ route('api.backend.wish.lists.create') }}',--}}
+{{--                    method: 'POST',--}}
+{{--                    data: {--}}
+{{--                        product_id: productId,--}}
+{{--                        user_id: user_id,--}}
+{{--                    },--}}
+{{--                    headers: {--}}
+{{--                        "Authorization": `Bearer ${token}`,--}}
+{{--                    },--}}
+{{--                    success: function (response) {--}}
+{{--                    },--}}
+{{--                    error: function (exception) {--}}
+{{--                        console.log(exception);--}}
+{{--                    }--}}
+{{--                });--}}
+{{--            });--}}
+
+{{--        }--}}
+
+{{--    </script>--}}
     <script>
         const rangeInput = document.querySelectorAll(".range-input input"),
             priceInput = document.querySelectorAll(".price-input input"),

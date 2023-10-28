@@ -3,7 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\backend\BackendQuestionController;
+use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\ProductInfoController;
 use Illuminate\Support\Facades\Auth;
@@ -77,6 +77,11 @@ Route::group(['prefix' => 'clinic'], function () {
     Route::get('/detail/{id}', [\App\Http\Controllers\ClinicController::class, 'detail'])->name('clinic.detail');
 
 });
+Route::group(['prefix' => 'product'], function () {
+    Route::get('/lists', [BackendProductInfoController::class, 'index'])->name('backend.products.list');
+
+
+});
 
 Route::group(['prefix' => 'flea-market'], function () {
     Route::get('/', [\App\Http\Controllers\FleaMarketController::class, 'index'])->name('flea-market.index');
@@ -97,7 +102,6 @@ Route::group(['prefix' => 'what-free'], function () {
     Route::get('/campaign', [\App\Http\Controllers\WhatFreeToDay::class, 'campaign'])->name('what.free.campaign');
 
 });
-
 Route::middleware(['auth'])->group(function () {
 
 });

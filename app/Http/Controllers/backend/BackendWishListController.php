@@ -90,6 +90,50 @@ class BackendWishListController extends Controller
 
     public function update(Request $request, $id)
     {
+        try {
+            $wishList = WishList::find($id);
+            $userID = $request->input('user_id');
+            $productID = $request->input('product_id');
+            if ($wishList) {
+                if (!$userID || !$productID) {
+                    return response('UserID or ProductID not found', 404);
+                }
+
+                $user = User::find($userID);
+                if (!$user || $user->status != UserStatus::ACTIVE) {
+                    return response('User not found', 404);
+                }
+
+                $product = ProductInfo::find($productID);
+                if (!$product || $product->status != ProductStatus::ACTIVE) {
+                    return response('Product not found', 404);
+                }
+
+                $wishList->user_id = $userID;
+                $wishList->product_id = $productID;
+                $wishList->isFavorite = !$wishList->isFavorite;
+
+                $success = $wishList->save();
+                if ($success) {
+                    return response()->json($wishList);
+                }
+                return response('Update error', 400);
+            }
+            else {
+                $wishList = new WishList();
+                $wishList->user_id = $userID;
+                $wishList->product_id = $productID;
+                $wishList->isFavorite = !$wishList->isFavorite;
+
+                $success = $wishList->save();
+                if ($success) {
+                    return response()->json($wishList);
+                }
+                return response('Update error', 400);
+            }
+        } catch (\Exception $exception) {
+            return response($exception, 400);
+        }
 
     }
 
