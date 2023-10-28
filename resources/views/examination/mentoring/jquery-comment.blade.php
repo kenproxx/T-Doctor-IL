@@ -1748,7 +1748,7 @@
             },
 
             isLogin: function () {
-                console.log('1')
+                console.log(token)
                 if (!token) {
                     console.log('chua dang nhap')
                     swal({
@@ -1760,7 +1760,6 @@
                         window.location.href = '{{ route('home') }}';
                     });
                 }
-                console.log(2)
             },
 
             postComment: function(ev) {
