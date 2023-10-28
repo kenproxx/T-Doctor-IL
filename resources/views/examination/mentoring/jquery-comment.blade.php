@@ -1748,9 +1748,7 @@
             },
 
             isLogin: function () {
-                console.log(token)
                 if (!token) {
-                    console.log('chua dang nhap')
                     swal({
                         title: "Chưa đăng nhập",
                         text: "Xin hãy đăng nhập trước",
