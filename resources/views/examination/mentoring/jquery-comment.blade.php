@@ -1749,6 +1749,7 @@
 
             isLogin: function () {
                 if (!token) {
+                    console.log('chua dang nhap')
                     swal({
                         title: "Chưa đăng nhập",
                         text: "Xin hãy đăng nhập trước",
@@ -1761,7 +1762,9 @@
             },
 
             postComment: function(ev) {
+                console.log('1')
                 this.isLogin();
+                console.log('2')
                 var self = this;
                 var sendButton = $(ev.currentTarget);
                 var commentingField = sendButton.parents('.commenting-field').first();
