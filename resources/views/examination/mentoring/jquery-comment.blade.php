@@ -1748,6 +1748,7 @@
             },
 
             isLogin: function () {
+                console.log('1')
                 if (!token) {
                     console.log('chua dang nhap')
                     swal({
@@ -1759,12 +1760,11 @@
                         window.location.href = '{{ route('home') }}';
                     });
                 }
+                console.log(2)
             },
 
             postComment: function(ev) {
-                console.log('1')
                 this.isLogin();
-                console.log('2')
                 var self = this;
                 var sendButton = $(ev.currentTarget);
                 var commentingField = sendButton.parents('.commenting-field').first();
