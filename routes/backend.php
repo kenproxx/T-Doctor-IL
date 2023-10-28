@@ -27,6 +27,7 @@ Route::group(['prefix' => 'wish-lists'], function () {
     Route::get('/list', [BackendWishListController::class, 'getAll'])->name('api.backend.wish.lists.list');
     Route::get('/detail/{id}', [BackendWishListController::class, 'detail'])->name('api.backend.wish.lists.detail');
     Route::post('/create', [BackendWishListController::class, 'create'])->name('api.backend.wish.lists.create');
+    Route::POST('/update/{id}', [BackendWishListController::class, 'update'])->name('api.backend.wish.lists.update');
     Route::delete('/delete/{id}', [BackendWishListController::class, 'delete'])->name('api.backend.wish.lists.delete');
     Route::delete('/delete-list', [BackendWishListController::class, 'deleteMultil'])->name('api.backend.wish.lists.delete.listId');
 });
