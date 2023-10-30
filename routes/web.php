@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\backend\BackendProductInfoController;
+use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\ProductInfoController;
 use Illuminate\Support\Facades\Auth;
