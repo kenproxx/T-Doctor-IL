@@ -9,19 +9,20 @@ use App\Models\ProductInfo;
 use App\Models\User;
 use App\Models\WishList;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class BackendWishListController extends Controller
 {
     public function getAll(Request $request)
     {
-        $userID = $request->input('user_id');
-
+//        $userID = $request->input('user_id');
+    $userID = Auth::user()->id;
         $wishLists = DB::table('wish_lists')
             ->join('users', 'users.id', '=', 'wish_lists.user_id')
             ->join('product_infos', 'product_infos.id', '=', 'wish_lists.product_id')
             ->where('wish_lists.user_id', $userID)
-            ->where('product_infos.status', ProductStatus::ACTIVE)
+            ->where('isFavorite','=', '1')
             ->select('wish_lists.*')
             ->get();
 
@@ -91,27 +92,14 @@ class BackendWishListController extends Controller
     public function update(Request $request, $id)
     {
         try {
-            $wishList = WishList::find($id);
+            $wishList = WishList::where('product_id', $id)->first();
             $userID = $request->input('user_id');
             $productID = $request->input('product_id');
             if ($wishList) {
-                if (!$userID || !$productID) {
-                    return response('UserID or ProductID not found', 404);
-                }
-
-                $user = User::find($userID);
-                if (!$user || $user->status != UserStatus::ACTIVE) {
-                    return response('User not found', 404);
-                }
-
-                $product = ProductInfo::find($productID);
-                if (!$product || $product->status != ProductStatus::ACTIVE) {
-                    return response('Product not found', 404);
-                }
-
+                $isFavorite = $wishList->isFavorite;
                 $wishList->user_id = $userID;
                 $wishList->product_id = $productID;
-                $wishList->isFavorite = !$wishList->isFavorite;
+                $wishList->isFavorite = !$isFavorite;
 
                 $success = $wishList->save();
                 if ($success) {
@@ -123,7 +111,7 @@ class BackendWishListController extends Controller
                 $wishList = new WishList();
                 $wishList->user_id = $userID;
                 $wishList->product_id = $productID;
-                $wishList->isFavorite = !$wishList->isFavorite;
+                $wishList->isFavorite = '1';
 
                 $success = $wishList->save();
                 if ($success) {

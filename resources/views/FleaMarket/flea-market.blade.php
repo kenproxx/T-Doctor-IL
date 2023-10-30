@@ -39,7 +39,7 @@
                 <form action="{{route('flea.market.my.store' )}}" class="col-md-4 flea-button mr-3">
                     <button class="flea-btn" >Go to my store</button>
                 </form>
-                <form action="{{route('flea.market.wish.list')}}" class="col-md-4 flea-button">
+                <form action="#" onclick="checkLogin()" class="col-md-4 flea-button">
                 <button class="flea-btn">Wish list</button>
                 </form>
             </div>
@@ -114,7 +114,6 @@
             <div class="col-md-9">
                 <div class="img-union"><img src="{{asset('img/flea-market/platinum.png')}}"></div>
                 @include('FleaMarket.tab-product-flea')
-
                 <div class="img-union "><img src="{{asset('img/flea-market/premium.png')}}"></div>
                 <div class="img-union"><img src="{{asset('img/flea-market/silver.png')}}"></div>
                 <div class="page row ">
@@ -196,40 +195,24 @@
         </div>
     </div>
     </body>
-{{--    <script>--}}
-{{--        if (window.location.href.indexOf("flea-market") > -1) {--}}
-{{--            --}}{{--let token = `{{ $_COOKIE['accessToken'] }}`;--}}
-{{--            --}}{{--let user_id = ` {{Auth::user()->id}} `;--}}
-{{--            // console.log(token)--}}
+    <script>
+        function getCookie(name) {
+            var value = "; " + document.cookie;
+            var parts = value.split("; " + name + "=");
+            if (parts.length === 2) return parts.pop().split(";").shift();
+        }
 
-{{--            $('.button-heart').click(function (event) {--}}
-{{--                event.preventDefault();--}}
-{{--                $(this).find('.bi-heart').toggleClass('text-danger');--}}
+        var token = getCookie('accessToken');
 
-{{--                let productId = $(this).data('product-id');--}}
-{{--                let isFavorite = $(this).data('favorite');--}}
+        function checkLogin() {
+            if (token === undefined) {
+                $('#staticBackdrop').modal('show');
+            } else {
+                window.location.href = '{{ route('flea.market.wish.list') }}';
+            }
+        }
+    </script>
 
-{{--                $.ajax({--}}
-{{--                    url: '{{ route('api.backend.wish.lists.create') }}',--}}
-{{--                    method: 'POST',--}}
-{{--                    data: {--}}
-{{--                        product_id: productId,--}}
-{{--                        user_id: user_id,--}}
-{{--                    },--}}
-{{--                    headers: {--}}
-{{--                        "Authorization": `Bearer ${token}`,--}}
-{{--                    },--}}
-{{--                    success: function (response) {--}}
-{{--                    },--}}
-{{--                    error: function (exception) {--}}
-{{--                        console.log(exception);--}}
-{{--                    }--}}
-{{--                });--}}
-{{--            });--}}
-
-{{--        }--}}
-
-{{--    </script>--}}
     <script>
         const rangeInput = document.querySelectorAll(".range-input input"),
             priceInput = document.querySelectorAll(".price-input input"),
