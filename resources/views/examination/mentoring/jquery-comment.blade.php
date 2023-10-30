@@ -10,6 +10,11 @@
 
 <style>
 
+    .form-control:focus {
+        box-shadow: none;
+        border: 1px solid #CCC !important;
+    }
+
     html {
         font-size: 18px;
     }
@@ -39,7 +44,7 @@
         text-decoration: underline;
     }
 
-    .jquery-comments .textarea, .jquery-comments input, .jquery-comments button {
+    .jquery-comments .textarea, .jquery-comments button {
         -webkit-appearance: none;
         -moz-appearance: none;
         -ms-appearance: none;
@@ -1761,7 +1766,7 @@
             },
 
             postComment: function(ev) {
-                this.isLogin();
+                // this.isLogin();
                 var self = this;
                 var sendButton = $(ev.currentTarget);
                 var commentingField = sendButton.parents('.commenting-field').first();
@@ -1803,7 +1808,12 @@
                 formData.append("answer_parent", commentInput.parent);
                 formData.append("status", '{{ \App\Enums\AnswerStatus::APPROVED }}');
                 formData.append("user_id", '{{ Auth::user()->id ?? '' }}');
-                formData.append("name", '{{ \App\Models\User::getNameByID(Auth::user()->id ?? '' )  }}');
+
+                if (!token) {
+                    formData.append("name", commentInput.name_comment);
+                } else {
+                    formData.append("name", '{{ \App\Models\User::getNameByID(Auth::user()->id ?? '' )  }}');
+                }
 
                 try {
                     $.ajax({
@@ -2329,6 +2339,12 @@
                         'multiple': 'multiple',
                         'data-role': 'none' // Prevent jquery-mobile for adding classes
                     });
+                    var inputName = $('<input/>', {
+                        'class': 'form-control',
+                        'type': 'text',
+                        'style': 'margin-bottom: 1rem;',
+                        'name': 'name_comment',
+                    });
 
                     if(this.options.uploadIconURL.length) {
                         uploadIcon.css('background-image', 'url("'+this.options.uploadIconURL+'")');
@@ -2364,6 +2380,9 @@
 
 
                 // Populate the element
+                if (!token) {
+                    textareaWrapper.append(inputName);
+                }
                 textareaWrapper.append(closeButton).append(textarea).append(controlRow);
                 commentingField.append(profilePicture).append(textareaWrapper);
 
