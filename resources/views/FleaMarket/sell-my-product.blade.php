@@ -44,7 +44,7 @@
                                 <div class="text-font-16 font-14-mobi mt-md-4 mt-3">
                                     <p><span>Location </span> <span class="red-color">*</span></p>
                                     <div class="w-100 mt-2">
-                                        <select class="ac-choose font-16-mobi mt-2" name="province_id checkValid"
+                                        <select class="ac-choose font-16-mobi mt-2" id="province_id" name="province_id checkValid"
                                                 required>
                                             <option value="">Please choose....</option>
                                             <option value="1">123</option>
@@ -99,11 +99,6 @@
                     <div class="text-font-24 font-14-mobi">Photo</div>
                     <div class="d-flex mt-2">
                         <div class=" pl-0 d-flex">
-{{--                            <div class="d-flex" id="galleryPreviews"></div>--}}
-{{--                            <a id="galleryButton" class="p-0"><img class=" p-0" width="200px" height="200px"--}}
-{{--                                                                        src="{{asset('img/flea-market/add-photo.png')}}">--}}
-{{--                                <input type="file" class="form-control" id="gallery" name="gallery[]" multiple accept="image/*">--}}
-{{--                            </a>--}}
                             <div class="p-0 d-flex">
                                 <label for="gallery" class="p-0">
                                     <img class="p-0" width="200px" height="200px" src="{{asset('img/flea-market/add-photo.png')}}">
@@ -111,7 +106,6 @@
                                 <input type="file" id="gallery" name="gallery[]" style="display: none;" multiple accept="image/*">
                                 <button id="chooseImageBtn" type="button" style="display: none">Chọn ảnh</button>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -165,22 +159,18 @@
                 </div>
             </div>
         </form>
-
     </div>
     </body>
     <script>
         document.getElementById('chooseImageBtn').addEventListener('click', function () {
             document.getElementById('gallery').click();
         });
-
         document.getElementById('gallery').addEventListener('change', function () {
             // Xử lý các hình ảnh đã chọn ở đây
             const selectedImages = this.files;
             for (let i = 0; i < selectedImages.length; i++) {
-                console.log(`Đã chọn hình ảnh: ${selectedImages[i].name}`);
             }
         });
-
     </script>
     <script>
         document.getElementById('disabledInput').addEventListener('click', function (event) {
@@ -244,7 +234,6 @@
             radio.addEventListener('change', function() {
                 if (this.checked) {
                     selectedValue = this.value;
-                    console.log(selectedValue);
                 }
             });
         });
@@ -253,7 +242,6 @@
             radio.addEventListener('change', function () {
                 if (this.checked) {
                     selectedValueAdd = this.value;
-                    console.log(selectedValueAdd);
                 }
             });
         });
@@ -263,7 +251,6 @@
                     'Authorization': `Bearer ${token}`
                 };
 
-                console.log(selectedValue)
                 const formData = new FormData();
                 formData.append("name", $('#name').val());
                 formData.append("name_en", $('#name').val());
@@ -277,13 +264,18 @@
                 formData.append("description", $('#description').val());
                 formData.append("ads_period", (selectedValue));
                 formData.append("user_id", {{Auth::user()->id}});
+                let photo = '';
                 var filedata = document.getElementById("gallery");
                 var i = 0, len = filedata.files.length, img, reader, file;
                 for (i; i < len; i++) {
                     file = filedata.files[i];
+                    if (i == 0) {
+                        photo = file;
+                    }
                     formData.append('gallery[]', file);
                 }
-                console.log('gallery[]', file);
+
+                formData.append('thumbnail', photo);
                 formData.append('status', 'ACTIVE');
                 try {
                     $.ajax({
