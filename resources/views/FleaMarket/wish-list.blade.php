@@ -7,7 +7,7 @@
     <div class="container mt-70">
         <div class="pc-hidden">@include('What-free.header-wFree')</div>
         <div class="d-flex mt-88">
-            <div class="col-md-3 mobile-hidden">
+            <div class="col-md-3  mobile-hidden">
                 <div class="border-radius ">
                     <div class="flea-text">Filter</div>
                     <div>
@@ -40,23 +40,42 @@
                     </div>
                     <div class="flea-text-sp">See all categories</div>
                 </div>
-                <div class="border-radius mt-3">
-                    <h4>Price</h4>
+                <div class="border-radius mt-3 ">
                     <div class="d-flex">
-                        <input class="flea-input-price" placeholder="$ 0">
-                        <div><img src="{{asset('img/flea-market/line.png')}}"></div>
-                        <input class="flea-input-price" placeholder="$ 0">
+                        <div class="wrapper">
+                            <header>
+                                <h2>Price</h2>
+                            </header>
+                            <div class="price-input">
+                                <div class="field">
+                                    <input type="number" class="input-min" value="0">
+                                </div>
+                                <div class="separator">-</div>
+                                <div class="field">
+                                    <input type="number" class="input-max" value="0">
+                                </div>
+                            </div>
+                            <div class="slider">
+                                <div class="progress"></div>
+                            </div>
+                            <div class="range-input">
+                                <input type="range" class="range-min" min="0" max="10000" value="2500" step="100">
+                                <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
+                            </div>
+                        </div>
                     </div>
-                    <div><img class="w-100 h-100 m-0" src="{{asset('img/flea-market/sixebar.png')}}"></div>
+                </div>
+                <div class="mt-100">
+                    <div class="flea-adv row align-items-center justify-content-center">
+                        <div class="">
+                            <img src="{{asset('img/image 16.png')}}" alt="" style="width: 270px;height: 682px">
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-9 medicine-list--item">
-                <div class="page row ">
-                    @for($i = 0; $i < 12; $i++)
-                        <div class="col-md-4 col-6 item">
-                            @include('component.product-wish')
-                        </div>
-                    @endfor
+                @include('component.product-wish')
+            </div>
                 </div>
                 <nav aria-label="Page navigation example" class="d-flex justify-content-center">
                     <ul class="pagination">
@@ -81,5 +100,48 @@
         </div>
     </div>
     </body>
+    <script>
+        const rangeInput = document.querySelectorAll(".range-input input"),
+            priceInput = document.querySelectorAll(".price-input input"),
+            range = document.querySelector(".slider .progress");
+        let priceGap = 1000;
 
+        priceInput.forEach((input) => {
+            input.addEventListener("input", (e) => {
+                let minPrice = parseInt(priceInput[0].value),
+                    maxPrice = parseInt(priceInput[1].value);
+
+                if (maxPrice - minPrice >= priceGap && maxPrice <= rangeInput[1].max) {
+                    if (e.target.className === "input-min") {
+                        rangeInput[0].value = minPrice;
+                        range.style.left = (minPrice / rangeInput[0].max) * 100 + "%";
+                    } else {
+                        rangeInput[1].value = maxPrice;
+                        range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+                    }
+                }
+            });
+        });
+
+        rangeInput.forEach((input) => {
+            input.addEventListener("input", (e) => {
+                let minVal = parseInt(rangeInput[0].value),
+                    maxVal = parseInt(rangeInput[1].value);
+
+                if (maxVal - minVal < priceGap) {
+                    if (e.target.className === "range-min") {
+                        rangeInput[0].value = maxVal - priceGap;
+                    } else {
+                        rangeInput[1].value = minVal + priceGap;
+                    }
+                } else {
+                    priceInput[0].value = minVal;
+                    priceInput[1].value = maxVal;
+                    range.style.left = (minVal / rangeInput[0].max) * 100 + "%";
+                    range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
+                }
+            });
+        });
+
+    </script>
 @endsection
