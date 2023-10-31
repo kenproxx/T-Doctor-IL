@@ -39,9 +39,9 @@
                 <form action="{{route('flea.market.my.store' )}}" class="col-md-4 flea-button mr-3">
                     <button class="flea-btn" >Go to my store</button>
                 </form>
-                <form action="#" onclick="checkLogin()" class="col-md-4 flea-button">
-                <button class="flea-btn">Wish list</button>
-                </form>
+                <a href="#" onclick="checkLogin()" class="col-md-4 flea-button flea-btn">
+                    Wish list
+                </a>
             </div>
         </div>
         <div class="d-flex mt-88">
@@ -201,7 +201,6 @@
             var parts = value.split("; " + name + "=");
             if (parts.length === 2) return parts.pop().split(";").shift();
         }
-
         var token = getCookie('accessToken');
 
         function checkLogin() {
@@ -212,13 +211,11 @@
             }
         }
     </script>
-
     <script>
         const rangeInput = document.querySelectorAll(".range-input input"),
             priceInput = document.querySelectorAll(".price-input input"),
             range = document.querySelector(".slider .progress");
         let priceGap = 1000;
-
         priceInput.forEach((input) => {
             input.addEventListener("input", (e) => {
                 let minPrice = parseInt(priceInput[0].value),
@@ -235,7 +232,6 @@
                 }
             });
         });
-
         rangeInput.forEach((input) => {
             input.addEventListener("input", (e) => {
                 let minVal = parseInt(rangeInput[0].value),
@@ -255,6 +251,5 @@
                 }
             });
         });
-
     </script>
 @endsection

@@ -16,8 +16,7 @@ class BackendWishListController extends Controller
 {
     public function getAll(Request $request)
     {
-//        $userID = $request->input('user_id');
-    $userID = Auth::user()->id;
+        $userID = $request->input('user_id');
         $wishLists = DB::table('wish_lists')
             ->join('users', 'users.id', '=', 'wish_lists.user_id')
             ->join('product_infos', 'product_infos.id', '=', 'wish_lists.product_id')
