@@ -206,15 +206,14 @@
         let imgGallery = [];
         document.getElementById('gallery').addEventListener('change', function () {
             const imagePreviews = document.getElementById('imagePreview');
-            imagePreviews.innerHTML = ''; // Xóa hình ảnh hiện tại (nếu có) khi người dùng chọn hình ảnh mới
+            imagePreviews.innerHTML = '';
 
             const selectedImages = this.files;
             for (let i = 0; i < selectedImages.length; i++) {
                 const file = this.files[i];
 
-                // Tạo một thẻ <img> để hiển thị hình ảnh
                 const image = document.createElement('img');
-                image.src = URL.createObjectURL(file); // Tạo URL dựa trên tệp
+                image.src = URL.createObjectURL(file);
                 image.alt = 'Preview Image';
                 image.style.maxHeight = '200px';
                 image.style.maxWidth = '200px';
