@@ -34,13 +34,7 @@
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="productList" role="tabpanel" aria-labelledby="productList-tab">
-                        <div class="page row">
-                            @for($i = 0; $i < 12; $i++)
-                                <div class="col-md-4 item col-6">
                                     @include('component.edit-product')
-                                </div>
-                            @endfor
-                        </div>
                     </div>
                     <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
                         @include('component.review-item')
