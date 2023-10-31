@@ -59,7 +59,7 @@ Route::group(['prefix' => 'answers'], function () {
     Route::get('/question/{id}', [BackendAnswerController::class, 'getAllByQuestion'])->name('api.backend.answers.question');
     Route::get('/parent/{id}', [BackendAnswerController::class, 'getAllByAnswer'])->name('api.backend.answers.parent');
     Route::get('/detail/{id}', [BackendAnswerController::class, 'detail'])->name('api.backend.answers.detail');
-    Route::post('/create', [BackendAnswerController::class, 'create'])->name('api.backend.answers.create');
+//    Route::post('/create', [BackendAnswerController::class, 'create'])->name('api.backend.answers.create');
     Route::put('/change/{id}', [BackendAnswerController::class, 'changeStatus'])->name('api.backend.answers.change.status');
     Route::put('/update/{id}', [BackendAnswerController::class, 'update'])->name('api.backend.answers.update');
     Route::delete('/delete/{id}', [BackendAnswerController::class, 'delete'])->name('api.backend.answers.delete');
