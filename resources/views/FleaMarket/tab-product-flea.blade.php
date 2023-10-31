@@ -6,22 +6,6 @@
 <div class="page row" id="listProducts">
 
 </div>
-<div class="listProductWishlist">
-@php
-    $isFavorites =\App\Models\WishList::where('isFavorite','=', 1)->where('user_id', '=',6)->get()->toArray();
-    foreach ($isFavorites as $isFavorite){
-    $product = \App\Models\ProductInfo::where('id', '=', $isFavorite['product_id'])->get()->toArray();
-    foreach ($product as $item){
-    }
-    }
-@endphp
-    @if(!$isFavorite['id']== $item['id'])
-        <i id="icon-heart-{{$item['id']}}" class="bi bi-heart" data-product-id="{{$item['id']}}" onclick="addProductToWishList({{$item['id']}})"></i>
-    @else
-        <i id="icon-heart-{{$item['id']}}" class="bi bi-heart-fill" style="color: red;" data-product-id="{{$item['id']}}" onclick="addProductToWishList({{$item['id']}})"></i>
-@endif
-
-</div>
 <script>
     var token = `${getCookie('accessToken')}`;
     function isLogin() {
@@ -105,16 +89,7 @@
                     <div class="img-pro">
                         <img src="${item.thumbnail}" alt="">
                         <a class="button-heart" data-favorite="0">
-
-{{--                --}}
-{{--                  <i id="bi-heart" class="bi bi-heart-fill" style="color: red;" data-product-id="${item.id}" onclick="addProductToWishList()"></i>  --}}
-
-{{--                @else--}}
                 <i id="icon-heart-${item.id}" class="${isFavorite} bi" data-product-id="${item.id}" onclick="addProductToWishList(${item.id})"></i>
-{{--                    @endif--}}
-
-
-
     </a>
                     </div>
                     <div class="content-pro">

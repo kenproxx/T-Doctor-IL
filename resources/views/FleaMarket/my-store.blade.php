@@ -46,13 +46,7 @@
                         @include('component.review-item')
                     </div>
                     <div class="tab-pane fade" id="wishList" role="tabpanel" aria-labelledby="wishList-tab">
-                        <div class="row">
-                            @for($i = 0; $i < 12; $i++)
-                                <div class="col-md-4 col-6 item">
                                     @include('component.product-wish')
-                                </div>
-                            @endfor
-                        </div>
                     </div>
                 </div>
                 <nav aria-label="Page navigation example" class="d-flex justify-content-center">
