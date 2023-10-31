@@ -88,11 +88,6 @@ Route::group(['prefix' => 'categories'], function () {
 });
 
 Route::group(['prefix' => 'coupons'], function () {
-    Route::get('/list', [BackendCouponController::class, 'getAll'])->name('api.backend.coupons.list');
-    Route::get('/detail/{id}', [BackendCouponController::class, 'detail'])->name('api.backend.coupons.detail');
-    Route::get('/code/{id}', [BackendCouponController::class, 'getByCode'])->name('api.backend.coupons.code');
-    Route::get('/user/{id}', [BackendCouponController::class, 'getAllByUserID'])->name('api.backend.coupons.user');
-    Route::get('/search', [BackendCouponController::class, 'search'])->name('api.backend.coupons.clinic');
     Route::post('/create', [BackendCouponController::class, 'create'])->name('api.backend.coupons.create');
     Route::put('/update/{id}', [BackendCouponController::class, 'update'])->name('api.backend.coupons.update');
     Route::delete('/delete/{id}', [BackendCouponController::class, 'delete'])->name('api.backend.coupons.delete');
