@@ -25,8 +25,6 @@
                 }
             });
         }
-
-
     }
     var token = `{{ $_COOKIE['accessToken'] }}`;
     $(document).ready(function () {
@@ -89,7 +87,7 @@
                         $('#listWishList').empty().append(html);
                     },
                     error: function (exception) {
-                        console.log(exception);
+                        // console.log(exception);
                     }
                 });
 
