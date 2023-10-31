@@ -5,6 +5,8 @@ namespace App\Http\Controllers\backend;
 use App\Enums\CouponApplyStatus;
 use App\Enums\CouponStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MailController;
+use App\Http\Controllers\MainController;
 use App\Models\Coupon;
 use App\Models\CouponApply;
 use Illuminate\Http\Request;
@@ -81,6 +83,12 @@ class BackendCouponApplyController extends Controller
                 }
 
                 $success = $couponApply->save();
+
+                (new MailController())->sendEmail(
+                    $email,
+                    'support.il.vietnam@gmail.com',
+                    'Register success',
+                    'Thank you for taking the time to consider our services');
 
                 if ($success) {
                     $coupon->save();
