@@ -946,7 +946,8 @@
                     closeIconURL: '',
 
                     // Strings to be formatted (for example localization)
-                    textareaPlaceholderText: 'Add a comment',
+                    textareaPlaceholderText: 'Nhập vào đây...',
+                    namePlaceholderText: 'Nhập vào tên của bạn',
                     newestText: 'Newest',
                     oldestText: 'Oldest',
                     popularText: 'Popular',
@@ -1811,19 +1812,17 @@
                 formData.append("answer_parent", commentInput.parent);
                 formData.append("status", '{{ \App\Enums\AnswerStatus::APPROVED }}');
                 formData.append("user_id", '{{ Auth::user()->id ?? '' }}');
+                formData.append("pings", '');
 
-                let url;
                 if (!token) {
                     formData.append("name", commentInput.name_comment);
-                    url = `{{route('answers.create')}}`;
                 } else {
                     formData.append("name", '{{ \App\Models\User::getNameByID(Auth::user()->id ?? '' )  }}');
-                    url = `{{route('api.backend.answers.create')}}`;
                 }
 
                 try {
                     $.ajax({
-                        url: url,
+                        url: `{{route('answers.api.create')}}`,
                         method: 'POST',
                         headers: headers,
                         contentType: false,
@@ -2350,6 +2349,7 @@
                         'type': 'text',
                         'style': 'margin-bottom: 1rem;',
                         'name': 'name_comment',
+                        'placeholder': this.options.namePlaceholderText,
                     });
 
                     if(this.options.uploadIconURL.length) {
@@ -3152,6 +3152,7 @@
                 var textarea = commentingField.find('.textarea');
                 var name_comment = commentingField.find('input.name_comment').val();
                 var time = new Date().toISOString();
+                var youText = this.options.textFormatter(this.options.youText);
 
                 var commentJSON = {
                     id: 'c' + (this.getComments().length + 1),   // Temporary id
@@ -3160,7 +3161,7 @@
                     modified: time,
                     content: this.getTextareaContent(textarea),
                     pings: this.getPings(textarea),
-                    fullname: this.options.textFormatter(this.options.youText),
+                    fullname: youText ? youText : name_comment,
                     profilePictureURL: this.options.profilePictureURL,
                     createdByCurrentUser: true,
                     upvoteCount: 0,
