@@ -31,7 +31,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logoutProcess');
 Route::get('profile', 'ProfileController@index')->name('profile');
 Route::put('profile-update', 'ProfileController@update')->name('profile.update');
 
-
 Route::group(['prefix' => 'news'], function () {
     Route::get('', [HomeController::class, 'index'])->name('index.new');
     Route::get('detail', [HomeController::class, 'detail'])->name('detail.new');
@@ -130,4 +129,8 @@ Route::group(['prefix' => 'api', 'middleware' => 'jwt'], function () {
 // Admin
 Route::group(['prefix' => 'admin'], function () {
     require_once __DIR__ . '/admin.php';
+});
+
+Route::group(['prefix' => ''], function () {
+    require_once __DIR__ . '/restapi.php';
 });

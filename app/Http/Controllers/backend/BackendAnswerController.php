@@ -52,6 +52,7 @@ class BackendAnswerController extends Controller
             $content = $request->input('content');
             $content_en = $request->input('content_en');
             $content_laos = $request->input('content_laos');
+            $pings = $request->input('pings');
             $user_id = $request->input('user_id');
             $status = $request->input('status');
 
@@ -75,6 +76,7 @@ class BackendAnswerController extends Controller
             $answer->content = $content;
             $answer->content_en = $content_en;
             $answer->content_laos = $content_laos;
+            $answer->pings = $pings;
             $answer->user_id = $user_id;
             $answer->status = $status;
 
@@ -141,6 +143,7 @@ class BackendAnswerController extends Controller
             $content = $request->input('content');
             $content_en = $request->input('content_en');
             $content_laos = $request->input('content_laos');
+            $pings = $request->input('pings');
             $user_id = $request->input('user_id');
             $status = $request->input('status');
 
@@ -164,6 +167,7 @@ class BackendAnswerController extends Controller
             $answer->content = $content;
             $answer->content_en = $content_en;
             $answer->content_laos = $content_laos;
+            $answer->pings = $pings;
             $answer->user_id = $user_id;
             $answer->status = $status;
 
