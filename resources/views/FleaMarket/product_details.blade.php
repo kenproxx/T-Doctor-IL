@@ -19,7 +19,7 @@
     {{--    @dd($productDetail)--}}
     <div class="recruitment-details ">
         <div class="container">
-            <div class="recruitment-details--title"><i class="fa-solid fa-arrow-left"></i> Product details</div>
+            <div class="recruitment-details--title"><a href="{{route('flea-market.index')}}"><i class="fa-solid fa-arrow-left"></i> Product details</a></div>
             <div class="row recruitment-details--content">
                 <div class="col-md-8 recruitment-details ">
                     @if(!empty($pr_json->thumbnail))

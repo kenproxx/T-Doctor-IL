@@ -98,8 +98,9 @@
                 <div class="">
                     <div class="text-font-24 font-14-mobi">Photo</div>
                     <div class="d-flex mt-2">
-                        <div class=" pl-0 d-flex">
+                        <div class="pl-0 d-flex">
                             <div class="p-0 d-flex">
+                                <div id="imagePreview"></div>
                                 <label for="gallery" class="p-0">
                                     <img class="p-0" width="200px" height="200px" src="{{asset('img/flea-market/add-photo.png')}}">
                                 </label>
@@ -108,6 +109,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
                 <div class="text-font-24 mt-4 col-md-12 font-14-mobi">
                     <p><span>Please choose you adertisement plan </span><span class="red-color">*</span></p>
@@ -166,7 +168,6 @@
             document.getElementById('gallery').click();
         });
         document.getElementById('gallery').addEventListener('change', function () {
-            // Xử lý các hình ảnh đã chọn ở đây
             const selectedImages = this.files;
             for (let i = 0; i < selectedImages.length; i++) {
             }
@@ -202,33 +203,26 @@
     </script>
     <script>
         const token = `{{ $_COOKIE['accessToken'] }}`;
-        // let imgGallery = [];
-        // document.getElementById('galleryButton').addEventListener('click', function () {
-        //     const input = document.createElement('input');
-        //     input.type = 'file';
-        //     input.accept = 'image/*';
-        //     input.multiple = true;
-        //     // Lắng nghe sự kiện change của thẻ input
-        //     input.addEventListener('change', function () {
-        //         imgGallery = this.files;
-        //         const imagePreviews = document.getElementById('galleryPreviews');
-        //         imagePreviews.innerHTML = '';
-        //
-        //         for (let i = 0; i < 4; i++) {
-        //             const file = this.files[i];
-        //
-        //                 // Tạo một thẻ <img> để hiển thị hình ảnh
-        //                 const image = document.createElement('img');
-        //                 image.src = URL.createObjectURL(file); // Tạo URL dựa trên tệp
-        //                 image.alt = 'Preview Image';
-        //                 image.style.maxHeight = '200px';
-        //                 image.style.maxWidth = '200px';
-        //                 image.style.paddingRight = '8px';
-        //                 imagePreviews.appendChild(image);
-        //         }
-        //     });
-        //     input.click();
-        // });
+        let imgGallery = [];
+        document.getElementById('gallery').addEventListener('change', function () {
+            const imagePreviews = document.getElementById('imagePreview');
+            imagePreviews.innerHTML = ''; // Xóa hình ảnh hiện tại (nếu có) khi người dùng chọn hình ảnh mới
+
+            const selectedImages = this.files;
+            for (let i = 0; i < selectedImages.length; i++) {
+                const file = this.files[i];
+
+                // Tạo một thẻ <img> để hiển thị hình ảnh
+                const image = document.createElement('img');
+                image.src = URL.createObjectURL(file); // Tạo URL dựa trên tệp
+                image.alt = 'Preview Image';
+                image.style.maxHeight = '200px';
+                image.style.maxWidth = '200px';
+                image.style.paddingRight = '8px';
+                imagePreviews.appendChild(image);
+            }
+        });
+
         let selectedValue = '';
         document.querySelectorAll('input[name="ads_period"]').forEach(function(radio) {
             radio.addEventListener('change', function() {
@@ -274,7 +268,6 @@
                     }
                     formData.append('gallery[]', file);
                 }
-
                 formData.append('thumbnail', photo);
                 formData.append('status', 'ACTIVE');
                 try {
