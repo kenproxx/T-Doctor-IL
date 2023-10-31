@@ -85,7 +85,7 @@ Route::group(['prefix' => 'product'], function () {
 
 Route::group(['prefix' => 'flea-market'], function () {
     Route::get('/', [\App\Http\Controllers\FleaMarketController::class, 'index'])->name('flea-market.index');
-    Route::get('wish-list', [\App\Http\Controllers\FleaMarketController::class, 'wishList'])->name('flea.market.wish.list');
+    Route::get('wish-list-flea-market', [\App\Http\Controllers\FleaMarketController::class, 'wishList'])->name('flea.market.wish.list');
     Route::get('my-store', [\App\Http\Controllers\FleaMarketController::class, 'myStore'])->name('flea.market.my.store');
     Route::get('review', [\App\Http\Controllers\FleaMarketController::class, 'review'])->name('flea.market.review');
     Route::get('sell-product', [\App\Http\Controllers\FleaMarketController::class, 'sellProduct'])->name('flea.market.sell.product');

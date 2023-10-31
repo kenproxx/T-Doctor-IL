@@ -39,6 +39,9 @@
                 headers: {
                     "Authorization": accessToken
                 },
+                data: {
+                    user_id: {{ Auth::check() ? Auth::user()->id : null }}
+                },
                 success: function (response) {
                     renderWishList(response);
                 },

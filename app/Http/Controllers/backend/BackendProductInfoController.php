@@ -6,6 +6,7 @@ use App\Enums\ProductStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Clinic;
 use App\Models\ProductInfo;
+use App\Models\WishList;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,20 @@ class BackendProductInfoController extends Controller
 {
     public function index()
     {
-        $products = ProductInfo::where('status', '!=', ProductStatus::DELETED)->get();
+        $products = ProductInfo::where('status', '!=', ProductStatus::DELETED)
+            ->get();
+
+        if (Auth::check()) {
+            $userId = Auth::user()->id;
+
+            $products->each(function ($product) use ($userId) {
+                $isFavorite = WishList::where('product_id', $product->id)
+                    ->where('user_id', $userId)
+                    ->value('isFavorite');
+
+                $product->isFavorit = $isFavorite == 1 ? true : false;
+            });
+        }
         return response()->json($products);
     }
 

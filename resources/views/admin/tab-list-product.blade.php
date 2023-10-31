@@ -85,7 +85,7 @@
                 "Authorization": accessToken
             },
             success: function (response) {
-               alert('Delete Success!');
+               // alert('Delete Success!');
                window.location.reload();
             },
             error: function (exception) {
