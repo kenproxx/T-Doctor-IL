@@ -228,7 +228,7 @@ class BackendQuestionController extends Controller
                     'creator' => $answer->user_id,
                     'created' => $answer->created_at,
                     'modified' => $answer->updated_at,
-                    'fullname' => User::getNameByID($answer->user_id),
+                    'fullname' => $answer->user_id ? User::getNameByID($answer->user_id) : $answer->name,
                     'profile_picture_url' => 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png',
                 ];
                 array_push($list, $item);

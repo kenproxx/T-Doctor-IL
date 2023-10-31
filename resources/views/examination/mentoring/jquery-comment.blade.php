@@ -946,7 +946,8 @@
                     closeIconURL: '',
 
                     // Strings to be formatted (for example localization)
-                    textareaPlaceholderText: 'Add a comment',
+                    textareaPlaceholderText: 'Nhập vào đây...',
+                    namePlaceholderText: 'Nhập vào tên của bạn',
                     newestText: 'Newest',
                     oldestText: 'Oldest',
                     popularText: 'Popular',
@@ -1009,6 +1010,7 @@
                         profilePictureURL: 'profile_picture_url',
                         comment_count: 'comment_count',
                         view_count: 'view_count',
+                        name_comment: 'name_comment',
                     },
 
                     searchUsers: function(term, success, error) {success([])},
@@ -1801,6 +1803,8 @@
 
             saveCommentToDB: function (commentInput) {
                 const formData = new FormData();
+                formData.append("_token", '{{ csrf_token() }}');
+                formData.append("content", commentInput.content);
                 formData.append("content", commentInput.content);
                 formData.append("content_en", commentInput.content);
                 formData.append("content_laos", commentInput.content);
@@ -1808,6 +1812,7 @@
                 formData.append("answer_parent", commentInput.parent);
                 formData.append("status", '{{ \App\Enums\AnswerStatus::APPROVED }}');
                 formData.append("user_id", '{{ Auth::user()->id ?? '' }}');
+                formData.append("pings", '');
 
                 if (!token) {
                     formData.append("name", commentInput.name_comment);
@@ -1817,7 +1822,7 @@
 
                 try {
                     $.ajax({
-                        url: `{{route('api.backend.answers.create')}}`,
+                        url: `{{route('answers.api.create')}}`,
                         method: 'POST',
                         headers: headers,
                         contentType: false,
@@ -2340,10 +2345,11 @@
                         'data-role': 'none' // Prevent jquery-mobile for adding classes
                     });
                     var inputName = $('<input/>', {
-                        'class': 'form-control',
+                        'class': 'form-control name_comment',
                         'type': 'text',
                         'style': 'margin-bottom: 1rem;',
                         'name': 'name_comment',
+                        'placeholder': this.options.namePlaceholderText,
                     });
 
                     if(this.options.uploadIconURL.length) {
@@ -3144,21 +3150,24 @@
 
             createCommentJSON: function(commentingField) {
                 var textarea = commentingField.find('.textarea');
+                var name_comment = commentingField.find('input.name_comment').val();
                 var time = new Date().toISOString();
+                var youText = this.options.textFormatter(this.options.youText);
 
                 var commentJSON = {
-                    id: 'c' +  (this.getComments().length + 1),   // Temporary id
+                    id: 'c' + (this.getComments().length + 1),   // Temporary id
                     parent: textarea.attr('data-parent') || null,
                     created: time,
                     modified: time,
                     content: this.getTextareaContent(textarea),
                     pings: this.getPings(textarea),
-                    fullname: this.options.textFormatter(this.options.youText),
+                    fullname: youText ? youText : name_comment,
                     profilePictureURL: this.options.profilePictureURL,
                     createdByCurrentUser: true,
                     upvoteCount: 0,
                     userHasUpvoted: false,
-                    attachments: this.getAttachmentsFromCommentingField(commentingField)
+                    attachments: this.getAttachmentsFromCommentingField(commentingField),
+                    name_comment: name_comment
                 };
                 return commentJSON;
             },
