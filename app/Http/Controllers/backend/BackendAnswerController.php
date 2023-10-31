@@ -56,6 +56,12 @@ class BackendAnswerController extends Controller
             $user_id = $request->input('user_id');
             $status = $request->input('status');
 
+            if (!$status) {
+                $status = AnswerStatus::PENDING;
+            }
+
+            $name = $request->input('name');
+
             $question_id = $request->input('question_id');
             $answer_parent = $request->input('answer_parent');
             if ($answer_parent) {
@@ -66,12 +72,15 @@ class BackendAnswerController extends Controller
                 $answer->question_id = $question_id;
             }
 
-            $user = User::find($user_id);
-            if (!$user) {
-                return response('User not found!', 404);
+            if ($name) {
+                $answer->name = $name;
+            } else {
+                $user = User::find($user_id);
+                if (!$user) {
+                    return response('User not found!', 404);
+                }
+                $answer->name = $user->username;
             }
-
-            $answer->name = $user->username;
 
             $answer->content = $content;
             $answer->content_en = $content_en;

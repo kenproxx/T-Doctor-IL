@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\backend\BackendAnswerController;
 use App\Http\Controllers\restapi\ClinicApi;
 use App\Http\Controllers\restapi\DoctorInfoApi;
 use Illuminate\Support\Facades\Route;
@@ -27,3 +28,6 @@ Route::group(['prefix' => 'doctors-info'], function () {
     Route::get('/detail/{id}', [DoctorInfoApi::class, 'detail'])->name('doctors.info.restapi.detail');
 });
 
+Route::group(['prefix' => 'api/answers'], function () {
+    Route::post('/create', [BackendAnswerController::class, 'create'])->name('answers.api.create');
+});
