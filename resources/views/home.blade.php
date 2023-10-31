@@ -10,7 +10,7 @@
                     <img src="{{asset('img/image 16.png')}}" alt="" style="width:165px; height: 313px">
                 </div>
                 <div class="section1__side_2">
-                    <img src="{{asset('img/image 16.png')}}" alt="" style="width:165px; height: 313px">
+                    <img src="{{asset('img/banner33.png')}}" alt="" style="width:165px; height: 313px">
                 </div>
 
             </div>
@@ -589,10 +589,10 @@
 
             <div class="section1__side">
                 <div class="section1__side_1">
-                    <img src="{{asset('img/image 16.png')}}" alt="" style="width:165px; height: 313px">
+                    <img src="{{asset('img/banner44.png')}}" alt="" style="width:165px; height: 313px">
                 </div>
                 <div class="section1__side_2">
-                    <img src="{{asset('img/image 16.png')}}" alt="" style="width:165px; height: 313px">
+                    <img src="{{asset('img/banner55.png')}}" alt="" style="width:165px; height: 313px">
                 </div>
             </div>
         </div>
