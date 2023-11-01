@@ -1,12 +1,9 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClinicController;
-use App\Http\Controllers\frontend\HomeController;
+use App\Http\Controllers\CouponController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductInfoController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,10 +17,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@home')->name('homeAdmin');
+Route::get('/', [HomeController::class, 'home'])->name('homeAdmin');
 Route::group(['prefix' => 'home'], function () {
-    Route::get('/list-products', 'HomeController@listProduct')->name('homeAdmin.list.product');
-    Route::get('/list-clinics', 'HomeController@listClinics')->name('homeAdmin.list.clinics');
+    Route::get('list-products', [HomeController::class, 'listProduct'])->name('homeAdmin.list.product');
+    Route::get('list-clinics', [HomeController::class, 'listClinics'])->name('homeAdmin.list.clinics');
+    Route::get('list-coupon', [HomeController::class, 'listCoupon'])->name('homeAdmin.list.coupons');
 });
 
 Route::get('/about', function () {
@@ -46,6 +44,14 @@ Route::group(['prefix' => 'clinics'], function () {
     Route::get('/create', [ClinicController::class, 'create'])->name('clinics.create.product');
     Route::get('/edit/{id}', [ClinicController::class, 'edit'])->name('clinics.edit');
     Route::put('/update/{id}', [ClinicController::class, 'update'])->name('clinics.update');
+
+});
+
+Route::group(['prefix' => 'coupon'], function () {
+    Route::get('detail/{id}', [CouponController::class, 'show'])->name('coupon.detail');
+    Route::get('create', [CouponController::class, 'create'])->name('coupon.create.product');
+    Route::get('edit/{id}', [CouponController::class, 'edit'])->name('coupon.edit');
+    Route::put('update/{id}', [CouponController::class, 'update'])->name('coupon.update');
 
 });
 

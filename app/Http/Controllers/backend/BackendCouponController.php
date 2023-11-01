@@ -10,14 +10,15 @@ use Illuminate\Http\Request;
 
 class BackendCouponController extends Controller
 {
-    public function getAll(Request $request)
+    public function getAll()
     {
-        $status = $request->input('status');
-        if ($status) {
-            $coupons = Coupon::where('status', $status)->get();
-        } else {
-            $coupons = Coupon::where('status', '!=', CouponStatus::DELETED)->get();
-        }
+        $coupons = Coupon::all();
+        return response()->json($coupons);
+    }
+
+    public function getListCouponForUser()
+    {
+        $coupons = Coupon::where('status', '=', CouponStatus::ACTIVE)->get();
         return response()->json($coupons);
     }
 
@@ -107,7 +108,7 @@ class BackendCouponController extends Controller
     {
         try {
             $coupon = Coupon::find($id);
-            if (!$coupon || $coupon->status == CouponStatus::DELETED) {
+            if (!$coupon) {
                 return response('Not found!', 404);
             }
 
@@ -154,10 +155,7 @@ class BackendCouponController extends Controller
 
         $startDate = $request->input('startDate');
         $endDate = $request->input('endDate');
-        $assign_to = $request->input('assign_to');
 
-        $registered = $request->input('registered');
-        $views = $request->input('views');
         $max_register = $request->input('max_register');
 
         $user_id = $request->input('user_id');
@@ -179,10 +177,7 @@ class BackendCouponController extends Controller
 
         $coupon->startDate = $startDate;
         $coupon->endDate = $endDate;
-        $coupon->assign_to = $assign_to;
 
-        $coupon->registered = $registered;
-        $coupon->views = $views;
         $coupon->max_register = $max_register;
 
         $coupon->user_id = $user_id;

@@ -24,7 +24,7 @@ class ProductInfoController extends Controller
 
     public function createProduct()
     {
-        return view('admin.tab-create-products');
+        return view('admin.product.tab-create-products');
     }
 
     public function edit($id)
@@ -33,6 +33,6 @@ class ProductInfoController extends Controller
         if (!$product || $product->status == ProductStatus::DELETED) {
             return redirect(route('homeAdmin.list.product'));
         }
-        return view('admin.tab-edit-product', compact('product'));
+        return view('admin.product.tab-edit-product', compact('product'));
     }
 }

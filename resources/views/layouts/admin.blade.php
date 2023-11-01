@@ -43,22 +43,28 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item {{ Nav::isRoute('home') }}">
+        <li class="nav-item {{ Nav::isRoute('homeAdmin') }}">
             <a class="nav-link" href="{{ route('homeAdmin') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>{{ __('Dashboard') }}</span></a>
         </li>
         <!-- Nav Item - List Products -->
-        <li class="nav-item {{ Nav::isRoute('home') }}">
+        <li class="nav-item {{ Nav::isRoute('homeAdmin.list.product') }}">
             <a class="nav-link" href="{{ route('homeAdmin.list.product') }}">
                 <i class="fa-regular fa-rectangle-list"></i>
                 <span>{{ __('List Products') }}</span></a>
         </li>
         <!-- Nav Item - List Clinics -->
-        <li class="nav-item {{ Nav::isRoute('home') }}">
+        <li class="nav-item {{ Nav::isRoute('homeAdmin.list.clinics') }}">
             <a class="nav-link" href="{{ route('homeAdmin.list.clinics') }}">
                 <i class="fa-solid fa-house-chimney-medical"></i>
                 <span>{{ __('List Clinics') }}</span></a>
+        </li>
+        <!-- Nav Item - List Coupon -->
+        <li class="nav-item {{ Nav::isRoute('homeAdmin.list.coupons') }}">
+            <a class="nav-link" href="{{ route('homeAdmin.list.coupons') }}">
+                <i class="fa-solid fa-house-chimney-medical"></i>
+                <span>List Coupon</span></a>
         </li>
 
         <!-- Divider -->

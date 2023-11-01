@@ -5,8 +5,8 @@
 
     </style>
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">{{ __('List products') }}</h1>
-    <a href="{{route('product.create.product')}}" class="btn btn-primary mb-3">Add</a>
+    <h1 class="h3 mb-4 text-gray-800">List Coupon</h1>
+    <a href="{{route('coupon.create.product')}}" class="btn btn-primary mb-3">Add</a>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -16,7 +16,7 @@
         </div>
     @endif
 
-    @include('admin.tab-list-product')
+    @include('admin.coupon.tab-list-coupon')
 
 
 @endsection
