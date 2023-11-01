@@ -3,7 +3,7 @@
 @section('main-content')
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">{{ __('Create') }}</h1>
+    <h1 class="h3 mb-4 text-gray-800">Edit Coupon</h1>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -12,128 +12,104 @@
             </button>
         </div>
     @endif
-    <form id="form" method="post" action="{{ route('api.backend.products.update', ['id' => $product->id]) }}" enctype="multipart/form-data">
+    <form id="form">
         @csrf
-        @method('POST')
-        <div>
-            <div>
-                <label>name</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{$product->name}}">
+        <div class="row">
+            <div class="col-sm-4"><label>tiêu đề việt</label>
+                <input type="text" class="form-control" id="title" name="title" value="{{ $coupon->title }}"></div>
+            <div class="col-sm-4"><label>tiêu đề anh</label>
+                <input type="text" class="form-control" id="title_en" name="title_en" value="{{ $coupon->title_en }}"></div>
+            <div class="col-sm-4"><label>tiêu đề lào</label>
+                <input type="text" class="form-control" id="title_laos" name="title_laos"
+                       value="{{ $coupon->title_laos }}"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4"><label>Mô tả ngắn việt</label>
+                <textarea class="form-control" name="short_description" id="short_description">{{ $coupon->short_description }}</textarea>
             </div>
-            <div>
-                <label>name_en</label>
-                <input type="text" class="form-control" id="name_en" name="name_en" value="{{$product->name_en}}">
+            <div class="col-sm-4"><label>Mô tả ngắn anh</label>
+                <textarea class="form-control" name="short_description_en" id="short_description_en">{{ $coupon->short_description_en }}</textarea>
             </div>
-            <div>
-                <label>brand_name</label>
-                <input type="text" class="form-control" id="brand_name" name="brand_name"
-                       value="{{$product->brand_name}}">
-            </div>
-            <div>
-                <label>category_id</label>
-                <input type="text" class="form-control" id="category_id" name="category_id"
-                       value="{{$product->category_id}}">
-            </div>
-            <div>
-                <label>brand_name_en</label>
-                <input type="text" class="form-control" id="brand_name_en" name="brand_name_en"
-                       value="{{$product->brand_name_en}}">
-            </div>
-            <div>
-                <label>province_id</label>
-                <input type="text" class="form-control" id="province_id" name="province_id"
-                       value="{{$product->province_id}}">
-            </div>
-            <div>
-                <label>thumbnail</label>
-                <input type="file" class="form-control" id="thumbnail" name="thumbnail" multiple accept="image/*">
-                <img width="50px" src="{{$product->thumbnail}}">
-            </div>
-            <div>
-                <label>gallery</label>
-                <input type="file" class="form-control" id="gallery" name="gallery[]" multiple accept="image/*">
-                @php
-                    $galleryArray = explode(',', $product->gallery);
-                @endphp
-                @foreach($galleryArray as $productImg)
-                    <img width="50px" src="{{$productImg}}">
-                @endforeach
-            </div>
-            <div>
-                <label>price</label>
-                <input type="text" class="form-control" id="price" name="price" value="{{$product->price}}">
-            </div>
-            <div>
-                <label>price_unit</label>
-                <input type="text" class="form-control" id="price_unit" name="price_unit"
-                       value="{{$product->price_unit}}">
-            </div>
-            <div>
-                <label>ads_plan</label>
-                <input type="text" class="form-control" id="ads_plan" name="ads_plan" value="{{$product->ads_plan}}">
-            </div>
-            <div>
-                <label>ads_period</label>
-                <input type="text" class="form-control" id="ads_period" name="ads_period"
-                       value="{{$product->ads_period}}">
-            </div>
-            <div>
-                <label>status</label>
-                <input type="text" class="form-control" id="status" name="status" value="{{$product->status}}">
-            </div>
-            <div hidden="">
-                <label>User</label>
-                <input type="text" class="form-control" id="user_id" name="user_id" value="{{Auth::user()->id}}">
+            <div class="col-sm-4"><label>Mô tả ngắn lào</label>
+                <textarea class="form-control" name="short_description_laos" id="short_description_laos">{{ $coupon->short_description_laos }}</textarea>
             </div>
         </div>
-        <button type="button" class="btn btn-primary mt-md-4" id="editProducts">Lưu</button>
+        <div class="row">
+            <div class="col-sm-4"><label>Mô tả dài việt</label>
+                <textarea class="form-control" name="description" id="description">{{ $coupon->description }}</textarea>
+            </div>
+            <div class="col-sm-4"><label>Mô tả dài anh</label>
+                <textarea class="form-control" name="description_en" id="description_en">{{ $coupon->description_en }}</textarea>
+            </div>
+            <div class="col-sm-4"><label>Mô tả dài lào</label>
+                <textarea class="form-control" name="description_laos" id="description_laos">{{ $coupon->description_laos }}</textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6"><label>Thời gian bắt đầu</label>
+                <input type="datetime-local" class="form-control" id="startDate" name="startDate" value="{{ $coupon->startDate }}"></div>
+            <div class="col-sm-6"><label>Thời gian kết thúc</label>
+                <input type="datetime-local" class="form-control" id="endDate" name="endDate" value="{{ $coupon->endDate }}"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6"><label>Số lượng đký tối đa</label>
+                <input type="number" class="form-control" id="max_register" name="max_register" value="{{ $coupon->max_register }}">
+            </div>
+            <div class="col-sm-6"><label>Trạng thái</label>
+                <select class="custom-select" id="status" name="status">
+                    <option value="{{ \App\Enums\CouponStatus::ACTIVE }}" {{ $coupon->status === \App\Enums\CouponStatus::ACTIVE ? 'selected' : '' }}>
+                        {{ \App\Enums\CouponStatus::ACTIVE }}
+                    </option>
+                    <option value="{{ \App\Enums\CouponStatus::INACTIVE }}" {{ $coupon->status === \App\Enums\CouponStatus::INACTIVE ? 'selected' : '' }}>
+                        {{ \App\Enums\CouponStatus::INACTIVE }}
+                    </option>
+                    <option value="{{ \App\Enums\CouponStatus::DELETED }}" {{ $coupon->status === \App\Enums\CouponStatus::DELETED ? 'selected' : '' }}>
+                        {{ \App\Enums\CouponStatus::DELETED }}
+                    </option>
+                </select>
+
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
     </form>
     <script>
+
         const token = `{{ $_COOKIE['accessToken'] }}`;
         $(document).ready(function () {
-            $('#editProducts').on('click', function () {
+            $('.up-date-button').on('click', function () {
                 const headers = {
                     'Authorization': `Bearer ${token}`
                 };
-                const formDataEdit = new FormData();
+                const formData = new FormData();
 
                 const fieldNames = [
-                    "name", "name_en", "category_id", "brand_name",
-                    "brand_name_en", "province_id", "price",
-                    "price_unit", "ads_plan", "ads_period", "user_id"
+                    "title", "title_en", "title_laos", "short_description",
+                    "short_description_en", "short_description_laos", "description",
+                    "description_en", "description_laos", "startDate", "endDate",
+                    "max_register", "status"
                 ];
 
                 fieldNames.forEach(fieldName => {
-                    formDataEdit.append(fieldName, $(`#${fieldName}`).val());
+                    formData.append(fieldName, $(`#${fieldName}`).val());
                 });
-
-
-                var filedata = document.getElementById("gallery");
-                var i = 0, len = filedata.files.length, file;
-                for (i; i < len; i++) {
-                    file = filedata.files[i];
-                    formDataEdit.append('gallery[]', file);
-                }
-                const photoGallery = $('#gallery')[0].files;
-                const photo = $('#thumbnail')[0].files[0];
-                formDataEdit.append('thumbnail', photo);
-                formDataEdit.append('status', 'ACTIVE');
+                formData.append("user_id", '{{ \Illuminate\Support\Facades\Auth::user()->id }}');
 
                 try {
                     $.ajax({
-                        url: `{{route('api.backend.product.updatePost',$product->id)}}`,
-                        method: 'POST',
+                        url: `{{route('api.backend.coupons.update', ['id' => $coupon->id])}}`,
+                        method: 'post',
                         headers: headers,
                         contentType: false,
                         cache: false,
                         processData: false,
-                        data: formDataEdit,
-                        success: function (response) {
+                        data: formData,
+                        success: function () {
                             alert('success');
-                            window.location.reload();
+                            window.location.href = '/admin/home/list-coupon';
                         },
                         error: function (exception) {
-                            console.log(exception)
+                            console.log(exception);
                         }
                     });
                 } catch (error) {

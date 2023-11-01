@@ -10,12 +10,12 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Thumbnail</th>
-            <th scope="col">Gallery</th>
-            <th scope="col">Name</th>
-            <th scope="col">Location</th>
-            <th scope="col">Prise</th>
-            <th scope="col">Edit</th>
+            <th scope="col">Tiêu đề</th>
+            <th scope="col">Mô tả ngắn</th>
+            <th scope="col">Lượng người đăng ký</th>
+            <th scope="col">trạng thái</th>
+            <th scope="col">Thời hạn</th>
+            <th scope="col">Thao tác</th>
         </tr>
         </thead>
         <tbody id="ProductsAdmin">
@@ -31,12 +31,13 @@
         async function callListProduct(token) {
             let accessToken = `Bearer ` + token;
             await $.ajax({
-                url: `{{route('api.backend.products.list')}}`,
+                url: `{{route('api.backend.coupons.list')}}`,
                 method: 'GET',
                 headers: {
                     "Authorization": accessToken
                 },
                 success: function (response) {
+                    console.log(response)
                     renderProduct(response);
                 },
                 error: function (exception) {
@@ -55,28 +56,22 @@
             let item = res[i];
             let rowNumber = i + 1;
 
-            let gallery = item.gallery;
-            let arrayGallery = gallery.split(',')
-            let img = ``;
-            for (let j = 0; j < arrayGallery.length; j++) {
-                img = img + `<img class="mr-2 w-auto h-100" src="${arrayGallery[j]}" alt="">`;
-            }
             html = html + `<tr>
-            <th scope="row">${rowNumber}</th>
-            <td><img class="mr-2 w-auto h-100" src="${item.thumbnail}" alt=""></td>
-            <td>${img}</td>
-            <td>${item.name}</td>
-            <td>${item.province_id}</td>
-            <td>${item.price} ${item.price_unit}</td>
+            <th scope="row">${ i + 1 }</th>
+            <td>${item.title}</td>
+            <td>${item.short_description}</td>
+            <td>${item.registered} / ${item.max_register}</td>
+            <td>${item.status} </td>
+            <td>${item.startDate} - ${item.endDate}</td>
             <td><a href="${urlEdit}"> Edit</a> | <a href="#" onclick="checkDelete(${item.id})">Delete</a></td>
         </tr>`;
         }
         await $('#ProductsAdmin').empty().append(html);
     }
 
-    async function deleteProduct(token, id) {
+    async function deleteCoupon(token, id) {
         let accessToken = `Bearer ` + token;
-        let urlDelete = `{{route('api.backend.products.delete', ['id' => ':id'])}}`;
+        let urlDelete = `{{route('api.backend.coupons.delete', ['id' => ':id'])}}`;
         urlDelete = urlDelete.replace(':id', id);
         await $.ajax({
             url: urlDelete,
@@ -85,7 +80,7 @@
                 "Authorization": accessToken
             },
             success: function (response) {
-               // alert('Delete Success!');
+               alert('Delete Success!');
                window.location.reload();
             },
             error: function (exception) {
@@ -96,7 +91,7 @@
 
     function checkDelete(value) {
         if (confirm("Press a button!") == true) {
-            deleteProduct(token, value)
+            deleteCoupon(token, value)
         }
     }
 

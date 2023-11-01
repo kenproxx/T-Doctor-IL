@@ -34,9 +34,9 @@ Route::group(['prefix' => 'api/answers'], function () {
 });
 
 Route::group(['prefix' => 'coupons'], function () {
-    Route::get('/list', [BackendCouponController::class, 'getAll'])->name('api.backend.coupons.list');
-    Route::get('/detail/{id}', [BackendCouponController::class, 'detail'])->name('api.backend.coupons.detail');
-    Route::get('/code/{id}', [BackendCouponController::class, 'getByCode'])->name('api.backend.coupons.code');
-    Route::get('/user/{id}', [BackendCouponController::class, 'getAllByUserID'])->name('api.backend.coupons.user');
-    Route::get('/search', [BackendCouponController::class, 'search'])->name('api.backend.coupons.clinic');
+    Route::get('/list', [BackendCouponController::class, 'getListCouponForUser'])->name('coupons.list');
+    Route::get('/detail/{id}', [BackendCouponController::class, 'detail'])->name('coupons.detail');
+    Route::get('/code/{id}', [BackendCouponController::class, 'getByCode'])->name('coupons.code');
+    Route::get('/user/{id}', [BackendCouponController::class, 'getAllByUserID'])->name('coupons.user');
+    Route::get('/search', [BackendCouponController::class, 'search'])->name('coupons.clinic');
 });

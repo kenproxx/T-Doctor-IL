@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\ClinicStatus;
+use App\Enums\CouponStatus;
 use App\Models\Coupon;
 
 class CouponController extends Controller
 {
     public function show($id)
     {
-        $clinics = Coupon::find($id);
-        if (!$clinics || $clinics->status != ClinicStatus::ACTIVE) {
-            return response("Product not found", 404);
+        $coupon = Coupon::find($id);
+        if (!$coupon || $coupon->status != CouponStatus::ACTIVE) {
+            return response("coupon not found", 404);
         }
-        return response()->json($clinics,$id);
+        return response()->json($coupon,$id);
     }
 
     public function index()
@@ -33,10 +33,10 @@ class CouponController extends Controller
 
     public function edit($id)
     {
-        $clinics = Coupon::find($id);
-        if (!$clinics || $clinics->status != ClinicStatus::ACTIVE) {
-            return response("Product not found", 404);
+        $coupon = Coupon::find($id);
+        if (!$coupon) {
+            return response("coupon not found", 404);
         }
-        return view('admin.coupon.tab-edit-coupon',compact('clinics'));
+        return view('admin.coupon.tab-edit-coupon',compact('coupon'));
     }
 }
