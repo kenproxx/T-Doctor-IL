@@ -16,7 +16,7 @@
         </div>
     @endif
 
-    @include('admin.tab-list-product')
+    @include('admin.product.tab-list-product')
 
 
 @endsection
