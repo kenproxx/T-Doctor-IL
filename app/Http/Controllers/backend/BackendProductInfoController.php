@@ -203,6 +203,7 @@ class BackendProductInfoController extends Controller
             $brand_name = $request->input('brand_name');
             $brand_name_en = $request->input('brand_name_en');
             $province_id = $request->input('province_id');
+            $description = $request->input('description');
 
             if ($request->hasFile('thumbnail')) {
                 $item = $request->file('thumbnail');
@@ -241,6 +242,7 @@ class BackendProductInfoController extends Controller
             $product->price_unit = $price_unit;
             $product->ads_plan = $ads_plan;
             $product->ads_period = $ads_period;
+            $product->description = $description;
             $product->status = $status;
             $product->updated_by = $userID;
 
