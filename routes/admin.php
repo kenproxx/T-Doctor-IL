@@ -22,6 +22,7 @@ Route::group(['prefix' => 'home'], function () {
     Route::get('list-products', [HomeController::class, 'listProduct'])->name('homeAdmin.list.product');
     Route::get('list-clinics', [HomeController::class, 'listClinics'])->name('homeAdmin.list.clinics');
     Route::get('list-coupon', [HomeController::class, 'listCoupon'])->name('homeAdmin.list.coupons');
+    Route::get('list-doctor', [HomeController::class, 'listDoctor'])->name('homeAdmin.list.doctors');
 });
 
 Route::get('/about', function () {
@@ -52,6 +53,13 @@ Route::group(['prefix' => 'coupon'], function () {
     Route::get('create', [CouponController::class, 'create'])->name('coupon.create.product');
     Route::get('edit/{id}', [CouponController::class, 'edit'])->name('coupon.edit');
     Route::put('update/{id}', [CouponController::class, 'update'])->name('coupon.update');
+
+});
+Route::group(['prefix' => 'doctor'], function () {
+    Route::get('detail/{id}', [CouponController::class, 'show'])->name('doctor.detail');
+    Route::get('create', [CouponController::class, 'create'])->name('doctor.create.product');
+    Route::get('edit/{id}', [CouponController::class, 'edit'])->name('doctor.edit');
+    Route::put('update/{id}', [CouponController::class, 'update'])->name('doctor.update');
 
 });
 
