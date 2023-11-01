@@ -60,6 +60,12 @@
                 <i class="fa-solid fa-house-chimney-medical"></i>
                 <span>{{ __('List Clinics') }}</span></a>
         </li>
+        <!-- Nav Item - List Coupon -->
+        <li class="nav-item {{ Nav::isRoute('home') }}">
+            <a class="nav-link" href="{{ route('homeAdmin.list.coupons') }}">
+                <i class="fa-solid fa-house-chimney-medical"></i>
+                <span>List Coupon</span></a>
+        </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
