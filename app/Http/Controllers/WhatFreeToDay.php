@@ -10,7 +10,7 @@ class WhatFreeToDay extends Controller
 {
     public function index()
     {
-        $coupons = Coupon::where('status', '!=', CouponStatus::DELETED)->get();
+        $coupons = Coupon::where('status', '=', CouponStatus::ACTIVE)->get();
         return view('What-free.what-free', compact('coupons'));
     }
 

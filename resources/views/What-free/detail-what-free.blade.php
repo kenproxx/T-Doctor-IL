@@ -121,7 +121,7 @@
                             </div>
                             <div>
                                 <div class="flea-prise">Apply motivation</div>
-                                <textarea class="form-control" placeholder="Please let me use your service" name="content" id="content"></textarea>
+                                <textarea class="form-control" placeholder="Please let me use your service" name="content" id="content_"></textarea>
                             </div>
                         </div>
                         <input type="hidden" value="{{ $coupon->id }}" name="coupon_id" id="coupon_id">
@@ -156,13 +156,13 @@
                 const formData = new FormData();
 
                 const fieldNames = [
-                    "name", "email", "phone", "content", "coupon_id", "_token"
+                    "name", "email", "phone", "coupon_id", "_token"
                 ];
-
                 fieldNames.forEach(fieldName => {
                     formData.append(fieldName, $(`#${fieldName}`).val());
                 });
                 formData.append("user_id", '{{ \Illuminate\Support\Facades\Auth::user()->id }}');
+                formData.append("content", $(`#content_`).val());
 
                 try {
                     $.ajax({
@@ -175,7 +175,7 @@
                         data: formData,
                         success: function () {
                             alert('success');
-                            window.location.href = '/admin/home/list-coupon'
+                            window.location.reload();
                         },
                         error: function (exception) {
                             console.log(exception)
