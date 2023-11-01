@@ -39,4 +39,8 @@ class HomeController extends Controller
     {
         return view('admin.coupon.list-coupon');
     }
+    public function listDoctor()
+    {
+        return view('admin.product.list-product');
+    }
 }

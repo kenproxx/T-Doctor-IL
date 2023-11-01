@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\DoctorInfoStatus;
 use App\Models\DoctorInfo;
 use Illuminate\Http\Request;
 
@@ -15,51 +16,28 @@ class DoctorInfoController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    public function show($id)
+    {
+        $coupon = DoctorInfo::find($id);
+        if (!$coupon || $coupon->status != DoctorInfoStatus::ACTIVE) {
+            return response("coupon not found", 404);
+        }
+        return response()->json($coupon,$id);
+    }
+
+
+
     public function create()
     {
-        //
+        return view('admin.doctor.tab-create-doctor');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function edit($id)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(DoctorInfo $doctorInfo)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(DoctorInfo $doctorInfo)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, DoctorInfo $doctorInfo)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(DoctorInfo $doctorInfo)
-    {
-        //
+        $doctor = DoctorInfo::find($id);
+        if (!$doctor) {
+            return response("doctor not found", 404);
+        }
+        return view('admin.doctor.tab-edit-doctor',compact('doctor'));
     }
 }
