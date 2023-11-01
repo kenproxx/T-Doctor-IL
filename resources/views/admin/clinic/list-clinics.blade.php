@@ -16,7 +16,7 @@
         </div>
     @endif
 
-    @include('admin.tab-list-clinics')
+    @include('admin.clinic.tab-list-clinics')
 
 
 @endsection

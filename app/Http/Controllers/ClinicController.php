@@ -29,7 +29,7 @@ class ClinicController extends Controller
 
     public function create()
     {
-        return view('admin.tab-create-clinics');
+        return view('admin.clinic.tab-create-clinics');
     }
 
     public function edit($id)
@@ -38,6 +38,6 @@ class ClinicController extends Controller
         if (!$clinics || $clinics->status != ClinicStatus::ACTIVE) {
             return response("Product not found", 404);
         }
-        return view('admin.tab-edit-clinics',compact('clinics'));
+        return view('admin.clinic.tab-edit-clinics',compact('clinics'));
     }
 }
