@@ -66,8 +66,9 @@ class FleaMarketController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function editProduct()
+    public function editProduct($id)
     {
-        return view('FleaMarket.edit-product');
+        $e_product = ProductInfo::find($id);
+        return view('FleaMarket.edit-product',compact('e_product'));
     }
 }
