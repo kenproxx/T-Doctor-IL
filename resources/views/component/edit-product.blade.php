@@ -42,7 +42,7 @@
                     },
                     success: function (product) {
                         let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`.replace(':id', product.id);
-                        let urlDelete = `{{ route('api.backend.products.delete', ['id' => ':id']) }}`.replace(':id', product.id);
+                        let urlEdit = `{{ route('flea.market.edit.product', ['id' => ':id']) }}`.replace(':id', product.id);
                         html += `
                         <div class="col-md-4 col-6 item">
                             <div class="product-item">
@@ -64,7 +64,7 @@
 
                                     <div class="justify-content-between edit-button">
                                         <a onclick="deleteProduct(${product.id})" class="apply-bt apply-bt_delete w-45 align-items-center justify-content-center d-flex">Delete</a>
-                                        <form action="{{ route('recruitment.edit.cv') }}" class="w-45">
+                                        <form action="${urlEdit}" class="w-45">
                                             <button type="submit" class="apply-bt apply-bt_edit w-100">Edit</button>
                                         </form>
                                     </div>
