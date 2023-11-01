@@ -29,10 +29,14 @@ class HomeController extends Controller
 
     public function listProduct()
     {
-        return view('admin.list-product');
+        return view('admin.product.list-product');
     }
     public function listClinics()
     {
-        return view('admin.list-clinics');
+        return view('admin.clinic.list-clinics');
+    }
+    public function listCoupon()
+    {
+        return view('admin.coupon.list-coupon');
     }
 }
