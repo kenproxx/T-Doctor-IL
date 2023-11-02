@@ -112,7 +112,7 @@
                                 </div>
                                 <div class="div-5">
                                     <div class="text-wrapper-3">Email</div>
-                                    <input class="form-control" type="text" placeholder="example123" name="email" id="email">
+                                    <input class="form-control" type="text" placeholder="example123" name="email_" id="email_">
                                 </div>
                                 <div class="div-5">
                                     <div class="text-wrapper-3">Contact number</div>
@@ -160,11 +160,12 @@
                 const formData = new FormData();
 
                 const fieldNames = [
-                    "name", "email", "phone", "coupon_id", "_token"
+                    "name", "phone", "coupon_id", "_token"
                 ];
                 fieldNames.forEach(fieldName => {
                     formData.append(fieldName, $(`#${fieldName}`).val());
                 });
+                formData.append("email", $(`#email_`).val());
                 formData.append("user_id", '{{ \Illuminate\Support\Facades\Auth::user()->id ?? '' }}');
                 formData.append("content", $(`#content_`).val());
 
