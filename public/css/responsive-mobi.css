@@ -331,7 +331,6 @@ img {
   /* FLEA MARKET */
   .container .img-union {
     margin-bottom: 16px;
-    margin-top: 45px;
   }
   .container .recruitment-details .border-radius-1px img {
     width: auto;
@@ -356,6 +355,9 @@ img {
   .container .item-detail img {
     width: auto;
     height: 100%;
+  }
+  .container .mw-140px {
+    max-width: 140px;
   }
   .container .item img {
     width: 100%;

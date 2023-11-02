@@ -41,6 +41,6 @@ class HomeController extends Controller
     }
     public function listDoctor()
     {
-        return view('admin.product.list-product');
+        return view('admin.doctor.list-doctors');
     }
 }

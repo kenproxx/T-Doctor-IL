@@ -3,12 +3,10 @@
 @section('content')
     @include('layouts.partials.header')
     @include('component.banner')
-
     @php
         $pr = (new \App\Http\Controllers\backend\BackendProductInfoController())->show($id);
         $pr_json = json_decode($pr->getContent());
         $galleryArray = explode(',', $pr_json->gallery);
-
     @endphp
     <style>
         .selected {
@@ -34,10 +32,9 @@
                     @endif
                     <div class="list col-2 col-md-12 mt-md-3">
                         @foreach($galleryArray as $pr_gallery)
-                            <div
-                                class="item-detail d-flex justify-content-center  border-radius-1px color-Grey-Dark mr-md-3">
+                            <div class="item-detail d-flex justify-content-center  border-radius-1px color-Grey-Dark mr-md-3">
                                 <img style="width: auto; height: 100%" src="{{asset($pr_gallery)}}" alt=""
-                                     class="border">
+                                     class="border mw-140px">
                             </div>
                         @endforeach
                     </div>
@@ -74,7 +71,7 @@
                                     {{$pr_json->brand_name}}</strong></p>
                         </div>
                         <div class="div-7 d-flex justify-content-between">
-                            <a href="" class="div-wrapper">
+                            <a href="{{route('flea.market.my.store')}}" class="div-wrapper">
                                 Visit store
                             </a>
                             <button id="button-apply" class="text-wrapper-5">Send message</button>

@@ -31,7 +31,7 @@
         async function callListProduct(token) {
             let accessToken = `Bearer ` + token;
             await $.ajax({
-                url: `{{route('api.backend.d')}}`,
+                url: `{{route('api.backend.doctors.info.list')}}`,
                 method: 'GET',
                 headers: {
                     "Authorization": accessToken
