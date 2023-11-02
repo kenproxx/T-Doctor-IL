@@ -12,7 +12,11 @@
         }
     </style>
     <div class="container">
-        <form>
+        <form enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="content-question">Title</label>
+                <input type="text" class="form-control" id="title"/>
+            </div>
             <div class="form-group">
                 <label for="content-question">Content Question</label>
                 <textarea type="text" class="form-control" id="content-question"
@@ -29,6 +33,7 @@
                     <option value="3">Other</option>
                 </select>
             </div>
+            @include('component.upload_gallery')
             <div class="d-flex justify-content-center">
                 <button type="button" class="btn btn-secondary mx-2 button_create_question" onclick="history.back()">
                     Cancel
@@ -39,20 +44,33 @@
     </div>
 
     <script>
-        const token = `{{ $_COOKIE['accessToken'] }}`;
+        const token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
         function submitButton() {
+            if (!token) {
+                alert('Please login to apply')
+                return;
+            }
             const message = document.getElementById('content-question').value;
+            const title = document.getElementById('title').value;
             const headers = {
                 'Authorization': `Bearer ${token}`
             };
             const formData = new FormData();
+            formData.append("title", title);
+            formData.append("title_en", title);
+            formData.append("title_laos", title);
             formData.append("content", message);
             formData.append("content_en", message);
             formData.append("content_laos", message);
             formData.append("category_id", $('#category').val());
             formData.append("status", '{{ \App\Enums\QuestionStatus::APPROVED }}');
-            formData.append("user_id", '{{ Auth::user()->id }}');
+            formData.append("user_id", '{{ Auth::user()->id ?? '' }}');
 
+            let len = galleryUploadInput.files.length;
+            for (let i = 0; i < len; i++) {
+                const file = galleryUploadInput.files[i];
+                formData.append('gallery[]', file);
+            }
 
             try {
                 $.ajax({

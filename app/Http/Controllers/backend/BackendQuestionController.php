@@ -39,6 +39,9 @@ class BackendQuestionController extends Controller
         try {
             $question = new Question();
 
+            $title = $request->input('title');
+            $title_en = $request->input('title_en');
+            $title_laos = $request->input('title_laos');
             $content = $request->input('content');
             $content_en = $request->input('content_en');
             $content_laos = $request->input('content_laos');
@@ -46,20 +49,32 @@ class BackendQuestionController extends Controller
             $category_id = $request->input('category_id');
             $status = $request->input('status');
 
+            $question->title = $title;
+            $question->title_en = $title_en;
+            $question->title_laos = $title_laos;
             $question->content = $content;
-            $question->category_id = $category_id;
             $question->content_en = $content_en;
             $question->content_laos = $content_laos;
+            $question->category_id = $category_id;
             $question->user_id = $user_id;
             $question->status = $status;
 
+            if ($request->hasFile('gallery')) {
+                $galleryPaths = array_map(function ($image) {
+                    $itemPath = $image->store('gallery', 'public');
+                    return asset('storage/' . $itemPath);
+                }, $request->file('gallery'));
+                $gallery = implode(',', $galleryPaths);
+            } else {
+                $gallery = '';
+            }
             $user = User::find($user_id);
             if (!$user) {
                 return response('User not found!', 404);
             }
             $question->name = $user->username;
-            $question->views = 0;
             $question->id = $this->getMaxID();
+            $question->gallery = $gallery;
 
             $success = $question->save();
             if ($success) {
