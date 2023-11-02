@@ -97,8 +97,7 @@ Route::group(['prefix' => 'what-free'], function () {
     Route::get('/to-day', [\App\Http\Controllers\WhatFreeToDay::class, 'toDay'])->name('what.free.to.day');
     Route::get('/wit-mission', [\App\Http\Controllers\WhatFreeToDay::class, 'withMission'])->name('what.free.with.mission');
     Route::get('/discounted-sevice', [\App\Http\Controllers\WhatFreeToDay::class, 'discountedSevice'])->name('what.free.discounted.service');
-    Route::get('/detail', [\App\Http\Controllers\WhatFreeToDay::class, 'detail'])->name('what.free.detail');
-    Route::get('/detail', [\App\Http\Controllers\WhatFreeToDay::class, 'detail'])->name('what.free.detail');
+    Route::get('/detail/{id}', [\App\Http\Controllers\WhatFreeToDay::class, 'detail'])->name('what.free.detail');
     Route::get('/campaign', [\App\Http\Controllers\WhatFreeToDay::class, 'campaign'])->name('what.free.campaign');
 
 });

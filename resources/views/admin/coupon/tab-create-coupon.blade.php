@@ -12,7 +12,7 @@
             </button>
         </div>
     @endif
-    <form id="form">
+    <form id="form" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-sm-4"><label>tiêu đề việt</label>
@@ -65,6 +65,11 @@
                 </select>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-12"><label>Ảnh bìa</label>
+                <input type="file" class="form-control" id="thumbnail" name="thumbnail">
+            </div>
+        </div>
 
         <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
     </form>
@@ -89,6 +94,7 @@
                     formData.append(fieldName, $(`#${fieldName}`).val());
                 });
                 formData.append("user_id", '{{ \Illuminate\Support\Facades\Auth::user()->id }}');
+                formData.append("thumbnail", $('#thumbnail')[0].files[0]);
 
                 try {
                     $.ajax({

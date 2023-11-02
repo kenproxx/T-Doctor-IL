@@ -6,9 +6,9 @@ use App\Enums\CouponApplyStatus;
 use App\Enums\CouponStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MailController;
-use App\Http\Controllers\MainController;
 use App\Models\Coupon;
 use App\Models\CouponApply;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -31,7 +31,8 @@ class BackendCouponApplyController extends Controller
         if ($status) {
             $couponApplies = CouponApply::where('status', $status)->where('user_id', $id)->get();
         } else {
-            $couponApplies = CouponApply::where('status', '!=', CouponApplyStatus::DELETED)->where('user_id', $id)->get();
+            $couponApplies = CouponApply::where('status', '!=', CouponApplyStatus::DELETED)->where('user_id',
+                $id)->get();
         }
         return response()->json($couponApplies);
     }
@@ -70,34 +71,19 @@ class BackendCouponApplyController extends Controller
                 return response('Coupon not found!', 404);
             }
 
-            if ($coupon->max_register == 0) {
-                return response('The number of subscribers has reached the maximum!', 400);
+            $coupon->registered = $coupon->registered + 1;
+
+            $success = $couponApply->save();
+
+            (new MailController())->sendEmail($email, 'support.il.vietnam@gmail.com', 'Register success',
+                'Thank you for taking the time to consider our services');
+
+            if ($success) {
+                $coupon->save();
+                return response()->json($couponApply);
             }
-
-            if ($coupon->endDate > Carbon::now()->addHours(7) && $coupon->startDate < Carbon::now()->addHours(7)) {
-                $coupon->registered = $coupon->registered + 1;
-                $coupon->max_register = $coupon->max_register - 1;
-
-                if ($coupon->max_register == 0) {
-                    $coupon->status = CouponStatus::INACTIVE;
-                }
-
-                $success = $couponApply->save();
-
-                (new MailController())->sendEmail(
-                    $email,
-                    'support.il.vietnam@gmail.com',
-                    'Register success',
-                    'Thank you for taking the time to consider our services');
-
-                if ($success) {
-                    $coupon->save();
-                    return response()->json($couponApply);
-                }
-                return response('Create error!', 400);
-            }
-            return response('Coupon not active!', 400);
-        } catch (\Exception $exception) {
+            return response('Create error!', 400);
+        } catch (Exception $exception) {
             return response($exception, 400);
         }
     }
@@ -164,7 +150,7 @@ class BackendCouponApplyController extends Controller
                 return response()->json($couponApply);
             }
             return response('Update error!', 400);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response($exception, 400);
         }
     }
@@ -192,7 +178,7 @@ class BackendCouponApplyController extends Controller
                 return response('Delete success!', 200);
             }
             return response('Delete error!', 400);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response($exception, 400);
         }
     }

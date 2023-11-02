@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Enums\CouponStatus;
+use App\Models\Clinic;
+use App\Models\Coupon;
 
 class WhatFreeToDay extends Controller
 {
     public function index()
     {
-        return view('What-free.what-free');
+        $coupons = Coupon::where('status', '=', CouponStatus::ACTIVE)->get();
+        return view('What-free.what-free', compact('coupons'));
     }
 
     public function toDay()
@@ -24,9 +27,14 @@ class WhatFreeToDay extends Controller
         return view('What-free.tab-discounted-sevice');
     }
 
-    public function detail()
+    public function detail($id)
     {
-        return view('What-free.detail-what-free');
+        $coupon = Coupon::where('id', $id)->first();
+        $coupon->views = $coupon->views + 1;
+        $coupon->save();
+        $user_id = $coupon->user_id;
+        $clinic = Clinic::where('user_id', $user_id)->first();
+        return view('What-free.detail-what-free', compact('coupon', 'clinic'));
     }
     public function campaign()
     {

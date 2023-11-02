@@ -3,6 +3,7 @@
 @section('content')
     @include('layouts.partials.header')
     @include('component.banner')
+
     <div class="container">
         @include('What-free.header-wFree')
         <div class="clinics-list">
@@ -13,41 +14,26 @@
                 </div>
             </div>
             <div class="body row">
-                @for($i = 0; $i < 9; $i++)
+                @foreach($coupons as $coupon)
                     <div class="col-md-4 mb-30">
-                        @include('component.what-free')
+                        <div class="border-16px color-Grey-Dark">
+                            <div class="w-100"><img class="w-100" style="max-height: 300px; object-fit: cover" src="{{asset($coupon->thumbnail)}}">
+                            </div>
+                            <a href="{{route('what.free.detail', $coupon->id)}}">
+                                <div class="mt-3 flea-content-product">{{ $coupon->title }}
+                                </div>
+                                <div class="text-gray mt-2">{{ $coupon->short_description }}
+                                </div>
+                            </a>
+                            <div class="justify-content-between d-flex mt-2"><i
+                                    class="fa-solid fa-user-group d-flex align-items-center"><p
+                                        class="flea-content-product ml-4">{{ $coupon->registered }}
+                                        /{{ $coupon->max_register }}</p></i><i
+                                    class="fa-regular fa-clock d-flex align-items-center"><p class="header-center ml-2">
+                                        {{ $coupon->endDate }}</p></i></div>
+                        </div>
                     </div>
-                @endfor
-            </div>
-        </div>
-        <div class="clinics-list">
-            <div class="clinics-header margin-bottom-32 border-bottom">
-                <div class="justify-content-between align-items-center d-flex mt-4 mb-2">
-                    <div class="ac-text_content ">Free with mission</div>
-                    <div class="flea-content-product"><a href="{{route('what.free.with.mission')}}">See all</a></div>
-                </div>
-            </div>
-            <div class="body row">
-                @for($i = 0; $i < 9; $i++)
-                    <div class="col-md-4 mb-30">
-                        @include('component.what-free')
-                    </div>
-                @endfor
-            </div>
-        </div>
-        <div class="clinics-list">
-            <div class="clinics-header margin-bottom-32 border-bottom">
-                <div class="justify-content-between align-items-center d-flex mt-4 mb-2">
-                    <div class="ac-text_content ">Discounted sevice</div>
-                    <div class="flea-content-product"><a href="{{route('what.free.discounted.service')}}">See all</a></div>
-                </div>
-            </div>
-            <div class="body row">
-                @for($i = 0; $i < 9; $i++)
-                    <div class="col-md-4 mb-30">
-                        @include('component.what-free')
-                    </div>
-                @endfor
+                @endforeach
             </div>
         </div>
     </div>
