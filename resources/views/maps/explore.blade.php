@@ -43,7 +43,7 @@
             {
                 'type': 'Feature',
                 'properties': {
-                    'message': 'Bar',
+                    'message': 'Phi Ngáo đá',
                     'iconSize': [50, 50]
                 },
                 'geometry': {
@@ -54,7 +54,7 @@
             {
                 'type': 'Feature',
                 'properties': {
-                    'message': 'Baz',
+                    'message': 'Phi Ngáo đá',
                     'iconSize': [40, 40]
                 },
                 'geometry': {
