@@ -133,3 +133,6 @@ Route::group(['prefix' => 'admin'], function () {
 Route::group(['prefix' => ''], function () {
     require_once __DIR__ . '/restapi.php';
 });
+
+// Route maps
+Route::get('explore', [\App\Http\Controllers\MapController::class, 'explore'])->name('explore.list');
