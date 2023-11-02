@@ -6,7 +6,7 @@
     @include('component.banner')
     <div class="container content-add">
         <div class="add-cv_text">
-            <div class="ac-text_content font-18-mobi"><a href=""><i class="fa-solid fa-arrow-left mr-4"
+            <div class="ac-text_content font-18-mobi"><a href="{{route('flea-market.index')}}"><i class="fa-solid fa-arrow-left mr-4"
                                                                     style="color: black"></i></a>Product details
             </div>
         </div>

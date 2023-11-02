@@ -5,7 +5,10 @@
         <div class="col-md-8 col-10">
             <div class="d-mb-flex">
                 <div class="info col-8 pl-0">
-                    <div class="name font-18-mobi">Trần đình phi</div>
+                    @php
+                        $user = \App\Models\User::find(\Illuminate\Support\Facades\Auth::user()->id);
+                    @endphp
+                    <div class="name font-18-mobi">{{$user->name}} {{$user->last_name}}</div>
                     <p class="location-info font-14-mobi">Location: <strong class="hanoi font-14-mobi">HANOI</strong></p>
                 </div>
                 <div class="col-4 pc-hidden">
@@ -15,7 +18,10 @@
                 </div>
             </div>
             <div class=" margin-info row mt-2">
-                <div class="col-4 col-md-3 font-12-mobi">Product: <span>10</span></div>
+                @php
+                $count = \App\Models\ProductInfo::where('created_by', \Illuminate\Support\Facades\Auth::user()->id)->where('status', \App\Enums\ProductStatus::ACTIVE)->count();
+                @endphp
+                <div class="col-4 col-md-3 font-12-mobi">Product: <span>{{$count}}</span></div>
                 <div class="col-4 col-md-3 font-12-mobi">Sold: <span>1000</span></div>
                 <div class="col-4 col-md-3 font-12-mobi">Sold out: <span>10</span></div>
                 <div class="col-4 col-md-3 font-12-mobi">Following: <span>50</span></div>
