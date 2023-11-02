@@ -26,7 +26,7 @@
 
     // Create a default Marker and add it to the map.
     const marker1 = new mapboxgl.Marker()
-        .setLngLat([12.554729, 55.70651])
+        .setLngLat([106.3, 20.96667])
         .addTo(map);
 
     // Create a default Marker, colored black, rotated 45 degrees.
