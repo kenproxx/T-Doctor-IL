@@ -69,7 +69,6 @@
             <div class="col-sm-12"><label>Ảnh bìa</label>
                 <input type="file" class="form-control" id="thumbnail" name="thumbnail">
             </div>
-
         </div>
 
         <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>

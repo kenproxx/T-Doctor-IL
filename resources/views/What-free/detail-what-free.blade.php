@@ -56,7 +56,7 @@
                         <div class="button-black"><i class="fa-regular fa-eye mr-3"></i>{{ $coupon->views }}</div>
                     </div>
                     <div class="img-main">
-                        <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="show" class="main">
+                        <img src="{{asset($coupon->thumbnail)}}" style="object-fit: contain; height: 100%" alt="show" class="main">
                     </div>
                     {{-- Start nội dung mô tả (backend)--}}
 
