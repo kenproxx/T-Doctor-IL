@@ -163,6 +163,14 @@ class BackendCouponController extends Controller
         $status = $request->input('status');
         $code = 'CP' . $user_id . (new MainController())->generateRandomString(8);
 
+        if ($request->hasFile('thumbnail')) {
+            $item = $request->file('thumbnail');
+            $itemPath = $item->store('coupon', 'public');
+            $thumbnail = asset('storage/' . $itemPath);
+        } else {
+            $thumbnail = '';
+        }
+
         $coupon->title = $title;
         $coupon->title_en = $title_en;
         $coupon->title_laos = $title_laos;
@@ -184,6 +192,7 @@ class BackendCouponController extends Controller
 
         $coupon->status = $status;
         $coupon->code = $code;
+        $coupon->thumbnail = $thumbnail;
 
         $success = $coupon->save();
 

@@ -17,7 +17,7 @@
                 @foreach($coupons as $coupon)
                     <div class="col-md-4 mb-30">
                         <div class="border-16px color-Grey-Dark">
-                            <div class="w-100"><img class="w-100" src="{{asset('img/News-event/nieng-rang.png')}}">
+                            <div class="w-100"><img class="w-100" style="max-height: 300px; object-fit: cover" src="{{asset($coupon->thumbnail)}}">
                             </div>
                             <a href="{{route('what.free.detail', $coupon->id)}}">
                                 <div class="mt-3 flea-content-product">{{ $coupon->title }}
