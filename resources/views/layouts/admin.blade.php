@@ -52,7 +52,7 @@
         <li class="nav-item {{ Nav::isRoute('homeAdmin.list.product') }}">
             <a class="nav-link" href="{{ route('homeAdmin.list.product') }}">
                 <i class="fa-regular fa-rectangle-list"></i>
-                <span>{{ __('List Products') }}</span></a>
+                <span>{{ __('Selling/Buying') }}</span></a>
         </li>
         <!-- Nav Item - List Clinics -->
         <li class="nav-item {{ Nav::isRoute('homeAdmin.list.clinics') }}">
@@ -70,7 +70,7 @@
         <li class="nav-item {{ Nav::isRoute('homeAdmin.list.doctors') }}">
             <a class="nav-link" href="{{ route('homeAdmin.list.doctors') }}">
                 <i class="fa-solid fa-user-doctor"></i>
-                <span>List Doctor</span></a>
+                <span>Examination</span></a>
         </li>
 
         <!-- Divider -->
