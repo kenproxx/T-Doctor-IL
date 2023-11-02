@@ -136,7 +136,7 @@
         </div>
     </div>
     <script>
-        const token = `{{ $_COOKIE['accessToken'] }}`;
+        const token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
 
         $(document).ready(function () {
             $('#button-apply').on('click', function () {
@@ -150,6 +150,10 @@
             })
 
             $('.apply-button').on('click', function () {
+                if (!token) {
+                    alert('Please login to apply')
+                    return;
+                }
                 const headers = {
                     'Authorization': `Bearer ${token}`
                 };
@@ -161,7 +165,7 @@
                 fieldNames.forEach(fieldName => {
                     formData.append(fieldName, $(`#${fieldName}`).val());
                 });
-                formData.append("user_id", '{{ \Illuminate\Support\Facades\Auth::user()->id }}');
+                formData.append("user_id", '{{ \Illuminate\Support\Facades\Auth::user()->id ?? '' }}');
                 formData.append("content", $(`#content_`).val());
 
                 try {
