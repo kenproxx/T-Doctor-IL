@@ -1,4 +1,4 @@
-@php use App\Enums\AnswerStatus;use App\Enums\SearchMentoring;use App\Models\User; @endphp
+@php use App\Enums\AnswerStatus;use App\Enums\SearchMentoring;use App\Models\QuestionLikes;use App\Models\User;use Carbon\Carbon;use Illuminate\Support\Facades\Auth; @endphp
 @extends('layouts.master')
 @section('title', 'Home')
 @section('content')
@@ -284,7 +284,8 @@
     <div id="mentoring" class="container">
         <a href="{{ route('examination.mentoring') }}">
             <div class="page-header">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none" style="vertical-align: inherit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none"
+                     style="vertical-align: inherit">
                     <path d="M26.6654 16H5.33203M5.33203 16L13.332 24M5.33203 16L13.332 8" stroke="black"
                           stroke-width="4"
                           stroke-linecap="round" stroke-linejoin="round"/>
@@ -329,7 +330,15 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center">
-                <button type="button" class="btn btn-primary mx-2 button-main">Like</button>
+                @php
+                    $isLike = QuestionLikes::where('question_id', $question->id)->where('user_id', Auth::user()->id ?? '')->first();
+                @endphp
+
+                @if(!Auth::check())
+                    <button type="button" class="btn btn-primary mx-2 button-main" onclick="alertLogin()">Like</button>
+                @else
+                    <button type="button" class="btn btn-primary mx-2 button-main" onclick="changeEmotion()">{{ $isLike->is_like ? 'Dislike' : 'Like' }}</button>
+                @endif
                 <button type="button" class="btn btn-primary mx-2 button-main" onclick="replyCommentMain()">Reply
                 </button>
             </div>
@@ -353,7 +362,8 @@
                                     class="text-wrapper text-title">{{ $answer->user_id ? User::getNameByID($answer->user_id) : $answer->name }}</div>
                             </div>
                             <div class="div-wrapper">
-                                <div class="text-wrapper-2">{{ \Carbon\Carbon::parse($answer->created_at)->format('H:i:s d/m/Y') }}</div>
+                                <div
+                                    class="text-wrapper-2">{{ Carbon::parse($answer->created_at)->format('H:i:s d/m/Y') }}</div>
                             </div>
                         </div>
                         <div class="d-ch-v-c-c-t-t-l-n-u-wrapper">
@@ -534,10 +544,45 @@
             }
         }
 
+        function changeEmotion() {
+            if (!token) {
+                alert('Please login to apply')
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("_token", '{{ csrf_token() }}');
+
+            let url = '{{route('api.backend.question-like.change', ['questionId' => $question->id, 'userId' => Auth::user()->id ?? ''])}}';
+            try {
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    headers: headers,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    data: formData,
+                    success: function () {
+                        location.reload();
+                    },
+                    error: function (exception) {
+                    }
+                });
+            } catch (error) {
+                throw error;
+            }
+        }
+
         function replyCommentMain() {
             hiddenReplyComment();
             var commentMain = document.getElementById('comment-main');
             commentMain.classList.toggle('d-none');
+        }
+
+        function alertLogin() {
+            alert('Please login to apply')
+
         }
 
     </script>

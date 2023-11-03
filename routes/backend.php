@@ -9,6 +9,7 @@ use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\backend\BackendReviewController;
 use App\Http\Controllers\backend\BackendWishListController;
+use App\Http\Controllers\QuestionLikesController;
 use App\Http\Controllers\restapi\admin\AdminDoctorInfoApi;
 use Illuminate\Support\Facades\Route;
 
@@ -110,4 +111,9 @@ Route::group(['prefix' => 'doctors-info'], function () {
     Route::post('/create', [AdminDoctorInfoApi::class, 'create'])->name('api.backend.doctors.info.create');
     Route::put('/update/{id}', [AdminDoctorInfoApi::class, 'update'])->name('api.backend.doctors.info.update');
     Route::delete('/delete/{id}', [AdminDoctorInfoApi::class, 'delete'])->name('api.backend.doctors.info.delete');
+});
+
+Route::group(['prefix' => 'question-like'], function () {
+    Route::get('is-like/{questionId}/{userId}', [QuestionLikesController::class, 'checkEmotion'])->name('api.backend.question-like.check');
+    Route::post('change/{questionId}/{userId}', [QuestionLikesController::class, 'changeEmotion'])->name('api.backend.question-like.change');
 });
