@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\DoctorInfoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductInfoController;
 use Illuminate\Support\Facades\Route;
@@ -56,10 +57,10 @@ Route::group(['prefix' => 'coupon'], function () {
 
 });
 Route::group(['prefix' => 'doctor'], function () {
-    Route::get('detail/{id}', [CouponController::class, 'show'])->name('doctor.detail');
-    Route::get('create', [CouponController::class, 'create'])->name('doctor.create.product');
-    Route::get('edit/{id}', [CouponController::class, 'edit'])->name('doctor.edit');
-    Route::put('update/{id}', [CouponController::class, 'update'])->name('doctor.update');
+    Route::get('detail/{id}', [DoctorInfoController::class, 'show'])->name('doctor.detail');
+    Route::get('create', [DoctorInfoController::class, 'create'])->name('doctor.create.product');
+    Route::get('edit/{id}', [DoctorInfoController::class, 'edit'])->name('doctor.edit');
+    Route::put('update/{id}', [DoctorInfoController::class, 'update'])->name('doctor.update');
 
 });
 

@@ -3,11 +3,15 @@
         color: red;
     }
 </style>
-<div class="page row" id="listProducts">
-
-</div>
+<div class="img-union"><img src="{{asset('img/flea-market/platinum.png')}}"></div>
+<div class="page row" id="productsAdsPlan1"></div>
+<div class="img-union "><img src="{{asset('img/flea-market/premium.png')}}"></div>
+<div class="page row" id="productsAdsPlan2"></div>
+<div class="img-union"><img src="{{asset('img/flea-market/silver.png')}}"></div>
+<div class="page row" id="productsAdsPlan3"></div>
 <script>
     var token = `${getCookie('accessToken')}`;
+
     function isLogin() {
         if (token == 'undefined') {
             $('#staticBackdrop').modal('show');
@@ -77,36 +81,57 @@
         }
 
         async function renderProduct(res) {
-            let html = ``;
+            var productsAdsPlan1 = [];
+            var productsAdsPlan2 = [];
+            var productsAdsPlan3 = [];
+
             for (let i = 0; i < res.length; i++) {
                 let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`;
                 url = url.replace(':id', res[i].id);
                 let item = res[i];
-                let isFavorite = item.isFavorit ?  'bi-heart-fill' : 'bi-heart';
-                html += `
-            <div class="col-md-4 col-6 item">
-                <div class="product-item">
-                    <div class="img-pro">
-                        <img src="${item.thumbnail}" alt="">
-                        <a class="button-heart" data-favorite="0">
-                <i id="icon-heart-${item.id}" class="${isFavorite} bi" data-product-id="${item.id}" onclick="addProductToWishList(${item.id})"></i>
-    </a>
+                let adsPlan = item.ads_plan;
+
+                if (adsPlan === 1) {
+                    productsAdsPlan1.push(item);
+                } else if (adsPlan === 2) {
+                    productsAdsPlan2.push(item);
+                } else if (adsPlan === 3) {
+                    productsAdsPlan3.push(item);
+                }
+
+                let isFavorite = item.isFavorit ? 'bi-heart-fill' : 'bi-heart';
+
+                var html = `
+                    <div class="col-md-4 col-6 item">
+                        <div class="product-item">
+                            <div class="img-pro">
+                                <img src="${item.thumbnail}" alt="">
+                                <a class="button-heart" data-favorite="0">
+                                    <i id="icon-heart-${item.id}" class="${isFavorite} bi" data-product-id="${item.id}" onclick="addProductToWishList(${item.id})"></i>
+                                </a>
+                            </div>
+                            <div class="content-pro">
+                                <div class="name-pro">
+                                    <a href="${url}">${item.name}</a>
+                                </div>
+                                <div class="location-pro d-flex">
+                                    Location: <p>${item.province_id}</p>
+                                </div>
+                                <div class="price-pro">
+                                    ${item.price} ${item.price_unit}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="content-pro">
-                        <div class="name-pro">
-                            <a href="${url}">${item.name}</a>
-                        </div>
-                        <div class="location-pro d-flex">
-                            Location: <p>${item.province_id}</p>
-                        </div>
-                        <div class="price-pro">
-                            ${item.price} ${item.price_unit}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;}
-            $('#listProducts').empty().append(html);
+                `;
+                if (adsPlan === 1) {
+                    $('#productsAdsPlan1').append(html);
+                } else if (adsPlan === 2) {
+                    $('#productsAdsPlan2').append(html);
+                } else if (adsPlan === 3) {
+                    $('#productsAdsPlan3').append(html);
+                }
+            }
         }
     });
 </script>

@@ -175,7 +175,7 @@
                     </div>
                     <div class="col-3">
                         <button id="submitButton" type="button" class="add-cv-bt w-100 apply-bt_edit create-button">
-                            Register
+                            Save
                         </button>
                     </div>
                 </div>
