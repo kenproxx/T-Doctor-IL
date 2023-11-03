@@ -5,8 +5,15 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
+use App\Http\Controllers\CalcViewQuestionController;
+use App\Http\Controllers\ClinicController;
+use App\Http\Controllers\examinationController;
+use App\Http\Controllers\FleaMarketController;
 use App\Http\Controllers\frontend\HomeController;
+use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\ProductInfoController;
+use App\Http\Controllers\RecruitmentController;
+use App\Http\Controllers\WhatFreeToDay;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -36,45 +43,49 @@ Route::group(['prefix' => 'news'], function () {
     Route::get('detail', [HomeController::class, 'detail'])->name('detail.new');
 });
 Route::group(['prefix' => 'recruitment'], function () {
-    Route::get('/index', [\App\Http\Controllers\RecruitmentController::class, 'index'])->name('recruitment.index');
-    Route::get('/apply', [\App\Http\Controllers\RecruitmentController::class, 'apply'])->name('recruitment.apply');
-    Route::get('/add-cv', [\App\Http\Controllers\RecruitmentController::class, 'addCv'])->name('recruitment.add.cv');
-    Route::get('/detail', [\App\Http\Controllers\RecruitmentController::class, 'detail'])->name('recruitment_detail');
-    Route::get('/edit-cv', [\App\Http\Controllers\RecruitmentController::class, 'editCv'])->name('recruitment.edit.cv');
+    Route::get('/index', [RecruitmentController::class, 'index'])->name('recruitment.index');
+    Route::get('/apply', [RecruitmentController::class, 'apply'])->name('recruitment.apply');
+    Route::get('/add-cv', [RecruitmentController::class, 'addCv'])->name('recruitment.add.cv');
+    Route::get('/detail', [RecruitmentController::class, 'detail'])->name('recruitment_detail');
+    Route::get('/edit-cv', [RecruitmentController::class, 'editCv'])->name('recruitment.edit.cv');
 });
 Route::group(['prefix' => 'examination'], function () {
-    Route::get('/index', [\App\Http\Controllers\ExaminationController::class, 'index'])->name('examination.index');
-    Route::get('/doctor-info', [\App\Http\Controllers\ExaminationController::class, 'infoDoctor'])->name('examination.doctor_info');
-    Route::get('/best-doctor', [\App\Http\Controllers\ExaminationController::class, 'bestDoctor'])->name('examination.best_doctor');
-    Route::get('/new-doctor', [\App\Http\Controllers\ExaminationController::class, 'newDoctor'])->name('examination.new_doctor');
-    Route::get('/available-doctor', [\App\Http\Controllers\ExaminationController::class, 'availableDoctor'])->name('examination.available_doctor');
-    Route::get('/find-my-medicine', [\App\Http\Controllers\ExaminationController::class, 'findMyMedicine'])->name('examination.findmymedicine');
-    Route::get('/best-pharmacists', [\App\Http\Controllers\ExaminationController::class, 'bestPharmacists'])->name('examination.bestpharmacists');
-    Route::get('/new-pharmacists', [\App\Http\Controllers\ExaminationController::class, 'newPharmacists'])->name('examination.newpharmacists');
-    Route::get('/available-pharmacists', [\App\Http\Controllers\ExaminationController::class, 'availablePharmacists'])->name('examination.availablepharmacists');
-    Route::get('/hot-deal-medicine', [\App\Http\Controllers\ExaminationController::class, 'hotDealMedicine'])->name('examination.hotdealmedicine');
-    Route::get('/new-medicine', [\App\Http\Controllers\ExaminationController::class, 'newMedicine'])->name('examination.newmedicine');
-    Route::get('/recommended', [\App\Http\Controllers\ExaminationController::class, 'recommended'])->name('examination.recommended');
-    Route::get('/my-personal-doctor', [\App\Http\Controllers\ExaminationController::class, 'myPersonalDoctor'])->name('examination.mypersonaldoctor');
-    Route::get('/mentoring', [\App\Http\Controllers\ExaminationController::class, 'mentoring'])->name('examination.mentoring');
-    Route::get('/ask-a-question', [\App\Http\Controllers\ExaminationController::class, 'createMentoring'])->name('examination.mentoring.create');
-    Route::get('/calc-view-comment/{id}', [\App\Http\Controllers\CalcViewQuestionController::class, 'calcView'])->name('examination.mentoring.calc.view');
+    Route::get('/index', [ExaminationController::class, 'index'])->name('examination.index');
+    Route::get('/doctor-info', [ExaminationController::class, 'infoDoctor'])->name('examination.doctor_info');
+    Route::get('/best-doctor', [ExaminationController::class, 'bestDoctor'])->name('examination.best_doctor');
+    Route::get('/new-doctor', [ExaminationController::class, 'newDoctor'])->name('examination.new_doctor');
+    Route::get('/available-doctor', [ExaminationController::class, 'availableDoctor'])->name('examination.available_doctor');
+    Route::get('/find-my-medicine', [ExaminationController::class, 'findMyMedicine'])->name('examination.findmymedicine');
+    Route::get('/best-pharmacists', [ExaminationController::class, 'bestPharmacists'])->name('examination.bestpharmacists');
+    Route::get('/new-pharmacists', [ExaminationController::class, 'newPharmacists'])->name('examination.newpharmacists');
+    Route::get('/available-pharmacists', [ExaminationController::class, 'availablePharmacists'])->name('examination.availablepharmacists');
+    Route::get('/hot-deal-medicine', [ExaminationController::class, 'hotDealMedicine'])->name('examination.hotdealmedicine');
+    Route::get('/new-medicine', [ExaminationController::class, 'newMedicine'])->name('examination.newmedicine');
+    Route::get('/recommended', [ExaminationController::class, 'recommended'])->name('examination.recommended');
+    Route::get('/my-personal-doctor', [ExaminationController::class, 'myPersonalDoctor'])->name('examination.mypersonaldoctor');
 });
 
 Route::group(['prefix' => 'questions'], function () {
     Route::get('/get-list', [BackendQuestionController::class, 'custom_getlist'])->name('questions.custome.list');
 });
+Route::group(['prefix' => 'mentoring'], function () {
+    Route::get('', [ExaminationController::class, 'mentoring'])->name('examination.mentoring');
+    Route::get('detail/{id}', [ExaminationController::class, 'showMentoring'])->name('examination.mentoring.show');
+    Route::post('search', [ExaminationController::class, 'searchMentoring'])->name('examination.mentoring.search');
+    Route::get('/ask-a-question', [ExaminationController::class, 'createMentoring'])->name('examination.mentoring.create');
+    Route::get('/calc-view-comment/{id}', [CalcViewQuestionController::class, 'calcView'])->name('examination.mentoring.calc.view');
+});
 
 Route::group(['prefix' => 'medicine'], function () {
-    Route::get('/', [\App\Http\Controllers\MedicineController::class, 'index'])->name('medicine');
-    Route::get('/detail', [\App\Http\Controllers\MedicineController::class, 'detail'])->name('medicine.detail');
-    Route::get('/wish-list', [\App\Http\Controllers\MedicineController::class, 'wishList'])->name('medicine.wishList');
+    Route::get('/', [MedicineController::class, 'index'])->name('medicine');
+    Route::get('/detail', [MedicineController::class, 'detail'])->name('medicine.detail');
+    Route::get('/wish-list', [MedicineController::class, 'wishList'])->name('medicine.wishList');
 
 });
 
 Route::group(['prefix' => 'clinic'], function () {
-    Route::get('/', [\App\Http\Controllers\ClinicController::class, 'index'])->name('clinic');
-    Route::get('/detail/{id}', [\App\Http\Controllers\ClinicController::class, 'detail'])->name('clinic.detail');
+    Route::get('/', [ClinicController::class, 'index'])->name('clinic');
+    Route::get('/detail/{id}', [ClinicController::class, 'detail'])->name('clinic.detail');
 
 });
 Route::group(['prefix' => 'product'], function () {
@@ -84,21 +95,21 @@ Route::group(['prefix' => 'product'], function () {
 });
 
 Route::group(['prefix' => 'flea-market'], function () {
-    Route::get('/', [\App\Http\Controllers\FleaMarketController::class, 'index'])->name('flea-market.index');
-    Route::get('wish-list-flea-market', [\App\Http\Controllers\FleaMarketController::class, 'wishList'])->name('flea.market.wish.list');
-    Route::get('my-store', [\App\Http\Controllers\FleaMarketController::class, 'myStore'])->name('flea.market.my.store');
-    Route::get('review', [\App\Http\Controllers\FleaMarketController::class, 'review'])->name('flea.market.review');
-    Route::get('sell-product', [\App\Http\Controllers\FleaMarketController::class, 'sellProduct'])->name('flea.market.sell.product');
-    Route::get('edit-product/{id}', [\App\Http\Controllers\FleaMarketController::class, 'editProduct'])->name('flea.market.edit.product');
-    Route::get('product-detail/{id}', [\App\Http\Controllers\FleaMarketController::class, 'productDetail'])->name('flea.market.product.detail');
+    Route::get('/', [FleaMarketController::class, 'index'])->name('flea-market.index');
+    Route::get('wish-list-flea-market', [FleaMarketController::class, 'wishList'])->name('flea.market.wish.list');
+    Route::get('my-store', [FleaMarketController::class, 'myStore'])->name('flea.market.my.store');
+    Route::get('review', [FleaMarketController::class, 'review'])->name('flea.market.review');
+    Route::get('sell-product', [FleaMarketController::class, 'sellProduct'])->name('flea.market.sell.product');
+    Route::get('edit-product/{id}', [FleaMarketController::class, 'editProduct'])->name('flea.market.edit.product');
+    Route::get('product-detail/{id}', [FleaMarketController::class, 'productDetail'])->name('flea.market.product.detail');
 });
 Route::group(['prefix' => 'what-free'], function () {
-    Route::get('/', [\App\Http\Controllers\WhatFreeToDay::class, 'index'])->name('what.free');
-    Route::get('/to-day', [\App\Http\Controllers\WhatFreeToDay::class, 'toDay'])->name('what.free.to.day');
-    Route::get('/wit-mission', [\App\Http\Controllers\WhatFreeToDay::class, 'withMission'])->name('what.free.with.mission');
-    Route::get('/discounted-sevice', [\App\Http\Controllers\WhatFreeToDay::class, 'discountedSevice'])->name('what.free.discounted.service');
-    Route::get('/detail/{id}', [\App\Http\Controllers\WhatFreeToDay::class, 'detail'])->name('what.free.detail');
-    Route::get('/campaign', [\App\Http\Controllers\WhatFreeToDay::class, 'campaign'])->name('what.free.campaign');
+    Route::get('/', [WhatFreeToDay::class, 'index'])->name('what.free');
+    Route::get('/to-day', [WhatFreeToDay::class, 'toDay'])->name('what.free.to.day');
+    Route::get('/wit-mission', [WhatFreeToDay::class, 'withMission'])->name('what.free.with.mission');
+    Route::get('/discounted-sevice', [WhatFreeToDay::class, 'discountedSevice'])->name('what.free.discounted.service');
+    Route::get('/detail/{id}', [WhatFreeToDay::class, 'detail'])->name('what.free.detail');
+    Route::get('/campaign', [WhatFreeToDay::class, 'campaign'])->name('what.free.campaign');
 
 });
 Route::middleware(['auth'])->group(function () {

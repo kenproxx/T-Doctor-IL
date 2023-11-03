@@ -816,8 +816,8 @@
 
 <script>
 
-    const token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
-    const headers = {
+    let token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
+    let headers = {
         'Authorization': `Bearer ${token}`
     };
 
