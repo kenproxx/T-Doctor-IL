@@ -7,7 +7,7 @@ use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\CalcViewQuestionController;
 use App\Http\Controllers\ClinicController;
-use App\Http\Controllers\examinationController;
+use App\Http\Controllers\ExaminationController;
 use App\Http\Controllers\FleaMarketController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\MedicineController;

@@ -7,13 +7,10 @@ use App\Enums\SearchMentoring;
 use App\Models\Answer;
 use App\Models\CalcViewQuestion;
 use App\Models\Question;
-use App\Models\User;
 use Carbon\Carbon;
-use DateTime;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class examinationController extends Controller
+class ExaminationController extends Controller
 {
     public function index()
     {
