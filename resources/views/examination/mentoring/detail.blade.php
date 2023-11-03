@@ -341,7 +341,7 @@
                     <button type="button" class="btn btn-primary mx-2 button-main" onclick="alertLogin()">Like</button>
                 @else
                     <button type="button" class="btn btn-primary mx-2 button-main"
-                            onclick="changeEmotion()">{{ $isLike ? ( $isLike->is_like ? 'Like' : 'Dislike' ) : 'Dislike'}}</button>
+                            onclick="changeEmotion()">{{ $isLike ? ( $isLike->is_like ? 'Dislike' : 'Like' ) : 'Like'}}</button>
                 @endif
                 <button type="button" class="btn btn-primary mx-2 button-main" onclick="replyCommentMain()">Reply
                 </button>
