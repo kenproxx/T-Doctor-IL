@@ -332,12 +332,16 @@
             <div class="d-flex justify-content-center">
                 @php
                     $isLike = QuestionLikes::where('question_id', $question->id)->where('user_id', Auth::user()->id ?? '')->first();
+                    if (!$isLike) {
+                        $isLike = false;
+                    }
                 @endphp
 
                 @if(!Auth::check())
                     <button type="button" class="btn btn-primary mx-2 button-main" onclick="alertLogin()">Like</button>
                 @else
-                    <button type="button" class="btn btn-primary mx-2 button-main" onclick="changeEmotion()">{{ $isLike->is_like ? 'Dislike' : 'Like' }}</button>
+                    <button type="button" class="btn btn-primary mx-2 button-main"
+                            onclick="changeEmotion()">{{ $isLike->is_like ? 'Dislike' : 'Like' }}</button>
                 @endif
                 <button type="button" class="btn btn-primary mx-2 button-main" onclick="replyCommentMain()">Reply
                 </button>
@@ -553,7 +557,7 @@
             const formData = new FormData();
             formData.append("_token", '{{ csrf_token() }}');
 
-            let url = '{{route('api.backend.question-like.change', ['questionId' => $question->id, 'userId' => Auth::user()->id ?? ''])}}';
+            let url = '{{route('api.backend.question-like.change', ['questionId' => $question->id ?? 0, 'userId' => Auth::user()->id ?? 0])}}';
             try {
                 $.ajax({
                     url: url,
