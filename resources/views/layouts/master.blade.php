@@ -65,4 +65,5 @@
     </span>
 </div>
 </body>
+@include('components.head.tinymce-config')
 </html>
