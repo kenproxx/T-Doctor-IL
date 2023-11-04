@@ -2,7 +2,7 @@
 <script>
     tinymce.init({
         selector: 'textarea',
-        plugins: 'a_tinymce_plugin file image media imagetools',
+        plugins: 'image media',
         toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | image | table ',
         file_picker_callback: function (cb, value, meta) {
             var input = document.createElement('input');

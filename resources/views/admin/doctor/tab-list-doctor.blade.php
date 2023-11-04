@@ -37,7 +37,6 @@
                     "Authorization": accessToken
                 },
                 success: function (response) {
-                    console.log(response)
                     renderProduct(response);
                 },
                 error: function (exception) {
