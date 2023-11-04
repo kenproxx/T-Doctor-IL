@@ -89,15 +89,23 @@
                 const formData = new FormData();
 
                 const fieldNames = [
-                    "title", "title_en", "title_laos", "short_description",
-                    "short_description_en", "short_description_laos", "description",
-                    "description_en", "description_laos", "startDate", "endDate",
+                    "title", "title_en", "title_laos", "startDate", "endDate",
                     "max_register", "status"
+                ];
+
+                const fieldTextareaTiny = [
+                    "short_description", "short_description_en", "short_description_laos",
+                    "description", "description_en", "description_laos"
                 ];
 
                 fieldNames.forEach(fieldName => {
                     formData.append(fieldName, $(`#${fieldName}`).val());
                 });
+                fieldTextareaTiny.forEach(fieldTextarea => {
+                    const content = tinymce.get(fieldTextarea).getContent();
+                    formData.append(fieldTextarea, content);
+                });
+
                 formData.append("user_id", '{{ \Illuminate\Support\Facades\Auth::user()->id }}');
                 formData.append("thumbnail", $('#thumbnail')[0].files[0]);
 
