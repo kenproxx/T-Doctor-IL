@@ -21,6 +21,7 @@
         "symfony/http-client": "^6.1",
         "symfony/mailgun-mailer": "^6.1",
         "symfony/postmark-mailer": "^6.1",
+        "tinymce/tinymce": "^6.7",
         "tymon/jwt-auth": "*"
     },
     "require-dev": {
