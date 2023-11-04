@@ -62,7 +62,7 @@
 
                     <div class="mb-3 mt-30">
 {{--                        <div class="mb-2 flea-content-product">Today’s free</div>--}}
-                        <div class="flea-text-gray color-Grey-Black">{{ $coupon->description }}</div>
+                        <div class="flea-text-gray color-Grey-Black">{!! $coupon->description !!}</div>
                     </div>
 
                     {{-- End nội dung mô tả--}}

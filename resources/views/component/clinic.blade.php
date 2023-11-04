@@ -22,7 +22,6 @@
                         "Authorization": accessToken
                     },
                     success: function (response) {
-                        // console.log(response)
                         renderClinics(response);
                     },
                     error: function (exception) {
