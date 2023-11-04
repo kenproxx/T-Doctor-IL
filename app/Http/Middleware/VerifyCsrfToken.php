@@ -22,6 +22,9 @@ class VerifyCsrfToken extends Middleware
         '/api/coupons/**',
         '/api/coupons-apply/**',
         '/api/doctors-info',
+        '/api/users/**',
+        '/api/pharmacies/**',
+        '/users/**',
         'auth/*'
     ];
 }

@@ -14,7 +14,6 @@ use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\RecruitmentController;
 use App\Http\Controllers\WhatFreeToDay;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*

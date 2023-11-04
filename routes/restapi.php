@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\BackendAnswerController;
 use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\restapi\ClinicApi;
 use App\Http\Controllers\restapi\DoctorInfoApi;
+use App\Http\Controllers\restapi\PharmacyApi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,12 @@ Route::group(['prefix' => 'clinics'], function () {
     Route::get('/list', [ClinicApi::class, 'getAll'])->name('clinics.restapi.list');
     Route::get('/user/{id}', [ClinicApi::class, 'getAllByUserId'])->name('clinics.restapi.user');
     Route::get('/detail/{id}', [ClinicApi::class, 'detail'])->name('clinics.restapi.detail');
+});
+
+Route::group(['prefix' => 'pharmacies'], function () {
+    Route::get('/list', [PharmacyApi::class, 'getAll'])->name('pharmacies.restapi.list');
+    Route::get('/user/{id}', [PharmacyApi::class, 'getAllByUserId'])->name('pharmacies.restapi.user');
+    Route::get('/detail/{id}', [PharmacyApi::class, 'detail'])->name('pharmacies.restapi.detail');
 });
 
 Route::group(['prefix' => 'doctors-info'], function () {
