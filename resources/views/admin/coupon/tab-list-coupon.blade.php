@@ -11,7 +11,6 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Tiêu đề</th>
-            <th scope="col">Mô tả ngắn</th>
             <th scope="col">Lượng người đăng ký</th>
             <th scope="col">trạng thái</th>
             <th scope="col">Thời hạn</th>
@@ -37,7 +36,6 @@
                     "Authorization": accessToken
                 },
                 success: function (response) {
-                    console.log(response)
                     renderProduct(response);
                 },
                 error: function (exception) {
@@ -54,12 +52,10 @@
             let urlEdit = `{{route('coupon.edit', ['id' => ':id'])}}`;
             urlEdit = urlEdit.replace(':id', res[i].id);
             let item = res[i];
-            let rowNumber = i + 1;
 
             html = html + `<tr>
             <th scope="row">${ i + 1 }</th>
             <td>${item.title}</td>
-            <td>${item.short_description}</td>
             <td>${item.registered} / ${item.max_register}</td>
             <td>${item.status} </td>
             <td>${item.startDate} - ${item.endDate}</td>
