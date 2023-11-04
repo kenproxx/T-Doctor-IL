@@ -47,7 +47,6 @@
         }
 
         .frame.mentoring-img {
-            display: inline-flex;
             align-items: flex-start;
             gap: 30px;
             position: relative;
@@ -262,6 +261,66 @@
 
 
     </style>
+
+    <style>
+        /* Style the Image Used to Trigger the Modal */
+        #mentoring-img img {
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #mentoring-img img:hover {opacity: 0.7;}
+
+        /* The Modal (background) */
+        #image-viewer {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.9);
+        }
+        #image-viewer .modal-content {
+            margin: auto;
+            display: block;
+            width: 80%;
+            max-width: 700px;
+        }
+        #image-viewer .modal-content {
+            animation-name: zoom;
+            animation-duration: 0.6s;
+        }
+        @keyframes zoom {
+            from {transform:scale(0)}
+            to {transform:scale(1)}
+        }
+        #image-viewer .close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        #image-viewer .close:hover,
+        #image-viewer .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        @media only screen and (max-width: 700px){
+            #image-viewer .modal-content {
+                width: 100%;
+            }
+        }
+    </style>
     <head>
         <meta charset=utf-8>
         <meta name=description content="">
@@ -298,7 +357,7 @@
             <p class="card-text">{{ $question->content }}</p>
         </div>
 
-        <div class="frame row justify-content-md-around mentoring-img">
+        <div class="frame row justify-content-md-around mentoring-img" id="mentoring-img">
 
             @foreach(explode(',', $question->gallery) as $picture)
 
@@ -413,7 +472,28 @@
             </div>
         @endforeach
     </div>
+
+    <div id="image-viewer">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="full-image">
+    </div>
+
     <script>
+        $(document).ready(function () {
+            var mentoringDivs = $('#mentoring-img').find('img.rectangle');
+
+            mentoringDivs.on('click', function () {
+                var imageUrl = $(this).attr('src');
+
+                $('#full-image').attr('src', imageUrl);
+
+                $('#image-viewer').css('display', 'flex');
+            });
+
+            $("#image-viewer").click(function () {
+                $('#image-viewer').hide();
+            });
+        });
 
         var replyCommentElements = document.querySelectorAll(".reply-comment");
         let token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
