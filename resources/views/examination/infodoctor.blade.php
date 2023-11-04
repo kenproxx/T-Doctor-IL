@@ -7,7 +7,8 @@
         <div id="title" class="d-flex justify-content-center">
             <div id="list-title" class="d-flex">
                 <div class="list--doctor p-0">
-                    <a class="back" href="{{route('examination.index')}}"><p><i class="bi bi-arrow-left"></i>Detailed information Doctor</p></a>
+                    <a class="back" href="{{route('examination.index')}}"><p><i class="bi bi-arrow-left"></i>Detailed
+                            information Doctor</p></a>
                 </div>
             </div>
         </div>
@@ -29,7 +30,10 @@
                     font-size: 32px;
                     font-weight: 800;
                     ">Doctor's QR Code</p>
-                    <img src="{{asset('img/detail_doctor/qr_code.png')}}">
+                    <p id="qrContent">
+                        <img src="{{asset('img/detail_doctor/qr_code.png')}}" alt="QR Code">
+                    </p>
+
                 </div>
             </div>
             <div id="about" style="width: 670px; height: 670px; margin-left: 15px">
@@ -89,7 +93,9 @@
                 </div>
                 <div class="cmt flex-column">
                     <p><b>"Dịch vụ cực tốt"</b><br>
-                        Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho bạn bè cùng sử dụng :D
+                        Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại salon quá tốt. Book giờ nào
+                        thì cứ đúng giờ đến k sợ phải chờ đợi như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi
+                        để giới thiệu cho bạn bè cùng sử dụng :D
                     </p>
                     <button><i class="bi bi-reply-fill"></i> Reply</button>
                 </div>
@@ -97,6 +103,28 @@
         </div>
 
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <script>
+        function displayQRContent(content) {
+            var qr = new QRCode(document.getElementById("qrContent"), content);
+        }
 
+        $(document).ready(function () {
+            async function showQrCode() {
+                await $.ajax({
+                    url: '{{route('info.doctor.qr.code')}}',
+                    type: 'GET',
+                    success: function (data) {
+                        displayQRContent(data);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+            showQrCode();
+        });
+    </script>
 @endsection
 

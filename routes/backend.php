@@ -11,7 +11,17 @@ use App\Http\Controllers\backend\BackendReviewController;
 use App\Http\Controllers\backend\BackendWishListController;
 use App\Http\Controllers\QuestionLikesController;
 use App\Http\Controllers\restapi\admin\AdminDoctorInfoApi;
+use App\Http\Controllers\restapi\admin\AdminPharmacyApi;
+use App\Http\Controllers\restapi\UserApi;
 use Illuminate\Support\Facades\Route;
+
+Route::group(['prefix' => 'users'], function () {
+    Route::post('/change-info', [UserApi::class, 'changeInformation'])->name('user.change.information');
+    Route::post('/change-email', [UserApi::class, 'changeEmail'])->name('user.change.email');
+    Route::post('/change-phone', [UserApi::class, 'changePhoneNumber'])->name('user.change.phone');
+    Route::post('/change-password', [UserApi::class, 'changePassword'])->name('user.change.password');
+    Route::post('/change-avatar', [UserApi::class, 'changeAvt'])->name('user.change.avatar');
+});
 
 Route::group(['prefix' => 'products'], function () {
     Route::get('/list', [BackendProductInfoController::class, 'index'])->name('api.backend.products.list');
@@ -42,6 +52,16 @@ Route::group(['prefix' => 'clinics'], function () {
     Route::put('/update/{id}', [BackendClinicController::class, 'update'])->name('api.backend.clinics.update');
     Route::post('/edit/{id}', [BackendClinicController::class, 'update'])->name('api.backend.clinics.edit');
     Route::delete('/delete/{id}', [BackendClinicController::class, 'delete'])->name('api.backend.clinics.delete');
+});
+
+Route::group(['prefix' => 'pharmacies'], function () {
+    Route::get('/list', [AdminPharmacyApi::class, 'getAll'])->name('api.backend.pharmacies.list');
+    Route::get('/user/{id}', [AdminPharmacyApi::class, 'getAllByUserId'])->name('api.backend.pharmacies.user');
+    Route::get('/detail/{id}', [AdminPharmacyApi::class, 'detail'])->name('api.backend.pharmacies.detail');
+    Route::post('/create', [AdminPharmacyApi::class, 'create'])->name('api.backend.pharmacies.create');
+    Route::put('/update/{id}', [AdminPharmacyApi::class, 'update'])->name('api.backend.pharmacies.update');
+    Route::post('/edit/{id}', [AdminPharmacyApi::class, 'update'])->name('api.backend.pharmacies.edit');
+    Route::delete('/delete/{id}', [AdminPharmacyApi::class, 'delete'])->name('api.backend.pharmacies.delete');
 });
 
 Route::group(['prefix' => 'questions'], function () {

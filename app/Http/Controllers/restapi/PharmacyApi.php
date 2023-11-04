@@ -8,30 +8,30 @@ use App\Http\Controllers\Controller;
 use App\Models\Clinic;
 use Illuminate\Http\Request;
 
-class ClinicApi extends Controller
+class PharmacyApi extends Controller
 {
     public function getAll()
     {
-        $clinics = Clinic::where('status', ClinicStatus::ACTIVE)->where('type', TypeBussiness::CLINICS)->get();
-        return response()->json($clinics);
+        $pharmacies = Clinic::where('status', ClinicStatus::ACTIVE)->where('type', TypeBussiness::PHARMACIES)->get();
+        return response()->json($pharmacies);
     }
 
     public function detail($id)
     {
-        $clinic = Clinic::find($id);
-        if (!$clinic || $clinic->status != ClinicStatus::ACTIVE) {
+        $pharmacy = Clinic::find($id);
+        if (!$pharmacy || $pharmacy->status != ClinicStatus::ACTIVE) {
             return response("Clinic not found", 404);
         }
-        return response()->json($clinic);
+        return response()->json($pharmacy);
     }
 
     public function getAllByUserId($id)
     {
-        $clinics = Clinic::where([
+        $pharmacies = Clinic::where([
             ['status', ClinicStatus::ACTIVE],
-            ['type', TypeBussiness::CLINICS],
+            ['type', TypeBussiness::PHARMACIES],
             ['user_id', $id]
         ])->get();
-        return response()->json($clinics);
+        return response()->json($pharmacies);
     }
 }

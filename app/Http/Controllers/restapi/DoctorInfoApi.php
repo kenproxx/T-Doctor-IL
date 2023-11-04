@@ -11,13 +11,14 @@ class DoctorInfoApi extends Controller
 {
     public function getAll(Request $request)
     {
-        $doctor_infos = DoctorInfo::where('status', DoctorInfoStatus::ACTIVE)->get();
-        return response()->json($doctor_infos);
+        $doctorInfos = DoctorInfo::where('status', DoctorInfoStatus::ACTIVE)->get();
+        return response()->json($doctorInfos);
     }
+
 
     public function search(Request $request)
     {
-
+        // Implement search functionality
     }
 
     public function findByUser($id)
