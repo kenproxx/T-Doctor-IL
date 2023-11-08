@@ -71,9 +71,16 @@
                                     {{$pr_json->brand_name}}</strong></p>
                         </div>
                         <div class="div-7 d-flex justify-content-between">
-                            <a href="{{route('flea.market.my.store')}}" class="div-wrapper">
+                            @if(Auth::user() == null || Auth::user()->id != $pr_json->created_by)
+                                <a href="{{route('flea.market.product.shop.info',$pr_json->created_by)}}" class="div-wrapper">
+                                    Visit store
+                                </a>
+                            @else
+                                <a href="{{route('flea.market.my.store')}}" class="div-wrapper">
                                 Visit store
-                            </a>
+                                </a>
+                            @endif
+
                             <button id="button-apply" class="text-wrapper-5">Send message</button>
                         </div>
                     </div>

@@ -52,6 +52,10 @@ class FleaMarketController extends Controller
     {
         return view('FleaMarket.review');
     }
+    public function ShopInfo($id)
+    {
+        return view('FleaMarket.shop-infor',compact('id'));
+    }
 
     /**
      * Update the specified resource in storage.

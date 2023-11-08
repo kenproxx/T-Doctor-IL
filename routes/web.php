@@ -89,6 +89,7 @@ Route::group(['prefix' => 'clinic'], function () {
 });
 Route::group(['prefix' => 'product'], function () {
     Route::get('/lists', [BackendProductInfoController::class, 'index'])->name('backend.products.list');
+    Route::get('/search', [BackendProductInfoController::class, 'search'])->name('backend.products.search');
 
 
 });
@@ -101,6 +102,7 @@ Route::group(['prefix' => 'flea-market'], function () {
     Route::get('sell-product', [FleaMarketController::class, 'sellProduct'])->name('flea.market.sell.product');
     Route::get('edit-product/{id}', [FleaMarketController::class, 'editProduct'])->name('flea.market.edit.product');
     Route::get('product-detail/{id}', [FleaMarketController::class, 'productDetail'])->name('flea.market.product.detail');
+    Route::get('shop-info/{id}', [FleaMarketController::class, 'ShopInfo'])->name('flea.market.product.shop.info');
 });
 Route::group(['prefix' => 'what-free'], function () {
     Route::get('/', [WhatFreeToDay::class, 'index'])->name('what.free');
