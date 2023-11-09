@@ -6,6 +6,7 @@ use App\Models\Role;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -20,8 +21,11 @@ class CheckAdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         try {
-            $user = JWTAuth::parseToken()->authenticate();
-
+            if (Auth::check()) {
+                $user = Auth::user();
+            } else {
+                $user = JWTAuth::parseToken()->authenticate();
+            }
             $role_user = DB::table('role_users')->where('user_id', $user->id)->first();
             $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
 
