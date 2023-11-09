@@ -5,6 +5,7 @@ use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\restapi\ClinicApi;
 use App\Http\Controllers\restapi\DoctorInfoApi;
 use App\Http\Controllers\restapi\PharmacyApi;
+use App\Http\Controllers\restapi\ProductInfoApi;
 use App\Http\Controllers\restapi\ReviewApi;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::group(['prefix' => 'products'], function () {
+    Route::get('/list', [ProductInfoApi::class, 'index'])->name('products.api.list');
+    Route::get('/category/{id}', [ProductInfoApi::class, 'getAllByCategory'])->name('products.api.category');
+    Route::get('/user/{id}', [ProductInfoApi::class, 'getByUser'])->name('products.api.user');
+    Route::get('/detail/{id}', [ProductInfoApi::class, 'getById'])->name('products.api.detail');
+    Route::get('/clinics/{id}', [ProductInfoApi::class, 'getByClinic'])->name('products.api.clinics');
+    Route::get('/search', [ProductInfoApi::class, 'search'])->name('products.api.search');
+});
 
 Route::group(['prefix' => 'clinics'], function () {
     Route::get('/list', [ClinicApi::class, 'getAll'])->name('clinics.restapi.list');

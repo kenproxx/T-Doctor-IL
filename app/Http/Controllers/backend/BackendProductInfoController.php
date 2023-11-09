@@ -32,6 +32,17 @@ class BackendProductInfoController extends Controller
         return response()->json($products);
     }
 
+    public function getAllByCategory(Request $request, $id)
+    {
+        $status = $request->input('status');
+        if ($status) {
+            $products = ProductInfo::where('status', $status)->where('category_id', $id)->get();
+        } else {
+            $products = ProductInfo::where('status', '!=', ProductStatus::DELETED)->where('category_id', $id)->get();
+        }
+        return response()->json($products);
+    }
+
     public function getByUser(Request $request, $id)
     {
         $status = $request->input('status');
