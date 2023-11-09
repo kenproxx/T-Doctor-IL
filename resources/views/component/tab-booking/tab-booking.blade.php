@@ -1,46 +1,93 @@
 @extends('layouts.master')
-<div class="col-md-3">
+<div class="col-md-2">
     <div>
         <img src="{{asset('img/doctor.png')}}" alt="img">
     </div>
     <div class="d-flex justify-content-between mt-md-2">
-        <div class="fs-18px">Nhà thuốc Pramaly</div>
+        <div class="fs-18px">{{$bookings->name}}</div>
         <div class="button-follow fs-12p ">
-            <a href="">FOLLOW</a>
+            <a class="text-follow-12" href="">FOLLOW</a>
         </div>
     </div>
     <div class="d-flex mt-md-2">
         <div class="d-flex col-md-6 justify-content-center align-items-center">
-        <a href=""><i class="fa-solid fa-bullseye"></i>Start</a>
+        <a class="row p-2" href="">
+            <div class="justify-content-center d-flex">
+                <i class="border-button-address fa-solid fa-bullseye"></i>
+            </div>
+            <div class="d-flex justify-content-center">Start</div>
+        </a>
         </div>
         <div class="d-flex col-md-6 justify-content-center align-items-center">
-        <a href=""><i class="fa-regular fa-circle-right"></i>Direction</a>
+            <a class="row p-2" href="">
+                <div class="justify-content-center d-flex">
+                    <i class="border-button-address fa-regular fa-circle-right"></i>
+                </div>
+                <div class="d-flex justify-content-center">Direction</div>
+            </a>
         </div>
     </div>
-    <div>
-        <a href="#">Booking</a>
+    <div class="mt-md-3 mb-md-3">
+        <a class="border-button-address font-weight-800 fs-14 justify-content-center"  href="#">Booking</a>
     </div>
-    <div>
-        <div><i class="fa-solid fa-location-dot"></i>
-            <span>
-                V7-VB7 The Terra An Hưng, La Khê, Hà Đông, Hà Nội
+    <div class="border-top">
+        <div class="mt-md-2"><i class="text-gray mr-md-2 fa-solid fa-location-dot"></i>
+            <span class="fs-14 font-weight-600">
+               {{$bookings->address_detail}}
             </span>
         </div>
-        <div>
-            <i class="fa-regular fa-clock"></i>
-            Open: 7am-21pm
+        <div class="mt-md-2">
+            <i class="text-gray mr-md-2 fa-regular fa-clock"></i>
+            <span class="fs-14 font-weight-600">Open: {{ \Carbon\Carbon::parse($bookings->open_date)->format('H:i') }} - {{ \Carbon\Carbon::parse($bookings->close_date)->format('H:i') }}
+</span>
         </div>
-        <div>
-            <i class="fa-solid fa-globe"></i> dalieuthammygsv.com
+        <div class="mt-md-2">
+            <i class="text-gray mr-md-2 fa-solid fa-globe"></i>
+            <span class="fs-14 font-weight-600"> dalieuthammygsv.com</span>
         </div>
-        <div>
-            <i class="fa-solid fa-phone-volume"></i> 024 6666 8888
+        <div class="mt-md-2">
+            <i class="text-gray mr-md-2 fa-solid fa-phone-volume"></i> <span class="fs-14 font-weight-600"> 024 6666 8888</span>
         </div>
-        <div>
-            <i class="fa-solid fa-bookmark"></i> clinic
+        <div class="mt-md-2 mb-md-2">
+            <i class="text-gray mr-md-2 fa-solid fa-bookmark"></i> <span class="fs-14 font-weight-600"> clinic</span>
         </div>
-        <div>
-            @include('component.review-item')
+       @for($i=0; $i<3; $i++)
+            <div class="border-top mb-md-2">
+                <div class="d-flex justify-content-between rv-header align-items-center mt-md-2">
+                    <div class="d-flex rv-header--left">
+                        <div class="avt-24 mr-md-2">
+                            <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
+                        </div>
+                        <p class="fs-16px">Trần Đình Phi</p>
+                    </div>
+                    <div class="rv-header--right">
+                        <p class="fs-14 font-weight-400">10:20 07/04/2023</p>
+                    </div>
+                </div>
+                <div class="content">
+                    <p>
+                        Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho bạn bè cùng sử dụng :D
+                    </p>
+                </div>
+            </div>
+        @endfor
+        <div class="border-top">
+            <div class="d-flex justify-content-between rv-header align-items-center mt-md-2">
+                <div class="d-flex rv-header--left">
+                    <div class="avt-24 mr-md-2">
+                        <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
+                    </div>
+                    <p class="fs-16px">Trần Đình Phi</p>
+                </div>
+                <div class="rv-header--right">
+                    <p class="fs-14 font-weight-400">10:20 07/04/2023</p>
+                </div>
+            </div>
+            <div class="content">
+                <p>
+                    Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho bạn bè cùng sử dụng :D
+                </p>
+            </div>
         </div>
     </div>
 </div>

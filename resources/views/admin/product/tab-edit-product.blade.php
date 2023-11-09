@@ -130,7 +130,7 @@
                         data: formDataEdit,
                         success: function (response) {
                             alert('success');
-                            window.location.reload();
+                            window.location.href= `{{route('homeAdmin.list.product')}}`
                         },
                         error: function (exception) {
                             console.log(exception)
