@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthSocialController;
 use App\Http\Controllers\backend\BackendClinicController;
 use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
@@ -35,6 +36,10 @@ Route::get('/login', 'AuthController@index')->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('loginProcess');
 Route::post('/register', [AuthController::class, 'register'])->name('registerProcess');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logoutProcess');
+
+Route::get('/login-google', [AuthSocialController::class, 'getGoogleSignInUrl'])->name('login.google');
+Route::get('/login-google-callback', [AuthSocialController::class, 'loginCallback'])->name('login.google.callback');
+Route::get('/login-role', [AuthSocialController::class, 'chooseRole'])->name('login.social.choose.role');
 
 Route::get('profile', 'ProfileController@index')->name('profile');
 Route::put('profile-update', 'ProfileController@update')->name('profile.update');
@@ -87,7 +92,7 @@ Route::group(['prefix' => 'medicine'], function () {
 Route::group(['prefix' => 'clinic'], function () {
     Route::get('/', [ClinicController::class, 'index'])->name('clinic');
     Route::get('/detail/{id}', [ClinicController::class, 'detail'])->name('clinic.detail');
-    Route::get('/detail/{id}/test', [ClinicController::class, 'test'])->name('clinic.detail.test');
+    Route::get('/booking/{id}', [ClinicController::class, 'booking'])->name('clinic.booking');
 
 });
 Route::group(['prefix' => 'product'], function () {
@@ -117,7 +122,7 @@ Route::group(['prefix' => 'what-free'], function () {
 
 });
 Route::middleware(['auth'])->group(function () {
-
+    Route::post('/save-user-login-social', [AuthSocialController::class, 'saveUser'])->name('save.user.login.social');
 });
 
 // QrCode

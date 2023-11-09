@@ -5,9 +5,9 @@
     @include('component.banner')
     <div class="container">
         @include('What-free.header-wFree')
-        <div>
+        <a href="{{route('clinic.booking',$id)}}">
             <img src="{{asset('img/icons_logo/maps.png')}}">
-        </div>
+        </a>
         <div class="other-clinics">
             <div class="title">
                 Other Clinics/Pharmacies

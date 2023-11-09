@@ -47,6 +47,8 @@ class BackendClinicController extends Controller
             $clinic = new Clinic();
 
             $name = $request->input('name');
+            $phone = $request->input('phone');
+            $email = $request->input('email');
             $name_en = $request->input('name_en');
             $name_laos = $request->input('name_laos');
             $address_detail = $request->input('address_detail');
@@ -73,6 +75,8 @@ class BackendClinicController extends Controller
             $status = $request->input('status');
 
             $clinic->name = $name;
+            $clinic->phone = $phone;
+            $clinic->email = $email;
             $clinic->name_en = $name_en ?? '';
             $clinic->name_laos = $name_laos ?? '';
             $clinic->address_detail = $address_detail;
@@ -132,6 +136,8 @@ class BackendClinicController extends Controller
             }
 
             $name = $request->input('name') ?? $clinic->name;
+            $phone = $request->input('phone') ?? $clinic->phone;
+            $email = $request->input('email') ?? $clinic->email;
             $name_en = $request->input('name_en') ?? $clinic->name_en;
             $name_laos = $request->input('name_laos') ?? $clinic->name_en;
             $address_detail = $request->input('address_detail') ?? $clinic->address_detail;
@@ -156,6 +162,8 @@ class BackendClinicController extends Controller
             }
 
             $clinic->name = $name;
+            $clinic->phone = $phone;
+            $clinic->email = $email;
             $clinic->name_en = $name_en ?? '';
             $clinic->name_laos = $name_laos ?? '';
             $clinic->address_detail = $address_detail;

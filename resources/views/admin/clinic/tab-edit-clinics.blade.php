@@ -26,6 +26,14 @@
                 <input type="text" class="form-control" id="name_en" name="name_en" value="{{$clinics->name_en}}">
             </div>
             <div>
+                <label>phone</label>
+                <input type="text" class="form-control" id="phone" name="phone" value="{{$clinics->phone}}">
+            </div>
+            <div>
+                <label>email</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{$clinics->email}}">
+            </div>
+            <div>
                 <label>address_detail</label>
                 <input type="text" class="form-control" id="address_detail" name="address_detail"
                        value="{{$clinics->address_detail}}">
@@ -84,7 +92,7 @@
                 <input type="datetime-local" class="form-control" id="close_date" name="close_date" value="{{$clinics->close_date}}">
             </div>
         </div>
-        <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
+        <button type="submit" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
     </form>
 
     <script>
@@ -97,6 +105,8 @@
                 const formData = new FormData();
                 formData.append("name", $('#name').val());
                 formData.append("name_en", $('#name_en').val());
+                formData.append("phone", $('#phone').val());
+                formData.append("email", $('#email').val());
                 formData.append("address_detail", $('#address_detail').val());
                 formData.append("address_detail_en", $('#address_detail_en').val());
                 formData.append("province_id", $('#province_id').val());
@@ -127,7 +137,7 @@
                         data: formData,
                         success: function (response) {
                             alert('success');
-                            window.location.reload();
+                            window.location.href= `{{route('homeAdmin.list.clinics')}}`;
                         },
                         error: function (exception) {
                             console.log(exception)
