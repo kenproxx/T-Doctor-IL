@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserStatus;
+use App\Models\RoleUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -42,6 +43,13 @@ class AuthController extends Controller
                 $token = JWTAuth::fromUser($user);
                 setCookie('accessToken', $token);
                 toast('Welcome ' . $user->email, 'success', 'top-left');
+
+                $userRoles = RoleUser::where('user_id', $user->id)->get();
+                foreach ($userRoles as $userRole) {
+                    if ($userRole->role_id == 14) {
+                        return redirect(route('homeAdmin'));
+                    }
+                }
                 return redirect(route('home'));
             } else {
                 toast('Email or password incorrect', 'error', 'top-left');

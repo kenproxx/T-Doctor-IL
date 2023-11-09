@@ -1,6 +1,22 @@
+@php use App\Models\Province; @endphp
 @extends('layouts.master')
 @section('title', 'Home')
 @section('content')
+    <style>
+        .border-flea-market {
+            border-radius: 16px;
+            padding: 16px;
+        }
+
+        .object-fit-cover {
+            object-fit: cover;
+        }
+
+        .title-div-flea-market {
+            white-space: nowrap;
+            overflow: hidden;
+        }
+    </style>
     @include('layouts.partials.header')
     @include('component.banner')
     <div>
@@ -33,93 +49,32 @@
                             </li>
                         </ul>
                     </div>
+
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <div class="section1-content">
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
+                                @foreach($coupons as $coupon)
+                                    <a href="{{ route('what.free.detail', $coupon->id) }}" target="_blank">
+                                        <div class="px-5 py-2">
+                                            <div class="content__item d-flex gap-3">
+                                                <img
+                                                    class="content__item__image"
+                                                    src="{{asset($coupon->thumbnail ?? 'img/icons_logo/image 1.jpeg')}}"
+                                                    alt=""
+                                                />
+                                                <div class="w-100 overflow-hidden">
+                                                    <h6>
+                                                        {!! $coupon->title !!}
+                                                    </h6>
+                                                    <div class="content__item__describe">
+                                                        {!! $coupon->short_description !!}
+                                                    </div>
+                                                    <p class="content__item-link">Read</p>
+                                                </div>
                                             </div>
-                                            <p class="content__item-link">Read</p>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
-                                            </div>
-                                            <p class="content__item-link">Read</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
-                                            </div>
-                                            <p class="content__item-link">Read</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
-                                            </div>
-                                            <p class="content__item-link">Read</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </a>
+                                @endforeach
                             </div>
 
                         </div>
@@ -601,12 +556,14 @@
         <img src="{{asset('img/Rectangle 23815.png')}}" alt="">
     </div>
     <div id="map-location" class="d-flex justify-content-center">
-        <div class="content-item d-flex justify-content-center" >
+        <div class="content-item d-flex justify-content-center">
             <div id="address" class="p-2 w-100">
                 <h2>Clinics/Pharmacies</h2>
                 <p>Find your suitable clinics/pharmacies and book now!</p>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d760.8895710809026!2d105.75723237632864!3d20.973456865015233!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313453779ecd7b59%3A0x21695bf72a03120f!2zQ8O0bmcgdHkgVE5ISCBJTCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1696643777380!5m2!1svi!2s"
-                        width="770" height="417" style="border:1px; border-radius: 8px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d760.8895710809026!2d105.75723237632864!3d20.973456865015233!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313453779ecd7b59%3A0x21695bf72a03120f!2zQ8O0bmcgdHkgVE5ISCBJTCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1696643777380!5m2!1svi!2s"
+                    width="770" height="417" style="border:1px; border-radius: 8px" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div id="describe" class="mt-auto p-2">
                 <div class="describe-item">
@@ -648,9 +605,9 @@
                 <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">BS Đô Văn Định</h5>
-                    <p  class="card-text">respiratory doctor</p>
-                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+                    <p class="card-text">respiratory doctor</p>
+                    <p class="card-text_1">Location: <b>Hanoi</b></p>
+                    <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
                 </div>
             </div>
             <div class="card">
@@ -658,9 +615,9 @@
                 <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">BS Đô Văn Định</h5>
-                    <p  class="card-text">respiratory doctor</p>
-                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+                    <p class="card-text">respiratory doctor</p>
+                    <p class="card-text_1">Location: <b>Hanoi</b></p>
+                    <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
                 </div>
             </div>
             <div class="card">
@@ -668,9 +625,9 @@
                 <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">BS Đô Văn Định</h5>
-                    <p  class="card-text">respiratory doctor</p>
-                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+                    <p class="card-text">respiratory doctor</p>
+                    <p class="card-text_1">Location: <b>Hanoi</b></p>
+                    <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
                 </div>
             </div>
             <div class="card">
@@ -678,9 +635,9 @@
                 <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">BS Đô Văn Định</h5>
-                    <p  class="card-text">respiratory doctor</p>
-                    <p  class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p  class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+                    <p class="card-text">respiratory doctor</p>
+                    <p class="card-text_1">Location: <b>Hanoi</b></p>
+                    <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
                 </div>
             </div>
         </div>
@@ -699,10 +656,10 @@
         </nav>
     </div>
     <div class="banner1">
-        <img src="{{asset('img/Rectangle 23815.png')}}" alt="" >
+        <img src="{{asset('img/Rectangle 23815.png')}}" alt="">
     </div>
     <div id="recruitment_board" class="d-flex justify-content-center">
-        <div id="content-bkg" class="content-item d-flex justify-content-center " >
+        <div id="content-bkg" class="content-item d-flex justify-content-center ">
             <div id="recruitment" class="p-2 w-100">
                 <h2>Recruitment</h2>
                 <p>Hire staffs cheaper, find your staffs faster</p>
@@ -825,84 +782,28 @@
                 <h2>Flea market</h2>
                 <p>Hire staffs cheaper, find your staffs faster</p>
                 <div class="section1-content">
-                    <div class="d-flex justify-content-around">
-                        <div class="card" style="width: 188px; height: 342px">
-                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                                <p class="card-text">Location: <b>Hanoi</b></p>
-                                <h4>599.000</h4>
+
+                    <div class="row">
+                        @foreach($products as $product)
+                            <div class="col-sm-4 pt-4">
+                                <div class="card border-flea-market" style="height: 342px">
+                                    <img src="{{asset($product->thumbnail ?? 'img/item_shopping.png')}}"
+                                         class="card-img-top object-fit-cover" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title title-div-flea-market">{{ $product->name }}</h5>
+                                        @if($product->province_id)
+                                            @php
+                                                $province = Province::find($product->province_id);
+                                            @endphp
+                                            <p class="card-text">Location: <b>{{ $province->name }}</b></p>
+                                        @endif
+                                        <h4>{{ $product->price }}</h4>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card" style="width: 188px; height: 342px">
-                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                                <p class="card-text">Location: <b>Hanoi</b></p>
-                                <h4>599.000</h4>
-                            </div>
-                        </div>
-                        <div class="card" style="width:188px; height: 342px">
-                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                                <p class="card-text">Location: <b>Hanoi</b></p>
-                                <h4>599.000</h4>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
-                    <div class="d-flex justify-content-around">
-                        <div class="card" style="width: 188px; height: 342px">
-                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                                <p class="card-text">Location: <b>Hanoi</b></p>
-                                <h4>599.000</h4>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 188px; height: 342px">
-                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                                <p class="card-text">Location: <b>Hanoi</b></p>
-                                <h4>599.000</h4>
-                            </div>
-                        </div>
-                        <div class="card" style="width:188px; height: 342px">
-                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                                <p class="card-text">Location: <b>Hanoi</b></p>
-                                <h4>599.000</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-around">
-                        <div class="card" style="width: 188px; height: 342px">
-                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                                <p class="card-text">Location: <b>Hanoi</b></p>
-                                <h4>599.000</h4>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 188px; height: 342px">
-                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                                <p class="card-text">Location: <b>Hanoi</b></p>
-                                <h4>599.000</h4>
-                            </div>
-                        </div>
-                        <div class="card" style="width:188px; height: 342px">
-                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                                <p class="card-text">Location: <b>Hanoi</b></p>
-                                <h4>599.000</h4>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
             <div id="describe" class="d-flex align-items-center flex-column mb-3">
@@ -954,7 +855,8 @@
         <div id="list-item" class="d-flex justify-content-center container">
             <div class="card" style="width: 237px; height: 361px">
                 <i class="bi bi-heart"></i>
-                <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px" height= "237px">
+                <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
+                     height="237px">
                 <div class="card-body">
                     <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
                     <p class="card-text">Location: <b>Hanoi</b></p>
@@ -963,7 +865,8 @@
             </div>
             <div class="card" style="width: 237px; height: 361px">
                 <i class="bi bi-heart"></i>
-                <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px" height= "237px">
+                <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
+                     height="237px">
                 <div class="card-body">
                     <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
                     <p class="card-text">Location: <b>Hanoi</b></p>
@@ -972,7 +875,8 @@
             </div>
             <div class="card" style="width: 237px; height: 361px">
                 <i class="bi bi-heart"></i>
-                <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px" height= "237px">
+                <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
+                     height="237px">
                 <div class="card-body">
                     <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
                     <p class="card-text">Location: <b>Hanoi</b></p>
@@ -981,7 +885,8 @@
             </div>
             <div class="card" style="width: 237px; height: 361px">
                 <i class="bi bi-heart"></i>
-                <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px" height= "237px">
+                <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
+                     height="237px">
                 <div class="card-body">
                     <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
                     <p class="card-text">Location: <b>Hanoi</b></p>
@@ -1003,4 +908,10 @@
             </ul>
         </nav>
     </div>
+
+    <script>
+        function viewCoupon(id) {
+            window.location.href = "/coupon/" + id;
+        }
+    </script>
 @endsection

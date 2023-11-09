@@ -201,11 +201,11 @@
 
                                         <div class="form-element">
                                             <label for="password">Password</label>
-                                            <input id="password" type="password" name="password" placeholder="********" required>
+                                            <input id="password" type="password" name="password" minlength="8" placeholder="********" required>
                                         </div>
                                         <div class="form-element">
                                             <label for="passwordConfirm">Enter the Password</label>
-                                            <input id="passwordConfirm" name="passwordConfirm" type="password" placeholder="********" required>
+                                            <input id="passwordConfirm" name="passwordConfirm" minlength="8" type="password" placeholder="********" required>
                                         </div>
                                         <div class="form-element">
                                             <input id="remember-me" type="checkbox" required>

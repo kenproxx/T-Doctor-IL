@@ -101,7 +101,8 @@ a {
     cursor: pointer;
 }
 .content__item__image {
-    width: 173px;
+    min-width: 173px;
+    max-width: 173px;
     height: 137px;
     object-fit: cover;
     border-radius: 8px;
@@ -974,7 +975,8 @@ span.material-symbols-outlined {
     margin-top: 12px;
 }
 .card-img-top{
-    height: 237px!important;
+    min-height: 215px!important;
+    max-height: 215px!important;
 }
 .delete-1{
     border-radius: 8px;

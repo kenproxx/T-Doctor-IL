@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CouponStatus;
+use App\Enums\ProductStatus;
+use App\Models\Coupon;
+use App\Models\ProductInfo;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,7 +17,9 @@ class HomeController extends Controller
         if (!Auth::check()) {
             setCookie('accessToken', null);
         }
-        return view('home');
+        $coupons = Coupon::where('status', CouponStatus::ACTIVE)->get();
+        $products = ProductInfo::where('status', ProductStatus::ACTIVE)->get();
+        return view('home', compact('coupons', 'products'));
     }
     public function home()
     {
