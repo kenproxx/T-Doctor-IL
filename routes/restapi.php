@@ -6,6 +6,7 @@ use App\Http\Controllers\restapi\ClinicApi;
 use App\Http\Controllers\restapi\DoctorInfoApi;
 use App\Http\Controllers\restapi\PharmacyApi;
 use App\Http\Controllers\restapi\ProductInfoApi;
+use App\Http\Controllers\restapi\QrCodeApi;
 use App\Http\Controllers\restapi\ReviewApi;
 use Illuminate\Support\Facades\Route;
 
@@ -63,4 +64,8 @@ Route::group(['prefix' => 'coupons'], function () {
     Route::get('/code/{id}', [BackendCouponController::class, 'getByCode'])->name('coupons.code');
     Route::get('/user/{id}', [BackendCouponController::class, 'getAllByUserID'])->name('coupons.user');
     Route::get('/search', [BackendCouponController::class, 'search'])->name('coupons.clinic');
+});
+
+Route::group(['prefix' => 'qr-code'], function () {
+    Route::post('/doctor-info', [QrCodeApi::class, 'doctorInfo'])->name('qr.code.api.show.doctor.info');
 });

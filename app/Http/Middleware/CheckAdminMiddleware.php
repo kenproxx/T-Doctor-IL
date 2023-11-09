@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class NormalPermission
+class CheckAdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -21,23 +21,11 @@ class NormalPermission
     {
         try {
             $user = JWTAuth::parseToken()->authenticate();
+
             $role_user = DB::table('role_users')->where('user_id', $user->id)->first();
             $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
 
-            if ($roleNames->contains('PAITENTS')
-                || $roleNames->contains('NORMAL_PEOPLE')
-                || $roleNames->contains('DOCTORS')
-                || $roleNames->contains('PHAMACISTS')
-                || $roleNames->contains('THERAPISTS')
-                || $roleNames->contains('ESTHETICIANS')
-                || $roleNames->contains('NURSES')
-                || $roleNames->contains('PHARMACEUTICAL COMPANIES')
-                || $roleNames->contains('HOSPITALS')
-                || $roleNames->contains('CLINICS')
-                || $roleNames->contains('PHARMACIES')
-                || $roleNames->contains('SPAS')
-                || $roleNames->contains('OTHERS')
-                || $roleNames->contains('ADMIN')) {
+            if ($roleNames->contains('ADMIN')) {
                 return $next($request);
             }
         } catch (Exception $e) {

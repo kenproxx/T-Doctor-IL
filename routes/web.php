@@ -137,20 +137,32 @@ Route::group(['prefix' => 'products'], function () {
 
 });
 
+/* Admin */
+Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
+    require_once __DIR__ . '/admin.php';
+});
 
-//Route::group(['prefix' => 'admin', 'middleware' => 'role.admin'], function () {
-//    require_once __DIR__ . '/admin.php';
-//});
+/* Business */
+Route::group(['prefix' => 'api', 'middleware' => ['business']], function () {
+    require_once __DIR__ . '/permission/business.php';
+});
 
+/* Medical */
+Route::group(['prefix' => 'api', 'middleware' => ['medical']], function () {
+    require_once __DIR__ . '/permission/medical.php';
+});
+
+/* Normal */
+Route::group(['prefix' => 'api', 'middleware' => 'normal'], function () {
+    require_once __DIR__ . '/permission/normal.php';
+});
+
+/* Authenticate */
 Route::group(['prefix' => 'api', 'middleware' => 'jwt'], function () {
     require_once __DIR__ . '/backend.php';
 });
 
-// Admin
-Route::group(['prefix' => 'admin'], function () {
-    require_once __DIR__ . '/admin.php';
-});
-
+/* Free api */
 Route::group(['prefix' => ''], function () {
     require_once __DIR__ . '/restapi.php';
 });
