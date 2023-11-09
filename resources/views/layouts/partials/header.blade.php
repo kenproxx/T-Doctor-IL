@@ -16,7 +16,8 @@
         <div class="header-right d-flex align-items-center">
             @if(\Illuminate\Support\Facades\Auth::check())
                 <div class="dropdown">
-                    <div class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                    <div class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                         aria-expanded="false">
                         {{\Illuminate\Support\Facades\Auth::user()->username}}
                     </div>
                     <div class="dropdown-menu">
@@ -51,7 +52,8 @@
                 <div class="header-right d-flex align-items-center">
                     @if(\Illuminate\Support\Facades\Auth::check())
                         <div class="dropdown">
-                            <div class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                            <div class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                                 aria-expanded="false">
                                 {{\Illuminate\Support\Facades\Auth::user()->username}}
                             </div>
                             <div class="dropdown-menu">
@@ -61,10 +63,12 @@
                             </div>
                         </div>
                     @else
-                        <button class="account_control" id="show_login" data-toggle="modal" data-target="#staticBackdrop">Log In
+                        <button class="account_control" id="show_login" data-toggle="modal"
+                                data-target="#staticBackdrop">Log In
                         </button>
                         <div>|</div>
-                        <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">Sign Up
+                        <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">
+                            Sign Up
                         </button>
                     @endif
                 </div>
@@ -142,17 +146,18 @@
                             </div>
                             <div class="form-signin d-flex justify-content-around">
                                 <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/facebook_logo.png')}}"/></button>
+                                            src="{{asset('img/icons_logo/facebook_logo.png')}}"/></button>
+                                <a href="{{ route('login.google') }}" class="login-with-btn"><img
+                                            src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/></a>
                                 <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/google_logo.png')}}"/></button>
+                                            src="{{asset('img/icons_logo/apple_logo.png')}}"/></button>
                                 <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/apple_logo.png')}}"/></button>
-                                <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/kakao-talk_logo.png')}}"/></button>
+                                            src="{{asset('img/icons_logo/kakao-talk_logo.png')}}"/></button>
                             </div>
                             <div class="sign--up d-flex justify-content-center">
                                 <p>Do not have an account?</p>
-                                <a href="" data-toggle="modal" data-target="#modalRegister" data-dismiss="modal">Sign up</a>
+                                <a href="" data-toggle="modal" data-target="#modalRegister" data-dismiss="modal">Sign
+                                    up</a>
                             </div>
                         </div>
                     </div>
@@ -186,7 +191,8 @@
                                             <label for="member">Member</label>
                                             <select id="member" name="member" class="form-select">
                                                 <option>Choose...</option>
-                                                <option value="PHARMACEUTICAL_COMPANIES">PHARMACEUTICAL COMPANIES</option>
+                                                <option value="PHARMACEUTICAL_COMPANIES">PHARMACEUTICAL COMPANIES
+                                                </option>
                                                 <option value="HOSPITALS">HOSPITALS</option>
                                                 <option value="CLINICS">CLINICS</option>
                                                 <option value="PHARMACIES">PHARMACIES</option>
@@ -196,16 +202,19 @@
                                         </div>
                                         <div class="form-element">
                                             <label for="email">Email</label>
-                                            <input id="email" name="email" type="email" placeholder="exmaple@gmail.com" required>
+                                            <input id="email" name="email" type="email" placeholder="exmaple@gmail.com"
+                                                   required>
                                         </div>
 
                                         <div class="form-element">
                                             <label for="password">Password</label>
-                                            <input id="password" type="password" name="password" minlength="8" placeholder="********" required>
+                                            <input id="password" type="password" name="password" minlength="8"
+                                                   placeholder="********" required>
                                         </div>
                                         <div class="form-element">
                                             <label for="passwordConfirm">Enter the Password</label>
-                                            <input id="passwordConfirm" name="passwordConfirm" minlength="8" type="password" placeholder="********" required>
+                                            <input id="passwordConfirm" name="passwordConfirm" minlength="8"
+                                                   type="password" placeholder="********" required>
                                         </div>
                                         <div class="form-element">
                                             <input id="remember-me" type="checkbox" required>
@@ -229,13 +238,13 @@
                             </div>
                             <div class="form-signin" style="display: flex; justify-content: space-around">
                                 <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/facebook_logo.png')}}"/></button>
+                                            src="{{asset('img/icons_logo/facebook_logo.png')}}"/></button>
+                                <a href="{{ route('login.google') }}" class="login-with-btn"><img
+                                            src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/></a>
                                 <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/google_logo.png')}}"/></button>
+                                            src="{{asset('img/icons_logo/apple_logo.png')}}"/></button>
                                 <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/apple_logo.png')}}"/></button>
-                                <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/kakao-talk_logo.png')}}"/></button>
+                                            src="{{asset('img/icons_logo/kakao-talk_logo.png')}}"/></button>
                             </div>
                             <div class="sign--up d-flex justify-content-center">
                                 <p>Do you already have an account?</p>
