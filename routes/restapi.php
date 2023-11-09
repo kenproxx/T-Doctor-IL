@@ -5,6 +5,7 @@ use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\restapi\ClinicApi;
 use App\Http\Controllers\restapi\DoctorInfoApi;
 use App\Http\Controllers\restapi\PharmacyApi;
+use App\Http\Controllers\restapi\ReviewApi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +39,13 @@ Route::group(['prefix' => 'doctors-info'], function () {
 
 Route::group(['prefix' => 'api/answers'], function () {
     Route::post('/create', [BackendAnswerController::class, 'create'])->name('answers.api.create');
+});
+
+Route::group(['prefix' => 'reviews'], function () {
+    Route::get('/list', [ReviewApi::class, 'getAll'])->name('reviews.api.list');
+    Route::get('/clinics/{id}', [ReviewApi::class, 'getAllByClinicId'])->name('reviews.api.clinics');
+    Route::get('/detail/{id}', [ReviewApi::class, 'detail'])->name('reviews.api.detail');
+    Route::post('/create', [ReviewApi::class, 'create'])->name('reviews.api.create');
 });
 
 Route::group(['prefix' => 'coupons'], function () {

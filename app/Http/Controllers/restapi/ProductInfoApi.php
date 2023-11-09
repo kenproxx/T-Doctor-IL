@@ -6,6 +6,7 @@ use App\Enums\ProductStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Clinic;
 use App\Models\ProductInfo;
+use DB;
 use Illuminate\Http\Request;
 
 class ProductInfoApi extends Controller
@@ -21,6 +22,15 @@ class ProductInfoApi extends Controller
         $status = $request->input('status');
         $products = ProductInfo::where('status', ProductStatus::ACTIVE)->where('created_by', $id)->get();
         return response()->json($products);
+    }
+
+    public function getById(Request $request, $id)
+    {
+        $product = ProductInfo::find($id);
+        if (!$product || $product->status != ProductStatus::ACTIVE) {
+            return response('Not found');
+        }
+        return response()->json($product);
     }
 
     public function search(Request $request)
