@@ -49,4 +49,20 @@ class ClinicController extends Controller
         }
         return view('component.tab-booking.tab-booking',compact('id','bookings'));
     }
+    public function bookingService($id)
+    {
+        $bookingSv = Clinic::find($id);
+        if (!$bookingSv || $bookingSv->status != ClinicStatus::ACTIVE) {
+            return response("Product not found", 404);
+        }
+        return view('component.tab-booking.booking-service',compact('id','bookingSv'));
+    }
+    public function selectDate($id)
+    {
+        $bookingSv = Clinic::find($id);
+        if (!$bookingSv || $bookingSv->status != ClinicStatus::ACTIVE) {
+            return response("Product not found", 404);
+        }
+        return view('component.tab-booking.select-date',compact('id','bookingSv'));
+    }
 }

@@ -1036,4 +1036,25 @@
     border-radius: 50%;
     object-fit: cover;
 }
+.border-booking-sv {
+    border-radius: 8px;
+    background:  #F3F3F3;
+    display: flex;
+    padding: 8px;
+    align-items: flex-start;
+    gap: 10px;
+}
+.button-booking-sv {
+    display: flex;
+    width: 74px;
+    height: 32px;
+    padding: 11px 50px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    background: var(--secon1, #45C3D2);
+}
+
+
 

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-<div class="col-md-2">
+<div class="col-md-2 container-fluid">
     <div>
         <img src="{{asset('img/doctor.png')}}" alt="img">
     </div>
@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="mt-md-3 mb-md-3">
-        <a class="border-button-address font-weight-800 fs-14 justify-content-center"  href="#">Booking</a>
+        <a class="border-button-address font-weight-800 fs-14 justify-content-center" href="{{route('clinic.booking.service',$id)}}">Booking</a>
     </div>
     <div class="border-top">
         <div class="mt-md-2"><i class="text-gray mr-md-2 fa-solid fa-location-dot"></i>
@@ -43,13 +43,13 @@
         </div>
         <div class="mt-md-2">
             <i class="text-gray mr-md-2 fa-solid fa-globe"></i>
-            <span class="fs-14 font-weight-600"> dalieuthammygsv.com</span>
+            <span class="fs-14 font-weight-600"> {{$bookings->email}}</span>
         </div>
         <div class="mt-md-2">
-            <i class="text-gray mr-md-2 fa-solid fa-phone-volume"></i> <span class="fs-14 font-weight-600"> 024 6666 8888</span>
+            <i class="text-gray mr-md-2 fa-solid fa-phone-volume"></i> <span class="fs-14 font-weight-600">{{$bookings->phone}}</span>
         </div>
         <div class="mt-md-2 mb-md-2">
-            <i class="text-gray mr-md-2 fa-solid fa-bookmark"></i> <span class="fs-14 font-weight-600"> clinic</span>
+            <i class="text-gray mr-md-2 fa-solid fa-bookmark"></i> <span class="fs-14 font-weight-600"> {{$bookings->type}}</span>
         </div>
        @for($i=0; $i<3; $i++)
             <div class="border-top mb-md-2">
