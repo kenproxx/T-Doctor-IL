@@ -48,10 +48,21 @@ class UserApi extends Controller
     {
         try {
             $userID = $request->input('user_id');
-            $phoneNumber = $request->input('email');
+            $email = $request->input('email');
             $user = User::find($userID);
+
+            $isEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
+            if (!$isEmail) {
+                return response('Email invalid!', 400);
+            }
+
+            $oldUser = User::where('email', $email)->first();
+            if ($oldUser) {
+                return response('Email already exited!', 400);
+            }
+
             if ($userID && $user && $user->status == UserStatus::ACTIVE) {
-                $user->phone = $phoneNumber;
+                $user->email = $email;
                 $success = $user->save();
                 if ($success) {
                     return response('Change Email success!', 200);

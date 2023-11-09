@@ -15,7 +15,6 @@ class DoctorInfoApi extends Controller
         return response()->json($doctorInfos);
     }
 
-
     public function search(Request $request)
     {
         // Implement search functionality

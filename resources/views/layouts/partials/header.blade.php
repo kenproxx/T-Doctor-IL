@@ -196,7 +196,7 @@
                                         </div>
                                         <div class="form-element">
                                             <label for="email">Email</label>
-                                            <input id="email" name="email" type="text" placeholder="exmaple@gmail.com" required>
+                                            <input id="email" name="email" type="email" placeholder="exmaple@gmail.com" required>
                                         </div>
 
                                         <div class="form-element">

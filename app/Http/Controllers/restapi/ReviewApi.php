@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\restapi;
 
+use App\Enums\ClinicStatus;
 use App\Enums\ReviewStatus;
 use App\Http\Controllers\Controller;
+use App\Models\Clinic;
 use App\Models\Review;
 use Illuminate\Http\Request;
 
@@ -43,13 +45,23 @@ class ReviewApi extends Controller
             $clinic_id = $request->input('clinic_id');
             $star = $request->input('star');
             $content = $request->input('content');
+            $userID = $request->input('user_id');
+
+            $clinic = Clinic::find($clinic_id);
+            if (!$clinic || $clinic->status != ClinicStatus::ACTIVE) {
+                return response('Clinics not found!', 400);
+            }
+
+            if (!$userID) {
+                $userID = 0;
+            }
 
             $review->name = $name;
             $review->address = $address;
             $review->phone = $phone;
             $review->email = $email;
             $review->clinic_id = $clinic_id;
-            $review->user_id = 0;
+            $review->user_id = $userID;
             $review->star = $star;
             $review->content = $content;
             $review->status = ReviewStatus::PENDING;
