@@ -47,6 +47,8 @@ class AdminPharmacyApi extends Controller
             $pharmacy = new Clinic();
 
             $name = $request->input('name');
+            $phone = $request->input('phone');
+            $email = $request->input('email');
             $name_en = $request->input('name_en');
             $name_laos = $request->input('name_laos');
             $address_detail = $request->input('address_detail');
@@ -73,6 +75,8 @@ class AdminPharmacyApi extends Controller
             $status = $request->input('status');
 
             $pharmacy->name = $name;
+            $pharmacy->phone = $phone;
+            $pharmacy->email = $email;
             $pharmacy->name_en = $name_en ?? '';
             $pharmacy->name_laos = $name_laos ?? '';
             $pharmacy->address_detail = $address_detail;
@@ -132,6 +136,8 @@ class AdminPharmacyApi extends Controller
             }
 
             $name = $request->input('name') ?? $pharmacy->name;
+            $phone = $request->input('phone') ?? $pharmacy->phone;
+            $email = $request->input('email') ?? $pharmacy->email;
             $name_en = $request->input('name_en') ?? $pharmacy->name_en;
             $name_laos = $request->input('name_laos') ?? $pharmacy->name_en;
             $address_detail = $request->input('address_detail') ?? $pharmacy->address_detail;
@@ -156,6 +162,8 @@ class AdminPharmacyApi extends Controller
             }
 
             $pharmacy->name = $name;
+            $pharmacy->phone = $phone;
+            $pharmacy->email = $email;
             $pharmacy->name_en = $name_en ?? '';
             $pharmacy->name_laos = $name_laos ?? '';
             $pharmacy->address_detail = $address_detail;

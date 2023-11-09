@@ -17,13 +17,21 @@
         @method('POST')
 
         <div>
-            <div>
+            <div class="">
                 <label>name</label>
                 <input type="text" class="form-control" id="name" name="name" required value="">
             </div>
             <div>
                 <label>name_en</label>
                 <input type="text" class="form-control" id="name_en" name="name_en" value="">
+            </div>
+            <div>
+                <label>phone</label>
+                <input type="text" class="form-control" id="phone" name="phone" required value="">
+            </div>
+            <div>
+                <label>email</label>
+                <input type="text" class="form-control" id="email" name="email" required value="">
             </div>
             <div>
                 <label>address_detail</label>
@@ -91,6 +99,8 @@
                 const formData = new FormData();
                 formData.append("name", $('#name').val());
                 formData.append("name_en", $('#name_en').val());
+                formData.append("phone", $('#phone').val());
+                formData.append("email", $('#email').val());
                 formData.append("address_detail", $('#address_detail').val());
                 formData.append("address_detail_en", $('#address_detail_en').val());
                 formData.append("province_id", $('#province_id').val());
@@ -121,7 +131,7 @@
                         data: formData,
                         success: function (response) {
                             alert('success');
-                            window.location.reload();
+                            window.location.href= `{{route('homeAdmin.list.clinics')}}`;
                         },
                         error: function (exception) {
                             console.log(exception)

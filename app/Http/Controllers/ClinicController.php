@@ -41,8 +41,12 @@ class ClinicController extends Controller
         return view('admin.clinic.tab-edit-clinics',compact('clinics'));
     }
 
-    public function test($id)
+    public function booking($id)
     {
-        return view('component.tab-booking.tab-booking',compact('id'));
+        $bookings = Clinic::find($id);
+        if (!$bookings || $bookings->status != ClinicStatus::ACTIVE) {
+            return response("Product not found", 404);
+        }
+        return view('component.tab-booking.tab-booking',compact('id','bookings'));
     }
 }
