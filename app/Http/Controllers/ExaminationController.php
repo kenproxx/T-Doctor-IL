@@ -9,6 +9,8 @@ use App\Models\CalcViewQuestion;
 use App\Models\Question;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 
 class ExaminationController extends Controller
 {
@@ -16,45 +18,71 @@ class ExaminationController extends Controller
     {
         return view('examination.index');
     }
+
     public function infoDoctor()
     {
-        return view('examination.infodoctor');
+        $url = route('qr.code.show.doctor.info');
+        $qrCodes = QrCode::size(300)->generate($url);
+        return view('examination.infodoctor', compact('qrCodes'));
     }
 
-    public function bestDoctor(){
+    public function bestDoctor()
+    {
         return view('examination.bestdoctor');
     }
-    public function newDoctor(){
+
+    public function newDoctor()
+    {
         return view('examination.newdoctor');
     }
-    public function availableDoctor(){
+
+    public function availableDoctor()
+    {
         return view('examination.availabledoctor');
     }
-    public function findMyMedicine(){
+
+    public function findMyMedicine()
+    {
         return view('examination.findmymedicine');
     }
-    public function bestPharmacists(){
+
+    public function bestPharmacists()
+    {
         return view('examination.bestpharmacists');
     }
-    public function newPharmacists(){
+
+    public function newPharmacists()
+    {
         return view('examination.newpharmacists');
     }
-    public function availablePharmacists(){
+
+    public function availablePharmacists()
+    {
         return view('examination.availablepharmacists');
     }
-    public function hotDealMedicine(){
+
+    public function hotDealMedicine()
+    {
         return view('examination.hotdealmedicine');
     }
-    public function newMedicine(){
+
+    public function newMedicine()
+    {
         return view('examination.newmedicine');
     }
-    public function recommended(){
+
+    public function recommended()
+    {
         return view('examination.recommended');
     }
-    public function myPersonalDoctor(){
+
+    public function myPersonalDoctor()
+    {
         return view('examination.mypersonaldoctor');
     }
-    public function mentoring(){
+
+    public function mentoring()
+    {
         $questions = Question::withCount('answers')
             ->where('status', QuestionStatus::APPROVED)
             ->orderBy('answers_count', 'desc') // Order by answer_count in descending order
@@ -63,7 +91,8 @@ class ExaminationController extends Controller
         return view('examination.mentoring.mentoring', compact('questions'));
     }
 
-    public function searchMentoring(Request $request){
+    public function searchMentoring(Request $request)
+    {
 
         $list = [];
 
@@ -88,17 +117,17 @@ class ExaminationController extends Controller
 
         switch ($request->input('type')) {
             case SearchMentoring::LATEST:
-                usort($list, function($a, $b) {
+                usort($list, function ($a, $b) {
                     return strtotime($b['created_at']) - strtotime($a['created_at']);
                 });
                 break;
             case SearchMentoring::MOST_VIEWS:
-                usort($list, function($a, $b) {
+                usort($list, function ($a, $b) {
                     return $b['view_count'] - $a['view_count'];
                 });
                 break;
             case SearchMentoring::MOST_COMMENTED:
-                usort($list, function($a, $b) {
+                usort($list, function ($a, $b) {
                     return $b['comment_count'] - $a['comment_count'];
                 });
                 break;
@@ -106,10 +135,14 @@ class ExaminationController extends Controller
 
         return response()->json($list);
     }
-    public function createMentoring(){
+
+    public function createMentoring()
+    {
         return view('examination.mentoring.create');
     }
-    public function showMentoring($id){
+
+    public function showMentoring($id)
+    {
         $question = Question::where('id', $id)->first();
         $answers = Answer::where('question_id', $id)->get();
 
@@ -123,7 +156,7 @@ class ExaminationController extends Controller
         }
         $calcViewQuestion->save();
 
-        return view('examination.mentoring.detail', compact( 'question', 'answers'));
+        return view('examination.mentoring.detail', compact('question', 'answers'));
     }
 
 }

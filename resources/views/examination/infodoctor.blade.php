@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@section('title', 'Home')
+@section('title', 'Doctor Info')
 @section('content')
     @include('layouts.partials.header_3')
     @include('component.banner')
@@ -31,7 +31,7 @@
                     font-weight: 800;
                     ">Doctor's QR Code</p>
                     <p id="qrContent">
-                        <img src="{{asset('img/detail_doctor/qr_code.png')}}" alt="QR Code">
+                        {!! $qrCodes !!}
                     </p>
 
                 </div>
@@ -84,7 +84,7 @@
             <div id="rv-ctn" class="justify-content-center">
                 <div id="user_rv" class="d-flex">
                     <div id="user" class="d-flex">
-                        <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
+                        <img src="{{asset('img/detail_doctor/ellipse _14.png')}}" alt="">
                         <p>Trần Đình Phi</p>
                     </div>
                     <div id="time">
@@ -103,28 +103,5 @@
         </div>
 
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
-    <script>
-        function displayQRContent(content) {
-            var qr = new QRCode(document.getElementById("qrContent"), content);
-        }
-
-        $(document).ready(function () {
-            async function showQrCode() {
-                await $.ajax({
-                    url: '{{route('info.doctor.qr.code')}}',
-                    type: 'GET',
-                    success: function (data) {
-                        displayQRContent(data);
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    }
-                });
-            }
-
-            showQrCode();
-        });
-    </script>
 @endsection
 

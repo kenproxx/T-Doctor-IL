@@ -8,9 +8,6 @@ use Illuminate\Http\Request;
 
 class DoctorInfoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         //
@@ -22,10 +19,13 @@ class DoctorInfoController extends Controller
         if (!$coupon || $coupon->status != DoctorInfoStatus::ACTIVE) {
             return response("coupon not found", 404);
         }
-        return response()->json($coupon,$id);
+        return response()->json($coupon, $id);
     }
 
-
+    public function showFromQrCode()
+    {
+        return view('qrCode.doctor-info');
+    }
 
     public function create()
     {
@@ -38,6 +38,6 @@ class DoctorInfoController extends Controller
         if (!$doctor) {
             return response("doctor not found", 404);
         }
-        return view('admin.doctor.tab-edit-doctor',compact('doctor'));
+        return view('admin.doctor.tab-edit-doctor', compact('doctor'));
     }
 }

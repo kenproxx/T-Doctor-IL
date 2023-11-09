@@ -7,6 +7,7 @@ use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\CalcViewQuestionController;
 use App\Http\Controllers\ClinicController;
+use App\Http\Controllers\DoctorInfoController;
 use App\Http\Controllers\ExaminationController;
 use App\Http\Controllers\FleaMarketController;
 use App\Http\Controllers\frontend\HomeController;
@@ -114,6 +115,12 @@ Route::group(['prefix' => 'what-free'], function () {
 Route::middleware(['auth'])->group(function () {
 
 });
+
+// QrCode
+Route::group(['prefix' => 'qr-code'], function () {
+    Route::get('/doctor-info', [DoctorInfoController::class, 'showFromQrCode'])->name('qr.code.show.doctor.info');
+});
+
 /* List Api*/
 //Auth
 Route::group(['prefix' => 'auth'], function () {
