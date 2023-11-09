@@ -4,9 +4,9 @@ namespace App\Http\Controllers\restapi;
 
 use App\Enums\ProductStatus;
 use App\Http\Controllers\Controller;
-use App\Models\Clinic;
 use App\Models\ProductInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductInfoApi extends Controller
 {
@@ -16,11 +16,25 @@ class ProductInfoApi extends Controller
         return response()->json($products);
     }
 
+    public function getAllByCategory($id)
+    {
+        $products = ProductInfo::where('status', ProductStatus::ACTIVE)->where('category_id', $id)->get();
+        return response()->json($products);
+    }
+
     public function getByUser(Request $request, $id)
     {
-        $status = $request->input('status');
         $products = ProductInfo::where('status', ProductStatus::ACTIVE)->where('created_by', $id)->get();
         return response()->json($products);
+    }
+
+    public function getById(Request $request, $id)
+    {
+        $product = ProductInfo::find($id);
+        if (!$product || $product->status != ProductStatus::ACTIVE) {
+            return response('Not found');
+        }
+        return response()->json($product);
     }
 
     public function search(Request $request)
@@ -60,13 +74,6 @@ class ProductInfoApi extends Controller
         } else {
             $products = ProductInfo::where($query)->get();
         }
-        return response()->json($products);
-    }
-
-    public function getByClinicMain(Request $request, $id)
-    {
-        $clinic = Clinic::find($id);
-        $products = ProductInfo::where('status', ProductStatus::ACTIVE)->where('', $clinic->user_id)->get();
         return response()->json($products);
     }
 

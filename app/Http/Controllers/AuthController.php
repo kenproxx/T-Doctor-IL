@@ -62,6 +62,12 @@ class AuthController extends Controller
             $passwordConfirm = $request->input('passwordConfirm');
             $member = $request->input('member');
 
+            $isEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
+            if (!$isEmail) {
+                toast('Email invalid!', 'error', 'top-left');
+                return back();
+            }
+
             $myUser = (new MainController())->switchMember($member);
 
             $user = new User();
@@ -71,8 +77,19 @@ class AuthController extends Controller
                 return back();
             }
 
+            $oldUser = User::where('username', $username)->first();
+            if ($oldUser) {
+                toast('Username already exited!', 'error', 'top-left');
+                return back();
+            }
+
             if ($password != $passwordConfirm) {
                 toast('Password or Password Confirm incorrect!', 'error', 'top-left');
+                return back();
+            }
+
+            if (strlen($password) < 5) {
+                toast('Password invalid!', 'error', 'top-left');
                 return back();
             }
 
