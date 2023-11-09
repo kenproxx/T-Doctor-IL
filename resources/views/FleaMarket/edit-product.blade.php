@@ -299,7 +299,6 @@
                 }
                 formData.append('thumbnail', photo);
                 formData.append('status', 'ACTIVE');
-                console.log(formData)
                 try {
                     $.ajax({
                         url: `{{route('api.backend.product.updatePost',$e_product->id)}}`,

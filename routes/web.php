@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\backend\BackendClinicController;
 use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\CalcViewQuestionController;
@@ -85,6 +86,7 @@ Route::group(['prefix' => 'medicine'], function () {
 Route::group(['prefix' => 'clinic'], function () {
     Route::get('/', [ClinicController::class, 'index'])->name('clinic');
     Route::get('/detail/{id}', [ClinicController::class, 'detail'])->name('clinic.detail');
+    Route::get('/detail/{id}/test', [ClinicController::class, 'test'])->name('clinic.detail.test');
 
 });
 Route::group(['prefix' => 'product'], function () {
