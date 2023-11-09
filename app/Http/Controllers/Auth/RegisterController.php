@@ -11,6 +11,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use function Laravel\Prompts\password;
 
 class RegisterController extends Controller
 {
@@ -23,16 +24,31 @@ class RegisterController extends Controller
             $passwordConfirm = $request->input('passwordConfirm');
             $member = $request->input('member');
 
+            $isEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
+            if (!$isEmail) {
+                return response('Email invalid!', 400);
+            }
+
             $myUser = (new MainController())->switchMember($member);
 
             $user = new User();
+
             $oldUser = User::where('email', $email)->first();
             if ($oldUser) {
                 return response('Email already exited!', 400);
             }
 
+            $oldUser = User::where('username', $username)->first();
+            if ($oldUser) {
+                return response('Username already exited!', 400);
+            }
+
             if ($password != $passwordConfirm) {
                 return response('Password or Password Confirm incorrect!', 400);
+            }
+
+            if (strlen($password) < 5) {
+                return response('Password invalid!', 400);
             }
 
             $user->email = $email;
