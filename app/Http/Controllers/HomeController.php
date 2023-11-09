@@ -49,4 +49,11 @@ class HomeController extends Controller
     {
         return view('admin.doctor.list-doctors');
     }
+    public function listStaff()
+    {
+        //get list staff by manager_id = auth()->id()
+        $users = User::where('manager_id', Auth::id())->get();
+
+        return view('admin.staff.list-staff', compact('users'));
+    }
 }

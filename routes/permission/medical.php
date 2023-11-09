@@ -9,6 +9,7 @@ use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\backend\BackendReviewController;
+use App\Http\Controllers\backend\BackendStaffController;
 use App\Http\Controllers\backend\BackendWishListController;
 use App\Http\Controllers\QuestionLikesController;
 use App\Http\Controllers\restapi\admin\AdminDoctorInfoApi;
@@ -38,6 +39,14 @@ Route::group(['prefix' => 'products'], function () {
     Route::post('/edit/{id}', [BackendProductInfoController::class, 'update'])->name('api.backend.product.updatePost');
     Route::put('/update/{id}', [BackendProductInfoController::class, 'update'])->name('api.backend.products.update');
     Route::delete('/delete/{id}', [BackendProductInfoController::class, 'destroy'])->name('api.backend.products.delete');
+});
+
+Route::group(['prefix' => 'staffs'], function () {
+    Route::get('/list', [BackendStaffController::class, 'index'])->name('api.backend.staffs.list');
+    Route::get('/detail/{id}', [BackendStaffController::class, 'show'])->name('api.backend.staffs.detail');
+    Route::post('/store', [BackendStaffController::class, 'store'])->name('api.backend.staffs.store');
+    Route::post('/update/{id}', [BackendStaffController::class, 'update'])->name('api.backend.staffs.update');
+    Route::post('/delete/{id}', [BackendStaffController::class, 'destroy'])->name('api.backend.staffs.delete');
 });
 
 Route::group(['prefix' => 'wish-lists'], function () {

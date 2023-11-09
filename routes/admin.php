@@ -5,6 +5,7 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DoctorInfoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductInfoController;
+use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +25,7 @@ Route::group(['prefix' => 'home'], function () {
     Route::get('list-clinics', [HomeController::class, 'listClinics'])->name('homeAdmin.list.clinics');
     Route::get('list-coupon', [HomeController::class, 'listCoupon'])->name('homeAdmin.list.coupons');
     Route::get('list-doctor', [HomeController::class, 'listDoctor'])->name('homeAdmin.list.doctors');
+    Route::get('list-staff', [HomeController::class, 'listStaff'])->name('homeAdmin.list.staff');
 });
 
 Route::get('/about', function () {
@@ -38,6 +40,13 @@ Route::group(['prefix' => 'products'], function () {
     Route::get('/create', [ProductInfoController::class, 'createProduct'])->name('product.create.product');
     Route::get('/edit/{id}', [ProductInfoController::class, 'edit'])->name('product.edit');
     Route::put('/update/{id}', [ProductInfoController::class, 'update'])->name('product.update');
+
+});
+
+Route::group(['prefix' => 'staffs'], function () {
+    Route::get('detail/{id}', [StaffController::class, 'show'])->name('staff.detail');
+    Route::get('create', [StaffController::class, 'create'])->name('staff.create');
+    Route::get('edit/{id}', [StaffController::class, 'edit'])->name('staff.edit');
 
 });
 

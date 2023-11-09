@@ -72,6 +72,11 @@
                 <i class="fa-solid fa-user-doctor"></i>
                 <span>Examination</span></a>
         </li>
+        <li class="nav-item {{ Nav::isRoute('homeAdmin.list.staff') }}">
+            <a class="nav-link" href="{{ route('homeAdmin.list.staff') }}">
+                <i class="fa-solid fa-user-doctor"></i>
+                <span>Nhân viên</span></a>
+        </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">

@@ -63,4 +63,22 @@ class User extends Authenticatable  implements JWTSubject
         return $user->name . ' ' . $user->last_name;
     }
 
+    public static function isExistUsername($username)
+    {
+        $user = User::where('username', $username)->first();
+        if ($user) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function isExistEmail($email)
+    {
+        $user = User::where('email', $email)->first();
+        if ($user) {
+            return true;
+        }
+        return false;
+    }
+
 }
