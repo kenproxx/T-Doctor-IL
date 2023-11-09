@@ -11,7 +11,6 @@
 <div class="page row" id="productsAdsPlan3"></div>
 <script>
     var token = `${getCookie('accessToken')}`;
-
     function isLogin() {
         if (token == 'undefined') {
             $('#staticBackdrop').modal('show');

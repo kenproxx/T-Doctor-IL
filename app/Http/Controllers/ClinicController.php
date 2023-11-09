@@ -40,4 +40,9 @@ class ClinicController extends Controller
         }
         return view('admin.clinic.tab-edit-clinics',compact('clinics'));
     }
+
+    public function test($id)
+    {
+        return view('component.tab-booking.tab-booking',compact('id'));
+    }
 }

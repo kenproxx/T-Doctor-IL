@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\backend\BackendClinicController;
 use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\CalcViewQuestionController;
@@ -86,10 +87,12 @@ Route::group(['prefix' => 'medicine'], function () {
 Route::group(['prefix' => 'clinic'], function () {
     Route::get('/', [ClinicController::class, 'index'])->name('clinic');
     Route::get('/detail/{id}', [ClinicController::class, 'detail'])->name('clinic.detail');
+    Route::get('/detail/{id}/test', [ClinicController::class, 'test'])->name('clinic.detail.test');
 
 });
 Route::group(['prefix' => 'product'], function () {
     Route::get('/lists', [BackendProductInfoController::class, 'index'])->name('backend.products.list');
+    Route::get('/search', [BackendProductInfoController::class, 'search'])->name('backend.products.search');
 
 
 });
@@ -102,6 +105,7 @@ Route::group(['prefix' => 'flea-market'], function () {
     Route::get('sell-product', [FleaMarketController::class, 'sellProduct'])->name('flea.market.sell.product');
     Route::get('edit-product/{id}', [FleaMarketController::class, 'editProduct'])->name('flea.market.edit.product');
     Route::get('product-detail/{id}', [FleaMarketController::class, 'productDetail'])->name('flea.market.product.detail');
+    Route::get('shop-info/{id}', [FleaMarketController::class, 'ShopInfo'])->name('flea.market.product.shop.info');
 });
 Route::group(['prefix' => 'what-free'], function () {
     Route::get('/', [WhatFreeToDay::class, 'index'])->name('what.free');
