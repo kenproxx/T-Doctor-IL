@@ -195,6 +195,8 @@ return [
         BenSampo\Enum\EnumServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        /* More service*/
+        SocialiteProviders\Manager\ServiceProvider::class,
     ],
 
     /*
@@ -249,6 +251,7 @@ return [
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];
