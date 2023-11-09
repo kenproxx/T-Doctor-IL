@@ -1,6 +1,21 @@
 @extends('layouts.master')
 @section('title', 'Home')
 @section('content')
+    <style>
+        .border-flea-market {
+            border-radius: 16px;
+            padding: 16px;
+        }
+
+        .object-fit-cover {
+            object-fit: cover;
+        }
+
+        .title-div-flea-market {
+            white-space: nowrap;
+            overflow: hidden;
+        }
+    </style>
     @include('layouts.partials.header')
     @include('component.banner')
     <div>
@@ -20,106 +35,45 @@
                         <h3 class="py-3 text-center">WHAT’S FREE?</h3>
                         <a href="#"><p class="section1_link">See all</p></a>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <ul class="nav nav-pills nav-fill">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Free today</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Free with mission</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Discounted service</a>
-                            </li>
-                        </ul>
-                    </div>
+                        <div class="d-flex justify-content-center">
+                            <ul class="nav nav-pills nav-fill">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="#">Free today</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Free with mission</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Discounted service</a>
+                                </li>
+                            </ul>
+                        </div>
+
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                             <div class="section1-content">
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
+                                @foreach($coupons as $coupon)
+                                    <a href="{{ route('what.free.detail', $coupon->id) }}" target="_blank">
+                                    <div class="px-5 py-2" >
+                                        <div class="content__item d-flex gap-3">
+                                            <img
+                                                class="content__item__image"
+                                                src="{{asset($coupon->thumbnail ?? 'img/icons_logo/image 1.jpeg')}}"
+                                                alt=""
+                                            />
+                                            <div class="w-100 overflow-hidden">
+                                                <h6>
+                                                    {!! $coupon->title !!}
+                                                </h6>
+                                                <div class="content__item__describe">
+                                                    {!! $coupon->short_description !!}
+                                                </div>
+                                                <p class="content__item-link">Read</p>
                                             </div>
-                                            <p class="content__item-link">Read</p>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
-                                            </div>
-                                            <p class="content__item-link">Read</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
-                                            </div>
-                                            <p class="content__item-link">Read</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
-                                            </div>
-                                            <p class="content__item-link">Read</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                    </a>
+                                @endforeach
                             </div>
 
                         </div>
@@ -825,84 +779,27 @@
                 <h2>Flea market</h2>
                 <p>Hire staffs cheaper, find your staffs faster</p>
                 <div class="section1-content">
-                    <div class="d-flex justify-content-around">
-                        <div class="card" style="width: 188px; height: 342px">
-                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                                <p class="card-text">Location: <b>Hanoi</b></p>
-                                <h4>599.000</h4>
+
+                    <div class="row">
+                        @foreach($products as $product)
+                            <div class="col-sm-4 pt-4">
+                                <div class="card border-flea-market" style="height: 342px">
+                                    <img src="{{asset($product->thumbnail ?? 'img/item_shopping.png')}}" class="card-img-top object-fit-cover" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title title-div-flea-market">{{ $product->name }}</h5>
+                                        @if($product->province_id)
+                                            @php
+                                                $province = \App\Models\Province::find($product->province_id);
+                                            @endphp
+                                            <p class="card-text">Location: <b>{{ $province->name }}</b></p>
+                                        @endif
+                                        <h4>{{ $product->price }}</h4>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card" style="width: 188px; height: 342px">
-                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                                <p class="card-text">Location: <b>Hanoi</b></p>
-                                <h4>599.000</h4>
-                            </div>
-                        </div>
-                        <div class="card" style="width:188px; height: 342px">
-                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                                <p class="card-text">Location: <b>Hanoi</b></p>
-                                <h4>599.000</h4>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
-                    <div class="d-flex justify-content-around">
-                        <div class="card" style="width: 188px; height: 342px">
-                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                                <p class="card-text">Location: <b>Hanoi</b></p>
-                                <h4>599.000</h4>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 188px; height: 342px">
-                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                                <p class="card-text">Location: <b>Hanoi</b></p>
-                                <h4>599.000</h4>
-                            </div>
-                        </div>
-                        <div class="card" style="width:188px; height: 342px">
-                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                                <p class="card-text">Location: <b>Hanoi</b></p>
-                                <h4>599.000</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-around">
-                        <div class="card" style="width: 188px; height: 342px">
-                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                                <p class="card-text">Location: <b>Hanoi</b></p>
-                                <h4>599.000</h4>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 188px; height: 342px">
-                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                                <p class="card-text">Location: <b>Hanoi</b></p>
-                                <h4>599.000</h4>
-                            </div>
-                        </div>
-                        <div class="card" style="width:188px; height: 342px">
-                            <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                                <p class="card-text">Location: <b>Hanoi</b></p>
-                                <h4>599.000</h4>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
             <div id="describe" class="d-flex align-items-center flex-column mb-3">
@@ -1003,4 +900,10 @@
             </ul>
         </nav>
     </div>
+
+    <script>
+        function viewCoupon(id) {
+            window.location.href = "/coupon/" + id;
+        };
+    </script>
 @endsection
