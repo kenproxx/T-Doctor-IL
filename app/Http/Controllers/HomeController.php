@@ -56,4 +56,9 @@ class HomeController extends Controller
 
         return view('admin.staff.list-staff', compact('users'));
     }
+
+    public function listConfig()
+    {
+        return view('admin.general-config.list-config');
+    }
 }

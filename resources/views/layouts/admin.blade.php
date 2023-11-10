@@ -22,6 +22,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/list-config.css') }}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
@@ -100,6 +101,10 @@
                 <i class="fa-solid fa-user-doctor"></i>
                 <span>Nhân viên</span></a>
         </li>
+            <li class="nav-item {{ Nav::isRoute('homeAdmin.list.config') }}">
+            <a class="nav-link" href="{{ route('homeAdmin.list.config') }}">
+                <i class="fa-solid fa-user-doctor"></i>
+                <span>Cấu hình chung</span></a>
         @endif
 
         <!-- Divider -->
