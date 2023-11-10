@@ -22,7 +22,6 @@
             <div>
                 <label>Member</label>
                 <select id="member" name="member" class="form-select form-control">
-                    <option>Choose...</option>
                     <option value="{{ Role::DOCTORS }}">{{ Role::DOCTORS }}</option>
                     <option value="{{ Role::PHAMACISTS }}">{{ Role::PHAMACISTS }}</option>
                     <option value="{{ Role::THERAPISTS }}">{{ Role::THERAPISTS }}</option>

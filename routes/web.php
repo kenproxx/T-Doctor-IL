@@ -123,8 +123,12 @@ Route::group(['prefix' => 'what-free'], function () {
     Route::get('/campaign', [WhatFreeToDay::class, 'campaign'])->name('what.free.campaign');
 
 });
+
 Route::middleware(['auth'])->group(function () {
     Route::post('/save-user-login-social', [AuthSocialController::class, 'saveUser'])->name('save.user.login.social');
+});
+Route::group(['middleware' => ['medical']], function () {
+    Route::get('/admin', [\App\Http\Controllers\HomeController::class, 'home'])->name('homeAdmin');
 });
 
 // QrCode

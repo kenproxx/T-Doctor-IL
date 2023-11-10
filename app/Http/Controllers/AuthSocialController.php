@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthSocialController extends Controller
 {
@@ -40,6 +41,11 @@ class AuthSocialController extends Controller
 
             if ($existingUser) {
                 auth()->login($existingUser, true);
+                $token = JWTAuth::fromUser($existingUser);
+                setcookie("accessToken", $token, time()+3600*24);
+                if (!$existingUser->provider_name) {
+                    return redirect(route('profile'));
+                }
             } else {
                 $newUser = new User;
                 $newUser->provider_name = "google";
@@ -58,7 +64,65 @@ class AuthSocialController extends Controller
                 $newUser->save();
 
                 auth()->login($newUser, true);
+                $token = JWTAuth::fromUser($newUser);
+                setcookie("accessToken", $token, time()+3600*24);
             }
+            toast('Register success!', 'success', 'top-left');
+            return redirect()->route('login.social.choose.role');
+        } catch (\Exception $exception) {
+            return $exception;
+        }
+    }
+
+    public function getFacebookSignInUrl()
+    {
+        try {
+            $url = Socialite::driver('facebook')->stateless()
+                ->redirect()->getTargetUrl();
+            return redirect($url);
+        } catch (\Exception $exception) {
+            return $exception;
+        }
+    }
+
+    public function callback(Request $request)
+    {
+        try {
+            $facebookUser = Socialite::driver('facebook')->stateless()->user();
+
+
+            if ($facebookUser->getEmail() == null || $facebookUser->getName() == null) {
+                return redirect()->route('login')->with('error', 'Error');
+            }
+
+            $existingUser = User::where('email', $facebookUser->email)->first();
+
+            $password = (new HomeController())->generateRandomString(8);
+            $passwordHash = Hash::make($password);
+
+            if ($existingUser) {
+                auth()->login($existingUser, true);
+
+            } else {
+                $newUser = new User;
+                $newUser->provider_name = "facebook";
+                $newUser->provider_id = $facebookUser->getId();
+                $newUser->name = $facebookUser->getName();
+                $newUser->last_name = $facebookUser->getName();
+                $newUser->email = $facebookUser->getEmail();
+                $newUser->phone = '';
+                $newUser->username = $facebookUser->getId() . $facebookUser->getEmail();
+                $newUser->address_code = "";
+                $newUser->password = $passwordHash;
+                $newUser->type = "OTHERS";
+                $newUser->email_verified_at = now();
+                $newUser->avt = $facebookUser->getAvatar();
+
+                $newUser->save();
+
+                auth()->login($newUser, true);
+            }
+
             toast('Register success!', 'success', 'top-left');
             return redirect()->route('login.social.choose.role');
         } catch (\Exception $exception) {
