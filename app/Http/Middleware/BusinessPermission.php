@@ -7,6 +7,7 @@ use App\Models\User;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -21,8 +22,11 @@ class BusinessPermission
     public function handle(Request $request, Closure $next): Response
     {
         try {
-            $user = JWTAuth::parseToken()->authenticate();
-//            dd($user);
+            if (!Auth::check()) {
+                $user = JWTAuth::parseToken()->authenticate();
+            } else {
+                $user = Auth::user();
+            }
             $role_user = DB::table('role_users')->where('user_id', $user->id)->first();
             $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
 //            $roles = $user->roles;

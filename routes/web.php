@@ -123,8 +123,12 @@ Route::group(['prefix' => 'what-free'], function () {
     Route::get('/campaign', [WhatFreeToDay::class, 'campaign'])->name('what.free.campaign');
 
 });
+
 Route::middleware(['auth'])->group(function () {
     Route::post('/save-user-login-social', [AuthSocialController::class, 'saveUser'])->name('save.user.login.social');
+});
+Route::group(['middleware' => ['medical']], function () {
+    Route::get('/admin', [\App\Http\Controllers\HomeController::class, 'home'])->name('homeAdmin');
 });
 
 // QrCode
@@ -145,7 +149,6 @@ Route::group(['prefix' => 'products'], function () {
 });
 
 /* Admin */
-Route::get('/admin', [\App\Http\Controllers\HomeController::class, 'home'])->name('homeAdmin');
 Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     require_once __DIR__ . '/admin.php';
 });
