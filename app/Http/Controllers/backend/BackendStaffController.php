@@ -4,6 +4,8 @@ namespace App\Http\Controllers\backend;
 
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
+use App\Models\Role;
+use App\Models\RoleUser;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -76,10 +78,24 @@ class BackendStaffController extends Controller
             $user->phone = '';
             $user->address_code = '';
 
-            $user->save();
-
             $success = $user->save();
+
             if ($success) {
+                $role = Role::where('name', $member)->first();
+
+                if ($role) {
+                    // Lấy id của user vừa tạo
+                    $newUser = User::where('username', $username)->first();
+
+                    // Tạo mới bản ghi trong bảng role_user
+                    RoleUser::create([
+                        'role_id' => $role->id,
+                        'user_id' => $newUser->id
+                    ]);
+                } else {
+                    // Xử lý nếu không tìm thấy role
+                    // (ví dụ: thông báo lỗi hoặc xử lý khác)
+                }
                 return response()->json($user);
             }
 
@@ -153,7 +169,21 @@ class BackendStaffController extends Controller
             $user->status = $status;
 
 
-            $user->save();
+            $success = $user->save();
+
+            if ($success) {
+                $role = Role::where('name', $member)->first();
+
+                if ($role) {
+
+                    // cập nhật bản ghi trong bảng role_user
+                    RoleUser::where('user_id', $user->id)->update([
+                        'role_id' => $role->id,
+                    ]);
+
+                }
+                return response()->json($user);
+            }
         } catch (Exception $exception) {
             return response($exception, 400);
         }
