@@ -145,6 +145,7 @@ Route::group(['prefix' => 'products'], function () {
 });
 
 /* Admin */
+Route::get('/admin', [\App\Http\Controllers\HomeController::class, 'home'])->name('homeAdmin');
 Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
     require_once __DIR__ . '/admin.php';
 });
