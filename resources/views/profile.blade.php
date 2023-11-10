@@ -29,15 +29,17 @@
 
             <div class="card shadow mb-4">
                 <div class="card-profile-image mt-4">
-                    <figure class="rounded-circle avatar avatar font-weight-bold" style="font-size: 60px; height: 180px; width: 180px;" data-initial="{{ Auth::user()->avt }}"></figure>
+                    <figure class="rounded-circle avatar avatar font-weight-bold"
+                            style="font-size: 60px; height: 180px; width: 180px;"
+                            data-initial="{{ Auth::user()->avt }}"></figure>
                 </div>
                 <div class="card-body">
 
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="text-center">
-                                <h5 class="font-weight-bold">{{  Auth::user()->fullName }}</h5>
-                                <p>Administrator</p>
+                                <h5 class="font-weight-bold">{{  Auth::user()->name }}</h5>
+                                <p>{{  Auth::user()->username }}</p>
                             </div>
                         </div>
                     </div>
@@ -86,25 +88,50 @@
 
                         <div class="pl-lg-4">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="name">Name<span class="small text-danger">*</span></label>
-                                        <input type="text" id="name" class="form-control" name="name" placeholder="Name" value="{{ old('name', Auth::user()->name) }}">
+                                        <label class="form-control-label" for="username">Username<span
+                                                class="small text-danger">*</span></label>
+                                        <input type="text" id="username" class="form-control" name="username"
+                                               placeholder="Username"
+                                               value="{{ old('username', Auth::user()->username) }}">
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="name">Name<span
+                                                class="small text-danger">*</span></label>
+                                        <input type="text" id="name" class="form-control" name="name" placeholder="Name"
+                                               value="{{ old('name', Auth::user()->name) }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="last_name">Last name</label>
-                                        <input type="text" id="last_name" class="form-control" name="last_name" placeholder="Last name" value="{{ old('last_name', Auth::user()->last_name) }}">
+                                        <input type="text" id="last_name" class="form-control" name="last_name"
+                                               placeholder="Last name"
+                                               value="{{ old('last_name', Auth::user()->last_name) }}">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-12">
+                                <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="email">Email address<span class="small text-danger">*</span></label>
-                                        <input type="email" id="email" class="form-control" name="email" placeholder="example@example.com" value="{{ old('email', Auth::user()->email) }}">
+                                        <label class="form-control-label" for="email">Email address<span
+                                                class="small text-danger">*</span></label>
+                                        <input type="email" id="email" class="form-control" name="email"
+                                               placeholder="example@example.com"
+                                               value="{{ old('email', Auth::user()->email) }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="form-control-label" for="phone">PhoneNumber<span
+                                                class="small text-danger">*</span></label>
+                                        <input type="text" id="phone" class="form-control" name="phone"
+                                               placeholder="Phone"
+                                               value="{{ old('phone', Auth::user()->phone) }}">
                                     </div>
                                 </div>
                             </div>
@@ -112,20 +139,60 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="current_password">Current password</label>
-                                        <input type="password" id="current_password" class="form-control" name="current_password" placeholder="Current password">
+                                        <label class="form-control-label" for="current_password">Current
+                                            password</label>
+                                        <input type="password" id="current_password" class="form-control"
+                                               name="current_password" placeholder="Current password">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="new_password">New password</label>
-                                        <input type="password" id="new_password" class="form-control" name="new_password" placeholder="New password">
+                                        <input type="password" id="new_password" class="form-control"
+                                               name="new_password" placeholder="New password">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="confirm_password">Confirm password</label>
-                                        <input type="password" id="confirm_password" class="form-control" name="password_confirmation" placeholder="Confirm password">
+                                        <label class="form-control-label" for="confirm_password">Confirm
+                                            password</label>
+                                        <input type="password" id="confirm_password" class="form-control"
+                                               name="password_confirmation" placeholder="Confirm password">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="address_code">AddressCode</label>
+                                        <input type="text" id="address_code" class="form-control" name="address_code"
+                                               placeholder="HN123"
+                                               value="{{ old('address_code', Auth::user()->address_code) }}">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="member">Member<span
+                                                class="small text-danger">*</span></label>
+                                        <select id="member" name="member" class="form-control">
+                                            @foreach($roles as $role)
+                                                @php
+                                                    $isSelected = false;
+                                                    if ($role->id == $roleItem->id){
+                                                        $isSelected = true;
+                                                    }
+                                                @endphp
+                                                <option {{ $isSelected ? 'selected' : '' }} value="{{$role->id}}">{{$role->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group focused">
+                                        <label class="form-control-label" for="status">Status</label>
+                                        <input type="text" id="status" class="form-control" name="status"
+                                               disabled
+                                               value="{{ old('status', Auth::user()->status) }}">
                                     </div>
                                 </div>
                             </div>

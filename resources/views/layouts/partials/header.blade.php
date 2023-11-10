@@ -146,13 +146,13 @@
                             </div>
                             <div class="form-signin d-flex justify-content-around">
                                 <button type="button" class="login-with-btn"><img
-                                            src="{{asset('img/icons_logo/facebook_logo.png')}}"/></button>
+                                        src="{{asset('img/icons_logo/facebook_logo.png')}}"/></button>
                                 <a href="{{ route('login.google') }}" class="login-with-btn"><img
-                                            src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/></a>
+                                        src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/></a>
                                 <button type="button" class="login-with-btn"><img
-                                            src="{{asset('img/icons_logo/apple_logo.png')}}"/></button>
+                                        src="{{asset('img/icons_logo/apple_logo.png')}}"/></button>
                                 <button type="button" class="login-with-btn"><img
-                                            src="{{asset('img/icons_logo/kakao-talk_logo.png')}}"/></button>
+                                        src="{{asset('img/icons_logo/kakao-talk_logo.png')}}"/></button>
                             </div>
                             <div class="sign--up d-flex justify-content-center">
                                 <p>Do not have an account?</p>
@@ -188,16 +188,19 @@
                                                    required>
                                         </div>
                                         <div class="form-element">
+                                            <label for="type">Type Account</label>
+                                            <select id="type" name="type" class="form-select">
+                                                <option>Choose...</option>
+                                                <option value="BUSINESS">BUSINESS</option>
+                                                <option value="MEDICAL">MEDICAL</option>
+                                                <option value="NORMAL">NORMAL</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-element">
                                             <label for="member">Member</label>
                                             <select id="member" name="member" class="form-select">
-                                                <option>Choose...</option>
-                                                <option value="PHARMACEUTICAL_COMPANIES">PHARMACEUTICAL COMPANIES
-                                                </option>
-                                                <option value="HOSPITALS">HOSPITALS</option>
-                                                <option value="CLINICS">CLINICS</option>
-                                                <option value="PHARMACIES">PHARMACIES</option>
-                                                <option value="SPAS">SPAS</option>
-                                                <option value="OTHERS">OTHERS</option>
+                                                <option value="PAITENTS">PAITENTS</option>
+                                                <option value="NORMAL_PEOPLE">NORMAL PEOPLE</option>
                                             </select>
                                         </div>
                                         <div class="form-element">
@@ -238,13 +241,13 @@
                             </div>
                             <div class="form-signin" style="display: flex; justify-content: space-around">
                                 <button type="button" class="login-with-btn"><img
-                                            src="{{asset('img/icons_logo/facebook_logo.png')}}"/></button>
+                                        src="{{asset('img/icons_logo/facebook_logo.png')}}"/></button>
                                 <a href="{{ route('login.google') }}" class="login-with-btn"><img
-                                            src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/></a>
+                                        src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/></a>
                                 <button type="button" class="login-with-btn"><img
-                                            src="{{asset('img/icons_logo/apple_logo.png')}}"/></button>
+                                        src="{{asset('img/icons_logo/apple_logo.png')}}"/></button>
                                 <button type="button" class="login-with-btn"><img
-                                            src="{{asset('img/icons_logo/kakao-talk_logo.png')}}"/></button>
+                                        src="{{asset('img/icons_logo/kakao-talk_logo.png')}}"/></button>
                             </div>
                             <div class="sign--up d-flex justify-content-center">
                                 <p>Do you already have an account?</p>
@@ -258,4 +261,34 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#type').on('change', function () {
+            let value = $(this).val();
+            let html = ``;
+            switch (value) {
+                case 'BUSINESS':
+                    html = `<option value="{{\App\Enums\Role::PHARMACEUTICAL_COMPANIES}}">PHARMACEUTICAL COMPANIES</option>
+                                                <option value="{{\App\Enums\Role::HOSPITALS}}">HOSPITALS</option>
+                                                <option value="{{\App\Enums\Role::CLINICS}}">CLINICS</option>
+                                                <option value="{{\App\Enums\Role::PHARMACIES}}">PHARMACIES</option>
+                                                <option value="{{\App\Enums\Role::SPAS}}">SPAS</option>
+                                                <option value="{{\App\Enums\Role::OTHERS}}">OTHERS</option>`;
+                    break;
+                case 'MEDICAL':
+                    html = `<option value="{{\App\Enums\Role::DOCTORS}}">DOCTOR</option>
+                                                <option value="{{\App\Enums\Role::PHAMACISTS}}">PHAMACISTS</option>
+                                                <option value="{{\App\Enums\Role::THERAPISTS}}">THERAPISTS</option>
+                                                <option value="{{\App\Enums\Role::ESTHETICIANS}}">ESTHETICIANS</option>
+                                                <option value="{{\App\Enums\Role::NURSES}}">NURSES</option>`;
+                    break;
+                default:
+                    html = `<option value="{{\App\Enums\Role::PAITENTS}}">PAITENTS</option>
+                                                <option value="{{\App\Enums\Role::NORMAL_PEOPLE}}">NORMAL PEOPLE</option>`;
+                    break;
+            }
+            $('#member').empty().append(html);
+        })
+    })
+</script>
 

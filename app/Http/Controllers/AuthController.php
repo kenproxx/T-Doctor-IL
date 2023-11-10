@@ -49,7 +49,7 @@ class AuthController extends Controller
             if (Auth::attempt($credentials)) {
                 $token = JWTAuth::fromUser($user);
                 setCookie('accessToken', $token);
-                toast('Welcome '.$user->email, 'success', 'top-left');
+                toast('Welcome ' . $user->email, 'success', 'top-left');
 
                 $role_user = DB::table('role_users')->where('user_id', $user->id)->first();
                 $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
@@ -84,7 +84,7 @@ class AuthController extends Controller
                 return back();
             }
 
-            $myUser = (new MainController())->switchMember($member);
+//            $myUser = (new MainController())->switchMember($member);
 
             $user = new User();
             $oldUser = User::where('email', $email)->first();
@@ -118,13 +118,20 @@ class AuthController extends Controller
             $user->username = $username;
             $user->phone = '';
             $user->address_code = '';
-            $user->type = $myUser[1];
+//            $user->type = $myUser[1];
+            $user->type = $request->input('type');
             $user->status = UserStatus::ACTIVE;
 
             $success = $user->save();
 
+            $role = Role::where('name', $request->input('member'))->first();
+            if (!$role) {
+                $role = Role::where('name', \App\Enums\Role::NORMAL_PEOPLE)->first();
+            }
+
             $roleItem = [
-                'role_id' => $myUser[0]->id,
+//                'role_id' => $myUser[0]->id,
+                'role_id' => $role->id,
                 'user_id' => $user->id
             ];
 
