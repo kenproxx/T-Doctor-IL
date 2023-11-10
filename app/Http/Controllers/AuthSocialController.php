@@ -42,8 +42,7 @@ class AuthSocialController extends Controller
             if ($existingUser) {
                 auth()->login($existingUser, true);
                 $token = JWTAuth::fromUser($existingUser);
-                (new AuthController())->setCookie('accessToken', null);
-                (new AuthController())->setCookie('accessToken', $token);
+                setcookie("accessToken", $token, time()+3600*24);
                 if (!$existingUser->provider_name) {
                     return redirect(route('profile'));
                 }
@@ -66,8 +65,7 @@ class AuthSocialController extends Controller
 
                 auth()->login($newUser, true);
                 $token = JWTAuth::fromUser($newUser);
-                (new AuthController())->setCookie('accessToken', null);
-                (new AuthController())->setCookie('accessToken', $token);
+                setcookie("accessToken", $token, time()+3600*24);
             }
             toast('Register success!', 'success', 'top-left');
             return redirect()->route('login.social.choose.role');
