@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserStatus;
-use App\Models\RoleUser;
+use App\Models\Role;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -30,32 +31,39 @@ class AuthController extends Controller
                 toast('Account not found!', 'error', 'top-left');
                 return back();
             } else {
-                if ($user && $user->status == UserStatus::INACTIVE) {
-                    toast('Account not active!', 'error', 'top-left');
-                    return back();
-                } else if ($user && $user->status == UserStatus::BLOCKED) {
-                    toast('Account has been blocked!', 'error', 'top-left');
-                    return back();
+                if ($user) {
+                    switch ($user->status) {
+                        case UserStatus::INACTIVE:
+                            toast('Account not active!', 'error', 'top-left');
+                            return back();
+                        case UserStatus::BLOCKED:
+                            toast('Account has been blocked!', 'error', 'top-left');
+                            return back();
+                        case UserStatus::DELETED:
+                            toast('Account has been deleted!', 'error', 'top-left');
+                            return back();
+                    }
                 }
             }
 
             if (Auth::attempt($credentials)) {
                 $token = JWTAuth::fromUser($user);
                 setCookie('accessToken', $token);
-                toast('Welcome ' . $user->email, 'success', 'top-left');
+                toast('Welcome '.$user->email, 'success', 'top-left');
 
-                $userRoles = RoleUser::where('user_id', $user->id)->get();
-                foreach ($userRoles as $userRole) {
-                    if ($userRole->role_id == 14) {
-                        return redirect(route('homeAdmin'));
-                    }
+                $role_user = DB::table('role_users')->where('user_id', $user->id)->first();
+                $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
+
+                if ($roleNames->contains('DOCTORS') || $roleNames->contains('PHAMACISTS') || $roleNames->contains('THERAPISTS') || $roleNames->contains('ESTHETICIANS') || $roleNames->contains('NURSES') || $roleNames->contains('PHARMACEUTICAL COMPANIES') || $roleNames->contains('HOSPITALS') || $roleNames->contains('CLINICS') || $roleNames->contains('PHARMACIES') || $roleNames->contains('SPAS') || $roleNames->contains('OTHERS') || $roleNames->contains('ADMIN')) {
+                    return redirect(route('homeAdmin'));
                 }
+
                 return redirect(route('home'));
             } else {
                 toast('Email or password incorrect', 'error', 'top-left');
             }
             return back();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             toast('Error, Please try again!', 'error', 'top-left');
             return back();
         }
@@ -127,7 +135,7 @@ class AuthController extends Controller
             }
             toast('Register fail!', 'error', 'top-left');
             return back();
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             toast('Error, Please try again!', 'error', 'top-left');
             return back();
         }
