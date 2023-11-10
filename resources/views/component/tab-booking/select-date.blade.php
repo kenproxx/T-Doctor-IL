@@ -1,11 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+@extends('layouts.master')
+@section('title', 'Flea Market')
+@section('content')
     <style>
         section {
             margin-top: 20px;
         }
+
+        .ui-datepicker-calendar tbody tr td .ui-state-default {
+            border: none;
+            font-size: 12px;
+            font-weight: 800;        }
 
         @media only screen and (max-width: 639px) {
             .flex-container {
@@ -20,6 +24,7 @@
 
         .flex-container-morning, .flex-container-afternoon {
             display: flex;
+            justify-content: center;
             flex-wrap: wrap;
         }
 
@@ -42,13 +47,13 @@
         @media only screen and (min-width: 640px) {
             .item .button {
                 margin-left: 10%;
-                width: 80%;
+                /*width: 100%;*/
                 margin-right: 10%;
             }
         }
 
         .form-submit {
-            width: 100%;
+            /*width: 100%;*/
             margin-top: 50px;
         }
 
@@ -69,37 +74,71 @@
                 opacity: 0;
             }
         }
+        .button-apply-booking {
+            display: flex;
+            padding: 11px 50px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex: 1 0 0;
+            border-radius: 8px;
+            background:  #45C3D2;
+        }
+        .button-Reset-booking {
+            display: flex;
+            padding: 11px 50px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex: 1 0 0;
+            border-radius: 8px;
+            background:  #D6D6D6;
+        }
+        .item button {
+            border-radius: 8px;
+            background:  #F3F3F3;
+            color:  #929292;
+            display: flex;
+            width: 65px;
+            padding: 6px 16px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-shrink: 0;
+        }
     </style>
-</head>
-<body>
 <section>
-    <div class="row">
-        <div class="small-12 medium-5 columns">
+    <div class="row col-md-2 d-block">
+        <div class="small-12 ">
             <div id="datepicker"></div>
         </div>
-        <div class="small-12 medium-7 columns">
+        <div class="small-12 ">
             <div class="spin-me"></div>
             <div class="master-container-slots">
-                <div class="morning-container callout">
-                    <p>Morning</p>
+                <div class="morning-container fs-16px">
+                    <p>AM</p>
                     <div class="flex-container-morning"></div>
                 </div>
-                <div class="afternoon-container callout">
-                    <p>Afternoon</p>
+                <div class="afternoon-container fs-16px">
+                    <p>PM</p>
                     <div class="flex-container-afternoon"></div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="small-12 medium-4 medium-centered columns">
-            <a class='button form-submit disabled'>Submit</a>
+    <div class="row col-md-2">
+        <div class=" medium-centered d-md-flex justify-content-between">
+            <div class="col-md-6 pl-0">
+            <a class= 'button form-submit button-Reset-booking w-100'>Reset</a>
+            </div>
+            <div class="col-md-6 pr-0">
+            <a class='button form-submit w-100 button-apply-booking disabled'>Apply</a>
+            </div>
         </div>
     </div>
 </section>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+
 <script>
     let cachedData = {};
 
@@ -177,7 +216,7 @@
             const container = document.querySelector('.master-container-slots');
             const morning = document.querySelector('.flex-container-morning');
             const afternoon = document.querySelector('.flex-container-afternoon');
-            const formSubmit = document.querySelector('.form-submit');
+            const formSubmit = document.querySelector('.button-apply-booking');
             formSubmit.classList.add('disabled');
             container.classList.add('hide');
             if (cachedData[date]) {
@@ -213,5 +252,4 @@
         }
     });
 </script>
-</body>
-</html>
+@endsection
