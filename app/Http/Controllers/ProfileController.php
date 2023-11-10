@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
@@ -16,25 +18,53 @@ class ProfileController extends Controller
 
     public function index()
     {
-        return view('profile');
+        $roles = Role::where('name', \App\Enums\Role::ADMIN)->get();
+        $roleUser = DB::table('role_users')->where('user_id', Auth::user()->id)->first();
+        $roleItem = Role::find($roleUser->role_id);
+        $isAdmin = (new MainController())->checkAdmin();
+        return view('profile', compact('roles', 'roleItem', 'isAdmin'));
     }
 
     public function update(Request $request)
     {
         $request->validate([
+            'username' => 'required|string',
             'name' => 'required|string|max:255',
             'last_name' => 'nullable|string|max:255',
+
             'email' => 'required|string|email|max:255|unique:users,email,' . Auth::user()->id,
+            'phone' => 'required|string|max:255',
+
+            'address_code' => 'required|string|max:255',
+            'member' => 'required|string|max:255',
+
             'current_password' => 'nullable|required_with:new_password',
-            'new_password' => 'nullable|min:8|max:12|required_with:current_password',
-            'password_confirmation' => 'nullable|min:8|max:12|required_with:new_password|same:new_password'
+            'new_password' => 'nullable|min:6|max:12|required_with:current_password',
+            'password_confirmation' => 'nullable|min:6|max:12|required_with:new_password|same:new_password'
         ]);
 
+        $username = $request->input('username');
 
         $user = User::findOrFail(Auth::user()->id);
+
+        if ($username != Auth::user()->username) {
+            $oldUser = User::where('username', $username)->first();
+            if ($oldUser) {
+                toast('Error, Username already exited!', 'error', 'top-left');
+                return back();
+            }
+        }
+
+        $user->username = $username;
+
         $user->name = $request->input('name');
         $user->last_name = $request->input('last_name');
+
         $user->email = $request->input('email');
+        $user->phone = $request->input('phone');
+
+        $user->address_code = $request->input('address_code');
+        $user->member = $request->input('member');
 
         if (!is_null($request->input('current_password'))) {
             if (Hash::check($request->input('current_password'), $user->password)) {

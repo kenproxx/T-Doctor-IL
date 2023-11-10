@@ -4,10 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Enums\TypeUser;
 use App\Models\Role;
+use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
+    public function checkAdmin()
+    {
+        $isAdmin = false;
+        $user = Auth::user();
+
+        $role_user = DB::table('role_users')->where('user_id', $user->id)->first();
+        $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
+
+        if ($roleNames->contains('ADMIN')) {
+            $isAdmin = true;
+        }
+        return $isAdmin;
+    }
+
     public function switchMember($member)
     {
         switch ($member) {
