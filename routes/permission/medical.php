@@ -193,14 +193,14 @@ Route::group(['prefix' => 'reviews'], function () {
 //    Route::delete('/delete/{id}', [BackendCouponApplyController::class, 'delete'])->name('api.backend.coupons-apply.delete');
 //});
 //
-//Route::group(['prefix' => 'doctors-info'], function () {
-//    Route::get('/list', [AdminDoctorInfoApi::class, 'getAll'])->name('api.backend.doctors.info.list');
-//    Route::get('/detail/{id}', [AdminDoctorInfoApi::class, 'detail'])->name('api.backend.doctors.info.detail');
-//    Route::get('/user/{id}', [AdminDoctorInfoApi::class, 'findByUser'])->name('api.backend.doctors.info.user');
-//    Route::post('/create', [AdminDoctorInfoApi::class, 'create'])->name('api.backend.doctors.info.create');
-//    Route::put('/update/{id}', [AdminDoctorInfoApi::class, 'update'])->name('api.backend.doctors.info.update');
-//    Route::delete('/delete/{id}', [AdminDoctorInfoApi::class, 'delete'])->name('api.backend.doctors.info.delete');
-//});
+Route::group(['prefix' => 'doctors-info'], function () {
+    Route::get('/list', [AdminDoctorInfoApi::class, 'getAll'])->name('api.backend.doctors.info.list');
+    Route::get('/detail/{id}', [AdminDoctorInfoApi::class, 'detail'])->name('api.backend.doctors.info.detail');
+    Route::get('/user/{id}', [AdminDoctorInfoApi::class, 'findByUser'])->name('api.backend.doctors.info.user');
+    Route::post('/create', [AdminDoctorInfoApi::class, 'create'])->name('api.backend.doctors.info.create');
+    Route::put('/update/{id}', [AdminDoctorInfoApi::class, 'update'])->name('api.backend.doctors.info.update');
+    Route::delete('/delete/{id}', [AdminDoctorInfoApi::class, 'delete'])->name('api.backend.doctors.info.delete');
+});
 //
 //Route::group(['prefix' => 'question-like'], function () {
 //    Route::get('is-like/{questionId}/{userId}', [QuestionLikesController::class, 'checkEmotion'])->name('api.backend.question-like.check');
