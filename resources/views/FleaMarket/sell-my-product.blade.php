@@ -6,8 +6,9 @@
     @include('component.banner')
     <div class="container content-add">
         <div class="add-cv_text">
-            <div class="ac-text_content font-18-mobi"><a href="{{route('flea-market.index')}}"><i class="fa-solid fa-arrow-left mr-4"
-                                                                    style="color: black"></i></a>Product details
+            <div class="ac-text_content font-18-mobi"><a href="{{route('flea-market.index')}}"><i
+                        class="fa-solid fa-arrow-left mr-4"
+                        style="color: black"></i></a>Product details
             </div>
         </div>
         <form action="#">
@@ -44,7 +45,8 @@
                                 <div class="text-font-16 font-14-mobi mt-md-4 mt-3">
                                     <p><span>Location </span> <span class="red-color">*</span></p>
                                     <div class="w-100 mt-2">
-                                        <select class="ac-choose font-16-mobi mt-2" id="province_id" name="province_id checkValid"
+                                        <select class="ac-choose font-16-mobi mt-2" id="province_id"
+                                                name="province_id checkValid"
                                                 required>
                                             <option value="">Please choose....</option>
                                             <option value="1">123</option>
@@ -85,7 +87,8 @@
                         <div class="text-font-24 font-14-mobi mt-md-4 mt-3">Detailed description</div>
                     </div>
                     <div class="mt-md-3 mt-2 font-16-mobi">
-                        <textarea class="ac-textarea mt-md-3 checkValid" required name="description" id="description"
+                        <textarea class="form-control ac-textarea mt-md-3 checkValid" name="description"
+                                  id="description" required
                                   placeholder="Enter an introduction about yourself"></textarea>
                     </div>
                     <div class="d-flex mt-2 font-10-mobi">
@@ -102,9 +105,11 @@
                             <div class="p-0 d-flex">
                                 <div id="imagePreview"></div>
                                 <label for="gallery" class="p-0">
-                                    <img class="p-0" width="200px" height="200px" src="{{asset('img/flea-market/add-photo.png')}}">
+                                    <img class="p-0" width="200px" height="200px"
+                                         src="{{asset('img/flea-market/add-photo.png')}}">
                                 </label>
-                                <input type="file" id="gallery" name="gallery[]" style="display: none;" multiple accept="image/*">
+                                <input type="file" id="gallery" name="gallery[]" style="display: none;" multiple
+                                       accept="image/*">
                                 <button id="chooseImageBtn" type="button" style="display: none">Chọn ảnh</button>
                             </div>
                         </div>
@@ -223,8 +228,8 @@
         });
 
         let selectedValue = '';
-        document.querySelectorAll('input[name="ads_period"]').forEach(function(radio) {
-            radio.addEventListener('change', function() {
+        document.querySelectorAll('input[name="ads_period"]').forEach(function (radio) {
+            radio.addEventListener('change', function () {
                 if (this.checked) {
                     selectedValue = this.value;
                 }
@@ -254,7 +259,14 @@
                 formData.append("price", $('#price').val());
                 formData.append("price_unit", 'VND');
                 formData.append("ads_plan", (selectedValueAdd));
-                formData.append("description", $('#description').val());
+                const fieldTextareaTiny = [
+                    "short_description", "short_description_en", "short_description_laos",
+                    "description", "description_en", "description_laos"
+                ];
+                fieldTextareaTiny.forEach(fieldTextarea => {
+                    const content = tinymce.get(fieldTextarea).getContent();
+                    formData.append(fieldTextarea, content);
+                });
                 formData.append("ads_period", (selectedValue));
                 formData.append("user_id", {{Auth::user()->id}});
                 let photo = '';
