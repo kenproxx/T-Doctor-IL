@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\UserStatus;
 use App\Models\Role;
+use App\Models\RoleUser;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -84,8 +85,6 @@ class AuthController extends Controller
                 return back();
             }
 
-//            $myUser = (new MainController())->switchMember($member);
-
             $user = new User();
             $oldUser = User::where('email', $email)->first();
             if ($oldUser) {
@@ -118,25 +117,29 @@ class AuthController extends Controller
             $user->username = $username;
             $user->phone = '';
             $user->address_code = '';
-//            $user->type = $myUser[1];
             $user->type = $request->input('type');
             $user->status = UserStatus::ACTIVE;
 
             $success = $user->save();
 
-            $role = Role::where('name', $request->input('member'))->first();
-            if (!$role) {
-                $role = Role::where('name', \App\Enums\Role::NORMAL_PEOPLE)->first();
-            }
-
-            $roleItem = [
-//                'role_id' => $myUser[0]->id,
-                'role_id' => $role->id,
-                'user_id' => $user->id
-            ];
-
-            $success = DB::table('role_users')->insert($roleItem);
             if ($success) {
+
+                $role = Role::where('name', $member)->first();
+
+                if ($role) {
+                    // Lấy id của user vừa tạo
+                    $newUser = User::where('username', $username)->first();
+
+                    // Tạo mới bản ghi trong bảng role_user
+                    RoleUser::create([
+                        'role_id' => $role->id,
+                        'user_id' => $newUser->id
+                    ]);
+                } else {
+                    // Xử lý nếu không tìm thấy role
+                    // (ví dụ: thông báo lỗi hoặc xử lý khác)
+                }
+
                 toast('Register success!', 'success', 'top-left');
                 return redirect(route('home'));
             }
