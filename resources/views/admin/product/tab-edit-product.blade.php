@@ -24,6 +24,17 @@
                 <label>name_en</label>
                 <input type="text" class="form-control" id="name_en" name="name_en" value="{{$product->name_en}}">
             </div>
+            <div class="row">
+                <div class="col-sm-4"><label>Mô tả dài việt</label>
+                    <textarea class="form-control" name="description" id="description">{{$product->description}}</textarea>
+                </div>
+                <div class="col-sm-4"><label>Mô tả dài anh</label>
+                    <textarea class="form-control" name="description_en" id="description_en">{{$product->description_en}}</textarea>
+                </div>
+                <div class="col-sm-4"><label>Mô tả dài lào</label>
+                    <textarea class="form-control" name="description_laos" id="description_laos">{{$product->description_laos}}</textarea>
+                </div>
+            </div>
             <div>
                 <label>brand_name</label>
                 <input type="text" class="form-control" id="brand_name" name="brand_name"

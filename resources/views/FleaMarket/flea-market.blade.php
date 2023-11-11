@@ -22,7 +22,7 @@
                     </div>
 
                     <div class="search-box col-md-5">
-                        <input type="search" name="focus" placeholder="Search" id="search-input" value="">
+                        <input class="m-0" type="search" name="focus" placeholder="Search" id="search-input" value="">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                     <div class="flex-fill">

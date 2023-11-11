@@ -137,6 +137,8 @@ class BackendProductInfoController extends Controller
             $brand_name_en = $request->input('brand_name_en');
             $province_id = $request->input('province_id');
             $description = $request->input('description');
+            $description_en = $request->input('description_en');
+            $description_laos = $request->input('description_laos');
 
             if ($request->hasFile('thumbnail')) {
                 $item = $request->file('thumbnail');
@@ -178,6 +180,8 @@ class BackendProductInfoController extends Controller
             $product->ads_plan = $ads_plan;
             $product->ads_period = $ads_period;
             $product->description = $description;
+            $product->description_en = $description_en;
+            $product->description_laos = $description_laos;
             $product->status = $status;
             $product->created_by = $userID;
 
@@ -215,6 +219,8 @@ class BackendProductInfoController extends Controller
             $brand_name_en = $request->input('brand_name_en');
             $province_id = $request->input('province_id');
             $description = $request->input('description');
+            $description_en = $request->input('description_en');
+            $description_laos = $request->input('description_laos');
 
             if ($request->hasFile('thumbnail')) {
                 $item = $request->file('thumbnail');
@@ -254,6 +260,8 @@ class BackendProductInfoController extends Controller
             $product->ads_plan = $ads_plan;
             $product->ads_period = $ads_period;
             $product->description = $description;
+            $product->description_en = $description_en;
+            $product->description_laos = $description_laos;
             $product->status = $status;
             $product->updated_by = $userID;
 
