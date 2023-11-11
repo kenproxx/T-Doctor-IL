@@ -97,7 +97,7 @@
                             <div class="div-2">
                                 <p class="text-content-product-2">Product Description</p>
                                 <ul class="list-mo-ta">
-                                    {{$pr_json->description}}
+                                    {!!  $pr_json->description!!}
                                 </ul>
                             </div>
                             {{-- End nội dung mô tả--}}
