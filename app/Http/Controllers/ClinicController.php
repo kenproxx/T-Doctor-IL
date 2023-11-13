@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Enums\ClinicStatus;
 use App\Models\Clinic;
 use Illuminate\Http\Request;
@@ -68,5 +69,32 @@ class ClinicController extends Controller
             return response("Product not found", 404);
         }
         return view('component.tab-booking.select-date',compact('id','bookingSv'));
+    }
+
+    public function store(Request $request)
+    {
+        try {
+            $userID = $request->input('user_id');
+            $clinicID = $request->input('clinic_id');
+            $checkIn = $request->input('check_in');
+            $checkOut = $request->input('check_out');
+            $service = $request->input('service');
+            $booking = new Booking();
+
+            $booking->user_id = $userID;
+            $booking->clinic_id = $clinicID;
+            $booking->check_in = $checkIn;
+            $booking->check_out = $checkOut;
+            $booking->service = $service;
+
+            $success = $booking->save();
+            if ($success) {
+                \Laravel\Prompts\alert('Booking success');
+                return back()->with('success', 'Booking success');
+            }
+            return response('Create error', 400);
+        } catch (\Exception $exception) {
+            return response($exception, 400);
+        }
     }
 }

@@ -16,13 +16,19 @@
                 @include('component.clinic')
             </div>
         </div>
+        <div hidden="">
+            <input id="room_id" name="room_id" value="{{ $bookings->id }}">
+            <input id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+            <input id="check_in" name="check_in" value="">
+            <input id="check_out" name="check_out" value="">
+        </div>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" style="margin-left: 180px;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">-----------------------------------------------------------------</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -152,44 +158,91 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="ads" role="tabpanel">
-                            <div class="fs-18px justify-content-start d-flex mb-md-4 mt-2">
-                                <div class="align-items-center">
-                                    <i class="fa-solid fa-chevron-left"></i>
-                                </div>
-                                <div class="ml-2">
-                                    <span>{{$bookings->name}}</span>
-                                </div>
-                            </div>
-                            <div class="mb-md-4">
-                                <div class="border-bottom fs-16px">
-                                    <span>Booking</span>
-                                </div>
-                                <div class="mt-md-3">
-                                    <button class="w-100 btn btn-secondary border-button-address font-weight-800 fs-14 justify-content-center" id="adsContinue">Please select a date and time</button>
-                                </div>
-                            </div>
-                            <div class="border-bottom fs-16px mb-md-3">
-                                <span>Main service</span>
-                            </div>
-                            @for($i=0; $i<4; $i++)
-                                <div class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
-                                    <div class="fs-14 font-weight-600">
-                                        <span>Botox, filler consultation and reservation</span>
+                            <form method="post" action="{{route('clinic.booking.store')}}">
+                                @csrf
+                                <div class="fs-18px justify-content-start d-flex mb-md-4 mt-2">
+                                    <div class="align-items-center">
+                                        <i class="fa-solid fa-chevron-left"></i>
                                     </div>
-                                    <div class="button-booking-sv">
-                                        <button class="" id="adsContinue">Booking</button>
+                                    <div class="ml-2">
+                                        <span>{{$bookings->name}}</span>
+                                    </div>
+                                </div>
+                                <div class="mb-md-4">
+                                    <div class="border-bottom fs-16px">
+                                        <span>Booking</span>
+                                    </div>
+                                    <div class="mt-md-3">
+                                        <input type="datetime-local" id="check_in" name="check_in" value="">
+{{--                                        <select id="check_in" name="check_in">--}}
+{{--                                            <option value="">Select a date and time</option>--}}
+{{--                                            <option value="9">9:00</option>--}}
+{{--                                            <option value="10">10:00</option>--}}
+{{--                                            <option value="11">11:00</option>--}}
+{{--                                            <option value="12">12:00</option>--}}
+{{--                                            <option value="13">13:00</option>--}}
+{{--                                            <option value="14">14:00</option>--}}
+{{--                                            <option value="15">15:00</option>--}}
+{{--                                            <option value="16">16:00</option>--}}
+{{--                                            <option value="17">17:00</option>--}}
+{{--                                        </select>--}}
+                                        {{--                                    <button--}}
+                                        {{--                                        class="w-100 btn btn-secondary border-button-address font-weight-800 fs-14 justify-content-center"--}}
+                                        {{--                                        id="adsContinue">Please select a date and time--}}
+                                        {{--                                    </button>--}}
+                                    </div>
+                                </div>
+                                <div class="border-bottom fs-16px mb-md-3">
+                                    <span>Main service</span>
+                                </div>
+                                <div class="d-md-flex">
+                                    <label for="booking">Botox, filler consultation and reservation</label>
+                                    <input type="checkbox" value="1" name="service">
+                                </div>
+                                <div class="d-md-flex">
+                                    <label for="booking">Botox, filler consultation and reservation</label>
+                                    <input type="checkbox" value="2" name="service">
+                                </div>
+                                <div class="d-md-flex">
+                                    <label for="booking">Botox, filler consultation and reservation</label>
+                                    <input type="checkbox" value="3" name="service">
+                                </div>
+                                <div class="d-md-flex">
+                                    <label for="booking">Botox, filler consultation and reservation</label>
+                                    <input type="checkbox" value="4" name="service">
+                                </div>
+                                <div class="d-md-flex">
+                                    <label for="booking">Botox, filler consultation and reservation</label>
+                                    <input type="checkbox" value="5" name="service">
+                                </div>
 
-                                    </div>
+{{--                                @for($i=0; $i<4; $i++)--}}
+{{--                                    <div class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">--}}
+{{--                                        <div class="fs-14 font-weight-600">--}}
+{{--                                            <span>Botox, filler consultation and reservation</span>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="button-booking-sv">--}}
+{{--                                            <button class="" id="adsContinue">Booking</button>--}}
+
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                @endfor--}}
+                                <div class="border-bottom mt-md-4 fs-16px mb-md-3">
+                                    <span>Information</span>
                                 </div>
-                            @endfor
-                            <div class="border-bottom mt-md-4 fs-16px mb-md-3">
-                                <span>Information</span>
-                            </div>
-                            <div class="fs-14 font-weight-600">
+                                <div class="fs-14 font-weight-600">
                                     <span>
                                         {{$bookings->introduce}}
                                     </span>
-                            </div>
+                                </div>
+                                <div hidden="">
+                                    <input id="clinic_id" name="clinic_id" value="{{ $bookings->id }}">
+                                    <input id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+                                </div>
+
+                                <button class="btn btn-primary btn-block up-date-button" id="activate">Activate this Campaign!
+                                </button>
+                            </form>
                         </div>
                         <div class="tab-pane fade" id="placementPanel" role="tabpanel">
                             <section>
@@ -214,156 +267,29 @@
                                 <div class="">
                                     <div class=" medium-centered d-md-flex justify-content-between">
                                         <div class="">
-                                            <a class= 'button form-submit button-Reset-booking w-100'>Reset</a>
+                                            <a class='button form-submit button-Reset-booking w-100'>Reset</a>
                                         </div>
                                         <div class="">
-                                            <button class="btn btn-secondary button form-submit w-100 button-apply-booking disabled" id="placementContinue">Apply</button>
+                                            <button
+                                                class="btn btn-secondary button form-submit w-100 button-apply-booking disabled"
+                                                id="placementContinue">Apply
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
                             </section>
                         </div>
-                        <div class="tab-pane fade" id="schedulePanel" role="tabpanel">
-                            <h4>Schedule</h4>
-                            <div id="scheduleAccordion" class="mb-3" role="tablist" aria-multiselectable="true">
-                                <div class="card">
-                                    <div class="card-header" role="tab" id="headingOne">
-                                        <h5 class="mb-0">
-                                            <a data-toggle="collapse" data-parent="#scheduleAccordion"
-                                               href="#scheduleAccordioncollapseOne" aria-expanded="true"
-                                               aria-controls="collapseOne">
-                                                Start and Stop Date
-                                            </a>
-                                        </h5>
-                                    </div>
-
-                                    <div id="scheduleAccordioncollapseOne" class="collapse" role="tabpanel"
-                                         aria-labelledby="headingOne">
-                                        <div class="card-block">
-                                            <div class="form-group row">
-                                                <label for="example-date-input" class="col-2 col-form-label">Start
-                                                    Date</label>
-                                                <div class="col-10">
-                                                    <input class="form-control" type="date" value="2018-01-09"
-                                                           id="start-date">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="example-date-input" class="col-2 col-form-label">Stop
-                                                    Date</label>
-                                                <div class="col-10">
-                                                    <input class="form-control" type="date" value="2018-01-09"
-                                                           id="stop-date">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header" role="tab" id="headingTwo">
-                                        <h5 class="mb-0">
-                                            <a class="collapsed" data-toggle="collapse"
-                                               data-parent="#scheduleAccordion" href="#scheduleAccordioncollapseTwo"
-                                               aria-expanded="false" aria-controls="collapseTwo">
-                                                Rules for Specific Days
-                                            </a>
-                                        </h5>
-                                    </div>
-                                    <div id="scheduleAccordioncollapseTwo" class="collapse" role="tabpanel"
-                                         aria-labelledby="headingTwo">
-                                        <div class="card-block">
-                                            <h6>Play on the following days (check all that apply)</h6>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" id="sunday">
-                                                    Sunday
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" id="monday">
-                                                    Monday
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" id="tuesday">
-                                                    Tuesday
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" id="wednesday">
-                                                    Wednesday
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" id="thursday">
-                                                    Thursday
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" id="friday">
-                                                    Friday
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" id="saturday">
-                                                    Saturday
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header" role="tab" id="headingThree">
-                                        <h5 class="mb-0">
-                                            <a class="collapsed" data-toggle="collapse"
-                                               data-parent="#scheduleAccordion"
-                                               href="#scheduleAccordioncollapseThree" aria-expanded="false"
-                                               aria-controls="collapseThree">
-                                                Rules for Specific Times
-                                            </a>
-                                        </h5>
-                                    </div>
-                                    <div id="scheduleAccordioncollapseThree" class="collapse" role="tabpanel"
-                                         aria-labelledby="headingThree">
-                                        <div class="card-block">
-                                            <h6>Play during the following timeframes (applies to each day)</h6>
-                                            <div class="form-group row">
-                                                <label for="example-time-input" class="col-2 col-form-label">Start
-                                                    Time</label>
-                                                <div class="col-10">
-                                                    <input class="form-control" type="time" value="13:45:00"
-                                                           id="start-time">
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label for="example-time-input" class="col-2 col-form-label">End
-                                                    Time</label>
-                                                <div class="col-10">
-                                                    <input class="form-control" type="time" value="13:45:00"
-                                                           id="end-time">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <button class="btn btn-secondary" id="scheduleContinue">Continue</button>
-                        </div>
                         <div class="tab-pane fade" id="reviewPanel" role="tabpanel">
                             <h4>Review</h4>
-                            <button class="btn btn-primary btn-block" id="activate">Activate this Campaign!</button>
+                            <button class="btn btn-primary btn-block up-date-button" id="activate">Activate this
+                                Campaign!
+                            </button>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer" hidden="">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <div class="modal-footer" hidden="">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -397,140 +323,151 @@
                 $('#myTab a[href="#reviewPanel"]').tab('show');
             });
 
-            $('#activate').click(function (e) {
-                e.preventDefault();
-                var formData = {
-                    campaign_name: $('#campaignName').val(),
-                    start_date: $('#start-date').val(),
-                    end_date: $('#end-date').val(),
-                    days: {
-                        sunday: $('#sunday').prop('checked'),
-                        monday: $('#monday').prop('checked'),
-                        tuesday: $('#tuesday').prop('checked'),
-                        wednesday: $('#wednesday').prop('checked'),
-                        thurday: $('#thursday').prop('checked'),
-                        friday: $('#friday').prop('checked'),
-                        saturday: $('#saturday').prop('checked'),
-                    },
-                    start_time: $('#start-time').val(),
-                    end_time: $('#end-time').val()
-                }
-                alert(JSON.stringify(formData));
-                location.reload();
-            })
-        })
-    </script>
-    <script>
-        let cachedData = {};
-
-        function serviceCallSlots(date) {
-            const dt = new Date(date);
-            let ms = dt.getTime();
-            let startMs = ms - (60 * 60 * 24 * 1000 * 2);
-            const dtArr = [1, 2, 3, 4, 5].map((e) => {
-                const innerDt = new Date(startMs);
-                startMs += 60 * 60 * 24 * 1000;
-                return innerDt;
-            });
-            const timeArrs = [
-                ['9', '10', '11', '12', '1', '2', '3', '4', '5'],
-                ['9', '10', '11', '1', '2', '3', '4', '5'],
-                ['9', '10', '11', '12', '3', '4', '5'],
-                ['10', '11', '2', '4'],
-                ['11', '12', '1', '4', '5']
-            ];
-            return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    //construct object
-                    const obj = dtArr.reduce((accum, e) => {
-                        const randomNum = Math.floor(Math.random() * 5);
-                        const dtString = e.toLocaleDateString();
-                        let parts = dtString.split('/');
-                        parts[0] = parts[0].length === 1 ? '0' + parts[0] : parts[0];
-                        parts[1] = parts[1].length === 1 ? '0' + parts[1] : parts[1];
-                        accum[parts.join('/')] = timeArrs[randomNum];
-                        return accum;
-                    }, {});
-                    resolve(obj);
-                }, 2000);
-            })
-        }
-
-        function spinner(startOrStop) {
-            const spin = document.querySelector('.spin-me');
-            if (startOrStop === 'start') {
-                const spinner = document.createElement('i');
-                spinner.setAttribute('class', 'fas fa-spinner fa-4x fa-spin');
-                spin.appendChild(spinner);
-            } else {
-                spin.innerHTML = '';
-            }
-        }
-
-        function createSlotsDom(formSubmit, morning, afternoon, arr) {
-            [9, 10, 11, 12, 1, 2, 3, 4, 5].map((e) => {
-                const div = document.createElement('div');
-                div.setAttribute('class', 'item');
-                const button = document.createElement('button');
-                button.setAttribute('class', 'hollow button');
-                button.setAttribute('href', 'javascript:void(0)');
-                const time = (e < 10 ? '0' : '') + e + ':00';
-                const txt = document.createTextNode(time);
-                button.appendChild(txt);
-                button.onclick = function (e) {
-                    formSubmit.classList.remove('disabled');
-                }
-                if (!arr.filter(r => r == e).length) {
-                    button.setAttribute('disabled', 'true');
-                }
-                div.appendChild(button);
-                if (e >= 9 && e < 12) {
-                    morning.appendChild(div);
-                } else {
-                    afternoon.appendChild(div);
-                }
-            });
-        }
-
-        $("#datepicker").datepicker({
-            onSelect: function (date) {
-                const container = document.querySelector('.master-container-slots');
-                const morning = document.querySelector('.flex-container-morning');
-                const afternoon = document.querySelector('.flex-container-afternoon');
-                const formSubmit = document.querySelector('.button-apply-booking');
-                formSubmit.classList.add('disabled');
-                container.classList.add('hide');
-                if (cachedData[date]) {
-                    spinner('start');
-                    setTimeout(() => {
-                        morning.innerHTML = '';
-                        afternoon.innerHTML = '';
-                        createSlotsDom(formSubmit, morning, afternoon, cachedData[date]);
-                        spinner('stop');
-                        container.classList.remove('hide');
-                        container.classList.add('fade-in');
-                    }, 500);
-                } else {
-                    spinner('start');
-                    const prom = serviceCallSlots(date);
-                    setTimeout(() => {
-                        morning.innerHTML = '';
-                        afternoon.innerHTML = '';
-                        prom.then((payload) => {
-                            Object.keys(payload).map((e) => {
-                                const cachedKeys = Object.keys(cachedData);
-                                if (!cachedKeys.includes(e)) {
-                                    cachedData[e] = payload[e];
-                                }
-                            });
-                            createSlotsDom(formSubmit, morning, afternoon, cachedData[date]);
-                            spinner('stop');
-                            container.classList.remove('hide');
-                            container.classList.add('fade-in');
-                        });
-                    }, 500);
-                }
-            }
+            {{--$(document).ready(function () {--}}
+            {{--    $('.up-date-button').on('click', function () {--}}
+            {{--        const headers = {--}}
+            {{--            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+            {{--        };--}}
+            {{--        const formData = new FormData();--}}
+            {{--        formData.append("room_id", $('#room_id').val());--}}
+            {{--        formData.append("user_id", $('#user_id').val());--}}
+            {{--        formData.append("check_in", $('#check_in').val());--}}
+            {{--        formData.append("check_out", $('#check_out').val());--}}
+            {{--        console.log(formData)--}}
+            {{--        try {--}}
+            {{--            $.ajax({--}}
+            {{--                url: `{{route('clinic.booking.store')}}`,--}}
+            {{--                method: 'POST',--}}
+            {{--                headers: headers,--}}
+            {{--                contentType: false,--}}
+            {{--                cache: false,--}}
+            {{--                processData: false,--}}
+            {{--                data: formData,--}}
+            {{--                success: function (response) {--}}
+            {{--                    alert('success');--}}
+            {{--                    location.reload();--}}
+            {{--                },--}}
+            {{--                error: function (exception) {--}}
+            {{--                    console.log(exception)--}}
+            {{--                }--}}
+            {{--            });--}}
+            {{--        } catch (error) {--}}
+            {{--            throw error;--}}
+            {{--        }--}}
+            {{--    })--}}
+            {{--})--}}
         });
     </script>
+{{--    <script>--}}
+{{--        let cachedData = {};--}}
+
+{{--        function serviceCallSlots(date) {--}}
+{{--            const dt = new Date(date);--}}
+{{--            let ms = dt.getTime();--}}
+{{--            let startMs = ms - (60 * 60 * 24 * 1000 * 2);--}}
+{{--            const dtArr = [1, 2, 3, 4, 5].map((e) => {--}}
+{{--                const innerDt = new Date(startMs);--}}
+{{--                startMs += 60 * 60 * 24 * 1000;--}}
+{{--                return innerDt;--}}
+{{--            });--}}
+{{--            const timeArrs = [--}}
+{{--                ['9', '10', '11', '12', '1', '2', '3', '4', '5'],--}}
+{{--                ['9', '10', '11', '1', '2', '3', '4', '5'],--}}
+{{--                ['9', '10', '11', '12', '3', '4', '5'],--}}
+{{--                ['10', '11', '2', '4'],--}}
+{{--                ['11', '12', '1', '4', '5']--}}
+{{--            ];--}}
+{{--            return new Promise((resolve, reject) => {--}}
+{{--                setTimeout(() => {--}}
+{{--                    const obj = dtArr.reduce((accum, e) => {--}}
+{{--                        const randomNum = Math.floor(Math.random() * 5);--}}
+{{--                        const dtString = e.toLocaleDateString();--}}
+{{--                        let parts = dtString.split('/');--}}
+{{--                        parts[0] = parts[0].length === 1 ? '0' + parts[0] : parts[0];--}}
+{{--                        parts[1] = parts[1].length === 1 ? '0' + parts[1] : parts[1];--}}
+{{--                        accum[parts.join('/')] = timeArrs[randomNum];--}}
+{{--                        return accum;--}}
+{{--                    }, {});--}}
+{{--                    resolve(obj);--}}
+{{--                }, 2000);--}}
+{{--            })--}}
+{{--        }--}}
+
+{{--        function spinner(startOrStop) {--}}
+{{--            const spin = document.querySelector('.spin-me');--}}
+{{--            if (startOrStop === 'start') {--}}
+{{--                const spinner = document.createElement('i');--}}
+{{--                spinner.setAttribute('class', 'fas fa-spinner fa-4x fa-spin');--}}
+{{--                spin.appendChild(spinner);--}}
+{{--            } else {--}}
+{{--                spin.innerHTML = '';--}}
+{{--            }--}}
+{{--        }--}}
+
+{{--        function createSlotsDom(formSubmit, morning, afternoon, arr) {--}}
+{{--            [9, 10, 11, 12, 1, 2, 3, 4, 5].map((e) => {--}}
+{{--                const div = document.createElement('div');--}}
+{{--                div.setAttribute('class', 'item');--}}
+{{--                const button = document.createElement('button');--}}
+{{--                button.setAttribute('class', 'hollow button');--}}
+{{--                button.setAttribute('href', 'javascript:void(0)');--}}
+{{--                const time = (e < 10 ? '0' : '') + e + ':00';--}}
+{{--                const txt = document.createTextNode(time);--}}
+{{--                button.appendChild(txt);--}}
+{{--                button.onclick = function (e) {--}}
+{{--                    formSubmit.classList.remove('disabled');--}}
+{{--                }--}}
+{{--                if (!arr.filter(r => r == e).length) {--}}
+{{--                    button.setAttribute('disabled', 'true');--}}
+{{--                }--}}
+{{--                div.appendChild(button);--}}
+{{--                if (e >= 9 && e < 12) {--}}
+{{--                    morning.appendChild(div);--}}
+{{--                } else {--}}
+{{--                    afternoon.appendChild(div);--}}
+{{--                }--}}
+{{--            });--}}
+{{--        }--}}
+
+{{--        $("#datepicker").datepicker({--}}
+{{--            onSelect: function (date) {--}}
+{{--                const container = document.querySelector('.master-container-slots');--}}
+{{--                const morning = document.querySelector('.flex-container-morning');--}}
+{{--                const afternoon = document.querySelector('.flex-container-afternoon');--}}
+{{--                const formSubmit = document.querySelector('.button-apply-booking');--}}
+{{--                formSubmit.classList.add('disabled');--}}
+{{--                container.classList.add('hide');--}}
+{{--                if (cachedData[date]) {--}}
+{{--                    spinner('start');--}}
+{{--                    setTimeout(() => {--}}
+{{--                        morning.innerHTML = '';--}}
+{{--                        afternoon.innerHTML = '';--}}
+{{--                        createSlotsDom(formSubmit, morning, afternoon, cachedData[date]);--}}
+{{--                        spinner('stop');--}}
+{{--                        container.classList.remove('hide');--}}
+{{--                        container.classList.add('fade-in');--}}
+{{--                    }, 500);--}}
+{{--                } else {--}}
+{{--                    spinner('start');--}}
+{{--                    const prom = serviceCallSlots(date);--}}
+{{--                    setTimeout(() => {--}}
+{{--                        morning.innerHTML = '';--}}
+{{--                        afternoon.innerHTML = '';--}}
+{{--                        prom.then((payload) => {--}}
+{{--                            Object.keys(payload).map((e) => {--}}
+{{--                                const cachedKeys = Object.keys(cachedData);--}}
+{{--                                if (!cachedKeys.includes(e)) {--}}
+{{--                                    cachedData[e] = payload[e];--}}
+{{--                                }--}}
+{{--                            });--}}
+{{--                            createSlotsDom(formSubmit, morning, afternoon, cachedData[date]);--}}
+{{--                            spinner('stop');--}}
+{{--                            container.classList.remove('hide');--}}
+{{--                            container.classList.add('fade-in');--}}
+{{--                        });--}}
+{{--                    }, 500);--}}
+{{--                }--}}
+{{--            }--}}
+{{--        });--}}
+{{--    </script>--}}
 @endsection
