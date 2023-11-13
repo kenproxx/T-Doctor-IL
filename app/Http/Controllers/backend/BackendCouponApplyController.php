@@ -58,6 +58,11 @@ class BackendCouponApplyController extends Controller
             $user_id = $request->input('user_id');
             $coupon_id = $request->input('coupon_id');
 
+            // kiểm tra name, email, phone, content not null
+            if (!$name || !$email || !$phone || !$content) {
+                return response('Nhập thiếu thông tin rồi má', 400);
+            }
+
             $couponApply->name = $name;
             $couponApply->email = $email;
             $couponApply->phone = $phone;
