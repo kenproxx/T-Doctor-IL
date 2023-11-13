@@ -1,4 +1,4 @@
-        <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-{{--    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>--}}
+    {{--    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>--}}
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,9 +37,9 @@
     <link rel="stylesheet" href="{{asset('css/news.css')}}">
 
     <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
-{{--    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>--}}
+    {{--    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>--}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>--}}
+    {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>--}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
@@ -48,6 +48,34 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
+
+<style>
+    .loading-overlay-master {
+        display: none;
+        background: rgba(255, 255, 255, 0.7);
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+        z-index: 9998;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .loading-overlay-master.is-active {
+        display: flex;
+    }
+
+    .code {
+        font-family: monospace;
+        /*   font-size: .9em; */
+        color: #dd4a68;
+        background-color: rgb(238, 238, 238);
+        padding: 0 3px;
+    }
+</style>
+
 <div class="d-none">
     @if(Auth::check())
         <div class="">
@@ -58,11 +86,14 @@
     @endif
 </div>
 <body>
-@include('sweetalert::alert')
-<div id="content">
-    @yield('content')
-    @include('layouts.partials.footer')
+<div class="loading-overlay-master">
+    <span class="fas fa-spinner fa-3x fa-spin"></span>
 </div>
+    @include('sweetalert::alert')
+    <div id="content">
+        @yield('content')
+        @include('layouts.partials.footer')
+    </div>
 <!-- Back to top -->
 <div class="btn-back-to-top" id="myBtn">
     <span class="symbol-btn-back-to-top">
@@ -71,4 +102,11 @@
 </div>
 </body>
 @include('components.head.tinymce-config')
+
+<script>
+    function loadingMasterPage() {
+        let overlay = document.getElementsByClassName('loading-overlay-master')[0]
+        overlay.classList.toggle('is-active')
+    }
+</script>
 </html>

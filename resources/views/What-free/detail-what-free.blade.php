@@ -154,6 +154,7 @@
                     alert('Please login to apply')
                     return;
                 }
+                loadingMasterPage();
                 const headers = {
                     'Authorization': `Bearer ${token}`
                 };
@@ -167,7 +168,9 @@
                 });
                 formData.append("email", $(`#email_`).val());
                 formData.append("user_id", '{{ \Illuminate\Support\Facades\Auth::user()->id ?? '' }}');
-                formData.append("content", $(`#content_`).val());
+
+                const content = tinymce.get('content_').getContent();
+                formData.append("content", content);
 
                 try {
                     $.ajax({
@@ -180,13 +183,16 @@
                         data: formData,
                         success: function () {
                             alert('success');
+                            loadingMasterPage();
                             window.location.reload();
                         },
                         error: function (exception) {
-                            console.log(exception)
+                            loadingMasterPage();
+                            alert(exception.responseText);
                         }
                     });
                 } catch (error) {
+                    loadingMasterPage();
                     throw error;
                 }
             })
