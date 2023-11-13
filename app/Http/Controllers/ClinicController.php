@@ -24,7 +24,11 @@ class ClinicController extends Controller
 
     public function detail($id)
     {
-        return view('clinics.detailClinics',compact('id'));
+        $bookings = Clinic::find($id);
+        if (!$bookings || $bookings->status != ClinicStatus::ACTIVE) {
+            return response("Product not found", 404);
+        }
+        return view('clinics.detailClinics',compact('id','bookings'));
     }
 
     public function create()
