@@ -106,22 +106,30 @@
                 const formData = new FormData();
                 const fieldNames = [
                     "specialty", "specialty_en", "specialty_laos",
-                    "service", "service_en", "service_laos",
                     "service_price", "service_price_en", "service_price_laos",
                     "detail_address", "detail_address_en", "detail_address_laos",
                     "province_id", "district_id", "commune_id",
                     "time_working_1", "time_working_2",
                     "name","year_of_experience", "status"
                 ];
+                const fieldTextareaTiny = [
+                    "service", "service_en", "service_laos",
+                ];
 
                 fieldNames.forEach(fieldName => {
                     formData.append(fieldName, $(`#${fieldName}`).val());
                 });
+
+                fieldTextareaTiny.forEach(fieldTextarea => {
+                    const content = tinymce.get(fieldTextarea).getContent();
+                    formData.append(fieldTextarea, content);
+                });
+
                 formData.append("created_by", '{{ \Illuminate\Support\Facades\Auth::user()->id }}');
                 formData.append("apply_for", 'doctor');
                 const photo = $('#thumbnail')[0].files[0];
                 formData.append('thumbnail', photo);
-                console.log(formData)
+                formData.append('_token', '{{ csrf_token() }}');
 
                 try {
                     $.ajax({
@@ -134,7 +142,7 @@
                         data: formData,
                         success: function () {
                             alert('success');
-                            window.location.href = '/admin/home/list-doc-info';
+                            window.location.href = '{{ route('homeAdmin.list.doctors') }}';
                         },
                         error: function (exception) {
                             console.log(exception)
