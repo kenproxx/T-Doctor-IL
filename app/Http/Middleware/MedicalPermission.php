@@ -22,26 +22,7 @@ class MedicalPermission
     public function handle(Request $request, Closure $next): Response
     {
         try {
-            if (!Auth::check()) {
-                $user = JWTAuth::parseToken()->authenticate();
-            } else {
-                $user = Auth::user();
-            }
-            $role_user = DB::table('role_users')->where('user_id', $user->id)->first();
-            $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
-
-            if ($roleNames->contains('DOCTORS')
-                || $roleNames->contains('PHAMACISTS')
-                || $roleNames->contains('THERAPISTS')
-                || $roleNames->contains('ESTHETICIANS')
-                || $roleNames->contains('NURSES')
-                || $roleNames->contains('PHARMACEUTICAL COMPANIES')
-                || $roleNames->contains('HOSPITALS')
-                || $roleNames->contains('CLINICS')
-                || $roleNames->contains('PHARMACIES')
-                || $roleNames->contains('SPAS')
-                || $roleNames->contains('OTHERS')
-                || $roleNames->contains('ADMIN')) {
+            if ($this->isMedicalPermission()) {
                 return $next($request);
             }
         } catch (Exception $e) {
@@ -54,5 +35,33 @@ class MedicalPermission
             }
         }
         return response('Forbidden: You don’t have permission to access [directory] on this server', 403);
+    }
+
+    public function isMedicalPermission()
+    {
+        if (!Auth::check()) {
+            $user = JWTAuth::parseToken()->authenticate();
+        } else {
+            $user = Auth::user();
+        }
+        $role_user = DB::table('role_users')->where('user_id', $user->id)->first();
+        $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
+
+        if ($roleNames->contains('DOCTORS')
+            || $roleNames->contains('PHAMACISTS')
+            || $roleNames->contains('THERAPISTS')
+            || $roleNames->contains('ESTHETICIANS')
+            || $roleNames->contains('NURSES')
+            || $roleNames->contains('PHARMACEUTICAL COMPANIES')
+            || $roleNames->contains('HOSPITALS')
+            || $roleNames->contains('CLINICS')
+            || $roleNames->contains('PHARMACIES')
+            || $roleNames->contains('SPAS')
+            || $roleNames->contains('OTHERS')
+            || $roleNames->contains('ADMIN')) {
+            return true;
+        }
+
+        return false;
     }
 }

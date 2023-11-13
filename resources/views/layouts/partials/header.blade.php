@@ -21,8 +21,9 @@
                         {{\Illuminate\Support\Facades\Auth::user()->username}}
                     </div>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        @if( (new \App\Http\Middleware\MedicalPermission())->isMedicalPermission())
+                        <a class="dropdown-item" href="{{ route('homeAdmin') }}">Dashboard</a>
+                        @endif
                         <a class="dropdown-item" href="{{route('logoutProcess')}}">Logout</a>
                     </div>
                 </div>
