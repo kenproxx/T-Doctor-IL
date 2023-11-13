@@ -160,6 +160,8 @@ class BackendCouponController extends Controller
 
         $user_id = $request->input('user_id');
 
+        $clinic_id = $request->input('clinic_id');
+
         $status = $request->input('status');
         $code = 'CP' . $user_id . (new MainController())->generateRandomString(8);
 

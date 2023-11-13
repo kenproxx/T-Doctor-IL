@@ -48,6 +48,7 @@
             cursor: pointer;
             overflow: hidden;
         }
+
         .upload-options label::after {
             content: "add";
             font-family: "Material Icons";
@@ -58,6 +59,7 @@
             left: calc(50% - 1.25rem);
             z-index: 0;
         }
+
         .upload-options label span {
             display: inline-block;
             width: 50%;
@@ -68,6 +70,7 @@
             vertical-align: middle;
             text-align: center;
         }
+
         .upload-options label span:hover i.material-icons {
             color: lightgray;
         }
@@ -83,6 +86,7 @@
             background-repeat: no-repeat;
             background-size: cover;
         }
+
         .js--image-preview::after {
             position: relative;
             font-size: 4.5em;
@@ -91,9 +95,11 @@
             left: calc(50% - 2.25rem);
             z-index: 0;
         }
+
         .js--image-preview.js--no-default::after {
             display: none;
         }
+
         .js--image-preview:nth-child(2) {
             background-image: url("http://bastianandre.at/giphy.gif");
         }
@@ -199,7 +205,7 @@
         </div>
 
         <div class="row">
-            <div class="col-sm-12"><label>Ảnh bìa</label>
+            <div class="col-sm-6"><label>Ảnh bìa</label>
                 <div class="box">
                     <div class="js--image-preview"></div>
                     <div class="upload-options">
@@ -209,6 +215,11 @@
                     </div>
                 </div>
             </div>
+            <div class="col-sm-6"><label>Đơn vị áp dụng</label>
+                <select class="custom-select" id="clinic_id">
+                    <option selected>Choose...</option>
+                </select>
+            </div>
         </div>
 
         <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
@@ -216,9 +227,9 @@
     <script>
 
         const token = `{{ $_COOKIE['accessToken'] }}`;
+
         $(document).ready(function () {
             $('.up-date-button').on('click', function () {
-                console.log(123)
                 const headers = {
                     'Authorization': `Bearer ${token}`
                 };
@@ -226,7 +237,7 @@
 
                 const fieldNames = [
                     "title", "title_en", "title_laos", "startDate", "endDate",
-                    "max_register", "status"
+                    "max_register", "status" ,"clinic_id"
                 ];
                 const fieldTextareaTiny = [
                     "short_description", "short_description_en", "short_description_laos",
@@ -266,6 +277,27 @@
                 }
             })
         })
+
+        genSelectOption();
+
+        async function genSelectOption() {
+            const token = `{{ $_COOKIE['accessToken'] }}`;
+            const headers = {
+                'Authorization': `Bearer ${token}`
+            };
+            let response = await fetch(`{{route('api.backend.clinics.all-clinic-active')}}`, {
+                method: 'GET',
+                headers: headers,
+            });
+            let html = '';
+            if (response.ok) {
+                const data = await response.json();
+                data.forEach(item => {
+                    html += `<option value="${item.id}">${item.name}</option>`
+                })
+                $('#clinic_id').html(html);
+            }
+        }
     </script>
 
     <script>

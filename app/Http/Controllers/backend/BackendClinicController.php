@@ -24,6 +24,12 @@ class BackendClinicController extends Controller
         return response()->json($clinics);
     }
 
+    public function getAllClinicActive()
+    {
+        $clinics = Clinic::where('status', ClinicStatus::ACTIVE)->get();
+        return response()->json($clinics);
+    }
+
     public function getAllByUserId(Request $request, $id)
     {
         $status = $request->input('status');
