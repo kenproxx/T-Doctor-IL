@@ -602,9 +602,29 @@
         <div id="list-doctor" class="d-flex justify-content-center container">
             <div class="card">
                 <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
+                <img src="{{asset('img/pngtree-cartoon-anime-male-doctor-element-png-image_4073784.jpg')}}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">BS Đô Văn Định</h5>
+                    <h5 class="card-title">BS Nguyễn Khắc Quý</h5>
+                    <p class="card-text">respiratory doctor</p>
+                    <p class="card-text_1">Location: <b>Hanoi</b></p>
+                    <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+                </div>
+            </div>
+            <div class="card">
+                <i class="bi bi-heart"></i>
+                <img src="{{asset('img/11111.jpeg')}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">BS Lê Hải Thành</h5>
+                    <p class="card-text">respiratory doctor</p>
+                    <p class="card-text_1">Location: <b>Hanoi</b></p>
+                    <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+                </div>
+            </div>
+            <div class="card">
+                <i class="bi bi-heart"></i>
+                <img src="{{asset('img/22222.jpeg')}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">BS Phạm Đức Long</h5>
                     <p class="card-text">respiratory doctor</p>
                     <p class="card-text_1">Location: <b>Hanoi</b></p>
                     <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
@@ -614,27 +634,7 @@
                 <i class="bi bi-heart"></i>
                 <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">BS Đô Văn Định</h5>
-                    <p class="card-text">respiratory doctor</p>
-                    <p class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
-            </div>
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Đô Văn Định</h5>
-                    <p class="card-text">respiratory doctor</p>
-                    <p class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
-            </div>
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Đô Văn Định</h5>
+                    <h5 class="card-title">BS Trần Đình </h5>
                     <p class="card-text">respiratory doctor</p>
                     <p class="card-text_1">Location: <b>Hanoi</b></p>
                     <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
