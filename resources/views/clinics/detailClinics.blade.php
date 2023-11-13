@@ -22,7 +22,7 @@
         <div class="modal-dialog" style="margin-left: 180px;">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">-----------------------------------------------------------------</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -49,7 +49,7 @@
                         <div class="tab-pane fade show active" id="infoPanel" role="tabpanel">
                             <div class="form-group">
                                 <div>
-                                    <img src="{{asset('img/doctor.png')}}" alt="img">
+                                    <img src="{{$bookings->gallery}}" alt="img">
                                 </div>
                                 <div class="d-flex justify-content-between mt-md-2">
                                     <div class="fs-18px">{{$bookings->name}}</div>
@@ -165,8 +165,6 @@
                                     <span>Booking</span>
                                 </div>
                                 <div class="mt-md-3">
-                                    {{--                                        <a class="border-button-address font-weight-800 fs-14 justify-content-center" href="{{route('clinic.booking.select.date',$id)}}">Please select a date and--}}
-                                    {{--                                            time</a>--}}
                                     <button class="w-100 btn btn-secondary border-button-address font-weight-800 fs-14 justify-content-center" id="adsContinue">Please select a date and time</button>
                                 </div>
                             </div>
@@ -181,7 +179,6 @@
                                     <div class="button-booking-sv">
                                         <button class="" id="adsContinue">Booking</button>
 
-                                        {{--                                            <a href="{{route('clinic.booking.select.date',$id)}}">Booking</a>--}}
                                     </div>
                                 </div>
                             @endfor
@@ -221,7 +218,6 @@
                                         </div>
                                         <div class="">
                                             <button class="btn btn-secondary button form-submit w-100 button-apply-booking disabled" id="placementContinue">Apply</button>
-                                            {{--                                                <a class='button form-submit w-100 button-apply-booking disabled'>Apply</a>--}}
                                         </div>
                                     </div>
                                 </div>
