@@ -3,7 +3,7 @@
         <div class="row header-detail mobile-hidden">
             <div class="col-md-4 header-detail--left d-flex justify-content-around">
                 <a class="logo" href="{{ route('home') }}">
-                    <img src="{{asset('img/icons_logo/image 1.png')}}" alt="Logo" width="177px" height="42px"
+                    <img src="{{asset('img/icons_logo/logo-new.png')}}" alt="Logo" width="177px" height="42px"
                          class="d-inline-block align-text-top">
                 </a>
                 <a class="back" href="{{route('home')}}"><h5><i class="fa-solid fa-angles-left"></i> Flea market</h5></a>
