@@ -79,7 +79,7 @@
 
         <div class="background-map">
 
-            <div class="p-0 col-md-3 tab-pane fade show active background-modal" id="modalBooking">
+            <div class="p-0 col-md-3 tab-pane fade show active background-modal b-radius" id="modalBooking">
                 <div>
                     @php
                         $str = $bookings->gallery;
@@ -529,7 +529,7 @@
             $('#close-modal').click(function () {
                 $('#modalBooking').attr('hidden', 'true');
             });
-            let html = `<form method="post" action="{{route('clinic.booking.store')}}">
+            let html = `<form method="post" action="{{route('clinic.booking.store')}}" class="p-3">
             @csrf
             <div class="fs-18px justify-content-start d-flex mb-md-4 mt-2">
                 <div class="align-items-center">
