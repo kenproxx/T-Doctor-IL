@@ -15,6 +15,7 @@ use App\Http\Controllers\FleaMarketController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\ProductInfoController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecruitmentController;
 use App\Http\Controllers\WhatFreeToDay;
 use Illuminate\Support\Facades\Route;
@@ -41,8 +42,8 @@ Route::get('/login-google', [AuthSocialController::class, 'getGoogleSignInUrl'])
 Route::get('/login-google-callback', [AuthSocialController::class, 'loginCallback'])->name('login.google.callback');
 Route::get('/login-role', [AuthSocialController::class, 'chooseRole'])->name('login.social.choose.role');
 
-Route::get('profile', 'ProfileController@index')->name('profile');
-Route::put('profile-update', 'ProfileController@update')->name('profile.update');
+Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+Route::put('profile-update', [ProfileController::class, 'update'])->name('profile.update');
 
 Route::group(['prefix' => 'news'], function () {
     Route::get('', [HomeController::class, 'index'])->name('index.new');
