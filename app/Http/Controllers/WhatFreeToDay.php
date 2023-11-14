@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Enums\CouponStatus;
+use App\Enums\SocialUserStatus;
 use App\Models\Clinic;
 use App\Models\Coupon;
+use App\Models\SocialUser;
+use Illuminate\Support\Facades\Auth;
 
 class WhatFreeToDay extends Controller
 {
@@ -34,7 +37,15 @@ class WhatFreeToDay extends Controller
         $coupon->save();
         $user_id = $coupon->user_id;
         $clinic = Clinic::where('user_id', $user_id)->first();
-        return view('What-free.detail-what-free', compact('coupon', 'clinic'));
+        if (Auth::check()) {
+            $socials = SocialUser::where('user_id', Auth::user()->id)
+                ->where('status', SocialUserStatus::ACTIVE)
+                ->first();
+        } else {
+            $socials = '';
+        }
+
+        return view('What-free.detail-what-free', compact('coupon', 'clinic', 'socials'));
     }
     public function campaign()
     {
