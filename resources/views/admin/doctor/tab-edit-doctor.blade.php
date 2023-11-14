@@ -14,60 +14,90 @@
     @endif
     <form id="form">
         @csrf
+        <div><label for="name">name</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{$doctor->name}}"></div>
+        <div><label for="year_of_experience">Năm kinh nghiệm</label>
+            <input type="text" class="form-control" id="year_of_experience" name="year_of_experience" value="{{$doctor->year_of_experience}}"></div>
+        <div><label for="apply_for">Apply for</label>
+            <input type="text" class="form-control" id="apply_for" name="apply_for" value="{{$doctor->apply_for}}"></div>
         <div class="row">
-            <div class="col-sm-4"><label>tiêu đề việt</label>
-                <input type="text" class="form-control" id="title" name="title" value="{{ $coupon->title }}"></div>
-            <div class="col-sm-4"><label>tiêu đề anh</label>
-                <input type="text" class="form-control" id="title_en" name="title_en" value="{{ $coupon->title_en }}"></div>
-            <div class="col-sm-4"><label>tiêu đề lào</label>
-                <input type="text" class="form-control" id="title_laos" name="title_laos"
-                       value="{{ $coupon->title_laos }}"></div>
+            <div class="col-sm-4"><label for="specialty">chuyên môn việt</label>
+                <input type="text" class="form-control" id="specialty" name="specialty" value="{{$doctor->specialty}}"></div>
+            <div class="col-sm-4"><label for="specialty_en">chuyên môn anh</label>
+                <input type="text" class="form-control" id="specialty_en" name="specialty_en" value="{{$doctor->specialty_en}}"></div>
+            <div class="col-sm-4"><label for="specialty_laos">chuyên môn lào</label>
+                <input type="text" class="form-control" id="specialty_laos" name="specialty_laos"
+                       value="{{$doctor->specialty_laos}}"></div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><label>Mô tả ngắn việt</label>
-                <textarea class="form-control" name="short_description" id="short_description">{{ $coupon->short_description }}</textarea>
+            <div class="col-sm-4"><label>Dịch vụ cung cấp việt</label>
+                <textarea class="form-control" name="service" id="service">{{$doctor->service}}</textarea>
             </div>
-            <div class="col-sm-4"><label>Mô tả ngắn anh</label>
-                <textarea class="form-control" name="short_description_en" id="short_description_en">{{ $coupon->short_description_en }}</textarea>
+            <div class="col-sm-4"><label>Dịch vụ cung cấp anh</label>
+                <textarea class="form-control" name="service_en" id="service_en">{{$doctor->service_en}}</textarea>
             </div>
-            <div class="col-sm-4"><label>Mô tả ngắn lào</label>
-                <textarea class="form-control" name="short_description_laos" id="short_description_laos">{{ $coupon->short_description_laos }}</textarea>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4"><label>Mô tả dài việt</label>
-                <textarea class="form-control" name="description" id="description">{{ $coupon->description }}</textarea>
-            </div>
-            <div class="col-sm-4"><label>Mô tả dài anh</label>
-                <textarea class="form-control" name="description_en" id="description_en">{{ $coupon->description_en }}</textarea>
-            </div>
-            <div class="col-sm-4"><label>Mô tả dài lào</label>
-                <textarea class="form-control" name="description_laos" id="description_laos">{{ $coupon->description_laos }}</textarea>
+            <div class="col-sm-4"><label>Dịch vụ cung cấp lào</label>
+                <textarea class="form-control" name="service_laos" id="service_laos">{{$doctor->service_laos}}</textarea>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6"><label>Thời gian bắt đầu</label>
-                <input type="datetime-local" class="form-control" id="startDate" name="startDate" value="{{ $coupon->startDate }}"></div>
-            <div class="col-sm-6"><label>Thời gian kết thúc</label>
-                <input type="datetime-local" class="form-control" id="endDate" name="endDate" value="{{ $coupon->endDate }}"></div>
+            <div class="col-sm-4"><label>Giá dịch vụ việt</label>
+                <input class="form-control" name="service_price" id="service_price" value="{{$doctor->service_price}}">
+            </div>
+            <div class="col-sm-4"><label>Giá dịch vụ anh</label>
+                <input class="form-control" name="service_price_en" id="service_price_en" value="{{$doctor->service_price_en}}">
+            </div>
+            <div class="col-sm-4"><label>Giá dịch vụ lào</label>
+                <input class="form-control" name="service_price_laos" id="service_price_laos" value="{{$doctor->service_price_laos}}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4"><label>địa chỉ chi tiết việt</label>
+                <input class="form-control" name="detail_address" id="detail_address" value="{{$doctor->detail_address}}">
+            </div>
+            <div class="col-sm-4"><label>địa chỉ chi tiết anh</label>
+                <input class="form-control" name="detail_address_en" id="detail_address_en" value="{{$doctor->detail_address_en}}">
+            </div>
+            <div class="col-sm-4"><label>địa chỉ chi tiết lào</label>
+                <input class="form-control" name="detail_address_laos" id="detail_address_laos" value="{{$doctor->detail_address_laos}}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4"><label>Tỉnh</label>
+                <input class="form-control" name="province_id" id="province_id" VALUE="{{$doctor->province_id}}">
+            </div>
+            <div class="col-sm-4"><label>Quận</label>
+                <input class="form-control" name="district_id" id="district_id" value="{{$doctor->district_id}}">
+            </div>
+            <div class="col-sm-4"><label>Xã</label>
+                <input class="form-control" name="commune_id" id="commune_id" value="{{$doctor->commune_id}}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6"><label>Thời gian làm việc từ</label>
+                <input type="text" class="form-control" id="time_working_1" name="time_working_1" value="{{$doctor->time_working_1}}"></div>
+            <div class="col-sm-6"><label>Những này làm việc</label>
+                <input type="text" class="form-control" id="time_working_2" name="time_working_2" value="{{$doctor->time_working_2}}"></div>
         </div>
         <div class="row">
             <div class="col-sm-6"><label>Số lượng đký tối đa</label>
-                <input type="number" class="form-control" id="max_register" name="max_register" value="{{ $coupon->max_register }}">
+                <label>thumbnail</label>
+                <input type="file" class="form-control" id="thumbnail" name="thumbnail" multiple accept="image/*">
+                @php
+                    $galleryArray = explode(',', $doctor->thumbnail);
+                @endphp
+                @foreach($galleryArray as $productImg)
+                    <img width="50px" src="{{$productImg}}">
+                @endforeach
             </div>
             <div class="col-sm-6"><label>Trạng thái</label>
                 <select class="custom-select" id="status" name="status">
-                    <option value="{{ \App\Enums\CouponStatus::ACTIVE }}" {{ $coupon->status === \App\Enums\CouponStatus::ACTIVE ? 'selected' : '' }}>
-                        {{ \App\Enums\CouponStatus::ACTIVE }}
-                    </option>
-                    <option value="{{ \App\Enums\CouponStatus::INACTIVE }}" {{ $coupon->status === \App\Enums\CouponStatus::INACTIVE ? 'selected' : '' }}>
-                        {{ \App\Enums\CouponStatus::INACTIVE }}
-                    </option>
-                    <option value="{{ \App\Enums\CouponStatus::DELETED }}" {{ $coupon->status === \App\Enums\CouponStatus::DELETED ? 'selected' : '' }}>
-                        {{ \App\Enums\CouponStatus::DELETED }}
-                    </option>
+                    <option value="{{ \App\Enums\DoctorInfoStatus::ACTIVE }}">{{ \App\Enums\DoctorInfoStatus::ACTIVE }}</option>
+                    <option
+                        value="{{ \App\Enums\DoctorInfoStatus::INACTIVE }}">{{ \App\Enums\DoctorInfoStatus::INACTIVE }}</option>
+                    <option
+                        value="{{ \App\Enums\DoctorInfoStatus::DELETED }}">{{ \App\Enums\DoctorInfoStatus::DELETED }}</option>
                 </select>
-
             </div>
         </div>
 
@@ -79,25 +109,38 @@
         $(document).ready(function () {
             $('.up-date-button').on('click', function () {
                 const headers = {
-                    'Authorization': `Bearer ${token}`
+                    'Authorization': `Bearer ${token}`,
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 };
                 const formData = new FormData();
-
                 const fieldNames = [
-                    "title", "title_en", "title_laos", "short_description",
-                    "short_description_en", "short_description_laos", "description",
-                    "description_en", "description_laos", "startDate", "endDate",
-                    "max_register", "status"
+                    "specialty", "specialty_en", "specialty_laos",
+                    "service_price", "service_price_en", "service_price_laos",
+                    "detail_address", "detail_address_en", "detail_address_laos",
+                    "province_id", "district_id", "commune_id",
+                    "time_working_1", "time_working_2",
+                    "name","year_of_experience", "status","apply_for"
+                ];
+                const fieldTextareaTiny = [
+                    "service", "service_en", "service_laos",
                 ];
 
                 fieldNames.forEach(fieldName => {
                     formData.append(fieldName, $(`#${fieldName}`).val());
                 });
+
+                fieldTextareaTiny.forEach(fieldTextarea => {
+                    const content = tinymce.get(fieldTextarea).getContent();
+                    formData.append(fieldTextarea, content);
+                });
+                const photo = $('#thumbnail')[0].files[0];
+                formData.append('thumbnail', photo);
+                formData.append('_token', '{{ csrf_token() }}');
                 formData.append("user_id", '{{ \Illuminate\Support\Facades\Auth::user()->id }}');
 
                 try {
                     $.ajax({
-                        url: `{{route('api.backend.coupons.update', ['id' => $coupon->id])}}`,
+                        url: `{{route('api.backend.doctors.info.update.doctor', ['id' => $doctor->id])}}`,
                         method: 'post',
                         headers: headers,
                         contentType: false,
@@ -106,7 +149,7 @@
                         data: formData,
                         success: function () {
                             alert('success');
-                            window.location.href = '/admin/home/list-coupon';
+                            window.location.href = '{{route('homeAdmin.list.doctors')}}';
                         },
                         error: function (exception) {
                             console.log(exception);

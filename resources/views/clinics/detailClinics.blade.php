@@ -533,7 +533,7 @@
             @csrf
             <div class="fs-18px justify-content-start d-flex mb-md-4 mt-2">
                 <div class="align-items-center">
-                    <i class="fa-solid fa-chevron-left"></i>
+                <a href="{{route('clinic.detail',$bookings->id)}}"><i class="fa-solid fa-chevron-left"></i></a>
                 </div>
                 <div class="ml-2">
                     <span>{{$bookings->name}}</span>
