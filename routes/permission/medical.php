@@ -37,6 +37,7 @@ Route::group(['prefix' => 'home'], function () {
     Route::get('list-products', [HomeController::class, 'listProduct'])->name('homeAdmin.list.product');
     Route::get('list-clinics', [HomeController::class, 'listClinics'])->name('homeAdmin.list.clinics');
     Route::get('list-coupon', [HomeController::class, 'listCoupon'])->name('homeAdmin.list.coupons');
+    Route::get('list-apply-coupon/{id}', [HomeController::class, 'listApplyCoupon'])->name('homeAdmin.list.apply.coupons');
     Route::get('list-doctor', [HomeController::class, 'listDoctor'])->name('homeAdmin.list.doctors');
     Route::get('list-staff', [HomeController::class, 'listStaff'])->name('homeAdmin.list.staff');
     Route::get('list-config', [HomeController::class, 'listConfig'])->name('homeAdmin.list.config');

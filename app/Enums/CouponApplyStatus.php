@@ -10,4 +10,9 @@ final class CouponApplyStatus extends Enum
     const UNUSED = 'UNUSED';
     const CANCELED = 'CANCELED';
     const DELETED = 'DELETED';
+
+    const PENDING = 'PENDING';
+    const VALID = 'VALID';
+    const INVALID = 'INVALID';
+    const REWARDED = 'REWARDED';
 }

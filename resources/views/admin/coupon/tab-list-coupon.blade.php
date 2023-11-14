@@ -50,7 +50,10 @@
 
         for (let i = 0; i < res.length; i++) {
             let urlEdit = `{{route('coupon.edit', ['id' => ':id'])}}`;
+            let urlView = `{{route('homeAdmin.list.apply.coupons', ['id' => ':id'])}}`;
             urlEdit = urlEdit.replace(':id', res[i].id);
+            urlView = urlView.replace(':id', res[i].id);
+
             let item = res[i];
 
             html = html + `<tr>
@@ -59,7 +62,7 @@
             <td>${item.registered} / ${item.max_register}</td>
             <td>${item.status} </td>
             <td>${item.startDate} - ${item.endDate}</td>
-            <td><a href="${urlEdit}"> Edit</a> | <a href="#" onclick="checkDelete(${item.id})">Delete</a></td>
+            <td><a href="${urlView}"> Xem đơn đăng ký </a> | <a href="${urlEdit}"> Edit</a> | <a href="#" onclick="checkDelete(${item.id})">Delete</a></td>
         </tr>`;
         }
         await $('#ProductsAdmin').empty().append(html);

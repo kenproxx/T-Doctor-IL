@@ -79,7 +79,7 @@ class BackendCouponApplyController extends Controller
             $couponApply->coupon_id = $coupon_id;
             $couponApply->sns_option = $sns_option;
             $couponApply->link_ = $link[$sns_option];
-            $couponApply->status = CouponApplyStatus::UNUSED;
+            $couponApply->status = CouponApplyStatus::PENDING;
 
             $coupon = Coupon::find($coupon_id);
             if (!$coupon || $coupon->status != CouponStatus::ACTIVE) {
@@ -197,4 +197,33 @@ class BackendCouponApplyController extends Controller
             return response($exception, 400);
         }
     }
+
+    public function updateStatus(Request $request)
+    {
+        $id = $request->input('id');
+        $status = $request->input('status');
+
+        $couponApply = CouponApply::find($id);
+        if (!$couponApply) {
+            return response('Not found', 404);
+        }
+
+        if ($couponApply->status == CouponApplyStatus::REWARDED) {
+            return response('Không thể thay đổi trạng thái của bài đã trao giải', 400);
+        }
+
+        if ($status == CouponApplyStatus::REWARDED) {
+            if ($couponApply->status == CouponApplyStatus::VALID) {
+                $couponApply->status = CouponApplyStatus::REWARDED;
+            }
+            else {
+                return response('Không thể trao giải cho bài không hợp lệ', 400);
+            }
+        } else {
+            $couponApply->status = $status;
+        }
+        $couponApply->save();
+        return response('Thay đổi thành công', 200);
+    }
+
 }
