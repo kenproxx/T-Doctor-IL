@@ -79,13 +79,16 @@ class ClinicController extends Controller
             $checkIn = $request->input('check_in');
             $checkOut = $request->input('check_out');
             $service = $request->input('service');
+            $servicesAsString = implode(',', $service);
+            $time = $request->input('selectedTime');
+            dd($request->all());
             $booking = new Booking();
 
             $booking->user_id = $userID;
             $booking->clinic_id = $clinicID;
-            $booking->check_in = $checkIn;
+            $booking->check_in = $time;
             $booking->check_out = $checkOut;
-            $booking->service = $service;
+            $booking->service = $servicesAsString;
 
             $success = $booking->save();
             if ($success) {
