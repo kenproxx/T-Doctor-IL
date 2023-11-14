@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Enums\ClinicStatus;
 use App\Models\Clinic;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ClinicController extends Controller
 {
@@ -81,18 +82,18 @@ class ClinicController extends Controller
             $service = $request->input('service');
             $servicesAsString = implode(',', $service);
             $time = $request->input('selectedTime');
-            dd($request->all());
+            $timestamp = Carbon::parse($time);
             $booking = new Booking();
 
             $booking->user_id = $userID;
             $booking->clinic_id = $clinicID;
-            $booking->check_in = $time;
+            $booking->check_in = $timestamp;
             $booking->check_out = $checkOut;
             $booking->service = $servicesAsString;
 
             $success = $booking->save();
             if ($success) {
-                \Laravel\Prompts\alert('Booking success');
+                alert('Booking success');
                 return back()->with('success', 'Booking success');
             }
             return response('Create error', 400);
