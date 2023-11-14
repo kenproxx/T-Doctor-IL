@@ -28,7 +28,7 @@
                 let arrayGallery = gallery.split(',')
                 let img = ``;
                 for (let j = 0; j < arrayGallery.length; j++) {
-                    img = img + `<img class="mr-2 w-auto h-100" src="${arrayGallery[j]}" alt="">`;
+                    img = img + `<img class="mr-2 w-auto h-100 img-item1 " src="${arrayGallery[j]}" alt="">`;
                 }
 
                 html = html + `

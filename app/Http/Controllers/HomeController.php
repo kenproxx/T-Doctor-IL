@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\CouponStatus;
 use App\Enums\ProductStatus;
 use App\Models\Coupon;
+use App\Models\CouponApply;
 use App\Models\ProductInfo;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -44,6 +45,11 @@ class HomeController extends Controller
     public function listCoupon()
     {
         return view('admin.coupon.list-coupon');
+    }
+    public function listApplyCoupon($id)
+    {
+        $applyCoupons = CouponApply::where('coupon_id', $id)->get();
+        return view('admin.coupon.tab-list-apply-coupon', compact('applyCoupons'));
     }
     public function listDoctor()
     {

@@ -37,6 +37,7 @@ Route::group(['prefix' => 'home'], function () {
     Route::get('list-products', [HomeController::class, 'listProduct'])->name('homeAdmin.list.product');
     Route::get('list-clinics', [HomeController::class, 'listClinics'])->name('homeAdmin.list.clinics');
     Route::get('list-coupon', [HomeController::class, 'listCoupon'])->name('homeAdmin.list.coupons');
+    Route::get('list-apply-coupon/{id}', [HomeController::class, 'listApplyCoupon'])->name('homeAdmin.list.apply.coupons');
     Route::get('list-doctor', [HomeController::class, 'listDoctor'])->name('homeAdmin.list.doctors');
     Route::get('list-staff', [HomeController::class, 'listStaff'])->name('homeAdmin.list.staff');
     Route::get('list-config', [HomeController::class, 'listConfig'])->name('homeAdmin.list.config');
@@ -186,14 +187,6 @@ Route::group(['prefix' => 'reviews'], function () {
 //    Route::delete('/delete/{id}', [BackendCouponController::class, 'delete'])->name('api.backend.coupons.delete');
 //});
 //
-Route::group(['prefix' => 'coupons-apply'], function () {
-    Route::get('/list', [BackendCouponApplyController::class, 'getAll'])->name('api.backend.coupons-apply.list');
-    Route::get('/detail/{id}', [BackendCouponApplyController::class, 'detail'])->name('api.backend.coupons-apply.detail');
-    Route::get('/user/{id}', [BackendCouponApplyController::class, 'getAllByUser'])->name('api.backend.coupons-apply.user');
-    Route::post('/create', [BackendCouponApplyController::class, 'create'])->name('api.backend.coupons-apply.create');
-    Route::put('/update/{id}', [BackendCouponApplyController::class, 'update'])->name('api.backend.coupons-apply.update');
-    Route::delete('/delete/{id}', [BackendCouponApplyController::class, 'delete'])->name('api.backend.coupons-apply.delete');
-});
 //
 Route::group(['prefix' => 'doctors-info'], function () {
     Route::get('/list', [AdminDoctorInfoApi::class, 'getAll'])->name('api.backend.doctors.info.list');
