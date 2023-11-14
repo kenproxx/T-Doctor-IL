@@ -5,7 +5,7 @@
                                              alt="logo"></a>
         </div>
         <div class="header-center d-flex">
-            <a href="{{route('recruitment.index')}}" >Recruitment</a>
+            <a href="{{route('recruitment.index')}}" hidden="" >Recruitment</a>
             <a href="{{route('flea-market.index')}}">Flea market</a>
             <a href="{{route('examination.index')}}">Examination</a>
             <a href="{{route('index.new')}}">New/Events</a>
