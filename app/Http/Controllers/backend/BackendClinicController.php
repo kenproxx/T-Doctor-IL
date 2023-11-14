@@ -7,9 +7,13 @@ use App\Enums\TypeBussiness;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Clinic;
+use App\Models\Role;
+use App\Models\RoleUser;
 use App\Models\User;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BackendClinicController extends Controller
 {
@@ -19,15 +23,38 @@ class BackendClinicController extends Controller
         if ($status && $status != ClinicStatus::DELETED) {
             $clinics = Clinic::where('status', $status)->where('type', TypeBussiness::CLINICS)->get();
         } else {
-            $clinics = Clinic::where('status', '!=', ClinicStatus::DELETED)->where('type', TypeBussiness::CLINICS)->get();
+            $clinics = Clinic::where('status', '!=', ClinicStatus::DELETED)->where('type',
+                TypeBussiness::CLINICS)->get();
         }
         return response()->json($clinics);
     }
 
     public function getAllClinicActive()
     {
-        $clinics = Clinic::where('status', ClinicStatus::ACTIVE)->get();
+        if ($this->isAdmin()) {
+            $clinics = Clinic::where('status', ClinicStatus::ACTIVE)->get();
+        } else {
+            if (Auth::user()->manager_id) {
+                $clinics = Clinic::where('status', ClinicStatus::ACTIVE)->where('user_id',
+                    Auth::user()->manager_id)->get();
+            } else {
+                $clinics = Clinic::where('status', ClinicStatus::ACTIVE)->where('user_id', Auth::user()->id)->get();
+            }
+        }
         return response()->json($clinics);
+    }
+
+    public function isAdmin()
+    {
+        $role_user = RoleUser::where('user_id', Auth::user()->id)->first();
+
+        $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
+
+        if ($roleNames->contains('ADMIN')) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function getAllByUserId(Request $request, $id)
@@ -71,7 +98,7 @@ class BackendClinicController extends Controller
             if ($request->hasFile('gallery')) {
                 $galleryPaths = array_map(function ($image) {
                     $itemPath = $image->store('gallery', 'public');
-                    return asset('storage/' . $itemPath);
+                    return asset('storage/'.$itemPath);
                 }, $request->file('gallery'));
                 $gallery = implode(',', $galleryPaths);
             } else {
@@ -119,7 +146,7 @@ class BackendClinicController extends Controller
                 return response()->json($clinic);
             }
             return response("Error, Please try again!", 400);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response($exception, 400);
         }
     }
@@ -160,7 +187,7 @@ class BackendClinicController extends Controller
             if ($request->hasFile('gallery')) {
                 $galleryPaths = array_map(function ($image) {
                     $itemPath = $image->store('gallery', 'public');
-                    return asset('storage/' . $itemPath);
+                    return asset('storage/'.$itemPath);
                 }, $request->file('gallery'));
                 $gallery = implode(',', $galleryPaths);
             } else {
@@ -195,7 +222,7 @@ class BackendClinicController extends Controller
                 return response()->json($clinic);
             }
             return response("Error, Please try again!", 400);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response($exception, 400);
         }
     }
@@ -213,7 +240,7 @@ class BackendClinicController extends Controller
                 return response("Delete success!", 200);
             }
             return response("Error, Please try again!", 400);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response($exception, 400);
         }
     }

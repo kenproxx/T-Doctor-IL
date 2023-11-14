@@ -4,9 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Enums\CouponStatus;
 use App\Models\Coupon;
+use App\Models\Role;
+use App\Models\RoleUser;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class CouponController extends Controller
 {
+    public function isAdmin()
+    {
+        $role_user = RoleUser::where('user_id', Auth::user()->id)->first();
+
+        $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
+
+        if ($roleNames->contains('ADMIN')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public function show($id)
     {
         $coupon = Coupon::find($id);
@@ -37,6 +53,7 @@ class CouponController extends Controller
         if (!$coupon) {
             return response("coupon not found", 404);
         }
-        return view('admin.coupon.tab-edit-coupon',compact('coupon'));
+        $isAdmin = $this->isAdmin();
+        return view('admin.coupon.tab-edit-coupon',compact('coupon', 'isAdmin'));
     }
 }

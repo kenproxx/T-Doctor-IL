@@ -97,6 +97,8 @@ class AdminDoctorInfoApi extends Controller
     private function saveDoctorInfo($request, $doctor)
     {
         $name = $request->input('name');
+        $name_en = $request->input('name_en');
+        $name_laos = $request->input('name_laos');
 
         $specialty = $request->input('specialty');
         $specialty_en = $request->input('specialty_en');
@@ -134,13 +136,22 @@ class AdminDoctorInfoApi extends Controller
         $detail_address = $request->input('detail_address');
         $detail_address_en = $request->input('detail_address_en');
         $detail_address_laos = $request->input('detail_address_laos');
+
         $created_by = $request->input('created_by');
+
+        $hospital = $request->input('hospital');
+        $hospital_en = $request->input('hospital_en');
+        $hospital_laos = $request->input('hospital_laos');
+
+        $other = $request->input('other');
 
         $status = $request->input('status');
 
         $apply_for = $request->input('apply_for');
 
         $doctor->name = $name;
+        $doctor->name_en = $name_en;
+        $doctor->name_laos = $name_laos;
 
         $doctor->thumbnail = $thumbnail;
 
@@ -170,6 +181,12 @@ class AdminDoctorInfoApi extends Controller
         $doctor->detail_address_laos = $detail_address_laos;
 
         $doctor->created_by = $created_by;
+
+        $doctor->other = $other;
+
+        $doctor->hospital = $hospital;
+        $doctor->hospital_en = $hospital_en;
+        $doctor->hospital_laos = $hospital_laos;
 
         $doctor->status = $status;
         $doctor->apply_for = $apply_for;

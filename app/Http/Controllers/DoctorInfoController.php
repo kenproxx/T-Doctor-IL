@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Enums\DoctorInfoStatus;
+use App\Models\Chat;
 use App\Models\DoctorInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DoctorInfoController extends Controller
 {
@@ -22,9 +24,21 @@ class DoctorInfoController extends Controller
         return response()->json($coupon, $id);
     }
 
-    public function showFromQrCode()
+    public function showFromQrCode($id)
     {
-        return view('qrCode.doctor-info');
+        if (Auth::check()) {
+            $user = Auth::user();
+            $messageDoctor = Chat::where([
+                ['from_user_id', $id],
+                ['to_user_id', $user->id]
+            ])->orWhere([
+                ['to_user_id', $id],
+                ['from_user_id', $user->id]
+            ])->get();
+            $doctor = DoctorInfo::find($id);
+            return view('qrCode.doctor-info', compact('messageDoctor', 'doctor'));
+        }
+        return redirect(route('home'));
     }
 
     public function create()

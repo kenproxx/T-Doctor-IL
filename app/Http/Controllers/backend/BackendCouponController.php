@@ -5,14 +5,44 @@ namespace App\Http\Controllers\backend;
 use App\Enums\CouponStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MainController;
+use App\Models\Clinic;
 use App\Models\Coupon;
+use App\Models\Role;
+use App\Models\RoleUser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BackendCouponController extends Controller
 {
+
+    public function isAdmin()
+    {
+        $role_user = RoleUser::where('user_id', Auth::user()->id)->first();
+
+        $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
+
+        if ($roleNames->contains('ADMIN')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
     public function getAll()
     {
-        $coupons = Coupon::all();
+
+
+        if ($this->isAdmin()) {
+            $coupons = Coupon::all();
+        } else {
+            if (Auth::user()->manager_id) {
+                $clinic_id = Clinic::where('user_id', Auth::user()->manager_id)->pluck('id');
+            } else {
+                $clinic_id = Clinic::where('user_id', Auth::user()->id)->pluck('id');
+            }
+            $coupons = Coupon::whereIn('clinic_id', $clinic_id)->get();
+        }
+
         return response()->json($coupons);
     }
 
@@ -162,7 +192,12 @@ class BackendCouponController extends Controller
 
         $clinic_id = $request->input('clinic_id');
 
-        $status = $request->input('status');
+        if ($this->isAdmin()) {
+            $status = CouponStatus::ACTIVE;
+        } else {
+            $status = CouponStatus::PENDING;
+        }
+
         $code = 'CP' . $user_id . (new MainController())->generateRandomString(8);
 
         if ($request->hasFile('thumbnail')) {
@@ -195,6 +230,7 @@ class BackendCouponController extends Controller
         $coupon->status = $status;
         $coupon->code = $code;
         $coupon->thumbnail = $thumbnail;
+        $coupon->clinic_id = $clinic_id;
 
         $success = $coupon->save();
 
