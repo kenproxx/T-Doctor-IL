@@ -123,21 +123,19 @@ class AuthController extends Controller
             $success = $user->save();
 
             if ($success) {
-
                 $role = Role::where('name', $member)->first();
-
+                $newUser = User::where('username', $username)->first();
                 if ($role) {
-                    // Lấy id của user vừa tạo
-                    $newUser = User::where('username', $username)->first();
-
-                    // Tạo mới bản ghi trong bảng role_user
                     RoleUser::create([
                         'role_id' => $role->id,
                         'user_id' => $newUser->id
                     ]);
                 } else {
-                    // Xử lý nếu không tìm thấy role
-                    // (ví dụ: thông báo lỗi hoặc xử lý khác)
+                    $roleNormal = Role::where('name', \App\Enums\Role::PAITENTS)->first();
+                    RoleUser::create([
+                        'role_id' => $roleNormal->id,
+                        'user_id' => $newUser->id
+                    ]);
                 }
 
                 toast('Register success!', 'success', 'top-left');
