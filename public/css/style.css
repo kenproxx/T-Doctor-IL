@@ -807,16 +807,16 @@ span.material-symbols-outlined {
     margin-right: 26px;
 }
 /*info-doc*/
-#show_inf #inf-doctor #about #dess{
+#show_inf #inf-doctor #about .dess{
     margin-top: 24px;
     display: flex;
 }
-#show_inf #inf-doctor #about #dess p{
+#show_inf #inf-doctor #about .dess p{
     color:#929292;
     font-size: 24px;
     font-weight: 400;
 }
-#show_inf #inf-doctor #about #dess span{
+#show_inf #inf-doctor #about .dess span{
     color: #000;
     font-size: 24px;
     font-weight: 800;

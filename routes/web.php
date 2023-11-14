@@ -58,7 +58,7 @@ Route::group(['prefix' => 'recruitment'], function () {
 });
 Route::group(['prefix' => 'examination'], function () {
     Route::get('/index', [ExaminationController::class, 'index'])->name('examination.index');
-    Route::get('/doctor-info', [ExaminationController::class, 'infoDoctor'])->name('examination.doctor_info');
+    Route::get('/doctor-info/{id}', [ExaminationController::class, 'infoDoctor'])->name('examination.doctor_info');
     Route::get('/best-doctor', [ExaminationController::class, 'bestDoctor'])->name('examination.best_doctor');
     Route::get('/new-doctor', [ExaminationController::class, 'newDoctor'])->name('examination.new_doctor');
     Route::get('/available-doctor', [ExaminationController::class, 'availableDoctor'])->name('examination.available_doctor');
@@ -132,7 +132,7 @@ Route::group(['middleware' => ['medical']], function () {
 
 // QrCode
 Route::group(['prefix' => 'qr-code'], function () {
-    Route::get('/doctor-info', [DoctorInfoController::class, 'showFromQrCode'])->name('qr.code.show.doctor.info');
+    Route::get('/doctor-info/{id}', [DoctorInfoController::class, 'showFromQrCode'])->name('qr.code.show.doctor.info');
 });
 
 /* List Api*/
