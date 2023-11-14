@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\SocialUser;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Exception;
 
 class SocialUserApi extends Controller
 {
@@ -53,53 +55,7 @@ class SocialUserApi extends Controller
                 return response()->json($socialUser);
             }
             return response('Create error', 400);
-        } catch (\Exception $exception) {
-            return response($exception, 400);
-        }
-    }
-
-    public function update(Request $request, $id)
-    {
-        try {
-            $socialUser = SocialUser::find($id);
-            if (!$socialUser || $socialUser->status != SocialUserStatus::ACTIVE) {
-                return response('Not found', 404);
-            }
-
-            $userID = $request->input('user_id');
-            $user = User::find($userID);
-            if (!$user) {
-                return response('User not found', 404);
-            }
-
-            $socialUser = $this->processSave($socialUser, $request);
-
-            $success = $socialUser->save();
-            if ($success) {
-                return response()->json($socialUser);
-            }
-            return response('Update error', 400);
-        } catch (\Exception $exception) {
-            return response($exception, 400);
-        }
-    }
-
-    public function delete($id)
-    {
-        try {
-            $socialUser = SocialUser::find($id);
-            if (!$socialUser || $socialUser->status != SocialUserStatus::ACTIVE) {
-                return response('Not found', 404);
-            }
-
-            $socialUser->status = SocialUserStatus::DELETED;
-
-            $success = $socialUser->save();
-            if ($success) {
-                return response()->json($socialUser);
-            }
-            return response('Delete error', 400);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response($exception, 400);
         }
     }
@@ -123,5 +79,71 @@ class SocialUserApi extends Controller
         $socialUser->status = SocialUserStatus::ACTIVE;
 
         return $socialUser;
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $socialUser = SocialUser::find($id);
+            if (!$socialUser || $socialUser->status != SocialUserStatus::ACTIVE) {
+                return response('Not found', 404);
+            }
+
+            $userID = $request->input('user_id');
+            $user = User::find($userID);
+            if (!$user) {
+                return response('User not found', 404);
+            }
+
+            $socialUser = $this->processSave($socialUser, $request);
+
+            $success = $socialUser->save();
+            if ($success) {
+                return response()->json($socialUser);
+            }
+            return response('Update error', 400);
+        } catch (Exception $exception) {
+            return response($exception, 400);
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+            $socialUser = SocialUser::find($id);
+            if (!$socialUser || $socialUser->status != SocialUserStatus::ACTIVE) {
+                return response('Not found', 404);
+            }
+
+            $socialUser->status = SocialUserStatus::DELETED;
+
+            $success = $socialUser->save();
+            if ($success) {
+                return response()->json($socialUser);
+            }
+            return response('Delete error', 400);
+        } catch (Exception $exception) {
+            return response($exception, 400);
+        }
+    }
+
+    public function createOrEdit(Request $request)
+    {
+        try {
+            $socialUser = SocialUser::where('user_id', Auth::user()->id)->first();
+            if (!$socialUser || $socialUser->status != SocialUserStatus::ACTIVE) {
+                $socialUser = new SocialUser();
+            }
+
+            $socialUser = $this->processSave($socialUser, $request);
+
+            $success = $socialUser->save();
+            if ($success) {
+                return response()->json($socialUser);
+            }
+            return response('Update error', 400);
+        } catch (Exception $exception) {
+            return response($exception, 400);
+        }
     }
 }

@@ -1,6 +1,12 @@
 @extends('layouts.admin')
 
 @section('main-content')
+
+    <style>
+        .w-icon-px {
+            width: 14px;
+        }
+    </style>
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('Profile') }}</h1>
 
@@ -64,6 +70,52 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <form>
+                        <div class="input-group mb-3" >
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-facebook w-icon-px"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="facebook" name="facebook" value="{{ $socialUser->facebook ?? '' }}">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-tiktok w-icon-px"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="tiktok" name="tiktok" value="{{ $socialUser->tiktok ?? '' }}">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-instagram"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="instagram" name="instagram" value="{{ $socialUser->instagram ?? '' }}">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-google"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="google_review" name="google_review" value="{{ $socialUser->google_review ?? '' }}">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-youtube w-icon-px"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="youtube" name="youtube" value="{{ $socialUser->youtube ?? '' }}">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-otter w-icon-px"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="other" name="other" value="{{ $socialUser->other ?? '' }}">
+                        </div>
+
+                        <input type="hidden" id="user_id" name="user_id" value="{{ \Illuminate\Support\Facades\Auth::user()->id }}">
+                        <button type="button" class="btn btn-primary" onclick="submitForm()">Submit</button>
+                    </form>
                 </div>
             </div>
 
@@ -215,5 +267,48 @@
         </div>
 
     </div>
+
+    <script>
+        function submitForm() {
+            loadingMasterPage();
+            const token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
+            const headers = {
+                'Authorization': `Bearer ${token}`
+            };
+            const formData = new FormData();
+
+            const arrField = ['facebook', 'tiktok', 'instagram', 'google_review', 'youtube', 'other', 'user_id'];
+
+            arrField.forEach((field) => {
+                formData.append(field, $(`#${field}`).val().trim());
+            });
+            formData.append('_token', '{{ csrf_token() }}');
+
+            try {
+                $.ajax({
+                    url: `{{route('user.social.update')}}`,
+                    method: 'POST',
+                    headers: headers,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    data: formData,
+                    success: function () {
+                        loadingMasterPage();
+                        alert('Update success');
+                        window.location.reload();
+                    },
+                    error: function (exception) {
+                        alert(exception.responseText);
+                        loadingMasterPage();
+                    }
+                });
+            } catch (error) {
+                loadingMasterPage();
+                throw error;
+            }
+
+        }
+    </script>
 
 @endsection
