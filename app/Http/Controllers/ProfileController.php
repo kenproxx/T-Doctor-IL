@@ -19,7 +19,7 @@ class ProfileController extends Controller
 
     public function index()
     {
-        $roles = Role::where('name', \App\Enums\Role::ADMIN)->get();
+        $roles = Role::where('name', '!=',\App\Enums\Role::ADMIN)->get();
         $roleUser = DB::table('role_users')->where('user_id', Auth::user()->id)->first();
         $roleItem = Role::find($roleUser->role_id);
         $isAdmin = (new MainController())->checkAdmin();
@@ -38,7 +38,6 @@ class ProfileController extends Controller
             'phone' => 'required|string|max:255',
 
             'address_code' => 'required|string|max:255',
-            'member' => 'required|string|max:255',
 
             'current_password' => 'nullable|required_with:new_password',
             'new_password' => 'nullable|min:6|max:12|required_with:current_password',
@@ -66,7 +65,6 @@ class ProfileController extends Controller
         $user->phone = $request->input('phone');
 
         $user->address_code = $request->input('address_code');
-        $user->member = $request->input('member');
 
         if (!is_null($request->input('current_password'))) {
             if (Hash::check($request->input('current_password'), $user->password)) {
