@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\SocialUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +23,8 @@ class ProfileController extends Controller
         $roleUser = DB::table('role_users')->where('user_id', Auth::user()->id)->first();
         $roleItem = Role::find($roleUser->role_id);
         $isAdmin = (new MainController())->checkAdmin();
-        return view('profile', compact('roles', 'roleItem', 'isAdmin'));
+        $socialUser = SocialUser::where('user_id', Auth::user()->id)->first();
+        return view('profile', compact('roles', 'roleItem', 'isAdmin', 'socialUser'));
     }
 
     public function update(Request $request)
