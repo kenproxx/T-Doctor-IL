@@ -80,7 +80,11 @@ class ClinicController extends Controller
             $checkIn = $request->input('check_in');
             $checkOut = $request->input('check_out');
             $service = $request->input('service');
-            $servicesAsString = implode(',', $service);
+            if (is_array($service)) {
+                $servicesAsString = implode(',', $service);
+            } else {
+                $servicesAsString = $service;
+            }
             $time = $request->input('selectedTime');
             $timestamp = Carbon::parse($time);
             $booking = new Booking();
