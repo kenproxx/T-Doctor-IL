@@ -117,43 +117,43 @@ a {
     left: 200px;
     top: 20px;
 }
-#list-doctor .card{
+.list-doctor .card{
     padding: 16px;
     margin-left: 31px;
     width: 237px;
     border-radius: 16px;
     margin-bottom: 30px;
 }
-#list-doctor .card:hover{
+.list-doctor .card:hover{
     border-radius: 16px;
     border: 1px solid  #45C3D2;
     background: white;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
-#list-doctor .card .card-body a h5{
+.list-doctor .card .card-body a h5{
     margin-bottom: 0;
     color: black;
 }
-#list-doctor .card .card-body p{
+.list-doctor .card .card-body p{
     margin-bottom: 0;
 }
-#list-doctor .card-body .card-title{
+.list-doctor .card-body .card-title{
     text-align: left;
     font-size: 18px;
     font-weight: 800;
 }
-#list-doctor .card-body .card-text{
+.list-doctor .card-body .card-text{
     font-size: 16px;
     font-weight: 400;
     text-align: left;
 }
-#list-doctor .card-body .card-text_1{
+.list-doctor .card-body .card-text_1{
     font-size: 16px;
     font-weight: 400;
     color: #929292;
     text-align: left;
 }
-#list-doctor .card-body .card-text_1 b{
+.list-doctor .card-body .card-text_1 b{
     color: black;
 
 }
@@ -410,7 +410,7 @@ flea__item{
     height: 42px;
     text-align: center;
 }
-#doctor-information #list-doctor .card .card-body{
+#doctor-information .list-doctor .card .card-body{
     padding: 0;
     margin-top: 12px;
 }
@@ -772,35 +772,35 @@ span.material-symbols-outlined {
     background: #F3F3F3;
 }
 /*examination scene*/
-#list-title{
+.list-title{
     width: 1170px;
     height: 60px;
     border-bottom: 1px solid #D6D6D6;
     margin-bottom: 24px;
 }
-#list-title .list--doctor{
+.list-title .list--doctor{
     margin-right: auto;
 }
-#list-title .list--doctor p{
+.list-title .list--doctor p{
     font-size: 32px;
     font-weight: 800;
 }
-#examination-scene #list-title .p-2{
+#examination-scene .list-title .p-2{
     padding:0 30px 0 0;
 }
-#examination-scene #list-title .p-2 a{
+#examination-scene .list-title .p-2 a{
     font-size: 18px;
     font-weight: 600;
     color: black;
     margin: 30px;
 }
 /*end examination scene*/
-#title #list-title .list--doctor .back p{
+#title .list-title .list--doctor .back p{
     font-size: 32px;
     font-weight: 800;
     color: black;
 }
-#title #list-title .list--doctor .back p i{
+#title .list-title .list--doctor .back p i{
     font-size: 32px;
     font-weight: 800;
     color: black;

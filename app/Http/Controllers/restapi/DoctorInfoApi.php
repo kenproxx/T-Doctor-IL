@@ -11,7 +11,12 @@ class DoctorInfoApi extends Controller
 {
     public function getAll(Request $request)
     {
-        $doctorInfos = DoctorInfo::where('status', DoctorInfoStatus::ACTIVE)->get();
+        $size = $request->input('size');
+        if ($size && $size > 0 && is_numeric($size)) {
+            $doctorInfos = DoctorInfo::where('status', DoctorInfoStatus::ACTIVE)->orderBy('id', 'DESC')->limit($size)->get();
+        } else {
+            $doctorInfos = DoctorInfo::where('status', DoctorInfoStatus::ACTIVE)->orderBy('id', 'DESC')->get();
+        }
         return response()->json($doctorInfos);
     }
 
