@@ -40,7 +40,7 @@ class BackendCouponController extends Controller
             } else {
                 $clinic_id = Clinic::where('user_id', Auth::user()->id)->pluck('id');
             }
-            $coupons = Coupon::where('clinic_id', $clinic_id)->get();
+            $coupons = Coupon::whereIn('clinic_id', $clinic_id)->get();
         }
 
         return response()->json($coupons);
