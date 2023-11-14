@@ -23,6 +23,8 @@
                     <div class="dropdown-menu">
                         @if( (new \App\Http\Middleware\MedicalPermission())->isMedicalPermission())
                         <a class="dropdown-item" href="{{ route('homeAdmin') }}">Dashboard</a>
+                        @else
+                        <a class="dropdown-item" href="{{ route('profile') }}">Trang cá nhân</a>
                         @endif
                         <a class="dropdown-item" href="{{route('logoutProcess')}}">Logout</a>
                     </div>
