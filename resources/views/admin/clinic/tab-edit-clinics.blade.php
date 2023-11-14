@@ -67,7 +67,7 @@
             </div>
             <div>
                 <label>gallery</label>
-                <input type="file" class="form-control" id="gallery" name="gallery" >
+                <input type="file" class="form-control" id="gallery" name="gallery" multiple>
                 @php
                     $galleryArray = explode(',', $clinics->gallery);
                 @endphp

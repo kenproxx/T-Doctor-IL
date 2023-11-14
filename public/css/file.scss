@@ -1063,7 +1063,12 @@ section {
 .ui-datepicker-calendar tbody tr td .ui-state-default {
     border: none;
     font-size: 12px;
-    font-weight: 800;        }
+    font-weight: 800;
+    color: var(--Black, #000);
+    text-align: center;
+    font-style: normal;
+    line-height: normal;
+}
 
 @media only screen and (max-width: 639px) {
     .flex-container {
