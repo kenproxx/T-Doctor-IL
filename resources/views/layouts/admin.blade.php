@@ -33,17 +33,26 @@
     //lấy ra toàn bộ role của user hiện tại
     $roles = RoleUser::where('user_id', Auth::user()->id)->pluck('role_id')->toArray();
     $isStaff = false;
+    $isNormal = false;
     foreach ($roles as $role){
         $roleNames = Role::where('id', $role)->pluck('name');
-
+            if ($roleNames->contains('PAITENTS')
+                    || $roleNames->contains('NORMAL PEOPLE')
+            ){
+                $isNormal = true;
+                break;
+            }
             if ($roleNames->contains('DOCTORS')
                     || $roleNames->contains('PHAMACISTS')
                     || $roleNames->contains('THERAPISTS')
                     || $roleNames->contains('ESTHETICIANS')
-                    || $roleNames->contains('NURSES') ){
+                    || $roleNames->contains('NURSES')
+                    || $roleNames->contains('NURSES')
+                    ){
                     $isStaff = true;
                     break;
             }
+
     }
 @endphp
 <body id="page-top">
@@ -64,80 +73,86 @@
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
-        <!-- Nav Item - Dashboard -->
-        <li class="nav-item {{ Nav::isRoute('homeAdmin') }}">
-            <a class="nav-link" href="{{ route('homeAdmin') }}">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>{{ __('Dashboard') }}</span></a>
-        </li>
-        <!-- Nav Item - List Products -->
-        <li class="nav-item {{ Nav::isRoute('homeAdmin.list.product') }}">
-            <a class="nav-link" href="{{ route('homeAdmin.list.product') }}">
-                <i class="fa-regular fa-rectangle-list"></i>
-                <span>{{ __('Selling/Buying') }}</span></a>
-        </li>
+        @if(!$isNormal)
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item {{ Nav::isRoute('homeAdmin') }}">
+                <a class="nav-link" href="{{ route('homeAdmin') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>{{ __('Dashboard') }}</span></a>
+            </li>
+            <!-- Nav Item - List Products -->
+            <li class="nav-item {{ Nav::isRoute('homeAdmin.list.product') }}">
+                <a class="nav-link" href="{{ route('homeAdmin.list.product') }}">
+                    <i class="fa-regular fa-rectangle-list"></i>
+                    <span>{{ __('Selling/Buying') }}</span></a>
+            </li>
 
-        @if(!$isStaff)
-        <!-- Nav Item - List Clinics -->
-        <li class="nav-item {{ Nav::isRoute('homeAdmin.list.clinics') }}">
-            <a class="nav-link" href="{{ route('homeAdmin.list.clinics') }}">
-                <i class="fa-solid fa-house-chimney-medical"></i>
-                <span>{{ __('List Clinics') }}</span></a>
-        </li>
-        <!-- Nav Item - List Coupon -->
-        <li class="nav-item {{ Nav::isRoute('homeAdmin.list.coupons') }}">
-            <a class="nav-link" href="{{ route('homeAdmin.list.coupons') }}">
-                <i class="fa-solid fa-house-chimney-medical"></i>
-                <span>List Coupon</span></a>
-        </li>
-        <!-- Nav Item - List Doctor -->
-        <li class="nav-item {{ Nav::isRoute('homeAdmin.list.doctors') }}">
-            <a class="nav-link" href="{{ route('homeAdmin.list.doctors') }}">
-                <i class="fa-solid fa-user-doctor"></i>
-                <span>Examination</span></a>
-        </li>
-        <li class="nav-item {{ Nav::isRoute('homeAdmin.list.staff') }}">
-            <a class="nav-link" href="{{ route('homeAdmin.list.staff') }}">
-                <i class="fa-solid fa-user-doctor"></i>
-                <span>Nhân viên</span></a>
-        </li>
-            <li class="nav-item {{ Nav::isRoute('homeAdmin.list.config') }}">
-            <a class="nav-link" href="{{ route('homeAdmin.list.config') }}">
-                <i class="fa-solid fa-user-doctor"></i>
-                <span>Cấu hình chung</span></a>
-        @endif
+            @if(!$isStaff)
+                <!-- Nav Item - List Clinics -->
+                <li class="nav-item {{ Nav::isRoute('homeAdmin.list.clinics') }}">
+                    <a class="nav-link" href="{{ route('homeAdmin.list.clinics') }}">
+                        <i class="fa-solid fa-house-chimney-medical"></i>
+                        <span>{{ __('List Clinics') }}</span></a>
+                </li>
+                <!-- Nav Item - List Coupon -->
+                <li class="nav-item {{ Nav::isRoute('homeAdmin.list.coupons') }}">
+                    <a class="nav-link" href="{{ route('homeAdmin.list.coupons') }}">
+                        <i class="fa-solid fa-house-chimney-medical"></i>
+                        <span>List Coupon</span></a>
+                </li>
+                <li class="nav-item {{ Nav::isRoute('homeAdmin.list.coupons') }}">
+                    <a class="nav-link" href="{{ route('homeAdmin.list.coupons') }}">
+                        <i class="fa-solid fa-house-chimney-medical"></i>
+                        <span>Apply Coupon Manager</span></a>
+                </li>
+                <!-- Nav Item - List Doctor -->
+                <li class="nav-item {{ Nav::isRoute('homeAdmin.list.doctors') }}">
+                    <a class="nav-link" href="{{ route('homeAdmin.list.doctors') }}">
+                        <i class="fa-solid fa-user-doctor"></i>
+                        <span>Examination</span></a>
+                </li>
+                <li class="nav-item {{ Nav::isRoute('homeAdmin.list.staff') }}">
+                    <a class="nav-link" href="{{ route('homeAdmin.list.staff') }}">
+                        <i class="fa-solid fa-user-doctor"></i>
+                        <span>Nhân viên</span></a>
+                </li>
+                <li class="nav-item {{ Nav::isRoute('homeAdmin.list.config') }}">
+                    <a class="nav-link" href="{{ route('homeAdmin.list.config') }}">
+                        <i class="fa-solid fa-user-doctor"></i>
+                        <span>Cấu hình chung</span></a>
+                    @endif
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+                    @endif
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        {{ __('Settings') }}
+                    </div>
 
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            {{ __('Settings') }}
-        </div>
+                    <!-- Nav Item - Profile -->
+                <li class="nav-item {{ Nav::isRoute('profile') }}">
+                    <a class="nav-link" href="{{ route('profile') }}">
+                        <i class="fas fa-fw fa-user"></i>
+                        <span>{{ __('Profile') }}</span>
+                    </a>
+                </li>
 
-        <!-- Nav Item - Profile -->
-        <li class="nav-item {{ Nav::isRoute('profile') }}">
-            <a class="nav-link" href="{{ route('profile') }}">
-                <i class="fas fa-fw fa-user"></i>
-                <span>{{ __('Profile') }}</span>
-            </a>
-        </li>
+                <!-- Nav Item - About -->
+                <li class="nav-item {{ Nav::isRoute('about') }}">
+                    <a class="nav-link" href="{{ route('about') }}">
+                        <i class="fas fa-fw fa-hands-helping"></i>
+                        <span>{{ __('About') }}</span>
+                    </a>
+                </li>
 
-        <!-- Nav Item - About -->
-        <li class="nav-item {{ Nav::isRoute('about') }}">
-            <a class="nav-link" href="{{ route('about') }}">
-                <i class="fas fa-fw fa-hands-helping"></i>
-                <span>{{ __('About') }}</span>
-            </a>
-        </li>
+                <!-- Divider -->
+                <hr class="sidebar-divider d-none d-md-block">
 
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
-
-        <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>
+                <!-- Sidebar Toggler (Sidebar) -->
+                <div class="text-center d-none d-md-inline">
+                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                </div>
 
     </ul>
     <!-- End of Sidebar -->
