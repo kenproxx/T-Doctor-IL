@@ -9,6 +9,7 @@ use App\Http\Controllers\MailController;
 use App\Models\Coupon;
 use App\Models\CouponApply;
 use App\Models\SocialUser;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -66,7 +67,7 @@ class BackendCouponApplyController extends Controller
             }
             // kiểm tra name, email, phone, content not null
             if (!$name || !$email || !$phone || !$content) {
-                return response('Nhập thiếu thông tin rồi má', 400);
+                return response('Nhập thiếu thông tin rồi', 400);
             }
 
             $link = SocialUser::where('user_id', $user_id)->first($sns_option);
@@ -215,8 +216,8 @@ class BackendCouponApplyController extends Controller
         if ($status == CouponApplyStatus::REWARDED) {
             if ($couponApply->status == CouponApplyStatus::VALID) {
                 $couponApply->status = CouponApplyStatus::REWARDED;
-            }
-            else {
+                $this->sendMailWhenReward($couponApply);
+            } else {
                 return response('Không thể trao giải cho bài không hợp lệ', 400);
             }
         } else {
@@ -224,6 +225,32 @@ class BackendCouponApplyController extends Controller
         }
         $couponApply->save();
         return response('Thay đổi thành công', 200);
+    }
+
+    public function sendMailWhenReward($couponApply)
+    {
+        $coupon = Coupon::where('id', $couponApply->coupon_id)->first();
+        $donViPhatHanh = $coupon->user_id;
+
+        $emailNguoiDungApply = $couponApply->email ?? '';
+        $emailDonViPhatHanh = User::where('id', $donViPhatHanh)->first()->email ?? '';
+        $emailAdmin = '';
+
+        $emailFrom = 'support.il.vietnam@gmail.com';
+        $title = 'Thông báo trúng thưởng';
+        $content = 'Chúc mừng bạn đã trúng thưởng';
+
+        $listEmail = [];
+        array_push($listEmail, $emailNguoiDungApply);
+        array_push($listEmail, $emailDonViPhatHanh);
+        array_push($listEmail, $emailAdmin);
+
+        $mailController = new MailController();
+        foreach ($listEmail as $email) {
+            if ($email) {
+                $mailController->sendEmail($email, $emailFrom, $title, $content);
+            }
+        }
     }
 
 }
