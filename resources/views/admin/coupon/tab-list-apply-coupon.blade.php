@@ -68,6 +68,7 @@
             if (!result) {
                 return;
             }
+            loadingMasterPage();
             let url = '{{ route('api.backend.coupons-apply.update-status') }}';
             const headers = {
                 'Authorization': `Bearer ${token}`
@@ -87,15 +88,17 @@
                     processData: false,
                     data: formData,
                     success: function (data) {
-                        console.log(data)
                         alert(data);
+                        loadingMasterPage();
                         window.location.reload();
                     },
                     error: function (exception) {
                         alert(exception.responseText);
+                        loadingMasterPage();
                     }
                 });
             } catch (error) {
+                loadingMasterPage();
             }
         }
     </script>
