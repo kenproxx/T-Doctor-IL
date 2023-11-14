@@ -6,6 +6,7 @@ use App\Enums\QuestionStatus;
 use App\Enums\SearchMentoring;
 use App\Models\Answer;
 use App\Models\CalcViewQuestion;
+use App\Models\DoctorInfo;
 use App\Models\Question;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -19,11 +20,12 @@ class ExaminationController extends Controller
         return view('examination.index');
     }
 
-    public function infoDoctor()
+    public function infoDoctor($id)
     {
-        $url = route('qr.code.show.doctor.info');
+        $url = route('qr.code.show.doctor.info', $id);
         $qrCodes = QrCode::size(300)->generate($url);
-        return view('examination.infodoctor', compact('qrCodes'));
+        $doctor = DoctorInfo::find($id);
+        return view('examination.infodoctor', compact('qrCodes', 'doctor'));
     }
 
     public function bestDoctor()
