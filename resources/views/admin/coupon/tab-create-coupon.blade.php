@@ -193,13 +193,9 @@
             <div class="col-sm-6"><label>Số lượng đký tối đa</label>
                 <input type="number" class="form-control" id="max_register" name="max_register">
             </div>
-            <div class="col-sm-6"><label>Trạng thái</label>
-                <select class="custom-select" id="status" name="status">
-                    <option value="{{ CouponStatus::ACTIVE }}">{{ CouponStatus::ACTIVE }}</option>
-                    <option
-                        value="{{ CouponStatus::INACTIVE }}">{{ CouponStatus::INACTIVE }}</option>
-                    <option
-                        value="{{ CouponStatus::DELETED }}">{{ CouponStatus::DELETED }}</option>
+            <div class="col-sm-6"><label>Đơn vị áp dụng</label>
+                <select class="custom-select" id="clinic_id">
+                    <option selected>Choose...</option>
                 </select>
             </div>
         </div>
@@ -214,11 +210,6 @@
                         </label>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-6"><label>Đơn vị áp dụng</label>
-                <select class="custom-select" id="clinic_id">
-                    <option selected>Choose...</option>
-                </select>
             </div>
         </div>
 
@@ -266,7 +257,7 @@
                         data: formData,
                         success: function () {
                             alert('success');
-                            window.location.href = '/admin/home/list-coupon'
+                            window.location.href = '{{ route('homeAdmin.list.coupons') }}'
                         },
                         error: function (exception) {
                             console.log(exception)

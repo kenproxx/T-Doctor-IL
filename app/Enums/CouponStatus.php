@@ -9,4 +9,5 @@ final class CouponStatus extends Enum
     const ACTIVE = 'ACTIVE';
     const INACTIVE = 'INACTIVE';
     const DELETED = 'DELETED';
+    const PENDING = 'PENDING';
 }
