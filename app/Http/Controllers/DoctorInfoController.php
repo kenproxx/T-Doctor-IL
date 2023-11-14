@@ -19,7 +19,7 @@ class DoctorInfoController extends Controller
     {
         $coupon = DoctorInfo::find($id);
         if (!$coupon || $coupon->status != DoctorInfoStatus::ACTIVE) {
-            return response("coupon not found", 404);
+            return response("doctor not found", 404);
         }
         return response()->json($coupon, $id);
     }

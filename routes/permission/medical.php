@@ -20,6 +20,7 @@ use App\Http\Controllers\QuestionLikesController;
 use App\Http\Controllers\restapi\admin\AdminDoctorInfoApi;
 use App\Http\Controllers\restapi\admin\AdminPharmacyApi;
 use App\Http\Controllers\restapi\UserApi;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 
@@ -203,6 +204,12 @@ Route::group(['prefix' => 'doctors-info'], function () {
 //    Route::post('change/{questionId}/{userId}', [QuestionLikesController::class, 'changeEmotion'])->name('api.backend.question-like.change');
 //});
 
+Route::group(['prefix' => 'settings'], function () {
+    Route::get('/list', [SettingController::class, 'getAll'])->name('api.backend.setting.list');
+    Route::get('/create', [SettingController::class, 'createView'])->name('setting.create');
+    Route::post('/creat', [SettingController::class, 'create'])->name('api.backend.setting.create');
+
+});
 
 
 
