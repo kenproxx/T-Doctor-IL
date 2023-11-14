@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\BackendCouponApplyController;
+use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\restapi\SocialUserApi;
 use App\Http\Controllers\restapi\UserApi;
 use Illuminate\Support\Facades\Route;
@@ -26,4 +27,11 @@ Route::group(['prefix' => 'coupons-apply'], function () {
     Route::delete('/delete/{id}', [BackendCouponApplyController::class, 'delete'])->name('api.backend.coupons-apply.delete');
 
     Route::post('change-status', [BackendCouponApplyController::class, 'updateStatus'])->name('api.backend.coupons-apply.update-status');
+});
+
+Route::group(['prefix' => 'coupons'], function () {
+    Route::get('/list', [BackendCouponController::class, 'getAll'])->name('api.backend.coupons.list');
+    Route::post('/create', [BackendCouponController::class, 'create'])->name('api.backend.coupons.create');
+    Route::post('/update/{id}', [BackendCouponController::class, 'update'])->name('api.backend.coupons.update');
+    Route::delete('/delete/{id}', [BackendCouponController::class, 'delete'])->name('api.backend.coupons.delete');
 });

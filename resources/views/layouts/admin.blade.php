@@ -117,6 +117,12 @@
                     <span>{{ __('Selling/Buying') }}</span></a>
             </li>
 
+            <!-- Nav Item - List Coupon -->
+            <li class="nav-item {{ Nav::isRoute('homeAdmin.list.coupons') }}">
+                <a class="nav-link" href="{{ route('homeAdmin.list.coupons') }}">
+                    <i class="fa-solid fa-house-chimney-medical"></i>
+                    <span>List Coupon</span></a>
+            </li>
             @if(!$isStaff)
                 <!-- Nav Item - List Clinics -->
                 <li class="nav-item {{ Nav::isRoute('homeAdmin.list.clinics') }}">
@@ -124,12 +130,7 @@
                         <i class="fa-solid fa-house-chimney-medical"></i>
                         <span>{{ __('List Clinics') }}</span></a>
                 </li>
-                <!-- Nav Item - List Coupon -->
-                <li class="nav-item {{ Nav::isRoute('homeAdmin.list.coupons') }}">
-                    <a class="nav-link" href="{{ route('homeAdmin.list.coupons') }}">
-                        <i class="fa-solid fa-house-chimney-medical"></i>
-                        <span>List Coupon</span></a>
-                </li>
+
                 <!-- Nav Item - List Doctor -->
                 <li class="nav-item {{ Nav::isRoute('homeAdmin.list.doctors') }}">
                     <a class="nav-link" href="{{ route('homeAdmin.list.doctors') }}">

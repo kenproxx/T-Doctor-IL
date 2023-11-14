@@ -112,11 +112,6 @@ Route::group(['prefix' => 'categories'], function () {
     Route::delete('/delete/{id}', [BackendCategoryController::class, 'delete'])->name('api.backend.categories.delete');
 });
 
-Route::group(['prefix' => 'coupons'], function () {
-    Route::get('/list', [BackendCouponController::class, 'getAll'])->name('api.backend.coupons.list');
-    Route::post('/create', [BackendCouponController::class, 'create'])->name('api.backend.coupons.create');
-    Route::post('/update/{id}', [BackendCouponController::class, 'update'])->name('api.backend.coupons.update');
-    Route::delete('/delete/{id}', [BackendCouponController::class, 'delete'])->name('api.backend.coupons.delete');
-});
+
 
 

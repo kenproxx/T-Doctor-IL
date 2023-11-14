@@ -182,11 +182,16 @@
                 <input type="datetime-local" class="form-control" id="endDate" name="endDate" value="{{ $coupon->endDate }}"></div>
         </div>
         <div class="row">
-            <div class="col-sm-6"><label>Số lượng đký tối đa</label>
+            <div class="col-sm-4"><label>Số lượng đký tối đa</label>
                 <input type="number" class="form-control" id="max_register" name="max_register" value="{{ $coupon->max_register }}">
             </div>
-            <div class="col-sm-6"><label>Trạng thái</label>
-                <select class="custom-select" id="status" name="status">
+            <div class="col-sm-4"><label>Đơn vị áp dụng</label>
+                <select class="custom-select" id="clinic_id">
+                    <option selected>Choose...</option>
+                </select>
+            </div>
+            <div class="col-sm-4"><label>Trạng thái</label>
+                <select class="custom-select" id="status" name="status" {{ !$isAdmin ? 'disabled' : '' }}>
                     <option value="{{ \App\Enums\CouponStatus::ACTIVE }}" {{ $coupon->status === \App\Enums\CouponStatus::ACTIVE ? 'selected' : '' }}>
                         {{ \App\Enums\CouponStatus::ACTIVE }}
                     </option>
@@ -195,6 +200,9 @@
                     </option>
                     <option value="{{ \App\Enums\CouponStatus::DELETED }}" {{ $coupon->status === \App\Enums\CouponStatus::DELETED ? 'selected' : '' }}>
                         {{ \App\Enums\CouponStatus::DELETED }}
+                    </option>
+                    <option value="{{ \App\Enums\CouponStatus::PENDING }}" {{ $coupon->status === \App\Enums\CouponStatus::PENDING ? 'selected' : '' }}>
+                        {{ \App\Enums\CouponStatus::PENDING }}
                     </option>
                 </select>
 
@@ -228,7 +236,7 @@
 
                 const fieldNames = [
                     "title", "title_en", "title_laos", "startDate", "endDate",
-                    "max_register", "status"
+                    "max_register", "status", "clinic_id"
                 ];
 
                 const fieldTextareaTiny = [
@@ -258,7 +266,7 @@
                         data: formData,
                         success: function () {
                             alert('success');
-                            window.location.href = '/admin/home/list-coupon';
+                            window.location.href = '{{ route('homeAdmin.list.coupons') }}';
                         },
                         error: function (exception) {
                             console.log(exception);
@@ -269,6 +277,27 @@
                 }
             })
         })
+
+        genSelectOption();
+
+        async function genSelectOption() {
+            const token = `{{ $_COOKIE['accessToken'] }}`;
+            const headers = {
+                'Authorization': `Bearer ${token}`
+            };
+            let response = await fetch(`{{route('api.backend.clinics.all-clinic-active')}}`, {
+                method: 'GET',
+                headers: headers,
+            });
+            let html = '';
+            if (response.ok) {
+                const data = await response.json();
+                data.forEach(item => {
+                    html += `<option value="${item.id}">${item.name}</option>`
+                })
+                $('#clinic_id').html(html);
+            }
+        }
     </script>
 
     <script>
