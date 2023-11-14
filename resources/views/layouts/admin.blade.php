@@ -130,11 +130,6 @@
                         <i class="fa-solid fa-house-chimney-medical"></i>
                         <span>List Coupon</span></a>
                 </li>
-                <li class="nav-item {{ Nav::isRoute('homeAdmin.list.coupons') }}">
-                    <a class="nav-link" href="{{ route('homeAdmin.list.coupons') }}">
-                        <i class="fa-solid fa-house-chimney-medical"></i>
-                        <span>Apply Coupon Manager</span></a>
-                </li>
                 <!-- Nav Item - List Doctor -->
                 <li class="nav-item {{ Nav::isRoute('homeAdmin.list.doctors') }}">
                     <a class="nav-link" href="{{ route('homeAdmin.list.doctors') }}">
