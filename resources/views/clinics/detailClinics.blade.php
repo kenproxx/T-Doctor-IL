@@ -91,7 +91,11 @@
                         <div class="tab-pane fade show active" id="infoPanel" role="tabpanel">
                             <div class="form-group">
                                 <div>
-                                    <img src="{{$bookings->gallery}}" alt="img">
+                                    @php
+                                        $str = $bookings->gallery;
+                                        $parts = explode(',', $str);
+                                    @endphp
+                                    <img src="{{$parts[0]}}" alt="img">
                                 </div>
                                 <div class="d-flex justify-content-between mt-md-2">
                                     <div class="fs-18px">{{$bookings->name}}</div>
@@ -312,8 +316,7 @@
                                     <input id="user_id" name="user_id" value="{{ Auth::user()->id }}">
                                 </div>
 
-                                <button class="btn btn-primary btn-block up-date-button" id="activate">Activate this
-                                    Campaign!
+                                <button class="btn btn-primary btn-block up-date-button" id="activate">Apply
                                 </button>
                             </form>
                         </div>
