@@ -39,15 +39,18 @@
         }
 
         .background-map {
-            background: url("{{asset('img/svg/map.png')}}") no-repeat center ;
+            background: url("{{asset('img/svg/map.png')}}") no-repeat ;
             overflow: hidden !important;
-            height: 1000px;
+            min-height: 1000px;
+            width: 100%;
+            height: 100%;
         }
 
         .background-modal {
             background: #FFFFFF;
-            max-height: 100vh;
+            max-height: 820px;
             overflow-y: scroll;
+            margin: 20px;
         }
 
         ::-webkit-scrollbar {
