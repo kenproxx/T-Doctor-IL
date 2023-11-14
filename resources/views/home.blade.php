@@ -777,8 +777,8 @@
         <img src="{{asset('img/Rectangle 23815.png')}}" alt="" style="">
     </div>
     <div id="flea_market_board" class="d-flex justify-content-center">
-        <div id="content-bkg" class="content-item d-flex justify-content-center ">
-            <div id="flea-market" class="p-2 w-100">
+        <div id="content-bkg" class="col-10 content-item d-flex justify-content-center ">
+            <div id="flea-market" class="col-8 p-2 w-100">
                 <h2>Flea market</h2>
                 <p>Hire staffs cheaper, find your staffs faster</p>
                 <div class="section1-content">

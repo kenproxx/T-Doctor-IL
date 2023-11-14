@@ -11,9 +11,9 @@
                 <div class="filter_option"><p>Location <i class="bi bi-chevron-expand"></i></p></div>
                 <div class="filter_option"><p>Experience <i class="bi bi-chevron-expand"></i></p></div>
             </div>
-            <div class="filter_search flex-fill">
-                <label for="filter_search"><i class="bi bi-search"></i></label>
-                <input type="text" name="filter_search" id="filter_search" placeholder="Search for anything.....">
+            <div class="filter_search flex-fill d-flex align-content-center p-0" style="background-color: #F3F3F3!important;">
+                <button style="background-color: #F3F3F3;color: #000"><i class="bi bi-search" style="font-size: 25px; font-weight: 600"></i></button>
+                <input  style="border: " type="text" name="filter_search" id="filter_search" placeholder="Search for anything.....">
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    <div id="list-doctor" class="d-flex justify-content-center container">
+    <div id="list-doctor" class="d-flex  container">
         <div class="card" >
                 <i class="bi bi-heart"></i>
                 <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
