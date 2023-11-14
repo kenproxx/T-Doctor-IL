@@ -45,20 +45,24 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label for="address_code">AddressCode</label>
                         <input type="text" name="address_code" class="form-control" id="address_code" value="{{ $user->address_code }}">
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
+                        <label for="type">Type Account</label>
+                        <select id="type" name="type" class="form-select">
+                            <option>Choose...</option>
+                            <option value="BUSINESS">BUSINESS</option>
+                            <option value="MEDICAL">MEDICAL</option>
+                            <option value="NORMAL">NORMAL</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
                         <label for="member">Member</label>
                         <select id="member" name="member" class="form-select">
-                            <option>Choose...</option>
-                            <option value="PHARMACEUTICAL_COMPANIES">PHARMACEUTICAL COMPANIES</option>
-                            <option value="HOSPITALS">HOSPITALS</option>
-                            <option value="CLINICS">CLINICS</option>
-                            <option value="PHARMACIES">PHARMACIES</option>
-                            <option value="SPAS">SPAS</option>
-                            <option value="OTHERS">OTHERS</option>
+                            <option value="PAITENTS">PAITENTS</option>
+                            <option value="NORMAL_PEOPLE">NORMAL PEOPLE</option>
                         </select>
                     </div>
                 </div>
@@ -69,4 +73,34 @@
             </form>
         @endif
     </div>
+    <script>
+        $(document).ready(function () {
+            $('#type').on('change', function () {
+                let value = $(this).val();
+                let html = ``;
+                switch (value) {
+                    case 'BUSINESS':
+                        html = `<option value="{{\App\Enums\Role::PHARMACEUTICAL_COMPANIES}}">PHARMACEUTICAL COMPANIES</option>
+                                                <option value="{{\App\Enums\Role::HOSPITALS}}">HOSPITALS</option>
+                                                <option value="{{\App\Enums\Role::CLINICS}}">CLINICS</option>
+                                                <option value="{{\App\Enums\Role::PHARMACIES}}">PHARMACIES</option>
+                                                <option value="{{\App\Enums\Role::SPAS}}">SPAS</option>
+                                                <option value="{{\App\Enums\Role::OTHERS}}">OTHERS</option>`;
+                        break;
+                    case 'MEDICAL':
+                        html = `<option value="{{\App\Enums\Role::DOCTORS}}">DOCTOR</option>
+                                                <option value="{{\App\Enums\Role::PHAMACISTS}}">PHAMACISTS</option>
+                                                <option value="{{\App\Enums\Role::THERAPISTS}}">THERAPISTS</option>
+                                                <option value="{{\App\Enums\Role::ESTHETICIANS}}">ESTHETICIANS</option>
+                                                <option value="{{\App\Enums\Role::NURSES}}">NURSES</option>`;
+                        break;
+                    default:
+                        html = `<option value="{{\App\Enums\Role::PAITENTS}}">PAITENTS</option>
+                                                <option value="{{\App\Enums\Role::NORMAL_PEOPLE}}">NORMAL PEOPLE</option>`;
+                        break;
+                }
+                $('#member').empty().append(html);
+            })
+        })
+    </script>
 @endsection

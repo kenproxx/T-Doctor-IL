@@ -6,6 +6,12 @@
         .w-icon-px {
             width: 14px;
         }
+
+        .avatar-user {
+            vertical-align: middle;
+            border-radius: 50% !important;
+            border:1px solid #cccccc;
+        }
     </style>
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('Profile') }}</h1>
@@ -35,9 +41,7 @@
 
             <div class="card shadow mb-4">
                 <div class="card-profile-image mt-4">
-                    <figure class="rounded-circle avatar avatar font-weight-bold"
-                            style="font-size: 60px; height: 180px; width: 180px;"
-                            data-initial="{{ Auth::user()->avt }}"></figure>
+                    <img class="avatar-user" src="{{ Auth::user()->avt }}" alt="" style="max-width: 100px; max-height: 100px">
                 </div>
                 <div class="card-body">
 
@@ -46,27 +50,6 @@
                             <div class="text-center">
                                 <h5 class="font-weight-bold">{{  Auth::user()->name }}</h5>
                                 <p>{{  Auth::user()->username }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card-profile-stats">
-                                <span class="heading">22</span>
-                                <span class="description">Friends</span>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card-profile-stats">
-                                <span class="heading">10</span>
-                                <span class="description">Photos</span>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card-profile-stats">
-                                <span class="heading">89</span>
-                                <span class="description">Comments</span>
                             </div>
                         </div>
                     </div>
@@ -226,7 +209,7 @@
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="member">Member<span
                                                 class="small text-danger">*</span></label>
-                                        <select id="member" name="member" class="form-control">
+                                        <select id="member" name="member" class="form-control" disabled>
                                             @foreach($roles as $role)
                                                 @php
                                                     $isSelected = false;

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Enums\UserStatus;
+use App\Models\Role;
+use App\Models\RoleUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,7 +44,7 @@ class AuthSocialController extends Controller
             if ($existingUser) {
                 auth()->login($existingUser, true);
                 $token = JWTAuth::fromUser($existingUser);
-                setcookie("accessToken", $token, time()+3600*24);
+                setcookie("accessToken", $token, time() + 3600 * 24);
                 if (!$existingUser->provider_name) {
                     return redirect(route('profile'));
                 }
@@ -65,7 +67,7 @@ class AuthSocialController extends Controller
 
                 auth()->login($newUser, true);
                 $token = JWTAuth::fromUser($newUser);
-                setcookie("accessToken", $token, time()+3600*24);
+                setcookie("accessToken", $token, time() + 3600 * 24);
             }
             toast('Register success!', 'success', 'top-left');
             return redirect()->route('login.social.choose.role');
@@ -161,8 +163,6 @@ class AuthSocialController extends Controller
                 return back();
             }
 
-            $myUser = (new MainController())->switchMember($member);
-
             if ($username != Auth::user()->username) {
                 $oldUser = User::where('username', $username)->first();
                 if ($oldUser) {
@@ -199,18 +199,24 @@ class AuthSocialController extends Controller
             $user->address_code = $address_code;
             $user->password = Hash::make($password);
 
-            $user->type = $myUser[1];
+            $user->type = $request->input('type');
             $user->status = UserStatus::ACTIVE;
 
-            $user->save();
+            $success = $user->save();
 
-            $roleItem = [
-                'role_id' => $myUser[0]->id,
-                'user_id' => $user->id
-            ];
 
-            $success = DB::table('role_users')->insert($roleItem);
             if ($success) {
+                $role = Role::where('name', $member)->first();
+
+                if (!$role) {
+                    $role = Role::where('name', \App\Enums\Role::PAITENTS)->first();
+                }
+
+                RoleUser::create([
+                    'role_id' => $role->id,
+                    'user_id' => $user->id
+                ]);
+
                 toast('Update success!', 'success', 'top-left');
                 return redirect()->route('home');
             }
