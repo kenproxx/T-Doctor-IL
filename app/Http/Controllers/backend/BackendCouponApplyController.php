@@ -215,6 +215,10 @@ class BackendCouponApplyController extends Controller
 
         if ($status == CouponApplyStatus::REWARDED) {
             if ($couponApply->status == CouponApplyStatus::VALID) {
+                $isMaxReward = $this->checkMaxRewardCoupon($couponApply->coupon_id);
+                if ($isMaxReward) {
+                    return response('Đã đủ số lượng trúng thưởng', 400);
+                }
                 $couponApply->status = CouponApplyStatus::REWARDED;
                 $this->sendMailWhenReward($couponApply);
             } else {
@@ -225,6 +229,19 @@ class BackendCouponApplyController extends Controller
         }
         $couponApply->save();
         return response('Thay đổi thành công', 200);
+    }
+
+    public function checkMaxRewardCoupon($coupon_id)
+    {
+        $coupon = Coupon::find($coupon_id);
+        $maxReward = $coupon->max_register;
+
+        $couponApply = CouponApply::where('coupon_id', $coupon_id)->where('status', CouponApplyStatus::REWARDED)->count();
+        if ($couponApply >= $maxReward) {
+            return true;
+        }
+        return false;
+
     }
 
     public function sendMailWhenReward($couponApply)
