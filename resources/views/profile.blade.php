@@ -1,6 +1,12 @@
 @extends('layouts.admin')
 
 @section('main-content')
+
+    <style>
+        .w-icon-px {
+            width: 14px;
+        }
+    </style>
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('Profile') }}</h1>
 
@@ -64,6 +70,38 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="card shadow mb-4">
+                <div class="card-body">
+                    <form>
+                        <div class="input-group mb-3" >
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-facebook w-icon-px"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="facebook" name="facebook" >
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-tiktok w-icon-px"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="tiktok" name="tiktok" >
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-youtube w-icon-px"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="youtube" name="youtube" >
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-otter w-icon-px"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="other" name="other" >
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
                 </div>
             </div>
 
