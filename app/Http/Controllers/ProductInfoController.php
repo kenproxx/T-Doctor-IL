@@ -30,9 +30,11 @@ class ProductInfoController extends Controller
     public function edit($id)
     {
         $product = ProductInfo::find($id);
+        $isAdmin = (new MainController())->checkAdmin();
+        $provinces = \App\Models\Province::find($product->province_id)->get();
         if (!$product || $product->status == ProductStatus::DELETED) {
             return redirect(route('homeAdmin.list.product'));
         }
-        return view('admin.product.tab-edit-product', compact('product'));
+        return view('admin.product.tab-edit-product', compact('product', 'provinces', 'isAdmin'));
     }
 }
