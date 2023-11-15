@@ -45,6 +45,7 @@ Route::group(['prefix' => 'pharmacies'], function () {
 Route::group(['prefix' => 'doctors-info'], function () {
     Route::get('/list', [DoctorInfoApi::class, 'getAll'])->name('doctors.info.restapi.list');
     Route::get('/user/{id}', [DoctorInfoApi::class, 'findByUser'])->name('doctors.info.restapi.user');
+    Route::get('/department/{id}', [DoctorInfoApi::class, 'findByDepartment'])->name('doctors.info.restapi.department');
     Route::get('/detail/{id}', [DoctorInfoApi::class, 'detail'])->name('doctors.info.restapi.detail');
 });
 

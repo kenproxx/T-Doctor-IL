@@ -1,3 +1,6 @@
+@php
+    $routeName = Route::currentRouteName();
+@endphp
 <header class="header">
     <div class="container">
         <div class="row header-detail">
@@ -6,13 +9,18 @@
                     <img src="{{asset('img/icons_logo/logo-new.png')}}" alt="Logo" width="177px" height="42px"
                          class="d-inline-block align-text-top">
                 </a>
-                <a class="back" href="#"><h5><i class="fa-solid fa-angles-left"></i> Examination</h5></a>
+                <a class="back" href="{{ route('home') }}"><h5><i class="fa-solid fa-angles-left"></i> Examination</h5>
+                </a>
             </div>
             <div class="col-md-6 header-detail--center d-flex justify-content-sm-around">
-                <a class="active" href="{{ route('examination.index') }}">Find a doctor</a>
-                <a  href="{{ route('examination.findmymedicine') }}">Find my medicine</a>
-                <a href="{{route('examination.mentoring')}}">Mentoring</a>
-                <a href="{{ route('examination.mypersonaldoctor') }}">My personal doctor</a>
+                <a class=" {{ $routeName == 'examination.index' ? 'active' : '' }}"
+                   href="{{ route('examination.index') }}">Find a doctor</a>
+                <a class="{{ $routeName == 'examination.findmymedicine' ? 'active' : '' }}"
+                   href="{{ route('examination.findmymedicine') }}">Find my medicine</a>
+                <a class="{{ $routeName == 'examination.mentoring' ? 'active' : '' }}"
+                   href="{{route('examination.mentoring')}}">Mentoring</a>
+                <a class="{{ $routeName == 'examination.mypersonaldoctor' ? 'active' : '' }}"
+                   href="{{ route('examination.mypersonaldoctor') }}">My personal doctor</a>
             </div>
             <div class="col-md-2 header-detail--right d-flex">
                 <div class="user-1">
