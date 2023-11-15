@@ -48,7 +48,7 @@ class MedicalPermission
         if (!$role_user) {
             User::where('id', $user->id)->delete();
             Auth::logout();
-            return back();
+            return redirect(route('home'));
         }
         $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
 

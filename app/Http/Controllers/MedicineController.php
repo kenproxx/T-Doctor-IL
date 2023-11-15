@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Enums\online_medicine\OnlineMedicineStatus;
+use App\Models\online_medicine\CategoryProduct;
+use App\Models\online_medicine\ProductMedicine;
 
 class MedicineController extends Controller
 {
     public function index()
     {
-        return view('medicine.list');
+        $medicines = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->paginate(16);
+        return view('medicine.list', compact('medicines'));
     }
 
-    public function detail()
+    public function detail($id)
     {
-        return view('medicine.detailMedicine');
+        $medicine = ProductMedicine::find($id);
+        $categoryMedicines = CategoryProduct::where('status', true)->get();
+        return view('medicine.detailMedicine', compact('medicine', 'categoryMedicines'));
     }
 
     public function wishList()

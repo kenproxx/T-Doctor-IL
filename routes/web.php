@@ -85,7 +85,7 @@ Route::group(['prefix' => 'mentoring'], function () {
 
 Route::group(['prefix' => 'medicine'], function () {
     Route::get('/', [MedicineController::class, 'index'])->name('medicine');
-    Route::get('/detail', [MedicineController::class, 'detail'])->name('medicine.detail');
+    Route::get('/detail/{id}', [MedicineController::class, 'detail'])->name('medicine.detail');
     Route::get('/wish-list', [MedicineController::class, 'wishList'])->name('medicine.wishList');
 
 });
