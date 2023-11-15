@@ -362,7 +362,7 @@
 
         <div class="frame row justify-content-md-around mentoring-img" id="mentoring-img">
 
-            @foreach(explode(',', $question->gallery) as $picture)
+            @foreach(explode(',', $question->gallery_public) as $picture)
 
                 <div class="div col-sm-4">
                     <div class="catalog">
