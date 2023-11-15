@@ -15,7 +15,10 @@ class BackendProductInfoController extends Controller
 {
     public function index()
     {
-        $products = ProductInfo::where('status', '!=', ProductStatus::DELETED)
+        $products = DB::table('product_infos')
+            ->join('provinces', 'provinces.id', '=', 'product_infos.province_id')
+            ->where('product_infos.status', '!=', ProductStatus::DELETED)
+            ->select('product_infos.*', 'provinces.name as province_name')
             ->get();
 
         if (Auth::check()) {
@@ -29,6 +32,8 @@ class BackendProductInfoController extends Controller
                 $product->isFavorit = $isFavorite == 1 ? true : false;
             });
         }
+
+
         return response()->json($products);
     }
 
@@ -215,8 +220,10 @@ class BackendProductInfoController extends Controller
             $name = $request->input('name');
             $category_id = $request->input('category_id');
             $name_en = $request->input('name_en');
+            $name_laos = $request->input('name_laos');
             $brand_name = $request->input('brand_name');
             $brand_name_en = $request->input('brand_name_en');
+            $brand_name_laos = $request->input('brand_name_laos');
             $province_id = $request->input('province_id');
             $description = $request->input('description');
             $description_en = $request->input('description_en');
@@ -249,9 +256,11 @@ class BackendProductInfoController extends Controller
 
             $product->name = $name;
             $product->name_en = $name_en;
+            $product->name_laos = $name_laos;
             $product->category_id = $category_id;
             $product->brand_name = $brand_name;
             $product->brand_name_en = $brand_name_en;
+            $product->brand_name_laos = $brand_name_laos;
             $product->province_id = $province_id;
             $product->thumbnail = $thumbnail;
             $product->gallery = $gallery;
