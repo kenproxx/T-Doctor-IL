@@ -28,6 +28,7 @@
                 let imageDoctor = item['thumbnail'];
                 let myArray = imageDoctor.split("/storage");
                 html = html + `<div class="card" >
+                <div class="ribbon ribbon-top-left"><span>New</span></div>
                 <i class="bi bi-heart"></i>
                 <img src=" ${url}${myArray[1]} " class="card-img-top" alt="...">
                 <div class="card-body">

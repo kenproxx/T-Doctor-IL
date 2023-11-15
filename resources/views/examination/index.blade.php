@@ -12,9 +12,9 @@
                     <div class="filter_option"><p>Location <i class="bi bi-chevron-expand"></i></p></div>
                     <div class="filter_option"><p>Experience <i class="bi bi-chevron-expand"></i></p></div>
                 </div>
-                <div class="filter_search flex-fill">
-                    <label for="filter_search"><i class="bi bi-search"></i></label>
-                    <input type="text" name="filter_search" id="filter_search" placeholder="Search for anything.....">
+                <div class="form-group has-search">
+                    <span class="fa fa-search form-control-feedback"></span>
+                    <input type="text" class="form-control" placeholder="Search for anything…">
                 </div>
             </div>
         </div>
