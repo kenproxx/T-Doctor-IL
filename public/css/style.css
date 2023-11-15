@@ -123,7 +123,7 @@ a {
 .list-doctor .card{
     padding: 16px;
     margin-left: 64px;
-    width: 244px;
+    width: 227px;
     border-radius: 16px;
     margin-bottom: 30px;
 }
@@ -1056,5 +1056,13 @@ span.material-symbols-outlined {
     pointer-events: none;
     color: #aaa;
     margin-top: 8px;
-
+}
+#list-doctor-new{
+    gap:25px
+}
+#list-doctor-best{
+    gap: 25px;
+}
+#list-doctor-available{
+    gap: 25px;
 }
