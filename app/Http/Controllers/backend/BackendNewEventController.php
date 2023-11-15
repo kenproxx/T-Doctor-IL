@@ -13,7 +13,8 @@ class BackendNewEventController extends Controller
      */
     public function index()
     {
-        return view('admin.new_event.index');
+        $listNewEvent = NewEvent::all();
+        return view('admin.new_event.index', compact('listNewEvent'));
     }
 
     /**
@@ -25,12 +26,70 @@ class BackendNewEventController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        $newEvent = NewEvent::find($id);
+        return view('admin.new_event.edit', compact('newEvent'));
+
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request)
+    {
+        $params = $request->only('title', 'title_en', 'title_laos', 'status', 'short_description',
+            'short_description_en', 'short_description_laos', 'description', 'description_en', 'description_laos');
+
+        // kiểm tra 1 trong những title, title_en, title_laos phải khác null, nếu tất cả đều null thì lỗi
+        if ($params['title'] == null && $params['title_en'] == null && $params['title_laos'] == null) {
+            return response('Vui lòng nhập tiêu đề !!!', 400);
+        }
+        //kiểm tra 1 trong những short_description phải khác null, nếu tất cả đều null thì lỗi
+        if ($params['short_description'] == null && $params['short_description_en'] == null && $params['short_description_laos'] == null) {
+            return response('Vui lòng nhập mô tả ngắn !!!', 400);
+        }
+        // kiểm tra 1 trong những description phải khác null, nếu tất cả đều null thì lỗi
+        if ($params['description'] == null && $params['description_en'] == null && $params['description_laos'] == null) {
+            return response('Vui lòng nhập nội dung !!!', 400);
+        }
+
+        if ($request->hasFile('thumbnail')) {
+            $item = $request->file('thumbnail');
+            $itemPath = $item->store('new_event', 'public');
+            $thumbnail = asset('storage/'.$itemPath);
+            $params['thumbnail'] = $thumbnail;
+        }
+
+        $newEvent = NewEvent::find($request->input('id'));
+        $newEvent->fill($params);
+
+        $success = $newEvent->update();
+
+        if ($success) {
+            return response('Cập nhật sự kiện thành công !!!', 200);
+        } else {
+            return response('Cập nhật sự kiện thất bại !!!', 400);
+        }
+    }
+
+    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         $params = $request->only('title', 'title_en', 'title_laos', 'status', 'short_description',
-            'short_description_en', 'short_description_laos', 'description', 'description_en', 'description_laos',);
+            'short_description_en', 'short_description_laos', 'description', 'description_en', 'description_laos');
 
         // kiểm tra 1 trong những title, title_en, title_laos phải khác null, nếu tất cả đều null thì lỗi
         if ($params['title'] == null && $params['title_en'] == null && $params['title_laos'] == null) {
@@ -64,30 +123,6 @@ class BackendNewEventController extends Controller
         } else {
             return response('Thêm sự kiện thất bại !!!', 400);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        return view('admin.new_event.edit');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        dd($request->input());
     }
 
     /**

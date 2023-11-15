@@ -18,7 +18,7 @@ Route::group(['prefix' => 'new-event'], function () {
     Route::get('index', [BackendNewEventController::class, 'index'])->name('api.new-event.index');
     Route::get('create', [BackendNewEventController::class, 'create'])->name('api.new-event.create');
     Route::post('store', [BackendNewEventController::class, 'store'])->name('api.new-event.store');
-    Route::get('edit', [BackendNewEventController::class, 'edit'])->name('api.new-event.edit');
+    Route::get('edit/{id}', [BackendNewEventController::class, 'edit'])->name('api.new-event.edit');
     Route::post('update', [BackendNewEventController::class, 'update'])->name('api.new-event.update');
     Route::post('destroy', [BackendNewEventController::class, 'destroy'])->name('api.new-event.destroy');
 });
