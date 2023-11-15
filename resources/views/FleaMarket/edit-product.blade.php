@@ -6,8 +6,9 @@
     @include('component.banner')
     <div class="container content-add">
         <div class="add-cv_text">
-            <div class="ac-text_content font-18-mobi"><a href=""><i class="fa-solid fa-arrow-left mr-4"
-                                                                    style="color: black"></i></a>Edit product
+            <div class="ac-text_content font-18-mobi"><a href=""><a href="{{route('flea.market.my.store')}}"><i
+                            class="fa-solid fa-arrow-left mr-4"
+                            style="color: black"></i></a>Edit product
                 information
             </div>
         </div>
@@ -49,6 +50,9 @@
                                         <select class="ac-choose font-16-mobi mt-2" id="province_id"
                                                 name="province_id checkValid"
                                                 required>
+                                            @foreach($provinces as $province)
+                                                <option value="{{$province->id}}">{{$province->name}}</option>
+                                            @endforeach
                                             <option
                                                 value="{{$e_product->province_id}}">{{$e_product->province_id}}</option>
                                             <option value="1">123</option>

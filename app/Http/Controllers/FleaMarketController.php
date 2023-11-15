@@ -63,8 +63,8 @@ class FleaMarketController extends Controller
     public function sellProduct()
     {
         $user = Auth::user();
-
-        return view('FleaMarket.sell-my-product',compact('user'));
+        $province = DB::table('provinces')->get();
+        return view('FleaMarket.sell-my-product',compact('user','province'));
     }
 
     /**
@@ -73,6 +73,8 @@ class FleaMarketController extends Controller
     public function editProduct($id)
     {
         $e_product = ProductInfo::find($id);
-        return view('FleaMarket.edit-product',compact('e_product'));
+        $provinces = DB::table('provinces')->get();
+
+        return view('FleaMarket.edit-product',compact('e_product','provinces'));
     }
 }
