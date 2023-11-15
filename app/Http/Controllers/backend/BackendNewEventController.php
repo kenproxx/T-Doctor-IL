@@ -69,8 +69,8 @@ class BackendNewEventController extends Controller
      */
     public function update(Request $request)
     {
-        $params = $request->only('title', 'title_en', 'title_laos', 'status', 'short_description',
-            'short_description_en', 'short_description_laos', 'description', 'description_en', 'description_laos');
+        $params = $request->only('title', 'title_en', 'title_laos', 'status', 'type',
+            'short_description', 'short_description_en', 'short_description_laos', 'description', 'description_en', 'description_laos');
 
         // kiểm tra 1 trong những title, title_en, title_laos phải khác null, nếu tất cả đều null thì lỗi
         if ($params['title'] == null && $params['title_en'] == null && $params['title_laos'] == null) {
@@ -109,8 +109,8 @@ class BackendNewEventController extends Controller
      */
     public function store(Request $request)
     {
-        $params = $request->only('title', 'title_en', 'title_laos', 'status', 'short_description',
-            'short_description_en', 'short_description_laos', 'description', 'description_en', 'description_laos');
+        $params = $request->only('title', 'title_en', 'title_laos', 'status', 'type',
+            'short_description', 'short_description_en', 'short_description_laos', 'description', 'description_en', 'description_laos');
 
         // kiểm tra 1 trong những title, title_en, title_laos phải khác null, nếu tất cả đều null thì lỗi
         if ($params['title'] == null && $params['title_en'] == null && $params['title_laos'] == null) {
