@@ -1,4 +1,4 @@
-<div id="list-doctor" class="list-doctor d-flex justify-content-center container">
+<div id="list-doctor" class="list-doctor d-flex  container">
 
 </div>
 <script>

@@ -262,8 +262,8 @@
                         <h3 class="py-3 text-center">News / Events</h3>
                         <a href="#"><p class="section1_link">See all</p></a>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <ul class="nav nav-pills nav-fill">
+                    <div class="d-flex ">
+                        <ul class="nav nav-pills nav-fill" style="gap:50px">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="#">New</a>
                             </li>

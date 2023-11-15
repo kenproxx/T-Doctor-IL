@@ -26,7 +26,7 @@
                 <div class="ms-auto p-2"><a href="{{route('examination.best_doctor')}}">See all</a></div>
             </div>
         </div>
-        <div id="list-doctor-best" class="list-doctor d-flex justify-content-center">
+        <div id="list-doctor-best" class="list-doctor d-flex ">
 
         </div>
         <div class="d-flex justify-content-center">
@@ -37,7 +37,7 @@
                 <div class="ms-auto p-2"><a href="{{route('examination.new_doctor')}}">See all</a></div>
             </div>
         </div>
-        <div id="list-doctor-new" class="list-doctor d-flex justify-content-center">
+        <div id="list-doctor-new" class="list-doctor d-flex ">
 
         </div>
         <div class="d-flex justify-content-center">
@@ -48,7 +48,7 @@
                 <div class="ms-auto p-2"><a href="{{route('examination.available_doctor')}}">See all</a></div>
             </div>
         </div>
-        <div id="list-doctor-available" class="list-doctor d-flex justify-content-center">
+        <div id="list-doctor-available" class="list-doctor d-flex ">
 
         </div>
     </div>
