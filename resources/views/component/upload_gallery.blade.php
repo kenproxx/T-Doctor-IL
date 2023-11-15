@@ -146,7 +146,8 @@
                         imageCon.classList.add("d-inline-block");
                         imageCon.classList.add("active");
                         imageCon.innerHTML =
-                            '<div class="gallery-pic-container d-flex align-items-center justify-content-center overflow-hidden"><img></div><div class="gallery-cancel-btn"><i class="fas fa-times"></i></div><div class="gallery-file-name"></div>';
+                            '<div class="gallery-pic-container d-flex align-items-center justify-content-center overflow-hidden">' +
+                            '<img></div><div class="gallery-cancel-btn"><i class="fas fa-times"></i></div><div class="gallery-file-name"></div>';
                         imageCon.firstElementChild.firstElementChild.src = result;
                         imageCon.children[2].innerHTML = file.name;
                         /*addEventListener to cancel button*/

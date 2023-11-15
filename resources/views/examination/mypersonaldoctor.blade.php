@@ -28,32 +28,12 @@
                                 <h3><b>My personal doctor</b></h3>
                                 <hr>
                             </div>
-                            <div id="list-doctor" class="d-flex justify-content-center">
+                            <div class="d-flex justify-content-center list-doctor">
                                 <div class="card" >
                                     <i class="bi bi-heart"></i>
                                     <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
                                     <div class="card-body">
-                                        <a href="{{route('examination.doctor_info')}}"><h5 class="card-title">BS Đô Văn Định</h5></a>
-                                        <p class="card-text_1">Location: <b>Hanoi</b></p>
-                                        <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                                        <button class="delete-1">Delete</button>
-                                    </div>
-                                </div>
-                                <div class="card" >
-                                    <i class="bi bi-heart"></i>
-                                    <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <a href="{{route('examination.doctor_info')}}"><h5 class="card-title">BS Đô Văn Định</h5></a>
-                                        <p class="card-text_1">Location: <b>Hanoi</b></p>
-                                        <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                                        <button class="delete-1">Delete</button>
-                                    </div>
-                                </div>
-                                <div class="card" >
-                                    <i class="bi bi-heart"></i>
-                                    <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <a href="{{route('examination.doctor_info')}}"><h5 class="card-title">BS Đô Văn Định</h5></a>
+                                        <a href="{{route('examination.doctor_info', 1)}}"><h5 class="card-title">BS Đô Văn Định</h5></a>
                                         <p class="card-text_1">Location: <b>Hanoi</b></p>
                                         <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
                                         <button class="delete-1">Delete</button>
@@ -74,25 +54,6 @@
                             </div>
                         </div>
                     </div>
-                    <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
             </div>
         </div>

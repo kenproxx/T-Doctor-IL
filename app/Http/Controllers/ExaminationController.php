@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\DoctorDepartmentStatus;
+use App\Enums\online_medicine\OnlineMedicineStatus;
 use App\Enums\QuestionStatus;
 use App\Enums\SearchMentoring;
+use App\Enums\TypeBussiness;
+use App\Enums\TypeTimeWork;
 use App\Models\Answer;
 use App\Models\CalcViewQuestion;
+use App\Models\Clinic;
+use App\Models\DoctorDepartment;
 use App\Models\DoctorInfo;
+use App\Models\online_medicine\CategoryProduct;
+use App\Models\online_medicine\ProductMedicine;
 use App\Models\Question;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -17,7 +25,8 @@ class ExaminationController extends Controller
 {
     public function index()
     {
-        return view('examination.index');
+        $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
+        return view('examination.index', compact('departments'));
     }
 
     public function infoDoctor($id)
@@ -45,7 +54,18 @@ class ExaminationController extends Controller
 
     public function findMyMedicine()
     {
-        return view('examination.findmymedicine');
+        $bestPhamrmacists = Clinic::where('type', TypeBussiness::PHARMACIES)->orderBy('count', 'DESC')->limit(16)->get();
+        $newPhamrmacists = Clinic::where('type', TypeBussiness::PHARMACIES)->orderBy('id', 'DESC')->limit(16)->get();
+        $allPhamrmacists = Clinic::where('type', TypeBussiness::PHARMACIES)->where('time_work', TypeTimeWork::ALL)->limit(16)->get();
+
+        $hotMedicines = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->limit(16)->get();
+        $newMedicines = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->orderBy('id', 'DESC')->limit(16)->get();
+        $recommendedMedicines = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->limit(16)->get();
+
+        $categoryMedicines = CategoryProduct::where('status', true)->get();
+        return view('examination.findmymedicine', compact(
+            'bestPhamrmacists', 'newPhamrmacists', 'allPhamrmacists',
+            'hotMedicines', 'newMedicines', 'recommendedMedicines', 'categoryMedicines'));
     }
 
     public function bestPharmacists()
