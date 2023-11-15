@@ -28,6 +28,11 @@ class BusinessPermission
                 $user = Auth::user();
             }
             $role_user = DB::table('role_users')->where('user_id', $user->id)->first();
+            if (!$role_user) {
+                User::where('id', $user->id)->delete();
+                Auth::logout();
+                return back();
+            }
             $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
 //            $roles = $user->roles;
 //            $roleNames = $roles->pluck('name');

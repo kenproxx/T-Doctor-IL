@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Models\Role;
+use App\Models\User;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;
@@ -27,6 +28,11 @@ class CheckAdminMiddleware
                 $user = JWTAuth::parseToken()->authenticate();
             }
             $role_user = DB::table('role_users')->where('user_id', $user->id)->first();
+            if (!$role_user) {
+                User::where('id', $user->id)->delete();
+                Auth::logout();
+                return back();
+            }
             $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
 
             if ($roleNames->contains('ADMIN')) {
