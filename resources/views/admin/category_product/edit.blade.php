@@ -18,15 +18,18 @@
         <div class="row">
             <div class="col-sm-4">
                 <label>Title </label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ $categoryProduct->name ?? '' }}">
+                <input type="text" class="form-control" id="name" name="name"
+                       value="{{ $categoryProduct->name ?? '' }}">
             </div>
             <div class="col-sm-4">
                 <label>Title Anh</label>
-                <input type="text" class="form-control" id="name_en" name="name_en" value="{{ $categoryProduct->name_en ?? '' }}">
+                <input type="text" class="form-control" id="name_en" name="name_en"
+                       value="{{ $categoryProduct->name_en ?? '' }}">
             </div>
             <div class="col-sm-4">
                 <label>Title Lào</label>
-                <input type="text" class="form-control" id="name_laos" name="name_laos" value="{{ $categoryProduct->name_laos ?? '' }}">
+                <input type="text" class="form-control" id="name_laos" name="name_laos"
+                       value="{{ $categoryProduct->name_laos ?? '' }}">
             </div>
         </div>
         <div class="row">
@@ -34,9 +37,11 @@
                 <label>status</label>
                 <select class="custom-select" id="status" name="status">
                     <option
-                        value="1" {{ $categoryProduct->status == 1 ? 'selected' : '' }}>Active</option>
+                        value="1" {{ $categoryProduct->status == 1 ? 'selected' : '' }}>Active
+                    </option>
                     <option
-                        value="0" {{ $categoryProduct->status == 0 ? 'selected' : '' }}>Inactive</option>
+                        value="0" {{ $categoryProduct->status == 0 ? 'selected' : '' }}>Inactive
+                    </option>
                 </select>
             </div>
         </div>
@@ -53,7 +58,7 @@
             };
             const formData = new FormData();
 
-            const arrField = ['name', 'name_en', 'name_laos', 'status', 'id' ];
+            const arrField = ['name', 'name_en', 'name_laos', 'status', 'id'];
 
             arrField.forEach((field) => {
                 formData.append(field, $(`#${field}`).val().trim());
