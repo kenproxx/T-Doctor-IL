@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\NewEvent;
 use Illuminate\Http\Request;
 
 class BackendNewEventController extends Controller
@@ -12,7 +13,7 @@ class BackendNewEventController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.new_event.index');
     }
 
     /**
@@ -20,7 +21,7 @@ class BackendNewEventController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.new_event.create');
     }
 
     /**
@@ -28,7 +29,41 @@ class BackendNewEventController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $params = $request->only('title', 'title_en', 'title_laos', 'status', 'short_description',
+            'short_description_en', 'short_description_laos', 'description', 'description_en', 'description_laos',);
+
+        // kiểm tra 1 trong những title, title_en, title_laos phải khác null, nếu tất cả đều null thì lỗi
+        if ($params['title'] == null && $params['title_en'] == null && $params['title_laos'] == null) {
+            return response('Vui lòng nhập tiêu đề !!!', 400);
+        }
+        //kiểm tra 1 trong những short_description phải khác null, nếu tất cả đều null thì lỗi
+        if ($params['short_description'] == null && $params['short_description_en'] == null && $params['short_description_laos'] == null) {
+            return response('Vui lòng nhập mô tả ngắn !!!', 400);
+        }
+        // kiểm tra 1 trong những description phải khác null, nếu tất cả đều null thì lỗi
+        if ($params['description'] == null && $params['description_en'] == null && $params['description_laos'] == null) {
+            return response('Vui lòng nhập nội dung !!!', 400);
+        }
+
+        $newEvent = new NewEvent();
+        $newEvent->fill($params);
+
+        if ($request->hasFile('thumbnail')) {
+            $item = $request->file('thumbnail');
+            $itemPath = $item->store('new_event', 'public');
+            $thumbnail = asset('storage/'.$itemPath);
+        } else {
+            $thumbnail = '';
+        }
+        $newEvent->thumbnail = $thumbnail;
+
+        $success = $newEvent->save();
+
+        if ($success) {
+            return response()->json('Thêm sự kiện thành công !!!');
+        } else {
+            return response('Thêm sự kiện thất bại !!!', 400);
+        }
     }
 
     /**
@@ -44,7 +79,7 @@ class BackendNewEventController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('admin.new_event.edit');
     }
 
     /**
@@ -52,7 +87,7 @@ class BackendNewEventController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        dd($request->input());
     }
 
     /**
