@@ -4,7 +4,7 @@
 @section('main-content')
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">create</h1>
+    <h1 class="h3 mb-4 text-gray-800">Edit</h1>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -16,46 +16,52 @@
     <form enctype="multipart/form-data">
         <div class="row">
             <div class="col-sm-4">
-                <label>Title </label>
-                <input type="text" class="form-control" id="title" name="title">
+                <label>Title</label>
+                <input type="text" class="form-control" id="title" name="title" value="{{ $newEvent->title ?? '' }}">
             </div>
             <div class="col-sm-4">
                 <label>Title Anh</label>
-                <input type="text" class="form-control" id="title_en" name="title_en">
+                <input type="text" class="form-control" id="title_en" name="title_en"
+                       value="{{ $newEvent->title_en ?? '' }}">
             </div>
             <div class="col-sm-4">
                 <label>Title Lào</label>
-                <input type="text" class="form-control" id="title_laos" name="title_laos">
+                <input type="text" class="form-control" id="title_laos" name="title_laos"
+                       value="{{ $newEvent->title_laos ?? '' }}">
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
                 <label>Short Description</label>
-                <textarea type="text" class="form-control" id="short_description" name="short_description"></textarea>
+                <textarea type="text" class="form-control" id="short_description"
+                          name="short_description">{{ $newEvent->short_description ?? '' }}</textarea>
             </div>
             <div class="col-sm-4">
                 <label>Short Description Anh</label>
                 <textarea type="text" class="form-control" id="short_description_en"
-                          name="short_description_en"></textarea>
+                          name="short_description_en">{{ $newEvent->short_description_en ?? '' }}</textarea>
             </div>
             <div class="col-sm-4">
                 <label>Short Description Lào</label>
                 <textarea type="text" class="form-control" id="short_description_laos"
-                          name="short_description_laos"></textarea>
+                          name="short_description_laos">{{ $newEvent->short_description_laos ?? '' }}</textarea>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
                 <label>Description </label>
-                <textarea type="text" class="form-control" id="description" name="description"></textarea>
+                <textarea type="text" class="form-control" id="description"
+                          name="description">{{ $newEvent->description ?? '' }}</textarea>
             </div>
             <div class="col-sm-4">
                 <label>Description Anh</label>
-                <textarea type="text" class="form-control" id="description_en" name="description_en"></textarea>
+                <textarea type="text" class="form-control" id="description_en"
+                          name="description_en">{{ $newEvent->description_en ?? '' }}</textarea>
             </div>
             <div class="col-sm-4">
                 <label>Description Lào</label>
-                <textarea type="text" class="form-control" id="description_laos" name="description_laos"></textarea>
+                <textarea type="text" class="form-control" id="description_laos"
+                          name="description_laos">{{ $newEvent->description_laos ?? '' }}</textarea>
             </div>
         </div>
         <div class="row">
@@ -72,6 +78,7 @@
                 <label>thumbnail</label>
                 <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*">
             </div>
+            <input type="hidden" id="id" name="id" value="{{ $newEvent->id ?? '' }}">
         </div>
     </form>
     <button type="button" onclick="submitForm()" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
@@ -84,12 +91,13 @@
             };
             const formData = new FormData();
 
-            const arrField = ['title', 'title_en', 'title_laos', 'status'];
+            const arrField = ['title', 'title_en', 'title_laos', 'status', 'id'];
 
             const fieldTextareaTiny = [
                 'short_description', 'short_description_en', 'short_description_laos',
                 'description', 'description_en', 'description_laos',
             ];
+
             fieldTextareaTiny.forEach(fieldTextarea => {
                 const content = tinymce.get(fieldTextarea).getContent();
                 formData.append(fieldTextarea, content);
@@ -106,7 +114,7 @@
 
             try {
                 $.ajax({
-                    url: `{{route('api.new-event.store')}}`,
+                    url: `{{route('api.new-event.update')}}`,
                     method: 'POST',
                     headers: headers,
                     contentType: false,
