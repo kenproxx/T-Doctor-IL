@@ -118,7 +118,7 @@ a {
     top: 15px;
 }
 #list-doctor{
-    gap:25px
+    /*gap:25px*/
 }
 .list-doctor .card{
     padding: 16px;

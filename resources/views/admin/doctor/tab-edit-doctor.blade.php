@@ -3,7 +3,7 @@
 @section('main-content')
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Edit Coupon</h1>
+    <h1 class="h3 mb-4 text-gray-800">Edit Product</h1>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -16,9 +16,26 @@
         @csrf
         <div><label for="name">name</label>
             <input type="text" class="form-control" id="name" name="name" value="{{$doctor->name}}"></div>
-        <div><label for="year_of_experience">Năm kinh nghiệm</label>
-            <input class="form-control" type="number" id="year_of_experience" name="year_of_experience"
-                   value="{{$doctor->year_of_experience}}"></div>
+        <div class="row">
+            <div class="col-sm-6">
+                <label for="year_of_experience">Năm kinh nghiệm</label>
+                <input type="number" class="form-control" id="year_of_experience" name="year_of_experience"
+                       value="{{$doctor->year_of_experience}}">
+            </div>
+            <div class="col-sm-6">
+                <label for="created_by">User</label>
+                <select class="custom-select" id="created_by" name="created_by">
+                    @php
+                        $crUser = \App\Models\User::find($doctor->created_by);
+                    @endphp
+                    <option value="{{$crUser->id}}"> {{$crUser->username}} ({{$crUser->email}})</option>
+                    @foreach($users as $user)
+                        <option value="{{$user->id}}"> {{$user->username}} ({{$user->email}})</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
         <div><label for="apply_for">Apply for</label>
             <input type="text" class="form-control" id="apply_for" name="apply_for" value="{{$doctor->apply_for}}">
         </div>
@@ -47,7 +64,8 @@
         </div>
         <div class="row">
             <div class="col-sm-4"><label>Giá dịch vụ việt</label>
-                <input class="form-control" type="number" name="service_price" id="service_price" value="{{$doctor->service_price}}">
+                <input class="form-control" type="number" name="service_price" id="service_price"
+                       value="{{$doctor->service_price}}">
             </div>
             <div class="col-sm-4"><label>Giá dịch vụ anh</label>
                 <input class="form-control" type="number" name="service_price_en" id="service_price_en"
@@ -73,23 +91,76 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><label>Tỉnh</label>
-                <input class="form-control" type="number" name="province_id" id="province_id" VALUE="{{$doctor->province_id}}">
+            <div class="col-sm-4">
+                <label for="province_id">Tỉnh</label>
+                <select name="province_id" id="province_id" class="form-control">
+
+                </select>
             </div>
-            <div class="col-sm-4"><label>Quận</label>
-                <input class="form-control" type="number" name="district_id" id="district_id" value="{{$doctor->district_id}}">
+            <div class="col-sm-4">
+                <label for="district_id">Quận</label>
+                @php
+                    $district = \App\Models\District::find($doctor->district_id);
+                @endphp
+                <select name="district_id" id="district_id" class="form-control">
+                    <option value="{{$district->id}}-{{$district->code}}"> {{$district->name}}</option>
+                </select>
             </div>
-            <div class="col-sm-4"><label>Xã</label>
-                <input class="form-control" type="number" name="commune_id" id="commune_id" value="{{$doctor->commune_id}}">
+            <div class="col-sm-4">
+                <label for="commune_id">Xã</label>
+                @php
+                    $commune = \App\Models\Commune::find($doctor->commune_id);
+                @endphp
+                <select name="commune_id" id="commune_id" class="form-control">
+                    <option value="{{$commune->id}}-{{$commune->code}}">{{$commune->name}}</option>
+                </select>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6"><label>Thời gian làm việc từ</label>
-                <input type="text" class="form-control" id="time_working_1" name="time_working_1"
-                       value="{{$doctor->time_working_1}}"></div>
-            <div class="col-sm-6"><label>Những này làm việc</label>
-                <input type="text" class="form-control" id="time_working_2" name="time_working_2"
-                       value="{{$doctor->time_working_2}}"></div>
+            @php
+                $working1 = $doctor->time_working_1;
+                $arrayWorking1 = explode('-', $working1);
+
+                $working2 = $doctor->time_working_2;
+                $arrayWorking2 = explode('-', $working2);
+            @endphp
+            <div class="col-sm-3">
+                <label for="time_working_1_start">Thời gian làm việc bắt đầu</label>
+                <input type="time" class="form-control" id="time_working_1_start" name="time_working_1_start"
+                       value="{{ $arrayWorking1[0] }}">
+            </div>
+            <div class="col-sm-3">
+                <label for="time_working_1_end">Thời gian làm việc kết thúc</label>
+                <input type="time" class="form-control" id="time_working_1_end" name="time_working_1_end"
+                       value="{{ $arrayWorking1[1] }}">
+            </div>
+            <div class="col-sm-3">
+                <label for="time_working_2_start">Những này làm việc bắt đầu</label>
+                <select name="time_working_2_start" id="time_working_2_start" class="form-control">
+                    <option {{ $arrayWorking2[0] == 'T2' ? 'selected' : '' }} value="T2">Thứ 2</option>
+                    <option {{ $arrayWorking2[0] == 'T3' ? 'selected' : '' }}  value="T3">Thứ 3</option>
+                    <option {{ $arrayWorking2[0] == 'T4' ? 'selected' : '' }}  value="T4">Thứ 4</option>
+                    <option {{ $arrayWorking2[0] == 'T5' ? 'selected' : '' }}  value="T5">Thứ 5</option>
+                    <option {{ $arrayWorking2[0] == 'T6' ? 'selected' : '' }}  value="T6">Thứ 6</option>
+                    <option {{ $arrayWorking2[0] == 'T7' ? 'selected' : '' }}  value="T7">Thứ 7</option>
+                    <option {{ $arrayWorking2[0] == 'CN' ? 'selected' : '' }}  value="CN">Chủ nhật</option>
+                </select>
+            </div>
+            <div class="col-sm-3">
+                <label for="time_working_2_end">Những này làm việc kết thúc</label>
+                <select name="time_working_2_end" id="time_working_2_end" class="form-control">
+                    <option {{ $arrayWorking2[1] == 'T2' ? 'selected' : '' }}  value="T2">Thứ 2</option>
+                    <option {{ $arrayWorking2[1] == 'T3' ? 'selected' : '' }}  value="T3">Thứ 3</option>
+                    <option {{ $arrayWorking2[1] == 'T4' ? 'selected' : '' }}  value="T4">Thứ 4</option>
+                    <option {{ $arrayWorking2[1] == 'T5' ? 'selected' : '' }}  value="T5">Thứ 5</option>
+                    <option {{ $arrayWorking2[1] == 'T6' ? 'selected' : '' }}  value="T6">Thứ 6</option>
+                    <option {{ $arrayWorking2[1] == 'T7' ? 'selected' : '' }}  value="T7">Thứ 7</option>
+                    <option {{ $arrayWorking2[1] == 'CN' ? 'selected' : '' }}  value="CN">Chủ nhật</option>
+                </select>
+            </div>
+
+            <input type="text" class="form-control d-none" id="time_working_1" name="time_working_1">
+            <input type="text" class="form-control d-none" id="time_working_2" name="time_working_2">
         </div>
         <div class="row">
             <div class="col-sm-4"><label>Số lượng đký tối đa</label>
@@ -102,7 +173,7 @@
                     <img width="50px" src="{{$productImg}}">
                 @endforeach
             </div>
-            <div class="col-sm-4"><label for="department">Department</label>
+            <div class="col-sm-4"><label for="department_id">Department</label>
                 <select class="custom-select" id="department_id" name="department_id">
                     @foreach($departments as $department)
                         <option
@@ -110,7 +181,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-sm-4"><label>Trạng thái</label>
+            <div class="col-sm-4"><label for="status">Trạng thái</label>
                 <select class="custom-select" id="status" name="status">
                     <option
                         {{ $doctor->status == \App\Enums\DoctorInfoStatus::ACTIVE ? 'selected' : ''}}
@@ -119,7 +190,7 @@
                     </option>
                     <option
                         {{ $doctor->status == \App\Enums\DoctorInfoStatus::INACTIVE ? 'selected' : ''}}
-                            value="{{ \App\Enums\DoctorInfoStatus::INACTIVE }}">
+                        value="{{ \App\Enums\DoctorInfoStatus::INACTIVE }}">
                         {{ \App\Enums\DoctorInfoStatus::INACTIVE }}
                     </option>
                 </select>
@@ -129,7 +200,6 @@
         <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
     </form>
     <script>
-
         const token = `{{ $_COOKIE['accessToken'] }}`;
         $(document).ready(function () {
             $('.up-date-button').on('click', function () {
@@ -144,7 +214,7 @@
                     "detail_address", "detail_address_en", "detail_address_laos",
                     "province_id", "district_id", "commune_id",
                     "time_working_1", "time_working_2",
-                    "name", "year_of_experience", "status", "apply_for", "department_id"
+                    "name", "year_of_experience", "status", "apply_for", "department_id", "created_by"
                 ];
                 const fieldTextareaTiny = [
                     "service", "service_en", "service_laos",
@@ -184,6 +254,128 @@
                     throw error;
                 }
             })
+
+            setDataForTime('time_working_1_start', 'time_working_1_end', 'time_working_1');
+            setDataForTime('time_working_2_start', 'time_working_2_end', 'time_working_2');
+
+            $('#time_working_1_start').on('change', function () {
+                setDataForTime('time_working_1_start', 'time_working_1_end', 'time_working_1')
+            })
+
+            $('#time_working_1_end').on('change', function () {
+                setDataForTime('time_working_1_start', 'time_working_1_end', 'time_working_1')
+            })
+
+            $('#time_working_2_start').on('change', function () {
+                setDataForTime('time_working_2_start', 'time_working_2_end', 'time_working_2')
+            })
+
+            $('#time_working_2_end').on('change', function () {
+                setDataForTime('time_working_2_start', 'time_working_2_end', 'time_working_2')
+            })
+
+            function setDataForTime(time_working_start, time_working_end, merge) {
+                let value_start = $('#' + time_working_start).val();
+                let value_end = $('#' + time_working_end).val();
+                let mergeValue = value_start + '-' + value_end;
+                $('#' + merge).val(mergeValue);
+            }
         })
+    </script>
+    <script>
+        $(document).ready(function () {
+            callGetAllProvince();
+
+            $('#province_id').on('change', function () {
+                let id_code = $(this).val();
+                let myArray = id_code.split('-');
+                let code = myArray[1];
+                callGetAllDistricts(code);
+            })
+
+            $('#district_id').on('change', function () {
+                let id_code = $(this).val();
+                let myArray = id_code.split('-');
+                let code = myArray[1];
+                callGetAllCommunes(code);
+            })
+        })
+
+        async function callGetAllProvince() {
+            $.ajax({
+                url: `{{ route('restapi.get.provinces') }}`,
+                method: 'GET',
+                success: function (response) {
+                    showAllProvince(response);
+                },
+                error: function (exception) {
+                    console.log(exception);
+                }
+            });
+        }
+
+        async function callGetAllDistricts(code) {
+            let url = `{{ route('restapi.get.districts', ['code' => ':code']) }}`;
+            url = url.replace(':code', code);
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (response) {
+                    showAllDistricts(response);
+                },
+                error: function (exception) {
+                    console.log(exception);
+                }
+            });
+        }
+
+        async function callGetAllCommunes(code) {
+            let url = `{{ route('restapi.get.communes', ['code' => ':code']) }}`;
+            url = url.replace(':code', code);
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (response) {
+                    showAllCommunes(response);
+                },
+                error: function (exception) {
+                    console.log(exception);
+                }
+            });
+        }
+
+        function showAllProvince(res) {
+            let html = ``;
+            for (let i = 0; i < res.length; i++) {
+                let data = res[i];
+                let code = data.code;
+                let province_id = `{{ $doctor->province_id }}`;
+                let supHtml = '';
+                if (province_id == data.id) {
+                    supHtml = 'selected';
+                }
+                html = html + `<option ${supHtml} class="province province-item" data-code="${code}" value="${data.id}-${data.code}">${data.name}</option>`;
+            }
+
+            $('#province_id').empty().append(html);
+        }
+
+        function showAllDistricts(res) {
+            let html = ``;
+            for (let i = 0; i < res.length; i++) {
+                let data = res[i];
+                html = html + `<option class="district district-item" value="${data.id}-${data.code}">${data.name}</option>`;
+            }
+            $('#district_id').empty().append(html);
+        }
+
+        function showAllCommunes(res) {
+            let html = ``;
+            for (let i = 0; i < res.length; i++) {
+                let data = res[i];
+                html = html + `<option value="${data.id}-${data.code}">${data.name}</option>`;
+            }
+            $('#commune_id').empty().append(html);
+        }
     </script>
 @endsection

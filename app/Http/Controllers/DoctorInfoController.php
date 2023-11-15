@@ -4,10 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Enums\DoctorDepartmentStatus;
 use App\Enums\DoctorInfoStatus;
+use App\Enums\UserStatus;
 use App\Models\Chat;
 use App\Models\DoctorDepartment;
 use App\Models\DoctorInfo;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class DoctorInfoController extends Controller
@@ -46,7 +47,8 @@ class DoctorInfoController extends Controller
     public function create()
     {
         $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
-        return view('admin.doctor.tab-create-doctor', compact('departments'));
+        $users = $this->returnListUser();
+        return view('admin.doctor.tab-create-doctor', compact('departments', 'users'));
     }
 
     public function edit($id)
@@ -55,7 +57,21 @@ class DoctorInfoController extends Controller
         if (!$doctor) {
             return response("doctor not found", 404);
         }
+        $users = $this->returnListUser();
         $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
-        return view('admin.doctor.tab-edit-doctor', compact('doctor', 'departments'));
+        return view('admin.doctor.tab-edit-doctor', compact('doctor', 'departments', 'users'));
+    }
+
+    private function returnListUser()
+    {
+        $listUsers = User::where('status', UserStatus::ACTIVE)->where('id', '!=', Auth::user()->id)->get();
+        $users = null;
+        foreach ($listUsers as $user) {
+            $doctor = DoctorInfo::where('created_by', $user->id)->where('status', '!=', DoctorInfoStatus::DELETED)->first();
+            if (!$doctor) {
+                $users[] = $user;
+            }
+        }
+        return collect($users);
     }
 }
