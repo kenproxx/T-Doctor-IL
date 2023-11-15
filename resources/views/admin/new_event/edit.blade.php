@@ -1,4 +1,5 @@
 @php use App\Enums\NewEventStatus; @endphp
+@php use App\Enums\NewEventType; @endphp
 @extends('layouts.admin')
 
 @section('main-content')
@@ -69,9 +70,18 @@
                 <label>Status</label>
                 <select class="custom-select" id="status" name="status">
                     <option
-                        value="{{ NewEventStatus::ACTIVE }}">{{ NewEventStatus::ACTIVE }}</option>
+                        value="{{ NewEventStatus::ACTIVE }}" {{ $newEvent->status === NewEventStatus::ACTIVE ? 'selected' : '' }}>{{ NewEventStatus::ACTIVE }}</option>
                     <option
-                        value="{{ NewEventStatus::INACTIVE }}">{{ NewEventStatus::INACTIVE }}</option>
+                        value="{{ NewEventStatus::INACTIVE }}" {{ $newEvent->status === NewEventStatus::INACTIVE ? 'selected' : '' }}>{{ NewEventStatus::INACTIVE }}</option>
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <label>Loại</label>
+                <select class="custom-select" id="type" name="type">
+                    <option
+                        value="{{ NewEventType::NEWS }}" {{ $newEvent->type === NewEventType::NEWS ? 'selected' : '' }}>{{ NewEventType::NEWS }}</option>
+                    <option
+                        value="{{ NewEventType::EVENT }}" {{ $newEvent->type === NewEventType::EVENT ? 'selected' : '' }}>{{ NewEventType::EVENT }}</option>
                 </select>
             </div>
             <div class="col-sm-4">
@@ -92,7 +102,7 @@
             };
             const formData = new FormData();
 
-            const arrField = ['title', 'title_en', 'title_laos', 'status', 'id'];
+            const arrField = ['title', 'title_en', 'title_laos', 'status', 'id', 'type'];
 
             const fieldTextareaTiny = [
                 'short_description', 'short_description_en', 'short_description_laos',

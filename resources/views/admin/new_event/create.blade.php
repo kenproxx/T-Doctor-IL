@@ -1,4 +1,5 @@
 @php use App\Enums\NewEventStatus; @endphp
+@php use App\Enums\NewEventType; @endphp
 @extends('layouts.admin')
 
 @section('main-content')
@@ -69,6 +70,15 @@
                 </select>
             </div>
             <div class="col-sm-4">
+                <label>Loại</label>
+                <select class="custom-select" id="type" name="type">
+                    <option
+                        value="{{ NewEventType::NEWS }}">{{ NewEventType::NEWS }}</option>
+                    <option
+                        value="{{ NewEventType::EVENT }}">{{ NewEventType::EVENT }}</option>
+                </select>
+            </div>
+            <div class="col-sm-4">
                 <label>thumbnail</label>
                 <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*">
             </div>
@@ -85,7 +95,7 @@
             };
             const formData = new FormData();
 
-            const arrField = ['title', 'title_en', 'title_laos', 'status'];
+            const arrField = ['title', 'title_en', 'title_laos', 'status', 'type'];
 
             const fieldTextareaTiny = [
                 'short_description', 'short_description_en', 'short_description_laos',
