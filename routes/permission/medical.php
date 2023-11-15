@@ -224,11 +224,11 @@ Route::group(['prefix' => 'booking'], function () {
 
 Route::group(['prefix' => 'category-product'], function () {
     Route::get('index', [BackendCategoryProductController::class, 'index'])->name('api.backend.category-product.index');
-    Route::get('edit', [BackendCategoryProductController::class, 'edit'])->name('api.backend.category-product.edit');
+    Route::get('edit/{id}', [BackendCategoryProductController::class, 'edit'])->name('api.backend.category-product.edit');
     Route::post('update', [BackendCategoryProductController::class, 'update'])->name('api.backend.category-product.update');
     Route::get('create', [BackendCategoryProductController::class, 'create'])->name('api.backend.category-product.create');
     Route::post('store', [BackendCategoryProductController::class, 'store'])->name('api.backend.category-product.store');
-    Route::post('destroy', [BackendCategoryProductController::class, 'destroy'])->name('api.backend.category-product.destroy');
+    Route::post('destroy/{id}', [BackendCategoryProductController::class, 'destroy'])->name('api.backend.category-product.destroy');
 });
 
 Route::group(['prefix' => 'product-medicine'], function () {
