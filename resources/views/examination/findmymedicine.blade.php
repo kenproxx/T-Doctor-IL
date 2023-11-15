@@ -37,7 +37,7 @@
                 <div class="ms-auto p-2"><a href="{{route('examination.bestpharmacists')}}">See all</a></div>
             </div>
         </div>
-        <div class="d-flex justify-content-center list-doctor">
+        <div class="d-flex list-doctor">
             @if(count($bestPhamrmacists) > 0)
                 @foreach($bestPhamrmacists as $bestPhamrmacist)
                     <div class="card">
@@ -90,7 +90,7 @@
                 <div class="ms-auto p-2"><a href="{{route('examination.newpharmacists')}}">See all</a></div>
             </div>
         </div>
-        <div class="d-flex justify-content-center list-doctor">
+        <div class="d-flex list-doctor">
             @if(count($newPhamrmacists) > 0)
                 @foreach($newPhamrmacists as $newPhamrmacist)
                     <div class="card">
@@ -143,7 +143,7 @@
                 <div class="ms-auto p-2"><a href="{{route('examination.availablepharmacists')}}">See all</a></div>
             </div>
         </div>
-        <div class="d-flex justify-content-center list-doctor">
+        <div class="d-flex list-doctor">
             @if(count($allPhamrmacists) > 0)
                 @foreach($allPhamrmacists as $allPhamrmacist)
                     <div class="card">
@@ -196,7 +196,7 @@
                 <div class="ms-auto p-2"><a href="{{route('examination.hotdealmedicine')}}">See all</a></div>
             </div>
         </div>
-        <div class="d-flex justify-content-center list-doctor">
+        <div class="d-flex list-doctor">
             @if(count($hotMedicines) > 0)
                 @foreach($hotMedicines as $hotMedicine)
                     @php
@@ -222,7 +222,7 @@
                 <div class="ms-auto p-2"><a href="{{route('examination.newmedicine')}}">See all</a></div>
             </div>
         </div>
-        <div class="d-flex justify-content-center list-doctor">
+        <div class="d-flex list-doctor">
             @if(count($newMedicines) > 0)
                 @foreach($newMedicines as $newMedicine)
                     @php
@@ -248,7 +248,7 @@
                 <div class="ms-auto p-2"><a href="{{route('examination.recommended')}}">See all</a></div>
             </div>
         </div>
-        <div class="d-flex justify-content-center list-doctor">
+        <div class="d-flex list-doctor">
             @if(count($recommendedMedicines) > 0)
                 @foreach($recommendedMedicines as $recommendedMedicine)
                     @php
