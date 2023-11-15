@@ -71,7 +71,7 @@
         $(document).ready(function () {
             async function callListDoctor() {
                 await $.ajax({
-                    url: `{{route('doctors.info.restapi.list')}}/?size=16`,
+                    url: `{{route('doctors.info.restapi.list')}}/?size=4`,
                     method: 'GET',
                     success: function (response) {
                         showListDoctor(response);

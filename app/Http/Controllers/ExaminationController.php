@@ -13,6 +13,7 @@ use App\Models\CalcViewQuestion;
 use App\Models\Clinic;
 use App\Models\DoctorDepartment;
 use App\Models\DoctorInfo;
+use App\Models\online_medicine\CategoryProduct;
 use App\Models\online_medicine\ProductMedicine;
 use App\Models\Question;
 use Carbon\Carbon;
@@ -60,9 +61,11 @@ class ExaminationController extends Controller
         $hotMedicines = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->limit(16)->get();
         $newMedicines = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->orderBy('id', 'DESC')->limit(16)->get();
         $recommendedMedicines = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->limit(16)->get();
+
+        $categoryMedicines = CategoryProduct::where('status', true)->get();
         return view('examination.findmymedicine', compact(
             'bestPhamrmacists', 'newPhamrmacists', 'allPhamrmacists',
-            'hotMedicines', 'newMedicines', 'recommendedMedicines'));
+            'hotMedicines', 'newMedicines', 'recommendedMedicines', 'categoryMedicines'));
     }
 
     public function bestPharmacists()

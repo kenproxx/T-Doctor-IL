@@ -149,6 +149,8 @@ class AdminDoctorInfoApi extends Controller
 
         $apply_for = $request->input('apply_for');
 
+        $department_id = $request->input('department_id');
+
         $doctor->name = $name;
         $doctor->name_en = $name_en;
         $doctor->name_laos = $name_laos;
@@ -190,6 +192,8 @@ class AdminDoctorInfoApi extends Controller
 
         $doctor->status = $status;
         $doctor->apply_for = $apply_for;
+
+        $doctor->department_id = $department_id;
 
         return $doctor->save();
     }

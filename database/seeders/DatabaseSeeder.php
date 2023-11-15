@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
 //            QuestionSeeder::class,
 //            ClinicSeeder::class,
 //            DoctorDepartmentSeeder::class,
+//            CategoryProductSeeder::class,
         ]);
     }
 }

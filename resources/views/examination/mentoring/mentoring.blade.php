@@ -241,7 +241,7 @@
             <a class="tab active" href="#">All</a>
             <a class="tab" href="#">Health</a>
             <a class="tab" href="#">Beauty</a>
-            <a class="tab" href="#">New/Events</a>
+            <a class="tab" href="#">Losing weight</a>
             <a class="tab" href="#">Kids</a>
             <a class="tab" href="#">Pets</a>
             <a class="tab" href="#">Other</a>

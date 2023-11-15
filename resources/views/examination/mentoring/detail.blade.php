@@ -270,7 +270,9 @@
             transition: 0.3s;
         }
 
-        #mentoring-img img:hover {opacity: 0.7;}
+        #mentoring-img img:hover {
+            opacity: 0.7;
+        }
 
         /* The Modal (background) */
         #image-viewer {
@@ -282,23 +284,31 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgb(0,0,0);
-            background-color: rgba(0,0,0,0.9);
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.9);
         }
+
         #image-viewer .modal-content {
             margin: auto;
             display: block;
             width: 80%;
             max-width: 700px;
         }
+
         #image-viewer .modal-content {
             animation-name: zoom;
             animation-duration: 0.6s;
         }
+
         @keyframes zoom {
-            from {transform:scale(0)}
-            to {transform:scale(1)}
+            from {
+                transform: scale(0)
+            }
+            to {
+                transform: scale(1)
+            }
         }
+
         #image-viewer .close {
             position: absolute;
             top: 15px;
@@ -308,6 +318,7 @@
             font-weight: bold;
             transition: 0.3s;
         }
+
         #image-viewer .close:hover,
         #image-viewer .close:focus {
             color: #bbb;
@@ -315,31 +326,23 @@
             cursor: pointer;
         }
 
-        @media only screen and (max-width: 700px){
+        @media only screen and (max-width: 700px) {
             #image-viewer .modal-content {
                 width: 100%;
             }
         }
     </style>
-    <head>
-        <meta charset=utf-8>
-        <meta name=description content="">
-        <meta name=viewport content="width=device-width, initial-scale=1">
-        <title>Jquery Comments Plugin</title>
-
-        <!-- Styles -->
-        <link rel="stylesheet" type="text/css"
-              href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
-        <!-- Libraries -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-        <script type="text/javascript"
-                src="https://cdnjs.cloudflare.com/ajax/libs/jquery.textcomplete/1.8.0/jquery.textcomplete.js"></script>
-
-    </head>
     @include('layouts.partials.header_3')
     @include('component.banner')
-
+    @php
+        $isDoctor = false;
+        if (Auth::check()){
+            $doctor = \App\Models\DoctorInfo::where('created_by', Auth::user()->id)->where('status', \App\Enums\DoctorInfoStatus::ACTIVE)->first();
+            if ($doctor){
+                $isDoctor = true;
+            }
+        }
+    @endphp
     <div id="mentoring" class="container">
         <a href="{{ route('examination.mentoring') }}">
             <div class="page-header">
@@ -402,8 +405,10 @@
                     <button type="button" class="btn btn-primary mx-2 button-main"
                             onclick="changeEmotion()">{{ $isLike ? ( $isLike->is_like ? 'Dislike' : 'Like' ) : 'Like'}}</button>
                 @endif
-                <button type="button" class="btn btn-primary mx-2 button-main" onclick="replyCommentMain()">Reply
-                </button>
+                @if($isDoctor)
+                    <button type="button" class="btn btn-primary mx-2 button-main" onclick="replyCommentMain()">Reply
+                    </button>
+                @endif
             </div>
         </div>
 
@@ -422,11 +427,11 @@
                                 <img class="ellipse"
                                      src="https://media.licdn.com/dms/image/D560BAQE96KctT7x-iw/company-logo_200_200/0/1666170056007?e=2147483647&v=beta&t=U-5DmL_mYQaduEYyl0aVlabEvxP6-F5nZE9daao6Wuk"/>
                                 <div
-                                    class="text-wrapper text-title">{{ $answer->user_id ? User::getNameByID($answer->user_id) : $answer->name }}</div>
+                                        class="text-wrapper text-title">{{ $answer->user_id ? User::getNameByID($answer->user_id) : $answer->name }}</div>
                             </div>
                             <div class="div-wrapper">
                                 <div
-                                    class="text-wrapper-2">{{ Carbon::parse($answer->created_at)->format('H:i:s d/m/Y') }}</div>
+                                        class="text-wrapper-2">{{ Carbon::parse($answer->created_at)->format('H:i:s d/m/Y') }}</div>
                             </div>
                         </div>
                         <div class="d-ch-v-c-c-t-t-l-n-u-wrapper">
@@ -454,19 +459,21 @@
                         </div>
                     </div>
                     <div class="div-5 justify-content-end" id="button-reply-comment-{{ $index }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <g clip-path="url(#clip0_1944_12433)">
-                                <path
-                                    d="M6.66667 4.66808V1.83342C6.66667 1.63275 6.546 1.45142 6.36133 1.37275C6.17733 1.29475 5.962 1.33408 5.81867 1.47475L0.152 6.97475C0.0546667 7.06875 0 7.19808 0 7.33342C0 7.46875 0.0546667 7.59808 0.152 7.69208L5.81867 13.1921C5.96333 13.3321 6.178 13.3714 6.36133 13.2941C6.546 13.2154 6.66667 13.0341 6.66667 12.8334V10.0001H7.612C10.7027 10.0001 13.552 11.6801 15.0473 14.3814L15.0613 14.4067C15.1507 14.5694 15.32 14.6667 15.5 14.6667C15.5413 14.6667 15.5827 14.6621 15.624 14.6514C15.8453 14.5947 16 14.3954 16 14.1667C16 8.98408 11.8287 4.75742 6.66667 4.66808Z"
-                                    fill="#929292"/>
-                            </g>
-                            <defs>
-                                <clipPath id="clip0_1944_12433">
-                                    <rect width="16" height="16" fill="white"/>
-                                </clipPath>
-                            </defs>
-                        </svg>
-                        <div class="text-wrapper-3 reply-comment">Reply</div>
+                        @if($isDoctor)
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <g clip-path="url(#clip0_1944_12433)">
+                                    <path
+                                        d="M6.66667 4.66808V1.83342C6.66667 1.63275 6.546 1.45142 6.36133 1.37275C6.17733 1.29475 5.962 1.33408 5.81867 1.47475L0.152 6.97475C0.0546667 7.06875 0 7.19808 0 7.33342C0 7.46875 0.0546667 7.59808 0.152 7.69208L5.81867 13.1921C5.96333 13.3321 6.178 13.3714 6.36133 13.2941C6.546 13.2154 6.66667 13.0341 6.66667 12.8334V10.0001H7.612C10.7027 10.0001 13.552 11.6801 15.0473 14.3814L15.0613 14.4067C15.1507 14.5694 15.32 14.6667 15.5 14.6667C15.5413 14.6667 15.5827 14.6621 15.624 14.6514C15.8453 14.5947 16 14.3954 16 14.1667C16 8.98408 11.8287 4.75742 6.66667 4.66808Z"
+                                        fill="#929292"/>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_1944_12433">
+                                        <rect width="16" height="16" fill="white"/>
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                            <div class="text-wrapper-3 reply-comment">Reply</div>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -14,8 +14,10 @@
                                 Category
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @foreach($categoryMedicines as $categoryMedicine)
                                     <a class="dropdown-item doctor-department" href="#"
-                                       data-department="category">Category</a>
+                                       data-department="{{ $categoryMedicine->id }}">{{ $categoryMedicine->name }}</a>
+                                @endforeach
                             </div>
                         </li>
                     </div>
