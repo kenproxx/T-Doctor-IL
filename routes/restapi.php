@@ -7,6 +7,7 @@ use App\Http\Controllers\restapi\ClinicApi;
 use App\Http\Controllers\restapi\DoctorInfoApi;
 use App\Http\Controllers\restapi\PharmacyApi;
 use App\Http\Controllers\restapi\ProductInfoApi;
+use App\Http\Controllers\restapi\ProductMedicineApi;
 use App\Http\Controllers\restapi\QrCodeApi;
 use App\Http\Controllers\restapi\ReadAddressApi;
 use App\Http\Controllers\restapi\ReviewApi;
@@ -83,4 +84,8 @@ Route::group(['prefix' => 'address'], function () {
     Route::get('/provinces', [ReadAddressApi::class, 'getAllProvince'])->name('restapi.get.provinces');
     Route::get('/districts/{code}', [ReadAddressApi::class, 'getAllDistrictByProvinceCode'])->name('restapi.get.districts');
     Route::get('/communes/{code}', [ReadAddressApi::class, 'getAllCommuneByDistrictCode'])->name('restapi.get.communes');
+});
+
+Route::group(['prefix' => 'products-medicines'], function () {
+    Route::get('/category/{id}', [ProductMedicineApi::class, 'findMedicineByCategory'])->name('restapi.get.products.medicines.category');
 });

@@ -45,6 +45,11 @@ class MedicalPermission
             $user = Auth::user();
         }
         $role_user = DB::table('role_users')->where('user_id', $user->id)->first();
+        if (!$role_user) {
+            User::where('id', $user->id)->delete();
+            Auth::logout();
+            return redirect(route('home'));
+        }
         $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
 
         if ($roleNames->contains('DOCTORS')

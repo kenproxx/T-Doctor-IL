@@ -15,8 +15,8 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @foreach($categoryMedicines as $categoryMedicine)
-                                    <a class="dropdown-item doctor-department" href="#"
-                                       data-department="{{ $categoryMedicine->id }}">{{ $categoryMedicine->name }}</a>
+                                    <a class="dropdown-item medicine-product" href="#"
+                                       data-medicine="{{ $categoryMedicine }}">{{ $categoryMedicine->name }}</a>
                                 @endforeach
                             </div>
                         </li>
@@ -29,244 +29,301 @@
                 </div>
             </div>
         </div>
-        <div class="d-flex justify-content-center">
-            <div class=" list-title d-flex">
-                <div class="list--doctor p-0">
-                    <p>Best Pharmacists</p>
+
+        <div id="list-find-my-medicine">
+            <div class="d-flex justify-content-center">
+                <div class="list-title d-flex">
+                    <div class="list--doctor p-0">
+                        <p>Best Pharmacists</p>
+                    </div>
+                    <div class="ms-auto p-2"><a href="{{route('examination.bestpharmacists')}}">See all</a></div>
                 </div>
-                <div class="ms-auto p-2"><a href="{{route('examination.bestpharmacists')}}">See all</a></div>
             </div>
-        </div>
-        <div class="d-flex list-doctor">
-            @if(count($bestPhamrmacists) > 0)
-                @foreach($bestPhamrmacists as $bestPhamrmacist)
-                    <div class="card">
-                        <i class="bi bi-heart"></i>
-                        @php
-                            $arrayGallery=[];
-                            $gallery = $bestPhamrmacist->gallery;
-                            if ($gallery){
-                                $arrayGallery = explode(',', $gallery);
-                            }
-                            $text = '';
-                            switch ($bestPhamrmacist->time_work){
-                                case \App\Enums\TypeTimeWork::ALL:
-                                    $text = '24/7';
-                                    break;
-                                case \App\Enums\TypeTimeWork::OTHER:
-                                    $text = 'Other';
-                                    break;
-                                case \App\Enums\TypeTimeWork::ONLY_MORNING:
-                                    $text = 'All morning';
-                                    break;
-                                case \App\Enums\TypeTimeWork::ONLY_AFTERNOON:
-                                    $text = 'All afternoon';
-                                    break;
-                                default:
-                                    $text = 'Private';
-                                    break;
+            <div class="d-flex list-doctor">
+                @if(count($bestPhamrmacists) > 0)
+                    @foreach($bestPhamrmacists as $bestPhamrmacist)
+                        <div class="card">
+                            <i class="bi bi-heart"></i>
+                            @php
+                                $arrayGallery=[];
+                                $gallery = $bestPhamrmacist->gallery;
+                                if ($gallery){
+                                    $arrayGallery = explode(',', $gallery);
+                                }
+                                $text = '';
+                                switch ($bestPhamrmacist->time_work){
+                                    case \App\Enums\TypeTimeWork::ALL:
+                                        $text = '24/7';
+                                        break;
+                                    case \App\Enums\TypeTimeWork::OTHER:
+                                        $text = 'Other';
+                                        break;
+                                    case \App\Enums\TypeTimeWork::ONLY_MORNING:
+                                        $text = 'All morning';
+                                        break;
+                                    case \App\Enums\TypeTimeWork::ONLY_AFTERNOON:
+                                        $text = 'All afternoon';
+                                        break;
+                                    default:
+                                        $text = 'Private';
+                                        break;
 
-                            }
+                                }
 
-                        @endphp
-                        @if(count($arrayGallery) > 0)
-                            <img src="{{asset($arrayGallery[0])}}" class="card-img-top" alt="...">
-                        @endif
-                        <div class="card-body">
-                            <a href="#"><h5
+                            @endphp
+                            @if(count($arrayGallery) > 0)
+                                <img src="{{asset($arrayGallery[0])}}" class="card-img-top" alt="...">
+                            @endif
+                            <div class="card-body">
+                                <a href="#"><h5
                                         class="card-title"> {{ $bestPhamrmacist->name }}</h5></a>
-                            <p class="card-text_1">Location: <b>{{ $bestPhamrmacist->address_detail }}</b></p>
-                            <p class="card-text_1">Working time: <b> {{ $text }}</b></p>
+                                <p class="card-text_1">Location: <b>{{ $bestPhamrmacist->address_detail }}</b></p>
+                                <p class="card-text_1">Working time: <b> {{ $text }}</b></p>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
-            @endif
-        </div>
-        <div class="d-flex justify-content-center">
-            <div class=" list-title d-flex">
-                <div class="list--doctor p-0">
-                    <p>New Pharmacists</p>
-                </div>
-                <div class="ms-auto p-2"><a href="{{route('examination.newpharmacists')}}">See all</a></div>
+                    @endforeach
+                @endif
             </div>
-        </div>
-        <div class="d-flex list-doctor">
-            @if(count($newPhamrmacists) > 0)
-                @foreach($newPhamrmacists as $newPhamrmacist)
-                    <div class="card">
-                        <i class="bi bi-heart"></i>
-                        @php
-                            $arrayGallery=[];
-                            $gallery = $newPhamrmacist->gallery;
-                            if ($gallery){
-                                $arrayGallery = explode(',', $gallery);
-                            }
-                            $text = '';
-                            switch ($newPhamrmacist->time_work){
-                                case \App\Enums\TypeTimeWork::ALL:
-                                    $text = '24/7';
-                                    break;
-                                case \App\Enums\TypeTimeWork::OTHER:
-                                    $text = 'Other';
-                                    break;
-                                case \App\Enums\TypeTimeWork::ONLY_MORNING:
-                                    $text = 'All morning';
-                                    break;
-                                case \App\Enums\TypeTimeWork::ONLY_AFTERNOON:
-                                    $text = 'All afternoon';
-                                    break;
-                                default:
-                                    $text = 'Private';
-                                    break;
+            <div class="d-flex justify-content-center">
+                <div class=" list-title d-flex">
+                    <div class="list--doctor p-0">
+                        <p>New Pharmacists</p>
+                    </div>
+                    <div class="ms-auto p-2"><a href="{{route('examination.newpharmacists')}}">See all</a></div>
+                </div>
+            </div>
+            <div class="d-flex list-doctor">
+                @if(count($newPhamrmacists) > 0)
+                    @foreach($newPhamrmacists as $newPhamrmacist)
+                        <div class="card">
+                            <i class="bi bi-heart"></i>
+                            @php
+                                $arrayGallery=[];
+                                $gallery = $newPhamrmacist->gallery;
+                                if ($gallery){
+                                    $arrayGallery = explode(',', $gallery);
+                                }
+                                $text = '';
+                                switch ($newPhamrmacist->time_work){
+                                    case \App\Enums\TypeTimeWork::ALL:
+                                        $text = '24/7';
+                                        break;
+                                    case \App\Enums\TypeTimeWork::OTHER:
+                                        $text = 'Other';
+                                        break;
+                                    case \App\Enums\TypeTimeWork::ONLY_MORNING:
+                                        $text = 'All morning';
+                                        break;
+                                    case \App\Enums\TypeTimeWork::ONLY_AFTERNOON:
+                                        $text = 'All afternoon';
+                                        break;
+                                    default:
+                                        $text = 'Private';
+                                        break;
 
-                            }
+                                }
 
-                        @endphp
-                        @if(count($arrayGallery) > 0)
-                            <img src="{{asset($arrayGallery[0])}}" class="card-img-top" alt="...">
-                        @endif
-                        <div class="card-body">
-                            <a href="#"><h5
+                            @endphp
+                            @if(count($arrayGallery) > 0)
+                                <img src="{{asset($arrayGallery[0])}}" class="card-img-top" alt="...">
+                            @endif
+                            <div class="card-body">
+                                <a href="#"><h5
                                         class="card-title"> {{ $newPhamrmacist->name }}</h5></a>
-                            <p class="card-text_1">Location: <b>{{ $newPhamrmacist->address_detail }}</b></p>
-                            <p class="card-text_1">Working time: <b> {{ $text }}</b></p>
+                                <p class="card-text_1">Location: <b>{{ $newPhamrmacist->address_detail }}</b></p>
+                                <p class="card-text_1">Working time: <b> {{ $text }}</b></p>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
-            @endif
-        </div>
-        <div class="d-flex justify-content-center">
-            <div class=" list-title d-flex">
-                <div class="list--doctor p-0">
-                    <p>24/7 Available Pharmacists</p>
-                </div>
-                <div class="ms-auto p-2"><a href="{{route('examination.availablepharmacists')}}">See all</a></div>
+                    @endforeach
+                @endif
             </div>
-        </div>
-        <div class="d-flex list-doctor">
-            @if(count($allPhamrmacists) > 0)
-                @foreach($allPhamrmacists as $allPhamrmacist)
-                    <div class="card">
-                        <i class="bi bi-heart"></i>
-                        @php
-                            $arrayGallery=[];
-                            $gallery = $allPhamrmacist->gallery;
-                            if ($gallery){
-                                $arrayGallery = explode(',', $gallery);
-                            }
-                            $text = '';
-                            switch ($allPhamrmacist->time_work){
-                                case \App\Enums\TypeTimeWork::ALL:
-                                    $text = '24/7';
-                                    break;
-                                case \App\Enums\TypeTimeWork::OTHER:
-                                    $text = 'Other';
-                                    break;
-                                case \App\Enums\TypeTimeWork::ONLY_MORNING:
-                                    $text = 'All morning';
-                                    break;
-                                case \App\Enums\TypeTimeWork::ONLY_AFTERNOON:
-                                    $text = 'All afternoon';
-                                    break;
-                                default:
-                                    $text = 'Private';
-                                    break;
+            <div class="d-flex justify-content-center">
+                <div class=" list-title d-flex">
+                    <div class="list--doctor p-0">
+                        <p>24/7 Available Pharmacists</p>
+                    </div>
+                    <div class="ms-auto p-2"><a href="{{route('examination.availablepharmacists')}}">See all</a></div>
+                </div>
+            </div>
+            <div class="d-flex list-doctor">
+                @if(count($allPhamrmacists) > 0)
+                    @foreach($allPhamrmacists as $allPhamrmacist)
+                        <div class="card">
+                            <i class="bi bi-heart"></i>
+                            @php
+                                $arrayGallery=[];
+                                $gallery = $allPhamrmacist->gallery;
+                                if ($gallery){
+                                    $arrayGallery = explode(',', $gallery);
+                                }
+                                $text = '';
+                                switch ($allPhamrmacist->time_work){
+                                    case \App\Enums\TypeTimeWork::ALL:
+                                        $text = '24/7';
+                                        break;
+                                    case \App\Enums\TypeTimeWork::OTHER:
+                                        $text = 'Other';
+                                        break;
+                                    case \App\Enums\TypeTimeWork::ONLY_MORNING:
+                                        $text = 'All morning';
+                                        break;
+                                    case \App\Enums\TypeTimeWork::ONLY_AFTERNOON:
+                                        $text = 'All afternoon';
+                                        break;
+                                    default:
+                                        $text = 'Private';
+                                        break;
 
-                            }
+                                }
 
-                        @endphp
-                        @if(count($arrayGallery) > 0)
-                            <img src="{{asset($arrayGallery[0])}}" class="card-img-top" alt="...">
-                        @endif
-                        <div class="card-body">
-                            <a href="#"><h5
+                            @endphp
+                            @if(count($arrayGallery) > 0)
+                                <img src="{{asset($arrayGallery[0])}}" class="card-img-top" alt="...">
+                            @endif
+                            <div class="card-body">
+                                <a href="#"><h5
                                         class="card-title"> {{ $allPhamrmacist->name }}</h5></a>
-                            <p class="card-text_1">Location: <b>{{ $allPhamrmacist->address_detail }}</b></p>
-                            <p class="card-text_1">Working time: <b> {{ $text }}</b></p>
+                                <p class="card-text_1">Location: <b>{{ $allPhamrmacist->address_detail }}</b></p>
+                                <p class="card-text_1">Working time: <b> {{ $text }}</b></p>
+                            </div>
                         </div>
-                    </div>
-                @endforeach
-            @endif
-        </div>
-        <div class="d-flex justify-content-center">
-            <div class=" list-title d-flex">
-                <div class="list--doctor p-0">
-                    <p>Hot deal medicine</p>
-                </div>
-                <div class="ms-auto p-2"><a href="{{route('examination.hotdealmedicine')}}">See all</a></div>
+                    @endforeach
+                @endif
             </div>
-        </div>
-        <div class="d-flex list-doctor">
-            @if(count($hotMedicines) > 0)
-                @foreach($hotMedicines as $hotMedicine)
-                    @php
-                        $user = \App\Models\User::find($hotMedicine->user_id);
-                    @endphp
-                    <div class="card">
-                        <i class="bi bi-heart"></i>
-                        <img src="{{asset($hotMedicine->thumbnail)}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <a href="#"><h5 class="card-title">{{ $hotMedicine->name }}</h5></a>
-                            <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
-                            <p class="card-text_1">Price: <b>{{ $hotMedicine->price }} {{ $hotMedicine->unit_price }}</b></p>
-                        </div>
+            <div class="d-flex justify-content-center">
+                <div class=" list-title d-flex">
+                    <div class="list--doctor p-0">
+                        <p>Hot deal medicine</p>
                     </div>
-                @endforeach
-            @endif
-        </div>
-        <div class="d-flex justify-content-center">
-            <div class=" list-title d-flex">
-                <div class="list--doctor p-0">
-                    <p>New medicine</p>
+                    <div class="ms-auto p-2"><a href="{{route('examination.hotdealmedicine')}}">See all</a></div>
                 </div>
-                <div class="ms-auto p-2"><a href="{{route('examination.newmedicine')}}">See all</a></div>
             </div>
-        </div>
-        <div class="d-flex list-doctor">
-            @if(count($newMedicines) > 0)
-                @foreach($newMedicines as $newMedicine)
-                    @php
-                        $user = \App\Models\User::find($newMedicine->user_id);
-                    @endphp
-                    <div class="card">
-                        <i class="bi bi-heart"></i>
-                        <img src="{{asset($newMedicine->thumbnail)}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <a href="#"><h5 class="card-title">{{ $newMedicine->name }}</h5></a>
-                            <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
-                            <p class="card-text_1">Price: <b>{{ $newMedicine->price }} {{ $newMedicine->unit_price }}</b></p>
+            <div class="d-flex list-doctor">
+                @if(count($hotMedicines) > 0)
+                    @foreach($hotMedicines as $hotMedicine)
+                        @php
+                            $user = \App\Models\User::find($hotMedicine->user_id);
+                        @endphp
+                        <div class="card">
+                            <i class="bi bi-heart"></i>
+                            <img src="{{asset($hotMedicine->thumbnail)}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <a href="{{ route('medicine.detail', $hotMedicine->id) }}"><h5 class="card-title">{{ $hotMedicine->name }}</h5></a>
+                                <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
+                                <p class="card-text_1">Price: <b>{{ $hotMedicine->price }} {{ $hotMedicine->unit_price }}</b></p>
+                            </div>
                         </div>
+                    @endforeach
+                @endif
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class=" list-title d-flex">
+                    <div class="list--doctor p-0">
+                        <p>New medicine</p>
                     </div>
-                @endforeach
-            @endif
-        </div>
-        <div class="d-flex justify-content-center">
-            <div class=" list-title d-flex">
-                <div class="list--doctor p-0">
-                    <p>Recommended</p>
+                    <div class="ms-auto p-2"><a href="{{route('examination.newmedicine')}}">See all</a></div>
                 </div>
-                <div class="ms-auto p-2"><a href="{{route('examination.recommended')}}">See all</a></div>
             </div>
-        </div>
-        <div class="d-flex list-doctor">
-            @if(count($recommendedMedicines) > 0)
-                @foreach($recommendedMedicines as $recommendedMedicine)
-                    @php
-                        $user = \App\Models\User::find($recommendedMedicine->user_id);
-                    @endphp
-                    <div class="card">
-                        <i class="bi bi-heart"></i>
-                        <img src="{{asset($recommendedMedicine->thumbnail)}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <a href="#"><h5 class="card-title">{{ $recommendedMedicine->name }}</h5></a>
-                            <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
-                            <p class="card-text_1">Price: <b>{{ $recommendedMedicine->price }} {{ $recommendedMedicine->unit_price }}</b></p>
+            <div class="d-flex list-doctor">
+                @if(count($newMedicines) > 0)
+                    @foreach($newMedicines as $newMedicine)
+                        @php
+                            $user = \App\Models\User::find($newMedicine->user_id);
+                        @endphp
+                        <div class="card">
+                            <i class="bi bi-heart"></i>
+                            <img src="{{asset($newMedicine->thumbnail)}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <a href="{{ route('medicine.detail', $newMedicine->id) }}"><h5 class="card-title">{{ $newMedicine->name }}</h5></a>
+                                <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
+                                <p class="card-text_1">Price: <b>{{ $newMedicine->price }} {{ $newMedicine->unit_price }}</b></p>
+                            </div>
                         </div>
+                    @endforeach
+                @endif
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class=" list-title d-flex">
+                    <div class="list--doctor p-0">
+                        <p>Recommended</p>
                     </div>
-                @endforeach
-            @endif
+                    <div class="ms-auto p-2"><a href="{{route('examination.recommended')}}">See all</a></div>
+                </div>
+            </div>
+            <div class="d-flex list-doctor">
+                @if(count($recommendedMedicines) > 0)
+                    @foreach($recommendedMedicines as $recommendedMedicine)
+                        @php
+                            $user = \App\Models\User::find($recommendedMedicine->user_id);
+                        @endphp
+                        <div class="card">
+                            <i class="bi bi-heart"></i>
+                            <img src="{{asset($recommendedMedicine->thumbnail)}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <a href="{{ route('medicine.detail', $recommendedMedicine->id) }}"><h5 class="card-title">{{ $recommendedMedicine->name }}</h5></a>
+                                <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
+                                <p class="card-text_1">Price: <b>{{ $recommendedMedicine->price }} {{ $recommendedMedicine->unit_price }}</b></p>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $('.medicine-product').on('click', function () {
+                let medicine = $(this).data('medicine');
+                callListDoctorByDepartment(medicine);
+            })
 
+            function showListMedicineByCategory(res, medicine) {
+                let html = ``;
+                let url = `{{ asset('storage') }}`;
+                let detail = `{{ route('medicine.detail', ['id' => ':id']) }}`;
+                for (let i = 0; i < res.length; i++) {
+                    let item = res[i];
+                    let mainUrl = detail.replace(':id', item['id']);
+                    let imageDoctor = item['thumbnail'];
+                    let myArray = imageDoctor.split("/storage");
+                    html = html + `<div class="card">
+                            <i class="bi bi-heart"></i>
+                            <img src="${url}${myArray[1]}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <a href="${mainUrl}"><h5 class="card-title">${item['name']}</h5></a>
+                                <p class="card-text_1">Location: <b>${item['address_code']}</b></p>
+                                <p class="card-text_1">Price: <b>${item['price']} ${item['unit_price']}</b></p>
+                            </div>
+                        </div>`;
+                }
+                let listDoctor = `<div class="list-doctor d-flex"> ${html} </div>`;
+                let showMedicine = ` <div class="d-flex justify-content-center">
+                <div class=" list-title d-flex">
+                    <div class="list--doctor p-0">
+                        <p>${medicine.name}</p>
+                    </div>
+                    <div class="ms-auto p-2"><a href="{{route('examination.findmymedicine')}}">See all</a></div>
+                </div>
+            </div>`;
+                let allHtml = showMedicine + listDoctor;
+                $('#list-find-my-medicine').empty().append(allHtml);
+            }
+
+            async function callListDoctorByDepartment(department) {
+                let url = `{{route('restapi.get.products.medicines.category', ['id' => ':id'])}}/?size=4`;
+                url = url.replace(':id', department['id']);
+                await $.ajax({
+                    url: url,
+                    method: 'GET',
+                    success: function (response) {
+                        showListMedicineByCategory(response, department);
+                    },
+                    error: function (exception) {
+                        console.log(exception)
+                    }
+                });
+            }
+        })
+    </script>
 @endsection
 
