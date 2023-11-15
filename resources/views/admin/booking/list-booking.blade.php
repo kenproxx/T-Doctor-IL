@@ -35,7 +35,7 @@
                         @endphp
                         {{$user}}</td>
                     <td>@php
-                            $clinic = \App\Models\Clinic::find($item->clinic_id)->pluck('name')->first();
+                            $clinic = \App\Models\Clinic::where('id',$item->clinic_id)->pluck('name')->first();
                             @endphp
                         {{$clinic}}
                     </td>
