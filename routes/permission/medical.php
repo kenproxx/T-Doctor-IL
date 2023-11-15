@@ -208,6 +208,8 @@ Route::group(['prefix' => 'settings'], function () {
     Route::get('/list', [SettingController::class, 'getAll'])->name('api.backend.setting.list');
     Route::get('/create', [SettingController::class, 'createView'])->name('setting.create');
     Route::post('/creat', [SettingController::class, 'create'])->name('api.backend.setting.create');
+    Route::get('/edit/{id}', [SettingController::class, 'edit'])->name('setting.edit');
+    Route::post('/update/{id}', [SettingController::class, 'update'])->name('api.backend.setting.update');
 
 });
 
