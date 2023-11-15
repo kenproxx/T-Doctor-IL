@@ -1,4 +1,4 @@
-@php use App\Enums\AnswerStatus;use App\Enums\SearchMentoring;use App\Models\QuestionLikes;use App\Models\User;use Carbon\Carbon;use Illuminate\Support\Facades\Auth; @endphp
+@php use App\Enums\AnswerStatus;use App\Models\QuestionLikes;use App\Models\User;use Carbon\Carbon;use Illuminate\Support\Facades\Auth; @endphp
 @extends('layouts.master')
 @section('title', 'Home')
 @section('content')
@@ -367,11 +367,28 @@
                 <div class="div col-sm-4">
                     <div class="catalog">
                         <div class="div">
-                            <img class="rectangle" src="{{ asset($picture) }}"/>
+                            <img alt="" class="rectangle" src="{{ asset($picture) }}"/>
                         </div>
                     </div>
                 </div>
             @endforeach
+
+            @if(Auth::check())
+                @php
+                    $doctor = \App\Models\DoctorInfo::where('created_by', Auth::user()->id)->get();
+                @endphp
+                @if(Auth::user()->id == $question->user_id || $doctor)
+                    @foreach(explode(',', $question->gallery) as $picture)
+                        <div class="div col-sm-4">
+                            <div class="catalog">
+                                <div class="div">
+                                    <img alt="" class="rectangle" src="{{ asset($picture) }}"/>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            @endif
         </div>
 
         <div class="mt-5">
@@ -427,11 +444,11 @@
                                 <img class="ellipse"
                                      src="https://media.licdn.com/dms/image/D560BAQE96KctT7x-iw/company-logo_200_200/0/1666170056007?e=2147483647&v=beta&t=U-5DmL_mYQaduEYyl0aVlabEvxP6-F5nZE9daao6Wuk"/>
                                 <div
-                                        class="text-wrapper text-title">{{ $answer->user_id ? User::getNameByID($answer->user_id) : $answer->name }}</div>
+                                    class="text-wrapper text-title">{{ $answer->user_id ? User::getNameByID($answer->user_id) : $answer->name }}</div>
                             </div>
                             <div class="div-wrapper">
                                 <div
-                                        class="text-wrapper-2">{{ Carbon::parse($answer->created_at)->format('H:i:s d/m/Y') }}</div>
+                                    class="text-wrapper-2">{{ Carbon::parse($answer->created_at)->format('H:i:s d/m/Y') }}</div>
                             </div>
                         </div>
                         <div class="d-ch-v-c-c-t-t-l-n-u-wrapper">
@@ -460,7 +477,8 @@
                     </div>
                     <div class="div-5 justify-content-end" id="button-reply-comment-{{ $index }}">
                         @if($isDoctor)
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                                 fill="none">
                                 <g clip-path="url(#clip0_1944_12433)">
                                     <path
                                         d="M6.66667 4.66808V1.83342C6.66667 1.63275 6.546 1.45142 6.36133 1.37275C6.17733 1.29475 5.962 1.33408 5.81867 1.47475L0.152 6.97475C0.0546667 7.06875 0 7.19808 0 7.33342C0 7.46875 0.0546667 7.59808 0.152 7.69208L5.81867 13.1921C5.96333 13.3321 6.178 13.3714 6.36133 13.2941C6.546 13.2154 6.66667 13.0341 6.66667 12.8334V10.0001H7.612C10.7027 10.0001 13.552 11.6801 15.0473 14.3814L15.0613 14.4067C15.1507 14.5694 15.32 14.6667 15.5 14.6667C15.5413 14.6667 15.5827 14.6621 15.624 14.6514C15.8453 14.5947 16 14.3954 16 14.1667C16 8.98408 11.8287 4.75742 6.66667 4.66808Z"
