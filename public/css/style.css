@@ -114,8 +114,11 @@ a {
 }
 .card .bi-heart{
     position: absolute;
-    left: 200px;
-    top: 20px;
+    left: 185px;
+    top: 15px;
+}
+#list-doctor{
+    gap:25px
 }
 .list-doctor .card{
     padding: 16px;
@@ -1000,14 +1003,6 @@ span.material-symbols-outlined {
 .row{
     width: 100%;
 }
-.box {
-    position: relative;
-    max-width: 90px;
-    width: 90%;
-    height: 300px;
-    background: #fff;
-    box-shadow: 0 0 15px rgba(0,0,0,.1);
-}
 
 /* common */
 .ribbon {
@@ -1042,4 +1037,24 @@ span.material-symbols-outlined {
 }
 #list-doctor .card .ribbon{
     padding: 0;!important;
+}
+.has-search .form-control {
+    padding-left: 2.375rem;
+   margin-top: 10px;
+    height: 100%;
+    width: 568px;
+    border-radius: 8px;
+}
+
+.has-search .form-control-feedback {
+    position: absolute;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+    margin-top: 8px;
+
 }

@@ -7,16 +7,23 @@
         <div class="d-flex justify-content-center">
             <div id="filter" class="box--1 d-flex ">
                 <div class="d-flex flex-fill">
-                    <div class="filter_option"><p>Category <i class="bi bi-chevron-expand"></i></p></div>
-                    <div class="filter_option"><p>Location <i class="bi bi-chevron-expand"></i></p></div>
+                    <div class="filter_option" style="list-style: none;">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Category
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item doctor-department" href="#"
+                                       data-department="category">Category</a>
+                            </div>
+                        </li>
+                    </div>
+                    <div class="filter_option"><p>Location</p></div>
                 </div>
-                <div class="filter_search flex-fill d-flex align-content-center p-0"
-                     style="background-color: #F3F3F3!important;">
-                    <button style="background-color: #F3F3F3;color: #000"><i class="bi bi-search"
-                                                                             style="font-size: 25px; font-weight: 600"></i>
-                    </button>
-                    <input style="border: none" type="text" name="filter_search" id="filter_search"
-                           placeholder="Search for anything.....">
+                <div class="form-group has-search">
+                    <span class="fa fa-search form-control-feedback"></span>
+                    <input type="text" class="form-control" placeholder="Search for anything…">
                 </div>
             </div>
         </div>
@@ -118,7 +125,7 @@
                         @endif
                         <div class="card-body">
                             <a href="#"><h5
-                                    class="card-title"> {{ $newPhamrmacist->name }}</h5></a>
+                                        class="card-title"> {{ $newPhamrmacist->name }}</h5></a>
                             <p class="card-text_1">Location: <b>{{ $newPhamrmacist->address_detail }}</b></p>
                             <p class="card-text_1">Working time: <b> {{ $text }}</b></p>
                         </div>
@@ -171,7 +178,7 @@
                         @endif
                         <div class="card-body">
                             <a href="#"><h5
-                                    class="card-title"> {{ $allPhamrmacist->name }}</h5></a>
+                                        class="card-title"> {{ $allPhamrmacist->name }}</h5></a>
                             <p class="card-text_1">Location: <b>{{ $allPhamrmacist->address_detail }}</b></p>
                             <p class="card-text_1">Working time: <b> {{ $text }}</b></p>
                         </div>
@@ -188,7 +195,22 @@
             </div>
         </div>
         <div class="d-flex justify-content-center list-doctor">
-
+            @if(count($hotMedicines) > 0)
+                @foreach($hotMedicines as $hotMedicine)
+                    @php
+                        $user = \App\Models\User::find($hotMedicine->user_id);
+                    @endphp
+                    <div class="card">
+                        <i class="bi bi-heart"></i>
+                        <img src="{{asset($hotMedicine->thumbnail)}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <a href="#"><h5 class="card-title">{{ $hotMedicine->name }}</h5></a>
+                            <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
+                            <p class="card-text_1">Price: <b>{{ $hotMedicine->price }} {{ $hotMedicine->unit_price }}</b></p>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
         </div>
         <div class="d-flex justify-content-center">
             <div class=" list-title d-flex">
@@ -199,7 +221,22 @@
             </div>
         </div>
         <div class="d-flex justify-content-center list-doctor">
-
+            @if(count($newMedicines) > 0)
+                @foreach($newMedicines as $newMedicine)
+                    @php
+                        $user = \App\Models\User::find($newMedicine->user_id);
+                    @endphp
+                    <div class="card">
+                        <i class="bi bi-heart"></i>
+                        <img src="{{asset($newMedicine->thumbnail)}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <a href="#"><h5 class="card-title">{{ $newMedicine->name }}</h5></a>
+                            <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
+                            <p class="card-text_1">Price: <b>{{ $newMedicine->price }} {{ $newMedicine->unit_price }}</b></p>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
         </div>
         <div class="d-flex justify-content-center">
             <div class=" list-title d-flex">
@@ -210,7 +247,22 @@
             </div>
         </div>
         <div class="d-flex justify-content-center list-doctor">
-
+            @if(count($recommendedMedicines) > 0)
+                @foreach($recommendedMedicines as $recommendedMedicine)
+                    @php
+                        $user = \App\Models\User::find($recommendedMedicine->user_id);
+                    @endphp
+                    <div class="card">
+                        <i class="bi bi-heart"></i>
+                        <img src="{{asset($recommendedMedicine->thumbnail)}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <a href="#"><h5 class="card-title">{{ $recommendedMedicine->name }}</h5></a>
+                            <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
+                            <p class="card-text_1">Price: <b>{{ $recommendedMedicine->price }} {{ $recommendedMedicine->unit_price }}</b></p>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
         </div>
     </div>
 

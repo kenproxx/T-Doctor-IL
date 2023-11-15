@@ -21,13 +21,13 @@
                             </div>
                         </li>
                     </div>
-                    <div class="filter_option"><p>Position <i class="bi bi-chevron-expand"></i></p></div>
-                    <div class="filter_option"><p>Location <i class="bi bi-chevron-expand"></i></p></div>
-                    <div class="filter_option"><p>Experience <i class="bi bi-chevron-expand"></i></p></div>
+                    <div class="filter_option"><p>Position</p></div>
+                    <div class="filter_option"><p>Location</p></div>
+                    <div class="filter_option"><p>Experience</p></div>
                 </div>
-                <div class="filter_search flex-fill">
-                    <label for="filter_search"><i class="bi bi-search"></i></label>
-                    <input type="text" name="filter_search" id="filter_search" placeholder="Search for anything.....">
+                <div class="form-group has-search">
+                    <span class="fa fa-search form-control-feedback"></span>
+                    <input type="text" class="form-control" placeholder="Search for anything…">
                 </div>
             </div>
         </div>
@@ -71,7 +71,7 @@
         $(document).ready(function () {
             async function callListDoctor() {
                 await $.ajax({
-                    url: `{{route('doctors.info.restapi.list')}}/?size=4`,
+                    url: `{{route('doctors.info.restapi.list')}}/?size=16`,
                     method: 'GET',
                     success: function (response) {
                         showListDoctor(response);
