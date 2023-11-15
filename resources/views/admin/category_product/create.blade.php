@@ -34,9 +34,11 @@
                 <label>status</label>
                 <select class="custom-select" id="status" name="status">
                     <option
-                        value="1" selected>Active</option>
+                        value="1" selected>Active
+                    </option>
                     <option
-                        value="0">Inactive</option>
+                        value="0">Inactive
+                    </option>
                 </select>
             </div>
         </div>
@@ -52,7 +54,7 @@
             };
             const formData = new FormData();
 
-            const arrField = ['name', 'name_en', 'name_laos', 'status' ];
+            const arrField = ['name', 'name_en', 'name_laos', 'status'];
 
             arrField.forEach((field) => {
                 formData.append(field, $(`#${field}`).val().trim());

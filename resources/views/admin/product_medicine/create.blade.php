@@ -1,3 +1,5 @@
+@php use App\Enums\online_medicine\ObjectOnlineMedicine; @endphp
+@php use App\Enums\online_medicine\FilterOnlineMedicine; @endphp
 @extends('layouts.admin')
 
 @section('main-content')
@@ -72,24 +74,26 @@
                 <div class="col-md-4">
                     <label>Object</label>
                     <select class="custom-select" id="object_" name="object_">
-                        <option value="{{ \App\Enums\online_medicine\ObjectOnlineMedicine::KIDS }}">KIDS</option>
-                        <option value="{{ \App\Enums\online_medicine\ObjectOnlineMedicine::FOR_WOMEN }}">FOR_WOMEN</option>
-                        <option value="{{ \App\Enums\online_medicine\ObjectOnlineMedicine::FOR_MEN }}">FOR_MEN</option>
-                        <option value="{{ \App\Enums\online_medicine\ObjectOnlineMedicine::FOR_ADULT }}">FOR_ADULT</option>
+                        <option value="{{ ObjectOnlineMedicine::KIDS }}">KIDS</option>
+                        <option value="{{ ObjectOnlineMedicine::FOR_WOMEN }}">FOR_WOMEN
+                        </option>
+                        <option value="{{ ObjectOnlineMedicine::FOR_MEN }}">FOR_MEN</option>
+                        <option value="{{ ObjectOnlineMedicine::FOR_ADULT }}">FOR_ADULT
+                        </option>
                     </select>
                 </div>
                 <div class="col-md-4">
                     <label>Filter</label>
                     <select class="custom-select" id="filter_" name="filter_">
-                        <option value="{{ \App\Enums\online_medicine\FilterOnlineMedicine::HEALTH }}">Health</option>
-                        <option value="{{ \App\Enums\online_medicine\FilterOnlineMedicine::BEAUTY }}">Beauty</option>
-                        <option value="{{ \App\Enums\online_medicine\FilterOnlineMedicine::PET }}">Pet</option>
+                        <option value="{{ FilterOnlineMedicine::HEALTH }}">Health</option>
+                        <option value="{{ FilterOnlineMedicine::BEAUTY }}">Beauty</option>
+                        <option value="{{ FilterOnlineMedicine::PET }}">Pet</option>
                     </select>
                 </div>
             </div>
             <div>
                 <label>thumbnail</label>
-                <input type="file" class="form-control" id="thumbnail" name="thumbnail" multiple accept="image/*">
+                <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*">
             </div>
             <div>
                 <label>gallery</label>
@@ -124,21 +128,30 @@
 
             const arrField = [
                 'name', 'name_en', 'name_laos',
-                'description', 'description_en', 'description_laos',
                 'brand_name', 'brand_name_en', 'brand_name_laos',
-                'category_id', 'object_', 'filter_',
-                'thumbnail', 'gallery', 'price', 'status'
+                'category_id', 'object_', 'filter_', 'price', 'status'
             ];
+
+            const fieldTextareaTiny = [
+                'description', 'description_en', 'description_laos',
+            ];
+            fieldTextareaTiny.forEach(fieldTextarea => {
+                const content = tinymce.get(fieldTextarea).getContent();
+                formData.append(fieldTextarea, content);
+            });
 
             arrField.forEach((field) => {
                 formData.append(field, $(`#${field}`).val().trim());
             });
 
+            const photo = $('#thumbnail')[0].files[0];
+            formData.append('thumbnail', photo);
+
             formData.append('_token', '{{ csrf_token() }}');
 
             try {
                 $.ajax({
-                    url: `{{route('api.backend.category-product.store')}}`,
+                    url: `{{route('api.backend.product-medicine.store')}}`,
                     method: 'POST',
                     headers: headers,
                     contentType: false,
