@@ -35,10 +35,10 @@
                 <th scope="row">{{ $index + 1 }}</th>
                 <td>{{ $productMedicine->name }}</td>
                 <td><img src="{{ $productMedicine->thumb }}" alt="" width="100px"></td>
-                <td>{{ $productMedicine->object_ }}</td>
-                <td>{{ $productMedicine->filter_ }}</td>
+                <td>{{ \App\Enums\online_medicine\ObjectOnlineMedicine::NAME_EN[$productMedicine->object_] }}</td>
+                <td>{{ \App\Enums\online_medicine\FilterOnlineMedicine::NAME_EN[$productMedicine->filter_] }}</td>
                 <td>{{ $productMedicine->category_id }}</td>
-                <td>{{ $productMedicine->status }}</td>
+                <td>{{ $productMedicine->status == 1 ? 'Active' : ($productMedicine->status == 0 ? 'Inactive' : '') }}</td>
                 <td>
                     <a href="{{ route('api.backend.product-medicine.edit', ['id' => $productMedicine->id]) }}"
                        class="btn btn-primary">Edit</a>
