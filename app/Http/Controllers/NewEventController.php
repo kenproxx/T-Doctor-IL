@@ -1,28 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\frontend;
+namespace App\Http\Controllers;
 
-use App\Enums\NewEventStatus;
-use App\Http\Controllers\Controller;
 use App\Models\NewEvent;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class NewEventController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $listNewEvent = NewEvent::where('status', NewEventStatus::ACTIVE)
-            ->orderBy('created_at', 'desc')
-            ->get();
-        return view('News-event.News', compact('listNewEvent'));
-    }
-
-    public function detail ()
-    {
-        return view('News-event.detail-news');
+        //
     }
 
     /**
@@ -44,7 +34,7 @@ class HomeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(NewEvent $newEvent)
     {
         //
     }
@@ -52,7 +42,7 @@ class HomeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(NewEvent $newEvent)
     {
         //
     }
@@ -60,7 +50,7 @@ class HomeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, NewEvent $newEvent)
     {
         //
     }
@@ -68,7 +58,7 @@ class HomeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(NewEvent $newEvent)
     {
         //
     }

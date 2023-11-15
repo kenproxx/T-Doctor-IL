@@ -66,7 +66,7 @@
             <td><img class="mr-2 w-auto h-100" src="${item.thumbnail}" alt=""></td>
             <td>${img}</td>
             <td>${item.name}</td>
-            <td>${item.province_id}</td>
+            <td>${item.province_name}</td>
             <td>${item.price} ${item.price_unit}</td>
             <td><a href="${urlEdit}"> Edit</a> | <a href="#" onclick="checkDelete(${item.id})">Delete</a></td>
         </tr>`;

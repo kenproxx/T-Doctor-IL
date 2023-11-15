@@ -130,6 +130,12 @@
                         <i class="fa-solid fa-house-chimney-medical"></i>
                         <span>{{ __('List Clinics') }}</span></a>
                 </li>
+                <!-- Nav Item - New Event -->
+                <li class="nav-item {{ Nav::isRoute('api.new-event.index') }}">
+                    <a class="nav-link" href="{{ route('api.new-event.index') }}">
+                        <i class="fa-solid fa-house-chimney-medical"></i>
+                        <span>{{ __('New Event') }}</span></a>
+                </li>
 
                 <!-- Nav Item - List Doctor -->
                 <li class="nav-item {{ Nav::isRoute('homeAdmin.list.doctors') }}">
@@ -146,11 +152,12 @@
                     <a class="nav-link" href="{{ route('homeAdmin.list.config') }}">
                         <i class="fa-solid fa-user-doctor"></i>
                         <span>Cấu hình chung</span></a>
-
+                </li>
                 <li class="nav-item {{ Nav::isRoute('homeAdmin.list.booking') }}">
                     <a class="nav-link" href="{{ route('homeAdmin.list.booking') }}">
                         <i class="fa-solid fa-user-doctor"></i>
                         <span>Booking</span></a>
+                </li>
                     @endif
 
                     <!-- Divider -->
