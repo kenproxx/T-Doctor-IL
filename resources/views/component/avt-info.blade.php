@@ -7,12 +7,20 @@
                 <div class="info col-8 pl-0">
                     @php
                     if (Auth::user() != null) {
-                        $user = Auth::user();
+                        $info = Auth::user();
                     } else {
-                        $user = \App\Models\User::find($id);}
+                             $info = \App\Models\User::where('id', $id)->first();
+                    }
+                        $address = DB::table('provinces')->where('code_name', $info->address_code)->first();
                     @endphp
-                    <div class="name font-18-mobi">{{$user->name}} {{$user->last_name}}</div>
-                    <p class="location-info font-14-mobi">Location: <strong class="hanoi font-14-mobi">HANOI</strong></p>
+                    <div class="name font-18-mobi">{{$info->name}} {{$info->last_name}}</div>
+                    <p class="location-info font-14-mobi">Location: <strong class="hanoi font-14-mobi">
+                            @if(!empty($address))
+                                {{$address->name}}
+                            @else
+                                Null
+                            @endif
+                        </strong></p>
                 </div>
                 <div class="col-4 pc-hidden">
                         <form action="{{route('flea.market.sell.product')}}" class=" flea-button">
@@ -37,23 +45,15 @@
         </div>
         <div class="col-md-2 mobile-hidden">
             <div class="d-flex col-md-4">
-{{--                @if(!$id)--}}
+                @if( Auth::user()== null || $info->id != Auth::user()->id)
+                    <form action="{{route('flea.market.sell.product')}}" class=" flea-button mr-3">
+                        <button class="flea-btn width-88">Follow</button>
+                    </form>
+                @else
                     <form action="{{route('flea.market.sell.product')}}" class=" flea-button mr-3">
                         <button class="flea-btn width-88">Sell my product</button>
                     </form>
-{{--                @else--}}
-{{--                    @if($follow == null)--}}
-{{--                        <form action="{{route('flea.market.follow', $id)}}" method="post" class="flea-button">--}}
-{{--                            @csrf--}}
-{{--                            <button class="flea-btn width-88">Follow</button>--}}
-{{--                        </form>--}}
-{{--                    @else--}}
-{{--                        <form action="{{route('flea.market.unfollow', $id)}}" method="post" class="flea-button">--}}
-{{--                            @csrf--}}
-{{--                            <button class="flea-btn width-88">Unfollow</button>--}}
-{{--                        </form>--}}
-{{--                    @endif--}}
-{{--                @endif--}}
+                @endif
             </div>
         </div>
     </div>

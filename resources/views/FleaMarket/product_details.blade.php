@@ -5,7 +5,8 @@
     @include('component.banner')
     @php
         $pr = (new \App\Http\Controllers\backend\BackendProductInfoController())->show($id);
-        $pr_json = json_decode($pr->getContent());
+        $productDetail = json_decode($pr->getContent());
+        $pr_json = $productDetail->product;
         $galleryArray = explode(',', $pr_json->gallery);
     @endphp
     <style>
@@ -14,7 +15,6 @@
             opacity: 0.5;
         }
     </style>
-    {{--    @dd($productDetail)--}}
     <div class="recruitment-details ">
         <div class="container">
             <div class="recruitment-details--title"><a href="{{route('flea-market.index')}}"><i class="fa-solid fa-arrow-left"></i> Product details</a></div>
@@ -77,10 +77,9 @@
                                 </a>
                             @else
                                 <a href="{{route('flea.market.my.store')}}" class="div-wrapper">
-                                Visit store
+                                    My store
                                 </a>
                             @endif
-
                             <button id="button-apply" class="text-wrapper-5">Send message</button>
                         </div>
                     </div>

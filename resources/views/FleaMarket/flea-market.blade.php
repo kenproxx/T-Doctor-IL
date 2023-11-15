@@ -412,6 +412,7 @@
                     url = url.replace(':id', res[i].id);
                     let item = res[i];
                     let adsPlan = item.ads_plan;
+                    let userId = `{{ Auth::check() ? Auth::user()->id : null }}`;
 
                     if (adsPlan === 1) {
                         productsAdsPlan1.push(item);
@@ -422,15 +423,19 @@
                     }
 
                     let isFavorite = item.isFavorit ? 'bi-heart-fill' : 'bi-heart';
-
+                    let created_by = item.created_by;
+                    let tab = ``;
+                    if (userId != created_by) {
+                        tab = `
+                             <a class="button-heart" data-favorite="0">
+                                <i id="icon-heart-${item.id}" class="${isFavorite} bi" data-product-id="${item.id}" onclick="addProductToWishList(${item.id})"></i>
+                            </a>`;}
                     var html = `
                     <div class="col-md-4 col-6 item">
                         <div class="product-item">
                             <div class="img-pro">
                                 <img src="${item.thumbnail}" alt="">
-                                <a class="button-heart" data-favorite="0">
-                                    <i id="icon-heart-${item.id}" class="${isFavorite} bi" data-product-id="${item.id}" onclick="addProductToWishList(${item.id})"></i>
-                                </a>
+                                ${tab}
                             </div>
                             <div class="content-pro">
                                 <div class="name-pro">
