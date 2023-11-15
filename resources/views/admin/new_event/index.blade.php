@@ -34,8 +34,10 @@
                 <td>{{ $newEvent->user_id }}</td>
                 <td>{{ $newEvent->status }}</td>
                 <td>
-                    <a href="{{ route('api.new-event.edit', ['id' => $newEvent->id]) }}" class="btn btn-primary">Edit</a>
-                    <button type="button" class="btn btn-danger" onclick="deleteNewEvent({{ $newEvent->id }})">Delete</button>
+                    <a href="{{ route('api.new-event.edit', ['id' => $newEvent->id]) }}"
+                       class="btn btn-primary">Edit</a>
+                    <button type="button" class="btn btn-danger" onclick="deleteNewEvent({{ $newEvent->id }})">Delete
+                    </button>
                 </td>
             </tr>
         @endforeach
@@ -45,7 +47,41 @@
         const token = `{{ $_COOKIE['accessToken'] ?? ''}}`;
 
         function deleteNewEvent(id) {
+            if (confirm('Bạn có chắc chắn muốn xóa không?')) {
 
+                loadingMasterPage();
+                let url = '{{ route('api.new-event.destroy', ['id' => ':id']) }}';
+                url = url.replace(':id', id);
+
+                const headers = {
+                    'Authorization': `Bearer ${token}`
+                };
+                const formData = new FormData();
+                formData.append('_token', '{{ csrf_token() }}');
+
+                try {
+                    $.ajax({
+                        url: url,
+                        method: 'POST',
+                        headers: headers,
+                        contentType: false,
+                        cache: false,
+                        data: formData,
+                        processData: false,
+                        success: function (data) {
+                            alert(data);
+                            loadingMasterPage();
+                            window.location.href = `{{route('api.new-event.index')}}`;
+                        },
+                        error: function (exception) {
+                            alert(exception.responseText);
+                            loadingMasterPage();
+                        }
+                    });
+                } catch (error) {
+                    loadingMasterPage();
+                }
+            }
         }
     </script>
 

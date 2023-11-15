@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Enums\NewEventStatus;
 use App\Http\Controllers\Controller;
 use App\Models\NewEvent;
 use Illuminate\Http\Request;
@@ -41,6 +42,26 @@ class BackendNewEventController extends Controller
         $newEvent = NewEvent::find($id);
         return view('admin.new_event.edit', compact('newEvent'));
 
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        $newEvent = NewEvent::find($id);
+        // nếu tìm thấy, thì sửa status = Inactive và thông báo
+        if ($newEvent) {
+            $newEvent->status = NewEventStatus::INACTIVE;
+            $success = $newEvent->update();
+            if ($success) {
+                return response('Xóa sự kiện thành công !!!', 200);
+            } else {
+                return response('Xóa sự kiện thất bại !!!', 400);
+            }
+        } else {
+            return response('Không tìm thấy sự kiện !!!', 400);
+        }
     }
 
     /**
@@ -123,13 +144,5 @@ class BackendNewEventController extends Controller
         } else {
             return response('Thêm sự kiện thất bại !!!', 400);
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

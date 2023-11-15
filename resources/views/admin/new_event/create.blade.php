@@ -79,6 +79,7 @@
         const token = `{{ $_COOKIE['accessToken'] }}`;
 
         function submitForm() {
+            loadingMasterPage();
             const headers = {
                 'Authorization': `Bearer ${token}`
             };
@@ -115,13 +116,16 @@
                     data: formData,
                     success: function (data) {
                         alert(data);
+                        loadingMasterPage();
                         window.location.href = `{{route('api.new-event.index')}}`;
                     },
                     error: function (exception) {
                         alert(exception.responseText);
+                        loadingMasterPage();
                     }
                 });
             } catch (error) {
+                loadingMasterPage();
                 throw error;
             }
         }
