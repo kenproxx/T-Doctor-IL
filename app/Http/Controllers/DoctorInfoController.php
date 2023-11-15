@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\DoctorDepartmentStatus;
 use App\Enums\DoctorInfoStatus;
 use App\Models\Chat;
+use App\Models\DoctorDepartment;
 use App\Models\DoctorInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,7 +45,8 @@ class DoctorInfoController extends Controller
 
     public function create()
     {
-        return view('admin.doctor.tab-create-doctor');
+        $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
+        return view('admin.doctor.tab-create-doctor', compact('departments'));
     }
 
     public function edit($id)
@@ -52,6 +55,7 @@ class DoctorInfoController extends Controller
         if (!$doctor) {
             return response("doctor not found", 404);
         }
-        return view('admin.doctor.tab-edit-doctor', compact('doctor'));
+        $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
+        return view('admin.doctor.tab-edit-doctor', compact('doctor', 'departments'));
     }
 }

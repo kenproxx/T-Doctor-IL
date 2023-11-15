@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\BookingStatus;
 use App\Enums\CouponStatus;
 use App\Enums\ProductStatus;
+use App\Enums\SettingStatus;
+use App\Models\Booking;
 use App\Models\Coupon;
 use App\Models\CouponApply;
 use App\Models\ProductInfo;
+use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,6 +69,12 @@ class HomeController extends Controller
 
     public function listConfig()
     {
-        return view('admin.general-config.list-config');
+        $settingConfig = Setting::where('status', SettingStatus::ACTIVE)->first();
+        return view('admin.general-config.list-config', compact('settingConfig'));
+    }
+    public function listBooking()
+    {
+        $bookings = Booking::where('status', BookingStatus::PENDING)->get();
+        return view('admin.booking.list-booking', compact('bookings'));
     }
 }

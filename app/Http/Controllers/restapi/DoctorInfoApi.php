@@ -27,9 +27,20 @@ class DoctorInfoApi extends Controller
 
     public function findByUser($id)
     {
-        $doctor_infos = DoctorInfo::where('created_by', $id)->first();
-        if (!$doctor_infos || $doctor_infos->status != DoctorInfoStatus::ACTIVE) {
+        $doctor_info = DoctorInfo::where('created_by', $id)->first();
+        if (!$doctor_info || $doctor_info->status != DoctorInfoStatus::ACTIVE) {
             return response('Not found', 404);
+        }
+        return response()->json($doctor_info);
+    }
+
+    public function findByDepartment($id, Request $request)
+    {
+        $size = $request->input('size');
+        if ($size && $size > 0 && is_numeric($size)) {
+            $doctor_infos = DoctorInfo::where('department_id', $id)->orderBy('id', 'DESC')->limit($size)->get();
+        } else {
+            $doctor_infos = DoctorInfo::where('department_id', $id)->orderBy('id', 'DESC')->get();
         }
         return response()->json($doctor_infos);
     }

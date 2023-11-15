@@ -17,7 +17,7 @@
         <div><label>name</label>
             <input type="text" class="form-control" id="name" name="name"></div>
         <div><label>Năm kinh nghiệm</label>
-            <input type="text" class="form-control" id="year_of_experience" name="year_of_experience"></div>
+            <input type="number" class="form-control" id="year_of_experience" name="year_of_experience"></div>
         <div class="row">
             <div class="col-sm-4"><label>chuyên môn việt</label>
                 <input type="text" class="form-control" id="specialty" name="specialty"></div>
@@ -40,13 +40,13 @@
         </div>
         <div class="row">
             <div class="col-sm-4"><label>Giá dịch vụ việt</label>
-                <input class="form-control" name="service_price" id="service_price">
+                <input class="form-control" type="number" name="service_price" id="service_price">
             </div>
             <div class="col-sm-4"><label>Giá dịch vụ anh</label>
-                <input class="form-control" name="service_price_en" id="service_price_en">
+                <input class="form-control" type="number" name="service_price_en" id="service_price_en">
             </div>
             <div class="col-sm-4"><label>Giá dịch vụ lào</label>
-                <input class="form-control" name="service_price_laos" id="service_price_laos">
+                <input class="form-control" type="number" name="service_price_laos" id="service_price_laos">
             </div>
         </div>
         <div class="row">
@@ -62,13 +62,13 @@
         </div>
         <div class="row">
             <div class="col-sm-4"><label>Tỉnh</label>
-                <input class="form-control" name="province_id" id="province_id">
+                <input class="form-control" type="number" name="province_id" id="province_id">
             </div>
             <div class="col-sm-4"><label>Quận</label>
-                <input class="form-control" name="district_id" id="district_id">
+                <input class="form-control" type="number" name="district_id" id="district_id">
             </div>
             <div class="col-sm-4"><label>Xã</label>
-                <input class="form-control" name="commune_id" id="commune_id">
+                <input class="form-control" type="number" name="commune_id" id="commune_id">
             </div>
         </div>
         <div class="row">
@@ -78,17 +78,23 @@
                 <input type="text" class="form-control" id="time_working_2" name="time_working_2"></div>
         </div>
         <div class="row">
-            <div class="col-sm-6"><label>Số lượng đký tối đa</label>
+            <div class="col-sm-4"><label>Số lượng đký tối đa</label>
                 <label>thumbnail</label>
                 <input type="file" class="form-control" id="thumbnail" name="thumbnail" multiple accept="image/*">
             </div>
-            <div class="col-sm-6"><label>Trạng thái</label>
+            <div class="col-sm-4"><label for="department">Department</label>
+                <select class="custom-select" id="department_id" name="department_id">
+                    @foreach($departments as $department)
+                        <option value=" {{$department->id}}"> {{$department->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-sm-4"><label>Trạng thái</label>
                 <select class="custom-select" id="status" name="status">
-                    <option value="{{ \App\Enums\DoctorInfoStatus::ACTIVE }}">{{ \App\Enums\DoctorInfoStatus::ACTIVE }}</option>
+                    <option
+                        value="{{ \App\Enums\DoctorInfoStatus::ACTIVE }}">{{ \App\Enums\DoctorInfoStatus::ACTIVE }}</option>
                     <option
                         value="{{ \App\Enums\DoctorInfoStatus::INACTIVE }}">{{ \App\Enums\DoctorInfoStatus::INACTIVE }}</option>
-                    <option
-                        value="{{ \App\Enums\DoctorInfoStatus::DELETED }}">{{ \App\Enums\DoctorInfoStatus::DELETED }}</option>
                 </select>
             </div>
         </div>
@@ -110,7 +116,7 @@
                     "detail_address", "detail_address_en", "detail_address_laos",
                     "province_id", "district_id", "commune_id",
                     "time_working_1", "time_working_2",
-                    "name","year_of_experience", "status"
+                    "name", "year_of_experience", "status",  "department_id"
                 ];
                 const fieldTextareaTiny = [
                     "service", "service_en", "service_laos",
