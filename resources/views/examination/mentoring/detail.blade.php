@@ -375,7 +375,7 @@
 
             @if(Auth::check())
                 @php
-                    $doctor = \App\Models\DoctorInfo::where('created_by', Auth::user()->id)->get();
+                    $doctor = \App\Models\DoctorInfo::where('created_by', Auth::user()->id)->first();
                 @endphp
                 @if(Auth::user()->id == $question->user_id || $doctor)
                     @foreach(explode(',', $question->gallery) as $picture)
