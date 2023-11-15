@@ -136,6 +136,11 @@
                         <i class="fa-solid fa-house-chimney-medical"></i>
                         <span>{{ __('New Event') }}</span></a>
                 </li>
+                <li class="nav-item {{ Nav::isRoute('api.backend.category-product.index') }}">
+                    <a class="nav-link" href="{{ route('api.backend.category-product.index') }}">
+                        <i class="fa-solid fa-house-chimney-medical"></i>
+                        <span>{{ __('Category Product') }}</span></a>
+                </li>
 
                 <!-- Nav Item - List Doctor -->
                 <li class="nav-item {{ Nav::isRoute('homeAdmin.list.doctors') }}">

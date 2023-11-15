@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\backend\BackendAnswerController;
 use App\Http\Controllers\backend\BackendCategoryController;
+use App\Http\Controllers\backend\BackendCategoryProductController;
 use App\Http\Controllers\backend\BackendClinicController;
 use App\Http\Controllers\backend\BackendCouponApplyController;
 use App\Http\Controllers\backend\BackendCouponController;
@@ -218,6 +219,15 @@ Route::group(['prefix' => 'booking'], function () {
     Route::get('/edit/{id}', [BookingController::class, 'edit'])->name('api.backend.booking.edit');
     Route::post('/update/{id}', [BookingController::class, 'update'])->name('api.backend.booking.update');
     Route::delete('/delete/{id}', [BookingController::class, 'delete'])->name('api.backend.booking.delete');
+});
+
+Route::group(['prefix' => 'category-product'], function () {
+    Route::get('index', [BackendCategoryProductController::class, 'index'])->name('api.backend.category-product.index');
+    Route::get('edit', [BackendCategoryProductController::class, 'edit'])->name('api.backend.category-product.edit');
+    Route::post('update', [BackendCategoryProductController::class, 'update'])->name('api.backend.category-product.update');
+    Route::get('create', [BackendCategoryProductController::class, 'create'])->name('api.backend.category-product.create');
+    Route::post('store', [BackendCategoryProductController::class, 'store'])->name('api.backend.category-product.store');
+    Route::post('destroy', [BackendCategoryProductController::class, 'destroy'])->name('api.backend.category-product.destroy');
 });
 
 

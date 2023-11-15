@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\online_medicine;
+namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\online_medicine\CategoryProduct;
 use Illuminate\Http\Request;
 
-class CategoryProductController extends Controller
+class BackendCategoryProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return view('admin.category_product.index');
     }
 
     /**
@@ -21,7 +21,7 @@ class CategoryProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.category_product.create');
     }
 
     /**
@@ -43,15 +43,15 @@ class CategoryProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CategoryProduct $categoryProduct)
+    public function edit($id)
     {
-        //
+        return view('admin.category_product.edit');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CategoryProduct $categoryProduct)
+    public function update(Request $request)
     {
         //
     }
@@ -59,7 +59,7 @@ class CategoryProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CategoryProduct $categoryProduct)
+    public function destroy($id)
     {
         //
     }
