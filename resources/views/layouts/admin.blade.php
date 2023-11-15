@@ -146,6 +146,11 @@
                     <a class="nav-link" href="{{ route('homeAdmin.list.config') }}">
                         <i class="fa-solid fa-user-doctor"></i>
                         <span>Cấu hình chung</span></a>
+
+                <li class="nav-item {{ Nav::isRoute('homeAdmin.list.booking') }}">
+                    <a class="nav-link" href="{{ route('homeAdmin.list.booking') }}">
+                        <i class="fa-solid fa-user-doctor"></i>
+                        <span>Booking</span></a>
                     @endif
 
                     <!-- Divider -->
