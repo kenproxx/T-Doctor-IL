@@ -65,10 +65,12 @@
                 <div class="col-md-4">
                     <label>category_id</label>
                     <select class="custom-select" id="category_id" name="category_id">
-                        <option value="1">category 1</option>
-                        <option value="2">category 2</option>
-                        <option value="3">category 3</option>
-                        <option value="4">category 4</option>
+                        <option value="0">Khác</option>
+                        @if($categoryProductMedicine)
+                            @foreach($categoryProductMedicine as $index => $cateProductMedicine)
+                                <option value="{{ $cateProductMedicine->id }}">{{ $cateProductMedicine->name }}</option>
+                            @endforeach
+                        @endif
                     </select>
                 </div>
                 <div class="col-md-4">

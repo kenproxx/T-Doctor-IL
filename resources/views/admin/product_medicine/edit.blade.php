@@ -114,8 +114,8 @@
                 <div class="col-md-6">
                     <label>status</label>
                     <select class="custom-select" id="status" name="status">
-                        <option value="1">Active</option>
-                        <option value="0">Inactive</option>
+                        <option value="1" {{ $productMedicine->status == 1 ? 'selected' : '' }}>Active</option>
+                        <option value="0" {{ $productMedicine->status == 0 ? 'selected' : '' }}>Inactive</option>
                     </select>
                 </div>
             </div>
