@@ -7,10 +7,10 @@ use BenSampo\Enum\Enum;
 final class ObjectOnlineMedicine extends Enum
 {
     //for kids, for women, for men, for adult
-    const KIDS = 'KIDS';
-    const FOR_WOMEN = 'FOR_WOMEN';
-    const FOR_MEN = 'FOR_MEN';
-    const FOR_ADULT = 'FOR_ADULT';
+    const KIDS = '1';
+    const FOR_WOMEN = '2';
+    const FOR_MEN = '3';
+    const FOR_ADULT = '4';
 
 
     const NAME = [

@@ -6,10 +6,10 @@ use BenSampo\Enum\Enum;
 
 final class FilterOnlineMedicine extends Enum
 {
-    const ALL = 'ALL';
-    const HEALTH = 'HEALTH';
-    const BEAUTY = 'BEAUTY';
-    const PET = 'PET';
+    const ALL = '0';
+    const HEALTH = '1';
+    const BEAUTY = '2';
+    const PET = '3';
 
     const NAME = [
         self::ALL => 'Tất cả',
