@@ -49,6 +49,8 @@ class BackendQuestionController extends Controller
             $category_id = $request->input('category_id');
             $status = $request->input('status');
 
+            $list_image = $request->input('list_public');
+
             $question->title = $title;
             $question->title_en = $title_en;
             $question->title_laos = $title_laos;
@@ -72,9 +74,27 @@ class BackendQuestionController extends Controller
             if (!$user) {
                 return response('User not found!', 404);
             }
+
+            $arrayGalleries = explode(',', $gallery);
+            $arrayPublic = explode(',', $list_image);
+
+            $itemPublic = null;
+            foreach ($arrayPublic as $quantity) {
+                $itemPublic[] = $arrayGalleries[$quantity];
+            }
+
+            foreach ($arrayPublic as $index) {
+                if (isset($arrayGalleries[$index])) {
+                    unset($arrayGalleries[$index]);
+                }
+            }
+
+            $itemPrivate = array_values($arrayGalleries);
+
             $question->name = $user->username;
             $question->id = $this->getMaxID();
-            $question->gallery = $gallery;
+            $question->gallery = implode(',', $itemPrivate);
+            $question->gallery_public = implode(',', $itemPublic);
 
             $success = $question->save();
             if ($success) {
