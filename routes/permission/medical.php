@@ -11,6 +11,7 @@ use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\backend\BackendReviewController;
 use App\Http\Controllers\backend\BackendStaffController;
 use App\Http\Controllers\backend\BackendWishListController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DoctorInfoController;
@@ -42,6 +43,7 @@ Route::group(['prefix' => 'home'], function () {
     Route::get('list-doctor', [HomeController::class, 'listDoctor'])->name('homeAdmin.list.doctors');
     Route::get('list-staff', [HomeController::class, 'listStaff'])->name('homeAdmin.list.staff');
     Route::get('list-config', [HomeController::class, 'listConfig'])->name('homeAdmin.list.config');
+    Route::get('list-booking', [HomeController::class, 'listBooking'])->name('homeAdmin.list.booking');
 });
 
 Route::get('/about', function () {
@@ -210,7 +212,12 @@ Route::group(['prefix' => 'settings'], function () {
     Route::post('/creat', [SettingController::class, 'create'])->name('api.backend.setting.create');
     Route::get('/edit/{id}', [SettingController::class, 'edit'])->name('setting.edit');
     Route::post('/update/{id}', [SettingController::class, 'update'])->name('api.backend.setting.update');
+});
 
+Route::group(['prefix' => 'booking'], function () {
+    Route::get('/edit/{id}', [BookingController::class, 'edit'])->name('api.backend.booking.edit');
+    Route::post('/update/{id}', [BookingController::class, 'update'])->name('api.backend.booking.update');
+    Route::delete('/delete/{id}', [BookingController::class, 'delete'])->name('api.backend.booking.delete');
 });
 
 
