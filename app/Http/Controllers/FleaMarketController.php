@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ReviewStoreStatus;
 use App\Models\FleaMarket;
 use App\Models\ProductInfo;
+use App\Models\ReviewStore;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -54,7 +56,8 @@ class FleaMarketController extends Controller
     }
     public function ShopInfo($id)
     {
-        return view('FleaMarket.shop-infor',compact('id'));
+        $reviewStore = ReviewStore::where('status', ReviewStoreStatus::APPROVED)->get();
+        return view('FleaMarket.shop-infor',compact('id','reviewStore'));
     }
 
     /**

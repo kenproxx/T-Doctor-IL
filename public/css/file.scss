@@ -93,7 +93,19 @@
         object-fit: cover;
     }
 }
-
+.cmt-review {
+    border-radius: 8px;
+    border: 0.5px solid var(--Light, #EAEAEA);
+    background: var(--White-Light, #F3F3F3);
+    display: flex;
+    height: 197px;
+    padding: 8px 16px 20px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    align-self: stretch;
+    width: 100%;
+}
 .recruitment-details {
     &--title {
         font-size: 32px;
@@ -960,7 +972,7 @@
 }
 
 
-.rv_item{
+.rv_item-1{
     padding: 10px;
     border-bottom: 1px solid rgba(214, 214, 214, 1);
     .rv-header{
@@ -969,7 +981,10 @@
             align-items: center;
             .avt{
                 border-radius: 30px;
-                img{
+                img {
+                    width: 32px;
+                    height: 32px;
+                    border-radius: 20px;
                     object-fit: cover;
                 }
             }
@@ -983,6 +998,13 @@
             font-size: 14px;
             font-weight: 400;
             align-items: center;
+            p{
+                color: #000;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
         }
     }
     .content{
