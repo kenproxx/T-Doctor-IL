@@ -130,6 +130,22 @@
                         <i class="fa-solid fa-house-chimney-medical"></i>
                         <span>{{ __('List Clinics') }}</span></a>
                 </li>
+                <!-- Nav Item - New Event -->
+                <li class="nav-item {{ Nav::isRoute('api.new-event.index') }}">
+                    <a class="nav-link" href="{{ route('api.new-event.index') }}">
+                        <i class="fa-solid fa-house-chimney-medical"></i>
+                        <span>{{ __('New Event') }}</span></a>
+                </li>
+                <li class="nav-item {{ Nav::isRoute('api.backend.category-product.index') }}">
+                    <a class="nav-link" href="{{ route('api.backend.category-product.index') }}">
+                        <i class="fa-solid fa-house-chimney-medical"></i>
+                        <span>{{ __('Category Product') }}</span></a>
+                </li>
+                <li class="nav-item {{ Nav::isRoute('api.backend.product-medicine.index') }}">
+                    <a class="nav-link" href="{{ route('api.backend.product-medicine.index') }}">
+                        <i class="fa-solid fa-house-chimney-medical"></i>
+                        <span>{{ __('Product Medicine') }}</span></a>
+                </li>
 
                 <!-- Nav Item - List Doctor -->
                 <li class="nav-item {{ Nav::isRoute('homeAdmin.list.doctors') }}">

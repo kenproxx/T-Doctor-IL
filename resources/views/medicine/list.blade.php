@@ -113,11 +113,11 @@
             </div>
             <div class="col-md-9 medicine-list--item">
                 <div class="page row ">
-                    @for($i = 0; $i < 12; $i++)
+                    @foreach($medicines as $medicine)
                         <div class="col-md-4 item">
                             @include('component.products')
                         </div>
-                    @endfor
+                    @endforeach
                 </div>
                 <nav aria-label="Page navigation example" class="d-flex justify-content-center">
                     <ul class="pagination">

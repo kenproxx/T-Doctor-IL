@@ -16,48 +16,28 @@
         </div>
     </div>
     <div id="title" class="d-flex justify-content-center">
-        <div id="list-title" class="d-flex">
+        <div class="list-title">
             <div class="list--doctor p-0">
-                <a class="back" href="{{route('examination.findmymedicine')}}"><p><i class="bi bi-arrow-left"></i>Hot deal medicine</p></a>
+                <a class="back" href="{{route('examination.findmymedicine')}}"><p><i class="bi bi-arrow-left"></i><b>Hot deal medicine</b></p></a>
             </div>
         </div>
     </div>
-    <div id="list-doctor" class="d-flex justify-content-center container">
-        <div class="card" >
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('/img/Rectangle 23798 (1).png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <a href="{{route('medicine.detail')}}"><h5 class="card-title">PARALMAX EXTRA</h5></a>
-                    <p class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p class="card-text_1"><b>599,000 VND</b></p>
+    <div class="row list-doctor">
+        @if(count($hotMedicines) > 0)
+            @foreach($hotMedicines as $hotMedicine)
+                @php
+                    $user = \App\Models\User::find($hotMedicine->user_id);
+                @endphp
+                <div class="card col-md-3">
+                    <i class="bi bi-heart"></i>
+                    <img src="{{asset($hotMedicine->thumbnail)}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <a href="{{ route('medicine.detail', $hotMedicine->id) }}"><h5 class="card-title">{{ $hotMedicine->name }}</h5></a>
+                        <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
+                        <p class="card-text_1">Price: <b>{{ $hotMedicine->price }} {{ $hotMedicine->unit_price }}</b></p>
+                    </div>
                 </div>
-            </div>
-        <div class="card" >
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('/img/Rectangle 23798 (1).png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <a href="{{route('medicine.detail')}}"><h5 class="card-title">PARALMAX EXTRA</h5></a>
-                    <p class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p class="card-text_1"><b>599,000 VND</b></p>
-                </div>
-            </div>
-        <div class="card" >
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('/img/Rectangle 23798 (1).png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <a href="{{route('medicine.detail')}}"><h5 class="card-title">PARALMAX EXTRA</h5></a>
-                    <p class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p class="card-text_1"><b>599,000 VND</b></p>
-                </div>
-            </div>
-        <div class="card" >
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('/img/Rectangle 23798 (1).png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <a href="{{route('medicine.detail')}}"><h5 class="card-title">PARALMAX EXTRA</h5></a>
-                    <p class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p class="card-text_1"><b>599,000 VND</b></p>
-                </div>
-            </div>
+            @endforeach
+        @endif
     </div>
 @endsection

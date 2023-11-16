@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\online_medicine;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\online_medicine\ProductMedicine;
+use App\Models\NewEvent;
 use Illuminate\Http\Request;
 
-class ProductMedicineController extends Controller
+class NewEventController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +34,7 @@ class ProductMedicineController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ProductMedicine $productMedicine)
+    public function show(NewEvent $newEvent)
     {
         //
     }
@@ -43,7 +42,7 @@ class ProductMedicineController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProductMedicine $productMedicine)
+    public function edit(NewEvent $newEvent)
     {
         //
     }
@@ -51,7 +50,7 @@ class ProductMedicineController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProductMedicine $productMedicine)
+    public function update(Request $request, NewEvent $newEvent)
     {
         //
     }
@@ -59,7 +58,7 @@ class ProductMedicineController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductMedicine $productMedicine)
+    public function destroy(NewEvent $newEvent)
     {
         //
     }

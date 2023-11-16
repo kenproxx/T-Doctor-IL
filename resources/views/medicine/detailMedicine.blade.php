@@ -7,7 +7,20 @@
         <div class="container">
             <div class="row medicine-search">
                 <div class="medicine-search--left col-md-3 d-flex justify-content-around">
-                    <div class="title">Category <i class="bi bi-arrow-down-up"></i></div>
+                    <div class="title" style="list-style: none;">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Category
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                @foreach($categoryMedicines as $categoryMedicine)
+                                    <a class="dropdown-item medicine-product" href="#"
+                                       data-medicine="{{ $categoryMedicine }}">{{ $categoryMedicine->name }}</a>
+                                @endforeach
+                            </div>
+                        </li>
+                    </div>
                     <div class="title">Location <i class="bi bi-arrow-down-up"></i></div>
                 </div>
                 <div class="medicine-search--center col-md-6 row d-flex justify-content-between">
@@ -24,7 +37,9 @@
                 <div class="medicine-search--right col-md-3 d-flex row justify-content-between">
                     <div class="col-md-6 ">
                         <div class="div-wrapper">
-                            <button type="button" data-toggle="modal" data-target="#modalCreatPrescription">Create prescription</button>
+                            <button type="button" data-toggle="modal" data-target="#modalCreatPrescription">Create
+                                prescription
+                            </button>
                         </div>
                     </div>
                     @include('component.modalCreatPrescription')
@@ -36,61 +51,47 @@
                 </div>
             </div>
 
-            <a href="{{route('medicine')}}" class="recruitment-details--title"><i class="fa-solid fa-arrow-left"></i> Product details</a>
+            <a href="{{route('medicine')}}" class="recruitment-details--title"><i class="fa-solid fa-arrow-left"></i>
+                Product details</a>
             <div class="row recruitment-details--content">
                 <div class="col-md-8 recruitment-details--content--left">
                     <div class="img-main">
-                        <img src="{{asset('/img/Rectangle 23798 (1).png')}}" alt="show" class="main">
+                        <img src="{{asset($medicine->thumbnail)}}" alt="show" class="main">
                     </div>
                     <div class="list d-flex">
-                        <div class="item">
-                            <img src="{{asset('/img/Rectangle 23798 (1).png')}}" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="{{asset('/img/Rectangle 23800.png')}}" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="{{asset('/img/Rectangle 23801.png')}}" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="{{asset('/img/Rectangle 23802.png')}}" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="{{asset('/img/Rectangle 23800.png')}}" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="{{asset('/img/Rectangle 23801.png')}}" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="{{asset('/img/Rectangle 23802.png')}}" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="{{asset('/img/Rectangle 23800.png')}}" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="{{asset('/img/Rectangle 23801.png')}}" alt="">
-                        </div>
-                        <div class="item">
-                            <img src="{{asset('/img/Rectangle 23802.png')}}" alt="">
-                        </div>
+                        @php
+                            $gallery = $medicine->gallery;
+                            $arrayGallery = explode(',', $gallery);
+                        @endphp
+                        @foreach($arrayGallery as $item)
+                            <div class="item">
+                                <img src="{{asset($item)}}" alt="">
+                            </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="col-md-4 recruitment-details--content--right">
                     <div class="product-details">
                         <div class="body">
-                            <p class="text-wrapper" >Thuốc giảm đau PARALMAX EXTRA</p>
-                            <div class="price">599,000 VND</div>
+                            <p class="text-wrapper">{{ $medicine->name }}</p>
+                            <div class="price">{{ $medicine->price }} {{ $medicine->unit_price }}</div>
                             <div class="brand-name d-flex">
                                 <div class="text-wrapper-2">Location:</div>
-                                <div class="text-wrapper-3">Ha Noi</div>
+                                @php
+                                    $user = \App\Models\User::find($medicine->user_id)
+                                @endphp
+                                <div class="text-wrapper-3">{{ $user->address_code }}</div>
                             </div>
                             <div class="brand-name d-flex">
                                 <div class="text-wrapper-2">Category:</div>
-                                <div class="text-wrapper-3">medicine</div>
+                                @php
+                                    $category = \App\Models\online_medicine\CategoryProduct::find($medicine->category_id)
+                                @endphp
+                                <div class="text-wrapper-3">{{ $category->name }}</div>
                             </div>
                             <div class="brand-name d-flex">
                                 <div class="text-wrapper-2">Brand name:</div>
-                                <div class="text-wrapper-3">OMRON</div>
+                                <div class="text-wrapper-3">{{ $medicine->brand_name }}</div>
                             </div>
                         </div>
                         <div class="button row justify-content-between">
@@ -100,48 +101,8 @@
                     </div>
                 </div>
             </div>
-            <div class="recruitment-details--text" >
-                <hr>
-                {{-- Start nội dung mô tả (backend)--}}
-                <div class="frame">
-                    <b style="font-size: 20px" class="text-wrapper">Bên mình đang cần tuyển dụng 2 BS chuyên khoa
-                        VLTL hoặc YHCT</b>
-                    <div class="div">
-                        <div class="div-2">
-                            <b style="font-size: 16px" class="text-wrapper-2">Job Description</b>
-                            <p class="th-c-hi-n-c-c-k-thu">
-                                Thực hiện các kỹ thuật xét nghiệm phức tạp và thông thường tại phòng khám theo quy
-                                định<br/>Nghiêm chỉnh
-                                thực hiện quy chế cơ quan<br/>Thực hiện công việc khác theo sự phân công của lãnh
-                                đạo<br/>Công việc cụ thể
-                                trao đổi khi phỏng vấn
-                            </p>
-                        </div>
-                        <div class="div-3">
-                            <b style="font-size: 16px" class="text-wrapper-2">Job requirements</b>
-                            <p class="c-nh-n-x-t-nghi-m-c">
-                                Cử nhân Xét nghiệm (có CCHN, tối thiểu 36 tháng hành nghề)<br/>Có năng lực và chuyên
-                                môn đúng với vị trí dự
-                                tuyển<br/>Các vị trí chuyên môn tốt nghiệp trình độ Cao đẳng trở lên<br/>Sử dụng
-                                thành thạo máy tính<br/>Nhanh
-                                nhẹn, năng động, trung thực, muốn gắn bó lâu dài<br/>Ưu tiên có CCHN/giao tiếp tiếng
-                                anh
-                            </p>
-                        </div>
-                        <div class="div-3">
-                            <b style="font-size: 16px" class="text-wrapper-2">Job requirements</b>
-                            <p class="c-nh-n-x-t-nghi-m-c">
-                                Cử nhân Xét nghiệm (có CCHN, tối thiểu 36 tháng hành nghề)<br/>Có năng lực và chuyên
-                                môn đúng với vị trí dự
-                                tuyển<br/>Các vị trí chuyên môn tốt nghiệp trình độ Cao đẳng trở lên<br/>Sử dụng
-                                thành thạo máy tính<br/>Nhanh
-                                nhẹn, năng động, trung thực, muốn gắn bó lâu dài<br/>Ưu tiên có CCHN/giao tiếp tiếng
-                                anh
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                {{-- End nội dung mô tả--}}
+            <div class="recruitment-details--text">
+                {!! $medicine->description !!}
             </div>
         </div>
     </div>

@@ -118,7 +118,7 @@ a {
     top: 15px;
 }
 #list-doctor{
-    gap:25px
+    /*gap:25px*/
 }
 .list-doctor .card{
     padding: 16px;
@@ -650,7 +650,6 @@ span.material-symbols-outlined {
 /* end footer */
 /*recruitment screen*/
 #filter{
-    width: 1170px;
     height: 48px;
     margin-top: 10px;
     margin-bottom: 40px;
@@ -1057,12 +1056,18 @@ span.material-symbols-outlined {
     color: #aaa;
     margin-top: 8px;
 }
-#list-doctor-new{
-    gap:25px
-}
-#list-doctor-best{
-    gap: 25px;
-}
-#list-doctor-available{
-    gap: 25px;
+/*#list-doctor-new{*/
+/*    gap:25px*/
+/*}*/
+/*#list-doctor-best{*/
+/*    gap: 25px;*/
+/*}*/
+/*#list-doctor-available{*/
+/*    gap: 25px;*/
+/*}*/
+.bi-heart-1{
+    position: absolute;
+    left: 265px;
+    top: 15px;
+
 }

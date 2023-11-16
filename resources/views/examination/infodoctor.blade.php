@@ -6,7 +6,7 @@
     @if($doctor)
         <div id="show_inf" class="container">
             <div id="title" class="d-flex justify-content-center">
-                <div id="list-title" class="d-flex">
+                <div class="d-flex list-title">
                     <div class="list--doctor p-0">
                         <a class="back" href="{{route('examination.index')}}"><p><i class="bi bi-arrow-left"></i>Detailed
                                 information Doctor</p></a>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="dess">
                         <p>Services: </p>
-                        <span> {{ $doctor->service }}</span>
+                        <span> {!! $doctor->service !!}</span>
                     </div>
                     <div class="dess">
                         <p>Working time: </p>
@@ -75,7 +75,7 @@
                 </div>
             </div>
             <div id="review" class="d-flex justify-content-center">
-                <div id="list-title" class="d-flex">
+                <div id="" class="d-flex list-title">
                     <div class="list--doctor p-0">
                         <p>Review</p>
                     </div>

@@ -1,4 +1,4 @@
-<div id="list-doctor" class="list-doctor d-flex  container">
+<div id="list-doctor-render" class="list-doctor row">
 
 </div>
 <script>
@@ -27,7 +27,7 @@
                 let mainUrl = detailDoctor.replace(':id', item['id']);
                 let imageDoctor = item['thumbnail'];
                 let myArray = imageDoctor.split("/storage");
-                html = html + `<div class="card" >
+                html = html + `<div class="card col-md-3" >
                 <div class="ribbon ribbon-top-left"><span>New</span></div>
                 <i class="bi bi-heart"></i>
                 <img src=" ${url}${myArray[1]} " class="card-img-top" alt="...">
@@ -40,7 +40,7 @@
             </div>`;
 
             }
-            $('#list-doctor').empty().append(html);
+            $('#list-doctor-render').empty().append(html);
         }
     })
 </script>

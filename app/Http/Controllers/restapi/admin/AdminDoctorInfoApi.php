@@ -58,42 +58,6 @@ class AdminDoctorInfoApi extends Controller
         }
     }
 
-    public function update(Request $request, $id)
-    {
-        try {
-            $doctor_infos = DoctorInfo::where('id', $id)->first();
-            if (!$doctor_infos || $doctor_infos->status == DoctorInfoStatus::DELETED) {
-                return response('Not found', 404);
-            }
-
-            $item = $this->saveDoctorInfo($request, $doctor_infos);
-            if ($item) {
-                return response()->json($doctor_infos);
-            }
-            return response("Update error!", 400);
-        } catch (\Exception $exception) {
-            return response($exception, 400);
-        }
-    }
-
-    public function delete($id)
-    {
-        try {
-            $doctor_infos = DoctorInfo::where('id', $id)->first();
-            if (!$doctor_infos || $doctor_infos->status == DoctorInfoStatus::DELETED) {
-                return response('Not found', 404);
-            }
-            $doctor_infos->status = DoctorInfoStatus::DELETED;
-            $success = $doctor_infos->save();
-            if ($success) {
-                return response('Delete success!', 200);
-            }
-            return response('Delete error!', 400);
-        } catch (\Exception $exception) {
-            return response($exception, 400);
-        }
-    }
-
     private function saveDoctorInfo($request, $doctor)
     {
         $name = $request->input('name');
@@ -129,9 +93,17 @@ class AdminDoctorInfoApi extends Controller
         $time_working_1 = $request->input('time_working_1');
         $time_working_2 = $request->input('time_working_2');
 
-        $province_id = $request->input('province_id');
-        $district_id = $request->input('district_id');
-        $commune_id = $request->input('commune_id');
+        $province = $request->input('province_id');
+        $district = $request->input('district_id');
+        $commune = $request->input('commune_id');
+
+        $provinceArray = explode('-', $province);
+        $districtArray = explode('-', $district);
+        $communeArray = explode('-', $commune);
+
+        $province_id = $provinceArray[0];
+        $district_id = $districtArray[0];
+        $commune_id = $communeArray[0];
 
         $detail_address = $request->input('detail_address');
         $detail_address_en = $request->input('detail_address_en');
@@ -196,5 +168,41 @@ class AdminDoctorInfoApi extends Controller
         $doctor->department_id = $department_id;
 
         return $doctor->save();
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $doctor_infos = DoctorInfo::where('id', $id)->first();
+            if (!$doctor_infos || $doctor_infos->status == DoctorInfoStatus::DELETED) {
+                return response('Not found', 404);
+            }
+
+            $item = $this->saveDoctorInfo($request, $doctor_infos);
+            if ($item) {
+                return response()->json($doctor_infos);
+            }
+            return response("Update error!", 400);
+        } catch (\Exception $exception) {
+            return response($exception, 400);
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+            $doctor_infos = DoctorInfo::where('id', $id)->first();
+            if (!$doctor_infos || $doctor_infos->status == DoctorInfoStatus::DELETED) {
+                return response('Not found', 404);
+            }
+            $doctor_infos->status = DoctorInfoStatus::DELETED;
+            $success = $doctor_infos->save();
+            if ($success) {
+                return response('Delete success!', 200);
+            }
+            return response('Delete error!', 400);
+        } catch (\Exception $exception) {
+            return response($exception, 400);
+        }
     }
 }

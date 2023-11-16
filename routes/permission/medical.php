@@ -3,10 +3,12 @@
 
 use App\Http\Controllers\backend\BackendAnswerController;
 use App\Http\Controllers\backend\BackendCategoryController;
+use App\Http\Controllers\backend\BackendCategoryProductController;
 use App\Http\Controllers\backend\BackendClinicController;
 use App\Http\Controllers\backend\BackendCouponApplyController;
 use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\backend\BackendProductInfoController;
+use App\Http\Controllers\backend\BackendProductMedicineController;
 use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\backend\BackendReviewController;
 use App\Http\Controllers\backend\BackendStaffController;
@@ -220,5 +222,20 @@ Route::group(['prefix' => 'booking'], function () {
     Route::delete('/delete/{id}', [BookingController::class, 'delete'])->name('api.backend.booking.delete');
 });
 
+Route::group(['prefix' => 'category-product'], function () {
+    Route::get('index', [BackendCategoryProductController::class, 'index'])->name('api.backend.category-product.index');
+    Route::get('edit/{id}', [BackendCategoryProductController::class, 'edit'])->name('api.backend.category-product.edit');
+    Route::post('update', [BackendCategoryProductController::class, 'update'])->name('api.backend.category-product.update');
+    Route::get('create', [BackendCategoryProductController::class, 'create'])->name('api.backend.category-product.create');
+    Route::post('store', [BackendCategoryProductController::class, 'store'])->name('api.backend.category-product.store');
+    Route::post('destroy/{id}', [BackendCategoryProductController::class, 'destroy'])->name('api.backend.category-product.destroy');
+});
 
-
+Route::group(['prefix' => 'product-medicine'], function () {
+    Route::get('index', [BackendProductMedicineController::class, 'index'])->name('api.backend.product-medicine.index');
+    Route::get('edit/{id}', [BackendProductMedicineController::class, 'edit'])->name('api.backend.product-medicine.edit');
+    Route::post('update', [BackendProductMedicineController::class, 'update'])->name('api.backend.product-medicine.update');
+    Route::get('create', [BackendProductMedicineController::class, 'create'])->name('api.backend.product-medicine.create');
+    Route::post('store', [BackendProductMedicineController::class, 'store'])->name('api.backend.product-medicine.store');
+    Route::post('destroy/{id}', [BackendProductMedicineController::class, 'destroy'])->name('api.backend.product-medicine.destroy');
+});

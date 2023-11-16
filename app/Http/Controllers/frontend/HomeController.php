@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\frontend;
 
+use App\Enums\NewEventStatus;
 use App\Http\Controllers\Controller;
+use App\Models\NewEvent;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -12,7 +14,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('News-event.News');
+        $listNewEvent = NewEvent::where('status', NewEventStatus::ACTIVE)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('News-event.News', compact('listNewEvent'));
     }
 
     public function detail ()
