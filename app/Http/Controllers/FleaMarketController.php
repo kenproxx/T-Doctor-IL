@@ -6,7 +6,6 @@ use App\Enums\ReviewStoreStatus;
 use App\Models\FleaMarket;
 use App\Models\ProductInfo;
 use App\Models\ReviewStore;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -19,7 +18,7 @@ class FleaMarketController extends Controller
     {
         $productFleaMarkets = DB::table('product_infos')->get();
 
-        return view('FleaMarket.flea-market',compact('productFleaMarkets'));
+        return view('FleaMarket.flea-market', compact('productFleaMarkets'));
 
     }
 
@@ -28,7 +27,7 @@ class FleaMarketController extends Controller
      */
     public function productDetail($id)
     {
-        return view('FleaMarket.product_details',compact('id'));
+        return view('FleaMarket.product_details', compact('id'));
     }
 
     /**
@@ -45,8 +44,8 @@ class FleaMarketController extends Controller
     public function myStore()
     {
         $userId = Auth::user()->id;
-        $reviewStore = ReviewStore::where('store_id', $userId)->where('status',ReviewStoreStatus::APPROVED)->get();
-        return view('FleaMarket.my-store',compact('reviewStore'));
+        $reviewStore = ReviewStore::where('store_id', $userId)->where('status', ReviewStoreStatus::APPROVED)->get();
+        return view('FleaMarket.my-store', compact('reviewStore'));
     }
 
     /**
@@ -56,10 +55,11 @@ class FleaMarketController extends Controller
     {
         return view('FleaMarket.review');
     }
+
     public function ShopInfo($id)
     {
-        $reviewStore = ReviewStore::where('store_id', $id)->where('status',ReviewStoreStatus::APPROVED)->get();
-        return view('FleaMarket.shop-infor',compact('id','reviewStore'));
+        $reviewStore = ReviewStore::where('store_id', $id)->where('status', ReviewStoreStatus::APPROVED)->get();
+        return view('FleaMarket.shop-infor', compact('id', 'reviewStore'));
     }
 
     /**
@@ -69,7 +69,7 @@ class FleaMarketController extends Controller
     {
         $user = Auth::user();
         $province = DB::table('provinces')->get();
-        return view('FleaMarket.sell-my-product',compact('user','province'));
+        return view('FleaMarket.sell-my-product', compact('user', 'province'));
     }
 
     /**
@@ -80,6 +80,6 @@ class FleaMarketController extends Controller
         $e_product = ProductInfo::find($id);
         $provinces = DB::table('provinces')->get();
 
-        return view('FleaMarket.edit-product',compact('e_product','provinces'));
+        return view('FleaMarket.edit-product', compact('e_product', 'provinces'));
     }
 }
