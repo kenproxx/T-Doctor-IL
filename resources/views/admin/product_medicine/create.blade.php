@@ -102,11 +102,15 @@
                 <input type="file" class="form-control" id="gallery" name="gallery[]" multiple accept="image/*">
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label>price</label>
                     <input type="number" class="form-control" id="price" name="price" value="">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <label>unit_price</label>
+                    <input type="text" class="form-control" id="unit_price" name="unit_price" value="">
+                </div>
+                <div class="col-md-4">
                     <label>status</label>
                     <select class="custom-select" id="status" name="status">
                         <option
@@ -133,7 +137,7 @@
             const arrField = [
                 'name', 'name_en', 'name_laos',
                 'brand_name', 'brand_name_en', 'brand_name_laos',
-                'category_id', 'object_', 'filter_', 'price', 'status'
+                'category_id', 'object_', 'filter_', 'price', 'status', 'unit_price'
             ];
 
             var filedata = document.getElementById("gallery");

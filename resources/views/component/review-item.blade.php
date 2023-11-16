@@ -1,3 +1,9 @@
+
+@php
+$userId = Auth::user()->id;
+    $reviewStore = \App\Models\ReviewStore::where('store_id', $userId)->get();
+@endphp
+
 @foreach($reviewStore as $review)
     <style>
         .cl-yellow {
