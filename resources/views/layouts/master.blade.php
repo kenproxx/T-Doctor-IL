@@ -44,7 +44,8 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.textcomplete/1.8.0/jquery.textcomplete.js"></script>
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/jquery.textcomplete/1.8.0/jquery.textcomplete.js"></script>
 
 </head>
 
@@ -88,11 +89,11 @@
 <div class="loading-overlay-master">
     <span class="fas fa-spinner fa-3x fa-spin"></span>
 </div>
-    @include('sweetalert::alert')
-    <div id="content">
-        @yield('content')
-        @include('layouts.partials.footer')
-    </div>
+@include('sweetalert::alert')
+<div id="content">
+    @yield('content')
+    @include('layouts.partials.footer')
+</div>
 <!-- Back to top -->
 <div class="btn-back-to-top" id="myBtn">
     <span class="symbol-btn-back-to-top">
