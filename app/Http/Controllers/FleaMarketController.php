@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ProductStatus;
 use App\Enums\ReviewStoreStatus;
+use App\Models\Category;
 use App\Models\FleaMarket;
+use App\Models\online_medicine\CategoryProduct;
 use App\Models\ProductInfo;
 use App\Models\ReviewStore;
 use Illuminate\Support\Facades\Auth;
@@ -17,8 +20,8 @@ class FleaMarketController extends Controller
     public function index()
     {
         $productFleaMarkets = DB::table('product_infos')->get();
-
-        return view('FleaMarket.flea-market', compact('productFleaMarkets'));
+        $departments = CategoryProduct::where('status', 1)->get();
+        return view('FleaMarket.flea-market', compact('productFleaMarkets', 'departments'));
 
     }
 

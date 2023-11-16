@@ -55,34 +55,12 @@
             <div class="col-md-3  mobile-hidden">
                 <div class="border-radius ">
                     <div class="flea-text">Filter</div>
-                    <div>
-                        <input type="checkbox">
-                        <label class="flea-text-gray">All (96)</label>
-                    </div>
-                    <div>
-                        <input type="checkbox">
-                        <label class="flea-text-gray">Equipments (71)</label>
-                    </div>
-                    <div>
-                        <input type="checkbox">
-                        <label class="flea-text-gray">Furniture (55)</label>
-                    </div>
-                    <div>
-                        <input type="checkbox">
-                        <label class="flea-text-gray">Medicine (54)</label>
-                    </div>
-                    <div>
-                        <input type="checkbox">
-                        <label class="flea-text-gray">Cosmetics (49)</label>
-                    </div>
-                    <div>
-                        <input type="checkbox">
-                        <label class="flea-text-gray">Furniture (53)</label>
-                    </div>
-                    <div>
-                        <input type="checkbox">
-                        <label class="flea-text-gray">Others (47)</label>
-                    </div>
+                    @foreach($departments as $department)
+                        <div>
+                            <input type="checkbox" onchange="performSearch()" name="category_{{$department->id}}" id="category_{{$department->id}}">
+                            <label for="category_{{$department->id}}" class="flea-text-gray">{{$department->name}}</label>
+                        </div>
+                    @endforeach
                     <div class="flea-text-sp">See all categories</div>
                 </div>
                 <div class="border-radius mt-3 ">
@@ -268,11 +246,23 @@
             });
         });
 
+
         function performSearch() {
             var searchInput = document.getElementById('inputSearch');
             var searchValue = searchInput.value;
 
+            var departmentIds = [];
+            var departmentInputs = document.querySelectorAll('input[name^="category_"]');
+            for (var i = 0; i < departmentInputs.length; i++) {
+                var departmentInput = departmentInputs[i];
+                if (departmentInput.checked) {
+                    departmentIds.push(departmentInput.name.replace('category_', ''));
+                }
+            }
+            var categoryIdsString = departmentIds.join(',');
+            console.log(categoryIdsString)
             var formData = {
+                category_id: categoryIdsString,
                 name: searchValue,
                 status: 'ACTIVE',
                 min_price: $('#inputProductMin').val(),
@@ -280,7 +270,7 @@
             };
 
             $.ajax({
-                url: "{{ route('backend.products.search') }}",
+                url: "{{ route('products.api.search') }}",
                 method: "GET",
                 data: formData,
                 success: function (response) {
