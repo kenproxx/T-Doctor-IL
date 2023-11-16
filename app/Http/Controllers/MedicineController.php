@@ -25,9 +25,14 @@ class MedicineController extends Controller
         $countAllMedicine = ProductMedicine::where('product_medicines.status', OnlineMedicineStatus::APPROVED)->count();
         $categoryMedicines = CategoryProduct::where('status', true)->get();
 
+        //get all product in cart by user_id
+        $carts = null;
+        if (Auth::check()) {
+            $carts = Cart::where('user_id', Auth::user()->id)->get();
+        }
         $provinces = Province::all();
 
-        return view('medicine.list', compact('medicines', 'categoryMedicines', 'provinces', 'countAllMedicine'));
+        return view('medicine.list', compact('medicines', 'categoryMedicines', 'provinces', 'countAllMedicine', 'carts'));
     }
 
     public function detail($id)

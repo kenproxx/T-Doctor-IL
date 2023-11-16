@@ -1,3 +1,6 @@
+@php use App\Enums\TypeProductCart; @endphp
+@php use App\Models\online_medicine\ProductMedicine; @endphp
+@php use App\Models\ProductInfo; @endphp
 <style>
     .change-quantity {
         width: 100%;
@@ -41,10 +44,10 @@
             <div class="modal-body">
                 @foreach($carts as $cart)
                     @php
-                        if ($cart->type_product == \App\Enums\TypeProductCart::MEDICINE){
-                            $product = \App\Models\online_medicine\ProductMedicine::find($cart->product_id);
+                        if ($cart->type_product == TypeProductCart::MEDICINE){
+                            $product = ProductMedicine::find($cart->product_id);
                         } else {
-                            $product = \App\Models\ProductInfo::find($cart->product_id);
+                            $product = ProductInfo::find($cart->product_id);
                         }
                     @endphp
                     <div class="product-cart row">
@@ -61,13 +64,13 @@
                         </div>
                         <div class="col-2">
                             <div class="change-quantity">
-                                <div class="value-button btnChangeQty" data-type="decrease" data-id="{{ $cart->id }}"
-                                     id="decrease">-
+                                <div class="value-button btnChangeQty" data-type="decrease"
+                                     onclick="decreaseQuantity('{{ $cart->id }}')">-
                                 </div>
-                                <input id="number_{{$cart->id}}" class="number mr-2 ml-2" value="{{ $cart->quantity }}"
-                                       min="1"/>
-                                <div class="value-button btnChangeQty" data-type="increase" data-id="{{ $cart->id }}"
-                                     id="increase">+
+                                <input id="number_quantity_{{$cart->id}}" type="number" class="number mr-2 ml-2"
+                                       value="{{ $cart->quantity }}" min="0"/>
+                                <div class="value-button btnChangeQty" data-type="increase"
+                                     onclick="increaseQuantity('{{ $cart->id }}')">+
                                 </div>
                             </div>
                         </div>
@@ -85,27 +88,33 @@
     <input type="text" id="accessToken" class="d-none" value="{{ $_COOKIE['accessToken'] }}">
 @endif
 <script>
-    $(document).ready(function () {
-        $('.btnChangeQty').on('click', function () {
-            let id = $(this).data('id');
-            let type = $(this).data('type');
-            changeQuantity(id, type);
-        })
-    })
 
-    async function changeQuantity(id, type) {
+    function decreaseQuantity(cartId) {
+        var inputElement = $('#number_quantity_' + cartId);
+        var currentValue = parseInt(inputElement.val());
+
+        if (currentValue > 1) {
+            let newQuantity = currentValue - 1;
+            inputElement.val(newQuantity);
+            changeQuantity(cartId, newQuantity);
+        }
+    }
+
+    function increaseQuantity(cartId) {
+        var inputElement = $('#number_quantity_' + cartId);
+        var currentValue = parseInt(inputElement.val());
+        let newQuantity = currentValue + 1;
+
+        inputElement.val(newQuantity);
+        changeQuantity(cartId, newQuantity);
+    }
+
+    async function changeQuantity(id, quantity) {
         let token = document.getElementById('accessToken').value;
 
         const headers = {
             'Authorization': `Bearer ${token}`
         };
-
-        let quantity = document.getElementById('number_' + id).value;
-        if (type == 'decrease') {
-            quantity--;
-        } else {
-            quantity++;
-        }
 
         let route = `{{route('api.backend.cart.change.quantity', ['id' => ':id'])}}`;
         route = route.replace(':id', id);
@@ -120,12 +129,6 @@
                 method: 'POST',
                 headers: headers,
                 data: data,
-                success: function (response) {
-                    console.log(response)
-                },
-                error: function (exception) {
-                    console.log(exception)
-                }
             });
         } catch (error) {
             throw error;
