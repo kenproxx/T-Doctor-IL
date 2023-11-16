@@ -22,7 +22,6 @@ use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\QuestionLikesController;
 use App\Http\Controllers\restapi\admin\AdminDoctorInfoApi;
 use App\Http\Controllers\restapi\admin\AdminPharmacyApi;
-use App\Http\Controllers\restapi\CartApi;
 use App\Http\Controllers\restapi\UserApi;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StaffController;
@@ -239,12 +238,4 @@ Route::group(['prefix' => 'product-medicine'], function () {
     Route::get('create', [BackendProductMedicineController::class, 'create'])->name('api.backend.product-medicine.create');
     Route::post('store', [BackendProductMedicineController::class, 'store'])->name('api.backend.product-medicine.store');
     Route::post('destroy/{id}', [BackendProductMedicineController::class, 'destroy'])->name('api.backend.product-medicine.destroy');
-});
-
-Route::group(['prefix' => 'carts'], function () {
-    Route::get('user/{id}', [CartApi::class, 'showCartByUserID'])->name('api.backend.cart.user');
-    Route::post('create', [CartApi::class, 'addToCart'])->name('api.backend.cart.create');
-    Route::post('change-quantity/{id}', [CartApi::class, 'changeQuantityCart'])->name('api.backend.cart.change.quantity');
-    Route::delete('delete/{id}', [CartApi::class, 'deleteCart'])->name('api.backend.cart.delete');
-    Route::delete('clear/{id}', [CartApi::class, 'clearCart'])->name('api.backend.cart.clear');
 });

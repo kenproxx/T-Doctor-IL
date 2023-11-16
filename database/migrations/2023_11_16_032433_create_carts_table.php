@@ -17,6 +17,11 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id');
             $table->integer('quantity')->nullable()->default(0);
             $table->string('type_product')->nullable()->comment('flea market hay là online medicine');
+            $table->string('type_cart')->nullable()->comment('phương thức thanh toán');
+            $table->string('type_delivery')->nullable()->comment('phương thức giao hàng');
+            $table->string('price')->nullable()->default(0)->comment('giá sản phẩm');
+            $table->string('total_price')->nullable()->default(0);
+            $table->string('status')->default('PENDING');
             $table->timestamps();
         });
     }

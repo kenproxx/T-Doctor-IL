@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-    <div class="list-doctor row container m-auto">
+    <div class="list-doctor row">
         @foreach($newPhamrmacists as $newPhamrmacist)
             <div class="card col-md-3">
                 <i class="bi bi-heart"></i>

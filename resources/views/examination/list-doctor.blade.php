@@ -1,4 +1,4 @@
-<div id="list-doctor-render" class="list-doctor row container m-auto">
+<div id="list-doctor-render" class="list-doctor row">
 
 </div>
 <script>

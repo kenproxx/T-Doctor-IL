@@ -17,6 +17,7 @@ use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecruitmentController;
+use App\Http\Controllers\ReviewStoreController;
 use App\Http\Controllers\WhatFreeToDay;
 use Illuminate\Support\Facades\Route;
 
@@ -87,9 +88,6 @@ Route::group(['prefix' => 'medicine'], function () {
     Route::get('/', [MedicineController::class, 'index'])->name('medicine');
     Route::get('/detail/{id}', [MedicineController::class, 'detail'])->name('medicine.detail');
     Route::get('/wish-list', [MedicineController::class, 'wishList'])->name('medicine.wishList');
-    Route::post('search', [MedicineController::class, 'searchOnlineMedicine'])->name('medicine.search');
-    Route::post('get-name-location', [MedicineController::class, 'getLocationByUserId'])->name('medicine.get.name.location.by.user');
-
 
 });
 
@@ -115,6 +113,10 @@ Route::group(['prefix' => 'flea-market'], function () {
     Route::get('edit-product/{id}', [FleaMarketController::class, 'editProduct'])->name('flea.market.edit.product');
     Route::get('product-detail/{id}', [FleaMarketController::class, 'productDetail'])->name('flea.market.product.detail');
     Route::get('shop-info/{id}', [FleaMarketController::class, 'ShopInfo'])->name('flea.market.product.shop.info');
+    Route::get('review-store', [ReviewStoreController::class, 'ReviewStore'])->name('flea.market.product.review.store');
+    Route::get('create-review-store', [ReviewStoreController::class, 'createReviewStore'])->name('flea.market.product.create.review.store');
+    Route::post('create-review/{id}', [ReviewStoreController::class, 'createReview'])->name('flea.market.product.create.review');
+
 });
 Route::group(['prefix' => 'what-free'], function () {
     Route::get('/', [WhatFreeToDay::class, 'index'])->name('what.free');

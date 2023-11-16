@@ -34,10 +34,37 @@
                         @include('FleaMarket.tab-product-flea')
                     </div>
                     <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
-                        @include('component.review-item')
+                        <div class="d-flex justify-content-end align-items-center mb-md-3">
+                            <a id="writeReviewBtn" class="b-radius p-2" style="border-radius: 30px; background: none" ><i class="fa-regular fa-file-lines"></i>Write a review</a>
+                        </div>
+                        <div id="reviewItem">
+                            @include('component.review-item')
+                        </div>
+                        <div id="createReviewStore" style="display: none;">
+                            @include('FleaMarket.tab-create-review-store')
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var writeReviewBtn = document.getElementById('writeReviewBtn');
+            var reviewItem = document.getElementById('reviewItem');
+            var createReviewStore = document.getElementById('createReviewStore');
+
+            writeReviewBtn.addEventListener('click', function () {
+                // Ẩn nút "Write a review"
+                writeReviewBtn.style.display = 'none';
+
+                // Ẩn review-item và hiển thị tab-create-review-store
+                reviewItem.style.display = 'none';
+                createReviewStore.style.display = 'block';
+            });
+        });
+    </script>
+
+
 @endsection

@@ -5,67 +5,23 @@ namespace App\Http\Controllers;
 use App\Enums\TypeUser;
 use App\Models\Role;
 use DB;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
     public function checkAdmin()
     {
-        $adminRole = ['ADMIN'];
-        return $this->checkRoles($adminRole);
-    }
+        $isAdmin = false;
+        $user = Auth::user();
 
-    private function checkRoles($roleNames)
-    {
-        $hasRole = false;
-        if (Auth::check()) {
-            $user = Auth::user();
-            $role_user = DB::table('role_users')->where('user_id', $user->id)->first();
-            $userRoleNames = Role::where('id', $role_user->role_id)->pluck('name');
+        $role_user = DB::table('role_users')->where('user_id', $user->id)->first();
+        $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
 
-            foreach ($roleNames as $roleName) {
-                if ($userRoleNames->contains($roleName)) {
-                    $hasRole = true;
-                    break;
-                }
-            }
+        if ($roleNames->contains('ADMIN')) {
+            $isAdmin = true;
         }
-        return $hasRole;
-    }
-
-    public function checkBusiness()
-    {
-        $businessRoles = [
-            'PHARMACEUTICAL COMPANIES',
-            'HOSPITALS',
-            'CLINICS',
-            'PHARMACIES',
-            'SPAS',
-            'OTHERS',
-            'ADMIN'
-        ];
-
-        return $this->checkRoles($businessRoles);
-    }
-
-    public function checkMedical()
-    {
-        $medicalRoles = [
-            'DOCTORS',
-            'PHAMACISTS',
-            'THERAPISTS',
-            'ESTHETICIANS',
-            'NURSES',
-            'PHARMACEUTICAL COMPANIES',
-            'HOSPITALS',
-            'CLINICS',
-            'PHARMACIES',
-            'SPAS',
-            'OTHERS',
-            'ADMIN'
-        ];
-
-        return $this->checkRoles($medicalRoles);
+        return $isAdmin;
     }
 
     public function switchMember($member)

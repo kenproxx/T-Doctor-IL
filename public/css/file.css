@@ -83,6 +83,20 @@
   object-fit: cover;
 }
 
+.cmt-review {
+  border-radius: 8px;
+  border: 0.5px solid var(--Light, #EAEAEA);
+  background: var(--White-Light, #F3F3F3);
+  display: flex;
+  height: 197px;
+  padding: 8px 16px 20px 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  align-self: stretch;
+  width: 100%;
+}
+
 .recruitment-details--title {
   font-size: 32px;
   font-weight: 800;
@@ -816,33 +830,43 @@
   border-bottom: 3px solid !important;
 }
 
-.rv_item {
+.rv_item-1 {
   padding: 10px;
   border-bottom: 1px solid rgb(214, 214, 214);
 }
-.rv_item .rv-header {
+.rv_item-1 .rv-header {
   margin-bottom: 10px;
 }
-.rv_item .rv-header--left {
+.rv_item-1 .rv-header--left {
   align-items: center;
 }
-.rv_item .rv-header--left .avt {
+.rv_item-1 .rv-header--left .avt {
   border-radius: 30px;
 }
-.rv_item .rv-header--left .avt img {
+.rv_item-1 .rv-header--left .avt img {
+  width: 32px;
+  height: 32px;
+  border-radius: 20px;
   object-fit: cover;
 }
-.rv_item .rv-header--left p {
+.rv_item-1 .rv-header--left p {
   font-weight: 800;
 }
-.rv_item .rv-header--right {
+.rv_item-1 .rv-header--right {
   display: flex;
   align-self: flex-end;
   font-size: 14px;
   font-weight: 400;
   align-items: center;
 }
-.rv_item .content {
+.rv_item-1 .rv-header--right p {
+  color: #000;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.rv_item-1 .content {
   font-size: 16px;
 }
 

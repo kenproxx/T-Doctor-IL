@@ -22,7 +22,7 @@
             </div>
         </div>
     </div>
-    <div class="row list-doctor container m-auto">
+    <div class="row list-doctor">
         @if(count($recommendedMedicines) > 0)
             @foreach($recommendedMedicines as $recommendedMedicine)
                 @php
