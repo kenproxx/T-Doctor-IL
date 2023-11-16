@@ -44,7 +44,9 @@ class FleaMarketController extends Controller
      */
     public function myStore()
     {
-        return view('FleaMarket.my-store');
+        $userId = Auth::user()->id;
+        $reviewStore = ReviewStore::where('store_id', $userId)->get();
+        return view('FleaMarket.my-store',compact('reviewStore'));
     }
 
     /**
@@ -56,7 +58,7 @@ class FleaMarketController extends Controller
     }
     public function ShopInfo($id)
     {
-        $reviewStore = ReviewStore::where('status', ReviewStoreStatus::APPROVED)->get();
+        $reviewStore = ReviewStore::where('store_id', $id)->get();
         return view('FleaMarket.shop-infor',compact('id','reviewStore'));
     }
 
