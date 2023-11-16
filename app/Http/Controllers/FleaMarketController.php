@@ -45,7 +45,8 @@ class FleaMarketController extends Controller
     {
         $userId = Auth::user()->id;
         $reviewStore = ReviewStore::where('store_id', $userId)->where('status', ReviewStoreStatus::APPROVED)->get();
-        return view('FleaMarket.my-store', compact('reviewStore'));
+        $id = Auth::user()->id;
+        return view('FleaMarket.my-store', compact('reviewStore', 'id'));
     }
 
     /**

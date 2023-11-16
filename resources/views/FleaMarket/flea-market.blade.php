@@ -107,9 +107,9 @@
                             </div>
                             <div class="range-input">
                                 <input type="range" onchange="performSearch()" class="rangePrice range-min" min="0"
-                                       max="10000000" value="2500000" step="1000">
+                                       max="100000" value="25000" step="1000">
                                 <input type="range" onchange="performSearch()" class="rangePrice range-max" min="0"
-                                       max="10000000" value="7500000" step="1000">
+                                       max="100000" value="75000" step="1000">
                             </div>
                         </div>
                     </div>
