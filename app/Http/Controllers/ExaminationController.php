@@ -70,32 +70,38 @@ class ExaminationController extends Controller
 
     public function bestPharmacists()
     {
-        return view('examination.bestpharmacists');
+        $bestPhamrmacists = Clinic::where('type', TypeBussiness::PHARMACIES)->orderBy('count', 'DESC')->limit(16)->get();
+        return view('examination.bestpharmacists', compact('bestPhamrmacists'));
     }
 
     public function newPharmacists()
     {
-        return view('examination.newpharmacists');
+        $newPhamrmacists = Clinic::where('type', TypeBussiness::PHARMACIES)->orderBy('id', 'DESC')->limit(16)->get();
+        return view('examination.newpharmacists', compact('newPhamrmacists'));
     }
 
     public function availablePharmacists()
     {
-        return view('examination.availablepharmacists');
+        $availablePhamrmacists = Clinic::where('type', TypeBussiness::PHARMACIES)->where('time_work', TypeTimeWork::ALL)->limit(16)->get();
+        return view('examination.availablepharmacists', compact('availablePhamrmacists'));
     }
 
     public function hotDealMedicine()
     {
-        return view('examination.hotdealmedicine');
+        $hotMedicines = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->limit(16)->get();
+        return view('examination.hotdealmedicine', compact('hotMedicines'));
     }
 
     public function newMedicine()
     {
-        return view('examination.newmedicine');
+        $newMedicines = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->orderBy('id', 'DESC')->limit(16)->get();
+        return view('examination.newmedicine', compact('newMedicines'));
     }
 
     public function recommended()
     {
-        return view('examination.recommended');
+        $recommendedMedicines = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->limit(16)->get();
+        return view('examination.recommended', compact('recommendedMedicines'));
     }
 
     public function myPersonalDoctor()

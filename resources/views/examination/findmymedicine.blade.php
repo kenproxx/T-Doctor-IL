@@ -39,10 +39,10 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.bestpharmacists')}}">See all</a></div>
                 </div>
             </div>
-            <div class="d-flex list-doctor">
+            <div class="row list-doctor">
                 @if(count($bestPhamrmacists) > 0)
                     @foreach($bestPhamrmacists as $bestPhamrmacist)
-                        <div class="card">
+                        <div class="card col-md-3">
                             <i class="bi bi-heart"></i>
                             @php
                                 $arrayGallery=[];
@@ -92,10 +92,10 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.newpharmacists')}}">See all</a></div>
                 </div>
             </div>
-            <div class="d-flex list-doctor">
+            <div class="row list-doctor">
                 @if(count($newPhamrmacists) > 0)
                     @foreach($newPhamrmacists as $newPhamrmacist)
-                        <div class="card">
+                        <div class="card col-md-3">
                             <i class="bi bi-heart"></i>
                             @php
                                 $arrayGallery=[];
@@ -145,10 +145,10 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.availablepharmacists')}}">See all</a></div>
                 </div>
             </div>
-            <div class="d-flex list-doctor">
+            <div class="row list-doctor">
                 @if(count($allPhamrmacists) > 0)
                     @foreach($allPhamrmacists as $allPhamrmacist)
-                        <div class="card">
+                        <div class="card col-md-3">
                             <i class="bi bi-heart"></i>
                             @php
                                 $arrayGallery=[];
@@ -198,13 +198,13 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.hotdealmedicine')}}">See all</a></div>
                 </div>
             </div>
-            <div class="d-flex list-doctor">
+            <div class="row list-doctor">
                 @if(count($hotMedicines) > 0)
                     @foreach($hotMedicines as $hotMedicine)
                         @php
                             $user = \App\Models\User::find($hotMedicine->user_id);
                         @endphp
-                        <div class="card">
+                        <div class="card col-md-3">
                             <i class="bi bi-heart"></i>
                             <img src="{{asset($hotMedicine->thumbnail)}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -224,13 +224,13 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.newmedicine')}}">See all</a></div>
                 </div>
             </div>
-            <div class="d-flex list-doctor">
+            <div class="row list-doctor">
                 @if(count($newMedicines) > 0)
                     @foreach($newMedicines as $newMedicine)
                         @php
                             $user = \App\Models\User::find($newMedicine->user_id);
                         @endphp
-                        <div class="card">
+                        <div class="card col-md-3">
                             <i class="bi bi-heart"></i>
                             <img src="{{asset($newMedicine->thumbnail)}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -250,13 +250,13 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.recommended')}}">See all</a></div>
                 </div>
             </div>
-            <div class="d-flex list-doctor">
+            <div class="row list-doctor">
                 @if(count($recommendedMedicines) > 0)
                     @foreach($recommendedMedicines as $recommendedMedicine)
                         @php
                             $user = \App\Models\User::find($recommendedMedicine->user_id);
                         @endphp
-                        <div class="card">
+                        <div class="card col-md-3">
                             <i class="bi bi-heart"></i>
                             <img src="{{asset($recommendedMedicine->thumbnail)}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -286,7 +286,7 @@
                     let mainUrl = detail.replace(':id', item['id']);
                     let imageDoctor = item['thumbnail'];
                     let myArray = imageDoctor.split("/storage");
-                    html = html + `<div class="card">
+                    html = html + `<div class="card col-md-3">
                             <i class="bi bi-heart"></i>
                             <img src="${url}${myArray[1]}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -296,7 +296,7 @@
                             </div>
                         </div>`;
                 }
-                let listDoctor = `<div class="list-doctor d-flex"> ${html} </div>`;
+                let listDoctor = `<div class="list-doctor row"> ${html} </div>`;
                 let showMedicine = ` <div class="d-flex justify-content-center">
                 <div class=" list-title d-flex">
                     <div class="list--doctor p-0">

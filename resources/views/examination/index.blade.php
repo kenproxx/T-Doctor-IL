@@ -40,7 +40,9 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.best_doctor')}}">See all</a></div>
                 </div>
             </div>
-            <div id="list-doctor-best" class="list-doctor d-flex "></div>
+            <div id="list-doctor-best" class="list-doctor row">
+
+            </div>
             <div class="d-flex justify-content-center">
                 <div id="list-title-new" class="list-title d-flex">
                     <div class="list--doctor p-0">
@@ -49,7 +51,9 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.new_doctor')}}">See all</a></div>
                 </div>
             </div>
-            <div id="list-doctor-new" class="list-doctor d-flex "></div>
+            <div id="list-doctor-new" class="list-doctor row">
+
+            </div>
             <div class="d-flex justify-content-center">
                 <div id="list-title-available" class="list-title d-flex">
                     <div class="list--doctor p-0">
@@ -58,7 +62,7 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.available_doctor')}}">See all</a></div>
                 </div>
             </div>
-            <div id="list-doctor-available" class="list-doctor d-flex ">
+            <div id="list-doctor-available" class="list-doctor row">
 
             </div>
         </div>
@@ -89,7 +93,7 @@
                     let mainUrl = detailDoctor.replace(':id', item['id']);
                     let imageDoctor = item['thumbnail'];
                     let myArray = imageDoctor.split("/storage");
-                    html = html + `<div class="card" >
+                    html = html + `<div class="card col-md-3" >
                             <i class="bi bi-heart"></i>
                             <img src=" ${url}${myArray[1]} " class="card-img-top" alt="...">
                             <div class="card-body">
@@ -120,7 +124,7 @@
                     let mainUrl = detailDoctor.replace(':id', item['id']);
                     let imageDoctor = item['thumbnail'];
                     let myArray = imageDoctor.split("/storage");
-                    html = html + `<div class="card" >
+                    html = html + `<div class="card col-md-3" >
                             <i class="bi bi-heart"></i>
                             <img src=" ${url}${myArray[1]} " class="card-img-top" alt="...">
                             <div class="card-body">
@@ -132,7 +136,7 @@
                         </div>`;
                 }
 
-                let listDoctor = `<div id="list-doctor-department" class="list-doctor d-flex justify-content-center"> ${html} </div>`;
+                let listDoctor = `<div id="list-doctor-department" class="list-doctor row"> ${html} </div>`;
                 let showDepartment = `<div class="d-flex justify-content-center">
                         <div id="list-title-department" class="list-title d-flex">
                             <div class="list--doctor p-0">

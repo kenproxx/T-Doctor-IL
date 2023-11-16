@@ -1056,15 +1056,15 @@ span.material-symbols-outlined {
     color: #aaa;
     margin-top: 8px;
 }
-#list-doctor-new{
-    gap:25px
-}
-#list-doctor-best{
-    gap: 25px;
-}
-#list-doctor-available{
-    gap: 25px;
-}
+/*#list-doctor-new{*/
+/*    gap:25px*/
+/*}*/
+/*#list-doctor-best{*/
+/*    gap: 25px;*/
+/*}*/
+/*#list-doctor-available{*/
+/*    gap: 25px;*/
+/*}*/
 .bi-heart-1{
     position: absolute;
     left: 265px;

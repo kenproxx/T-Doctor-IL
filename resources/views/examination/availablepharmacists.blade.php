@@ -15,50 +15,55 @@
             </div>
         </div>
     </div>
-    <div id="title"  class="d-flex justify-content-center">
-        <div id="list-title" class="d-flex">
+    <div id="title" class="d-flex justify-content-center">
+        <div class="list-title d-flex">
             <div class="list--doctor p-0">
                 <a class="back" href="{{route('examination.findmymedicine')}}"><p><i class="bi bi-arrow-left"></i> 24/7 Available Pharmacists</p></a>
             </div>
         </div>
     </div>
-    <div id="list-doctor" class="d-flex justify-content-center container">
-        <div class="card" >
+    <div class="list-doctor row">
+        @foreach($availablePhamrmacists as $availablePhamrmacist)
+            <div class="card col-md-3">
                 <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
+                @php
+                    $arrayGallery=[];
+                    $gallery = $availablePhamrmacist->gallery;
+                    if ($gallery){
+                        $arrayGallery = explode(',', $gallery);
+                    }
+                    $text = '';
+                    switch ($availablePhamrmacist->time_work){
+                        case \App\Enums\TypeTimeWork::ALL:
+                            $text = '24/7';
+                            break;
+                        case \App\Enums\TypeTimeWork::OTHER:
+                            $text = 'Other';
+                            break;
+                        case \App\Enums\TypeTimeWork::ONLY_MORNING:
+                            $text = 'All morning';
+                            break;
+                        case \App\Enums\TypeTimeWork::ONLY_AFTERNOON:
+                            $text = 'All afternoon';
+                            break;
+                        default:
+                            $text = 'Private';
+                            break;
+
+                    }
+
+                @endphp
+                @if(count($arrayGallery) > 0)
+                    <img src="{{asset($arrayGallery[0])}}" class="card-img-top" alt="...">
+                @endif
                 <div class="card-body">
-                    <a href="{{route('examination.doctor_info')}}"><h5 class="card-title">BS Đô Văn Định</h5></a>
-                    <p class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+                    <a href="#"><h5
+                            class="card-title"> {{ $availablePhamrmacist->name }}</h5></a>
+                    <p class="card-text_1">Location: <b>{{ $availablePhamrmacist->address_detail }}</b></p>
+                    <p class="card-text_1">Working time: <b> {{ $text }}</b></p>
                 </div>
             </div>
-        <div class="card" >
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <a href="{{route('examination.doctor_info')}}"><h5 class="card-title">BS Đô Văn Định</h5></a>
-                    <p class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
-            </div>
-        <div class="card" >
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <a href="{{route('examination.doctor_info')}}"><h5 class="card-title">BS Đô Văn Định</h5></a>
-                    <p class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
-            </div>
-        <div class="card" >
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <a href="{{route('examination.doctor_info')}}"><h5 class="card-title">BS Đô Văn Định</h5></a>
-                    <p class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
-            </div>
+        @endforeach
     </div>
 
 @endsection
