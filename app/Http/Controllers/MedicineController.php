@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Enums\online_medicine\OnlineMedicineStatus;
+use App\Models\Cart;
 use App\Models\online_medicine\CategoryProduct;
 use App\Models\online_medicine\ProductMedicine;
+use Illuminate\Support\Facades\Auth;
 
 class MedicineController extends Controller
 {
@@ -18,7 +20,11 @@ class MedicineController extends Controller
     {
         $medicine = ProductMedicine::find($id);
         $categoryMedicines = CategoryProduct::where('status', true)->get();
-        return view('medicine.detailMedicine', compact('medicine', 'categoryMedicines'));
+        $carts = null;
+        if (Auth::check()) {
+            $carts = Cart::where('user_id', Auth::user()->id)->get();
+        }
+        return view('medicine.detailMedicine', compact('medicine', 'categoryMedicines', 'carts'));
     }
 
     public function wishList()

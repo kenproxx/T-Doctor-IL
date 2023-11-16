@@ -1,7 +1,13 @@
-@media (min-width: 1500px){
+@media (min-width: 1500px) {
     .container {
         min-width: 1440px;
     }
+}
+
+.input-quantity {
+    font-size: 24px;
+    border: 1px solid #ccc;
+    border-radius: 3px
 }
 
 .header {
@@ -87,6 +93,7 @@
     margin-top: 100px;
     height: 280px;
     margin-bottom: 40px;
+
     img {
         height: 100%;
         width: 100%;
@@ -105,12 +112,13 @@
     &--content {
         margin: 30px 0;
 
-         &--left {
+        &--left {
             .img-main {
                 width: 100%;
                 height: 441px;
                 object-fit: cover;
                 margin-bottom: 16px;
+
                 img {
                     width: 100%;
                     height: 100%;
@@ -121,9 +129,11 @@
             .list {
                 overflow-x: auto;
                 display: flex;
+
                 .item {
                     height: 79px;
                     margin-right: 16px;
+
                     img {
                         width: 140px;
                         height: 100%;
@@ -145,41 +155,49 @@
 
             .product-details {
                 .body {
-                    .text-wrapper{
+                    .text-wrapper {
                         font-size: 24px;
                         font-weight: 800;
                     }
-                    .price{
+
+                    .price {
                         font-size: 32px;
                         font-weight: 800;
                         margin-top: 24px;
                     }
-                    .brand-name{
+
+                    .brand-name {
                         margin-top: 24px;
-                        .text-wrapper-2{
+
+                        .text-wrapper-2 {
                             font-size: 24px;
                             font-weight: 400;
                             margin-right: 10px;
                         }
-                        .text-wrapper-3{
+
+                        .text-wrapper-3 {
                             font-size: 25px;
                             font-weight: 800;
                         }
                     }
                 }
-                .button{
+
+                .button {
                     margin-top: 24px;
-                    button{
+
+                    button {
                         width: 100%;
                         border: none;
                         font-size: 14px;
                         font-weight: 800;
                         height: 50px;
-                        &.div-wrapper{
+
+                        &.div-wrapper {
                             border-radius: 8px;
                             background: rgba(214, 214, 214, 1);
                         }
-                        &.text-wrapper-5{
+
+                        &.text-wrapper-5 {
                             border-radius: 8px;
                             background: rgba(69, 195, 210, 1);
                             color: white;
@@ -438,65 +456,78 @@
 .medicine {
     margin-top: 30px;
 
-    &-list{
+    &-list {
         margin-top: 20px;
-        &--filter{
-            .filter{
+
+        &--filter {
+            .filter {
                 border: 1px solid rgba(234, 234, 234, 1);
                 box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
                 border-radius: 8px;
                 padding: 16px;
                 margin-bottom: 32px;
-                &-header{
+
+                &-header {
                     margin-bottom: 24px;
-                    .text-wrapper{
+
+                    .text-wrapper {
                         font-size: 16px;
                         font-weight: 800;
                     }
-                    i{
+
+                    i {
                         color: rgba(146, 146, 146, 1);
                     }
                 }
-                &-body{
-                    .item{
+
+                &-body {
+                    .item {
                         margin-bottom: 8px;
-                        input{
+
+                        input {
                             background: rgba(69, 195, 210, 1);
                             border: 1.5px solid rgba(69, 195, 210, 1);
                             margin-right: 20px;
                         }
-                        .text-all{
+
+                        .text-all {
                             font-size: 16px;
                             font-weight: 800;
                         }
-                        .text{
+
+                        .text {
                             color: rgba(146, 146, 146, 1);
                             font-size: 16px;
                         }
                     }
                 }
             }
-            .price{
+
+            .price {
                 border: 1px solid rgba(234, 234, 234, 1);
                 box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
                 border-radius: 8px;
                 padding: 16px;
-                .text-wrapper{
+
+                .text-wrapper {
                     font-size: 16px;
                     font-weight: 800;
                     margin-bottom: 24px;
                 }
-                .price-input{
+
+                .price-input {
                     display: flex;
                     margin: 30px 0;
-                    .field{
-                        input{
+
+                    .field {
+                        input {
                             border-radius: 8px;
                             border: 1px solid rgba(191, 191, 191, 1);
                             background: rgba(243, 243, 243, 1);
                         }
                     }
-                    .separator{
+
+                    .separator {
                         color: rgba(191, 191, 191, 1);
                     }
                 }
@@ -549,7 +580,8 @@
             align-items: center;
             margin-right: 20px;
             border: none;
-            &:focus{
+
+            &:focus {
                 border: none;
             }
 
@@ -575,7 +607,7 @@
     }
 
     &--right {
-        .div-wrapper{
+        .div-wrapper {
             height: 48px;
             background: rgba(66, 66, 66, 1);
             border-radius: 8px;
@@ -583,14 +615,16 @@
             justify-content: center;
             text-align: center;
             align-items: center;
-            button{
+
+            button {
                 border-radius: 8px;
                 background: rgba(66, 66, 66, 1);
                 font-size: 16px;
                 font-weight: 500;
                 color: white;
             }
-            a{
+
+            a {
                 font-size: 16px;
                 font-weight: 500;
                 color: white;
@@ -599,32 +633,37 @@
     }
 }
 
-.product-item{
+.product-item {
     margin-bottom: 30px;
     padding: 16px;
     border: 1px solid rgba(234, 234, 234, 1);
     border-radius: 16px;
-    .img-pro{
+
+    .img-pro {
         margin-bottom: 10px;
         position: relative;
-        img{
+
+        img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        i{
+
+        i {
             font-size: 24px;
             position: absolute;
             top: 0;
             right: 0;
         }
-        #bi-heart-fill{
+
+        #bi-heart-fill {
             color: rgba(255, 0, 0, 1);
         }
     }
-    .content-pro{
-        .name-pro{
-            a{
+
+    .content-pro {
+        .name-pro {
+            a {
                 color: black;
                 font-size: 18px;
                 font-weight: 800;
@@ -635,39 +674,45 @@
                 overflow: hidden;
             }
         }
-        .location-pro{
+
+        .location-pro {
             margin: 5px 0;
             font-size: 16px;
-            p{
+
+            p {
                 margin-left: 5px;
                 font-weight: 800;
             }
         }
-        .price-pro{
+
+        .price-pro {
             font-size: 24px;
             font-weight: 800;
         }
     }
 }
 
-.clinics-list{
-    .clinics-header{
+.clinics-list {
+    .clinics-header {
         margin-bottom: 16px;
-        .near{
+
+        .near {
             font-size: 18px;
             font-weight: 800;
         }
-        a{
+
+        a {
             font-weight: 600;
             color: black;
         }
     }
+
     .margin-bottom-32 {
         margin-bottom: 32px;
     }
 }
 
-.clinic-search{
+.clinic-search {
     margin-bottom: 40px;
     align-items: center;
 
@@ -712,7 +757,8 @@
             align-items: center;
             margin-right: 20px;
             border: none;
-            &:focus{
+
+            &:focus {
                 border: none;
             }
 
@@ -737,7 +783,7 @@
     }
 
     &--right {
-        .div-wrapper{
+        .div-wrapper {
             height: 48px;
             background: rgba(66, 66, 66, 1);
             border-radius: 8px;
@@ -745,7 +791,8 @@
             justify-content: center;
             text-align: center;
             align-items: center;
-            a{
+
+            a {
                 font-size: 16px;
                 font-weight: 500;
                 color: white;
@@ -755,50 +802,60 @@
 
 }
 
-.clinic-item{
+.clinic-item {
     border: 1px solid rgba(234, 234, 234, 1);
     padding: 10px 14px;
     border-radius: 8px;
     margin-bottom: 8px;
     display: grid;
     gap: 8px;
-    a{
+
+    a {
         font-size: 18px;
         font-weight: 800;
         color: black;
     }
-    .time{
+
+    .time {
         font-size: 12px;
         font-weight: 500;
-        p{
+
+        p {
             color: rgba(69, 195, 210, 1);
         }
     }
-    .location{
+
+    .location {
         text-transform: capitalize;
         font-size: 16px;
         font-weight: 600;
-        i{
+
+        i {
             font-size: 16px;
         }
-        span{
+
+        span {
             color: rgba(69, 195, 210, 1);
         }
     }
-    .service{
+
+    .service {
         text-transform: capitalize;
         font-size: 16px;
         font-weight: 600;
     }
-    .star{
-        i{
+
+    .star {
+        i {
             color: rgba(255, 193, 7, 1);
         }
     }
-    .img-detail{
-        .img-item{
+
+    .img-detail {
+        .img-item {
             height: 80px;
-            img{
+
+            img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
@@ -807,68 +864,78 @@
     }
 }
 
-.other-clinics{
-    .title{
+.other-clinics {
+    .title {
         font-size: 48px;
         font-weight: 800;
         margin: 44px 0;
     }
 }
 
-.detail-clinics{
-    iframe{
+.detail-clinics {
+    iframe {
         width: 100%;
         height: 80vh;
     }
 }
 
-.modal-cart{
-    .modal-dialog{
+.modal-cart {
+    .modal-dialog {
         max-width: 700px;
-        .modal-content{
-            .modal-header{
+
+        .modal-content {
+            .modal-header {
                 border-bottom: none;
-                .modal-title{
+
+                .modal-title {
                     font-size: 24px;
                     font-weight: 800;
                 }
             }
-            .modal-body{
+
+            .modal-body {
                 max-height: 75vh;
                 overflow-y: auto;
                 padding: 0 30px;
                 border-bottom: none;
                 display: grid;
                 gap: 16px;
-                .product-cart{
+
+                .product-cart {
                     border-radius: 8px;
                     padding: 10px 16px;
                     border: 1px solid rgba(234, 234, 234, 1);
                     align-items: center;
-                    .img{
+
+                    .img {
                         width: 100px;
                         height: 100px;
-                        img{
+
+                        img {
                             width: 100%;
                             height: 100%;
                             object-fit: cover;
                         }
                     }
-                    .title{
-                        .title-name{
+
+                    .title {
+                        .title-name {
                             font-size: 18px;
                             font-weight: 800;
                         }
-                        .price{
+
+                        .price {
                             font-size: 18px;
                             font-weight: 600;
                         }
                     }
                 }
             }
-            .modal-footer{
+
+            .modal-footer {
                 border-top: none;
-                .cancel{
+
+                .cancel {
                     width: 161px;
                     font-size: 14px;
                     font-weight: 800;
@@ -876,7 +943,8 @@
                     border-radius: 8px;
                     height: 40px;
                 }
-                .pay{
+
+                .pay {
                     width: 161px;
                     font-size: 14px;
                     font-weight: 800;
@@ -891,18 +959,20 @@
     }
 }
 
-.modalCreatPrescription{
-    .title{
+.modalCreatPrescription {
+    .title {
         width: 100%;
         margin-bottom: 10px;
-        p{
+
+        p {
             font-size: 12px;
             font-weight: 600;
             color: rgba(146, 146, 146, 1);
         }
 
     }
-    input{
+
+    input {
         padding: 20px 16px;
         border-radius: 8px;
         background: rgba(243, 243, 243, 1);
@@ -910,7 +980,8 @@
         height: 56px;
         width: 100%;
     }
-    select{
+
+    select {
         border-radius: 8px;
         height: 56px;
         width: 100%;
@@ -919,8 +990,9 @@
         border: 1px solid rgba(191, 191, 191, 1);
         color: #929292;
     }
-    .add-img{
-        button{
+
+    .add-img {
+        button {
             width: 220px;
             height: 220px;
             border-radius: 8px;
@@ -928,11 +1000,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            i{
+
+            i {
                 color: rgba(146, 146, 146, 1);
                 font-size: 60px;
             }
-            img{
+
+            img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
@@ -942,17 +1016,19 @@
     }
 }
 
-.medicine-list--item{
-    .tabMystore{
+.medicine-list--item {
+    .tabMystore {
         border-bottom: none;
         margin-bottom: 32px;
-        .nav-item{
-            a{
+
+        .nav-item {
+            a {
                 width: 100% !important;
-                background: white!important;
+                background: white !important;
                 border: none;
-                &.active{
-                    border-bottom: 3px solid!important;
+
+                &.active {
+                    border-bottom: 3px solid !important;
                 }
             }
         }
@@ -960,24 +1036,30 @@
 }
 
 
-.rv_item{
+.rv_item {
     padding: 10px;
     border-bottom: 1px solid rgba(214, 214, 214, 1);
-    .rv-header{
+
+    .rv-header {
         margin-bottom: 10px;
-        &--left{
+
+        &--left {
             align-items: center;
-            .avt{
+
+            .avt {
                 border-radius: 30px;
-                img{
+
+                img {
                     object-fit: cover;
                 }
             }
-            p{
+
+            p {
                 font-weight: 800;
             }
         }
-        &--right{
+
+        &--right {
             display: flex;
             align-self: flex-end;
             font-size: 14px;
@@ -985,7 +1067,8 @@
             align-items: center;
         }
     }
-    .content{
+
+    .content {
         font-size: 16px;
     }
 }
@@ -1005,6 +1088,7 @@
     border-radius: 8px;
     background: #EAEAEA;
 }
+
 .text-follow-12 {
     color: #414141;
     text-align: center;
@@ -1013,37 +1097,45 @@
     font-weight: 800;
     line-height: normal;
 }
+
 .border-button-address {
     border-radius: 45px;
-    background: var(--secon1, #45C3D2);display: flex;
+    background: var(--secon1, #45C3D2);
+    display: flex;
     padding: 8px;
     align-items: flex-start;
     gap: 10px;
     color: #FFFFFF;
 }
+
 .font-weight-800 {
     font-weight: 800;
 }
+
 .font-weight-600 {
     font-weight: 600;
 }
+
 .font-weight-400 {
     font-weight: 400;
 }
+
 .avt-24 {
     width: 24px;
     height: 24px;
     border-radius: 50%;
     object-fit: cover;
 }
+
 .border-booking-sv {
     border-radius: 8px;
-    background:  #F3F3F3;
+    background: #F3F3F3;
     display: flex;
     padding: 8px;
     align-items: flex-start;
     gap: 10px;
 }
+
 .button-booking-sv {
     display: flex;
     width: 74px;
@@ -1055,6 +1147,7 @@
     border-radius: 8px;
     background: var(--secon1, #45C3D2);
 }
+
 /* select date */
 section {
     margin-top: 20px;
@@ -1133,6 +1226,7 @@ section {
         opacity: 0;
     }
 }
+
 .button-apply-booking {
     display: flex;
     padding: 11px 50px;
@@ -1141,8 +1235,9 @@ section {
     gap: 10px;
     flex: 1 0 0;
     border-radius: 8px;
-    background:  #45C3D2;
+    background: #45C3D2;
 }
+
 .button-Reset-booking {
     display: flex;
     padding: 11px 50px;
@@ -1151,12 +1246,13 @@ section {
     gap: 10px;
     flex: 1 0 0;
     border-radius: 8px;
-    background:  #D6D6D6;
+    background: #D6D6D6;
 }
+
 .item button {
     border-radius: 8px;
-    background:  #F3F3F3;
-    color:  #929292;
+    background: #F3F3F3;
+    color: #929292;
     display: flex;
     width: 65px;
     padding: 6px 16px;

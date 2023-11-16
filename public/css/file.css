@@ -3,6 +3,12 @@
     min-width: 1440px;
   }
 }
+.input-quantity {
+  font-size: 24px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
 .header .header-detail {
   height: 100px;
   align-items: center;
