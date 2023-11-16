@@ -1,3 +1,5 @@
+@php use App\Enums\online_medicine\ObjectOnlineMedicine; @endphp
+@php use App\Enums\online_medicine\FilterOnlineMedicine; @endphp
 @extends('layouts.admin')
 
 @section('main-content')
@@ -15,7 +17,6 @@
             </button>
         </div>
     @endif
-
     <table class="table table-striped">
         <thead>
         <tr>
@@ -35,10 +36,10 @@
                 <th scope="row">{{ $index + 1 }}</th>
                 <td>{{ $productMedicine->name }}</td>
                 <td><img src="{{ $productMedicine->thumb }}" alt="" width="100px"></td>
-                <td>{{ \App\Enums\online_medicine\ObjectOnlineMedicine::NAME_EN[$productMedicine->object_] }}</td>
-                <td>{{ \App\Enums\online_medicine\FilterOnlineMedicine::NAME_EN[$productMedicine->filter_] }}</td>
+                <td>{{ ObjectOnlineMedicine::NAME_EN[$productMedicine->object_] }}</td>
+                <td>{{ FilterOnlineMedicine::NAME_EN[$productMedicine->filter_] }}</td>
                 <td>{{ $productMedicine->category_id }}</td>
-                <td>{{ $productMedicine->status == 1 ? 'Active' : ($productMedicine->status == 0 ? 'Inactive' : '') }}</td>
+                <td>{{ $productMedicine->status }}</td>
                 <td>
                     <a href="{{ route('api.backend.product-medicine.edit', ['id' => $productMedicine->id]) }}"
                        class="btn btn-primary">Edit</a>

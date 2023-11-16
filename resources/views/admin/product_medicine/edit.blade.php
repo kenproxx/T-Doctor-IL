@@ -1,5 +1,5 @@
 @php use App\Enums\online_medicine\ObjectOnlineMedicine; @endphp
-@php use App\Enums\online_medicine\FilterOnlineMedicine; @endphp
+@php use App\Enums\online_medicine\FilterOnlineMedicine;use App\Enums\online_medicine\OnlineMedicineStatus; @endphp
 @extends('layouts.admin')
 
 @section('main-content')
@@ -114,12 +114,14 @@
                 <div class="col-md-6">
                     <label>status</label>
                     <select class="custom-select" id="status" name="status">
-                        <option value="{{ \App\Enums\online_medicine\OnlineMedicineStatus::APPROVED }}">{{ \App\Enums\online_medicine\OnlineMedicineStatus::APPROVED }}</option>
-                        <option value="{{ \App\Enums\online_medicine\OnlineMedicineStatus::DELETED }}">{{ \App\Enums\online_medicine\OnlineMedicineStatus::DELETED }}</option>
+                        <option
+                            value="{{ OnlineMedicineStatus::APPROVED }}" {{ $productMedicine->price == OnlineMedicineStatus::APPROVED ? 'selected' : '' }}>{{ OnlineMedicineStatus::APPROVED }}</option>
+                        <option
+                            value="{{ OnlineMedicineStatus::DELETED }}" {{ $productMedicine->price == OnlineMedicineStatus::DELETED ? 'selected' : '' }}>{{ \App\Enums\online_medicine\OnlineMedicineStatus::DELETED }}</option>
                     </select>
                 </div>
             </div>
-            <input type="hidden" id="id" name="id" value="{{ $productMedicine->id }}">
+            <input type="hidden" id="id" name="id" value="{{ $productMedicine->id ?? '' }}">
         </div>
     </form>
 
@@ -129,6 +131,7 @@
 
         function submitForm() {
             loadingMasterPage();
+
             const headers = {
                 'Authorization': `Bearer ${token}`
             };

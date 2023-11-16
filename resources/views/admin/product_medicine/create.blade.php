@@ -1,5 +1,5 @@
 @php use App\Enums\online_medicine\ObjectOnlineMedicine; @endphp
-@php use App\Enums\online_medicine\FilterOnlineMedicine; @endphp
+@php use App\Enums\online_medicine\FilterOnlineMedicine;use App\Enums\online_medicine\OnlineMedicineStatus; @endphp
 @extends('layouts.admin')
 
 @section('main-content')
@@ -109,8 +109,10 @@
                 <div class="col-md-6">
                     <label>status</label>
                     <select class="custom-select" id="status" name="status">
-                        <option value="{{ \App\Enums\online_medicine\OnlineMedicineStatus::APPROVED }}">{{ \App\Enums\online_medicine\OnlineMedicineStatus::APPROVED }}</option>
-                        <option value="{{ \App\Enums\online_medicine\OnlineMedicineStatus::DELETED }}">{{ \App\Enums\online_medicine\OnlineMedicineStatus::DELETED }}</option>
+                        <option
+                            value="{{ OnlineMedicineStatus::APPROVED }}">{{ OnlineMedicineStatus::APPROVED }}</option>
+                        <option
+                            value="{{ OnlineMedicineStatus::DELETED }}">{{ OnlineMedicineStatus::DELETED }}</option>
                     </select>
                 </div>
             </div>
@@ -163,7 +165,7 @@
                     success: function (data) {
                         alert(data);
                         loadingMasterPage();
-                        window.location.href = `{{route('api.backend.category-product.index')}}`;
+                        window.location.href = `{{route('api.backend.product-medicine.index')}}`;
                     },
                     error: function (exception) {
                         alert(exception.responseText);

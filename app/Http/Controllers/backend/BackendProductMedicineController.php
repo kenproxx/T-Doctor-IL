@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Enums\online_medicine\OnlineMedicineStatus;
 use App\Http\Controllers\Controller;
 use App\Models\online_medicine\CategoryProduct;
 use App\Models\online_medicine\ProductMedicine;
@@ -97,7 +98,7 @@ class BackendProductMedicineController extends Controller
     public function update(Request $request)
     {
         $params = $request->only(
-            'id', 'name', 'name_en', 'name_laos',
+            'name', 'name_en', 'name_laos',
             'brand_name', 'brand_name_en', 'brand_name_laos',
             'category_id', 'object_', 'filter_', 'price', 'status',
             'description', 'description_en', 'description_laos',
@@ -123,9 +124,7 @@ class BackendProductMedicineController extends Controller
             $thumbnail = asset('storage/'.$itemPath);
             $params['thumbnail'] = $thumbnail;
         }
-
-        $productMedicine = ProductMedicine::find($params['id']);
-
+        $productMedicine = ProductMedicine::find($request->input('id'));
         $productMedicine->fill($params);
 
         $success = $productMedicine->save();
@@ -145,7 +144,7 @@ class BackendProductMedicineController extends Controller
         $productMedicine = ProductMedicine::find($id);
         // nếu tìm thấy, thì sửa status = Inactive và thông báo
         if ($productMedicine) {
-            $productMedicine->status = 0;
+            $productMedicine->status = OnlineMedicineStatus::DELETED;
             $success = $productMedicine->update();
             if ($success) {
                 return response('Xóa sản phẩm thành công !!!', 200);
