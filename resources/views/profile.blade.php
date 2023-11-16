@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Auth; @endphp
 @extends('layouts.admin')
 
 @section('main-content')
@@ -10,7 +11,7 @@
         .avatar-user {
             vertical-align: middle;
             border-radius: 50% !important;
-            border:1px solid #cccccc;
+            border: 1px solid #cccccc;
         }
     </style>
     <!-- Page Heading -->
@@ -41,7 +42,8 @@
 
             <div class="card shadow mb-4">
                 <div class="card-profile-image mt-4">
-                    <img class="avatar-user" src="{{ Auth::user()->avt }}" alt="" style="max-width: 100px; max-height: 100px">
+                    <img class="avatar-user" src="{{ Auth::user()->avt }}" alt=""
+                         style="max-width: 100px; max-height: 100px">
                 </div>
                 <div class="card-body">
 
@@ -59,44 +61,56 @@
             <div class="card shadow mb-4">
                 <div class="card-body">
                     <form>
-                        <div class="input-group mb-3" >
+                        <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-facebook w-icon-px"></i></span>
+                                <span class="input-group-text" id="basic-addon1"><i
+                                        class="fa-brands fa-facebook w-icon-px"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="facebook" name="facebook" value="{{ $socialUser->facebook ?? '' }}">
+                            <input type="text" class="form-control" id="facebook" name="facebook"
+                                   value="{{ $socialUser->facebook ?? '' }}">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-tiktok w-icon-px"></i></span>
+                                <span class="input-group-text" id="basic-addon1"><i
+                                        class="fa-brands fa-tiktok w-icon-px"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="tiktok" name="tiktok" value="{{ $socialUser->tiktok ?? '' }}">
+                            <input type="text" class="form-control" id="tiktok" name="tiktok"
+                                   value="{{ $socialUser->tiktok ?? '' }}">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-instagram"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="instagram" name="instagram" value="{{ $socialUser->instagram ?? '' }}">
+                            <input type="text" class="form-control" id="instagram" name="instagram"
+                                   value="{{ $socialUser->instagram ?? '' }}">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-google"></i></span>
+                                <span class="input-group-text" id="basic-addon1"><i
+                                        class="fa-brands fa-google"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="google_review" name="google_review" value="{{ $socialUser->google_review ?? '' }}">
+                            <input type="text" class="form-control" id="google_review" name="google_review"
+                                   value="{{ $socialUser->google_review ?? '' }}">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-youtube w-icon-px"></i></span>
+                                <span class="input-group-text" id="basic-addon1"><i
+                                        class="fa-brands fa-youtube w-icon-px"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="youtube" name="youtube" value="{{ $socialUser->youtube ?? '' }}">
+                            <input type="text" class="form-control" id="youtube" name="youtube"
+                                   value="{{ $socialUser->youtube ?? '' }}">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-otter w-icon-px"></i></span>
+                                <span class="input-group-text" id="basic-addon1"><i
+                                        class="fa-solid fa-otter w-icon-px"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="other" name="other" value="{{ $socialUser->other ?? '' }}">
+                            <input type="text" class="form-control" id="other" name="other"
+                                   value="{{ $socialUser->other ?? '' }}">
                         </div>
 
-                        <input type="hidden" id="user_id" name="user_id" value="{{ \Illuminate\Support\Facades\Auth::user()->id }}">
+                        <input type="hidden" id="user_id" name="user_id"
+                               value="{{ Auth::user()->id }}">
                         <button type="button" class="btn btn-primary" onclick="submitForm()">Submit</button>
                     </form>
                 </div>
@@ -197,6 +211,38 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-sm-3"><label>Nation</label>
+                                    <select class="custom-select" name="nation_id" id="nation_id"
+                                            onchange="searchProvince(this.value)">
+                                        @if($nations)
+                                            @foreach($nations as $nation)
+                                                <option value="{{ $nation->id }}">{{ $nation->name }}</option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </div>
+                                <div class="col-sm-3"><label>Province</label>
+                                    <select class="custom-select" name="province_id" id="province_id"
+                                            onchange="searchDistrict()">
+                                        <option value="">123</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-sm-3"><label>District</label>
+                                    <select class="custom-select" name="district_id" id="district_id"
+                                            onchange="searchCommune()">
+                                        <option value="">123</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-sm-3"><label>Commune</label>
+                                    <select class="custom-select" name="commune_id" id="commune_id">
+                                        <option value="">123</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="address_code">AddressCode</label>
@@ -217,7 +263,8 @@
                                                         $isSelected = true;
                                                     }
                                                 @endphp
-                                                <option {{ $isSelected ? 'selected' : '' }} value="{{$role->id}}">{{$role->name}}</option>
+                                                <option
+                                                    {{ $isSelected ? 'selected' : '' }} value="{{$role->id}}">{{$role->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -251,6 +298,81 @@
 
     </div>
 
+    <script>
+
+        function searchProvince(id) {
+            const url = `{{ route('address.get.list.province') }}`;
+            const data = {
+                _token: '{{ csrf_token() }}',
+                nation_id: id
+            };
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: data,
+                success: function (response) {
+                    let html = '';
+                    response.forEach((item) => {
+                        html += `<option value="${item.id}">${item.name}</option>`;
+                    });
+                    $('#province_id').html(html);
+                },
+                error: function (exception) {
+                    alert(exception.responseText);
+                }
+            });
+        }
+
+        function searchDistrict() {
+            const provinceId = $('#province_id').val();
+            const url = `{{ route('address.get.list.district') }}`;
+            const data = {
+                _token: '{{ csrf_token() }}',
+                province_id: provinceId
+            };
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: data,
+                success: function (response) {
+                    const data = response.data;
+                    let html = '';
+                    data.forEach((item) => {
+                        html += `<option value="${item.id}">${item.name}</option>`;
+                    });
+                    $('#district_id').html(html);
+                },
+                error: function (exception) {
+                    alert(exception.responseText);
+                }
+            });
+        }
+
+        function searchCommune() {
+            const districtId = $('#district_id').val();
+            const url = `{{ route('address.get.list.commune') }}`;
+            const data = {
+                _token: '{{ csrf_token() }}',
+                district_id: districtId
+            };
+            $.ajax({
+                url: url,
+                method: 'POST',
+                data: data,
+                success: function (response) {
+                    const data = response.data;
+                    let html = '';
+                    data.forEach((item) => {
+                        html += `<option value="${item.id}">${item.name}</option>`;
+                    });
+                    $('#commune_id').html(html);
+                },
+                error: function (exception) {
+                    alert(exception.responseText);
+                }
+            });
+        }
+    </script>
     <script>
         function submitForm() {
             loadingMasterPage();
