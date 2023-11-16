@@ -6,12 +6,16 @@ use App\Enums\OrderItemStatus;
 use App\Enums\OrderStatus;
 use App\Enums\TypeProductCart;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MailController;
 use App\Models\Cart;
 use App\Models\online_medicine\ProductMedicine;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\ProductInfo;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CheckoutApi extends Controller
 {
@@ -84,6 +88,12 @@ class CheckoutApi extends Controller
 
             $cart->delete();
         }
+
+        $roleAdmin = Role::where('name', \App\Enums\Role::ADMIN)->first();
+        $role_user = DB::table('role_users')->where('role_id', $roleAdmin->id)->first();
+        $admin = User::where('id', $role_user->user_id)->first();
+        (new MailController())->sendEmail($email, 'supporttdoctor@gmail.com', 'Order success', 'Notification of successful order placement!');
+        (new MailController())->sendEmail($admin->email, 'supporttdoctor@gmail.com', 'Order created', 'A new order has just been created!');
 
         return $success;
     }

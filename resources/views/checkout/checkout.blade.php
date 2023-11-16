@@ -348,7 +348,7 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" id="realBtnOrder">Order</button>
+            <button class="d-none" type="submit" id="realBtnOrder">Order</button>
         </form>
     </div>
     <script>
@@ -365,7 +365,7 @@
                 let valueMethod = `{{ \App\Enums\OrderMethod::IMMEDIATE }}`;
                 switch (method) {
                     case 'vn_pay':
-                        url = `vn_pay`;
+                        url = `{{route('user.checkout.vnpay')}}`;
                         valueMethod = `{{ \App\Enums\OrderMethod::ELECTRONIC_WALLET }}`;
                         break;
                     case 'paypal':
@@ -396,7 +396,7 @@
                 let district = $('#district').val();
                 let address_detail = $('#address_detail').val();
 
-                let address = address_detail + ', ' + district + ', ' + province;
+                let address = address_detail + '-' + district + '-' + province;
                 $('#address').val(address);
             })
 
@@ -418,7 +418,7 @@
                 let discount = $('#discount_fee').text();
 
                 let total_order = parseFloat(total) + parseFloat(shipping) - parseFloat(discount);
-                let html = total_order + ' ' + unitPrice;
+                let html = total_order;
                 $('#total_order').text(html);
 
                 $('#value_total_fee').val(total);
