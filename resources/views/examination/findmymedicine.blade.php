@@ -284,23 +284,25 @@
                 </div>
             </div>
             <div class="row list-doctor container m-auto">
-                @if(count($function_foods) > 0)
-                    @foreach($function_foods as $function_food)
-                        @php
-                            $user = \App\Models\User::find($function_food->user_id);
-                        @endphp
-                        <div class="card col-md-3">
-                            <i class="bi bi-heart"></i>
-                            <img src="{{asset($function_food->thumbnail)}}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <a href="{{ route('medicine.detail', $function_food->id) }}"><h5
-                                        class="card-title">{{ $function_food->name }}</h5></a>
-                                <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
-                                <p class="card-text_1">Price:
-                                    <b>{{ $function_food->price }} {{ $function_food->unit_price }}</b></p>
+                @if($function_foods)
+                    @if(count($function_foods) > 0)
+                        @foreach($function_foods as $function_food)
+                            @php
+                                $user = \App\Models\User::find($function_food->user_id);
+                            @endphp
+                            <div class="card col-md-3">
+                                <i class="bi bi-heart"></i>
+                                <img src="{{asset($function_food->thumbnail)}}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <a href="{{ route('medicine.detail', $function_food->id) }}"><h5
+                                            class="card-title">{{ $function_food->name }}</h5></a>
+                                    <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
+                                    <p class="card-text_1">Price:
+                                        <b>{{ $function_food->price }} {{ $function_food->unit_price }}</b></p>
+                                </div>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    @endif
                 @endif
             </div>
 
@@ -319,7 +321,9 @@
                                 <div class="list--doctor p-0">
                                     <p>{{ $categoryMedicine->name }}</p>
                                 </div>
-                                <div class="ms-auto p-2"><a href="{{ route('examination.findByCategory', $categoryMedicine->id) }}">See all</a></div>
+                                <div class="ms-auto p-2"><a
+                                        href="{{ route('examination.findByCategory', $categoryMedicine->id) }}">See
+                                        all</a></div>
                             </div>
                         </div>
                         <div class="row list-doctor container m-auto">
