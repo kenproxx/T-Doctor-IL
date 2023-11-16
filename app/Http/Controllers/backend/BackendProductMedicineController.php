@@ -76,6 +76,7 @@ class BackendProductMedicineController extends Controller
             'brand_name', 'brand_name_en', 'brand_name_laos',
             'category_id', 'object_', 'filter_', 'price', 'status',
             'description', 'description_en', 'description_laos',
+            'unit_price'
         );
 
         //check name
@@ -144,6 +145,16 @@ class BackendProductMedicineController extends Controller
         //check brand_name
         if (empty($params['brand_name']) && empty($params['brand_name_en']) && empty($params['brand_name_laos'])) {
             return response('Tên thương hiệu không được để trống', 400);
+        }
+
+        //check thumbnail not null
+        if (!$request->hasFile('thumbnail')) {
+            return response('Ảnh đại diện không được để trống', 400);
+        }
+
+        //check gallery not null
+        if (!$request->hasFile('gallery')) {
+            return response('Ảnh chi tiết không được để trống', 400);
         }
 
         if ($request->hasFile('thumbnail')) {

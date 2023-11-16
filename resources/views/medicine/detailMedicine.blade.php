@@ -26,21 +26,6 @@
                     @endif
 
                 </div>
-{{--                <div class="medicine-search--right col-md-3 d-flex row justify-content-between">--}}
-{{--                    <div class="col-md-6 ">--}}
-{{--                        <div class="div-wrapper">--}}
-{{--                            <button type="button" data-toggle="modal" data-target="#modalCreatPrescription">Create--}}
-{{--                                prescription--}}
-{{--                            </button>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    @include('component.modalCreatPrescription')--}}
-{{--                    <div class="col-md-6">--}}
-{{--                        <div class="div-wrapper">--}}
-{{--                            <a href="{{route('medicine.wishList')}}">Wish list</a>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
             </div>
 
             <a href="{{route('medicine')}}" class="recruitment-details--title"><i class="fa-solid fa-arrow-left"></i>
@@ -128,7 +113,7 @@
                 let userID = document.getElementById('userID').value;
 
                 let productID = $('#productID').val();
-                let typeProduct = $('#type_product').val();
+                let typeProduct = '{{ \App\Enums\TypeProductCart::MEDICINE }}';
                 let quantity = $('#quantity').val();
 
                 let data = {

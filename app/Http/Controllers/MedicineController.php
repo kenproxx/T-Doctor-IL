@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\online_medicine\OnlineMedicineStatus;
+use App\Enums\TypeProductCart;
 use App\Models\Cart;
 use App\Models\online_medicine\CategoryProduct;
 use App\Models\online_medicine\ProductMedicine;
@@ -18,8 +19,8 @@ class MedicineController extends Controller
         $medicines = ProductMedicine::where('product_medicines.status', OnlineMedicineStatus::APPROVED)
             ->leftJoin('users', 'product_medicines.user_id', '=', 'users.id')
             ->leftJoin('provinces', 'provinces.id', '=', 'users.province_id')
-            ->select('product_medicines.*', 'provinces.full_name as location_name')
-            ->paginate(16);
+            ->select('product_medicines.*', 'provinces.name as location_name')
+            ->paginate(100);
 
         // count all medicine
         $countAllMedicine = ProductMedicine::where('product_medicines.status', OnlineMedicineStatus::APPROVED)->count();
@@ -28,7 +29,9 @@ class MedicineController extends Controller
         //get all product in cart by user_id
         $carts = null;
         if (Auth::check()) {
-            $carts = Cart::where('user_id', Auth::user()->id)->get();
+            $carts = Cart::where('user_id', Auth::user()->id)
+                ->where('type_product', TypeProductCart::MEDICINE)
+                ->get();
         }
         $provinces = Province::all();
 
@@ -41,7 +44,9 @@ class MedicineController extends Controller
         $categoryMedicines = CategoryProduct::where('status', true)->get();
         $carts = null;
         if (Auth::check()) {
-            $carts = Cart::where('user_id', Auth::user()->id)->get();
+            $carts = Cart::where('user_id', Auth::user()->id)
+                ->where('type_product', TypeProductCart::MEDICINE)
+                ->get();
         }
         return view('medicine.detailMedicine', compact('medicine', 'categoryMedicines', 'carts'));
     }
@@ -89,10 +94,10 @@ class MedicineController extends Controller
         $medicines
             ->leftJoin('users', 'product_medicines.user_id', '=', 'users.id')
             ->leftJoin('provinces', 'provinces.id', '=', 'users.province_id')
-            ->select('product_medicines.*', 'provinces.full_name as location_name');
+            ->select('product_medicines.*', 'provinces.name as location_name');
 
         // Lấy dữ liệu đã lọc và phân trang
-        $medicines = $medicines->paginate(16);
+        $medicines = $medicines->paginate();
 
         // Hiển thị dữ liệu đã lọc
         return response()->json($medicines);

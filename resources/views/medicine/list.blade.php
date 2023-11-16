@@ -4,6 +4,11 @@
 @section('content')
     @include('layouts.partials.header')
     @include('component.banner')
+    @php
+        $isAdmin = (new \App\Http\Controllers\MainController())->checkAdmin();
+        $isBusiness = (new \App\Http\Controllers\MainController())->checkBusiness();
+        $isMedical = (new \App\Http\Controllers\MainController())->checkMedical();
+    @endphp
 
     <div class="medicine container">
         <div class="row medicine-search">
@@ -34,10 +39,17 @@
                     <input type="search" name="focus" placeholder="Search" id="search-input" value="">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </form>
-                <button type="button" data-toggle="modal" data-target="#modalCart" class="shopping-bag">
-                    <i class="fa-solid fa-bag-shopping"></i>
-                    <div class="text-wrapper">1</div>
-                </button>
+                @if(\Illuminate\Support\Facades\Auth::check())
+                    @if($isMedical)
+                        <button type="button" data-toggle="modal" data-target="#modalCart" class="shopping-bag">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                            @if($carts && count($carts) > 0)
+                                <div class="text-wrapper"> {{ count($carts) }}</div>
+                            @endif
+                        </button>
+                        @include('component.modal-cart')
+                    @endif
+                @endif
                 @include('component.modal-cart')
             </div>
             <div class="medicine-search--right col-md-3 d-flex row justify-content-between">
@@ -180,7 +192,7 @@
         let locationMedicine = [];
 
         function masterFilterMedicine() {
-            const token = `{{ $_COOKIE['accessToken'] }}`;
+            const token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
 
             loadingMasterPage();
             const headers = {
