@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
@@ -88,6 +89,8 @@ Route::group(['prefix' => 'medicine'], function () {
     Route::get('/', [MedicineController::class, 'index'])->name('medicine');
     Route::get('/detail/{id}', [MedicineController::class, 'detail'])->name('medicine.detail');
     Route::get('/wish-list', [MedicineController::class, 'wishList'])->name('medicine.wishList');
+    Route::post('search', [MedicineController::class, 'searchOnlineMedicine'])->name('medicine.search');
+    Route::post('get-name-location', [MedicineController::class, 'getLocationByUserId'])->name('medicine.get.name.location.by.user');
 
 });
 
@@ -126,6 +129,13 @@ Route::group(['prefix' => 'what-free'], function () {
     Route::get('/detail/{id}', [WhatFreeToDay::class, 'detail'])->name('what.free.detail');
     Route::get('/campaign', [WhatFreeToDay::class, 'campaign'])->name('what.free.campaign');
 
+});
+
+Route::group(['prefix' => 'address'], function () {
+    Route::post('nation', [AddressController::class, 'getListNation'])->name('address.get.list.nation');
+    Route::post('province', [AddressController::class, 'getListProvince'])->name('address.get.list.province');
+    Route::post('district', [AddressController::class, 'getListDistrict'])->name('address.get.list.district');
+    Route::post('commune', [AddressController::class, 'getListCommune'])->name('address.get.list.commune');
 });
 
 Route::middleware(['auth'])->group(function () {

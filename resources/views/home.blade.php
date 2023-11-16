@@ -599,7 +599,7 @@
                 </ul>
             </div>
         </div>
-        <div id="list-doctor" class="d-flex justify-content-center container">
+        <div id="list-doctor  " class="d-flex justify-content-center container list-doctor11">
             <div class="card">
                 <i class="bi bi-heart"></i>
                 <img src="{{asset('img/pngtree-cartoon-anime-male-doctor-element-png-image_4073784.jpg')}}" class="card-img-top" alt="...">
@@ -832,10 +832,10 @@
     <div class="banner1">
         <img src="{{asset('img/Rectangle 23815.png')}}" alt="">
     </div>
-    <div id="item-information">
+    <div id="item-information" style="padding-top: 15px">
         <h1>Buy online</h1>
         <p>Don't struggle finding, we are always ready for you</p>
-        <div id="list-option" class="d-flex justify-content-around ">
+        <div id="list-option" style="padding-top: 15px" class="d-flex justify-content-around ">
             <div class="option-menu d-flex justify-content-center">
                 <ul class="nav nav-pills nav-fill">
                     <li class="nav-item">

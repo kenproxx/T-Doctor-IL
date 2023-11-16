@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Nation;
 use App\Models\Role;
 use App\Models\SocialUser;
 use App\Models\User;
@@ -24,7 +25,8 @@ class ProfileController extends Controller
         $roleItem = Role::find($roleUser->role_id);
         $isAdmin = (new MainController())->checkAdmin();
         $socialUser = SocialUser::where('user_id', Auth::user()->id)->first();
-        return view('profile', compact('roles', 'roleItem', 'isAdmin', 'socialUser'));
+        $nations = Nation::all();
+        return view('profile', compact('roles', 'roleItem', 'isAdmin', 'socialUser', 'nations'));
     }
 
     public function update(Request $request)

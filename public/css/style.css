@@ -979,6 +979,7 @@ span.material-symbols-outlined {
 .card-img-top{
     min-height: 215px!important;
     max-height: 215px!important;
+    object-fit: cover!important;
 }
 .delete-1{
     border-radius: 8px;
@@ -1070,4 +1071,7 @@ span.material-symbols-outlined {
     left: 265px;
     top: 15px;
 
+}
+.list-doctor11{
+    gap: 30px;
 }
