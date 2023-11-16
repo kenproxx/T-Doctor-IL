@@ -74,7 +74,7 @@ class HomeController extends Controller
     }
     public function listBooking()
     {
-        $bookings = Booking::where('status', BookingStatus::PENDING)->get();
+        $bookings = Booking::all();
         return view('admin.booking.list-booking', compact('bookings'));
     }
 }

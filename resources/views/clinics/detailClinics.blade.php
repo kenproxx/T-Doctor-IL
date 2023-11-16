@@ -3,12 +3,18 @@
 @section('content')
     @include('layouts.partials.header')
     @include('component.banner')
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.1.0/foundation.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 
     <style>
+        .ui-widget.ui-widget-content {
+            width: 100%;
+        }
         .checkbox-button {
             display: inline-block;
             position: relative;
-            padding-left: 30px;
+            /*padding-left: 30px;*/
             cursor: pointer;
         }
 
@@ -69,7 +75,7 @@
         .border-button-close span {
             padding: 0 5px;
             border-radius: 32px;
-            background: var(--White, #FFF);
+            background:  #FFF;
         }
     </style>
 
@@ -647,7 +653,7 @@
                                     <input id="user_id" name="user_id" value="{{ Auth::user()->id }}">
                                 </div>
 
-                                <button class="btn btn-primary btn-block up-date-button button-apply-booking" id="activate">Apply
+                                <button class="btn mt-4 btn-primary btn-block up-date-button button-apply-booking" id="activate">Apply
                                 </button>
                             </form>
                         `;

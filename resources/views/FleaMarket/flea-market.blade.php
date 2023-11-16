@@ -46,7 +46,7 @@
                 <form action="{{route('flea.market.my.store' )}}" class="col-md-4 flea-button mr-3">
                     <button class="flea-btn">Go to my store</button>
                 </form>
-                <a href="#" onclick="checkLogin()" class="col-md-4 flea-button flea-btn">
+                <a href="#" onclick="checkLoginWish()" class="col-md-4 flea-button flea-btn">
                     Wish list
                 </a>
             </div>
@@ -219,7 +219,7 @@
 
         var token = getCookie('accessToken');
 
-        function checkLogin() {
+        function checkLoginWish() {
             if (token === undefined) {
                 $('#staticBackdrop').modal('show');
             } else {

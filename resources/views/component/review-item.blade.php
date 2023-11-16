@@ -4,7 +4,7 @@
             <div class="avt">
                 <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
             </div>
-            <p>Trần Đình Phi</p>
+            <p class="pl-2"> Lê Hải Thành</p>
         </div>
         <div class="rv-header--right">
             <p>10:20 07/04/2023</p>
