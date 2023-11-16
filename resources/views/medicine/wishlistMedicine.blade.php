@@ -24,7 +24,9 @@
             <div class="medicine-search--right col-md-3 d-flex row justify-content-between">
                 <div class="col-md-6 ">
                     <div class="div-wrapper">
-                        <button type="button" data-toggle="modal" data-target="#modalCreatPrescription">Create prescription</button>
+                        <button type="button" data-toggle="modal" data-target="#modalCreatPrescription">Create
+                            prescription
+                        </button>
                     </div>
                 </div>
                 @include('component.modalCreatPrescription')
