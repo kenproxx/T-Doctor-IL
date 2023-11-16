@@ -24,7 +24,9 @@
             <div class="medicine-search--right col-md-3 d-flex row justify-content-between">
                 <div class="col-md-6 ">
                     <div class="div-wrapper">
-                        <button type="button" data-toggle="modal" data-target="#modalCreatPrescription">Create prescription</button>
+                        <button type="button" data-toggle="modal" data-target="#modalCreatPrescription">Create
+                            prescription
+                        </button>
                     </div>
                 </div>
                 @include('component.modalCreatPrescription')
@@ -44,23 +46,19 @@
                     </div>
                     <div class="filter-body">
                         <div class="d-flex item">
-                            <input type="checkbox">
+                            <input type="checkbox" name="filter_" value="0" onchange="searchFilterMedicine()">
                             <div class="text-all">All (96)</div>
                         </div>
                         <div class="d-flex item">
-                            <input type="checkbox">
+                            <input type="checkbox" name="filter_" value="{{ \App\Enums\online_medicine\FilterOnlineMedicine::HEALTH }}" onchange="searchFilterMedicine()">
                             <div class="text">Health</div>
                         </div>
                         <div class="d-flex item">
-                            <input type="checkbox">
+                            <input type="checkbox" name="filter_" value="{{ \App\Enums\online_medicine\FilterOnlineMedicine::BEAUTY }}" onchange="searchFilterMedicine()">
                             <div class="text">Beauty</div>
                         </div>
                         <div class="d-flex item">
-                            <input type="checkbox">
-                            <div class="text">Kids</div>
-                        </div>
-                        <div class="d-flex item">
-                            <input type="checkbox">
+                            <input type="checkbox" name="filter_" value="{{ \App\Enums\online_medicine\FilterOnlineMedicine::PET }}" onchange="searchFilterMedicine()">
                             <div class="text">Pet</div>
                         </div>
                     </div>
@@ -141,6 +139,40 @@
             </div>
         </div>
     </div>
+    <script>
+        function masterFilterMedicine() {
+
+        }
+
+        function searchFilterMedicine() {
+            var checkboxes = document.querySelectorAll('input[name="filter_"]');
+
+            var selectedValues = [];
+
+            checkboxes.forEach(function (checkbox) {
+                if (checkbox.checked) {
+                    selectedValues.push(checkbox.nextElementSibling.textContent.trim());
+                }
+            });
+            console.log(selectedValues)
+        }
+
+        function objectFilterMedicine() {
+            console.log('objectFilterMedicine')
+        }
+
+        function priceFilterMedicine() {
+            console.log('priceFilterMedicine')
+        }
+
+        function categoryFilterMedicine() {
+            console.log('categoryFilterMedicine')
+        }
+
+        function locationFilterMedicine() {
+            console.log('locationFilterMedicine')
+        }
+    </script>
     <script>
         const rangeInput = document.querySelectorAll(".range-input input"),
             priceInput = document.querySelectorAll(".price-input input"),

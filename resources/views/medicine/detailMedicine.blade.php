@@ -80,23 +80,23 @@
                                 @php
                                     $user = \App\Models\User::find($medicine->user_id)
                                 @endphp
-                                <div class="text-wrapper-3">{{ $user->address_code }}</div>
+                                <div class="text-wrapper-3">{{ $user->address_code ?? '' }}</div>
                             </div>
                             <div class="brand-name d-flex">
                                 <div class="text-wrapper-2">Category:</div>
                                 @php
                                     $category = \App\Models\online_medicine\CategoryProduct::find($medicine->category_id)
                                 @endphp
-                                <div class="text-wrapper-3">{{ $category->name }}</div>
+                                <div class="text-wrapper-3">{{ $category->name ?? ''}}</div>
                             </div>
                             <div class="brand-name d-flex">
                                 <div class="text-wrapper-2">Brand name:</div>
                                 <div class="text-wrapper-3">{{ $medicine->brand_name }}</div>
                             </div>
                         </div>
-                        <div class="button row justify-content-between">
-                            <div class="col-6"><button class="div-wrapper">Visit store</button></div>
-                            <div class="col-6"><button id="button-apply" class="text-wrapper-5">Buy now</button></div>
+                        <div class="row">
+                            <div class="col-6"><button class="btn btn-secondary w-100" onclick="visitStore()">Visit store</button></div>
+                            <div class="col-6"><button id="button-apply" class="btn btn-primary w-100" onclick="buyNow()">Buy now</button></div>
                         </div>
                     </div>
                 </div>
@@ -111,5 +111,13 @@
         $('.list img').click(function () {
             $(".main").attr("src", $(this).attr('src'));
         })
+
+        function visitStore(id) {
+            console.log(123)
+        }
+
+        function buyNow(id) {
+            console.log(456)
+        }
     </script>
 @endsection
