@@ -208,9 +208,11 @@
                             <i class="bi bi-heart"></i>
                             <img src="{{asset($hotMedicine->thumbnail)}}" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <a href="{{ route('medicine.detail', $hotMedicine->id) }}"><h5 class="card-title">{{ $hotMedicine->name }}</h5></a>
+                                <a href="{{ route('medicine.detail', $hotMedicine->id) }}"><h5
+                                        class="card-title">{{ $hotMedicine->name }}</h5></a>
                                 <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
-                                <p class="card-text_1">Price: <b>{{ $hotMedicine->price }} {{ $hotMedicine->unit_price }}</b></p>
+                                <p class="card-text_1">Price:
+                                    <b>{{ $hotMedicine->price }} {{ $hotMedicine->unit_price }}</b></p>
                             </div>
                         </div>
                     @endforeach
@@ -234,9 +236,11 @@
                             <i class="bi bi-heart"></i>
                             <img src="{{asset($newMedicine->thumbnail)}}" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <a href="{{ route('medicine.detail', $newMedicine->id) }}"><h5 class="card-title">{{ $newMedicine->name }}</h5></a>
+                                <a href="{{ route('medicine.detail', $newMedicine->id) }}"><h5
+                                        class="card-title">{{ $newMedicine->name }}</h5></a>
                                 <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
-                                <p class="card-text_1">Price: <b>{{ $newMedicine->price }} {{ $newMedicine->unit_price }}</b></p>
+                                <p class="card-text_1">Price:
+                                    <b>{{ $newMedicine->price }} {{ $newMedicine->unit_price }}</b></p>
                             </div>
                         </div>
                     @endforeach
@@ -260,14 +264,85 @@
                             <i class="bi bi-heart"></i>
                             <img src="{{asset($recommendedMedicine->thumbnail)}}" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <a href="{{ route('medicine.detail', $recommendedMedicine->id) }}"><h5 class="card-title">{{ $recommendedMedicine->name }}</h5></a>
+                                <a href="{{ route('medicine.detail', $recommendedMedicine->id) }}"><h5
+                                        class="card-title">{{ $recommendedMedicine->name }}</h5></a>
                                 <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
-                                <p class="card-text_1">Price: <b>{{ $recommendedMedicine->price }} {{ $recommendedMedicine->unit_price }}</b></p>
+                                <p class="card-text_1">Price:
+                                    <b>{{ $recommendedMedicine->price }} {{ $recommendedMedicine->unit_price }}</b></p>
                             </div>
                         </div>
                     @endforeach
                 @endif
             </div>
+
+            <div class="d-flex justify-content-center">
+                <div class=" list-title d-flex">
+                    <div class="list--doctor p-0">
+                        <p>Functional Foods</p>
+                    </div>
+                    <div class="ms-auto p-2"><a href="#">See all</a></div>
+                </div>
+            </div>
+            <div class="row list-doctor container m-auto">
+                @if(count($function_foods) > 0)
+                    @foreach($function_foods as $function_food)
+                        @php
+                            $user = \App\Models\User::find($function_food->user_id);
+                        @endphp
+                        <div class="card col-md-3">
+                            <i class="bi bi-heart"></i>
+                            <img src="{{asset($function_food->thumbnail)}}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <a href="{{ route('medicine.detail', $function_food->id) }}"><h5
+                                        class="card-title">{{ $function_food->name }}</h5></a>
+                                <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
+                                <p class="card-text_1">Price:
+                                    <b>{{ $function_food->price }} {{ $function_food->unit_price }}</b></p>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+
+            @foreach($categoryMedicines as $categoryMedicine)
+                @if($categoryMedicine->name != 'Functional Foods')
+                    @php
+                        $products = \App\Models\online_medicine\ProductMedicine::where('category_id', $categoryMedicine->id)
+                                                ->where('status', \App\Enums\online_medicine\OnlineMedicineStatus::APPROVED)
+                                                ->orderBy('id', 'desc')
+                                                ->limit(4)
+                                                ->get();
+                    @endphp
+                    @if(count($products) > 0)
+                        <div class="d-flex justify-content-center">
+                            <div class=" list-title d-flex">
+                                <div class="list--doctor p-0">
+                                    <p>{{ $categoryMedicine->name }}</p>
+                                </div>
+                                <div class="ms-auto p-2"><a href="{{ route('examination.findByCategory', $categoryMedicine->id) }}">See all</a></div>
+                            </div>
+                        </div>
+                        <div class="row list-doctor container m-auto">
+                            @foreach($products as $product)
+                                @php
+                                    $user = \App\Models\User::find($product->user_id);
+                                @endphp
+                                <div class="card col-md-3">
+                                    <i class="bi bi-heart"></i>
+                                    <img src="{{asset($product->thumbnail)}}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <a href="{{ route('medicine.detail', $product->id) }}"><h5
+                                                class="card-title">{{ $product->name }}</h5></a>
+                                        <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
+                                        <p class="card-text_1">Price:
+                                            <b>{{ $product->price }} {{ $product->unit_price }}</b></p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @endif
+                @endif
+            @endforeach
         </div>
     </div>
     <script>

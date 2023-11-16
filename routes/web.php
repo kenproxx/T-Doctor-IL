@@ -71,6 +71,7 @@ Route::group(['prefix' => 'examination'], function () {
     Route::get('/hot-deal-medicine', [ExaminationController::class, 'hotDealMedicine'])->name('examination.hotdealmedicine');
     Route::get('/new-medicine', [ExaminationController::class, 'newMedicine'])->name('examination.newmedicine');
     Route::get('/recommended', [ExaminationController::class, 'recommended'])->name('examination.recommended');
+    Route::get('/category/{id}', [ExaminationController::class, 'findByCategory'])->name('examination.findByCategory');
     Route::get('/my-personal-doctor', [ExaminationController::class, 'myPersonalDoctor'])->name('examination.mypersonaldoctor');
 });
 
@@ -140,13 +141,16 @@ Route::group(['prefix' => 'address'], function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/save-user-login-social', [AuthSocialController::class, 'saveUser'])->name('save.user.login.social');
+
+    Route::group(['prefix' => 'checkout'], function () {
+        Route::get('/', [CheckoutController::class, 'index'])->name('user.checkout.index');
+        Route::get('/return-checkout', [CheckoutController::class, 'returnCheckout'])->name('return.checkout.payment');
+        Route::post('/imm', [CheckoutController::class, 'checkoutByImm'])->name('user.checkout.imm');
+        Route::post('/vnpay', [CheckoutController::class, 'checkoutByVNPay'])->name('user.checkout.vnpay');
+    });
 });
 Route::group(['middleware' => ['medical']], function () {
     Route::get('/admin', [\App\Http\Controllers\HomeController::class, 'home'])->name('homeAdmin');
-});
-
-Route::group(['prefix' => 'checkout'], function () {
-    Route::get('/', [CheckoutController::class, 'index'])->name('user.checkout.index');
 });
 
 // QrCode

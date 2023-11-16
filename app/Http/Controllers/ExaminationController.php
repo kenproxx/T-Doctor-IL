@@ -62,10 +62,19 @@ class ExaminationController extends Controller
         $newMedicines = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->orderBy('id', 'DESC')->limit(16)->get();
         $recommendedMedicines = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->limit(16)->get();
 
+        $category_function = CategoryProduct::where('name', 'Functional Foods')->first();
+        $function_foods = null;
+        if ($category_function) {
+            $function_foods = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)
+                ->where('category_id', $category_function->id)
+                ->limit(16)
+                ->get();
+        }
+
         $categoryMedicines = CategoryProduct::where('status', true)->get();
         return view('examination.findmymedicine', compact(
             'bestPhamrmacists', 'newPhamrmacists', 'allPhamrmacists',
-            'hotMedicines', 'newMedicines', 'recommendedMedicines', 'categoryMedicines'));
+            'hotMedicines', 'newMedicines', 'recommendedMedicines', 'categoryMedicines', 'function_foods'));
     }
 
     public function bestPharmacists()
@@ -162,6 +171,16 @@ class ExaminationController extends Controller
         }
 
         return response()->json($list);
+    }
+
+    public function findByCategory($id)
+    {
+        $categoryProduct = CategoryProduct::find($id);
+        $productCategories = ProductMedicine::where('category_id', $id)
+            ->where('status', OnlineMedicineStatus::APPROVED)
+            ->orderBy('id', 'desc')
+            ->get();
+        return view('examination.find-by-category', compact('categoryProduct', 'productCategories'));
     }
 
     public function createMentoring()

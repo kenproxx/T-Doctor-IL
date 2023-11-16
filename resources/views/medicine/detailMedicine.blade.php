@@ -11,11 +11,11 @@
     <div class="recruitment-details ">
         <div class="container">
             <div class="row medicine-search">
-                <div class="medicine-search--center col-md-6 row d-flex justify-content-between">
-                   <div class="col-md-10"></div>
+                <div class="col-md-10"></div>
+                <div class="medicine-search--center col-md-2">
                     @if(\Illuminate\Support\Facades\Auth::check())
                         @if($isMedical)
-                            <button type="button" data-toggle="modal" data-target="#modalCart" class="shopping-bag">
+                            <button type="button" data-toggle="modal" data-target="#modalCart" class="shopping-bag float-right">
                                 <i class="fa-solid fa-bag-shopping"></i>
                                 @if($carts && count($carts) > 0)
                                     <div class="text-wrapper"> {{ count($carts) }}</div>
