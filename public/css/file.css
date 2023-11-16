@@ -941,7 +941,6 @@ section {
 
 .flex-container-morning, .flex-container-afternoon {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
 }
 

@@ -40,30 +40,30 @@
                     headers: {
                         "Authorization": accessToken
                     },
-                    success: function (product) {
-                        let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`.replace(':id', product.id);
-                        let urlEdit = `{{ route('flea.market.edit.product', ['id' => ':id']) }}`.replace(':id', product.id);
+                    success: function (data) {
+                        let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`.replace(':id', data.product.id);
+                        let urlEdit = `{{ route('flea.market.edit.product', ['id' => ':id']) }}`.replace(':id', data.product.id);
                         html += `
                         <div class="col-md-4 col-6 item">
                             <div class="product-item">
                                 <div class="img-pro justify-content-center d-flex">
-                                    <img src="${product.thumbnail}" alt="">
+                                    <img src="${data.product.thumbnail}" alt="">
                                 </div>
                                 <div class="content-pro">
                                     <div class="">
                                         <div class="name-product" style="height: auto">
-                                            <a href="${url}">${product.name}</a>
+                                            <a href="${url}">${data.product.name}</a>
                                         </div>
                                         <div class="location-pro d-flex" style="color: #929292">
-                                            Location: <p> Ha Noi</p>
+                                            Location: <p>${data.province.name}</p>
                                         </div>
                                         <div class="price-pro">
-                                             ${product.price} ${product.price_unit}
+                                             ${data.product.price} ${data.product.price_unit}
                                         </div>
                                     </div>
 
                                     <div class="justify-content-between edit-button">
-                                        <a onclick="deleteProduct(${product.id})" class="apply-bt apply-bt_delete w-45 align-items-center justify-content-center d-flex">Delete</a>
+                                        <a onclick="deleteProduct(${data.product.id})" class="apply-bt apply-bt_delete w-45 align-items-center justify-content-center d-flex">Delete</a>
                                         <form action="${urlEdit}" class="w-45">
                                             <button type="submit" class="apply-bt apply-bt_edit w-100">Edit</button>
                                         </form>

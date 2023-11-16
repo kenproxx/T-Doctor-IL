@@ -36,9 +36,7 @@
                     <option value="{{ \App\Enums\BookingStatus::DELETE }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::DELETE ? 'selected' : '' }}>
                         {{ \App\Enums\BookingStatus::DELETE }}
                     </option>
-
                 </select>
-
             </div>
         </div>
 

@@ -206,7 +206,8 @@ class BackendProductInfoController extends Controller
         if (!$product || $product->status == ProductStatus::DELETED) {
             return response("Product not found", 404);
         }
-        return response()->json($product);
+        $province = DB::table('provinces')->where('id', $product->province_id)->first();
+        return response()->json(['product' => $product, 'province' => $province]);
     }
 
     public function update(Request $request, $id)

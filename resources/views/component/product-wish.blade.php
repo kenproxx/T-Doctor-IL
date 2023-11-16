@@ -53,6 +53,7 @@
             let html = ``;
             for (let i = 0; i < res.length; i++) {
                 let productId = res[i].product_id;
+
                 $.ajax({
                     url: `{{ route('api.backend.products.detail', ['id' => ':id']) }}`.replace(':id', productId),
                     method: 'GET',

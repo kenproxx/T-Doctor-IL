@@ -48,9 +48,9 @@
                                         <select class="ac-choose font-16-mobi mt-2" id="province_id"
                                                 name="province_id checkValid"
                                                 required>
-                                            <option value="">Please choose....</option>
-                                            <option value="1">123</option>
-                                            <option value="2">123</option>
+                                            @foreach($province as $item)
+                                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

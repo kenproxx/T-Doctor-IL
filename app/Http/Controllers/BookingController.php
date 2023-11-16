@@ -25,6 +25,7 @@ class BookingController extends Controller
             $checkIn = $request->input('check_in');
             $checkOut = $request->input('check_out');
             $service = $request->input('service');
+            $status = $request->input('status');
             if (is_array($service)) {
                 $servicesAsString = implode(',', $service);
             } else {
@@ -38,6 +39,7 @@ class BookingController extends Controller
             $booking->check_in = $checkIn;
             $booking->check_out = $checkOut;
             $booking->service = $servicesAsString;
+            $booking->status = $status;
 
             $success = $booking->save();
             if ($success) {
