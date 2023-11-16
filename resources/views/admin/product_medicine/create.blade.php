@@ -5,7 +5,7 @@
 @section('main-content')
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">create</h1>
+    <h1 class="h3 mb-4 text-gray-800">Create</h1>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -20,15 +20,15 @@
         <div>
             <div class="row">
                 <div class="col-md-4">
-                    <label>name</label>
+                    <label for="name">name</label>
                     <input type="text" class="form-control" id="name" name="name" value="">
                 </div>
                 <div class="col-md-4">
-                    <label>name_en</label>
+                    <label for="name_en">name_en</label>
                     <input type="text" class="form-control" id="name_en" name="name_en" value="">
                 </div>
                 <div class="col-md-4">
-                    <label>name_laos</label>
+                    <label for="name_laos">name_laos</label>
                     <input type="text" class="form-control" id="name_laos" name="name_laos" value="">
                 </div>
             </div>
@@ -112,7 +112,7 @@
                         <option
                             value="{{ OnlineMedicineStatus::APPROVED }}">{{ OnlineMedicineStatus::APPROVED }}</option>
                         <option
-                            value="{{ OnlineMedicineStatus::DELETED }}">{{ OnlineMedicineStatus::DELETED }}</option>
+                            value="{{ OnlineMedicineStatus::PENDING }}">{{ OnlineMedicineStatus::PENDING }}</option>
                     </select>
                 </div>
             </div>
@@ -136,6 +136,13 @@
                 'category_id', 'object_', 'filter_', 'price', 'status'
             ];
 
+            var filedata = document.getElementById("gallery");
+            var i = 0, len = filedata.files.length, img, reader, file;
+            for (i; i < len; i++) {
+                file = filedata.files[i];
+                formData.append('gallery[]', file);
+            }
+
             const fieldTextareaTiny = [
                 'description', 'description_en', 'description_laos',
             ];
@@ -150,7 +157,7 @@
 
             const photo = $('#thumbnail')[0].files[0];
             formData.append('thumbnail', photo);
-
+            formData.append('user_id', '{{ Auth::user()->id }}');
             formData.append('_token', '{{ csrf_token() }}');
 
             try {

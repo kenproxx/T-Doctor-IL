@@ -36,8 +36,16 @@
                 <th scope="row">{{ $index + 1 }}</th>
                 <td>{{ $productMedicine->name }}</td>
                 <td><img src="{{ $productMedicine->thumb }}" alt="" width="100px"></td>
-                <td>{{ ObjectOnlineMedicine::NAME_EN[$productMedicine->object_] }}</td>
-                <td>{{ FilterOnlineMedicine::NAME_EN[$productMedicine->filter_] }}</td>
+                <td>
+                    @if($productMedicine->object_)
+                        {{ ObjectOnlineMedicine::NAME_EN[$productMedicine->object_] }}
+                    @endif
+                </td>
+                <td>
+                    @if($productMedicine->object_)
+                        {{ FilterOnlineMedicine::NAME_EN[$productMedicine->filter_] }}
+                    @endif
+                </td>
                 <td>{{ $productMedicine->category_id }}</td>
                 <td>{{ $productMedicine->status }}</td>
                 <td>
