@@ -71,6 +71,7 @@ Route::group(['prefix' => 'examination'], function () {
     Route::get('/hot-deal-medicine', [ExaminationController::class, 'hotDealMedicine'])->name('examination.hotdealmedicine');
     Route::get('/new-medicine', [ExaminationController::class, 'newMedicine'])->name('examination.newmedicine');
     Route::get('/recommended', [ExaminationController::class, 'recommended'])->name('examination.recommended');
+    Route::get('/category/{id}', [ExaminationController::class, 'findByCategory'])->name('examination.findByCategory');
     Route::get('/my-personal-doctor', [ExaminationController::class, 'myPersonalDoctor'])->name('examination.mypersonaldoctor');
 });
 

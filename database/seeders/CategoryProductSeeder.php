@@ -32,6 +32,12 @@ class CategoryProductSeeder extends Seeder
                 'name_en' => 'medicine',
                 'name_laos' => 'medicine',
                 'status' => true,
+            ],
+            [
+                'name' => 'Functional Foods',
+                'name_en' => 'Functional',
+                'name_laos' => 'Foods',
+                'status' => true,
             ]
         ];
         CategoryProduct::insert($categories);
