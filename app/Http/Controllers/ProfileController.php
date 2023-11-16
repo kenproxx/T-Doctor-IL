@@ -68,6 +68,11 @@ class ProfileController extends Controller
 
         $user->address_code = $request->input('address_code');
 
+        $user->nation_id = $request->input('nation_id');
+        $user->province_id = $request->input('province_id');
+        $user->district_id = $request->input('district_id');
+        $user->commune_id = $request->input('commune_id');
+
         if (!is_null($request->input('current_password'))) {
             if (Hash::check($request->input('current_password'), $user->password)) {
                 $password = $request->input('new_password');

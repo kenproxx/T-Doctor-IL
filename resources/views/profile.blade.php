@@ -216,7 +216,8 @@
                                             onchange="searchProvince(this.value)">
                                         @if($nations)
                                             @foreach($nations as $nation)
-                                                <option value="{{ $nation->id }}">{{ $nation->name }}</option>
+                                                <option
+                                                    value="{{ $nation->id }}" {{ Auth::user()->nation_id == $nation->id ? 'selected' : '' }}>{{ $nation->name }}</option>
                                             @endforeach
                                         @endif
                                     </select>
@@ -296,6 +297,16 @@
 
     <script>
 
+        let isFirstLoading = true;
+        let nation_user = '{{ Auth::user()->nation_id }}';
+        let province_user = '{{ Auth::user()->province_id }}';
+        let district_user = '{{ Auth::user()->district_id }}';
+        let commune_user = '{{ Auth::user()->commune_id }}';
+
+        $(document).ready(function () {
+            searchProvince(nation_user);
+        });
+
         function searchProvince(id) {
             loadingMasterPage();
             const url = `{{ route('address.get.list.province') }}`;
@@ -304,19 +315,30 @@
                 nation_id: id
             };
             try {
-
                 $.ajax({
                     url: url,
                     method: 'POST',
                     data: data,
-                    success: function (response) {
+                    success: async function (response) {
                         let html = '';
                         response.forEach((item) => {
-                            html += `<option value="${item.code}">${item.name}</option>`;
+                            let isSelected = ''
+                            if (isFirstLoading) {
+                                isSelected = item.code == province_user ? 'selected' : '';
+                            }
+                            html += `<option value="${item.code}" ${isSelected}>${item.name}</option>`;
                         });
                         $('#province_id').html(html);
                         if (response.length > 0) {
-                            searchDistrict(response[0].code);
+                            if (isFirstLoading) {
+                                await searchDistrict(province_user);
+                            } else {
+                                await searchDistrict(response[0].code);
+                            }
+                        } else {
+                            $('#district_id').html('');
+                            $('#commune_id').html('');
+                            isFirstLoading = false;
                         }
                         loadingMasterPage();
                     },
@@ -330,7 +352,7 @@
             }
         }
 
-        function searchDistrict(id) {
+        async function searchDistrict(id) {
             loadingMasterPage();
             const url = `{{ route('address.get.list.district') }}`;
             const data = {
@@ -342,14 +364,25 @@
                     url: url,
                     method: 'POST',
                     data: data,
-                    success: function (response) {
+                    success: async function (response) {
                         let html = '';
                         response.forEach((item) => {
-                            html += `<option value="${item.code}">${item.name}</option>`;
+                            let isSelected = ''
+                            if (isFirstLoading) {
+                                isSelected = item.code == district_user ? 'selected' : '';
+                            }
+                            html += `<option value="${item.code}" ${isSelected}>${item.name}</option>`;
                         });
                         $('#district_id').html(html);
                         if (response.length > 0) {
-                            searchCommune(response[0].code)
+                            if (isFirstLoading) {
+                                await searchCommune(district_user);
+                            } else {
+                                await searchCommune(response[0].code);
+                            }
+                        } else {
+                            $('#commune_id').html('');
+                            isFirstLoading = false;
                         }
                         loadingMasterPage();
                     },
@@ -363,7 +396,7 @@
             }
         }
 
-        function searchCommune(id) {
+        async function searchCommune(id) {
             loadingMasterPage();
             const url = `{{ route('address.get.list.commune') }}`;
             const data = {
@@ -375,10 +408,14 @@
                     url: url,
                     method: 'POST',
                     data: data,
-                    success: function (response) {
+                    success: async function (response) {
                         let html = '';
                         response.forEach((item) => {
-                            html += `<option value="${item.id}">${item.name}</option>`;
+                            let isSelected = ''
+                            if (isFirstLoading) {
+                                isSelected = item.id == commune_user ? 'selected' : '';
+                            }
+                            html += `<option value="${item.id}" ${isSelected}>${item.name}</option>`;
                         });
                         $('#commune_id').html(html);
                         loadingMasterPage();
