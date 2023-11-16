@@ -979,6 +979,7 @@ span.material-symbols-outlined {
 .card-img-top{
     min-height: 215px!important;
     max-height: 215px!important;
+    object-fit: cover!important;
 }
 .delete-1{
     border-radius: 8px;
