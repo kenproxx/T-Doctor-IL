@@ -87,6 +87,9 @@ Route::group(['prefix' => 'medicine'], function () {
     Route::get('/', [MedicineController::class, 'index'])->name('medicine');
     Route::get('/detail/{id}', [MedicineController::class, 'detail'])->name('medicine.detail');
     Route::get('/wish-list', [MedicineController::class, 'wishList'])->name('medicine.wishList');
+    Route::post('search', [MedicineController::class, 'searchOnlineMedicine'])->name('medicine.search');
+    Route::post('get-name-location', [MedicineController::class, 'getLocationByUserId'])->name('medicine.get.name.location.by.user');
+
 
 });
 

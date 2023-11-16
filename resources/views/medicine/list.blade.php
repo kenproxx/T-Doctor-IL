@@ -1,3 +1,4 @@
+@php use App\Enums\online_medicine\FilterOnlineMedicine;use App\Enums\online_medicine\ObjectOnlineMedicine;use App\Models\User; @endphp
 @extends('layouts.master')
 @section('title', 'Online Medicine')
 @section('content')
@@ -7,8 +8,26 @@
     <div class="medicine container">
         <div class="row medicine-search">
             <div class="medicine-search--left col-md-3 d-flex justify-content-around">
-                <div class="title">Category <i class="bi bi-arrow-down-up"></i></div>
-                <div class="title">Location <i class="bi bi-arrow-down-up"></i></div>
+                <div class="title">
+                    <select class="custom-select" id="category_id" name="category_id" onchange="categoryFilterMedicine(this.value)">
+                        <option value="">Category</option>
+                        @if($categoryMedicines)
+                            @foreach($categoryMedicines as $index => $cateProductMedicine)
+                                <option value="{{ $cateProductMedicine->id }}">{{ $cateProductMedicine->name }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+                <div class="title">
+                    <select class="custom-select" id="category_id" name="category_id" onchange="locationFilterMedicine(this.value)">
+                        <option value="">Location</option>
+                        @if($provinces)
+                            @foreach($provinces as $index => $province)
+                                <option value="{{ $province->id }}">{{ $province->full_name }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
             </div>
             <div class="medicine-search--center col-md-6 row d-flex justify-content-between">
                 <form class="search-box col-md-10">
@@ -46,19 +65,25 @@
                     </div>
                     <div class="filter-body">
                         <div class="d-flex item">
-                            <input type="checkbox" name="filter_" value="0" onchange="searchFilterMedicine()">
-                            <div class="text-all">All (96)</div>
+                            <input type="checkbox" name="filter_" value="0" onchange="searchFilterMedicine(this.value)">
+                            <div class="text-all">All ({{ $countAllMedicine }})</div>
                         </div>
                         <div class="d-flex item">
-                            <input type="checkbox" name="filter_" value="{{ \App\Enums\online_medicine\FilterOnlineMedicine::HEALTH }}" onchange="searchFilterMedicine()">
+                            <input type="checkbox" name="filter_"
+                                   value="{{ FilterOnlineMedicine::HEALTH }}"
+                                   onchange="searchFilterMedicine(this.value)">
                             <div class="text">Health</div>
                         </div>
                         <div class="d-flex item">
-                            <input type="checkbox" name="filter_" value="{{ \App\Enums\online_medicine\FilterOnlineMedicine::BEAUTY }}" onchange="searchFilterMedicine()">
+                            <input type="checkbox" name="filter_"
+                                   value="{{ FilterOnlineMedicine::BEAUTY }}"
+                                   onchange="searchFilterMedicine(this.value)">
                             <div class="text">Beauty</div>
                         </div>
                         <div class="d-flex item">
-                            <input type="checkbox" name="filter_" value="{{ \App\Enums\online_medicine\FilterOnlineMedicine::PET }}" onchange="searchFilterMedicine()">
+                            <input type="checkbox" name="filter_"
+                                   value="{{ FilterOnlineMedicine::PET }}"
+                                   onchange="searchFilterMedicine(this.value)">
                             <div class="text">Pet</div>
                         </div>
                     </div>
@@ -70,19 +95,26 @@
                     </div>
                     <div class="filter-body">
                         <div class="d-flex item">
-                            <input type="checkbox">
+                            <input type="checkbox" value="{{ ObjectOnlineMedicine::KIDS }}"
+                                   onchange="objectFilterMedicine(this.value)">
                             <div class="text">For kids</div>
                         </div>
                         <div class="d-flex item">
-                            <input type="checkbox">
+                            <input type="checkbox"
+                                   value="{{ ObjectOnlineMedicine::FOR_WOMEN }}"
+                                   onchange="objectFilterMedicine(this.value)">
                             <div class="text">For women</div>
                         </div>
                         <div class="d-flex item">
-                            <input type="checkbox">
+                            <input type="checkbox"
+                                   value="{{ ObjectOnlineMedicine::FOR_MEN }}"
+                                   onchange="objectFilterMedicine(this.value)">
                             <div class="text">For men</div>
                         </div>
                         <div class="d-flex item">
-                            <input type="checkbox">
+                            <input type="checkbox"
+                                   value="{{ ObjectOnlineMedicine::FOR_ADULT }}"
+                                   onchange="objectFilterMedicine(this.value)">
                             <div class="text">For adults</div>
                         </div>
                     </div>
@@ -110,7 +142,7 @@
                 </div>
             </div>
             <div class="col-md-9 medicine-list--item">
-                <div class="page row ">
+                <div class="page row" id="content-medicine">
                     @foreach($medicines as $medicine)
                         <div class="col-md-4 item">
                             @include('component.products')
@@ -140,37 +172,130 @@
         </div>
     </div>
     <script>
+
+        let filterMedicine = [];
+        let objectMedicine = [];
+        let priceMedicine = [];
+        let categoryMedicine = '';
+        let locationMedicine = [];
+
         function masterFilterMedicine() {
+            const token = `{{ $_COOKIE['accessToken'] }}`;
 
+            loadingMasterPage();
+            const headers = {
+                'Authorization': `Bearer ${token}`
+            };
+            const formData = new FormData();
+            formData.append('filter', filterMedicine);
+            formData.append('object', objectMedicine);
+            formData.append('price', priceMedicine);
+            formData.append('category', categoryMedicine);
+            formData.append('location', locationMedicine);
+
+            formData.append('_token', '{{ csrf_token() }}');
+            try {
+                $.ajax({
+                    url: `{{route('medicine.search')}}`,
+                    method: 'POST',
+                    headers: headers,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    data: formData,
+                    success: function (data) {
+                        renderJson2Html(data.data);
+                        loadingMasterPage();
+                    },
+                    error: function (exception) {
+                        console.log(exception.responseText);
+                        loadingMasterPage();
+                    }
+                });
+            } catch (error) {
+                loadingMasterPage();
+                throw error;
+            }
         }
 
-        function searchFilterMedicine() {
-            var checkboxes = document.querySelectorAll('input[name="filter_"]');
-
-            var selectedValues = [];
-
-            checkboxes.forEach(function (checkbox) {
-                if (checkbox.checked) {
-                    selectedValues.push(checkbox.nextElementSibling.textContent.trim());
-                }
-            });
-            console.log(selectedValues)
+        function renderJson2Html(data) {
+            let html = '';
+            if (data.length === 0) {
+                html = `<div class="col-md-12">
+                            <div class="alert alert-danger" role="alert">
+                                No data
+                            </div>
+                        </div>`;
+            } else {
+                data.forEach( async function (item) {
+                    html += `<div class="col-md-4 item">
+                                <div class="product-item">
+                                    <div class="img-pro">
+                                        <img src="${item.thumbnail}" alt="">
+                                    </div>
+                                    <div class="content-pro">
+                                        <div class="name-pro">
+                                            <a href="">${item.name}</a>
+                                        </div>
+                                        <div class="location-pro d-flex">
+                                            Location: <p>${item.location_name ?? 'Toàn quốc'}</p>
+                                            <br>
+                                        </div>
+                                        <div class="price-pro">
+                                            ${item.price ?? 0} ${item.unit_price ?? 'VND'}
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>`;
+                });
+            }
+            document.getElementById('content-medicine').innerHTML = html;
         }
 
-        function objectFilterMedicine() {
-            console.log('objectFilterMedicine')
+        function searchFilterMedicine(value) {
+            // Kiểm tra xem giá trị có trong mảng hay không
+            var index = filterMedicine.indexOf(value);
+
+            if (index === -1) {
+                // Nếu giá trị không có trong mảng, thêm vào mảng
+                filterMedicine.push(value);
+            } else {
+                // Nếu giá trị đã có trong mảng, xóa khỏi mảng
+                filterMedicine.splice(index, 1);
+            }
+
+            masterFilterMedicine();
+        }
+
+        function objectFilterMedicine(value) {
+            // Kiểm tra xem giá trị có trong mảng hay không
+            var index = objectMedicine.indexOf(value);
+
+            if (index === -1) {
+                // Nếu giá trị không có trong mảng, thêm vào mảng
+                objectMedicine.push(value);
+            } else {
+                // Nếu giá trị đã có trong mảng, xóa khỏi mảng
+                objectMedicine.splice(index, 1);
+            }
+
+            masterFilterMedicine();
         }
 
         function priceFilterMedicine() {
             console.log('priceFilterMedicine')
         }
 
-        function categoryFilterMedicine() {
-            console.log('categoryFilterMedicine')
+        function categoryFilterMedicine(value) {
+            categoryMedicine = value;
+
+            masterFilterMedicine();
         }
 
-        function locationFilterMedicine() {
-            console.log('locationFilterMedicine')
+        function locationFilterMedicine(value) {
+            locationMedicine = value;
+
+            masterFilterMedicine();
         }
     </script>
     <script>
