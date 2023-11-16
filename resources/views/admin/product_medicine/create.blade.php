@@ -109,8 +109,8 @@
                 <div class="col-md-6">
                     <label>status</label>
                     <select class="custom-select" id="status" name="status">
-                        <option value="1">Active</option>
-                        <option value="0">Inactive</option>
+                        <option value="{{ \App\Enums\online_medicine\OnlineMedicineStatus::APPROVED }}">{{ \App\Enums\online_medicine\OnlineMedicineStatus::APPROVED }}</option>
+                        <option value="{{ \App\Enums\online_medicine\OnlineMedicineStatus::DELETED }}">{{ \App\Enums\online_medicine\OnlineMedicineStatus::DELETED }}</option>
                     </select>
                 </div>
             </div>
