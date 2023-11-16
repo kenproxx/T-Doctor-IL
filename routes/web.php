@@ -130,13 +130,14 @@ Route::group(['prefix' => 'what-free'], function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/save-user-login-social', [AuthSocialController::class, 'saveUser'])->name('save.user.login.social');
+
+    Route::group(['prefix' => 'checkout'], function () {
+        Route::get('/', [CheckoutController::class, 'index'])->name('user.checkout.index');
+        Route::post('/imm', [CheckoutController::class, 'checkoutByImm'])->name('user.checkout.imm');
+    });
 });
 Route::group(['middleware' => ['medical']], function () {
     Route::get('/admin', [\App\Http\Controllers\HomeController::class, 'home'])->name('homeAdmin');
-});
-
-Route::group(['prefix' => 'checkout'], function () {
-    Route::get('/', [CheckoutController::class, 'index'])->name('user.checkout.index');
 });
 
 // QrCode

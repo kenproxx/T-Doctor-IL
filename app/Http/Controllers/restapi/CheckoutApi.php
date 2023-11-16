@@ -2,10 +2,89 @@
 
 namespace App\Http\Controllers\restapi;
 
+use App\Enums\OrderItemStatus;
+use App\Enums\OrderStatus;
+use App\Enums\TypeProductCart;
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
+use App\Models\online_medicine\ProductMedicine;
+use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\ProductInfo;
 use Illuminate\Http\Request;
 
 class CheckoutApi extends Controller
 {
-    //
+    public function checkoutByImm(Request $request)
+    {
+        try {
+            $success = $this->checkout($request);
+            if ($success) {
+                return response('Checkout success!', 200);
+            }
+            return response('Checkout error!', 400);
+        } catch (\Exception $exception) {
+            return response($exception, 400);
+        }
+    }
+
+    public function checkout($request)
+    {
+        $userID = $request->input('user_id');
+
+        $full_name = $request->input('full_name');
+        $email = $request->input('email');
+        $phone = $request->input('phone');
+        $address = $request->input('address');
+
+        $total = $request->input('total_fee');
+        $ship = $request->input('shipping_fee');
+        $discount = $request->input('discount_fee');
+        $totalOrder = $request->input('total_order');
+
+        $orderMethod = $request->input('order_method');
+
+        $order = new Order();
+
+        $order->user_id = $userID;
+
+        $order->full_name = $full_name;
+        $order->email = $email;
+        $order->phone = $phone;
+        $order->address = $address;
+
+        $order->total_price = $total;
+        $order->shipping_price = $ship;
+        $order->discount_price = $discount;
+        $order->total = $totalOrder;
+
+        $order->order_method = $orderMethod;
+        $order->status = OrderStatus::PROCESSING;
+
+        $success = $order->save();
+
+        $carts = Cart::where('user_id', $userID)->get();
+        foreach ($carts as $cart) {
+            if ($cart->type_product == TypeProductCart::MEDICINE) {
+                $product = ProductMedicine::find($cart->product_id);
+            } else {
+                $product = ProductInfo::find($cart->product_id);
+            }
+
+            $orderItem = new OrderItem();
+            $orderItem->order_id = $order->id;
+
+            $orderItem->product_id = $cart->product_id;
+            $orderItem->quantity = $cart->quantity;
+            $orderItem->price = $product->price;
+
+            $orderItem->status = OrderItemStatus::ACTIVE;
+
+            $orderItem->save();
+
+            $cart->delete();
+        }
+
+        return $success;
+    }
 }
