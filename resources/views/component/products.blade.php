@@ -16,7 +16,7 @@
             @php
                 $user = \App\Models\User::find($medicine->user_id)
             @endphp
-            Location: <p>{{ $user->address_code }}</p>
+                Location: <p>{{ $user->address_code ?? ''}}</p>
         </div>
         <div class="price-pro">
             {{ $medicine->price }} {{ $medicine->unit_price }}
