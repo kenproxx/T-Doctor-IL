@@ -40,7 +40,7 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.best_doctor')}}">See all</a></div>
                 </div>
             </div>
-            <div id="list-doctor-best" class="list-doctor row">
+            <div id="list-doctor-best" class="list-doctor row container m-auto">
 
             </div>
             <div class="d-flex justify-content-center">
@@ -51,7 +51,7 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.new_doctor')}}">See all</a></div>
                 </div>
             </div>
-            <div id="list-doctor-new" class="list-doctor row">
+            <div id="list-doctor-new" class="list-doctor row container m-auto">
 
             </div>
             <div class="d-flex justify-content-center">
@@ -62,7 +62,7 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.available_doctor')}}">See all</a></div>
                 </div>
             </div>
-            <div id="list-doctor-available" class="list-doctor row">
+            <div id="list-doctor-available" class="list-doctor row container m-auto">
 
             </div>
         </div>
@@ -136,7 +136,7 @@
                         </div>`;
                 }
 
-                let listDoctor = `<div id="list-doctor-department" class="list-doctor row"> ${html} </div>`;
+                let listDoctor = `<div id="list-doctor-department" class="list-doctor row container m-auto"> ${html} </div>`;
                 let showDepartment = `<div class="d-flex justify-content-center">
                         <div id="list-title-department" class="list-title d-flex">
                             <div class="list--doctor p-0">
