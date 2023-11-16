@@ -4,10 +4,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthSocialController;
-use App\Http\Controllers\backend\BackendClinicController;
 use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\CalcViewQuestionController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\DoctorInfoController;
 use App\Http\Controllers\ExaminationController;
@@ -133,6 +133,10 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::group(['middleware' => ['medical']], function () {
     Route::get('/admin', [\App\Http\Controllers\HomeController::class, 'home'])->name('homeAdmin');
+});
+
+Route::group(['prefix' => 'checkout'], function () {
+    Route::get('/', [CheckoutController::class, 'index'])->name('user.checkout.index');
 });
 
 // QrCode

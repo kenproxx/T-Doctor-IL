@@ -86,7 +86,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn pay">Pay</button>
+                <a href="{{ route('user.checkout.index') }}" class="btn pay">Pay</a>
             </div>
         </div>
     </div>
