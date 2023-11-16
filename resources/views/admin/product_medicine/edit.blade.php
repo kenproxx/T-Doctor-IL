@@ -5,7 +5,7 @@
 @section('main-content')
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">create</h1>
+    <h1 class="h3 mb-4 text-gray-800">Update</h1>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -20,99 +20,132 @@
         <div>
             <div class="row">
                 <div class="col-md-4">
-                    <label>name</label>
+                    <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" name="name"
                            value="{{ $productMedicine->name ?? '' }}">
                 </div>
                 <div class="col-md-4">
-                    <label>name_en</label>
+                    <label for="name_en">Name English</label>
                     <input type="text" class="form-control" id="name_en" name="name_en"
                            value="{{ $productMedicine->name_en ?? '' }}">
                 </div>
                 <div class="col-md-4">
-                    <label>name_laos</label>
+                    <label for="name_laos">Name Laos</label>
                     <input type="text" class="form-control" id="name_laos" name="name_laos"
                            value="{{ $productMedicine->name_laos ?? '' }}">
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-sm-4"><label>Mô tả dài việt</label>
+                <div class="col-sm-4">
+                    <label for="description">Mô tả dài việt</label>
                     <textarea class="form-control" name="description"
                               id="description">{{ $productMedicine->description ?? '' }}</textarea>
                 </div>
-                <div class="col-sm-4"><label>Mô tả dài anh</label>
+                <div class="col-sm-4">
+                    <label for="description_en">Mô tả dài anh</label>
                     <textarea class="form-control" name="description_en"
                               id="description_en">{{ $productMedicine->description_en ?? '' }}</textarea>
                 </div>
-                <div class="col-sm-4"><label>Mô tả dài lào</label>
+                <div class="col-sm-4">
+                    <label for="description_laos">Mô tả dài lào</label>
                     <textarea class="form-control" name="description_laos"
                               id="description_laos">{{ $productMedicine->description_laos ?? '' }}</textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <label>brand_name</label>
+                    <label for="brand_name">brand_name</label>
                     <input type="text" class="form-control" id="brand_name" name="brand_name"
                            value="{{ $productMedicine->brand_name ?? '' }}">
                 </div>
                 <div class="col-md-4">
-                    <label>brand_name_en</label>
+                    <label for="brand_name_en">brand_name_en</label>
                     <input type="text" class="form-control" id="brand_name_en" name="brand_name_en"
                            value="{{ $productMedicine->brand_name_en ?? '' }}">
                 </div>
                 <div class="col-md-4">
-                    <label>brand_name_laos</label>
+                    <label for="brand_name_laos">brand_name_laos</label>
                     <input type="text" class="form-control" id="brand_name_laos" name="brand_name_laos"
                            value="{{ $productMedicine->brand_name_laos ?? '' }}">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <label>category_id</label>
+                    <label for="category_id">category_id</label>
                     <select class="custom-select" id="category_id" name="category_id">
-                        <option value="1">category 1</option>
-                        <option value="2">category 2</option>
-                        <option value="3">category 3</option>
-                        <option value="4">category 4</option>
+                        <option value="0">Khác</option>
+                        @if($categoryProductMedicine)
+                            @foreach($categoryProductMedicine as $index => $cateProductMedicine)
+                                <option
+                                    {{ $productMedicine->category_id == $cateProductMedicine->id ? 'selected' : '' }}
+                                    value="{{ $cateProductMedicine->id }}">
+                                    {{ $cateProductMedicine->name }}
+                                </option>
+                            @endforeach
+                        @endif
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label>Object</label>
+                    <label for="object_">Object</label>
                     <select class="custom-select" id="object_" name="object_">
-                        <option value="{{ ObjectOnlineMedicine::KIDS }}">KIDS</option>
-                        <option value="{{ ObjectOnlineMedicine::FOR_WOMEN }}">FOR_WOMEN
+                        <option
+                            {{ $productMedicine->object_ ==ObjectOnlineMedicine::KIDS ? 'selected' : '' }}
+                            value="{{ ObjectOnlineMedicine::KIDS }}">KIDS</option>
+                        <option
+                            {{ $productMedicine->object_ == ObjectOnlineMedicine::FOR_WOMEN ? 'selected' : '' }}
+                            value="{{ ObjectOnlineMedicine::FOR_WOMEN }}">FOR_WOMEN
                         </option>
-                        <option value="{{ ObjectOnlineMedicine::FOR_MEN }}">FOR_MEN</option>
-                        <option value="{{ ObjectOnlineMedicine::FOR_ADULT }}">FOR_ADULT
+                        <option {{ $productMedicine->object_ == ObjectOnlineMedicine::FOR_MEN ? 'selected' : '' }}
+                                value="{{ ObjectOnlineMedicine::FOR_MEN }}">FOR_MEN
+                        </option>
+                        <option {{ $productMedicine->object_ == ObjectOnlineMedicine::FOR_ADULT ? 'selected' : '' }}
+                                value="{{ ObjectOnlineMedicine::FOR_ADULT }}">FOR_ADULT
                         </option>
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label>Filter</label>
+                    <label for="filter_">Filter</label>
                     <select class="custom-select" id="filter_" name="filter_">
-                        <option value="{{ FilterOnlineMedicine::HEALTH }}">Health</option>
-                        <option value="{{ FilterOnlineMedicine::BEAUTY }}">Beauty</option>
-                        <option value="{{ FilterOnlineMedicine::PET }}">Pet</option>
+                        <option
+                            {{ $productMedicine->filter_ == FilterOnlineMedicine::HEALTH ? 'selected' : '' }}
+                            value="{{ FilterOnlineMedicine::HEALTH }}">Health
+                        </option>
+                        <option
+                            {{ $productMedicine->filter_ == FilterOnlineMedicine::BEAUTY ? 'selected' : '' }}
+                            value="{{ FilterOnlineMedicine::BEAUTY }}">Beauty
+                        </option>
+                        <option
+                            {{ $productMedicine->filter_ == FilterOnlineMedicine::PET  ? 'selected' : '' }}
+                            value="{{ FilterOnlineMedicine::PET }}">
+                        </option>
                     </select>
                 </div>
             </div>
             <div>
                 <label>thumbnail</label>
                 <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*">
+                <img class="mt-3" src="{{ asset($productMedicine->thumbnail) }}" alt="" width="80px" height="80xp">
             </div>
             <div>
                 <label>gallery</label>
                 <input type="file" class="form-control" id="gallery" name="gallery[]" multiple accept="image/*">
+                @php
+                    $gallery = $productMedicine->gallery;
+                    $arrayGallery = explode(',',$gallery);
+                @endphp
+                @foreach($arrayGallery as $itemGallery)
+                    <img src="{{ asset($itemGallery) }}" alt="" width="80px" height="80xp" class="mr-3 mt-3">
+                @endforeach
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <label>price</label>
+                    <label for="price">price</label>
                     <input type="number" class="form-control" id="price" name="price"
                            value="{{ $productMedicine->price ?? '' }}">
                 </div>
                 <div class="col-md-6">
-                    <label>status</label>
+                    <label for="status">status</label>
                     <select class="custom-select" id="status" name="status">
                         <option
                             value="{{ OnlineMedicineStatus::APPROVED }}" {{ $productMedicine->price == OnlineMedicineStatus::APPROVED ? 'selected' : '' }}>{{ OnlineMedicineStatus::APPROVED }}</option>
@@ -141,7 +174,14 @@
                 'name', 'name_en', 'name_laos',
                 'brand_name', 'brand_name_en', 'brand_name_laos',
                 'category_id', 'object_', 'filter_', 'price', 'status', 'id'
-            ];
+            ]
+
+            var filedata = document.getElementById("gallery");
+            var i = 0, len = filedata.files.length, img, reader, file;
+            for (i; i < len; i++) {
+                file = filedata.files[i];
+                formData.append('gallery[]', file);
+            }
 
             const fieldTextareaTiny = [
                 'description', 'description_en', 'description_laos',

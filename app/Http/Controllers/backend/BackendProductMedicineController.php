@@ -15,7 +15,7 @@ class BackendProductMedicineController extends Controller
      */
     public function index()
     {
-        $productMedicines = ProductMedicine::all();
+        $productMedicines = ProductMedicine::where('status', '!=', OnlineMedicineStatus::DELETED)->get();
         return view('admin.product_medicine.index', compact('productMedicines'));
     }
 
@@ -26,52 +26,6 @@ class BackendProductMedicineController extends Controller
     {
         $categoryProductMedicine = CategoryProduct::where('status', 1)->get();
         return view('admin.product_medicine.create', compact('categoryProductMedicine'));
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $params = $request->only(
-            'name', 'name_en', 'name_laos',
-            'brand_name', 'brand_name_en', 'brand_name_laos',
-            'category_id', 'object_', 'filter_', 'price', 'status',
-            'description', 'description_en', 'description_laos',
-        );
-
-        //check name
-        if (empty($params['name']) && empty($params['name_en']) && empty($params['name_laos'])) {
-            return response('Tên sản phẩm không được để trống', 400);
-        }
-        //check description
-        if (empty($params['description']) && empty($params['description_en']) && empty($params['description_laos'])) {
-            return response('Mô tả sản phẩm không được để trống', 400);
-        }
-        //check brand_name
-        if (empty($params['brand_name']) && empty($params['brand_name_en']) && empty($params['brand_name_laos'])) {
-            return response('Tên thương hiệu không được để trống', 400);
-        }
-
-        if ($request->hasFile('thumbnail')) {
-            $item = $request->file('thumbnail');
-            $itemPath = $item->store('product_medicine', 'public');
-            $thumbnail = asset('storage/'.$itemPath);
-            $params['thumbnail'] = $thumbnail;
-        }
-
-        $productMedicine = new ProductMedicine();
-
-        $productMedicine->fill($params);
-
-        $success = $productMedicine->save();
-
-        if ($success) {
-            return response('Thêm sản phẩm thành công', 200);
-        } else {
-            return response('Thêm sản phẩm thất bại', 400);
-        }
-
     }
 
     /**
@@ -90,6 +44,26 @@ class BackendProductMedicineController extends Controller
         $productMedicine = ProductMedicine::find($id);
         $categoryProductMedicine = CategoryProduct::where('status', 1)->get();
         return view('admin.product_medicine.edit', compact('productMedicine', 'categoryProductMedicine'));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id)
+    {
+        $productMedicine = ProductMedicine::find($id);
+        // nếu tìm thấy, thì sửa status = Inactive và thông báo
+        if ($productMedicine) {
+            $productMedicine->status = OnlineMedicineStatus::DELETED;
+            $success = $productMedicine->update();
+            if ($success) {
+                return response('Xóa sản phẩm thành công !!!', 200);
+            } else {
+                return response('Xóa sản phẩm thất bại !!!', 400);
+            }
+        } else {
+            return response('Không tìm thấy sản phẩm !!!', 400);
+        }
     }
 
     /**
@@ -121,10 +95,21 @@ class BackendProductMedicineController extends Controller
         if ($request->hasFile('thumbnail')) {
             $item = $request->file('thumbnail');
             $itemPath = $item->store('product_medicine', 'public');
-            $thumbnail = asset('storage/'.$itemPath);
+            $thumbnail = asset('storage/' . $itemPath);
             $params['thumbnail'] = $thumbnail;
         }
         $productMedicine = ProductMedicine::find($request->input('id'));
+        $gallery = $productMedicine->gallery;
+        if ($request->hasFile('gallery')) {
+            $galleryPaths = array_map(function ($image) {
+                $itemPath = $image->store('gallery', 'public');
+                return asset('storage/' . $itemPath);
+            }, $request->file('gallery'));
+            $gallery = implode(',', $galleryPaths);
+        }
+
+        $productMedicine->gallery = $gallery;
+
         $productMedicine->fill($params);
 
         $success = $productMedicine->save();
@@ -137,22 +122,60 @@ class BackendProductMedicineController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Store a newly created resource in storage.
      */
-    public function destroy($id)
+    public function store(Request $request)
     {
-        $productMedicine = ProductMedicine::find($id);
-        // nếu tìm thấy, thì sửa status = Inactive và thông báo
-        if ($productMedicine) {
-            $productMedicine->status = OnlineMedicineStatus::DELETED;
-            $success = $productMedicine->update();
-            if ($success) {
-                return response('Xóa sản phẩm thành công !!!', 200);
-            } else {
-                return response('Xóa sản phẩm thất bại !!!', 400);
-            }
-        } else {
-            return response('Không tìm thấy sản phẩm !!!', 400);
+        $params = $request->only(
+            'name', 'name_en', 'name_laos',
+            'brand_name', 'brand_name_en', 'brand_name_laos',
+            'category_id', 'object_', 'filter_', 'price', 'status',
+            'description', 'description_en', 'description_laos',
+        );
+
+        //check name
+        if (empty($params['name']) && empty($params['name_en']) && empty($params['name_laos'])) {
+            return response('Tên sản phẩm không được để trống', 400);
         }
+        //check description
+        if (empty($params['description']) && empty($params['description_en']) && empty($params['description_laos'])) {
+            return response('Mô tả sản phẩm không được để trống', 400);
+        }
+        //check brand_name
+        if (empty($params['brand_name']) && empty($params['brand_name_en']) && empty($params['brand_name_laos'])) {
+            return response('Tên thương hiệu không được để trống', 400);
+        }
+
+        if ($request->hasFile('thumbnail')) {
+            $item = $request->file('thumbnail');
+            $itemPath = $item->store('product_medicine', 'public');
+            $thumbnail = asset('storage/' . $itemPath);
+            $params['thumbnail'] = $thumbnail;
+        }
+
+        if ($request->hasFile('gallery')) {
+            $galleryPaths = array_map(function ($image) {
+                $itemPath = $image->store('gallery', 'public');
+                return asset('storage/' . $itemPath);
+            }, $request->file('gallery'));
+            $gallery = implode(',', $galleryPaths);
+        } else {
+            $gallery = '';
+        }
+
+        $productMedicine = new ProductMedicine();
+
+        $productMedicine->gallery = $gallery;
+        $productMedicine->user_id = $request->input('user_id');
+        $productMedicine->fill($params);
+
+        $success = $productMedicine->save();
+
+        if ($success) {
+            return response('Thêm sản phẩm thành công', 200);
+        } else {
+            return response('Thêm sản phẩm thất bại', 400);
+        }
+
     }
 }
