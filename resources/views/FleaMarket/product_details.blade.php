@@ -49,7 +49,7 @@
 
                             <p style="color: #929292">Location:<strong class="flea-prise">
                                     @php
-                                        $province = \Illuminate\Support\Facades\DB::table('provinces')->find($pr_json->province_id);
+                                        $province = \Illuminate\Support\Facades\DB::table('provinces')->where('id', $pr_json->province_id)->first()
                                     @endphp
                                     @if(!empty($province))
                                         {{$province->name}}
