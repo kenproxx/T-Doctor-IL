@@ -168,84 +168,14 @@
                     console.log(exception)
                 }
             });
-
-            // $(function () {
-            //     var saveComment = function (data) {
-            //
-            //         // Convert pings to human readable format
-            //         $(Object.keys(data.pings)).each(function (index, userId) {
-            //             var fullname = data.pings[userId];
-            //             var pingText = '@' + fullname;
-            //             data.content = data.content.replace(new RegExp('@' + userId, 'g'), pingText);
-            //         });
-            //
-            //         return data;
-            //     }
-            //     $('#comments-container').comments({
-            //         currentUserId: 1,
-            //         roundProfilePictures: true,
-            //         textareaRows: 1,
-            //         enableAttachments: true,
-            //         enableHashtags: true,
-            //         enablePinging: true,
-            //         scrollContainer: $(window),
-            //         searchUsers: function (term, success, error) {
-            //             setTimeout(function () {
-            //                 success(usersArray.filter(function (user) {
-            //                     var containsSearchTerm = user.fullname.toLowerCase().indexOf(term.toLowerCase()) != -1;
-            //                     var isNotSelf = user.id != 1;
-            //                     return containsSearchTerm && isNotSelf;
-            //                 }));
-            //             }, 500);
-            //         },
-            //
-            //         getComments: function (success, error) {
-            //             setTimeout(function () {
-            //                 success(data);
-            //             }, 500);
-            //         },
-            //         postComment: function (data, success, error) {
-            //             setTimeout(function () {
-            //                 success(saveComment(data));
-            //             }, 500);
-            //         },
-            //         putComment: function (data, success, error) {
-            //             setTimeout(function () {
-            //                 success(saveComment(data));
-            //             }, 500);
-            //         },
-            //         deleteComment: function (data, success, error) {
-            //             setTimeout(function () {
-            //                 success();
-            //             }, 500);
-            //         },
-            //         upvoteComment: function (data, success, error) {
-            //             setTimeout(function () {
-            //                 success(data);
-            //             }, 500);
-            //         },
-            //         validateAttachments: function (attachments, callback) {
-            //             setTimeout(function () {
-            //                 callback(attachments);
-            //             }, 500);
-            //         },
-            //     });
-            // });
         </script>
 
     </head>
     @include('layouts.partials.header_3')
     @include('component.banner')
     <div id="mentoring" class="container">
-        <div class="nav d-flex justify-content-around">
-            <a class="tab active" href="#">All</a>
-            <a class="tab" href="#">Health</a>
-            <a class="tab" href="#">Beauty</a>
-            <a class="tab" href="#">Losing weight</a>
-            <a class="tab" href="#">Kids</a>
-            <a class="tab" href="#">Pets</a>
-            <a class="tab" href="#">Other</a>
-        </div>
+
+
         <div id="comments-container"></div>
 
         <div class="border-bottom">
@@ -294,10 +224,38 @@
                 </div>
             </div>
         </div>
+        <div class="nav d-flex justify-content-around mt-3">
+            <a class="tab" onclick="choiceType(this, 0)">All</a>
+            <a class="tab" onclick="choiceType(this, 1)">Health</a>
+            <a class="tab" onclick="choiceType(this, 2)">Beauty</a>
+            <a class="tab" onclick="choiceType(this, 3)">Losing weight</a>
+            <a class="tab" onclick="choiceType(this, 4)">Kids</a>
+            <a class="tab" onclick="choiceType(this, 5)">Pets</a>
+            <a class="tab" onclick="choiceType(this, 6)">Other</a>
+        </div>
         <div id="all_comment"></div>
     </div>
 
     <script>
+
+        let category_id = 0;
+
+        function choiceType(elememt, value) {
+            // Lấy tất cả các thẻ có lớp 'tab'
+            var tabs = document.querySelectorAll('.tab');
+
+            // Hủy (remove) lớp 'active' của tất cả các thẻ
+            tabs.forEach(function (tab) {
+                tab.classList.remove('active');
+            });
+
+            // Thêm lớp 'active' cho thẻ được chọn
+            elememt.classList.toggle('active');
+            category_id = value;
+
+            searchMentoring();
+        }
+
 
         const radioButtons = document.getElementsByName("type");
         let selectedValue = '{{ SearchMentoring::LATEST }}'
@@ -320,6 +278,7 @@
             const formData = new FormData();
             formData.append("type", selectedValue);
             formData.append("_token", '{{ csrf_token() }}');
+            formData.append("category_id", category_id);
 
             try {
                 $.ajax({
@@ -345,6 +304,30 @@
         function renderJsonToHTML(data) {
             let str = '';
             data.forEach((comment) => {
+
+                let textCate = '';
+                switch (comment.category_id) {
+                    case 1:
+                        textCate = 'Health';
+                        break;
+                    case 2:
+                        textCate = 'Beauty';
+                        break;
+                    case 3:
+                        textCate = 'Losing weight';
+                        break;
+                    case 4:
+                        textCate = 'Kids';
+                        break;
+                    case 5:
+                        textCate = 'Pets';
+                        break;
+                    case 6:
+                        textCate = 'Other';
+                        break;
+                    default:
+                        textCate = 'All';
+                }
                 let url = '{{ route('examination.mentoring.show', ['id' => ':id']) }}';
                 url = url.replace(':id', comment.id);
 
@@ -352,7 +335,7 @@
                 <div class="frame-wrapper">
                     <div class="div">
                         <div class="div-wrapper">
-                            <div class="text-wrapper">Health</div>
+                            <div class="text-wrapper">${textCate}</div>
                         </div>
                         <div class="div-2">
                             <a href="${url}"><div class="lin-tip-tht-bi-cc"><p class="p">${comment.title}</p>
