@@ -31,7 +31,7 @@
                         </div>
                         <div class="d-flex row">
                             @foreach($related as $item)
-                                <div class="col-md-6 d-flex pl-0">
+                                <div class="col-md-6 d-flex">
                                     <a href="{{route('detail.new',$item->id)}}">
                                         <div class="d-flex border-8px">
                                             <div class="col-md-3 p-0">
