@@ -3,8 +3,9 @@
 @section('content')
     @include('layouts.partials.header_3')
     @include('component.banner')
+    <div class="container">
     <div class="d-flex justify-content-center">
-        <div id="filter" class="box--1 d-flex ">
+        <div id="filter" class="box--1 d-flex w-100">
             <div class="d-flex flex-fill">
                 <div class="filter_option"><p>Category <i class="bi bi-chevron-expand"></i></p></div>
                 <div class="filter_option"><p>Location <i class="bi bi-chevron-expand"></i></p></div>
@@ -22,13 +23,14 @@
             </div>
         </div>
     </div>
-    <div class="row list-doctor container m-auto">
+    <div class="row list-doctor  m-auto">
         @if(count($recommendedMedicines) > 0)
             @foreach($recommendedMedicines as $recommendedMedicine)
                 @php
                     $user = \App\Models\User::find($recommendedMedicine->user_id);
                 @endphp
-                <div class="card col-md-3">
+                <div class=" col-md-3">
+                    <div class="card">
                     <i class="bi bi-heart"></i>
                     <img src="{{asset($recommendedMedicine->thumbnail)}}" class="card-img-top" alt="...">
                     <div class="card-body">
@@ -37,7 +39,9 @@
                         <p class="card-text_1">Price: <b>{{ $recommendedMedicine->price }} {{ $recommendedMedicine->unit_price }}</b></p>
                     </div>
                 </div>
+                </div>
             @endforeach
         @endif
+    </div>
     </div>
 @endsection

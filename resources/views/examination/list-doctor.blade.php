@@ -1,4 +1,4 @@
-<div id="list-doctor-render" class="list-doctor row container m-auto">
+<div id="list-doctor-render" class="list-doctor row m-auto">
 
 </div>
 <script>
@@ -27,7 +27,8 @@
                 let mainUrl = detailDoctor.replace(':id', item['id']);
                 let imageDoctor = item['thumbnail'];
                 let myArray = imageDoctor.split("/storage");
-                html = html + `<div class="card col-md-3" >
+                html = html + `<div class="col-md-3" >
+                               <div class="card">
                 <div class="ribbon ribbon-top-left"><span>New</span></div>
                 <i class="bi bi-heart"></i>
                 <img src=" ${url}${myArray[1]} " class="card-img-top" alt="...">
@@ -36,6 +37,7 @@
                     <p class="card-text">Specialty: ${item['specialty']}</p>
                     <p class="card-text_1">Location: <b>${item['detail_address']}</b></p>
                     <p class="card-text_1">Working time: <b>${item['time_working_1']}</b></p>
+                </div>
                 </div>
             </div>`;
 
