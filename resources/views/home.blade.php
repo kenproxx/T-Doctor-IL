@@ -582,7 +582,7 @@
             </div>
         </div>
     </div>
-    <div id="doctor-information">
+    <div id="doctor-information" style="padding-top: 15px">
         <h1>Find a doctor</h1>
         <div id="list-option" class="d-flex justify-content-around ">
             <div class="option-menu d-flex justify-content-center">
