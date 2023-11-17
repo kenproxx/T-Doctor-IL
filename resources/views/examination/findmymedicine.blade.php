@@ -153,7 +153,7 @@
                 @if(count($allPhamrmacists) > 0)
                     @foreach($allPhamrmacists as $allPhamrmacist)
                         <div class=" col-md-3">
-                            <div class=card></div>
+                            <div class=card>
                             <i class="bi bi-heart"></i>
                             @php
                                 $arrayGallery=[];
@@ -190,6 +190,7 @@
                                         class="card-title"> {{ $allPhamrmacist->name }}</h5></a>
                                 <p class="card-text_1">Location: <b>{{ $allPhamrmacist->address_detail }}</b></p>
                                 <p class="card-text_1">Working time: <b> {{ $text }}</b></p>
+                            </div>
                             </div>
                         </div>
                     @endforeach
@@ -269,7 +270,7 @@
                         @php
                             $user = \App\Models\User::find($recommendedMedicine->user_id);
                         @endphp
-                        <div class="card col-md-3">
+                        <div class="col-md-3">
                             <div class="card">
                             <i class="bi bi-heart"></i>
                             <img src="{{asset($recommendedMedicine->thumbnail)}}" class="card-img-top" alt="...">
@@ -302,7 +303,7 @@
                             @php
                                 $user = \App\Models\User::find($function_food->user_id);
                             @endphp
-                            <div class="card col-md-3">
+                            <div class=" col-md-3">
                                 <div class="card">
                                 <i class="bi bi-heart"></i>
                                 <img src="{{asset($function_food->thumbnail)}}" class="card-img-top" alt="...">
@@ -345,7 +346,7 @@
                                 @php
                                     $user = \App\Models\User::find($product->user_id);
                                 @endphp
-                                <div class="card col-md-3">
+                                <div class=" col-md-3">
                                     <div class="card">
                                     <i class="bi bi-heart"></i>
                                     <img src="{{asset($product->thumbnail)}}" class="card-img-top" alt="...">
