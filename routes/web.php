@@ -77,7 +77,9 @@ Route::group(['prefix' => 'examination'], function () {
 
 Route::group(['prefix' => 'questions'], function () {
     Route::get('/get-list', [BackendQuestionController::class, 'custom_getlist'])->name('questions.custome.list');
+    Route::get('/list/{id}', [BackendQuestionController::class, 'getListQuestion'])->name('questions.list.filter');
 });
+
 Route::group(['prefix' => 'mentoring'], function () {
     Route::get('', [ExaminationController::class, 'mentoring'])->name('examination.mentoring');
     Route::get('detail/{id}', [ExaminationController::class, 'showMentoring'])->name('examination.mentoring.show');
