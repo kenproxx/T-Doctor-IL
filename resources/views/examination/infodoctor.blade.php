@@ -70,7 +70,7 @@
                     <div id="opt_btn" class="d-flex">
                         <button>Chat</button>
                         <button>Videocall</button>
-                        <button>Homecare</button>
+{{--                        <button>Homecare</button>--}}
                     </div>
                 </div>
             </div>
