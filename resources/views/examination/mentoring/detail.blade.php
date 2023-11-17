@@ -342,6 +342,8 @@
                 $isDoctor = true;
             }
         }
+
+        $isMedical = (new \App\Http\Controllers\MainController())->checkMedical();
     @endphp
     <div id="mentoring" class="container">
         <a href="{{ route('examination.mentoring') }}">
@@ -377,7 +379,7 @@
                 @php
                     $doctor = \App\Models\DoctorInfo::where('created_by', Auth::user()->id)->first();
                 @endphp
-                @if(Auth::user()->id == $question->user_id || $doctor)
+                @if(Auth::user()->id == $question->user_id || $isMedical)
                     @foreach(explode(',', $question->gallery) as $picture)
                         <div class="div col-sm-4">
                             <div class="catalog">
@@ -422,7 +424,7 @@
                     <button type="button" class="btn btn-primary mx-2 button-main"
                             onclick="changeEmotion()">{{ $isLike ? ( $isLike->is_like ? 'Dislike' : 'Like' ) : 'Like'}}</button>
                 @endif
-                @if($isDoctor)
+                @if($isMedical)
                     <button type="button" class="btn btn-primary mx-2 button-main" onclick="replyCommentMain()">Reply
                     </button>
                 @endif
@@ -476,7 +478,7 @@
                         </div>
                     </div>
                     <div class="div-5 justify-content-end" id="button-reply-comment-{{ $index }}">
-                        @if($isDoctor)
+                        @if($isMedical)
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
                                  fill="none">
                                 <g clip-path="url(#clip0_1944_12433)">
