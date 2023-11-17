@@ -318,6 +318,10 @@ img {
                 width: 90px;
             }
         }
+        .img-sell-product {
+            width: 140px;
+            height: 100px;
+        }
     }
     .content-add {
         padding: 16px;
@@ -458,8 +462,14 @@ img {
         .img-info {
             width: 148px;
         }
+        .img-sell-product {
+            width: 200px;
+            height: 200px;
+        }
     }
-
+    .mt-45 {
+        margin-top: 45px !important;
+    }
     /* END FLEA MARKET */
 
 }

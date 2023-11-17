@@ -73,7 +73,8 @@ class FleaMarketController extends Controller
     {
         $user = Auth::user();
         $province = DB::table('provinces')->get();
-        return view('FleaMarket.sell-my-product', compact('user', 'province'));
+        $category = CategoryProduct::where('status', 1)->get();
+        return view('FleaMarket.sell-my-product', compact('user', 'province', 'category'));
     }
 
     /**
