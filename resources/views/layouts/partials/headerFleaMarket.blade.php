@@ -1,6 +1,9 @@
+@php use App\Http\Middleware\MedicalPermission; @endphp
+@php use Illuminate\Support\Facades\Auth; @endphp
+@php use App\Enums\Role; @endphp
 <header class="header">
     <div class="container">
-        <div class="row header-detail mobile-hidden">
+        <div class="row header-detail mobile-hidden justify-content-between">
             <div class="col-md-4 header-detail--left d-flex justify-content-around">
                 <a class="logo" href="{{ route('home') }}">
                     <img src="{{asset('img/icons_logo/logo-new.png')}}" alt="Logo" width="177px" height="42px"
@@ -13,11 +16,29 @@
                 <a href="{{route('flea.market.sell.product')}}">Sell my product</a>
                 <a href="{{route('flea.market.wish.list')}}">Wish list</a>
             </div>
-            <div class="col-md-4 header-detail--right d-flex">
-                <strong>Trần đình phi</strong>
-                <div class="ml-2 user">
-                    <img src="{{asset('img/user-circle.png')}}">
-                </div>
+            <div class="header-right d-flex align-items-center w-25">
+                @if(Auth::check())
+                    <div class="dropdown">
+                        <div class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                             aria-expanded="false">
+                            {{Auth::user()->username}}
+                        </div>
+                        <div class="dropdown-menu">
+                            @if( (new MedicalPermission())->isMedicalPermission())
+                                <a class="dropdown-item" href="{{ route('homeAdmin') }}">Dashboard</a>
+                            @else
+                                <a class="dropdown-item" href="{{ route('profile') }}">Trang cá nhân</a>
+                            @endif
+                            <a class="dropdown-item" href="{{route('logoutProcess')}}">Logout</a>
+                        </div>
+                    </div>
+                @else
+                    <button class="account_control" id="show_login" data-toggle="modal" data-target="#staticBackdrop">Log In
+                    </button>
+                    <div>|</div>
+                    <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">Sign Up
+                    </button>
+                @endif
             </div>
         </div>
         <div class="header-mobile row d-flex d-none">
