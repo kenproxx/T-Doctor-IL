@@ -107,6 +107,9 @@ a {
     object-fit: cover;
     border-radius: 8px;
 }
+.padding-news {
+    padding: 10px 10px;
+}
 .content__item__describe{
     height: 45px;
     overflow: hidden;

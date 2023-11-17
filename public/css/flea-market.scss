@@ -462,6 +462,9 @@ input[type="range"]::-moz-range-thumb {
     border: 2px solid #D9D9D9;
     border-radius: 10px;
 }
+.b-radius-8px {
+    border-radius: 8px;
+}
 .text-wrapper-input {
      input[type=radio] {
         box-sizing: border-box;
