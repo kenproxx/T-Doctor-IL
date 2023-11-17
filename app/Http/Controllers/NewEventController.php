@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\NewEventStatus;
 use App\Models\NewEvent;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,26 @@ class NewEventController extends Controller
      */
     public function index()
     {
-        //
+        $listEvent = NewEvent::where('status', NewEventStatus::ACTIVE)
+            ->where('type', 'EVENT')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $listNews = NewEvent::where('status', NewEventStatus::ACTIVE)
+            ->where('type', 'NEWS')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('News-event.News', compact('listEvent', 'listNews'));
+    }
+
+    public function detail($id)
+    {
+        $newEvent = NewEvent::find($id);
+        $related = NewEvent::where('status', NewEventStatus::ACTIVE)
+            ->where('type', $newEvent->type)
+            ->where('id', '!=', $id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('News-event.detail-news', compact('newEvent', 'id', 'related'));
     }
 
     /**

@@ -15,6 +15,7 @@ use App\Http\Controllers\ExaminationController;
 use App\Http\Controllers\FleaMarketController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\MedicineController;
+use App\Http\Controllers\NewEventController;
 use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecruitmentController;
@@ -48,8 +49,8 @@ Route::get('profile', [ProfileController::class, 'index'])->name('profile');
 Route::put('profile-update', [ProfileController::class, 'update'])->name('profile.update');
 
 Route::group(['prefix' => 'news'], function () {
-    Route::get('', [HomeController::class, 'index'])->name('index.new');
-    Route::get('detail', [HomeController::class, 'detail'])->name('detail.new');
+    Route::get('', [NewEventController::class, 'index'])->name('index.new');
+    Route::get('detail/{id}', [NewEventController::class, 'detail'])->name('detail.new');
 });
 Route::group(['prefix' => 'recruitment'], function () {
     Route::get('/index', [RecruitmentController::class, 'index'])->name('recruitment.index');
