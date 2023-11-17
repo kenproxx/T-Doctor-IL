@@ -82,4 +82,21 @@ class User extends Authenticatable  implements JWTSubject
         return false;
     }
 
+    //get member name by id
+    public static function getMemberNameByID($id)
+    {
+        if (!$id) {
+            return '';
+        }
+        $user = User::where('id', $id)->first();
+        if (!$user) {
+            return '';
+        }
+        $role = RoleUser::where('user_id', $id)->first();
+        if (!$role) {
+            return '';
+        }
+        return Role::where('id', $role->role_id)->first()->name;
+    }
+
 }
