@@ -84,7 +84,7 @@ class FleaMarketController extends Controller
     {
         $e_product = ProductInfo::find($id);
         $provinces = DB::table('provinces')->get();
-
-        return view('FleaMarket.edit-product', compact('e_product', 'provinces'));
+        $departments = CategoryProduct::where('status', 1)->get();
+        return view('FleaMarket.edit-product', compact('e_product', 'provinces', 'departments'));
     }
 }
