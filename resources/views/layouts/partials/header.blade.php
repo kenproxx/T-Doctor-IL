@@ -19,9 +19,12 @@
         <div class="header-right d-flex align-items-center">
             @if(Auth::check())
                 <div class="dropdown">
-                    <div class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                    <div class="d-flex dropdown-toggle justify-content-between" type="button" data-toggle="dropdown"
                          aria-expanded="false">
-                        {{Auth::user()->username}}
+                        <div class="d-flex align-items-center mr-2">
+                            {{Auth::user()->username}}
+                        </div>
+                        <img src="{{asset('img/user-circle.png')}}">
                     </div>
                     <div class="dropdown-menu">
                         @if( (new MedicalPermission())->isMedicalPermission())
