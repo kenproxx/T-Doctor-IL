@@ -197,6 +197,7 @@ return [
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         /* More service*/
         SocialiteProviders\Manager\ServiceProvider::class,
+        GetStream\StreamLaravel\StreamLaravelServiceProvider::class,
     ],
 
     /*
@@ -252,6 +253,7 @@ return [
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+        'FeedManager' => GetStream\StreamLaravel\Facades\FeedManager::class,
     ],
 
 ];

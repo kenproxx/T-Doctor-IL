@@ -11,6 +11,8 @@
         "php": "^8.1",
         "bensampo/laravel-enum": "*",
         "devmarketer/easynav": "^1.0",
+        "get-stream/stream": "^7.1",
+        "get-stream/stream-laravel": "*",
         "guzzlehttp/guzzle": "^7.0.1",
         "kalnoy/nestedset": "^6.0",
         "laravel/framework": "^10.0",
@@ -18,6 +20,8 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.0",
         "realrashid/sweet-alert": "^7.1",
+        "simplesoftwareio/simple-qrcode": "^4.2",
+        "socialiteproviders/manager": "^4.4",
         "symfony/http-client": "^6.1",
         "symfony/mailgun-mailer": "^6.1",
         "symfony/postmark-mailer": "^6.1",
@@ -38,15 +42,25 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [],
+            "providers": [
+                "GetStream\\StreamLaravel\\StreamLaravelServiceProvider"
+            ],
+            "aliases": {
+                "FeedManager": "GetStream\\StreamLaravel\\Facades\\FeedManager"
+            }
         }
     },
     "autoload": {
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
-        }
+            "Database\\Seeders\\": "database/seeders/",
+            "GetStream\\StreamLaravel\\": "src/"
+        },
+        "files": [
+            "app/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
