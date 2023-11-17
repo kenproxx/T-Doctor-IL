@@ -86,8 +86,14 @@
                 <div id="rv-ctn" class="justify-content-center">
                     <div id="user_rv" class="d-flex">
                         <div id="user" class="d-flex">
-                            <img src="{{asset('img/detail_doctor/ellipse _14.png')}}" alt="">
-                            <p>Trần Đình Phi</p>
+                            <div class="">
+                                <img src="{{asset('img/detail_doctor/ellipse _14.png')}}" alt="">
+
+                            </div>
+                            <div class="">
+                                <p>Trần Đình Phi</p>
+                            </div>
+
                         </div>
                         <div id="time">
                             <p>10:20 07/04/2023</p>

@@ -210,7 +210,7 @@
                             $user = \App\Models\User::find($hotMedicine->user_id);
                         @endphp
                         <div class="col-md-3">
-                            <div class="card"></div>
+                            <div class="card">
                             <i class="bi bi-heart"></i>
                             <img src="{{asset($hotMedicine->thumbnail)}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -220,6 +220,7 @@
                                 <p class="card-text_1">Price:
                                     <b>{{ $hotMedicine->price }} {{ $hotMedicine->unit_price }}</b></p>
                             </div>
+                        </div>
                         </div>
                     @endforeach
                 @endif
@@ -280,11 +281,11 @@
                                     <b>{{ $recommendedMedicine->price }} {{ $recommendedMedicine->unit_price }}</b></p>
                             </div>
                         </div>
-            </div>
+                    </div>
 
                     @endforeach
                 @endif
-            </div>
+
 
             <div class="d-flex justify-content-center"style="padding: 12px">
                 <div class=" list-title d-flex">
