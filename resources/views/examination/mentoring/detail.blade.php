@@ -478,7 +478,7 @@
                         </div>
                     </div>
                     <div class="div-5 justify-content-end" id="button-reply-comment-{{ $index }}">
-                        @if($isDoctor)
+                        @if($isMedical)
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
                                  fill="none">
                                 <g clip-path="url(#clip0_1944_12433)">
