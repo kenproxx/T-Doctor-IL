@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\backend\BackendAccountRegisterController;
 use App\Http\Controllers\backend\BackendAnswerController;
 use App\Http\Controllers\backend\BackendCategoryController;
 use App\Http\Controllers\backend\BackendCategoryProductController;
@@ -257,4 +258,9 @@ Route::group(['prefix' => 'service-clinic-pharmacy'], function () {
     Route::get('create', [BackendServiceClinicController::class, 'create'])->name('api.backend.service-clinic-pharmacy.create');
     Route::post('store', [BackendServiceClinicController::class, 'store'])->name('api.backend.service-clinic-pharmacy.store');
     Route::post('destroy/{id}', [BackendServiceClinicController::class, 'destroy'])->name('api.backend.service-clinic-pharmacy.destroy');
+});
+
+Route::group(['prefix' => 'account-register'], function () {
+    Route::get('index', [BackendAccountRegisterController::class, 'index'])->name('api.backend.account-register.index');
+    Route::post('update/{id}', [BackendAccountRegisterController::class, 'update'])->name('api.backend.account-register.update');
 });

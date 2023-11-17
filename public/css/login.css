@@ -30,6 +30,7 @@
 .popup .form .form-element input[type="text"],
 .popup .form .form-element select,
 .popup .form .form-element input[type="email"],
+.popup .form .form-element input[type="file"],
 .popup .form .form-element input[type="password"]{
     width: 570px;
     height: 56px;
