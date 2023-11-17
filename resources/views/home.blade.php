@@ -599,8 +599,10 @@
                 </ul>
             </div>
         </div>
-        <div id="list-doctor  " class="d-flex justify-content-center container list-doctor11">
-            <div class="card">
+        <div class="container">
+        <div id="list-doctor  " class="d-flex">
+            <div class="col-md-3">
+                <div class="card">
                 <i class="bi bi-heart"></i>
                 <img src="{{asset('img/pngtree-cartoon-anime-male-doctor-element-png-image_4073784.jpg')}}" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -610,7 +612,9 @@
                     <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
                 </div>
             </div>
-            <div class="card">
+            </div>
+            <div class="col-md-3">
+                <div class="card">
                 <i class="bi bi-heart"></i>
                 <img src="{{asset('img/11111.jpeg')}}" class="card-img-top" alt="...">
                 <div class="card-body">
@@ -620,26 +624,33 @@
                     <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
                 </div>
             </div>
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/22222.jpeg')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Phạm Đức Long</h5>
-                    <p class="card-text">respiratory doctor</p>
-                    <p class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <i class="bi bi-heart"></i>
+                    <img src="{{asset('img/22222.jpeg')}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">BS Phạm Đức Long</h5>
+                        <p class="card-text">respiratory doctor</p>
+                        <p class="card-text_1">Location: <b>Hanoi</b></p>
+                        <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+                    </div>
                 </div>
             </div>
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Trần Đình </h5>
-                    <p class="card-text">respiratory doctor</p>
-                    <p class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+            <div class="col-md-3">
+                <div class="card">
+                    <i class="bi bi-heart"></i>
+                    <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">BS Trần Đình </h5>
+                        <p class="card-text">respiratory doctor</p>
+                        <p class="card-text_1">Location: <b>Hanoi</b></p>
+                        <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
+                    </div>
                 </div>
             </div>
+
+        </div>
         </div>
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
