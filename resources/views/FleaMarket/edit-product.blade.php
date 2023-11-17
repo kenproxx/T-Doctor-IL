@@ -9,7 +9,7 @@
             <div class="ac-text_content font-18-mobi"><a href=""><a href="{{route('flea.market.my.store')}}"><i
                             class="fa-solid fa-arrow-left mr-4"
                             style="color: black"></i></a>Edit product
-                information
+                    information
             </div>
         </div>
         <form action="#">
@@ -37,26 +37,33 @@
 
                                         <select class="ac-choose font-16-mobi mt-2" name="category_id checkValid"
                                                 required id="category_id">
+                                            @php
+                                                $e_productCat = \App\Models\online_medicine\CategoryProduct::find($e_product->category_id);
+                                            @endphp
                                             <option
-                                                value="{{$e_product->category_id}}">{{$e_product->category_id}}</option>
-                                            <option value="1">123</option>
-                                            <option value="2">123</option>
+                                                value="{{$e_product->category_id}}">{{$e_productCat->name}}</option>
+                                            @foreach($departments as $department)
+                                                <option value="{{$department->id}}">{{$department->name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
-                                <div class="text-font-16 font-14-mobi mt-md-4 mt-3">
+
+                                <div class="text-font-16 font-14-mobi mt-45 mt-3">
                                     <p><span>Location </span> <span class="red-color">*</span></p>
                                     <div class="w-100 mt-2">
                                         <select class="ac-choose font-16-mobi mt-2" id="province_id"
                                                 name="province_id checkValid"
                                                 required>
+                                            @php
+                                                $e_productName = \App\Models\Province::find($e_product->province_id);
+                                            @endphp
+                                            <option
+                                                value="{{$e_product->province_id}}">{{$e_productName->name}}</option>
                                             @foreach($provinces as $province)
                                                 <option value="{{$province->id}}">{{$province->name}}</option>
                                             @endforeach
-                                            <option
-                                                value="{{$e_product->province_id}}">{{$e_product->province_id}}</option>
-                                            <option value="1">123</option>
-                                            <option value="2">123</option>
+
                                         </select>
                                     </div>
                                 </div>
@@ -117,15 +124,17 @@
                                         @foreach($galleryArray as $index => $productImg)
                                             <div class="image-container pr-2" data-index="{{ $index }}">
                                                 <img class="image" width="200px" height="200px" src="{{ $productImg }}">
-{{--                                                <button class="delete-image" data-index="{{ $index }}">X</button>--}}
+                                                {{--                                                <button class="delete-image" data-index="{{ $index }}">X</button>--}}
                                             </div>
                                         @endforeach
                                     </div>
                                     <div id="imagePreview"></div>
                                     <label for="gallery" class="p-0">
-                                        <img class="p-0" width="200px" height="200px" src="{{ asset('img/flea-market/add-photo.png') }}">
+                                        <img class="p-0 img-sell-product"
+                                             src="{{ asset('img/flea-market/add-photo.png') }}">
                                     </label>
-                                    <input type="file" id="gallery" name="gallery[]" style="display: none;" multiple accept="image/*">
+                                    <input type="file" id="gallery" name="gallery[]" style="display: none;" multiple
+                                           accept="image/*">
                                     <button id="chooseImageBtn" type="button" style="display: none">Chọn ảnh</button>
                                 </div>
                             </div>
@@ -136,15 +145,18 @@
                         <p><span>Please choose you advertisement plan </span><span class="red-color">*</span></p>
                         <div class="mt-2 d-flex font-12-mobi">
                             <div class="text-wrapper-input col-md-4 d-flex pl-0">
-                                <input type="radio" class="web-tick-box" name="ads_plan" id="ads_plan1" value="1" {{ $e_product->ads_plan == 1 ? 'checked' : '' }}>
+                                <input type="radio" class="web-tick-box" name="ads_plan" id="ads_plan1"
+                                       value="1" {{ $e_product->ads_plan == 1 ? 'checked' : '' }}>
                                 <label class="ml-2"><strong>Platinum</strong></label>
                             </div>
                             <div class="col-md-4 d-flex text-wrapper-input">
-                                <input type="radio" class="web-tick-box" name="ads_plan" id="ads_plan2" value="2" {{ $e_product->ads_plan == 2 ? 'checked' : '' }}>
+                                <input type="radio" class="web-tick-box" name="ads_plan" id="ads_plan2"
+                                       value="2" {{ $e_product->ads_plan == 2 ? 'checked' : '' }}>
                                 <label class=" ml-2"><strong>Premium</strong></label>
                             </div>
                             <div class="col-md-4 d-flex text-wrapper-input">
-                                <input type="radio" class="web-tick-box" name="ads_plan" id="ads_plan3" value="3" {{ $e_product->ads_plan == 3 ? 'checked' : '' }}>
+                                <input type="radio" class="web-tick-box" name="ads_plan" id="ads_plan3"
+                                       value="3" {{ $e_product->ads_plan == 3 ? 'checked' : '' }}>
                                 <label class=" ml-2"><strong>Silver</strong></label>
                             </div>
                         </div>
@@ -154,19 +166,23 @@
                         <p><span>Advertisement period</span><span class="red-color">*</span></p>
                         <div class="mt-2 d-flex font-12-mobi">
                             <div class="text-wrapper-input col-md-3 d-flex pl-0">
-                                <input type="radio" class="web-tick-box" name="ads_period" value="1" {{ $e_product->ads_period == 1 ? 'checked' : '' }}>
+                                <input type="radio" class="web-tick-box" name="ads_period"
+                                       value="1" {{ $e_product->ads_period == 1 ? 'checked' : '' }}>
                                 <label class="ml-2"><strong>5 Day</strong></label>
                             </div>
                             <div class="col-md-3 d-flex text-wrapper-input pl-0">
-                                <input type="radio" class="web-tick-box" name="ads_period" value="2" {{ $e_product->ads_period == 2 ? 'checked' : '' }}>
+                                <input type="radio" class="web-tick-box" name="ads_period"
+                                       value="2" {{ $e_product->ads_period == 2 ? 'checked' : '' }}>
                                 <label class="ml-2"><strong>10 Day</strong></label>
                             </div>
                             <div class="col-md-3 d-flex text-wrapper-input pl-0">
-                                <input type="radio" class="web-tick-box" name="ads_period" value="3" {{ $e_product->ads_period == 3 ? 'checked' : '' }}>
+                                <input type="radio" class="web-tick-box" name="ads_period"
+                                       value="3" {{ $e_product->ads_period == 3 ? 'checked' : '' }}>
                                 <label class="ml-2"><strong>15 Day</strong></label>
                             </div>
                             <div class="col-md-3 d-flex text-wrapper-input pl-0">
-                                <input type="radio" class="web-tick-box" name="ads_period" value="4" {{ $e_product->ads_period == 4 ? 'checked' : '' }}>
+                                <input type="radio" class="web-tick-box" name="ads_period"
+                                       value="4" {{ $e_product->ads_period == 4 ? 'checked' : '' }}>
                                 <label class="ml-2"><strong>20 Day</strong></label>
                             </div>
                         </div>
@@ -174,10 +190,10 @@
 
                 </div>
                 <div class="d-flex justify-content-center">
-                    <div class="col-3">
+                    <div class="col-md-3 col-6">
                         <button type="submit" class="add-cv-bt w-100 apply-bt_delete">Cancel</button>
                     </div>
-                    <div class="col-3">
+                    <div class="col-md-3 col-6">
                         <button id="submitButton" type="button" class="add-cv-bt w-100 apply-bt_edit create-button">
                             Save
                         </button>
@@ -198,9 +214,9 @@
         });
     </script>
     <script>
-{{--    xóa hình trong blade nhưng chưa được =))    --}}
-        $(document).ready(function() {
-            $('.delete-image').on('click', function() {
+        {{--    xóa hình trong blade nhưng chưa được =))    --}}
+        $(document).ready(function () {
+            $('.delete-image').on('click', function () {
                 const index = $(this).data('index');
                 $galleryArray.splice(index, 1);
                 $(`.image-container[data-index="${index}"]`).remove();
@@ -249,9 +265,11 @@
                 const image = document.createElement('img');
                 image.src = URL.createObjectURL(file);
                 image.alt = 'Preview Image';
-                image.style.maxHeight = '200px';
-                image.style.maxWidth = '200px';
-                image.style.paddingRight = '8px';
+                image.className = 'img-sell-product col-6 b-radius-8px';
+                // image.className = 'col-6';
+                // image.style.maxHeight = '200px';
+                // image.style.maxWidth = '200px';
+                image.style.paddingBottom = '16px';
                 imagePreviews.appendChild(image);
             }
         });
@@ -281,14 +299,20 @@
                 const formData = new FormData();
                 formData.append("name", $('#name').val());
                 formData.append("name_en", $('#name').val());
+                formData.append("name_laos", $('#name').val());
                 formData.append("category_id", $('#category_id').val());
                 formData.append("brand_name", $('#brand_name').val());
                 formData.append("brand_name_en", $('#brand_name').val());
+                formData.append("brand_name_laos", $('#brand_name').val());
                 formData.append("province_id", $('#province_id').val());
                 formData.append("price", $('#price').val());
                 formData.append("price_unit", 'VND');
                 formData.append("ads_plan", (selectedValueAdd));
-                formData.append("description", $('#description').val());
+                const fieldTextareaTiny = ["description"];
+                fieldTextareaTiny.forEach(fieldTextarea => {
+                    const content = tinymce.get(fieldTextarea).getContent();
+                    formData.append(fieldTextarea, content);
+                });
                 formData.append("ads_period", (selectedValue));
                 formData.append("user_id", {{Auth::user()->id}});
                 let photo = '';
