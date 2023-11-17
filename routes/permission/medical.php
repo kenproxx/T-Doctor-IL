@@ -11,6 +11,7 @@ use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendProductMedicineController;
 use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\backend\BackendReviewController;
+use App\Http\Controllers\backend\BackendServiceClinicController;
 use App\Http\Controllers\backend\BackendStaffController;
 use App\Http\Controllers\backend\BackendWishListController;
 use App\Http\Controllers\BookingController;
@@ -247,4 +248,13 @@ Route::group(['prefix' => 'carts'], function () {
     Route::post('change-quantity/{id}', [CartApi::class, 'changeQuantityCart'])->name('api.backend.cart.change.quantity');
     Route::delete('delete/{id}', [CartApi::class, 'deleteCart'])->name('api.backend.cart.delete');
     Route::delete('clear/{id}', [CartApi::class, 'clearCart'])->name('api.backend.cart.clear');
+});
+
+Route::group(['prefix' => 'service-clinic-pharmacy'], function () {
+    Route::get('index', [BackendServiceClinicController::class, 'index'])->name('api.backend.service-clinic-pharmacy.index');
+    Route::get('edit/{id}', [BackendServiceClinicController::class, 'edit'])->name('api.backend.service-clinic-pharmacy.edit');
+    Route::post('update', [BackendServiceClinicController::class, 'update'])->name('api.backend.service-clinic-pharmacy.update');
+    Route::get('create', [BackendServiceClinicController::class, 'create'])->name('api.backend.service-clinic-pharmacy.create');
+    Route::post('store', [BackendServiceClinicController::class, 'store'])->name('api.backend.service-clinic-pharmacy.store');
+    Route::post('destroy/{id}', [BackendServiceClinicController::class, 'destroy'])->name('api.backend.service-clinic-pharmacy.destroy');
 });
