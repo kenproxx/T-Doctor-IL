@@ -260,7 +260,6 @@
                 }
             }
             var categoryIdsString = departmentIds.join(',');
-            console.log(categoryIdsString)
             var formData = {
                 category_id: categoryIdsString,
                 name: searchValue,
@@ -289,6 +288,8 @@
             $('#productsAdsPlan3').html('');
 
             for (var i = 0; i < products.length; i++) {
+                let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`;
+                url = url.replace(':id', products[i].id);
                 var product = products[i];
                 var adsPlan = product.ads_plan;
                 var isFavoriteClass = product.isFavorit ? 'bi-heart-fill' : 'bi-heart';
@@ -304,7 +305,7 @@
                     </div>
                     <div class="content-pro">
                         <div class="name-pro">
-                            <a href="${product.url}">${product.name}</a>
+                            <a href="${url}">${product.name}</a>
                         </div>
                         <div class="location-pro d-flex">
                             Location: <p>${product.province_id}</p>
