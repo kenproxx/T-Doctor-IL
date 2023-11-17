@@ -857,10 +857,10 @@ span.material-symbols-outlined {
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 #show_inf #review{
-    margin-top: 20px;
+    margin-top: 150px;
 }
 #show_inf #rv_doc #rv-ctn {
-    width: 1170px;
+    width: 100%;
     margin-bottom: 24px;
     border-bottom: 1px solid #D6D6D6;
 }
@@ -1076,4 +1076,7 @@ span.material-symbols-outlined {
 .card{
     min-height: 390px;!important;
     max-height: 390px;!important;
+}
+.pagination{
+    padding-bottom: 10px;
 }
