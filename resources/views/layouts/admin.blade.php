@@ -141,6 +141,11 @@
                         <i class="fa-solid fa-house-chimney-medical"></i>
                         <span>{{ __('Category Product') }}</span></a>
                 </li>
+                <li class="nav-item {{ Nav::isRoute('api.backend.service-clinic-pharmacy.index') }}">
+                    <a class="nav-link" href="{{ route('api.backend.service-clinic-pharmacy.index') }}">
+                        <i class="fa-solid fa-house-chimney-medical"></i>
+                        <span>{{ __('Quản lý dịch vụ phòng khám') }}</span></a>
+                </li>
                 <li class="nav-item {{ Nav::isRoute('api.backend.product-medicine.index') }}">
                     <a class="nav-link" href="{{ route('api.backend.product-medicine.index') }}">
                         <i class="fa-solid fa-house-chimney-medical"></i>
