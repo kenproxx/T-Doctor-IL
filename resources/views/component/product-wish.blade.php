@@ -26,9 +26,11 @@
             });
         }
     }
+
     var token = `{{ $_COOKIE['accessToken'] }}`;
     $(document).ready(function () {
         callListProduct(token);
+
         async function callListProduct(token) {
             let accessToken = `Bearer ` + token;
             $.ajax({
@@ -41,6 +43,7 @@
                     user_id: {{ Auth::check() ? Auth::user()->id : null }}
                 },
                 success: function (response) {
+                    console.log(response);
                     renderWishList(response);
                 },
                 error: function (exception) {
@@ -48,21 +51,15 @@
                 }
             });
         }
+
         async function renderWishList(res) {
+
             let accessToken = `Bearer ` + token;
             let html = ``;
             for (let i = 0; i < res.length; i++) {
-                let productId = res[i].product_id;
-
-                $.ajax({
-                    url: `{{ route('api.backend.products.detail', ['id' => ':id']) }}`.replace(':id', productId),
-                    method: 'GET',
-                    headers: {
-                        "Authorization": accessToken
-                    },
-                    success: function (product) {
-                        let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`.replace(':id', product.id);
-                        html += `
+                let product = res[i];
+                let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`.replace(':id', product.id);
+                html += `
                         <div class="col-md-4 col-6 item">
                             <div class="product-item">
                                 <div class="img-pro">
@@ -84,15 +81,10 @@
                                 </div>
                             </div>
                         </div>
-                    `;
-                        $('#listWishList').empty().append(html);
-                    },
-                    error: function (exception) {
-                        // console.log(exception);
-                    }
-                });
-
+                 `;
             }
+            $('#listWishList').empty().append(html);
+
         }
     });
 </script>

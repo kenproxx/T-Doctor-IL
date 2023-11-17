@@ -570,7 +570,7 @@
                     <h3>24/7 AVAILABLE</h3>
                     <p>You can find available clinics/pharmacies</p>
                 </div>
-                <div class="describe-item">
+                <div class="describe-item" hidden="">
                     <h3>HOME CARE SERVICE</h3>
                     <p>Don't come to us! We will come to you!</p>
                 </div>
@@ -758,7 +758,7 @@
                         <h3>24/7 AVAILABLE</h3>
                         <p>You can find available clinics/pharmacies</p>
                     </div>
-                    <div class="describe-item">
+                    <div class="describe-item" hidden="">
                         <h3>HOME CARE SERVICE</h3>
                         <p>Don't come to us! We will come to you!</p>
                     </div>
@@ -814,7 +814,7 @@
                         <h3>24/7 AVAILABLE</h3>
                         <p>You can find available clinics/pharmacies</p>
                     </div>
-                    <div class="describe-item">
+                    <div class="describe-item" hidden="">
                         <h3>HOME CARE SERVICE</h3>
                         <p>Don't come to us! We will come to you!</p>
                     </div>

@@ -22,7 +22,7 @@ class BackendWishListController extends Controller
             ->join('product_infos', 'product_infos.id', '=', 'wish_lists.product_id')
             ->where('wish_lists.user_id', $userID)
             ->where('isFavorite','=', '1')
-            ->select('wish_lists.*')
+            ->select('wish_lists.*', 'product_infos.*')
             ->get();
 
         return response()->json($wishLists);
