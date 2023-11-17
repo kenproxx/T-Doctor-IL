@@ -843,7 +843,7 @@
     <div class="banner1">
         <img src="{{asset('img/Rectangle 23815.png')}}" alt="">
     </div>
-    <div id="item-information" style="padding-top: 15px">
+    <div id="item-information" style="padding-top: 15px; margin-top: 20px">
         <h1>Buy online</h1>
         <p>Don't struggle finding, we are always ready for you</p>
         <div id="list-option" style="padding-top: 15px" class="d-flex justify-content-around ">

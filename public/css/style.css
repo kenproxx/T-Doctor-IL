@@ -1073,4 +1073,7 @@ span.material-symbols-outlined {
 .list-doctor11{
     gap: 30px;
 }
-
+.card{
+    min-height: 390px;!important;
+    max-height: 390px;!important;
+}
