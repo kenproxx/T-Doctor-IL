@@ -1,5 +1,5 @@
 @php use App\Enums\online_medicine\ObjectOnlineMedicine; @endphp
-@php use App\Enums\online_medicine\FilterOnlineMedicine; @endphp
+@php use App\Enums\online_medicine\FilterOnlineMedicine;use App\Enums\UserStatus;use App\Models\User; @endphp
 @extends('layouts.admin')
 
 @section('main-content')
@@ -35,13 +35,18 @@
                 <td>{{ $user->username }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->type }}</td>
-                <td>{{ \App\Models\User::getMemberNameByID($user->id) }}</td>
+                <td>{{ User::getMemberNameByID($user->id) }}</td>
                 <td>{{ $user->status }}</td>
                 <td>
-                    <a href="http://127.0.0.1:8000{{ asset($user->business_license_img ?? $user->medical_license_img) }}" class="btn btn-info" target="_blank">View License
+                    <a href="{{ url('/') . asset($user->business_license_img ?? $user->medical_license_img) }}"
+                       class="btn btn-info" target="_blank">View License
                     </a>
-                    <button onclick="updateUser('{{ $user->id }}', '{{ \App\Enums\UserStatus::DELETED }}')" class="btn btn-danger">Reject</button>
-                    <button onclick="updateUser('{{ $user->id }}', '{{ \App\Enums\UserStatus::ACTIVE }}')" class="btn btn-primary">Approve</button>
+                    <button onclick="updateUser('{{ $user->id }}', '{{ UserStatus::DELETED }}')"
+                            class="btn btn-danger">Reject
+                    </button>
+                    <button onclick="updateUser('{{ $user->id }}', '{{ UserStatus::ACTIVE }}')"
+                            class="btn btn-primary">Approve
+                    </button>
                 </td>
             </tr>
         @endforeach
