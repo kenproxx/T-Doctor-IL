@@ -6,9 +6,9 @@ use BenSampo\Enum\Enum;
 
 final class Role extends Enum
 {
-//    const BUSINESS = 'BUSINESS MEMBER';
-//    const MEDICAL = 'MEDICAL SERVICES';
-//    const NORMAL = 'NORMAL MEMBER';
+    const BUSINESS = 'BUSINESS';
+    const MEDICAL = 'MEDICAL';
+    const NORMAL = 'NORMAL';
 
     /*  BUSINESS MEMBER    */
     const PHARMACEUTICAL_COMPANIES = 'PHARMACEUTICAL COMPANIES';
