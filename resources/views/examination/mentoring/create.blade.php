@@ -26,11 +26,12 @@
                 <label for="category">Select Category</label>
                 <select class="custom-select" id="category">
                     <option selected value="0">Choose...</option>
-                    <option value="1">Heath</option>
-                    <option value="2">Beauty</option>
-                    <option value="3">Kids</option>
-                    <option value="3">Pet</option>
-                    <option value="3">Other</option>
+                    <option value="{{ \App\Enums\MentoringCategory::HEALTH }}">Heath</option>
+                    <option value="{{ \App\Enums\MentoringCategory::BEAUTY }}">Beauty</option>
+                    <option value="{{ \App\Enums\MentoringCategory::LOSING_WEIGHT }}">Losing weight</option>
+                    <option value="{{ \App\Enums\MentoringCategory::KIDS }}">Kids</option>
+                    <option value="{{ \App\Enums\MentoringCategory::PETS }}">Pets</option>
+                    <option value="{{ \App\Enums\MentoringCategory::OTHER }}">Other</option>
                 </select>
             </div>
             @include('component.upload_gallery')
