@@ -1,10 +1,15 @@
+@php use App\Http\Controllers\MainController; @endphp
+@php use App\Models\User; @endphp
+@php use App\Models\online_medicine\CategoryProduct; @endphp
+@php use Illuminate\Support\Facades\Auth; @endphp
+@php use App\Enums\TypeProductCart; @endphp
 @extends('layouts.master')
 @section('title', 'Online Medicine')
 @section('content')
     @php
-        $isAdmin = (new \App\Http\Controllers\MainController())->checkAdmin();
-        $isBusiness = (new \App\Http\Controllers\MainController())->checkBusiness();
-        $isMedical = (new \App\Http\Controllers\MainController())->checkMedical();
+        $isAdmin = (new MainController())->checkAdmin();
+        $isBusiness = (new MainController())->checkBusiness();
+        $isMedical = (new MainController())->checkMedical();
     @endphp
     @include('layouts.partials.header')
     @include('component.banner')
@@ -13,9 +18,10 @@
             <div class="row medicine-search">
                 <div class="col-md-10"></div>
                 <div class="medicine-search--center col-md-2">
-                    @if(\Illuminate\Support\Facades\Auth::check())
+                    @if(Auth::check())
                         @if($isMedical)
-                            <button type="button" data-toggle="modal" data-target="#modalCart" class="shopping-bag float-right">
+                            <button type="button" data-toggle="modal" data-target="#modalCart"
+                                    class="shopping-bag float-right">
                                 <i class="fa-solid fa-bag-shopping"></i>
                                 @if($carts && count($carts) > 0)
                                     <div class="text-wrapper"> {{ count($carts) }}</div>
@@ -55,14 +61,14 @@
                             <div class="brand-name d-flex">
                                 <div class="text-wrapper-2">Location:</div>
                                 @php
-                                    $user = \App\Models\User::find($medicine->user_id)
+                                    $user = User::find($medicine->user_id)
                                 @endphp
                                 <div class="text-wrapper-3">{{ $user->address_code ?? '' }}</div>
                             </div>
                             <div class="brand-name d-flex">
                                 <div class="text-wrapper-2">Category:</div>
                                 @php
-                                    $category = \App\Models\online_medicine\CategoryProduct::find($medicine->category_id)
+                                    $category = CategoryProduct::find($medicine->category_id)
                                 @endphp
                                 <div class="text-wrapper-3">{{ $category->name ?? ''}}</div>
                             </div>
@@ -76,7 +82,7 @@
                             </div>
                         </div>
                         <input type="text" value="{{ $medicine->id }}" id="productID" class="d-none">
-                        <input type="text" value="{{ \App\Enums\TypeProductCart::MEDICINE }}" id="type_product"
+                        <input type="text" value="{{ TypeProductCart::MEDICINE }}" id="type_product"
                                class="d-none">
                         <div class="row">
                             <div class="col-6">
@@ -96,7 +102,7 @@
     </div>
     @if(Auth::check())
         <input type="text" id="accessToken" class="d-none" value="{{ $_COOKIE['accessToken'] }}">
-        <input type="text" id="userID" class="d-none" value="{{ \Illuminate\Support\Facades\Auth::user()->id }}">
+        <input type="text" id="userID" class="d-none" value="{{ Auth::user()->id }}">
     @endif
 
     <script>
@@ -113,7 +119,7 @@
                 let userID = document.getElementById('userID').value;
 
                 let productID = $('#productID').val();
-                let typeProduct = '{{ \App\Enums\TypeProductCart::MEDICINE }}';
+                let typeProduct = '{{ TypeProductCart::MEDICINE }}';
                 let quantity = $('#quantity').val();
 
                 let data = {
