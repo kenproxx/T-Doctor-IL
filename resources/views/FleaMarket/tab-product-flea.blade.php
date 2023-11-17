@@ -11,6 +11,7 @@
 <div class="page row" id="productsAdsPlan3"></div>
 <script>
     var token = `${getCookie('accessToken')}`;
+
     function isLogin() {
         if (token == 'undefined') {
             $('#staticBackdrop').modal('show');
@@ -53,6 +54,7 @@
             $('#staticBackdrop').modal('show');
         }
     }
+
     function getCookie(name) {
         var value = "; " + document.cookie;
         var parts = value.split("; " + name + "=");
@@ -89,7 +91,11 @@
                 url = url.replace(':id', res[i].id);
                 let item = res[i];
                 let adsPlan = item.ads_plan;
+                let userId = `{{ Auth::check() ? Auth::user()->id : null }}`;
 
+                if (userId == item.created_by) {
+                    continue;
+                }
                 if (adsPlan === 1) {
                     productsAdsPlan1.push(item);
                 } else if (adsPlan === 2) {

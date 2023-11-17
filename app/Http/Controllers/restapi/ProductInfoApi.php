@@ -44,9 +44,7 @@ class ProductInfoApi extends Controller
         $max_price = $request->input('max_price');
         $status = ProductStatus::ACTIVE;
         $category_id = $request->input('category_id');
-
-        $categories = explode(',', $category_id);
-
+            $categories = explode(',', $category_id);
         $query = [];
 
         if ($name) {
@@ -62,6 +60,7 @@ class ProductInfoApi extends Controller
             $str = ['price', '>=', $min_price];
             array_push($query, $str);
         }
+
         if ($max_price) {
             $str = ['price', '<=', $max_price];
             array_push($query, $str);

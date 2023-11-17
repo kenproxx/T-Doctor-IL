@@ -30,6 +30,7 @@ Route::group(['prefix' => 'products'], function () {
     Route::get('/detail/{id}', [ProductInfoApi::class, 'getById'])->name('products.api.detail');
     Route::get('/clinics/{id}', [ProductInfoApi::class, 'getByClinic'])->name('products.api.clinics');
     Route::get('/search', [ProductInfoApi::class, 'search'])->name('products.api.search');
+    Route::get('/department/{id}', [ProductInfoApi::class, 'findByDepartment'])->name('products.restapi.department');
 });
 
 Route::group(['prefix' => 'clinics'], function () {

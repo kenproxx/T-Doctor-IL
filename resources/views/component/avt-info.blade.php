@@ -30,11 +30,9 @@
         </div>
         <div class=" margin-info row mt-2">
             @php
-                if (Auth::user() != null) {
-                    $id = Auth::user()->id;
-                } else {
-                    $id = $id;
-                }
+//                if (Auth::user() != null) {
+//                    $id = Auth::user()->id;
+//                }
                 $count = \App\Models\ProductInfo::where('created_by', $id )->where('status', \App\Enums\ProductStatus::ACTIVE)->count();
             @endphp
             <div class="col-4 col-md-3 font-12-mobi">Product: <span>{{$count}}</span></div>
