@@ -3,8 +3,9 @@
 @section('content')
     @include('layouts.partials.header_3')
     @include('component.banner')
+    <div class="container">
     <div class="d-flex justify-content-center">
-        <div id="filter" class="box--1 d-flex ">
+        <div id="filter" class="box--1 d-flex w-100 ">
             <div class="d-flex flex-fill">
                 <div class="filter_option"><p>Category <i class="bi bi-chevron-expand"></i></p></div>
                 <div class="filter_option"><p>Location <i class="bi bi-chevron-expand"></i></p></div>
@@ -15,7 +16,7 @@
             </div>
         </div>
     </div>
-    <div id="title" class="d-flex justify-content-center">
+    <div id="title" class="d-flex justify-content-center" style="padding: 12px">
         <div  class="list-title">
             <div class="list--doctor p-0">
                 <a class="back" href="{{route('examination.findmymedicine')}}"><p><i class="bi bi-arrow-left"></i>Best Pharmacists</p></a>
@@ -24,7 +25,8 @@
     </div>
     <div class="list-doctor row container m-auto">
         @foreach($bestPhamrmacists as $bestPhamrmacist)
-            <div class="card col-md-3">
+            <div class="col-md-3">
+                <div class="card">
                 <i class="bi bi-heart"></i>
                 @php
                     $arrayGallery=[];
@@ -63,7 +65,9 @@
                     <p class="card-text_1">Working time: <b> {{ $text }}</b></p>
                 </div>
             </div>
+            </div>
         @endforeach
+    </div>
     </div>
 
 @endsection

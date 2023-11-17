@@ -31,7 +31,7 @@
         </div>
 
         <div id="list-find-my-medicine">
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center" style="padding: 12px">
                 <div class="list-title d-flex">
                     <div class="list--doctor p-0">
                         <p>Best Pharmacists</p>
@@ -39,10 +39,11 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.bestpharmacists')}}">See all</a></div>
                 </div>
             </div>
-            <div class="row list-doctor container m-auto">
+            <div class="row list-doctor m-auto">
                 @if(count($bestPhamrmacists) > 0)
                     @foreach($bestPhamrmacists as $bestPhamrmacist)
-                        <div class="card col-md-3">
+                        <div class="col-md-3">
+                            <div class="card">
                             <i class="bi bi-heart"></i>
                             @php
                                 $arrayGallery=[];
@@ -81,10 +82,11 @@
                                 <p class="card-text_1">Working time: <b> {{ $text }}</b></p>
                             </div>
                         </div>
+                        </div>
                     @endforeach
                 @endif
             </div>
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center" style="padding: 12px">
                 <div class=" list-title d-flex">
                     <div class="list--doctor p-0">
                         <p>New Pharmacists</p>
@@ -92,10 +94,11 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.newpharmacists')}}">See all</a></div>
                 </div>
             </div>
-            <div class="row list-doctor container m-auto">
+            <div class="row list-doctor m-auto">
                 @if(count($newPhamrmacists) > 0)
                     @foreach($newPhamrmacists as $newPhamrmacist)
-                        <div class="card col-md-3">
+                        <div class="col-md-3">
+                            <div class="card ">
                             <i class="bi bi-heart"></i>
                             @php
                                 $arrayGallery=[];
@@ -134,10 +137,11 @@
                                 <p class="card-text_1">Working time: <b> {{ $text }}</b></p>
                             </div>
                         </div>
+                        </div>
                     @endforeach
                 @endif
             </div>
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center" style="padding: 12px">
                 <div class=" list-title d-flex">
                     <div class="list--doctor p-0">
                         <p>24/7 Available Pharmacists</p>
@@ -145,10 +149,11 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.availablepharmacists')}}">See all</a></div>
                 </div>
             </div>
-            <div class="row list-doctor container m-auto">
+            <div class="row list-doctor m-auto">
                 @if(count($allPhamrmacists) > 0)
                     @foreach($allPhamrmacists as $allPhamrmacist)
-                        <div class="card col-md-3">
+                        <div class=" col-md-3">
+                            <div class=card></div>
                             <i class="bi bi-heart"></i>
                             @php
                                 $arrayGallery=[];
@@ -190,7 +195,7 @@
                     @endforeach
                 @endif
             </div>
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center" style="padding: 12px">
                 <div class=" list-title d-flex">
                     <div class="list--doctor p-0">
                         <p>Hot deal medicine</p>
@@ -198,13 +203,14 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.hotdealmedicine')}}">See all</a></div>
                 </div>
             </div>
-            <div class="row list-doctor container m-auto">
+            <div class="row list-doctor m-auto">
                 @if(count($hotMedicines) > 0)
                     @foreach($hotMedicines as $hotMedicine)
                         @php
                             $user = \App\Models\User::find($hotMedicine->user_id);
                         @endphp
-                        <div class="card col-md-3">
+                        <div class="col-md-3">
+                            <div class="card"></div>
                             <i class="bi bi-heart"></i>
                             <img src="{{asset($hotMedicine->thumbnail)}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -218,7 +224,7 @@
                     @endforeach
                 @endif
             </div>
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center" style="padding: 12px">
                 <div class=" list-title d-flex">
                     <div class="list--doctor p-0">
                         <p>New medicine</p>
@@ -226,13 +232,14 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.newmedicine')}}">See all</a></div>
                 </div>
             </div>
-            <div class="row list-doctor container m-auto">
+            <div class="row list-doctor  m-auto">
                 @if(count($newMedicines) > 0)
                     @foreach($newMedicines as $newMedicine)
                         @php
                             $user = \App\Models\User::find($newMedicine->user_id);
                         @endphp
-                        <div class="card col-md-3">
+                        <div class="col-md-3">
+                            <div class="card">
                             <i class="bi bi-heart"></i>
                             <img src="{{asset($newMedicine->thumbnail)}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -243,10 +250,11 @@
                                     <b>{{ $newMedicine->price }} {{ $newMedicine->unit_price }}</b></p>
                             </div>
                         </div>
+                        </div>
                     @endforeach
                 @endif
             </div>
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center" style="padding: 12px">
                 <div class=" list-title d-flex">
                     <div class="list--doctor p-0">
                         <p>Recommended</p>
@@ -254,13 +262,14 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.recommended')}}">See all</a></div>
                 </div>
             </div>
-            <div class="row list-doctor container m-auto">
+            <div class="row list-doctor m-auto">
                 @if(count($recommendedMedicines) > 0)
                     @foreach($recommendedMedicines as $recommendedMedicine)
                         @php
                             $user = \App\Models\User::find($recommendedMedicine->user_id);
                         @endphp
                         <div class="card col-md-3">
+                            <div class="card">
                             <i class="bi bi-heart"></i>
                             <img src="{{asset($recommendedMedicine->thumbnail)}}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -271,11 +280,13 @@
                                     <b>{{ $recommendedMedicine->price }} {{ $recommendedMedicine->unit_price }}</b></p>
                             </div>
                         </div>
+            </div>
+
                     @endforeach
                 @endif
             </div>
 
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center"style="padding: 12px">
                 <div class=" list-title d-flex">
                     <div class="list--doctor p-0">
                         <p>Functional Foods</p>
@@ -283,7 +294,7 @@
                     <div class="ms-auto p-2"><a href="#">See all</a></div>
                 </div>
             </div>
-            <div class="row list-doctor container m-auto">
+            <div class="row list-doctor m-auto">
                 @if($function_foods)
                     @if(count($function_foods) > 0)
                         @foreach($function_foods as $function_food)
@@ -291,6 +302,7 @@
                                 $user = \App\Models\User::find($function_food->user_id);
                             @endphp
                             <div class="card col-md-3">
+                                <div class="card">
                                 <i class="bi bi-heart"></i>
                                 <img src="{{asset($function_food->thumbnail)}}" class="card-img-top" alt="...">
                                 <div class="card-body">
@@ -300,6 +312,7 @@
                                     <p class="card-text_1">Price:
                                         <b>{{ $function_food->price }} {{ $function_food->unit_price }}</b></p>
                                 </div>
+                            </div>
                             </div>
                         @endforeach
                     @endif
@@ -316,7 +329,7 @@
                                                 ->get();
                     @endphp
                     @if(count($products) > 0)
-                        <div class="d-flex justify-content-center">
+                        <div class="d-flex justify-content-center" style="padding: 12px">
                             <div class=" list-title d-flex">
                                 <div class="list--doctor p-0">
                                     <p>{{ $categoryMedicine->name }}</p>
@@ -326,12 +339,13 @@
                                         all</a></div>
                             </div>
                         </div>
-                        <div class="row list-doctor container m-auto">
+                        <div class="row list-doctor  m-auto">
                             @foreach($products as $product)
                                 @php
                                     $user = \App\Models\User::find($product->user_id);
                                 @endphp
                                 <div class="card col-md-3">
+                                    <div class="card">
                                     <i class="bi bi-heart"></i>
                                     <img src="{{asset($product->thumbnail)}}" class="card-img-top" alt="...">
                                     <div class="card-body">
@@ -341,6 +355,7 @@
                                         <p class="card-text_1">Price:
                                             <b>{{ $product->price }} {{ $product->unit_price }}</b></p>
                                     </div>
+                                </div>
                                 </div>
                             @endforeach
                         </div>
@@ -365,7 +380,8 @@
                     let mainUrl = detail.replace(':id', item['id']);
                     let imageDoctor = item['thumbnail'];
                     let myArray = imageDoctor.split("/storage");
-                    html = html + `<div class="card col-md-3">
+                    html = html + `<div class=" col-md-3">
+                                <div class="card">
                             <i class="bi bi-heart"></i>
                             <img src="${url}${myArray[1]}" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -373,9 +389,10 @@
                                 <p class="card-text_1">Location: <b>${item['address_code']}</b></p>
                                 <p class="card-text_1">Price: <b>${item['price']} ${item['unit_price']}</b></p>
                             </div>
+                            </div>
                         </div>`;
                 }
-                let listDoctor = `<div class="list-doctor row container m-auto"> ${html} </div>`;
+                let listDoctor = `<div class="list-doctor row m-auto"> ${html} </div>`;
                 let showMedicine = ` <div class="d-flex justify-content-center">
                 <div class=" list-title d-flex">
                     <div class="list--doctor p-0">
