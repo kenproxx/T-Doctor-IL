@@ -80,9 +80,14 @@ class BackendQuestionController extends Controller
             $arrayGalleries = explode(',', $gallery);
             $arrayPublic = explode(',', $list_image);
 
-            $itemPublic = null;
-            foreach ($arrayPublic as $quantity) {
-                $itemPublic[] = $arrayGalleries[$quantity];
+
+            if ($list_image){
+                $itemPublic = null;
+                foreach ($arrayPublic as $quantity) {
+                    $itemPublic[] = $arrayGalleries[$quantity];
+                }
+            } else {
+                $itemPublic[] = '';
             }
 
             foreach ($arrayPublic as $index) {
