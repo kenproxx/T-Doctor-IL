@@ -73,7 +73,7 @@
                 formData.append('gallery[]', file);
             }
 
-            console.log(file);
+            console.log(len);
             formData.append("list_public", $('#checkImageQty').val());
             try {
                 $.ajax({
