@@ -265,7 +265,7 @@
                     <div class="d-flex ">
                         <ul class="nav nav-pills nav-fill" style="gap:50px">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="home">New</a>
+                                <a class="nav-link active" aria-current="page" href="#">New</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Event</a>

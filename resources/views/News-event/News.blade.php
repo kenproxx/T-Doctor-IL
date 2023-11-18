@@ -5,22 +5,24 @@
     @include('component.banner')
     <div class="recruitment-details ">
         <div class="container">
-
             @if($listNews)
                 @php
-                    $news = $listNews[0];
+                    $news = $listNews->first();
                 @endphp
-                <a href="{{route('detail.new',$news->id)}}">
-                    <div class="d-flex">
-                        <div class="col-md-5 pl-0">
-                            <img class="w-100 b-radius-8px" src="{{$news->thumbnail}}">
+            @if($news)
+                    <a href="{{route('detail.new',$news->id)}}">
+                        <div class="d-flex">
+                            <div class="col-md-5 pl-0">
+                                <img class="w-100 b-radius-8px" src="{{$news->thumbnail}}">
+                            </div>
+                            <div class="col-md-7 pr-0">
+                                <strong class="text-content-product">{{$news->title}}</strong>
+                                <p class="text-gray mt-3">{!! $news->short_description !!}</p>
+                            </div>
                         </div>
-                        <div class="col-md-7 pr-0">
-                            <strong class="text-content-product">{{$news->title}}</strong>
-                            <p class="text-gray mt-3">{!! $news->short_description !!}</p>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+            @endif
+
                 <div class="mt-4">
                     <p class="text-content-product">All news</p>
                 </div>
@@ -67,6 +69,10 @@
                         </li>
                     </ul>
                 </nav>
+            @else
+                <div class="d-flex justify-content-center">
+                    <h3>Không có tin tức nào</h3>
+                </div>
             @endif
         </div>
     </div>
@@ -76,19 +82,21 @@
         <div class="container">
             @if($listEvent)
                 @php
-                    $Event = $listEvent[0];
+                    $Event = $listEvent->first();
                 @endphp
-                <a href="{{route('detail.new',$Event->id)}}">
-                <div class="d-flex">
-                    <div class="col-md-5 pl-0">
-                        <img class="w-100 b-radius-8px" src="{{$Event->thumbnail}}">
-                    </div>
-                    <div class="col-md-7 pr-0">
-                        <strong class="text-content-product">{{$Event->title}}</strong>
-                        <p class="text-gray mt-3">{!! $Event->short_description !!}</p>
-                    </div>
-                </div>
-                </a>
+            @if($Event)
+                    <a href="{{route('detail.new',$Event->id)}}">
+                        <div class="d-flex">
+                            <div class="col-md-5 pl-0">
+                                <img class="w-100 b-radius-8px" src="{{$Event->thumbnail}}">
+                            </div>
+                            <div class="col-md-7 pr-0">
+                                <strong class="text-content-product">{{$Event->title}}</strong>
+                                <p class="text-gray mt-3">{!! $Event->short_description !!}</p>
+                            </div>
+                        </div>
+                    </a>
+            @endif
                 <div class="mt-4">
                     <p class="text-content-product">All news</p>
                 </div>
