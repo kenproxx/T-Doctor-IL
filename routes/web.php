@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthSocialController;
 use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\CalcViewQuestionController;
+use App\Http\Controllers\ChatMessageController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\DoctorInfoController;
@@ -151,6 +152,11 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::group(['middleware' => ['medical']], function () {
     Route::get('/admin', [\App\Http\Controllers\HomeController::class, 'home'])->name('homeAdmin');
+});
+
+Route::group(['prefix' => 'messages'], function () {
+    Route::get('/chat', [ChatMessageController::class, 'index'])->name('chat.message.show');
+//    Route::get('/search', [BackendProductInfoController::class, 'search'])->name('backend.products.search');
 });
 
 // QrCode

@@ -22,6 +22,9 @@
         "sass-loader": "^8.0.0"
     },
     "dependencies": {
-        "@stream-io/video-client": "^0.4.8"
+        "@stream-io/video-client": "^0.4.8",
+        "laravel-echo": "^1.15.3",
+        "pusher-js": "^8.3.0",
+        "socket.io-client": "^4.7.2"
     }
 }
