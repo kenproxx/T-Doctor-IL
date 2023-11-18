@@ -375,20 +375,26 @@ class BackendQuestionController extends Controller
 
     public function getQuestionByUserIdAndCategoryId($userId, $categoryId)
     {
-        $query = [];
+//        $query = [];
+//
+//        $param = ['status', '=', QuestionStatus::APPROVED];
+//        array_push($query, $param);
+//
+//        if (Auth::user()) {
+//            $param = [
+//                'user_id' => $userId,
+//                'category_id' => $categoryId
+//            ];
+//            array_push($query, $param);
+//        }
 
-        $param = ['status', '=', QuestionStatus::APPROVED];
-        array_push($query, $param);
-
-        if (Auth::user()) {
-            $param = [
+        $questions = Question::where(
+            [
+                'status' => QuestionStatus::APPROVED,
                 'user_id' => $userId,
                 'category_id' => $categoryId
-            ];
-            array_push($query, $param);
-        }
-
-        $questions = Question::where($query)->get();
+            ]
+        )->get();
         $list = [];
         foreach ($questions as $question) {
 
