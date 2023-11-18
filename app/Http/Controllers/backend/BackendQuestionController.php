@@ -11,6 +11,7 @@ use App\Models\Question;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BackendQuestionController extends Controller
 {
@@ -284,6 +285,51 @@ class BackendQuestionController extends Controller
                     array_push($query, $param);
                     break;
             }
+        }
+
+        $questions = Question::where($query)->get();
+        $list = [];
+        foreach ($questions as $question) {
+
+            $listAnswer = Answer::where('question_id', $question->id)->get();
+            $question_id = $question->id;
+            $item = [
+                'id' => $question_id,
+                'parent' => null,
+                'title' => $question->title,
+                'title_en' => $question->title_en,
+                'title_laos' => $question->title_laos,
+                'content' => $question->content,
+                'content_en' => $question->content_en,
+                'content_laos' => $question->content_laos,
+                'pings' => null,
+                'attachments' => '',
+                'creator' => $question->user_id,
+                'created' => $question->created_at,
+                'modified' => $question->updated_at,
+                'fullname' => User::getNameByID($question->user_id),
+                'comment_count' => $listAnswer->count(),
+                'view_count' => CalcViewQuestion::getViewQuestion($question_id)->views ?? 0,
+                'profile_picture_url' => 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png',
+            ];
+
+            array_push($list, $item);
+
+        }
+
+        return response()->json($list);
+    }
+
+    public function getQuestionByUserId()
+    {
+        $query = [];
+
+        $param = ['status', '=', QuestionStatus::APPROVED];
+        array_push($query, $param);
+
+        if (Auth::user()) {
+            $param = ['user_id', '=', Auth::user()->id()];
+            array_push($query, $param);
         }
 
         $questions = Question::where($query)->get();
