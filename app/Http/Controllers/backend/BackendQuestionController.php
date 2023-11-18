@@ -31,10 +31,17 @@ class BackendQuestionController extends Controller
         $statusQuestion = Question::find($id);
         $question = CalcViewQuestion::getViewQuestion($id);
         $answersQuestion = Answer::where('question_id', $id)->get();
-        if (!$question || $statusQuestion->status == QuestionStatus::DELETED) {
+        if ($statusQuestion->status == QuestionStatus::DELETED) {
             return response('Not found', 404);
         }
-        $question->views = $question->views + 1;
+
+        if ($question === null) {
+            $question = new CalcViewQuestion();
+            $question->views = 1;
+            $question->question_id = $id;
+        } else {
+            $question->views = $question->views + 1;
+        }
         $question->save();
 
         $responseData = [
@@ -340,9 +347,57 @@ class BackendQuestionController extends Controller
             array_push($query, $param);
         }
 
-        $categoryId =
-
         $questions = Question::where($query)->get();
+        $list = [];
+        foreach ($questions as $question) {
+
+            $listAnswer = Answer::where('question_id', $question->id)->get();
+            $question_id = $question->id;
+            $item = [
+                'id' => $question_id,
+                'parent' => null,
+                'title' => $question->title,
+                'title_en' => $question->title_en,
+                'title_laos' => $question->title_laos,
+                'content' => $question->content,
+                'content_en' => $question->content_en,
+                'content_laos' => $question->content_laos,
+                'pings' => null,
+                'attachments' => '',
+                'creator' => $question->user_id,
+                'created' => $question->created_at,
+                'modified' => $question->updated_at,
+                'fullname' => User::getNameByID($question->user_id),
+                'comment_count' => $listAnswer->count(),
+                'view_count' => CalcViewQuestion::getViewQuestion($question_id)->views ?? 0,
+                'profile_picture_url' => 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png',
+            ];
+
+            array_push($list, $item);
+
+        }
+
+        return response()->json($list);
+    }
+
+    public function getQuestionByUserIdAndCategoryId($userId, $categoryId)
+    {
+        if ($categoryId == 0) {
+            $questions = Question::where(
+                [
+                    'status' => QuestionStatus::APPROVED,
+                    'user_id' => $userId,
+                ])->get();
+        } else {
+            $questions = Question::where(
+                [
+                    'status' => QuestionStatus::APPROVED,
+                    'user_id' => $userId,
+                    'category_id' => $categoryId
+                ]
+            )->get();
+        }
+
         $list = [];
         foreach ($questions as $question) {
 
