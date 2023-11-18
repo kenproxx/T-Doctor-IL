@@ -320,7 +320,7 @@ class BackendQuestionController extends Controller
         return response()->json($list);
     }
 
-    public function getQuestionByUserId()
+    public function getQuestionByUserId($id)
     {
         $query = [];
 
@@ -328,7 +328,7 @@ class BackendQuestionController extends Controller
         array_push($query, $param);
 
         if (Auth::user()) {
-            $param = ['user_id', '=', Auth::user()->id()];
+            $param = ['user_id', '=', $id];
             array_push($query, $param);
         }
 
