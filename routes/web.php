@@ -80,6 +80,7 @@ Route::group(['prefix' => 'questions'], function () {
     Route::get('/get-list', [BackendQuestionController::class, 'custom_getlist'])->name('questions.custome.list');
     Route::get('/list/{id}', [BackendQuestionController::class, 'getListQuestion'])->name('questions.list.filter');
     Route::get('/user-id/{id}', [BackendQuestionController::class, 'getQuestionByUserId'])->name('questions.list.userid');
+    Route::get('/{userId}/{categoryId}', [BackendQuestionController::class, 'getQuestionByUserIdAndCategoryId'])->name('questions.list.userid.categoryId');
 });
 
 
