@@ -36,7 +36,7 @@ class BackendQuestionController extends Controller
         }
 
         if (is_null($question->views)) {
-            $question->views = 0;
+            $question->views = 1;
         }
         else {
             $question->views = $question->views + 1;
