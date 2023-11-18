@@ -224,7 +224,7 @@
         }
         arrayItem.sort();
         let data = arrayItem.toString();
-        console.log(data);
+        // console.log(data);
         checkImageQty.value = data;
     }
 </script>
