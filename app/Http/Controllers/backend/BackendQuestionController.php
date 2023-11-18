@@ -36,9 +36,9 @@ class BackendQuestionController extends Controller
         }
 
         if ($question === null) {
+            $question = new CalcViewQuestion();
             $question->views = 1;
-        }
-        else {
+        } else {
             $question->views = $question->views + 1;
         }
         $question->save();
