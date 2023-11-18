@@ -74,7 +74,7 @@
             }
 
             formData.append("list_public", $('#checkImageQty').val());
-
+            console.log(formData);
             try {
                 $.ajax({
                     url: `{{route('api.backend.questions.create')}}`,
