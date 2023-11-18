@@ -35,7 +35,12 @@ class BackendQuestionController extends Controller
         }
         $question->views = $question->views + 1;
         $question->save();
-        return response()->json($question);
+
+        $responseData = [
+            'statusQuestion' => $statusQuestion,
+            'question' => $question,
+        ];
+        return response()->json($responseData);
     }
 
     public function create(Request $request)
