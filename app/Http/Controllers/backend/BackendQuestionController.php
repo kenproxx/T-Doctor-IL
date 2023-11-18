@@ -35,7 +35,7 @@ class BackendQuestionController extends Controller
             return response('Not found', 404);
         }
 
-        if (!$question) {
+        if ($question === null) {
             $question->views = 1;
         }
         else {
