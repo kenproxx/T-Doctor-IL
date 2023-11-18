@@ -30,6 +30,7 @@ class BackendQuestionController extends Controller
     {
         $statusQuestion = Question::find($id);
         $question = CalcViewQuestion::getViewQuestion($id);
+        $answersQuestion = Answer::where('question_id', $id);
         if (!$question || $statusQuestion->status == QuestionStatus::DELETED) {
             return response('Not found', 404);
         }
@@ -39,6 +40,7 @@ class BackendQuestionController extends Controller
         $responseData = [
             'statusQuestion' => $statusQuestion,
             'question' => $question,
+            'answers' => $answersQuestion,
         ];
         return response()->json($responseData);
     }
