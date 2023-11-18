@@ -34,7 +34,13 @@ class BackendQuestionController extends Controller
         if ($statusQuestion->status == QuestionStatus::DELETED) {
             return response('Not found', 404);
         }
-        $question->views = $question->views + 1;
+
+        if (is_null($question->views)) {
+            $question->views = 0;
+        }
+        else {
+            $question->views = $question->views + 1;
+        }
         $question->save();
 
         $responseData = [
