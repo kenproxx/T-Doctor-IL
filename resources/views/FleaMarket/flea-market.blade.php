@@ -43,8 +43,8 @@
                 <form action="{{route('flea.market.sell.product')}}" class="col-md-4 flea-button mr-3">
                     <button class="flea-btn">Sell my product</button>
                 </form>
-                <form action="{{route('flea.market.my.store' )}}" class="col-md-4 flea-button mr-3">
-                    <button class="flea-btn">Go to my store</button>
+                <form action="#" class="col-md-4 flea-button mr-3">
+                    <button onclick="checkLoginWishStore()" class="flea-btn">Go to my store</button>
                 </form>
                 <a href="#" onclick="checkLoginWish()" class="col-md-4 flea-button flea-btn">
                     Wish list
@@ -197,6 +197,14 @@
 
         var token = getCookie('accessToken');
 
+        function checkLoginWishStore() {
+            if (Au) {
+                $('#staticBackdrop').modal('show');
+            } else {
+                window.location.href = '{{route('flea.market.my.store' )}}';
+            }
+        }
+
         function checkLoginWish() {
             if (token === undefined) {
                 $('#staticBackdrop').modal('show');
@@ -291,6 +299,7 @@
                 let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`;
                 url = url.replace(':id', products[i].id);
                 var product = products[i];
+                console.log(product)
                 var adsPlan = product.ads_plan;
                 var isFavoriteClass = product.isFavorit ? 'bi-heart-fill' : 'bi-heart';
 
