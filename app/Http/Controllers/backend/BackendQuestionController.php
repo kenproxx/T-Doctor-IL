@@ -28,7 +28,7 @@ class BackendQuestionController extends Controller
 
     public function detail($id)
     {
-        $question = Question::find($id);
+        $question = CalcViewQuestion::getViewQuestion();
         if (!$question || $question->status == QuestionStatus::DELETED) {
             return response('Not found', 404);
         }
@@ -331,6 +331,8 @@ class BackendQuestionController extends Controller
             $param = ['user_id', '=', $id];
             array_push($query, $param);
         }
+
+        $categoryId =
 
         $questions = Question::where($query)->get();
         $list = [];
