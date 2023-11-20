@@ -41,12 +41,15 @@ Route::post('/login', [AuthController::class, 'login'])->name('loginProcess');
 Route::post('/register', [AuthController::class, 'register'])->name('registerProcess');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logoutProcess');
 
+
 Route::get('/login-google', [AuthSocialController::class, 'getGoogleSignInUrl'])->name('login.google');
 Route::get('/login-google-callback', [AuthSocialController::class, 'loginCallback'])->name('login.google.callback');
 Route::get('/login-role', [AuthSocialController::class, 'chooseRole'])->name('login.social.choose.role');
 
 Route::get('profile', [ProfileController::class, 'index'])->name('profile');
 Route::put('profile-update', [ProfileController::class, 'update'])->name('profile.update');
+Route::get('/info-user/{id}', [ProfileController::class, 'infoUser'])->name('infouser');
+
 
 Route::group(['prefix' => 'news'], function () {
     Route::get('', [NewEventController::class, 'index'])->name('index.new');

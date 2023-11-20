@@ -29,6 +29,17 @@ class ProfileController extends Controller
         return view('profile', compact('roles', 'roleItem', 'isAdmin', 'socialUser', 'nations'));
     }
 
+    public function infoUser($userId) {
+        $user = User::find($userId);
+        $role = $user->roles()->where('name', 'admin')->first();
+
+        $responseData = [
+            'infoUser' => $user,
+            'roleUser' => $role,
+        ];
+        return response()->json($responseData);
+    }
+
     public function update(Request $request)
     {
         $request->validate([
