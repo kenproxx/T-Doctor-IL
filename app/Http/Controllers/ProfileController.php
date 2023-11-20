@@ -30,13 +30,17 @@ class ProfileController extends Controller
     }
 
     public function infoUser($userId) {
-        $user = User::find($userId);
-        $role = $user->roles()->where('user_id', $userId)->first();
+        $user = User::with('roles')->find($userId);
+
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
 
         $responseData = [
             'infoUser' => $user,
-            'roleUser' => $role,
+            'roleUser' => $user->roles->first(),
         ];
+
         return response()->json($responseData);
     }
 
