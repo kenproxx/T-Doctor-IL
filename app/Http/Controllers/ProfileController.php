@@ -31,7 +31,7 @@ class ProfileController extends Controller
 
     public function infoUser($userId) {
         $user = User::find($userId);
-        $role = $user->roles()->where('name', 'admin')->first();
+        $role = $user->roles()->where('user_id', $userId)->first();
 
         $responseData = [
             'infoUser' => $user,
