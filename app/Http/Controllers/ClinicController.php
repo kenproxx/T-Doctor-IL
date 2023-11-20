@@ -7,6 +7,7 @@ use App\Enums\ClinicStatus;
 use App\Models\Clinic;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class ClinicController extends Controller
 {
@@ -75,30 +76,36 @@ class ClinicController extends Controller
     public function store(Request $request)
     {
         try {
-            $userID = $request->input('user_id');
-            $clinicID = $request->input('clinic_id');
-            $checkIn = $request->input('check_in');
-            $checkOut = $request->input('check_out');
-            $service = $request->input('service');
-            if (is_array($service)) {
-                $servicesAsString = implode(',', $service);
-            } else {
-                $servicesAsString = $service;
+            if (Auth::user() == null) {
+                alert()->error('Error', 'Please login to booking.');
+                return back();
             }
-            $time = $request->input('selectedTime');
-            $timestamp = Carbon::parse($time);
-            $booking = new Booking();
+            else{
+                $userID = \Auth::user()->id;
+                $clinicID = $request->input('clinic_id');
+                $checkIn = $request->input('check_in');
+                $checkOut = $request->input('check_out');
+                $service = $request->input('service');
+                if (is_array($service)) {
+                    $servicesAsString = implode(',', $service);
+                } else {
+                    $servicesAsString = $service;
+                }
+                $time = $request->input('selectedTime');
+                $timestamp = Carbon::parse($time);
+                $booking = new Booking();
 
-            $booking->user_id = $userID;
-            $booking->clinic_id = $clinicID;
-            $booking->check_in = $timestamp;
-            $booking->check_out = $checkOut;
-            $booking->service = $servicesAsString;
+                $booking->user_id = $userID;
+                $booking->clinic_id = $clinicID;
+                $booking->check_in = $timestamp;
+                $booking->check_out = $checkOut;
+                $booking->service = $servicesAsString;
 
-            $success = $booking->save();
-            if ($success) {
-                alert('Booking success');
-                return back()->with('success', 'Booking success');
+                $success = $booking->save();
+                if ($success) {
+                    alert()->success('Success', 'Booking success.');
+                    return back()->with('success', 'Booking success');
+                }
             }
             return response('Create error', 400);
         } catch (\Exception $exception) {
