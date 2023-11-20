@@ -98,7 +98,7 @@
                     </a>
             @endif
                 <div class="mt-4">
-                    <p class="text-content-product">All news</p>
+                    <p class="text-content-product">All Event</p>
                 </div>
                 <div class="d-flex row">
                     @foreach($listEvent as $Event)
