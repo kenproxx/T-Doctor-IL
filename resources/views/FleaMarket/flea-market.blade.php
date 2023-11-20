@@ -40,12 +40,13 @@
                 <input onkeyup="performSearch()" id="inputSearch" placeholder="Search for anything…">
             </div>
             <div class="d-flex col-md-4 justify-content-between align-items-center">
-                <form action="{{route('flea.market.sell.product')}}" class="col-md-4 flea-button mr-3">
-                    <button class="flea-btn">Sell my product</button>
-                </form>
-                <form action="#" class="col-md-4 flea-button mr-3">
-                    <button onclick="checkLoginWishStore()" class="flea-btn">Go to my store</button>
-                </form>
+
+                <a href="#" onclick="checkLogin()" class="col-md-4 flea-button">
+                    Sell my product
+                </a>
+                <a href="#" onclick="checkLoginWishStore()" class="col-md-4 flea-button flea-btn">
+                    Go to my store
+                </a>
                 <a href="#" onclick="checkLoginWish()" class="col-md-4 flea-button flea-btn">
                     Wish list
                 </a>
@@ -198,18 +199,25 @@
         var token = getCookie('accessToken');
 
         function checkLoginWishStore() {
-            if (Au) {
+            let userId = `{{ Auth::check() ? Auth::user()->id : null }}`;
+            if (!userId) {
                 $('#staticBackdrop').modal('show');
             } else {
                 window.location.href = '{{route('flea.market.my.store' )}}';
             }
         }
-
         function checkLoginWish() {
             if (token === undefined) {
                 $('#staticBackdrop').modal('show');
             } else {
                 window.location.href = '{{ route('flea.market.wish.list') }}';
+            }
+        }
+        function checkLogin() {
+            if (token === undefined) {
+                $('#staticBackdrop').modal('show');
+            } else {
+                window.location.href = '{{route('flea.market.sell.product')}}';
             }
         }
     </script>

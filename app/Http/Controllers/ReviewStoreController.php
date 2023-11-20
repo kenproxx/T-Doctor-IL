@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\ReviewStoreStatus;
 use App\Models\ReviewStore;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewStoreController extends Controller
 {
@@ -22,18 +23,19 @@ class ReviewStoreController extends Controller
     {
         $cmt_review = $request->input('cmt_review');
         $star_number = $request->input('star_number');
-
-
-
-
         $cmt_store = new ReviewStore();
         $cmt_store->star_number = $star_number;
         $cmt_store->content = $cmt_review;
-        $cmt_store->user_id = auth()->user()->id;
         $cmt_store->store_id = $id;
         $cmt_store->status = ReviewStoreStatus::APPROVED;
-        $cmt_store->save();
-        return redirect()->route('flea.market.product.shop.info', $id)->with('success', 'Đã gửi đánh giá thành công');
-
+        if (!Auth::user()==null) {
+            $cmt_store->user_id = auth()->user()->id;
+            $cmt_store->save();
+            alert()->success('Đánh giá thành công');
+            return redirect()->route('flea.market.product.shop.info', $id);
+        }else{
+           alert()->error('Bạn cần đăng nhập để đánh giá');
+            return redirect()->route('flea.market.product.shop.info', $id);
+        }
     }
 }
