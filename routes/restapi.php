@@ -51,6 +51,7 @@ Route::group(['prefix' => 'doctors-info'], function () {
     Route::get('/user/{id}', [DoctorInfoApi::class, 'findByUser'])->name('doctors.info.restapi.user');
     Route::get('/department/{id}', [DoctorInfoApi::class, 'findByDepartment'])->name('doctors.info.restapi.department');
     Route::get('/detail/{id}', [DoctorInfoApi::class, 'detail'])->name('doctors.info.restapi.detail');
+    Route::get('/my-doctors/{id}', [DoctorInfoApi::class, 'getMyDoctor'])->name('doctors.info.restapi.my.doctor');
 });
 
 Route::group(['prefix' => 'doctors-departments'], function () {
