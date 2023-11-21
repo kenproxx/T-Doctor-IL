@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
+use App\Models\Role;
+use App\Models\RoleUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +38,9 @@ class LoginController extends Controller
             if (Auth::attempt($credentials)) {
                 $token = JWTAuth::fromUser($user);
                 $response = $user->toArray();
+                $roleUser = RoleUser::where('user_id', $user->id)->first();
+                $role = Role::find($roleUser->role_id);
+                $response['role'] = $role->name;
                 $response['accessToken'] = $token;
                 return response()->json($response);
             }
