@@ -12,10 +12,10 @@
             @if($news)
                     <a href="{{route('detail.new',$news->id)}}">
                         <div class="d-flex">
-                            <div class="col-md-5 pl-0">
+                            <div class="col-md-4 pl-0">
                                 <img class="w-100 b-radius-8px" src="{{$news->thumbnail}}">
                             </div>
-                            <div class="col-md-7 pr-0">
+                            <div class="col-md-8 pr-0">
                                 <strong class="text-content-product">{{$news->title}}</strong>
                                 <p class="text-gray mt-3">{!! $news->short_description !!}</p>
                             </div>
@@ -76,8 +76,10 @@
             @endif
         </div>
     </div>
-    @include('component.banner')
-
+    <div class="banner2">
+        @include('component.banner')
+    </div>
+F
     <div class="recruitment-details ">
         <div class="container">
             @if($listEvent)

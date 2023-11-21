@@ -3,7 +3,8 @@
 @section('content')
     @include('layouts.partials.header_3')
     @include('component.banner')
-    <div id="examination-scene" class="container ">
+    <div  class="container ">
+    <div id="examination-scene">
         <div class="d-flex justify-content-center">
             <div id="filter" class="box--1 d-flex ">
                 <div class="d-flex flex-fill">
@@ -423,5 +424,7 @@
             }
         })
     </script>
+    </div>
+    </div>
 @endsection
 
