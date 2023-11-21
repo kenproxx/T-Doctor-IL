@@ -73,7 +73,7 @@
 
 .banner {
   margin-top: 100px;
-  height: 500px;
+    width: 100%;
   margin-bottom: 40px;
 }
 .banner img {
@@ -1051,5 +1051,9 @@ section {
   gap: 10px;
   flex-shrink: 0;
 }
-
+.banner2 .banner{
+    width: 100%;
+    margin-bottom: 40px;
+    margin-top: 0;!important;
+}
 /*# sourceMappingURL=file.css.map */
