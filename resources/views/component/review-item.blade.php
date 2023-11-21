@@ -1,7 +1,7 @@
-@if($reviewStore->count() == 0)
-    <p>You have no product to evaluate
-    </p>
-@else
+{{--@if($reviewStore->count() == 0)--}}
+{{--    <p>You have no product to evaluate--}}
+{{--    </p>--}}
+{{--@else--}}
     @foreach($reviewStore as $review)
         <style>
             .cl-yellow {
