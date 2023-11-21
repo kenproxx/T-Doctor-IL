@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\AddressMapController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
@@ -114,9 +115,9 @@ Route::group(['prefix' => 'clinic'], function () {
 Route::group(['prefix' => 'product'], function () {
     Route::get('/lists', [BackendProductInfoController::class, 'index'])->name('backend.products.list');
     Route::get('/search', [BackendProductInfoController::class, 'search'])->name('backend.products.search');
-
-
 });
+Route::get('/address', [AddressMapController::class, 'index']);
+Route::post('/save-address', [AddressMapController::class, 'store']);
 
 Route::group(['prefix' => 'flea-market'], function () {
     Route::get('/', [FleaMarketController::class, 'index'])->name('flea-market.index');

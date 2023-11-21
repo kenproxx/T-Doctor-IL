@@ -1,3 +1,8 @@
+
+
+@php
+    use App\Models\AddressMap;
+@endphp
 @extends('layouts.master')
 @section('title', 'Booking Clinic')
 @section('content')
@@ -6,6 +11,7 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.1.0/foundation.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+
 
     <style>
         .ui-widget.ui-widget-content {
@@ -18,11 +24,13 @@
             cursor: pointer;
         }
 
+
         .checkbox-button input {
             position: absolute;
             opacity: 0;
             cursor: pointer;
         }
+
 
         .checkbox-button label {
             display: flex;
@@ -39,10 +47,12 @@
             transition: background-color 0.3s ease;
         }
 
+
         .checkbox-button input:checked + label {
             background-color: #2ecc71;
             color: #fff;
         }
+
 
         .background-map {
             background: url("{{asset('img/svg/map.png')}}") no-repeat ;
@@ -52,6 +62,7 @@
             height: 100%;
         }
 
+
         .background-modal {
             background: #FFFFFF;
             max-height: 820px;
@@ -59,9 +70,11 @@
             margin: 20px;
         }
 
+
         ::-webkit-scrollbar {
             display: none;
         }
+
 
         .border-button-close {
             position: absolute;
@@ -72,139 +85,28 @@
             gap: 10px;
         }
 
+
         .border-button-close span {
             padding: 0 5px;
             border-radius: 32px;
             background:  #FFF;
         }
+        .gm-style-iw {
+            padding: 0 !important;
+        }
     </style>
+
 
     <div class="container">
         @include('What-free.header-wFree')
-        {{--        <img src="{{asset('img/svg/map.png')}}">--}}
+        @php
+            $addresses = AddressMap::all();
+            $coordinatesArray = $addresses->toArray();
+        @endphp
+        <div id="allAddressesMap" style="height: 800px;">
 
-        <div class="background-map">
-
-            <div class="p-0 col-md-3 tab-pane fade show active background-modal b-radius" id="modalBooking">
-                <div>
-                    @php
-                        $str = $bookings->gallery;
-                        $parts = explode(',', $str);
-                    @endphp
-                    <div class="modal-header">
-                        <button type="button" class="close border-button-close" id="close-modal">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <img class="b-radius" src="{{$parts[0]}}" alt="img">
-                </div>
-                <div class="p-3">
-                    <div class="form-group">
-                        <div class="d-flex justify-content-between mt-md-2">
-                            <div class="fs-18px">{{$bookings->name}}</div>
-                            <div class="button-follow fs-12p ">
-                                <a class="text-follow-12" href="">FOLLOW</a>
-                            </div>
-                        </div>
-                        <div class="d-flex mt-md-2">
-                            <div class="d-flex col-md-6 justify-content-center align-items-center">
-                                <a class="row p-2" href="">
-                                    <div class="justify-content-center d-flex">
-                                        <i class="border-button-address fa-solid fa-bullseye"></i>
-                                    </div>
-                                    <div class="d-flex justify-content-center">Start</div>
-                                </a>
-                            </div>
-                            <div class="d-flex col-md-6 justify-content-center align-items-center">
-                                <a class="row p-2" href="">
-                                    <div class="justify-content-center d-flex">
-                                        <i class="border-button-address fa-regular fa-circle-right"></i>
-                                    </div>
-                                    <div class="d-flex justify-content-center">Direction</div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-md-3 mb-md-3">
-                        {{--                                    <a class="border-button-address font-weight-800 fs-14 justify-content-center" href="{{route('clinic.booking.service',$id)}}">Booking</a>--}}
-                        <button id="modalToggle" data-toggle="modal" data-target="#exampleModal"
-                                class="w-100 btn btn-secondary border-button-address font-weight-800 fs-14 justify-content-center"
-                                id="infoContinue">Booking
-                        </button>
-                    </div>
-                    <div class="border-top">
-                        <div class="mt-md-2"><i class="text-gray mr-md-2 fa-solid fa-location-dot"></i>
-                            <span class="fs-14 font-weight-600">{{$bookings->address_detail}}</span>
-                        </div>
-                        <div class="mt-md-2">
-                            <i class="text-gray mr-md-2 fa-regular fa-clock"></i>
-                            <span class="fs-14 font-weight-600">Open: {{ \Carbon\Carbon::parse($bookings->open_date)->format('H:i') }} - {{ \Carbon\Carbon::parse($bookings->close_date)->format('H:i') }}</span>
-                        </div>
-                        <div class="mt-md-2">
-                            <i class="text-gray mr-md-2 fa-solid fa-globe"></i>
-                            <span class="fs-14 font-weight-600"> {{$bookings->email}}</span>
-                        </div>
-                        <div class="mt-md-2">
-                            <i class="text-gray mr-md-2 fa-solid fa-phone-volume"></i> <span
-                                class="fs-14 font-weight-600">{{$bookings->phone}}</span>
-                        </div>
-                        <div class="mt-md-2 mb-md-2">
-                            <i class="text-gray mr-md-2 fa-solid fa-bookmark"></i> <span
-                                class="fs-14 font-weight-600"> {{$bookings->type}}</span>
-                        </div>
-                        @for($i=0; $i<3; $i++)
-                            <div class="border-top mb-md-2">
-                                <div
-                                    class="d-flex justify-content-between rv-header align-items-center mt-md-2">
-                                    <div class="d-flex rv-header--left">
-                                        <div class="avt-24 mr-md-2">
-                                            <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
-                                        </div>
-                                        <p class="fs-16px">Trần Đình Phi</p>
-                                    </div>
-                                    <div class="rv-header--right">
-                                        <p class="fs-14 font-weight-400">10:20 07/04/2023</p>
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <p>
-                                        Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại
-                                        salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi
-                                        như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới
-                                        thiệu cho bạn bè cùng sử dụng :D
-                                    </p>
-                                </div>
-                            </div>
-                        @endfor
-                        <div class="border-top">
-                            <div
-                                class="d-flex justify-content-between rv-header align-items-center mt-md-2">
-                                <div class="d-flex rv-header--left">
-                                    <div class="avt-24 mr-md-2">
-                                        <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
-                                    </div>
-                                    <p class="fs-16px">Trần Đình Phi</p>
-                                </div>
-                                <div class="rv-header--right">
-                                    <p class="fs-14 font-weight-400">10:20 07/04/2023</p>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <p>
-                                    Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại
-                                    salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như
-                                    mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho
-                                    bạn bè cùng sử dụng :D
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
         </div>
         <a href="#" id="modalToggle" data-toggle="modal" data-target="#exampleModal">
-
         </a>
         <div class="other-clinics">
             <div class="title">
@@ -216,138 +118,356 @@
         </div>
         <div hidden="">
             <input id="room_id" name="room_id" value="{{ $bookings->id }}">
-{{--            <input id="user_id" name="user_id" value="{{ Auth::user()->id }}">--}}
             <input id="check_in" name="check_in" value="">
             <input id="check_out" name="check_out" value="">
         </div>
     </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQO5YhrnYxyI215uOX9bNQ-_xxV_stGf8&callback=initMap"></script>
+    <script>
+        var locations = {!! json_encode($coordinatesArray) !!};
+        var infoWindows = [];
+        function getCurrentLocation(callback) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var currentLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    callback(currentLocation);
+                });
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        }
+        function calculateDistance(lat1, lng1, lat2, lng2) {
+            var R = 6371;
+            var dLat = toRadians(lat2 - lat1);
+            var dLng = toRadians(lng2 - lng1);
+
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+                Math.sin(dLng / 2) * Math.sin(dLng / 2);
+
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+            var distance = R * c;
+            return distance;
+        }
+
+
+        function toRadians(degrees) {
+            return degrees * (Math.PI / 180);
+        }
+
+
+        function initMap(currentLocation, locations) {
+            var map = new google.maps.Map(document.getElementById('allAddressesMap'), {
+                center: currentLocation,
+                zoom: 10
+            });
+
+
+            var currentLocationMarker = new google.maps.Marker({
+                position: currentLocation,
+                map: map,
+                title: 'Your Location'
+            });
+
+
+            locations.forEach(function(location) {
+                var distance = calculateDistance(
+                    currentLocation.lat, currentLocation.lng,
+                    parseFloat(location.latitude), parseFloat(location.longitude)
+                );
+
+
+                // Chọn bán kính tìm kiếm (ví dụ: 5 km)
+                var searchRadius = 10;
+
+
+                if (distance <= searchRadius) {
+                    var marker = new google.maps.Marker({
+                        position: { lat: parseFloat(location.latitude), lng: parseFloat(location.longitude) },
+                        map: map,
+                        title: 'Location'
+                    });
+
+
+                    var infoWindowContent = `
+                  <div>
+                       @php
+                        $str = $bookings->gallery;
+                        $parts = explode(',', $str);
+                    @endphp
+                    <div class="modal-header">
+                    </div>
+                    <img class="b-radius" src="{{$parts[0]}}" alt="img">
+                  </div>
+                       <div class="p-3">
+                            <div class="form-group">
+                       <div class="d-flex justify-content-between mt-md-2">
+                           <div class="fs-18px">{{$bookings->name}}</div>
+                           <div class="button-follow fs-12p ">
+                               <a class="text-follow-12" href="">FOLLOW</a>
+                           </div>
+                       </div>
+                       <div class="d-flex mt-md-2">
+                           <div class="d-flex col-md-6 justify-content-center align-items-center">
+                               <a class="row p-2" href="">
+                                   <div class="justify-content-center d-flex">
+                                       <i class="border-button-address fa-solid fa-bullseye"></i>
+                                   </div>
+                                   <div class="d-flex justify-content-center">Start</div>
+                               </a>
+                           </div>
+                           <div class="d-flex col-md-6 justify-content-center align-items-center">
+                               <a class="row p-2" href="">
+                                   <div class="justify-content-center d-flex">
+                                       <i class="border-button-address fa-regular fa-circle-right"></i>
+                                   </div>
+                                   <div class="d-flex justify-content-center">Direction</div>
+                               </a>
+                           </div>
+                       </div>
+                   </div>
+                   <div class="mt-md-3 mb-md-3">
+                       <button id="infoContinue" data-toggle="modal" data-target="#exampleModal"
+                               class="w-100 btn btn-secondary border-button-address font-weight-800 fs-14 justify-content-center"
+                              >Booking
+                       </button>
+                   </div>
+                   <div class="border-top">
+                       <div class="mt-md-2"><i class="text-gray mr-md-2 fa-solid fa-location-dot"></i>
+                           <span class="fs-14 font-weight-600">{{$bookings->address_detail}}</span>
+                       </div>
+                       <div class="mt-md-2">
+                           <i class="text-gray mr-md-2 fa-regular fa-clock"></i>
+                           <span class="fs-14 font-weight-600">Open: {{ \Carbon\Carbon::parse($bookings->open_date)->format('H:i') }} - {{ \Carbon\Carbon::parse($bookings->close_date)->format('H:i') }}</span>
+                       </div>
+                       <div class="mt-md-2">
+                           <i class="text-gray mr-md-2 fa-solid fa-globe"></i>
+                           <span class="fs-14 font-weight-600"> {{$bookings->email}}</span>
+                       </div>
+                       <div class="mt-md-2">
+                           <i class="text-gray mr-md-2 fa-solid fa-phone-volume"></i> <span
+                               class="fs-14 font-weight-600">{{$bookings->phone}}</span>
+                       </div>
+                       <div class="mt-md-2 mb-md-2">
+                           <i class="text-gray mr-md-2 fa-solid fa-bookmark"></i> <span
+                               class="fs-14 font-weight-600"> {{$bookings->type}}</span>
+                       </div>
+                       @for($i=0; $i<3; $i++)
+                    <div class="border-top mb-md-2">
+                        <div
+                            class="d-flex justify-content-between rv-header align-items-center mt-md-2">
+                            <div class="d-flex rv-header--left">
+                                <div class="avt-24 mr-md-2">
+                                    <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
+                                       </div>
+                                       <p class="fs-16px">Trần Đình Phi</p>
+                                   </div>
+                                   <div class="rv-header--right">
+                                       <p class="fs-14 font-weight-400">10:20 07/04/2023</p>
+                                   </div>
+                               </div>
+                               <div class="content">
+                                   <p>
+                                       Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại
+                                       salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi
+                                       như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới
+                                       thiệu cho bạn bè cùng sử dụng :D
+                                   </p>
+                               </div>
+                           </div>
+                       @endfor
+                    <div class="border-top">
+                        <div
+                            class="d-flex justify-content-between rv-header align-items-center mt-md-2">
+                            <div class="d-flex rv-header--left">
+                                <div class="avt-24 mr-md-2">
+                                    <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
+                                   </div>
+                                   <p class="fs-16px">Trần Đình Phi</p>
+                               </div>
+                               <div class="rv-header--right">
+                                   <p class="fs-14 font-weight-400">10:20 07/04/2023</p>
+                               </div>
+                           </div>
+                           <div class="content">
+                               <p>
+                                   Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại
+                                   salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như
+                                   mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho
+                                   bạn bè cùng sử dụng :D
+                               </p>
+                           </div>
+                       </div>
+                   </div>
+               </div>`;
+
+
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: infoWindowContent
+                    });
+
+
+                    marker.addListener('click', function() {
+                        closeAllInfoWindows();
+                        infoWindow.open(map, marker);
+                    });
+
+
+                    infoWindows.push(infoWindow);
+                }
+            });
+        }
+
+
+        function closeAllInfoWindows() {
+            infoWindows.forEach(function(infoWindow) {
+                infoWindow.close();
+            });
+        }
+
+
+        getCurrentLocation(function(currentLocation) {
+            initMap(currentLocation, locations);
+        });
+
+
+    </script>
     <script>
         $(document).ready(function () {
             $('#close-modal').click(function () {
                 $('#modalBooking').attr('hidden', 'true');
             });
             let html = `<form method="post" action="{{route('clinic.booking.store')}}" class="p-3">
-            @csrf
+           @csrf
             <div class="fs-18px justify-content-start d-flex mb-md-4 mt-2">
                 <div class="align-items-center">
                 <a href="{{route('clinic.detail',$bookings->id)}}"><i class="fa-solid fa-chevron-left"></i></a>
-                </div>
-                <div class="ml-2">
-                    <span>{{$bookings->name}}</span>
-                             </div>
-                                </div>
-                                <div class="mb-md-4">
-                                    <div class="border-bottom fs-16px">
-                                        <span>Booking</span>
-                                    </div>
-                                    <div class="mt-md-3">
+               </div>
+               <div class="ml-2">
+                   <span>{{$bookings->name}}</span>
+                            </div>
+                               </div>
+                               <div class="mb-md-4">
+                                   <div class="border-bottom fs-16px">
+                                       <span>Booking</span>
+                                   </div>
+                                   <div class="mt-md-3">
 
 
-                                        <section>
-                                            <div class=" d-block">
-                                                <div class="small-12 ">
-                                                    <div id="datepicker"></div>
-                                                </div>
-                                                <div class="small-12 ">
-                                                    <div class="spin-me"></div>
-                                                    <div class="master-container-slots">
-                                                        <div class="morning-container fs-16px">
-                                                            <p>AM</p>
-                                                            <div class="flex-container-morning"></div>
-                                                        </div>
-                                                        <div class="afternoon-container fs-16px">
-                                                            <p>PM</p>
-                                                            <div class="flex-container-afternoon"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <input hidden="" type="text" id="selectedTime" name="selectedTime"
-                                                       readonly>
-                                            </div>
-                                        </section>
 
-                                    </div>
-                                </div>
-                                <div class="border-bottom fs-16px mb-md-3">
-                                    <span>Main service</span>
-                                </div>
-                                <div
-                                    class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
-                                    <div class="fs-14 font-weight-600">
-                                        <span>Botox, filler consultation and reservation</span>
-                                    </div>
-                                    <div class="checkbox-button">
-                                        <input type="checkbox" id="myCheckbox1" value="1" name="service[]">
-                                        <label for="myCheckbox1">Booking</label>
-                                    </div>
-                                </div>
-                                <div
-                                    class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
-                                    <div class="fs-14 font-weight-600">
-                                        <span>Botox, filler consultation and reservation</span>
-                                    </div>
-                                    <div class="checkbox-button">
-                                        <input type="checkbox" id="myCheckbox2" value="2" name="service[]">
-                                        <label for="myCheckbox2">Booking</label>
-                                    </div>
-                                </div>
-                                <div
-                                    class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
-                                    <div class="fs-14 font-weight-600">
-                                        <span>Botox, filler consultation and reservation</span>
-                                    </div>
-                                    <div class="checkbox-button">
-                                        <input type="checkbox" id="myCheckbox3" value="3" name="service[]">
-                                        <label for="myCheckbox3">Booking</label>
-                                    </div>
-                                </div>
-                                <div
-                                    class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
-                                    <div class="fs-14 font-weight-600">
-                                        <span>Botox, filler consultation and reservation</span>
-                                    </div>
-                                    <div class="checkbox-button">
-                                        <input type="checkbox" id="myCheckbox4" value="4" name="service[]">
-                                        <label for="myCheckbox4">Booking</label>
-                                    </div>
-                                </div>
-                                <div
-                                    class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
-                                    <div class="fs-14 font-weight-600">
-                                        <span>Botox, filler consultation and reservation</span>
-                                    </div>
-                                    <div class="checkbox-button">
-                                        <input type="checkbox" id="myCheckbox5" value="5" name="service[]">
-                                        <label for="myCheckbox5">Booking</label>
-                                    </div>
-                                </div>
-                                <div
-                                    class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
-                                    <div class="fs-14 font-weight-600">
-                                        <span>Botox, filler consultation and reservation</span>
-                                    </div>
-                                    <div class="checkbox-button">
-                                        <input type="checkbox" id="myCheckbox6" value="6" name="service[]">
-                                        <label for="myCheckbox6">Booking</label>
-                                    </div>
-                                </div>
-                                <div class="border-bottom mt-md-4 fs-16px mb-md-3">
-                                    <span>Information</span>
-                                </div>
-                                <div class="fs-14 font-weight-600">
-                                    <span>
-                                        {{$bookings->introduce}}
+
+                                       <section>
+                                           <div class=" d-block">
+                                               <div class="small-12 ">
+                                                   <div id="datepicker"></div>
+                                               </div>
+                                               <div class="small-12 ">
+                                                   <div class="spin-me"></div>
+                                                   <div class="master-container-slots">
+                                                       <div class="morning-container fs-16px">
+                                                           <p>AM</p>
+                                                           <div class="flex-container-morning"></div>
+                                                       </div>
+                                                       <div class="afternoon-container fs-16px">
+                                                           <p>PM</p>
+                                                           <div class="flex-container-afternoon"></div>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                               <input hidden="" type="text" id="selectedTime" name="selectedTime"
+                                                      readonly>
+                                           </div>
+                                       </section>
+
+
+                                   </div>
+                               </div>
+                               <div class="border-bottom fs-16px mb-md-3">
+                                   <span>Main service</span>
+                               </div>
+                               <div
+                                   class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
+                                   <div class="fs-14 font-weight-600">
+                                       <span>Botox, filler consultation and reservation</span>
+                                   </div>
+                                   <div class="checkbox-button">
+                                       <input type="checkbox" id="myCheckbox1" value="1" name="service[]">
+                                       <label for="myCheckbox1">Booking</label>
+                                   </div>
+                               </div>
+                               <div
+                                   class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
+                                   <div class="fs-14 font-weight-600">
+                                       <span>Botox, filler consultation and reservation</span>
+                                   </div>
+                                   <div class="checkbox-button">
+                                       <input type="checkbox" id="myCheckbox2" value="2" name="service[]">
+                                       <label for="myCheckbox2">Booking</label>
+                                   </div>
+                               </div>
+                               <div
+                                   class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
+                                   <div class="fs-14 font-weight-600">
+                                       <span>Botox, filler consultation and reservation</span>
+                                   </div>
+                                   <div class="checkbox-button">
+                                       <input type="checkbox" id="myCheckbox3" value="3" name="service[]">
+                                       <label for="myCheckbox3">Booking</label>
+                                   </div>
+                               </div>
+                               <div
+                                   class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
+                                   <div class="fs-14 font-weight-600">
+                                       <span>Botox, filler consultation and reservation</span>
+                                   </div>
+                                   <div class="checkbox-button">
+                                       <input type="checkbox" id="myCheckbox4" value="4" name="service[]">
+                                       <label for="myCheckbox4">Booking</label>
+                                   </div>
+                               </div>
+                               <div
+                                   class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
+                                   <div class="fs-14 font-weight-600">
+                                       <span>Botox, filler consultation and reservation</span>
+                                   </div>
+                                   <div class="checkbox-button">
+                                       <input type="checkbox" id="myCheckbox5" value="5" name="service[]">
+                                       <label for="myCheckbox5">Booking</label>
+                                   </div>
+                               </div>
+                               <div
+                                   class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
+                                   <div class="fs-14 font-weight-600">
+                                       <span>Botox, filler consultation and reservation</span>
+                                   </div>
+                                   <div class="checkbox-button">
+                                       <input type="checkbox" id="myCheckbox6" value="6" name="service[]">
+                                       <label for="myCheckbox6">Booking</label>
+                                   </div>
+                               </div>
+                               <div class="border-bottom mt-md-4 fs-16px mb-md-3">
+                                   <span>Information</span>
+                               </div>
+                               <div class="fs-14 font-weight-600">
+                                   <span>
+                                       {{$bookings->introduce}}
             </span>
         </div>
         <div hidden="">
             <input id="clinic_id" name="clinic_id" value="{{ $bookings->id }}">
-                                    {{--<input id="user_id" name="user_id" value="{{ Auth::user()->id }}">--}}
-                                </div>
+                                   {{--<input id="user_id" name="user_id" value="{{ Auth::user()->id }}">--}}
+            </div>
 
-                                <button class="btn mt-4 btn-primary btn-block up-date-button button-apply-booking" id="activate">Apply
-                                </button>
-                            </form>
-                        `;
+
+            <button class="btn mt-4 btn-primary btn-block up-date-button button-apply-booking" id="activate">Apply
+            </button>
+        </form>
+`;
+
 
             $('#modalToggle').click(function () {
                 $('#modalBooking').empty().append(html);
@@ -363,6 +483,7 @@
                 });
             });
 
+
             $('#infoContinue').click(function (e) {
                 e.preventDefault();
                 $('.progress-bar').css('width', '40%');
@@ -370,12 +491,14 @@
                 $('#myTab a[href="#ads"]').tab('show');
             });
 
+
             $('#adsContinue').click(function (e) {
                 e.preventDefault();
                 $('.progress-bar').css('width', '60%');
                 $('.progress-bar').html('Step 3 of 5');
                 $('#myTab a[href="#placementPanel"]').tab('show');
             });
+
 
             $('#placementContinue').click(function (e) {
                 e.preventDefault();
@@ -388,6 +511,7 @@
     <script>
         function loadData() {
             let cachedData = {};
+
 
             function serviceCallSlots(date) {
                 const dt = new Date(date);
@@ -421,6 +545,7 @@
                 })
             }
 
+
             function spinner(startOrStop) {
                 const spin = document.querySelector('.spin-me');
                 if (startOrStop === 'start') {
@@ -432,35 +557,44 @@
                 }
             }
 
+
             function createSlotsDom(formSubmit, morning, afternoon, arr) {
                 [9, 10, 11, 12, 1, 2, 3, 4, 5].map((e) => {
                     const div = document.createElement('div');
                     div.setAttribute('class', 'item');
 
+
                     const anchor = document.createElement('a');
                     anchor.setAttribute('class', 'hollow button');
                     anchor.setAttribute('href', 'javascript:void(0)');
 
+
                     const time = (e < 10 ? '0' : '') + e + ':00';
                     const txt = document.createTextNode(time);
                     anchor.appendChild(txt);
+
 
                     anchor.onclick = function (event) {
                         const selectedTime = event.target.innerText;
                         let date = document.getElementById('check_in').value;
                         const selectedDateTime = date + ' ' + selectedTime;
 
+
                         document.getElementById('selectedTime').value = selectedDateTime;
                         console.log(selectedDateTime);
 
+
                         formSubmit.classList.remove('disabled');
                     }
+
 
                     if (!arr.filter(r => r == e).length) {
                         anchor.setAttribute('disabled', 'true');
                     }
 
+
                     div.appendChild(anchor);
+
 
                     if (e >= 9 && e < 12) {
                         morning.appendChild(div);
@@ -471,6 +605,8 @@
             }
 
 
+
+
             $("#datepicker").datepicker({
                 onSelect: function (date) {
                     const container = document.querySelector('.master-container-slots');
@@ -479,8 +615,10 @@
                     const formSubmit = document.querySelector('.button-apply-booking');
                     const checkInInput = document.getElementById('check_in');
 
+
                     formSubmit.classList.add('disabled');
                     container.classList.add('hide');
+
 
                     if (cachedData[date]) {
                         spinner('start');
@@ -520,4 +658,33 @@
             });
         }
     </script>
+
+
+
+
 @endsection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
