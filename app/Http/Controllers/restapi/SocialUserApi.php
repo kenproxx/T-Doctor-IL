@@ -146,4 +146,10 @@ class SocialUserApi extends Controller
             return response($exception, 400);
         }
     }
+
+    public function getSocialByUserId($userId) {
+        $data = SocialUser::where('user_id', $userId)->get();
+
+        return response()->json($data);
+    }
 }

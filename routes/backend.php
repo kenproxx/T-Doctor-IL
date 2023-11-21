@@ -16,6 +16,7 @@ Route::group(['prefix' => 'users'], function () {
 
 Route::group(['prefix' => 'users-social'], function () {
     Route::post('modify', [SocialUserApi::class, 'createOrEdit'])->name('user.social.update');
+    Route::get('list-social/{id}', [SocialUserApi::class, 'getSocialByUserId'])->name('list-social');
 });
 
 Route::group(['prefix' => 'coupons-apply'], function () {
