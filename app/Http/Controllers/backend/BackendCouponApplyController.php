@@ -40,7 +40,7 @@ class BackendCouponApplyController extends Controller
         $infoCoupon = [];
 
         foreach ($couponApplies as $couponApply) {
-            $coupon = Coupon::where('id', $couponApply->coupon_id)->first('title');
+            $coupon = Coupon::where('id', $couponApply->coupon_id)->select('title', 'views', 'registered', 'max_register', 'thumbnail')->first();
             array_push($infoCoupon, $coupon);
         }
 

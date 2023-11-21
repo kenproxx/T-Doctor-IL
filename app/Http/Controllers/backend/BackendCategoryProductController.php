@@ -13,7 +13,7 @@ class BackendCategoryProductController extends Controller
      */
     public function index()
     {
-        $categoryProducts = CategoryProduct::all();
+        $categoryProducts = CategoryProduct::where('status', 1)->paginate(20);
         return view('admin.category_product.index', compact('categoryProducts'));
     }
 
@@ -23,31 +23,6 @@ class BackendCategoryProductController extends Controller
     public function create()
     {
         return view('admin.category_product.create');
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $params = $request->only('name', 'name_en', 'name_laos', 'status',);
-
-        // kiểm tra 1 trong những name phải khác null
-        if (empty($params['name']) && empty($params['name_en']) && empty($params['name_laos'])) {
-            return response('Tên danh mục không được để trống', 400);
-        }
-
-        $categoryProduct = new CategoryProduct();
-
-        $categoryProduct->fill($params);
-
-        $success = $categoryProduct->save();
-
-        if ($success) {
-            return response('Thêm danh mục thành công', 200);
-        } else {
-            return response('Thêm danh mục thất bại', 400);
-        }
     }
 
     /**
@@ -68,32 +43,6 @@ class BackendCategoryProductController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request)
-    {
-        $id = $request->input('id');
-        $params = $request->only('name', 'name_en', 'name_laos', 'status',);
-
-        // kiểm tra 1 trong những name phải khác null
-        if (empty($params['name']) && empty($params['name_en']) && empty($params['name_laos'])) {
-            return response('Tên danh mục không được để trống', 400);
-        }
-
-        $categoryProduct = CategoryProduct::find($id);
-
-        $categoryProduct->fill($params);
-
-        $success = $categoryProduct->update();
-
-        if ($success) {
-            return response('Cập nhật danh mục thành công', 200);
-        } else {
-            return response('Cập nhật danh mục thất bại', 400);
-        }
-    }
-
-    /**
      * Remove the specified resource from storage.
      */
     public function destroy($id)
@@ -111,6 +60,75 @@ class BackendCategoryProductController extends Controller
             }
         } else {
             return response('Không tìm thấy danh mục !!!', 400);
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request)
+    {
+        $id = $request->input('id');
+        $params = $request->only('name', 'name_en', 'name_laos', 'status',);
+
+        // kiểm tra 1 trong những name phải khác null
+        if (empty($params['name']) && empty($params['name_en']) && empty($params['name_laos'])) {
+            return response('Tên danh mục không được để trống', 400);
+        }
+
+        $categoryProduct = CategoryProduct::find($id);
+
+        if ($request->hasFile('thumbnail')) {
+            $item = $request->file('thumbnail');
+            $itemPath = $item->store('product', 'public');
+            $thumbnail = asset('storage/' . $itemPath);
+        } else {
+            $thumbnail = $categoryProduct->thumbnail;
+        }
+
+        $categoryProduct->fill($params);
+        $categoryProduct->thumbnail = $thumbnail;
+
+        $success = $categoryProduct->update();
+
+        if ($success) {
+            return response('Cập nhật danh mục thành công', 200);
+        } else {
+            return response('Cập nhật danh mục thất bại', 400);
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $params = $request->only('name', 'name_en', 'name_laos', 'status',);
+
+        // kiểm tra 1 trong những name phải khác null
+        if (empty($params['name']) && empty($params['name_en']) && empty($params['name_laos'])) {
+            return response('Tên danh mục không được để trống', 400);
+        }
+
+        if ($request->hasFile('thumbnail')) {
+            $item = $request->file('thumbnail');
+            $itemPath = $item->store('product', 'public');
+            $thumbnail = asset('storage/' . $itemPath);
+        } else {
+            $thumbnail = '';
+        }
+
+        $categoryProduct = new CategoryProduct();
+
+        $categoryProduct->fill($params);
+        $categoryProduct->thumbnail = $thumbnail;
+
+        $success = $categoryProduct->save();
+
+        if ($success) {
+            return response('Thêm danh mục thành công', 200);
+        } else {
+            return response('Thêm danh mục thất bại', 400);
         }
     }
 }

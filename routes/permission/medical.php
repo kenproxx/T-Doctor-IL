@@ -22,6 +22,7 @@ use App\Http\Controllers\DoctorInfoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\QuestionLikesController;
+use App\Http\Controllers\restapi\admin\AdminDoctorDepartmentApi;
 use App\Http\Controllers\restapi\admin\AdminDoctorInfoApi;
 use App\Http\Controllers\restapi\admin\AdminPharmacyApi;
 use App\Http\Controllers\restapi\CartApi;
@@ -205,7 +206,16 @@ Route::group(['prefix' => 'doctors-info'], function () {
     Route::post('/update-doctor/{id}', [AdminDoctorInfoApi::class, 'update'])->name('api.backend.doctors.info.update.doctor');
     Route::delete('/delete/{id}', [AdminDoctorInfoApi::class, 'delete'])->name('api.backend.doctors.info.delete');
 });
-//
+/* Doctor department api */
+Route::group(['prefix' => 'doctors-departments'], function () {
+    Route::get('/list', [AdminDoctorDepartmentApi::class, 'getAll'])->name('api.backend.doctors.departments.list');
+    Route::get('/detail/{id}', [AdminDoctorDepartmentApi::class, 'getById'])->name('api.backend.doctors.departments.detail');
+    Route::get('/user/{id}', [AdminDoctorDepartmentApi::class, 'getAllByUserID'])->name('api.backend.doctors.departments.user');
+    Route::post('/create', [AdminDoctorDepartmentApi::class, 'create'])->name('api.backend.doctors.departments.create');
+    Route::put('/update/{id}', [AdminDoctorDepartmentApi::class, 'update'])->name('api.backend.doctors.departments.update');
+    Route::delete('/delete/{id}', [AdminDoctorDepartmentApi::class, 'delete'])->name('api.backend.doctors.departments.delete');
+});
+
 //Route::group(['prefix' => 'question-like'], function () {
 //    Route::get('is-like/{questionId}/{userId}', [QuestionLikesController::class, 'checkEmotion'])->name('api.backend.question-like.check');
 //    Route::post('change/{questionId}/{userId}', [QuestionLikesController::class, 'changeEmotion'])->name('api.backend.question-like.change');

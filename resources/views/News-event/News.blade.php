@@ -10,9 +10,9 @@
                     $news = $listNews->first();
                 @endphp
             @if($news)
-                    <a href="{{route('detail.new',$news->id)}}">
+                    <a class="col-md-5 pl-0" href="{{route('detail.new',$news->id)}} ">
                         <div class="d-flex">
-                            <div class="col-md-5 pl-0">
+                            <div >
                                 <img class="w-100 b-radius-8px" src="{{$news->thumbnail}}">
                             </div>
                             <div class="col-md-7 pr-0">
@@ -76,8 +76,9 @@
             @endif
         </div>
     </div>
-    @include('component.banner')
-
+    <div class="banner2">
+        @include('component.banner')
+    </div>
     <div class="recruitment-details ">
         <div class="container">
             @if($listEvent)

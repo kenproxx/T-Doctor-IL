@@ -4,7 +4,8 @@
     @include('layouts.partials.header_3')
     @include('component.banner')
     @if($doctor)
-        <div id="show_inf" class="container">
+        <div  class="container">
+        <div id="show_inf">
             <div id="title" class="d-flex justify-content-center">
                 <div class="d-flex list-title">
                     <div class="list--doctor p-0">
@@ -112,6 +113,7 @@
                 </div>
             </div>
 
+        </div>
         </div>
     @endif
 @endsection
