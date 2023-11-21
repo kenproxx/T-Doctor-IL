@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\BackendAnswerController;
 use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\restapi\CategoryApi;
 use App\Http\Controllers\restapi\ClinicApi;
+use App\Http\Controllers\restapi\DoctorDepartmentApi;
 use App\Http\Controllers\restapi\DoctorInfoApi;
 use App\Http\Controllers\restapi\PharmacyApi;
 use App\Http\Controllers\restapi\ProductInfoApi;
@@ -50,6 +51,12 @@ Route::group(['prefix' => 'doctors-info'], function () {
     Route::get('/user/{id}', [DoctorInfoApi::class, 'findByUser'])->name('doctors.info.restapi.user');
     Route::get('/department/{id}', [DoctorInfoApi::class, 'findByDepartment'])->name('doctors.info.restapi.department');
     Route::get('/detail/{id}', [DoctorInfoApi::class, 'detail'])->name('doctors.info.restapi.detail');
+});
+
+Route::group(['prefix' => 'doctors-departments'], function () {
+    Route::get('/list', [DoctorDepartmentApi::class, 'getAll'])->name('doctors.departments.list');
+    Route::get('/detail/{id}', [DoctorDepartmentApi::class, 'getById'])->name('doctors.departments.detail');
+    Route::get('/user/{id}', [DoctorDepartmentApi::class, 'getAllByUserID'])->name('doctors.departments.user');
 });
 
 Route::group(['prefix' => 'api/answers'], function () {
