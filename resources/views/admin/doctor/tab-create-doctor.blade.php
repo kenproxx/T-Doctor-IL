@@ -186,6 +186,8 @@
                     formData.append(fieldName, $(`#${fieldName}`).val());
                 });
 
+                console.log(fieldNames);
+
                 fieldTextareaTiny.forEach(fieldTextarea => {
                     const content = tinymce.get(fieldTextarea).getContent();
                     formData.append(fieldTextarea, content);

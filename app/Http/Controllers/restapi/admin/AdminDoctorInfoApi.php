@@ -129,6 +129,8 @@ class AdminDoctorInfoApi extends Controller
 
         $department_id = $request->input('department_id');
 
+        $hocham_hocvi = $request->input('hocham_hocvi');
+
         $doctor->name = $name;
         $doctor->name_en = $name_en;
         $doctor->name_laos = $name_laos;
@@ -172,6 +174,7 @@ class AdminDoctorInfoApi extends Controller
         $doctor->apply_for = $apply_for;
 
         $doctor->department_id = $department_id;
+        $doctor->hocham_hocvi = $hocham_hocvi;
 
         return $doctor->save();
     }
