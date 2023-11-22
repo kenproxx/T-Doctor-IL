@@ -17,7 +17,7 @@ class PharmaciesApiController extends Controller
         $detail = DoctorInfo::where([
             'id' => $id,
             'hocham_hocvi' => 'pharmacies'
-        ]);
+        ])->get();
 
         if (!$detail) {
             return response("Pharmacies not found", 404);
