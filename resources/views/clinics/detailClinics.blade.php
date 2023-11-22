@@ -1,6 +1,5 @@
 @php
-    use App\Models\AddressMap;
-@endphp
+    @endphp
 @extends('layouts.master')
 @section('title', 'Booking Clinic')
 @section('content')
@@ -15,6 +14,7 @@
         .ui-widget.ui-widget-content {
             width: 100%;
         }
+
         .checkbox-button {
             display: inline-block;
             position: relative;
@@ -49,7 +49,7 @@
         }
 
         .background-map {
-            background: url("{{asset('img/svg/map.png')}}") no-repeat ;
+            background: url("{{asset('img/svg/map.png')}}") no-repeat;
             overflow: hidden !important;
             min-height: 1000px;
             width: 100%;
@@ -79,20 +79,24 @@
         .border-button-close span {
             padding: 0 5px;
             border-radius: 32px;
-            background:  #FFF;
+            background: #FFF;
         }
+
         .gm-style-iw {
             padding: 0 !important;
         }
+
         button.gm-ui-hover-effect {
             top: 10px !important;
             right: 10px !important;
             border-radius: 20px !important;
             background: white !important;
         }
-        .background-modal{
-            max-width: 360px;
+
+        .background-modal {
+            max-width: 400px;
         }
+
         .button-follow {
             max-height: 30px;
         }
@@ -101,7 +105,7 @@
     <div class="container">
         @include('What-free.header-wFree')
         @php
-            $addresses = \App\Models\Clinic::all();
+            $addresses = \App\Models\Clinic::where('id', $bookings->id)->get();
             $coordinatesArray = $addresses->toArray();
         @endphp
         <div id="allAddressesMap" class="show active fade" style="height: 800px;">
@@ -112,9 +116,9 @@
             <div class="title">
                 Other Clinics/Pharmacies
             </div>
-            <div class="body row">
+
                 @include('component.clinic')
-            </div>
+
         </div>
         <div hidden="">
             <input id="room_id" name="room_id" value="{{ $bookings->id }}">
@@ -122,18 +126,18 @@
             <input id="check_out" name="check_out" value="">
         </div>
     </div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQO5YhrnYxyI215uOX9bNQ-_xxV_stGf8&callback=initMap"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe6qi9czJ2Z6SLnV9sSUzce0nuzhRm3hg"></script>
     <script>
         var locations = {!! json_encode($coordinatesArray) !!};
         var infoWindows = [];
-
         function getCurrentLocation(callback) {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
+                navigator.geolocation.getCurrentPosition(function (position) {
                     var currentLocation = {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     };
+                    console.log(currentLocation)
                     callback(currentLocation);
                 });
             } else {
@@ -172,7 +176,7 @@
                 title: 'Your Location'
             });
 
-            locations.forEach(function(location) {
+            locations.forEach(function (location) {
                 var distance = calculateDistance(
                     currentLocation.lat, currentLocation.lng,
                     parseFloat(location.latitude), parseFloat(location.longitude)
@@ -183,7 +187,7 @@
 
                 if (distance <= searchRadius) {
                     var marker = new google.maps.Marker({
-                        position: { lat: parseFloat(location.latitude), lng: parseFloat(location.longitude) },
+                        position: {lat: parseFloat(location.latitude), lng: parseFloat(location.longitude)},
                         map: map,
                         title: 'Location'
                     });
@@ -303,7 +307,7 @@
                         content: infoWindowContent
                     });
 
-                    marker.addListener('click', function() {
+                    marker.addListener('click', function () {
                         closeAllInfoWindows();
                         infoWindow.open(map, marker);
                     });
@@ -314,12 +318,12 @@
         }
 
         function closeAllInfoWindows() {
-            infoWindows.forEach(function(infoWindow) {
-                infoWindow.close();
+            infoWindows.forEach(function (infoWindow) {
+                infoWindow.open();
             });
         }
 
-        getCurrentLocation(function(currentLocation) {
+        getCurrentLocation(function (currentLocation) {
             initMap(currentLocation, locations);
         });
 
@@ -372,6 +376,7 @@
                 })
                 .catch(error => console.error('Error:', error));
         }
+
         var html = `<form method="post" action="{{route('clinic.booking.store')}}" class="p-3">
             @csrf
         <div class="fs-18px justify-content-start d-flex mb-md-4 mt-2">
@@ -499,147 +504,145 @@
     </script>
     <script>
         $(document).ready(function () {
-            console.log(9999);
             $(document).on('click', '#modalToggle', function () {
-                console.log(555556);
                 $('#modalBooking').empty().append(html);
                 loadData();
             });
 
 
-        function loadData() {
-            let cachedData = {};
+            function loadData() {
+                let cachedData = {};
 
-            function serviceCallSlots(date) {
-                const dt = new Date(date);
-                let ms = dt.getTime();
-                let startMs = ms - (60 * 60 * 24 * 1000 * 2);
-                const dtArr = [1, 2, 3, 4, 5].map((e) => {
-                    const innerDt = new Date(startMs);
-                    startMs += 60 * 60 * 24 * 1000;
-                    return innerDt;
-                });
-                const timeArrs = [
-                    ['9', '10', '11', '12', '1', '2', '3', '4', '5'],
-                    ['9', '10', '11', '1', '2', '3', '4', '5'],
-                    ['9', '10', '11', '12', '3', '4', '5'],
-                    ['10', '11', '2', '4'],
-                    ['11', '12', '1', '4', '5']
-                ];
-                return new Promise((resolve, reject) => {
-                    setTimeout(() => {
-                        const obj = dtArr.reduce((accum, e) => {
-                            const randomNum = Math.floor(Math.random() * 5);
-                            const dtString = e.toLocaleDateString();
-                            let parts = dtString.split('/');
-                            parts[0] = parts[0].length === 1 ? '0' + parts[0] : parts[0];
-                            parts[1] = parts[1].length === 1 ? '0' + parts[1] : parts[1];
-                            accum[parts.join('/')] = timeArrs[randomNum];
-                            return accum;
-                        }, {});
-                        resolve(obj);
-                    }, 2000);
-                })
-            }
-
-            function spinner(startOrStop) {
-                const spin = document.querySelector('.spin-me');
-                if (startOrStop === 'start') {
-                    const spinner = document.createElement('i');
-                    spinner.setAttribute('class', 'fas fa-spinner fa-4x fa-spin');
-                    spin.appendChild(spinner);
-                } else {
-                    spin.innerHTML = '';
+                function serviceCallSlots(date) {
+                    const dt = new Date(date);
+                    let ms = dt.getTime();
+                    let startMs = ms - (60 * 60 * 24 * 1000 * 2);
+                    const dtArr = [1, 2, 3, 4, 5].map((e) => {
+                        const innerDt = new Date(startMs);
+                        startMs += 60 * 60 * 24 * 1000;
+                        return innerDt;
+                    });
+                    const timeArrs = [
+                        ['9', '10', '11', '12', '1', '2', '3', '4', '5'],
+                        ['9', '10', '11', '1', '2', '3', '4', '5'],
+                        ['9', '10', '11', '12', '3', '4', '5'],
+                        ['10', '11', '2', '4'],
+                        ['11', '12', '1', '4', '5']
+                    ];
+                    return new Promise((resolve, reject) => {
+                        setTimeout(() => {
+                            const obj = dtArr.reduce((accum, e) => {
+                                const randomNum = Math.floor(Math.random() * 5);
+                                const dtString = e.toLocaleDateString();
+                                let parts = dtString.split('/');
+                                parts[0] = parts[0].length === 1 ? '0' + parts[0] : parts[0];
+                                parts[1] = parts[1].length === 1 ? '0' + parts[1] : parts[1];
+                                accum[parts.join('/')] = timeArrs[randomNum];
+                                return accum;
+                            }, {});
+                            resolve(obj);
+                        }, 2000);
+                    })
                 }
-            }
 
-            function createSlotsDom(formSubmit, morning, afternoon, arr) {
-                [9, 10, 11, 12, 1, 2, 3, 4, 5].map((e) => {
-                    const div = document.createElement('div');
-                    div.setAttribute('class', 'item');
-
-                    const anchor = document.createElement('a');
-                    anchor.setAttribute('class', 'hollow button');
-                    anchor.setAttribute('href', 'javascript:void(0)');
-
-                    const time = (e < 10 ? '0' : '') + e + ':00';
-                    const txt = document.createTextNode(time);
-                    anchor.appendChild(txt);
-
-                    anchor.onclick = function (event) {
-                        const selectedTime = event.target.innerText;
-                        let date = document.getElementById('check_in').value;
-                        const selectedDateTime = date + ' ' + selectedTime;
-
-                        document.getElementById('selectedTime').value = selectedDateTime;
-                        console.log(selectedDateTime);
-
-                        formSubmit.classList.remove('disabled');
-                    }
-
-                    if (!arr.filter(r => r == e).length) {
-                        anchor.setAttribute('disabled', 'true');
-                    }
-
-                    div.appendChild(anchor);
-
-                    if (e >= 9 && e < 12) {
-                        morning.appendChild(div);
+                function spinner(startOrStop) {
+                    const spin = document.querySelector('.spin-me');
+                    if (startOrStop === 'start') {
+                        const spinner = document.createElement('i');
+                        spinner.setAttribute('class', 'fas fa-spinner fa-4x fa-spin');
+                        spin.appendChild(spinner);
                     } else {
-                        afternoon.appendChild(div);
+                        spin.innerHTML = '';
                     }
-                });
-            }
+                }
+
+                function createSlotsDom(formSubmit, morning, afternoon, arr) {
+                    [9, 10, 11, 12, 1, 2, 3, 4, 5].map((e) => {
+                        const div = document.createElement('div');
+                        div.setAttribute('class', 'item');
+
+                        const anchor = document.createElement('a');
+                        anchor.setAttribute('class', 'hollow button');
+                        anchor.setAttribute('href', 'javascript:void(0)');
+
+                        const time = (e < 10 ? '0' : '') + e + ':00';
+                        const txt = document.createTextNode(time);
+                        anchor.appendChild(txt);
+
+                        anchor.onclick = function (event) {
+                            const selectedTime = event.target.innerText;
+                            let date = document.getElementById('check_in').value;
+                            const selectedDateTime = date + ' ' + selectedTime;
+
+                            document.getElementById('selectedTime').value = selectedDateTime;
+                            console.log(selectedDateTime);
+
+                            formSubmit.classList.remove('disabled');
+                        }
+
+                        if (!arr.filter(r => r == e).length) {
+                            anchor.setAttribute('disabled', 'true');
+                        }
+
+                        div.appendChild(anchor);
+
+                        if (e >= 9 && e < 12) {
+                            morning.appendChild(div);
+                        } else {
+                            afternoon.appendChild(div);
+                        }
+                    });
+                }
 
 
-            $("#datepicker").datepicker({
-                onSelect: function (date) {
-                    const container = document.querySelector('.master-container-slots');
-                    const morning = document.querySelector('.flex-container-morning');
-                    const afternoon = document.querySelector('.flex-container-afternoon');
-                    const formSubmit = document.querySelector('.button-apply-booking');
-                    const checkInInput = document.getElementById('check_in');
+                $("#datepicker").datepicker({
+                    onSelect: function (date) {
+                        const container = document.querySelector('.master-container-slots');
+                        const morning = document.querySelector('.flex-container-morning');
+                        const afternoon = document.querySelector('.flex-container-afternoon');
+                        const formSubmit = document.querySelector('.button-apply-booking');
+                        const checkInInput = document.getElementById('check_in');
 
-                    formSubmit.classList.add('disabled');
-                    container.classList.add('hide');
+                        formSubmit.classList.add('disabled');
+                        container.classList.add('hide');
 
-                    if (cachedData[date]) {
-                        spinner('start');
-                        setTimeout(() => {
-                            morning.innerHTML = '';
-                            afternoon.innerHTML = '';
-                            createSlotsDom(formSubmit, morning, afternoon, cachedData[date]);
-                            spinner('stop');
-                            container.classList.remove('hide');
-                            container.classList.add('fade-in');
-                            checkInInput.value = date;
-                            console.log(checkInInput.value)
-                        }, 500);
-                    } else {
-                        spinner('start');
-                        const prom = serviceCallSlots(date);
-                        setTimeout(() => {
-                            morning.innerHTML = '';
-                            afternoon.innerHTML = '';
-                            prom.then((payload) => {
-                                Object.keys(payload).map((e) => {
-                                    const cachedKeys = Object.keys(cachedData);
-                                    if (!cachedKeys.includes(e)) {
-                                        cachedData[e] = payload[e];
-                                    }
-                                });
+                        if (cachedData[date]) {
+                            spinner('start');
+                            setTimeout(() => {
+                                morning.innerHTML = '';
+                                afternoon.innerHTML = '';
                                 createSlotsDom(formSubmit, morning, afternoon, cachedData[date]);
                                 spinner('stop');
                                 container.classList.remove('hide');
                                 container.classList.add('fade-in');
                                 checkInInput.value = date;
-                            });
-                        }, 500);
+                                console.log(checkInInput.value)
+                            }, 500);
+                        } else {
+                            spinner('start');
+                            const prom = serviceCallSlots(date);
+                            setTimeout(() => {
+                                morning.innerHTML = '';
+                                afternoon.innerHTML = '';
+                                prom.then((payload) => {
+                                    Object.keys(payload).map((e) => {
+                                        const cachedKeys = Object.keys(cachedData);
+                                        if (!cachedKeys.includes(e)) {
+                                            cachedData[e] = payload[e];
+                                        }
+                                    });
+                                    createSlotsDom(formSubmit, morning, afternoon, cachedData[date]);
+                                    spinner('stop');
+                                    container.classList.remove('hide');
+                                    container.classList.add('fade-in');
+                                    checkInInput.value = date;
+                                });
+                            }, 500);
+                        }
+                        document.getElementById('check_in').value = date;
                     }
-                    document.getElementById('check_in').value = date;
-                }
-            });
-        }
+                });
+            }
         });
     </script>
 @endsection
