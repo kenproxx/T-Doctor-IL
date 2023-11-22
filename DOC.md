@@ -6,4 +6,6 @@
 5. composer require laravel/socialite
 6. composer require socialiteproviders/manager
 7. composer require socialiteproviders/kakao
+8. composer require guzzlehttp/guzzle
+9. composer require laravelcollective/html
 
