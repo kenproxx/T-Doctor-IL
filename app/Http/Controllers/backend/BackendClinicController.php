@@ -90,6 +90,8 @@ class BackendClinicController extends Controller
             $nation_id = $request->input('nation_id');
             $province_id = $request->input('province_id');
             $district_id = $request->input('district_id');
+            $longitude = $request->input('longitude');
+            $latitude = $request->input('latitude');
             $commune_id = $request->input('commune_id');
             $open_date = $request->input('open_date');
             $close_date = $request->input('close_date');
@@ -112,6 +114,8 @@ class BackendClinicController extends Controller
             $clinic->email = $email;
             $clinic->name_en = $name_en ?? '';
             $clinic->name_laos = $name_laos ?? '';
+            $clinic->longitude = $longitude;
+            $clinic->latitude = $latitude;
             $clinic->address_detail = $address_detail;
             $clinic->address_detail_en = $address_detail_en ?? '';
             $clinic->user_id = $user_id;
@@ -179,6 +183,8 @@ class BackendClinicController extends Controller
             $province_id = $request->input('province_id');
             $district_id = $request->input('district_id');
             $commune_id = $request->input('commune_id');
+            $longitude = $request->input('longitude') ?? $clinic->longitude;
+            $latitude = $request->input('latitude') ?? $clinic->latitude;
             $open_date = $request->input('open_date') ?? $clinic->open_date;
             $close_date = $request->input('close_date') ?? $clinic->close_date;
             $introduce = $request->input('introduce') ?? $clinic->introduce;
@@ -199,6 +205,8 @@ class BackendClinicController extends Controller
             $clinic->email = $email;
             $clinic->name_en = $name_en ?? '';
             $clinic->name_laos = $name_laos ?? '';
+            $clinic->longitude = $longitude;
+            $clinic->latitude = $latitude;
             $clinic->address_detail = $address_detail;
             $clinic->address_detail_en = $address_detail_en ?? '';
 

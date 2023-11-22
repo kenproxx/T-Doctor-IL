@@ -1,8 +1,12 @@
+@php
+    use App\Models\AddressMap;
+@endphp
 @extends('layouts.master')
 @section('title', 'Booking Clinic')
 @section('content')
     @include('layouts.partials.header')
     @include('component.banner')
+
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.1.0/foundation.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
@@ -81,21 +85,100 @@
 
     <div class="container">
         @include('What-free.header-wFree')
-        {{--        <img src="{{asset('img/svg/map.png')}}">--}}
+        @php
+            $addresses = AddressMap::all();
+            $coordinatesArray = $addresses->toArray();
+        @endphp
+        <div id="allAddressesMap" style="height: 800px;">
 
-        <div class="background-map">
+        </div>
 
-            <div class="p-0 col-md-3 tab-pane fade show active background-modal b-radius" id="modalBooking">
+        <div class="other-clinics">
+            <div class="title">
+                Other Clinics/Pharmacies
+            </div>
+            <div class="body row">
+                @include('component.clinic')
+            </div>
+        </div>
+        <div hidden="">
+            <input id="room_id" name="room_id" value="{{ $bookings->id }}">
+            <input id="check_in" name="check_in" value="">
+            <input id="check_out" name="check_out" value="">
+        </div>
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQO5YhrnYxyI215uOX9bNQ-_xxV_stGf8&callback=initMap"></script>
+    <script>
+        var locations = {!! json_encode($coordinatesArray) !!};
+        var infoWindows = [];
+
+        function getCurrentLocation(callback) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var currentLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    callback(currentLocation);
+                });
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        }
+
+        function calculateDistance(lat1, lng1, lat2, lng2) {
+            var R = 6371; // Độ dài trung bình của trái đất trong km
+            var dLat = toRadians(lat2 - lat1);
+            var dLng = toRadians(lng2 - lng1);
+
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+                Math.sin(dLng / 2) * Math.sin(dLng / 2);
+
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+            var distance = R * c;
+            return distance;
+        }
+
+        function toRadians(degrees) {
+            return degrees * (Math.PI / 180);
+        }
+
+        function initMap(currentLocation, locations) {
+            var map = new google.maps.Map(document.getElementById('allAddressesMap'), {
+                center: currentLocation,
+                zoom: 10
+            });
+
+            var currentLocationMarker = new google.maps.Marker({
+                position: currentLocation,
+                map: map,
+                title: 'Your Location'
+            });
+
+            locations.forEach(function(location) {
+                var distance = calculateDistance(
+                    currentLocation.lat, currentLocation.lng,
+                    parseFloat(location.latitude), parseFloat(location.longitude)
+                );
+
+                // Chọn bán kính tìm kiếm (ví dụ: 5 km)
+                var searchRadius = 10;
+
+                if (distance <= searchRadius) {
+                    var marker = new google.maps.Marker({
+                        position: { lat: parseFloat(location.latitude), lng: parseFloat(location.longitude) },
+                        map: map,
+                        title: 'Location'
+                    });
+
+                    var infoWindowContent = `<div class="p-0 tab-pane fade show active background-modal b-radius" id="modalBooking">
                 <div>
                     @php
                         $str = $bookings->gallery;
                         $parts = explode(',', $str);
                     @endphp
-                    <div class="modal-header">
-                        <button type="button" class="close border-button-close" id="close-modal">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
                     <img class="b-radius" src="{{$parts[0]}}" alt="img">
                 </div>
                 <div class="p-3">
@@ -126,10 +209,9 @@
                         </div>
                     </div>
                     <div class="mt-md-3 mb-md-3">
-                        {{--                                    <a class="border-button-address font-weight-800 fs-14 justify-content-center" href="{{route('clinic.booking.service',$id)}}">Booking</a>--}}
                         <button id="modalToggle" data-toggle="modal" data-target="#exampleModal"
                                 class="w-100 btn btn-secondary border-button-address font-weight-800 fs-14 justify-content-center"
-                                id="infoContinue">Booking
+                                >Booking
                         </button>
                     </div>
                     <div class="border-top">
@@ -153,12 +235,12 @@
                                 class="fs-14 font-weight-600"> {{$bookings->type}}</span>
                         </div>
                         @for($i=0; $i<3; $i++)
-                            <div class="border-top mb-md-2">
-                                <div
-                                    class="d-flex justify-content-between rv-header align-items-center mt-md-2">
-                                    <div class="d-flex rv-header--left">
-                                        <div class="avt-24 mr-md-2">
-                                            <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
+                    <div class="border-top mb-md-2">
+                        <div
+                            class="d-flex justify-content-between rv-header align-items-center mt-md-2">
+                            <div class="d-flex rv-header--left">
+                                <div class="avt-24 mr-md-2">
+                                    <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
                                         </div>
                                         <p class="fs-16px">Trần Đình Phi</p>
                                     </div>
@@ -176,12 +258,12 @@
                                 </div>
                             </div>
                         @endfor
-                        <div class="border-top">
-                            <div
-                                class="d-flex justify-content-between rv-header align-items-center mt-md-2">
-                                <div class="d-flex rv-header--left">
-                                    <div class="avt-24 mr-md-2">
-                                        <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
+                    <div class="border-top">
+                        <div
+                            class="d-flex justify-content-between rv-header align-items-center mt-md-2">
+                            <div class="d-flex rv-header--left">
+                                <div class="avt-24 mr-md-2">
+                                    <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
                                     </div>
                                     <p class="fs-16px">Trần Đình Phi</p>
                                 </div>
@@ -200,37 +282,86 @@
                         </div>
                     </div>
                 </div>
+            </div>`;
 
-            </div>
-        </div>
-        <a href="#" id="modalToggle" data-toggle="modal" data-target="#exampleModal">
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: infoWindowContent
+                    });
 
-        </a>
-        <div class="other-clinics">
-            <div class="title">
-                Other Clinics/Pharmacies
-            </div>
-            <div class="body row">
-                @include('component.clinic')
-            </div>
-        </div>
-        <div hidden="">
-            <input id="room_id" name="room_id" value="{{ $bookings->id }}">
-{{--            <input id="user_id" name="user_id" value="{{ Auth::user()->id }}">--}}
-            <input id="check_in" name="check_in" value="">
-            <input id="check_out" name="check_out" value="">
-        </div>
-    </div>
-    <script>
-        $(document).ready(function () {
-            $('#close-modal').click(function () {
-                $('#modalBooking').attr('hidden', 'true');
+                    marker.addListener('click', function() {
+                        closeAllInfoWindows();
+                        infoWindow.open(map, marker);
+                    });
+
+                    infoWindows.push(infoWindow);
+                }
             });
-            let html = `<form method="post" action="{{route('clinic.booking.store')}}" class="p-3">
+        }
+
+        function closeAllInfoWindows() {
+            infoWindows.forEach(function(infoWindow) {
+                infoWindow.close();
+            });
+        }
+
+        getCurrentLocation(function(currentLocation) {
+            initMap(currentLocation, locations);
+        });
+
+        function addNewAddress() {
+            var newAddress = document.getElementById('newAddress').value;
+
+            if (newAddress) {
+                var geocoder = new google.maps.Geocoder();
+                geocoder.geocode({'address': newAddress}, function (results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        var latitude = results[0].geometry.location.lat();
+                        var longitude = results[0].geometry.location.lng();
+
+                        if (!isNaN(latitude) && !isNaN(longitude)) {
+                            saveAddress(newAddress, latitude, longitude, 'map-new-' + new Date().getTime());
+                        } else {
+                            console.error('Invalid coordinates:', latitude, longitude);
+                            alert('Invalid coordinates. Please try again.');
+                        }
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status);
+                    }
+                });
+            }
+        }
+
+        function saveAddress(address, latitude, longitude, mapId) {
+            var formData = new FormData();
+            formData.append('address', address);
+            formData.append('latitude', latitude);
+            formData.append('longitude', longitude);
+
+            fetch('/save-address', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                },
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        var map = new google.maps.Map(document.getElementById(mapId), {
+                            center: {lat: parseFloat(latitude), lng: parseFloat(longitude)},
+                            zoom: 15
+                        });
+                    } else {
+                        alert('Failed to save address. Please try again.');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+        var html = `<form method="post" action="{{route('clinic.booking.store')}}" class="p-3">
             @csrf
-            <div class="fs-18px justify-content-start d-flex mb-md-4 mt-2">
-                <div class="align-items-center">
-                <a href="{{route('clinic.detail',$bookings->id)}}"><i class="fa-solid fa-chevron-left"></i></a>
+        <div class="fs-18px justify-content-start d-flex mb-md-4 mt-2">
+            <div class="align-items-center">
+            <a href="{{route('clinic.detail',$bookings->id)}}"><i class="fa-solid fa-chevron-left"></i></a>
                 </div>
                 <div class="ml-2">
                     <span>{{$bookings->name}}</span>
@@ -337,55 +468,30 @@
                                 <div class="fs-14 font-weight-600">
                                     <span>
                                         {{$bookings->introduce}}
-            </span>
-        </div>
-        <div hidden="">
-            <input id="clinic_id" name="clinic_id" value="{{ $bookings->id }}">
+        </span>
+    </div>
+    <div hidden="">
+        <input id="clinic_id" name="clinic_id" value="{{ $bookings->id }}">
                                     {{--<input id="user_id" name="user_id" value="{{ Auth::user()->id }}">--}}
-                                </div>
+        </div>
 
-                                <button class="btn mt-4 btn-primary btn-block up-date-button button-apply-booking" id="activate">Apply
-                                </button>
-                            </form>
-                        `;
+        <button class="btn mt-4 btn-primary btn-block up-date-button button-apply-booking" id="activate">Apply
+        </button>
+    </form>
+`;
 
-            $('#modalToggle').click(function () {
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            console.log(9999);
+            $(document).on('click', '#modalToggle', function () {
+                console.log(555556);
                 $('#modalBooking').empty().append(html);
                 loadData();
             });
-        });
-    </script>
-    <script>
-        $(function () {
-            $('#modalToggle').click(function () {
-                $('#modal').modal({
-                    backdrop: 'static'
-                });
-            });
 
-            $('#infoContinue').click(function (e) {
-                e.preventDefault();
-                $('.progress-bar').css('width', '40%');
-                $('.progress-bar').html('Step 2 of 5');
-                $('#myTab a[href="#ads"]').tab('show');
-            });
 
-            $('#adsContinue').click(function (e) {
-                e.preventDefault();
-                $('.progress-bar').css('width', '60%');
-                $('.progress-bar').html('Step 3 of 5');
-                $('#myTab a[href="#placementPanel"]').tab('show');
-            });
-
-            $('#placementContinue').click(function (e) {
-                e.preventDefault();
-                $('.progress-bar').css('width', '80%');
-                $('.progress-bar').html('Step 4 of 5');
-                $('#myTab a[href="#reviewPanel"]').tab('show');
-            });
-        });
-    </script>
-    <script>
         function loadData() {
             let cachedData = {};
 
@@ -519,5 +625,6 @@
                 }
             });
         }
+        });
     </script>
 @endsection
