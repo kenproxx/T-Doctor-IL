@@ -210,6 +210,9 @@ Route::group(['prefix' => 'doctors-info'], function () {
     Route::post('/update-doctor/{id}', [AdminDoctorInfoApi::class, 'update'])->name('api.backend.doctors.info.update.doctor');
     Route::delete('/delete/{id}', [AdminDoctorInfoApi::class, 'delete'])->name('api.backend.doctors.info.delete');
 });
+
+
+
 /* Doctor department api */
 Route::group(['prefix' => 'doctors-departments'], function () {
     Route::get('/list', [AdminDoctorDepartmentApi::class, 'getAll'])->name('api.backend.doctors.departments.list');

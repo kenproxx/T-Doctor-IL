@@ -46,7 +46,13 @@ class AdminDoctorInfoApi extends Controller
     public function create(Request $request)
     {
         try {
-            $doctor_infos = new DoctorInfo();
+            $created_by = $request->input('created_by');
+            $doctor = DoctorInfo::where('created_by', $created_by)->first();
+            if (!$doctor) {
+                $doctor_infos = new DoctorInfo();
+            } else {
+                $doctor_infos = $doctor;
+            }
 
             $item = $this->saveDoctorInfo($request, $doctor_infos);
             if ($item) {
@@ -123,6 +129,8 @@ class AdminDoctorInfoApi extends Controller
 
         $department_id = $request->input('department_id');
 
+        $hocham_hocvi = $request->input('hocham_hocvi');
+
         $doctor->name = $name;
         $doctor->name_en = $name_en;
         $doctor->name_laos = $name_laos;
@@ -166,6 +174,7 @@ class AdminDoctorInfoApi extends Controller
         $doctor->apply_for = $apply_for;
 
         $doctor->department_id = $department_id;
+        $doctor->hocham_hocvi = $hocham_hocvi;
 
         return $doctor->save();
     }
