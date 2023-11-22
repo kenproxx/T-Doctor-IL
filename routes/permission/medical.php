@@ -213,7 +213,7 @@ Route::group(['prefix' => 'doctors-info'], function () {
 
 Route::group(['prefix' => 'pharmacies'], function () {
     Route::get('/list', [\App\Http\Controllers\PharmaciesApiController::class, 'index'])->name('api.pharmacies.list');
-    Route::get('/detail/{id}', [\App\Http\Controllers\PharmaciesApiController::class, 'detail'])->name('api.pharmacies.detail');
+    Route::get('/detail/{id}', [\App\Http\Controllers\PharmaciesApiController::class, 'detailPharmacies'])->name('api.pharmacies.detail');
 });
 
 /* Doctor department api */
