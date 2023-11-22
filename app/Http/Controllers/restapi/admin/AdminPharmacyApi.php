@@ -24,6 +24,18 @@ class AdminPharmacyApi extends Controller
         return response()->json($pharmacies);
     }
 
+    public function getAllPharmacy(Request $request) {
+
+        $status = $request->input('status');
+        if ($status && $status != ClinicStatus::DELETED) {
+            $pharmacy = Clinic::where('status', $status)->where('type', TypeBussiness::PHARMACY)->get();
+        } else {
+            $pharmacy = Clinic::where('status', '!=', ClinicStatus::DELETED)->where('type', TypeBussiness::PHARMACY)->get();
+        }
+
+        return response()->json($pharmacy);
+    }
+
     public function getAllByUserId(Request $request, $id)
     {
         $status = $request->input('status');

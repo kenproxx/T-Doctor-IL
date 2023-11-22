@@ -145,6 +145,10 @@ Route::group(['prefix' => 'pharmacies'], function () {
     Route::delete('/delete/{id}', [AdminPharmacyApi::class, 'delete'])->name('api.backend.pharmacies.delete');
 });
 
+Route::group(['prefix' => 'pharmacy'], function () {
+    Route::get('/list', [AdminPharmacyApi::class, 'getAllPharmacy'])->name('api.backend.pharmacy.list');
+});
+
 Route::group(['prefix' => 'questions'], function () {
     Route::get('/list', [BackendQuestionController::class, 'getAll'])->name('api.backend.questions.list');
     Route::get('/user/{id}', [BackendQuestionController::class, 'getAllByUserId'])->name('api.backend.questions.user');
