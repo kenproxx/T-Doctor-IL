@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Enums\TypeUser;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MainController;
@@ -10,9 +9,7 @@ use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use function Laravel\Prompts\password;
 
 class RegisterController extends Controller
 {
@@ -53,6 +50,7 @@ class RegisterController extends Controller
                 return response('Password invalid!', 400);
             }
 
+            $checkPending = false;
             if ($type == \App\Enums\Role::BUSINESS) {
                 // kiểm tra xem fileupload có tồn tại không, nếu không th ì thông báo lỗi
                 if (!$request->hasFile('fileupload')) {
