@@ -127,15 +127,13 @@
                     let imageDoctor = item['thumbnail'];
                     let myArray = imageDoctor.split("/storage");
                     html = html + `<div class="card col-md-3" >
-                                    <div class="card">
-                            <i class="bi bi-heart"></i>
+                              <i class="bi bi-heart"></i>
                             <img src=" ${url}${myArray[1]} " class="card-img-top" alt="...">
                             <div class="card-body">
                                 <a href="${mainUrl}"><h5 class="card-title">${item['name']}</h5></a>
                                 <p class="card-text">Specialty: ${item['specialty']}</p>
                                 <p class="card-text_1">Location: <b>${item['detail_address']}</b></p>
                                 <p class="card-text_1">Working time: <b>${item['time_working_1']}</b></p>
-                            </div>
                             </div>
                         </div>`;
                 }
