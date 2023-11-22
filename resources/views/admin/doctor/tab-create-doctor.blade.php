@@ -16,8 +16,7 @@
         @csrf
         <div><label>name</label>
             <input type="text" class="form-control" id="name" name="name"></div>
-        <div><label>Email</label>
-            <input type="email" class="form-control" id="email_doctor" name="name"></div>
+
         <div class="row">
             <div class="col-sm-6">
                 <label for="year_of_experience">Năm kinh nghiệm</label>
