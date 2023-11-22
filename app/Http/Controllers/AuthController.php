@@ -162,20 +162,7 @@ class AuthController extends Controller
             $success = $user->save();
 
             if ($success) {
-                $role = Role::where('name', $member)->first();
-                $newUser = User::where('username', $username)->first();
-                if ($role) {
-                    RoleUser::create([
-                        'role_id' => $role->id,
-                        'user_id' => $newUser->id
-                    ]);
-                } else {
-                    $roleNormal = Role::where('name', \App\Enums\Role::PAITENTS)->first();
-                    RoleUser::create([
-                        'role_id' => $roleNormal->id,
-                        'user_id' => $newUser->id
-                    ]);
-                }
+                (new MainController())->createRoleUser($member, $username);
 
                 toast('Register success!', 'success', 'top-left');
                 return redirect(route('home'));
