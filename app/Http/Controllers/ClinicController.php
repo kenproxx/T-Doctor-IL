@@ -20,6 +20,11 @@ class ClinicController extends Controller
         return response()->json($clinics,$id);
     }
 
+
+    public function showNear()
+    {
+
+    }
     public function index()
     {
         return view('clinics.listClinics');

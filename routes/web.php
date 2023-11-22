@@ -108,6 +108,7 @@ Route::group(['prefix' => 'clinic'], function () {
     Route::get('/', [ClinicController::class, 'index'])->name('clinic');
     Route::get('/detail/{id}', [ClinicController::class, 'detail'])->name('clinic.detail');
     Route::post('/create', [ClinicController::class, 'store'])->name('clinic.booking.store');
+    Route::get('/showNear/{id}', [ClinicController::class, 'showNear'])->name('clinic.booking.showNear');
 
 });
 Route::group(['prefix' => 'product'], function () {
