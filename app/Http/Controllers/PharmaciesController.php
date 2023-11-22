@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DoctorInfo;
 use Illuminate\Http\Request;
 
-class PharmaciesApiController extends Controller
+class PharmaciesController extends Controller
 {
     public function index() {
         $pharmacies = DoctorInfo::where('hocham_hocvi', 'pharmacies')->get();

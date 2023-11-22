@@ -83,8 +83,8 @@ Route::group(['prefix' => 'questions'], function () {
 });
 
 Route::group(['prefix' => 'pharmacies'], function () {
-    Route::get('/list', [\App\Http\Controllers\PharmaciesApiController::class, 'index'])->name('api.pharmacies.list');
-    Route::get('/detail/{id}', [\App\Http\Controllers\PharmaciesApiController::class, 'detailPharmacies'])->name('api.pharmacies.detail');
+    Route::get('/list', [\App\Http\Controllers\PharmaciesController::class, 'index'])->name('api.pharmacies.list');
+    Route::get('/detail/{id}', [\App\Http\Controllers\PharmaciesController::class, 'detailPharmacies'])->name('api.pharmacies.detail');
 });
 
 Route::group(['prefix' => 'mentoring'], function () {
