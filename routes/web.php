@@ -82,7 +82,10 @@ Route::group(['prefix' => 'questions'], function () {
     Route::get('/{userId}/{categoryId}', [BackendQuestionController::class, 'getQuestionByUserIdAndCategoryId'])->name('questions.list.userid.categoryId');
 });
 
-
+Route::group(['prefix' => 'pharmacies'], function () {
+    Route::get('/list', [\App\Http\Controllers\PharmaciesApiController::class, 'index'])->name('api.pharmacies.list');
+    Route::get('/detail/{id}', [\App\Http\Controllers\PharmaciesApiController::class, 'detailPharmacies'])->name('api.pharmacies.detail');
+});
 
 Route::group(['prefix' => 'mentoring'], function () {
     Route::get('', [ExaminationController::class, 'mentoring'])->name('examination.mentoring');
