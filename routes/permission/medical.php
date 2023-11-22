@@ -210,6 +210,12 @@ Route::group(['prefix' => 'doctors-info'], function () {
     Route::post('/update-doctor/{id}', [AdminDoctorInfoApi::class, 'update'])->name('api.backend.doctors.info.update.doctor');
     Route::delete('/delete/{id}', [AdminDoctorInfoApi::class, 'delete'])->name('api.backend.doctors.info.delete');
 });
+
+Route::group(['prefix' => 'pharmacies'], function () {
+    Route::get('/list', [\App\Http\Controllers\PharmaciesApiController::class, 'index'])->name('api.pharmacies.list');
+    Route::get('/detail/{id}', [\App\Http\Controllers\PharmaciesApiController::class, 'detail'])->name('api.pharmacies.detail');
+});
+
 /* Doctor department api */
 Route::group(['prefix' => 'doctors-departments'], function () {
     Route::get('/list', [AdminDoctorDepartmentApi::class, 'getAll'])->name('api.backend.doctors.departments.list');
