@@ -136,7 +136,7 @@
                 var detailAddress = $('#address_detail').val();
 
                 // Gộp các giá trị vào một chuỗi cách nhau bởi dấu phẩy
-                var combinedAddress = [detailAddress, codeCommuneId, codeDistrictId, codeProvinceId,'việt nam' ].join(',');
+                var combinedAddress = [detailAddress, codeCommuneId, codeDistrictId, codeProvinceId,'Việt Nam' ].join(',');
                 // Gán giá trị vào input ẩn
                 console.log(combinedAddress)
                 $('#combined_address').val(combinedAddress);

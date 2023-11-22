@@ -81,15 +81,30 @@
             border-radius: 32px;
             background:  #FFF;
         }
+        .gm-style-iw {
+            padding: 0 !important;
+        }
+        button.gm-ui-hover-effect {
+            top: 10px !important;
+            right: 10px !important;
+            border-radius: 20px !important;
+            background: white !important;
+        }
+        .background-modal{
+            max-width: 360px;
+        }
+        .button-follow {
+            max-height: 30px;
+        }
     </style>
 
     <div class="container">
         @include('What-free.header-wFree')
         @php
-            $addresses = AddressMap::all();
+            $addresses = \App\Models\Clinic::all();
             $coordinatesArray = $addresses->toArray();
         @endphp
-        <div id="allAddressesMap" style="height: 800px;">
+        <div id="allAddressesMap" class="show active fade" style="height: 800px;">
 
         </div>
 
@@ -173,7 +188,7 @@
                         title: 'Location'
                     });
 
-                    var infoWindowContent = `<div class="p-0 tab-pane fade show active background-modal b-radius" id="modalBooking">
+                    var infoWindowContent = `<div class="p-0 m-0 tab-pane fade show active background-modal b-radius" id="modalBooking">
                 <div>
                     @php
                         $str = $bookings->gallery;
