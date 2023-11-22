@@ -1,19 +1,18 @@
 @extends('layouts.admin')
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQO5YhrnYxyI215uOX9bNQ-_xxV_stGf8&callback=initMap"></script>
-
 @section('main-content')
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('Edit') }}</h1>
     <form method="post" action="{{ route('api.backend.clinics.update', ['id' => $clinics->id]) }}">
         @csrf
-        @method('PUT')
+        @method('POST')
 
         <div>
             <div class="row">
                 <div class="col-md-4">
                     <label>name</label>
-                    <input type="text" class="form-control" id="name" name="name" required value="{{$clinics->name}}">
+                    <input type="text" class="form-control" id="name" name="name" value="{{$clinics->name}}">
                 </div>
                 <div class="col-md-4">
                     <label>name_en</label>
@@ -56,8 +55,8 @@
                 @endphp
                 <div class="col-sm-4">
                     <label for="province_id">Tỉnh</label>
-
                     <select name="province_id" id="province_id" class="form-control">
+
                     </select>
                 </div>
                 <div class="col-sm-4">
@@ -125,7 +124,7 @@
                 <input type="text" name="latitude" id="latitude" class="form-control">
             </div>
         </div>
-        <button type="submit" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
+        <button type="button" class="btn btn-primary up-date-button mt-4">Lưu</button>
     </form>
     <script>
         $(document).ready(function () {
