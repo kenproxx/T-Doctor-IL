@@ -28,8 +28,6 @@ class RegisterController extends Controller
                 return response('Email invalid!', 400);
             }
 
-            $myUser = (new MainController())->switchMember($member);
-
             $user = new User();
 
             $oldUser = User::where('email', $email)->first();
@@ -78,8 +76,8 @@ class RegisterController extends Controller
             $user->email = $email;
             $user->name = '';
             $user->last_name = '';
-            $user->password = Hash::make($password);
             $user->username = $username;
+            $user->password = Hash::make($password);
             $user->phone = '';
             $user->address_code = '';
             $user->type = $type;
@@ -93,22 +91,11 @@ class RegisterController extends Controller
             $success = $user->save();
 
             if ($success) {
-                $role = Role::where('name', $member)->first();
-                $newUser = User::where('username', $username)->first();
-                if ($role) {
-                    RoleUser::create([
-                        'role_id' => $role->id,
-                        'user_id' => $newUser->id
-                    ]);
-                } else {
-                    $roleNormal = Role::where('name', \App\Enums\Role::PAITENTS)->first();
-                    RoleUser::create([
-                        'role_id' => $roleNormal->id,
-                        'user_id' => $newUser->id
-                    ]);
-                }
+                (new MainController())->createRoleUser($member, $username);
                 $response = $user->toArray();
-                $response['role'] = $myUser[0]->name;
+                $roleUser = RoleUser::where('user_id', $user->id)->first();
+                $role = Role::find($roleUser->role_id);
+                $response['role'] = $role->name;
                 return response()->json($response);
             }
             return response('Register fail!', 400);

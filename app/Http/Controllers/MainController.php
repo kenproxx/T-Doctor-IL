@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Enums\TypeUser;
 use App\Models\Role;
+use App\Models\RoleUser;
+use App\Models\User;
 use DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -98,6 +100,24 @@ class MainController extends Controller
         }
 
         return [$role, $type];
+    }
+
+    public function createRoleUser($member, $username)
+    {
+        $role = Role::where('name', $member)->first();
+        $newUser = User::where('username', $username)->first();
+        if ($role) {
+            RoleUser::create([
+                'role_id' => $role->id,
+                'user_id' => $newUser->id
+            ]);
+        } else {
+            $roleNormal = Role::where('name', \App\Enums\Role::PAITENTS)->first();
+            RoleUser::create([
+                'role_id' => $roleNormal->id,
+                'user_id' => $newUser->id
+            ]);
+        }
     }
 
     public function generateRandomString($length)
