@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\DoctorDepartmentStatus;
 use App\Enums\DoctorInfoStatus;
+use App\Enums\Role;
 use App\Enums\UserStatus;
 use App\Models\Chat;
 use App\Models\DoctorDepartment;
@@ -64,7 +65,9 @@ class DoctorInfoController extends Controller
 
     private function returnListUser()
     {
-        $listUsers = User::where('status', UserStatus::ACTIVE)->where('id', '!=', Auth::user()->id)->get();
+        $listUsers = User::whereHas('roles', function ($query) {
+            $query->where('role_id', 11);
+        })->get();
         $users = null;
         foreach ($listUsers as $user) {
             $doctor = DoctorInfo::where('created_by', $user->id)->where('status', '!=', DoctorInfoStatus::DELETED)->first();
