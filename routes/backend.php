@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\backend\BackendCouponApplyController;
 use App\Http\Controllers\backend\BackendCouponController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\restapi\SocialUserApi;
 use App\Http\Controllers\restapi\UserApi;
 use Illuminate\Support\Facades\Route;
@@ -36,3 +37,5 @@ Route::group(['prefix' => 'coupons'], function () {
     Route::post('/update/{id}', [BackendCouponController::class, 'update'])->name('api.backend.coupons.update');
     Route::delete('/delete/{id}', [BackendCouponController::class, 'delete'])->name('api.backend.coupons.delete');
 });
+
+Route::get('/info-user/{id}', [ProfileController::class, 'infoUser'])->name('infouser');

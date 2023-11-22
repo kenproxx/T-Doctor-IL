@@ -46,7 +46,13 @@ class AdminDoctorInfoApi extends Controller
     public function create(Request $request)
     {
         try {
-            $doctor_infos = new DoctorInfo();
+            $created_by = $request->input('created_by');
+            $doctor = DoctorInfo::where('created_by', $created_by)->first();
+            if (!$doctor) {
+                $doctor_infos = new DoctorInfo();
+            } else {
+                $doctor_infos = $doctor;
+            }
 
             $item = $this->saveDoctorInfo($request, $doctor_infos);
             if ($item) {

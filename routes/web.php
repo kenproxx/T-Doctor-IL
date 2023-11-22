@@ -46,11 +46,6 @@ Route::get('/login-google', [AuthSocialController::class, 'getGoogleSignInUrl'])
 Route::get('/login-google-callback', [AuthSocialController::class, 'loginCallback'])->name('login.google.callback');
 Route::get('/login-role', [AuthSocialController::class, 'chooseRole'])->name('login.social.choose.role');
 
-Route::get('profile', [ProfileController::class, 'index'])->name('profile');
-Route::put('profile-update', [ProfileController::class, 'update'])->name('profile.update');
-Route::get('/info-user/{id}', [ProfileController::class, 'infoUser'])->name('infouser');
-
-
 Route::group(['prefix' => 'news'], function () {
     Route::get('', [NewEventController::class, 'index'])->name('index.new');
     Route::get('detail/{id}', [NewEventController::class, 'detail'])->name('detail.new');
@@ -152,6 +147,9 @@ Route::group(['prefix' => 'address'], function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::post('/save-user-login-social', [AuthSocialController::class, 'saveUser'])->name('save.user.login.social');
+
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('profile-update', [ProfileController::class, 'update'])->name('profile.update');
 
     Route::group(['prefix' => 'checkout'], function () {
         Route::get('/', [CheckoutController::class, 'index'])->name('user.checkout.index');
