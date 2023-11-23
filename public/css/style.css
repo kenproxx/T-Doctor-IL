@@ -1086,12 +1086,37 @@ span.material-symbols-outlined {
     align-items: flex-start;
     gap: 12px;
     border-radius: 16px;
-    border: 1px solid var(--Light, #EAEAEA);
-    background: var(--White, #FFF);
+    border: 1px solid #EAEAEA;
+    background:  #FFF;
 }
 .heart-item {
     position: absolute;
-    right: 25px;
+    right: 40px;
     top: 25px;
     font-size: 25px;
+}
+.max-img {
+    min-width: 237px;
+    min-height: 237px;
+    /*max-width: 237px;*/
+    /*max-height: 237px;*/
+}
+.d-content {
+    display: contents;
+}
+.respiratory {
+    color:  #424242;
+    text-align: center;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.location-doc {
+    color: #929292;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }

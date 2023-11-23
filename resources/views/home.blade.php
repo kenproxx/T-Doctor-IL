@@ -291,22 +291,22 @@
                                 @foreach($listNews as $news)
                                     <div class="px-5 py-2">
                                         <a href="{{route('detail.new',$news->id)}}">
-                                        <div class="content__item d-flex gap-3">
-                                            <img
-                                                class="content__item__image"
-                                                src="{{$news->thumbnail}}"
-                                                alt=""
-                                            />
-                                            <div>
-                                                <h6>
-                                                    {{$news->title}}
-                                                </h6>
-                                                <div class="content__item__describe">
-                                                   {!!   $news->short_description  !!}
+                                            <div class="content__item d-flex gap-3">
+                                                <img
+                                                    class="content__item__image"
+                                                    src="{{$news->thumbnail}}"
+                                                    alt=""
+                                                />
+                                                <div>
+                                                    <h6>
+                                                        {{$news->title}}
+                                                    </h6>
+                                                    <div class="content__item__describe">
+                                                        {!!   $news->short_description  !!}
+                                                    </div>
+                                                    <p class="content__item-link">Read</p>
                                                 </div>
-                                                <p class="content__item-link">Read</p>
                                             </div>
-                                        </div>
                                         </a>
                                     </div>
                                 @endforeach
@@ -372,7 +372,8 @@
                 <div id="address" class="p-2 w-100">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d760.8895710809026!2d105.75723237632864!3d20.973456865015233!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313453779ecd7b59%3A0x21695bf72a03120f!2zQ8O0bmcgdHkgVE5ISCBJTCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1696643777380!5m2!1svi!2s"
-                        width="770" height="417" style="border:1px; border-radius: 8px" allowfullscreen="" loading="lazy"
+                        width="770" height="417" style="border:1px; border-radius: 8px" allowfullscreen=""
+                        loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 <div id="describe" class="p-2">
@@ -417,15 +418,21 @@
             @endphp
             <div id="list-doctor" class="d-flex row">
                 @foreach($doctors as $doctor)
-
-                    <div class="col-md-3 mt-3 bg-list-doctor">
-                        <div><i class="bi bi-heart heart-item"></i><img src="{{$doctor->thumbnail}}"></div>
-                        <div>
-                            <div>BS {{$doctor->name}}</div>
-                            <div>{!! $doctor->service !!}</div>
-                            <div>Location: {{$doctor->name}}</div>
-                            <div>Working time: {{$doctor->time_working_1}}</div>
+                    <div class="col-md-3 mt-3">
+                        <a href="{{ route('examination.doctor_info', $doctor->id) }}" target="_blank">
+                        <div class="bg-list-doctor">
+                            <div><i class="bi bi-heart heart-item"></i><img class="b-radius-8px max-img"
+                                                                            src="{{$doctor->thumbnail}}"></div>
+                            <div class="d-content">
+                                    <div class="fs-18px">BS {{$doctor->name}}</div>
+                                <div class="respiratory">{!! $doctor->service !!}</div>
+                                <div class="d-flex  location-doc">Location: <p class="fs-16px">{{$doctor->name}}</p>
+                                </div>
+                                <div class="d-flex  location-doc">Working time:<p
+                                        class="fs-16px">{{$doctor->time_working_1}}</p></div>
+                            </div>
                         </div>
+                        </a>
                     </div>
                 @endforeach
             </div>
@@ -575,6 +582,7 @@
                     <div class="row">
                         @foreach($products as $product)
                             <div class="col-sm-4 pt-4">
+                                <a href="{{ route('flea.market.product.detail', $product->id) }}" target="_blank">
                                 <div class="card border-flea-market" style="height: 342px">
                                     <img src="{{asset($product->thumbnail ?? 'img/item_shopping.png')}}"
                                          class="card-img-top object-fit-cover" alt="...">
@@ -591,6 +599,7 @@
                                         <h4>{{ $product->price }}</h4>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         @endforeach
                     </div>
