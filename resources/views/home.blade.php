@@ -41,13 +41,16 @@
                     <div class="d-flex">
                         <ul class="nav nav-pills nav-fill d-flex justify-content-between w-100">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Free today</a>
+                                <a class="nav-link active font-14-mobi" id="home-tab" data-toggle="tab" href="#home"
+                                   role="tab" aria-controls="home" aria-selected="true">Free today</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Free with mission</a>
+                                <a class="nav-link font-14-mobi" id="profile-tab" data-toggle="tab" href="#profile"
+                                   role="tab" aria-controls="profile" aria-selected="false">Free with mission</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Discounted service</a>
+                                <a class="nav-link font-14-mobi" id="contact-tab" data-toggle="tab" href="#contact"
+                                   role="tab" aria-controls="home" aria-selected="true">Discounted service</a>
                             </li>
                         </ul>
                     </div>
@@ -409,57 +412,22 @@
             </div>
         </div>
         <div class="container">
-            <div id="list-doctor  " class="d-flex">
-                <div class="col-md-3">
-                    <div class="card">
-                        <i class="bi bi-heart"></i>
-                        <img src="{{asset('img/pngtree-cartoon-anime-male-doctor-element-png-image_4073784.jpg')}}"
-                             class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">BS Nguyễn Khắc Quý</h5>
-                            <p class="card-text">respiratory doctor</p>
-                            <p class="card-text_1">Location: <b>Hanoi</b></p>
-                            <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <i class="bi bi-heart"></i>
-                        <img src="{{asset('img/11111.jpeg')}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">BS Lê Hải Thành</h5>
-                            <p class="card-text">respiratory doctor</p>
-                            <p class="card-text_1">Location: <b>Hanoi</b></p>
-                            <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <i class="bi bi-heart"></i>
-                        <img src="{{asset('img/22222.jpeg')}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">BS Phạm Đức Long</h5>
-                            <p class="card-text">respiratory doctor</p>
-                            <p class="card-text_1">Location: <b>Hanoi</b></p>
-                            <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="card">
-                        <i class="bi bi-heart"></i>
-                        <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">BS Trần Đình </h5>
-                            <p class="card-text">respiratory doctor</p>
-                            <p class="card-text_1">Location: <b>Hanoi</b></p>
-                            <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                        </div>
-                    </div>
-                </div>
+            @php
+                $doctors = \App\Models\DoctorInfo::where('status', \App\Enums\DoctorInfoStatus::ACTIVE)->get();
+            @endphp
+            <div id="list-doctor" class="d-flex row">
+                @foreach($doctors as $doctor)
 
+                    <div class="col-md-3 mt-3 bg-list-doctor">
+                        <div><i class="bi bi-heart heart-item"></i><img src="{{$doctor->thumbnail}}"></div>
+                        <div>
+                            <div>BS {{$doctor->name}}</div>
+                            <div>{!! $doctor->service !!}</div>
+                            <div>Location: {{$doctor->name}}</div>
+                            <div>Working time: {{$doctor->time_working_1}}</div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
         <nav aria-label="Page navigation example">

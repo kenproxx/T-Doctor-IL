@@ -1079,3 +1079,19 @@ span.material-symbols-outlined {
 .pagination{
     padding-bottom: 10px;
 }
+#list-doctor .bg-list-doctor{
+    display: flex;
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    border-radius: 16px;
+    border: 1px solid var(--Light, #EAEAEA);
+    background: var(--White, #FFF);
+}
+.heart-item {
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    font-size: 25px;
+}
