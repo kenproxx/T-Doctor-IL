@@ -23,7 +23,10 @@ class BookingApi extends Controller
                 ->where('status', BookingStatus::APPROVED)
                 ->get();
             if (count($exitBooking) > 5) {
-                return response('The pre-booking service has reached the allowed number! Please re-choose again!', 400);
+                $array = [
+                    'message' => 'The pre-booking service has reached the allowed number! Please re-choose again!'
+                ];
+                return response($array, 400);
             }
 
             $success = $booking->save();
