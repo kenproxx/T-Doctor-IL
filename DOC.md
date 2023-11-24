@@ -8,5 +8,5 @@
 7. composer require socialiteproviders/kakao
 8. composer require guzzlehttp/guzzle
 9. composer require laravelcollective/html
-10. composer require mcamara/laravel-localization
+
 
