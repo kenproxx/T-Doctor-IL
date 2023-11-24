@@ -1,10 +1,9 @@
 @extends('layouts.admin')
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQO5YhrnYxyI215uOX9bNQ-_xxV_stGf8&callback=initMap"></script>
 @section('main-content')
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('Edit') }}</h1>
-    <form method="post" action="{{ route('api.backend.clinics.update', ['id' => $clinics->id]) }}">
+    <form method="post" action="{{ route('api.backend.clinics.update', ['id' => $clinic->id]) }}">
         @csrf
         @method('POST')
 
@@ -12,41 +11,47 @@
             <div class="row">
                 <div class="col-md-4">
                     <label>name</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{$clinics->name}}">
+                    <input type="text" class="form-control" id="name" name="name" value="{{$clinic->name}}">
                 </div>
                 <div class="col-md-4">
                     <label>name_en</label>
-                    <input type="text" class="form-control" id="name_en" name="name_en" value="{{$clinics->name_en}}">
+                    <input type="text" class="form-control" id="name_en" name="name_en" value="{{$clinic->name_en}}">
                 </div>
                 <div class="col-md-4">
                     <label>name_laos</label>
-                    <input type="text" class="form-control" id="name_laos" name="name_laos" value="{{$clinics->name_laos}}">
+                    <input type="text" class="form-control" id="name_laos" name="name_laos"
+                           value="{{$clinic->name_laos}}">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <label>phone</label>
-                    <input type="number" class="form-control" id="phone" name="phone" required value="{{$clinics->phone}}">
+                    <input type="number" class="form-control" id="phone" name="phone" required
+                           value="{{$clinic->phone}}">
                 </div>
                 <div class="col-md-6">
                     <label>email</label>
-                    <input type="email" class="form-control" id="email" name="email" required value="{{$clinics->email}}">
+                    <input type="email" class="form-control" id="email" name="email" required
+                           value="{{$clinic->email}}">
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-4"><label for="address_detail">địa chỉ chi tiết việt</label>
-                    <input type="text" class="form-control" name="address_detail" id="address_detail" value="{{$clinics->address_detail}}">
+                    <input type="text" class="form-control" name="address_detail" id="address_detail"
+                           value="{{$clinic->address_detail}}">
                 </div>
                 <div class="col-sm-4"><label for="address_detail_en">địa chỉ chi tiết anh</label>
-                    <input type="text" class="form-control" name="address_detail_en" id="detail_address_en" value="{{$clinics->address_detail_en}}">
+                    <input type="text" class="form-control" name="address_detail_en" id="detail_address_en"
+                           value="{{$clinic->address_detail_en}}">
                 </div>
                 <div class="col-sm-4"><label for="address_detail_laos">địa chỉ chi tiết lào</label>
-                    <input type="text" class="form-control" name="address_detail_laos" id="detail_address_laos" value="{{$clinics->address_detail_laos}}">
+                    <input type="text" class="form-control" name="address_detail_laos" id="detail_address_laos"
+                           value="{{$clinic->address_detail_laos}}">
                 </div>
             </div>
             <div class="row">
                 @php
-                    $combinedAddress = $clinics->address; // Thay bằng giá trị thực tế của bạn
+                    $combinedAddress = $clinic->address; // Thay bằng giá trị thực tế của bạn
                     $addressParts = explode(',', $combinedAddress);
                     $detailAddress = $addressParts[0];
                     $codeProvince = $addressParts[1];
@@ -83,13 +88,13 @@
             <div>
                 <label>introduce</label>
                 <input type="text" class="form-control" id="introduce" name="introduce" required
-                       value="{{$clinics->introduce}}">
+                       value="{{$clinic->introduce}}">
             </div>
             <div>
                 <label>gallery</label>
                 <input type="file" class="form-control" id="gallery" name="gallery" multiple>
                 @php
-                    $galleryArray = explode(',', $clinics->gallery);
+                    $galleryArray = explode(',', $clinic->gallery);
                 @endphp
                 @foreach($galleryArray as $productImg)
                     <img width="50px" src="{{$productImg}}">
@@ -112,7 +117,7 @@
                     <select class="custom-select" id="time_work" name="time_work">
                         @foreach($types as $type)
                             <option
-                                {{ $type == $clinics->time_work ? 'selected' : ''}} value="{{ $type }}">{{ $type }}</option>
+                                {{ $type == $clinic->time_work ? 'selected' : ''}} value="{{ $type }}">{{ $type }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -121,13 +126,16 @@
                 <label>User</label>
                 <input type="text" class="form-control" id="user_id" name="user_id" value="{{Auth::user()->id}}">
             </div>
+            0
             <div>
                 <label>open_date</label>
-                <input type="datetime-local" class="form-control" id="open_date" name="open_date" required value="{{$clinics->open_date}}">
+                <input type="datetime-local" class="form-control" id="open_date" name="open_date" required
+                       value="{{$clinic->open_date}}">
             </div>
             <div>
                 <label>close_date</label>
-                <input type="datetime-local" class="form-control" id="close_date" name="close_date" value="{{$clinics->close_date}}">
+                <input type="datetime-local" class="form-control" id="close_date" name="close_date"
+                       value="{{$clinic->close_date}}">
             </div>
             <div hidden="">
                 <input type="text" name="combined_address" id="combined_address" class="form-control">
@@ -160,7 +168,7 @@
                 var detailAddress = $('#address_detail').val();
 
                 // Gộp các giá trị vào một chuỗi cách nhau bởi dấu phẩy
-                var combinedAddress = [ codeProvinceId, codeDistrictId, codeCommuneId, detailAddress].join(',');
+                var combinedAddress = [codeProvinceId, codeDistrictId, codeCommuneId, detailAddress].join(',');
                 // Gán giá trị vào input ẩn
                 console.log(combinedAddress)
                 $('#combined_address').val(combinedAddress);
@@ -204,9 +212,10 @@
                 formData.append("latitude", $('#latitude').val());
                 formData.append("address_detail", $('#address_detail').val());
                 formData.append("address_detail_en", $('#detail_address_en').val());
+                formData.append("detail_address_laos", $('#detail_address_laos').val());
                 formData.append("province_id", myProvince[0]);
                 formData.append("district_id", myDistrict[0]);
-                formData.append("commune_id",myCommune[0]);
+                formData.append("commune_id", myCommune[0]);
                 formData.append("introduce", $('#introduce').val());
                 formData.append("open_date", $('#open_date').val());
                 formData.append("close_date", $('#close_date').val());
@@ -221,7 +230,7 @@
                 }
                 try {
                     $.ajax({
-                        url: `{{route('api.backend.clinics.edit',$clinics->id)}}`,
+                        url: `{{route('api.backend.clinics.edit',$clinic->id)}}`,
                         method: 'POST',
                         headers: headers,
                         contentType: false,
@@ -243,6 +252,20 @@
         })
     </script>
     <script>
+        let province_id;
+        let list_address = `{{ $clinic->address }}`;
+        console.log(list_address)
+        let arrayAddress = list_address.split(',');
+        var filtered = arrayAddress.filter(function (el) {
+            return el != null;
+        });
+        if (filtered.length > 3) {
+            province_id = filtered[1];
+        } else {
+            province_id = filtered[0];
+        }
+
+
         $(document).ready(function () {
             callGetAllProvince();
 
@@ -308,8 +331,12 @@
             let html = ``;
             for (let i = 0; i < res.length; i++) {
                 let data = res[i];
+                let isCheck = '';
+                if (province_id == data.id){
+                    isCheck = 'selected';
+                }
                 let code = data.code;
-                html = html + `<option class="province province-item" data-code="${code}" value="${data.id}-${data.code}-${data.name}">${data.name}</option>`;
+                html = html + `<option class="province province-item"  ${isCheck}  data-code="${code}" value="${data.id}-${data.code}-${data.name}">${data.name}</option>`;
             }
 
             $('#province_id').empty().append(html);

@@ -18,12 +18,54 @@
             white-space: nowrap;
             overflow: hidden;
         }
+        .background-modal {
+            background: #FFFFFF;
+            max-height: 820px;
+            overflow-y: scroll;
+            margin: 20px;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        .border-button-close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .border-button-close span {
+            padding: 0 5px;
+            border-radius: 32px;
+            background: #FFF;
+        }
+
+        .gm-style-iw {
+            padding: 0 !important;
+        }
+
+        button.gm-ui-hover-effect {
+            top: 10px !important;
+            right: 10px !important;
+            border-radius: 20px !important;
+            background: white !important;
+        }
+
+        .background-modal {
+            max-width: 400px;
+        }
+
+        .button-follow {
+            max-height: 30px;
+        }
     </style>
     @include('layouts.partials.header')
     @include('component.banner')
     <div>
-
-        {{ __('home.name') }}
         <div class="section1 d-flex justify-content-evenly">
             <div class="section1__side">
                 <div class="section1__side_1">
@@ -371,12 +413,8 @@
                 <p>Find your suitable clinics/pharmacies and book now!</p>
             </div>
             <div class="d-flex">
-                <div id="address" class="p-2 w-100">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d760.8895710809026!2d105.75723237632864!3d20.973456865015233!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313453779ecd7b59%3A0x21695bf72a03120f!2zQ8O0bmcgdHkgVE5ISCBJTCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1696643777380!5m2!1svi!2s"
-                        width="770" height="417" style="border:1px; border-radius: 8px" allowfullscreen=""
-                        loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div id="allAddressesMap" class="p-2 w-100">
+
                 </div>
                 <div id="describe" class="p-2">
                     <div class="describe-item">
@@ -710,10 +748,222 @@
             </ul>
         </nav>
     </div>
-
+    @php
+        $addresses = \App\Models\Clinic::all();
+        $coordinatesArray = $addresses->toArray();
+    @endphp
     <script>
         function viewCoupon(id) {
             window.location.href = "/coupon/" + id;
         }
+    </script>
+    <script>
+        var locations = {!! json_encode($coordinatesArray) !!};
+        var infoWindows = [];
+
+        function getCurrentLocation(callback) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var currentLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    callback(currentLocation);
+                });
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        }
+
+        function calculateDistance(lat1, lng1, lat2, lng2) {
+            var R = 6371; // Độ dài trung bình của trái đất trong km
+            var dLat = toRadians(lat2 - lat1);
+            var dLng = toRadians(lng2 - lng1);
+
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+                Math.sin(dLng / 2) * Math.sin(dLng / 2);
+
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+            var distance = R * c;
+            return distance;
+        }
+
+        function toRadians(degrees) {
+            return degrees * (Math.PI / 180);
+        }
+        function formatTime(dateTimeString) {
+            const date = new Date(dateTimeString);
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            return `${hours}:${minutes}`;
+        }
+
+        function initMap(currentLocation, locations) {
+            var map = new google.maps.Map(document.getElementById('allAddressesMap'), {
+                center: currentLocation,
+                zoom: 10
+            });
+
+            var currentLocationMarker = new google.maps.Marker({
+                position: currentLocation,
+                map: map,
+                title: 'Your Location'
+            });
+
+            locations.forEach(function(location) {
+                var distance = calculateDistance(
+                    currentLocation.lat, currentLocation.lng,
+                    parseFloat(location.latitude), parseFloat(location.longitude)
+                );
+
+                // Chọn bán kính tìm kiếm (ví dụ: 5 km)
+                var searchRadius = 10;
+
+                if (distance <= searchRadius) {
+                    var marker = new google.maps.Marker({
+                        position: { lat: parseFloat(location.latitude), lng: parseFloat(location.longitude) },
+                        map: map,
+                        title: 'Location'
+                    });
+                    var urlDetail = "{{ route('clinic.detail', ['id' => ':id']) }}".replace(':id', location.id);
+                    let img = '';
+                    let gallery = location.gallery;
+                    let arrayGallery = gallery.split(',');
+
+
+                    var infoWindowContent =`<div class="p-0 m-0 tab-pane fade show active background-modal b-radius" id="modalBooking">
+                <div>
+
+                    <img class="b-radius" src="${arrayGallery[0]}" alt="img">
+                </div>
+                <div class="p-3">
+                    <div class="form-group">
+                        <div class="d-flex justify-content-between mt-md-2">
+                            <div class="fs-18px">${location.name}</div>
+                            <div class="button-follow fs-12p ">
+                                <a class="text-follow-12" href="">FOLLOW</a>
+                            </div>
+                        </div>
+                        <div class="d-flex mt-md-2">
+                            <div class="d-flex col-md-6 justify-content-center align-items-center">
+                                <a class="row p-2" href="">
+                                    <div class="justify-content-center d-flex">
+                                        <i class="border-button-address fa-solid fa-bullseye"></i>
+                                    </div>
+                                    <div class="d-flex justify-content-center">Start</div>
+                                </a>
+                            </div>
+                            <div class="d-flex col-md-6 justify-content-center align-items-center">
+                                <a class="row p-2" href="">
+                                    <div class="justify-content-center d-flex">
+                                        <i class="border-button-address fa-regular fa-circle-right"></i>
+                                    </div>
+                                    <div class="d-flex justify-content-center">Direction</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-md-3 mb-md-3">
+                    <a class="w-100 btn btn-secondary border-button-address font-weight-800 fs-14 justify-content-center" href="${urlDetail}" >
+                    Booking
+                    </a>
+                    </div>
+                    <div class="border-top">
+                        <div class="mt-md-2"><i class="text-gray mr-md-2 fa-solid fa-location-dot"></i>
+                            <span class="fs-14 font-weight-600">${location.address_detail}</span>
+                        </div>
+                        <div class="mt-md-2">
+                            <i class="text-gray mr-md-2 fa-regular fa-clock"></i>
+                            <span class="fs-14 font-weight-600">
+                                Open: ${formatTime(location.open_date)} - ${formatTime(location.close_date)}
+                            </span>
+                        </div>
+                        <div class="mt-md-2">
+                            <i class="text-gray mr-md-2 fa-solid fa-globe"></i>
+                            <span class="fs-14 font-weight-600"> ${location.email}</span>
+                        </div>
+                        <div class="mt-md-2">
+                            <i class="text-gray mr-md-2 fa-solid fa-phone-volume"></i> <span
+                                class="fs-14 font-weight-600"> ${location.phone}</span>
+                        </div>
+                        <div class="mt-md-2 mb-md-2">
+                            <i class="text-gray mr-md-2 fa-solid fa-bookmark"></i> <span
+                                class="fs-14 font-weight-600"> ${location.type}</span>
+                        </div>
+                        @for($i=0; $i<3; $i++)
+                    <div class="border-top mb-md-2">
+                        <div
+                            class="d-flex justify-content-between rv-header align-items-center mt-md-2">
+                            <div class="d-flex rv-header--left">
+                                <div class="avt-24 mr-md-2">
+                                    <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
+                                        </div>
+                                        <p class="fs-16px">Trần Đình Phi</p>
+                                    </div>
+                                    <div class="rv-header--right">
+                                        <p class="fs-14 font-weight-400">10:20 07/04/2023</p>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <p>
+                                        Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại
+                                        salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi
+                                        như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới
+                                        thiệu cho bạn bè cùng sử dụng :D
+                                    </p>
+                                </div>
+                            </div>
+                        @endfor
+                    <div class="border-top">
+                        <div
+                            class="d-flex justify-content-between rv-header align-items-center mt-md-2">
+                            <div class="d-flex rv-header--left">
+                                <div class="avt-24 mr-md-2">
+                                    <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
+                                    </div>
+                                    <p class="fs-16px">Trần Đình Phi</p>
+                                </div>
+                                <div class="rv-header--right">
+                                    <p class="fs-14 font-weight-400">10:20 07/04/2023</p>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <p>
+                                    Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại
+                                    salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như
+                                    mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho
+                                    bạn bè cùng sử dụng :D
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: infoWindowContent
+                    });
+
+                    marker.addListener('click', function() {
+                        closeAllInfoWindows();
+                        infoWindow.open(map, marker);
+                    });
+
+                    infoWindows.push(infoWindow);
+                }
+            });
+        }
+
+        function closeAllInfoWindows() {
+            infoWindows.forEach(function(infoWindow) {
+                infoWindow.close();
+            });
+        }
+
+        getCurrentLocation(function(currentLocation) {
+            initMap(currentLocation, locations);
+        });
     </script>
 @endsection
