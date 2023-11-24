@@ -95,16 +95,27 @@
                     <img width="50px" src="{{$productImg}}">
                 @endforeach
             </div>
-            <div>
-                <label for="status">status</label>
-                <select class="custom-select" id="status" name="status">
-                    <option
-                        value="{{ \App\Enums\ClinicStatus::ACTIVE }}">{{ \App\Enums\ClinicStatus::ACTIVE }}</option>
-                    <option
-                        value="{{ \App\Enums\ClinicStatus::INACTIVE }}">{{ \App\Enums\ClinicStatus::INACTIVE }}</option>
-                    <option
-                        value="{{ \App\Enums\ClinicStatus::DELETED }}">{{ \App\Enums\ClinicStatus::DELETED }}</option>
-                </select>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="status">status</label>
+                    <select class="custom-select" id="status" name="status">
+                        <option
+                            value="{{ \App\Enums\ClinicStatus::ACTIVE }}">{{ \App\Enums\ClinicStatus::ACTIVE }}</option>
+                        <option
+                            value="{{ \App\Enums\ClinicStatus::INACTIVE }}">{{ \App\Enums\ClinicStatus::INACTIVE }}</option>
+                        <option
+                            value="{{ \App\Enums\ClinicStatus::DELETED }}">{{ \App\Enums\ClinicStatus::DELETED }}</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="status">Time work</label>
+                    <select class="custom-select" id="time_work" name="time_work">
+                        @foreach($types as $type)
+                            <option
+                                {{ $type == $clinics->time_work ? 'selected' : ''}} value="{{ $type }}">{{ $type }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
             <div hidden="">
                 <label>User</label>
