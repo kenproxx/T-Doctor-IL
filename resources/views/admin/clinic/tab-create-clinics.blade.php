@@ -82,29 +82,45 @@
                 <input type="file" class="form-control" id="gallery" name="gallery[]" required multiple
                        accept="image/*">
             </div>
-            <div>
-                <label for="status">status</label>
-                <select class="custom-select" id="status" name="status">
-                    <option
-                        value="{{ \App\Enums\ClinicStatus::ACTIVE }}">{{ \App\Enums\ClinicStatus::ACTIVE }}</option>
-                    <option
-                        value="{{ \App\Enums\ClinicStatus::INACTIVE }}">{{ \App\Enums\ClinicStatus::INACTIVE }}</option>
-                    <option
-                        value="{{ \App\Enums\ClinicStatus::DELETED }}">{{ \App\Enums\ClinicStatus::DELETED }}</option>
-                </select>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="status">status</label>
+                    <select class="custom-select" id="status" name="status">
+                        <option
+                            value="{{ \App\Enums\ClinicStatus::ACTIVE }}">{{ \App\Enums\ClinicStatus::ACTIVE }}</option>
+                        <option
+                            value="{{ \App\Enums\ClinicStatus::INACTIVE }}">{{ \App\Enums\ClinicStatus::INACTIVE }}</option>
+                        <option
+                            value="{{ \App\Enums\ClinicStatus::DELETED }}">{{ \App\Enums\ClinicStatus::DELETED }}</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="status">status</label>
+                    <select class="custom-select" id="time_work" name="time_work">
+                        <option value="{{\App\Enums\TypeTimeWork::ALL}}">{{\App\Enums\TypeTimeWork::ALL}}</option>
+                        <option value="{{\App\Enums\TypeTimeWork::NONE}}">{{\App\Enums\TypeTimeWork::NONE}}</option>
+                        <option value="{{\App\Enums\TypeTimeWork::OFFICE_HOURS}}">{{\App\Enums\TypeTimeWork::OFFICE_HOURS}}</option>
+                        <option value="{{\App\Enums\TypeTimeWork::ONLY_AFTERNOON}}">{{\App\Enums\TypeTimeWork::ONLY_MORNING}}</option>
+                        <option value="{{\App\Enums\TypeTimeWork::ONLY_AFTERNOON}}">{{\App\Enums\TypeTimeWork::ONLY_AFTERNOON}}</option>
+                    </select>
+                </div>
             </div>
+
             <div hidden="">
                 <label>User</label>
                 <input type="text" class="form-control" id="user_id" name="user_id" value="{{Auth::user()->id}}">
             </div>
-            <div>
-                <label>open_date</label>
-                <input type="datetime-local" class="form-control" id="open_date" name="open_date" required value="">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="open_date">open_date</label>
+                    <input type="time" class="form-control" id="open_date" name="open_date" required value="">
+                </div>
+                <div class="col-md-6">
+                    <label for="close_date">close_date</label>
+                    <input type="time" class="form-control" id="close_date" name="close_date" value="">
+                </div>
             </div>
-            <div>
-                <label>close_date</label>
-                <input type="datetime-local" class="form-control" id="close_date" name="close_date" value="">
-            </div>
+
             <div hidden="">
                 <input type="text" name="combined_address" id="combined_address" class="form-control">
                 <input type="text" name="longitude" id="longitude" class="form-control">
@@ -187,6 +203,7 @@
                 formData.append("open_date", $('#open_date').val());
                 formData.append("close_date", $('#close_date').val());
                 formData.append("user_id", $('#user_id').val());
+                formData.append("time_work", $('#time_work').val());
                 formData.append("status", $('#status').val());
 
                 var filedata = document.getElementById("gallery");
