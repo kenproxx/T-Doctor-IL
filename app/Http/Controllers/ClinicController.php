@@ -47,13 +47,13 @@ class ClinicController extends Controller
 
     public function edit($id)
     {
-        $clinics = Clinic::find($id);
+        $clinic = Clinic::find($id);
         $reflector = new \ReflectionClass('App\Enums\TypeTimeWork');
         $types = $reflector->getConstants();
-        if (!$clinics || $clinics->status != ClinicStatus::ACTIVE) {
+        if (!$clinic || $clinic->status != ClinicStatus::ACTIVE) {
             return response("Product not found", 404);
         }
-        return view('admin.clinic.tab-edit-clinics', compact('clinics','types'));
+        return view('admin.clinic.tab-edit-clinics', compact('clinic','types'));
     }
 
     public function booking($id)

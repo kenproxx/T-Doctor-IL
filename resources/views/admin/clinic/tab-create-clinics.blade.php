@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQO5YhrnYxyI215uOX9bNQ-_xxV_stGf8&callback=initMap"></script>
+<script
 @section('main-content')
 
     <!-- Page Heading -->
@@ -32,14 +32,14 @@
                 </div>
             </div>
             <div class="row">
-            <div class="col-md-6">
-                <label>phone</label>
-                <input type="number" class="form-control" id="phone" name="phone" required value="">
-            </div>
-            <div class="col-md-6">
-                <label>email</label>
-                <input type="email" class="form-control" id="email" name="email" required value="">
-            </div>
+                <div class="col-md-6">
+                    <label>phone</label>
+                    <input type="number" class="form-control" id="phone" name="phone" required value="">
+                </div>
+                <div class="col-md-6">
+                    <label>email</label>
+                    <input type="email" class="form-control" id="email" name="email" required value="">
+                </div>
             </div>
             <div class="row">
                 <div class="col-sm-4"><label for="address_detail">địa chỉ chi tiết việt</label>
@@ -49,7 +49,8 @@
                     <input type="text" class="form-control" name="address_detail_en" id="detail_address_en" value="">
                 </div>
                 <div class="col-sm-4"><label for="address_detail_laos">địa chỉ chi tiết lào</label>
-                    <input type="text" class="form-control" name="address_detail_laos" id="detail_address_laos" value="">
+                    <input type="text" class="form-control" name="address_detail_laos" id="detail_address_laos"
+                           value="">
                 </div>
             </div>
             <div class="row">
@@ -99,9 +100,12 @@
                     <select class="custom-select" id="time_work" name="time_work">
                         <option value="{{\App\Enums\TypeTimeWork::ALL}}">{{\App\Enums\TypeTimeWork::ALL}}</option>
                         <option value="{{\App\Enums\TypeTimeWork::NONE}}">{{\App\Enums\TypeTimeWork::NONE}}</option>
-                        <option value="{{\App\Enums\TypeTimeWork::OFFICE_HOURS}}">{{\App\Enums\TypeTimeWork::OFFICE_HOURS}}</option>
-                        <option value="{{\App\Enums\TypeTimeWork::ONLY_AFTERNOON}}">{{\App\Enums\TypeTimeWork::ONLY_MORNING}}</option>
-                        <option value="{{\App\Enums\TypeTimeWork::ONLY_AFTERNOON}}">{{\App\Enums\TypeTimeWork::ONLY_AFTERNOON}}</option>
+                        <option
+                            value="{{\App\Enums\TypeTimeWork::OFFICE_HOURS}}">{{\App\Enums\TypeTimeWork::OFFICE_HOURS}}</option>
+                        <option
+                            value="{{\App\Enums\TypeTimeWork::ONLY_AFTERNOON}}">{{\App\Enums\TypeTimeWork::ONLY_MORNING}}</option>
+                        <option
+                            value="{{\App\Enums\TypeTimeWork::ONLY_AFTERNOON}}">{{\App\Enums\TypeTimeWork::ONLY_AFTERNOON}}</option>
                         <option value="{{\App\Enums\TypeTimeWork::OTHER}}">{{\App\Enums\TypeTimeWork::OTHER}}</option>
                     </select>
                 </div>
@@ -112,23 +116,32 @@
                 <input type="text" class="form-control" id="user_id" name="user_id" value="{{Auth::user()->id}}">
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label for="open_date">open_date</label>
                     <input type="datetime-local" class="form-control" id="open_date" name="open_date" required value="">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label for="close_date">close_date</label>
                     <input type="datetime-local" class="form-control" id="close_date" name="close_date" value="">
                 </div>
-            </div>
+                <div class="col-md-4">
+                    <label for="type">type</label>
+                    <select class="type-select" id="type" name="time_work">
+                        <option
+                            value="{{\App\Enums\TypeBussiness::CLINICS}}">{{\App\Enums\TypeBussiness::CLINICS}}</option>
+                        <option
+                            value="{{\App\Enums\TypeBussiness::PHARMACIES}}">{{\App\Enums\TypeBussiness::PHARMACIES}}</option>
+                    </select>
+                </div>
 
-            <div hidden="">
-                <input type="text" name="combined_address" id="combined_address" class="form-control">
-                <input type="text" name="longitude" id="longitude" class="form-control">
-                <input type="text" name="latitude" id="latitude" class="form-control">
+                <div hidden="">
+                    <input type="text" name="combined_address" id="combined_address" class="form-control">
+                    <input type="text" name="longitude" id="longitude" class="form-control">
+                    <input type="text" name="latitude" id="latitude" class="form-control">
+                </div>
             </div>
+            <button type="button" class="btn btn-primary up-date-button mt-4">Lưu</button>
         </div>
-        <button type="button" class="btn btn-primary up-date-button mt-4">Lưu</button>
     </form>
     <script>
         $(document).ready(function () {
@@ -153,7 +166,7 @@
                 var detailAddress = $('#address_detail').val();
 
                 // Gộp các giá trị vào một chuỗi cách nhau bởi dấu phẩy
-                var combinedAddress = [detailAddress, codeCommuneId, codeDistrictId, codeProvinceId,'Việt Nam' ].join(',');
+                var combinedAddress = [detailAddress, codeCommuneId, codeDistrictId, codeProvinceId, 'Việt Nam'].join(',');
                 // Gán giá trị vào input ẩn
                 $('#combined_address').val(combinedAddress);
                 addNewAddress();
@@ -199,12 +212,13 @@
                 formData.append("address_detail_laos", $('#detail_address_laos').val());
                 formData.append("province_id", myProvince[0]);
                 formData.append("district_id", myDistrict[0]);
-                formData.append("commune_id",myCommune[0]);
+                formData.append("commune_id", myCommune[0]);
                 formData.append("introduce", $('#introduce').val());
                 formData.append("open_date", $('#open_date').val());
                 formData.append("close_date", $('#close_date').val());
                 formData.append("user_id", $('#user_id').val());
                 formData.append("time_work", $('#time_work').val());
+                formData.append("type", $('#type').val());
                 formData.append("status", $('#status').val());
 
                 var filedata = document.getElementById("gallery");

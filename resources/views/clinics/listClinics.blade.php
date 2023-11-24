@@ -87,7 +87,7 @@
 
                     let html = `
                     <div class="col-md-4 mb-md-3">
-                        <div class="clinic-item">
+                        <div class="clinic-item over-x-hidden">
                             <a href="${urlDetail}">
                                 ${item.name}
                             </a>
