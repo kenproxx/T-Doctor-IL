@@ -196,6 +196,7 @@
                 formData.append("latitude", $('#latitude').val());
                 formData.append("address_detail", $('#address_detail').val());
                 formData.append("address_detail_en", $('#detail_address_en').val());
+                formData.append("address_detail_laos", $('#detail_address_laos').val());
                 formData.append("province_id", myProvince[0]);
                 formData.append("district_id", myDistrict[0]);
                 formData.append("commune_id",myCommune[0]);

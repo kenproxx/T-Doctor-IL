@@ -119,6 +119,7 @@ class BackendClinicController extends Controller
             $clinic->latitude = $latitude;
             $clinic->address_detail = $address_detail;
             $clinic->address_detail_en = $address_detail_en ?? '';
+            $clinic->address_detail_laos = $address_detail_laos ?? '';
             $clinic->user_id = $user_id;
             $clinic->time_work = $time_work;
             $clinic->type = TypeBussiness::CLINICS;
