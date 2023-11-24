@@ -15,6 +15,17 @@ class BookingApi extends Controller
         try {
             $booking = new Booking();
             $booking = (new ClinicController())->createBooking($request, $booking);
+
+            $clinicID = $booking->clinic_id;
+            $servicesAsString = $booking->service;
+            $exitBooking = Booking::where('clinic_id', $clinicID)
+                ->where('service', $servicesAsString)
+                ->where('status', BookingStatus::APPROVED)
+                ->get();
+            if (count($exitBooking) > 5) {
+                return response('The pre-booking service has reached the allowed number! Please re-choose again!', 400);
+            }
+
             $success = $booking->save();
             if ($success) {
                 $response = $booking->toArray();
