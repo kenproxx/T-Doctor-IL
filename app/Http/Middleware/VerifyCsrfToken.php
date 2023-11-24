@@ -33,6 +33,7 @@ class VerifyCsrfToken extends Middleware
         '/address/**',
         '/api/booking/**',
         '/api/carts/**',
+        '/api/doctor-reviews/**',
         '/api/users-social/**',
         'auth/*'
     ];
