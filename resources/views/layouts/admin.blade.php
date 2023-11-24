@@ -12,7 +12,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title> @yield('title') </title>
 
     <!-- Fonts -->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
@@ -124,6 +124,12 @@
                     <span>List Coupon</span></a>
             </li>
             @if(!$isStaff)
+                <!-- Nav Item - List Service Clinics -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('user.service.clinics.list') }}">
+                        <i class="fa-solid fa-house-chimney-medical"></i>
+                        <span>Service Clinics</span></a>
+                </li>
                 <!-- Nav Item - List Clinics -->
                 <li class="nav-item {{ Nav::isRoute('homeAdmin.list.clinics') }}">
                     <a class="nav-link" href="{{ route('homeAdmin.list.clinics') }}">
@@ -178,39 +184,39 @@
                         <i class="fa-solid fa-user-doctor"></i>
                         <span>Booking</span></a>
                 </li>
-                    @endif
+            @endif
 
-                    <!-- Divider -->
-                    <hr class="sidebar-divider">
-                    @endif
-                    <!-- Heading -->
-                    <div class="sidebar-heading">
-                        {{ __('Settings') }}
-                    </div>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+        @endif
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            {{ __('Settings') }}
+        </div>
 
-                    <!-- Nav Item - Profile -->
-                <li class="nav-item {{ Nav::isRoute('profile') }}">
-                    <a class="nav-link" href="{{ route('profile') }}">
-                        <i class="fas fa-fw fa-user"></i>
-                        <span>{{ __('Profile') }}</span>
-                    </a>
-                </li>
+        <!-- Nav Item - Profile -->
+        <li class="nav-item {{ Nav::isRoute('profile') }}">
+            <a class="nav-link" href="{{ route('profile') }}">
+                <i class="fas fa-fw fa-user"></i>
+                <span>{{ __('Profile') }}</span>
+            </a>
+        </li>
 
-                <!-- Nav Item - About -->
-                <li class="nav-item {{ Nav::isRoute('about') }}">
-                    <a class="nav-link" href="{{ route('about') }}">
-                        <i class="fas fa-fw fa-hands-helping"></i>
-                        <span>{{ __('About') }}</span>
-                    </a>
-                </li>
+        <!-- Nav Item - About -->
+        <li class="nav-item {{ Nav::isRoute('about') }}">
+            <a class="nav-link" href="{{ route('about') }}">
+                <i class="fas fa-fw fa-hands-helping"></i>
+                <span>{{ __('About') }}</span>
+            </a>
+        </li>
 
-                <!-- Divider -->
-                <hr class="sidebar-divider d-none d-md-block">
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
 
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="text-center d-none d-md-inline">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div>
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
 
     </ul>
     <!-- End of Sidebar -->

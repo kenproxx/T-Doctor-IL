@@ -28,7 +28,7 @@ Route::group(['prefix' => 'service-clinics'], function () {
     Route::get('list', [AminServiceClinicApi::class, 'getAll'])->name('api.admin.service.clinic.list');
     Route::get('list-by-clinics/{id}', [AminServiceClinicApi::class, 'getAllByClinics'])->name('api.admin.service.clinic.list.clinics');
     Route::get('list-by-user/{id}', [AminServiceClinicApi::class, 'getAllByUserId'])->name('api.admin.service.clinic.list.user');
-    Route::get('detail', [AminServiceClinicApi::class, 'detail'])->name('api.admin.service.clinic.detail');
+    Route::get('detail/{id}', [AminServiceClinicApi::class, 'detail'])->name('api.admin.service.clinic.detail');
     Route::post('create', [AminServiceClinicApi::class, 'create'])->name('api.admin.service.clinic.create');
     Route::put('update/{id}', [AminServiceClinicApi::class, 'update'])->name('api.admin.service.clinic.update');
     Route::put('change-status/{id}', [AminServiceClinicApi::class, 'changeStatus'])->name('api.admin.service.clinic.changeStatus');
