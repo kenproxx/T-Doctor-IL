@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\BackendNewEventController;
+use App\Http\Controllers\restapi\admin\AminServiceClinicApi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,5 +24,15 @@ Route::group(['prefix' => 'new-event'], function () {
     Route::post('destroy/{id}', [BackendNewEventController::class, 'destroy'])->name('api.new-event.destroy');
 });
 
+Route::group(['prefix' => 'service-clinics'], function () {
+    Route::get('list', [AminServiceClinicApi::class, 'getAll'])->name('api.admin.service.clinic.list');
+    Route::get('list-by-clinics/{id}', [AminServiceClinicApi::class, 'getAllByClinics'])->name('api.admin.service.clinic.list.clinics');
+    Route::get('list-by-user/{id}', [AminServiceClinicApi::class, 'getAllByUserId'])->name('api.admin.service.clinic.list.user');
+    Route::get('detail', [AminServiceClinicApi::class, 'detail'])->name('api.admin.service.clinic.detail');
+    Route::post('create', [AminServiceClinicApi::class, 'create'])->name('api.admin.service.clinic.create');
+    Route::put('update/{id}', [AminServiceClinicApi::class, 'update'])->name('api.admin.service.clinic.update');
+    Route::put('change-status/{id}', [AminServiceClinicApi::class, 'changeStatus'])->name('api.admin.service.clinic.changeStatus');
+    Route::delete('delete/{id}', [AminServiceClinicApi::class, 'delete'])->name('api.admin.service.clinic.delete');
+});
 
 
