@@ -21,6 +21,7 @@ use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecruitmentController;
 use App\Http\Controllers\ReviewStoreController;
+use App\Http\Controllers\ServiceClinicController;
 use App\Http\Controllers\WhatFreeToDay;
 use Illuminate\Support\Facades\Route;
 
@@ -165,6 +166,12 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/return-checkout', [CheckoutController::class, 'returnCheckout'])->name('return.checkout.payment');
         Route::post('/imm', [CheckoutController::class, 'checkoutByImm'])->name('user.checkout.imm');
         Route::post('/vnpay', [CheckoutController::class, 'checkoutByVNPay'])->name('user.checkout.vnpay');
+    });
+
+    Route::group(['prefix' => 'service-clinics'], function () {
+        Route::get('list', [ServiceClinicController::class, 'getListService'])->name('user.service.clinics.list');
+        Route::get('detail/{id}', [ServiceClinicController::class, 'detailService'])->name('user.service.clinics.detail');
+        Route::get('create', [ServiceClinicController::class, 'createService'])->name('user.service.clinics.create');
     });
 });
 Route::group(['middleware' => ['medical']], function () {

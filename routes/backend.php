@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\BackendCouponApplyController;
 use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\restapi\BookingApi;
+use App\Http\Controllers\restapi\DoctorReviewApi;
 use App\Http\Controllers\restapi\SocialUserApi;
 use App\Http\Controllers\restapi\UserApi;
 use Illuminate\Support\Facades\Route;
@@ -46,4 +47,14 @@ Route::group(['prefix' => 'booking'], function () {
     Route::get('/list-users/{id}', [BookingApi::class, 'getAllBookingByUserId'])->name('api.booking.list.users');
     Route::get('/list-clinics/{id}', [BookingApi::class, 'getAllBookingByClinicID'])->name('api.booking.list.users');
     Route::post('create', [BookingApi::class, 'createBooking'])->name('api.user.createBooking');
+});
+
+Route::group(['prefix' => 'doctor-reviews'], function () {
+    Route::get('/list', [DoctorReviewApi::class, 'getAll'])->name('api.backend.doctor.reviews.list');
+    Route::get('/doctor/{id}', [DoctorReviewApi::class, 'getAllByDoctorID'])->name('api.backend.doctor.reviews.doctor');
+    Route::get('/user/{id}', [DoctorReviewApi::class, 'getAllByUserID'])->name('api.backend.doctor.reviews.user');
+    Route::get('/detail/{id}', [DoctorReviewApi::class, 'findById'])->name('api.backend.doctor.reviews.detail');
+    Route::post('/create', [DoctorReviewApi::class, 'create'])->name('api.backend.doctor.reviews.create');
+    Route::post('/update/{id}', [DoctorReviewApi::class, 'update'])->name('api.backend.doctor.reviews.update');
+    Route::delete('/delete/{id}', [DoctorReviewApi::class, 'delete'])->name('api.backend.doctor.reviews.delete');
 });
