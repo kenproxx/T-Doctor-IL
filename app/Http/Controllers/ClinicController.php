@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\BookingStatus;
 use App\Enums\ClinicStatus;
 use App\Models\Booking;
 use App\Models\Clinic;
@@ -122,9 +123,12 @@ class ClinicController extends Controller
         $time = $request->input('selectedTime');
         $timestamp = Carbon::parse($time);
 
+        $datetime = $timestamp->addHour();
+
         $booking->user_id = $userID;
         $booking->clinic_id = $clinicID;
         $booking->check_in = $timestamp;
+        $booking->status = BookingStatus::PENDING;
 //        $booking->check_out = $checkOut;
         $booking->service = $servicesAsString;
 
