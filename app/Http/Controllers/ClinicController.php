@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Booking;
 use App\Enums\ClinicStatus;
+use App\Models\Booking;
 use App\Models\Clinic;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ClinicController extends Controller
@@ -17,7 +17,7 @@ class ClinicController extends Controller
         if (!$clinics || $clinics->status != ClinicStatus::ACTIVE) {
             return response("Product not found", 404);
         }
-        return response()->json($clinics,$id);
+        return response()->json($clinics, $id);
     }
 
 
@@ -25,6 +25,7 @@ class ClinicController extends Controller
     {
 
     }
+
     public function index()
     {
         return view('clinics.listClinics');
@@ -36,7 +37,7 @@ class ClinicController extends Controller
         if (!$bookings || $bookings->status != ClinicStatus::ACTIVE) {
             return response("Product not found", 404);
         }
-        return view('clinics.detailClinics',compact('id','bookings'));
+        return view('clinics.detailClinics', compact('id', 'bookings'));
     }
 
     public function create()
@@ -50,7 +51,7 @@ class ClinicController extends Controller
         if (!$clinics || $clinics->status != ClinicStatus::ACTIVE) {
             return response("Product not found", 404);
         }
-        return view('admin.clinic.tab-edit-clinics',compact('clinics'));
+        return view('admin.clinic.tab-edit-clinics', compact('clinics'));
     }
 
     public function booking($id)
@@ -59,23 +60,25 @@ class ClinicController extends Controller
         if (!$bookings || $bookings->status != ClinicStatus::ACTIVE) {
             return response("Product not found", 404);
         }
-        return view('component.tab-booking.tab-booking',compact('id','bookings'));
+        return view('component.tab-booking.tab-booking', compact('id', 'bookings'));
     }
+
     public function bookingService($id)
     {
         $bookingSv = Clinic::find($id);
         if (!$bookingSv || $bookingSv->status != ClinicStatus::ACTIVE) {
             return response("Product not found", 404);
         }
-        return view('component.tab-booking.booking-service',compact('id','bookingSv'));
+        return view('component.tab-booking.booking-service', compact('id', 'bookingSv'));
     }
+
     public function selectDate($id)
     {
         $bookingSv = Clinic::find($id);
         if (!$bookingSv || $bookingSv->status != ClinicStatus::ACTIVE) {
             return response("Product not found", 404);
         }
-        return view('component.tab-booking.select-date',compact('id','bookingSv'));
+        return view('component.tab-booking.select-date', compact('id', 'bookingSv'));
     }
 
     public function store(Request $request)
@@ -84,37 +87,49 @@ class ClinicController extends Controller
             if (Auth::user() == null) {
                 alert()->error('Error', 'Please login to booking.');
                 return back();
-            }
-            else{
-                $userID = \Auth::user()->id;
-                $clinicID = $request->input('clinic_id');
-                $checkIn = $request->input('check_in');
-                $checkOut = $request->input('check_out');
-                $service = $request->input('service');
-                if (is_array($service)) {
-                    $servicesAsString = implode(',', $service);
-                } else {
-                    $servicesAsString = $service;
-                }
-                $time = $request->input('selectedTime');
-                $timestamp = Carbon::parse($time);
+            } else {
                 $booking = new Booking();
 
-                $booking->user_id = $userID;
-                $booking->clinic_id = $clinicID;
-                $booking->check_in = $timestamp;
-                $booking->check_out = $checkOut;
-                $booking->service = $servicesAsString;
-
+                $booking = $this->createBooking($request, $booking);
                 $success = $booking->save();
+
                 if ($success) {
                     alert()->success('Success', 'Booking success.');
                     return back()->with('success', 'Booking success');
                 }
             }
-            return response('Create error', 400);
+            alert()->error('Error', 'Booking error.');
+            return back()->with('error', 'Booking error');
         } catch (\Exception $exception) {
-            return response($exception, 400);
+            alert()->error('Error', 'Please try again');
+            return back()->with('error', 'Booking error');
         }
+    }
+
+    public function createBooking(Request $request, $booking)
+    {
+        if (Auth::check()) {
+            $userID = Auth::user()->id;
+        } else {
+            $userID = $request->input('user_id');
+        }
+        $clinicID = $request->input('clinic_id');
+        $checkOut = $request->input('check_out');
+        $service = $request->input('service');
+        if (is_array($service)) {
+            $servicesAsString = implode(',', $service);
+        } else {
+            $servicesAsString = $service;
+        }
+        $time = $request->input('selectedTime');
+        $timestamp = Carbon::parse($time);
+
+        $booking->user_id = $userID;
+        $booking->clinic_id = $clinicID;
+        $booking->check_in = $timestamp;
+        $booking->check_out = $checkOut;
+        $booking->service = $servicesAsString;
+
+        return $booking;
     }
 }
