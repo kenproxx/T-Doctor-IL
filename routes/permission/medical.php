@@ -18,6 +18,7 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DoctorInfoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductInfoController;
+use App\Http\Controllers\restapi\admin\AdminBookingApi;
 use App\Http\Controllers\restapi\admin\AdminDoctorDepartmentApi;
 use App\Http\Controllers\restapi\admin\AdminDoctorInfoApi;
 use App\Http\Controllers\restapi\admin\AdminPhamacitisApi;
@@ -288,6 +289,15 @@ Route::group(['prefix' => 'service-clinics'], function () {
     Route::get('list', [ServiceClinicApi::class, 'getAll'])->name('api.backend.service.clinic.list');
     Route::get('list-by-clinics/{id}', [ServiceClinicApi::class, 'getAllByClinics'])->name('api.backend.service.clinic.list.clinics');
     Route::get('list-by-user/{id}', [ServiceClinicApi::class, 'getAllByUserId'])->name('api.backend.service.clinic.list.user');
-    Route::get('detail', [ServiceClinicApi::class, 'detail'])->name('api.backend.service.clinic.detail');
+    Route::get('detail/{id}', [ServiceClinicApi::class, 'detail'])->name('api.backend.service.clinic.detail');
     Route::post('create', [ServiceClinicApi::class, 'create'])->name('api.backend.service.clinic.create');
+});
+
+Route::group(['prefix' => 'bookings'], function () {
+    Route::get('list', [AdminBookingApi::class, 'getAll'])->name('api.bookings.list');
+    Route::get('list-by-clinics/{id}', [AdminBookingApi::class, 'getAllByClinicId'])->name('api.bookings.getAllByClinicId');
+    Route::get('list-by-user/{id}', [AdminBookingApi::class, 'getAllByUserId'])->name('api.bookings.getAllByUserId');
+    Route::get('detail/{id}', [AdminBookingApi::class, 'detail'])->name('api.bookings.detail');
+    Route::post('update/{id}', [AdminBookingApi::class, 'updateStatus'])->name('api.bookings.updateStatus');
+    Route::delete('delete/{id}', [AdminBookingApi::class, 'delete'])->name('api.bookings.delete');
 });

@@ -121,8 +121,6 @@ class ClinicController extends Controller
         $time = $request->input('selectedTime');
         $timestamp = Carbon::parse($time);
 
-        $datetime = $timestamp->addHour();
-
         $booking->user_id = $userID;
         $booking->clinic_id = $clinicID;
         $booking->check_in = $timestamp;
