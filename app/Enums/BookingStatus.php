@@ -8,6 +8,7 @@ use BenSampo\Enum\Enum;
 final class BookingStatus extends Enum
 {
     const PENDING = 'PENDING';
-    const DELETE = 'DELETE';
+    const COMPLETE = 'COMPLETE';
+    const CANCEL = 'CANCEL';
     const APPROVED = 'APPROVED';
 }

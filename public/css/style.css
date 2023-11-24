@@ -1079,3 +1079,44 @@ span.material-symbols-outlined {
 .pagination{
     padding-bottom: 10px;
 }
+#list-doctor .bg-list-doctor{
+    display: flex;
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    border-radius: 16px;
+    border: 1px solid #EAEAEA;
+    background:  #FFF;
+}
+.heart-item {
+    position: absolute;
+    right: 40px;
+    top: 25px;
+    font-size: 25px;
+}
+.max-img {
+    min-width: 237px;
+    min-height: 237px;
+    /*max-width: 237px;*/
+    /*max-height: 237px;*/
+}
+.d-content {
+    display: contents;
+}
+.respiratory {
+    color:  #424242;
+    text-align: center;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.location-doc {
+    color: #929292;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

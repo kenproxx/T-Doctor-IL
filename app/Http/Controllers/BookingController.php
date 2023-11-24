@@ -56,11 +56,11 @@ class BookingController extends Controller
     {
         try {
             $setting = Booking::find($id);
-            if (!$setting || $setting->status == BookingStatus::DELETE) {
+            if (!$setting || $setting->status == BookingStatus::CANCEL) {
                 return response('Not found', 404);
             }
 
-            $setting->status = BookingStatus::DELETE;
+            $setting->status = BookingStatus::CANCEL;
             $success = $setting->save();
             if ($success) {
                 alert()->success('Delete success!');

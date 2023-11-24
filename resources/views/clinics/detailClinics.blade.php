@@ -126,7 +126,7 @@
             <input id="check_out" name="check_out" value="">
         </div>
     </div>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe6qi9czJ2Z6SLnV9sSUzce0nuzhRm3hg"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAl8bmtXj3F5lPG_mbD5Pj9mGSu2LCzrrE"></script>
     <script>
         var locations = {!! json_encode($coordinatesArray) !!};
         var infoWindows = [];
