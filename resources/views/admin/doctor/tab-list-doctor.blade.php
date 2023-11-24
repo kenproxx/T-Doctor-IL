@@ -38,24 +38,32 @@
             const accessToken = `Bearer ${token}`;
 
             let url;
+            console.log(type)
             switch (type) {
                 case "NURSES":
                     url = `{{ route('api.backend.phamacitis.list') }}`;
+                    console.log(url)
                     break;
-                case "PHARMACISTS":
+                case "PHAMACISTS":
                     url = `{{ route('api.backend.phamacitis.list') }}`;
+                    console.log(url)
                     break;
                 case "THERAPISTS":
                     url = `{{ route('api.backend.doctors.info.list') }}`;
+                    console.log(url)
                     break;
                 case "ESTHETICIANS":
                     url = `{{ route('api.backend.doctors.info.list') }}`;
+                    console.log(url)
                     break;
                 default:
                     url = `{{ route('api.backend.doctors.info.list') }}`;
-                    break
+                    console.log(url)
+                    break;
+
             }
 
+            $('#listTextMedical').text('List ' + type);
             try {
                 const response = await $.ajax({
                     url: url,
@@ -74,7 +82,7 @@
 
     async function renderProduct(res) {
         let html = ``;
-        console.log(res);
+
         for (let i = 0; i < res.length; i++) {
             let urlEdit = `{{route('doctor.edit', ['id' => ':id'])}}`;
             urlEdit = urlEdit.replace(':id', res[i].id);
