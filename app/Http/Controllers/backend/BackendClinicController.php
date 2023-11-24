@@ -96,6 +96,7 @@ class BackendClinicController extends Controller
             $open_date = $request->input('open_date');
             $close_date = $request->input('close_date');
             $introduce = $request->input('introduce');
+            $time_work = $request->input('time_work');
 
             if ($request->hasFile('gallery')) {
                 $galleryPaths = array_map(function ($image) {
@@ -118,7 +119,9 @@ class BackendClinicController extends Controller
             $clinic->latitude = $latitude;
             $clinic->address_detail = $address_detail;
             $clinic->address_detail_en = $address_detail_en ?? '';
+            $clinic->address_detail_laos = $address_detail_laos ?? '';
             $clinic->user_id = $user_id;
+            $clinic->time_work = $time_work;
             $clinic->type = TypeBussiness::CLINICS;
 
             $address = [
