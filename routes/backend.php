@@ -8,6 +8,7 @@ use App\Http\Controllers\restapi\UserApi;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'users'], function () {
+    Route::post('/update-profile', [UserApi::class, 'updateProfile'])->name('user.update.profile');
     Route::post('/change-info', [UserApi::class, 'changeInformation'])->name('user.change.information');
     Route::post('/change-email', [UserApi::class, 'changeEmail'])->name('user.change.email');
     Route::post('/change-phone', [UserApi::class, 'changePhoneNumber'])->name('user.change.phone');
