@@ -155,7 +155,6 @@
                 // Gộp các giá trị vào một chuỗi cách nhau bởi dấu phẩy
                 var combinedAddress = [detailAddress, codeCommuneId, codeDistrictId, codeProvinceId,'Việt Nam' ].join(',');
                 // Gán giá trị vào input ẩn
-                console.log(combinedAddress)
                 $('#combined_address').val(combinedAddress);
                 addNewAddress();
             }
@@ -224,7 +223,6 @@
                         processData: false,
                         data: formData,
                         success: function (response) {
-                            console.log(response)
                             alert('success');
                             window.location.href = `{{route('homeAdmin.list.clinics')}}`;
                         },
@@ -342,12 +340,7 @@
                         if (!isNaN(latitude) && !isNaN(longitude)) {
                             $('#latitude').val(latitude);
                             $('#longitude').val(longitude);
-                        } else {
-                            console.error('Invalid coordinates:', latitude, longitude);
-                            alert('Invalid coordinates. Please try again.');
                         }
-                    } else {
-                        alert('Geocode was not successful for the following reason: ' + status);
                     }
                 });
             }
