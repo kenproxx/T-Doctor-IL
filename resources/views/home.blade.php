@@ -22,6 +22,8 @@
     @include('layouts.partials.header')
     @include('component.banner')
     <div>
+
+        {{ __('home.name') }}
         <div class="section1 d-flex justify-content-evenly">
             <div class="section1__side">
                 <div class="section1__side_1">
@@ -424,7 +426,7 @@
                             <div><i class="bi bi-heart heart-item"></i><img class="b-radius-8px max-img"
                                                                             src="{{$doctor->thumbnail}}"></div>
                             <div class="d-content">
-                                    <div class="fs-18px">BS {{$doctor->name}}</div>
+                                    <div class="fs-18px">{{$doctor->name}}</div>
                                 <div class="respiratory">{!! $doctor->service !!}</div>
                                 <div class="d-flex  location-doc">Location: <p class="fs-16px">{{$doctor->name}}</p>
                                 </div>

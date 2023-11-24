@@ -35,6 +35,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/lang/en', function ($locale) {
+    session()->put('locale', 'en');
+    return redirect()->back();
+})->name('language');
+
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::post('/login', [AuthController::class, 'login'])->name('loginProcess');

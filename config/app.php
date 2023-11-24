@@ -80,7 +80,12 @@ return [
     |
     */
 
-    'locale' => 'en',
+//    'locale' => 'en',
+//    'supportedLocales' => [
+//        'vi',
+//        'en',
+//        'laos',
+//    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -179,6 +184,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Mcamara\LaravelLocalization\LaravelLocalizationServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -255,6 +261,7 @@ return [
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'LaravelLocalization' => Mcamara\LaravelLocalization\Facades\LaravelLocalization::class,
     ],
 
 ];
