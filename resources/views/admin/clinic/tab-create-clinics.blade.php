@@ -114,11 +114,11 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="open_date">open_date</label>
-                    <input type="time" class="form-control" id="open_date" name="open_date" required value="">
+                    <input type="datetime-local" class="form-control" id="open_date" name="open_date" required value="">
                 </div>
                 <div class="col-md-6">
                     <label for="close_date">close_date</label>
-                    <input type="time" class="form-control" id="close_date" name="close_date" value="">
+                    <input type="datetime-local" class="form-control" id="close_date" name="close_date" value="">
                 </div>
             </div>
 
