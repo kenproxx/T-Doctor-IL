@@ -18,11 +18,11 @@
             <input type="text" class="form-control" id="name" name="name"></div>
 
         <div class="row">
-            <div class="col-sm-4">
-                <label for="year_of_experience">Học hàm / Học vị</label>
-                <select class="custom-select" id="hocham_hocvi" name="hocham_hocvi"  required>
-                        <option value="doctor">Bác sĩ</option>
-                        <option value="pharmacies">Dược sĩ</option>
+            <div class="col-sm-4"><label for="hocham_hocvi">Học hàm học vị</label>
+                <select class="custom-select" id="hocham_hocvi" name="hocham_hocvi">
+                    @foreach($types as $type)
+                        <option value="{{ $type }}">{{ $type }}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="col-sm-4">

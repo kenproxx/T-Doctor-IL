@@ -49,7 +49,9 @@ class DoctorInfoController extends Controller
     {
         $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
         $users = $this->returnListUser();
-        return view('admin.doctor.tab-create-doctor', compact('departments', 'users'));
+        $reflector = new \ReflectionClass('App\Enums\TypeMedical');
+        $types = $reflector->getConstants();
+        return view('admin.doctor.tab-create-doctor', compact('departments', 'users', 'types'));
     }
 
     public function edit($id)
@@ -60,15 +62,18 @@ class DoctorInfoController extends Controller
         }
         $users = $this->returnListUser();
         $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
-        return view('admin.doctor.tab-edit-doctor', compact('doctor', 'departments', 'users'));
+        $reflector = new \ReflectionClass('App\Enums\TypeMedical');
+        $types = $reflector->getConstants();
+        return view('admin.doctor.tab-edit-doctor', compact('doctor', 'departments', 'users', 'types'));
     }
 
     private function returnListUser()
     {
-        $listUsers = User::whereHas('roles', function ($query) {
-            $query->where('role_id', 11);
-        })->get();
-        $users = null;
+//        $listUsers = User::whereHas('roles', function ($query) {
+//            $query->where('role_id', 11);
+//        })->get();
+//        $users = null;
+        $listUsers = User::where('status', UserStatus::ACTIVE)->get();
         foreach ($listUsers as $user) {
             $doctor = DoctorInfo::where('created_by', $user->id)->where('status', '!=', DoctorInfoStatus::DELETED)->first();
             if (!$doctor) {

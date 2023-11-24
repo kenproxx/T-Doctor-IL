@@ -492,7 +492,7 @@
     </div>
     <div hidden="">
         <input id="clinic_id" name="clinic_id" value="{{ $bookings->id }}">
-                                    {{--<input id="user_id" name="user_id" value="{{ Auth::user()->id }}">--}}
+                                    <input id="user_id" name="user_id" value="{{ Auth::user()->id }}">
         </div>
 
         <button class="btn mt-4 btn-primary btn-block up-date-button button-apply-booking" id="activate">Apply

@@ -24,6 +24,7 @@ use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\QuestionLikesController;
 use App\Http\Controllers\restapi\admin\AdminDoctorDepartmentApi;
 use App\Http\Controllers\restapi\admin\AdminDoctorInfoApi;
+use App\Http\Controllers\restapi\admin\AdminPhamacitisApi;
 use App\Http\Controllers\restapi\admin\AdminPharmacyApi;
 use App\Http\Controllers\restapi\CartApi;
 use App\Http\Controllers\restapi\UserApi;
@@ -209,6 +210,12 @@ Route::group(['prefix' => 'doctors-info'], function () {
     Route::put('/update/{id}', [AdminDoctorInfoApi::class, 'update'])->name('api.backend.doctors.info.update');
     Route::post('/update-doctor/{id}', [AdminDoctorInfoApi::class, 'update'])->name('api.backend.doctors.info.update.doctor');
     Route::delete('/delete/{id}', [AdminDoctorInfoApi::class, 'delete'])->name('api.backend.doctors.info.delete');
+});
+
+Route::group(['prefix' => 'phamacitis'], function () {
+    Route::get('/list', [AdminPhamacitisApi::class, 'getAll'])->name('api.backend.phamacitis.list');
+    Route::get('/detail/{id}', [AdminPhamacitisApi::class, 'detail'])->name('api.backend.phamacitis.detail');
+    Route::get('/user/{id}', [AdminPhamacitisApi::class, 'findByUser'])->name('api.backend.phamacitis.user');
 });
 
 

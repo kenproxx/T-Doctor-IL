@@ -108,11 +108,7 @@ class ClinicController extends Controller
 
     public function createBooking(Request $request, $booking)
     {
-        if (Auth::check()) {
-            $userID = Auth::user()->id;
-        } else {
-            $userID = $request->input('user_id');
-        }
+        $userID = $request->input('user_id');
         $clinicID = $request->input('clinic_id');
         $checkOut = $request->input('check_out');
         $service = $request->input('service');
@@ -127,7 +123,7 @@ class ClinicController extends Controller
         $booking->user_id = $userID;
         $booking->clinic_id = $clinicID;
         $booking->check_in = $timestamp;
-        $booking->check_out = $checkOut;
+//        $booking->check_out = $checkOut;
         $booking->service = $servicesAsString;
 
         return $booking;

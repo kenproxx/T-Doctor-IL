@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\BookingStatus;
 use App\Enums\CouponStatus;
 use App\Enums\ProductStatus;
 use App\Enums\SettingStatus;
@@ -26,6 +25,7 @@ class HomeController extends Controller
         $products = ProductInfo::where('status', ProductStatus::ACTIVE)->get();
         return view('home', compact('coupons', 'products'));
     }
+
     public function home()
     {
         $users = User::count();
@@ -42,23 +42,35 @@ class HomeController extends Controller
     {
         return view('admin.product.list-product');
     }
+
     public function listClinics()
     {
         return view('admin.clinic.list-clinics');
     }
+
     public function listCoupon()
     {
         return view('admin.coupon.list-coupon');
     }
+
     public function listApplyCoupon($id)
     {
         $applyCoupons = CouponApply::where('coupon_id', $id)->get();
         return view('admin.coupon.tab-list-apply-coupon', compact('applyCoupons'));
     }
+
     public function listDoctor()
+    {
+        $reflector = new \ReflectionClass('App\Enums\TypeMedical');
+        $types = $reflector->getConstants();
+        return view('admin.doctor.list-doctors', compact('types'));
+    }
+
+    public function listPhamacitis()
     {
         return view('admin.doctor.list-doctors');
     }
+
     public function listStaff()
     {
         //get list staff by manager_id = auth()->id()
@@ -72,6 +84,7 @@ class HomeController extends Controller
         $settingConfig = Setting::where('status', SettingStatus::ACTIVE)->first();
         return view('admin.general-config.list-config', compact('settingConfig'));
     }
+
     public function listBooking()
     {
         $bookings = Booking::all();
