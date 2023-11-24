@@ -3,11 +3,8 @@
 
 use App\Http\Controllers\backend\BackendAccountRegisterController;
 use App\Http\Controllers\backend\BackendAnswerController;
-use App\Http\Controllers\backend\BackendCategoryController;
 use App\Http\Controllers\backend\BackendCategoryProductController;
 use App\Http\Controllers\backend\BackendClinicController;
-use App\Http\Controllers\backend\BackendCouponApplyController;
-use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendProductMedicineController;
 use App\Http\Controllers\backend\BackendQuestionController;
@@ -21,13 +18,12 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DoctorInfoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductInfoController;
-use App\Http\Controllers\QuestionLikesController;
 use App\Http\Controllers\restapi\admin\AdminDoctorDepartmentApi;
 use App\Http\Controllers\restapi\admin\AdminDoctorInfoApi;
 use App\Http\Controllers\restapi\admin\AdminPhamacitisApi;
 use App\Http\Controllers\restapi\admin\AdminPharmacyApi;
 use App\Http\Controllers\restapi\CartApi;
-use App\Http\Controllers\restapi\UserApi;
+use App\Http\Controllers\restapi\ServiceClinicApi;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
@@ -219,7 +215,6 @@ Route::group(['prefix' => 'phamacitis'], function () {
 });
 
 
-
 /* Doctor department api */
 Route::group(['prefix' => 'doctors-departments'], function () {
     Route::get('/list', [AdminDoctorDepartmentApi::class, 'getAll'])->name('api.backend.doctors.departments.list');
@@ -287,4 +282,12 @@ Route::group(['prefix' => 'service-clinic-pharmacy'], function () {
 Route::group(['prefix' => 'account-register'], function () {
     Route::get('index', [BackendAccountRegisterController::class, 'index'])->name('api.backend.account-register.index');
     Route::post('update/{id}', [BackendAccountRegisterController::class, 'update'])->name('api.backend.account-register.update');
+});
+
+Route::group(['prefix' => 'service-clinics'], function () {
+    Route::get('list', [ServiceClinicApi::class, 'getAll'])->name('api.backend.service.clinic.list');
+    Route::get('list-by-clinics/{id}', [ServiceClinicApi::class, 'getAllByClinics'])->name('api.backend.service.clinic.list.clinics');
+    Route::get('list-by-user/{id}', [ServiceClinicApi::class, 'getAllByUserId'])->name('api.backend.service.clinic.list.user');
+    Route::get('detail', [ServiceClinicApi::class, 'detail'])->name('api.backend.service.clinic.detail');
+    Route::post('create', [ServiceClinicApi::class, 'create'])->name('api.backend.service.clinic.create');
 });
