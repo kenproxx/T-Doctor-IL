@@ -5,7 +5,7 @@
 
     </style>
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">List Doctor</h1>
+    <h1 class="h3 mb-4 text-gray-800" id="listTextMedical">List Doctor</h1>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand btn btn-primary mb-3" href="{{route('doctor.create.product')}}"> <span
                 class="text-white">Add</span></a>
@@ -18,7 +18,7 @@
             <div class="form-group">
                 <select id="type_medical" class="form-control">
                    @foreach($types as $type)
-                        <option value=" {{$type}}"> {{$type}}</option>
+                        <option value="{{$type}}"> {{$type}}</option>
                    @endforeach
                 </select>
             </div>
