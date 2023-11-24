@@ -17,12 +17,21 @@
         <div><label for="name">name</label>
             <input type="text" class="form-control" id="name" name="name" value="{{$doctor->name}}"></div>
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
+                <label for="hocham_hocvi">Học hàm học vị</label>
+                <select class="custom-select" id="hocham_hocvi" name="hocham_hocvi">
+                    @foreach($types as $type)
+                        <option
+                            {{ $type == $doctor->hocham_hocvi ? 'selected' : ''}} value="{{ $type }}">{{ $type }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-sm-4">
                 <label for="year_of_experience">Năm kinh nghiệm</label>
                 <input type="number" class="form-control" id="year_of_experience" name="year_of_experience"
                        value="{{$doctor->year_of_experience}}">
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <label for="created_by">User</label>
                 <select class="custom-select" id="created_by" name="created_by">
                     @php
@@ -213,7 +222,7 @@
                     "service_price", "service_price_en", "service_price_laos",
                     "detail_address", "detail_address_en", "detail_address_laos",
                     "province_id", "district_id", "commune_id",
-                    "time_working_1", "time_working_2",
+                    "time_working_1", "time_working_2", "hocham_hocvi",
                     "name", "year_of_experience", "status", "apply_for", "department_id", "created_by"
                 ];
                 const fieldTextareaTiny = [

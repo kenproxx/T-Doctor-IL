@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\restapi;
 
 use App\Enums\DoctorInfoStatus;
+use App\Enums\TypeMedical;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Chat;
@@ -16,9 +17,13 @@ class DoctorInfoApi extends Controller
     {
         $size = $request->input('size');
         if ($size && $size > 0 && is_numeric($size)) {
-            $doctorInfos = DoctorInfo::where('status', DoctorInfoStatus::ACTIVE)->orderBy('id', 'DESC')->limit($size)->get();
+            $doctorInfos = DoctorInfo::where('status', DoctorInfoStatus::ACTIVE)->orderBy('id', 'DESC')
+                ->where('hocham_hocvi', TypeMedical::PHAMACISTS)
+                ->limit($size)->get();
         } else {
-            $doctorInfos = DoctorInfo::where('status', DoctorInfoStatus::ACTIVE)->orderBy('id', 'DESC')->get();
+            $doctorInfos = DoctorInfo::where('status', DoctorInfoStatus::ACTIVE)->orderBy('id', 'DESC')
+                ->where('hocham_hocvi', TypeMedical::DOCTORS)
+                ->get();
         }
         return response()->json($doctorInfos);
     }
@@ -30,7 +35,9 @@ class DoctorInfoApi extends Controller
 
     public function findByUser($id)
     {
-        $doctor_info = DoctorInfo::where('created_by', $id)->first();
+        $doctor_info = DoctorInfo::where('created_by', $id)
+            ->where('hocham_hocvi', TypeMedical::DOCTORS)
+            ->first();
         if (!$doctor_info || $doctor_info->status != DoctorInfoStatus::ACTIVE) {
             return response('Not found', 404);
         }
@@ -41,16 +48,25 @@ class DoctorInfoApi extends Controller
     {
         $size = $request->input('size');
         if ($size && $size > 0 && is_numeric($size)) {
-            $doctor_infos = DoctorInfo::where('department_id', $id)->orderBy('id', 'DESC')->limit($size)->get();
+            $doctor_infos = DoctorInfo::where('department_id', $id)
+                ->where('hocham_hocvi', TypeMedical::DOCTORS)
+                ->orderBy('id', 'DESC')
+                ->limit($size)
+                ->get();
         } else {
-            $doctor_infos = DoctorInfo::where('department_id', $id)->orderBy('id', 'DESC')->get();
+            $doctor_infos = DoctorInfo::where('department_id', $id)
+                ->where('hocham_hocvi', TypeMedical::DOCTORS)
+                ->orderBy('id', 'DESC')
+                ->get();
         }
         return response()->json($doctor_infos);
     }
 
     public function detail(Request $request, $id)
     {
-        $doctor_infos = DoctorInfo::where('id', $id)->first();
+        $doctor_infos = DoctorInfo::where('id', $id)
+            ->where('hocham_hocvi', TypeMedical::DOCTORS)
+            ->first();
         if (!$doctor_infos || $doctor_infos->status != DoctorInfoStatus::ACTIVE) {
             return response('Not found', 404);
         }
@@ -78,6 +94,7 @@ class DoctorInfoApi extends Controller
         $doctorInfos = DoctorInfo::whereIn('created_by', $array_doctor_ids)
             ->where('status', DoctorInfoStatus::ACTIVE)
             ->where('created_by', '!=', $id)
+            ->where('hocham_hocvi', TypeMedical::DOCTORS)
             ->get();
 
         return response()->json($doctorInfos);

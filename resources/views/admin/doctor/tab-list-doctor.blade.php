@@ -24,30 +24,57 @@
     </table>
 </div>
 <script>
-    var token = `{{ $_COOKIE['accessToken'] }}`;
-    $(document).ready(function () {
-        callListProduct(token);
-        async function callListProduct(token) {
-            let accessToken = `Bearer ` + token;
-            await $.ajax({
-                url: `{{route('api.backend.doctors.info.list')}}`,
-                method: 'GET',
-                headers: {
-                    "Authorization": accessToken
-                },
-                success: function (response) {
-                    renderProduct(response);
-                },
-                error: function (exception) {
-                    console.log(exception)
-                }
-            });
+    const token = `{{ $_COOKIE['accessToken'] }}`;
+
+    $(document).ready(() => {
+        callListProduct(token, 'DOCTOR');
+
+        $('#type_medical').on('change', function () {
+            let type = $(this).val();
+            callListProduct(token, type);
+        });
+
+        async function callListProduct(token, type) {
+            const accessToken = `Bearer ${token}`;
+
+            let url;
+            switch (type) {
+                case "NURSES":
+                    url = `{{ route('api.backend.phamacitis.list') }}`;
+                    break;
+                case "PHARMACISTS":
+                    url = `{{ route('api.backend.phamacitis.list') }}`;
+                    break;
+                case "THERAPISTS":
+                    url = `{{ route('api.backend.doctors.info.list') }}`;
+                    break;
+                case "ESTHETICIANS":
+                    url = `{{ route('api.backend.doctors.info.list') }}`;
+                    break;
+                default:
+                    url = `{{ route('api.backend.doctors.info.list') }}`;
+                    break
+            }
+
+            try {
+                const response = await $.ajax({
+                    url: url,
+                    method: 'GET',
+                    headers: {
+                        Authorization: accessToken,
+                    },
+                });
+                await renderProduct(response);
+            } catch (exception) {
+                console.log(exception);
+            }
         }
     });
 
-    async function renderProduct(res, id) {
-        let html = ``;
 
+    async function renderProduct(res) {
+        let html = ``;
+        console.log(res);
         for (let i = 0; i < res.length; i++) {
             let urlEdit = `{{route('doctor.edit', ['id' => ':id'])}}`;
             urlEdit = urlEdit.replace(':id', res[i].id);
@@ -61,7 +88,7 @@
                 img = img + `<img class="mr-2 w-auto h-100" src="${arrayGallery[j]}" alt="">`;
             }
             html = html + `<tr>
-            <th scope="row">${ i + 1 }</th>
+            <th scope="row">${i + 1}</th>
             <td>${img}</td>
             <td>${item.specialty}</td>
             <td>${item.year_of_experience}</td>
@@ -87,8 +114,8 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (response) {
-               alert('Delete Success!');
-               window.location.reload();
+                alert('Delete Success!');
+                window.location.reload();
             },
             error: function (exception) {
                 console.log(exception)

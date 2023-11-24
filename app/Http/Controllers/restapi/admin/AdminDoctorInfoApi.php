@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\restapi\admin;
 
 use App\Enums\DoctorInfoStatus;
+use App\Enums\TypeMedical;
 use App\Http\Controllers\Controller;
 use App\Models\DoctorInfo;
 use Illuminate\Http\Request;
@@ -13,9 +14,13 @@ class AdminDoctorInfoApi extends Controller
     {
         $status = $request->input('status');
         if ($status) {
-            $doctor_infos = DoctorInfo::where('status', $status)->get();
+            $doctor_infos = DoctorInfo::where('status', $status)
+                ->where('hocham_hocvi', TypeMedical::DOCTORS)
+                ->get();
         } else {
-            $doctor_infos = DoctorInfo::where('status', '!=', DoctorInfoStatus::DELETED)->get();
+            $doctor_infos = DoctorInfo::where('status', '!=', DoctorInfoStatus::DELETED)
+                ->where('hocham_hocvi', TypeMedical::DOCTORS)
+                ->get();
         }
         return response()->json($doctor_infos);
     }
@@ -27,7 +32,9 @@ class AdminDoctorInfoApi extends Controller
 
     public function findByUser($id)
     {
-        $doctor_infos = DoctorInfo::where('created_by', $id)->first();
+        $doctor_infos = DoctorInfo::where('created_by', $id)
+            ->where('hocham_hocvi', TypeMedical::DOCTORS)
+            ->first();
         if (!$doctor_infos || $doctor_infos->status == DoctorInfoStatus::DELETED) {
             return response('Not found', 404);
         }
@@ -36,7 +43,9 @@ class AdminDoctorInfoApi extends Controller
 
     public function detail(Request $request, $id)
     {
-        $doctor_infos = DoctorInfo::where('id', $id)->first();
+        $doctor_infos = DoctorInfo::where('id', $id)
+            ->where('hocham_hocvi', TypeMedical::DOCTORS)
+            ->first();
         if (!$doctor_infos || $doctor_infos->status == DoctorInfoStatus::DELETED) {
             return response('Not found', 404);
         }
