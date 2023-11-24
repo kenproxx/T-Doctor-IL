@@ -172,6 +172,9 @@ class UserApi extends Controller
             $district_id = $request->input('district_id');
             $commune_id = $request->input('commune_id');
 
+            $gender = $request->input('gender');
+            $birthday = $request->input('birthday');
+
             $user = User::find($userID);
             if ($userID && $user && $user->status == UserStatus::ACTIVE) {
                 $user->name = $name;
@@ -219,6 +222,9 @@ class UserApi extends Controller
                 $user->province_id = $province_id;
                 $user->district_id = $district_id;
                 $user->commune_id = $commune_id;
+
+                $user->gender = $gender;
+                $user->birthday = $birthday;
 
                 $success = $user->save();
                 if ($success) {
