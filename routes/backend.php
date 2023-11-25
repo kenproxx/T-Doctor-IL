@@ -45,7 +45,7 @@ Route::get('/info-user/{id}', [ProfileController::class, 'infoUser'])->name('inf
 
 Route::group(['prefix' => 'booking'], function () {
     Route::get('/list-users/{id}/{status}', [BookingApi::class, 'getAllBookingByUserId'])->name('api.booking.list.users');
-    Route::get('/list-clinics/{id}', [BookingApi::class, 'getAllBookingByClinicID'])->name('api.booking.list.users');
+    Route::get('/list-clinics/{id}', [BookingApi::class, 'getAllBookingByClinicID'])->name('api.booking.list.clinics');
     Route::post('create', [BookingApi::class, 'createBooking'])->name('api.user.createBooking');
 });
 

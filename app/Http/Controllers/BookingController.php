@@ -6,9 +6,16 @@ use App\Enums\BookingStatus;
 use App\Models\Booking;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
+
+    public function index()
+    {
+        $id = Auth::user()->id;
+        return view('bookings.listBooking',compact('id'));
+    }
     public function edit($id)
     {
         $bookings_edit = Booking::find($id);
