@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Enums\BookingStatus;
 use App\Enums\ClinicStatus;
+use App\Enums\ServiceClinicStatus;
 use App\Models\Booking;
 use App\Models\Clinic;
+use App\Models\ServiceClinic;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,12 +40,14 @@ class ClinicController extends Controller
         if (!$bookings || $bookings->status != ClinicStatus::ACTIVE) {
             return response("Product not found", 404);
         }
-        return view('clinics.detailClinics', compact('id', 'bookings'));
+        $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
+        return view('clinics.detailClinics', compact('id', 'bookings', 'services'));
     }
 
     public function create()
     {
-        return view('admin.clinic.tab-create-clinics');
+        $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
+        return view('admin.clinic.tab-create-clinics', compact('services'));
     }
 
     public function edit($id)
@@ -54,7 +58,8 @@ class ClinicController extends Controller
         if (!$clinic || $clinic->status != ClinicStatus::ACTIVE) {
             return response("Product not found", 404);
         }
-        return view('admin.clinic.tab-edit-clinics', compact('clinic','types'));
+        $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
+        return view('admin.clinic.tab-edit-clinics', compact('clinic', 'types', 'services'));
     }
 
     public function booking($id)

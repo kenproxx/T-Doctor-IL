@@ -1,6 +1,37 @@
 @extends('layouts.admin')
-@section('main-content')
+<style>
+    .list-service {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+    }
 
+    .list-service li {
+        margin-right: 20px; /* Adjust as needed */
+    }
+
+    .list-service li:last-child {
+        margin-right: 0;
+    }
+
+    .new-select {
+        display: flex;
+        align-items: center;
+    }
+
+    .new-select input {
+        margin-right: 5px; /* Adjust as needed */
+    }
+
+    .new-select label {
+        margin-top: 10px;
+    }
+
+    /* Add more styles as needed */
+
+</style>
+@section('main-content')
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('Edit') }}</h1>
     <form method="post" action="{{ route('api.backend.clinics.update', ['id' => $clinic->id]) }}">
@@ -126,7 +157,26 @@
                 <label>User</label>
                 <input type="text" class="form-control" id="user_id" name="user_id" value="{{Auth::user()->id}}">
             </div>
-            0
+            <div class="form-group">
+                <label for="service_clinic">Service Clinic</label>
+                <input type="text" class="form-control" id="service_clinic" name="service_clinic" disabled>
+                <ul class="list-service">
+                    @php
+                        $arrayService = explode(',', $clinic->service_id);
+                    @endphp
+                    @foreach($services as $service)
+
+                        <li class="new-select">
+                            <input onchange="getInput();" class="service_clinic_item" value="{{$service->id}}"
+                                   id="service_{{$service->id}}"
+                                   name="service_clinic"
+                                   {{ in_array($service->id, $arrayService) ? 'checked' : '' }}
+                                   type="checkbox">
+                            <label for="service_{{$service->id}}">{{$service->name}}</label>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
             <div>
                 <label>open_date</label>
                 <input type="datetime-local" class="form-control" id="open_date" name="open_date" required
@@ -141,6 +191,7 @@
                 <input type="text" name="combined_address" id="combined_address" class="form-control">
                 <input type="text" name="longitude" id="longitude" class="form-control">
                 <input type="text" name="latitude" id="latitude" class="form-control">
+                <input type="text" name="clinics_service" id="clinics_service" class="form-control">
             </div>
         </div>
         <button type="button" class="btn btn-primary up-date-button mt-4">Lưu</button>
@@ -221,6 +272,7 @@
                 formData.append("close_date", $('#close_date').val());
                 formData.append("user_id", $('#user_id').val());
                 formData.append("status", $('#status').val());
+                formData.append("clinics_service", $('#clinics_service').val());
 
                 var filedata = document.getElementById("gallery");
                 var i = 0, len = filedata.files.length, img, reader, file;
@@ -332,7 +384,7 @@
             for (let i = 0; i < res.length; i++) {
                 let data = res[i];
                 let isCheck = '';
-                if (province_id == data.id){
+                if (province_id == data.id) {
                     isCheck = 'selected';
                 }
                 let code = data.code;
@@ -383,5 +435,76 @@
                 });
             }
         }
+    </script>
+    <script>
+        let arrayItem = [];
+        let arrayNameCategory = [];
+
+        function removeArray(arr) {
+            var what, a = arguments, L = a.length, ax;
+            while (L > 1 && arr.length) {
+                what = a[--L];
+                while ((ax = arr.indexOf(what)) !== -1) {
+                    arr.splice(ax, 1);
+                }
+            }
+            return arr;
+        }
+
+        function getListName(array, items) {
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].checked) {
+                    if (array.length == 0) {
+                        array.push(items[i].nextElementSibling.innerText);
+                    } else {
+                        let name = array.includes(items[i].nextElementSibling.innerText);
+                        if (!name) {
+                            array.push(items[i].nextElementSibling.innerText);
+                        }
+                    }
+                } else {
+                    removeArray(array, items[i].nextElementSibling.innerText)
+                }
+            }
+            return array;
+        }
+
+        function checkArray(array, listItems) {
+            for (let i = 0; i < listItems.length; i++) {
+                if (listItems[i].checked) {
+                    if (array.length == 0) {
+                        array.push(listItems[i].value);
+                    } else {
+                        let check = array.includes(listItems[i].value);
+                        if (!check) {
+                            array.push(listItems[i].value);
+                        }
+                    }
+                } else {
+                    removeArray(array, listItems[i].value);
+                }
+            }
+            return array;
+        }
+
+        function getInput() {
+            let items = document.getElementsByClassName('service_clinic_item');
+
+            arrayItem = checkArray(arrayItem, items);
+            arrayNameCategory = getListName(arrayNameCategory, items)
+
+            let listName = arrayNameCategory.toString();
+
+            if (listName) {
+                $('#service_clinic').val(listName);
+            }
+
+            arrayItem.sort();
+            let value = arrayItem.toString();
+            console.log(value)
+            $('#clinics_service').val(value);
+        }
+
+        getInput();
     </script>
 @endsection
