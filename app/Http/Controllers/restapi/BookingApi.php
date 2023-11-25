@@ -44,19 +44,13 @@ class BookingApi extends Controller
         }
     }
 
-    public function getAllBookingByUserId($id, Request $request)
+    public function getAllBookingByUserId($id, $status,  Request $request)
     {
-        $status = $request->input('status');
-        if ($status) {
-            $bookings = Booking::where('user_id', $id)
-                ->where('status', $status)
-                ->get();
-        } else {
-            $bookings = Booking::where('user_id', $id)
-                ->where('status', '!=', BookingStatus::CANCEL)
-                ->get();
-        }
+        $bookings = Booking::where('user_id', $id)
+            ->where('status', $status)
+            ->get();
         $arrayBookings = null;
+
         foreach ($bookings as $booking) {
             $arrayBooking = null;
             $arrayBooking = $booking->toArray();

@@ -44,7 +44,7 @@ Route::group(['prefix' => 'coupons'], function () {
 Route::get('/info-user/{id}', [ProfileController::class, 'infoUser'])->name('infouser');
 
 Route::group(['prefix' => 'booking'], function () {
-    Route::get('/list-users/{id}', [BookingApi::class, 'getAllBookingByUserId'])->name('api.booking.list.users');
+    Route::get('/list-users/{id}/{status}', [BookingApi::class, 'getAllBookingByUserId'])->name('api.booking.list.users');
     Route::get('/list-clinics/{id}', [BookingApi::class, 'getAllBookingByClinicID'])->name('api.booking.list.users');
     Route::post('create', [BookingApi::class, 'createBooking'])->name('api.user.createBooking');
 });
