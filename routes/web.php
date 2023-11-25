@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthSocialController;
 use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CalcViewQuestionController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClinicController;
@@ -121,6 +122,13 @@ Route::group(['prefix' => 'product'], function () {
     Route::get('/lists', [BackendProductInfoController::class, 'index'])->name('backend.products.list');
     Route::get('/search', [BackendProductInfoController::class, 'search'])->name('backend.products.search');
 });
+
+Route::group(['prefix' => 'booking'], function () {
+    Route::get('/lists', [BookingController::class, 'index'])->name('booking.list.by.user');
+    Route::get('/search', [BackendProductInfoController::class, 'search'])->name('backend.products.search');
+});
+
+
 Route::get('/address', [AddressMapController::class, 'index']);
 Route::post('/save-address', [AddressMapController::class, 'store']);
 

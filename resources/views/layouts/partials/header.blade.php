@@ -31,8 +31,9 @@
                             <a class="dropdown-item" href="{{ route('homeAdmin') }}">Dashboard</a>
                         @else
                             <a class="dropdown-item" href="{{ route('profile') }}">Trang cá nhân</a>
+                            <a class="dropdown-item" href="{{route('booking.list.by.user')}}">My booking</a>
                         @endif
-                        <a class="dropdown-item" href="{{route('logoutProcess')}}">Logout</a>
+                            <a class="dropdown-item" href="{{route('logoutProcess')}}">Logout</a>
                     </div>
                 </div>
             @else
