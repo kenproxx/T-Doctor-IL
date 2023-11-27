@@ -87,7 +87,7 @@ class HomeController extends Controller
 
     public function listBooking()
     {
-        $bookings = Booking::paginate(10);
+        $bookings = Booking::paginate(20);
 
         return view('admin.booking.list-booking', compact('bookings'));
     }

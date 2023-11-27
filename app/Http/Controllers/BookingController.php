@@ -36,15 +36,13 @@ class BookingController extends Controller
             $checkIn = $request->input('check_in');
             $checkOut = $request->input('check_out');
             $servicesArray = $request->input('services');
-            $service = implode(',', $servicesArray);
             $status = $request->input('status');
-            if (is_array($service)) {
-                $servicesAsString = implode(',', $service);
+            if (is_array($servicesArray)) {
+                $servicesAsString = implode(',', $servicesArray);
             } else {
-                $servicesAsString = $service;
+                $servicesAsString = $servicesArray;
             }
             $time = $request->input('selectedTime');
-            $timestamp = Carbon::parse($time);
 
             $booking->user_id = $userID;
             $booking->clinic_id = $clinicID;
@@ -72,7 +70,7 @@ class BookingController extends Controller
                 return response('Not found', 404);
             }
 
-            $setting->status = BookingStatus::CANCEL;
+            $setting->status = BookingStatus::DELETE;
             $success = $setting->save();
             if ($success) {
                 alert()->success('Delete success!');
