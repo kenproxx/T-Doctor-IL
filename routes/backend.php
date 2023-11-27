@@ -5,6 +5,7 @@ use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\restapi\BookingApi;
 use App\Http\Controllers\restapi\DoctorReviewApi;
+use App\Http\Controllers\restapi\MessageApi;
 use App\Http\Controllers\restapi\SocialUserApi;
 use App\Http\Controllers\restapi\UserApi;
 use Illuminate\Support\Facades\Route;
@@ -41,7 +42,7 @@ Route::group(['prefix' => 'coupons'], function () {
     Route::delete('/delete/{id}', [BackendCouponController::class, 'delete'])->name('api.backend.coupons.delete');
 });
 
-Route::get('/info-user/{id}', [ProfileController::class, 'infoUser'])->name('infouser');
+Route::get('/info-user/{id}', [ProfileController::class, 'infoUser'])->name('info.user');
 
 Route::group(['prefix' => 'booking'], function () {
     Route::get('/list-users/{id}/{status}', [BookingApi::class, 'getAllBookingByUserId'])->name('api.booking.list.users');
@@ -57,4 +58,8 @@ Route::group(['prefix' => 'doctor-reviews'], function () {
     Route::post('/create', [DoctorReviewApi::class, 'create'])->name('api.backend.doctor.reviews.create');
     Route::post('/update/{id}', [DoctorReviewApi::class, 'update'])->name('api.backend.doctor.reviews.update');
     Route::delete('/delete/{id}', [DoctorReviewApi::class, 'delete'])->name('api.backend.doctor.reviews.delete');
+});
+
+Route::group(['prefix' => 'messages'], function () {
+    Route::post('/create', [MessageApi::class, 'create'])->name('api.backend.messages.create');
 });

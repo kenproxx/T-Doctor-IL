@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Enums\DoctorDepartmentStatus;
 use App\Enums\DoctorInfoStatus;
-use App\Enums\Role;
 use App\Enums\UserStatus;
 use App\Models\Chat;
 use App\Models\DoctorDepartment;
@@ -32,14 +31,15 @@ class DoctorInfoController extends Controller
     {
         if (Auth::check()) {
             $user = Auth::user();
+            $doctor = DoctorInfo::find($id);
+            $userDoctor = User::find($doctor->created_by);
             $messageDoctor = Chat::where([
-                ['from_user_id', $id],
+                ['from_user_id', $userDoctor->id],
                 ['to_user_id', $user->id]
             ])->orWhere([
-                ['to_user_id', $id],
+                ['to_user_id', $userDoctor->id],
                 ['from_user_id', $user->id]
             ])->get();
-            $doctor = DoctorInfo::find($id);
             return view('qrCode.doctor-info', compact('messageDoctor', 'doctor'));
         }
         return redirect(route('home'));
@@ -52,19 +52,6 @@ class DoctorInfoController extends Controller
         $reflector = new \ReflectionClass('App\Enums\TypeMedical');
         $types = $reflector->getConstants();
         return view('admin.doctor.tab-create-doctor', compact('departments', 'users', 'types'));
-    }
-
-    public function edit($id)
-    {
-        $doctor = DoctorInfo::find($id);
-        if (!$doctor) {
-            return response("doctor not found", 404);
-        }
-        $users = $this->returnListUser();
-        $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
-        $reflector = new \ReflectionClass('App\Enums\TypeMedical');
-        $types = $reflector->getConstants();
-        return view('admin.doctor.tab-edit-doctor', compact('doctor', 'departments', 'users', 'types'));
     }
 
     private function returnListUser()
@@ -81,5 +68,18 @@ class DoctorInfoController extends Controller
             }
         }
         return collect($users);
+    }
+
+    public function edit($id)
+    {
+        $doctor = DoctorInfo::find($id);
+        if (!$doctor) {
+            return response("doctor not found", 404);
+        }
+        $users = $this->returnListUser();
+        $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
+        $reflector = new \ReflectionClass('App\Enums\TypeMedical');
+        $types = $reflector->getConstants();
+        return view('admin.doctor.tab-edit-doctor', compact('doctor', 'departments', 'users', 'types'));
     }
 }
