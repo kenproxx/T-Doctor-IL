@@ -21,6 +21,7 @@ use App\Http\Controllers\NewEventController;
 use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecruitmentController;
+use App\Http\Controllers\restapi\BookingApi;
 use App\Http\Controllers\ReviewStoreController;
 use App\Http\Controllers\ServiceClinicController;
 use App\Http\Controllers\WhatFreeToDay;
@@ -125,6 +126,8 @@ Route::group(['prefix' => 'product'], function () {
 
 Route::group(['prefix' => 'booking'], function () {
     Route::get('/lists', [BookingController::class, 'index'])->name('booking.list.by.user');
+    Route::get('/list-by-users/{id}/{status}', [BookingApi::class, 'getAllBookingByUserId'])->name('booking.list.users');
+    Route::delete('/delete-booking/{id}', [BookingApi::class, 'cancelBooking'])->name('booking.delete.users');
     Route::get('/search', [BackendProductInfoController::class, 'search'])->name('backend.products.search');
 });
 
