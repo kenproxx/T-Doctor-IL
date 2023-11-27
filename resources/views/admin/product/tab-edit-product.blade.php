@@ -19,47 +19,47 @@
         <div>
             <div class="row">
                 <div class="col-md-4">
-                    <label>name</label>
+                    <label for="name">name</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{$product->name}}">
                 </div>
                 <div class="col-md-4">
-                    <label>name_en</label>
+                    <label for="name_en">name_en</label>
                     <input type="text" class="form-control" id="name_en" name="name_en" value="{{$product->name_en}}">
                 </div>
                 <div class="col-md-4">
-                    <label>name_laos</label>
+                    <label for="name_laos">name_laos</label>
                     <input type="text" class="form-control" id="name_laos" name="name_laos" value="{{$product->name_laos}}">
                 </div>
 
             </div>
 
             <div class="row">
-                <div class="col-sm-4"><label>Mô tả việt</label>
+                <div class="col-sm-4"><label for="description">Mô tả việt</label>
                     <textarea class="form-control" name="description"
                               id="description">{{$product->description}}</textarea>
                 </div>
-                <div class="col-sm-4"><label>Mô tả anh</label>
+                <div class="col-sm-4"><label for="description_en">Mô tả anh</label>
                     <textarea class="form-control" name="description_en"
                               id="description_en">{{$product->description_en}}</textarea>
                 </div>
-                <div class="col-sm-4"><label>Mô tả lào</label>
+                <div class="col-sm-4"><label for="description_laos">Mô tả lào</label>
                     <textarea class="form-control" name="description_laos"
                               id="description_laos">{{$product->description_laos}}</textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <label>brand_name</label>
+                    <label for="brand_name">brand_name</label>
                     <input type="text" class="form-control" id="brand_name" name="brand_name"
                            value="{{$product->brand_name}}">
                 </div>
                 <div class="col-md-4">
-                    <label>brand_name_en</label>
+                    <label for="brand_name_en">brand_name_en</label>
                     <input type="text" class="form-control" id="brand_name_en" name="brand_name_en"
                            value="{{$product->brand_name_en}}">
                 </div>
                 <div class="col-md-4">
-                    <label>brand_name_laos</label>
+                    <label for="brand_name_laos">brand_name_laos</label>
                     <input type="text" class="form-control" id="brand_name_laos" name="brand_name_laos"
                            value="{{$product->brand_name_laos}}">
                 </div>
@@ -67,7 +67,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <label>category_id</label>
+                    <label for="category_id">category_id</label>
                     <select class="custom-select" id="category_id" name="category_id">
                         <option value="{{$product->category_id}}">{{$product->category_id}}</option>
                         <option value="1">category 1</option>
@@ -95,24 +95,24 @@
             <div>
                 <label>thumbnail</label>
                 <input type="file" class="form-control" id="thumbnail" name="thumbnail" multiple accept="image/*">
-                <img width="50px" src="{{$product->thumbnail}}">
+                <img width="50px" src="{{$product->thumbnail}}" alt="thumbnail">
             </div>
             <div>
-                <label>gallery</label>
+                <label for="gallery">gallery</label>
                 <input type="file" class="form-control" id="gallery" name="gallery[]" multiple accept="image/*">
                 @php
                     $galleryArray = explode(',', $product->gallery);
                 @endphp
                 @foreach($galleryArray as $productImg)
-                    <img width="50px" src="{{$productImg}}">
+                    <img width="50px" src="{{$productImg}}" alt="gallery">
                 @endforeach
             </div>
             <div>
-                <label>price</label>
+                <label for="price">price</label>
                 <input type="number" class="form-control" id="price" name="price" value="{{$product->price}}">
             </div>
             <div>
-                <label>price_unit</label>
+                <label for="price_unit">price_unit</label>
                 <input type="text" class="form-control" id="price_unit" name="price_unit"
                        value="{{$product->price_unit}}">
             </div>
@@ -157,7 +157,7 @@
             </div>
 
             <div hidden="">
-                <label>User</label>
+                <label for="user_id">User</label>
                 <input type="text" class="form-control" id="user_id" name="user_id" value="{{Auth::user()->id}}">
             </div>
         </div>

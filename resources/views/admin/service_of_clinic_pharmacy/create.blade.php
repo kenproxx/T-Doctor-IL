@@ -1,7 +1,7 @@
 @php use App\Enums\NewEventStatus; @endphp
 @php use App\Enums\NewEventType; @endphp
 @extends('layouts.admin')
-
+@section('title', 'Booking Clinic')
 @section('main-content')
 
     <!-- Page Heading -->
