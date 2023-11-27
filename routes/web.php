@@ -126,7 +126,7 @@ Route::group(['prefix' => 'booking'], function () {
     Route::get('/lists', [BookingController::class, 'index'])->name('booking.list.by.user');
     Route::get('/list-by-users/{id}/{status}', [BookingApi::class, 'getAllBookingByUserId'])->name('booking.list.users');
     Route::delete('/delete-booking/{id}', [BookingApi::class, 'cancelBooking'])->name('booking.delete.users');
-    Route::get('/search', [BackendProductInfoController::class, 'search'])->name('backend.products.search');
+                Route::get('/search', [BackendProductInfoController::class, 'search'])->name('backend.booking.search');
 });
 
 
