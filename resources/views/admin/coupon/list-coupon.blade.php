@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@section('title', 'List Coupon')
 @section('main-content')
     <style>
 

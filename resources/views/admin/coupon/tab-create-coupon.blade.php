@@ -1,7 +1,7 @@
 @php use App\Enums\CouponStatus; @endphp
 @php use Illuminate\Support\Facades\Auth; @endphp
 @extends('layouts.admin')
-
+@section('title', 'List Coupon')
 @section('main-content')
     <style>
 
@@ -51,7 +51,7 @@
 
         .upload-options label::after {
             content: "add";
-            font-family: "Material Icons";
+            /*font-family: "Material Icons";*/
             position: absolute;
             font-size: 2.5rem;
             color: #e6e6e6;
@@ -80,7 +80,7 @@
             width: 100%;
             position: relative;
             overflow: hidden;
-            background-image: url("");
+            /*background-image: url("");*/
             background-color: white;
             background-position: center center;
             background-repeat: no-repeat;
@@ -153,47 +153,47 @@
     <form id="form" enctype="multipart/form-data">
         @csrf
         <div class="row">
-            <div class="col-sm-4"><label>tiêu đề việt</label>
+            <div class="col-sm-4"><label for="title">tiêu đề việt</label>
                 <input type="text" class="form-control" id="title" name="title"></div>
-            <div class="col-sm-4"><label>tiêu đề anh</label>
+            <div class="col-sm-4"><label for="title_en">tiêu đề anh</label>
                 <input type="text" class="form-control" id="title_en" name="title_en" value=""></div>
-            <div class="col-sm-4"><label>tiêu đề lào</label>
+            <div class="col-sm-4"><label for="title_laos">tiêu đề lào</label>
                 <input type="text" class="form-control" id="title_laos" name="title_laos"
                        value=""></div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><label>Mô tả ngắn việt</label>
+            <div class="col-sm-4"><label for="short_description">Mô tả ngắn việt</label>
                 <textarea class="form-control" name="short_description" id="short_description"></textarea>
             </div>
-            <div class="col-sm-4"><label>Mô tả ngắn anh</label>
+            <div class="col-sm-4"><label for="short_description_en">Mô tả ngắn anh</label>
                 <textarea class="form-control" name="short_description_en" id="short_description_en"></textarea>
             </div>
-            <div class="col-sm-4"><label>Mô tả ngắn lào</label>
+            <div class="col-sm-4"><label for="short_description_laos">Mô tả ngắn lào</label>
                 <textarea class="form-control" name="short_description_laos" id="short_description_laos"></textarea>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><label>Mô tả dài việt</label>
+            <div class="col-sm-4"><label for="description">Mô tả dài việt</label>
                 <textarea class="form-control" name="description" id="description"></textarea>
             </div>
-            <div class="col-sm-4"><label>Mô tả dài anh</label>
+            <div class="col-sm-4"><label for="description_en">Mô tả dài anh</label>
                 <textarea class="form-control" name="description_en" id="description_en"></textarea>
             </div>
-            <div class="col-sm-4"><label>Mô tả dài lào</label>
+            <div class="col-sm-4"><label for="description_laos">Mô tả dài lào</label>
                 <textarea class="form-control" name="description_laos" id="description_laos"></textarea>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6"><label>Thời gian bắt đầu</label>
+            <div class="col-sm-6"><label for="startDate">Thời gian bắt đầu</label>
                 <input type="datetime-local" class="form-control" id="startDate" name="startDate"></div>
-            <div class="col-sm-6"><label>Thời gian kết thúc</label>
+            <div class="col-sm-6"><label for="endDate">Thời gian kết thúc</label>
                 <input type="datetime-local" class="form-control" id="endDate" name="endDate"></div>
         </div>
         <div class="row">
-            <div class="col-sm-6"><label>Số lượng đký tối đa</label>
+            <div class="col-sm-6"><label for="max_register">Số lượng đký tối đa</label>
                 <input type="number" class="form-control" id="max_register" name="max_register">
             </div>
-            <div class="col-sm-6"><label>Đơn vị áp dụng</label>
+            <div class="col-sm-6"><label for="clinic_id">Đơn vị áp dụng</label>
                 <select class="custom-select" id="clinic_id">
                     <option selected>Choose...</option>
                 </select>
