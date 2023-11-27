@@ -18,7 +18,7 @@ class DoctorInfoApi extends Controller
         $size = $request->input('size');
         if ($size && $size > 0 && is_numeric($size)) {
             $doctorInfos = DoctorInfo::where('status', DoctorInfoStatus::ACTIVE)->orderBy('id', 'DESC')
-                ->where('hocham_hocvi', TypeMedical::PHAMACISTS)
+                ->where('hocham_hocvi', TypeMedical::DOCTORS)
                 ->limit($size)->get();
         } else {
             $doctorInfos = DoctorInfo::where('status', DoctorInfoStatus::ACTIVE)->orderBy('id', 'DESC')

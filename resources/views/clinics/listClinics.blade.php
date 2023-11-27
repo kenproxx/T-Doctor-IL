@@ -6,7 +6,9 @@
 <div class="container">
     @include('What-free.header-wFree')
     @php
-        $addresses = \App\Models\Clinic::all();
+        $addresses = \App\Models\Clinic::where('status', \App\Enums\ClinicStatus::ACTIVE)
+        ->orderBy('id', 'desc')
+        ->get();
         $coordinatesArray = $addresses->toArray();
     @endphp
     <div class="clinics-list">

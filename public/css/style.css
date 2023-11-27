@@ -858,32 +858,32 @@ span.material-symbols-outlined {
 #show_inf #review{
     margin-top: 150px;
 }
-#show_inf #rv_doc #rv-ctn {
+#show_inf .rv_doc .rv_ctn {
     width: 100%;
     margin-bottom: 24px;
     border-bottom: 1px solid #D6D6D6;
 }
-#show_inf #rv_doc #rv-ctn #user_rv #user{
+#show_inf .rv_doc .rv_ctn .user_rv .user{
     align-items: center;
     gap: 8px;
     margin-right: auto;
 }
-#show_inf #rv_doc #rv-ctn #user_rv #user p{
+#show_inf .rv_doc .rv_ctn .user_rv .user p{
     color: black;
     font-size: 24px;
     font-weight: 800;
 }
-#show_inf #rv_doc #rv-ctn #user_rv #time{
+#show_inf .rv_doc .rv_ctn .user_rv .time{
     display: flex;
     align-items: flex-end;
     gap: 16px;
 }
-#show_inf #rv_doc #rv-ctn #user_rv #time p{
+#show_inf .rv_doc .rv_ctn .user_rv .time p{
     color: #000;
     font-size: 14px;
     font-weight: 400;
 }
-#show_inf #rv_doc #rv-ctn .cmt button {
+#show_inf .rv_doc .rv_ctn .cmt button {
     border: none;
     outline: none;
     background: white;
@@ -893,7 +893,7 @@ span.material-symbols-outlined {
     font-size: 16px;
     font-weight: 600;
 }
-#show_inf #rv_doc #rv-ctn .cmt button .bi-reply-fill{
+#show_inf .rv_doc .rv_ctn .cmt button .bi-reply-fill{
     color: #929292;
 }
 /*info-doc end*/
