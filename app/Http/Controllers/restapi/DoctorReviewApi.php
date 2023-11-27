@@ -6,6 +6,7 @@ use App\Enums\DoctorReviewStatus;
 use App\Http\Controllers\Controller;
 use App\Models\DoctorReview;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DoctorReviewApi extends Controller
 {
@@ -20,10 +21,30 @@ class DoctorReviewApi extends Controller
 
     public function getAllByDoctorID($id)
     {
-        $reviews = DoctorReview::where('doctor_id', $id)
-            ->where('status', DoctorReviewStatus::APPROVED)
-            ->orderBy('id', 'desc')
+        $parentReviews = DB::table('doctor_reviews')
+            ->join('users', 'doctor_reviews.created_by', '=', 'users.id')
+            ->where('doctor_reviews.doctor_id', $id)
+            ->where('doctor_reviews.status', DoctorReviewStatus::APPROVED)
+            ->orderBy('doctor_reviews.id', 'desc')
+            ->select('doctor_reviews.*', 'users.username', 'users.avt')
             ->get();
+
+        $reviews = [];
+        foreach ($parentReviews as $parentReview) {
+            $childReviews = DB::table('doctor_reviews')
+                ->join('users', 'doctor_reviews.created_by', '=', 'users.id')
+                ->where('doctor_reviews.parent_id', $parentReview->id)
+                ->where('doctor_reviews.status', DoctorReviewStatus::APPROVED)
+                ->orderBy('doctor_reviews.id', 'desc')
+                ->select('doctor_reviews.*', 'users.username', 'users.avt')
+                ->get();
+
+            $reviews[] = [
+                'parent' => $parentReview,
+                'child' => $childReviews,
+            ];
+        }
+
         return response()->json($reviews);
     }
 
@@ -97,7 +118,7 @@ class DoctorReviewApi extends Controller
             $review->doctor_id = $doctor_id;
         }
 
-        $review->status = DoctorReviewStatus::PENDING;
+        $review->status = DoctorReviewStatus::APPROVED;
 
         return $review;
     }

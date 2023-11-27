@@ -17,9 +17,13 @@ class AdminPharmacyApi extends Controller
     {
         $status = $request->input('status');
         if ($status && $status != ClinicStatus::DELETED) {
-            $pharmacies = Clinic::where('status', $status)->where('type', TypeBussiness::PHARMACIES)->get();
+            $pharmacies = Clinic::where('status', $status)
+                ->where('type', TypeBussiness::PHARMACIES)
+                ->get();
         } else {
-            $pharmacies = Clinic::where('status', '!=', ClinicStatus::DELETED)->where('type', TypeBussiness::PHARMACIES)->get();
+            $pharmacies = Clinic::where('status', '!=', ClinicStatus::DELETED)
+                ->where('type', TypeBussiness::PHARMACIES)
+                ->get();
         }
         return response()->json($pharmacies);
     }
@@ -28,9 +32,13 @@ class AdminPharmacyApi extends Controller
 
         $status = $request->input('status');
         if ($status && $status != ClinicStatus::DELETED) {
-            $pharmacy = Clinic::where('status', $status)->where('type', TypeBussiness::PHARMACY)->get();
+            $pharmacy = Clinic::where('status', $status)
+                ->where('type', TypeBussiness::PHARMACIES)
+                ->get();
         } else {
-            $pharmacy = Clinic::where('status', '!=', ClinicStatus::DELETED)->where('type', TypeBussiness::PHARMACY)->get();
+            $pharmacy = Clinic::where('status', '!=', ClinicStatus::DELETED)
+                ->where('type', TypeBussiness::PHARMACIES)
+                ->get();
         }
 
         return response()->json($pharmacy);
