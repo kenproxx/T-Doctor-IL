@@ -14,7 +14,7 @@ class BackendNewEventController extends Controller
      */
     public function index()
     {
-        $listNewEvent = NewEvent::paginate(10);
+        $listNewEvent = NewEvent::paginate(20);
         return view('admin.new_event.index', compact('listNewEvent'));
     }
 

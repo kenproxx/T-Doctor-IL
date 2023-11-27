@@ -15,7 +15,7 @@ class BackendProductMedicineController extends Controller
      */
     public function index()
     {
-        $productMedicines = ProductMedicine::where('status', '!=', OnlineMedicineStatus::DELETED)->paginate(10);
+        $productMedicines = ProductMedicine::where('status', '!=', OnlineMedicineStatus::DELETED)->paginate(20);
         return view('admin.product_medicine.index', compact('productMedicines'));
     }
 

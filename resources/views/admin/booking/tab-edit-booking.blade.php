@@ -4,9 +4,19 @@
     <form id="form" action="{{route('api.backend.booking.update',$bookings_edit->id)}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="row">
-            <div class="col-sm-4"><label for="user_id">user_id</label>
+            <div class="col-sm-4"><label for="user">Tên người đăng ký</label>
+                @php
+                    $user_name = \Illuminate\Foundation\Auth\User::where('id',$bookings_edit->user_id)->value('name');
+                @endphp
+                <input type="text" class="form-control" id="user" name="user" value="{{$user_name}}" disabled></div>
+            <div class="col-sm-4"><label for="user">Tên người đăng ký</label>
+                @php
+                    $clinic_name = \App\Models\Clinic::where('id',$bookings_edit->clinic_id)->value('name');
+                @endphp
+                <input type="text" class="form-control" id="user" name="user" value="{{$clinic_name}}" disabled></div>
+            <div class="col-sm-4" hidden=""><label for="user_id">user_id</label>
                 <input type="text" class="form-control" id="user_id" name="user_id" value="{{ $bookings_edit->user_id}}"></div>
-            <div class="col-sm-4"><label for="clinic_id">clinic_id</label>
+            <div class="col-sm-4" hidden=""><label for="clinic_id">clinic_id</label>
                 <input type="text" class="form-control" id="clinic_id" name="clinic_id" value="{{ $bookings_edit->clinic_id }}"></div>
             <div class="col-sm-4">
                 <label for="service">Dịch vụ</label>

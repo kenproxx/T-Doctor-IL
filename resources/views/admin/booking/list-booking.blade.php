@@ -4,7 +4,7 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">List Booking</h1>
-{{--    <a href="{{route('coupon.create.product')}}" class="btn btn-primary mb-3">Add</a>--}}
+    {{--    <a href="{{route('coupon.create.product')}}" class="btn btn-primary mb-3">Add</a>--}}
     <style>
         td {
             overflow: hidden;
@@ -36,11 +36,16 @@
                         {{$user}}</td>
                     <td>@php
                             $clinic = \App\Models\Clinic::where('id',$item->clinic_id)->pluck('name')->first();
-                            @endphp
+                        @endphp
                         {{$clinic}}
                     </td>
                     <td>{{$item->check_in}} </td>
-                    <td>{{$item->service}}</td>
+                    @php
+                        $service_name = explode(',', $item->service);
+                        $services = \App\Models\ServiceClinic::whereIn('id', $service_name)->get();
+                        $service_names = $services->pluck('name')->implode(', ');
+                    @endphp
+                    <td>{{$service_names}}</td>
                     <td>{{$item->status}}</td>
                     <td class="d-flex">
                         <form action="{{route('api.backend.booking.edit',$item->id)}}" method="get">
@@ -48,17 +53,18 @@
                             <button type="submit" class="btn btn-primary">Edit</button>
                         </form>
 
-                         <form action="{{route('api.backend.booking.delete',$item->id)}}" method="post">
+                        <form action="{{route('api.backend.booking.delete',$item->id)}}" method="post">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="ml-3 btn btn-primary btn-danger">Delete</button>
-                        </form></td>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
         </table>
         <div class="d-flex justify-content-center align-items-center">
-        {{ $bookings->links() }}
+            {{ $bookings->links() }}
         </div>
     </div>
 @endsection

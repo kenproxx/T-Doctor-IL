@@ -2,6 +2,8 @@
 @section('title')
     Create Doctor
 @endsection
+@section('main-content')
+
 <style>
     .list-apply {
         list-style-type: none;
@@ -34,7 +36,6 @@
     /* Add more styles as needed */
 
 </style>
-@section('main-content')
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Create Doctor Information</h1>
