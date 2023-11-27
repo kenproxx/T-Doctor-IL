@@ -3,7 +3,6 @@
     Create Doctor
 @endsection
 @section('main-content')
-
 <style>
     .list-apply {
         list-style-type: none;
@@ -279,26 +278,30 @@
                 formData.append('thumbnail', photo);
                 formData.append('_token', '{{ csrf_token() }}');
 
-                try {
-                    $.ajax({
-                        url: `{{route('api.backend.doctors.info.create')}}`,
-                        method: 'POST',
-                        headers: headers,
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        data: formData,
-                        success: function () {
-                            alert('Create success');
-                            window.location.href = '{{ route('homeAdmin.list.doctors') }}';
-                        },
-                        error: function (exception) {
-                            alert('Create error');
-                            console.log(exception)
-                        }
-                    });
-                } catch (error) {
-                    throw error;
+                if (photo){
+                    try {
+                        $.ajax({
+                            url: `{{route('api.backend.doctors.info.create')}}`,
+                            method: 'POST',
+                            headers: headers,
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            data: formData,
+                            success: function () {
+                                alert('Create success');
+                                window.location.href = '{{ route('homeAdmin.list.doctors') }}';
+                            },
+                            error: function (exception) {
+                                alert('Create error, Please try again!');
+                                console.log(exception)
+                            }
+                        });
+                    } catch (error) {
+                        throw error;
+                    }
+                } else {
+                    alert('Please choosing thumbnail!')
                 }
             })
 
