@@ -16,9 +16,9 @@
                 <div
                     class="clinic-search--left col-md-12 d-flex justify-content-between clinic-search--center align-items-center">
                     <div class="clinic-search--left col-md-6 justify-content-around mobile-hidden">
-                        <div class="title mobile-hidden">All <i class="bi bi-arrow-down-up"></i></div>
-                        <div class="title mobile-hidden">Category <i class="bi bi-arrow-down-up"></i></div>
-                        <div class="title mobile-hidden">Location <i class="bi bi-arrow-down-up"></i></div>
+                        <div class="title mobile-hidden">{{ __('home.All') }} <i class="bi bi-arrow-down-up"></i></div>
+                        <div class="title mobile-hidden">{{ __('home.Category') }} <i class="bi bi-arrow-down-up"></i></div>
+                        <div class="title mobile-hidden">{{ __('home.Location') }} <i class="bi bi-arrow-down-up"></i></div>
                     </div>
 
                     <div class="search-box col-md-5">
@@ -35,40 +35,40 @@
             </div>
         </div>
         <div class="d-flex mt-70 mobile-hidden">
-            <div class="col-md-3 flea-content ">Flea market</div>
+            <div class="col-md-3 flea-content ">{{ __('home.Flea market') }}</div>
             <div class="col-md-5 flea-search d-flex align-items-center">
-                <input onkeyup="performSearch()" id="inputSearch" placeholder="Search for anything…">
+                <input onkeyup="performSearch()" id="inputSearch" placeholder="{{ __('home.Search for anything…') }}">
             </div>
             <div class="d-flex col-md-4 justify-content-between align-items-center">
 
                 <a href="#" onclick="checkLogin()" class="col-md-4 flea-button">
-                    Sell my product
+                    {{ __('home.Sell my product') }}
                 </a>
                 <a href="#" onclick="checkLoginWishStore()" class="col-md-4 flea-button flea-btn">
-                    Go to my store
+                    {{ __('home.Go to my store') }}
                 </a>
                 <a href="#" onclick="checkLoginWish()" class="col-md-4 flea-button flea-btn">
-                    Wish list
+                    {{ __('home.Wish list') }}
                 </a>
             </div>
         </div>
         <div class="d-flex mt-88">
             <div class="col-md-3  mobile-hidden">
                 <div class="border-radius ">
-                    <div class="flea-text">Filter</div>
+                    <div class="flea-text">{{ __('home.Filter') }}</div>
                     @foreach($departments as $department)
                         <div>
                             <input type="checkbox" onchange="performSearch()" name="category_{{$department->id}}" id="category_{{$department->id}}">
                             <label for="category_{{$department->id}}" class="flea-text-gray">{{$department->name}}</label>
                         </div>
                     @endforeach
-                    <div class="flea-text-sp">See all categories</div>
+                    <div class="flea-text-sp">{{ __('home.See all categories') }}</div>
                 </div>
                 <div class="border-radius mt-3 ">
                     <div class="d-flex">
                         <div class="wrapper">
                             <header>
-                                <h2>Price</h2>
+                                <h2>{{ __('home.Price') }}</h2>
                             </header>
                             <div class="price-input">
                                 <div class="field">
@@ -119,42 +119,42 @@
             </div>
             <div class="offcanvas-body">
                 <div class="border-radius ">
-                    <div class="flea-text">Filter</div>
+                    <div class="flea-text">{{ __('home.Filter') }}</div>
                     <div>
                         <input type="checkbox" name="" id="">
-                        <label class="flea-text-gray">All (96)</label>
+                        <label class="flea-text-gray">{{ __('home.All') }} (96)</label>
                     </div>
                     <div>
                         <input type="checkbox" name="" id="">
-                        <label class="flea-text-gray">Equipments (71)</label>
+                        <label class="flea-text-gray">{{ __('home.Equipments') }} (71)</label>
                     </div>
                     <div>
                         <input type="checkbox" name="" id="">
-                        <label class="flea-text-gray">Furniture (55)</label>
+                        <label class="flea-text-gray">{{ __('home.Furniture') }} (55)</label>
                     </div>
                     <div>
                         <input type="checkbox" name="" id="">
-                        <label class="flea-text-gray">Medicine (54)</label>
+                        <label class="flea-text-gray">{{ __('home.Medicine') }} (54)</label>
                     </div>
                     <div>
                         <input type="checkbox" name="" id="">
-                        <label class="flea-text-gray">Cosmetics (49)</label>
+                        <label class="flea-text-gray">{{ __('home.Cosmetics') }} (49)</label>
                     </div>
                     <div>
                         <input type="checkbox" name="" id="">
-                        <label class="flea-text-gray">Furniture (53)</label>
+                        <label class="flea-text-gray">{{ __('home.Furniture') }} (53)</label>
                     </div>
                     <div>
                         <input type="checkbox" name="" id="">
-                        <label class="flea-text-gray">Others (47)</label>
+                        <label class="flea-text-gray">{{ __('home.Others') }} (47)</label>
                     </div>
-                    <div class="flea-text-sp">See all categories</div>
+                    <div class="flea-text-sp">{{ __('home.See all categories') }}</div>
                 </div>
                 <div class="border-radius mt-3 ">
                     <div class="d-flex">
                         <div class="wrapper">
                             <header>
-                                <h2>Price</h2>
+                                <h2>{{ __('home.Price') }}</h2>
                             </header>
                             <div class="price-input">
                                 <div class="field">
@@ -180,9 +180,9 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <button class="add-cv-bt w-100 apply-bt_delete col-6">Refresh</button>
+                    <button class="add-cv-bt w-100 apply-bt_delete col-6">{{ __('home.Refresh') }}</button>
                     <form action="#" class="col-6 pr-0">
-                        <button type="submit" class="add-cv-bt apply-bt_edit w-100">Apply</button>
+                        <button type="submit" class="add-cv-bt apply-bt_edit w-100">{{ __('home.Apply') }}</button>
                     </form>
                 </div>
             </div>
