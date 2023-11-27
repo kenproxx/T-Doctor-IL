@@ -1,5 +1,36 @@
 @extends('layouts.admin')
+<style>
+    .list-apply {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+    }
 
+    .list-apply li {
+        margin-right: 20px; /* Adjust as needed */
+    }
+
+    .list-apply li:last-child {
+        margin-right: 0;
+    }
+
+    .new-select {
+        display: flex;
+        align-items: center;
+    }
+
+    .new-select input {
+        margin-right: 5px; /* Adjust as needed */
+    }
+
+    .new-select label {
+        margin-top: 10px;
+    }
+
+    /* Add more styles as needed */
+
+</style>
 @section('main-content')
 
     <!-- Page Heading -->
@@ -14,9 +45,10 @@
     @endif
     <form id="form">
         @csrf
-        <div><label>name</label>
-            <input type="text" class="form-control" id="name" name="name"></div>
-
+        <div>
+            <label for="name">name</label>
+            <input type="text" class="form-control" id="name" name="name">
+        </div>
         <div class="row">
             <div class="col-sm-4"><label for="hocham_hocvi">Học hàm học vị</label>
                 <select class="custom-select" id="hocham_hocvi" name="hocham_hocvi">
@@ -39,44 +71,56 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><label>chuyên môn việt</label>
+            <div class="col-sm-4">
+                <label for="specialty">chuyên môn việt</label>
                 <input type="text" class="form-control" id="specialty" name="specialty"></div>
-            <div class="col-sm-4"><label>chuyên môn anh</label>
+            <div class="col-sm-4">
+                <label for="specialty_en">chuyên môn anh</label>
                 <input type="text" class="form-control" id="specialty_en" name="specialty_en" value=""></div>
-            <div class="col-sm-4"><label>chuyên môn lào</label>
+            <div class="col-sm-4">
+                <label for="specialty_laos">chuyên môn lào</label>
                 <input type="text" class="form-control" id="specialty_laos" name="specialty_laos"
                        value=""></div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><label>Dịch vụ cung cấp việt</label>
+            <div class="col-sm-4">
+                <label for="service">Dịch vụ cung cấp việt</label>
                 <textarea class="form-control" name="service" id="service"></textarea>
             </div>
-            <div class="col-sm-4"><label>Dịch vụ cung cấp anh</label>
+            <div class="col-sm-4">
+                <label for="service_en">Dịch vụ cung cấp anh</label>
                 <textarea class="form-control" name="service_en" id="service_en"></textarea>
             </div>
-            <div class="col-sm-4"><label>Dịch vụ cung cấp lào</label>
+            <div class="col-sm-4">
+                <label for="service_laos">Dịch vụ cung cấp lào</label>
                 <textarea class="form-control" name="service_laos" id="service_laos"></textarea>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><label>Giá dịch vụ việt</label>
+            <div class="col-sm-4">
+                <label for="service_price">Giá dịch vụ việt</label>
                 <input class="form-control" type="number" name="service_price" id="service_price">
             </div>
-            <div class="col-sm-4"><label>Giá dịch vụ anh</label>
+            <div class="col-sm-4">
+                <label for="service_price_en">Giá dịch vụ anh</label>
                 <input class="form-control" type="number" name="service_price_en" id="service_price_en">
             </div>
-            <div class="col-sm-4"><label>Giá dịch vụ lào</label>
+            <div class="col-sm-4">
+                <label for="service_price_laos">Giá dịch vụ lào</label>
                 <input class="form-control" type="number" name="service_price_laos" id="service_price_laos">
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><label>địa chỉ chi tiết việt</label>
+            <div class="col-sm-4">
+                <label for="detail_address">địa chỉ chi tiết việt</label>
                 <input class="form-control" name="detail_address" id="detail_address">
             </div>
-            <div class="col-sm-4"><label>địa chỉ chi tiết anh</label>
+            <div class="col-sm-4">
+                <label for="detail_address_en">địa chỉ chi tiết anh</label>
                 <input class="form-control" name="detail_address_en" id="detail_address_en">
             </div>
-            <div class="col-sm-4"><label>địa chỉ chi tiết lào</label>
+            <div class="col-sm-4">
+                <label for="detail_address_laos">địa chỉ chi tiết lào</label>
                 <input class="form-control" name="detail_address_laos" id="detail_address_laos">
             </div>
         </div>
@@ -137,6 +181,7 @@
 
             <input type="text" class="form-control d-none" id="time_working_1" name="time_working_1">
             <input type="text" class="form-control d-none" id="time_working_2" name="time_working_2">
+            <input type="text" class="form-control d-none" id="apply_for" name="apply_for">
         </div>
         <div class="row">
             <div class="col-sm-4"><label>Số lượng đký tối đa</label>
@@ -152,12 +197,41 @@
             </div>
             <div class="col-sm-4"><label for="status">Trạng thái</label>
                 <select class="custom-select" id="status" name="status">
-                    <option
-                        value="{{ \App\Enums\DoctorInfoStatus::ACTIVE }}">{{ \App\Enums\DoctorInfoStatus::ACTIVE }}</option>
-                    <option
-                        value="{{ \App\Enums\DoctorInfoStatus::INACTIVE }}">{{ \App\Enums\DoctorInfoStatus::INACTIVE }}</option>
+                    <option value="{{ \App\Enums\DoctorInfoStatus::ACTIVE }}">
+                        {{ \App\Enums\DoctorInfoStatus::ACTIVE }}
+                    </option>
+                    <option value="{{ \App\Enums\DoctorInfoStatus::INACTIVE }}">
+                        {{ \App\Enums\DoctorInfoStatus::INACTIVE }}
+                    </option>
                 </select>
             </div>
+        </div>
+        <div class="form-group">
+            <label for="apply_show">Apply Show</label>
+            <input type="text" class="form-control" id="apply_show" name="apply_show" disabled>
+            @php
+                $arrayApply = [
+                    'name'=> 'Name',
+                    'response_rate'=> 'Response Rate',
+                    'specialty'=> 'Specialty',
+                    'year_of_experience'=> 'Years of experience',
+                    'service'=> 'Service',
+                    'service_price'=> 'Service Price',
+                    'time_working_1'=> 'Time Working',
+                    'time_working_2'=> 'Date Working',
+                ];
+            @endphp
+            <ul class="list-apply">
+                @foreach($arrayApply as $key => $value)
+                    <li class="new-select">
+                        <input onchange="getInput();" class="apply_item" value="{{$key}}"
+                               id="apply_item_{{$key}}"
+                               name="apply_item"
+                               type="checkbox">
+                        <label for="apply_item_{{$key}}">{{$value}}</label>
+                    </li>
+                @endforeach
+            </ul>
         </div>
 
         <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
@@ -175,7 +249,7 @@
                     "service_price", "service_price_en", "service_price_laos",
                     "detail_address", "detail_address_en", "detail_address_laos",
                     "province_id", "district_id", "commune_id",
-                    "time_working_1", "time_working_2",
+                    "time_working_1", "time_working_2", "apply_for", "service", "service_en", "service_laos",
                     "name", "year_of_experience", "status", "department_id", "created_by", "hocham_hocvi"
                 ];
                 const fieldTextareaTiny = [
@@ -188,13 +262,15 @@
 
                 console.log(fieldNames);
 
-                fieldTextareaTiny.forEach(fieldTextarea => {
-                    const content = tinymce.get(fieldTextarea).getContent();
-                    formData.append(fieldTextarea, content);
-                });
+                /* Temporary don't use tinymce because this was error
+                *  and move the necessary ids(service, service_en, service_laos) to fieldNames array*/
+                // fieldTextareaTiny.forEach(fieldTextarea => {
+                //     const content = tinymce.get(fieldTextarea).getContent();
+                //     formData.append(fieldTextarea, content);
+                // });
 
                 {{--formData.append("created_by", '{{ \Illuminate\Support\Facades\Auth::user()->id }}');--}}
-                formData.append("apply_for", 'doctor');
+                formData.append("apply_for", $('#apply_for').val());
                 const photo = $('#thumbnail')[0].files[0];
                 formData.append('thumbnail', photo);
                 formData.append('_token', '{{ csrf_token() }}');
@@ -209,10 +285,11 @@
                         processData: false,
                         data: formData,
                         success: function () {
-                            alert('success');
+                            alert('Create success');
                             window.location.href = '{{ route('homeAdmin.list.doctors') }}';
                         },
                         error: function (exception) {
+                            alert('Create error');
                             console.log(exception)
                         }
                     });
@@ -337,6 +414,74 @@
                 html = html + `<option value="${data.id}-${data.code}">${data.name}</option>`;
             }
             $('#commune_id').empty().append(html);
+        }
+    </script>
+    <script>
+        let arrayItem = [];
+        let arrayNameCategory = [];
+
+        function removeArray(arr) {
+            var what, a = arguments, L = a.length, ax;
+            while (L > 1 && arr.length) {
+                what = a[--L];
+                while ((ax = arr.indexOf(what)) !== -1) {
+                    arr.splice(ax, 1);
+                }
+            }
+            return arr;
+        }
+
+        function getListName(array, items) {
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].checked) {
+                    if (array.length == 0) {
+                        array.push(items[i].nextElementSibling.innerText);
+                    } else {
+                        let name = array.includes(items[i].nextElementSibling.innerText);
+                        if (!name) {
+                            array.push(items[i].nextElementSibling.innerText);
+                        }
+                    }
+                } else {
+                    removeArray(array, items[i].nextElementSibling.innerText)
+                }
+            }
+            return array;
+        }
+
+        function checkArray(array, listItems) {
+            for (let i = 0; i < listItems.length; i++) {
+                if (listItems[i].checked) {
+                    if (array.length == 0) {
+                        array.push(listItems[i].value);
+                    } else {
+                        let check = array.includes(listItems[i].value);
+                        if (!check) {
+                            array.push(listItems[i].value);
+                        }
+                    }
+                } else {
+                    removeArray(array, listItems[i].value);
+                }
+            }
+            return array;
+        }
+
+        function getInput() {
+            let items = document.getElementsByClassName('apply_item');
+
+            arrayItem = checkArray(arrayItem, items);
+            arrayNameCategory = getListName(arrayNameCategory, items)
+
+            let listName = arrayNameCategory.toString();
+
+            if (listName) {
+                $('#apply_show').val(listName);
+            }
+
+            arrayItem.sort();
+            let value = arrayItem.toString();
+            $('#apply_for').val(value);
         }
     </script>
 @endsection

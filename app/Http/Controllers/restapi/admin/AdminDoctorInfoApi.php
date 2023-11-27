@@ -135,6 +135,9 @@ class AdminDoctorInfoApi extends Controller
         $status = $request->input('status');
 
         $apply_for = $request->input('apply_for');
+        if (!$apply_for) {
+            $apply_for = 'none';
+        }
 
         $department_id = $request->input('department_id');
 
