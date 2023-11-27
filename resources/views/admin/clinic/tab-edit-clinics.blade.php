@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+ @extends('layouts.admin')
 <style>
     .list-service {
         list-style-type: none;
@@ -41,27 +41,27 @@
         <div>
             <div class="row">
                 <div class="col-md-4">
-                    <label>name</label>
+                    <label for="name">name</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{$clinic->name}}">
                 </div>
                 <div class="col-md-4">
-                    <label>name_en</label>
+                    <label for="name_en">name_en</label>
                     <input type="text" class="form-control" id="name_en" name="name_en" value="{{$clinic->name_en}}">
                 </div>
                 <div class="col-md-4">
-                    <label>name_laos</label>
+                    <label for="name_laos">name_laos</label>
                     <input type="text" class="form-control" id="name_laos" name="name_laos"
                            value="{{$clinic->name_laos}}">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <label>phone</label>
+                    <label for="phone">phone</label>
                     <input type="number" class="form-control" id="phone" name="phone" required
                            value="{{$clinic->phone}}">
                 </div>
                 <div class="col-md-6">
-                    <label>email</label>
+                    <label for="email">email</label>
                     <input type="email" class="form-control" id="email" name="email" required
                            value="{{$clinic->email}}">
                 </div>
