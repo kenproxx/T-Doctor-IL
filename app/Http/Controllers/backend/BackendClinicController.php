@@ -86,6 +86,7 @@ class BackendClinicController extends Controller
             $name_laos = $request->input('name_laos');
             $address_detail = $request->input('address_detail');
             $address_detail_en = $request->input('address_detail_en');
+            $address_detail_laos = $request->input('address_detail_laos');
             $user_id = $request->input('user_id');
             $nation_id = $request->input('nation_id');
             $province_id = $request->input('province_id');
@@ -142,6 +143,7 @@ class BackendClinicController extends Controller
             $clinic->introduce = $introduce;
             $clinic->gallery = $gallery;
             $clinic->status = $status ?? ClinicStatus::ACTIVE;
+
 
             if (!$user_id) {
                 return response("UserID not null!", 400);
