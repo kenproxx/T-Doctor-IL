@@ -144,6 +144,7 @@
 
     async function checkDelete(id) {
         let confirmed = confirm('Are you sure you want to delete this item?');
+        loadingMasterPage();
 
         if (confirmed) {
             let accessToken = `Bearer ` + token;
@@ -158,10 +159,12 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function (response) {
+                    loadingMasterPage();
                     window.location.reload();
                     alert('Success!');
                 },
                 error: function (exception) {
+                    loadingMasterPage();
                     console.log(exception)
                 }
             });
