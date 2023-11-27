@@ -1,9 +1,10 @@
 @extends('layouts.admin')
-
+@section('title')
+    Edit Selling/Buying
+@endsection
 @section('main-content')
-
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">{{ __('Create') }}</h1>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('Edit') }}</h1>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -12,54 +13,55 @@
             </button>
         </div>
     @endif
-    <form id="form" method="post" action="{{ route('api.backend.products.update', ['id' => $product->id]) }}"
-          enctype="multipart/form-data">
-        @csrf
-        @method('POST')
+    <form id="form" >
         <div>
             <div class="row">
                 <div class="col-md-4">
-                    <label for="name">name</label>
+                    <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{$product->name}}">
                 </div>
                 <div class="col-md-4">
-                    <label for="name_en">name_en</label>
+                    <label for="name_en">Name English</label>
                     <input type="text" class="form-control" id="name_en" name="name_en" value="{{$product->name_en}}">
                 </div>
                 <div class="col-md-4">
-                    <label for="name_laos">name_laos</label>
-                    <input type="text" class="form-control" id="name_laos" name="name_laos" value="{{$product->name_laos}}">
+                    <label for="name_laos">Name Laos</label>
+                    <input type="text" class="form-control" id="name_laos" name="name_laos"
+                           value="{{$product->name_laos}}">
                 </div>
 
             </div>
 
             <div class="row">
-                <div class="col-sm-4"><label for="description">Mô tả việt</label>
+                <div class="col-sm-4">
+                    <label for="description">Mô tả việt</label>
                     <textarea class="form-control" name="description"
                               id="description">{{$product->description}}</textarea>
                 </div>
-                <div class="col-sm-4"><label for="description_en">Mô tả anh</label>
+                <div class="col-sm-4">
+                    <label for="description_en">Mô tả anh</label>
                     <textarea class="form-control" name="description_en"
                               id="description_en">{{$product->description_en}}</textarea>
                 </div>
-                <div class="col-sm-4"><label for="description_laos">Mô tả lào</label>
+                <div class="col-sm-4">
+                    <label for="description_laos">Mô tả lào</label>
                     <textarea class="form-control" name="description_laos"
                               id="description_laos">{{$product->description_laos}}</textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <label for="brand_name">brand_name</label>
+                    <label for="brand_name">Brand Name</label>
                     <input type="text" class="form-control" id="brand_name" name="brand_name"
                            value="{{$product->brand_name}}">
                 </div>
                 <div class="col-md-4">
-                    <label for="brand_name_en">brand_name_en</label>
+                    <label for="brand_name_en">Brand Name English</label>
                     <input type="text" class="form-control" id="brand_name_en" name="brand_name_en"
                            value="{{$product->brand_name_en}}">
                 </div>
                 <div class="col-md-4">
-                    <label for="brand_name_laos">brand_name_laos</label>
+                    <label for="brand_name_laos">Brand Name Laos</label>
                     <input type="text" class="form-control" id="brand_name_laos" name="brand_name_laos"
                            value="{{$product->brand_name_laos}}">
                 </div>
@@ -67,13 +69,14 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <label for="category_id">category_id</label>
+                    <label for="category_id">Category</label>
                     <select class="custom-select" id="category_id" name="category_id">
-                        <option value="{{$product->category_id}}">{{$product->category_id}}</option>
-                        <option value="1">category 1</option>
-                        <option value="2">category 2</option>
-                        <option value="3">category 3</option>
-                        <option value="4">category 4</option>
+                        @foreach($categories as $category)
+                            <option {{ $category->id == $product->category_id ? 'checked' : '' }}
+                                    value="{{$category->id}}">
+                                {{$category->name}}
+                            </option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="col-md-6">
@@ -85,20 +88,18 @@
                     <select class="custom-select" id="province_id" name="province_id">
                         @foreach($provinces as $province)
                             <option
-                                value="{{$province->id}}" {{$province->id == $product->province_id ? 'selected' : ''}}>{{$province->name}}</option>
+                                    value="{{$province->id}}" {{$province->id == $product->province_id ? 'selected' : ''}}>{{$province->name}}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
-
-
             <div>
-                <label>thumbnail</label>
+                <label>Thumbnail</label>
                 <input type="file" class="form-control" id="thumbnail" name="thumbnail" multiple accept="image/*">
                 <img width="50px" src="{{$product->thumbnail}}" alt="thumbnail">
             </div>
             <div>
-                <label for="gallery">gallery</label>
+                <label for="gallery">Gallery</label>
                 <input type="file" class="form-control" id="gallery" name="gallery[]" multiple accept="image/*">
                 @php
                     $galleryArray = explode(',', $product->gallery);
@@ -108,48 +109,42 @@
                 @endforeach
             </div>
             <div>
-                <label for="price">price</label>
+                <label for="price">Price</label>
                 <input type="number" class="form-control" id="price" name="price" value="{{$product->price}}">
             </div>
             <div>
-                <label for="price_unit">price_unit</label>
+                <label for="price_unit">Price Unit</label>
                 <input type="text" class="form-control" id="price_unit" name="price_unit"
                        value="{{$product->price_unit}}">
             </div>
 
             <div class="row">
                 <div class="col-sm-4">
-                    <label for="ads_plan">ads_plan</label>
+                    <label for="ads_plan">Ads Plan</label>
                     <select id="ads_plan" name="ads_plan" class="custom-select">
-                        <option value="{{$product->ads_plan}}">{{$product->ads_plan}}</option>
-                        <option value="1">Platinum</option>
-                        <option value="2">Premium</option>
-                        <option value="3">Silver</option>
+                        <option {{$product->ads_plan == 1 ? 'selected' : ''}} value="1">Platinum</option>
+                        <option {{$product->ads_plan == 2 ? 'selected' : ''}} value="2">Premium</option>
+                        <option {{$product->ads_plan == 3 ? 'selected' : ''}} value="3">Silver</option>
                     </select>
                 </div>
                 <div class="col-sm-4">
-                    <label for="ads_period">ads_period</label>
+                    <label for="ads_period">Ads Period</label>
                     <select id="ads_period" name="ads_period" class="custom-select">
-                        <option value="{{$product->ads_period}}">{{$product->ads_period}}</option>
-                        <option value="1">5 Day</option>
-                        <option value="2">10 Day</option>
-                        <option value="3">15 Day</option>
-                        <option value="4">20 Day</option>
+                        <option {{$product->ads_period == 1 ? 'selected' : ''}} value="1">5 Day</option>
+                        <option {{$product->ads_period == 2 ? 'selected' : ''}} value="2">10 Day</option>
+                        <option {{$product->ads_period == 3 ? 'selected' : ''}} value="3">15 Day</option>
+                        <option {{$product->ads_period == 4 ? 'selected' : ''}} value="4">20 Day</option>
                     </select>
                 </div>
                 <div class="col-sm-4"><label for="status">Trạng thái</label>
                     <select class="custom-select" id="status" name="status" {{ !$isAdmin ? 'disabled' : '' }}>
-                        <option
-                            value="{{ \App\Enums\ProductStatus::ACTIVE }}" {{ $product->status === \App\Enums\ProductStatus::ACTIVE ? 'selected' : '' }}>
+                        <option value="{{ \App\Enums\ProductStatus::ACTIVE }}"
+                            {{ $product->status == \App\Enums\ProductStatus::ACTIVE ? 'selected' : '' }}>
                             {{ \App\Enums\ProductStatus::ACTIVE }}
                         </option>
-                        <option
-                            value="{{ \App\Enums\ProductStatus::INACTIVE }}" {{ $product->status === \App\Enums\ProductStatus::INACTIVE ? 'selected' : '' }}>
+                        <option value="{{ \App\Enums\ProductStatus::INACTIVE }}"
+                            {{ $product->status == \App\Enums\ProductStatus::INACTIVE ? 'selected' : '' }}>
                             {{ \App\Enums\ProductStatus::INACTIVE }}
-                        </option>
-                        <option
-                            value="{{ \App\Enums\ProductStatus::DELETED }}" {{ $product->status === \App\Enums\ProductStatus::DELETED ? 'selected' : '' }}>
-                            {{ \App\Enums\ProductStatus::DELETED }}
                         </option>
                     </select>
 
@@ -175,7 +170,7 @@
                 const fieldNames = [
                     "name", "name_en", "category_id", "brand_name",
                     "brand_name_en", "province_id", "price",
-                    "price_unit", "ads_plan", "ads_period", "user_id","name_laos","brand_name_laos"
+                    "price_unit", "ads_plan", "ads_period", "user_id", "name_laos", "brand_name_laos"
                 ];
                 const fieldTextareaTiny = [
                     "description", "description_en", "description_laos"

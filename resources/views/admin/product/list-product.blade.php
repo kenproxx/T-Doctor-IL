@@ -1,9 +1,8 @@
 @extends('layouts.admin')
-
+@section('title')
+    List Selling/Buying
+@endsection
 @section('main-content')
-    <style>
-
-    </style>
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('List products') }}</h1>
     <a href="{{route('product.create.product')}}" class="btn btn-primary mb-3">Add</a>
@@ -15,8 +14,5 @@
             </button>
         </div>
     @endif
-
     @include('admin.product.tab-list-product')
-
-
 @endsection

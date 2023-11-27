@@ -64,7 +64,7 @@ class ReviewApi extends Controller
             $review->user_id = $userID;
             $review->star = $star;
             $review->content = $content;
-            $review->status = ReviewStatus::PENDING;
+            $review->status = ReviewStatus::APPROVED;
 
             $success = $review->save();
             if ($success) {
