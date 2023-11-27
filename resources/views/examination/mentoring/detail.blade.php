@@ -354,7 +354,7 @@
                           stroke-width="4"
                           stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
-                <h1 class="d-inline ml-3">Comment</h1>
+                <h1 class="d-inline ml-3">{{ __('home.Comment') }}</h1>
             </div>
         </a>
         <div class="card-body">
@@ -401,7 +401,7 @@
                             <img class="img"
                                  src="https://media.licdn.com/dms/image/D560BAQE96KctT7x-iw/company-logo_200_200/0/1666170056007?e=2147483647&v=beta&t=U-5DmL_mYQaduEYyl0aVlabEvxP6-F5nZE9daao6Wuk"/>
                             <input type="text" class="form-control text-wrapper-4 w-100 h-100 border-0"
-                                   placeholder="Enter question here" id="input-comment-main">
+                                   placeholder="{{ __('home.Enter question here') }}" id="input-comment-main">
                         </div>
                     </div>
                     <div class="text-wrapper-5">
@@ -433,7 +433,7 @@
 
         <div class="border-bottom mb-4">
             <div class="div d-flex justify-content-between mb-3">
-                <div class="text-wrapper d-inline-flex header_comment">Answer</div>
+                <div class="text-wrapper d-inline-flex header_comment">{{ __('home.Answer') }}</div>
             </div>
         </div>
 
@@ -468,7 +468,7 @@
                                      src="https://media.licdn.com/dms/image/D560BAQE96KctT7x-iw/company-logo_200_200/0/1666170056007?e=2147483647&v=beta&t=U-5DmL_mYQaduEYyl0aVlabEvxP6-F5nZE9daao6Wuk"/>
                                 <input type="text" class="form-control text-wrapper-4 w-100 h-100 border-0"
                                        id="input-comment-{{ $index }}"
-                                       placeholder="Enter question here">
+                                       placeholder="{{ __('home.Enter question here') }}">
                             </div>
                         </div>
                         <div class="text-wrapper-5">
@@ -492,7 +492,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <div class="text-wrapper-3 reply-comment">Reply</div>
+                            <div class="text-wrapper-3 reply-comment">{{ __('home.Reply') }}</div>
                         @endif
                     </div>
                 </div>

@@ -36,7 +36,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Carts</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ __('home.Carts') }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -85,7 +85,7 @@
                 @endif
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn cancel" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn cancel" data-dismiss="modal">{{ __('home.CANCEL') }}</button>
                 <a href="{{ route('user.checkout.index') }}" class="btn pay">Pay</a>
             </div>
         </div>

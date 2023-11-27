@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Addresses</title>
+    <title>{{ __('home.Addresses') }}</title>
 </head>
 <body>
-<h1>Addresses</h1>
+<h1>{{ __('home.Addresses') }}</h1>
 
 <!-- Form to add new address -->
 <form id="addAddressForm">
     @csrf
     <label for="newAddress">New Address:</label>
     <input type="text" id="newAddress" name="newAddress" required>
-    <button type="button" onclick="addNewAddress()">Save</button>
+    <button type="button" onclick="addNewAddress()">{{ __('home.Save') }}</button>
 </form>
 <div id="allAddressesMap" style="height: 800px;"></div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQO5YhrnYxyI215uOX9bNQ-_xxV_stGf8&callback=initMap"></script>
