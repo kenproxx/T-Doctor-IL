@@ -52,6 +52,9 @@
         @endforeach
         </tbody>
     </table>
+    <div class="d-flex justify-content-center align-items-center">
+        {{$users->links()}}
+    </div>
     <script>
         const token = `{{ $_COOKIE['accessToken'] ?? ''}}`;
 
