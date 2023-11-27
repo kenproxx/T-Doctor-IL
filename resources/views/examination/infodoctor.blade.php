@@ -34,8 +34,7 @@
                 <div id="title" class="d-flex justify-content-center">
                     <div class="d-flex list-title">
                         <div class="list--doctor p-0">
-                            <a class="back" href="{{route('examination.index')}}"><p><i class="bi bi-arrow-left"></i>Detailed
-                                    information Doctor</p></a>
+                            <a class="back" href="{{route('examination.index')}}"><p><i class="bi bi-arrow-left"></i>{{ __('home.Detailed information Doctor') }}</p></a>
                         </div>
                     </div>
                 </div>
@@ -56,7 +55,7 @@
                     color: #000;
                     font-size: 32px;
                     font-weight: 800;
-                    ">Doctor's QR Code</p>
+                    ">{{ __("home.Doctor's QR Code") }}</p>
                             <p id="qrContent">
                                 {!! $qrCodes !!}
                             </p>
@@ -66,43 +65,43 @@
                     <div id="about" style="width: 670px; height: 670px; margin-left: 15px">
                         <h5 style="font-size: 48px; font-weight: 800;">{{ $doctor->name }}</h5>
                         <div class="dess">
-                            <p>Hospital: </p>
+                            <p>{{ __('home.Hospital') }}: </p>
                             <span> {{ $doctor->hospital }} </span>
                         </div>
                         <div class="dess">
-                            <p>Specialty:</p>
+                            <p>{{ __('home.Specialty') }}:</p>
                             <span> {{ $doctor->specialty }}</span>
                         </div>
                         <div class="dess">
-                            <p>Experience: </p>
+                            <p>{{ __('home.Experience') }}: </p>
                             <span> {{ $doctor->year_of_experience }} years</span>
                         </div>
                         <div class="dess">
-                            <p>Services: </p>
+                            <p>{{ __('home.Services') }}: </p>
                             <span> {!! $doctor->service !!}</span>
                         </div>
                         <div class="dess">
-                            <p>Working time: </p>
+                            <p>{{ __('home.Working time') }}: </p>
                             <span> {{ $doctor->time_working_1 }} ({{ $doctor->time_working_2 }})</span>
                         </div>
                         <div class="dess">
-                            <p>Service prices:</p>
+                            <p>{{ __('home.Service prices') }}:</p>
                             <span>{{ $doctor->service_price }}</span>
                         </div>
                         <div class="dess">
-                            <p>Respond rate: </p>
+                            <p>{{ __('home.Respond rate') }}: </p>
                             <span>{{ $doctor->response_rate }}%</span>
                         </div>
                         <div id="opt_btn" class="d-flex">
-                            <button>Chat</button>
-                            <button>Videocall</button>
+                            <button>{{ __('home.Chat') }}</button>
+                            <button>{{ __('home.Videocall') }}</button>
                         </div>
                     </div>
                 </div>
                 <div id="review" class="d-flex justify-content-center">
                     <div class="d-flex list-title">
                         <div class="list--doctor p-0">
-                            <p>Review</p>
+                            <p>{{ __('home.Review') }}</p>
                         </div>
                         <div class="ms-auto p-2">
                             <button class="btn btn-primary" type="button" onclick="showOrHidden(1);">Add Review</button>
@@ -114,11 +113,11 @@
                         @csrf
                         @method('POST')
                         <div class="font-weight-600 fs-24px text-center row">
-                            <span>Are you satisfied with
+                            <span>{{ __('home.Are you satisfied with') }}
                                 <strong>
                                     {{ $doctor->name}}
                                 </strong>
-                                services?
+                                {{ __('home.Services') }}?
                             </span>
                         </div>
                         <div class="mt-md-4 mb-md-5 d-flex justify-content-center">
@@ -142,11 +141,11 @@
                             </label>
                         </div>
                         <div>
-                            <label for="review_title"><b>Title</b></label>
+                            <label for="review_title"><b>{{ __('home.Title') }}</b></label>
                             <input type="text" class="form-control" id="review_title">
                         </div>
                         <div>
-                            <label for="review_content"><b>Add detailed review</b></label>
+                            <label for="review_content"><b>{{ __('home.Add detailed review') }}</b></label>
                             <textarea class="form-control" id="review_content" rows="6"></textarea>
                         </div>
                     </div>
@@ -154,12 +153,12 @@
                         <div class="recruitment-details--btn col-md-6 justify-content-end d-flex">
                             <button type="button" onclick="showOrHidden(0);"
                                     class="btn btn-secondary btnHiddenForm col-md-6">
-                                Cancel
+                                {{ __('home.CANCEL') }}
                             </button>
                         </div>
                         <div class="recruitment-details--btn col-md-6 justify-content-start d-flex">
                             <button class="btn col-md-6 btn-send" type="button" onclick="addReview(0);">
-                                Submit
+                                {{ __('home.Submit') }}
                             </button>
                         </div>
                     </div>
@@ -301,23 +300,23 @@
 
                     let htmlReviewFormChild = `<div class="form-add-review-child d-none mb-2" id="form_add_review_child_${parent.id}">
                         <div>
-                            <label for="review_title_${parent.id}"><b>Title</b></label>
+                            <label for="review_title_${parent.id}"><b>{{ __('home.Title') }}</b></label>
                             <input type="text" class="form-control" id="review_title_${parent.id}">
                         </div>
                         <div>
-                            <label for="review_content_${parent.id}"><b>Add detailed review</b></label>
+                            <label for="review_content_${parent.id}"><b>{{ __('home.Add detailed review') }}</b></label>
                             <textarea class="form-control" id="review_content_${parent.id}" rows="6"></textarea>
                         </div>
                         <div class="row mt-2">
                             <div class="recruitment-details--btn col-md-6 justify-content-end d-flex">
                                 <button type="button" onclick="showOrHiddenChild(0, '${parent.id}');"
                                         class="btn btn-secondary btnHiddenForm col-md-6">
-                                    Cancel
+                                    {{ __('home.CANCEL') }}
                                 </button>
                             </div>
                             <div class="recruitment-details--btn col-md-6 justify-content-start d-flex">
                                 <button class="btn col-md-6 btn-send" type="button" onclick="addReview('${parent.id}');">
-                                    Submit
+                                    {{ __('home.Submit') }}
                                 </button>
                             </div>
                         </div>

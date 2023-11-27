@@ -27,7 +27,7 @@
                         <div class="tab-pane fade show active" id="productList" role="tabpanel"
                              aria-labelledby="productList-tab">
                             <div>
-                                <h3><b>My personal doctor</b></h3>
+                                <h3><b>{{ __('home.My personal doctor') }}</b></h3>
                                 <hr>
                             </div>
                             <div class="list-doctor row" id="listMyDoctor">
@@ -45,7 +45,7 @@
                     </div>
                 </div>
             @else
-                <p class="text-center">Please login to continue!</p>
+                <p class="text-center">{{ __('home.Please login to continue') }}!</p>
             @endif
         </div>
     </div>
@@ -100,9 +100,9 @@
                                     <img src="${img}" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <a href="${route}"><h5 class="card-title">${data['name']}</h5></a>
-                                        <p class="card-text_1">Location: <b>Hanoi</b></p>
-                                        <p class="card-text_1">Working time: <b>${data['time_working_1']} - ${data['time_working_2']}</b></p>
-                                        <button class="delete-1">Delete</button>
+                                        <p class="card-text_1">{{ __('home.Location') }}: <b>Hanoi</b></p>
+                                        <p class="card-text_1">{{ __('home.Working time') }}: <b>${data['time_working_1']} - ${data['time_working_2']}</b></p>
+                                        <button class="delete-1">{{ __('home.Delete') }}</button>
                                     </div>
                                 </div>`;
                 }

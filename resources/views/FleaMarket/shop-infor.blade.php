@@ -23,10 +23,10 @@
                 @include('component.avt-info')
                 <ul class="nav nav-tabs row tabMystore" role="tablist">
                     <li class="nav-item col-4">
-                        <a class="nav-link active font-14-mobi" id="productList-tab" data-toggle="tab" href="#productList" role="tab" aria-controls="home" aria-selected="true">Home</a>
+                        <a class="nav-link active font-14-mobi" id="productList-tab" data-toggle="tab" href="#productList" role="tab" aria-controls="home" aria-selected="true">{{ __('home.Home') }}</a>
                     </li>
                     <li class="nav-item col-4">
-                        <a class="nav-link font-14-mobi" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="profile" aria-selected="false">Review</a>
+                        <a class="nav-link font-14-mobi" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="profile" aria-selected="false">{{ __('home.Review') }}</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -35,7 +35,7 @@
                     </div>
                     <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
                         <div class="d-flex justify-content-end align-items-center mb-md-3">
-                            <a id="writeReviewBtn" class="b-radius p-2" style="border-radius: 30px; background: none" ><i class="fa-regular fa-file-lines"></i>Write a review</a>
+                            <a id="writeReviewBtn" class="b-radius p-2" style="border-radius: 30px; background: none" ><i class="fa-regular fa-file-lines"></i>{{ __('home.Write a review') }}</a>
                         </div>
                         <div id="reviewItem">
                             @include('component.review-item')
