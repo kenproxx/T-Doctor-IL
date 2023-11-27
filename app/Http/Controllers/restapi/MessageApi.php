@@ -12,6 +12,7 @@ class MessageApi extends Controller
     public function create(Request $request)
     {
         try {
+            $message = new Chat();
             $from_user = $request->input('from_user_id');
             $to_user = $request->input('to_user_id');
             $content = $request->input('content');
@@ -20,12 +21,11 @@ class MessageApi extends Controller
                 $item = $request->file('file_message');
                 $itemPath = $item->store('message/file', 'public');
                 $file = asset('storage/' . $itemPath);
+                $message->files = $file;
             }
 
-            $message = new Chat();
             $message->from_user_id = $from_user;
             $message->to_user_id = $to_user;
-            $message->files = $file;
             $message->chat_message = $content;
             $message->message_status = MessageStatus::UNSEEN;
 

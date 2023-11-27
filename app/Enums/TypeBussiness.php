@@ -8,5 +8,4 @@ final class TypeBussiness extends Enum
 {
     const CLINICS = 'CLINICS';
     const PHARMACIES = 'PHARMACIES';
-    const PHARMACY = 'PHARMACY';
 }

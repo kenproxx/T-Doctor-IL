@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Enums\DoctorDepartmentStatus;
+use App\Enums\DoctorInfoStatus;
 use App\Enums\online_medicine\OnlineMedicineStatus;
 use App\Enums\QuestionStatus;
 use App\Enums\SearchMentoring;
 use App\Enums\TypeBussiness;
+use App\Enums\TypeMedical;
 use App\Enums\TypeTimeWork;
 use App\Models\Answer;
 use App\Models\CalcViewQuestion;
@@ -54,11 +56,22 @@ class ExaminationController extends Controller
 
     public function findMyMedicine()
     {
-        $bestPhamrmacists = Clinic::where('type', TypeBussiness::PHARMACIES)->orderBy('count',
-            'DESC')->limit(16)->get();
-        $newPhamrmacists = Clinic::where('type', TypeBussiness::PHARMACIES)->orderBy('id', 'DESC')->limit(16)->get();
-        $allPhamrmacists = Clinic::where('type', TypeBussiness::PHARMACIES)->where('time_work',
-            TypeTimeWork::ALL)->limit(16)->get();
+        $bestPhamrmacists = DoctorInfo::where('hocham_hocvi', TypeMedical::PHAMACISTS)
+            ->where('status', DoctorInfoStatus::ACTIVE)
+            ->orderBy('id', 'DESC')
+            ->limit(16)
+            ->get();
+        $newPhamrmacists = DoctorInfo::where('hocham_hocvi', TypeMedical::PHAMACISTS)
+            ->where('status', DoctorInfoStatus::ACTIVE)
+            ->orderBy('id', 'DESC')
+            ->limit(16)
+            ->get();
+        $allPhamrmacists = DoctorInfo::where('hocham_hocvi', TypeMedical::PHAMACISTS)
+            ->where('status', DoctorInfoStatus::ACTIVE)
+            ->where('time_working_1', '00:00-23:59')
+            ->where('time_working_2', 'T2-CN')
+            ->limit(16)
+            ->get();
 
         $hotMedicines = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->limit(16)->get();
         $newMedicines = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->orderBy('id',
@@ -69,7 +82,7 @@ class ExaminationController extends Controller
         $function_foods = null;
         if ($category_function) {
             $function_foods = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->where('category_id',
-                    $category_function->id)->limit(16)->get();
+                $category_function->id)->limit(16)->get();
         }
 
         $categoryMedicines = CategoryProduct::where('status', true)->get();
@@ -125,8 +138,8 @@ class ExaminationController extends Controller
     public function mentoring()
     {
         $questions = Question::withCount('answers')->where('status', QuestionStatus::APPROVED)->orderBy('answers_count',
-                'desc') // Order by answer_count in descending order
-            ->take(10)->get();
+            'desc') // Order by answer_count in descending order
+        ->take(10)->get();
         return view('examination.mentoring.mentoring', compact('questions'));
     }
 
@@ -140,7 +153,7 @@ class ExaminationController extends Controller
 
         if ($category_id && $category_id != 0) {
             $listQuestion = Question::where('status', QuestionStatus::APPROVED)->where('category_id',
-                    $category_id)->get();
+                $category_id)->get();
         }
 
         foreach ($listQuestion as $question) {
@@ -186,7 +199,7 @@ class ExaminationController extends Controller
     {
         $categoryProduct = CategoryProduct::find($id);
         $productCategories = ProductMedicine::where('category_id', $id)->where('status',
-                OnlineMedicineStatus::APPROVED)->orderBy('id', 'desc')->get();
+            OnlineMedicineStatus::APPROVED)->orderBy('id', 'desc')->get();
         return view('examination.find-by-category', compact('categoryProduct', 'productCategories'));
     }
 

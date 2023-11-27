@@ -7,7 +7,9 @@ use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\User;
 use DB;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class MainController extends Controller
 {
@@ -118,6 +120,23 @@ class MainController extends Controller
                 'user_id' => $newUser->id
             ]);
         }
+    }
+
+    public function setLanguage(Request $request, $locale)
+    {
+        switch ($locale) {
+            case 'laos':
+                $lang = 'laos';
+                break;
+            case 'en':
+                $lang = 'en';
+                break;
+            default:
+                $lang = 'vi';
+                break;
+        }
+        Session::put('locale', $lang);
+        return redirect()->back();
     }
 
     public function generateRandomString($length)
