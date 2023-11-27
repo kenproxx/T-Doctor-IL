@@ -12,18 +12,18 @@ class HomeController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $listNewEvent = NewEvent::where('status', NewEventStatus::ACTIVE)
-            ->orderBy('created_at', 'desc')
-            ->get();
-        return view('News-event.News', compact('listNewEvent'));
-    }
-
-    public function detail ()
-    {
-        return view('News-event.detail-news');
-    }
+//    public function index()
+//    {
+//        $listNewEvent = NewEvent::where('status', NewEventStatus::ACTIVE)
+//            ->orderBy('created_at', 'desc')
+//            ->get();
+//        return view('News-event.News', compact('listNewEvent'));
+//    }
+//
+//    public function detail ()
+//    {
+//        return view('News-event.detail-news');
+//    }
 
     /**
      * Show the form for creating a new resource.

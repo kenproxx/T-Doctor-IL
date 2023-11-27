@@ -4,7 +4,8 @@
     @include('layouts.partials.header_3')
     @include('component.banner')
     @if($doctor)
-        <div id="show_inf" class="container">
+        <div  class="container">
+        <div id="show_inf">
             <div id="title" class="d-flex justify-content-center">
                 <div class="d-flex list-title">
                     <div class="list--doctor p-0">
@@ -70,7 +71,7 @@
                     <div id="opt_btn" class="d-flex">
                         <button>Chat</button>
                         <button>Videocall</button>
-                        <button>Homecare</button>
+{{--                        <button>Homecare</button>--}}
                     </div>
                 </div>
             </div>
@@ -86,8 +87,14 @@
                 <div id="rv-ctn" class="justify-content-center">
                     <div id="user_rv" class="d-flex">
                         <div id="user" class="d-flex">
-                            <img src="{{asset('img/detail_doctor/ellipse _14.png')}}" alt="">
-                            <p>Trần Đình Phi</p>
+                            <div class="">
+                                <img src="{{asset('img/detail_doctor/ellipse _14.png')}}" alt="">
+
+                            </div>
+                            <div class="">
+                                <p>Trần Đình Phi</p>
+                            </div>
+
                         </div>
                         <div id="time">
                             <p>10:20 07/04/2023</p>
@@ -106,6 +113,7 @@
                 </div>
             </div>
 
+        </div>
         </div>
     @endif
 @endsection

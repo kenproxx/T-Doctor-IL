@@ -1,3 +1,6 @@
+@php use App\Http\Middleware\MedicalPermission; @endphp
+@php use Illuminate\Support\Facades\Auth; @endphp
+@php use App\Enums\Role; @endphp
 <header class="container">
     <div class="header d-flex justify-content-around align-items-center header-pc">
         <div class="header-left">
@@ -5,7 +8,7 @@
                                              alt="logo"></a>
         </div>
         <div class="header-center d-flex">
-            <a href="{{route('recruitment.index')}}" hidden="" >Recruitment</a>
+            <a href="{{route('recruitment.index')}}" hidden="">Recruitment</a>
             <a href="{{route('flea-market.index')}}">Flea market</a>
             <a href="{{route('examination.index')}}">Examination</a>
             <a href="{{route('index.new')}}">New/Events</a>
@@ -14,19 +17,23 @@
             <a href="{{route('what.free')}}">What's free?</a>
         </div>
         <div class="header-right d-flex align-items-center">
-            @if(\Illuminate\Support\Facades\Auth::check())
+            @if(Auth::check())
                 <div class="dropdown">
-                    <div class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                    <div class="d-flex dropdown-toggle justify-content-between" type="button" data-toggle="dropdown"
                          aria-expanded="false">
-                        {{\Illuminate\Support\Facades\Auth::user()->username}}
+                        <div class="d-flex align-items-center mr-2">
+                            {{Auth::user()->username}}
+                        </div>
+                        <img src="{{asset('img/user-circle.png')}}">
                     </div>
                     <div class="dropdown-menu">
-                        @if( (new \App\Http\Middleware\MedicalPermission())->isMedicalPermission())
-                        <a class="dropdown-item" href="{{ route('homeAdmin') }}">Dashboard</a>
+                        @if( (new MedicalPermission())->isMedicalPermission())
+                            <a class="dropdown-item" href="{{ route('homeAdmin') }}">Dashboard</a>
                         @else
-                        <a class="dropdown-item" href="{{ route('profile') }}">Trang cá nhân</a>
+                            <a class="dropdown-item" href="{{ route('profile') }}">Trang cá nhân</a>
+                            <a class="dropdown-item" href="{{route('booking.list.by.user')}}">My booking</a>
                         @endif
-                        <a class="dropdown-item" href="{{route('logoutProcess')}}">Logout</a>
+                            <a class="dropdown-item" href="{{route('logoutProcess')}}">Logout</a>
                     </div>
                 </div>
             @else
@@ -53,11 +60,11 @@
                     </a>
                 </div>
                 <div class="header-right d-flex align-items-center">
-                    @if(\Illuminate\Support\Facades\Auth::check())
+                    @if(Auth::check())
                         <div class="dropdown">
                             <div class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
                                  aria-expanded="false">
-                                {{\Illuminate\Support\Facades\Auth::user()->username}}
+                                {{Auth::user()->username}}
                             </div>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="#">Action</a>
@@ -178,7 +185,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
                 </div>
                 <div class="popup">
-                    <form method="post" action="{{route('registerProcess')}}">
+                    <form method="post" action="{{route('registerProcess')}}" id="formSignUp" enctype="multipart/form-data">
                         @csrf
                         <div class="form">
                             <div class="tab-content" id="myTabContent">
@@ -192,19 +199,24 @@
                                         </div>
                                         <div class="form-element">
                                             <label for="type">Type Account</label>
-                                            <select id="type" name="type" class="form-select">
+                                            <select id="type" name="type" class="form-select" onchange="showInputFileUpload(this.value)">
                                                 <option>Choose...</option>
-                                                <option value="BUSINESS">BUSINESS</option>
-                                                <option value="MEDICAL">MEDICAL</option>
-                                                <option value="NORMAL">NORMAL</option>
+                                                <option value="{{Role::BUSINESS }}">BUSINESS</option>
+                                                <option value="{{Role::MEDICAL }}">MEDICAL</option>
+                                                <option value="{{Role::NORMAL }}" selected>NORMAL</option>
                                             </select>
                                         </div>
                                         <div class="form-element">
                                             <label for="member">Member</label>
                                             <select id="member" name="member" class="form-select">
-                                                <option value="PAITENTS">PAITENTS</option>
-                                                <option value="NORMAL_PEOPLE">NORMAL PEOPLE</option>
+                                                <option value="{{Role::PAITENTS }}">PAITENTS</option>
+                                                <option value="{{Role::NORMAL_PEOPLE }}">NORMAL PEOPLE
+                                                </option>
                                             </select>
+                                        </div>
+                                        <div class="form-element" id="elemet-upload-file-sign-up">
+                                            <label for="member" id="labelFileUploadSignup"></label>
+                                            <input type="file" id="fileupload" name="fileupload" accept="image/*, .pdf, .doc, .docx">
                                         </div>
                                         <div class="form-element">
                                             <label for="email">Email</label>
@@ -265,29 +277,47 @@
     </div>
 </div>
 <script>
+    $('#elemet-upload-file-sign-up').hide();
+
+    function showInputFileUpload(value) {
+        if (value === '{{Role::BUSINESS}}') {
+            $('#labelFileUploadSignup').text('Upload your business license');
+            //show elemet-upload-file-sign-up
+            $('#fileupload').attr('required', true);
+            $('#elemet-upload-file-sign-up').show();
+        } else if (value === '{{Role::MEDICAL}}') {
+            $('#labelFileUploadSignup').text('Upload your medical license');
+            $('#fileupload').attr('required', true);
+            $('#elemet-upload-file-sign-up').show();
+        } else {
+            $('#elemet-upload-file-sign-up').hide();
+            $('#fileupload').attr('required', false);
+        }
+    }
+
     $(document).ready(function () {
         $('#type').on('change', function () {
             let value = $(this).val();
             let html = ``;
             switch (value) {
                 case 'BUSINESS':
-                    html = `<option value="{{\App\Enums\Role::PHARMACEUTICAL_COMPANIES}}">PHARMACEUTICAL COMPANIES</option>
-                                                <option value="{{\App\Enums\Role::HOSPITALS}}">HOSPITALS</option>
-                                                <option value="{{\App\Enums\Role::CLINICS}}">CLINICS</option>
-                                                <option value="{{\App\Enums\Role::PHARMACIES}}">PHARMACIES</option>
-                                                <option value="{{\App\Enums\Role::SPAS}}">SPAS</option>
-                                                <option value="{{\App\Enums\Role::OTHERS}}">OTHERS</option>`;
+                    html = `<option value="{{Role::PHARMACEUTICAL_COMPANIES}}">PHARMACEUTICAL COMPANIES</option>
+                                                <option value="{{Role::HOSPITALS}}">HOSPITALS</option>
+                                                <option value="{{Role::CLINICS}}">CLINICS</option>
+                                                <option value="{{Role::PHARMACIES}}">PHARMACIES</option>
+                                                <option value="{{Role::SPAS}}">SPAS</option>
+                                                <option value="{{Role::OTHERS}}">OTHERS</option>`;
                     break;
                 case 'MEDICAL':
-                    html = `<option value="{{\App\Enums\Role::DOCTORS}}">DOCTOR</option>
-                                                <option value="{{\App\Enums\Role::PHAMACISTS}}">PHAMACISTS</option>
-                                                <option value="{{\App\Enums\Role::THERAPISTS}}">THERAPISTS</option>
-                                                <option value="{{\App\Enums\Role::ESTHETICIANS}}">ESTHETICIANS</option>
-                                                <option value="{{\App\Enums\Role::NURSES}}">NURSES</option>`;
+                    html = `<option value="{{Role::DOCTORS}}">DOCTOR</option>
+                                                <option value="{{Role::PHAMACISTS}}">PHAMACISTS</option>
+                                                <option value="{{Role::THERAPISTS}}">THERAPISTS</option>
+                                                <option value="{{Role::ESTHETICIANS}}">ESTHETICIANS</option>
+                                                <option value="{{Role::NURSES}}">NURSES</option>`;
                     break;
                 default:
-                    html = `<option value="{{\App\Enums\Role::PAITENTS}}">PAITENTS</option>
-                                                <option value="{{\App\Enums\Role::NORMAL_PEOPLE}}">NORMAL PEOPLE</option>`;
+                    html = `<option value="{{Role::PAITENTS}}">PAITENTS</option>
+                                                <option value="{{Role::NORMAL_PEOPLE}}">NORMAL PEOPLE</option>`;
                     break;
             }
             $('#member').empty().append(html);

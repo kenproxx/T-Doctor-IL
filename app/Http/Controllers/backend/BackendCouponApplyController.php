@@ -36,7 +36,20 @@ class BackendCouponApplyController extends Controller
             $couponApplies = CouponApply::where('status', '!=', CouponApplyStatus::DELETED)->where('user_id',
                 $id)->get();
         }
-        return response()->json($couponApplies);
+
+        $infoCoupon = [];
+
+        foreach ($couponApplies as $couponApply) {
+            $coupon = Coupon::where('id', $couponApply->coupon_id)->select('title', 'views', 'registered', 'max_register', 'thumbnail')->first();
+            array_push($infoCoupon, $coupon);
+        }
+
+        $data = [
+            'couponApplies' => $couponApplies,
+            'infoCoupon' => $infoCoupon
+        ];
+
+        return response()->json($data);
     }
 
     public function detail($id)

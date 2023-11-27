@@ -10,4 +10,5 @@ final class UserStatus extends Enum
     const INACTIVE = 'INACTIVE';
     const BLOCKED = 'BLOCKED';
     const DELETED = 'DELETED';
+    const PENDING = 'PENDING';
 }

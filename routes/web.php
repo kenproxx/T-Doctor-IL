@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\AddressMapController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthSocialController;
 use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CalcViewQuestionController;
 use App\Http\Controllers\ChatMessageController;
 use App\Http\Controllers\CheckoutController;
@@ -16,10 +18,12 @@ use App\Http\Controllers\ExaminationController;
 use App\Http\Controllers\FleaMarketController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\MedicineController;
+use App\Http\Controllers\NewEventController;
 use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecruitmentController;
 use App\Http\Controllers\ReviewStoreController;
+use App\Http\Controllers\ServiceClinicController;
 use App\Http\Controllers\WhatFreeToDay;
 use Illuminate\Support\Facades\Route;
 
@@ -34,23 +38,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/lang/en', function ($locale) {
+    session()->put('locale', 'en');
+    return redirect()->back();
+})->name('language');
+
 Route::get('/', 'HomeController@index')->name('home');
 
-Route::get('/login', 'AuthController@index')->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('loginProcess');
 Route::post('/register', [AuthController::class, 'register'])->name('registerProcess');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logoutProcess');
+
 
 Route::get('/login-google', [AuthSocialController::class, 'getGoogleSignInUrl'])->name('login.google');
 Route::get('/login-google-callback', [AuthSocialController::class, 'loginCallback'])->name('login.google.callback');
 Route::get('/login-role', [AuthSocialController::class, 'chooseRole'])->name('login.social.choose.role');
 
-Route::get('profile', [ProfileController::class, 'index'])->name('profile');
-Route::put('profile-update', [ProfileController::class, 'update'])->name('profile.update');
-
 Route::group(['prefix' => 'news'], function () {
-    Route::get('', [HomeController::class, 'index'])->name('index.new');
-    Route::get('detail', [HomeController::class, 'detail'])->name('detail.new');
+    Route::get('', [NewEventController::class, 'index'])->name('index.new');
+    Route::get('detail/{id}', [NewEventController::class, 'detail'])->name('detail.new');
 });
 Route::group(['prefix' => 'recruitment'], function () {
     Route::get('/index', [RecruitmentController::class, 'index'])->name('recruitment.index');
@@ -78,7 +84,17 @@ Route::group(['prefix' => 'examination'], function () {
 
 Route::group(['prefix' => 'questions'], function () {
     Route::get('/get-list', [BackendQuestionController::class, 'custom_getlist'])->name('questions.custome.list');
+    Route::get('/list/{id}', [BackendQuestionController::class, 'getListQuestion'])->name('questions.list.filter');
+    Route::get('/user-id/{id}', [BackendQuestionController::class, 'getQuestionByUserId'])->name('questions.list.userid');
+    Route::get('/detail/{id}', [BackendQuestionController::class, 'detail'])->name('api.backend.questions.detail');
+    Route::get('/{userId}/{categoryId}', [BackendQuestionController::class, 'getQuestionByUserIdAndCategoryId'])->name('questions.list.userid.categoryId');
 });
+
+Route::group(['prefix' => 'pharmacies'], function () {
+    Route::get('/list-pharmacies', [\App\Http\Controllers\PharmaciesController::class, 'index'])->name('api.pharmacies.list');
+    Route::get('/detail-pharmacies/{id}', [\App\Http\Controllers\PharmaciesController::class, 'detailPharmacies'])->name('api.pharmacies.detail');
+});
+
 Route::group(['prefix' => 'mentoring'], function () {
     Route::get('', [ExaminationController::class, 'mentoring'])->name('examination.mentoring');
     Route::get('detail/{id}', [ExaminationController::class, 'showMentoring'])->name('examination.mentoring.show');
@@ -100,14 +116,22 @@ Route::group(['prefix' => 'clinic'], function () {
     Route::get('/', [ClinicController::class, 'index'])->name('clinic');
     Route::get('/detail/{id}', [ClinicController::class, 'detail'])->name('clinic.detail');
     Route::post('/create', [ClinicController::class, 'store'])->name('clinic.booking.store');
+    Route::get('/showNear/{id}', [ClinicController::class, 'showNear'])->name('clinic.booking.showNear');
 
 });
 Route::group(['prefix' => 'product'], function () {
     Route::get('/lists', [BackendProductInfoController::class, 'index'])->name('backend.products.list');
     Route::get('/search', [BackendProductInfoController::class, 'search'])->name('backend.products.search');
-
-
 });
+
+Route::group(['prefix' => 'booking'], function () {
+    Route::get('/lists', [BookingController::class, 'index'])->name('booking.list.by.user');
+    Route::get('/search', [BackendProductInfoController::class, 'search'])->name('backend.products.search');
+});
+
+
+Route::get('/address', [AddressMapController::class, 'index']);
+Route::post('/save-address', [AddressMapController::class, 'store']);
 
 Route::group(['prefix' => 'flea-market'], function () {
     Route::get('/', [FleaMarketController::class, 'index'])->name('flea-market.index');
@@ -143,11 +167,20 @@ Route::group(['prefix' => 'address'], function () {
 Route::middleware(['auth'])->group(function () {
     Route::post('/save-user-login-social', [AuthSocialController::class, 'saveUser'])->name('save.user.login.social');
 
+    Route::get('profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('profile-update', [ProfileController::class, 'update'])->name('profile.update');
+
     Route::group(['prefix' => 'checkout'], function () {
         Route::get('/', [CheckoutController::class, 'index'])->name('user.checkout.index');
         Route::get('/return-checkout', [CheckoutController::class, 'returnCheckout'])->name('return.checkout.payment');
         Route::post('/imm', [CheckoutController::class, 'checkoutByImm'])->name('user.checkout.imm');
         Route::post('/vnpay', [CheckoutController::class, 'checkoutByVNPay'])->name('user.checkout.vnpay');
+    });
+
+    Route::group(['prefix' => 'service-clinics'], function () {
+        Route::get('list', [ServiceClinicController::class, 'getListService'])->name('user.service.clinics.list');
+        Route::get('detail/{id}', [ServiceClinicController::class, 'detailService'])->name('user.service.clinics.detail');
+        Route::get('create', [ServiceClinicController::class, 'createService'])->name('user.service.clinics.create');
     });
 });
 Route::group(['middleware' => ['medical']], function () {

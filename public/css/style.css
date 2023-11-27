@@ -107,6 +107,9 @@ a {
     object-fit: cover;
     border-radius: 8px;
 }
+.padding-news {
+    padding: 10px 10px;
+}
 .content__item__describe{
     height: 45px;
     overflow: hidden;
@@ -114,16 +117,15 @@ a {
 }
 .card .bi-heart{
     position: absolute;
-    left: 185px;
+    right: 23px;
     top: 15px;
+    font-size:25px ;
 }
 #list-doctor{
     /*gap:25px*/
 }
 .list-doctor .card{
-    padding: 16px;
-    margin-left: 64px;
-    width: 227px;
+    padding: 16px;;
     border-radius: 16px;
     margin-bottom: 30px;
 }
@@ -350,7 +352,6 @@ flea__item{
     font-size: 14px;
     font-weight: 800;
     border-radius: 0;
-    width: 125px;
     height: 34px;
     text-align: center;
 
@@ -776,7 +777,7 @@ span.material-symbols-outlined {
 }
 /*examination scene*/
 .list-title{
-    width: 1170px;
+    width: 100%;
     height: 60px;
     border-bottom: 1px solid #D6D6D6;
     margin-bottom: 24px;
@@ -855,10 +856,10 @@ span.material-symbols-outlined {
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 #show_inf #review{
-    margin-top: 20px;
+    margin-top: 150px;
 }
 #show_inf #rv_doc #rv-ctn {
-    width: 1170px;
+    width: 100%;
     margin-bottom: 24px;
     border-bottom: 1px solid #D6D6D6;
 }
@@ -968,9 +969,6 @@ span.material-symbols-outlined {
 .box--1{
    gap: 380px;
 }
-.box--3{
-    gap: 130px;
-}
 .card-body{
     padding: 0!important;
     gap: 8px;
@@ -978,7 +976,6 @@ span.material-symbols-outlined {
 }
 .card-img-top{
     min-height: 215px!important;
-    max-height: 215px!important;
     object-fit: cover!important;
 }
 .delete-1{
@@ -1074,4 +1071,52 @@ span.material-symbols-outlined {
 }
 .list-doctor11{
     gap: 30px;
+}
+.card{
+    min-height: 390px;!important;
+    max-height: 390px;!important;
+}
+.pagination{
+    padding-bottom: 10px;
+}
+#list-doctor .bg-list-doctor{
+    display: flex;
+    padding: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    border-radius: 16px;
+    border: 1px solid #EAEAEA;
+    background:  #FFF;
+}
+.heart-item {
+    position: absolute;
+    right: 40px;
+    top: 25px;
+    font-size: 25px;
+}
+.max-img {
+    min-width: 300px;
+    min-height: 300px;
+    /*max-width: 237px;*/
+    /*max-height: 237px;*/
+}
+.d-content {
+    display: contents;
+}
+.respiratory {
+    color:  #424242;
+    text-align: center;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.location-doc {
+    color: #929292;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }

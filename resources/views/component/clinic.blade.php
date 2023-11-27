@@ -53,7 +53,7 @@
                             <i class="bi bi-star-half"></i>
                             <i class="bi bi-star"></i>
                         </div>
-                        <div class="img-detail row">
+                        <div class="img-detail row over-x-hidden">
                         <div class="col-3 img-item d-flex">
                                 ${img}
                         </div>

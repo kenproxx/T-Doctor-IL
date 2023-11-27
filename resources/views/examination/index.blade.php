@@ -4,8 +4,8 @@
     @include('layouts.partials.header_3')
     @include('component.banner')
     <div id="examination-scene" class="container ">
-        <div class="d-flex justify-content-center">
-            <div id="filter" class="box--3 d-flex ">
+        <div class="d-flex w-100">
+            <div id="filter" class="box--3 d-flex justify-content-between w-100">
                 <div class="d-flex flex-fill">
                     <div class="filter_option" style="list-style: none;">
                         <li class="nav-item dropdown">
@@ -32,7 +32,7 @@
             </div>
         </div>
         <div id="show-doctor">
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center" style="padding: 12px">
                 <div id="list-title-best" class="list-title d-flex">
                     <div class="list--doctor p-0">
                         <p>Best doctor</p>
@@ -40,10 +40,10 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.best_doctor')}}">See all</a></div>
                 </div>
             </div>
-            <div id="list-doctor-best" class="list-doctor row container m-auto">
+            <div id="list-doctor-best" class="list-doctor row m-auto p-0">
 
             </div>
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center" style="padding: 12px">
                 <div id="list-title-new" class="list-title d-flex">
                     <div class="list--doctor p-0">
                         <p>New doctor</p>
@@ -51,10 +51,10 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.new_doctor')}}">See all</a></div>
                 </div>
             </div>
-            <div id="list-doctor-new" class="list-doctor row container m-auto">
+            <div id="list-doctor-new" class="list-doctor row m-auto">
 
             </div>
-            <div class="d-flex justify-content-center">
+            <div class="d-flex justify-content-center" style="padding: 12px;">
                 <div id="list-title-available" class="list-title d-flex">
                     <div class="list--doctor p-0">
                         <p>24/7 Available doctor</p>
@@ -62,7 +62,7 @@
                     <div class="ms-auto p-2"><a href="{{route('examination.available_doctor')}}">See all</a></div>
                 </div>
             </div>
-            <div id="list-doctor-available" class="list-doctor row container m-auto">
+            <div id="list-doctor-available" class="list-doctor row m-auto">
 
             </div>
         </div>
@@ -93,7 +93,8 @@
                     let mainUrl = detailDoctor.replace(':id', item['id']);
                     let imageDoctor = item['thumbnail'];
                     let myArray = imageDoctor.split("/storage");
-                    html = html + `<div class="card col-md-3" >
+                    html = html + `<div class="col-md-3" >
+                                    <div class="card">
                             <i class="bi bi-heart"></i>
                             <img src=" ${url}${myArray[1]} " class="card-img-top" alt="...">
                             <div class="card-body">
@@ -101,6 +102,7 @@
                                 <p class="card-text">Specialty: ${item['specialty']}</p>
                                 <p class="card-text_1">Location: <b>${item['detail_address']}</b></p>
                                 <p class="card-text_1">Working time: <b>${item['time_working_1']}</b></p>
+                            </div>
                             </div>
                         </div>`;
 
@@ -125,7 +127,7 @@
                     let imageDoctor = item['thumbnail'];
                     let myArray = imageDoctor.split("/storage");
                     html = html + `<div class="card col-md-3" >
-                            <i class="bi bi-heart"></i>
+                              <i class="bi bi-heart"></i>
                             <img src=" ${url}${myArray[1]} " class="card-img-top" alt="...">
                             <div class="card-body">
                                 <a href="${mainUrl}"><h5 class="card-title">${item['name']}</h5></a>

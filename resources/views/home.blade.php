@@ -1,4 +1,6 @@
-@php use App\Models\Province; @endphp
+@php use App\Enums\NewEventStatus;use App\Models\NewEvent;use App\Models\Province;
+
+@endphp
 @extends('layouts.master')
 @section('title', 'Home')
 @section('content')
@@ -15,6 +17,50 @@
         .title-div-flea-market {
             white-space: nowrap;
             overflow: hidden;
+        }
+        .background-modal {
+            background: #FFFFFF;
+            max-height: 820px;
+            overflow-y: scroll;
+            margin: 20px;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        .border-button-close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .border-button-close span {
+            padding: 0 5px;
+            border-radius: 32px;
+            background: #FFF;
+        }
+
+        .gm-style-iw {
+            padding: 0 !important;
+        }
+
+        button.gm-ui-hover-effect {
+            top: 10px !important;
+            right: 10px !important;
+            border-radius: 20px !important;
+            background: white !important;
+        }
+
+        .background-modal {
+            max-width: 400px;
+        }
+
+        .button-follow {
+            max-height: 30px;
         }
     </style>
     @include('layouts.partials.header')
@@ -36,16 +82,19 @@
                         <h3 class="py-3 text-center">WHAT’S FREE?</h3>
                         <a href="#"><p class="section1_link">See all</p></a>
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <ul class="nav nav-pills nav-fill">
+                    <div class="d-flex">
+                        <ul class="nav nav-pills nav-fill d-flex justify-content-between w-100">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Free today</a>
+                                <a class="nav-link active font-14-mobi" id="home-tab" data-toggle="tab" href="#home"
+                                   role="tab" aria-controls="home" aria-selected="true">Free today</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Free with mission</a>
+                                <a class="nav-link font-14-mobi" id="profile-tab" data-toggle="tab" href="#profile"
+                                   role="tab" aria-controls="profile" aria-selected="false">Free with mission</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Discounted service</a>
+                                <a class="nav-link font-14-mobi" id="contact-tab" data-toggle="tab" href="#contact"
+                                   role="tab" aria-controls="home" aria-selected="true">Discounted service</a>
                             </li>
                         </ul>
                     </div>
@@ -262,280 +311,82 @@
                         <h3 class="py-3 text-center">News / Events</h3>
                         <a href="#"><p class="section1_link">See all</p></a>
                     </div>
-                    <div class="d-flex ">
-                        <ul class="nav nav-pills nav-fill" style="gap:50px">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">New</a>
+                    <div class="d-flex col-md-6 p-0">
+                        <ul class="nav nav-pills nav-fill d-flex w-100">
+                            <li class="nav-item col-md-6 justify-content-center p-0">
+                                <a class="nav-link active font-14-mobi" id="News-tab" data-toggle="tab" href="#News"
+                                   role="tab" aria-controls="home" aria-selected="true">News</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Event</a>
+                            <li class="nav-item col-md-6 justify-content-center">
+                                <a class="nav-link font-14-mobi" id="review-tab" data-toggle="tab" href="#review"
+                                   role="tab" aria-controls="profile" aria-selected="false">Event</a>
                             </li>
                         </ul>
                     </div>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="tab-pane fade show active" id="News" role="tabpanel" aria-labelledby="News-tab">
                             <div class="section1-content">
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
+                                @php
+                                    $listNews = NewEvent::where('status', NewEventStatus::ACTIVE)
+                                        ->where('type', 'NEWS')
+                                        ->orderBy('created_at', 'desc')
+                                        ->get();
+                                @endphp
+                                @foreach($listNews as $news)
+                                    <div class="px-5 py-2">
+                                        <a href="{{route('detail.new',$news->id)}}">
+                                            <div class="content__item d-flex gap-3">
+                                                <img
+                                                    class="content__item__image"
+                                                    src="{{$news->thumbnail}}"
+                                                    alt=""
+                                                />
+                                                <div>
+                                                    <h6>
+                                                        {{$news->title}}
+                                                    </h6>
+                                                    <div class="content__item__describe">
+                                                        {!!   $news->short_description  !!}
+                                                    </div>
+                                                    <p class="content__item-link">Read</p>
+                                                </div>
                                             </div>
-                                            <p class="content__item-link">Read</p>
-                                        </div>
+                                        </a>
                                     </div>
-                                </div>
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
-                                            </div>
-                                            <p class="content__item-link">Read</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
-                                            </div>
-                                            <p class="content__item-link">Read</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
-                                            </div>
-                                            <p class="content__item-link">Read</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
                             <div class="section1-content">
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
+                                @php
+                                    $listEvent = NewEvent::where('status', NewEventStatus::ACTIVE)
+                                      ->where('type', 'EVENT')
+                                      ->orderBy('created_at', 'desc')
+                                      ->get();
+                                @endphp
+                                @foreach($listEvent as $event)
+                                    <div class="px-5 py-2">
+                                        <a href="{{route('detail.new',$event->id)}}">
+                                            <div class="content__item d-flex gap-3">
+                                                <img
+                                                    class="content__item__image"
+                                                    src="{{$event->thumbnail}}"
+                                                    alt=""
+                                                />
+                                                <div>
+                                                    <h6>
+                                                        {{$event->title}}
+                                                    </h6>
+                                                    <div class="content__item__describe">
+                                                        {!!   $event->short_description  !!}
+                                                    </div>
+                                                    <p class="content__item-link">Read</p>
+                                                </div>
                                             </div>
-                                            <p class="content__item-link">Read</p>
-                                        </div>
+                                        </a>
                                     </div>
-                                </div>
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
-                                            </div>
-                                            <p class="content__item-link">Read</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
-                                            </div>
-                                            <p class="content__item-link">Read</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
-                                            </div>
-                                            <p class="content__item-link">Read</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                @endforeach
 
-                        </div>
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                            <div class="section1-content mt-5">
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <p>
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
-                                            </p>
-                                            <p class="content__item-link">Read</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <p>
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
-                                            </p>
-                                            <p class="content__item-link">Read</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <p>
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
-                                            </p>
-                                            <p class="content__item-link">Read</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="px-5 py-2">
-                                    <div class="content__item d-flex gap-3">
-                                        <img
-                                            class="content__item__image"
-                                            src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                            alt=""
-                                        />
-                                        <div>
-                                            <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
-                                            </h6>
-                                            <p>
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
-                                            </p>
-                                            <p class="content__item-link">Read</p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -556,33 +407,35 @@
         <img src="{{asset('img/Rectangle 23815.png')}}" alt="">
     </div>
     <div id="map-location" class="d-flex justify-content-center">
-        <div class="content-item d-flex justify-content-center">
-            <div id="address" class="p-2 w-100">
+        <div class="content-item  justify-content-center">
+            <div class="title-clinics">
                 <h2>Clinics/Pharmacies</h2>
                 <p>Find your suitable clinics/pharmacies and book now!</p>
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d760.8895710809026!2d105.75723237632864!3d20.973456865015233!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313453779ecd7b59%3A0x21695bf72a03120f!2zQ8O0bmcgdHkgVE5ISCBJTCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1696643777380!5m2!1svi!2s"
-                    width="770" height="417" style="border:1px; border-radius: 8px" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
-            <div id="describe" class="mt-auto p-2">
-                <div class="describe-item">
-                    <h3>24/7 AVAILABLE</h3>
-                    <p>You can find available clinics/pharmacies</p>
+            <div class="d-flex">
+                <div id="allAddressesMap" class="p-2 w-100">
+
                 </div>
-                <div class="describe-item">
-                    <h3>HOME CARE SERVICE</h3>
-                    <p>Don't come to us! We will come to you!</p>
+                <div id="describe" class="p-2">
+                    <div class="describe-item">
+                        <h3>24/7 AVAILABLE</h3>
+                        <p>You can find available clinics/pharmacies</p>
+                    </div>
+                    <div class="describe-item" hidden="">
+                        <h3>HOME CARE SERVICE</h3>
+                        <p>Don't come to us! We will come to you!</p>
+                    </div>
+                    <div class="describe-item">
+                        <h3>MANY LOCATION</h3>
+                        <p>More than 1500 Doctors, 1000 Pharmacists, 1000 Hospitals always wait for you</p>
+                    </div>
+                    <button class="btn-visit mt-45">Visit</button>
                 </div>
-                <div class="describe-item">
-                    <h3>MANY LOCATION</h3>
-                    <p>More than 1500 Doctors, 1000 Pharmacists, 1000 Hospitals always wait for you</p>
-                </div>
-                <button class="btn-visit">Visit</button>
             </div>
+
         </div>
     </div>
-    <div id="doctor-information">
+    <div id="doctor-information" style="padding-top: 15px">
         <h1>Find a doctor</h1>
         <div id="list-option" class="d-flex justify-content-around ">
             <div class="option-menu d-flex justify-content-center">
@@ -599,46 +452,29 @@
                 </ul>
             </div>
         </div>
-        <div id="list-doctor  " class="d-flex justify-content-center container list-doctor11">
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/pngtree-cartoon-anime-male-doctor-element-png-image_4073784.jpg')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Nguyễn Khắc Quý</h5>
-                    <p class="card-text">respiratory doctor</p>
-                    <p class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
-            </div>
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/11111.jpeg')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Lê Hải Thành</h5>
-                    <p class="card-text">respiratory doctor</p>
-                    <p class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
-            </div>
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/22222.jpeg')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Phạm Đức Long</h5>
-                    <p class="card-text">respiratory doctor</p>
-                    <p class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
-            </div>
-            <div class="card">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">BS Trần Đình </h5>
-                    <p class="card-text">respiratory doctor</p>
-                    <p class="card-text_1">Location: <b>Hanoi</b></p>
-                    <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                </div>
+        <div class="container">
+            @php
+                $doctors = \App\Models\DoctorInfo::where('status', \App\Enums\DoctorInfoStatus::ACTIVE)->get();
+            @endphp
+            <div id="list-doctor" class="d-flex row">
+                @foreach($doctors as $doctor)
+                    <div class="col-md-3 mt-3">
+                        <a href="{{ route('examination.doctor_info', $doctor->id) }}" target="_blank">
+                        <div class="bg-list-doctor">
+                            <div><i class="bi bi-heart heart-item"></i><img class="b-radius-8px max-img"
+                                                                            src="{{$doctor->thumbnail}}"></div>
+                            <div class="d-content">
+                                    <div class="fs-18px">{{$doctor->name}}</div>
+                                <div class="respiratory">{!! $doctor->service !!}</div>
+                                <div class="d-flex  location-doc">Location: <p class="fs-16px">{{$doctor->name}}</p>
+                                </div>
+                                <div class="d-flex  location-doc">Working time:<p
+                                        class="fs-16px">{{$doctor->time_working_1}}</p></div>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+                @endforeach
             </div>
         </div>
         <nav aria-label="Page navigation example">
@@ -758,7 +594,7 @@
                         <h3>24/7 AVAILABLE</h3>
                         <p>You can find available clinics/pharmacies</p>
                     </div>
-                    <div class="describe-item">
+                    <div class="describe-item" hidden="">
                         <h3>HOME CARE SERVICE</h3>
                         <p>Don't come to us! We will come to you!</p>
                     </div>
@@ -786,6 +622,7 @@
                     <div class="row">
                         @foreach($products as $product)
                             <div class="col-sm-4 pt-4">
+                                <a href="{{ route('flea.market.product.detail', $product->id) }}" target="_blank">
                                 <div class="card border-flea-market" style="height: 342px">
                                     <img src="{{asset($product->thumbnail ?? 'img/item_shopping.png')}}"
                                          class="card-img-top object-fit-cover" alt="...">
@@ -802,6 +639,7 @@
                                         <h4>{{ $product->price }}</h4>
                                     </div>
                                 </div>
+                                </a>
                             </div>
                         @endforeach
                     </div>
@@ -814,7 +652,7 @@
                         <h3>24/7 AVAILABLE</h3>
                         <p>You can find available clinics/pharmacies</p>
                     </div>
-                    <div class="describe-item">
+                    <div class="describe-item" hidden="">
                         <h3>HOME CARE SERVICE</h3>
                         <p>Don't come to us! We will come to you!</p>
                     </div>
@@ -832,7 +670,7 @@
     <div class="banner1">
         <img src="{{asset('img/Rectangle 23815.png')}}" alt="">
     </div>
-    <div id="item-information" style="padding-top: 15px">
+    <div id="item-information" style="padding-top: 15px; margin-top: 20px">
         <h1>Buy online</h1>
         <p>Don't struggle finding, we are always ready for you</p>
         <div id="list-option" style="padding-top: 15px" class="d-flex justify-content-around ">
@@ -910,10 +748,222 @@
             </ul>
         </nav>
     </div>
-
+    @php
+        $addresses = \App\Models\Clinic::all();
+        $coordinatesArray = $addresses->toArray();
+    @endphp
     <script>
         function viewCoupon(id) {
             window.location.href = "/coupon/" + id;
         }
+    </script>
+    <script>
+        var locations = {!! json_encode($coordinatesArray) !!};
+        var infoWindows = [];
+
+        function getCurrentLocation(callback) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var currentLocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    callback(currentLocation);
+                });
+            } else {
+                alert('Geolocation is not supported by this browser.');
+            }
+        }
+
+        function calculateDistance(lat1, lng1, lat2, lng2) {
+            var R = 6371; // Độ dài trung bình của trái đất trong km
+            var dLat = toRadians(lat2 - lat1);
+            var dLng = toRadians(lng2 - lng1);
+
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(toRadians(lat1)) * Math.cos(toRadians(lat2)) *
+                Math.sin(dLng / 2) * Math.sin(dLng / 2);
+
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+            var distance = R * c;
+            return distance;
+        }
+
+        function toRadians(degrees) {
+            return degrees * (Math.PI / 180);
+        }
+        function formatTime(dateTimeString) {
+            const date = new Date(dateTimeString);
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            return `${hours}:${minutes}`;
+        }
+
+        function initMap(currentLocation, locations) {
+            var map = new google.maps.Map(document.getElementById('allAddressesMap'), {
+                center: currentLocation,
+                zoom: 10
+            });
+
+            var currentLocationMarker = new google.maps.Marker({
+                position: currentLocation,
+                map: map,
+                title: 'Your Location'
+            });
+
+            locations.forEach(function(location) {
+                var distance = calculateDistance(
+                    currentLocation.lat, currentLocation.lng,
+                    parseFloat(location.latitude), parseFloat(location.longitude)
+                );
+
+                // Chọn bán kính tìm kiếm (ví dụ: 5 km)
+                var searchRadius = 10;
+
+                if (distance <= searchRadius) {
+                    var marker = new google.maps.Marker({
+                        position: { lat: parseFloat(location.latitude), lng: parseFloat(location.longitude) },
+                        map: map,
+                        title: 'Location'
+                    });
+                    var urlDetail = "{{ route('clinic.detail', ['id' => ':id']) }}".replace(':id', location.id);
+                    let img = '';
+                    let gallery = location.gallery;
+                    let arrayGallery = gallery.split(',');
+
+
+                    var infoWindowContent =`<div class="p-0 m-0 tab-pane fade show active background-modal b-radius" id="modalBooking">
+                <div>
+
+                    <img class="b-radius" src="${arrayGallery[0]}" alt="img">
+                </div>
+                <div class="p-3">
+                    <div class="form-group">
+                        <div class="d-flex justify-content-between mt-md-2">
+                            <div class="fs-18px">${location.name}</div>
+                            <div class="button-follow fs-12p ">
+                                <a class="text-follow-12" href="">FOLLOW</a>
+                            </div>
+                        </div>
+                        <div class="d-flex mt-md-2">
+                            <div class="d-flex col-md-6 justify-content-center align-items-center">
+                                <a class="row p-2" href="">
+                                    <div class="justify-content-center d-flex">
+                                        <i class="border-button-address fa-solid fa-bullseye"></i>
+                                    </div>
+                                    <div class="d-flex justify-content-center">Start</div>
+                                </a>
+                            </div>
+                            <div class="d-flex col-md-6 justify-content-center align-items-center">
+                                <a class="row p-2" href="">
+                                    <div class="justify-content-center d-flex">
+                                        <i class="border-button-address fa-regular fa-circle-right"></i>
+                                    </div>
+                                    <div class="d-flex justify-content-center">Direction</div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-md-3 mb-md-3">
+                    <a class="w-100 btn btn-secondary border-button-address font-weight-800 fs-14 justify-content-center" href="${urlDetail}" >
+                    Booking
+                    </a>
+                    </div>
+                    <div class="border-top">
+                        <div class="mt-md-2"><i class="text-gray mr-md-2 fa-solid fa-location-dot"></i>
+                            <span class="fs-14 font-weight-600">${location.address_detail}</span>
+                        </div>
+                        <div class="mt-md-2">
+                            <i class="text-gray mr-md-2 fa-regular fa-clock"></i>
+                            <span class="fs-14 font-weight-600">
+                                Open: ${formatTime(location.open_date)} - ${formatTime(location.close_date)}
+                            </span>
+                        </div>
+                        <div class="mt-md-2">
+                            <i class="text-gray mr-md-2 fa-solid fa-globe"></i>
+                            <span class="fs-14 font-weight-600"> ${location.email}</span>
+                        </div>
+                        <div class="mt-md-2">
+                            <i class="text-gray mr-md-2 fa-solid fa-phone-volume"></i> <span
+                                class="fs-14 font-weight-600"> ${location.phone}</span>
+                        </div>
+                        <div class="mt-md-2 mb-md-2">
+                            <i class="text-gray mr-md-2 fa-solid fa-bookmark"></i> <span
+                                class="fs-14 font-weight-600"> ${location.type}</span>
+                        </div>
+                        @for($i=0; $i<3; $i++)
+                    <div class="border-top mb-md-2">
+                        <div
+                            class="d-flex justify-content-between rv-header align-items-center mt-md-2">
+                            <div class="d-flex rv-header--left">
+                                <div class="avt-24 mr-md-2">
+                                    <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
+                                        </div>
+                                        <p class="fs-16px">Trần Đình Phi</p>
+                                    </div>
+                                    <div class="rv-header--right">
+                                        <p class="fs-14 font-weight-400">10:20 07/04/2023</p>
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <p>
+                                        Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại
+                                        salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi
+                                        như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới
+                                        thiệu cho bạn bè cùng sử dụng :D
+                                    </p>
+                                </div>
+                            </div>
+                        @endfor
+                    <div class="border-top">
+                        <div
+                            class="d-flex justify-content-between rv-header align-items-center mt-md-2">
+                            <div class="d-flex rv-header--left">
+                                <div class="avt-24 mr-md-2">
+                                    <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
+                                    </div>
+                                    <p class="fs-16px">Trần Đình Phi</p>
+                                </div>
+                                <div class="rv-header--right">
+                                    <p class="fs-14 font-weight-400">10:20 07/04/2023</p>
+                                </div>
+                            </div>
+                            <div class="content">
+                                <p>
+                                    Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại
+                                    salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như
+                                    mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho
+                                    bạn bè cùng sử dụng :D
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: infoWindowContent
+                    });
+
+                    marker.addListener('click', function() {
+                        closeAllInfoWindows();
+                        infoWindow.open(map, marker);
+                    });
+
+                    infoWindows.push(infoWindow);
+                }
+            });
+        }
+
+        function closeAllInfoWindows() {
+            infoWindows.forEach(function(infoWindow) {
+                infoWindow.close();
+            });
+        }
+
+        getCurrentLocation(function(currentLocation) {
+            initMap(currentLocation, locations);
+        });
     </script>
 @endsection

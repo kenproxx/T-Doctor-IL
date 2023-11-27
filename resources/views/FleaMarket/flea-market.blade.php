@@ -40,12 +40,13 @@
                 <input onkeyup="performSearch()" id="inputSearch" placeholder="Search for anything…">
             </div>
             <div class="d-flex col-md-4 justify-content-between align-items-center">
-                <form action="{{route('flea.market.sell.product')}}" class="col-md-4 flea-button mr-3">
-                    <button class="flea-btn">Sell my product</button>
-                </form>
-                <form action="{{route('flea.market.my.store' )}}" class="col-md-4 flea-button mr-3">
-                    <button class="flea-btn">Go to my store</button>
-                </form>
+
+                <a href="#" onclick="checkLogin()" class="col-md-4 flea-button">
+                    Sell my product
+                </a>
+                <a href="#" onclick="checkLoginWishStore()" class="col-md-4 flea-button flea-btn">
+                    Go to my store
+                </a>
                 <a href="#" onclick="checkLoginWish()" class="col-md-4 flea-button flea-btn">
                     Wish list
                 </a>
@@ -197,11 +198,26 @@
 
         var token = getCookie('accessToken');
 
+        function checkLoginWishStore() {
+            let userId = `{{ Auth::check() ? Auth::user()->id : null }}`;
+            if (!userId) {
+                $('#staticBackdrop').modal('show');
+            } else {
+                window.location.href = '{{route('flea.market.my.store' )}}';
+            }
+        }
         function checkLoginWish() {
             if (token === undefined) {
                 $('#staticBackdrop').modal('show');
             } else {
                 window.location.href = '{{ route('flea.market.wish.list') }}';
+            }
+        }
+        function checkLogin() {
+            if (token === undefined) {
+                $('#staticBackdrop').modal('show');
+            } else {
+                window.location.href = '{{route('flea.market.sell.product')}}';
             }
         }
     </script>
@@ -260,7 +276,6 @@
                 }
             }
             var categoryIdsString = departmentIds.join(',');
-            console.log(categoryIdsString)
             var formData = {
                 category_id: categoryIdsString,
                 name: searchValue,
@@ -289,7 +304,10 @@
             $('#productsAdsPlan3').html('');
 
             for (var i = 0; i < products.length; i++) {
+                let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`;
+                url = url.replace(':id', products[i].id);
                 var product = products[i];
+                console.log(product)
                 var adsPlan = product.ads_plan;
                 var isFavoriteClass = product.isFavorit ? 'bi-heart-fill' : 'bi-heart';
 
@@ -304,7 +322,7 @@
                     </div>
                     <div class="content-pro">
                         <div class="name-pro">
-                            <a href="${product.url}">${product.name}</a>
+                            <a href="${url}">${product.name}</a>
                         </div>
                         <div class="location-pro d-flex">
                             Location: <p>${product.province_id}</p>

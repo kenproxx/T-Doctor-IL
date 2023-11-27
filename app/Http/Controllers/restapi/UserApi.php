@@ -110,7 +110,7 @@ class UserApi extends Controller
 
                 $user->name = $name;
                 $user->last_name = $last_name;
-                $user->username = $username;
+//                $user->username = $username;
                 $user->address_code = $address_code;
 
                 $success = $user->save();
@@ -145,6 +145,92 @@ class UserApi extends Controller
                     return response('Change PhoneNumber success!', 200);
                 }
                 return response('Change PhoneNumber error', 400);
+            }
+            return response('User not found', 404);
+        } catch (\Exception $exception) {
+            return response($exception, 500);
+        }
+    }
+
+    public function updateProfile(Request $request)
+    {
+        try {
+            $userID = $request->input('user_id');
+
+            $name = $request->input('name');
+            $last_name = $request->input('last_name');
+            $username = $request->input('username');
+
+            $email = $request->input('email');
+            $phone_number = $request->input('phone_number');
+            $current_password = $request->input('current_password');
+            $new_password = $request->input('new_password');
+            $confirm_password = $request->input('confirm_password');
+
+            $nation_id = $request->input('nation_id');
+            $province_id = $request->input('province_id');
+            $district_id = $request->input('district_id');
+            $commune_id = $request->input('commune_id');
+
+            $gender = $request->input('gender');
+            $birthday = $request->input('birthday');
+
+            $user = User::find($userID);
+            if ($userID && $user && $user->status == UserStatus::ACTIVE) {
+                $user->name = $name;
+                $user->last_name = $last_name;
+
+                if ($user->email != $email) {
+                    $isEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
+                    if (!$isEmail) {
+                        return response('Email invalid!', 400);
+                    }
+
+                    $oldUser = User::where('email', $email)->first();
+                    if ($oldUser) {
+                        return response('Email already exited!', 400);
+                    }
+                    $user->email = $email;
+                }
+
+                if ($user->username != $username) {
+                    $oldUser = User::where('username', $username)->first();
+                    if ($oldUser) {
+                        return response('Username already exited!', 400);
+                    }
+                    $user->username = $username;
+                }
+
+                $user->phone = $phone_number;
+
+                if ($current_password || $new_password || $confirm_password) {
+                    $oldPassword = $user->password;
+                    $check = Hash::check($current_password, $oldPassword);
+                    if (!$check) {
+                        return response('Password incorrect', 400);
+                    }
+                    if (strlen($new_password) < 5) {
+                        return response('Password invalid!', 400);
+                    }
+                    if ($new_password != $confirm_password) {
+                        return response('New password or new password confirm incorrect', 400);
+                    }
+                    $user->password = Hash::make($new_password);
+                }
+
+                $user->nation_id = $nation_id;
+                $user->province_id = $province_id;
+                $user->district_id = $district_id;
+                $user->commune_id = $commune_id;
+
+                $user->gender = $gender;
+                $user->birthday = $birthday;
+
+                $success = $user->save();
+                if ($success) {
+                    return response('Change Information success!', 200);
+                }
+                return response('Change Information error', 400);
             }
             return response('User not found', 404);
         } catch (\Exception $exception) {

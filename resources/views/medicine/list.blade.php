@@ -1,20 +1,21 @@
-@php use App\Enums\online_medicine\FilterOnlineMedicine;use App\Enums\online_medicine\ObjectOnlineMedicine;use App\Models\User; @endphp
+@php use App\Enums\online_medicine\FilterOnlineMedicine;use App\Enums\online_medicine\ObjectOnlineMedicine;use App\Http\Controllers\MainController;use App\Models\User;use Illuminate\Support\Facades\Auth; @endphp
 @extends('layouts.master')
 @section('title', 'Online Medicine')
 @section('content')
     @include('layouts.partials.header')
     @include('component.banner')
     @php
-        $isAdmin = (new \App\Http\Controllers\MainController())->checkAdmin();
-        $isBusiness = (new \App\Http\Controllers\MainController())->checkBusiness();
-        $isMedical = (new \App\Http\Controllers\MainController())->checkMedical();
+        $isAdmin = (new MainController())->checkAdmin();
+        $isBusiness = (new MainController())->checkBusiness();
+        $isMedical = (new MainController())->checkMedical();
     @endphp
 
     <div class="medicine container">
         <div class="row medicine-search">
             <div class="medicine-search--left col-md-3 d-flex justify-content-around">
                 <div class="title">
-                    <select class="custom-select" id="category_id" name="category_id" onchange="categoryFilterMedicine(this.value)">
+                    <select class="custom-select" id="category_id" name="category_id"
+                            onchange="categoryFilterMedicine(this.value)">
                         <option value="">Category</option>
                         @if($categoryMedicines)
                             @foreach($categoryMedicines as $index => $cateProductMedicine)
@@ -24,7 +25,8 @@
                     </select>
                 </div>
                 <div class="title">
-                    <select class="custom-select" id="category_id" name="category_id" onchange="locationFilterMedicine(this.value)">
+                    <select class="custom-select" id="category_id" name="category_id"
+                            onchange="locationFilterMedicine(this.value)">
                         <option value="">Location</option>
                         @if($provinces)
                             @foreach($provinces as $index => $province)
@@ -39,7 +41,7 @@
                     <input type="search" name="focus" placeholder="Search" id="search-input" value="">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </form>
-                @if(\Illuminate\Support\Facades\Auth::check())
+                @if(Auth::check())
                     @if($isMedical)
                         <button type="button" data-toggle="modal" data-target="#modalCart" class="shopping-bag">
                             <i class="fa-solid fa-bag-shopping"></i>
@@ -217,17 +219,16 @@
                     data: formData,
                     success: function (data) {
                         renderJson2Html(data.data);
-                        loadingMasterPage();
                     },
                     error: function (exception) {
-                        console.log(exception.responseText);
-                        loadingMasterPage();
                     }
                 });
             } catch (error) {
-                loadingMasterPage();
                 throw error;
             }
+            setTimeout(function () {
+                loadingMasterPage();
+            }, 1000);
         }
 
         function renderJson2Html(data) {
@@ -239,7 +240,7 @@
                             </div>
                         </div>`;
             } else {
-                data.forEach( async function (item) {
+                data.forEach(async function (item) {
                     html += `<div class="col-md-4 item">
                                 <div class="product-item">
                                     <div class="img-pro">

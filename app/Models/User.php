@@ -42,7 +42,7 @@ class User extends Authenticatable  implements JWTSubject
 
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(Role::class, 'role_users', 'user_id', 'role_id');
     }
 
     public function getJWTIdentifier()
@@ -80,6 +80,23 @@ class User extends Authenticatable  implements JWTSubject
             return true;
         }
         return false;
+    }
+
+    //get member name by id
+    public static function getMemberNameByID($id)
+    {
+        if (!$id) {
+            return '';
+        }
+        $user = User::where('id', $id)->first();
+        if (!$user) {
+            return '';
+        }
+        $role = RoleUser::where('user_id', $id)->first();
+        if (!$role) {
+            return '';
+        }
+        return Role::where('id', $role->role_id)->first()->name;
     }
 
 }

@@ -34,6 +34,8 @@ class AuthController extends Controller
             } else {
                 if ($user) {
                     switch ($user->status) {
+                        case UserStatus::ACTIVE:
+                            break;
                         case UserStatus::INACTIVE:
                             toast('Account not active!', 'error', 'top-left');
                             return back();
@@ -42,6 +44,9 @@ class AuthController extends Controller
                             return back();
                         case UserStatus::DELETED:
                             toast('Account has been deleted!', 'error', 'top-left');
+                            return back();
+                        case UserStatus::PENDING:
+                            toast('Account is pending!', 'error', 'top-left');
                             return back();
                     }
                 }
@@ -78,6 +83,10 @@ class AuthController extends Controller
             $password = $request->input('password');
             $passwordConfirm = $request->input('passwordConfirm');
             $member = $request->input('member');
+            $type = $request->input('type');
+            $user = new User();
+
+            $checkPending = false;
 
             $isEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
             if (!$isEmail) {
@@ -85,7 +94,6 @@ class AuthController extends Controller
                 return back();
             }
 
-            $user = new User();
             $oldUser = User::where('email', $email)->first();
             if ($oldUser) {
                 toast('Email already exited!', 'error', 'top-left');
@@ -108,6 +116,32 @@ class AuthController extends Controller
                 return back();
             }
 
+            if ($type == \App\Enums\Role::BUSINESS) {
+                // kiểm tra xem fileupload có tồn tại không, nếu không th ì thông báo lỗi
+                if (!$request->hasFile('fileupload')) {
+                    toast('Cần up file giấy phép kinh doanh', 'error', 'top-left');
+                    return back();
+                }
+                $item = $request->file('fileupload');
+                $itemPath = $item->store('license', 'public');
+                $img = asset('storage/' . $itemPath);
+                $user->business_license_img = $img;
+                $checkPending = true;
+            }
+
+            if ($type == \App\Enums\Role::MEDICAL) {
+                // kiểm tra xem fileupload có tồn tại không, nếu không th ì thông báo lỗi
+                if (!$request->hasFile('fileupload')) {
+                    toast('Cần up file giấy phép hành nghề', 'error', 'top-left');
+                    return back();
+                }
+                $item = $request->file('fileupload');
+                $itemPath = $item->store('license', 'public');
+                $img = asset('storage/' . $itemPath);
+                $user->medical_license_img = $img;
+                $checkPending = true;
+            }
+
             $passwordHash = Hash::make($password);
 
             $user->email = $email;
@@ -117,26 +151,18 @@ class AuthController extends Controller
             $user->username = $username;
             $user->phone = '';
             $user->address_code = '';
-            $user->type = $request->input('type');
-            $user->status = UserStatus::ACTIVE;
+            $user->type = $type;
+
+            if ($checkPending) {
+                $user->status = UserStatus::PENDING;
+            } else {
+                $user->status = UserStatus::ACTIVE;
+            }
 
             $success = $user->save();
 
             if ($success) {
-                $role = Role::where('name', $member)->first();
-                $newUser = User::where('username', $username)->first();
-                if ($role) {
-                    RoleUser::create([
-                        'role_id' => $role->id,
-                        'user_id' => $newUser->id
-                    ]);
-                } else {
-                    $roleNormal = Role::where('name', \App\Enums\Role::PAITENTS)->first();
-                    RoleUser::create([
-                        'role_id' => $roleNormal->id,
-                        'user_id' => $newUser->id
-                    ]);
-                }
+                (new MainController())->createRoleUser($member, $username);
 
                 toast('Register success!', 'success', 'top-left');
                 return redirect(route('home'));

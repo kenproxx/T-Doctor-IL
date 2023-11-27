@@ -6,9 +6,16 @@ use App\Enums\BookingStatus;
 use App\Models\Booking;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
+
+    public function index()
+    {
+        $id = Auth::user()->id;
+        return view('bookings.listBooking',compact('id'));
+    }
     public function edit($id)
     {
         $bookings_edit = Booking::find($id);
@@ -56,11 +63,11 @@ class BookingController extends Controller
     {
         try {
             $setting = Booking::find($id);
-            if (!$setting || $setting->status == BookingStatus::DELETE) {
+            if (!$setting || $setting->status == BookingStatus::CANCEL) {
                 return response('Not found', 404);
             }
 
-            $setting->status = BookingStatus::DELETE;
+            $setting->status = BookingStatus::CANCEL;
             $success = $setting->save();
             if ($success) {
                 alert()->success('Delete success!');

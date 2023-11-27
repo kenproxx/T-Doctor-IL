@@ -27,9 +27,6 @@ p {
 .container .mt-60 {
   margin-top: 60px !important;
 }
-.container .mt-45 {
-  margin-top: 45px !important;
-}
 .container .mb-42 {
   margin-bottom: 42px;
 }
@@ -455,6 +452,10 @@ input[type=range]::-moz-range-thumb {
 .b-radius {
   border: 2px solid #D9D9D9;
   border-radius: 10px;
+}
+
+.b-radius-8px {
+  border-radius: 8px;
 }
 
 .text-wrapper-input input[type=radio] {

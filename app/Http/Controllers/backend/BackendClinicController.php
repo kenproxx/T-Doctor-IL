@@ -90,15 +90,20 @@ class BackendClinicController extends Controller
             $nation_id = $request->input('nation_id');
             $province_id = $request->input('province_id');
             $district_id = $request->input('district_id');
+            $longitude = $request->input('longitude');
+            $latitude = $request->input('latitude');
             $commune_id = $request->input('commune_id');
             $open_date = $request->input('open_date');
             $close_date = $request->input('close_date');
             $introduce = $request->input('introduce');
+            $time_work = $request->input('time_work');
+            $type = $request->input('type');
+            $clinics_service = $request->input('clinics_service');
 
             if ($request->hasFile('gallery')) {
                 $galleryPaths = array_map(function ($image) {
                     $itemPath = $image->store('gallery', 'public');
-                    return asset('storage/'.$itemPath);
+                    return asset('storage/' . $itemPath);
                 }, $request->file('gallery'));
                 $gallery = implode(',', $galleryPaths);
             } else {
@@ -112,10 +117,16 @@ class BackendClinicController extends Controller
             $clinic->email = $email;
             $clinic->name_en = $name_en ?? '';
             $clinic->name_laos = $name_laos ?? '';
+            $clinic->longitude = $longitude;
+            $clinic->latitude = $latitude;
             $clinic->address_detail = $address_detail;
             $clinic->address_detail_en = $address_detail_en ?? '';
+            $clinic->address_detail_laos = $address_detail_laos ?? '';
             $clinic->user_id = $user_id;
-            $clinic->type = TypeBussiness::CLINICS;
+            $clinic->time_work = $time_work;
+            $clinic->type = $type;
+            $clinic->service_id = $clinics_service;
+//            $clinic->type = TypeBussiness::CLINICS;
 
             $address = [
                 'nation_id' => $nation_id,
@@ -175,19 +186,23 @@ class BackendClinicController extends Controller
             $name_laos = $request->input('name_laos') ?? $clinic->name_en;
             $address_detail = $request->input('address_detail') ?? $clinic->address_detail;
             $address_detail_en = $request->input('address_detail_en') ?? $clinic->address_detail_en;
+            $detail_address_laos = $request->input('detail_address_laos') ?? $clinic->detail_address_laos;
             $nation_id = $request->input('nation_id');
             $province_id = $request->input('province_id');
             $district_id = $request->input('district_id');
             $commune_id = $request->input('commune_id');
+            $longitude = $request->input('longitude') ?? $clinic->longitude;
+            $latitude = $request->input('latitude') ?? $clinic->latitude;
             $open_date = $request->input('open_date') ?? $clinic->open_date;
             $close_date = $request->input('close_date') ?? $clinic->close_date;
             $introduce = $request->input('introduce') ?? $clinic->introduce;
             $status = $request->input('status') ?? $clinic->status;
+            $clinics_service = $request->input('clinics_service');
 
             if ($request->hasFile('gallery')) {
                 $galleryPaths = array_map(function ($image) {
                     $itemPath = $image->store('gallery', 'public');
-                    return asset('storage/'.$itemPath);
+                    return asset('storage/' . $itemPath);
                 }, $request->file('gallery'));
                 $gallery = implode(',', $galleryPaths);
             } else {
@@ -199,9 +214,11 @@ class BackendClinicController extends Controller
             $clinic->email = $email;
             $clinic->name_en = $name_en ?? '';
             $clinic->name_laos = $name_laos ?? '';
+            $clinic->longitude = $longitude;
+            $clinic->latitude = $latitude;
             $clinic->address_detail = $address_detail;
+            $clinic->address_detail_laos = $detail_address_laos ?? '';
             $clinic->address_detail_en = $address_detail_en ?? '';
-
             $address = [
                 'nation_id' => $nation_id,
                 'province_id' => $province_id,
@@ -216,6 +233,7 @@ class BackendClinicController extends Controller
             $clinic->introduce = $introduce;
             $clinic->gallery = $gallery;
             $clinic->status = $status ?? ClinicStatus::ACTIVE;
+            $clinic->service_id = $clinics_service;
 
             $success = $clinic->save();
             if ($success) {

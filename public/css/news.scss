@@ -30,6 +30,13 @@
 .fs-24px {
     font-size: 24px;
 }
+.fs-32px {
+    color: #000;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
 .border-8px {
     border-radius: 12px;
     border: 1px solid  #EAEAEA;
@@ -122,4 +129,23 @@
 //.w-45 {
 //    width: 45% !important;
 //}
+
+.title-clinics {
+    margin-left: 8px;
+    margin-top: 40px;
+    h2 {
+        color: var(--Black, #000);
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: normal;
+    }
+    p {
+        color: var(--Grey-Dark, #929292);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+}
 

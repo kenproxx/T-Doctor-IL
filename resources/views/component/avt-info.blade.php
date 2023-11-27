@@ -30,9 +30,6 @@
         </div>
         <div class=" margin-info row mt-2">
             @php
-//                if (Auth::user() != null) {
-//                    $id = Auth::user()->id;
-//                }
                 $count = \App\Models\ProductInfo::where('created_by', $id )->where('status', \App\Enums\ProductStatus::ACTIVE)->count();
             @endphp
             <div class="col-4 col-md-3 font-12-mobi">Product: <span>{{$count}}</span></div>
@@ -42,8 +39,9 @@
         </div>
     </div>
     <div class="col-md-2 mobile-hidden">
+
         <div class="d-flex col-md-4">
-            @if( Auth::user()== null || $info->id != Auth::user()->id)
+            @if( Auth::user()== null || $id != Auth::user()->id)
                 <form action="{{route('flea.market.sell.product')}}" class=" flea-button mr-3">
                     <button class="flea-btn width-88">Follow</button>
                 </form>

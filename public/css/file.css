@@ -50,7 +50,6 @@
   width: 120px;
   height: 52px;
   background: #45C3D2;
-  margin-right: 24px;
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -74,7 +73,7 @@
 
 .banner {
   margin-top: 100px;
-  height: 280px;
+  height: 500px;
   margin-bottom: 40px;
 }
 .banner img {
@@ -649,6 +648,10 @@
   font-size: 16px;
   font-weight: 500;
   color: white;
+}
+
+.over-x-hidden {
+  overflow-x: hidden;
 }
 
 .clinic-item {

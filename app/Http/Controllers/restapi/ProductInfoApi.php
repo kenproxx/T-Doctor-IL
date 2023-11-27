@@ -4,9 +4,9 @@ namespace App\Http\Controllers\restapi;
 
 use App\Enums\ProductStatus;
 use App\Http\Controllers\Controller;
+use App\Models\Clinic;
 use App\Models\ProductInfo;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ProductInfoApi extends Controller
 {
@@ -44,7 +44,7 @@ class ProductInfoApi extends Controller
         $max_price = $request->input('max_price');
         $status = ProductStatus::ACTIVE;
         $category_id = $request->input('category_id');
-            $categories = explode(',', $category_id);
+        $categories = explode(',', $category_id);
         $query = [];
 
         if ($name) {
@@ -79,20 +79,20 @@ class ProductInfoApi extends Controller
     public function getByClinic(Request $request, $id)
     {
         $status = $request->input('status');
+        $products = null;
+        $clinic = Clinic::find($id);
         if ($status) {
-            $products = DB::table('product_infos')
-                ->join('clinics', 'clinics.user_id', '=', 'product_infos.created_by')
-                ->where('clinics.id', $id)
-                ->where('product_infos.status', '=', $status)
-                ->select('product_infos.*')
-                ->get();
+            if ($clinic) {
+                $products = ProductInfo::where('status', $status)
+                    ->where('created_by', $clinic->id)
+                    ->get();
+            }
         } else {
-            $products = DB::table('product_infos')
-                ->join('clinics', 'clinics.user_id', '=', 'product_infos.created_by')
-                ->where('clinics.user_id', $id)
-                ->where('product_infos.status', '!=', ProductStatus::DELETED)
-                ->select('product_infos.*')
-                ->get();
+            if ($clinic) {
+                $products = ProductInfo::where('status', '!=', ProductStatus::DELETED)
+                    ->where('created_by', $clinic->id)
+                    ->get();
+            }
         }
         return response()->json($products);
     }

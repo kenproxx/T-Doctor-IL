@@ -1,16 +1,15 @@
 <?php
 
 
+use App\Http\Controllers\backend\BackendAccountRegisterController;
 use App\Http\Controllers\backend\BackendAnswerController;
-use App\Http\Controllers\backend\BackendCategoryController;
 use App\Http\Controllers\backend\BackendCategoryProductController;
 use App\Http\Controllers\backend\BackendClinicController;
-use App\Http\Controllers\backend\BackendCouponApplyController;
-use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendProductMedicineController;
 use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\backend\BackendReviewController;
+use App\Http\Controllers\backend\BackendServiceClinicController;
 use App\Http\Controllers\backend\BackendStaffController;
 use App\Http\Controllers\backend\BackendWishListController;
 use App\Http\Controllers\BookingController;
@@ -19,11 +18,13 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DoctorInfoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductInfoController;
-use App\Http\Controllers\QuestionLikesController;
+use App\Http\Controllers\restapi\admin\AdminBookingApi;
+use App\Http\Controllers\restapi\admin\AdminDoctorDepartmentApi;
 use App\Http\Controllers\restapi\admin\AdminDoctorInfoApi;
+use App\Http\Controllers\restapi\admin\AdminPhamacitisApi;
 use App\Http\Controllers\restapi\admin\AdminPharmacyApi;
 use App\Http\Controllers\restapi\CartApi;
-use App\Http\Controllers\restapi\UserApi;
+use App\Http\Controllers\restapi\ServiceClinicApi;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
@@ -142,10 +143,14 @@ Route::group(['prefix' => 'pharmacies'], function () {
     Route::delete('/delete/{id}', [AdminPharmacyApi::class, 'delete'])->name('api.backend.pharmacies.delete');
 });
 
+Route::group(['prefix' => 'pharmacy'], function () {
+    Route::get('/list', [AdminPharmacyApi::class, 'getAllPharmacy'])->name('api.backend.pharmacy.list');
+});
+
 Route::group(['prefix' => 'questions'], function () {
     Route::get('/list', [BackendQuestionController::class, 'getAll'])->name('api.backend.questions.list');
     Route::get('/user/{id}', [BackendQuestionController::class, 'getAllByUserId'])->name('api.backend.questions.user');
-    Route::get('/detail/{id}', [BackendQuestionController::class, 'detail'])->name('api.backend.questions.detail');
+//    Route::get('/detail/{id}', [BackendQuestionController::class, 'detail'])->name('api.backend.questions.detail');
     Route::post('/create', [BackendQuestionController::class, 'create'])->name('api.backend.questions.create');
     Route::put('/change/{id}', [BackendQuestionController::class, 'upgradeStatus'])->name('api.backend.questions.change.status');
     Route::put('/update/{id}', [BackendQuestionController::class, 'update'])->name('api.backend.questions.update');
@@ -203,7 +208,24 @@ Route::group(['prefix' => 'doctors-info'], function () {
     Route::post('/update-doctor/{id}', [AdminDoctorInfoApi::class, 'update'])->name('api.backend.doctors.info.update.doctor');
     Route::delete('/delete/{id}', [AdminDoctorInfoApi::class, 'delete'])->name('api.backend.doctors.info.delete');
 });
-//
+
+Route::group(['prefix' => 'phamacitis'], function () {
+    Route::get('/list', [AdminPhamacitisApi::class, 'getAll'])->name('api.backend.phamacitis.list');
+    Route::get('/detail/{id}', [AdminPhamacitisApi::class, 'detail'])->name('api.backend.phamacitis.detail');
+    Route::get('/user/{id}', [AdminPhamacitisApi::class, 'findByUser'])->name('api.backend.phamacitis.user');
+});
+
+
+/* Doctor department api */
+Route::group(['prefix' => 'doctors-departments'], function () {
+    Route::get('/list', [AdminDoctorDepartmentApi::class, 'getAll'])->name('api.backend.doctors.departments.list');
+    Route::get('/detail/{id}', [AdminDoctorDepartmentApi::class, 'getById'])->name('api.backend.doctors.departments.detail');
+    Route::get('/user/{id}', [AdminDoctorDepartmentApi::class, 'getAllByUserID'])->name('api.backend.doctors.departments.user');
+    Route::post('/create', [AdminDoctorDepartmentApi::class, 'create'])->name('api.backend.doctors.departments.create');
+    Route::put('/update/{id}', [AdminDoctorDepartmentApi::class, 'update'])->name('api.backend.doctors.departments.update');
+    Route::delete('/delete/{id}', [AdminDoctorDepartmentApi::class, 'delete'])->name('api.backend.doctors.departments.delete');
+});
+
 //Route::group(['prefix' => 'question-like'], function () {
 //    Route::get('is-like/{questionId}/{userId}', [QuestionLikesController::class, 'checkEmotion'])->name('api.backend.question-like.check');
 //    Route::post('change/{questionId}/{userId}', [QuestionLikesController::class, 'changeEmotion'])->name('api.backend.question-like.change');
@@ -247,4 +269,35 @@ Route::group(['prefix' => 'carts'], function () {
     Route::post('change-quantity/{id}', [CartApi::class, 'changeQuantityCart'])->name('api.backend.cart.change.quantity');
     Route::delete('delete/{id}', [CartApi::class, 'deleteCart'])->name('api.backend.cart.delete');
     Route::delete('clear/{id}', [CartApi::class, 'clearCart'])->name('api.backend.cart.clear');
+});
+
+Route::group(['prefix' => 'service-clinic-pharmacy'], function () {
+    Route::get('index', [BackendServiceClinicController::class, 'index'])->name('api.backend.service-clinic-pharmacy.index');
+    Route::get('edit/{id}', [BackendServiceClinicController::class, 'edit'])->name('api.backend.service-clinic-pharmacy.edit');
+    Route::post('update', [BackendServiceClinicController::class, 'update'])->name('api.backend.service-clinic-pharmacy.update');
+    Route::get('create', [BackendServiceClinicController::class, 'create'])->name('api.backend.service-clinic-pharmacy.create');
+    Route::post('store', [BackendServiceClinicController::class, 'store'])->name('api.backend.service-clinic-pharmacy.store');
+    Route::post('destroy/{id}', [BackendServiceClinicController::class, 'destroy'])->name('api.backend.service-clinic-pharmacy.destroy');
+});
+
+Route::group(['prefix' => 'account-register'], function () {
+    Route::get('index', [BackendAccountRegisterController::class, 'index'])->name('api.backend.account-register.index');
+    Route::post('update/{id}', [BackendAccountRegisterController::class, 'update'])->name('api.backend.account-register.update');
+});
+
+Route::group(['prefix' => 'service-clinics'], function () {
+    Route::get('list', [ServiceClinicApi::class, 'getAll'])->name('api.backend.service.clinic.list');
+    Route::get('list-by-clinics/{id}', [ServiceClinicApi::class, 'getAllByClinics'])->name('api.backend.service.clinic.list.clinics');
+    Route::get('list-by-user/{id}', [ServiceClinicApi::class, 'getAllByUserId'])->name('api.backend.service.clinic.list.user');
+    Route::get('detail/{id}', [ServiceClinicApi::class, 'detail'])->name('api.backend.service.clinic.detail');
+    Route::post('create', [ServiceClinicApi::class, 'create'])->name('api.backend.service.clinic.create');
+});
+
+Route::group(['prefix' => 'bookings'], function () {
+    Route::get('list', [AdminBookingApi::class, 'getAll'])->name('api.bookings.list');
+    Route::get('list-by-clinics/{id}', [AdminBookingApi::class, 'getAllByClinicId'])->name('api.bookings.getAllByClinicId');
+    Route::get('list-by-user/{id}', [AdminBookingApi::class, 'getAllByUserId'])->name('api.bookings.getAllByUserId');
+    Route::get('detail/{id}', [AdminBookingApi::class, 'detail'])->name('api.bookings.detail');
+    Route::post('update/{id}', [AdminBookingApi::class, 'updateStatus'])->name('api.bookings.updateStatus');
+    Route::delete('delete/{id}', [AdminBookingApi::class, 'delete'])->name('api.bookings.delete');
 });

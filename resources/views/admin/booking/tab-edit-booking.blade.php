@@ -30,11 +30,14 @@
                     <option value="{{ \App\Enums\BookingStatus::PENDING }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::PENDING ? 'selected' : '' }}>
                         {{ \App\Enums\BookingStatus::PENDING }}
                     </option>
+                    <option value="{{ \App\Enums\BookingStatus::COMPLETE }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::COMPLETE ? 'selected' : '' }}>
+                        {{ \App\Enums\BookingStatus::COMPLETE }}
+                    </option>
                     <option value="{{ \App\Enums\BookingStatus::APPROVED }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::APPROVED ? 'selected' : '' }}>
                         {{ \App\Enums\BookingStatus::APPROVED }}
                     </option>
-                    <option value="{{ \App\Enums\BookingStatus::DELETE }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::DELETE ? 'selected' : '' }}>
-                        {{ \App\Enums\BookingStatus::DELETE }}
+                    <option value="{{ \App\Enums\BookingStatus::CANCEL }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::CANCEL ? 'selected' : '' }}>
+                        {{ \App\Enums\BookingStatus::CANCEL }}
                     </option>
                 </select>
             </div>

@@ -13,11 +13,6 @@ use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index()
     {
         $roles = Role::where('name', '!=',\App\Enums\Role::ADMIN)->get();
@@ -27,6 +22,19 @@ class ProfileController extends Controller
         $socialUser = SocialUser::where('user_id', Auth::user()->id)->first();
         $nations = Nation::all();
         return view('profile', compact('roles', 'roleItem', 'isAdmin', 'socialUser', 'nations'));
+    }
+
+    public function infoUser($userId) {
+        $user = User::find($userId);
+        $roleUser = DB::table('role_users')->where('user_id', $userId)->first();
+        $role = Role::find($roleUser->role_id);
+
+        $responseData = [
+            'infoUser' => $user,
+            'roleUser' => $role,
+        ];
+
+        return response()->json($responseData);
     }
 
     public function update(Request $request)

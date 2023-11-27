@@ -16,12 +16,20 @@
         @csrf
         <div><label>name</label>
             <input type="text" class="form-control" id="name" name="name"></div>
+
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4"><label for="hocham_hocvi">Học hàm học vị</label>
+                <select class="custom-select" id="hocham_hocvi" name="hocham_hocvi">
+                    @foreach($types as $type)
+                        <option value="{{ $type }}">{{ $type }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-sm-4">
                 <label for="year_of_experience">Năm kinh nghiệm</label>
                 <input type="number" class="form-control" id="year_of_experience" name="year_of_experience">
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <label for="created_by">User</label>
                 <select class="custom-select" id="created_by" name="created_by">
                     @foreach($users as $user)
@@ -168,7 +176,7 @@
                     "detail_address", "detail_address_en", "detail_address_laos",
                     "province_id", "district_id", "commune_id",
                     "time_working_1", "time_working_2",
-                    "name", "year_of_experience", "status", "department_id", "created_by"
+                    "name", "year_of_experience", "status", "department_id", "created_by", "hocham_hocvi"
                 ];
                 const fieldTextareaTiny = [
                     "service", "service_en", "service_laos",
@@ -178,12 +186,14 @@
                     formData.append(fieldName, $(`#${fieldName}`).val());
                 });
 
+                console.log(fieldNames);
+
                 fieldTextareaTiny.forEach(fieldTextarea => {
                     const content = tinymce.get(fieldTextarea).getContent();
                     formData.append(fieldTextarea, content);
                 });
 
-                formData.append("created_by", '{{ \Illuminate\Support\Facades\Auth::user()->id }}');
+                {{--formData.append("created_by", '{{ \Illuminate\Support\Facades\Auth::user()->id }}');--}}
                 formData.append("apply_for", 'doctor');
                 const photo = $('#thumbnail')[0].files[0];
                 formData.append('thumbnail', photo);

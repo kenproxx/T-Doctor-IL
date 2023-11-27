@@ -36,13 +36,13 @@
 
                                         <select class="ac-choose font-16-mobi mt-2" name="category_id checkValid"
                                                 required id="category_id">
-                                            <option value="">Please choose....</option>
-                                            <option value="1">123</option>
-                                            <option value="2">123</option>
+                                            @foreach($category as $item)
+                                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
-                                <div class="text-font-16 font-14-mobi mt-md-4 mt-3">
+                                <div class="text-font-16 font-14-mobi mt-45 mt-3">
                                     <p><span>Location </span> <span class="red-color">*</span></p>
                                     <div class="w-100 mt-2">
                                         <select class="ac-choose font-16-mobi mt-2" id="province_id"
@@ -105,7 +105,7 @@
                             <div class="p-0 d-flex">
                                 <div id="imagePreview"></div>
                                 <label for="gallery" class="p-0">
-                                    <img class="p-0" width="200px" height="200px"
+                                    <img class="p-0 img-sell-product"
                                          src="{{asset('img/flea-market/add-photo.png')}}">
                                 </label>
                                 <input type="file" id="gallery" name="gallery[]" style="display: none;" multiple
@@ -156,10 +156,10 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center">
-                <div class="col-3">
+                <div class="col-md-3 col-6">
                     <button type="submit" class="add-cv-bt w-100 apply-bt_delete">Cancel</button>
                 </div>
-                <div class="col-3">
+                <div class="col-md-3 col-6">
                     <button type="button" id="submitButton" class="add-cv-bt w-100 apply-bt_edit create-button">
                         Register
                     </button>
@@ -220,9 +220,11 @@
                 const image = document.createElement('img');
                 image.src = URL.createObjectURL(file);
                 image.alt = 'Preview Image';
-                image.style.maxHeight = '200px';
-                image.style.maxWidth = '200px';
-                image.style.paddingRight = '8px';
+                image.className = 'img-sell-product col-6 b-radius-8px';
+                // image.className = 'col-6';
+                // image.style.maxHeight = '200px';
+                // image.style.maxWidth = '200px';
+                image.style.paddingBottom = '16px';
                 imagePreviews.appendChild(image);
             }
         });
@@ -252,20 +254,21 @@
                 const formData = new FormData();
                 formData.append("name", $('#name').val());
                 formData.append("name_en", $('#name').val());
+                formData.append("name_laos", $('#name').val());
                 formData.append("category_id", $('#category_id').val());
                 formData.append("brand_name", $('#brand_name').val());
                 formData.append("brand_name_en", $('#brand_name').val());
+                formData.append("brand_name_laos", $('#brand_name').val());
                 formData.append("province_id", $('#province_id').val());
                 formData.append("price", $('#price').val());
                 formData.append("price_unit", 'VND');
                 formData.append("ads_plan", (selectedValueAdd));
-                const fieldTextareaTiny = [
-                    "short_description", "short_description_en", "short_description_laos",
-                    "description", "description_en", "description_laos"
-                ];
+                const fieldTextareaTiny = ["description"];
+                console.log(fieldTextareaTiny)
                 fieldTextareaTiny.forEach(fieldTextarea => {
                     const content = tinymce.get(fieldTextarea).getContent();
                     formData.append(fieldTextarea, content);
+                    console.log(content)
                 });
                 formData.append("ads_period", (selectedValue));
                 formData.append("user_id", {{Auth::user()->id}});

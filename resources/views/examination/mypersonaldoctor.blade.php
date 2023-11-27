@@ -3,60 +3,114 @@
 @section('content')
     @include('layouts.partials.header_3')
     @include('component.banner')
-        <div class="container">
-            <div class="d-flex">
-                <div class="col-md-3 mr-2">
-                    <div class="">
-                        <div class="flea-adv row align-items-center justify-content-center">
-                            <div class="">
-                                <img src="{{asset('img/image 16.png')}}" alt="" style="width: 270px;height: 682px">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="">
-                        <div class="flea-adv row align-items-center justify-content-center">
-                            <div class="">
-                                <img src="{{asset('img/image 16.png')}}" alt="" style="width: 270px;height: 682px">
-                            </div>
+    <div class="container">
+        <div class="d-flex">
+            <div class="col-md-3 mr-2">
+                <div class="">
+                    <div class="flea-adv row align-items-center justify-content-center">
+                        <div class="">
+                            <img src="{{asset('img/image 16.png')}}" alt="" style="width: 270px;height: 682px">
                         </div>
                     </div>
                 </div>
-                <div class="col-md-9 medicine-list--item">
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="productList" role="tabpanel" aria-labelledby="productList-tab">
-                            <div>
-                                <h3><b>My personal doctor</b></h3>
-                                <hr>
-                            </div>
-                            <div class="d-flex justify-content-center list-doctor">
-                                <div class="card" >
-                                    <i class="bi bi-heart"></i>
-                                    <img src="{{asset('img/doctor.png')}}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <a href="{{route('examination.doctor_info', 1)}}"><h5 class="card-title">BS Đô Văn Định</h5></a>
-                                        <p class="card-text_1">Location: <b>Hanoi</b></p>
-                                        <p class="card-text_1">Working time: <b>8:00 - 16:00</b></p>
-                                        <button class="delete-1">Delete</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
-                            @include('component.review-item')
-                        </div>
-                        <div class="tab-pane fade" id="wishList" role="tabpanel" aria-labelledby="wishList-tab">
-                            <div class="row">
-{{--                                @for($i = 0; $i < 12; $i++)--}}
-{{--                                    <div class="col-md-4 item">--}}
-{{--                                        @include('component.product-wish')--}}
-{{--                                    </div>--}}
-{{--                                @endfor--}}
-                            </div>
+                <div class="">
+                    <div class="flea-adv row align-items-center justify-content-center">
+                        <div class="">
+                            <img src="{{asset('img/image 16.png')}}" alt="" style="width: 270px;height: 682px">
                         </div>
                     </div>
                 </div>
             </div>
+            @if(Auth::check())
+                <div class="col-md-9 medicine-list--item">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="productList" role="tabpanel"
+                             aria-labelledby="productList-tab">
+                            <div>
+                                <h3><b>My personal doctor</b></h3>
+                                <hr>
+                            </div>
+                            <div class="list-doctor row" id="listMyDoctor">
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
+                            {{--                            @include('component.review-item')--}}
+                        </div>
+                        <div class="tab-pane fade" id="wishList" role="tabpanel" aria-labelledby="wishList-tab">
+                            <div class="row">
+
+                            </div>
+                        </div>1202
+
+                    </div>
+                </div>
+            @else
+                <p class="text-center">Please login to continue!</p>
+            @endif
         </div>
-    @endsection
+    </div>
+    <div class="">
+        @if(Auth::check())
+            <input type="text" class="d-none" id="inputReadMyDoctor" value="{{ Auth::user()->id }}">
+        @endif
+    </div>
+    <script>
+        $(document).ready(function () {
+            processReadMyDoctor();
+
+            async function processReadMyDoctor() {
+                let userID = $('#inputReadMyDoctor').val();
+                if (userID) {
+                    await readMyDoctor(userID);
+                }
+            }
+
+            async function readMyDoctor(id) {
+                let url = `{{ route('doctors.info.restapi.my.doctor', ['id'=>':id']) }}`;
+                url = url.replace(':id', id);
+                await $.ajax({
+                    url: url,
+                    method: 'GET',
+                    success: function (response) {
+                        renderMyDoctor(response);
+                    },
+                    error: function (exception) {
+                        console.log(exception)
+                    }
+                });
+            }
+
+            function renderMyDoctor(res) {
+                let html = ``;
+                for (let i = 0; i < res.length; i++) {
+                    let data = res[i];
+
+                    let mainUrl = `{{asset('/storage')}}`;
+
+                    let imageDoctor = data['thumbnail'];
+                    let myArray = imageDoctor.split("/storage");
+
+                    let img = mainUrl + myArray[1];
+
+                    let route = `{{route('examination.doctor_info', ['id'=>':id'])}}`;
+                    route = route.replace(':id', data['id']);
+
+                    html = html + `<div class="card col-md-4">
+                                    <i class="bi bi-heart"></i>
+                                    <img src="${img}" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <a href="${route}"><h5 class="card-title">${data['name']}</h5></a>
+                                        <p class="card-text_1">Location: <b>Hanoi</b></p>
+                                        <p class="card-text_1">Working time: <b>${data['time_working_1']} - ${data['time_working_2']}</b></p>
+                                        <button class="delete-1">Delete</button>
+                                    </div>
+                                </div>`;
+                }
+
+                $('#listMyDoctor').empty().append(html)
+            }
+        })
+    </script>
+@endsection
 
 

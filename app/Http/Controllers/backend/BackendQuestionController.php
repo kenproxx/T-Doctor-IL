@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Enums\MentoringCategory;
 use App\Enums\QuestionStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Answer;
 use App\Models\CalcViewQuestion;
 use App\Models\Question;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BackendQuestionController extends Controller
 {
@@ -25,13 +28,28 @@ class BackendQuestionController extends Controller
 
     public function detail($id)
     {
-        $question = Question::find($id);
-        if (!$question || $question->status == QuestionStatus::DELETED) {
+        $statusQuestion = Question::find($id);
+        $question = CalcViewQuestion::getViewQuestion($id);
+        $answersQuestion = Answer::where('question_id', $id)->get();
+        if ($statusQuestion->status == QuestionStatus::DELETED) {
             return response('Not found', 404);
         }
-        $question->views = $question->views + 1;
+
+        if ($question === null) {
+            $question = new CalcViewQuestion();
+            $question->views = 1;
+            $question->question_id = $id;
+        } else {
+            $question->views = $question->views + 1;
+        }
         $question->save();
-        return response()->json($question);
+
+        $responseData = [
+            'statusQuestion' => $statusQuestion,
+            'question' => $question,
+            'answers' => $answersQuestion,
+        ];
+        return response()->json($responseData);
     }
 
     public function create(Request $request)
@@ -64,7 +82,7 @@ class BackendQuestionController extends Controller
             if ($request->hasFile('gallery')) {
                 $galleryPaths = array_map(function ($image) {
                     $itemPath = $image->store('gallery', 'public');
-                    return asset('storage/' . $itemPath);
+                    return asset('storage/'.$itemPath);
                 }, $request->file('gallery'));
                 $gallery = implode(',', $galleryPaths);
             } else {
@@ -78,9 +96,14 @@ class BackendQuestionController extends Controller
             $arrayGalleries = explode(',', $gallery);
             $arrayPublic = explode(',', $list_image);
 
-            $itemPublic = null;
-            foreach ($arrayPublic as $quantity) {
-                $itemPublic[] = $arrayGalleries[$quantity];
+
+            if ($list_image){
+                $itemPublic = null;
+                foreach ($arrayPublic as $quantity) {
+                    $itemPublic[] = $arrayGalleries[$quantity];
+                }
+            } else {
+                $itemPublic[] = '';
             }
 
             foreach ($arrayPublic as $index) {
@@ -101,7 +124,7 @@ class BackendQuestionController extends Controller
                 return response()->json($question);
             }
             return response('Create question error!', 400);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response($exception, 400);
         }
     }
@@ -149,7 +172,7 @@ class BackendQuestionController extends Controller
                 return response('Update success!', 200);
             }
             return response('Update question error!', 400);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response($exception, 400);
         }
     }
@@ -181,7 +204,7 @@ class BackendQuestionController extends Controller
                 return response()->json($question);
             }
             return response('Create question error!', 400);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response($exception, 400);
         }
     }
@@ -199,28 +222,11 @@ class BackendQuestionController extends Controller
                 return response('Delete success!', 200);
             }
             return response('Delete q   uestion error!', 400);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response($exception, 400);
         }
     }
 
-//    public function deleteMultil(Request $request)
-//    {
-//        try {
-//            $listID = $request->input('listID');
-//            $question = Question::whereIn('id', $listID)->get();
-//            foreach ($question as $item) {
-//                $item->status = QuestionStatus::DELETED;
-//                $success = $item->save();
-//            }
-//            if ($success) {
-//                return response('Delete success!', 200);
-//            }
-//            return response('Delete question error!', 400);
-//        } catch (\Exception $exception) {
-//            return response($exception, 400);
-//        }
-//    }
 
     public function custom_getlist()
     {
@@ -268,11 +274,159 @@ class BackendQuestionController extends Controller
                 ];
                 array_push($list, $item);
             }
+        }
+
+        return response()->json($list);
+    }
+
+    public function getListQuestion($id)
+    {
+        $query = [];
+
+        $param = ['status', '=', QuestionStatus::APPROVED];
+        array_push($query, $param);
+
+        if ($id) {
+            switch ($id) {
+                case MentoringCategory::ALL:
+                    break;
+                case MentoringCategory::HEALTH:
+                case MentoringCategory::BEAUTY:
+                case MentoringCategory::LOSING_WEIGHT:
+                case MentoringCategory::KIDS:
+                case MentoringCategory::PETS:
+                case MentoringCategory::OTHER:
+                    $param = ['category_id', '=', $id];
+                    array_push($query, $param);
+                    break;
+            }
+        }
+
+        $questions = Question::where($query)->get();
+        $list = [];
+        foreach ($questions as $question) {
+
+            $listAnswer = Answer::where('question_id', $question->id)->get();
+            $question_id = $question->id;
+            $item = [
+                'id' => $question_id,
+                'parent' => null,
+                'title' => $question->title,
+                'title_en' => $question->title_en,
+                'title_laos' => $question->title_laos,
+                'content' => $question->content,
+                'content_en' => $question->content_en,
+                'content_laos' => $question->content_laos,
+                'pings' => null,
+                'attachments' => '',
+                'creator' => $question->user_id,
+                'created' => $question->created_at,
+                'modified' => $question->updated_at,
+                'fullname' => User::getNameByID($question->user_id),
+                'comment_count' => $listAnswer->count(),
+                'view_count' => CalcViewQuestion::getViewQuestion($question_id)->views ?? 0,
+                'profile_picture_url' => 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png',
+            ];
+
+            array_push($list, $item);
 
         }
 
+        return response()->json($list);
+    }
+
+    public function getQuestionByUserId($id)
+    {
+        $query = [];
+
+        $param = ['status', '=', QuestionStatus::APPROVED];
+        array_push($query, $param);
+
+        if (Auth::user()) {
+            $param = ['user_id', '=', $id];
+            array_push($query, $param);
+        }
+
+        $questions = Question::where($query)->get();
+        $list = [];
+        foreach ($questions as $question) {
+
+            $listAnswer = Answer::where('question_id', $question->id)->get();
+            $question_id = $question->id;
+            $item = [
+                'id' => $question_id,
+                'parent' => null,
+                'title' => $question->title,
+                'title_en' => $question->title_en,
+                'title_laos' => $question->title_laos,
+                'content' => $question->content,
+                'content_en' => $question->content_en,
+                'content_laos' => $question->content_laos,
+                'pings' => null,
+                'attachments' => '',
+                'creator' => $question->user_id,
+                'created' => $question->created_at,
+                'modified' => $question->updated_at,
+                'fullname' => User::getNameByID($question->user_id),
+                'comment_count' => $listAnswer->count(),
+                'view_count' => CalcViewQuestion::getViewQuestion($question_id)->views ?? 0,
+                'profile_picture_url' => 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png',
+            ];
+
+            array_push($list, $item);
+
+        }
 
         return response()->json($list);
+    }
 
+    public function getQuestionByUserIdAndCategoryId($userId, $categoryId)
+    {
+        if ($categoryId == 0) {
+            $questions = Question::where(
+                [
+                    'status' => QuestionStatus::APPROVED,
+                    'user_id' => $userId,
+                ])->get();
+        } else {
+            $questions = Question::where(
+                [
+                    'status' => QuestionStatus::APPROVED,
+                    'user_id' => $userId,
+                    'category_id' => $categoryId
+                ]
+            )->get();
+        }
+
+        $list = [];
+        foreach ($questions as $question) {
+
+            $listAnswer = Answer::where('question_id', $question->id)->get();
+            $question_id = $question->id;
+            $item = [
+                'id' => $question_id,
+                'parent' => null,
+                'title' => $question->title,
+                'title_en' => $question->title_en,
+                'title_laos' => $question->title_laos,
+                'content' => $question->content,
+                'content_en' => $question->content_en,
+                'content_laos' => $question->content_laos,
+                'pings' => null,
+                'attachments' => '',
+                'creator' => $question->user_id,
+                'created' => $question->created_at,
+                'modified' => $question->updated_at,
+                'fullname' => User::getNameByID($question->user_id),
+                'comment_count' => $listAnswer->count(),
+                'view_count' => CalcViewQuestion::getViewQuestion($question_id)->views ?? 0,
+                'profile_picture_url' => 'https://viima-app.s3.amazonaws.com/media/public/defaults/user-icon.png',
+            ];
+
+            array_push($list, $item);
+
+        }
+
+        return response()->json($list);
     }
 }

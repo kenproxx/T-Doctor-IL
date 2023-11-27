@@ -80,7 +80,12 @@ return [
     |
     */
 
-    'locale' => 'en',
+//    'locale' => 'en',
+//    'supportedLocales' => [
+//        'vi',
+//        'en',
+//        'laos',
+//    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -197,7 +202,7 @@ return [
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         /* More service*/
         SocialiteProviders\Manager\ServiceProvider::class,
-        GetStream\StreamLaravel\StreamLaravelServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
     ],
 
     /*
@@ -253,7 +258,8 @@ return [
         'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-        'FeedManager' => GetStream\StreamLaravel\Facades\FeedManager::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
     ],
 
 ];

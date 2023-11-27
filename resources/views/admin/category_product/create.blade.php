@@ -17,21 +17,25 @@
     <form enctype="multipart/form-data">
         <div class="row">
             <div class="col-sm-4">
-                <label>Title </label>
-                <input type="text" class="form-control" id="name" name="name">
+                <label for="name">Title </label>
+                <input type="text" class="form-control" id="name" name="name" required>
             </div>
             <div class="col-sm-4">
-                <label>Title Anh</label>
-                <input type="text" class="form-control" id="name_en" name="name_en">
+                <label for="name_en">Title Anh</label>
+                <input type="text" class="form-control" id="name_en" name="name_en" required>
             </div>
             <div class="col-sm-4">
-                <label>Title Lào</label>
-                <input type="text" class="form-control" id="name_laos" name="name_laos">
+                <label for="name_laos">Title Lào</label>
+                <input type="text" class="form-control" id="name_laos" name="name_laos" required>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12">
-                <label>status</label>
+            <div class="col-sm-6">
+                <label for="thumbnail">Thumbnail</label>
+                <input type="file" class="form-control" id="thumbnail" name="thumbnail" required>
+            </div>
+            <div class="col-sm-6">
+                <label for="status">status</label>
                 <select class="custom-select" id="status" name="status">
                     <option
                         value="1" selected>Active
@@ -59,6 +63,7 @@
             arrField.forEach((field) => {
                 formData.append(field, $(`#${field}`).val().trim());
             });
+            formData.append('thumbnail', $('#thumbnail')[0].files[0]);
 
             formData.append('_token', '{{ csrf_token() }}');
 
