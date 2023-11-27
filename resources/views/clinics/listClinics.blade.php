@@ -12,9 +12,9 @@
     <div class="clinics-list">
         <div class="clinics-header row">
             <div class=" d-flex justify-content-between">
-                <span class="fs-32px">Suggestions near you</span>
+                <span class="fs-32px">{{ __('home.Suggestions near you') }}</span>
                 <span>
-                    <a href="">See all</a>
+                    <a href="">{{ __('home.See all') }}</a>
                 </span>
             </div>
         </div>
@@ -23,7 +23,7 @@
     </div>
     <div class="other-clinics">
         <div class="title">
-            Other Clinics/Pharmacies
+            {{ __('home.Other Clinics/Pharmacies') }}
         </div>
         @include('component.clinic')
     </div>

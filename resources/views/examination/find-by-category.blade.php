@@ -23,8 +23,8 @@
                     <img src="{{asset($productCategory->thumbnail)}}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <a href="{{ route('medicine.detail', $productCategory->id) }}"><h5 class="card-title">{{ $productCategory->name }}</h5></a>
-                        <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
-                        <p class="card-text_1">Price: <b>{{ $productCategory->price }} {{ $productCategory->unit_price }}</b></p>
+                        <p class="card-text_1">{{ __('home.Location') }}: <b>{{ $user->address_code }}</b></p>
+                        <p class="card-text_1">{{ __('home.Price') }}: <b>{{ $productCategory->price }} {{ $productCategory->unit_price }}</b></p>
                     </div>
                 </div>
                 </div>

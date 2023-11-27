@@ -129,10 +129,10 @@
     <div class="row col-md-2">
         <div class=" medium-centered d-md-flex justify-content-between">
             <div class="col-md-6 pl-0">
-            <a class= 'button form-submit button-Reset-booking w-100'>Reset</a>
+            <a class= 'button form-submit button-Reset-booking w-100'>{{ __('home.Reset') }}</a>
             </div>
             <div class="col-md-6 pr-0">
-            <a class='button form-submit w-100 button-apply-booking disabled'>Apply</a>
+            <a class='button form-submit w-100 button-apply-booking disabled'>{{ __('home.Apply') }}</a>
             </div>
         </div>
     </div>

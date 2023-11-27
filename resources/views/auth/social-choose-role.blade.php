@@ -12,63 +12,63 @@
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label for="name">Name</label>
+                        <label for="name">{{ __('home.Name') }}</label>
                         <input type="text" name="name" class="form-control" id="name" value="{{ $user->name }}">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="last_name">Last name</label>
+                        <label for="last_name">{{ __('home.Last name') }}</label>
                         <input type="text" name="last_name" class="form-control" id="last_name" value="{{ $user->last_name }}">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="phone">PhoneNumber</label>
+                        <label for="phone">{{ __('home.PhoneNumber') }}</label>
                         <input required type="text" name="phone" class="form-control" id="phone" value="{{ $user->phone }}">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="username">Username</label>
+                        <label for="username">{{ __('home.Username') }}</label>
                         <input required type="text" name="username" class="form-control" id="username" value="{{ $user->username }}">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="email">Email</label>
+                        <label for="email">{{ __('home.Email') }}</label>
                         <input required type="email" name="email" class="form-control" id="email" value="{{ $user->email }}">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="password">Password</label>
+                        <label for="password">{{ __('home.Password') }}</label>
                         <input required type="password" name="password" class="form-control" id="password">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="passwordConfirm">PasswordConfirm</label>
+                        <label for="passwordConfirm">{{ __('home.Confirm Password') }}</label>
                         <input required type="password" name="passwordConfirm" class="form-control" id="passwordConfirm">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label for="address_code">AddressCode</label>
+                        <label for="address_code">{{ __('home.AddressCode') }}</label>
                         <input type="text" name="address_code" class="form-control" id="address_code" value="{{ $user->address_code }}">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="type">Type Account</label>
+                        <label for="type">{{ __('home.Type Account') }}</label>
                         <select id="type" name="type" class="form-select">
                             <option>Choose...</option>
-                            <option value="BUSINESS">BUSINESS</option>
-                            <option value="MEDICAL">MEDICAL</option>
-                            <option value="NORMAL">NORMAL</option>
+                            <option value="BUSINESS">{{ __('home.BUSINESS') }}</option>
+                            <option value="MEDICAL">{{ __('home.MEDICAL') }}</option>
+                            <option value="NORMAL">{{ __('home.NORMAL') }}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="member">Member</label>
+                        <label for="member">{{ __('home.Member') }}</label>
                         <select id="member" name="member" class="form-select">
-                            <option value="PAITENTS">PAITENTS</option>
-                            <option value="NORMAL_PEOPLE">NORMAL PEOPLE</option>
+                            <option value="PAITENTS">{{ __('home.PAITENTS') }}</option>
+                            <option value="NORMAL_PEOPLE">{{ __('home.NORMAL PEOPLE') }}</option>
                         </select>
                     </div>
                 </div>
                 <div class="">
-                    <a href="{{ route('home') }}" class="btn btn-secondary float-left">Back</a>
-                    <button type="submit" class="btn btn-primary float-right">Continue</button>
+                    <a href="{{ route('home') }}" class="btn btn-secondary float-left">{{ __('home.Back') }}</a>
+                    <button type="submit" class="btn btn-primary float-right">{{ __('home.Continue') }}</button>
                 </div>
             </form>
         @endif

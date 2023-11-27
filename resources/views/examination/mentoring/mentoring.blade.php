@@ -180,7 +180,7 @@
 
         <div class="border-bottom">
             <div class="div d-flex justify-content-between mb-3">
-                <div class="text-wrapper d-inline-flex header_comment">Best question</div>
+                <div class="text-wrapper d-inline-flex header_comment">{{ __('home.Best question') }}</div>
             </div>
         </div>
 
@@ -197,41 +197,41 @@
 
         <div class="border-bottom">
             <div class="div d-flex justify-content-between mb-3">
-                <div class="text-wrapper d-inline-flex header_comment">All comments</div>
+                <div class="text-wrapper d-inline-flex header_comment">{{ __('home.All comments') }}</div>
                 <div class="d-inline-flex">
-                    Sorted by
+                    {{ __('home.Sorted by') }}
                     <div class="form-check mx-1">
                         <input class="form-check-input" type="radio" name="type" id="exampleRadios1"
                                value="{{ SearchMentoring::LATEST }}" checked>
                         <label class="form-check-label" for="exampleRadios1">
-                            Latest
+                            {{ __('home.Latest') }}
                         </label>
                     </div>
                     <div class="form-check mx-1">
                         <input class="form-check-input" type="radio" name="type" id="exampleRadios2"
                                value="{{ SearchMentoring::MOST_COMMENTED }}">
                         <label class="form-check-label" for="exampleRadios2">
-                            Most commented
+                            {{ __('home.Most commented') }}
                         </label>
                     </div>
                     <div class="form-check mx-1">
                         <input class="form-check-input" type="radio" name="type" id="exampleRadios3"
                                value="{{ SearchMentoring::MOST_VIEWS }}">
                         <label class="form-check-label" for="exampleRadios3">
-                            Most views
+                            {{ __('home.Most views') }}
                         </label>
                     </div>
                 </div>
             </div>
         </div>
         <div class="nav d-flex justify-content-around mt-3">
-            <a class="tab" onclick="choiceType(this, 0)">All</a>
-            <a class="tab" onclick="choiceType(this, 1)">Health</a>
-            <a class="tab" onclick="choiceType(this, 2)">Beauty</a>
-            <a class="tab" onclick="choiceType(this, 3)">Losing weight</a>
-            <a class="tab" onclick="choiceType(this, 4)">Kids</a>
-            <a class="tab" onclick="choiceType(this, 5)">Pets</a>
-            <a class="tab" onclick="choiceType(this, 6)">Other</a>
+            <a class="tab" onclick="choiceType(this, 0)">{{ __('home.All') }}</a>
+            <a class="tab" onclick="choiceType(this, 1)">{{ __('home.Heath') }}</a>
+            <a class="tab" onclick="choiceType(this, 2)">{{ __('home.Beauty') }}</a>
+            <a class="tab" onclick="choiceType(this, 3)">{{ __('home.Losing weight') }}</a>
+            <a class="tab" onclick="choiceType(this, 4)">{{ __('home.Kids') }}</a>
+            <a class="tab" onclick="choiceType(this, 5)">{{ __('home.Pets') }}</a>
+            <a class="tab" onclick="choiceType(this, 6)">{{ __('home.Other') }}</a>
         </div>
         <div id="all_comment"></div>
     </div>

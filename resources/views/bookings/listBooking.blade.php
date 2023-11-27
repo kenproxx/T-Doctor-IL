@@ -8,15 +8,15 @@
             <ul class="nav nav-pills nav-fill d-flex w-100">
                 <li class="nav-item col-md-4 justify-content-center p-0">
                     <a class="nav-link active font-14-mobi" id="Pending-tab" data-toggle="tab" href="#Pending"
-                       role="tab" aria-controls="home" aria-selected="true">PENDING</a>
+                       role="tab" aria-controls="home" aria-selected="true">{{ __('home.PENDING') }}</a>
                 </li>
                 <li class="nav-item col-md-4 justify-content-center">
                     <a class="nav-link font-14-mobi" id="Cancel-tab" data-toggle="tab" href="#Cancel"
-                       role="tab" aria-controls="profile" aria-selected="false">CANCEL</a>
+                       role="tab" aria-controls="profile" aria-selected="false">{{ __('home.CANCEL') }}</a>
                 </li>
                 <li class="nav-item col-md-4 justify-content-center">
                     <a class="nav-link font-14-mobi" id="Complete-tab" data-toggle="tab" href="#Complete"
-                       role="tab" aria-controls="profile" aria-selected="false">COMPLETE</a>
+                       role="tab" aria-controls="profile" aria-selected="false">{{ __('home.COMPLETE') }}</a>
                 </li>
             </ul>
         </div>
@@ -115,9 +115,9 @@
                      <div class="border-radius mb-3 d-flex">
                         <div class="col-md-9">
                             <a href="${urlDetail}">
-                              <div>Thời gian vào: ${item.check_in} </div>
-                              <div> clinics: ${item.clinic_id} </div>
-                              <div> dịch vụ: ${item.service} </div>
+                              <div>{{ __('home.Thời gian vào') }}: ${item.check_in} </div>
+                              <div> {{ __('home.clinics') }}: ${item.clinic_id} </div>
+                              <div>{{ __('home.dịch vụ') }}: ${item.service} </div>
                             </a>
                          </div>
                         <div class="col-md-3">
