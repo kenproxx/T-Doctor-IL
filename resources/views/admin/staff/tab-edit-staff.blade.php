@@ -17,12 +17,12 @@
     @endif
     <form>
         <div>
-            <label>Username</label>
+            <label for="username">Username</label>
             <input type="text" class="form-control" id="username" name="username" value="{{ $user->username ?? '' }}">
         </div>
         <div>
 
-            <label>Member</label>
+            <label for="member">Member</label>
             <select id="member" name="member" class="form-select form-control">
                 <option value="{{ Role::DOCTORS }}" {{ $role == Role::DOCTORS ? 'selected' : '' }}>Doctors</option>
                 <option value="{{ Role::PHAMACISTS }}" {{ $role == Role::PHAMACISTS ? 'selected' : '' }}>Pharmacists</option>
@@ -35,19 +35,19 @@
 
         </div>
         <div>
-            <label>Email</label>
+            <label for="email">Email</label>
             <input type="email" class="form-control" id="email" name="email" value="{{ $user->email ?? '' }}">
         </div>
         <div>
-            <label>Password</label>
+            <label for="password">Password</label>
             <input type="password" class="form-control" id="password" name="password">
         </div>
         <div>
-            <label>Enter the Password</label>
+            <label for="password_confirm">Enter the Password</label>
             <input type="password" class="form-control" id="password_confirm" name="password_confirm">
         </div>
         <div>
-            <label>Status</label>
+            <label for="status">Status</label>
             <select id="status" name="status" class="form-select form-control">
                 <option value="{{ UserStatus::ACTIVE }}" {{ $user->status == UserStatus::ACTIVE ? 'selected' : '' }}>{{ UserStatus::ACTIVE }}</option>
                 <option value="{{ UserStatus::DELETED }}" {{ $user->status == UserStatus::DELETED ? 'selected' : '' }}>{{ UserStatus::DELETED }}</option>

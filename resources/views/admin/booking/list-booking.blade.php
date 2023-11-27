@@ -45,13 +45,13 @@
                     <td class="d-flex">
                         <form action="{{route('api.backend.booking.edit',$item->id)}}" method="get">
                             @csrf
-                            <button type="submit" class="mr-3 btn btn-primary">Edit</button>
+                            <button type="submit" class="btn btn-primary">Edit</button>
                         </form>
 
                          <form action="{{route('api.backend.booking.delete',$item->id)}}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="ml-3 btn btn-primary">Delete</button>
+                            <button type="submit" class="ml-3 btn btn-primary btn-danger">Delete</button>
                         </form></td>
                 </tr>
             @endforeach
