@@ -11,7 +11,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Department
+                                {{ __('home.Department') }}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @foreach($departments as $department)
@@ -21,13 +21,13 @@
                             </div>
                         </li>
                     </div>
-                    <div class="filter_option"><p>Position</p></div>
-                    <div class="filter_option"><p>Location</p></div>
-                    <div class="filter_option"><p>Experience</p></div>
+                    <div class="filter_option"><p>{{ __('home.Position') }}</p></div>
+                    <div class="filter_option"><p>{{ __('home.Location') }}</p></div>
+                    <div class="filter_option"><p>{{ __('home.Experience') }}</p></div>
                 </div>
                 <div class="form-group has-search">
                     <span class="fa fa-search form-control-feedback"></span>
-                    <input type="text" class="form-control" placeholder="Search for anything…">
+                    <input type="text" class="form-control" placeholder="{{ __('home.Search for anything…') }}">
                 </div>
             </div>
         </div>
@@ -35,9 +35,9 @@
             <div class="d-flex justify-content-center" style="padding: 12px">
                 <div id="list-title-best" class="list-title d-flex">
                     <div class="list--doctor p-0">
-                        <p>Best doctor</p>
+                        <p>{{ __('home.Best doctor') }}</p>
                     </div>
-                    <div class="ms-auto p-2"><a href="{{route('examination.best_doctor')}}">See all</a></div>
+                    <div class="ms-auto p-2"><a href="{{route('examination.best_doctor')}}">{{ __('home.See all') }}</a></div>
                 </div>
             </div>
             <div id="list-doctor-best" class="list-doctor row m-auto p-0">
@@ -46,9 +46,9 @@
             <div class="d-flex justify-content-center" style="padding: 12px">
                 <div id="list-title-new" class="list-title d-flex">
                     <div class="list--doctor p-0">
-                        <p>New doctor</p>
+                        <p>{{ __('home.New doctor') }}</p>
                     </div>
-                    <div class="ms-auto p-2"><a href="{{route('examination.new_doctor')}}">See all</a></div>
+                    <div class="ms-auto p-2"><a href="{{route('examination.new_doctor')}}">{{ __('home.See all') }}</a></div>
                 </div>
             </div>
             <div id="list-doctor-new" class="list-doctor row m-auto">
@@ -57,9 +57,9 @@
             <div class="d-flex justify-content-center" style="padding: 12px;">
                 <div id="list-title-available" class="list-title d-flex">
                     <div class="list--doctor p-0">
-                        <p>24/7 Available doctor</p>
+                        <p>{{ __('home.24/7 Available doctor') }}</p>
                     </div>
-                    <div class="ms-auto p-2"><a href="{{route('examination.available_doctor')}}">See all</a></div>
+                    <div class="ms-auto p-2"><a href="{{route('examination.available_doctor')}}">{{ __('home.See all') }}</a></div>
                 </div>
             </div>
             <div id="list-doctor-available" class="list-doctor row m-auto">
@@ -99,9 +99,9 @@
                             <img src=" ${url}${myArray[1]} " class="card-img-top" alt="...">
                             <div class="card-body">
                                 <a href="${mainUrl}"><h5 class="card-title">${item['name']}</h5></a>
-                                <p class="card-text">Specialty: ${item['specialty']}</p>
-                                <p class="card-text_1">Location: <b>${item['detail_address']}</b></p>
-                                <p class="card-text_1">Working time: <b>${item['time_working_1']}</b></p>
+                                <p class="card-text">{{ __('home.Specialty') }}: ${item['specialty']}</p>
+                                <p class="card-text_1">{{ __('home.Location') }}: <b>${item['detail_address']}</b></p>
+                                <p class="card-text_1">{{ __('home.Working time') }}: <b>${item['time_working_1']}</b></p>
                             </div>
                             </div>
                         </div>`;
@@ -131,9 +131,9 @@
                             <img src=" ${url}${myArray[1]} " class="card-img-top" alt="...">
                             <div class="card-body">
                                 <a href="${mainUrl}"><h5 class="card-title">${item['name']}</h5></a>
-                                <p class="card-text">Specialty: ${item['specialty']}</p>
-                                <p class="card-text_1">Location: <b>${item['detail_address']}</b></p>
-                                <p class="card-text_1">Working time: <b>${item['time_working_1']}</b></p>
+                                <p class="card-text">{{ __('home.Specialty') }}: ${item['specialty']}</p>
+                                <p class="card-text_1">{{ __('home.Location') }}: <b>${item['detail_address']}</b></p>
+                                <p class="card-text_1">{{ __('home.Working time') }}: <b>${item['time_working_1']}</b></p>
                             </div>
                         </div>`;
                 }
@@ -144,7 +144,7 @@
                             <div class="list--doctor p-0">
                                 <p>${department['name']}</p>
                             </div>
-                        <div class="ms-auto p-2"><a href="{{route('examination.index')}}">See all</a></div>
+                        <div class="ms-auto p-2"><a href="{{route('examination.index')}}">{{ __('home.See all') }}</a></div>
                         </div>
                     </div>`;
                 let allHtml = showDepartment + listDoctor;

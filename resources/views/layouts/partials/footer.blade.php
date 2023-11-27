@@ -4,7 +4,7 @@
             <div>
                 <div class="w-200 mb-3"><img src="{{ asset('img/icons_logo/logo-new.png') }}">
                 </div>
-                <p class="address-footer">V7B07 Shophouse Terra An Hưng, Đường Nguyễn Thanh Bình, Hà Đông, Hà Nội</p>
+                <p class="address-footer">{{ __('home.V7B07 Shophouse Terra An Hưng, Đường Nguyễn Thanh Bình, Hà Đông, Hà Nội') }}</p>
                 <div class="d-flex mt-3">
                     <a href="#"><svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g filter="url(#filter0_d_18_4306)">
@@ -84,30 +84,30 @@
             <aside>
                 <ul class='category'>
                     <li>
-                        <h3>TDOCTOR</h3>
+                        <h3>KRMEDI</h3>
                     </li>
-                    <li>How it works</li>
-                    <li>Featured</li>
-                    <li>Partnership</li>
-                    <li>Bussiness Relation</li>
+                    <li>{{ __('home.How it works') }}</li>
+                    <li>{{ __('home.Featured') }}</li>
+                    <li>{{ __('home.Partnership') }}</li>
+                    <li>{{ __('home.Bussiness Relation') }}</li>
                 </ul>
                 <ul class='category'>
                     <li>
-                        <h3>Community</h3>
+                        <h3>{{ __('home.Community') }}</h3>
                     </li>
-                    <li>Events</li>
-                    <li>Blog</li>
-                    <li>Podcast</li>
-                    <li>Invite a friend</li>
+                    <li>{{ __('home.Events') }}</li>
+                    <li>{{ __('home.Blog') }}</li>
+                    <li>{{ __('home.Podcast') }}</li>
+                    <li>{{ __('home.Invite a friend') }}</li>
                 </ul>
                 <ul class='category'>
                     <li>
-                        <h3>Socials</h3>
+                        <h3>{{ __('home.Socials') }}</h3>
                     </li>
-                    <li>Discord</li>
-                    <li>Instagram</li>
-                    <li>Twitter</li>
-                    <li>Facebook</li>
+                    <li>{{ __('home.Discord') }}</li>
+                    <li>{{ __('home.Instagram') }}</li>
+                    <li>{{ __('home.Twitter') }}</li>
+                    <li>{{ __('home.Facebook') }}</li>
                 </ul>
             </aside>
 
@@ -115,7 +115,7 @@
                 <input type="checkbox" id="status1" class="status_input" />
                 <div class="current_status">
                     <span class="status_color" style="--status_color: #11d10a"></span>
-                    <p class="status_message mt-0 font-16-600">TDOCTOR</p>
+                    <p class="status_message mt-0 font-16-600">KRMEDI</p>
                     <span class="expand">
 					<label for="status1">
 						<span class="material-symbols-outlined"> <i class="fa-solid fa-angle-down"></i> </span>
@@ -125,19 +125,19 @@
                 <ul class="other">
                     <li class="other_card">
                         <span class="status_color" style="--status_color: #d1ba0a"></span>
-                        <p class="status_message">How it works</p>
+                        <p class="status_message">{{ __('home.How it works') }}</p>
                     </li>
                     <li class="other_card">
                         <span class="status_color" style="--status_color: #d1140a"></span>
-                        <p class="status_message">Featured</p>
+                        <p class="status_message">{{ __('home.Featured') }}</p>
                     </li>
                     <li class="other_card">
                         <span class="status_color" style="--status_color: #a4a4a4"></span>
-                        <p class="status_message">Partnership</p>
+                        <p class="status_message">{{ __('home.Partnership') }}</p>
                     </li>
                     <li class="other_card">
                         <span class="status_color" style="--status_color: #a4a4a4"></span>
-                        <p class="status_message">Bussiness Relation</p>
+                        <p class="status_message">{{ __('home.Bussiness Relation') }}</p>
                     </li>
                 </ul>
             </div>
@@ -145,7 +145,7 @@
                 <input type="checkbox" id="status2" class="status_input" />
                 <div class="current_status">
                     <span class="status_color" style="--status_color: #11d10a"></span>
-                    <p class="font-16-600 status_message mt-0 ">Community</p>
+                    <p class="font-16-600 status_message mt-0 ">{{ __('home.Community') }}</p>
                     <span class="expand">
 					<label for="status2">
 						<span class="material-symbols-outlined"> <i class="fa-solid fa-angle-down"></i> </span>
@@ -155,19 +155,19 @@
                 <ul class="other">
                     <li class="other_card">
                         <span class="status_color" style="--status_color: #d1ba0a"></span>
-                        <p class="status_message">Events</p>
+                        <p class="status_message">{{ __('home.Events') }}</p>
                     </li>
                     <li class="other_card">
                         <span class="status_color" style="--status_color: #d1140a"></span>
-                        <p class="status_message">Blog</p>
+                        <p class="status_message">{{ __('home.Blog') }}</p>
                     </li>
                     <li class="other_card">
                         <span class="status_color" style="--status_color: #a4a4a4"></span>
-                        <p class="status_message">Podcast</p>
+                        <p class="status_message">{{ __('home.Podcas') }}t</p>
                     </li>
                     <li class="other_card">
                         <span class="status_color" style="--status_color: #a4a4a4"></span>
-                        <p class="status_message">Invite a friend</p>
+                        <p class="status_message">{{ __('home.Invite a friend') }}</p>
                     </li>
                 </ul>
             </div>
@@ -175,7 +175,7 @@
                 <input type="checkbox" id="status3" class="status_input" />
                 <div class="current_status">
                     <span class="status_color" style="--status_color: #11d10a"></span>
-                    <p class="status_message mt-0 font-16-600">Socials</p>
+                    <p class="status_message mt-0 font-16-600">{{ __('home.Socials') }}</p>
                     <span class="expand">
 					<label for="status3">
 						<span class="material-symbols-outlined"> <i class="fa-solid fa-angle-down"></i> </span>
@@ -185,19 +185,19 @@
                 <ul class="other">
                     <li class="other_card">
                         <span class="status_color" style="--status_color: #d1ba0a"></span>
-                        <p class="status_message">Facebook</p>
+                        <p class="status_message">{{ __('home.Facebook') }}</p>
                     </li>
                     <li class="other_card">
                         <span class="status_color" style="--status_color: #d1140a"></span>
-                        <p class="status_message">Twitter</p>
+                        <p class="status_message">{{ __('home.Twitter') }}</p>
                     </li>
                     <li class="other_card">
                         <span class="status_color" style="--status_color: #a4a4a4"></span>
-                        <p class="status_message">Instagram</p>
+                        <p class="status_message">{{ __('home.Instagram') }}</p>
                     </li>
                     <li class="other_card">
                         <span class="status_color" style="--status_color: #a4a4a4"></span>
-                        <p class="status_message">Kakaotalk</p>
+                        <p class="status_message">{{ __('home.Kakaotalk') }}</p>
                     </li>
                 </ul>
             </div>
@@ -206,10 +206,10 @@
             <div class=" bottom-footer">
                 <div class="border-top">
                     <div class="mt-4 d-flex justify-content-between">
-                        <div><p>©2022 Company Name. All rights reserved</p></div>
+                        <div><p>©{{ __('home.2022 Company Name. All rights reserved') }}</p></div>
                         <div class="d-flex text-bottom">
-                            <p class="mr-5">Privacy & Policy</p>
-                            <p>Terms & Condition</p>
+                            <p class="mr-5">{{ __('home.Privacy & Policy') }}</p>
+                            <p>{{ __('home.Terms & Condition') }}</p>
                         </div>
                     </div>
                 </div>

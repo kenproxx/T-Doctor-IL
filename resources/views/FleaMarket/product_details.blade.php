@@ -17,7 +17,7 @@
     </style>
     <div class="recruitment-details ">
         <div class="container">
-            <div class="recruitment-details--title"><a href="{{route('flea-market.index')}}"><i class="fa-solid fa-arrow-left"></i> Product details</a></div>
+            <div class="recruitment-details--title"><a href="{{route('flea-market.index')}}"><i class="fa-solid fa-arrow-left"></i> {{ __('home.Product details') }}</a></div>
             <div class="row recruitment-details--content">
                 <div class="col-md-8 recruitment-details ">
                     @if(!empty($pr_json->thumbnail))
@@ -28,7 +28,7 @@
                     @else
                         <img style="width: 100%" src="{{asset('img/flea-market/photo.png')}}" alt="show"
                              class="main col-10 col-md-12">
-                        <p>No Thumbnail Available</p>
+                        <p>{{ __('home.No Thumbnail Available') }}</p>
                     @endif
                     <div class="list col-2 col-md-12 mt-md-3">
                         @foreach($galleryArray as $pr_gallery)
@@ -47,7 +47,7 @@
                                 <strong class="">{{$pr_json->price}} {{$pr_json->price_unit}}</strong>
                             </div>
 
-                            <p style="color: #929292">Location:<strong class="flea-prise">
+                            <p style="color: #929292">{{ __('home.Location') }}:<strong class="flea-prise">
                                     @php
                                         $province = \Illuminate\Support\Facades\DB::table('provinces')->where('id', $pr_json->province_id)->first()
                                     @endphp
@@ -57,7 +57,7 @@
                                         Null
                                     @endif
                                 </strong></p>
-                            <p style="color: #929292">Category:<strong class="flea-prise">
+                            <p style="color: #929292">{{ __('home.Category') }}:<strong class="flea-prise">
                                     @php
                                         $cata_json = \Illuminate\Support\Facades\DB::table('categories')->where('id', $pr_json->category_id)->first()
                                     @endphp
@@ -73,14 +73,14 @@
                         <div class="div-7 d-flex justify-content-between">
                             @if(Auth::user() == null || Auth::user()->id != $pr_json->created_by)
                                 <a href="{{route('flea.market.product.shop.info',$pr_json->created_by)}}" class="div-wrapper">
-                                    Visit store
+                                    {{ __('home.Visit store') }}
                                 </a>
                             @else
                                 <a href="{{route('flea.market.my.store')}}" class="div-wrapper">
-                                    My store
+                                    {{ __('home.My store') }}
                                 </a>
                             @endif
-                            <button id="button-apply" class="text-wrapper-5">Send message</button>
+                            <button id="button-apply" class="text-wrapper-5">{{ __('home.Send message') }}</button>
                         </div>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                         <p class="text-content-product">{{$pr_json->name}}</p>
                         <div class="div mo-ta">
                             <div class="div-2">
-                                <p class="text-content-product-2">Product Description</p>
+                                <p class="text-content-product-2">{{ __('home.Product Description') }}</p>
                                 <ul class="list-mo-ta">
                                     {!!  $pr_json->description!!}
                                 </ul>

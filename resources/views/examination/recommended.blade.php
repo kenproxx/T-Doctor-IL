@@ -7,19 +7,19 @@
     <div class="d-flex justify-content-center">
         <div id="filter" class="box--1 d-flex w-100">
             <div class="d-flex flex-fill">
-                <div class="filter_option"><p>Category <i class="bi bi-chevron-expand"></i></p></div>
-                <div class="filter_option"><p>Location <i class="bi bi-chevron-expand"></i></p></div>
+                <div class="filter_option"><p>{{ __('home.Category') }} <i class="bi bi-chevron-expand"></i></p></div>
+                <div class="filter_option"><p>{{ __('home.Location') }} <i class="bi bi-chevron-expand"></i></p></div>
             </div>
             <div class="form-group has-search">
                 <span class="fa fa-search form-control-feedback"></span>
-                <input type="text" class="form-control" placeholder="Search for anything…">
+                <input type="text" class="form-control" placeholder="{{ __('home.Search for anything…') }}">
             </div>
         </div>
     </div>
     <div id="title" class="d-flex justify-content-center">
         <div class="list-title">
             <div class="list--doctor p-0">
-                <a class="back" href="{{route('examination.findmymedicine')}}"><p><i class="bi bi-arrow-left"></i><b>Recommended medicine</b></p></a>
+                <a class="back" href="{{route('examination.findmymedicine')}}"><p><i class="bi bi-arrow-left"></i><b>{{ __('home.Recommended medicine') }}</b></p></a>
             </div>
         </div>
     </div>

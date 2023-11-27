@@ -9,42 +9,42 @@
         <div class="d-flex mt-88">
             <div class="col-md-3  mobile-hidden">
                 <div class="border-radius ">
-                    <div class="flea-text">Filter</div>
+                    <div class="flea-text">{{ __('home.Filter') }}</div>
                     <div>
                         <input type="checkbox">
-                        <label class="flea-text-gray">All (96)</label>
+                        <label class="flea-text-gray">{{ __('home.All') }} (96)</label>
                     </div>
                     <div>
                         <input type="checkbox">
-                        <label class="flea-text-gray">Equipments (71)</label>
+                        <label class="flea-text-gray">{{ __('home.Equipments') }} (71)</label>
                     </div>
                     <div>
                         <input type="checkbox">
-                        <label class="flea-text-gray">Furniture (55)</label>
+                        <label class="flea-text-gray">{{ __('home.Furniture') }} (55)</label>
                     </div>
                     <div>
                         <input type="checkbox">
-                        <label class="flea-text-gray">Medicine (54)</label>
+                        <label class="flea-text-gray">{{ __('home.Medicine') }} (54)</label>
                     </div>
                     <div>
                         <input type="checkbox">
-                        <label class="flea-text-gray">Cosmetics (49)</label>
+                        <label class="flea-text-gray">{{ __('home.Cosmetics') }} (49)</label>
                     </div>
                     <div>
                         <input type="checkbox">
-                        <label class="flea-text-gray">Furniture (53)</label>
+                        <label class="flea-text-gray">{{ __('home.Furniture') }} (53)</label>
                     </div>
                     <div>
                         <input type="checkbox">
-                        <label class="flea-text-gray">Others (47)</label>
+                        <label class="flea-text-gray">{{ __('home.Others') }} (47)</label>
                     </div>
-                    <div class="flea-text-sp">See all categories</div>
+                    <div class="flea-text-sp">{{ __('home.See all categories') }}</div>
                 </div>
                 <div class="border-radius mt-3 ">
                     <div class="d-flex">
                         <div class="wrapper">
                             <header>
-                                <h2>Price</h2>
+                                <h2>{{ __('home.Price') }}</h2>
                             </header>
                             <div class="price-input">
                                 <div class="field">
@@ -82,7 +82,7 @@
                         <li class="page-item">
                             <a class="page-link" href="#" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
+                                <span class="sr-only">{{ __('home.Previous') }}</span>
                             </a>
                         </li>
                         <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -91,7 +91,7 @@
                         <li class="page-item">
                             <a class="page-link" href="#" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
+                                <span class="sr-only">{{ __('home.Next') }}</span>
                             </a>
                         </li>
                     </ul>

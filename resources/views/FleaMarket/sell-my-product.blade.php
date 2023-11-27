@@ -8,7 +8,7 @@
         <div class="add-cv_text">
             <div class="ac-text_content font-18-mobi"><a href="{{route('flea-market.index')}}"><i
                         class="fa-solid fa-arrow-left mr-4"
-                        style="color: black"></i></a>Product details
+                        style="color: black"></i></a>{{ __('home.Product details') }}
             </div>
         </div>
         <form action="#">
@@ -16,11 +16,11 @@
                 <div class="col-md-12">
                     <div class="">
                         <div class="">
-                            <div class="text-font-24 font-16-mobi mt-3 mt-md-4">Product information</div>
+                            <div class="text-font-24 font-16-mobi mt-3 mt-md-4">{{ __('home.Product information') }}</div>
                         </div>
                         <div class="p-0 col-md-12 border-top">
                             <div class="text-font-16 mt-4 font-14-mobi">
-                                <p><span>Product name </span><span class="red-color"> *</span></p>
+                                <p><span>{{ __('home.Product name') }} </span><span class="red-color"> *</span></p>
                                 <div class="w-100 mt-2">
                                     <input class="ac-email font-16-mobi checkValid" required name="name" id="name"
                                            value=""
@@ -31,7 +31,7 @@
                         <div class="d-block d-md-flex ">
                             <div class="col-md-6 pl-0 pr-0 pr-md-3">
                                 <div class="text-font-16 mt-md-4 mt-3 font-14-mobi">
-                                    <p><span>Category </span><span class="red-color"> *</span></p>
+                                    <p><span>{{ __('home.Category') }} </span><span class="red-color"> *</span></p>
                                     <div class="w-100 mt-md-2">
 
                                         <select class="ac-choose font-16-mobi mt-2" name="category_id checkValid"
@@ -43,7 +43,7 @@
                                     </div>
                                 </div>
                                 <div class="text-font-16 font-14-mobi mt-45 mt-3">
-                                    <p><span>Location </span> <span class="red-color">*</span></p>
+                                    <p><span>{{ __('home.Location') }} </span> <span class="red-color">*</span></p>
                                     <div class="w-100 mt-2">
                                         <select class="ac-choose font-16-mobi mt-2" id="province_id"
                                                 name="province_id checkValid"
@@ -57,25 +57,24 @@
                             </div>
                             <div class="col-md-6 pr-0 pl-0 pl-md-3">
                                 <div class="text-font-16 font-14-mobi mt-md-4 mt-3">
-                                    <p><span>Brand name </span></p>
+                                    <p><span>{{ __('home.Brand name') }} </span></p>
                                     <div class="w-100 mt-2 d-flex col-12 p-0">
                                         <div class="p-0 col-md-9 mt-2 col-8">
                                             <input class="web ac-nation font-16-mobi" style="max-width: 100%"
                                                    name="brand_name" id="brand_name" placeholder="0123456789">
                                         </div>
                                         <div class="pr-0 col-md-3 mt-2 col-4">
-                                            <a href="#" id="disabledInput" class="no-brand">No Brand</a>
+                                            <a href="#" id="disabledInput" class="no-brand">{{ __('home.No Brand') }}</a>
                                         </div>
                                     </div>
-                                    <small class="fs-12">If you don't remember the brand name, you can leave it blank or
-                                        click to select no brand</small>
+                                    <small class="fs-12">{{ __("home.If you don't remember the brand name, you can leave it blank or click to select no brand") }}</small>
                                 </div>
                                 <div class="text-font-16 font-14-mobi mt-md-4 mt-3">
-                                    <p><span>Price </span> <span class="red-color">*</span></p>
+                                    <p><span>{{ __('home.Price') }} </span> <span class="red-color">*</span></p>
                                     <div class="w-100 mt-2">
                                         <input class="web ac-nation font-16-mobi mt-2" name="price checkValid" required
                                                id="price"
-                                               placeholder="Please choose....">
+                                               placeholder="{{ __('home.Please choose....') }}">
                                     </div>
                                 </div>
                             </div>
@@ -84,22 +83,21 @@
                 </div>
                 <div class="cv-about col-md-12">
                     <div class="">
-                        <div class="text-font-24 font-14-mobi mt-md-4 mt-3">Detailed description</div>
+                        <div class="text-font-24 font-14-mobi mt-md-4 mt-3">{{ __('home.Detailed description') }}</div>
                     </div>
                     <div class="mt-md-3 mt-2 font-16-mobi">
                         <textarea class="form-control ac-textarea mt-md-3 checkValid" name="description"
                                   id="description" required
-                                  placeholder="Enter an introduction about yourself"></textarea>
+                                  placeholder="{{ __('home.Enter an introduction about yourself') }}"></textarea>
                     </div>
                     <div class="d-flex mt-2 font-10-mobi">
                         <i class="fa-solid fa-circle-exclamation text-center"
                            style="color: red;    padding: 4px 8px;"></i>
-                        <p>When promoting your website and exposing the website address, use of site will be
-                            suspended</p>
+                        <p>{{ __('home.When promoting your website and exposing the website address, use of site will be suspended') }}</p>
                     </div>
                 </div>
                 <div class="">
-                    <div class="text-font-24 font-14-mobi">Photo</div>
+                    <div class="text-font-24 font-14-mobi">{{ __('home.Photo') }}</div>
                     <div class="d-flex mt-2">
                         <div class="pl-0 d-flex">
                             <div class="p-0 d-flex">
@@ -110,58 +108,58 @@
                                 </label>
                                 <input type="file" id="gallery" name="gallery[]" style="display: none;" multiple
                                        accept="image/*">
-                                <button id="chooseImageBtn" type="button" style="display: none">Chọn ảnh</button>
+                                <button id="chooseImageBtn" type="button" style="display: none">{{ __('home.Chọn ảnh') }}</button>
                             </div>
                         </div>
                     </div>
 
                 </div>
                 <div class="text-font-24 mt-4 col-md-12 font-14-mobi">
-                    <p><span>Please choose you adertisement plan </span><span class="red-color">*</span></p>
+                    <p><span>{{ __('home.Please choose you adertisement plan') }} </span><span class="red-color">*</span></p>
                     <div class="mt-2 d-flex font-12-mobi">
                         <div class="text-wrapper-input col-md-4 d-flex pl-0">
                             <input type="radio" class="web-tick-box" name="ads_plan" id="ads_plan" value="1">
-                            <label class="ml-2"><strong>Platinum</strong></label>
+                            <label class="ml-2"><strong>{{ __('home.Platinum') }}</strong></label>
                         </div>
                         <div class="col-md-4 d-flex text-wrapper-input ">
                             <input type="radio" class="web-tick-box" name="ads_plan" id="ads_plan" value="2">
-                            <label class=" ml-2"><strong>Premium</strong></label>
+                            <label class=" ml-2"><strong>{{ __('home.Premium') }}</strong></label>
                         </div>
                         <div class="col-md-4 d-flex text-wrapper-input">
                             <input type="radio" class="web-tick-box" name="ads_plan" id="ads_plan" value="3">
-                            <label class=" ml-2"><strong>Silver</strong></label>
+                            <label class=" ml-2"><strong>{{ __('home.Silver') }}</strong></label>
                         </div>
                     </div>
                 </div>
                 <div class="text-font-24 mt-4 col-md-12 mb-80 font-14-mobi">
-                    <p><span>Advetisement period</span><span class="red-color">*</span></p>
+                    <p><span>{{ __('home.Advetisement period') }}</span><span class="red-color">*</span></p>
                     <div class="mt-2 d-flex font-12-mobi">
                         <div class="text-wrapper-input col-md-3 d-flex pl-0">
                             <input type="radio" class="web-tick-box" name="ads_period" value="1">
-                            <label class="ml-2"><strong>5 Day</strong></label>
+                            <label class="ml-2"><strong>{{ __('home.5 Day') }}</strong></label>
                         </div>
                         <div class="col-md-3 d-flex text-wrapper-input pl-0 ">
                             <input type="radio" class="web-tick-box" name="ads_period" value="2">
-                            <label class=" ml-2"><strong>10 Day</strong></label>
+                            <label class=" ml-2"><strong>{{ __('home.10 Day') }}</strong></label>
                         </div>
                         <div class="col-md-3 d-flex text-wrapper-input pl-0">
                             <input type="radio" class="web-tick-box" name="ads_period" value="3">
-                            <label class=" ml-2"><strong>15 Day</strong></label>
+                            <label class=" ml-2"><strong>{{ __('home.15 Day') }}</strong></label>
                         </div>
                         <div class="col-md-3 d-flex text-wrapper-input pl-0">
                             <input type="radio" class="web-tick-box" name="ads_period" value="4">
-                            <label class=" ml-2"><strong>20 Day</strong></label>
+                            <label class=" ml-2"><strong>{{ __('home.20 Day') }}</strong></label>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="d-flex justify-content-center">
                 <div class="col-md-3 col-6">
-                    <button type="submit" class="add-cv-bt w-100 apply-bt_delete">Cancel</button>
+                    <button type="submit" class="add-cv-bt w-100 apply-bt_delete">{{ __('home.CANCEL') }}</button>
                 </div>
                 <div class="col-md-3 col-6">
                     <button type="button" id="submitButton" class="add-cv-bt w-100 apply-bt_edit create-button">
-                        Register
+                        {{ __('home.Register') }}
                     </button>
                 </div>
             </div>

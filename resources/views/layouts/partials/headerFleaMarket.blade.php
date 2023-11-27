@@ -9,12 +9,12 @@
                     <img src="{{asset('img/icons_logo/logo-new.png')}}" alt="Logo" width="177px" height="42px"
                          class="d-inline-block align-text-top">
                 </a>
-                <a class="back" href="{{route('home')}}"><h5><i class="fa-solid fa-angles-left"></i> Flea market</h5></a>
+                <a class="back" href="{{route('home')}}"><h5><i class="fa-solid fa-angles-left"></i>{{ __('home.Flea market') }} </h5></a>
             </div>
             <div class="col-md-4 header-detail--center d-flex justify-content-sm-around">
-                <a class="active" href="{{route('flea-market.index')}}">My store</a>
-                <a href="{{route('flea.market.sell.product')}}">Sell my product</a>
-                <a href="{{route('flea.market.wish.list')}}">Wish list</a>
+                <a class="active" href="{{route('flea-market.index')}}">{{ __('home.My store') }}</a>
+                <a href="{{route('flea.market.sell.product')}}">{{ __('home.Sell my product') }}</a>
+                <a href="{{route('flea.market.wish.list')}}">{{ __('home.Wish list') }}</a>
             </div>
             <div class="header-right d-flex align-items-center w-25">
                 @if(Auth::check())
@@ -28,18 +28,18 @@
                         </div>
                         <div class="dropdown-menu">
                             @if( (new MedicalPermission())->isMedicalPermission())
-                                <a class="dropdown-item" href="{{ route('homeAdmin') }}">Dashboard</a>
+                                <a class="dropdown-item" href="{{ route('homeAdmin') }}">{{ __('home.Dashboar') }}</a>
                             @else
-                                <a class="dropdown-item" href="{{ route('profile') }}">Trang cá nhân</a>
+                                <a class="dropdown-item" href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
                             @endif
-                            <a class="dropdown-item" href="{{route('logoutProcess')}}">Logout</a>
+                            <a class="dropdown-item" href="{{route('logoutProcess')}}">{{ __('home.Logout') }}</a>
                         </div>
                     </div>
                 @else
-                    <button class="account_control" id="show_login" data-toggle="modal" data-target="#staticBackdrop">Log In
+                    <button class="account_control" id="show_login" data-toggle="modal" data-target="#staticBackdrop">{{ __('home.Log In') }}
                     </button>
                     <div>|</div>
-                    <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">Sign Up
+                    <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">{{ __('home.Sign Up') }}
                     </button>
                 @endif
             </div>
@@ -75,23 +75,23 @@
             </div>
             <div class="offcanvas-body">
                 <div class="text-center-info align-items-start d-flex mb-3">
-                    <a href="{{route('home')}}" class="text-center-info"><i class="fa-solid fa-angles-left"></i><span>Flea marrket</span></a>
+                    <a href="{{route('home')}}" class="text-center-info"><i class="fa-solid fa-angles-left"></i><span>{{ __('home.Flea marrket') }}</span></a>
                 </div>
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item button-nav-header mb-3">
-                        <a class="nav-link" href="{{route('flea-market.index')}}">My store</a>
+                        <a class="nav-link" href="{{route('flea-market.index')}}">{{ __('home.My store') }}</a>
                     </li>
                     <li class="nav-item button-nav-header mb-3">
-                        <a class="nav-link" href="{{route('flea.market.sell.product')}}">Sell my product</a>
+                        <a class="nav-link" href="{{route('flea.market.sell.product')}}">{{ __('home.Sell my product') }}</a>
                     </li>
                     <li class="nav-item button-nav-header mb-3">
-                        <a class="nav-link" href="{{route('flea.market.wish.list')}}">Wish list</a>
+                        <a class="nav-link" href="{{route('flea.market.wish.list')}}">{{ __('home.Wish list') }}</a>
                     </li>
                     <li class="nav-item button-nav-header mb-3">
-                        <a class="nav-link" href="{{route('flea.market.my.store')}}">Go to my store</a>
+                        <a class="nav-link" href="{{route('flea.market.my.store')}}">{{ __('home.Go to my store') }}</a>
                     </li>
                     <li class="nav-item button-nav-header mb-3">
-                        <a class="nav-link" href="#">Log out</a>
+                        <a class="nav-link" href="#">{{ __('home.Log out') }}</a>
                     </li>
 
                 </ul>
@@ -110,25 +110,25 @@
                             <div class="popup d-lg-flex justify-content-center">
                                 <div class="form">
                                     <div class="form-element">
-                                        <label for="email">Email</label>
+                                        <label for="email">{{ __('home.Email') }}</label>
                                         <input id="email" name="email" type="email" placeholder="exmaple@gmail.com">
                                     </div>
                                     <div class="form-element">
-                                        <label for="password">Password</label>
+                                        <label for="password">{{ __('home.Password') }}</label>
                                         <input id="password" name="password" type="password" placeholder="********">
                                     </div>
                                     <div class="form-element">
                                         <input id="remember-me" type="checkbox">
-                                        <label for="remember-me">Remember password</label>
+                                        <label for="remember-me">{{ __('home.Remember password') }}</label>
                                         <a href="#">Forgot password?</a>
                                     </div>
                                     <div class="form-element text-center">
-                                        <button>Login</button>
+                                        <button>{{ __('home.Login') }}</button>
                                     </div>
                                     <div class="other_sign">
                                         <div class="line"></div>
                                         <div class="text-center">
-                                            Or
+                                            {{ __('home.Or') }}
                                         </div>
                                         <div class="line"></div>
                                     </div>
@@ -143,9 +143,8 @@
                                                 src="{{asset('img/icons_logo/kakao-talk_logo.png')}}"/></button>
                                     </div>
                                     <div class="sign--up d-flex justify-content-center">
-                                        <p>Do not have an account?</p>
-                                        <a href="" data-toggle="modal" data-target="#modalRegister" data-dismiss="modal">Sign
-                                            up</a>
+                                        <p>{{ __('home.Do not have an account') }}?</p>
+                                        <a href="" data-toggle="modal" data-target="#modalRegister" data-dismiss="modal">{{ __('home.Sign up') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -171,24 +170,24 @@
                                              aria-labelledby="Pharmacist-tab">
                                             <div>
                                                 <div class="form-element">
-                                                    <label for="username">Username</label>
+                                                    <label for="username">{{ __('home.Username') }}</label>
                                                     <input id="username" name="username" type="text" placeholder="exmaple"
                                                            required>
                                                 </div>
                                                 <div class="form-element">
-                                                    <label for="type">Type Account</label>
+                                                    <label for="type">{{ __('home.Type Account') }}</label>
                                                     <select id="type" name="type" class="form-select" onchange="showInputFileUpload(this.value)">
                                                         <option>Choose...</option>
-                                                        <option value="{{Role::BUSINESS }}">BUSINESS</option>
-                                                        <option value="{{Role::MEDICAL }}">MEDICAL</option>
-                                                        <option value="{{Role::NORMAL }}" selected>NORMAL</option>
+                                                        <option value="{{Role::BUSINESS }}">{{ __('home.BUSINESS') }}</option>
+                                                        <option value="{{Role::MEDICAL }}">{{ __('home.MEDICAL') }}</option>
+                                                        <option value="{{Role::NORMAL }}" selected>{{ __('home.NORMAL') }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-element">
-                                                    <label for="member">Member</label>
+                                                    <label for="member">{{ __('home.Member') }}</label>
                                                     <select id="member" name="member" class="form-select">
-                                                        <option value="{{Role::PAITENTS }}">PAITENTS</option>
-                                                        <option value="{{Role::NORMAL_PEOPLE }}">NORMAL PEOPLE
+                                                        <option value="{{Role::PAITENTS }}">{{ __('home.PAITENTS') }}</option>
+                                                        <option value="{{Role::NORMAL_PEOPLE }}">{{ __('home.NORMAL PEOPLE') }}
                                                         </option>
                                                     </select>
                                                 </div>
@@ -197,25 +196,24 @@
                                                     <input type="file" id="fileupload" name="fileupload" accept="image/*, .pdf, .doc, .docx">
                                                 </div>
                                                 <div class="form-element">
-                                                    <label for="email">Email</label>
+                                                    <label for="email">{{ __('home.Email') }}</label>
                                                     <input id="email" name="email" type="email" placeholder="exmaple@gmail.com"
                                                            required>
                                                 </div>
 
                                                 <div class="form-element">
-                                                    <label for="password">Password</label>
+                                                    <label for="password">{{ __('home.Password') }}</label>
                                                     <input id="password" type="password" name="password" minlength="8"
                                                            placeholder="********" required>
                                                 </div>
                                                 <div class="form-element">
-                                                    <label for="passwordConfirm">Enter the Password</label>
+                                                    <label for="passwordConfirm">{{ __('home.Enter the Password') }}</label>
                                                     <input id="passwordConfirm" name="passwordConfirm" minlength="8"
                                                            type="password" placeholder="********" required>
                                                 </div>
                                                 <div class="form-element">
                                                     <input id="remember-me" type="checkbox" required>
-                                                    <label for="remember-me">Agree to Terms of Service and Privacy
-                                                        Policy</label>
+                                                    <label for="remember-me">{{ __('home.Agree to Terms of Service and Privacy Policy') }}</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -223,12 +221,12 @@
                                 </div>
                                 <div id="other-option">
                                     <div class="form-element text-center">
-                                        <button type="submit">Sign up</button>
+                                        <button type="submit">{{ __('home.Sign up') }}</button>
                                     </div>
                                     <div class="other_sign">
                                         <div class="line"></div>
                                         <div class="text-center">
-                                            Or
+                                            {{ __('home.Or') }}
                                         </div>
                                         <div class="line"></div>
                                     </div>
@@ -243,9 +241,9 @@
                                                 src="{{asset('img/icons_logo/kakao-talk_logo.png')}}"/></button>
                                     </div>
                                     <div class="sign--up d-flex justify-content-center">
-                                        <p>Do you already have an account?</p>
+                                        <p>{{ __('home.Do you already have an account') }}?</p>
                                         <a href="#" data-toggle="modal" data-target="#staticBackdrop" data-dismiss="modal">
-                                            Log in</a>
+                                            {{ __('home.Log in') }}</a>
                                     </div>
                                 </div>
                             </form>
