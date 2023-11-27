@@ -81,4 +81,27 @@ class BookingApi extends Controller
         }
         return response()->json($arrayBookings);
     }
+
+    public function cancelBooking(Request $request, $id)
+    {
+        if ($id) {
+            $booking = Booking::find($id);
+            if ($booking) {
+                if ($booking->status == BookingStatus::CANCEL) {
+                    $booking->status = BookingStatus::PENDING;
+                } else {
+                    $booking->status = BookingStatus::CANCEL;
+                }
+
+                $booking->save();
+                return response()->json(['message' => 'Booking status updated successfully']);
+            } else {
+                return response()->json(['error' => 'Booking not found'], 404);
+            }
+        } else {
+            return response()->json(['error' => 'Missing booking_id parameter'], 400);
+        }
+    }
+
+
 }
