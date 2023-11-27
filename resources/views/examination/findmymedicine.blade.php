@@ -43,7 +43,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Category
+                                {{ __('home.Category') }}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 @foreach($categoryMedicines as $categoryMedicine)
@@ -53,11 +53,11 @@
                             </div>
                         </li>
                     </div>
-                    <div class="filter_option"><p>Location</p></div>
+                    <div class="filter_option"><p>{{ __('home.Location') }}</p></div>
                 </div>
                 <div class="form-group has-search">
                     <span class="fa fa-search form-control-feedback"></span>
-                    <input type="text" class="form-control" placeholder="Search for anything…">
+                    <input type="text" class="form-control" placeholder="{{ __('home.Search for anything…') }}">
                 </div>
             </div>
         </div>
@@ -97,9 +97,9 @@
             <div class="d-flex justify-content-center" style="padding: 12px">
                 <div class="list-title d-flex">
                     <div class="list--doctor p-0">
-                        <p>Best Pharmacists</p>
+                        <p>{{ __('home.Best Pharmacists') }}</p>
                     </div>
-                    <div class="ms-auto p-2"><a href="{{route('examination.bestpharmacists')}}">See all</a></div>
+                    <div class="ms-auto p-2"><a href="{{route('examination.bestpharmacists')}}">{{ __('home.See all') }}</a></div>
                 </div>
             </div>
             <div class="row list-doctor m-auto">
@@ -141,8 +141,8 @@
                                 <div class="card-body">
                                     <a href="#"><h5
                                             class="card-title"> {{ $bestPhamrmacist->name }}</h5></a>
-                                    <p class="card-text_1">Location: <b>{{ $bestPhamrmacist->address_detail }}</b></p>
-                                    <p class="card-text_1">Working time: <b> {{ $text }}</b></p>
+                                    <p class="card-text_1">{{ __('home.Location') }}: <b>{{ $bestPhamrmacist->address_detail }}</b></p>
+                                    <p class="card-text_1">{{ __('home.Working time') }}: <b> {{ $text }}</b></p>
                                 </div>
                             </div>
                         </div>
@@ -152,9 +152,9 @@
             <div class="d-flex justify-content-center" style="padding: 12px">
                 <div class=" list-title d-flex">
                     <div class="list--doctor p-0">
-                        <p>New Pharmacists</p>
+                        <p>{{ __('home.New Pharmacists') }}</p>
                     </div>
-                    <div class="ms-auto p-2"><a href="{{route('examination.newpharmacists')}}">See all</a></div>
+                    <div class="ms-auto p-2"><a href="{{route('examination.newpharmacists')}}">{{ __('home.See all') }}</a></div>
                 </div>
             </div>
             <div class="row list-doctor m-auto">
@@ -196,8 +196,8 @@
                                 <div class="card-body">
                                     <a href="#"><h5
                                             class="card-title"> {{ $newPhamrmacist->name }}</h5></a>
-                                    <p class="card-text_1">Location: <b>{{ $newPhamrmacist->address_detail }}</b></p>
-                                    <p class="card-text_1">Working time: <b> {{ $text }}</b></p>
+                                    <p class="card-text_1">{{ __('home.Location') }}: <b>{{ $newPhamrmacist->address_detail }}</b></p>
+                                    <p class="card-text_1">{{ __('home.Working time') }}: <b> {{ $text }}</b></p>
                                 </div>
                             </div>
                         </div>
@@ -207,9 +207,9 @@
             <div class="d-flex justify-content-center" style="padding: 12px">
                 <div class=" list-title d-flex">
                     <div class="list--doctor p-0">
-                        <p>24/7 Available Pharmacists</p>
+                        <p>{{ __('home.24/7 Available Pharmacists') }}</p>
                     </div>
-                    <div class="ms-auto p-2"><a href="{{route('examination.availablepharmacists')}}">See all</a></div>
+                    <div class="ms-auto p-2"><a href="{{route('examination.availablepharmacists')}}">{{ __('home.See all') }}</a></div>
                 </div>
             </div>
             <div class="row list-doctor m-auto">
@@ -251,8 +251,8 @@
                                 <div class="card-body">
                                     <a href="#"><h5
                                             class="card-title"> {{ $allPhamrmacist->name }}</h5></a>
-                                    <p class="card-text_1">Location: <b>{{ $allPhamrmacist->address_detail }}</b></p>
-                                    <p class="card-text_1">Working time: <b> {{ $text }}</b></p>
+                                    <p class="card-text_1">{{ __('home.Location') }}: <b>{{ $allPhamrmacist->address_detail }}</b></p>
+                                    <p class="card-text_1">{{ __('home.Working time') }}: <b> {{ $text }}</b></p>
                                 </div>
                             </div>
                         </div>
@@ -262,9 +262,9 @@
             <div class="d-flex justify-content-center" style="padding: 12px">
                 <div class=" list-title d-flex">
                     <div class="list--doctor p-0">
-                        <p>Hot deal medicine</p>
+                        <p>{{ __('home.Hot deal medicine') }}</p>
                     </div>
-                    <div class="ms-auto p-2"><a href="{{route('examination.hotdealmedicine')}}">See all</a></div>
+                    <div class="ms-auto p-2"><a href="{{route('examination.hotdealmedicine')}}">{{ __('home.See all') }}</a></div>
                 </div>
             </div>
             <div class="row list-doctor m-auto">
@@ -280,8 +280,8 @@
                                 <div class="card-body">
                                     <a href="{{ route('medicine.detail', $hotMedicine->id) }}"><h5
                                             class="card-title">{{ $hotMedicine->name }}</h5></a>
-                                    <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
-                                    <p class="card-text_1">Price:
+                                    <p class="card-text_1">{{ __('home.Location') }}: <b>{{ $user->address_code }}</b></p>
+                                    <p class="card-text_1">{{ __('home.Price') }}:
                                         <b>{{ $hotMedicine->price }} {{ $hotMedicine->unit_price }}</b></p>
                                 </div>
                             </div>
@@ -292,9 +292,9 @@
             <div class="d-flex justify-content-center" style="padding: 12px">
                 <div class=" list-title d-flex">
                     <div class="list--doctor p-0">
-                        <p>New medicine</p>
+                        <p>{{ __('home.New medicine') }}</p>
                     </div>
-                    <div class="ms-auto p-2"><a href="{{route('examination.newmedicine')}}">See all</a></div>
+                    <div class="ms-auto p-2"><a href="{{route('examination.newmedicine')}}">{{ __('home.See all') }}</a></div>
                 </div>
             </div>
             <div class="row list-doctor  m-auto">
@@ -310,8 +310,8 @@
                                 <div class="card-body">
                                     <a href="{{ route('medicine.detail', $newMedicine->id) }}"><h5
                                             class="card-title">{{ $newMedicine->name }}</h5></a>
-                                    <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
-                                    <p class="card-text_1">Price:
+                                    <p class="card-text_1">{{ __('home.Location') }}: <b>{{ $user->address_code }}</b></p>
+                                    <p class="card-text_1">{{ __('home.Price') }}:
                                         <b>{{ $newMedicine->price }} {{ $newMedicine->unit_price }}</b></p>
                                 </div>
                             </div>
@@ -322,9 +322,9 @@
             <div class="d-flex justify-content-center" style="padding: 12px">
                 <div class=" list-title d-flex">
                     <div class="list--doctor p-0">
-                        <p>Recommended</p>
+                        <p>{{ __('home.Recommended') }}</p>
                     </div>
-                    <div class="ms-auto p-2"><a href="{{route('examination.recommended')}}">See all</a></div>
+                    <div class="ms-auto p-2"><a href="{{route('examination.recommended')}}">{{ __('home.See all') }}</a></div>
                 </div>
             </div>
             <div class="row list-doctor m-auto">
@@ -340,8 +340,8 @@
                                 <div class="card-body">
                                     <a href="{{ route('medicine.detail', $recommendedMedicine->id) }}"><h5
                                             class="card-title">{{ $recommendedMedicine->name }}</h5></a>
-                                    <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
-                                    <p class="card-text_1">Price:
+                                    <p class="card-text_1">{{ __('home.Location') }}: <b>{{ $user->address_code }}</b></p>
+                                    <p class="card-text_1">{{ __('home.Price') }}:
                                         <b>{{ $recommendedMedicine->price }} {{ $recommendedMedicine->unit_price }}</b>
                                     </p>
                                 </div>
@@ -354,9 +354,9 @@
             <div class="d-flex justify-content-center" style="padding: 12px">
                 <div class=" list-title d-flex">
                     <div class="list--doctor p-0">
-                        <p>Functional Foods</p>
+                        <p>{{ __('home.Functional Foods') }}</p>
                     </div>
-                    <div class="ms-auto p-2"><a href="#">See all</a></div>
+                    <div class="ms-auto p-2"><a href="#">{{ __('home.See all') }}</a></div>
                 </div>
             </div>
             <div class="row list-doctor m-auto">
@@ -373,8 +373,8 @@
                                     <div class="card-body">
                                         <a href="{{ route('medicine.detail', $function_food->id) }}"><h5
                                                 class="card-title">{{ $function_food->name }}</h5></a>
-                                        <p class="card-text_1">Location: <b>{{ $user->address_code }}</b></p>
-                                        <p class="card-text_1">Price:
+                                        <p class="card-text_1">{{ __('home.Location') }}: <b>{{ $user->address_code }}</b></p>
+                                        <p class="card-text_1">{{ __('home.Price') }}:
                                             <b>{{ $function_food->price }} {{ $function_food->unit_price }}</b></p>
                                     </div>
                                 </div>

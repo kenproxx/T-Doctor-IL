@@ -24,7 +24,7 @@
             </div>
             <div class="col-4 pc-hidden">
                 <form action="{{route('flea.market.sell.product')}}" class=" flea-button">
-                    <button class="flea-btn width-88">Sell my product</button>
+                    <button class="flea-btn width-88">{{ __('home.Sell my product') }}</button>
                 </form>
             </div>
         </div>
@@ -32,10 +32,10 @@
             @php
                 $count = \App\Models\ProductInfo::where('created_by', $id )->where('status', \App\Enums\ProductStatus::ACTIVE)->count();
             @endphp
-            <div class="col-4 col-md-3 font-12-mobi">Product: <span>{{$count}}</span></div>
-            <div class="col-4 col-md-3 font-12-mobi">Sold: <span>1000</span></div>
-            <div class="col-4 col-md-3 font-12-mobi">Sold out: <span>10</span></div>
-            <div class="col-4 col-md-3 font-12-mobi">Following: <span>50</span></div>
+            <div class="col-4 col-md-3 font-12-mobi">{{ __('home.Product') }}: <span>{{$count}}</span></div>
+            <div class="col-4 col-md-3 font-12-mobi">{{ __('home.Sold') }}: <span>1000</span></div>
+            <div class="col-4 col-md-3 font-12-mobi">{{ __('home.Sold out') }}: <span>10</span></div>
+            <div class="col-4 col-md-3 font-12-mobi">{{ __('home.Following') }}: <span>50</span></div>
         </div>
     </div>
     <div class="col-md-2 mobile-hidden">
@@ -43,11 +43,11 @@
         <div class="d-flex col-md-4">
             @if( Auth::user()== null || $id != Auth::user()->id)
                 <form action="{{route('flea.market.sell.product')}}" class=" flea-button mr-3">
-                    <button class="flea-btn width-88">Follow</button>
+                    <button class="flea-btn width-88">{{ __('home.Read') }}{{ __('home.FOLLOW') }}</button>
                 </form>
             @else
                 <form action="{{route('flea.market.sell.product')}}" class=" flea-button mr-3">
-                    <button class="flea-btn width-88">Sell my product</button>
+                    <button class="flea-btn width-88">{{ __('home.Sell my product') }}</button>
                 </form>
             @endif
         </div>

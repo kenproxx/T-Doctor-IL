@@ -205,7 +205,7 @@
                         <div class="d-flex justify-content-between mt-md-2">
                             <div class="fs-18px">{{$bookings->name}}</div>
                             <div class="button-follow fs-12p ">
-                                <a class="text-follow-12" href="">FOLLOW</a>
+                                <a class="text-follow-12" href="">{{ __('home.FOLLOW') }}</a>
                             </div>
                         </div>
                         <div class="d-flex mt-md-2">
@@ -214,7 +214,7 @@
                                     <div class="justify-content-center d-flex">
                                         <i class="border-button-address fa-solid fa-bullseye"></i>
                                     </div>
-                                    <div class="d-flex justify-content-center">Start</div>
+                                    <div class="d-flex justify-content-center">{{ __('home.Start') }}</div>
                                 </a>
                             </div>
                             <div class="d-flex col-md-6 justify-content-center align-items-center">
@@ -222,7 +222,7 @@
                                     <div class="justify-content-center d-flex">
                                         <i class="border-button-address fa-regular fa-circle-right"></i>
                                     </div>
-                                    <div class="d-flex justify-content-center">Direction</div>
+                                    <div class="d-flex justify-content-center">{{ __('home.Direction') }}</div>
                                 </a>
                             </div>
                         </div>
@@ -230,7 +230,7 @@
                     <div class="mt-md-3 mb-md-3">
                         <button id="modalToggle" data-toggle="modal" data-target="#exampleModal"
                                 class="w-100 btn btn-secondary border-button-address font-weight-800 fs-14 justify-content-center"
-                                >Booking
+                                >{{ __('home.Booking') }}
                         </button>
                     </div>
                     <div class="border-top">
@@ -269,10 +269,7 @@
                                 </div>
                                 <div class="content">
                                     <p>
-                                        Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại
-                                        salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi
-                                        như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới
-                                        thiệu cho bạn bè cùng sử dụng :D
+                                        {{ __('home.Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho bạn bè cùng sử dụng') }}
                                     </p>
                                 </div>
                             </div>
@@ -292,10 +289,7 @@
                             </div>
                             <div class="content">
                                 <p>
-                                    Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại
-                                    salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như
-                                    mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho
-                                    bạn bè cùng sử dụng :D
+                                    {{ __('home.Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho bạn bè cùng sử dụng') }}
                                 </p>
                             </div>
                         </div>
@@ -389,7 +383,7 @@
                                 </div>
                                 <div class="mb-md-4">
                                     <div class="border-bottom fs-16px">
-                                        <span>Booking</span>
+                                        <span>{{ __('home.Booking') }}</span>
                                     </div>
                                     <div class="mt-md-3">
 
@@ -420,70 +414,70 @@
                                     </div>
                                 </div>
                                 <div class="border-bottom fs-16px mb-md-3">
-                                    <span>Main service</span>
+                                    <span>{{ __('home.Main service') }}</span>
                                 </div>
                                 <div
                                     class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
                                     <div class="fs-14 font-weight-600">
-                                        <span>Botox, filler consultation and reservation</span>
+                                        <span>{{ __('home.Botox, filler consultation and reservation') }}</span>
                                     </div>
                                     <div class="checkbox-button">
                                         <input type="checkbox" id="myCheckbox1" value="1" name="service[]">
-                                        <label for="myCheckbox1">Booking</label>
+                                        <label for="myCheckbox1">{{ __('home.Booking') }}</label>
                                     </div>
                                 </div>
                                 <div
                                     class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
                                     <div class="fs-14 font-weight-600">
-                                        <span>Botox, filler consultation and reservation</span>
+                                        <span>{{ __('home.Botox, filler consultation and reservation') }}</span>
                                     </div>
                                     <div class="checkbox-button">
                                         <input type="checkbox" id="myCheckbox2" value="2" name="service[]">
-                                        <label for="myCheckbox2">Booking</label>
+                                        <label for="myCheckbox2">{{ __('home.Booking') }}</label>
                                     </div>
                                 </div>
                                 <div
                                     class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
                                     <div class="fs-14 font-weight-600">
-                                        <span>Botox, filler consultation and reservation</span>
+                                        <span>{{ __('home.Botox, filler consultation and reservation') }}</span>
                                     </div>
                                     <div class="checkbox-button">
                                         <input type="checkbox" id="myCheckbox3" value="3" name="service[]">
-                                        <label for="myCheckbox3">Booking</label>
+                                        <label for="myCheckbox3">{{ __('home.Booking') }}</label>
                                     </div>
                                 </div>
                                 <div
                                     class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
                                     <div class="fs-14 font-weight-600">
-                                        <span>Botox, filler consultation and reservation</span>
+                                        <span>{{ __('home.Botox, filler consultation and reservation') }}</span>
                                     </div>
                                     <div class="checkbox-button">
                                         <input type="checkbox" id="myCheckbox4" value="4" name="service[]">
-                                        <label for="myCheckbox4">Booking</label>
+                                        <label for="myCheckbox4">{{ __('home.Booking') }}</label>
                                     </div>
                                 </div>
                                 <div
                                     class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
                                     <div class="fs-14 font-weight-600">
-                                        <span>Botox, filler consultation and reservation</span>
+                                       <span>{{ __('home.Botox, filler consultation and reservation') }}</span>
                                     </div>
                                     <div class="checkbox-button">
                                         <input type="checkbox" id="myCheckbox5" value="5" name="service[]">
-                                        <label for="myCheckbox5">Booking</label>
+                                        <label for="myCheckbox5">{{ __('home.Booking') }}</label>
                                     </div>
                                 </div>
                                 <div
                                     class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
                                     <div class="fs-14 font-weight-600">
-                                        <span>Botox, filler consultation and reservation</span>
+                                        <span>{{ __('home.Botox, filler consultation and reservation') }}</span>
                                     </div>
                                     <div class="checkbox-button">
                                         <input type="checkbox" id="myCheckbox6" value="6" name="service[]">
-                                        <label for="myCheckbox6">Booking</label>
+                                        <label for="myCheckbox6">{{ __('home.Booking') }}</label>
                                     </div>
                                 </div>
                                 <div class="border-bottom mt-md-4 fs-16px mb-md-3">
-                                    <span>Information</span>
+                                    <span>{{ __('home.Information') }}</span>
                                 </div>
                                 <div class="fs-14 font-weight-600">
                                     <span>

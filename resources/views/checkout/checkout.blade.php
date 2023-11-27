@@ -99,34 +99,34 @@
                         <div class="list-title">
                             <div class="list--doctor p-0">
                                 <a class="back" href="{{route('home')}}"><p><i
-                                            class="bi bi-arrow-left"></i><b>Payment</b>
+                                            class="bi bi-arrow-left"></i><b>{{ __('home.Payment') }}</b>
                                     </p></a>
                             </div>
                         </div>
                     </div>
                     <div class=m-auto">
                         <div class="form-group">
-                            <label class="label-input" for="full_name">Full Name <span
+                            <label class="label-input" for="full_name">{{ __('home.Full Name') }} <span
                                     class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="full_name" id="full_name"
                                    placeholder="Tech Jock"
                                    value="{{ \Illuminate\Support\Facades\Auth::user()->name }}" required>
                         </div>
                         <div class="form-group">
-                            <label class="label-input" for="email">Email <span class="text-danger">*</span></label>
+                            <label class="label-input" for="email">{{ __('home.Email') }} <span class="text-danger">*</span></label>
                             <input type="email" class="form-control" name="email" id="email"
                                    placeholder="your-email@example.com"
                                    value="{{ \Illuminate\Support\Facades\Auth::user()->email }}" required>
                         </div>
                         <div class="form-group">
-                            <label class="label-input" for="phone_number">Phone Number
+                            <label class="label-input" for="phone_number">{{ __('home.PhoneNumber') }}
                                 <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="phone" id="phone_number"
                                    placeholder="0989889889"
                                    value="{{ \Illuminate\Support\Facades\Auth::user()->phone }}" required>
                         </div>
                         <div class="form-group">
-                            <label class="label-input" for="address_detail">Address<span
+                            <label class="label-input" for="address_detail">{{ __('home.Address') }}<span
                                     class="text-danger">*</span></label>
                             <div class="row">
                                 <div class="col-md-6">
@@ -152,15 +152,15 @@
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="text-weight ">
-                                Set as default address
+                                {{ __('home.Set as default address') }}
                             </div>
                             <div class="show-check-address ">
                                 <input type="checkbox" class="inputCheckAddress" id="switch"/>
-                                <label class="labelCheckAddress" for="switch">Toggle</label>
+                                <label class="labelCheckAddress" for="switch">{{ __('home.Toggle') }}</label>
                             </div>
                         </div>
                         <div class="more-method mt-3">
-                            <p class="text-select-method">Select Package</p>
+                            <p class="text-select-method">{{ __('home.Select Package') }}</p>
                             <div class="list-method">
                                 <div class="method-detail d-flex justify-content-between align-items-center method-cod">
                                     <label for="cod">
@@ -192,7 +192,7 @@
                                     <label for="vn_pay">
                                         <img src="{{ asset('/img/icon/vnpay-icon.png') }}" alt=""
                                              style="width: 24px; height: 19px">
-                                        <span>Ví VNPAY</span>
+                                        <span>{{ __('home.Ví VNPAY') }}</span>
                                     </label>
                                     <input type="radio" id="vn_pay" name="method" value="vn_pay">
                                 </div>
@@ -300,28 +300,28 @@
                         @endforeach
                         <div class="mt-3 normal">
                             <div class="d-flex justify-content-between align-items-center">
-                                <p class="text-price">Total fee:</p>
+                                <p class="text-price">{{ __('home.Total fee') }}:</p>
                                 <p class="value-price">
                                     <span id="total_fee">599,000</span>
                                     <span class="unit_price_product">VND</span>
                                 </p>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
-                                <p class="text-price">Discount fee:</p>
+                                <p class="text-price">{{ __('home.Discount fee') }}:</p>
                                 <p class="value-price">
                                     <span id="discount_fee">0</span>
                                     <span class="unit_price_product">VND</span>
                                 </p>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
-                                <p class="text-price">Shipping fee:</p>
+                                <p class="text-price">{{ __('home.Shipping fee') }}:</p>
                                 <p class="value-price">
                                     <span id="shipping_fee">0</span>
                                     <span class="unit_price_product">VND</span>
                                 </p>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
-                                <p class="total-price">Order total:</p>
+                                <p class="total-price">{{ __('home.Order total') }}:</p>
                                 <p class="total-price value-total-price">
                                     <span id="total_order">599,000</span>
                                     <span class="unit_price_product">VND</span>
@@ -342,13 +342,13 @@
                         <div class="mt-5">
                             <button id="btnOrder" type="button" class="btn w-100 p-2"
                                     style="background-color: #45C3D2; color: #fff">
-                                Order
+                                {{ __('home.Order') }}
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <button class="d-none" type="submit" id="realBtnOrder">Order</button>
+            <button class="d-none" type="submit" id="realBtnOrder">{{ __('home.Order') }}</button>
         </form>
     </div>
     <script>

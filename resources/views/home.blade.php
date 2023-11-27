@@ -79,22 +79,22 @@
             <div class="section1-main d-flex">
                 <div class="section1__item order-1">
                     <div class="section1-label position-relative">
-                        <h3 class="py-3 text-center">WHAT’S FREE?</h3>
-                        <a href="#"><p class="section1_link">See all</p></a>
+                        <h3 class="py-3 text-center">{{ __('home.WHAT’S FREE') }}?</h3>
+                        <a href="#"><p class="section1_link">{{ __('home.See all') }}</p></a>
                     </div>
                     <div class="d-flex">
                         <ul class="nav nav-pills nav-fill d-flex justify-content-between w-100">
                             <li class="nav-item">
                                 <a class="nav-link active font-14-mobi" id="home-tab" data-toggle="tab" href="#home"
-                                   role="tab" aria-controls="home" aria-selected="true">Free today</a>
+                                   role="tab" aria-controls="home" aria-selected="true">{{ __('home.Free today') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link font-14-mobi" id="profile-tab" data-toggle="tab" href="#profile"
-                                   role="tab" aria-controls="profile" aria-selected="false">Free with mission</a>
+                                   role="tab" aria-controls="profile" aria-selected="false">{{ __('home.Free with mission') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link font-14-mobi" id="contact-tab" data-toggle="tab" href="#contact"
-                                   role="tab" aria-controls="home" aria-selected="true">Discounted service</a>
+                                   role="tab" aria-controls="home" aria-selected="true">{{ __('home.Discounted service') }}</a>
                             </li>
                         </ul>
                     </div>
@@ -118,7 +118,7 @@
                                                     <div class="content__item__describe">
                                                         {!! $coupon->short_description !!}
                                                     </div>
-                                                    <p class="content__item-link">Read</p>
+                                                    <p class="content__item-link">{{ __('home.Read') }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -138,15 +138,12 @@
                                         />
                                         <div>
                                             <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
+                                                {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                                             </h6>
                                             <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
+                                                {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
                                             </div>
-                                            <p class="content__item-link">Read</p>
+                                            <p class="content__item-link">{{ __('home.Read') }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -159,15 +156,12 @@
                                         />
                                         <div>
                                             <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
+                                                {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                                             </h6>
                                             <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
+                                                {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
                                             </div>
-                                            <p class="content__item-link">Read</p>
+                                            <p class="content__item-link">{{ __('home.Read') }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -180,15 +174,12 @@
                                         />
                                         <div>
                                             <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
+                                                {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                                             </h6>
                                             <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
+                                                {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
                                             </div>
-                                            <p class="content__item-link">Read</p>
+                                            <p class="content__item-link">{{ __('home.Read') }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -201,15 +192,12 @@
                                         />
                                         <div>
                                             <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
+                                                {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                                             </h6>
                                             <div class="content__item__describe">
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
+                                                {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
                                             </div>
-                                            <p class="content__item-link">Read</p>
+                                            <p class="content__item-link">{{ __('home.Read') }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -227,15 +215,12 @@
                                         />
                                         <div>
                                             <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
+                                                {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                                             </h6>
                                             <p>
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
+                                                {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
                                             </p>
-                                            <p class="content__item-link">Read</p>
+                                            <p class="content__item-link">{{ __('home.Read') }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -248,15 +233,12 @@
                                         />
                                         <div>
                                             <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
+                                                {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                                             </h6>
                                             <p>
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
+                                                {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
                                             </p>
-                                            <p class="content__item-link">Read</p>
+                                            <p class="content__item-link">{{ __('home.Read') }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -269,15 +251,12 @@
                                         />
                                         <div>
                                             <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
+                                                {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                                             </h6>
                                             <p>
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
+                                                {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
                                             </p>
-                                            <p class="content__item-link">Read</p>
+                                            <p class="content__item-link">{{ __('home.Read') }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -290,15 +269,12 @@
                                         />
                                         <div>
                                             <h6>
-                                                Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                                khám Med247
+                                                {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                                             </h6>
                                             <p>
-                                                Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                                kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                                đầy. Dù đã có ...
+                                                {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
                                             </p>
-                                            <p class="content__item-link">Read</p>
+                                            <p class="content__item-link">{{ __('home.Read') }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -308,18 +284,18 @@
                 </div>
                 <div class="section1__item order-1">
                     <div class="section1-label position-relative">
-                        <h3 class="py-3 text-center">News / Events</h3>
-                        <a href="#"><p class="section1_link">See all</p></a>
+                        <h3 class="py-3 text-center">{{ __('home.News / Events') }}</h3>
+                        <a href="#"><p class="section1_link">{{ __('home.See all') }}</p></a>
                     </div>
                     <div class="d-flex col-md-6 p-0">
                         <ul class="nav nav-pills nav-fill d-flex w-100">
                             <li class="nav-item col-md-6 justify-content-center p-0">
                                 <a class="nav-link active font-14-mobi" id="News-tab" data-toggle="tab" href="#News"
-                                   role="tab" aria-controls="home" aria-selected="true">News</a>
+                                   role="tab" aria-controls="home" aria-selected="true">{{ __('home.News') }}</a>
                             </li>
                             <li class="nav-item col-md-6 justify-content-center">
                                 <a class="nav-link font-14-mobi" id="review-tab" data-toggle="tab" href="#review"
-                                   role="tab" aria-controls="profile" aria-selected="false">Event</a>
+                                   role="tab" aria-controls="profile" aria-selected="false">{{ __('home.Event') }}</a>
                             </li>
                         </ul>
                     </div>
@@ -348,7 +324,7 @@
                                                     <div class="content__item__describe">
                                                         {!!   $news->short_description  !!}
                                                     </div>
-                                                    <p class="content__item-link">Read</p>
+                                                    <p class="content__item-link">{{ __('home.Read') }}</p>
                                                 </div>
                                             </div>
                                         </a>
@@ -380,7 +356,7 @@
                                                     <div class="content__item__describe">
                                                         {!!   $event->short_description  !!}
                                                     </div>
-                                                    <p class="content__item-link">Read</p>
+                                                    <p class="content__item-link">{{ __('home.Read') }}</p>
                                                 </div>
                                             </div>
                                         </a>
@@ -409,8 +385,8 @@
     <div id="map-location" class="d-flex justify-content-center">
         <div class="content-item  justify-content-center">
             <div class="title-clinics">
-                <h2>Clinics/Pharmacies</h2>
-                <p>Find your suitable clinics/pharmacies and book now!</p>
+                <h2>{{ __('home.Clinics/Pharmacies') }}</h2>
+                <p>{{ __('home.Find your suitable clinics/pharmacies and book now') }}!</p>
             </div>
             <div class="d-flex">
                 <div id="allAddressesMap" class="p-2 w-100">
@@ -418,36 +394,36 @@
                 </div>
                 <div id="describe" class="p-2">
                     <div class="describe-item">
-                        <h3>24/7 AVAILABLE</h3>
-                        <p>You can find available clinics/pharmacies</p>
+                        <h3>{{ __('home.24/7 AVAILABLE') }}</h3>
+                        <p>{{ __('home.You can find available clinics/pharmacies') }}</p>
                     </div>
                     <div class="describe-item" hidden="">
-                        <h3>HOME CARE SERVICE</h3>
-                        <p>Don't come to us! We will come to you!</p>
+                        <h3>{{ __('home.HOME CARE SERVICE') }}</h3>
+                        <p>{{ __("home.Don't come to us! We will come to you") }}!</p>
                     </div>
                     <div class="describe-item">
-                        <h3>MANY LOCATION</h3>
-                        <p>More than 1500 Doctors, 1000 Pharmacists, 1000 Hospitals always wait for you</p>
+                        <h3>{{ __('home.MANY LOCATION') }}</h3>
+                        <p>{{ __('home.More than 1500 Doctors, 1000 Pharmacists, 1000 Hospitals always wait for you') }}</p>
                     </div>
-                    <button class="btn-visit mt-45">Visit</button>
+                    <button class="btn-visit mt-45">{{ __('home.Visit') }}</button>
                 </div>
             </div>
 
         </div>
     </div>
     <div id="doctor-information" style="padding-top: 15px">
-        <h1>Find a doctor</h1>
+        <h1>{{ __('home.Find a doctor') }}</h1>
         <div id="list-option" class="d-flex justify-content-around ">
             <div class="option-menu d-flex justify-content-center">
                 <ul class="nav nav-pills nav-fill">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">24/7 Available</a>
+                        <a class="nav-link active" aria-current="page" href="#">{{ __('home.24/7 AVAILABLE') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Find my medicine</a>
+                        <a class="nav-link" href="#">{{ __('home.Find my medicine') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Mentoring</a>
+                        <a class="nav-link" href="#">{{ __('home.Mentoring') }}</a>
                     </li>
                 </ul>
             </div>
@@ -466,9 +442,9 @@
                             <div class="d-content">
                                     <div class="fs-18px">{{$doctor->name}}</div>
                                 <div class="respiratory">{!! $doctor->service !!}</div>
-                                <div class="d-flex  location-doc">Location: <p class="fs-16px">{{$doctor->name}}</p>
+                                <div class="d-flex  location-doc">{{ __('home.Location') }}: <p class="fs-16px">{{$doctor->name}}</p>
                                 </div>
-                                <div class="d-flex  location-doc">Working time:<p
+                                <div class="d-flex  location-doc">{{ __('home.Working time') }}:<p
                                         class="fs-16px">{{$doctor->time_working_1}}</p></div>
                             </div>
                         </div>
@@ -480,13 +456,13 @@
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <li class="page-item disabled">
-                    <a class="page-link">Previous</a>
+                    <a class="page-link">{{ __('home.Previous') }}</a>
                 </li>
                 <li class="page-item"><a class="page-link" href="#">1</a></li>
                 <li class="page-item"><a class="page-link" href="#">2</a></li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
+                    <a class="page-link" href="#">{{ __('home.Next') }}</a>
                 </li>
             </ul>
         </nav>
@@ -497,8 +473,8 @@
     <div id="recruitment_board" class="d-flex justify-content-center">
         <div id="content-bkg" class="content-item d-flex justify-content-center ">
             <div id="recruitment" class="p-2 w-100">
-                <h2>Recruitment</h2>
-                <p>Hire staffs cheaper, find your staffs faster</p>
+                <h2>{{ __('home.Recruitment') }}</h2>
+                <p>{{ __('home.Hire staffs cheaper, find your staffs faster') }}</p>
                 <div>
                     <div class="section1-content">
                         <div class="item-bkg">
@@ -510,15 +486,12 @@
                                 />
                                 <div>
                                     <h6>
-                                        Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                        khám Med247
+                                        {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                                     </h6>
                                     <div class="content__item__describe">
-                                        Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                        kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                        đầy. Dù đã có ...
+                                        {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
                                     </div>
-                                    <p class="content__item-link">Read</p>
+                                    <p class="content__item-link">{{ __('home.Read') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -531,15 +504,12 @@
                                 />
                                 <div>
                                     <h6>
-                                        Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                        khám Med247
+                                        {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                                     </h6>
                                     <div class="content__item__describe">
-                                        Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                        kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                        đầy. Dù đã có ...
+                                        {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
                                     </div>
-                                    <p class="content__item-link">Read</p>
+                                    <p class="content__item-link">{{ __('home.Read') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -552,15 +522,12 @@
                                 />
                                 <div>
                                     <h6>
-                                        Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                        khám Med247
+                                        {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                                     </h6>
                                     <div class="content__item__describe">
-                                        Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                        kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                        đầy. Dù đã có ...
+                                        {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
                                     </div>
-                                    <p class="content__item-link">Read</p>
+                                    <p class="content__item-link">{{ __('home.Read') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -573,15 +540,12 @@
                                 />
                                 <div>
                                     <h6>
-                                        Nhận liền tay voucher khám online trị giá 250k từ Phòng
-                                        khám Med247
+                                        {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                                     </h6>
                                     <div class="content__item__describe">
-                                        Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý
-                                        kiến về một cô gái bị mù mắt sau khi được tiêm chất làm
-                                        đầy. Dù đã có ...
+                                        {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
                                     </div>
-                                    <p class="content__item-link">Read</p>
+                                    <p class="content__item-link">{{ __('home.Read') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -591,20 +555,20 @@
             <div id="describe" class="d-flex align-items-center flex-column mb-3">
                 <div class="p-5 w-100">
                     <div class="describe-item">
-                        <h3>24/7 AVAILABLE</h3>
-                        <p>You can find available clinics/pharmacies</p>
+                        <h3>{{ __('home.24/7 AVAILABLE') }}</h3>
+                        <p>{{ __('home.You can find available clinics/pharmacies') }}</p>
                     </div>
                     <div class="describe-item" hidden="">
-                        <h3>HOME CARE SERVICE</h3>
-                        <p>Don't come to us! We will come to you!</p>
+                        <h3>{{ __('home.HOME CARE SERVICE') }}</h3>
+                        <p>{{ __("home.Don't come to us! We will come to you") }}!</p>
                     </div>
                     <div class="describe-item">
-                        <h3>MANY LOCATION</h3>
-                        <p>More than 1500 Doctors, 1000 Pharmacists, 1000 Hospitals always wait for you</p>
+                        <h3>{{ __('home.MANY LOCATION') }}</h3>
+                        <p>{{ __('home.More than 1500 Doctors, 1000 Pharmacists, 1000 Hospitals always wait for you') }}</p>
                     </div>
                 </div>
                 <div class="mt-auto p-2">
-                    <button class="btn-see-all ">See all</button>
+                    <button class="btn-see-all ">{{ __('home.See all') }}</button>
                 </div>
             </div>
         </div>
@@ -615,8 +579,8 @@
     <div id="flea_market_board" class="d-flex justify-content-center">
         <div id="content-bkg" class="col-10 content-item d-flex justify-content-center ">
             <div id="flea-market" class="col-8 p-2 w-100">
-                <h2>Flea market</h2>
-                <p>Hire staffs cheaper, find your staffs faster</p>
+                <h2>{{ __('home.Flea market') }}</h2>
+                <p>{{ __('home.Hire staffs cheaper, find your staffs faster') }}</p>
                 <div class="section1-content">
 
                     <div class="row">
@@ -649,20 +613,20 @@
             <div id="describe" class="d-flex align-items-center flex-column mb-3">
                 <div class="p-5 w-100">
                     <div class="describe-item">
-                        <h3>24/7 AVAILABLE</h3>
-                        <p>You can find available clinics/pharmacies</p>
+                        <h3>{{ __('home.24/7 AVAILABLE') }}</h3>
+                        <p>{{ __('home.You can find available clinics/pharmacies') }}</p>
                     </div>
                     <div class="describe-item" hidden="">
-                        <h3>HOME CARE SERVICE</h3>
-                        <p>Don't come to us! We will come to you!</p>
+                        <h3>{{ __('home.HOME CARE SERVICE') }}</h3>
+                        <p>{{ __("home.Don't come to us! We will come to you") }}!</p>
                     </div>
                     <div class="describe-item">
-                        <h3>MANY LOCATION</h3>
-                        <p>More than 1500 Doctors, 1000 Pharmacists, 1000 Hospitals always wait for you</p>
+                        <h3>{{ __('home.MANY LOCATION') }}</h3>
+                        <p>{{ __('home.More than 1500 Doctors, 1000 Pharmacists, 1000 Hospitals always wait for you') }}</p>
                     </div>
                 </div>
                 <div class="mt-auto p-2">
-                    <button class="btn-see-all ">See all</button>
+                    <button class="btn-see-all ">{{ __('home.See all') }}</button>
                 </div>
             </div>
         </div>
@@ -671,79 +635,104 @@
         <img src="{{asset('img/Rectangle 23815.png')}}" alt="">
     </div>
     <div id="item-information" style="padding-top: 15px; margin-top: 20px">
-        <h1>Buy online</h1>
-        <p>Don't struggle finding, we are always ready for you</p>
+        <h1>{{ __('home.Buy online') }}</h1>
+        <p>{{ __("home.Don't struggle finding, we are always ready for you") }}</p>
         <div id="list-option" style="padding-top: 15px" class="d-flex justify-content-around ">
             <div class="option-menu d-flex justify-content-center">
                 <ul class="nav nav-pills nav-fill">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Popular</a>
+                        <a class="nav-link active" aria-current="page" href="#">{{ __('home.Popular') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Recommended</a>
+                        <a class="nav-link" href="#">{{ __('home.Recommended') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">New product</a>
+                        <a class="nav-link" href="#">{{ __('home.New product') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Hot deal</a>
+                        <a class="nav-link" href="#">{{ __('home.Hot deal') }}</a>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <div id="list-item" class="d-flex justify-content-center container">
+
+
+
+
+
+        <div class="container">
+        <div id="list-item" class="d-flex row">
+            <div class="col-md-3 mt-3">
             <div class="card" style="width: 237px; height: 361px">
                 <i class="bi bi-heart"></i>
                 <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
                      height="237px">
                 <div class="card-body">
-                    <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                    <p class="card-text">Location: <b>Hanoi</b></p>
+                    <h5 class="card-title">{{ __('home.Máy tạo oxy 5 lít Reiwa K5BW') }}</h5>
+                    <p class="card-text">{{ __('home.Location') }}: <b>Hanoi</b></p>
                     <h4>599.000</h4>
                 </div>
             </div>
-            <div class="card" style="width: 237px; height: 361px">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
-                     height="237px">
-                <div class="card-body">
-                    <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                    <p class="card-text">Location: <b>Hanoi</b></p>
-                    <h4>599.000</h4>
+            </div>
+            <div class="col-md-3 mt-3">
+                <div class="card" style="width: 237px; height: 361px">
+                    <i class="bi bi-heart"></i>
+                    <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
+                         height="237px">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ __('home.Máy tạo oxy 5 lít Reiwa K5BW') }}</h5>
+                        <p class="card-text">{{ __('home.Location') }}: <b>Hanoi</b></p>
+                        <h4>599.000</h4>
+                    </div>
                 </div>
             </div>
-            <div class="card" style="width: 237px; height: 361px">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
-                     height="237px">
-                <div class="card-body">
-                    <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                    <p class="card-text">Location: <b>Hanoi</b></p>
-                    <h4>599.000</h4>
+            <div class="col-md-3 mt-3">
+                <div class="card" style="width: 237px; height: 361px">
+                    <i class="bi bi-heart"></i>
+                    <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
+                         height="237px">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ __('home.Máy tạo oxy 5 lít Reiwa K5BW') }}</h5>
+                        <p class="card-text">{{ __('home.Location') }}: <b>Hanoi</b></p>
+                        <h4>599.000</h4>
+                    </div>
                 </div>
             </div>
-            <div class="card" style="width: 237px; height: 361px">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
-                     height="237px">
-                <div class="card-body">
-                    <h5 class="card-title">Máy tạo oxy 5 lít Reiwa K5BW</h5>
-                    <p class="card-text">Location: <b>Hanoi</b></p>
-                    <h4>599.000</h4>
+            <div class="col-md-3 mt-3">
+                <div class="card" style="width: 237px; height: 361px">
+                    <i class="bi bi-heart"></i>
+                    <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
+                         height="237px">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ __('home.Máy tạo oxy 5 lít Reiwa K5BW') }}</h5>
+                        <p class="card-text">{{ __('home.Location') }}: <b>Hanoi</b></p>
+                        <h4>599.000</h4>
+                    </div>
                 </div>
             </div>
         </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
                 <li class="page-item disabled">
-                    <a class="page-link">Previous</a>
+                    <a class="page-link">{{ __('home.Previous') }}</a>
                 </li>
                 <li class="page-item"><a class="page-link" href="#">1</a></li>
                 <li class="page-item"><a class="page-link" href="#">2</a></li>
                 <li class="page-item"><a class="page-link" href="#">3</a></li>
                 <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
+                    <a class="page-link" href="#">{{ __('home.Next') }}</a>
                 </li>
             </ul>
         </nav>
@@ -843,7 +832,7 @@
                         <div class="d-flex justify-content-between mt-md-2">
                             <div class="fs-18px">${location.name}</div>
                             <div class="button-follow fs-12p ">
-                                <a class="text-follow-12" href="">FOLLOW</a>
+                                <a class="text-follow-12" href="">{{ __('home.FOLLOW<') }}/a>
                             </div>
                         </div>
                         <div class="d-flex mt-md-2">
@@ -852,7 +841,7 @@
                                     <div class="justify-content-center d-flex">
                                         <i class="border-button-address fa-solid fa-bullseye"></i>
                                     </div>
-                                    <div class="d-flex justify-content-center">Start</div>
+                                    <div class="d-flex justify-content-center">{{ __('home.Start') }}</div>
                                 </a>
                             </div>
                             <div class="d-flex col-md-6 justify-content-center align-items-center">
@@ -860,14 +849,14 @@
                                     <div class="justify-content-center d-flex">
                                         <i class="border-button-address fa-regular fa-circle-right"></i>
                                     </div>
-                                    <div class="d-flex justify-content-center">Direction</div>
+                                    <div class="d-flex justify-content-center">{{ __('home.Direction') }}</div>
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div class="mt-md-3 mb-md-3">
                     <a class="w-100 btn btn-secondary border-button-address font-weight-800 fs-14 justify-content-center" href="${urlDetail}" >
-                    Booking
+                    {{ __('home.Booking') }}
                     </a>
                     </div>
                     <div class="border-top">
@@ -908,10 +897,7 @@
                                 </div>
                                 <div class="content">
                                     <p>
-                                        Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại
-                                        salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi
-                                        như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới
-                                        thiệu cho bạn bè cùng sử dụng :D
+                                        {{ __('home.Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho bạn bè cùng sử dụng') }}
                                     </p>
                                 </div>
                             </div>
@@ -931,10 +917,7 @@
                             </div>
                             <div class="content">
                                 <p>
-                                    Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại
-                                    salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như
-                                    mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho
-                                    bạn bè cùng sử dụng :D
+                                    {{ __('home.Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho bạn bè cùng sử dụng') }}
                                 </p>
                             </div>
                         </div>
