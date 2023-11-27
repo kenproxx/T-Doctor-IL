@@ -25,7 +25,7 @@ class SettingController extends Controller
      */
     public function createView()
     {
-        return view('admin.general-config.tab-create-setting');
+        return view('admin.setting-config.tab-create-setting');
     }
     public function create(Request $request)
     {
@@ -131,7 +131,7 @@ class SettingController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin.general-config.tab-edit-settings');
+        return view('admin.setting-config.tab-edit-settings');
     }
 
     /**

@@ -1,7 +1,7 @@
 @extends('layouts.admin')
-
+@section('title', 'General configuration')
 @section('main-content')
-    <h1 class="h3 mb-4 text-gray-800">Cấu hình chung</h1>
+    <h1 class="h3 mb-4 text-gray-800">General configuration</h1>
     @if(!$settingConfig)
         <form id="form" action="{{route('api.backend.setting.create')}}" method="post" enctype="multipart/form-data">
             @csrf

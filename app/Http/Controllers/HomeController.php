@@ -82,7 +82,7 @@ class HomeController extends Controller
     public function listConfig()
     {
         $settingConfig = Setting::where('status', SettingStatus::ACTIVE)->first();
-        return view('admin.general-config.list-config', compact('settingConfig'));
+        return view('admin.setting-config.list-config', compact('settingConfig'));
     }
 
     public function listBooking()
