@@ -16,6 +16,7 @@ use App\Http\Controllers\DoctorInfoController;
 use App\Http\Controllers\ExaminationController;
 use App\Http\Controllers\FleaMarketController;
 use App\Http\Controllers\frontend\HomeController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\NewEventController;
 use App\Http\Controllers\ProductInfoController;
@@ -38,10 +39,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/lang/en', function ($locale) {
-    session()->put('locale', 'en');
-    return redirect()->back();
-})->name('language');
+Route::get('/lang/{locale}', [MainController::class, 'setLanguage'])->name('language');
 
 Route::get('/', 'HomeController@index')->name('home');
 
