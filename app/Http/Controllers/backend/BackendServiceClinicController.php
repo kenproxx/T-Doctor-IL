@@ -13,7 +13,7 @@ class BackendServiceClinicController extends Controller
      */
     public function index()
     {
-        $serviceClinics = ServiceClinic::all();
+        $serviceClinics = ServiceClinic::paginate(10);
         return view('admin.service_of_clinic_pharmacy.index', compact('serviceClinics'));
     }
 

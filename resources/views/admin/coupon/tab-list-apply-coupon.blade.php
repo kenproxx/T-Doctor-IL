@@ -1,7 +1,7 @@
 @php use App\Models\Coupon; @endphp
 @php use App\Enums\CouponApplyStatus; @endphp
 @extends('layouts.admin')
-
+@section('title', 'List Coupon')
 @section('main-content')
     <style>
 

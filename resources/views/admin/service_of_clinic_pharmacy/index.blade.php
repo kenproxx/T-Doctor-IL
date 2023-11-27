@@ -42,6 +42,9 @@
 
         </tbody>
     </table>
+    <div class="align-items-center justify-content-center d-flex">
+        {{$serviceClinics->links()}}
+    </div>
     <script>
         const token = `{{ $_COOKIE['accessToken'] ?? ''}}`;
 

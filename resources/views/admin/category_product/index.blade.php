@@ -21,8 +21,8 @@
         <tr>
             <th scope="col">STT</th>
             <th scope="col">Tên cate</th>
-            <th scope="col">trạng thái</th>
-            <th scope="col">thao tác</th>
+            <th scope="col">Trạng thái</th>
+            <th scope="col">Thao tác</th>
         </tr>
         </thead>
         <tbody>
@@ -43,6 +43,9 @@
 
         </tbody>
     </table>
+    <div class="d-flex justify-content-center align-items-center">
+        {{$categoryProducts->links()}}
+    </div>
     <script>
         const token = `{{ $_COOKIE['accessToken'] ?? ''}}`;
 

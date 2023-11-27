@@ -17,17 +17,17 @@
     <form enctype="multipart/form-data">
         <div class="row">
             <div class="col-sm-4">
-                <label>Title </label>
+                <label for="name">Title </label>
                 <input type="text" class="form-control" id="name" name="name"
                        value="{{ $serviceClinic->name ?? '' }}">
             </div>
             <div class="col-sm-4">
-                <label>Title Anh</label>
+                <label for="name_en">Title Anh</label>
                 <input type="text" class="form-control" id="name_en" name="name_en"
                        value="{{ $serviceClinic->name_en ?? '' }}">
             </div>
             <div class="col-sm-4">
-                <label>Title Lào</label>
+                <label for="name_laos">Title Lào</label>
                 <input type="text" class="form-control" id="name_laos" name="name_laos"
                        value="{{ $serviceClinic->name_laos ?? '' }}">
             </div>

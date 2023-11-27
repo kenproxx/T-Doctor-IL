@@ -8,24 +8,31 @@
                 <input type="text" class="form-control" id="user_id" name="user_id" value="{{ $bookings_edit->user_id}}"></div>
             <div class="col-sm-4"><label for="clinic_id">clinic_id</label>
                 <input type="text" class="form-control" id="clinic_id" name="clinic_id" value="{{ $bookings_edit->clinic_id }}"></div>
-            <div class="col-sm-4"><label>service</label>
-
-                <select class="custom-select" id="service" name="service">
-                    <option value="{{ $bookings_edit->service }}" selected>{{ $bookings_edit->service }}</option>
-                    <option value="1" >dich vu 1</option>
-                    <option value="2" >dich vu 2</option>
-                    <option value="3" >dich vu 3</option>
+            <div class="col-sm-4">
+                <label for="service">Dịch vụ</label>
+                <!-- Dropdown sử dụng Select2 -->
+                <select class="form-control" id="service" name="services[]" multiple>
+                    @foreach($service as $item)
+                        <option value="{{$item->id}}" {{ in_array($item->id, explode(',', $bookings_edit->service)) ? 'selected' : '' }}>
+                            {{$item->name}}</option>
+                    @endforeach
                 </select>
             </div>
+            <script>
+                $(document).ready(function() {
+                    $('#service').select2();
+                });
+            </script>
+
         </div>
         <div class="row">
-            <div class="col-sm-6"><label>Thời gian bắt đầu</label>
+            <div class="col-sm-6"><label for="check_in">Thời gian bắt đầu</label>
                 <input type="datetime-local" class="form-control" id="check_in" name="check_in" value="{{ $bookings_edit->check_in }}"></div>
-            <div class="col-sm-6"><label>Thời gian kết thúc</label>
+            <div class="col-sm-6"><label for="check_out">Thời gian kết thúc</label>
                 <input type="datetime-local" class="form-control" id="check_out" name="check_out" value="{{ $bookings_edit->check_out }}"></div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><label>Trạng thái</label>
+            <div class="col-sm-4"><label for="status">Trạng thái</label>
                 <select class="custom-select" id="status" name="status" {{ !$isAdmin ? 'disabled' : '' }}>
                     <option value="{{ \App\Enums\BookingStatus::PENDING }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::PENDING ? 'selected' : '' }}>
                         {{ \App\Enums\BookingStatus::PENDING }}
@@ -46,3 +53,8 @@
         <button type="submit" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
     </form>
 @endsection
+<script>
+    $(document).ready(function() {
+        $('#service').select2();
+    });
+</script>

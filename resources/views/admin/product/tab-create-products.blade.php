@@ -18,50 +18,50 @@
         <div>
             <div class="row">
                 <div class="col-md-4">
-                    <label>name</label>
+                    <label for="name">name</label>
                     <input type="text" class="form-control" id="name" name="name" value="">
                 </div>
                 <div class="col-md-4">
-                    <label>name_en</label>
+                    <label for="name_en">name_en</label>
                     <input type="text" class="form-control" id="name_en" name="name_en" value="">
                 </div>
                 <div class="col-md-4">
-                    <label>name_laos</label>
+                    <label for="name_laos">name_laos</label>
                     <input type="text" class="form-control" id="name_laos" name="name_laos" value="">
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-sm-4"><label>Mô tả dài việt</label>
+                <div class="col-sm-4"><label for="description">Mô tả dài việt</label>
                     <textarea class="form-control" name="description" id="description"></textarea>
                 </div>
-                <div class="col-sm-4"><label>Mô tả dài anh</label>
+                <div class="col-sm-4"><label for="description_en">Mô tả dài anh</label>
                     <textarea class="form-control" name="description_en" id="description_en"></textarea>
                 </div>
-                <div class="col-sm-4"><label>Mô tả dài lào</label>
+                <div class="col-sm-4"><label for="description_laos">Mô tả dài lào</label>
                     <textarea class="form-control" name="description_laos" id="description_laos"></textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <label>brand_name</label>
+                    <label for="brand_name">brand_name</label>
                     <input type="text" class="form-control" id="brand_name" name="brand_name"
                            value="">
                 </div>
                 <div class="col-md-4">
-                    <label>brand_name_en</label>
+                    <label for="brand_name_en">brand_name_en</label>
                     <input type="text" class="form-control" id="brand_name_en" name="brand_name_en"
                            value="">
                 </div>
                 <div class="col-md-4">
-                    <label>brand_name_laos</label>
+                    <label for="brand_name_laos">brand_name_laos</label>
                     <input type="text" class="form-control" id="brand_name_laos" name="brand_name_laos"
                            value="">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <label>category_id</label>
+                    <label for="category_id">category_id</label>
                     <select class="custom-select" id="category_id" name="category_id">
                         <option value="1">category 1</option>
                         <option value="2">category 2</option>
@@ -91,11 +91,11 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <label>price</label>
+                    <label for="price">price</label>
                     <input type="number" class="form-control" id="price" name="price" value="">
                 </div>
                 <div class="col-md-6">
-                    <label>price_unit</label>
+                    <label for="price_unit">price_unit</label>
                     <input type="text" class="form-control" id="price_unit" name="price_unit"
                            value="VND">
                 </div>
@@ -120,11 +120,11 @@
                 </div>
             </div>
             <div hidden="">
-                <label>status</label>
+                <label for="status">status</label>
                 <input type="text" class="form-control" id="status" name="status" value="">
             </div>
             <div hidden="">
-                <label>User</label>
+                <label for="user_id">User</label>
                 <input type="text" class="form-control" id="user_id" name="user_id" value="{{Auth::user()->id}}">
             </div>
         </div>
@@ -164,7 +164,6 @@
                     file = filedata.files[i];
                     formData.append('gallery[]', file);
                 }
-                const photoGallery = $('#gallery')[0].files;
                 const photo = $('#thumbnail')[0].files[0];
                 formData.append('thumbnail', photo);
                 formData.append('status', 'ACTIVE');

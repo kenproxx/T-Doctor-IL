@@ -49,25 +49,25 @@
         <div>
             <div class="row">
                 <div class="col-md-4">
-                    <label>name</label>
+                    <label for="name">name</label>
                     <input type="text" class="form-control" id="name" name="name" required value="">
                 </div>
                 <div class="col-md-4">
-                    <label>name_en</label>
+                    <label for="name_en">name_en</label>
                     <input type="text" class="form-control" id="name_en" name="name_en" value="">
                 </div>
                 <div class="col-md-4">
-                    <label>name_laos</label>
+                    <label for="name_laos">name_laos</label>
                     <input type="text" class="form-control" id="name_laos" name="name_laos" value="">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <label>phone</label>
+                    <label for="phone">phone</label>
                     <input type="number" class="form-control" id="phone" name="phone" required value="">
                 </div>
                 <div class="col-md-6">
-                    <label>email</label>
+                    <label for="email">email</label>
                     <input type="email" class="form-control" id="email" name="email" required value="">
                 </div>
             </div>
@@ -75,10 +75,10 @@
                 <div class="col-sm-4"><label for="address_detail">địa chỉ chi tiết việt</label>
                     <input type="text" class="form-control" name="address_detail" id="address_detail" value="">
                 </div>
-                <div class="col-sm-4"><label for="address_detail_en">địa chỉ chi tiết anh</label>
+                <div class="col-sm-4"><label for="detail_address_en">địa chỉ chi tiết anh</label>
                     <input type="text" class="form-control" name="address_detail_en" id="detail_address_en" value="">
                 </div>
-                <div class="col-sm-4"><label for="address_detail_laos">địa chỉ chi tiết lào</label>
+                <div class="col-sm-4"><label for="detail_address_laos">địa chỉ chi tiết lào</label>
                     <input type="text" class="form-control" name="address_detail_laos" id="detail_address_laos"
                            value="">
                 </div>

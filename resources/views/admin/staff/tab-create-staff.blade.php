@@ -16,11 +16,11 @@
     <div>
         <form>
             <div>
-                <label>Username</label>
+                <label for="username">Username</label>
                 <input type="text" class="form-control" id="username" name="username">
             </div>
             <div>
-                <label>Member</label>
+                <label for="member">Member</label>
                 <select id="member" name="member" class="form-select form-control">
                     <option value="{{ Role::DOCTORS }}">{{ Role::DOCTORS }}</option>
                     <option value="{{ Role::PHAMACISTS }}">{{ Role::PHAMACISTS }}</option>
@@ -32,20 +32,20 @@
                 </select>
             </div>
             <div>
-                <label>Email</label>
+                <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" name="email">
             </div>
             <div>
-                <label>Password</label>
+                <label for="password">Password</label>
                 <input type="password" class="form-control" id="password" name="password">
             </div>
             <div>
-                <label>Enter the Password</label>
+                <label for="password_confirm">Enter the Password</label>
                 <input type="password" class="form-control" id="password_confirm" name="password_confirm">
             </div>
         </form>
         <div hidden>
-            <input type="text" class="form-control" id="manager_id" name="manager_id" value="{{Auth::user()->id}}">
+            <label for="manager_id"></label><input type="text" class="form-control" id="manager_id" name="manager_id" value="{{Auth::user()->id}}">
         </div>
     </div>
     <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>

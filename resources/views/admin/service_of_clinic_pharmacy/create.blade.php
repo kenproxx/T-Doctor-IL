@@ -1,7 +1,7 @@
 @php use App\Enums\NewEventStatus; @endphp
 @php use App\Enums\NewEventType; @endphp
 @extends('layouts.admin')
-
+@section('title', 'Booking Clinic')
 @section('main-content')
 
     <!-- Page Heading -->
@@ -17,15 +17,15 @@
     <form enctype="multipart/form-data">
         <div class="row">
             <div class="col-sm-4">
-                <label>Tên </label>
+                <label for="name">Tên </label>
                 <input type="text" class="form-control" id="name" name="name">
             </div>
             <div class="col-sm-4">
-                <label>Tên Anh</label>
+                <label for="name_en">Tên Anh</label>
                 <input type="text" class="form-control" id="name_en" name="name_en">
             </div>
             <div class="col-sm-4">
-                <label>Tên Lào</label>
+                <label for="name_laos">Tên Lào</label>
                 <input type="text" class="form-control" id="name_laos" name="name_laos">
             </div>
             <input type="hidden" value="{{ \Illuminate\Support\Facades\Auth::user()->id }}" id="user_id" name="user_id">

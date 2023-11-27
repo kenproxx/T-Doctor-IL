@@ -59,6 +59,9 @@
 
         </tbody>
     </table>
+    <div class="d-flex justify-content-center align-items-center">
+        {{$productMedicines->links()}}
+    </div>
     <script>
         const token = `{{ $_COOKIE['accessToken'] ?? ''}}`;
 

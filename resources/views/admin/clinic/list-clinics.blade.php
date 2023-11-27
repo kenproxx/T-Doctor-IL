@@ -18,5 +18,4 @@
 
     @include('admin.clinic.tab-list-clinics')
 
-
 @endsection

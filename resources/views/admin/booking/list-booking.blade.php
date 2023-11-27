@@ -47,18 +47,18 @@
                             @csrf
                             <button type="submit" class="btn btn-primary">Edit</button>
                         </form>
-                        |
-                        <form action="{{route('api.backend.booking.delete',$item->id)}}" method="post">
+
+                         <form action="{{route('api.backend.booking.delete',$item->id)}}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-primary">Delete</button>
+                            <button type="submit" class="ml-3 btn btn-primary btn-danger">Delete</button>
                         </form></td>
                 </tr>
             @endforeach
-
             </tbody>
         </table>
+        <div class="d-flex justify-content-center align-items-center">
+        {{ $bookings->links() }}
+        </div>
     </div>
-
-
 @endsection

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Enums\BookingStatus;
+use App\Enums\ServiceClinicStatus;
 use App\Models\Booking;
+use App\Models\ServiceClinic;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class BookingController extends Controller
 {
@@ -19,8 +22,9 @@ class BookingController extends Controller
     public function edit($id)
     {
         $bookings_edit = Booking::find($id);
+        $service = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
         $isAdmin = (new MainController())->checkAdmin();
-        return view('admin.booking.tab-edit-booking', compact('bookings_edit', 'isAdmin'));
+        return view('admin.booking.tab-edit-booking', compact('bookings_edit', 'isAdmin','service'));
     }
 
     public function update(Request $request, $id)
@@ -31,7 +35,8 @@ class BookingController extends Controller
             $clinicID = $request->input('clinic_id');
             $checkIn = $request->input('check_in');
             $checkOut = $request->input('check_out');
-            $service = $request->input('service');
+            $servicesArray = $request->input('services');
+            $service = implode(',', $servicesArray);
             $status = $request->input('status');
             if (is_array($service)) {
                 $servicesAsString = implode(',', $service);
@@ -51,7 +56,7 @@ class BookingController extends Controller
             $success = $booking->save();
             if ($success) {
                 alert('Booking success');
-                return back()->with('success', 'Booking success');
+                return Redirect::route('homeAdmin.list.booking')->with('success', 'Booking success');
             }
             return response('Create error', 400);
         } catch (\Exception $exception) {

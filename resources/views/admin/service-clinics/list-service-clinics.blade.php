@@ -3,7 +3,7 @@
     List Service Clinics
 @endsection
 @section('main-content')
-    <div class="container">
+    <div class="">
         <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800">List Service Clinics</h1>
         <a href="{{route('user.service.clinics.create')}}" class="btn btn-primary mb-3">Add</a>

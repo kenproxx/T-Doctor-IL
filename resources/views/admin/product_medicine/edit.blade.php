@@ -145,7 +145,7 @@
                            value="{{ $productMedicine->price ?? '' }}">
                 </div>
                 <div class="col-md-4">
-                    <label>unit_price</label>
+                    <label for="unit_price">unit_price</label>
                     <input type="text" class="form-control" id="unit_price" name="unit_price" value="{{ $productMedicine->unit_price ?? '' }}">
                 </div>
                 <div class="col-md-4">
