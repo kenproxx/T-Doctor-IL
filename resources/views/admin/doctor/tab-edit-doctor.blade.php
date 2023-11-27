@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('title')
+    Edit Doctor
+@endsection
 <style>
     .list-apply {
         list-style-type: none;
@@ -293,7 +296,7 @@
                     "service_price", "service_price_en", "service_price_laos",
                     "detail_address", "detail_address_en", "detail_address_laos",
                     "province_id", "district_id", "commune_id",
-                    "time_working_1", "time_working_2", "hocham_hocvi", "apply_for", "service", "service_en", "service_laos",
+                    "time_working_1", "time_working_2", "hocham_hocvi", "apply_for",
                     "name", "year_of_experience", "status", "department_id", "created_by"
                 ];
                 const fieldTextareaTiny = [
@@ -306,10 +309,10 @@
 
                 /* Temporary don't use tinymce because this was error
                 *  and move the necessary ids(service, service_en, service_laos) to fieldNames array*/
-                // fieldTextareaTiny.forEach(fieldTextarea => {
-                //     const content = tinymce.get(fieldTextarea).getContent();
-                //     formData.append(fieldTextarea, content);
-                // });
+                fieldTextareaTiny.forEach(fieldTextarea => {
+                    const content = tinymce.get(fieldTextarea).getContent();
+                    formData.append(fieldTextarea, content);
+                });
 
                 formData.append("apply_for", $('#apply_for').val());
                 const photo = $('#thumbnail')[0].files[0];
