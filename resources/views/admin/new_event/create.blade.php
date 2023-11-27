@@ -1,7 +1,7 @@
 @php use App\Enums\NewEventStatus; @endphp
 @php use App\Enums\NewEventType; @endphp
 @extends('layouts.admin')
-
+@section('title', 'News Events')
 @section('main-content')
 
     <!-- Page Heading -->
@@ -17,51 +17,51 @@
     <form enctype="multipart/form-data">
         <div class="row">
             <div class="col-sm-4">
-                <label>Title </label>
+                <label for="title">Title </label>
                 <input type="text" class="form-control" id="title" name="title">
             </div>
             <div class="col-sm-4">
-                <label>Title Anh</label>
+                <label for="title_en">Title Anh</label>
                 <input type="text" class="form-control" id="title_en" name="title_en">
             </div>
             <div class="col-sm-4">
-                <label>Title Lào</label>
+                <label for="title_laos">Title Lào</label>
                 <input type="text" class="form-control" id="title_laos" name="title_laos">
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
-                <label>Short Description</label>
+                <label for="short_description">Short Description</label>
                 <textarea type="text" class="form-control" id="short_description" name="short_description"></textarea>
             </div>
             <div class="col-sm-4">
-                <label>Short Description Anh</label>
+                <label for="short_description_en">Short Description Anh</label>
                 <textarea type="text" class="form-control" id="short_description_en"
                           name="short_description_en"></textarea>
             </div>
             <div class="col-sm-4">
-                <label>Short Description Lào</label>
+                <label for="short_description_laos">Short Description Lào</label>
                 <textarea type="text" class="form-control" id="short_description_laos"
                           name="short_description_laos"></textarea>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
-                <label>Description </label>
+                <label for="description">Description </label>
                 <textarea type="text" class="form-control" id="description" name="description"></textarea>
             </div>
             <div class="col-sm-4">
-                <label>Description Anh</label>
+                <label for="description_en">Description Anh</label>
                 <textarea type="text" class="form-control" id="description_en" name="description_en"></textarea>
             </div>
             <div class="col-sm-4">
-                <label>Description Lào</label>
+                <label for="description_laos">Description Lào</label>
                 <textarea type="text" class="form-control" id="description_laos" name="description_laos"></textarea>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
-                <label>Status</label>
+                <label for="status">Status</label>
                 <select class="custom-select" id="status" name="status">
                     <option
                         value="{{ NewEventStatus::ACTIVE }}">{{ NewEventStatus::ACTIVE }}</option>
@@ -70,7 +70,7 @@
                 </select>
             </div>
             <div class="col-sm-4">
-                <label>Loại</label>
+                <label for="type">Loại</label>
                 <select class="custom-select" id="type" name="type">
                     <option
                         value="{{ NewEventType::NEWS }}">{{ NewEventType::NEWS }}</option>

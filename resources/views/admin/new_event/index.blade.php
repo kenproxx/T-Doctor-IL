@@ -1,11 +1,11 @@
 @extends('layouts.admin')
-
+@section('title', 'News Events')
 @section('main-content')
     <style>
 
     </style>
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">List Staff</h1>
+    <h1 class="h3 mb-4 text-gray-800">News Events</h1>
     <a href="{{ route('api.new-event.create') }}" class="btn btn-primary mb-3">Add</a>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
@@ -33,9 +33,9 @@
                 <td>{{ $newEvent->title }}</td>
                 <td>{{ $newEvent->user_id }}</td>
                 <td>{{ $newEvent->status }}</td>
-                <td>
+                <td class="d-flex">
                     <a href="{{ route('api.new-event.edit', ['id' => $newEvent->id]) }}"
-                       class="btn btn-primary">Edit</a>
+                       class="btn btn-primary mr-2">Edit</a>
                     <button type="button" class="btn btn-danger" onclick="deleteNewEvent({{ $newEvent->id }})">Delete
                     </button>
                 </td>
@@ -43,6 +43,9 @@
         @endforeach
         </tbody>
     </table>
+    <div class="d-flex justify-content-center align-items-center">
+        {{$listNewEvent->links()}}
+    </div>
     <script>
         const token = `{{ $_COOKIE['accessToken'] ?? ''}}`;
 
