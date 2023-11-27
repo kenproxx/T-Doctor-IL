@@ -37,7 +37,7 @@
                                         <select class="ac-choose font-16-mobi mt-2" name="category_id checkValid"
                                                 required id="category_id">
                                             @foreach($category as $item)
-                                                    <option value="{{$item->id}}">{{$item->name}}</option>
+                                                <option value="{{$item->id}}">{{$item->name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -194,19 +194,6 @@
         });
     </script>
     <script>
-        document.getElementById('submitButton').addEventListener('click', function () {
-            const inputElements = document.getElementsByClassName('checkValid');
-            for (let i = 0; i < inputElements.length; i++) {
-                const inputElement = inputElements[i];
-                if (!inputElement.checkValidity()) {
-                    alert('Please fill out the required field in element ' + (i + 1));
-                    return;
-                }
-            }
-            alert('Form is valid. Submitting...');
-        });
-    </script>
-    <script>
         const token = `{{ $_COOKIE['accessToken'] }}`;
         let imgGallery = [];
         document.getElementById('gallery').addEventListener('change', function () {
@@ -221,9 +208,6 @@
                 image.src = URL.createObjectURL(file);
                 image.alt = 'Preview Image';
                 image.className = 'img-sell-product col-6 b-radius-8px';
-                // image.className = 'col-6';
-                // image.style.maxHeight = '200px';
-                // image.style.maxWidth = '200px';
                 image.style.paddingBottom = '16px';
                 imagePreviews.appendChild(image);
             }
@@ -264,7 +248,6 @@
                 formData.append("price_unit", 'VND');
                 formData.append("ads_plan", (selectedValueAdd));
                 const fieldTextareaTiny = ["description"];
-                console.log(fieldTextareaTiny)
                 fieldTextareaTiny.forEach(fieldTextarea => {
                     const content = tinymce.get(fieldTextarea).getContent();
                     formData.append(fieldTextarea, content);
@@ -285,21 +268,29 @@
                 formData.append('thumbnail', photo);
                 formData.append('status', 'ACTIVE');
                 try {
-                    $.ajax({
-                        url: `{{route('api.backend.products.create')}}`,
-                        method: 'POST',
-                        headers: headers,
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        data: formData,
-                        success: function (response) {
-                            alert('success');
-                            window.location.reload();
-                        },
-                        error: function (exception) {
+                    if (selectedValueAdd && $('#name').val() && $('#price').val()) {
+                        if (photo) {
+                            $.ajax({
+                                url: `{{route('api.backend.products.create')}}`,
+                                method: 'POST',
+                                headers: headers,
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                data: formData,
+                                success: function (response) {
+                                    alert('success');
+                                    window.location.reload();
+                                },
+                                error: function (exception) {
+                                }
+                            });
+                        } else {
+                            alert('Please enter thumbnail!');
                         }
-                    });
+                    } else {
+                        alert('Please enter input!');
+                    }
                 } catch (error) {
                     throw error;
                 }
