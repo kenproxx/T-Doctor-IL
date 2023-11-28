@@ -3,12 +3,12 @@
         color: red;
     }
 </style>
-<div class="img-union"><img src="{{asset('img/flea-market/platinum.png')}}"></div>
-<div class="page row" id="productsAdsPlan1"></div>
-<div class="img-union "><img src="{{asset('img/flea-market/premium.png')}}"></div>
-<div class="page row" id="productsAdsPlan2"></div>
-<div class="img-union"><img src="{{asset('img/flea-market/silver.png')}}"></div>
-<div class="page row" id="productsAdsPlan3"></div>
+<div class="img-union"><img src="{{asset('img/flea-market/platinum.png')}}" alt=""></div>
+<div class="page d-flex flex-wrap" id="productsAdsPlan1"></div>
+<div class="img-union "><img src="{{asset('img/flea-market/premium.png')}}" alt=""></div>
+<div class="page d-flex flex-wrap" id="productsAdsPlan2"></div>
+<div class="img-union"><img src="{{asset('img/flea-market/silver.png')}}" alt=""></div>
+<div class="page d-flex flex-wrap" id="productsAdsPlan3"></div>
 <script>
     var token = `${getCookie('accessToken')}`;
 
@@ -107,7 +107,7 @@
                 let isFavorite = item.isFavorit ? 'bi-heart-fill' : 'bi-heart';
 
                 var html = `
-                    <div class="col-md-4 col-6 item">
+                    <div class="col-md-3 col-6 item">
                         <div class="product-item">
                             <div class="img-pro">
                                 <img src="${item.thumbnail}" alt="">

@@ -168,23 +168,28 @@
                 <div class="header-right d-flex align-items-center">
                     @if(Auth::check())
                         <div class="dropdown">
-                            <div class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
+                            <div class="d-flex dropdown-toggle justify-content-between" type="button" data-toggle="dropdown"
                                  aria-expanded="false">
-                                {{Auth::user()->username}}
+                                <div class="d-flex align-items-center mr-2">
+                                    {{Auth::user()->username}}
+                                </div>
+                                <img src="{{asset('img/user-circle.png')}}">
                             </div>
                             <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">{{ __('home.Action') }}</a>
-                                <a class="dropdown-item" href="#">{{ __('home.Another action') }}</a>
+                                @if( (new MedicalPermission())->isMedicalPermission())
+                                    <a class="dropdown-item" href="{{ route('homeAdmin') }}">{{ __('home.Dashboar') }}</a>
+                                @else
+                                    <a class="dropdown-item" href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
+                                    <a class="dropdown-item" href="{{route('booking.list.by.user')}}">{{ __('home.My booking') }}</a>
+                                @endif
                                 <a class="dropdown-item" href="{{route('logoutProcess')}}">{{ __('home.Logout') }}</a>
                             </div>
                         </div>
                     @else
-                        <button class="account_control" id="show_login" data-toggle="modal"
-                                data-target="#staticBackdrop">{{ __('home.Log In') }}
+                        <button class="account_control" id="show_login" data-toggle="modal" data-target="#staticBackdrop">{{ __('home.Log In') }}
                         </button>
                         <div>|</div>
-                        <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">
-                            {{ __('home.Sign Up') }}
+                        <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">{{ __('home.Sign Up') }}
                         </button>
                     @endif
                 </div>

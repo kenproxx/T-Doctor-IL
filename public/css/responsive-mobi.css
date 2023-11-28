@@ -221,10 +221,13 @@ img {
   }
   .container .recruitment-details .main {
     padding-left: 0;
+    min-height: 180px;
   }
   .container .recruitment-details .border-radius-1px img {
     width: auto;
     height: auto;
+    max-height: 50px;
+    object-fit: cover;
   }
   .container .mt-110 {
     margin-top: 0;
@@ -287,6 +290,12 @@ img {
   }
   .mb-42 {
     margin-top: 30px;
+  }
+  .main-header {
+    height: 0;
+  }
+  .banner {
+    height: 110px;
   }
 }
 /* END FLEA MARKET */
@@ -362,6 +371,9 @@ img {
   }
   .container .mw-140px {
     max-width: 140px;
+  }
+  .container .item {
+    flex: 0;
   }
   .container .item img {
     width: 100%;

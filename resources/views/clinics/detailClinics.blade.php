@@ -117,7 +117,7 @@
                 Other Clinics/Pharmacies
             </div>
 
-                @include('component.clinic')
+            @include('component.clinic')
 
         </div>
         <div hidden="">
@@ -128,8 +128,12 @@
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAl8bmtXj3F5lPG_mbD5Pj9mGSu2LCzrrE"></script>
     <script>
+        var token = `{{ $_COOKIE['accessToken'] }}`;
+        let accessToken = `Bearer ` + token;
         var locations = {!! json_encode($coordinatesArray) !!};
+        var jsonServices = {!! json_encode($services) !!};
         var infoWindows = [];
+
         function getCurrentLocation(callback) {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
@@ -231,11 +235,11 @@
                         <button id="modalToggle" data-toggle="modal" data-target="#exampleModal"
                                 class="w-100 btn btn-secondary border-button-address font-weight-800 fs-14 justify-content-center"
                                 >{{ __('home.Booking') }}
-                        </button>
-                    </div>
-                    <div class="border-top">
-                        <div class="mt-md-2"><i class="text-gray mr-md-2 fa-solid fa-location-dot"></i>
-                            <span class="fs-14 font-weight-600">{{$bookings->address_detail}}</span>
+                    </button>
+                </div>
+                <div class="border-top">
+                    <div class="mt-md-2"><i class="text-gray mr-md-2 fa-solid fa-location-dot"></i>
+                        <span class="fs-14 font-weight-600">{{$bookings->address_detail}}</span>
                         </div>
                         <div class="mt-md-2">
                             <i class="text-gray mr-md-2 fa-regular fa-clock"></i>
@@ -270,10 +274,10 @@
                                 <div class="content">
                                     <p>
                                         {{ __('home.Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho bạn bè cùng sử dụng') }}
-                                    </p>
-                                </div>
-                            </div>
-                        @endfor
+                    </p>
+                </div>
+            </div>
+@endfor
                     <div class="border-top">
                         <div
                             class="d-flex justify-content-between rv-header align-items-center mt-md-2">
@@ -290,12 +294,12 @@
                             <div class="content">
                                 <p>
                                     {{ __('home.Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho bạn bè cùng sử dụng') }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    </p>
                 </div>
-            </div>`;
+            </div>
+        </div>
+    </div>
+</div>`;
 
                     var infoWindow = new google.maps.InfoWindow({
                         content: infoWindowContent
@@ -371,11 +375,51 @@
                 .catch(error => console.error('Error:', error));
         }
 
-        var html = `<form method="post" action="{{route('clinic.booking.store')}}" class="p-3">
+        readService();
+
+        async function readService() {
+            let url = '{{ route('api.backend.service.clinic.list.clinics', $id) }}';
+            await $.ajax({
+                url: url,
+                method: 'GET',
+                headers: {
+                    "Authorization": accessToken
+                },
+                success: function (response) {
+                    renderService(response);
+                },
+                error: function (exception) {
+                }
+            });
+        }
+
+        function renderService(response) {
+            let services = ``;
+            for (let i = 0; i < response.length; i++) {
+                let data = response[i];
+                services = services + `<div class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
+                                    <div class="fs-14 font-weight-600">
+                                        <span>${data.name}</span>
+                                    </div>
+                                    <div class="checkbox-button">
+                                        <input type="checkbox" id="myCheckbox${data.id}" value="${data.id}" name="service[]">
+                                        <label for="myCheckbox${data.id}">{{ __('home.Booking') }}</label>
+                                    </div>
+                                </div>`;
+            }
+            localStorage.setItem('services', services);
+        }
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '#modalToggle', function () {
+                let service = localStorage.getItem('services');
+                var html = `<form method="post" action="{{route('clinic.booking.store')}}" class="p-3">
             @csrf
-        <div class="fs-18px justify-content-start d-flex mb-md-4 mt-2">
-            <div class="align-items-center">
-            <a href="{{route('clinic.detail',$bookings->id)}}"><i class="fa-solid fa-chevron-left"></i></a>
+                <div class="fs-18px justify-content-start d-flex mb-md-4 mt-2">
+                    <div class="align-items-center">
+                    <a href="{{route('clinic.detail',$bookings->id)}}"><i class="fa-solid fa-chevron-left"></i></a>
                 </div>
                 <div class="ml-2">
                     <span>{{$bookings->name}}</span>
@@ -416,92 +460,27 @@
                                 <div class="border-bottom fs-16px mb-md-3">
                                     <span>{{ __('home.Main service') }}</span>
                                 </div>
-                                <div
-                                    class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
-                                    <div class="fs-14 font-weight-600">
-                                        <span>{{ __('home.Botox, filler consultation and reservation') }}</span>
-                                    </div>
-                                    <div class="checkbox-button">
-                                        <input type="checkbox" id="myCheckbox1" value="1" name="service[]">
-                                        <label for="myCheckbox1">{{ __('home.Booking') }}</label>
-                                    </div>
-                                </div>
-                                <div
-                                    class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
-                                    <div class="fs-14 font-weight-600">
-                                        <span>{{ __('home.Botox, filler consultation and reservation') }}</span>
-                                    </div>
-                                    <div class="checkbox-button">
-                                        <input type="checkbox" id="myCheckbox2" value="2" name="service[]">
-                                        <label for="myCheckbox2">{{ __('home.Booking') }}</label>
-                                    </div>
-                                </div>
-                                <div
-                                    class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
-                                    <div class="fs-14 font-weight-600">
-                                        <span>{{ __('home.Botox, filler consultation and reservation') }}</span>
-                                    </div>
-                                    <div class="checkbox-button">
-                                        <input type="checkbox" id="myCheckbox3" value="3" name="service[]">
-                                        <label for="myCheckbox3">{{ __('home.Booking') }}</label>
-                                    </div>
-                                </div>
-                                <div
-                                    class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
-                                    <div class="fs-14 font-weight-600">
-                                        <span>{{ __('home.Botox, filler consultation and reservation') }}</span>
-                                    </div>
-                                    <div class="checkbox-button">
-                                        <input type="checkbox" id="myCheckbox4" value="4" name="service[]">
-                                        <label for="myCheckbox4">{{ __('home.Booking') }}</label>
-                                    </div>
-                                </div>
-                                <div
-                                    class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
-                                    <div class="fs-14 font-weight-600">
-                                       <span>{{ __('home.Botox, filler consultation and reservation') }}</span>
-                                    </div>
-                                    <div class="checkbox-button">
-                                        <input type="checkbox" id="myCheckbox5" value="5" name="service[]">
-                                        <label for="myCheckbox5">{{ __('home.Booking') }}</label>
-                                    </div>
-                                </div>
-                                <div
-                                    class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
-                                    <div class="fs-14 font-weight-600">
-                                        <span>{{ __('home.Botox, filler consultation and reservation') }}</span>
-                                    </div>
-                                    <div class="checkbox-button">
-                                        <input type="checkbox" id="myCheckbox6" value="6" name="service[]">
-                                        <label for="myCheckbox6">{{ __('home.Booking') }}</label>
-                                    </div>
-                                </div>
+                               ${service}
                                 <div class="border-bottom mt-md-4 fs-16px mb-md-3">
                                     <span>{{ __('home.Information') }}</span>
                                 </div>
                                 <div class="fs-14 font-weight-600">
                                     <span>
                                         {{$bookings->introduce}}
-        </span>
-    </div>
-    <div hidden="">
-        <input id="clinic_id" name="clinic_id" value="{{ $bookings->id }}">
+                </span>
+            </div>
+            <div hidden="">
+                <input id="clinic_id" name="clinic_id" value="{{ $bookings->id }}">
         @if(Auth::check())
-        <input id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+                <input id="user_id" name="user_id" value="{{ Auth::user()->id }}">
         @endif
 
-        </div>
+                </div>
 
-        <button class="btn mt-4 btn-primary btn-block up-date-button button-apply-booking" id="activate">Apply
-        </button>
-    </form>
+                <button class="btn mt-4 btn-primary btn-block up-date-button button-apply-booking" id="activate">Apply
+                </button>
+            </form>
 `;
-
-
-    </script>
-    <script>
-        $(document).ready(function () {
-            $(document).on('click', '#modalToggle', function () {
                 $('#modalBooking').empty().append(html);
                 loadData();
             });
