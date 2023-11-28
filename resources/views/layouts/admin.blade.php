@@ -150,11 +150,6 @@
                         <i class="fa-solid fa-house-chimney-medical"></i>
                         <span>{{ __('home.Category Product') }}</span></a>
                 </li>
-                <li class="nav-item {{ Nav::isRoute('api.backend.service-clinic-pharmacy.index') }}">
-                    <a class="nav-link" href="{{ route('api.backend.service-clinic-pharmacy.index') }}">
-                        <i class="fa-solid fa-house-chimney-medical"></i>
-                        <span>{{ __('home.Quản lý dịch vụ phòng khám') }}</span></a>
-                </li>
                 <li class="nav-item {{ Nav::isRoute('api.backend.account-register.index') }}">
                     <a class="nav-link" href="{{ route('api.backend.account-register.index') }}">
                         <i class="fa-solid fa-house-chimney-medical"></i>
