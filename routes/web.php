@@ -12,6 +12,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CalcViewQuestionController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClinicController;
+use App\Http\Controllers\connect\CallVideoController;
 use App\Http\Controllers\DoctorInfoController;
 use App\Http\Controllers\ExaminationController;
 use App\Http\Controllers\FleaMarketController;
@@ -182,7 +183,34 @@ Route::middleware(['auth'])->group(function () {
         Route::get('detail/{id}', [ServiceClinicController::class, 'detailService'])->name('user.service.clinics.detail');
         Route::get('create', [ServiceClinicController::class, 'createService'])->name('user.service.clinics.create');
     });
+
+    Route::group(['prefix' => 'connect'], function () {
+        Route::group(['prefix' => 'video'], function () {
+            Route::get('index', [CallVideoController::class, 'index'])->name('api.backend.connect.video.index');
+            Route::get('index2', [CallVideoController::class, 'index2'])->name('api.backend.connect.video.index2');
+            Route::get('index3', [CallVideoController::class, 'index3'])->name('api.backend.connect.video.index3');
+
+            Route::post("/createMeeting", [CallVideoController::class, 'createMeeting'])->name("createMeeting");
+
+            Route::post("/validateMeeting", [CallVideoController::class, 'validateMeeting'])->name("validateMeeting");
+
+            Route::get("/meeting/{meetingId}", function($meetingId) {
+
+                $METERED_DOMAIN = env('METERED_DOMAIN');
+                return view('admin.connect.video.meeting', [
+                    'METERED_DOMAIN' => $METERED_DOMAIN,
+                    'MEETING_ID' => $meetingId
+                ]);
+            })->name('joinMeeting');
+        });
+    });
+
 });
+
+Route::get('/send', 'SendMessageController@index')->name('send');
+Route::post('/postMessage', 'SendMessageController@sendMessage')->name('postMessage');
+
+
 Route::group(['middleware' => ['medical']], function () {
     Route::get('/admin', [\App\Http\Controllers\HomeController::class, 'home'])->name('homeAdmin');
 });
@@ -236,3 +264,4 @@ Route::group(['prefix' => ''], function () {
 
 // Route maps
 Route::get('explore', [\App\Http\Controllers\MapController::class, 'explore'])->name('explore.list');
+
