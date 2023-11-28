@@ -24,7 +24,7 @@
             @endif
 
                 <div class="mt-4">
-                    <p class="text-content-product">All news</p>
+                    <p class="text-content-product">{{ __('home.All news') }}</p>
                 </div>
                 <div class="d-flex row">
                     @foreach($listNews as $news)
@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="d-flex justify-content-end align-items-end"
                                      style="position: absolute;bottom: 30px;right: 30px;">
-                                    <a href="{{route('detail.new',$news->id)}}">Read more</a>
+                                    <a href="{{route('detail.new',$news->id)}}">{{ __('home.Read more') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                         <li class="page-item">
                             <a class="page-link" href="#" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
+                                <span class="sr-only">{{ __('home.Previous') }}</span>
                             </a>
                         </li>
                         <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -64,14 +64,14 @@
                         <li class="page-item">
                             <a class="page-link" href="#" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
+                                <span class="sr-only">{{ __('home.Next') }}</span>
                             </a>
                         </li>
                     </ul>
                 </nav>
             @else
                 <div class="d-flex justify-content-center">
-                    <h3>Không có tin tức nào</h3>
+                    <h3>{{ __('home.Không có tin tức nào') }}</h3>
                 </div>
             @endif
         </div>
@@ -99,7 +99,7 @@
                     </a>
             @endif
                 <div class="mt-4">
-                    <p class="text-content-product">All Event</p>
+                    <p class="text-content-product">{{ __('home.All Event') }}</p>
                 </div>
                 <div class="d-flex row">
                     @foreach($listEvent as $Event)
@@ -119,7 +119,7 @@
                                 </div>
                                 <div class="d-flex justify-content-end align-items-end"
                                      style="position: absolute;bottom: 30px;right: 30px;">
-                                    <a href="{{route('detail.new',$Event->id)}}">Read more</a>
+                                    <a href="{{route('detail.new',$Event->id)}}">{{ __('home.Read more') }}</a>
                                 </div>
                             </div>
                         </div>
@@ -130,7 +130,7 @@
                         <li class="page-item">
                             <a class="page-link" href="#" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
+                                <span class="sr-only">{{ __('home.Previous') }}</span>
                             </a>
                         </li>
                         <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -139,7 +139,7 @@
                         <li class="page-item">
                             <a class="page-link" href="#" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
+                                <span class="sr-only">{{ __('home.Next') }}</span>
                             </a>
                         </li>
                     </ul>

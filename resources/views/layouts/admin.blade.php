@@ -100,7 +100,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            <div class="sidebar-brand-text mx-3">KRMEDI Admin <sup>2</sup></div>
         </a>
 
         <!-- Divider -->
@@ -111,76 +111,76 @@
             <li class="nav-item {{ Nav::isRoute('homeAdmin') }}">
                 <a class="nav-link" href="{{ route('homeAdmin') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>{{ __('Dashboard') }}</span></a>
+                    <span>{{ __('home.Dashboar') }}</span></a>
             </li>
             <!-- Nav Item - List Products -->
             <li class="nav-item {{ Nav::isRoute('homeAdmin.list.product') }}">
                 <a class="nav-link" href="{{ route('homeAdmin.list.product') }}">
                     <i class="fa-regular fa-rectangle-list"></i>
-                    <span>{{ __('Selling/Buying') }}</span></a>
+                    <span>{{ __('home.Selling/Buying') }}</span></a>
             </li>
 
             <!-- Nav Item - List Coupon -->
             <li class="nav-item {{ Nav::isRoute('homeAdmin.list.coupons') }}">
                 <a class="nav-link" href="{{ route('homeAdmin.list.coupons') }}">
                     <i class="fa-solid fa-house-chimney-medical"></i>
-                    <span>List Coupon</span></a>
+                    <span>{{ __('home.List Coupon') }}</span></a>
             </li>
             @if(!$isStaff)
                 <!-- Nav Item - List Service Clinics -->
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('user.service.clinics.list') }}">
                         <i class="fa-solid fa-house-chimney-medical"></i>
-                        <span>Service Clinics</span></a>
+                        <span>{{ __('home.Service Clinics') }}</span></a>
                 </li>
                 <!-- Nav Item - List Clinics -->
                 <li class="nav-item {{ Nav::isRoute('homeAdmin.list.clinics') }}">
                     <a class="nav-link" href="{{ route('homeAdmin.list.clinics') }}">
                         <i class="fa-solid fa-house-chimney-medical"></i>
-                        <span>{{ __('List Clinics') }}</span></a>
+                        <span>{{ __('home.List Clinics') }}</span></a>
                 </li>
                 <!-- Nav Item - New Event -->
                 <li class="nav-item {{ Nav::isRoute('api.new-event.index') }}">
                     <a class="nav-link" href="{{ route('api.new-event.index') }}">
                         <i class="fa-solid fa-house-chimney-medical"></i>
-                        <span>{{ __('New Event') }}</span></a>
+                        <span>{{ __('home.New Event') }}</span></a>
                 </li>
                 <li class="nav-item {{ Nav::isRoute('api.backend.category-product.index') }}">
                     <a class="nav-link" href="{{ route('api.backend.category-product.index') }}">
                         <i class="fa-solid fa-house-chimney-medical"></i>
-                        <span>{{ __('Category Product') }}</span></a>
+                        <span>{{ __('home.Category Product') }}</span></a>
                 </li>
                 <li class="nav-item {{ Nav::isRoute('api.backend.account-register.index') }}">
                     <a class="nav-link" href="{{ route('api.backend.account-register.index') }}">
                         <i class="fa-solid fa-house-chimney-medical"></i>
-                        <span>{{ __('Duyệt đăng ký phòng khám') }}</span></a>
+                        <span>{{ __('home.Duyệt đăng ký phòng khám') }}</span></a>
                 </li>
                 <li class="nav-item {{ Nav::isRoute('api.backend.product-medicine.index') }}">
                     <a class="nav-link" href="{{ route('api.backend.product-medicine.index') }}">
                         <i class="fa-solid fa-house-chimney-medical"></i>
-                        <span>{{ __('Product Medicine') }}</span></a>
+                        <span>{{ __('home.Product Medicine') }}</span></a>
                 </li>
 
                 <!-- Nav Item - List Doctor -->
                 <li class="nav-item {{ Nav::isRoute('homeAdmin.list.doctors') }}">
                     <a class="nav-link" href="{{ route('homeAdmin.list.doctors') }}">
                         <i class="fa-solid fa-user-doctor"></i>
-                        <span>Examination</span></a>
+                        <span>{{ __('home.Examination') }}</span></a>
                 </li>
                 <li class="nav-item {{ Nav::isRoute('homeAdmin.list.staff') }}">
                     <a class="nav-link" href="{{ route('homeAdmin.list.staff') }}">
                         <i class="fa-solid fa-user-doctor"></i>
-                        <span>Nhân viên</span></a>
+                        <span>{{ __('home.Nhân viên') }}</span></a>
                 </li>
                 <li class="nav-item {{ Nav::isRoute('homeAdmin.list.config') }}">
                     <a class="nav-link" href="{{ route('homeAdmin.list.config') }}">
                         <i class="fa-solid fa-user-doctor"></i>
-                        <span>Cấu hình chung</span></a>
+                        <span>{{ __('home.Cấu hình chung') }}</span></a>
                 </li>
                 <li class="nav-item {{ Nav::isRoute('homeAdmin.list.booking') }}">
                     <a class="nav-link" href="{{ route('homeAdmin.list.booking') }}">
                         <i class="fa-solid fa-user-doctor"></i>
-                        <span>Booking</span></a>
+                        <span>{{ __('home.Booking') }}</span></a>
                 </li>
             @endif
 
@@ -189,14 +189,14 @@
         @endif
         <!-- Heading -->
         <div class="sidebar-heading">
-            {{ __('Settings') }}
+            {{ __('home.Settings') }}
         </div>
 
         <!-- Nav Item - Profile -->
         <li class="nav-item {{ Nav::isRoute('profile') }}">
             <a class="nav-link" href="{{ route('profile') }}">
                 <i class="fas fa-fw fa-user"></i>
-                <span>{{ __('Profile') }}</span>
+                <span>{{ __('home.Profile') }}</span>
             </a>
         </li>
 
@@ -204,7 +204,7 @@
         <li class="nav-item {{ Nav::isRoute('about') }}">
             <a class="nav-link" href="{{ route('about') }}">
                 <i class="fas fa-fw fa-hands-helping"></i>
-                <span>{{ __('About') }}</span>
+                <span>{{ __('home.About') }}</span>
             </a>
         </li>
 
@@ -236,7 +236,7 @@
                 <!-- Topbar Search -->
                 <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                     <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="{{ __('home.Search for...') }}"
                                aria-label="Search" aria-describedby="basic-addon2">
                         <div class="input-group-append">
                             <button class="btn btn-primary" type="button">
@@ -261,7 +261,7 @@
                             <form class="form-inline mr-auto w-100 navbar-search">
                                 <div class="input-group">
                                     <input type="text" class="form-control bg-light border-0 small"
-                                           placeholder="Search for..." aria-label="Search"
+                                           placeholder="{{ __('home.Search for...') }}" aria-label="Search"
                                            aria-describedby="basic-addon2">
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="button">
@@ -285,7 +285,7 @@
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="alertsDropdown">
                             <h6 class="dropdown-header">
-                                Alerts Center
+                                {{ __('home.Alerts Center') }}
                             </h6>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="mr-3">
@@ -294,8 +294,8 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="small text-gray-500">December 12, 2019</div>
-                                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                    <div class="small text-gray-500">{{ __('home.December 12, 2019') }}</div>
+                                    <span class="font-weight-bold">{{ __('home.A new monthly report is ready to download') }}!</span>
                                 </div>
                             </a>
                             <a class="dropdown-item d-flex align-items-center" href="#">
@@ -305,8 +305,8 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="small text-gray-500">December 7, 2019</div>
-                                    $290.29 has been deposited into your account!
+                                    <div class="small text-gray-500">{{ __('home.December 7, 2019') }}</div>
+                                    {{ __('home.$290.29 has been deposited into your account') }}!
                                 </div>
                             </a>
                             <a class="dropdown-item d-flex align-items-center" href="#">
@@ -316,11 +316,11 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <div class="small text-gray-500">December 2, 2019</div>
-                                    Spending Alert: We've noticed unusually high spending for your account.
+                                    <div class="small text-gray-500">{{ __('home.December 2, 2019') }}</div>
+                                    {{ __("home.Spending Alert: We've noticed unusually high spending for your account.") }}
                                 </div>
                             </a>
-                            <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">{{ __('home.Show All Alerts') }}</a>
                         </div>
                     </li>
 
@@ -336,7 +336,7 @@
                         <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="messagesDropdown">
                             <h6 class="dropdown-header">
-                                Message Center
+                                {{ __('home.Message Center') }}
                             </h6>
                             <a class="dropdown-item d-flex align-items-center" href="#">
                                 <div class="dropdown-list-image mr-3">
@@ -345,10 +345,9 @@
                                     <div class="status-indicator bg-success"></div>
                                 </div>
                                 <div class="font-weight-bold">
-                                    <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                        problem I've been having.
+                                    <div class="text-truncate">{{ __("home.Hi there! I am wondering if you can help me with a problem I've been having") }}.
                                     </div>
-                                    <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                    <div class="small text-gray-500">{{ __('home.Emily Fowler · 58m') }}</div>
                                 </div>
                             </a>
                             <a class="dropdown-item d-flex align-items-center" href="#">
@@ -358,8 +357,7 @@
                                     <div class="status-indicator"></div>
                                 </div>
                                 <div>
-                                    <div class="text-truncate">I have the photos that you ordered last month, how would
-                                        you like them sent to you?
+                                    <div class="text-truncate">{{ __('home.I have the photos that you ordered last month, how would you like them sent to you') }}?
                                     </div>
                                     <div class="small text-gray-500">Jae Chun · 1d</div>
                                 </div>
@@ -371,8 +369,7 @@
                                     <div class="status-indicator bg-warning"></div>
                                 </div>
                                 <div>
-                                    <div class="text-truncate">Last month's report looks great, I am very happy with the
-                                        progress so far, keep up the good work!
+                                    <div class="text-truncate">{{ __("home.Last month's report looks great, I am very happy with the progress so far, keep up the good work") }}!
                                     </div>
                                     <div class="small text-gray-500">Morgan Alvarez · 2d</div>
                                 </div>
@@ -384,13 +381,12 @@
                                     <div class="status-indicator bg-success"></div>
                                 </div>
                                 <div>
-                                    <div class="text-truncate">Am I a good boy? The reason I ask is because someone told
-                                        me that people say this to all dogs, even if they aren't good...
+                                    <div class="text-truncate">{{ __("home.Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...") }}
                                     </div>
                                     <div class="small text-gray-500">Chicken the Dog · 2w</div>
                                 </div>
                             </a>
-                            <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                            <a class="dropdown-item text-center small text-gray-500" href="#">{{ __('home.Read More Messages') }}</a>
                         </div>
                     </li>
 
@@ -409,20 +405,20 @@
                              aria-labelledby="userDropdown">
                             <a class="dropdown-item" href="{{ route('profile') }}">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                {{ __('Profile') }}
+                                {{ __('home.Profile') }}
                             </a>
                             <a class="dropdown-item" href="javascript:void(0)">
                                 <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                {{ __('Settings') }}
+                                {{ __('home.Settings') }}
                             </a>
                             <a class="dropdown-item" href="javascript:void(0)">
                                 <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                {{ __('Activity Log') }}
+                                {{ __('home.Activity Log') }}
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{route('logoutProcess')}}">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                {{ __('Logout') }}
+                                {{ __('home.Logout') }}
                             </a>
                         </div>
                     </li>
@@ -447,7 +443,7 @@
         <footer class="sticky-footer bg-white">
             <div class="container my-auto">
                 <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Alejandro RH {{ now()->year }}</span>
+                    <span>{{ __('home.Copyright &copy; Alejandro RH ') }}{{ now()->year }}</span>
                 </div>
             </div>
         </footer>
@@ -469,12 +465,12 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{ __('Ready to Leave?') }}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ __('home.Ready to Leave') }}?</h5>
                 <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-body">{{ __("home.Select 'Logout' below if you are ready to end your current session") }}.</div>
             <div class="modal-footer">
                 <button class="btn btn-link" type="button" data-dismiss="modal">{{ __('Cancel') }}</button>
                 <a class="btn btn-danger" href="{{ route('logoutProcess') }}"
