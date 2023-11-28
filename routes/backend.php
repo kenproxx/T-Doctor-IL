@@ -53,6 +53,7 @@ Route::group(['prefix' => 'service-clinics'], function () {
 });
 
 Route::get('/info-user/{id}', [ProfileController::class, 'infoUser'])->name('info.user');
+Route::get('/users/by-role/{role_id}', [ProfileController::class, 'getUsersByRoleId'])->name('role.user');
 
 Route::group(['prefix' => 'booking'], function () {
     Route::get('/list-users/{id}/{status}', [BookingApi::class, 'getAllBookingByUserId'])->name('api.booking.list.users');
