@@ -16,7 +16,7 @@
                 <div class="title">
                     <select class="custom-select" id="category_id" name="category_id"
                             onchange="categoryFilterMedicine(this.value)">
-                        <option value="">Category</option>
+                        <option value="">{{ __('home.Category') }}</option>
                         @if($categoryMedicines)
                             @foreach($categoryMedicines as $index => $cateProductMedicine)
                                 <option value="{{ $cateProductMedicine->id }}">{{ $cateProductMedicine->name }}</option>
@@ -27,7 +27,7 @@
                 <div class="title">
                     <select class="custom-select" id="category_id" name="category_id"
                             onchange="locationFilterMedicine(this.value)">
-                        <option value="">Location</option>
+                        <option value="">{{ __('home.Location') }}</option>
                         @if($provinces)
                             @foreach($provinces as $index => $province)
                                 <option value="{{ $province->id }}">{{ $province->full_name }}</option>
@@ -57,15 +57,14 @@
             <div class="medicine-search--right col-md-3 d-flex row justify-content-between">
                 <div class="col-md-6 ">
                     <div class="div-wrapper">
-                        <button type="button" data-toggle="modal" data-target="#modalCreatPrescription">Create
-                            prescription
+                        <button type="button" data-toggle="modal" data-target="#modalCreatPrescription">{{ __('home.Create prescription') }}
                         </button>
                     </div>
                 </div>
                 @include('component.modalCreatPrescription')
                 <div class="col-md-6">
                     <div class="div-wrapper">
-                        <a href="{{route('medicine.wishList')}}">Wish list</a>
+                        <a href="{{route('medicine.wishList')}}">{{ __('home.Wish list') }}</a>
                     </div>
                 </div>
             </div>
@@ -74,67 +73,67 @@
             <div class="col-md-3 medicine-list--filter">
                 <div class="filter">
                     <div class="filter-header d-flex justify-content-between">
-                        <div class="text-wrapper">Filter</div>
+                        <div class="text-wrapper">{{ __('home.Filter') }}</div>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="filter-body">
                         <div class="d-flex item">
                             <input type="checkbox" name="filter_" value="0" onchange="searchFilterMedicine(this.value)">
-                            <div class="text-all">All ({{ $countAllMedicine }})</div>
+                            <div class="text-all">{{ __('home.All') }} ({{ $countAllMedicine }})</div>
                         </div>
                         <div class="d-flex item">
                             <input type="checkbox" name="filter_"
                                    value="{{ FilterOnlineMedicine::HEALTH }}"
                                    onchange="searchFilterMedicine(this.value)">
-                            <div class="text">Health</div>
+                            <div class="text">{{ __('home.Heath') }}</div>
                         </div>
                         <div class="d-flex item">
                             <input type="checkbox" name="filter_"
                                    value="{{ FilterOnlineMedicine::BEAUTY }}"
                                    onchange="searchFilterMedicine(this.value)">
-                            <div class="text">Beauty</div>
+                            <div class="text">{{ __('home.Beauty') }}</div>
                         </div>
                         <div class="d-flex item">
                             <input type="checkbox" name="filter_"
                                    value="{{ FilterOnlineMedicine::PET }}"
                                    onchange="searchFilterMedicine(this.value)">
-                            <div class="text">Pet</div>
+                            <div class="text">{{ __('home.Pets') }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="filter">
                     <div class="filter-header d-flex justify-content-between">
-                        <div class="text-wrapper">Object</div>
+                        <div class="text-wrapper">{{ __('home.Object') }}</div>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="filter-body">
                         <div class="d-flex item">
                             <input type="checkbox" value="{{ ObjectOnlineMedicine::KIDS }}"
                                    onchange="objectFilterMedicine(this.value)">
-                            <div class="text">For kids</div>
+                            <div class="text">{{ __('home.For kids') }}</div>
                         </div>
                         <div class="d-flex item">
                             <input type="checkbox"
                                    value="{{ ObjectOnlineMedicine::FOR_WOMEN }}"
                                    onchange="objectFilterMedicine(this.value)">
-                            <div class="text">For women</div>
+                            <div class="text">{{ __('home.For women') }}</div>
                         </div>
                         <div class="d-flex item">
                             <input type="checkbox"
                                    value="{{ ObjectOnlineMedicine::FOR_MEN }}"
                                    onchange="objectFilterMedicine(this.value)">
-                            <div class="text">For men</div>
+                            <div class="text">{{ __('home.For men') }}</div>
                         </div>
                         <div class="d-flex item">
                             <input type="checkbox"
                                    value="{{ ObjectOnlineMedicine::FOR_ADULT }}"
                                    onchange="objectFilterMedicine(this.value)">
-                            <div class="text">For adults</div>
+                            <div class="text">{{ __('home.For adults') }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="price">
-                    <div class="text-wrapper">Price</div>
+                    <div class="text-wrapper">{{ __('home.Price') }}</div>
                     <div class="wrapper">
                         <div class="price-input">
                             <div class="field">
@@ -168,7 +167,7 @@
                         <li class="page-item">
                             <a class="page-link" href="#" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
+                                <span class="sr-only">{{ __('home.Previous') }}</span>
                             </a>
                         </li>
                         <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -177,7 +176,7 @@
                         <li class="page-item">
                             <a class="page-link" href="#" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
+                                <span class="sr-only">{{ __('home.Next') }}</span>
                             </a>
                         </li>
                     </ul>
