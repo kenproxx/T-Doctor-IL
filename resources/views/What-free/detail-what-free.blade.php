@@ -46,7 +46,7 @@
         <div class="container">
             @include('What-free.header-wFree')
             <a href="{{route('what.free')}}" class="recruitment-details--title"><i class="fa-solid fa-arrow-left"></i>
-                What’s free details</a>
+                {{ __("home.What’s free details") }}</a>
             <div class="row recruitment-details--content">
                 <div class="col-md-8 recruitment-details--content--left">
                     <div class="text-content-product">{{ $coupon->title }}</div>
@@ -73,25 +73,25 @@
                 <div class="col-md-4 recruitment-details--content--right">
                     <div class="form-1 " id="form-hospital">
                         <div class="div d-flex justify-content-between align-items-center">
-                            <div class="title">Platinum</div>
-                            <button class="text-wrapper">FOLLOW</button>
+                            <div class="title">{{ __('home.Platinum') }}</div>
+                            <button class="text-wrapper">{{ __('home.FOLLOW') }}</button>
                         </div>
                         <div class="div-2">
                             <img class="image" src="{{asset('img/recruitment/logo.png')}}"/>
                             <div class="text-wrapper-2">{{ $clinic->name ?? '' }}</div>
                         </div>
                         <div class="div-3">
-                            <div class="mb-2 flea-content-product">Visit information</div>
+                            <div class="mb-2 flea-content-product">{{ __('home.Visit information') }}</div>
                             <div class="flea-text-gray color-Grey-Black">{{ $coupon->title }}</div>
                         </div>
                         <div class="div-7 d-flex justify-content-between">
-                            <button id="button-apply" class="text-wrapper-5 w-100">Apply</button>
+                            <button id="button-apply" class="text-wrapper-5 w-100">{{ __('home.Apply') }}</button>
                         </div>
                     </div>
                     <div class="form-2 d-none" id="form-apply">
                         <div class="div">
                             @if ($socials)
-                                <div class="text-wrapper">SNS option</div>
+                                <div class="text-wrapper">{{ __('home.SNS option') }}</div>
                                 <div class="div-2 d-flex" id="select-sns-apply">
                                     @if($socials->facebook)
                                         <div class="button">
@@ -139,26 +139,26 @@
                             @endif
                         </div>
                         <div class="div-3">
-                            <div class="text-wrapper">Applicant information</div>
+                            <div class="text-wrapper">{{ __('home.Applicant information') }}</div>
                             <div class="div-4">
                                 <div class="div-5">
-                                    <div class="text-wrapper-3">Name</div>
+                                    <div class="text-wrapper-3">{{ __('home.Name') }}</div>
                                     <input class="form-control" type="text" placeholder="example123" name="name"
                                            id="name">
                                 </div>
                                 <div class="div-5">
-                                    <div class="text-wrapper-3">Email</div>
+                                    <div class="text-wrapper-3">{{ __('home.Email') }}</div>
                                     <input class="form-control" type="text" placeholder="example123" name="email_"
                                            id="email_">
                                 </div>
                                 <div class="div-5">
-                                    <div class="text-wrapper-3">Contact number</div>
+                                    <div class="text-wrapper-3">{{ __('home.Contact number') }}</div>
                                     <input class="form-control" type="text" placeholder="example123" name="phone"
                                            id="phone">
                                 </div>
                             </div>
                             <div>
-                                <div class="flea-prise">Apply motivation</div>
+                                <div class="flea-prise">{{ __('home.Apply motivation') }}</div>
                                 <textarea class="form-control" placeholder="Please let me use your service"
                                           name="content" id="content_"></textarea>
                             </div>
@@ -166,8 +166,8 @@
                         <input type="hidden" value="{{ $coupon->id }}" name="coupon_id" id="coupon_id">
                         <input type="hidden" value="{{ csrf_token() }}" name="_token" id="_token">
                         <div class="div-7 d-flex justify-content-between">
-                            <button class="div-wrapper" id="button-back">Cancel</button>
-                            <button class="text-wrapper-5 apply-button">Apply</button>
+                            <button class="div-wrapper" id="button-back">{{ __('home.CANCEL') }}</button>
+                            <button class="text-wrapper-5 apply-button">{{ __('home.Apply') }}</button>
                         </div>
                     </div>
                 </div>
