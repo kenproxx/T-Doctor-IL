@@ -22,11 +22,15 @@ class ClinicApi extends Controller
             ->cursor()
             ->map(function ($item) {
                 $array = explode(',', $item->service_id);
-                $services = ServiceClinic::whereIn('id', $array)->get();
-
+                $services = \App\Models\ServiceClinic::whereIn('id', $array)->get();
+                $array = explode(',', $item->address);
+                $addressP = \App\Models\Province::where('id', $array[1])->first();
+                $addressD = \App\Models\District::where('id', $array[2])->first();
+                $addressC = \App\Models\Commune::where('id', $array[3])->first();
                 $clinic = (array)$item;
                 $clinic['total_services'] = $services->count();
                 $clinic['services'] = $services->toArray();
+                $clinic['addressInfo'] = $addressC['name'] . ',' . $addressD['name'] . ',' . $addressP['name'];
                 return $clinic;
             });
 

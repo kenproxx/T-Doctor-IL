@@ -1284,8 +1284,8 @@ span.material-symbols-outlined {
 .max-img {
     min-width: 300px;
     min-height: 300px;
-    /*max-width: 237px;*/
-    /*max-height: 237px;*/
+    max-width: 237px;
+    max-height: 237px;
 }
 
 .d-content {

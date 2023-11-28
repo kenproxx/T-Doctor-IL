@@ -38,14 +38,14 @@
                 html = html + `
                 <div class="col-md-4 mb-md-3">
                     <div class="clinic-item">
-                        <a href="${urlDetail}">
+                        <a class="text-overflow" href="${urlDetail}">
                           ${item.name}
                         </a>
                         <div class="time d-flex">
                             <p>${item.open_date} - ${item.close_date} </p>
                         </div>
                         <div class="location">
-                            <i class="fa-solid fa-location-dot"></i> ${item.address} - <span>3 Km</span>
+                            <div class="text-overflow d-flex"><i class="fa-solid fa-location-dot pr-2"></i>${item.address_detail} ${item.addressInfo}</div> - <span>10Km</span>
                         </div>
                         <div class="service">
                             Service: ${serviceHtml}
