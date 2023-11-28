@@ -126,6 +126,22 @@
                     <i class="fa-solid fa-house-chimney-medical"></i>
                     <span>{{ __('home.List Coupon') }}</span></a>
             </li>
+
+            <li class="nav-item {{ Nav::isRoute('api.backend.connect.video.index') }}">
+                <a class="nav-link" href="{{ route('api.backend.connect.video.index') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>{{ __('Call video') }}</span></a>
+            </li>
+            <li class="nav-item {{ Nav::isRoute('api.backend.connect.video.index2') }}">
+                <a class="nav-link" href="{{ route('api.backend.connect.video.index2') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>{{ __('Call video2') }}</span></a>
+            </li>
+            <li class="nav-item {{ Nav::isRoute('api.backend.connect.video.index3') }}">
+                <a class="nav-link" href="{{ route('api.backend.connect.video.index3') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>{{ __('Call video3') }}</span></a>
+            </li>
             @if(!$isStaff)
                 <!-- Nav Item - List Service Clinics -->
                 <li class="nav-item">

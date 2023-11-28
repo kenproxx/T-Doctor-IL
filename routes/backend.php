@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\backend\BackendCouponApplyController;
 use App\Http\Controllers\backend\BackendCouponController;
+use App\Http\Controllers\connect\CallVideoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\restapi\BookingApi;
 use App\Http\Controllers\restapi\DoctorReviewApi;
