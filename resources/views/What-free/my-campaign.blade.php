@@ -8,13 +8,13 @@
             <div class="col-md-12 medicine-list--item">
                 <ul class="nav nav-tabs row tabMystore col-md-6" role="tablist">
                     <li class="nav-item col-4">
-                        <a class="nav-link active" id="productList-tab" data-toggle="tab" href="#productList" role="tab" aria-controls="home" aria-selected="true">My campaign</a>
+                        <a class="nav-link active" id="productList-tab" data-toggle="tab" href="#productList" role="tab" aria-controls="home" aria-selected="true">{{ __('home.My campaign') }}</a>
                     </li>
                     <li class="nav-item col-4">
-                        <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="profile" aria-selected="false">Interested campaign</a>
+                        <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="profile" aria-selected="false">{{ __('home.Interested campaign') }}</a>
                     </li>
                     <li class="nav-item col-4">
-                        <a class="nav-link" id="wishList-tab" data-toggle="tab" href="#wishList" role="tab" aria-controls="contact" aria-selected="false">My SNS</a>
+                        <a class="nav-link" id="wishList-tab" data-toggle="tab" href="#wishList" role="tab" aria-controls="contact" aria-selected="false">{{ __('home.My SNS') }}</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -45,7 +45,7 @@
                         <li class="page-item">
                             <a class="page-link" href="#" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">Previous</span>
+                                <span class="sr-only">{{ __('home.Previous') }}</span>
                             </a>
                         </li>
                         <li class="page-item"><a class="page-link" href="#">1</a></li>
@@ -54,7 +54,7 @@
                         <li class="page-item">
                             <a class="page-link" href="#" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">Next</span>
+                                <span class="sr-only">{{ __('home.Next') }}</span>
                             </a>
                         </li>
                     </ul>
