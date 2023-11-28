@@ -103,11 +103,11 @@
             </div>
             <div class="col-md-9">
                 <div class="img-union"><img src="{{asset('img/flea-market/platinum.png')}}"></div>
-                <div class="page row" id="productsAdsPlan1"></div>
+                <div class="page d-flex flex-wrap" id="productsAdsPlan1"></div>
                 <div class="img-union "><img src="{{asset('img/flea-market/premium.png')}}"></div>
-                <div class="page row" id="productsAdsPlan2"></div>
+                <div class="page d-flex flex-wrap" id="productsAdsPlan2"></div>
                 <div class="img-union"><img src="{{asset('img/flea-market/silver.png')}}"></div>
-                <div class="page row" id="productsAdsPlan3"></div>
+                <div class="page d-flex flex-wrap" id="productsAdsPlan3"></div>
             </div>
         </div>
         {{-- modal filter --}}
@@ -312,7 +312,7 @@
                 var isFavoriteClass = product.isFavorit ? 'bi-heart-fill' : 'bi-heart';
 
                 var productHtml = `
-            <div class="col-md-4 col-6 item">
+            <div class="col-md-3 col-6 item">
                 <div class="product-item">
                     <div class="img-pro">
                         <img src="${product.thumbnail}" alt="">
@@ -439,7 +439,7 @@
                                 <i id="icon-heart-${item.id}" class="${isFavorite} bi" data-product-id="${item.id}" onclick="addProductToWishList(${item.id})"></i>
                             </a>`;}
                     var html = `
-                    <div class="col-md-4 col-6 item">
+                    <div class="col-md-3 col-6">
                         <div class="product-item">
                             <div class="img-pro">
                                 <img src="${item.thumbnail}" alt="">

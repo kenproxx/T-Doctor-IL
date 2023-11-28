@@ -95,7 +95,7 @@
     margin-bottom: 40px;
 
     img {
-        height: 100%;
+        height: auto;
         width: 100%;
         object-fit: cover;
     }
@@ -1215,9 +1215,9 @@ section {
     animation: fadeout .5s;
 }
 
-.item {
-    flex: 0 0 25%;
-}
+//.item {
+//    flex: 0 0 25%;
+//}
 
 .item .button {
     width: 95%;

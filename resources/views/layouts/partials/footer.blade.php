@@ -206,10 +206,10 @@
             <div class=" bottom-footer">
                 <div class="border-top">
                     <div class="mt-4 d-flex justify-content-between">
-                        <div><p>©{{ __('home.2022 Company Name. All rights reserved') }}</p></div>
+                        <div><p class="status_message">©{{ __('home.2022 Company Name. All rights reserved') }}</p></div>
                         <div class="d-flex text-bottom">
-                            <p class="mr-5">{{ __('home.Privacy & Policy') }}</p>
-                            <p>{{ __('home.Terms & Condition') }}</p>
+                            <p class="mr-5 status_message">{{ __('home.Privacy & Policy') }}</p>
+                            <p class="status_message">{{ __('home.Terms & Condition') }}</p>
                         </div>
                     </div>
                 </div>

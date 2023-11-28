@@ -26,13 +26,13 @@
                         <div class="mb-30">
                             <div class="justify-content-between align-items-center d-flex mt-4">
                                 <div class="ac-text_content ">{{ __('home.Related news') }}</div>
-                                <div class="flea-content-product">{{ __('home.See all') }}</div>
+                                <div class="flea-content-product"><a href="{{route('index.new')}}">See all</a></div>
                             </div>
                         </div>
                         <div class="d-flex row">
                             @foreach($related as $item)
-                                <div class="col-md-6 d-flex">
-                                    <a href="{{route('detail.new',$item->id)}}">
+                                <div class="col-md-6 d-flex mb-4">
+                                    <a class="w-100" href="{{route('detail.new',$item->id)}}">
                                         <div class="d-flex border-8px">
                                             <div class="col-md-3 p-0">
                                                 <img class="w-100" src="{{$item->thumbnail}}"  style="object-fit: cover;border-radius: 8px;height: 111px;">

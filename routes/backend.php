@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\restapi\BookingApi;
 use App\Http\Controllers\restapi\DoctorReviewApi;
 use App\Http\Controllers\restapi\MessageApi;
+use App\Http\Controllers\restapi\ServiceClinicApi;
 use App\Http\Controllers\restapi\SocialUserApi;
 use App\Http\Controllers\restapi\UserApi;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,14 @@ Route::group(['prefix' => 'coupons'], function () {
     Route::post('/create', [BackendCouponController::class, 'create'])->name('api.backend.coupons.create');
     Route::post('/update/{id}', [BackendCouponController::class, 'update'])->name('api.backend.coupons.update');
     Route::delete('/delete/{id}', [BackendCouponController::class, 'delete'])->name('api.backend.coupons.delete');
+});
+
+Route::group(['prefix' => 'service-clinics'], function () {
+    Route::get('list', [ServiceClinicApi::class, 'getAll'])->name('api.backend.service.clinic.list');
+    Route::get('list-by-clinics/{id}', [ServiceClinicApi::class, 'getAllByClinics'])->name('api.backend.service.clinic.list.clinics');
+    Route::get('list-by-user/{id}', [ServiceClinicApi::class, 'getAllByUserId'])->name('api.backend.service.clinic.list.user');
+    Route::get('detail/{id}', [ServiceClinicApi::class, 'detail'])->name('api.backend.service.clinic.detail');
+    Route::post('create', [ServiceClinicApi::class, 'create'])->name('api.backend.service.clinic.create');
 });
 
 Route::get('/info-user/{id}', [ProfileController::class, 'infoUser'])->name('info.user');
