@@ -113,14 +113,14 @@ Route::group(['prefix' => 'staffs'], function () {
     Route::post('/delete/{id}', [BackendStaffController::class, 'destroy'])->name('api.backend.staffs.delete');
 });
 
-Route::group(['prefix' => 'wish-lists'], function () {
-    Route::get('/list', [BackendWishListController::class, 'getAll'])->name('api.backend.wish.lists.list');
-    Route::get('/detail/{id}', [BackendWishListController::class, 'detail'])->name('api.backend.wish.lists.detail');
-    Route::post('/create', [BackendWishListController::class, 'create'])->name('api.backend.wish.lists.create');
-    Route::POST('/update/{id}', [BackendWishListController::class, 'update'])->name('api.backend.wish.lists.update');
-    Route::delete('/delete/{id}', [BackendWishListController::class, 'delete'])->name('api.backend.wish.lists.delete');
-    Route::delete('/delete-list', [BackendWishListController::class, 'deleteMultil'])->name('api.backend.wish.lists.delete.listId');
-});
+//Route::group(['prefix' => 'wish-lists'], function () {
+//    Route::get('/list', [BackendWishListController::class, 'getAll'])->name('api.backend.wish.lists.list');
+//    Route::get('/detail/{id}', [BackendWishListController::class, 'detail'])->name('api.backend.wish.lists.detail');
+//    Route::post('/create', [BackendWishListController::class, 'create'])->name('api.backend.wish.lists.create');
+//    Route::POST('/update/{id}', [BackendWishListController::class, 'update'])->name('api.backend.wish.lists.update');
+//    Route::delete('/delete/{id}', [BackendWishListController::class, 'delete'])->name('api.backend.wish.lists.delete');
+//    Route::delete('/delete-list', [BackendWishListController::class, 'deleteMultil'])->name('api.backend.wish.lists.delete.listId');
+//});
 
 Route::group(['prefix' => 'clinics'], function () {
     Route::get('/list', [BackendClinicController::class, 'getAll'])->name('api.backend.clinics.list');
@@ -283,14 +283,6 @@ Route::group(['prefix' => 'service-clinic-pharmacy'], function () {
 Route::group(['prefix' => 'account-register'], function () {
     Route::get('index', [BackendAccountRegisterController::class, 'index'])->name('api.backend.account-register.index');
     Route::post('update/{id}', [BackendAccountRegisterController::class, 'update'])->name('api.backend.account-register.update');
-});
-
-Route::group(['prefix' => 'service-clinics'], function () {
-    Route::get('list', [ServiceClinicApi::class, 'getAll'])->name('api.backend.service.clinic.list');
-    Route::get('list-by-clinics/{id}', [ServiceClinicApi::class, 'getAllByClinics'])->name('api.backend.service.clinic.list.clinics');
-    Route::get('list-by-user/{id}', [ServiceClinicApi::class, 'getAllByUserId'])->name('api.backend.service.clinic.list.user');
-    Route::get('detail/{id}', [ServiceClinicApi::class, 'detail'])->name('api.backend.service.clinic.detail');
-    Route::post('create', [ServiceClinicApi::class, 'create'])->name('api.backend.service.clinic.create');
 });
 
 Route::group(['prefix' => 'bookings'], function () {
