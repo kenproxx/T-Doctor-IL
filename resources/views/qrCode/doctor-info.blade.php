@@ -111,7 +111,7 @@
                                                 @endforeach
                                             </tbody>
                                         @else
-                                            <p class="text-danger">The information is encrypted</p>
+                                            <p class="text-danger">{{ __('home.The information is encrypted') }}</p>
                                         @endif
                                     </table>
                                 </div>
@@ -121,7 +121,7 @@
                 </div>
             </div>
         @endif
-        <h3 class="text-center">Chat History</h3>
+        <h3 class="text-center">{{ __('home.Chat History') }}</h3>
         @if(count($messageDoctor) > 0)
             <section style="background-color: #eee;" class="ml-3">
                 <div class="container py-5">
@@ -130,7 +130,7 @@
                         <div class="col-md-8 col-lg-6 col-xl-4">
                             <div class="card" style="border-radius: 15px;">
                                 <div class="text-center">
-                                    <h3 class="file-shared">Shared files</h3>
+                                    <h3 class="file-shared">{{ __('home.Shared files') }}</h3>
                                 </div>
                                 <div class="card-body">
                                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -138,19 +138,19 @@
                                             <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
                                                     data-bs-target="#images" type="button" role="tab"
                                                     aria-controls="home"
-                                                    aria-selected="true">Images
+                                                    aria-selected="true">{{ __('home.Images') }}
                                             </button>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
                                                     data-bs-target="#videos" type="button" role="tab"
-                                                    aria-controls="profile" aria-selected="false">Videos
+                                                    aria-controls="profile" aria-selected="false">{{ __('home.Videos') }}
                                             </button>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
                                                     data-bs-target="#audios" type="button" role="tab"
-                                                    aria-controls="contact" aria-selected="false">Audios
+                                                    aria-controls="contact" aria-selected="false">{{ __('home.Audios') }}
                                             </button>
                                         </li>
                                     </ul>

@@ -35,7 +35,7 @@
             </div>
 
             <a href="{{route('medicine')}}" class="recruitment-details--title"><i class="fa-solid fa-arrow-left"></i>
-                Product details</a>
+                {{ __('home.Product details') }}</a>
             <div class="row recruitment-details--content">
                 <div class="col-md-8 recruitment-details--content--left">
                     <div class="img-main">
@@ -59,25 +59,25 @@
                             <p class="text-wrapper">{{ $medicine->name }}</p>
                             <div class="price">{{ $medicine->price }} {{ $medicine->unit_price }}</div>
                             <div class="brand-name d-flex">
-                                <div class="text-wrapper-2">Location:</div>
+                                <div class="text-wrapper-2">{{ __('home.Location') }}:</div>
                                 @php
                                     $user = User::find($medicine->user_id)
                                 @endphp
                                 <div class="text-wrapper-3">{{ $user->address_code ?? '' }}</div>
                             </div>
                             <div class="brand-name d-flex">
-                                <div class="text-wrapper-2">Category:</div>
+                                <div class="text-wrapper-2">{{ __('home.Category') }}:</div>
                                 @php
                                     $category = CategoryProduct::find($medicine->category_id)
                                 @endphp
                                 <div class="text-wrapper-3">{{ $category->name ?? ''}}</div>
                             </div>
                             <div class="brand-name d-flex">
-                                <div class="text-wrapper-2">Brand name:</div>
+                                <div class="text-wrapper-2">{{ __('home.Brand name') }}:</div>
                                 <div class="text-wrapper-3">{{ $medicine->brand_name }}</div>
                             </div>
                             <div class="brand-name mt-2 mb-2">
-                                <label class="text-wrapper-2" for="quantity">Số lượng: </label>
+                                <label class="text-wrapper-2" for="quantity">{{ __('home.Số lượng') }}: </label>
                                 <input type="number" min="1" value="1" id="quantity" class="w-25 input-quantity">
                             </div>
                         </div>
@@ -86,10 +86,10 @@
                                class="d-none">
                         <div class="row">
                             <div class="col-6">
-                                <button id="btnVisitStore" class="btn btn-secondary w-100">Visit store</button>
+                                <button id="btnVisitStore" class="btn btn-secondary w-100">{{ __('home.Visit store') }}</button>
                             </div>
                             <div class="col-6">
-                                <button id="btnBuyNow" class="btn btn-primary w-100">Buy now</button>
+                                <button id="btnBuyNow" class="btn btn-primary w-100">{{ __('home.Buy now') }}</button>
                             </div>
                         </div>
                     </div>
