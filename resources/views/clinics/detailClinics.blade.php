@@ -1,5 +1,3 @@
-@php
-    @endphp
 @extends('layouts.master')
 @section('title', 'Booking Clinic')
 @section('content')

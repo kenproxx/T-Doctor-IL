@@ -17,7 +17,6 @@
                 }
             });
         }
-
         async function renderClinics(res) {
             let html = ``;
             const baseUrl = '{{ route("clinic.detail", ["id" => ":id"]) }}';
@@ -30,7 +29,12 @@
                 for (let j = 0; j < arrayGallery.length; j++) {
                     img = img + `<img class="mr-2 w-auto h-100 img-item1 " src="${arrayGallery[j]}" alt="">`;
                 }
-
+                let serviceHtml = ``;
+                let service = item.services;
+                for (let j = 0; j < service.length; j++) {
+                    let serviceItem = service[j];
+                    serviceHtml = serviceHtml + `<span>${serviceItem.name},</span>`;
+                }
                 html = html + `
                 <div class="col-md-4 mb-md-3">
                     <div class="clinic-item">
@@ -44,7 +48,7 @@
                             <i class="fa-solid fa-location-dot"></i> ${item.address} - <span>3 Km</span>
                         </div>
                         <div class="service">
-                            Service: Implant, Brightening, Crown(null)
+                            Service: ${serviceHtml}
                         </div>
                         <div class="star d-flex">
                             <i class="bi bi-star-fill"></i>
