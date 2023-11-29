@@ -433,7 +433,7 @@
         </div>
         <div class="container">
             @php
-                $doctors = \App\Models\DoctorInfo::where('status', \App\Enums\DoctorInfoStatus::ACTIVE)->get();
+                $doctors = \App\Models\User::where('type', \App\Enums\TypeUser::DOCTORS)->get();
             @endphp
             <div id="list-doctor" class="d-flex row">
                 @foreach($doctors as $doctor)
