@@ -99,13 +99,58 @@
         <i class="zmdi zmdi-chevron-up"></i>
     </span>
 </div>
+
+
+<div class="modal fade" id="modal-call-alert" data-backdrop="static" data-keyboard="false" tabindex="-1"
+     aria-labelledby="modal-call-alert-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal-call-alert-label">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Từ chối</button>
+                <button type="button" class="btn btn-primary"  data-dismiss="modal" id="ReceiveCall">Tiếp nhận</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 @include('components.head.tinymce-config')
+<script src="https://js.pusher.com/5.0/pusher.min.js"></script>
 
 <script>
     function loadingMasterPage() {
         let overlay = document.getElementsByClassName('loading-overlay-master')[0]
         overlay.classList.toggle('is-active')
     }
+
+    var pusher = new Pusher('3ac4f810445d089829e8', {
+        cluster: 'ap1', // specify your cluster here
+        encrypted: true
+    });
+    // Subscribe to the channel we specified in our Laravel Event
+    var channel = pusher.subscribe('send-message');
+    // Bind a function to a Event (the full Laravel class)
+    channel.bind('send-message', function (data) {
+        let thisUser = '{{Auth::user()->id}}'
+        if (data.to != thisUser) {
+            return;
+        }
+        $('#modal-call-alert').modal('show')
+        document.getElementById('modal-call-alert-label').innerHTML = 'Cuộc gọi từ ' + data.from
+
+        document.getElementById('ReceiveCall').addEventListener('click', function () {
+            window.open(data.content, '_blank');
+            $('#modal-call-alert').modal('hide')
+        });
+    });
 </script>
 </html>

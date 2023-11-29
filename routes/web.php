@@ -186,8 +186,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['prefix' => 'connect'], function () {
         Route::group(['prefix' => 'video'], function () {
-            Route::get('index', [CallVideoController::class, 'index'])->name('api.backend.connect.video.index');
-            Route::get('index2', [CallVideoController::class, 'index2'])->name('api.backend.connect.video.index2');
             Route::get('index3', [CallVideoController::class, 'index3'])->name('api.backend.connect.video.index3');
 
             Route::post("/createMeeting", [CallVideoController::class, 'createMeeting'])->name("createMeeting");

@@ -92,7 +92,7 @@
 
                 @if(\Illuminate\Support\Facades\Auth::user()->id != $user->id)
                 <td >
-                    <form method="post" action="{{ route('createMeeting') }}">
+                    <form method="post" action="{{ route('createMeeting') }}" target="_blank">
                         {{ csrf_field() }}
                         <input type="hidden" name="user_id_1" value="{{ \Illuminate\Support\Facades\Auth::user()->id }}">
                         <input type="hidden" name="user_id_2" value="{{ $user->id }}">

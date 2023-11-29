@@ -14,21 +14,15 @@ class CallVideoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        return view('admin.connect.video.index');
-    }
-    public function index2()
-    {
-        return view('admin.connect.video.index-stg');
-    }
+
     public function index3()
     {
         return view('admin.connect.video.index-materu');
     }
 
 
-    public function createMeeting(Request $request) {
+    public function createMeeting(Request $request)
+    {
 
         $METERED_DOMAIN = env('METERED_DOMAIN');
         $METERED_SECRET_KEY = env('METERED_SECRET_KEY');
@@ -41,24 +35,21 @@ class CallVideoController extends Controller
 
         $roomName = $response->json("roomName");
 
-        $connect = ConnectCallVideo::where('user_id_1', Auth::user()->id)->orWhere('user_id_2', Auth::user()->id)->first();
+        $connect = ConnectCallVideo::where('user_id_1', Auth::user()->id)->orWhere('user_id_2',
+            Auth::user()->id)->first();
 
-        $data['title'] = '123';
-        $data['content'] = '456';
+        $data['from'] = Auth::user()->name;
+        $data['to'] = $request->input('user_id_2');
+        $data['content'] = route('joinMeeting', ['meetingId' => $connect->room_name]);
 
         $options = array(
             'cluster' => 'ap1',
             'encrypted' => true
         );
 
-        $pusher = new Pusher(
-            env('PUSHER_APP_KEY'),
-            env('PUSHER_APP_SECRET'),
-            env('PUSHER_APP_ID'),
-            $options
-        );
+        $pusher = new Pusher(env('PUSHER_APP_KEY'), env('PUSHER_APP_SECRET'), env('PUSHER_APP_ID'), $options);
 
-        $pusher->trigger('Notify', 'send-message', $data);
+        $pusher->trigger('send-message', 'send-message', $data);
 
         if ($connect) {
             return redirect(route('joinMeeting', ['meetingId' => $connect->room_name])); // We will update this soon
@@ -72,7 +63,8 @@ class CallVideoController extends Controller
         }
     }
 
-    public function validateMeeting(Request $request) {
+    public function validateMeeting(Request $request)
+    {
         $METERED_DOMAIN = env('METERED_DOMAIN');
         $METERED_SECRET_KEY = env('METERED_SECRET_KEY');
 
@@ -84,7 +76,7 @@ class CallVideoController extends Controller
         $roomName = $response->json("roomName");
 
 
-        if ($response->status() === 200)  {
+        if ($response->status() === 200) {
             return redirect(route('joinMeeting', ['meetingId' => $roomName])); // We will update this soon
         } else {
             return redirect("/?error=Invalid Meeting ID");
