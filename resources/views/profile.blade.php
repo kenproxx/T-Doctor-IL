@@ -111,7 +111,7 @@
 
                         <input type="hidden" id="user_id" name="user_id"
                                value="{{ Auth::user()->id }}">
-                        <button type="button" class="btn btn-primary" onclick="submitForm()">Submit</button>
+                        <button type="button" class="btn btn-primary" onclick="submitForm()">{{ __('home.Submit') }}</button>
                     </form>
                 </div>
             </div>
@@ -123,7 +123,7 @@
             <div class="card shadow mb-4">
 
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">My Account</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">{{ __('home.My Account') }}</h6>
                 </div>
 
                 <div class="card-body">
@@ -133,13 +133,13 @@
 
                         <input type="hidden" name="_method" value="PUT">
 
-                        <h6 class="heading-small text-muted mb-4">User information</h6>
+                        <h6 class="heading-small text-muted mb-4">{{ __('home.User information') }}</h6>
 
                         <div class="pl-lg-4">
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="username">Username<span
+                                        <label class="form-control-label" for="username">{{ __('home.Username') }}<span
                                                 class="small text-danger">*</span></label>
                                         <input type="text" id="username" class="form-control" name="username"
                                                placeholder="Username"
@@ -148,7 +148,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="name">Name<span
+                                        <label class="form-control-label" for="name">{{ __('home.Name') }}<span
                                                 class="small text-danger">*</span></label>
                                         <input type="text" id="name" class="form-control" name="name" placeholder="Name"
                                                value="{{ old('name', Auth::user()->name) }}">
@@ -156,7 +156,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="last_name">Last name</label>
+                                        <label class="form-control-label" for="last_name">{{ __('home.Last name') }}</label>
                                         <input type="text" id="last_name" class="form-control" name="last_name"
                                                placeholder="Last name"
                                                value="{{ old('last_name', Auth::user()->last_name) }}">
@@ -167,7 +167,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="email">Email address<span
+                                        <label class="form-control-label" for="email">{{ __('home.Email address') }}<span
                                                 class="small text-danger">*</span></label>
                                         <input type="email" id="email" class="form-control" name="email"
                                                placeholder="example@example.com"
@@ -176,7 +176,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="phone">PhoneNumber<span
+                                        <label class="form-control-label" for="phone">{{ __('home.PhoneNumbe') }}r<span
                                                 class="small text-danger">*</span></label>
                                         <input type="text" id="phone" class="form-control" name="phone"
                                                placeholder="Phone"
@@ -188,30 +188,28 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="current_password">Current
-                                            password</label>
+                                        <label class="form-control-label" for="current_password">{{ __('home.Current password') }}</label>
                                         <input type="password" id="current_password" class="form-control"
                                                name="current_password" placeholder="Current password">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="new_password">New password</label>
+                                        <label class="form-control-label" for="new_password">{{ __('home.New password') }}</label>
                                         <input type="password" id="new_password" class="form-control"
                                                name="new_password" placeholder="New password">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="confirm_password">Confirm
-                                            password</label>
+                                        <label class="form-control-label" for="confirm_password">{{ __('home.Confirm password') }}</label>
                                         <input type="password" id="confirm_password" class="form-control"
                                                name="password_confirmation" placeholder="Confirm password">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-3"><label>Nation</label>
+                                <div class="col-sm-3"><label>{{ __('home.Nation') }}</label>
                                     <select class="custom-select" name="nation_id" id="nation_id"
                                             onchange="searchProvince(this.value)">
                                         @if($nations)
@@ -222,18 +220,18 @@
                                         @endif
                                     </select>
                                 </div>
-                                <div class="col-sm-3"><label>Province</label>
+                                <div class="col-sm-3"><label>{{ __('home.Province') }}</label>
                                     <select class="custom-select" name="province_id" id="province_id"
                                             onchange="searchDistrict(this.value)">
                                     </select>
                                 </div>
-                                <div class="col-sm-3"><label>District</label>
+                                <div class="col-sm-3"><label>{{ __('home.District') }}</label>
                                     <select class="custom-select" name="district_id" id="district_id"
                                             onchange="searchCommune(this.value)">
 
                                     </select>
                                 </div>
-                                <div class="col-sm-3"><label>Commune</label>
+                                <div class="col-sm-3"><label>{{ __('home.Commune') }}</label>
                                     <select class="custom-select" name="commune_id" id="commune_id">
 
                                     </select>
@@ -242,7 +240,7 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="address_code">AddressCode</label>
+                                        <label class="form-control-label" for="address_code">{{ __('home.AddressCode') }}</label>
                                         <input type="text" id="address_code" class="form-control" name="address_code"
                                                placeholder="HN123"
                                                value="{{ old('address_code', Auth::user()->address_code) }}">
@@ -250,7 +248,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="member">Member<span
+                                        <label class="form-control-label" for="member">{{ __('home.Member') }}<span
                                                 class="small text-danger">*</span></label>
                                         <select id="member" name="member" class="form-control" disabled>
                                             @foreach($roles as $role)
@@ -268,7 +266,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="status">Status</label>
+                                        <label class="form-control-label" for="status">{{ __('home.Status') }}</label>
                                         <input type="text" id="status" class="form-control" name="status"
                                                disabled
                                                value="{{ old('status', Auth::user()->status) }}">
@@ -281,7 +279,7 @@
                         <div class="pl-lg-4">
                             <div class="row">
                                 <div class="col text-center">
-                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                    <button type="submit" class="btn btn-primary">{{ __('home.Save Changes') }}</button>
                                 </div>
                             </div>
                         </div>

@@ -375,7 +375,44 @@ return [
     'Attention' =>'Attention',
     'Edit' => 'Edit',
     'Add new CV' => 'Add new CV',
-    'Single' => 'Single'
+    'Single' => 'Single',
+    'Visit information' => 'Visit information',
+    'SNS option' => 'SNS option',
+    'Applicant information' =>'Applicant information',
+    'Contact number' => 'Contact number',
+    'Apply motivation' => 'Apply motivation',
+    'My campaign' => 'My campaign',
+    'Interested campaign' => 'Interested campaign',
+    'My SNS' => 'My SNS',
+    'Discounted sevice' => 'Discounted sevice',
+    'My Account' => 'My Account',
+    'User information' => 'User information',
+    'Last name' => 'Last name',
+    'Email address' => 'Email address',
+    'Current password' => 'Current password',
+    'New password' => 'New password',
+    'Province' => 'Province',
+    'Commune' => 'Commune',
+    'Status' => 'Status',
+    'Save Changes' => 'Save Changes',
+    'Search for anything...' => 'Search for anything...',
+    'Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCT' => 'We are looking to recruit 2 doctors specializing in physical therapy or traditional medicine',
+    'Bên mình đang cần tuyển dụng 2 BS chuyên khoa VLTL hoặc YHCTĐịa điểm làm việc: 77 Hoàng Hoa Thám, Phường 13, Quận Tân Bình, TPHCM' => 'We are looking to recruit 2 doctors specializing in physical therapy or traditional medicine. Work location: 77 Hoang Hoa Tham, Ward 13, Tan Binh District, HCMC',
+    'Recruitment details' => 'Recruitment details',
+    'Bệnh viện bạch mai' => 'Bach Mai Hospital',
+    'From of employment' => 'From of employment',
+    'Full time' => 'Full time',
+    'Salary' => 'Salary',
+    '7 - 12 million' => '7 - 12 million',
+    'Deadline' => 'Deadline',
+    'Company page' => 'Company page',
+    'Select CV' => 'Select CV',
+    'Job Description' => 'Job Description',
+    'Conact number' => 'Conact number'
+
+
+
+
 
 
 

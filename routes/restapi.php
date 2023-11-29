@@ -98,3 +98,5 @@ Route::group(['prefix' => 'address'], function () {
 Route::group(['prefix' => 'products-medicines'], function () {
     Route::get('/category/{id}', [ProductMedicineApi::class, 'findMedicineByCategory'])->name('restapi.get.products.medicines.category');
 });
+
+Route::get('/users/by-role/{role_id}', [\App\Http\Controllers\ProfileController::class, 'getUsersByRoleId'])->name('role.user');

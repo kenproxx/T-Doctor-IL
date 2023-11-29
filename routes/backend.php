@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\backend\BackendCouponApplyController;
 use App\Http\Controllers\backend\BackendCouponController;
+use App\Http\Controllers\connect\CallVideoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\restapi\BookingApi;
 use App\Http\Controllers\restapi\DoctorReviewApi;
@@ -52,6 +53,7 @@ Route::group(['prefix' => 'service-clinics'], function () {
 });
 
 Route::get('/info-user/{id}', [ProfileController::class, 'infoUser'])->name('info.user');
+
 
 Route::group(['prefix' => 'booking'], function () {
     Route::get('/list-users/{id}/{status}', [BookingApi::class, 'getAllBookingByUserId'])->name('api.booking.list.users');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Nation;
 use App\Models\Role;
+use App\Models\RoleUser;
 use App\Models\SocialUser;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -35,6 +36,24 @@ class ProfileController extends Controller
         ];
 
         return response()->json($responseData);
+    }
+
+    public function getUsersByRoleId($roleId) {
+        $roleExists = RoleUser::where('role_id', $roleId)->exists();
+
+        if (!$roleExists) {
+            return response()->json(['message' => 'Role not found'], 404);
+        }
+
+        $userIds = RoleUser::where('role_id', $roleId)->pluck('user_id');
+
+        if ($userIds->isEmpty()) {
+            return response()->json(['message' => 'No users found for the given role_id'], 404);
+        }
+
+        $users = User::whereIn('id', $userIds)->get();
+
+        return response()->json(['users' => $users]);
     }
 
     public function update(Request $request)

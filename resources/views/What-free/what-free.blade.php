@@ -18,8 +18,8 @@
         <div class="clinics-list">
             <div class="clinics-header margin-bottom-32 border-bottom">
                 <div class="justify-content-between align-items-center d-flex mt-4 mb-2">
-                    <div class="ac-text_content ">Free today</div>
-                    <div class="flea-content-product"><a href="{{route('what.free.to.day')}}">See all</a></div>
+                    <div class="ac-text_content ">{{ __('home.Free today') }}</div>
+                    <div class="flea-content-product"><a href="{{route('what.free.to.day')}}">{{ __('home.See all') }}</a></div>
                 </div>
             </div>
             <div class="body row">
