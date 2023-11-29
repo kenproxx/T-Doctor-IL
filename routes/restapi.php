@@ -6,12 +6,15 @@ use App\Http\Controllers\restapi\CategoryApi;
 use App\Http\Controllers\restapi\ClinicApi;
 use App\Http\Controllers\restapi\DoctorDepartmentApi;
 use App\Http\Controllers\restapi\DoctorInfoApi;
+use App\Http\Controllers\restapi\NewsApi;
 use App\Http\Controllers\restapi\PharmacyApi;
 use App\Http\Controllers\restapi\ProductInfoApi;
 use App\Http\Controllers\restapi\ProductMedicineApi;
 use App\Http\Controllers\restapi\QrCodeApi;
 use App\Http\Controllers\restapi\ReadAddressApi;
 use App\Http\Controllers\restapi\ReviewApi;
+use App\Http\Controllers\restapi\ShortVideoApi;
+use App\Http\Controllers\restapi\TopicVideoApi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,6 +72,25 @@ Route::group(['prefix' => 'reviews'], function () {
     Route::get('/clinics/{id}', [ReviewApi::class, 'getAllByClinicId'])->name('reviews.api.clinics');
     Route::get('/detail/{id}', [ReviewApi::class, 'detail'])->name('reviews.api.detail');
     Route::post('/create', [ReviewApi::class, 'create'])->name('reviews.api.create');
+});
+
+Route::group(['prefix' => 'news'], function () {
+    Route::get('/list', [NewsApi::class, 'getAll'])->name('news.api.list');
+    Route::get('/users/{id}', [NewsApi::class, 'getAllByUserID'])->name('news.api.users');
+    Route::get('/detail/{id}', [NewsApi::class, 'detail'])->name('news.api.detail');
+});
+
+Route::group(['prefix' => 'topic-videos'], function () {
+    Route::get('/list', [TopicVideoApi::class, 'getAll'])->name('restapi.topic.videos.list');
+    Route::get('/users/{id}', [TopicVideoApi::class, 'getAllByUserID'])->name('restapi.topic.videos.users');
+    Route::get('/detail/{id}', [TopicVideoApi::class, 'detail'])->name('restapi.topic.videos.detail');
+});
+
+Route::group(['prefix' => 'short-videos'], function () {
+    Route::get('/list', [ShortVideoApi::class, 'getAll'])->name('short.videos.list');
+    Route::get('/users/{id}', [ShortVideoApi::class, 'getAllByUserID'])->name('short.videos.users');
+    Route::get('/topics/{id}', [ShortVideoApi::class, 'getAllByTopic'])->name('short.videos.topics');
+    Route::get('/detail/{id}', [ShortVideoApi::class, 'detail'])->name('short.videos.detail');
 });
 
 Route::group(['prefix' => 'coupons'], function () {

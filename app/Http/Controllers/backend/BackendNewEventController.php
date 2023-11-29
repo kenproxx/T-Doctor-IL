@@ -50,9 +50,9 @@ class BackendNewEventController extends Controller
     public function destroy(string $id)
     {
         $newEvent = NewEvent::find($id);
-        // nếu tìm thấy, thì sửa status = Inactive và thông báo
+        // nếu tìm thấy, thì sửa status = DELETED và thông báo
         if ($newEvent) {
-            $newEvent->status = NewEventStatus::INACTIVE;
+            $newEvent->status = NewEventStatus::DELETED;
             $success = $newEvent->update();
             if ($success) {
                 return response('Xóa sự kiện thành công !!!', 200);

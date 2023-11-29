@@ -26,6 +26,7 @@ use App\Http\Controllers\RecruitmentController;
 use App\Http\Controllers\restapi\BookingApi;
 use App\Http\Controllers\ReviewStoreController;
 use App\Http\Controllers\ServiceClinicController;
+use App\Http\Controllers\ShortVideoController;
 use App\Http\Controllers\WhatFreeToDay;
 use Illuminate\Support\Facades\Route;
 
@@ -176,6 +177,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/return-checkout', [CheckoutController::class, 'returnCheckout'])->name('return.checkout.payment');
         Route::post('/imm', [CheckoutController::class, 'checkoutByImm'])->name('user.checkout.imm');
         Route::post('/vnpay', [CheckoutController::class, 'checkoutByVNPay'])->name('user.checkout.vnpay');
+    });
+
+    Route::group(['prefix' => 'short-videos'], function () {
+        Route::get('', [ShortVideoController::class, 'showVideo'])->name('short.videos.show');
+        Route::get('/{id}', [ShortVideoController::class, 'detail'])->name('short.videos.item');
     });
 
     Route::group(['prefix' => 'service-clinics'], function () {

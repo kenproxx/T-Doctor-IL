@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\BackendNewEventController;
+use App\Http\Controllers\restapi\admin\AdminTopicVideoApi;
 use App\Http\Controllers\restapi\admin\AminServiceClinicApi;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,16 @@ Route::group(['prefix' => 'service-clinics'], function () {
     Route::put('update/{id}', [AminServiceClinicApi::class, 'update'])->name('api.admin.service.clinic.update');
     Route::put('change-status/{id}', [AminServiceClinicApi::class, 'changeStatus'])->name('api.admin.service.clinic.changeStatus');
     Route::delete('delete/{id}', [AminServiceClinicApi::class, 'delete'])->name('api.admin.service.clinic.delete');
+});
+
+Route::group(['prefix' => 'topic-videos'], function () {
+    Route::get('/list', [AdminTopicVideoApi::class, 'getAll'])->name('api.admin.topic.videos.list');
+    Route::get('/users/{id}', [AdminTopicVideoApi::class, 'getAllByUserID'])->name('api.admin.topic.videos.users');
+    Route::get('/detail/{id}', [AdminTopicVideoApi::class, 'detail'])->name('api.admin.topic.videos.detail');
+
+    Route::post('/create', [AdminTopicVideoApi::class, 'create'])->name('api.admin.topic.videos.create');
+    Route::put('/update/{id}', [AdminTopicVideoApi::class, 'update'])->name('api.admin.topic.videos.update');
+    Route::delete('/delete/{id}', [AdminTopicVideoApi::class, 'delete'])->name('api.admin.topic.videos.delete');
 });
 
 
