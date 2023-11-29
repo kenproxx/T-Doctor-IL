@@ -3,36 +3,53 @@
 @section('content')
     @include('layouts.partials.header')
     @include('component.banner')
-<div class="container">
-    @include('What-free.header-wFree')
-    @php
-        $addresses = \App\Models\Clinic::where('status', \App\Enums\ClinicStatus::ACTIVE)
-        ->orderBy('id', 'desc')
-        ->get();
-        $coordinatesArray = $addresses->toArray();
-    @endphp
-    <div class="clinics-list">
-        <div class="clinics-header row">
-            <div class=" d-flex justify-content-between">
-                <span class="fs-32px">{{ __('home.Suggestions near you') }}</span>
-                <span>
+    <div class="container">
+        @include('What-free.header-wFree')
+        @php
+            $address = DB::table('clinics')
+                  ->join('users', 'users.id', '=', 'clinics.user_id')
+                        ->where('clinics.status', \App\Enums\ClinicStatus::ACTIVE)
+                        ->where('clinics.type', \App\Enums\TypeBussiness::CLINICS)
+                        ->select('clinics.*', 'users.email')
+                        ->cursor()
+                        ->map(function ($item) {
+                            $array = explode(',', $item->service_id);
+                            $services = \App\Models\ServiceClinic::whereIn('id', $array)->get();
+                            $array = explode(',', $item->address);
+                            $addressP = \App\Models\Province::where('id', $array[1])->first();
+                            $addressD = \App\Models\District::where('id', $array[2])->first();
+                            $addressC = \App\Models\Commune::where('id', $array[3])->first();
+                            $clinic = (array)$item;
+                            $clinic['total_services'] = $services->count();
+                            $clinic['services'] = $services->toArray();
+                            $clinic['addressInfo'] = $addressC['name'] . ',' . $addressD['name'] . ',' . $addressP['name'];
+                            return $clinic;
+                        });
+            $adr = $address->toArray();
+        @endphp
+        <div class="clinics-list">
+            <div class="clinics-header row">
+                <div class=" d-flex justify-content-between">
+                    <span class="fs-32px">{{ __('home.Suggestions near you') }}</span>
+                    <span>
                     <a href="">{{ __('home.See all') }}</a>
                 </span>
+                </div>
             </div>
-        </div>
-        <div class="body row" id="productInformation"></div>
+            <div class="body row" id="productInformation"></div>
 
-    </div>
-    <div class="other-clinics">
-        <div class="title">
-            {{ __('home.Other Clinics/Pharmacies') }}
         </div>
-        @include('component.clinic')
+        <div class="other-clinics">
+            <div class="title">
+                {{ __('home.Other Clinics/Pharmacies') }}
+            </div>
+            @include('component.clinic')
+        </div>
     </div>
-</div>
     <script>
-        var locations = {!! json_encode($coordinatesArray) !!};
+        var addressNew = {!! json_encode($adr) !!};
         var infoWindows = [];
+
         function getCurrentLocation(callback) {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function (position) {
@@ -80,27 +97,32 @@
                     var urlDetail = "{{ route('clinic.detail', ['id' => ':id']) }}".replace(':id', item.id);
 
                     let img = '';
-                    console.log(item)
                     let gallery = item.gallery;
                     let arrayGallery = gallery.split(',');
                     for (let j = 0; j < arrayGallery.length; j++) {
                         img += `<img class="mr-2 w-auto h-100 img-item1" src="${arrayGallery[j]}" alt="">`;
                     }
+                    let serviceHtml = ``;
+                    let service = item.services;
+                    for (let j = 0; j < service.length; j++) {
+                        let serviceItem = service[j];
+                        serviceHtml = serviceHtml + `<span>${serviceItem.name},</span>`;
+                    }
 
                     let html = `
                     <div class="col-md-4 mb-md-3">
                         <div class="clinic-item over-x-hidden">
-                            <a href="${urlDetail}">
+                            <a class="text-overflow" href="${urlDetail}">
                                 ${item.name}
                             </a>
                             <div class="time d-flex">
                                 <p>${item.open_date} - ${item.close_date}</p>
                             </div>
                             <div class="location">
-                                <i class="fa-solid fa-location-dot"></i>${item.address_detail} ${item.address} - <span>${distance.toFixed(2)} Km</span>
+                                <div class="text-overflow d-flex"><i class="fa-solid fa-location-dot text-overflow pr-2"></i>${item.address_detail} ${item.addressInfo} </div>- <span>${distance.toFixed(2)} Km</span>
                             </div>
                             <div class="service">
-                                Service: Implant, Brightening, Crown(null)
+                                Service: ${serviceHtml}
                             </div>
                             <div class="star d-flex">
                                 <i class="bi bi-star-fill"></i>
@@ -124,13 +146,11 @@
 
         function loadProductInformation() {
             getCurrentLocation(function (currentLocation) {
-                initShowProducts(currentLocation, locations);
+                initShowProducts(currentLocation, addressNew);
             });
         }
 
         loadProductInformation();
     </script>
-
-
 
 @endsection

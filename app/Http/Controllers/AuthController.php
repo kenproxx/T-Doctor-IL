@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Enums\UserStatus;
 use App\Models\Role;
-use App\Models\RoleUser;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -152,17 +151,23 @@ class AuthController extends Controller
             $user->phone = '';
             $user->address_code = '';
             $user->type = $type;
+            $user->member = $member;
 
             if ($checkPending) {
                 $user->status = UserStatus::PENDING;
             } else {
                 $user->status = UserStatus::ACTIVE;
             }
-
             $success = $user->save();
 
             if ($success) {
                 (new MainController())->createRoleUser($member, $username);
+
+                if ($user->member == 'DOCTORS') {
+                    auth()->login($user, true);
+                    toast('Register success!', 'success', 'top-left');
+                    return redirect()->route('profile');
+                }
 
                 toast('Register success!', 'success', 'top-left');
                 return redirect(route('home'));

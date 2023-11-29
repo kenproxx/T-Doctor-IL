@@ -25,7 +25,6 @@
             </button>
         </div>
     @endif
-
     @if ($errors->any())
         <div class="alert alert-danger border-left-danger" role="alert">
             <ul class="pl-4 my-2">
@@ -103,7 +102,7 @@
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i
-                                        class="fa-solid fa-otter w-icon-px"></i></span>
+                                        class="fa-solid fa-hashtag"></i></span>
                             </div>
                             <input type="text" class="form-control" id="other" name="other"
                                    value="{{ $socialUser->other ?? '' }}">
@@ -111,7 +110,8 @@
 
                         <input type="hidden" id="user_id" name="user_id"
                                value="{{ Auth::user()->id }}">
-                        <button type="button" class="btn btn-primary" onclick="submitForm()">{{ __('home.Submit') }}</button>
+                        <button type="button" class="btn btn-primary"
+                                onclick="submitForm()">{{ __('home.Submit') }}</button>
                     </form>
                 </div>
             </div>
@@ -128,7 +128,7 @@
 
                 <div class="card-body">
 
-                    <form method="POST" action="{{ route('profile.update') }}" autocomplete="off">
+                    <form method="POST" action="{{ route('profile.update') }}" autocomplete="off" enctype="multipart/form-data">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                         <input type="hidden" name="_method" value="PUT">
@@ -150,13 +150,14 @@
                                     <div class="form-group focused">
                                         <label class="form-control-label" for="name">{{ __('home.Name') }}<span
                                                 class="small text-danger">*</span></label>
-                                        <input type="text" id="name" class="form-control" name="name" placeholder="Name"
+                                        <input type="text" id="name" class="form-control" name="name" placeholder="Name" required
                                                value="{{ old('name', Auth::user()->name) }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="last_name">{{ __('home.Last name') }}</label>
+                                        <label class="form-control-label"
+                                               for="last_name">{{ __('home.Last name') }}</label>
                                         <input type="text" id="last_name" class="form-control" name="last_name"
                                                placeholder="Last name"
                                                value="{{ old('last_name', Auth::user()->last_name) }}">
@@ -165,85 +166,115 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="email">{{ __('home.Email address') }}<span
+                                        <label class="form-control-label" for="email">{{ __('home.Email address') }}
+                                            <span
                                                 class="small text-danger">*</span></label>
                                         <input type="email" id="email" class="form-control" name="email"
                                                placeholder="example@example.com"
                                                value="{{ old('email', Auth::user()->email) }}">
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="phone">{{ __('home.PhoneNumbe') }}r<span
+                                        <label class="form-control-label" for="phone">{{ __('home.PhoneNumber') }}r<span
                                                 class="small text-danger">*</span></label>
-                                        <input type="text" id="phone" class="form-control" name="phone"
+                                        <input type="number" id="phone" class="form-control" name="phone"
                                                placeholder="Phone"
-                                               value="{{ old('phone', Auth::user()->phone) }}">
+                                               value="{{ old('phone', Auth::user()->phone) }}" required>
                                     </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="avt">Ảnh đại diện </label>
+                                    <input type="file" class="form-control" id="avt" name="avt" accept="image/*, .pdf, .doc, .docx">
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="current_password">{{ __('home.Current password') }}</label>
+                                        <label class="form-control-label"
+                                               for="current_password">{{ __('home.Current password') }}</label>
                                         <input type="password" id="current_password" class="form-control"
                                                name="current_password" placeholder="Current password">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="new_password">{{ __('home.New password') }}</label>
+                                        <label class="form-control-label"
+                                               for="new_password">{{ __('home.New password') }}</label>
                                         <input type="password" id="new_password" class="form-control"
                                                name="new_password" placeholder="New password">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="confirm_password">{{ __('home.Confirm password') }}</label>
+                                        <label class="form-control-label"
+                                               for="confirm_password">{{ __('home.Confirm password') }}</label>
                                         <input type="password" id="confirm_password" class="form-control"
                                                name="password_confirmation" placeholder="Confirm password">
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-3"><label>{{ __('home.Nation') }}</label>
-                                    <select class="custom-select" name="nation_id" id="nation_id"
-                                            onchange="searchProvince(this.value)">
-                                        @if($nations)
-                                            @foreach($nations as $nation)
-                                                <option
-                                                    value="{{ $nation->id }}" {{ Auth::user()->nation_id == $nation->id ? 'selected' : '' }}>{{ $nation->name }}</option>
-                                            @endforeach
+                                <div class="col-sm-4">
+                                    <label for="detail_address">địa chỉ chi tiết việt</label>
+                                    <input class="form-control" name="detail_address" id="detail_address"
+                                           value="{{$doctor->detail_address}}">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="detail_address_en">địa chỉ chi tiết anh</label>
+                                    <input class="form-control" name="detail_address_en" id="detail_address_en"
+                                           value="{{$doctor->detail_address_en}}">
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="detail_address_laos">địa chỉ chi tiết lào</label>
+                                    <input class="form-control" name="detail_address_laos" id="detail_address_laos"
+                                           value="{{$doctor->detail_address_laos}}">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <label for="province_id">Tỉnh</label>
+                                    <select name="province_id" id="province_id" class="form-control">
+
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="district_id">Quận</label>
+                                    @php
+                                        $district = \App\Models\District::find($doctor->district_id);
+                                    @endphp
+                                    <select name="district_id" id="district_id" class="form-control">
+                                        @if(!$district == null)
+                                            <option value="{{$district->id}}-{{$district->code}}"> {{$district->name}}</option>
+
                                         @endif
+                                            <option value="">Chọn quận</option>
                                     </select>
                                 </div>
-                                <div class="col-sm-3"><label>{{ __('home.Province') }}</label>
-                                    <select class="custom-select" name="province_id" id="province_id"
-                                            onchange="searchDistrict(this.value)">
-                                    </select>
-                                </div>
-                                <div class="col-sm-3"><label>{{ __('home.District') }}</label>
-                                    <select class="custom-select" name="district_id" id="district_id"
-                                            onchange="searchCommune(this.value)">
-
-                                    </select>
-                                </div>
-                                <div class="col-sm-3"><label>{{ __('home.Commune') }}</label>
-                                    <select class="custom-select" name="commune_id" id="commune_id">
-
+                                <div class="col-sm-4">
+                                    <label for="commune_id">Xã</label>
+                                    @php
+                                        $commune = \App\Models\Commune::find($doctor->commune_id);
+                                    @endphp
+                                    <select name="commune_id" id="commune_id" class="form-control">
+                                        @if(!$commune == null)
+                                            <option value="{{$commune->id}}-{{$commune->code}}">{{$commune->name}}</option>
+                                        @endif
+                                            <option value="">Chọn xã</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
-                                        <label class="form-control-label" for="address_code">{{ __('home.AddressCode') }}</label>
+                                        <label class="form-control-label"
+                                               for="address_code">{{ __('home.AddressCode') }}</label>
                                         <input type="text" id="address_code" class="form-control" name="address_code"
-                                               placeholder="HN123"
-                                               value="{{ old('address_code', Auth::user()->address_code) }}">
+                                               placeholder="ha_noi"
+                                               value="{{ old('address_code', Auth::user()->address_code) }}" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -273,6 +304,197 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- Doctor -->
+
+                            @php
+                                $roleItem = Auth::user()->roles()->first();
+                            @endphp
+                            @if($roleItem->name == 'DOCTORS')
+                                <h1>Info doctor</h1>
+
+                                <div class="row">
+                                    <div class="col-sm-4"><label for="specialty">chuyên môn việt</label>
+                                        <input type="text" class="form-control" id="specialty" name="specialty" value="{{$doctor->specialty}}">
+                                    </div>
+                                    <div class="col-sm-4"><label for="specialty_en">chuyên môn anh</label>
+                                        <input type="text" class="form-control" id="specialty_en" name="specialty_en"
+                                               value="{{$doctor->specialty_en}}"></div>
+                                    <div class="col-sm-4"><label for="specialty_laos">chuyên môn lào</label>
+                                        <input type="text" class="form-control" id="specialty_laos" name="specialty_laos"
+                                               value="{{$doctor->specialty_laos}}"></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label for="service">Dịch vụ cung cấp việt</label>
+                                        <textarea class="form-control" name="service" id="service">{{$doctor->service}}</textarea>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="service_en">Dịch vụ cung cấp anh</label>
+                                        <textarea class="form-control" name="service_en" id="service_en">{{$doctor->service_en}}</textarea>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="service_laos">Dịch vụ cung cấp lào</label>
+                                        <textarea class="form-control" name="service_laos"
+                                                  id="service_laos">{{$doctor->service_laos}}</textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label for="service_price">Giá dịch vụ việt</label>
+                                        <input class="form-control" type="number" name="service_price" id="service_price"
+                                               value="{{$doctor->service_price}}">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="service_price_en">Giá dịch vụ anh</label>
+                                        <input class="form-control" type="number" name="service_price_en" id="service_price_en"
+                                               value="{{$doctor->service_price_en}}">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="service_price_laos">Giá dịch vụ lào</label>
+                                        <input class="form-control" type="number" name="service_price_laos" id="service_price_laos"
+                                               value="{{$doctor->service_price_laos}}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    @php
+                                        $working1 = $doctor->time_working_1;
+                                        $arrayWorking1 = explode('-', $working1);
+
+                                        $working2 = $doctor->time_working_2;
+                                        $arrayWorking2 = explode('-', $working2);
+                                    @endphp
+                                    @if(!$working1 == null && !$working2 == null)
+                                        <div class="col-sm-3">
+                                            <label for="time_working_1_start">Thời gian làm việc bắt đầu</label>
+                                            <input type="time" class="form-control" id="time_working_1_start" name="time_working_1_start"
+                                                   value="{{ $arrayWorking1[0] }}">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label for="time_working_1_end">Thời gian làm việc kết thúc</label>
+                                            <input type="time" class="form-control" id="time_working_1_end" name="time_working_1_end"
+                                                   value="{{ $arrayWorking1[1] }}">
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label for="time_working_2_start">Những này làm việc bắt đầu</label>
+                                            <select name="time_working_2_start" id="time_working_2_start" class="form-control">
+                                                <option {{ $arrayWorking2[0] == 'T2' ? 'selected' : '' }} value="T2">Thứ 2</option>
+                                                <option {{ $arrayWorking2[0] == 'T3' ? 'selected' : '' }}  value="T3">Thứ 3</option>
+                                                <option {{ $arrayWorking2[0] == 'T4' ? 'selected' : '' }}  value="T4">Thứ 4</option>
+                                                <option {{ $arrayWorking2[0] == 'T5' ? 'selected' : '' }}  value="T5">Thứ 5</option>
+                                                <option {{ $arrayWorking2[0] == 'T6' ? 'selected' : '' }}  value="T6">Thứ 6</option>
+                                                <option {{ $arrayWorking2[0] == 'T7' ? 'selected' : '' }}  value="T7">Thứ 7</option>
+                                                <option {{ $arrayWorking2[0] == 'CN' ? 'selected' : '' }}  value="CN">Chủ nhật</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <label for="time_working_2_end">Những này làm việc kết thúc</label>
+                                            <select name="time_working_2_end" id="time_working_2_end" class="form-control">
+                                                <option {{ $arrayWorking2[1] == 'T2' ? 'selected' : '' }}  value="T2">Thứ 2</option>
+                                                <option {{ $arrayWorking2[1] == 'T3' ? 'selected' : '' }}  value="T3">Thứ 3</option>
+                                                <option {{ $arrayWorking2[1] == 'T4' ? 'selected' : '' }}  value="T4">Thứ 4</option>
+                                                <option {{ $arrayWorking2[1] == 'T5' ? 'selected' : '' }}  value="T5">Thứ 5</option>
+                                                <option {{ $arrayWorking2[1] == 'T6' ? 'selected' : '' }}  value="T6">Thứ 6</option>
+                                                <option {{ $arrayWorking2[1] == 'T7' ? 'selected' : '' }}  value="T7">Thứ 7</option>
+                                                <option {{ $arrayWorking2[1] == 'CN' ? 'selected' : '' }}  value="CN">Chủ nhật</option>
+                                            </select>
+                                        </div>
+
+                                        <input type="text" class="form-control d-none" id="time_working_1" name="time_working_1">
+                                        <input type="text" class="form-control d-none" id="time_working_2" name="time_working_2">
+                                        <input type="text" class="form-control d-none" id="apply_for" name="apply_for">
+                                    @else
+                                    <div class="col-sm-3">
+                                        <label for="time_working_1_start">Thời gian làm việc bắt đầu</label>
+                                        <input type="time" class="form-control" id="time_working_1_start"
+                                               name="time_working_1_start"
+                                               value="00:00">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="time_working_1_end">Thời gian làm việc kết thúc</label>
+                                        <input type="time" class="form-control" id="time_working_1_end"
+                                               name="time_working_1_end" value="23:59">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="time_working_2_start">Những này làm việc bắt đầu</label>
+                                        <select name="time_working_2_start" id="time_working_2_start" class="form-control">
+                                            <option value="T2">Thứ 2</option>
+                                            <option value="T3">Thứ 3</option>
+                                            <option value="T4">Thứ 4</option>
+                                            <option value="T5">Thứ 5</option>
+                                            <option value="T6">Thứ 6</option>
+                                            <option value="T7">Thứ 7</option>
+                                            <option value="CN">Chủ nhật</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="time_working_2_end">Những này làm việc kết thúc</label>
+                                        <select name="time_working_2_end" id="time_working_2_end" class="form-control">
+                                            <option value="T2">Thứ 2</option>
+                                            <option value="T3">Thứ 3</option>
+                                            <option value="T4">Thứ 4</option>
+                                            <option value="T5">Thứ 5</option>
+                                            <option value="T6">Thứ 6</option>
+                                            <option value="T7">Thứ 7</option>
+                                            <option value="CN">Chủ nhật</option>
+                                        </select>
+                                    </div>
+
+                                    <input type="text" class="form-control d-none" id="time_working_1"
+                                           name="time_working_1">
+                                    <input type="text" class="form-control d-none" id="time_working_2"
+                                           name="time_working_2">
+                                    <input type="text" class="form-control d-none" id="apply_for" name="apply_for">
+                                        @endif
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4"><label for="department_id">Department</label>
+                                        <select class="custom-select" id="department_id" name="department_id">
+                                            @php
+                                                $departments = \App\Models\DoctorDepartment::where('status', \App\Enums\DoctorDepartmentStatus::ACTIVE)->get();
+                                            @endphp
+                                            @foreach($departments as $department)
+                                                <option value="{{$department->id}}"> {{$department->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="year_of_experience">Năm kinh nghiệm</label>
+                                        <input type="number" class="form-control" id="year_of_experience" name="year_of_experience"
+                                               value="{{$doctor->year_of_experience}}">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="apply_show">Apply Show</label>
+                                    <input type="text" class="form-control" id="apply_show" name="apply_show" disabled>
+                                    @php
+                                        $arrayApply = [
+                                            'name'=> 'Name',
+                                            'response_rate'=> 'Response Rate',
+                                            'specialty'=> 'Specialty',
+                                            'year_of_experience'=> 'Years of experience',
+                                            'service'=> 'Service',
+                                            'service_price'=> 'Service Price',
+                                            'time_working_1'=> 'Time Working',
+                                            'time_working_2'=> 'Date Working',
+                                        ];
+
+                                        $arrayApplyOld = explode(',', $doctor->apply_for);
+                                    @endphp
+                                    <ul class="list-apply">
+                                        @foreach($arrayApply as $key => $value)
+                                            <li class="new-select">
+                                                <input onchange="getInput();" class="apply_item" value="{{$key}}"
+                                                       id="apply_item_{{$key}}"
+                                                       name="apply_item"
+                                                       {{ in_array($key, $arrayApplyOld) ? 'checked' : '' }}
+                                                       type="checkbox">
+                                                <label for="apply_item_{{$key}}">{{$value}}</label>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                         </div>
 
                         <!-- Button -->
@@ -294,138 +516,193 @@
     </div>
 
     <script>
-
-        let isFirstLoading = true;
-        let nation_user = '{{ Auth::user()->nation_id }}';
-        let province_user = '{{ Auth::user()->province_id }}';
-        let district_user = '{{ Auth::user()->district_id }}';
-        let commune_user = '{{ Auth::user()->commune_id }}';
-
         $(document).ready(function () {
-            searchProvince(nation_user);
-        });
+            callGetAllProvince();
 
-        function searchProvince(id) {
-            loadingMasterPage();
-            const url = `{{ route('address.get.list.province') }}`;
-            const data = {
-                _token: '{{ csrf_token() }}',
-                nation_id: id
-            };
-            try {
-                $.ajax({
-                    url: url,
-                    method: 'POST',
-                    data: data,
-                    success: async function (response) {
-                        let html = '';
-                        response.forEach((item) => {
-                            let isSelected = ''
-                            if (isFirstLoading) {
-                                isSelected = item.code == province_user ? 'selected' : '';
-                            }
-                            html += `<option value="${item.code}" ${isSelected}>${item.name}</option>`;
-                        });
-                        $('#province_id').html(html);
-                        if (response.length > 0) {
-                            if (isFirstLoading) {
-                                await searchDistrict(province_user);
-                            } else {
-                                await searchDistrict(response[0].code);
-                            }
-                        } else {
-                            $('#district_id').html('');
-                            $('#commune_id').html('');
-                            isFirstLoading = false;
-                        }
-                        loadingMasterPage();
-                    },
-                    error: function (exception) {
-                        alert(exception.responseText);
-                    }
-                });
-            } catch (error) {
-                loadingMasterPage();
-                throw error;
-            }
+            $('#province_id').on('change', function () {
+                let id_code = $(this).val();
+                let myArray = id_code.split('-');
+                let code = myArray[1];
+                callGetAllDistricts(code);
+            })
+
+            $('#district_id').on('change', function () {
+                let id_code = $(this).val();
+                let myArray = id_code.split('-');
+                let code = myArray[1];
+                callGetAllCommunes(code);
+            })
+        })
+
+        async function callGetAllProvince() {
+            $.ajax({
+                url: `{{ route('restapi.get.provinces') }}`,
+                method: 'GET',
+                success: function (response) {
+                    showAllProvince(response);
+                },
+                error: function (exception) {
+                    console.log(exception);
+                }
+            });
         }
 
-        async function searchDistrict(id) {
-            loadingMasterPage();
-            const url = `{{ route('address.get.list.district') }}`;
-            const data = {
-                _token: '{{ csrf_token() }}',
-                province_code: id
-            };
-            try {
-                $.ajax({
-                    url: url,
-                    method: 'POST',
-                    data: data,
-                    success: async function (response) {
-                        let html = '';
-                        response.forEach((item) => {
-                            let isSelected = ''
-                            if (isFirstLoading) {
-                                isSelected = item.code == district_user ? 'selected' : '';
-                            }
-                            html += `<option value="${item.code}" ${isSelected}>${item.name}</option>`;
-                        });
-                        $('#district_id').html(html);
-                        if (response.length > 0) {
-                            if (isFirstLoading) {
-                                await searchCommune(district_user);
-                            } else {
-                                await searchCommune(response[0].code);
-                            }
-                        } else {
-                            $('#commune_id').html('');
-                            isFirstLoading = false;
-                        }
-                        loadingMasterPage();
-                    },
-                    error: function (exception) {
-                        loadingMasterPage();
-                    }
-                });
-            } catch (error) {
-                loadingMasterPage();
-                throw error;
-            }
+        async function callGetAllDistricts(code) {
+            let url = `{{ route('restapi.get.districts', ['code' => ':code']) }}`;
+            url = url.replace(':code', code);
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (response) {
+                    showAllDistricts(response);
+                },
+                error: function (exception) {
+                    console.log(exception);
+                }
+            });
         }
 
-        async function searchCommune(id) {
-            loadingMasterPage();
-            const url = `{{ route('address.get.list.commune') }}`;
-            const data = {
-                _token: '{{ csrf_token() }}',
-                district_code: id
-            };
-            try {
-                $.ajax({
-                    url: url,
-                    method: 'POST',
-                    data: data,
-                    success: async function (response) {
-                        let html = '';
-                        response.forEach((item) => {
-                            let isSelected = ''
-                            if (isFirstLoading) {
-                                isSelected = item.id == commune_user ? 'selected' : '';
-                            }
-                            html += `<option value="${item.id}" ${isSelected}>${item.name}</option>`;
-                        });
-                        $('#commune_id').html(html);
-                        loadingMasterPage();
-                    },
-                    error: function (exception) {
-                        loadingMasterPage();
-                    }
-                });
-            } catch (error) {
-                loadingMasterPage();
-                throw error;
+        async function callGetAllCommunes(code) {
+            let url = `{{ route('restapi.get.communes', ['code' => ':code']) }}`;
+            url = url.replace(':code', code);
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function (response) {
+                    showAllCommunes(response);
+                },
+                error: function (exception) {
+                    console.log(exception);
+                }
+            });
+        }
+
+        function showAllProvince(res) {
+            let html = ``;
+            for (let i = 0; i < res.length; i++) {
+                let data = res[i];
+                let code = data.code;
+                let province_id = `{{ $doctor->province_id }}`;
+                let supHtml = '';
+                if (province_id == data.id) {
+                    supHtml = 'selected';
+                }
+                html = html + `<option ${supHtml} class="province province-item" data-code="${code}" value="${data.id}-${data.code}">${data.name}</option>`;
             }
+            $('#province_id').empty().append(html);
+        }
+
+        function showAllDistricts(res) {
+            let html = ``;
+            for (let i = 0; i < res.length; i++) {
+                let data = res[i];
+                html = html + `<option class="district district-item" value="${data.id}-${data.code}">${data.name}</option>`;
+            }
+            $('#district_id').empty().append(html);
+        }
+
+        function showAllCommunes(res) {
+            let html = ``;
+            for (let i = 0; i < res.length; i++) {
+                let data = res[i];
+                html = html + `<option value="${data.id}-${data.code}">${data.name}</option>`;
+            }
+            $('#commune_id').empty().append(html);
+        }
+    </script>
+    <script>
+        let arrayItem = [];
+        let arrayNameCategory = [];
+
+        function removeArray(arr) {
+            var what, a = arguments, L = a.length, ax;
+            while (L > 1 && arr.length) {
+                what = a[--L];
+                while ((ax = arr.indexOf(what)) !== -1) {
+                    arr.splice(ax, 1);
+                }
+            }
+            return arr;
+        }
+
+        function getListName(array, items) {
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].checked) {
+                    if (array.length == 0) {
+                        array.push(items[i].nextElementSibling.innerText);
+                    } else {
+                        let name = array.includes(items[i].nextElementSibling.innerText);
+                        if (!name) {
+                            array.push(items[i].nextElementSibling.innerText);
+                        }
+                    }
+                } else {
+                    removeArray(array, items[i].nextElementSibling.innerText)
+                }
+            }
+            return array;
+        }
+
+        function checkArray(array, listItems) {
+            for (let i = 0; i < listItems.length; i++) {
+                if (listItems[i].checked) {
+                    if (array.length == 0) {
+                        array.push(listItems[i].value);
+                    } else {
+                        let check = array.includes(listItems[i].value);
+                        if (!check) {
+                            array.push(listItems[i].value);
+                        }
+                    }
+                } else {
+                    removeArray(array, listItems[i].value);
+                }
+            }
+            return array;
+        }
+
+        function getInput() {
+            let items = document.getElementsByClassName('apply_item');
+
+            arrayItem = checkArray(arrayItem, items);
+            arrayNameCategory = getListName(arrayNameCategory, items)
+
+            let listName = arrayNameCategory.toString();
+
+            if (listName) {
+                $('#apply_show').val(listName);
+            }
+
+            arrayItem.sort();
+            let value = arrayItem.toString();
+            $('#apply_for').val(value);
+        }
+    </script>
+    <script>
+        setDataForTime('time_working_1_start', 'time_working_1_end', 'time_working_1');
+        setDataForTime('time_working_2_start', 'time_working_2_end', 'time_working_2');
+
+        $('#time_working_1_start').on('change', function () {
+            setDataForTime('time_working_1_start', 'time_working_1_end', 'time_working_1')
+        })
+
+        $('#time_working_1_end').on('change', function () {
+            setDataForTime('time_working_1_start', 'time_working_1_end', 'time_working_1')
+        })
+
+        $('#time_working_2_start').on('change', function () {
+            setDataForTime('time_working_2_start', 'time_working_2_end', 'time_working_2')
+        })
+
+        $('#time_working_2_end').on('change', function () {
+            setDataForTime('time_working_2_start', 'time_working_2_end', 'time_working_2')
+        })
+
+        function setDataForTime(time_working_start, time_working_end, merge) {
+            let value_start = $('#' + time_working_start).val();
+            let value_end = $('#' + time_working_end).val();
+            let mergeValue = value_start + '-' + value_end;
+            $('#' + merge).val(mergeValue);
         }
     </script>
     <script>

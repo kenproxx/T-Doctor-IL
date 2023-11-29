@@ -18,6 +18,7 @@
             white-space: nowrap;
             overflow: hidden;
         }
+
         .background-modal {
             background: #FFFFFF;
             max-height: 820px;
@@ -90,11 +91,13 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link font-14-mobi" id="profile-tab" data-toggle="tab" href="#profile"
-                                   role="tab" aria-controls="profile" aria-selected="false">{{ __('home.Free with mission') }}</a>
+                                   role="tab" aria-controls="profile"
+                                   aria-selected="false">{{ __('home.Free with mission') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link font-14-mobi" id="contact-tab" data-toggle="tab" href="#contact"
-                                   role="tab" aria-controls="home" aria-selected="true">{{ __('home.Discounted service') }}</a>
+                                   role="tab" aria-controls="home"
+                                   aria-selected="true">{{ __('home.Discounted service') }}</a>
                             </li>
                         </ul>
                     </div>
@@ -430,24 +433,25 @@
         </div>
         <div class="container">
             @php
-                $doctors = \App\Models\DoctorInfo::where('status', \App\Enums\DoctorInfoStatus::ACTIVE)->get();
+                $doctors = \App\Models\User::where('type', \App\Enums\TypeUser::DOCTORS)->get();
             @endphp
             <div id="list-doctor" class="d-flex row">
                 @foreach($doctors as $doctor)
                     <div class="col-md-3 mt-3">
                         <a href="{{ route('examination.doctor_info', $doctor->id) }}" target="_blank">
-                        <div class="bg-list-doctor">
-                            <div><i class="bi bi-heart heart-item"></i><img class="b-radius-8px max-img"
-                                                                            src="{{$doctor->thumbnail}}"></div>
-                            <div class="d-content">
+                            <div class="bg-list-doctor">
+                                <div><i class="bi bi-heart heart-item"></i><img class="b-radius-8px max-img"
+                                                                                src="{{$doctor->thumbnail}}"></div>
+                                <div class="d-content">
                                     <div class="fs-18px">{{$doctor->name}}</div>
-                                <div class="respiratory">{!! $doctor->service !!}</div>
-                                <div class="d-flex  location-doc">{{ __('home.Location') }}: <p class="fs-16px">{{$doctor->name}}</p>
+                                    <div class="respiratory">{!! $doctor->service !!}</div>
+                                    <div class="d-flex  location-doc">{{ __('home.Location') }}: <p
+                                            class="fs-16px">{{$doctor->name}}</p>
+                                    </div>
+                                    <div class="d-flex  location-doc">{{ __('home.Working time') }}:<p
+                                            class="fs-16px">{{$doctor->time_working_1}}</p></div>
                                 </div>
-                                <div class="d-flex  location-doc">{{ __('home.Working time') }}:<p
-                                        class="fs-16px">{{$doctor->time_working_1}}</p></div>
                             </div>
-                        </div>
                         </a>
                     </div>
                 @endforeach
@@ -587,22 +591,22 @@
                         @foreach($products as $product)
                             <div class="col-sm-4 pt-4">
                                 <a href="{{ route('flea.market.product.detail', $product->id) }}" target="_blank">
-                                <div class="card border-flea-market" style="height: 342px">
-                                    <img src="{{asset($product->thumbnail ?? 'img/item_shopping.png')}}"
-                                         class="card-img-top object-fit-cover" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title title-div-flea-market">{{ $product->name }}</h5>
-                                        @if($product->province_id)
-                                            @php
-                                                $province = Province::find($product->province_id);
-                                            @endphp
-                                            @if($province)
-                                                <p class="card-text">Location: <b>{{ $province->name}}</b></p>
+                                    <div class="card border-flea-market" style="height: 342px">
+                                        <img src="{{asset($product->thumbnail ?? 'img/item_shopping.png')}}"
+                                             class="card-img-top object-fit-cover" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title title-div-flea-market">{{ $product->name }}</h5>
+                                            @if($product->province_id)
+                                                @php
+                                                    $province = Province::find($product->province_id);
+                                                @endphp
+                                                @if($province)
+                                                    <p class="card-text">Location: <b>{{ $province->name}}</b></p>
+                                                @endif
                                             @endif
-                                        @endif
-                                        <h4>{{ $product->price }}</h4>
+                                            <h4>{{ $product->price }}</h4>
+                                        </div>
                                     </div>
-                                </div>
                                 </a>
                             </div>
                         @endforeach
@@ -657,70 +661,58 @@
         </div>
 
 
-
-
-
-
         <div class="container">
-        <div id="list-item" class="d-flex row">
-            <div class="col-md-3 mt-3">
-            <div class="card" style="width: 237px; height: 361px">
-                <i class="bi bi-heart"></i>
-                <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
-                     height="237px">
-                <div class="card-body">
-                    <h5 class="card-title">{{ __('home.Máy tạo oxy 5 lít Reiwa K5BW') }}</h5>
-                    <p class="card-text">{{ __('home.Location') }}: <b>Hanoi</b></p>
-                    <h4>599.000</h4>
-                </div>
-            </div>
-            </div>
-            <div class="col-md-3 mt-3">
-                <div class="card" style="width: 237px; height: 361px">
-                    <i class="bi bi-heart"></i>
-                    <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
-                         height="237px">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ __('home.Máy tạo oxy 5 lít Reiwa K5BW') }}</h5>
-                        <p class="card-text">{{ __('home.Location') }}: <b>Hanoi</b></p>
-                        <h4>599.000</h4>
+            <div id="list-item" class="d-flex row">
+                <div class="col-md-3 mt-3">
+                    <div class="card" style="width: 237px; height: 361px">
+                        <i class="bi bi-heart"></i>
+                        <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
+                             height="237px">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ __('home.Máy tạo oxy 5 lít Reiwa K5BW') }}</h5>
+                            <p class="card-text">{{ __('home.Location') }}: <b>Hanoi</b></p>
+                            <h4>599.000</h4>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3 mt-3">
-                <div class="card" style="width: 237px; height: 361px">
-                    <i class="bi bi-heart"></i>
-                    <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
-                         height="237px">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ __('home.Máy tạo oxy 5 lít Reiwa K5BW') }}</h5>
-                        <p class="card-text">{{ __('home.Location') }}: <b>Hanoi</b></p>
-                        <h4>599.000</h4>
+                <div class="col-md-3 mt-3">
+                    <div class="card" style="width: 237px; height: 361px">
+                        <i class="bi bi-heart"></i>
+                        <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
+                             height="237px">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ __('home.Máy tạo oxy 5 lít Reiwa K5BW') }}</h5>
+                            <p class="card-text">{{ __('home.Location') }}: <b>Hanoi</b></p>
+                            <h4>599.000</h4>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3 mt-3">
-                <div class="card" style="width: 237px; height: 361px">
-                    <i class="bi bi-heart"></i>
-                    <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
-                         height="237px">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ __('home.Máy tạo oxy 5 lít Reiwa K5BW') }}</h5>
-                        <p class="card-text">{{ __('home.Location') }}: <b>Hanoi</b></p>
-                        <h4>599.000</h4>
+                <div class="col-md-3 mt-3">
+                    <div class="card" style="width: 237px; height: 361px">
+                        <i class="bi bi-heart"></i>
+                        <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
+                             height="237px">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ __('home.Máy tạo oxy 5 lít Reiwa K5BW') }}</h5>
+                            <p class="card-text">{{ __('home.Location') }}: <b>Hanoi</b></p>
+                            <h4>599.000</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 mt-3">
+                    <div class="card" style="width: 237px; height: 361px">
+                        <i class="bi bi-heart"></i>
+                        <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
+                             height="237px">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ __('home.Máy tạo oxy 5 lít Reiwa K5BW') }}</h5>
+                            <p class="card-text">{{ __('home.Location') }}: <b>Hanoi</b></p>
+                            <h4>599.000</h4>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
-
-
-
-
-
-
-
-
 
 
         <nav aria-label="Page navigation example">
@@ -752,7 +744,7 @@
 
         function getCurrentLocation(callback) {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
+                navigator.geolocation.getCurrentPosition(function (position) {
                     var currentLocation = {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
@@ -782,6 +774,7 @@
         function toRadians(degrees) {
             return degrees * (Math.PI / 180);
         }
+
         function formatTime(dateTimeString) {
             const date = new Date(dateTimeString);
             const hours = date.getHours().toString().padStart(2, '0');
@@ -801,7 +794,7 @@
                 title: 'Your Location'
             });
 
-            locations.forEach(function(location) {
+            locations.forEach(function (location) {
                 var distance = calculateDistance(
                     currentLocation.lat, currentLocation.lng,
                     parseFloat(location.latitude), parseFloat(location.longitude)
@@ -812,7 +805,7 @@
 
                 if (distance <= searchRadius) {
                     var marker = new google.maps.Marker({
-                        position: { lat: parseFloat(location.latitude), lng: parseFloat(location.longitude) },
+                        position: {lat: parseFloat(location.latitude), lng: parseFloat(location.longitude)},
                         map: map,
                         title: 'Location'
                     });
@@ -822,7 +815,7 @@
                     let arrayGallery = gallery.split(',');
 
 
-                    var infoWindowContent =`<div class="p-0 m-0 tab-pane fade show active background-modal b-radius" id="modalBooking">
+                    var infoWindowContent = `<div class="p-0 m-0 tab-pane fade show active background-modal b-radius" id="modalBooking">
                 <div>
 
                     <img class="b-radius" src="${arrayGallery[0]}" alt="img">
@@ -832,7 +825,7 @@
                         <div class="d-flex justify-content-between mt-md-2">
                             <div class="fs-18px">${location.name}</div>
                             <div class="button-follow fs-12p ">
-                                <a class="text-follow-12" href="">{{ __('home.FOLLOW<') }}/a>
+                                <a class="text-follow-12" href="">{{ __('home.FOLLOW') }}</a>
                             </div>
                         </div>
                         <div class="d-flex mt-md-2">
@@ -898,10 +891,10 @@
                                 <div class="content">
                                     <p>
                                         {{ __('home.Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho bạn bè cùng sử dụng') }}
-                                    </p>
-                                </div>
-                            </div>
-                        @endfor
+                    </p>
+                </div>
+            </div>
+@endfor
                     <div class="border-top">
                         <div
                             class="d-flex justify-content-between rv-header align-items-center mt-md-2">
@@ -918,18 +911,18 @@
                             <div class="content">
                                 <p>
                                     {{ __('home.Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho bạn bè cùng sử dụng') }}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    </p>
                 </div>
-            </div>`;
+            </div>
+        </div>
+    </div>
+</div>`;
 
                     var infoWindow = new google.maps.InfoWindow({
                         content: infoWindowContent
                     });
 
-                    marker.addListener('click', function() {
+                    marker.addListener('click', function () {
                         closeAllInfoWindows();
                         infoWindow.open(map, marker);
                     });
@@ -940,12 +933,12 @@
         }
 
         function closeAllInfoWindows() {
-            infoWindows.forEach(function(infoWindow) {
+            infoWindows.forEach(function (infoWindow) {
                 infoWindow.close();
             });
         }
 
-        getCurrentLocation(function(currentLocation) {
+        getCurrentLocation(function (currentLocation) {
             initMap(currentLocation, locations);
         });
     </script>

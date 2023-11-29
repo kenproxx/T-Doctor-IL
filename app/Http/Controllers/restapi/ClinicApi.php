@@ -6,8 +6,8 @@ use App\Enums\ClinicStatus;
 use App\Enums\TypeBussiness;
 use App\Http\Controllers\Controller;
 use App\Models\Clinic;
+use App\Models\ServiceClinic;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ClinicApi extends Controller
@@ -19,7 +19,21 @@ class ClinicApi extends Controller
             ->where('clinics.status', ClinicStatus::ACTIVE)
             ->where('clinics.type', TypeBussiness::CLINICS)
             ->select('clinics.*', 'users.email')
-            ->get();
+            ->cursor()
+            ->map(function ($item) {
+                $array = explode(',', $item->service_id);
+                $services = \App\Models\ServiceClinic::whereIn('id', $array)->get();
+                $array = explode(',', $item->address);
+                $addressP = \App\Models\Province::where('id', $array[1])->first();
+                $addressD = \App\Models\District::where('id', $array[2])->first();
+                $addressC = \App\Models\Commune::where('id', $array[3])->first();
+                $clinic = (array)$item;
+                $clinic['total_services'] = $services->count();
+                $clinic['services'] = $services->toArray();
+                $clinic['addressInfo'] = $addressC['name'] . ',' . $addressD['name'] . ',' . $addressP['name'];
+                return $clinic;
+            });
+
         return response()->json($clinics);
     }
 
