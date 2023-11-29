@@ -30,7 +30,8 @@ class CallVideoController extends Controller
 
         // Contain the logic to create a new meeting
         $response = Http::post("https://{$METERED_DOMAIN}/api/v1/room?secretKey={$METERED_SECRET_KEY}", [
-            'autoJoin' => true
+            'autoJoin' => true,
+            'recordRoom' => true,
         ]);
 
         $roomName = $response->json("roomName");
@@ -40,7 +41,12 @@ class CallVideoController extends Controller
 
         $data['from'] = Auth::user()->name;
         $data['to'] = $request->input('user_id_2');
-        $data['content'] = route('joinMeeting', ['meetingId' => $connect->room_name]);
+
+        if ($connect) {
+            $roomName = $connect->room_name;
+        }
+
+        $data['content'] = route('joinMeeting', ['meetingId' => $roomName]);
 
         $options = array(
             'cluster' => 'ap1',
