@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+@php use Illuminate\Support\Facades\Auth; @endphp
+    <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe6qi9czJ2Z6SLnV9sSUzce0nuzhRm3hg"></script>
 <head>
@@ -116,7 +117,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Từ chối</button>
-                <button type="button" class="btn btn-primary"  data-dismiss="modal" id="ReceiveCall">Tiếp nhận</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="ReceiveCall">Tiếp nhận</button>
             </div>
         </div>
     </div>
@@ -140,7 +141,7 @@
     var channel = pusher.subscribe('send-message');
     // Bind a function to a Event (the full Laravel class)
     channel.bind('send-message', function (data) {
-        let thisUser = '{{Auth::user()->id}}'
+        let thisUser = '{{Auth::user()->id ?? ''}}'
         if (data.to != thisUser) {
             return;
         }
