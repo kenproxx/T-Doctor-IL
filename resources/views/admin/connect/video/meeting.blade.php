@@ -59,7 +59,7 @@
                         <div class="flex space-x-2 items-center">
                             <label>
                                 Name:
-                                <input class="text-xs" id="username" type="text"  placeholder="Name"/>
+                                <input class="text-xs" id="username" type="text" value="{{ \Illuminate\Support\Facades\Auth::user()->name ?? 'No name' }}" placeholder="Name"/>
                             </label>
 
                             <label>
