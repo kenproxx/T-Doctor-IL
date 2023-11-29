@@ -22,6 +22,10 @@
                             $clinic = (array)$item;
                             $clinic['total_services'] = $services->count();
                             $clinic['services'] = $services->toArray();
+                            if ($addressP == null) {
+                                $clinic['addressInfo'] = '';
+                                return $clinic;
+                            }
                             $clinic['addressInfo'] = $addressC['name'] . ',' . $addressD['name'] . ',' . $addressP['name'];
                             return $clinic;
                         });
