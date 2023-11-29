@@ -26,6 +26,8 @@ use App\Http\Controllers\RecruitmentController;
 use App\Http\Controllers\restapi\BookingApi;
 use App\Http\Controllers\ReviewStoreController;
 use App\Http\Controllers\ServiceClinicController;
+use App\Http\Controllers\ShortVideoController;
+use App\Http\Controllers\TopicVideoController;
 use App\Http\Controllers\WhatFreeToDay;
 use Illuminate\Support\Facades\Route;
 
@@ -178,10 +180,21 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/vnpay', [CheckoutController::class, 'checkoutByVNPay'])->name('user.checkout.vnpay');
     });
 
+    Route::group(['prefix' => 'short-videos'], function () {
+        Route::get('', [ShortVideoController::class, 'showVideo'])->name('short.videos.show');
+        Route::get('/{id}', [ShortVideoController::class, 'detail'])->name('short.videos.item');
+    });
+
     Route::group(['prefix' => 'service-clinics'], function () {
         Route::get('list', [ServiceClinicController::class, 'getListService'])->name('user.service.clinics.list');
         Route::get('detail/{id}', [ServiceClinicController::class, 'detailService'])->name('user.service.clinics.detail');
         Route::get('create', [ServiceClinicController::class, 'createService'])->name('user.service.clinics.create');
+    });
+
+    Route::group(['prefix' => 'topics-videos'], function () {
+        Route::get('list', [TopicVideoController::class, 'getList'])->name('user.topic.videos.list');
+        Route::get('detail/{id}', [TopicVideoController::class, 'detail'])->name('user.topic.videos.detail');
+        Route::get('create', [TopicVideoController::class, 'create'])->name('user.topic.videos.create');
     });
 
     Route::group(['prefix' => 'connect'], function () {

@@ -4,7 +4,7 @@ namespace App\Enums;
 
 use BenSampo\Enum\Enum;
 
-final class NewEventStatus extends Enum
+final class ShortVideoStatus extends Enum
 {
     const ACTIVE = 'ACTIVE';
     const INACTIVE = 'INACTIVE';

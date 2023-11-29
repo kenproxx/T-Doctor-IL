@@ -144,6 +144,12 @@
                         <i class="fa-solid fa-house-chimney-medical"></i>
                         <span>{{ __('home.List Clinics') }}</span></a>
                 </li>
+                <!-- Nav Item - List Topic Video -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('user.topic.videos.list') }}">
+                        <i class="fa-solid fa-house-chimney-medical"></i>
+                        <span>{{ __('home.Topic Videos') }}</span></a>
+                </li>
                 <!-- Nav Item - New Event -->
                 <li class="nav-item {{ Nav::isRoute('api.new-event.index') }}">
                     <a class="nav-link" href="{{ route('api.new-event.index') }}">

@@ -11,7 +11,6 @@ use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\backend\BackendReviewController;
 use App\Http\Controllers\backend\BackendServiceClinicController;
 use App\Http\Controllers\backend\BackendStaffController;
-use App\Http\Controllers\backend\BackendWishListController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\CouponController;
@@ -21,10 +20,11 @@ use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\restapi\admin\AdminBookingApi;
 use App\Http\Controllers\restapi\admin\AdminDoctorDepartmentApi;
 use App\Http\Controllers\restapi\admin\AdminDoctorInfoApi;
+use App\Http\Controllers\restapi\admin\AdminNewsApi;
 use App\Http\Controllers\restapi\admin\AdminPhamacitisApi;
 use App\Http\Controllers\restapi\admin\AdminPharmacyApi;
+use App\Http\Controllers\restapi\admin\AdminShortVideoApi;
 use App\Http\Controllers\restapi\CartApi;
-use App\Http\Controllers\restapi\ServiceClinicApi;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
@@ -292,4 +292,22 @@ Route::group(['prefix' => 'bookings'], function () {
     Route::get('detail/{id}', [AdminBookingApi::class, 'detail'])->name('api.bookings.detail');
     Route::post('update/{id}', [AdminBookingApi::class, 'updateStatus'])->name('api.bookings.updateStatus');
     Route::delete('delete/{id}', [AdminBookingApi::class, 'delete'])->name('api.bookings.delete');
+});
+
+Route::group(['prefix' => 'news'], function () {
+    Route::get('/list', [AdminNewsApi::class, 'getAll'])->name('api.news.list');
+    Route::get('/users/{id}', [AdminNewsApi::class, 'getAllByUserID'])->name('api.news.users');
+    Route::get('/detail/{id}', [AdminNewsApi::class, 'detail'])->name('api.news.detail');
+});
+
+Route::group(['prefix' => 'short-videos'], function () {
+    Route::get('/list', [AdminShortVideoApi::class, 'getAll'])->name('api.medical.short.videos.list');
+    Route::get('/users/{id}', [AdminShortVideoApi::class, 'getAllByUserID'])->name('api.medical.short.videos.users');
+    Route::get('/topic/{id}', [AdminShortVideoApi::class, 'getAllByTopicID'])->name('api.medical.short.videos.topic');
+    Route::get('/detail/{id}', [AdminShortVideoApi::class, 'detail'])->name('api.medical.short.videos.detail');
+
+    Route::post('/create', [AdminShortVideoApi::class, 'create'])->name('api.medical.short.videos.create');
+    Route::put('/update/{id}', [AdminShortVideoApi::class, 'update'])->name('api.medical.short.videos.update');
+    Route::put('/change/{id}', [AdminShortVideoApi::class, 'changeStatus'])->name('api.medical.short.videos.changeStatus');
+    Route::delete('/delete/{id}', [AdminShortVideoApi::class, 'delete'])->name('api.medical.short.videos.delete');
 });
