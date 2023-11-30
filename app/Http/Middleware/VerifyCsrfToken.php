@@ -13,6 +13,11 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //admin
+        '/admin/service-clinics/**',
+        '/admin/bookings/**',
+        '/admin/new-event/**',
+        '/admin/topic-videos/**',
+        //api
         '/api/products/**',
         '/api/wish-lists/**',
         '/api/clinics/**',
@@ -25,6 +30,7 @@ class VerifyCsrfToken extends Middleware
         '/api/doctors-info/**',
         '/api/users/**',
         '/api/pharmacies/**',
+        '/api/short-videos/**',
         // clients
         '/reviews/**',
         '/reviews/**',
@@ -34,11 +40,9 @@ class VerifyCsrfToken extends Middleware
         '/api/booking/**',
         '/api/carts/**',
         '/api/doctor-reviews/**',
-        '/admin/service-clinics/**',
-        '/admin/bookings/**',
         '/api/service-clinics/**',
         '/api/users-social/**',
         '/api/messages/**',
-        'auth/*'
+        'auth/*',
     ];
 }
