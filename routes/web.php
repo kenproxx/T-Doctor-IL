@@ -180,7 +180,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/vnpay', [CheckoutController::class, 'checkoutByVNPay'])->name('user.checkout.vnpay');
     });
 
-    Route::group(['prefix' => 'short-videos'], function () {
+    Route::group(['prefix' => 'short-video'], function () {
         Route::get('', [ShortVideoController::class, 'showVideo'])->name('short.videos.show');
         Route::get('/{id}', [ShortVideoController::class, 'detail'])->name('short.videos.item');
     });
