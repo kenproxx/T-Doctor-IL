@@ -105,11 +105,18 @@ class ProfileController extends Controller
         $province = $request->input('province_id');
         $district = $request->input('district_id');
         $commune = $request->input('commune_id');
+        if ($district == null){
+            return response('Cần cập nhật địa chỉ thành phố', 400);
+        }
+        if ($commune == null){
+            return response('Cần cập nhật địa chỉ quận/huyện', 400);
+        }
         $province_id = explode('-', $province);
         $district_id = explode('-', $district);
         $commune_id = explode('-', $commune);
 
         $user->province_id = $province_id[0];
+
         $user->district_id = $district_id[0];
         $user->commune_id = $commune_id[0];
         $user->specialty = $request->input('specialty');
@@ -133,15 +140,12 @@ class ProfileController extends Controller
         $user->time_working_2 = $request->input('time_working_2');
 
 
-        if (!$request->hasFile('avt')) {
-            return response('Cần up file giấy phép nghề nghiệp', 400);
+        if ($request->hasFile('avt')) {
+            $item = $request->file('avt');
+            $itemPath = $item->store('license', 'public');
+            $img = asset('storage/' . $itemPath);
+            $user->avt = $img;
         }
-        $item = $request->file('avt');
-        $itemPath = $item->store('license', 'public');
-        $img = asset('storage/' . $itemPath);
-        $user->avt = $img;
-
-
         $user->created_by = $request->input('created_by');
         $user->updated_by = Auth::user()->id;
         $user->department_id = $request->input('department_id');

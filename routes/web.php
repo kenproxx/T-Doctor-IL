@@ -55,7 +55,7 @@ Route::get('/login-google', [AuthSocialController::class, 'getGoogleSignInUrl'])
 Route::get('/login-google-callback', [AuthSocialController::class, 'loginCallback'])->name('login.google.callback');
 Route::get('/login-role', [AuthSocialController::class, 'chooseRole'])->name('login.social.choose.role');
 
-Route::group(['prefix' => 'news'], function () {
+Route::group(['prefix' => 'news-events'], function () {
     Route::get('', [NewEventController::class, 'index'])->name('index.new');
     Route::get('detail/{id}', [NewEventController::class, 'detail'])->name('detail.new');
 });

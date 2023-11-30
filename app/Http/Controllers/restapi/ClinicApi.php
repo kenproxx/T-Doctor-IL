@@ -24,9 +24,9 @@ class ClinicApi extends Controller
                 $array = explode(',', $item->service_id);
                 $services = \App\Models\ServiceClinic::whereIn('id', $array)->get();
                 $array = explode(',', $item->address);
-                $addressP = \App\Models\Province::where('id', $array[1])->first();
-                $addressD = \App\Models\District::where('id', $array[2])->first();
-                $addressC = \App\Models\Commune::where('id', $array[3])->first();
+                $addressP = \App\Models\Province::where('id', $array[1] ?? null)->first();
+                $addressD = \App\Models\District::where('id', $array[2] ?? null)->first();
+                $addressC = \App\Models\Commune::where('id', $array[3] ?? null)->first();
                 $clinic = (array)$item;
                 $clinic['total_services'] = $services->count();
                 $clinic['services'] = $services->toArray();

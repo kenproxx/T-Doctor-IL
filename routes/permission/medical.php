@@ -201,6 +201,7 @@ Route::group(['prefix' => 'reviews'], function () {
 //
 Route::group(['prefix' => 'doctors-info'], function () {
     Route::get('/list', [AdminDoctorInfoApi::class, 'getAll'])->name('api.backend.doctors.info.list');
+    Route::get('/list-doctor', [AdminDoctorInfoApi::class, 'getAllByUser'])->name('api.backend.doctors.info.list.by.user');
     Route::get('/detail/{id}', [AdminDoctorInfoApi::class, 'detail'])->name('api.backend.doctors.info.detail');
     Route::get('/user/{id}', [AdminDoctorInfoApi::class, 'findByUser'])->name('api.backend.doctors.info.user');
     Route::post('/create', [AdminDoctorInfoApi::class, 'create'])->name('api.backend.doctors.info.create');
