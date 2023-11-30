@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/contact-list/{id}', 'Api\ContactController@getContactList');
+
+
+Route::get('/conversation/{id}/{auth_id}', 'Api\ContactController@getMessages');
+
+
+Route::post('/conversation/send', 'Api\ContactController@sendNewMessage');

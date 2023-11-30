@@ -11,3 +11,6 @@
 
 [//]: # (Pusher để đẩy thông báo khi có người gọi đến)
 10. composer require pusher/pusher-php-server
+
+[//]: # (connect firebase)
+11. composer require kreait/firebase-php -W

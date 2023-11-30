@@ -1,5 +1,15 @@
 import './bootstrap';
 import jquery from 'jquery';
+window.Vue = require('vue');
+
+// import ChatApp from './components/ChatApp.vue'
+
+const app = new Vue({
+    el: '#app',
+    components:{
+        // ChatApp
+    },
+});
 
 let meetingJoined = false;
 const meeting = new Metered.Meeting();

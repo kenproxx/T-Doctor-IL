@@ -26,6 +26,9 @@
     },
     "dependencies": {
         "@stream-io/video-client": "^0.4.7",
-        "jquery": "^3.7.0"
+        "jquery": "^3.7.0",
+        "laravel-echo": "^1.15.3",
+        "pusher-js": "^8.4.0-rc1",
+        "vue": "^3.3.9"
     }
 }

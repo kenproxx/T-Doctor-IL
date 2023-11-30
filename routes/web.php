@@ -214,6 +214,11 @@ Route::middleware(['auth'])->group(function () {
                 ]);
             })->name('joinMeeting');
         });
+
+        Route::group(['prefix' => 'chat'], function () {
+            Route::get('index', [\App\Http\Controllers\connect\ChatMessageController::class, 'index'])->name('api.backend.connect.chat.index');
+
+        });
     });
 
 });

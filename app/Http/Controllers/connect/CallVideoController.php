@@ -24,9 +24,8 @@ class CallVideoController extends Controller
     public function createMeeting(Request $request)
     {
 
-        $METERED_DOMAIN = env('METERED_DOMAIN');
-        $METERED_SECRET_KEY = env('METERED_SECRET_KEY');
-
+        $METERED_DOMAIN = env('METERED_DOMAIN', 'krmedic.metered.live');
+        $METERED_SECRET_KEY = env('METERED_SECRET_KEY', 'C5AjSOjZ-PaBArxWNQG8nSKp3eiWcsqltszk6Gvq6hnscIke');
 
         // Contain the logic to create a new meeting
         $response = Http::post("https://{$METERED_DOMAIN}/api/v1/room?secretKey={$METERED_SECRET_KEY}", [
@@ -53,7 +52,11 @@ class CallVideoController extends Controller
             'encrypted' => true
         );
 
-        $pusher = new Pusher(env('PUSHER_APP_KEY'), env('PUSHER_APP_SECRET'), env('PUSHER_APP_ID'), $options);
+        $PUSHER_APP_KEY = env('PUSHER_APP_KEY', '3ac4f810445d089829e8');
+        $PUSHER_APP_SECRET = env('PUSHER_APP_SECRET', 'c6cafb046a45494f80b2');
+        $PUSHER_APP_ID = env('PUSHER_APP_ID', '1714303');
+
+        $pusher = new Pusher($PUSHER_APP_KEY, $PUSHER_APP_SECRET, $PUSHER_APP_ID, $options);
 
         $pusher->trigger('send-message', 'send-message', $data);
 

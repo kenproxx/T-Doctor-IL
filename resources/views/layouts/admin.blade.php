@@ -131,6 +131,11 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>{{ __('Call video3') }}</span></a>
             </li>
+            <li class="nav-item {{ Nav::isRoute('api.backend.connect.chat.index') }}">
+                <a class="nav-link" href="{{ route('api.backend.connect.chat.index') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>{{ __('Chat message') }}</span></a>
+            </li>
             @if(!$isStaff)
                 <!-- Nav Item - List Service Clinics -->
                 <li class="nav-item">
@@ -500,7 +505,7 @@
 <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
-@include('components.head.tinymce-config')
+{{--@include('components.head.tinymce-config')--}}
 </body>
 
 <script>
