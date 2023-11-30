@@ -76,7 +76,7 @@ class AdminTopicVideoApi extends Controller
             $itemPath = $item->store('topic-video/', 'public');
             $file = asset('storage/' . $itemPath);
         } else {
-            $file = '';
+            $file = $topicVideo->thumbnail;
         }
 
         $user_id = $request->input('user_id');
