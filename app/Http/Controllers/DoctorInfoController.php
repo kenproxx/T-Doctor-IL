@@ -72,7 +72,7 @@ class DoctorInfoController extends Controller
 
     public function edit($id)
     {
-        $doctor = DoctorInfo::find($id);
+        $doctor = User::find($id);
         if (!$doctor) {
             return response("doctor not found", 404);
         }

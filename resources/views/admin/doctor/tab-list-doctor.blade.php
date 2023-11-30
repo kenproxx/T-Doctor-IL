@@ -57,7 +57,7 @@
                     console.log(url)
                     break;
                 default:
-                    url = `{{ route('api.backend.doctors.info.list') }}`;
+                    url = `{{ route('api.backend.doctors.info.list.by.user') }}`;
                     console.log(url)
                     break;
 
@@ -81,6 +81,7 @@
 
 
     async function renderProduct(res) {
+        console.log(res)
         let html = ``;
 
         for (let i = 0; i < res.length; i++) {
@@ -89,7 +90,7 @@
             let item = res[i];
             let rowNumber = i + 1;
 
-            let thumbnail = item.thumbnail;
+            let thumbnail = item.avt;
             let arrayGallery = thumbnail.split(',')
             let img = ``;
             for (let j = 0; j < arrayGallery.length; j++) {

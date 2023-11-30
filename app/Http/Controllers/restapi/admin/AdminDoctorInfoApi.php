@@ -4,9 +4,13 @@ namespace App\Http\Controllers\restapi\admin;
 
 use App\Enums\DoctorInfoStatus;
 use App\Enums\TypeMedical;
+use App\Enums\UserStatus;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
 use App\Models\DoctorInfo;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminDoctorInfoApi extends Controller
 {
@@ -25,6 +29,12 @@ class AdminDoctorInfoApi extends Controller
         return response()->json($doctor_infos);
     }
 
+    public function getAllByUser()
+    {
+        $doctor_infos_byUser = User::where('member', TypeMedical::DOCTORS)
+            ->get();
+        return response()->json($doctor_infos_byUser);
+    }
     public function search(Request $request)
     {
 
@@ -55,15 +65,37 @@ class AdminDoctorInfoApi extends Controller
     public function create(Request $request)
     {
         try {
-            $created_by = $request->input('created_by');
-            $doctor = DoctorInfo::where('created_by', $created_by)->first();
-            if (!$doctor) {
-                $doctor_infos = new DoctorInfo();
-            } else {
-                $doctor_infos = $doctor;
+            $email = $request->input('email');
+            $username = $request->input('username');
+            $password = $request->input('password');
+            $passwordConfirm = $request->input('passwordConfirm');
+
+            $isEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
+            if (!$isEmail) {
+                toast('Email invalid!', 'error', 'top-left');
+                return back();
+            }
+            $oldUser = User::where('email', $email)->first();
+            if ($oldUser) {
+                return response('Email already exited!', 400);
             }
 
-            $item = $this->saveDoctorInfo($request, $doctor_infos);
+            $oldUserName = User::where('username', $username)->first();
+            if ($oldUserName) {
+                return response('Username already exited!', 400);
+            }
+
+            if ($password != $passwordConfirm) {
+                return response('Password or Password Confirm incorrect!', 400);
+            }
+
+            if (strlen($password) < 5) {
+                return response('Password invalid!', 400);
+            }
+
+            $doctor_infos = new User();
+            $created_by = Auth::user()->id;
+            $item = $this->saveDoctorInfo($request, $doctor_infos, $created_by);
             if ($item) {
                 return response()->json($doctor_infos);
             }
@@ -73,11 +105,19 @@ class AdminDoctorInfoApi extends Controller
         }
     }
 
-    private function saveDoctorInfo($request, $doctor)
+    private function saveDoctorInfo($request, $doctor, $created_by)
     {
+        $email = $request->input('email');
+        $username = $request->input('username');
+        $password = $request->input('password');
+
+        $member = $request->input('member');
+        $type = $request->input('type');
+
         $name = $request->input('name');
-        $name_en = $request->input('name_en');
-        $name_laos = $request->input('name_laos');
+
+        $last_name = $request->input('last_name');
+        $phone = $request->input('phone');
 
         $specialty = $request->input('specialty');
         $specialty_en = $request->input('specialty_en');
@@ -85,13 +125,13 @@ class AdminDoctorInfoApi extends Controller
 
         $year_of_experience = $request->input('year_of_experience');
 
-        if ($request->hasFile('thumbnail')) {
-            $item = $request->file('thumbnail');
+        if ($request->hasFile('avt')) {
+            $item = $request->file('avt');
             $itemPath = $item->store('doctor', 'public');
             $thumbnail = asset('storage/' . $itemPath);
         } else {
-            if ($doctor->thumbnail) {
-                $thumbnail = $doctor->thumbnail;
+            if ($doctor->avt) {
+                $thumbnail = $doctor->avt;
             } else {
                 $thumbnail = '';
             }
@@ -124,13 +164,11 @@ class AdminDoctorInfoApi extends Controller
         $detail_address_en = $request->input('detail_address_en');
         $detail_address_laos = $request->input('detail_address_laos');
 
-        $created_by = $request->input('created_by');
+        $updated_by = $request->input('updated_by');
 
         $hospital = $request->input('hospital');
         $hospital_en = $request->input('hospital_en');
         $hospital_laos = $request->input('hospital_laos');
-
-        $other = $request->input('other');
 
         $status = $request->input('status');
 
@@ -141,14 +179,18 @@ class AdminDoctorInfoApi extends Controller
 
         $department_id = $request->input('department_id');
 
-        $hocham_hocvi = $request->input('hocham_hocvi');
-
         $doctor->name = $name;
-        $doctor->name_en = $name_en;
-        $doctor->name_laos = $name_laos;
+        $doctor->username = $username;
+        $doctor->last_name = $last_name;
+        $doctor->phone = $phone;
+        $doctor->email = $email;
+        $doctor->password = $password;
 
-        $doctor->thumbnail = $thumbnail;
+        $doctor->avt = $thumbnail;
 
+        $doctor->member = $member;
+        $doctor->type = $type;
+        $doctor->updated_by = $updated_by;
         $doctor->specialty = $specialty;
         $doctor->specialty_en = $specialty_en;
         $doctor->specialty_laos = $specialty_laos;
@@ -166,6 +208,7 @@ class AdminDoctorInfoApi extends Controller
         $doctor->time_working_1 = $time_working_1;
         $doctor->time_working_2 = $time_working_2;
 
+        $doctor->address_code = $request->input('address_code');
         $doctor->province_id = $province_id;
         $doctor->district_id = $district_id;
         $doctor->commune_id = $commune_id;
@@ -173,33 +216,29 @@ class AdminDoctorInfoApi extends Controller
         $doctor->detail_address = $detail_address;
         $doctor->detail_address_en = $detail_address_en;
         $doctor->detail_address_laos = $detail_address_laos;
-
-        $doctor->created_by = $created_by;
-
-        $doctor->other = $other;
-
-        $doctor->hospital = $hospital;
-        $doctor->hospital_en = $hospital_en;
-        $doctor->hospital_laos = $hospital_laos;
+        if (!isset($created_by) || $created_by === "undefined") {
+            $doctor->created_by = null;
+        } else {
+            $doctor->created_by = $created_by;
+        }
 
         $doctor->status = $status;
         $doctor->apply_for = $apply_for;
 
         $doctor->department_id = $department_id;
-        $doctor->hocham_hocvi = $hocham_hocvi;
-
         return $doctor->save();
     }
 
     public function update(Request $request, $id)
     {
         try {
-            $doctor_infos = DoctorInfo::where('id', $id)->first();
-            if (!$doctor_infos || $doctor_infos->status == DoctorInfoStatus::DELETED) {
+            $doctor_infos = User::where('id', $id)->first();
+            if (!$doctor_infos || $doctor_infos->status == UserStatus::DELETED) {
                 return response('Not found', 404);
             }
 
-            $item = $this->saveDoctorInfo($request, $doctor_infos);
+            $created_by = "undefined" ;
+            $item = $this->saveDoctorInfo($request, $doctor_infos, $created_by);
             if ($item) {
                 return response()->json($doctor_infos);
             }
