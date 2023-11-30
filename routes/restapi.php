@@ -87,10 +87,10 @@ Route::group(['prefix' => 'topic-videos'], function () {
 });
 
 Route::group(['prefix' => 'short-videos'], function () {
-    Route::get('/list', [ShortVideoApi::class, 'getAll'])->name('short.videos.list');
-    Route::get('/users/{id}', [ShortVideoApi::class, 'getAllByUserID'])->name('short.videos.users');
-    Route::get('/topics/{id}', [ShortVideoApi::class, 'getAllByTopic'])->name('short.videos.topics');
-    Route::get('/detail/{id}', [ShortVideoApi::class, 'detail'])->name('short.videos.detail');
+    Route::get('/list', [ShortVideoApi::class, 'getAll'])->name('restapi.short.videos.list');
+    Route::get('/users/{id}', [ShortVideoApi::class, 'getAllByUserID'])->name('restapi.short.videos.users');
+    Route::get('/topics/{id}', [ShortVideoApi::class, 'getAllByTopic'])->name('restapi.short.videos.topics');
+    Route::get('/detail/{id}', [ShortVideoApi::class, 'detail'])->name('restapi.short.videos.detail');
 });
 
 Route::group(['prefix' => 'coupons'], function () {

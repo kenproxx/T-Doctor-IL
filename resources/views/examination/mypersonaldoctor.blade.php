@@ -40,7 +40,7 @@
                             <div class="row">
 
                             </div>
-                        </div>1202
+                        </div>
 
                     </div>
                 </div>
