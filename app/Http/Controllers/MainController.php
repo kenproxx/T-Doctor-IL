@@ -128,11 +128,11 @@ class MainController extends Controller
             case 'laos':
                 $lang = 'laos';
                 break;
-            case 'en':
-                $lang = 'en';
+            case 'vi':
+                $lang = 'vi';
                 break;
             default:
-                $lang = 'vi';
+                $lang = 'en';
                 break;
         }
         Session::put('locale', $lang);

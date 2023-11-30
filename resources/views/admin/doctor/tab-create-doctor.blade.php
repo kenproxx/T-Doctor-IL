@@ -1,40 +1,43 @@
+@php
+    use App\Enums\Role;
+@endphp
 @extends('layouts.admin')
 @section('title')
     Create Doctor
 @endsection
 @section('main-content')
-<style>
-    .list-apply {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        display: flex;
-    }
+    <style>
+        .list-apply {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+        }
 
-    .list-apply li {
-        margin-right: 20px; /* Adjust as needed */
-    }
+        .list-apply li {
+            margin-right: 20px; /* Adjust as needed */
+        }
 
-    .list-apply li:last-child {
-        margin-right: 0;
-    }
+        .list-apply li:last-child {
+            margin-right: 0;
+        }
 
-    .new-select {
-        display: flex;
-        align-items: center;
-    }
+        .new-select {
+            display: flex;
+            align-items: center;
+        }
 
-    .new-select input {
-        margin-right: 5px; /* Adjust as needed */
-    }
+        .new-select input {
+            margin-right: 5px; /* Adjust as needed */
+        }
 
-    .new-select label {
-        margin-top: 10px;
-    }
+        .new-select label {
+            margin-top: 10px;
+        }
 
-    /* Add more styles as needed */
+        /* Add more styles as needed */
 
-</style>
+    </style>
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Create Doctor Information</h1>
@@ -47,41 +50,104 @@
         </div>
     @endif
     <form id="form">
+
         @csrf
-        <div>
-            <label for="name">name</label>
-            <input type="text" class="form-control" id="name" name="name">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group focused">
+                    <label class="form-control-label" for="username">{{ __('home.Username') }}<span
+                            class="small text-danger">*</span></label>
+                    <input type="text" id="username" class="form-control" name="username"
+                           placeholder="Username"
+                           value="">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group focused">
+                    <label class="form-control-label" for="name">{{ __('home.Name') }}<span
+                            class="small text-danger">*</span></label>
+                    <input type="text" id="name" class="form-control" name="name" placeholder="Name" required
+                           value="">
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group focused">
+                    <label class="form-control-label"
+                           for="last_name">{{ __('home.Last name') }}</label>
+                    <input type="text" id="last_name" class="form-control" name="last_name"
+                           placeholder="Last name"
+                           value="">
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="form-control-label" for="email">{{ __('home.Email address') }}
+                        <span
+                            class="small text-danger">*</span></label>
+                    <input type="email" id="email" class="form-control" name="email"
+                           placeholder="example@example.com"
+                           value="">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="form-control-label" for="phone">{{ __('home.PhoneNumber') }}r<span
+                            class="small text-danger">*</span></label>
+                    <input type="number" id="phone" class="form-control" name="phone"
+                           placeholder="Phone"
+                           value="" required>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <label for="avt">Ảnh đại diện </label>
+                <input type="file" class="form-control" id="avt" name="avt" accept="image/*, .pdf, .doc, .docx">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-element col-md-4">
+                <label for="password">{{ __('home.Password') }}</label>
+                <input class="form-control" id="password" type="password" name="password" minlength="8"
+                       placeholder="********" required>
+            </div>
+            <div class="form-element col-md-4">
+                <label for="passwordConfirm">{{ __('home.Enter the Password') }}</label>
+                <input class="form-control" id="passwordConfirm" name="passwordConfirm" minlength="8"
+                       type="password" placeholder="********" required>
+            </div>
+                        <div class="col-sm-4 d-flex justify-content-start align-items-center">
+                            <span id='message'></span>
+                        </div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><label for="hocham_hocvi">Học hàm học vị</label>
-                <select class="custom-select" id="hocham_hocvi" name="hocham_hocvi">
-                    @foreach($types as $type)
-                        <option value="{{ $type }}">{{ $type }}</option>
-                    @endforeach
+            <div class="form-element col-md-6">
+                <label for="type">{{ __('home.Type Account') }}</label>
+                <select id="type" name="type" class="form-select form-control">
+                    <option value="{{Role::MEDICAL }}">{{ __('home.MEDICAL') }}</option>
                 </select>
             </div>
-            <div class="col-sm-4">
-                <label for="year_of_experience">Năm kinh nghiệm</label>
-                <input type="number" class="form-control" id="year_of_experience" name="year_of_experience">
-            </div>
-            <div class="col-sm-4">
-                <label for="created_by">User</label>
-                <select class="custom-select" id="created_by" name="created_by">
-                    @foreach($users as $user)
-                        <option value=" {{$user->id}}"> {{$user->username}} ({{$user->email}})</option>
-                    @endforeach
+            <div class="form-element col-md-6">
+                <label for="member">{{ __('home.Member') }}</label>
+                <select id="member" name="member" class="form-select form-control">
+                    <option value="{{Role::DOCTORS}}">DOCTOR</option>
+                    <option value="{{Role::PHAMACISTS}}">PHAMACISTS</option>
+                    <option value="{{Role::THERAPISTS}}">THERAPISTS</option>
+                    <option value="{{Role::ESTHETICIANS}}">ESTHETICIANS</option>
+                    <option value="{{Role::NURSES}}">NURSES</option>
                 </select>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4">
-                <label for="specialty">chuyên môn việt</label>
-                <input type="text" class="form-control" id="specialty" name="specialty"></div>
-            <div class="col-sm-4">
-                <label for="specialty_en">chuyên môn anh</label>
-                <input type="text" class="form-control" id="specialty_en" name="specialty_en" value=""></div>
-            <div class="col-sm-4">
-                <label for="specialty_laos">chuyên môn lào</label>
+            <div class="col-sm-4"><label for="specialty">chuyên môn việt</label>
+                <input type="text" class="form-control" id="specialty" name="specialty" value="">
+            </div>
+            <div class="col-sm-4"><label for="specialty_en">chuyên môn anh</label>
+                <input type="text" class="form-control" id="specialty_en" name="specialty_en"
+                       value=""></div>
+            <div class="col-sm-4"><label for="specialty_laos">chuyên môn lào</label>
                 <input type="text" class="form-control" id="specialty_laos" name="specialty_laos"
                        value=""></div>
         </div>
@@ -96,35 +162,42 @@
             </div>
             <div class="col-sm-4">
                 <label for="service_laos">Dịch vụ cung cấp lào</label>
-                <textarea class="form-control" name="service_laos" id="service_laos"></textarea>
+                <textarea class="form-control" name="service_laos"
+                          id="service_laos"></textarea>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
                 <label for="service_price">Giá dịch vụ việt</label>
-                <input class="form-control" type="number" name="service_price" id="service_price">
+                <input class="form-control" type="number" name="service_price" id="service_price"
+                       value="">
             </div>
             <div class="col-sm-4">
                 <label for="service_price_en">Giá dịch vụ anh</label>
-                <input class="form-control" type="number" name="service_price_en" id="service_price_en">
+                <input class="form-control" type="number" name="service_price_en" id="service_price_en"
+                       value="">
             </div>
             <div class="col-sm-4">
                 <label for="service_price_laos">Giá dịch vụ lào</label>
-                <input class="form-control" type="number" name="service_price_laos" id="service_price_laos">
+                <input class="form-control" type="number" name="service_price_laos" id="service_price_laos"
+                       value="">
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
                 <label for="detail_address">địa chỉ chi tiết việt</label>
-                <input class="form-control" name="detail_address" id="detail_address">
+                <input class="form-control" name="detail_address" id="detail_address"
+                       value="">
             </div>
             <div class="col-sm-4">
                 <label for="detail_address_en">địa chỉ chi tiết anh</label>
-                <input class="form-control" name="detail_address_en" id="detail_address_en">
+                <input class="form-control" name="detail_address_en" id="detail_address_en"
+                       value="">
             </div>
             <div class="col-sm-4">
                 <label for="detail_address_laos">địa chỉ chi tiết lào</label>
-                <input class="form-control" name="detail_address_laos" id="detail_address_laos">
+                <input class="form-control" name="detail_address_laos" id="detail_address_laos"
+                       value="">
             </div>
         </div>
         <div class="row">
@@ -142,12 +215,13 @@
             </div>
             <div class="col-sm-4">
                 <label for="commune_id">Xã</label>
-                <select name="commune_id" id="commune_id" class="form-control">
 
+                <select name="commune_id" id="commune_id" class="form-control">
                 </select>
             </div>
         </div>
         <div class="row">
+
             <div class="col-sm-3">
                 <label for="time_working_1_start">Thời gian làm việc bắt đầu</label>
                 <input type="time" class="form-control" id="time_working_1_start" name="time_working_1_start"
@@ -155,7 +229,8 @@
             </div>
             <div class="col-sm-3">
                 <label for="time_working_1_end">Thời gian làm việc kết thúc</label>
-                <input type="time" class="form-control" id="time_working_1_end" name="time_working_1_end" value="23:59">
+                <input type="time" class="form-control" id="time_working_1_end"
+                       name="time_working_1_end" value="23:59">
             </div>
             <div class="col-sm-3">
                 <label for="time_working_2_start">Những này làm việc bắt đầu</label>
@@ -187,58 +262,82 @@
             <input type="text" class="form-control d-none" id="apply_for" name="apply_for">
         </div>
         <div class="row">
-            <div class="col-sm-4"><label>Số lượng đký tối đa</label>
-                <label>thumbnail</label>
-                <input type="file" class="form-control" id="thumbnail" name="thumbnail" multiple accept="image/*">
-            </div>
+
             <div class="col-sm-4"><label for="department_id">Department</label>
                 <select class="custom-select" id="department_id" name="department_id">
                     @foreach($departments as $department)
-                        <option value="{{$department->id}}"> {{$department->name}}</option>
+                        <option value=" {{$department->id}}"> {{$department->name}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-sm-4"><label for="status">Trạng thái</label>
                 <select class="custom-select" id="status" name="status">
-                    <option value="{{ \App\Enums\DoctorInfoStatus::ACTIVE }}">
-                        {{ \App\Enums\DoctorInfoStatus::ACTIVE }}
+                    <option value="{{ \App\Enums\UserStatus::PENDING }}">
+                        {{ \App\Enums\UserStatus::PENDING }}
                     </option>
-                    <option value="{{ \App\Enums\DoctorInfoStatus::INACTIVE }}">
-                        {{ \App\Enums\DoctorInfoStatus::INACTIVE }}
+                    <option
+                        value="{{ \App\Enums\UserStatus::INACTIVE }}">
+                        {{ \App\Enums\UserStatus::INACTIVE }}
+                    </option>
+                    <option value="{{ \App\Enums\UserStatus::ACTIVE }}">
+                        {{ \App\Enums\UserStatus::ACTIVE }}
+                    </option>
+                    <option value="{{ \App\Enums\UserStatus::BLOCKED }}">
+                        {{ \App\Enums\UserStatus::BLOCKED }}
+                    </option>
+                    <option value="{{ \App\Enums\UserStatus::DELETED }}">
+                        {{ \App\Enums\UserStatus::DELETED }}
                     </option>
                 </select>
             </div>
+            <div class="col-sm-4">
+                <label for="year_of_experience">Năm kinh nghiệm</label>
+                <input type="number" class="form-control" id="year_of_experience" name="year_of_experience"
+                       value="">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="apply_show">Apply Show</label>
-            <input type="text" class="form-control" id="apply_show" name="apply_show" disabled>
-            @php
-                $arrayApply = [
-                    'name'=> 'Name',
-                    'response_rate'=> 'Response Rate',
-                    'specialty'=> 'Specialty',
-                    'year_of_experience'=> 'Years of experience',
-                    'service'=> 'Service',
-                    'service_price'=> 'Service Price',
-                    'time_working_1'=> 'Time Working',
-                    'time_working_2'=> 'Date Working',
-                ];
-            @endphp
-            <ul class="list-apply">
-                @foreach($arrayApply as $key => $value)
-                    <li class="new-select">
-                        <input onchange="getInput();" class="apply_item" value="{{$key}}"
-                               id="apply_item_{{$key}}"
-                               name="apply_item"
-                               type="checkbox">
-                        <label for="apply_item_{{$key}}">{{$value}}</label>
-                    </li>
-                @endforeach
-            </ul>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="apply_show">Apply Show</label>
+                <input type="text" class="form-control" id="apply_show" name="apply_show" disabled>
+                @php
+                    $arrayApply = [
+                        'name'=> 'Name',
+                        'response_rate'=> 'Response Rate',
+                        'specialty'=> 'Specialty',
+                        'year_of_experience'=> 'Years of experience',
+                        'service'=> 'Service',
+                        'service_price'=> 'Service Price',
+                        'time_working_1'=> 'Time Working',
+                        'time_working_2'=> 'Date Working',
+                    ];
+                @endphp
+                <ul class="list-apply flex-wrap-reverse">
+                    @foreach($arrayApply as $key => $value)
+                        <li class="new-select">
+                            <input onchange="getInput();" class="apply_item" value="{{$key}}"
+                                   id="apply_item_{{$key}}"
+                                   name="apply_item"
+                                   type="checkbox">
+                            <label for="apply_item_{{$key}}">{{$value}}</label>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </div>
-
+        <input hidden="" id="address_code" name="address_code" value="">
         <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
     </form>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        $('#password, #confirm_password').on('keyup', function () {
+            if ($('#password').val() === $('#passwordConfirm').val()) {
+                $('#message').html('Matching').css('color', 'green');
+            } else
+                $('#message').html('Not Matching').css('color', 'red');
+        });
+    </script>
     <script>
         const token = `{{ $_COOKIE['accessToken'] }}`;
         $(document).ready(function () {
@@ -252,8 +351,8 @@
                     "service_price", "service_price_en", "service_price_laos",
                     "detail_address", "detail_address_en", "detail_address_laos",
                     "province_id", "district_id", "commune_id",
-                    "time_working_1", "time_working_2", "apply_for",
-                    "name", "year_of_experience", "status", "department_id", "created_by", "hocham_hocvi"
+                    "time_working_1", "time_working_2", "apply_for", "address_code",
+                    "name", "year_of_experience", "status", "department_id", "username", "email", "phone", "last_name", "password", "passwordConfirm", "member", "type"
                 ];
                 const fieldTextareaTiny = [
                     "service", "service_en", "service_laos",
@@ -263,45 +362,46 @@
                     formData.append(fieldName, $(`#${fieldName}`).val());
                 });
 
-                console.log(fieldNames);
 
-                /* Temporary don't use tinymce because this was error
-                *  and move the necessary ids(service, service_en, service_laos) to fieldNames array*/
                 fieldTextareaTiny.forEach(fieldTextarea => {
                     const content = tinymce.get(fieldTextarea).getContent();
                     formData.append(fieldTextarea, content);
                 });
 
-                {{--formData.append("created_by", '{{ \Illuminate\Support\Facades\Auth::user()->id }}');--}}
+                formData.append("created_by", '{{ \Illuminate\Support\Facades\Auth::user()->id }}');
                 formData.append("apply_for", $('#apply_for').val());
-                const photo = $('#thumbnail')[0].files[0];
-                formData.append('thumbnail', photo);
+                const photo = $('#avt')[0].files[0];
+                formData.append('avt', photo);
                 formData.append('_token', '{{ csrf_token() }}');
 
-                if (photo){
-                    try {
-                        $.ajax({
-                            url: `{{route('api.backend.doctors.info.create')}}`,
-                            method: 'POST',
-                            headers: headers,
-                            contentType: false,
-                            cache: false,
-                            processData: false,
-                            data: formData,
-                            success: function () {
-                                alert('Create success');
-                                window.location.href = '{{ route('homeAdmin.list.doctors') }}';
-                            },
-                            error: function (exception) {
-                                alert('Create error, Please try again!');
-                                console.log(exception)
-                            }
-                        });
-                    } catch (error) {
-                        throw error;
-                    }
+                if (photo) {
+                        try {
+                            $.ajax({
+                                url: `{{route('api.backend.doctors.info.create')}}`,
+                                method: 'POST',
+                                headers: headers,
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                data: formData,
+                                success: function () {
+                                    toastr.success('Create success', 'Success');
+                                    window.location.href = '{{ route('homeAdmin.list.doctors') }}';
+                                },
+                                error: function (xhr) {
+                                    if (xhr.status === 400) {
+                                        toastr.error(xhr.responseText, 'Error');
+                                    } else {
+                                        toastr.error('Create error, Please try again!', 'Error');
+                                    }
+                                    console.log(xhr);
+                                }
+                            });
+                        } catch (error) {
+                            throw error;
+                        }
                 } else {
-                    alert('Please choosing thumbnail!')
+                    toastr.error('Please choosing thumbnail!');
                 }
             })
 
@@ -340,6 +440,7 @@
                 let id_code = $(this).val();
                 let myArray = id_code.split('-');
                 let code = myArray[1];
+                $('#address_code').val(myArray[2]);
                 callGetAllDistricts(code);
             })
 
@@ -399,7 +500,7 @@
             for (let i = 0; i < res.length; i++) {
                 let data = res[i];
                 let code = data.code;
-                html = html + `<option class="province province-item" data-code="${code}" value="${data.id}-${data.code}">${data.name}</option>`;
+                html = html + `<option class="province province-item" data-code="${code}" value="${data.id}-${data.code}-${data.code_name}">${data.name}</option>`;
             }
 
             $('#province_id').empty().append(html);

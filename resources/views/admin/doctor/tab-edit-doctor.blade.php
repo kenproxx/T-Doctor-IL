@@ -1,3 +1,6 @@
+@php
+    use App\Enums\Role;
+@endphp
 @extends('layouts.admin')
 @section('title')
     Edit Doctor
@@ -46,40 +49,93 @@
         </div>
     @endif
     <form id="form">
+
         @csrf
-        <div><label for="name">name</label>
-            <input type="text" class="form-control" id="name" name="name" value="{{$doctor->name}}"></div>
         <div class="row">
-            <div class="col-sm-4">
-                <label for="hocham_hocvi">Học hàm học vị</label>
-                <select class="custom-select" id="hocham_hocvi" name="hocham_hocvi">
-                    @foreach($types as $type)
-                        <option
-                            {{ $type == $doctor->hocham_hocvi ? 'selected' : ''}} value="{{ $type }}">{{ $type }}</option>
-                    @endforeach
-                </select>
+            <div class="col-lg-4">
+                <div class="form-group focused">
+                    <label class="form-control-label" for="username">{{ __('home.Username') }}<span
+                            class="small text-danger">*</span></label>
+                    <input type="text" id="username" class="form-control" name="username"
+                           placeholder="Username"
+                           value="{{ $doctor->username }}">
+                </div>
             </div>
-            <div class="col-sm-4">
-                <label for="year_of_experience">Năm kinh nghiệm</label>
-                <input type="number" class="form-control" id="year_of_experience" name="year_of_experience"
-                       value="{{$doctor->year_of_experience}}">
+            <div class="col-lg-4">
+                <div class="form-group focused">
+                    <label class="form-control-label" for="name">{{ __('home.Name') }}<span
+                            class="small text-danger">*</span></label>
+                    <input type="text" id="name" class="form-control" name="name" placeholder="Name" required
+                           value="{{ $doctor->name }}">
+                </div>
             </div>
-            <div class="col-sm-4">
-                <label for="created_by">User</label>
-                <select class="custom-select" id="created_by" name="created_by">
-                    @php
-                        $crUser = \App\Models\User::find($doctor->created_by);
-                    @endphp
-                    <option value="{{$crUser->id}}"> {{$crUser->username}} ({{$crUser->email}})</option>
-                    @foreach($users as $user)
-                        <option value="{{$user->id}}"> {{$user->username}} ({{$user->email}})</option>
-                    @endforeach
-                </select>
+            <div class="col-lg-4">
+                <div class="form-group focused">
+                    <label class="form-control-label"
+                           for="last_name">{{ __('home.Last name') }}</label>
+                    <input type="text" id="last_name" class="form-control" name="last_name"
+                           placeholder="Last name"
+                           value="{{ $doctor->last_name }}">
+                </div>
             </div>
         </div>
 
-        <div><label for="apply_for">Apply for</label>
-            <input type="text" class="form-control" id="apply_for" name="apply_for" value="{{$doctor->apply_for}}">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="form-control-label" for="email">{{ __('home.Email address') }}
+                        <span
+                            class="small text-danger">*</span></label>
+                    <input type="email" id="email" class="form-control" name="email"
+                           placeholder="example@example.com"
+                           value="{{ $doctor->email }}">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label class="form-control-label" for="phone">{{ __('home.PhoneNumber') }}r<span
+                            class="small text-danger">*</span></label>
+                    <input type="number" id="phone" class="form-control" name="phone"
+                           placeholder="Phone"
+                           value="{{ $doctor->phone }}" required>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <label for="avt">Ảnh đại diện </label>
+                <input type="file" class="form-control" id="avt" name="avt" accept="image/*, .pdf, .doc, .docx">
+                <img src="{{ asset($doctor->avt) }}" alt="" width="80px">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-element col-md-4">
+                <label for="password">{{ __('home.Password') }}</label>
+                <input class="form-control" id="password" type="password" name="password" minlength="8"
+                       placeholder="********" value="" required>
+            </div>
+            <div class="form-element col-md-4">
+                <label for="passwordConfirm">{{ __('home.Enter the Password') }}</label>
+                <input class="form-control" id="passwordConfirm" name="passwordConfirm" minlength="8"
+                       type="password" placeholder="********" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-element col-md-6">
+                <label for="type">{{ __('home.Type Account') }}</label>
+                <select id="type" name="type" class="form-select form-control">
+                    <option value="{{Role::MEDICAL }}" selected>{{ __('home.MEDICAL') }}</option>
+                </select>
+            </div>
+            <div class="form-element col-md-6">
+                <label for="member">{{ __('home.Member') }}</label>
+                <select id="member" name="member" class="form-select form-control">
+                    <option value="{{Role::DOCTORS}}" selected>DOCTOR</option>
+                    <option value="{{Role::PHAMACISTS}}">PHAMACISTS</option>
+                    <option value="{{Role::THERAPISTS}}">THERAPISTS</option>
+                    <option value="{{Role::ESTHETICIANS}}">ESTHETICIANS</option>
+                    <option value="{{Role::NURSES}}">NURSES</option>
+                </select>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-4"><label for="specialty">chuyên môn việt</label>
@@ -154,7 +210,8 @@
                     $district = \App\Models\District::find($doctor->district_id);
                 @endphp
                 <select name="district_id" id="district_id" class="form-control">
-                    <option value="{{$district->id}}-{{$district->code}}"> {{$district->name}}</option>
+                    <option
+                        value="{{$district->id ?? null}}-{{$district->code ?? null}}"> {{$district->name ?? null}}</option>
                 </select>
             </div>
             <div class="col-sm-4">
@@ -163,7 +220,8 @@
                     $commune = \App\Models\Commune::find($doctor->commune_id);
                 @endphp
                 <select name="commune_id" id="commune_id" class="form-control">
-                    <option value="{{$commune->id}}-{{$commune->code}}">{{$commune->name}}</option>
+                    <option
+                        value="{{$commune->id ?? null}}-{{$commune->code ?? null}}">{{$commune->name ?? null}}</option>
                 </select>
             </div>
         </div>
@@ -175,56 +233,91 @@
                 $working2 = $doctor->time_working_2;
                 $arrayWorking2 = explode('-', $working2);
             @endphp
-            <div class="col-sm-3">
-                <label for="time_working_1_start">Thời gian làm việc bắt đầu</label>
-                <input type="time" class="form-control" id="time_working_1_start" name="time_working_1_start"
-                       value="{{ $arrayWorking1[0] }}">
-            </div>
-            <div class="col-sm-3">
-                <label for="time_working_1_end">Thời gian làm việc kết thúc</label>
-                <input type="time" class="form-control" id="time_working_1_end" name="time_working_1_end"
-                       value="{{ $arrayWorking1[1] }}">
-            </div>
-            <div class="col-sm-3">
-                <label for="time_working_2_start">Những này làm việc bắt đầu</label>
-                <select name="time_working_2_start" id="time_working_2_start" class="form-control">
-                    <option {{ $arrayWorking2[0] == 'T2' ? 'selected' : '' }} value="T2">Thứ 2</option>
-                    <option {{ $arrayWorking2[0] == 'T3' ? 'selected' : '' }}  value="T3">Thứ 3</option>
-                    <option {{ $arrayWorking2[0] == 'T4' ? 'selected' : '' }}  value="T4">Thứ 4</option>
-                    <option {{ $arrayWorking2[0] == 'T5' ? 'selected' : '' }}  value="T5">Thứ 5</option>
-                    <option {{ $arrayWorking2[0] == 'T6' ? 'selected' : '' }}  value="T6">Thứ 6</option>
-                    <option {{ $arrayWorking2[0] == 'T7' ? 'selected' : '' }}  value="T7">Thứ 7</option>
-                    <option {{ $arrayWorking2[0] == 'CN' ? 'selected' : '' }}  value="CN">Chủ nhật</option>
-                </select>
-            </div>
-            <div class="col-sm-3">
-                <label for="time_working_2_end">Những này làm việc kết thúc</label>
-                <select name="time_working_2_end" id="time_working_2_end" class="form-control">
-                    <option {{ $arrayWorking2[1] == 'T2' ? 'selected' : '' }}  value="T2">Thứ 2</option>
-                    <option {{ $arrayWorking2[1] == 'T3' ? 'selected' : '' }}  value="T3">Thứ 3</option>
-                    <option {{ $arrayWorking2[1] == 'T4' ? 'selected' : '' }}  value="T4">Thứ 4</option>
-                    <option {{ $arrayWorking2[1] == 'T5' ? 'selected' : '' }}  value="T5">Thứ 5</option>
-                    <option {{ $arrayWorking2[1] == 'T6' ? 'selected' : '' }}  value="T6">Thứ 6</option>
-                    <option {{ $arrayWorking2[1] == 'T7' ? 'selected' : '' }}  value="T7">Thứ 7</option>
-                    <option {{ $arrayWorking2[1] == 'CN' ? 'selected' : '' }}  value="CN">Chủ nhật</option>
-                </select>
-            </div>
+            @if(!$working1 == null && !$working2 == null)
+                <div class="col-sm-3">
+                    <label for="time_working_1_start">Thời gian làm việc bắt đầu</label>
+                    <input type="time" class="form-control" id="time_working_1_start" name="time_working_1_start"
+                           value="{{ $arrayWorking1[0] }}">
+                </div>
+                <div class="col-sm-3">
+                    <label for="time_working_1_end">Thời gian làm việc kết thúc</label>
+                    <input type="time" class="form-control" id="time_working_1_end" name="time_working_1_end"
+                           value="{{ $arrayWorking1[1] }}">
+                </div>
+                <div class="col-sm-3">
+                    <label for="time_working_2_start">Những này làm việc bắt đầu</label>
+                    <select name="time_working_2_start" id="time_working_2_start" class="form-control">
+                        <option {{ $arrayWorking2[0] == 'T2' ? 'selected' : '' }} value="T2">Thứ 2</option>
+                        <option {{ $arrayWorking2[0] == 'T3' ? 'selected' : '' }}  value="T3">Thứ 3</option>
+                        <option {{ $arrayWorking2[0] == 'T4' ? 'selected' : '' }}  value="T4">Thứ 4</option>
+                        <option {{ $arrayWorking2[0] == 'T5' ? 'selected' : '' }}  value="T5">Thứ 5</option>
+                        <option {{ $arrayWorking2[0] == 'T6' ? 'selected' : '' }}  value="T6">Thứ 6</option>
+                        <option {{ $arrayWorking2[0] == 'T7' ? 'selected' : '' }}  value="T7">Thứ 7</option>
+                        <option {{ $arrayWorking2[0] == 'CN' ? 'selected' : '' }}  value="CN">Chủ nhật</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <label for="time_working_2_end">Những này làm việc kết thúc</label>
+                    <select name="time_working_2_end" id="time_working_2_end" class="form-control">
+                        <option {{ $arrayWorking2[1] == 'T2' ? 'selected' : '' }}  value="T2">Thứ 2</option>
+                        <option {{ $arrayWorking2[1] == 'T3' ? 'selected' : '' }}  value="T3">Thứ 3</option>
+                        <option {{ $arrayWorking2[1] == 'T4' ? 'selected' : '' }}  value="T4">Thứ 4</option>
+                        <option {{ $arrayWorking2[1] == 'T5' ? 'selected' : '' }}  value="T5">Thứ 5</option>
+                        <option {{ $arrayWorking2[1] == 'T6' ? 'selected' : '' }}  value="T6">Thứ 6</option>
+                        <option {{ $arrayWorking2[1] == 'T7' ? 'selected' : '' }}  value="T7">Thứ 7</option>
+                        <option {{ $arrayWorking2[1] == 'CN' ? 'selected' : '' }}  value="CN">Chủ nhật</option>
+                    </select>
+                </div>
 
-            <input type="text" class="form-control d-none" id="time_working_1" name="time_working_1">
-            <input type="text" class="form-control d-none" id="time_working_2" name="time_working_2">
-            <input type="text" class="form-control d-none" id="apply_for" name="apply_for">
+                <input type="text" class="form-control d-none" id="time_working_1" name="time_working_1">
+                <input type="text" class="form-control d-none" id="time_working_2" name="time_working_2">
+                <input type="text" class="form-control d-none" id="apply_for" name="apply_for">
+            @else
+                <div class="col-sm-3">
+                    <label for="time_working_1_start">Thời gian làm việc bắt đầu</label>
+                    <input type="time" class="form-control" id="time_working_1_start"
+                           name="time_working_1_start"
+                           value="00:00">
+                </div>
+                <div class="col-sm-3">
+                    <label for="time_working_1_end">Thời gian làm việc kết thúc</label>
+                    <input type="time" class="form-control" id="time_working_1_end"
+                           name="time_working_1_end" value="23:59">
+                </div>
+                <div class="col-sm-3">
+                    <label for="time_working_2_start">Những này làm việc bắt đầu</label>
+                    <select name="time_working_2_start" id="time_working_2_start" class="form-control">
+                        <option value="T2">Thứ 2</option>
+                        <option value="T3">Thứ 3</option>
+                        <option value="T4">Thứ 4</option>
+                        <option value="T5">Thứ 5</option>
+                        <option value="T6">Thứ 6</option>
+                        <option value="T7">Thứ 7</option>
+                        <option value="CN">Chủ nhật</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <label for="time_working_2_end">Những này làm việc kết thúc</label>
+                    <select name="time_working_2_end" id="time_working_2_end" class="form-control">
+                        <option value="T2">Thứ 2</option>
+                        <option value="T3">Thứ 3</option>
+                        <option value="T4">Thứ 4</option>
+                        <option value="T5">Thứ 5</option>
+                        <option value="T6">Thứ 6</option>
+                        <option value="T7">Thứ 7</option>
+                        <option value="CN">Chủ nhật</option>
+                    </select>
+                </div>
+
+                <input type="text" class="form-control d-none" id="time_working_1"
+                       name="time_working_1">
+                <input type="text" class="form-control d-none" id="time_working_2"
+                       name="time_working_2">
+                <input type="text" class="form-control d-none" id="apply_for" name="apply_for">
+            @endif
         </div>
         <div class="row">
-            <div class="col-sm-4"><label>Số lượng đký tối đa</label>
-                <label>thumbnail</label>
-                <input type="file" class="form-control" id="thumbnail" name="thumbnail" multiple accept="image/*">
-                @php
-                    $galleryArray = explode(',', $doctor->thumbnail);
-                @endphp
-                @foreach($galleryArray as $productImg)
-                    <img width="50px" src="{{$productImg}}" alt="">
-                @endforeach
-            </div>
+
             <div class="col-sm-4"><label for="department_id">Department</label>
                 <select class="custom-select" id="department_id" name="department_id">
                     @foreach($departments as $department)
@@ -236,51 +329,74 @@
             <div class="col-sm-4"><label for="status">Trạng thái</label>
                 <select class="custom-select" id="status" name="status">
                     <option
-                        {{ $doctor->status == \App\Enums\DoctorInfoStatus::ACTIVE ? 'selected' : ''}}
-                        value="{{ \App\Enums\DoctorInfoStatus::ACTIVE }}">
-                        {{ \App\Enums\DoctorInfoStatus::ACTIVE }}
+                        {{ $doctor->status == \App\Enums\UserStatus::PENDING ? 'selected' : ''}}
+                        value="{{ \App\Enums\UserStatus::PENDING }}">
+                        {{ \App\Enums\UserStatus::PENDING }}
                     </option>
                     <option
-                        {{ $doctor->status == \App\Enums\DoctorInfoStatus::INACTIVE ? 'selected' : ''}}
-                        value="{{ \App\Enums\DoctorInfoStatus::INACTIVE }}">
-                        {{ \App\Enums\DoctorInfoStatus::INACTIVE }}
+                        {{ $doctor->status == \App\Enums\UserStatus::INACTIVE ? 'selected' : ''}}
+                        value="{{ \App\Enums\UserStatus::INACTIVE }}">
+                        {{ \App\Enums\UserStatus::INACTIVE }}
+                    </option>
+                    <option
+                        {{ $doctor->status == \App\Enums\UserStatus::ACTIVE ? 'selected' : ''}}
+                        value="{{ \App\Enums\UserStatus::ACTIVE }}">
+                        {{ \App\Enums\UserStatus::ACTIVE }}
+                    </option>
+                    <option
+                        {{ $doctor->status == \App\Enums\UserStatus::BLOCKED ? 'selected' : ''}}
+                        value="{{ \App\Enums\UserStatus::BLOCKED }}">
+                        {{ \App\Enums\UserStatus::BLOCKED }}
+                    </option>
+                    <option
+                        {{ $doctor->status == \App\Enums\UserStatus::DELETED ? 'selected' : ''}}
+                        value="{{ \App\Enums\UserStatus::DELETED }}">
+                        {{ \App\Enums\UserStatus::DELETED }}
                     </option>
                 </select>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="apply_show">Apply Show</label>
-            <input type="text" class="form-control" id="apply_show" name="apply_show" disabled>
-            @php
-                $arrayApply = [
-                    'name'=> 'Name',
-                    'response_rate'=> 'Response Rate',
-                    'specialty'=> 'Specialty',
-                    'year_of_experience'=> 'Years of experience',
-                    'service'=> 'Service',
-                    'service_price'=> 'Service Price',
-                    'time_working_1'=> 'Time Working',
-                    'time_working_2'=> 'Date Working',
-                ];
+            <div class="col-sm-4">
+                <label for="year_of_experience">Năm kinh nghiệm</label>
+                <input type="number" class="form-control" id="year_of_experience" name="year_of_experience"
+                       value="{{$doctor->year_of_experience}}">
+            </div>
+            <div class="form-group">
+                <label for="apply_show">Apply Show</label>
+                <input type="text" class="form-control" id="apply_show" name="apply_show" disabled>
+                @php
+                    $arrayApply = [
+                        'name'=> 'Name',
+                        'response_rate'=> 'Response Rate',
+                        'specialty'=> 'Specialty',
+                        'year_of_experience'=> 'Years of experience',
+                        'service'=> 'Service',
+                        'service_price'=> 'Service Price',
+                        'time_working_1'=> 'Time Working',
+                        'time_working_2'=> 'Date Working',
+                    ];
 
-                $arrayApplyOld = explode(',', $doctor->apply_for);
-            @endphp
-            <ul class="list-apply">
-                @foreach($arrayApply as $key => $value)
-                    <li class="new-select">
-                        <input onchange="getInput();" class="apply_item" value="{{$key}}"
-                               id="apply_item_{{$key}}"
-                               name="apply_item"
-                               {{ in_array($key, $arrayApplyOld) ? 'checked' : '' }}
-                               type="checkbox">
-                        <label for="apply_item_{{$key}}">{{$value}}</label>
-                    </li>
-                @endforeach
-            </ul>
+                    $arrayApplyOld = explode(',', $doctor->apply_for);
+                @endphp
+                <ul class="list-apply">
+                    @foreach($arrayApply as $key => $value)
+                        <li class="new-select">
+                            <input onchange="getInput();" class="apply_item" value="{{$key}}"
+                                   id="apply_item_{{$key}}"
+                                   name="apply_item"
+                                   {{ in_array($key, $arrayApplyOld) ? 'checked' : '' }}
+                                   type="checkbox">
+                            <label for="apply_item_{{$key}}">{{$value}}</label>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+            <input hidden="" id="address_code" name="address_code" value="{{$doctor->address_code}}">
+            <input hidden="" id="update_by" name="update_by" value="{{Auth::user()->id}}">
         </div>
-
         <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
     </form>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         const token = `{{ $_COOKIE['accessToken'] }}`;
         $(document).ready(function () {
@@ -295,8 +411,8 @@
                     "service_price", "service_price_en", "service_price_laos",
                     "detail_address", "detail_address_en", "detail_address_laos",
                     "province_id", "district_id", "commune_id",
-                    "time_working_1", "time_working_2", "hocham_hocvi", "apply_for",
-                    "name", "year_of_experience", "status", "department_id", "created_by"
+                    "time_working_1", "time_working_2", "apply_for", "address_code","update_by",
+                    "name", "year_of_experience", "status", "department_id", "username", "email", "phone", "last_name", "password", "passwordConfirm", "member", "type"
                 ];
                 const fieldTextareaTiny = [
                     "service", "service_en", "service_laos",
@@ -314,8 +430,8 @@
                 });
 
                 formData.append("apply_for", $('#apply_for').val());
-                const photo = $('#thumbnail')[0].files[0];
-                formData.append('thumbnail', photo);
+                const photo = $('#avt')[0].files[0];
+                formData.append('avt', photo);
                 formData.append('_token', '{{ csrf_token() }}');
                 formData.append("user_id", '{{ \Illuminate\Support\Facades\Auth::user()->id }}');
 
