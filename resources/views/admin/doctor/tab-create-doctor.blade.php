@@ -118,13 +118,9 @@
                 <input class="form-control" id="passwordConfirm" name="passwordConfirm" minlength="8"
                        type="password" placeholder="********" required>
             </div>
-            {{--            <div class="col-sm-4"><label for="member">Học hàm học vị</label>--}}
-            {{--                <select class="custom-select" id="member" name="member">--}}
-            {{--                    @foreach($types as $type)--}}
-            {{--                        <option value="{{ $type }}">{{ $type }}</option>--}}
-            {{--                    @endforeach--}}
-            {{--                </select>--}}
-            {{--            </div>--}}
+                        <div class="col-sm-4 d-flex justify-content-start align-items-center">
+                            <span id='message'></span>
+                        </div>
         </div>
         <div class="row">
             <div class="form-element col-md-6">
@@ -299,7 +295,9 @@
                 <input type="number" class="form-control" id="year_of_experience" name="year_of_experience"
                        value="">
             </div>
-            <div class="form-group">
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
                 <label for="apply_show">Apply Show</label>
                 <input type="text" class="form-control" id="apply_show" name="apply_show" disabled>
                 @php
@@ -314,7 +312,7 @@
                         'time_working_2'=> 'Date Working',
                     ];
                 @endphp
-                <ul class="list-apply">
+                <ul class="list-apply flex-wrap-reverse">
                     @foreach($arrayApply as $key => $value)
                         <li class="new-select">
                             <input onchange="getInput();" class="apply_item" value="{{$key}}"
@@ -326,10 +324,20 @@
                     @endforeach
                 </ul>
             </div>
-            <input hidden="" id="address_code" name="address_code" value="" >
         </div>
+        <input hidden="" id="address_code" name="address_code" value="">
         <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
     </form>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        $('#password, #confirm_password').on('keyup', function () {
+            if ($('#password').val() === $('#passwordConfirm').val()) {
+                $('#message').html('Matching').css('color', 'green');
+            } else
+                $('#message').html('Not Matching').css('color', 'red');
+        });
+    </script>
     <script>
         const token = `{{ $_COOKIE['accessToken'] }}`;
         $(document).ready(function () {
@@ -343,7 +351,7 @@
                     "service_price", "service_price_en", "service_price_laos",
                     "detail_address", "detail_address_en", "detail_address_laos",
                     "province_id", "district_id", "commune_id",
-                    "time_working_1", "time_working_2", "apply_for","address_code",
+                    "time_working_1", "time_working_2", "apply_for", "address_code",
                     "name", "year_of_experience", "status", "department_id", "username", "email", "phone", "last_name", "password", "passwordConfirm", "member", "type"
                 ];
                 const fieldTextareaTiny = [
@@ -365,31 +373,35 @@
                 const photo = $('#avt')[0].files[0];
                 formData.append('avt', photo);
                 formData.append('_token', '{{ csrf_token() }}');
-                if (photo) {
 
-                    try {
-                        $.ajax({
-                            url: `{{route('api.backend.doctors.info.create')}}`,
-                            method: 'POST',
-                            headers: headers,
-                            contentType: false,
-                            cache: false,
-                            processData: false,
-                            data: formData,
-                            success: function () {
-                                alert('Create success');
-                                window.location.href = '{{ route('homeAdmin.list.doctors') }}';
-                            },
-                            error: function (exception) {
-                                alert('Create error, Please try again!');
-                                console.log(exception)
-                            }
-                        });
-                    } catch (error) {
-                        throw error;
-                    }
+                if (photo) {
+                        try {
+                            $.ajax({
+                                url: `{{route('api.backend.doctors.info.create')}}`,
+                                method: 'POST',
+                                headers: headers,
+                                contentType: false,
+                                cache: false,
+                                processData: false,
+                                data: formData,
+                                success: function () {
+                                    toastr.success('Create success', 'Success');
+                                    window.location.href = '{{ route('homeAdmin.list.doctors') }}';
+                                },
+                                error: function (xhr) {
+                                    if (xhr.status === 400) {
+                                        toastr.error(xhr.responseText, 'Error');
+                                    } else {
+                                        toastr.error('Create error, Please try again!', 'Error');
+                                    }
+                                    console.log(xhr);
+                                }
+                            });
+                        } catch (error) {
+                            throw error;
+                        }
                 } else {
-                    alert('Please choosing thumbnail!')
+                    toastr.error('Please choosing thumbnail!');
                 }
             })
 

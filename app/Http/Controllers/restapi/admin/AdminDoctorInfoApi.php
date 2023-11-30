@@ -5,12 +5,12 @@ namespace App\Http\Controllers\restapi\admin;
 use App\Enums\DoctorInfoStatus;
 use App\Enums\TypeMedical;
 use App\Enums\UserStatus;
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
 use App\Models\DoctorInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminDoctorInfoApi extends Controller
 {
@@ -35,6 +35,7 @@ class AdminDoctorInfoApi extends Controller
             ->get();
         return response()->json($doctor_infos_byUser);
     }
+
     public function search(Request $request)
     {
 
@@ -151,6 +152,7 @@ class AdminDoctorInfoApi extends Controller
         $province = $request->input('province_id');
         $district = $request->input('district_id');
         $commune = $request->input('commune_id');
+        $update_by = $request->input('update_by');
 
         $provinceArray = explode('-', $province);
         $districtArray = explode('-', $district);
@@ -178,13 +180,18 @@ class AdminDoctorInfoApi extends Controller
         }
 
         $department_id = $request->input('department_id');
+        $address_code = $request->input('address_code');
+
 
         $doctor->name = $name;
         $doctor->username = $username;
         $doctor->last_name = $last_name;
         $doctor->phone = $phone;
         $doctor->email = $email;
-        $doctor->password = $password;
+        if ($password) {
+            $passwordHash = Hash::make($password);
+            $doctor->password = $passwordHash;
+        }
 
         $doctor->avt = $thumbnail;
 
@@ -208,17 +215,21 @@ class AdminDoctorInfoApi extends Controller
         $doctor->time_working_1 = $time_working_1;
         $doctor->time_working_2 = $time_working_2;
 
-        $doctor->address_code = $request->input('address_code');
+        if ($address_code) {
+            $doctor->address_code = $address_code;
+        }
         $doctor->province_id = $province_id;
         $doctor->district_id = $district_id;
         $doctor->commune_id = $commune_id;
 
+
         $doctor->detail_address = $detail_address;
         $doctor->detail_address_en = $detail_address_en;
         $doctor->detail_address_laos = $detail_address_laos;
-        if (!isset($created_by) || $created_by === "undefined") {
-            $doctor->created_by = null;
-        } else {
+        if ($update_by) {
+            $doctor->updated_by = $update_by;
+        }
+        if ($created_by !== "undefined") {
             $doctor->created_by = $created_by;
         }
 
@@ -237,7 +248,7 @@ class AdminDoctorInfoApi extends Controller
                 return response('Not found', 404);
             }
 
-            $created_by = "undefined" ;
+            $created_by = "undefined";
             $item = $this->saveDoctorInfo($request, $doctor_infos, $created_by);
             if ($item) {
                 return response()->json($doctor_infos);
@@ -251,11 +262,11 @@ class AdminDoctorInfoApi extends Controller
     public function delete($id)
     {
         try {
-            $doctor_infos = DoctorInfo::where('id', $id)->first();
-            if (!$doctor_infos || $doctor_infos->status == DoctorInfoStatus::DELETED) {
+            $doctor_infos = User::where('id', $id)->first();
+            if (!$doctor_infos || $doctor_infos->status == UserStatus::DELETED) {
                 return response('Not found', 404);
             }
-            $doctor_infos->status = DoctorInfoStatus::DELETED;
+            $doctor_infos->status = UserStatus::DELETED;
             $success = $doctor_infos->save();
             if ($success) {
                 return response('Delete success!', 200);

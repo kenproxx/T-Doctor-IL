@@ -1,3 +1,6 @@
+@php
+    use App\Enums\Role;
+@endphp
 @extends('layouts.admin')
 @section('title')
     Edit Doctor
@@ -46,7 +49,7 @@
         </div>
     @endif
     <form id="form">
-{{--        @dd($doctor)--}}
+
         @csrf
         <div class="row">
             <div class="col-lg-4">
@@ -104,14 +107,36 @@
             </div>
         </div>
 
-        <div class="row d-none">
-            <div class="col-md-6"><label for="name">name</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{$doctor->name}}"></div>
-            <div class="col-md-6"><label for="apply_for">Apply for</label>
-                <input type="text" class="form-control" id="apply_for" name="apply_for" value="{{$doctor->apply_for}}">
+        <div class="row">
+            <div class="form-element col-md-4">
+                <label for="password">{{ __('home.Password') }}</label>
+                <input class="form-control" id="password" type="password" name="password" minlength="8"
+                       placeholder="********" value="" required>
+            </div>
+            <div class="form-element col-md-4">
+                <label for="passwordConfirm">{{ __('home.Enter the Password') }}</label>
+                <input class="form-control" id="passwordConfirm" name="passwordConfirm" minlength="8"
+                       type="password" placeholder="********" required>
             </div>
         </div>
-
+        <div class="row">
+            <div class="form-element col-md-6">
+                <label for="type">{{ __('home.Type Account') }}</label>
+                <select id="type" name="type" class="form-select form-control">
+                    <option value="{{Role::MEDICAL }}" selected>{{ __('home.MEDICAL') }}</option>
+                </select>
+            </div>
+            <div class="form-element col-md-6">
+                <label for="member">{{ __('home.Member') }}</label>
+                <select id="member" name="member" class="form-select form-control">
+                    <option value="{{Role::DOCTORS}}" selected>DOCTOR</option>
+                    <option value="{{Role::PHAMACISTS}}">PHAMACISTS</option>
+                    <option value="{{Role::THERAPISTS}}">THERAPISTS</option>
+                    <option value="{{Role::ESTHETICIANS}}">ESTHETICIANS</option>
+                    <option value="{{Role::NURSES}}">NURSES</option>
+                </select>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-4"><label for="specialty">chuyên môn việt</label>
                 <input type="text" class="form-control" id="specialty" name="specialty" value="{{$doctor->specialty}}">
@@ -328,7 +353,6 @@
                         value="{{ \App\Enums\UserStatus::DELETED }}">
                         {{ \App\Enums\UserStatus::DELETED }}
                     </option>
-
                 </select>
             </div>
             <div class="col-sm-4">
@@ -336,8 +360,6 @@
                 <input type="number" class="form-control" id="year_of_experience" name="year_of_experience"
                        value="{{$doctor->year_of_experience}}">
             </div>
-        </div>
-<input hidden="" id="updated_by" name="updated_by" value="{{Auth::user()->id}}">
             <div class="form-group">
                 <label for="apply_show">Apply Show</label>
                 <input type="text" class="form-control" id="apply_show" name="apply_show" disabled>
@@ -368,9 +390,13 @@
                     @endforeach
                 </ul>
             </div>
-
-            <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
+            <input hidden="" id="address_code" name="address_code" value="{{$doctor->address_code}}">
+            <input hidden="" id="update_by" name="update_by" value="{{Auth::user()->id}}">
+        </div>
+        <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
     </form>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         const token = `{{ $_COOKIE['accessToken'] }}`;
         $(document).ready(function () {
@@ -385,7 +411,7 @@
                     "service_price", "service_price_en", "service_price_laos",
                     "detail_address", "detail_address_en", "detail_address_laos",
                     "province_id", "district_id", "commune_id",
-                    "time_working_1", "time_working_2", "apply_for","address_code",
+                    "time_working_1", "time_working_2", "apply_for", "address_code","update_by",
                     "name", "year_of_experience", "status", "department_id", "username", "email", "phone", "last_name", "password", "passwordConfirm", "member", "type"
                 ];
                 const fieldTextareaTiny = [

@@ -114,7 +114,6 @@
         let accessToken = `Bearer ` + token;
         let urlDelete = `{{route('api.backend.doctors.info.delete', ['id' => ':id'])}}`;
         urlDelete = urlDelete.replace(':id', id);
-        console.log(urlDelete)
         await $.ajax({
             url: urlDelete,
             method: 'DELETE',
