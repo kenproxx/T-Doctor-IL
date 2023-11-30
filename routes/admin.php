@@ -42,7 +42,7 @@ Route::group(['prefix' => 'topic-videos'], function () {
     Route::get('/detail/{id}', [AdminTopicVideoApi::class, 'detail'])->name('api.admin.topic.videos.detail');
 
     Route::post('/create', [AdminTopicVideoApi::class, 'create'])->name('api.admin.topic.videos.create');
-    Route::put('/update/{id}', [AdminTopicVideoApi::class, 'update'])->name('api.admin.topic.videos.update');
+    Route::post('/update/{id}', [AdminTopicVideoApi::class, 'update'])->name('api.admin.topic.videos.update');
     Route::delete('/delete/{id}', [AdminTopicVideoApi::class, 'delete'])->name('api.admin.topic.videos.delete');
 });
 
