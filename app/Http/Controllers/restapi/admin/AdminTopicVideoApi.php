@@ -55,6 +55,13 @@ class AdminTopicVideoApi extends Controller
         try {
             $topic = new TopicVideo();
             $topic = $this->saveTopic($request, $topic);
+            $parent = $topic->parent_id;
+            if ($parent) {
+                $topic_parent = TopicVideo::find($parent);
+                if (!$topic_parent) {
+                    return response('Topic parent not found!', 400);
+                }
+            }
             $success = $topic->save();
             if ($success) {
                 return response()->json($topic);
@@ -79,6 +86,11 @@ class AdminTopicVideoApi extends Controller
             $file = $topicVideo->thumbnail;
         }
 
+        $parent_id = $request->input('parent_id');
+        if ($parent_id) {
+            $topicVideo->parent_id = $parent_id;
+        }
+
         $user_id = $request->input('user_id');
         $status = $request->input('status');
 
@@ -101,6 +113,19 @@ class AdminTopicVideoApi extends Controller
             }
 
             $topic = $this->saveTopic($request, $topic);
+
+            $parent = $topic->parent_id;
+            if ($parent) {
+                if ($parent == $id) {
+                    return response('Topic parent invalid!', 400);
+                }
+
+                $topic_parent = TopicVideo::find($parent);
+                if (!$topic_parent) {
+                    return response('Topic parent not found!', 400);
+                }
+            }
+
             $success = $topic->save();
             if ($success) {
                 return response()->json($topic);
