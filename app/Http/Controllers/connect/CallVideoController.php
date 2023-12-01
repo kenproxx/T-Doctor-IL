@@ -4,17 +4,20 @@ namespace App\Http\Controllers\connect;
 
 use App\Http\Controllers\Controller;
 use App\Models\ConnectCallVideo;
+use App\Models\HistoryConnectWithDoctor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Pusher\Pusher;
-use const PATHINFO_BASENAME;
 
 class CallVideoController extends Controller
 {
     public $METERED_DOMAIN;
     public $METERED_SECRET_KEY;
+
+    public $user_id_1;
+    public $user_id_2;
 
     public function __construct()
     {
@@ -40,16 +43,16 @@ class CallVideoController extends Controller
         $data['from'] = Auth::user()->name;
         $data['to'] = $request->input('user_id_2');
 
-        $connect = ConnectCallVideo::where('user_id_1', Auth::user()->id)->where('user_id_2',
-            $data['to'])->first();
+        $connect = ConnectCallVideo::where('user_id_1', Auth::user()->id)->where('user_id_2', $data['to'])->first();
 
         if ($connect) {
             $roomName = $connect->room_name;
         } else {
-            $response = Http::post("https://{$this->METERED_DOMAIN}/api/v1/room?secretKey={$this->METERED_SECRET_KEY}", [
-                'autoJoin' => true,
-                'recordRoom' => true,
-            ]);
+            $response = Http::post("https://{$this->METERED_DOMAIN}/api/v1/room?secretKey={$this->METERED_SECRET_KEY}",
+                [
+                    'autoJoin' => true,
+                    'recordRoom' => true,
+                ]);
 
             $roomName = $response->json("roomName");
         }
@@ -74,8 +77,16 @@ class CallVideoController extends Controller
         } else {
             $connect = new ConnectCallVideo();
             $connect->room_name = $roomName;
+
+//            user_id_1 là người gọi
+//            user_id_2 là người nhận/bác sĩ đươc gọi
+
             $connect->user_id_1 = $request->input('user_id_1');
             $connect->user_id_2 = $request->input('user_id_2');
+
+            $this->user_id_1 = $request->input('user_id_1');
+            $this->user_id_2 = $request->input('user_id_2');
+
             $connect->save();
             return redirect(route('joinMeeting', ['meetingId' => $roomName])); // We will update this soon.
         }
@@ -138,6 +149,17 @@ class CallVideoController extends Controller
             $pathFile = 'public/connect/video/'.$fileName;
 
             Storage::put($pathFile, $response->body());
+
+            $historyConnect = new HistoryConnectWithDoctor();
+
+//            user_id_1 là người gọi
+//            user_id_2 là người nhận/bác sĩ đươc gọi
+
+            $historyConnect->doctor_id = $this->user_id_2;
+            $historyConnect->user_id = $this->user_id_1;
+            $historyConnect->path_record = $pathFile;
+
+            $historyConnect->save();
 
             $this->deleteByRecordId($recordingId);
 
