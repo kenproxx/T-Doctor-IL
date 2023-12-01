@@ -91,19 +91,20 @@
                 for (let i = 0; i < res.length; i++) {
                     let item = res[i];
                     let mainUrl = detailDoctor.replace(':id', item['id']);
+                    let imageDoctor = item.avt;
+                    let myArray = imageDoctor.split("/storage");
                     html = html + `<div class="col-md-3" >
                                     <div class="card">
                             <i class="bi bi-heart"></i>
-                            <img src=" ${url}${item.avt} " class="card-img-top" alt="...">
+                            <img src=" ${url}${myArray[1]} " class="card-img-top" alt="...">
                             <div class="card-body">
                                 <a href="${mainUrl}"><h5 class="card-title">${item['name']}</h5></a>
                                 <p class="card-text">{{ __('home.Specialty') }}: ${item['specialty']}</p>
                                 <p class="card-text_1">{{ __('home.Location') }}: <b>${item['detail_address']}</b></p>
                                 <p class="card-text_1">{{ __('home.Working time') }}: <b>${item['time_working_1']}</b></p>
                             </div>
-                            </div>
-                        </div>`;
-
+                        </div>
+                    </div>`;
                 }
                 $('#list-doctor-new').empty().append(html);
                 $('#list-doctor-best').empty().append(html);

@@ -6,6 +6,7 @@ use App\Enums\DoctorInfoStatus;
 use App\Enums\TypeMedical;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MainController;
 use App\Models\DoctorInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -70,6 +71,7 @@ class AdminDoctorInfoApi extends Controller
             $username = $request->input('username');
             $password = $request->input('password');
             $passwordConfirm = $request->input('passwordConfirm');
+            $member = $request->input('member');
 
             $isEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
             if (!$isEmail) {
@@ -97,6 +99,18 @@ class AdminDoctorInfoApi extends Controller
             $doctor_infos = new User();
             $created_by = Auth::user()->id;
             $item = $this->saveDoctorInfo($request, $doctor_infos, $created_by);
+            if ($item) {
+                (new MainController())->createRoleUser($member, $username);
+
+                if ($doctor_infos->member == 'DOCTORS') {
+                    toast('Register success!', 'success', 'top-left');
+                    return redirect()->route('profile');
+                }
+
+                toast('Register success!', 'success', 'top-left');
+                return redirect(route('home'));
+            }
+
             if ($item) {
                 return response()->json($doctor_infos);
             }
