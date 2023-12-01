@@ -362,7 +362,8 @@
                         product_id: productId
                     },
                     headers: {
-                        "Authorization": `Bearer ${token}`
+                        "Authorization": `Bearer ${token}`,
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
                     success: function (response) {
                         let item = $('#icon-heart-' + id);

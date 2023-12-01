@@ -41,7 +41,7 @@
                 <div id="inf-doctor" class="d-flex justify-content-center">
                     <div id="img_info" style="width: 470px; height: 951px; margin-right: 15px">
                         <div id="doc" style="margin-bottom: 32px">
-                            <img src="{{asset( $doctor->thumbnail )}}">
+                            <img src="{{asset( $doctor->avt )}}">
                         </div>
                         <div id="qr_code" style="
                      display: flex;
@@ -96,7 +96,7 @@
                             <button>{{ __('home.Chat') }}</button>
                             <form method="post" action="{{ route('createMeeting') }}" target="_blank">
                                 {{ csrf_field() }}
-                                <input type="hidden" name="user_id_1" value="{{ \Illuminate\Support\Facades\Auth::user()->id }}">
+                                <input type="hidden" name="user_id_1" value="@if(Auth::check()) {{ \Illuminate\Support\Facades\Auth::user()->id }} @endif">
                                 <input type="hidden" name="user_id_2" value="{{ $doctor->id }}">
                                 <button type="submit">{{ __('home.Videocall') }}</button>
                             </form>
