@@ -17,12 +17,12 @@ class DoctorInfoApi extends Controller
     {
         $size = $request->input('size');
         if ($size && $size > 0 && is_numeric($size)) {
-            $doctorInfos = DoctorInfo::where('status', DoctorInfoStatus::ACTIVE)->orderBy('id', 'DESC')
-                ->where('hocham_hocvi', TypeMedical::DOCTORS)
+            $doctorInfos = User::where('status', UserStatus::ACTIVE)->orderBy('id', 'DESC')
+                ->where('member', TypeMedical::DOCTORS)
                 ->limit($size)->get();
         } else {
-            $doctorInfos = DoctorInfo::where('status', DoctorInfoStatus::ACTIVE)->orderBy('id', 'DESC')
-                ->where('hocham_hocvi', TypeMedical::DOCTORS)
+            $doctorInfos = User::where('status', UserStatus::ACTIVE)->orderBy('id', 'DESC')
+                ->where('member', TypeMedical::DOCTORS)
                 ->get();
         }
         return response()->json($doctorInfos);
