@@ -171,7 +171,7 @@
                 </div>
                 <div class="col-md-4">
                     <label for="type">type</label>
-                    <select class="type-select form-control" id="type" name="time_work">
+                    <select class="type-select form-control" id="type" name="type">
                         <option
                             value="{{\App\Enums\TypeBussiness::CLINICS}}">{{\App\Enums\TypeBussiness::CLINICS}}</option>
                         <option
