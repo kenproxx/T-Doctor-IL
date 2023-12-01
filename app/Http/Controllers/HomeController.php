@@ -92,12 +92,4 @@ class HomeController extends Controller
         return view('admin.booking.list-booking', compact('bookings'));
     }
 
-    public function getBookingByStatus($id,$status) {
-        $listBookings = Booking::where([
-            'id' => $id,
-            'status' => $status
-        ])->get();
-
-        return response()->json($listBookings);
-    }
 }
