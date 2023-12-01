@@ -51,6 +51,7 @@
             </tr>
         @endforeach
         </tbody>
+        <div> {{$users->links()}}</div>
     </table>
     <div class="d-flex justify-content-center align-items-center">
         {{$users->links()}}
