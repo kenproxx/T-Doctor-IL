@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\connect;
 
 use App\Http\Controllers\Controller;
+use App\Models\Chat;
 use App\Models\ConnectCallVideo;
-use App\Models\HistoryConnectWithDoctor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
@@ -150,16 +150,17 @@ class CallVideoController extends Controller
 
             Storage::put($pathFile, $response->body());
 
-            $historyConnect = new HistoryConnectWithDoctor();
+            $chat = new Chat();
 
 //            user_id_1 là người gọi
 //            user_id_2 là người nhận/bác sĩ đươc gọi
 
-            $historyConnect->doctor_id = $this->user_id_2;
-            $historyConnect->user_id = $this->user_id_1;
-            $historyConnect->path_record = $pathFile;
+            $chat->from_user_id = $this->user_id_1;
+            $chat->to_user_id = $this->user_id_2;
+            $chat->chat_message = "Call video";
+            $chat->files = $pathFile;
 
-            $historyConnect->save();
+            $chat->save();
 
             $this->deleteByRecordId($recordingId);
 
