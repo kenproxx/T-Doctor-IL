@@ -6,6 +6,8 @@ use App\Enums\BookingStatus;
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
+use App\Models\Clinic;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BookingApi extends Controller
@@ -46,17 +48,47 @@ class BookingApi extends Controller
 
     public function getAllBookingByUserId($id, $status,  Request $request)
     {
-        $bookings = Booking::where('user_id', $id)
-            ->where('status', $status)
-            ->get();
-        $arrayBookings = null;
+        $user = User::find($id);
 
-        foreach ($bookings as $booking) {
-            $arrayBooking = null;
-            $arrayBooking = $booking->toArray();
-            $arrayBooking['time_convert_checkin'] = date('Y-m-d H:i:s', strtotime($booking->check_in));
-            $arrayBookings[] = $arrayBooking;
+        if ($user) {
+            $roleNames = $user->roles->pluck('name')->toArray();
+
+            $desiredRoles = ['CLINICS', 'HOSPITALS'];
+
+            $intersection = array_intersect($roleNames, $desiredRoles);
+
+            if (!empty($intersection)) {
+                $myData  = Clinic::where('user_id', $id)->get();
+
+                if ($myData->isNotEmpty()) {
+                    $clinicIds = $myData->pluck('id')->toArray();
+
+                    $otherClinics = Booking::whereIn('clinic_id', $clinicIds)->get();
+
+                    foreach ($otherClinics as $clinic) {
+                        $arrayBooking = null;
+                        $arrayBooking = $clinic->toArray();
+                        $arrayBooking['time_convert_checkin'] = date('Y-m-d H:i:s', strtotime($clinic->check_in));
+                        $arrayBookings[] = $arrayBooking;
+                    }
+                }
+
+            } else {
+                $bookings = Booking::where('user_id', $id)
+                    ->where('status', $status)
+                    ->get();
+                $arrayBookings = null;
+
+                foreach ($bookings as $booking) {
+                    $arrayBooking = null;
+                    $arrayBooking = $booking->toArray();
+                    $arrayBooking['time_convert_checkin'] = date('Y-m-d H:i:s', strtotime($booking->check_in));
+                    $arrayBookings[] = $arrayBooking;
+                }
+            }
         }
+
+
         return response()->json($arrayBookings);
     }
 
@@ -103,5 +135,12 @@ class BookingApi extends Controller
         }
     }
 
+    /**
+     * @param $userId
+     * @param $status
+     * @return void
+     */
+    public function managerBookings ($userId, $status) {
 
+    }
 }
