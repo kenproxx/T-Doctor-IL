@@ -26,19 +26,21 @@
 </div>
 <script>
     const token = `{{ $_COOKIE['accessToken'] }}`;
+
     $(document).ready(() => {
 
         callListProduct(token, 'CLINICS');
 
         $('#type_medical').on('change', function () {
-            const type = $(this).val();
-            renderClinics(token, type);
+            let type = $(this).val();
+            callListProduct(token, type);
         });
 
         async function callListProduct(token, type) {
             const accessToken = `Bearer ${token}`;
-            let url;
 
+            let url;
+            console.log(type)
             switch (type) {
                 case "PHARMACIES":
                     url = `{{ route('api.backend.pharmacies.list') }}`;
@@ -52,10 +54,10 @@
                     url = `{{ route('api.backend.clinics.list') }}`;
                     console.log(url)
                     break;
+
             }
 
-            $('#listTextMedical').text(`List ${type}`);
-
+            $('#listTextMedical').text('List ' + type);
             try {
                 const response = await $.ajax({
                     url: url,
@@ -69,16 +71,18 @@
                 console.log(exception);
             }
         }
+    });
 
-        async function renderClinics(res) {
-            console.log(res)
-            let html = ``;
 
-            for (let i = 0; i < res.length; i++) {
-                let urlEdit = `{{route('clinics.edit', ['id' => ':id'])}}`;
-                urlEdit = urlEdit.replace(':id', res[i].id);
-                let item = res[i];
-                let rowNumber = i + 1;
+    async function renderClinics(res) {
+        console.log(res)
+        let html = ``;
+
+        for (let i = 0; i < res.length; i++) {
+            let urlEdit = `{{route('clinics.edit', ['id' => ':id'])}}`;
+            urlEdit = urlEdit.replace(':id', res[i].id);
+            let item = res[i];
+            let rowNumber = i + 1;
 
                 let gallery = item.gallery;
                 let arrayGallery = [];
@@ -115,7 +119,8 @@
             url: urlDelete,
             method: 'DELETE',
             headers: {
-                "Authorization": accessToken
+                "Authorization": accessToken,
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function (response) {
                 alert('Delete Success!');
@@ -132,6 +137,5 @@
             deleteClinics(token, value)
         }
     }
-    });
 
 </script>
