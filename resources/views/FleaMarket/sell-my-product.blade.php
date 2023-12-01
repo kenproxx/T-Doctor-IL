@@ -20,7 +20,7 @@
                         </div>
                         <div class="p-0 col-md-12 border-top">
                             <div class="text-font-16 mt-4 font-14-mobi">
-                                <p><span>{{ __('home.Product name') }} </span><span class="red-color"> *</span></p>
+                                <p><label for="name">{{ __('home.Product name') }} </label><span class="red-color"> *</span></p>
                                 <div class="w-100 mt-2">
                                     <input class="ac-email font-16-mobi checkValid" required name="name" id="name"
                                            value=""
@@ -31,7 +31,7 @@
                         <div class="d-block d-md-flex ">
                             <div class="col-md-6 pl-0 pr-0 pr-md-3">
                                 <div class="text-font-16 mt-md-4 mt-3 font-14-mobi">
-                                    <p><span>{{ __('home.Category') }} </span><span class="red-color"> *</span></p>
+                                    <p><label for="category_id">{{ __('home.Category') }} </label><span class="red-color"> *</span></p>
                                     <div class="w-100 mt-md-2">
 
                                         <select class="ac-choose font-16-mobi mt-2" name="category_id checkValid"
@@ -43,7 +43,7 @@
                                     </div>
                                 </div>
                                 <div class="text-font-16 font-14-mobi mt-45 mt-3">
-                                    <p><span>{{ __('home.Location') }} </span> <span class="red-color">*</span></p>
+                                    <p><label for="province_id">{{ __('home.Location') }} </label> <span class="red-color">*</span></p>
                                     <div class="w-100 mt-2">
                                         <select class="ac-choose font-16-mobi mt-2" id="province_id"
                                                 name="province_id checkValid"
@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-md-6 pr-0 pl-0 pl-md-3">
                                 <div class="text-font-16 font-14-mobi mt-md-4 mt-3">
-                                    <p><span>{{ __('home.Brand name') }} </span></p>
+                                    <p><label for="brand_name">{{ __('home.Brand name') }} </label></p>
                                     <div class="w-100 mt-2 d-flex col-12 p-0">
                                         <div class="p-0 col-md-9 mt-2 col-8">
                                             <input class="web ac-nation font-16-mobi" style="max-width: 100%"
@@ -70,7 +70,7 @@
                                     <small class="fs-12">{{ __("home.If you don't remember the brand name, you can leave it blank or click to select no brand") }}</small>
                                 </div>
                                 <div class="text-font-16 font-14-mobi mt-md-4 mt-3">
-                                    <p><span>{{ __('home.Price') }} </span> <span class="red-color">*</span></p>
+                                    <p><label for="price">{{ __('home.Price') }} </label> <span class="red-color">*</span></p>
                                     <div class="w-100 mt-2">
                                         <input class="web ac-nation font-16-mobi mt-2" name="price checkValid" required
                                                id="price"
@@ -83,7 +83,7 @@
                 </div>
                 <div class="cv-about col-md-12">
                     <div class="">
-                        <div class="text-font-24 font-14-mobi mt-md-4 mt-3">{{ __('home.Detailed description') }}</div>
+                        <label for="description" class="text-font-24 font-14-mobi mt-md-4 mt-3">{{ __('home.Detailed description') }}</label>
                     </div>
                     <div class="mt-md-3 mt-2 font-16-mobi">
                         <textarea class="form-control ac-textarea mt-md-3 checkValid" name="description"
@@ -104,7 +104,7 @@
                                 <div id="imagePreview"></div>
                                 <label for="gallery" class="p-0">
                                     <img class="p-0 img-sell-product"
-                                         src="{{asset('img/flea-market/add-photo.png')}}">
+                                         src="{{asset('img/flea-market/add-photo.png')}}" alt="img">
                                 </label>
                                 <input type="file" id="gallery" name="gallery[]" style="display: none;" multiple
                                        accept="image/*">
@@ -118,16 +118,16 @@
                     <p><span>{{ __('home.Please choose you adertisement plan') }} </span><span class="red-color">*</span></p>
                     <div class="mt-2 d-flex font-12-mobi">
                         <div class="text-wrapper-input col-md-4 d-flex pl-0">
-                            <input type="radio" class="web-tick-box" name="ads_plan" id="ads_plan" value="1">
-                            <label class="ml-2"><strong>{{ __('home.Platinum') }}</strong></label>
+                            <input type="radio" class="web-tick-box" name="ads_plan" id="ads_plan1" value="1">
+                            <label for="ads_plan1" class="ml-2"><strong>{{ __('home.Platinum') }}</strong></label>
                         </div>
                         <div class="col-md-4 d-flex text-wrapper-input ">
-                            <input type="radio" class="web-tick-box" name="ads_plan" id="ads_plan" value="2">
-                            <label class=" ml-2"><strong>{{ __('home.Premium') }}</strong></label>
+                            <input type="radio" class="web-tick-box" name="ads_plan" id="ads_plan2" value="2">
+                            <label for="ads_plan2" class=" ml-2"><strong>{{ __('home.Premium') }}</strong></label>
                         </div>
                         <div class="col-md-4 d-flex text-wrapper-input">
-                            <input type="radio" class="web-tick-box" name="ads_plan" id="ads_plan" value="3">
-                            <label class=" ml-2"><strong>{{ __('home.Silver') }}</strong></label>
+                            <input type="radio" class="web-tick-box" name="ads_plan" id="ads_plan3" value="3">
+                            <label for="ads_plan3" class=" ml-2"><strong>{{ __('home.Silver') }}</strong></label>
                         </div>
                     </div>
                 </div>
@@ -135,20 +135,20 @@
                     <p><span>{{ __('home.Advetisement period') }}</span><span class="red-color">*</span></p>
                     <div class="mt-2 d-flex font-12-mobi">
                         <div class="text-wrapper-input col-md-3 d-flex pl-0">
-                            <input type="radio" class="web-tick-box" name="ads_period" value="1">
-                            <label class="ml-2"><strong>{{ __('home.5 Day') }}</strong></label>
+                            <input type="radio" class="web-tick-box" name="ads_period" id="ads_period1" value="1">
+                            <label for="ads_period1" class="ml-2"><strong>{{ __('home.5 Day') }}</strong></label>
                         </div>
                         <div class="col-md-3 d-flex text-wrapper-input pl-0 ">
-                            <input type="radio" class="web-tick-box" name="ads_period" value="2">
-                            <label class=" ml-2"><strong>{{ __('home.10 Day') }}</strong></label>
+                            <input type="radio" class="web-tick-box" name="ads_period" id="ads_period2" value="2">
+                            <label for="ads_period2" class=" ml-2"><strong>{{ __('home.10 Day') }}</strong></label>
                         </div>
                         <div class="col-md-3 d-flex text-wrapper-input pl-0">
-                            <input type="radio" class="web-tick-box" name="ads_period" value="3">
-                            <label class=" ml-2"><strong>{{ __('home.15 Day') }}</strong></label>
+                            <input type="radio" class="web-tick-box" name="ads_period" id="ads_period3" value="3">
+                            <label for="ads_period3" class=" ml-2"><strong>{{ __('home.15 Day') }}</strong></label>
                         </div>
                         <div class="col-md-3 d-flex text-wrapper-input pl-0">
-                            <input type="radio" class="web-tick-box" name="ads_period" value="4">
-                            <label class=" ml-2"><strong>{{ __('home.20 Day') }}</strong></label>
+                            <input type="radio" class="web-tick-box" name="ads_period" id="ads_period4" value="4">
+                            <label for="ads_period4" class=" ml-2"><strong>{{ __('home.20 Day') }}</strong></label>
                         </div>
                     </div>
                 </div>

@@ -80,7 +80,7 @@
             <div class="section1-main d-flex">
                 <div class="section1__item order-1">
                     <div class="section1-label position-relative">
-                        <h3 class="py-3 text-center">{{ __('home.WHAT’S FREE') }}?</h3>
+                        <h3 class="py-3 text-center">{{ __('home.WHAT’S FREE') }} ?</h3>
                         <a href="#"><p class="section1_link">{{ __('home.See all') }}</p></a>
                     </div>
                     <div class="d-flex">
@@ -433,15 +433,15 @@
         </div>
         <div class="container">
             @php
-                $doctors = \App\Models\User::where('type', \App\Enums\TypeUser::DOCTORS)->get();
+                $doctors = \App\Models\User::where('member', \App\Enums\TypeUser::DOCTORS)->get();
             @endphp
-            <div id="list-doctor" class="d-flex row">
+            <div id="list-doctor" class="d-flex row  pb-md-3">
                 @foreach($doctors as $doctor)
                     <div class="col-md-3 mt-3">
                         <a href="{{ route('examination.doctor_info', $doctor->id) }}" target="_blank">
                             <div class="bg-list-doctor">
                                 <div><i class="bi bi-heart heart-item"></i><img class="b-radius-8px max-img"
-                                                                                src="{{$doctor->thumbnail}}"></div>
+                                                                                src="{{$doctor->avt}}"></div>
                                 <div class="d-content">
                                     <div class="fs-18px">{{$doctor->name}}</div>
                                     <div class="respiratory">{!! $doctor->service !!}</div>
@@ -457,19 +457,6 @@
                 @endforeach
             </div>
         </div>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link">{{ __('home.Previous') }}</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">{{ __('home.Next') }}</a>
-                </li>
-            </ul>
-        </nav>
     </div>
     <div class="banner1">
         <img src="{{asset('img/Rectangle 23815.png')}}" alt="">
@@ -630,7 +617,9 @@
                     </div>
                 </div>
                 <div class="mt-auto p-2">
+                    <a href="{{ route('flea-market.index') }}">
                     <button class="btn-see-all ">{{ __('home.See all') }}</button>
+                    </a>
                 </div>
             </div>
         </div>
