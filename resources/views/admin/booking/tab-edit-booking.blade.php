@@ -43,7 +43,7 @@
         </div>
         <div class="row">
             <div class="col-sm-4"><label for="status">Trạng thái</label>
-                <select class="custom-select" id="status" name="status" {{ !$isAdmin ? 'disabled' : '' }}>
+                <select class="custom-select" id="status" name="status">
                     <option value="{{ \App\Enums\BookingStatus::PENDING }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::PENDING ? 'selected' : '' }}>
                         {{ \App\Enums\BookingStatus::PENDING }}
                     </option>
@@ -64,6 +64,13 @@
     </form>
 @endsection
 <script>
+    @if(session('error'))
+    Swal.fire({
+        icon: 'error',
+        title: 'Permission Denied',
+        text: '{{ session('error') }}',
+    });
+    @endif
     $(document).ready(function() {
         $('#service').select2();
     });

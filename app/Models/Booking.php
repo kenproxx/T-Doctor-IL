@@ -10,13 +10,8 @@ class Booking extends Model
 {
     protected $fillable = ['user_id', 'clinic_id', 'check_in', 'check_out', 'consulting_form'];
 
-//    public function user()
-//    {
-//        return $this->belongsTo(User::class);
-//    }
-//
-//    public function Clinic()
-//    {
-//        return $this->belongsTo(Clinic::class);
-//    }
+    public function clinic()
+    {
+        return $this->belongsTo(Clinic::class, 'clinic_id', 'id');
+    }
 }

@@ -39,4 +39,9 @@ class Clinic extends Model
     {
         return $this->hasMany(Commune::class);
     }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'clinic_id', 'id');
+    }
 }

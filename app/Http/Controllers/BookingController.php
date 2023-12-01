@@ -22,9 +22,14 @@ class BookingController extends Controller
     public function edit($id)
     {
         $bookings_edit = Booking::find($id);
+        $owner = $bookings_edit->clinic->user_id;
         $service = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
         $isAdmin = (new MainController())->checkAdmin();
-        return view('admin.booking.tab-edit-booking', compact('bookings_edit', 'isAdmin','service'));
+        if ($owner == Auth::id() || $isAdmin) {
+            return view('admin.booking.tab-edit-booking', compact('bookings_edit', 'isAdmin','service'));
+        } else {
+            return response()->json(['error' => 'You do not have permission.'], 403);
+        }
     }
 
     public function update(Request $request, $id)

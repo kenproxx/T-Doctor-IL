@@ -52,7 +52,7 @@ Route::group(['prefix' => 'service-clinics'], function () {
     Route::post('create', [ServiceClinicApi::class, 'create'])->name('api.backend.service.clinic.create');
 });
 
-Route::get('/info-user/{id}', [ProfileController::class, 'infoUser'])->name('info.user');
+
 
 
 Route::group(['prefix' => 'booking'], function () {
