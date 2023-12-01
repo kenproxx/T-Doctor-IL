@@ -89,6 +89,23 @@ class AdminBookingApi extends Controller
         }
     }
 
+    public function cancelBooking($id, $status)
+    {
+        if ($id) {
+            $booking = Booking::find($id);
+            if ($booking) {
+                $booking->status = $status;
+
+                $booking->save();
+                return response()->json(['message' => 'Booking status updated successfully', 200]);
+            } else {
+                return response()->json(['error' => 'Booking not found'], 404);
+            }
+        } else {
+            return response()->json(['error' => 'Missing booking_id parameter'], 400);
+        }
+    }
+
     public function delete($id)
     {
         try {

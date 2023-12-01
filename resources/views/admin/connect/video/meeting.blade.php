@@ -60,7 +60,7 @@
                         <div class="flex space-x-2 items-center">
                             <label>
                                 Name:
-                                <input class="text-xs" id="username" type="text" value="{{ \Illuminate\Support\Facades\Auth::user()->name ?? 'No name' }}" placeholder="Name"/>
+                                <input class="text-xs" id="username" type="text" value="{{ \Illuminate\Support\Facades\Auth::user()->name ?? 'default name' }}" placeholder="Name"/>
                             </label>
 
                             <label>
@@ -238,7 +238,6 @@
                     name: username,
                 });
 
-                console.log("Meeting joined", meetingInfo);
                 $("#waitingArea").addClass("hidden");
                 $("#meetingView").removeClass("hidden");
                 $("#meetingAreaUsername").text(username);
@@ -442,9 +441,20 @@
 
         $("#leaveMeeting").on("click", async function() {
             await meeting.leaveMeeting();
+            handleDownloadRecord();
             $("#meetingView").addClass("hidden");
             $("#leaveMeetingView").removeClass("hidden");
         });
+
+        function handleDownloadRecord() {
+            axios.get(`{{ route('download.record', ['roomName' => $MEETING_ID]) }}`,
+                {
+                    Accept: 'application/json',
+            }).then((response) => {
+
+                console.log(response.data);
+            });
+        }
 
     </script>
 </html>

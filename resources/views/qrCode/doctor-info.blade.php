@@ -162,7 +162,7 @@
                                     @foreach($messageDoctor as $message)
                                         @php
                                             if (isset($message->files)){
-                                                if (str_contains($message->files, '.mp4')){
+                                                if (str_contains($message->files, '.mp4') || str_contains($message->files, '.webm')){
                                                      $arrayVideos[] = $message->files;
                                                 } elseif (str_contains($message->files, '.mp3')){
                                                      $arrayAudios[] = $message->files;
@@ -189,7 +189,7 @@
                                                 @foreach($arrayVideos as $video)
                                                     <div class="col-md-3">
                                                         <video style="max-width: 150px" controls>
-                                                            <source src="{{  asset($video) }}" type="video/mp4">
+                                                            <source src="{{  asset($video) }}" type="video/*">
                                                         </video>
                                                     </div>
                                                 @endforeach

@@ -94,7 +94,13 @@
                         </div>
                         <div id="opt_btn" class="d-flex">
                             <button>{{ __('home.Chat') }}</button>
-                            <button>{{ __('home.Videocall') }}</button>
+                            <form method="post" action="{{ route('createMeeting') }}" target="_blank">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="user_id_1" value="{{ \Illuminate\Support\Facades\Auth::user()->id }}">
+                                <input type="hidden" name="user_id_2" value="{{ $doctor->id }}">
+                                <button type="submit">{{ __('home.Videocall') }}</button>
+                            </form>
+{{--                            <button>{{ __('home.Videocall') }}</button>--}}
                         </div>
                     </div>
                 </div>
