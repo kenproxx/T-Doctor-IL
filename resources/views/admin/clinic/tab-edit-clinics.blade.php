@@ -177,21 +177,33 @@
                     @endforeach
                 </ul>
             </div>
-            <div>
-                <label>open_date</label>
-                <input type="datetime-local" class="form-control" id="open_date" name="open_date" required
-                       value="{{$clinic->open_date}}">
-            </div>
-            <div>
-                <label>close_date</label>
-                <input type="datetime-local" class="form-control" id="close_date" name="close_date"
-                       value="{{$clinic->close_date}}">
-            </div>
-            <div hidden="">
-                <input type="text" name="combined_address" id="combined_address" class="form-control">
-                <input type="text" name="longitude" id="longitude" class="form-control">
-                <input type="text" name="latitude" id="latitude" class="form-control">
-                <input type="text" name="clinics_service" id="clinics_service" class="form-control">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="open_date">open_date</label>
+                    <input type="datetime-local" class="form-control" id="open_date" name="open_date" required value="{{$clinic->open_date}}">
+                </div>
+                <div class="col-md-4">
+                    <label for="close_date">close_date</label>
+                    <input type="datetime-local" class="form-control" id="close_date" name="close_date" value="{{$clinic->close_date}}">
+                </div>
+                <div class="col-md-4">
+                    <label for="type">type</label>
+                    <select class="type-select form-control" id="type" name="time_work">
+                        <option
+                            value="{{\App\Enums\TypeBussiness::CLINICS}}"  {{ $clinic->type === \App\Enums\TypeBussiness::CLINICS ? 'selected' : '' }}>{{\App\Enums\TypeBussiness::CLINICS}}</option>
+                        <option
+                            value="{{\App\Enums\TypeBussiness::PHARMACIES}}" {{ $clinic->type === \App\Enums\TypeBussiness::PHARMACIES ? 'selected' : '' }}>{{\App\Enums\TypeBussiness::PHARMACIES}}</option>
+                        <option
+                            value="{{\App\Enums\TypeBussiness::HOSPITALS}}" {{ $clinic->type === \App\Enums\TypeBussiness::HOSPITALS ? 'selected' : '' }}>{{\App\Enums\TypeBussiness::HOSPITALS}}</option>
+                    </select>
+                </div>
+
+                <div hidden="">
+                    <input type="text" name="combined_address" id="combined_address" class="form-control">
+                    <input type="text" name="longitude" id="longitude" class="form-control">
+                    <input type="text" name="latitude" id="latitude" class="form-control">
+                    <input type="text" name="clinics_service" id="clinics_service" class="form-control">
+                </div>
             </div>
         </div>
         <button type="button" class="btn btn-primary up-date-button mt-4">Lưu</button>
