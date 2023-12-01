@@ -10,6 +10,7 @@ use App\Enums\SearchMentoring;
 use App\Enums\TypeBussiness;
 use App\Enums\TypeMedical;
 use App\Enums\TypeTimeWork;
+use App\Enums\UserStatus;
 use App\Models\Answer;
 use App\Models\CalcViewQuestion;
 use App\Models\Clinic;
@@ -57,18 +58,18 @@ class ExaminationController extends Controller
 
     public function findMyMedicine()
     {
-        $bestPhamrmacists = DoctorInfo::where('hocham_hocvi', TypeMedical::PHAMACISTS)
-            ->where('status', DoctorInfoStatus::ACTIVE)
+        $bestPhamrmacists = User::where('member', TypeMedical::PHAMACISTS)
+            ->where('status', UserStatus::ACTIVE)
             ->orderBy('id', 'DESC')
             ->limit(16)
             ->get();
-        $newPhamrmacists = DoctorInfo::where('hocham_hocvi', TypeMedical::PHAMACISTS)
-            ->where('status', DoctorInfoStatus::ACTIVE)
+        $newPhamrmacists = User::where('member', TypeMedical::PHAMACISTS)
+            ->where('status', UserStatus::ACTIVE)
             ->orderBy('id', 'DESC')
             ->limit(16)
             ->get();
-        $allPhamrmacists = DoctorInfo::where('hocham_hocvi', TypeMedical::PHAMACISTS)
-            ->where('status', DoctorInfoStatus::ACTIVE)
+        $allPhamrmacists = User::where('member', TypeMedical::PHAMACISTS)
+            ->where('status', UserStatus::ACTIVE)
             ->where('time_working_1', '00:00-23:59')
             ->where('time_working_2', 'T2-CN')
             ->limit(16)

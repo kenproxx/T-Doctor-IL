@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthSocialController;
 use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
+use App\Http\Controllers\backend\BackendWishListController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CalcViewQuestionController;
 use App\Http\Controllers\CheckoutController;
@@ -66,6 +67,16 @@ Route::group(['prefix' => 'recruitment'], function () {
     Route::get('/detail', [RecruitmentController::class, 'detail'])->name('recruitment_detail');
     Route::get('/edit-cv', [RecruitmentController::class, 'editCv'])->name('recruitment.edit.cv');
 });
+
+Route::group(['prefix' => 'wish-lists'], function () {
+    Route::get('/list', [BackendWishListController::class, 'getAll'])->name('api.backend.wish.lists.list');
+    Route::get('/detail/{id}', [BackendWishListController::class, 'detail'])->name('api.backend.wish.lists.detail');
+    Route::post('/create', [BackendWishListController::class, 'create'])->name('api.backend.wish.lists.create');
+    Route::POST('/update/{id}', [BackendWishListController::class, 'update'])->name('api.backend.wish.lists.update');
+    Route::delete('/delete/{id}', [BackendWishListController::class, 'delete'])->name('api.backend.wish.lists.delete');
+    Route::delete('/delete-list', [BackendWishListController::class, 'deleteMultil'])->name('api.backend.wish.lists.delete.listId');
+});
+
 Route::group(['prefix' => 'examination'], function () {
     Route::get('/index', [ExaminationController::class, 'index'])->name('examination.index');
     Route::get('/doctor-info/{id}', [ExaminationController::class, 'infoDoctor'])->name('examination.doctor_info');
