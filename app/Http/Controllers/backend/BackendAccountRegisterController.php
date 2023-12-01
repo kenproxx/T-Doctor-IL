@@ -15,7 +15,7 @@ class BackendAccountRegisterController extends Controller
     public function index()
     {
         $list = [Role::BUSINESS, Role::MEDICAL];
-        $users = User::whereIn('type', $list)->paginate(20);
+        $users = User::whereIn('type', $list)->paginate(30);
         return view('admin.account_register.index', compact('users'));
     }
 
