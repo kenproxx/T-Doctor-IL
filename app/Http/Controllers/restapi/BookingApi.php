@@ -137,10 +137,25 @@ class BookingApi extends Controller
 
     /**
      * @param $userId
-     * @param $status
-     * @return void
+     * @param $bookingId
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function managerBookings ($userId, $status) {
+    public function bookingCancel ($userId, $bookingId) {
+        if ($userId) {
+            $booking = Booking::where([
+                'id' => $bookingId,
+                'user_id' => $userId
+            ])->first();
+            if ($booking) {
+                $booking->status = BookingStatus::CANCEL;
 
+                $booking->save();
+                return response()->json(['message' => 'Cancellation of booking successfully'], 200);
+            } else {
+                return response()->json(['error' => 'Booking not found'], 404);
+            }
+        } else {
+            return response()->json(['error' => 'Missing user id parameter'], 400);
+        }
     }
 }
