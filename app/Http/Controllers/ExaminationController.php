@@ -18,6 +18,7 @@ use App\Models\DoctorInfo;
 use App\Models\online_medicine\CategoryProduct;
 use App\Models\online_medicine\ProductMedicine;
 use App\Models\Question;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -35,7 +36,7 @@ class ExaminationController extends Controller
     {
         $url = route('qr.code.show.doctor.info', $id);
         $qrCodes = QrCode::size(300)->generate($url);
-        $doctor = DoctorInfo::find($id);
+        $doctor = User::find($id);
         return view('examination.infodoctor', compact('qrCodes', 'doctor'));
     }
 

@@ -91,12 +91,10 @@
                 for (let i = 0; i < res.length; i++) {
                     let item = res[i];
                     let mainUrl = detailDoctor.replace(':id', item['id']);
-                    let imageDoctor = item['thumbnail'];
-                    let myArray = imageDoctor.split("/storage");
                     html = html + `<div class="col-md-3" >
                                     <div class="card">
                             <i class="bi bi-heart"></i>
-                            <img src=" ${url}${myArray[1]} " class="card-img-top" alt="...">
+                            <img src=" ${url}${item.avt} " class="card-img-top" alt="...">
                             <div class="card-body">
                                 <a href="${mainUrl}"><h5 class="card-title">${item['name']}</h5></a>
                                 <p class="card-text">{{ __('home.Specialty') }}: ${item['specialty']}</p>
