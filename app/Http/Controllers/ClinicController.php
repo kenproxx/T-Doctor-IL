@@ -55,9 +55,6 @@ class ClinicController extends Controller
         $clinic = Clinic::find($id);
         $reflector = new \ReflectionClass('App\Enums\TypeTimeWork');
         $types = $reflector->getConstants();
-        if (!$clinic || $clinic->status != ClinicStatus::ACTIVE) {
-            return response("Product not found", 404);
-        }
         $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
         return view('admin.clinic.tab-edit-clinics', compact('clinic', 'types', 'services'));
     }

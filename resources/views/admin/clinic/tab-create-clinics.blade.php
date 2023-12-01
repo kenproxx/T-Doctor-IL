@@ -176,6 +176,8 @@
                             value="{{\App\Enums\TypeBussiness::CLINICS}}">{{\App\Enums\TypeBussiness::CLINICS}}</option>
                         <option
                             value="{{\App\Enums\TypeBussiness::PHARMACIES}}">{{\App\Enums\TypeBussiness::PHARMACIES}}</option>
+                        <option
+                            value="{{\App\Enums\TypeBussiness::PHARMACIES}}">{{\App\Enums\TypeBussiness::HOSPITALS}}</option>
                     </select>
                 </div>
 

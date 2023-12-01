@@ -17,15 +17,21 @@ use Illuminate\Support\Facades\Auth;
 
 class BackendClinicController extends Controller
 {
-    public function getAll(Request $request)
+    public function getAll()
     {
-        $status = $request->input('status');
-        if ($status && $status != ClinicStatus::DELETED) {
-            $clinics = Clinic::where('status', $status)->where('type', TypeBussiness::CLINICS)->get();
-        } else {
-            $clinics = Clinic::where('status', '!=', ClinicStatus::DELETED)->where('type',
-                TypeBussiness::CLINICS)->get();
-        }
+        $clinics = Clinic::where('type', TypeBussiness::CLINICS)->get();
+        return response()->json($clinics);
+    }
+
+    public function getAllPharmacies()
+    {
+        $clinics = Clinic::where('type', TypeBussiness::PHARMACIES)->get();
+        return response()->json($clinics);
+    }
+
+    public function getAllHospitals()
+    {
+        $clinics = Clinic::where('type', TypeBussiness::HOSPITALS)->get();
         return response()->json($clinics);
     }
 
