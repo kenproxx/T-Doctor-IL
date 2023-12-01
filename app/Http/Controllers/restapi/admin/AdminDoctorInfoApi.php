@@ -19,12 +19,12 @@ class AdminDoctorInfoApi extends Controller
     {
         $status = $request->input('status');
         if ($status) {
-            $doctor_infos = DoctorInfo::where('status', $status)
-                ->where('hocham_hocvi', TypeMedical::DOCTORS)
+            $doctor_infos = User::where('status', $status)
+                ->where('member', TypeMedical::DOCTORS)
                 ->get();
         } else {
-            $doctor_infos = DoctorInfo::where('status', '!=', DoctorInfoStatus::DELETED)
-                ->where('hocham_hocvi', TypeMedical::DOCTORS)
+            $doctor_infos = User::where('status', '!=', DoctorInfoStatus::DELETED)
+                ->where('member', TypeMedical::DOCTORS)
                 ->get();
         }
         return response()->json($doctor_infos);
