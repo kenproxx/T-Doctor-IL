@@ -48,6 +48,7 @@ Route::group(['prefix' => 'home'], function () {
     Route::get('list-staff', [HomeController::class, 'listStaff'])->name('homeAdmin.list.staff');
     Route::get('list-config', [HomeController::class, 'listConfig'])->name('homeAdmin.list.config');
     Route::get('list-booking', [HomeController::class, 'listBooking'])->name('homeAdmin.list.booking');
+    Route::get('booking-by/{id}/{status}', [HomeController::class, 'getBookingByStatus'])->name('booking-by-id-status');
 });
 
 Route::get('/about', function () {
