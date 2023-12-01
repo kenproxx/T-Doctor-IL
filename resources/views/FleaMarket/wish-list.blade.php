@@ -66,9 +66,9 @@
                     </div>
                 </div>
                 <div class="mt-100">
-                    <div class="flea-adv row align-items-center justify-content-center">
-                        <div class="">
-                            <img src="{{asset('img/image 16.png')}}" alt="" style="width: 270px;height: 682px">
+                    <div class=" w-100 row align-items-center justify-content-center">
+                        <div class="p-0">
+                            <img src="{{asset('img/image 16.png')}}" alt="" style="height: 682px">
                         </div>
                     </div>
                 </div>
@@ -76,28 +76,26 @@
             <div class="col-md-9 medicine-list--item">
                 @include('component.product-wish')
             </div>
-                </div>
-                <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">{{ __('home.Previous') }}</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">{{ __('home.Next') }}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
         </div>
+        <nav aria-label="Page navigation example" class="d-flex justify-content-center">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">{{ __('home.Previous') }}</span>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">{{ __('home.Next') }}</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
     </body>
     <script>

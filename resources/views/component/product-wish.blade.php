@@ -43,7 +43,6 @@
                     user_id: {{ Auth::check() ? Auth::user()->id : null }}
                 },
                 success: function (response) {
-                    console.log(response);
                     renderWishList(response);
                 },
                 error: function (exception) {
@@ -60,10 +59,10 @@
                 let product = res[i];
                 let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`.replace(':id', product.id);
                 html += `
-                        <div class="col-md-4 col-6 item">
+                        <div class="col-md-3 col-6">
                             <div class="product-item">
                                 <div class="img-pro">
-                                    <img src="${product.thumbnail}" alt="">
+                                    <img class="b-radius-8px" src="${product.thumbnail}" alt="">
                                     <a class="button-heart" data-favorite="0">
                                         <i id="bi-heart" class="bi bi-heart-fill" style="color: red;" data-product-id="${product.id}" onclick="addProductToWishList()"></i>
                                     </a>

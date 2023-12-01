@@ -312,10 +312,10 @@
                 var isFavoriteClass = product.isFavorit ? 'bi-heart-fill' : 'bi-heart';
 
                 var productHtml = `
-            <div class="col-md-3 col-6 item">
+            <div class="col-md-3 col-6">
                 <div class="product-item">
                     <div class="img-pro">
-                        <img src="${product.thumbnail}" alt="">
+                        <img class="b-radius-8px" src="${product.thumbnail}" alt="">
                         <a class="button-heart" data-favorite="0">
                             <i id="icon-heart-${product.id}" class="${isFavoriteClass} bi" data-product-id="${product.id}" onclick="addProductToWishList(${product.id})"></i>
                         </a>
@@ -442,7 +442,7 @@
                     <div class="col-md-3 col-6">
                         <div class="product-item">
                             <div class="img-pro">
-                                <img src="${item.thumbnail}" alt="">
+                                <img class="b-radius-8px" src="${item.thumbnail}" alt="">
                                 ${tab}
                             </div>
                             <div class="content-pro">
