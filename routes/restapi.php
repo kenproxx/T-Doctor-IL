@@ -122,3 +122,4 @@ Route::group(['prefix' => 'products-medicines'], function () {
 });
 
 Route::get('/users/by-role/{role_id}', [\App\Http\Controllers\ProfileController::class, 'getUsersByRoleId'])->name('role.user');
+Route::get('/service/{serviceId}', [\App\Http\Controllers\restapi\admin\AminServiceClinicApi::class, 'getServiceById'])->name('service.by.id');
