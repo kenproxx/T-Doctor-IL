@@ -1,4 +1,4 @@
- @extends('layouts.admin')
+@extends('layouts.admin')
 <style>
     .list-service {
         list-style-type: none;
@@ -128,7 +128,7 @@
                     $galleryArray = explode(',', $clinic->gallery);
                 @endphp
                 @foreach($galleryArray as $productImg)
-                    <img width="50px" src="{{$productImg}}">
+                    <img width="50px" src="{{$productImg}}" alt="">
                 @endforeach
             </div>
             <div class="row">
@@ -144,7 +144,7 @@
                     </select>
                 </div>
                 <div class="col-md-6">
-                    <label for="status">Time work</label>
+                    <label for="time_work">Time work</label>
                     <select class="custom-select" id="time_work" name="time_work">
                         @foreach($types as $type)
                             <option
@@ -154,7 +154,7 @@
                 </div>
             </div>
             <div hidden="">
-                <label>User</label>
+                <label for="user_id">User</label>
                 <input type="text" class="form-control" id="user_id" name="user_id" value="{{Auth::user()->id}}">
             </div>
             <div class="form-group">
@@ -205,8 +205,8 @@
                     <input type="text" name="clinics_service" id="clinics_service" class="form-control">
                 </div>
             </div>
+            <button type="button" class="btn btn-primary up-date-button mt-4">Lưu</button>
         </div>
-        <button type="button" class="btn btn-primary up-date-button mt-4">Lưu</button>
     </form>
     <script>
         $(document).ready(function () {
@@ -231,9 +231,8 @@
                 var detailAddress = $('#address_detail').val();
 
                 // Gộp các giá trị vào một chuỗi cách nhau bởi dấu phẩy
-                var combinedAddress = [codeProvinceId, codeDistrictId, codeCommuneId, detailAddress].join(',');
+                var combinedAddress = [detailAddress, codeCommuneId, codeDistrictId, codeProvinceId, 'Việt Nam'].join(',');
                 // Gán giá trị vào input ẩn
-                console.log(combinedAddress)
                 $('#combined_address').val(combinedAddress);
                 addNewAddress();
             }
@@ -275,7 +274,7 @@
                 formData.append("latitude", $('#latitude').val());
                 formData.append("address_detail", $('#address_detail').val());
                 formData.append("address_detail_en", $('#detail_address_en').val());
-                formData.append("detail_address_laos", $('#detail_address_laos').val());
+                formData.append("address_detail_laos", $('#detail_address_laos').val());
                 formData.append("province_id", myProvince[0]);
                 formData.append("district_id", myDistrict[0]);
                 formData.append("commune_id", myCommune[0]);
@@ -283,6 +282,8 @@
                 formData.append("open_date", $('#open_date').val());
                 formData.append("close_date", $('#close_date').val());
                 formData.append("user_id", $('#user_id').val());
+                formData.append("time_work", $('#time_work').val());
+                formData.append("type", $('#type').val());
                 formData.append("status", $('#status').val());
                 formData.append("clinics_service", $('#clinics_service').val());
 
@@ -328,7 +329,6 @@
         } else {
             province_id = filtered[0];
         }
-
 
         $(document).ready(function () {
             callGetAllProvince();
@@ -437,12 +437,7 @@
                         if (!isNaN(latitude) && !isNaN(longitude)) {
                             $('#latitude').val(latitude);
                             $('#longitude').val(longitude);
-                        } else {
-                            console.error('Invalid coordinates:', latitude, longitude);
-                            alert('Invalid coordinates. Please try again.');
                         }
-                    } else {
-                        alert('Geocode was not successful for the following reason: ' + status);
                     }
                 });
             }
