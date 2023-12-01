@@ -91,4 +91,5 @@ class HomeController extends Controller
 
         return view('admin.booking.list-booking', compact('bookings'));
     }
+
 }
