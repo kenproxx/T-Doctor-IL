@@ -67,4 +67,14 @@
             {{ $bookings->links() }}
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if(session('error'))
+        Swal.fire({
+            icon: 'error',
+            title: 'Permission Denied',
+            text: '{{ session('error') }}',
+        });
+        @endif
+    </script>
 @endsection

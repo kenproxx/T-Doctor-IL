@@ -25,12 +25,15 @@ class BookingController extends Controller
         $owner = $bookings_edit->clinic->user_id;
         $service = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
         $isAdmin = (new MainController())->checkAdmin();
+
         if ($owner == Auth::id() || $isAdmin) {
-            return view('admin.booking.tab-edit-booking', compact('bookings_edit', 'isAdmin','service'));
+            return view('admin.booking.tab-edit-booking', compact('bookings_edit', 'isAdmin', 'service'));
         } else {
-            return response()->json(['error' => 'You do not have permission.'], 403);
+            session()->flash('error', 'You do not have permission.');
+            return \redirect()->back();
         }
     }
+
 
     public function update(Request $request, $id)
     {

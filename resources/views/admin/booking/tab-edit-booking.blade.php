@@ -64,13 +64,6 @@
     </form>
 @endsection
 <script>
-    @if(session('error'))
-    Swal.fire({
-        icon: 'error',
-        title: 'Permission Denied',
-        text: '{{ session('error') }}',
-    });
-    @endif
     $(document).ready(function() {
         $('#service').select2();
     });
