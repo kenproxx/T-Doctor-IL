@@ -1,7 +1,7 @@
 @php use App\Http\Middleware\MedicalPermission; @endphp
 @php use Illuminate\Support\Facades\Auth; @endphp
 @php use App\Enums\Role; @endphp
-<header class="header">
+<header class="header header-flea mt-0">
     <div class="container">
         <div class="row header-detail mobile-hidden justify-content-between">
             <div class="col-md-4 header-detail--left d-flex justify-content-around">

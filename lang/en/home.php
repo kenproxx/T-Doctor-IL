@@ -1,6 +1,7 @@
 <?php
 return [
     'Name' => 'Name',
+    'WHAT’S FREE' => 'WHAT’S FREE',
     "What's free" => "What's free",
     'See all' => 'See all',
     'Free today' => 'Free today',

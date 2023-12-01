@@ -31,6 +31,15 @@ a {
     margin-top: 10px;
     /*top: 40px;*/
 }
+.header-flea {
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    position: fixed;
+    background: white;
+    z-index: 3;
+    top: 0;
+    right: 0;
+    left: 0;
+}
 
 .header-left {
     width: 177px;
