@@ -171,13 +171,13 @@
                 </div>
                 <div class="col-md-4">
                     <label for="type">type</label>
-                    <select class="type-select form-control" id="type" name="time_work">
+                    <select class="type-select form-control" id="type" name="type">
                         <option
                             value="{{\App\Enums\TypeBussiness::CLINICS}}">{{\App\Enums\TypeBussiness::CLINICS}}</option>
                         <option
                             value="{{\App\Enums\TypeBussiness::PHARMACIES}}">{{\App\Enums\TypeBussiness::PHARMACIES}}</option>
                         <option
-                            value="{{\App\Enums\TypeBussiness::PHARMACIES}}">{{\App\Enums\TypeBussiness::HOSPITALS}}</option>
+                            value="{{\App\Enums\TypeBussiness::HOSPITALS}}">{{\App\Enums\TypeBussiness::HOSPITALS}}</option>
                     </select>
                 </div>
 
