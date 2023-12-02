@@ -48,14 +48,14 @@ class DoctorInfoApi extends Controller
     {
         $size = $request->input('size');
         if ($size && $size > 0 && is_numeric($size)) {
-            $doctor_infos = DoctorInfo::where('department_id', $id)
-                ->where('hocham_hocvi', TypeMedical::DOCTORS)
+            $doctor_infos = User::where('department_id', $id)
+                ->where('member', TypeMedical::DOCTORS)
                 ->orderBy('id', 'DESC')
                 ->limit($size)
                 ->get();
         } else {
-            $doctor_infos = DoctorInfo::where('department_id', $id)
-                ->where('hocham_hocvi', TypeMedical::DOCTORS)
+            $doctor_infos = User::where('department_id', $id)
+                ->where('member', TypeMedical::DOCTORS)
                 ->orderBy('id', 'DESC')
                 ->get();
         }

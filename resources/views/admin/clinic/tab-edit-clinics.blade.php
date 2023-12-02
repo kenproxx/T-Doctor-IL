@@ -72,11 +72,11 @@
                            value="{{$clinic->address_detail}}">
                 </div>
                 <div class="col-sm-4"><label for="address_detail_en">địa chỉ chi tiết anh</label>
-                    <input type="text" class="form-control" name="address_detail_en" id="detail_address_en"
+                    <input type="text" class="form-control" name="address_detail_en" id="address_detail_en"
                            value="{{$clinic->address_detail_en}}">
                 </div>
                 <div class="col-sm-4"><label for="address_detail_laos">địa chỉ chi tiết lào</label>
-                    <input type="text" class="form-control" name="address_detail_laos" id="detail_address_laos"
+                    <input type="text" class="form-control" name="address_detail_laos" id="address_detail_laos"
                            value="{{$clinic->address_detail_laos}}">
                 </div>
             </div>
@@ -101,7 +101,9 @@
                         $district = \App\Models\District::find($codeDistrict);
                     @endphp
                     <select name="district_id" id="district_id" class="form-control">
-                        <option value="{{$district->id}}-{{$district->code}}"> {{$district->name}}</option>
+                        @if($district)
+                            <option value="{{$district->id}}-{{$district->code}}"> {{$district->name}}</option>
+                        @endif
 
                     </select>
                 </div>
@@ -111,13 +113,15 @@
                         $commune = \App\Models\Commune::find($codeCommune);
                     @endphp
                     <select name="commune_id" id="commune_id" class="form-control">
-                        <option value="{{$commune->id}}-{{$commune->code}}">{{$commune->name}}</option>
+                        @if($commune)
+                            <option value="{{$commune->id}}-{{$commune->code}}">{{$commune->name}}</option>
+                        @endif
 
                     </select>
                 </div>
             </div>
             <div>
-                <label>introduce</label>
+                <label for="introduce">introduce</label>
                 <input type="text" class="form-control" id="introduce" name="introduce" required
                        value="{{$clinic->introduce}}">
             </div>
@@ -136,11 +140,11 @@
                     <label for="status">status</label>
                     <select class="custom-select" id="status" name="status">
                         <option
-                            value="{{ \App\Enums\ClinicStatus::ACTIVE }}">{{ \App\Enums\ClinicStatus::ACTIVE }}</option>
+                            value="{{ \App\Enums\ClinicStatus::ACTIVE }}" {{ $clinic->status === \App\Enums\ClinicStatus::ACTIVE ? 'selected' : '' }}>{{ \App\Enums\ClinicStatus::ACTIVE }}</option>
                         <option
-                            value="{{ \App\Enums\ClinicStatus::INACTIVE }}">{{ \App\Enums\ClinicStatus::INACTIVE }}</option>
+                            value="{{ \App\Enums\ClinicStatus::INACTIVE }}" {{ $clinic->status === \App\Enums\ClinicStatus::INACTIVE ? 'selected' : '' }}>{{ \App\Enums\ClinicStatus::INACTIVE }}</option>
                         <option
-                            value="{{ \App\Enums\ClinicStatus::DELETED }}">{{ \App\Enums\ClinicStatus::DELETED }}</option>
+                            value="{{ \App\Enums\ClinicStatus::DELETED }}" {{ $clinic->status === \App\Enums\ClinicStatus::DELETED ? 'selected' : '' }}>{{ \App\Enums\ClinicStatus::DELETED }}</option>
                     </select>
                 </div>
                 <div class="col-md-6">
@@ -180,17 +184,19 @@
             <div class="row">
                 <div class="col-md-4">
                     <label for="open_date">open_date</label>
-                    <input type="datetime-local" class="form-control" id="open_date" name="open_date" required value="{{$clinic->open_date}}">
+                    <input type="datetime-local" class="form-control" id="open_date" name="open_date" required
+                           value="{{$clinic->open_date}}">
                 </div>
                 <div class="col-md-4">
                     <label for="close_date">close_date</label>
-                    <input type="datetime-local" class="form-control" id="close_date" name="close_date" value="{{$clinic->close_date}}">
+                    <input type="datetime-local" class="form-control" id="close_date" name="close_date"
+                           value="{{$clinic->close_date}}">
                 </div>
                 <div class="col-md-4">
                     <label for="type">type</label>
                     <select class="type-select form-control" id="type" name="time_work">
                         <option
-                            value="{{\App\Enums\TypeBussiness::CLINICS}}"  {{ $clinic->type === \App\Enums\TypeBussiness::CLINICS ? 'selected' : '' }}>{{\App\Enums\TypeBussiness::CLINICS}}</option>
+                            value="{{\App\Enums\TypeBussiness::CLINICS}}" {{ $clinic->type === \App\Enums\TypeBussiness::CLINICS ? 'selected' : '' }}>{{\App\Enums\TypeBussiness::CLINICS}}</option>
                         <option
                             value="{{\App\Enums\TypeBussiness::PHARMACIES}}" {{ $clinic->type === \App\Enums\TypeBussiness::PHARMACIES ? 'selected' : '' }}>{{\App\Enums\TypeBussiness::PHARMACIES}}</option>
                         <option
@@ -199,15 +205,17 @@
                 </div>
 
                 <div hidden="">
-                    <input type="text" name="combined_address" id="combined_address" class="form-control">
-                    <input type="text" name="longitude" id="longitude" class="form-control">
-                    <input type="text" name="latitude" id="latitude" class="form-control">
-                    <input type="text" name="clinics_service" id="clinics_service" class="form-control">
+                    <label for="combined_address"></label><input type="text" name="combined_address" id="combined_address" class="form-control">
+                    <label for="longitude"></label><input type="text" name="longitude" id="longitude" class="form-control">
+                    <label for="latitude"></label><input type="text" name="latitude" id="latitude" class="form-control">
+                    <label for="clinics_service"></label><input type="text" name="clinics_service" id="clinics_service" class="form-control">
                 </div>
             </div>
             <button type="button" class="btn btn-primary up-date-button mt-4">Lưu</button>
         </div>
     </form>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         $(document).ready(function () {
             // Lắng nghe sự kiện onchange của các dropdown tỉnh, huyện, xã
@@ -256,13 +264,23 @@
                     'Authorization': `Bearer ${token}`
                 };
                 let province = $('#province_id').val();
-                let myProvince = province.split('-');
+                let myProvince = [];
+                if (province) {
+                    myProvince = province.split('-');
+                }
 
                 let district = $('#district_id').val();
-                let myDistrict = district.split('-');
+                let myDistrict = [];
+                if (district) {
+                    myDistrict = district.split('-');
+                }
 
                 let commune = $('#commune_id').val();
-                let myCommune = commune.split('-');
+                let myCommune = [];
+                if (commune) {
+                    myCommune = commune.split('-');
+                }
+
 
                 const formData = new FormData();
                 formData.append("name", $('#name').val());
@@ -306,8 +324,13 @@
                             alert('success');
                             window.location.href = `{{route('homeAdmin.list.clinics')}}`;
                         },
-                        error: function (exception) {
-                            console.log(exception)
+                        error: function (xhr) {
+                            if (xhr.status === 400) {
+                                toastr.error(xhr.responseText, 'Error');
+                            } else {
+                                toastr.error('Create error, Please try again!', 'Error');
+                            }
+                            console.log(xhr);
                         }
                     });
                 } catch (error) {
