@@ -54,6 +54,12 @@ class DoctorInfoController extends Controller
         return view('admin.doctor.tab-create-doctor', compact('departments', 'users', 'types'));
     }
 
+    public function listDepartment() {
+        $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
+
+        return response()->json($departments);
+    }
+
     private function returnListUser()
     {
 //        $listUsers = User::whereHas('roles', function ($query) {

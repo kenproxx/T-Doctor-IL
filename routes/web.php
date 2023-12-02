@@ -290,4 +290,5 @@ Route::group(['prefix' => ''], function () {
 // Route maps
 Route::get('explore', [\App\Http\Controllers\MapController::class, 'explore'])->name('explore.list');
 Route::get('/info-user/{id}', [ProfileController::class, 'infoUser'])->name('info.user');
+Route::get('/department', [DoctorInfoController::class, 'listDepartment'])->name('list.department');
 
