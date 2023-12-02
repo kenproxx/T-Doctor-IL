@@ -173,9 +173,6 @@ class BackendClinicController extends Controller
     public function detail($id)
     {
         $clinic = Clinic::find($id);
-        if (!$clinic || $clinic->status == ClinicStatus::DELETED) {
-            return response("Clinic not found", 404);
-        }
         return response()->json($clinic);
     }
 
@@ -183,9 +180,6 @@ class BackendClinicController extends Controller
     {
         try {
             $clinic = Clinic::find($id);
-            if (!$clinic || $clinic->status == ClinicStatus::DELETED) {
-                return response("Clinic not found", 404);
-            }
 
             $name = $request->input('name') ?? $clinic->name;
             $phone = $request->input('phone') ?? $clinic->phone;
