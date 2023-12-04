@@ -43,15 +43,15 @@
             console.log(type)
             switch (type) {
                 case "PHARMACIES":
-                    url = `{{ route('api.backend.pharmacies.list') }}`;
+                    url = `{{ route('api.backend.pharmacies.lists') }}`;
                     console.log(url)
                     break;
                 case "HOSPITALS":
-                    url = `{{ route('api.backend.hospitals.list') }}`;
+                    url = `{{ route('api.backend.hospitals.lists') }}`;
                     console.log(url)
                     break;
                 default:
-                    url = `{{ route('api.backend.clinics.list') }}`;
+                    url = `{{ route('api.backend.clinics.lists') }}`;
                     console.log(url)
                     break;
 

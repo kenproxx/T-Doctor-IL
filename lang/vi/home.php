@@ -1,5 +1,9 @@
 <?php
 return [
+    'list-departments' => "Danh sách chuyên khoa",
+    'add-new-department' => 'Thêm mới chuyên khoa',
+    'departments' => 'Chuyên khoa',
+    'symptoms' => 'Triệu chứng',
     'Name' => 'Tên',
     'WHAT’S FREE' => 'MIỄN PHÍ HÔM NAY',
     'See all' => 'Nhìn thấy tất cả',
@@ -503,6 +507,12 @@ return [
     'Thứ 6' => 'Thứ 6',
     'Thứ 7' => 'Thứ 7',
     'Chủ nhật' => 'Chủ nhật'
+    'CONTACT INFO'=>'Thông tin liên hệ',
+    'EXPERIENCE' => 'Kin nghiệm',
+    'HOSPITAL NAME' => 'Tên bệnh viện',
+    'RATE' => 'Tỷ lệ đánh giá',
+    'SPECIALIZED SERVICES' => 'Dịch vụ chuyên môn',
+    'SERVICE INFO' => 'Thông tin dịch vụ',
 
 
 

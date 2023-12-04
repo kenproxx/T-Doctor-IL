@@ -179,6 +179,18 @@ Route::group(['prefix' => 'address'], function () {
     Route::post('commune', [AddressController::class, 'getListCommune'])->name('address.get.list.commune');
 });
 
+Route::group(['prefix' => 'department'], function () {
+    Route::get('list', [\App\Http\Controllers\DepartmentController::class, 'index'])->name('department.index');
+    Route::get('create', [\App\Http\Controllers\DepartmentController::class, 'create'])->name('department.create');
+    Route::post('store', [\App\Http\Controllers\DepartmentController::class, 'store'])->name('departments.store');
+
+});
+
+Route::group(['prefix' => 'symptom'], function () {
+    Route::get('list', [\App\Http\Controllers\SymptomController::class, 'index'])->name('symptom.index');
+    Route::post('create', [\App\Http\Controllers\SymptomController::class, 'create'])->name('symptom.create');
+});
+
 Route::middleware(['auth'])->group(function () {
     Route::post('/save-user-login-social', [AuthSocialController::class, 'saveUser'])->name('save.user.login.social');
 

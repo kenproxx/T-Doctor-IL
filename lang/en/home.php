@@ -1,5 +1,9 @@
 <?php
 return [
+    'list-departments' => "List Departments",
+    'add-new-department' => 'Add new department',
+    'departments' => 'Departments',
+    'symptoms' => 'Symptoms',
     'Name' => 'Name',
     'WHAT’S FREE' => 'WHAT’S FREE',
     "What's free" => "What's free",
@@ -409,7 +413,7 @@ return [
     'Company page' => 'Company page',
     'Select CV' => 'Select CV',
     'Job Description' => 'Job Description',
-    'Conact number' => 'Conact number',
+    'Conact number' => 'Conact numbe',
     'List account register' => 'List account register',
     'type' => 'type',
     'Thao tác' => 'Operation',
@@ -503,7 +507,13 @@ return [
     'Thứ 5' => 'Thursday',
     'Thứ 6' => 'Friday',
     'Thứ 7' => 'Saturday',
-    'Chủ nhật' => 'Sunday'
+    'Chủ nhật' => 'Sunday',
+    'CONTACT INFO'=>'Contact information',
+    'EXPERIENCE' => 'Experience',
+    'HOSPITAL NAME' => 'Hospital name',
+    'RATE' => 'Rate',
+    'SPECIALIZED SERVICES' => 'Specialized services',
+    'SERVICE INFO' => 'Service information'
 
 
 

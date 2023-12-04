@@ -83,6 +83,9 @@ class AuthController extends Controller
             $passwordConfirm = $request->input('passwordConfirm');
             $member = $request->input('member');
             $type = $request->input('type');
+
+
+
             $user = new User();
 
             $checkPending = false;
@@ -144,11 +147,26 @@ class AuthController extends Controller
             $passwordHash = Hash::make($password);
 
             $user->email = $email;
-            $user->name = '';
+            if ($member == \App\Enums\Role::DOCTORS) {
+                $name_doctor = $request->input('name_doctor');
+                $contact_phone = $request->input('contact_phone');
+                $experience = $request->input('experience');
+                $hospital = $request->input('hospital');
+                $specialized_services = $request->input('specialized_services');
+                $services_info = $request->input('services_info');
+                $user->name = $name_doctor;
+                $user->phone = $contact_phone;
+                $user->year_of_experience = $experience ?? '';
+                $user->hospital = $hospital ?? '';
+                $user->specialty = $specialized_services ?? '';
+                $user->service = $services_info ?? '';
+            } else {
+                $user->name = '';
+                $user->phone = '';
+            }
             $user->last_name = '';
             $user->password = $passwordHash;
             $user->username = $username;
-            $user->phone = '';
             $user->address_code = '';
             $user->type = $type;
             $user->member = $member;
@@ -159,7 +177,6 @@ class AuthController extends Controller
                 $user->status = UserStatus::ACTIVE;
             }
             $success = $user->save();
-
             if ($success) {
                 (new MainController())->createRoleUser($member, $username);
 
