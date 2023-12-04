@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CategoryProductStatus;
 use App\Enums\CategoryStatus;
 use App\Enums\ProductStatus;
 use App\Models\Category;
+use App\Models\online_medicine\CategoryProduct;
 use App\Models\ProductInfo;
 
 class ProductInfoController extends Controller
@@ -26,7 +28,7 @@ class ProductInfoController extends Controller
 
     public function createProduct()
     {
-        $categories = Category::where('status', CategoryStatus::ACTIVE)->get();
+        $categories = CategoryProduct::where('status', CategoryProductStatus::ACTIVE)->get();
         return view('admin.product.tab-create-products', compact('categories'));
     }
 
