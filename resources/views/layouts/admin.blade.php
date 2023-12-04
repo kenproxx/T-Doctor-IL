@@ -193,6 +193,17 @@
                         <i class="fa-solid fa-user-doctor"></i>
                         <span>{{ __('home.Booking') }}</span></a>
                 </li>
+                <li class="nav-item {{ Nav::isRoute('homeAdmin.list.booking') }}">
+                    <a class="nav-link" href="{{ route('department.index') }}">
+                        <i class="fa-solid fa-user-doctor"></i>
+                        <span>{{ __('home.departments') }}</span></a>
+                </li>
+                <li class="nav-item {{ Nav::isRoute('homeAdmin.list.booking') }}">
+                    <a class="nav-link" href="{{ route('symptom.index') }}">
+                        <i class="fa-solid fa-user-doctor"></i>
+                        <span>{{ __('home.symptoms') }}</span></a>
+                </li>
+
             @endif
 
             <!-- Divider -->

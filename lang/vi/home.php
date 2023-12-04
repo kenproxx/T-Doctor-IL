@@ -1,5 +1,9 @@
 <?php
 return [
+    'list-departments' => "Danh sách chuyên khoa",
+    'add-new-department' => 'Thêm mới chuyên khoa',
+    'departments' => 'Chuyên khoa',
+    'symptoms' => 'Triệu chứng',
     'Name' => 'Tên',
     'WHAT’S FREE' => 'MIỄN PHÍ HÔM NAY',
     'See all' => 'Nhìn thấy tất cả',

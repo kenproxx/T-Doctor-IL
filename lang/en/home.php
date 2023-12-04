@@ -1,5 +1,9 @@
 <?php
 return [
+    'list-departments' => "List Departments",
+    'add-new-department' => 'Add new department',
+    'departments' => 'Departments',
+    'symptoms' => 'Symptoms',
     'Name' => 'Name',
     'WHAT’S FREE' => 'WHAT’S FREE',
     "What's free" => "What's free",
