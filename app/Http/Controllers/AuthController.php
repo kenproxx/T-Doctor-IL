@@ -83,13 +83,7 @@ class AuthController extends Controller
             $passwordConfirm = $request->input('passwordConfirm');
             $member = $request->input('member');
             $type = $request->input('type');
-            $name_doctor = $request->input('name_doctor');
-            $contact_phone = $request->input('contact_phone');
-            $experience = $request->input('experience');
-            $hospital = $request->input('hospital');
-            $rate = $request->input('rate');
-            $specialized_services = $request->input('specialized_services');
-            $services_info = $request->input('services_info');
+
 
 
             $user = new User();
@@ -153,19 +147,29 @@ class AuthController extends Controller
             $passwordHash = Hash::make($password);
 
             $user->email = $email;
-            $user->name = $name_doctor ?? '';
+            if ($member == \App\Enums\Role::DOCTORS) {
+                $name_doctor = $request->input('name_doctor');
+                $contact_phone = $request->input('contact_phone');
+                $experience = $request->input('experience');
+                $hospital = $request->input('hospital');
+                $specialized_services = $request->input('specialized_services');
+                $services_info = $request->input('services_info');
+                $user->name = $name_doctor;
+                $user->phone = $contact_phone;
+                $user->year_of_experience = $experience ?? '';
+                $user->hospital = $hospital ?? '';
+                $user->specialty = $specialized_services ?? '';
+                $user->service = $services_info ?? '';
+            } else {
+                $user->name = '';
+                $user->phone = '';
+            }
             $user->last_name = '';
             $user->password = $passwordHash;
             $user->username = $username;
             $user->address_code = '';
             $user->type = $type;
             $user->member = $member;
-            $user->phone = $contact_phone ?? '';
-            $user->year_of_experience = $experience ?? '';
-            $user->hospital = $hospital ?? '';
-            $user->specialty = $specialized_services ?? '';
-            $user->service = $services_info ?? '';
-
 
             if ($checkPending) {
                 $user->status = UserStatus::PENDING;
@@ -173,7 +177,6 @@ class AuthController extends Controller
                 $user->status = UserStatus::ACTIVE;
             }
             $success = $user->save();
-
             if ($success) {
                 (new MainController())->createRoleUser($member, $username);
 
