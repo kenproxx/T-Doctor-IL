@@ -7,7 +7,7 @@
 
     </style>
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">List Apply of Coupon</h1>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('home.List Apply of Coupon') }}</h1>
 
     <style>
         td {
@@ -21,13 +21,13 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Tên coupon</th>
-                <th scope="col">tên người đăng ký</th>
-                <th scope="col">Email người đăng ký</th>
-                <th scope="col">loại hình đăng ký</th>
-                <th scope="col">Link social người đăng ký</th>
-                <th scope="col">trạng thái</th>
-                <th scope="col">Thao tác</th>
+                <th scope="col">{{ __('home.Tên coupon') }}</th>
+                <th scope="col">{{ __('home.tên người đăng ký') }}</th>
+                <th scope="col">{{ __('home.Email người đăng ký') }}</th>
+                <th scope="col">{{ __('home.loại hình đăng ký') }}</th>
+                <th scope="col">{{ __('home.Link social người đăng ký') }}</th>
+                <th scope="col">{{ __('home.Trạng thái') }}</th>
+                <th scope="col">{{ __('home.Thao tác') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -64,7 +64,7 @@
         const REWARD = '{{ CouponApplyStatus::REWARDED }}';
 
         async function changeStatusApplyCoupon(status, idApplyCoupon) {
-            let result = confirm('Bạn có chắc chắn muốn thay đổi trạng thái của coupon này?');
+            let result = confirm('{{ __('home.Bạn có chắc chắn muốn thay đổi trạng thái của coupon này') }}?');
             if (!result) {
                 return;
             }

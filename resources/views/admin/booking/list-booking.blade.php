@@ -3,7 +3,7 @@
 @section('main-content')
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">List Booking</h1>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('home.List Booking') }}</h1>
     {{--    <a href="{{route('coupon.create.product')}}" class="btn btn-primary mb-3">Add</a>--}}
     <style>
         td {
@@ -17,12 +17,12 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Người đăng ký</th>
-                <th scope="col">clinic</th>
-                <th scope="col">giờ vào</th>
-                <th scope="col">dịch vụ</th>
-                <th scope="col">Trạng thái</th>
-                <th scope="col">Thao tác</th>
+                <th scope="col">{{ __('home.Người đăng ký') }}</th>
+                <th scope="col">{{ __('home.Clinics') }}</th>
+                <th scope="col">{{ __('home.giờ vào') }}</th>
+                <th scope="col">{{ __('home.dịch vụ') }}</th>
+                <th scope="col">{{ __('home.Trạng thái') }}</th>
+                <th scope="col">{{ __('home.Thao tác') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -56,7 +56,7 @@
                         <form action="{{route('api.backend.booking.delete',$item->id)}}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="ml-3 btn btn-primary btn-danger">Delete</button>
+                            <button type="submit" class="ml-3 btn btn-primary btn-danger">{{ __('home.Delete') }}</button>
                         </form>
                     </td>
                 </tr>

@@ -35,7 +35,7 @@
 
             <div id="waitingArea" class="max-h-screen">
                 <div class="py-4">
-                    <h1 class="text-2xl">Meeting Lobby</h1>
+                    <h1 class="text-2xl">{{ __('home.Meeting Lobby') }}</h1>
                 </div>
 
 
@@ -59,18 +59,18 @@
                     <div class="flex flex-col space-y-4 space-x-2 text-sm">
                         <div class="flex space-x-2 items-center">
                             <label>
-                                Name:
+                                {{ __('home.Name') }}:
                                 <input class="text-xs" id="username" type="text" value="{{ \Illuminate\Support\Facades\Auth::user()->name ?? 'default name' }}" placeholder="Name"/>
                             </label>
 
                             <label>
-                                Camera:
+                                {{ __('home.Camera') }}:
                                 <select class="text-xs" id='cameraSelectBox'>
                                 </select>
                             </label>
 
                             <label>
-                                Microphone:
+                                {{ __('home.Microphone') }}:
                                 <select class="text-xs" id='microphoneSelectBox'>
                                 </select>
                             </label>
@@ -78,7 +78,7 @@
 
                         <div>
                             <button id='joinMeetingBtn' class="inline-flex items-center px-4 py-2 border border-transparent text-sm rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                Join Meeting
+                                {{ __('home.Join Meeting') }}
                             </button>
                         </div>
                     </div>

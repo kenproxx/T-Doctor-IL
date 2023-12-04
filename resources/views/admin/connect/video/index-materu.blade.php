@@ -30,7 +30,7 @@
 
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
     <div class="py-4">
-        <h1 class="text-2xl">Video Chat Application</h1>
+        <h1 class="text-2xl">{{ __('home.Video Chat Application') }}</h1>
     </div>
 
 
@@ -50,21 +50,21 @@
                             <input type="text" name="meetingId" id="meetingId" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full rounded-none rounded-l-md pl-10 sm:text-sm border-gray-300" placeholder="Meeting ID">
                         </div>
                         <button type="submit" class="-ml-px relative inline-flex items-center space-x-2 px-4 py-2 border border-gray-300 text-sm font-medium rounded-r-md text-gray-700 bg-gray-50 hover:bg-gray-100 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500">
-                            <span>Join Meeting</span>
+                            <span>{{ __('home.Join Meeting') }}</span>
                         </button>
                     </div>
                 </form>
 
             </div>
             <div class="my-2 sm:my-0 flex items-center justify-center">
-                <span class="text-xs uppercase font-bold text-gray-400 px-1">OR</span>
+                <span class="text-xs uppercase font-bold text-gray-400 px-1">{{ __('home.Or') }}</span>
             </div>
 
             <div class="md:col-span-2">
                 <form method="post" action="{{ route('createMeeting') }}">
                     {{ csrf_field() }}
                     <input type="text">
-                    <button type="submit" class="mt-1 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create New Meeting</button>
+                    <button type="submit" class="mt-1 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">{{ __('home.Create New Meeting') }}</button>
                 </form>
             </div>
         </div>

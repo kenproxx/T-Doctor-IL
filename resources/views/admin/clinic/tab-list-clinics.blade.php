@@ -11,13 +11,13 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Gallery</th>
-            <th scope="col">Name</th>
-            <th scope="col">Address</th>
-            <th scope="col">open_date</th>
-            <th scope="col">close_date</th>
-            <th scope="col">status</th>
-            <th scope="col">Edit</th>
+            <th scope="col">{{ __('home.Gallery') }}</th>
+            <th scope="col">{{ __('home.Name') }}</th>
+            <th scope="col">{{ __('home.Addresses') }}</th>
+            <th scope="col">{{ __('home.open_date') }}</th>
+            <th scope="col">{{ __('home.close_date') }}</th>
+            <th scope="col">{{ __('home.Status') }}</th>
+            <th scope="col">{{ __('home.Edit') }}</th>
         </tr>
         </thead>
         <tbody id="ClinicsAdmin">
