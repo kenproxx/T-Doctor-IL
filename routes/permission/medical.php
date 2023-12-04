@@ -123,9 +123,9 @@ Route::group(['prefix' => 'staffs'], function () {
 //});
 
 Route::group(['prefix' => 'clinics'], function () {
-    Route::get('/list', [BackendClinicController::class, 'getAll'])->name('api.backend.clinics.list');
-    Route::get('/list-pharmacies', [BackendClinicController::class, 'getAllPharmacies'])->name('api.backend.pharmacies.list');
-    Route::get('/list-hospitals', [BackendClinicController::class, 'getAllHospitals'])->name('api.backend.hospitals.list');
+    Route::get('/list', [BackendClinicController::class, 'getAll'])->name('api.backend.clinics.lists');
+    Route::get('/list-pharmacies', [BackendClinicController::class, 'getAllPharmacies'])->name('api.backend.pharmacies.lists');
+    Route::get('/list-hospitals', [BackendClinicController::class, 'getAllHospitals'])->name('api.backend.hospitals.lists');
     Route::get('/all-clinic-active', [BackendClinicController::class, 'getAllClinicActive'])->name('api.backend.clinics.all-clinic-active');
     Route::get('/user/{id}', [BackendClinicController::class, 'getAllByUserId'])->name('api.backend.clinics.user');
     Route::get('/detail/{id}', [BackendClinicController::class, 'detail'])->name('api.backend.clinics.detail');
