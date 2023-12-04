@@ -506,7 +506,7 @@ return [
     'Thứ 5' => 'Thứ 5',
     'Thứ 6' => 'Thứ 6',
     'Thứ 7' => 'Thứ 7',
-    'Chủ nhật' => 'Chủ nhật'
+    'Chủ nhật' => 'Chủ nhật',
     'CONTACT INFO'=>'Thông tin liên hệ',
     'EXPERIENCE' => 'Kin nghiệm',
     'HOSPITAL NAME' => 'Tên bệnh viện',
