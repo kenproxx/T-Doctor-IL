@@ -7,7 +7,7 @@
 
     </style>
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">List account register</h1>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('home.List account register') }}</h1>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -20,12 +20,12 @@
         <thead>
         <tr>
             <th scope="col">STT</th>
-            <th scope="col">Username</th>
-            <th scope="col">email</th>
-            <th scope="col">type</th>
-            <th scope="col">member</th>
-            <th scope="col">status</th>
-            <th scope="col">Thao tác</th>
+            <th scope="col">{{ __('home.Username') }}</th>
+            <th scope="col">{{ __('home.email') }}</th>
+            <th scope="col">{{ __('home.type') }}</th>
+            <th scope="col">{{ __('home.Member') }}</th>
+            <th scope="col">{{ __('home.Status') }}</th>
+            <th scope="col">{{ __('home.Thao tác') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -39,13 +39,13 @@
                 <td>{{ $user->status }}</td>
                 <td>
                     <a href="{{ url('/') . asset($user->business_license_img ?? $user->medical_license_img) }}"
-                       class="btn btn-info" target="_blank">View License
+                       class="btn btn-info" target="_blank">{{ __('home.View License') }}
                     </a>
                     <button onclick="updateUser('{{ $user->id }}', '{{ UserStatus::DELETED }}')"
-                            class="btn btn-danger">Reject
+                            class="btn btn-danger">{{ __('home.Reject') }}
                     </button>
                     <button onclick="updateUser('{{ $user->id }}', '{{ UserStatus::ACTIVE }}')"
-                            class="btn btn-primary">Approve
+                            class="btn btn-primary">{{ __('home.Approve') }}
                     </button>
                 </td>
             </tr>
@@ -60,7 +60,7 @@
         const token = `{{ $_COOKIE['accessToken'] ?? ''}}`;
 
         function updateUser(id, value) {
-            if (confirm('Bạn có chắc chắn muốn thay đổi không?')) {
+            if (confirm('{{ __('home.Bạn có chắc chắn muốn thay đổi không') }}?')) {
 
                 loadingMasterPage();
                 let url = '{{ route('api.backend.account-register.update', ['id' => ':id']) }}';

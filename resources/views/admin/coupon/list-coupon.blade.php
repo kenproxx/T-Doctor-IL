@@ -5,8 +5,8 @@
 
     </style>
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">List Coupon</h1>
-    <a href="{{route('coupon.create.product')}}" class="btn btn-primary mb-3">Add</a>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('home.List Coupon') }}</h1>
+    <a href="{{route('coupon.create.product')}}" class="btn btn-primary mb-3">{{ __('home.Add') }}</a>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -28,12 +28,12 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Tiêu đề</th>
-                <th scope="col">Lượng người đăng ký</th>
-                <th scope="col">trạng thái</th>
-                <th scope="col">Thời hạn</th>
-                <th scope="col">Trạng thái</th>
-                <th scope="col">Thao tác</th>
+                <th scope="col">{{ __('home.Tiêu đề') }}</th>
+                <th scope="col">{{ __('home.Lượng người đăng ký') }}</th>
+                <th scope="col">{{ __('home.Trạng thái') }}</th>
+                <th scope="col">{{ __('home.Thời hạn') }}</th>
+                <th scope="col">{{ __('home.Trạng thái') }}</th>
+                <th scope="col">{{ __('home.Thao tác') }}</th>
             </tr>
             </thead>
             <tbody id="ProductsAdmin">

@@ -49,73 +49,73 @@
         <div>
             <div class="row">
                 <div class="col-md-4">
-                    <label for="name">name</label>
+                    <label for="name">{{ __('home.Name') }}</label>
                     <input type="text" class="form-control" id="name" name="name" required value="">
                 </div>
                 <div class="col-md-4">
-                    <label for="name_en">name_en</label>
+                    <label for="name_en">{{ __('home.name_en') }}</label>
                     <input type="text" class="form-control" id="name_en" name="name_en" value="">
                 </div>
                 <div class="col-md-4">
-                    <label for="name_laos">name_laos</label>
+                    <label for="name_laos">{{ __('home.name_laos') }}</label>
                     <input type="text" class="form-control" id="name_laos" name="name_laos" value="">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <label for="phone">phone</label>
+                    <label for="phone">{{ __('home.PhoneNumber') }}</label>
                     <input type="number" class="form-control" id="phone" name="phone" required value="">
                 </div>
                 <div class="col-md-6">
-                    <label for="email">email</label>
+                    <label for="email">{{ __('home.Email') }}</label>
                     <input type="email" class="form-control" id="email" name="email" required value="">
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4"><label for="address_detail">địa chỉ chi tiết việt</label>
+                <div class="col-sm-4"><label for="address_detail">{{ __('home.địa chỉ chi tiết việt') }}</label>
                     <input type="text" class="form-control" name="address_detail" id="address_detail" value="">
                 </div>
-                <div class="col-sm-4"><label for="detail_address_en">địa chỉ chi tiết anh</label>
+                <div class="col-sm-4"><label for="detail_address_en">{{ __('home.địa chỉ chi tiết anh') }}</label>
                     <input type="text" class="form-control" name="address_detail_en" id="detail_address_en" value="">
                 </div>
-                <div class="col-sm-4"><label for="detail_address_laos">địa chỉ chi tiết lào</label>
+                <div class="col-sm-4"><label for="detail_address_laos">{{ __('home.địa chỉ chi tiết lào') }}</label>
                     <input type="text" class="form-control" name="address_detail_laos" id="detail_address_laos"
                            value="">
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-4">
-                    <label for="province_id">Tỉnh</label>
+                    <label for="province_id">{{ __('home.Tỉnh') }}</label>
                     <select name="province_id" id="province_id" class="form-control">
 
                     </select>
                 </div>
                 <div class="col-sm-4">
-                    <label for="district_id">Quận</label>
+                    <label for="district_id">{{ __('home.Quận') }}</label>
                     <select name="district_id" id="district_id" class="form-control">
 
                     </select>
                 </div>
                 <div class="col-sm-4">
-                    <label for="commune_id">Xã</label>
+                    <label for="commune_id">{{ __('home.Xã') }}</label>
                     <select name="commune_id" id="commune_id" class="form-control">
 
                     </select>
                 </div>
             </div>
             <div>
-                <label for="introduce">introduce</label>
+                <label for="introduce">{{ __('home.introduce') }}</label>
                 <input type="text" class="form-control" id="introduce" name="introduce" required
                        value="">
             </div>
             <div>
-                <label>gallery</label>
+                <label>{{ __('home.gallery') }}</label>
                 <input type="file" class="form-control" id="gallery" name="gallery[]" required multiple
                        accept="image/*">
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <label for="status">status</label>
+                    <label for="status">{{ __('home.Status') }}</label>
                     <select class="custom-select" id="status" name="status">
                         <option
                             value="{{ \App\Enums\ClinicStatus::ACTIVE }}">{{ \App\Enums\ClinicStatus::ACTIVE }}</option>
@@ -126,7 +126,7 @@
                     </select>
                 </div>
                 <div class="col-md-6">
-                    <label for="time_work">Time work</label>
+                    <label for="time_work">{{ __('home.Time work') }}</label>
                     <select class="custom-select" id="time_work" name="time_work">
                         <option value="{{\App\Enums\TypeTimeWork::ALL}}">{{\App\Enums\TypeTimeWork::ALL}}</option>
                         <option value="{{\App\Enums\TypeTimeWork::NONE}}">{{\App\Enums\TypeTimeWork::NONE}}</option>
@@ -142,11 +142,11 @@
             </div>
 
             <div hidden="">
-                <label for="user_id">User</label>
+                <label for="user_id">{{ __('home.Username') }}</label>
                 <input type="text" class="form-control" id="user_id" name="user_id" value="{{Auth::user()->id}}">
             </div>
             <div class="form-group">
-                <label for="service_clinic">Service Clinic</label>
+                <label for="service_clinic">{{ __('home.Service Clinics') }}</label>
                 <input type="text" class="form-control" id="service_clinic" name="service_clinic" disabled>
                 <ul class="list-service">
                     @foreach($services as $service)
@@ -162,15 +162,15 @@
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <label for="open_date">open_date</label>
+                    <label for="open_date">{{ __('home.open_date') }}</label>
                     <input type="datetime-local" class="form-control" id="open_date" name="open_date" required value="">
                 </div>
                 <div class="col-md-4">
-                    <label for="close_date">close_date</label>
+                    <label for="close_date">{{ __('home.close_date') }}</label>
                     <input type="datetime-local" class="form-control" id="close_date" name="close_date" value="">
                 </div>
                 <div class="col-md-4">
-                    <label for="type">type</label>
+                    <label for="type">{{ __('home.type') }}</label>
                     <select class="type-select form-control" id="type" name="type">
                         <option
                             value="{{\App\Enums\TypeBussiness::CLINICS}}">{{\App\Enums\TypeBussiness::CLINICS}}</option>
@@ -188,7 +188,7 @@
                     <input type="text" name="clinics_service" id="clinics_service" class="form-control">
                 </div>
             </div>
-            <button type="button" class="btn btn-primary up-date-button mt-4">Lưu</button>
+            <button type="button" class="btn btn-primary up-date-button mt-4">{{ __('home.Save') }}</button>
         </div>
     </form>
     <script>

@@ -133,7 +133,7 @@
         }
     </style>
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Edit Coupon</h1>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('home.Edit Coupon') }}</h1>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -145,52 +145,52 @@
     <form id="form" enctype="multipart/form-data">
         @csrf
         <div class="row">
-            <div class="col-sm-4"><label for="title">tiêu đề việt</label>
+            <div class="col-sm-4"><label for="title">{{ __('home.tiêu đề việt') }}</label>
                 <input type="text" class="form-control" id="title" name="title" value="{{ $coupon->title }}"></div>
-            <div class="col-sm-4"><label for="title_en">tiêu đề anh</label>
+            <div class="col-sm-4"><label for="title_en">{{ __('home.tiêu đề anh') }}</label>
                 <input type="text" class="form-control" id="title_en" name="title_en" value="{{ $coupon->title_en }}"></div>
-            <div class="col-sm-4"><label for="title_laos">tiêu đề lào</label>
+            <div class="col-sm-4"><label for="title_laos">{{ __('home.tiêu đề lào') }}</label>
                 <input type="text" class="form-control" id="title_laos" name="title_laos"
                        value="{{ $coupon->title_laos }}"></div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><label for="short_description">Mô tả ngắn việt</label>
+            <div class="col-sm-4"><label for="short_description">{{ __('home.Mô tả ngắn việt') }}</label>
                 <textarea class="form-control" name="short_description" id="short_description">{{ $coupon->short_description }}</textarea>
             </div>
-            <div class="col-sm-4"><label for="short_description_en">Mô tả ngắn anh</label>
+            <div class="col-sm-4"><label for="short_description_en">{{ __('home.Mô tả ngắn anh') }}</label>
                 <textarea class="form-control" name="short_description_en" id="short_description_en">{{ $coupon->short_description_en }}</textarea>
             </div>
-            <div class="col-sm-4"><label for="short_description_laos">Mô tả ngắn lào</label>
+            <div class="col-sm-4"><label for="short_description_laos">{{ __('home.Mô tả ngắn lào') }}</label>
                 <textarea class="form-control" name="short_description_laos" id="short_description_laos">{{ $coupon->short_description_laos }}</textarea>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><label for="description">Mô tả dài việt</label>
+            <div class="col-sm-4"><label for="description">{{ __('home.Mô tả dài việt') }}</label>
                 <textarea class="form-control" name="description" id="description">{{ $coupon->description }}</textarea>
             </div>
-            <div class="col-sm-4"><label for="description_en">Mô tả dài anh</label>
+            <div class="col-sm-4"><label for="description_en">{{ __('home.Mô tả dài anh') }}</label>
                 <textarea class="form-control" name="description_en" id="description_en">{{ $coupon->description_en }}</textarea>
             </div>
-            <div class="col-sm-4"><label for="description_laos">Mô tả dài lào</label>
+            <div class="col-sm-4"><label for="description_laos">{{ __('home.Mô tả dài lào') }}</label>
                 <textarea class="form-control" name="description_laos" id="description_laos">{{ $coupon->description_laos }}</textarea>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6"><label for="startDate">Thời gian bắt đầu</label>
+            <div class="col-sm-6"><label for="startDate">{{ __('home.Thời gian bắt đầu') }}</label>
                 <input type="datetime-local" class="form-control" id="startDate" name="startDate" value="{{ $coupon->startDate }}"></div>
-            <div class="col-sm-6"><label for="endDate">Thời gian kết thúc</label>
+            <div class="col-sm-6"><label for="endDate">{{ __('home.Thời gian kết thúc') }}</label>
                 <input type="datetime-local" class="form-control" id="endDate" name="endDate" value="{{ $coupon->endDate }}"></div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><label for="max_register">Số lượng đký tối đa</label>
+            <div class="col-sm-4"><label for="max_register">{{ __('home.Số lượng đký tối đa') }}</label>
                 <input type="number" class="form-control" id="max_register" name="max_register" value="{{ $coupon->max_register }}">
             </div>
-            <div class="col-sm-4"><label for="clinic_id">Đơn vị áp dụng</label>
+            <div class="col-sm-4"><label for="clinic_id">{{ __('home.Đơn vị áp dụng') }}</label>
                 <select class="custom-select" id="clinic_id">
-                    <option selected>Choose...</option>
+                    <option selected>{{ __('home.Choose...') }}</option>
                 </select>
             </div>
-            <div class="col-sm-4"><label for="status">Trạng thái</label>
+            <div class="col-sm-4"><label for="status">{{ __('home.Trạng thái') }}</label>
                 <select class="custom-select" id="status" name="status" {{ !$isAdmin ? 'disabled' : '' }}>
                     <option value="{{ \App\Enums\CouponStatus::ACTIVE }}" {{ $coupon->status === \App\Enums\CouponStatus::ACTIVE ? 'selected' : '' }}>
                         {{ \App\Enums\CouponStatus::ACTIVE }}
@@ -209,7 +209,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12"><label>Ảnh bìa</label>
+            <div class="col-sm-12"><label>{{ __('home.Ảnh bìa') }}</label>
                 <div class="box">
 
                     <div class="js--image-preview"><img src="{{ asset($coupon->thumbnail) }}" class="w-100 h-100" style="object-fit: cover" alt=""></div>
@@ -222,7 +222,7 @@
             </div>
         </div>
 
-        <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
+        <button type="button" class="btn btn-primary up-date-button mt-md-4">{{ __('home.Save') }}</button>
     </form>
     <script>
 
