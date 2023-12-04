@@ -188,7 +188,8 @@ Route::group(['prefix' => 'department'], function () {
 
 Route::group(['prefix' => 'symptom'], function () {
     Route::get('list', [\App\Http\Controllers\SymptomController::class, 'index'])->name('symptom.index');
-    Route::post('create', [\App\Http\Controllers\SymptomController::class, 'create'])->name('symptom.create');
+    Route::get('create', [\App\Http\Controllers\SymptomController::class, 'create'])->name('symptom.create');
+    Route::post('store', [\App\Http\Controllers\SymptomController::class, 'store'])->name('symptom.store');
 });
 
 Route::middleware(['auth'])->group(function () {

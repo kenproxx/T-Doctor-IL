@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-    List Doctor
+    List Departments
 @endsection
 @section('main-content')
     <style>

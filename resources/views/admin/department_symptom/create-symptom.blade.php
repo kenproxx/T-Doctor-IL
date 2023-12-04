@@ -1,16 +1,16 @@
 @extends('layouts.admin')
 @section('title')
-    Create Department
+    Create Symptoms
 @endsection
 @section('main-content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Create Department</div>
+                    <div class="card-header">Create Symptom</div>
 
                     <div class="card-body">
-                        <form action="{{ route('departments.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('symptom.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group">

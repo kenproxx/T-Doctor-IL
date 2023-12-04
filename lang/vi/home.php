@@ -3,6 +3,8 @@ return [
     'list-departments' => "Danh sách chuyên khoa",
     'add-new-department' => 'Thêm mới chuyên khoa',
     'departments' => 'Chuyên khoa',
+    'list-symptom' => "Danh sách triệu chứng",
+    'add-new-symptom' => 'Thêm mới triệu chứng',
     'symptoms' => 'Triệu chứng',
     'Name' => 'Tên',
     'WHAT’S FREE' => 'MIỄN PHÍ HÔM NAY',
