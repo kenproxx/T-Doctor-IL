@@ -408,7 +408,13 @@ return [
     'Company page' => 'Trang công ty',
     'Select CV' => 'Chọn CV',
     'Job Description' => 'Mô tả công việc',
-    'Conact number' => 'Số liên lạc'
+    'Conact number' => 'Số liên lạc',
+    'CONTACT INFO'=>'Thông tin liên hệ',
+    'EXPERIENCE' => 'Kin nghiệm',
+    'HOSPITAL NAME' => 'Tên bệnh viện',
+    'RATE' => 'Tỷ lệ đánh giá',
+    'SPECIALIZED SERVICES' => 'Dịch vụ chuyên môn',
+    'SERVICE INFO' => 'Thông tin dịch vụ',
 
 
 

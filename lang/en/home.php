@@ -409,7 +409,13 @@ return [
     'Company page' => 'Company page',
     'Select CV' => 'Select CV',
     'Job Description' => 'Job Description',
-    'Conact number' => 'Conact number'
+    'Conact number' => 'Conact number',
+    'CONTACT INFO'=>'Contact information',
+    'EXPERIENCE' => 'Experience',
+    'HOSPITAL NAME' => 'Hospital name',
+    'RATE' => 'Rate',
+    'SPECIALIZED SERVICES' => 'Specialized services',
+    'SERVICE INFO' => 'Service information',
 
 
 

@@ -31,7 +31,8 @@
 .popup .form .form-element select,
 .popup .form .form-element input[type="email"],
 .popup .form .form-element input[type="file"],
-.popup .form .form-element input[type="password"]{
+.popup .form .form-element input[type="password"],
+.popup .form .form-element input[type="number"]{
     width: 570px;
     height: 56px;
     padding: 20px 16px 20px 16px;

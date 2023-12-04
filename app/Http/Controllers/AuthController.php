@@ -83,6 +83,15 @@ class AuthController extends Controller
             $passwordConfirm = $request->input('passwordConfirm');
             $member = $request->input('member');
             $type = $request->input('type');
+            $name_doctor = $request->input('name_doctor');
+            $contact_phone = $request->input('contact_phone');
+            $experience = $request->input('experience');
+            $hospital = $request->input('hospital');
+            $rate = $request->input('rate');
+            $specialized_services = $request->input('specialized_services');
+            $services_info = $request->input('services_info');
+
+
             $user = new User();
 
             $checkPending = false;
@@ -144,14 +153,19 @@ class AuthController extends Controller
             $passwordHash = Hash::make($password);
 
             $user->email = $email;
-            $user->name = '';
+            $user->name = $name_doctor ?? '';
             $user->last_name = '';
             $user->password = $passwordHash;
             $user->username = $username;
-            $user->phone = '';
             $user->address_code = '';
             $user->type = $type;
             $user->member = $member;
+            $user->phone = $contact_phone ?? '';
+            $user->year_of_experience = $experience ?? '';
+            $user->hospital = $hospital ?? '';
+            $user->specialty = $specialized_services ?? '';
+            $user->service = $services_info ?? '';
+
 
             if ($checkPending) {
                 $user->status = UserStatus::PENDING;

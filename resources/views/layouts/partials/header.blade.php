@@ -9,8 +9,12 @@
                     <a href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <g clip-path="url(#clip0_3391_30104)">
-                                <path d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#3C5A9A"/>
-                                <path d="M15.9014 3.68359H13.2431C11.6656 3.68359 9.91092 4.34708 9.91092 6.63376C9.91862 7.43053 9.91092 8.1936 9.91092 9.05238H8.08594V11.9565H9.96739V20.3168H13.4247V11.9013H15.7066L15.913 9.04423H13.3651C13.3651 9.04423 13.3708 7.77329 13.3651 7.40421C13.3651 6.50056 14.3054 6.55231 14.3619 6.55231C14.8094 6.55231 15.6794 6.55361 15.9027 6.55231V3.68359H15.9014Z" fill="white"/>
+                                <path
+                                    d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
+                                    fill="#3C5A9A"/>
+                                <path
+                                    d="M15.9014 3.68359H13.2431C11.6656 3.68359 9.91092 4.34708 9.91092 6.63376C9.91862 7.43053 9.91092 8.1936 9.91092 9.05238H8.08594V11.9565H9.96739V20.3168H13.4247V11.9013H15.7066L15.913 9.04423H13.3651C13.3651 9.04423 13.3708 7.77329 13.3651 7.40421C13.3651 6.50056 14.3054 6.55231 14.3619 6.55231C14.8094 6.55231 15.6794 6.55361 15.9027 6.55231V3.68359H15.9014Z"
+                                    fill="white"/>
                             </g>
                             <defs>
                                 <clipPath id="clip0_3391_30104">
@@ -24,10 +28,18 @@
                     <a href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <g clip-path="url(#clip0_3391_30107)">
-                                <path d="M23.4394 12.2242C23.4394 11.2409 23.3596 10.5234 23.187 9.7793H11.959V14.2173H18.5495C18.4167 15.3202 17.6992 16.9811 16.1047 18.0972L16.0823 18.2458L19.6324 20.996L19.8783 21.0205C22.1372 18.9344 23.4394 15.8649 23.4394 12.2242Z" fill="#4285F4"/>
-                                <path d="M11.9586 23.9178C15.1874 23.9178 17.898 22.8548 19.878 21.0211L16.1043 18.0978C15.0944 18.8021 13.7391 19.2937 11.9586 19.2937C8.79619 19.2937 6.11212 17.2076 5.15533 14.3242L5.01509 14.3361L1.32367 17.193L1.27539 17.3272C3.24193 21.2337 7.28134 23.9178 11.9586 23.9178Z" fill="#34A853"/>
-                                <path d="M5.15551 14.3248C4.90305 13.5807 4.75695 12.7834 4.75695 11.9596C4.75695 11.1357 4.90305 10.3385 5.14223 9.59439L5.13554 9.43592L1.39786 6.5332L1.27557 6.59137C0.465069 8.21247 0 10.0329 0 11.9596C0 13.8863 0.465069 15.7066 1.27557 17.3277L5.15551 14.3248Z" fill="#FBBC05"/>
-                                <path d="M11.9586 4.62403C14.2042 4.62403 15.7189 5.59402 16.5826 6.40461L19.9576 3.10928C17.8849 1.1826 15.1874 0 11.9586 0C7.28134 0 3.24192 2.68406 1.27539 6.59057L5.14205 9.59359C6.11212 6.7102 8.79618 4.62403 11.9586 4.62403Z" fill="#EB4335"/>
+                                <path
+                                    d="M23.4394 12.2242C23.4394 11.2409 23.3596 10.5234 23.187 9.7793H11.959V14.2173H18.5495C18.4167 15.3202 17.6992 16.9811 16.1047 18.0972L16.0823 18.2458L19.6324 20.996L19.8783 21.0205C22.1372 18.9344 23.4394 15.8649 23.4394 12.2242Z"
+                                    fill="#4285F4"/>
+                                <path
+                                    d="M11.9586 23.9178C15.1874 23.9178 17.898 22.8548 19.878 21.0211L16.1043 18.0978C15.0944 18.8021 13.7391 19.2937 11.9586 19.2937C8.79619 19.2937 6.11212 17.2076 5.15533 14.3242L5.01509 14.3361L1.32367 17.193L1.27539 17.3272C3.24193 21.2337 7.28134 23.9178 11.9586 23.9178Z"
+                                    fill="#34A853"/>
+                                <path
+                                    d="M5.15551 14.3248C4.90305 13.5807 4.75695 12.7834 4.75695 11.9596C4.75695 11.1357 4.90305 10.3385 5.14223 9.59439L5.13554 9.43592L1.39786 6.5332L1.27557 6.59137C0.465069 8.21247 0 10.0329 0 11.9596C0 13.8863 0.465069 15.7066 1.27557 17.3277L5.15551 14.3248Z"
+                                    fill="#FBBC05"/>
+                                <path
+                                    d="M11.9586 4.62403C14.2042 4.62403 15.7189 5.59402 16.5826 6.40461L19.9576 3.10928C17.8849 1.1826 15.1874 0 11.9586 0C7.28134 0 3.24192 2.68406 1.27539 6.59057L5.14205 9.59359C6.11212 6.7102 8.79618 4.62403 11.9586 4.62403Z"
+                                    fill="#EB4335"/>
                             </g>
                             <defs>
                                 <clipPath id="clip0_3391_30107">
@@ -41,7 +53,9 @@
                     <a href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <g clip-path="url(#clip0_3391_30112)">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24C18.6274 24 24 18.6274 24 12ZM22.56 12C22.56 6.16787 17.8321 1.44 12 1.44C6.16787 1.44 1.44 6.16787 1.44 12C1.44 17.8321 6.16787 22.56 12 22.56C17.8321 22.56 22.56 17.8321 22.56 12ZM16.4907 9.37131C15.7981 8.33983 14.7193 8.19852 14.3349 8.18219C13.4168 8.08757 12.5434 8.73236 12.0775 8.73236C11.6127 8.73236 10.8937 8.19618 10.1323 8.21027C9.13159 8.22541 8.20888 8.80251 7.69362 9.71471C6.65389 11.551 7.42736 14.2714 8.44072 15.7607C8.93588 16.4897 9.52633 17.3085 10.3016 17.2792C11.0481 17.2489 11.3304 16.7875 12.233 16.7875C13.1356 16.7875 13.3893 17.2792 14.1794 17.2641C14.9827 17.249 15.4917 16.5212 15.9834 15.79C16.5521 14.9443 16.7862 14.1255 16.8 14.0834C16.7822 14.0752 15.2335 13.4713 15.218 11.6561C15.2031 10.1364 16.4356 9.40752 16.4907 9.37131ZM14.3469 5.28C13.7542 5.30456 13.0358 5.68183 12.6106 6.18879C12.229 6.6385 11.895 7.35628 11.9845 8.04545C12.6462 8.09802 13.3216 7.70322 13.7335 7.19627C14.1449 6.68817 14.4227 5.98324 14.3469 5.28Z" fill="black"/>
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                      d="M24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24C18.6274 24 24 18.6274 24 12ZM22.56 12C22.56 6.16787 17.8321 1.44 12 1.44C6.16787 1.44 1.44 6.16787 1.44 12C1.44 17.8321 6.16787 22.56 12 22.56C17.8321 22.56 22.56 17.8321 22.56 12ZM16.4907 9.37131C15.7981 8.33983 14.7193 8.19852 14.3349 8.18219C13.4168 8.08757 12.5434 8.73236 12.0775 8.73236C11.6127 8.73236 10.8937 8.19618 10.1323 8.21027C9.13159 8.22541 8.20888 8.80251 7.69362 9.71471C6.65389 11.551 7.42736 14.2714 8.44072 15.7607C8.93588 16.4897 9.52633 17.3085 10.3016 17.2792C11.0481 17.2489 11.3304 16.7875 12.233 16.7875C13.1356 16.7875 13.3893 17.2792 14.1794 17.2641C14.9827 17.249 15.4917 16.5212 15.9834 15.79C16.5521 14.9443 16.7862 14.1255 16.8 14.0834C16.7822 14.0752 15.2335 13.4713 15.218 11.6561C15.2031 10.1364 16.4356 9.40752 16.4907 9.37131ZM14.3469 5.28C13.7542 5.30456 13.0358 5.68183 12.6106 6.18879C12.229 6.6385 11.895 7.35628 11.9845 8.04545C12.6462 8.09802 13.3216 7.70322 13.7335 7.19627C14.1449 6.68817 14.4227 5.98324 14.3469 5.28Z"
+                                      fill="black"/>
                             </g>
                             <defs>
                                 <clipPath id="clip0_3391_30112">
@@ -55,8 +69,12 @@
                     <a href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <g clip-path="url(#clip0_3391_30114)">
-                                <path d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#FFEB3B"/>
-                                <path d="M10.4141 11L9.98182 12.219H10.845L10.4141 11ZM10.4141 11L9.98182 12.219H10.845L10.4141 11ZM12 5.80859C7.85864 5.80859 4.5 8.43768 4.5 11.6831C4.5 13.7804 5.90318 15.6213 8.01545 16.659C6.96682 20.2522 6.35046 20.4868 10.6677 17.4636C11.1091 17.5258 11.5543 17.5567 12 17.5563C16.1414 17.5563 19.5 14.9259 19.5 11.6818C19.5 8.43769 16.1414 5.80859 12 5.80859ZM7.85318 13.7327C7.10455 13.7327 7.54636 12.6977 7.42091 10.7695C7.14818 10.7231 6.32045 10.955 6.32045 10.3481C6.32118 10.2363 6.36622 10.1292 6.44571 10.0505C6.52521 9.97178 6.63267 9.92778 6.74455 9.92814C8.31818 10.0413 9.38455 9.63496 9.38455 10.3481C9.38455 10.9659 8.58818 10.7177 8.28545 10.7695C8.16 12.6909 8.60045 13.7327 7.85318 13.7327ZM11.9223 13.6672C11.25 13.9727 11.2336 13.284 11.0727 12.9854H9.75409C9.59182 13.2909 9.57818 13.9781 8.90455 13.6672C8.39864 13.4354 9.22227 12.2586 9.83727 10.3509C9.87663 10.229 9.9536 10.1228 10.0571 10.0475C10.1606 9.97212 10.2854 9.93154 10.4134 9.93154C10.5414 9.93154 10.6662 9.97212 10.7697 10.0475C10.8732 10.1228 10.9502 10.229 10.9895 10.3509C11.6168 12.2954 12.4309 13.4354 11.9223 13.6672ZM12.7214 13.6672C11.9973 13.6672 12.4377 12.6895 12.3123 10.3536C12.3123 9.78496 13.1959 9.78632 13.1959 10.3536V12.8818C13.6132 12.9377 14.5295 12.6759 14.5295 13.2759C14.5241 13.91 13.5395 13.5895 12.7214 13.67V13.6672ZM16.7223 13.5431L15.7077 12.2068L15.5577 12.3568V13.2963C15.5577 13.3531 15.5465 13.4094 15.5247 13.4619C15.5028 13.5143 15.4709 13.5619 15.4306 13.602C15.3903 13.642 15.3424 13.6737 15.2898 13.6952C15.2372 13.7167 15.1809 13.7276 15.1241 13.7272C14.3727 13.7272 14.8227 12.6445 14.6918 10.3563C14.6925 10.2421 14.7384 10.1329 14.8194 10.0524C14.9004 9.97194 15.0099 9.92677 15.1241 9.92678C15.7773 9.92678 15.495 10.8513 15.5564 11.2809C16.7836 10.1095 16.7523 9.98541 17.0045 9.98541C17.3523 9.98541 17.565 10.4177 17.3332 10.6468L16.3473 11.6259L17.4123 13.0277C17.76 13.4818 17.0659 14.0013 16.7223 13.5459V13.5431ZM9.98182 12.219H10.845L10.4141 11L9.98182 12.219ZM10.4141 11L9.98182 12.219H10.845L10.4141 11ZM10.4141 11L9.98182 12.219H10.845L10.4141 11Z" fill="#3E2723"/>
+                                <path
+                                    d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z"
+                                    fill="#FFEB3B"/>
+                                <path
+                                    d="M10.4141 11L9.98182 12.219H10.845L10.4141 11ZM10.4141 11L9.98182 12.219H10.845L10.4141 11ZM12 5.80859C7.85864 5.80859 4.5 8.43768 4.5 11.6831C4.5 13.7804 5.90318 15.6213 8.01545 16.659C6.96682 20.2522 6.35046 20.4868 10.6677 17.4636C11.1091 17.5258 11.5543 17.5567 12 17.5563C16.1414 17.5563 19.5 14.9259 19.5 11.6818C19.5 8.43769 16.1414 5.80859 12 5.80859ZM7.85318 13.7327C7.10455 13.7327 7.54636 12.6977 7.42091 10.7695C7.14818 10.7231 6.32045 10.955 6.32045 10.3481C6.32118 10.2363 6.36622 10.1292 6.44571 10.0505C6.52521 9.97178 6.63267 9.92778 6.74455 9.92814C8.31818 10.0413 9.38455 9.63496 9.38455 10.3481C9.38455 10.9659 8.58818 10.7177 8.28545 10.7695C8.16 12.6909 8.60045 13.7327 7.85318 13.7327ZM11.9223 13.6672C11.25 13.9727 11.2336 13.284 11.0727 12.9854H9.75409C9.59182 13.2909 9.57818 13.9781 8.90455 13.6672C8.39864 13.4354 9.22227 12.2586 9.83727 10.3509C9.87663 10.229 9.9536 10.1228 10.0571 10.0475C10.1606 9.97212 10.2854 9.93154 10.4134 9.93154C10.5414 9.93154 10.6662 9.97212 10.7697 10.0475C10.8732 10.1228 10.9502 10.229 10.9895 10.3509C11.6168 12.2954 12.4309 13.4354 11.9223 13.6672ZM12.7214 13.6672C11.9973 13.6672 12.4377 12.6895 12.3123 10.3536C12.3123 9.78496 13.1959 9.78632 13.1959 10.3536V12.8818C13.6132 12.9377 14.5295 12.6759 14.5295 13.2759C14.5241 13.91 13.5395 13.5895 12.7214 13.67V13.6672ZM16.7223 13.5431L15.7077 12.2068L15.5577 12.3568V13.2963C15.5577 13.3531 15.5465 13.4094 15.5247 13.4619C15.5028 13.5143 15.4709 13.5619 15.4306 13.602C15.3903 13.642 15.3424 13.6737 15.2898 13.6952C15.2372 13.7167 15.1809 13.7276 15.1241 13.7272C14.3727 13.7272 14.8227 12.6445 14.6918 10.3563C14.6925 10.2421 14.7384 10.1329 14.8194 10.0524C14.9004 9.97194 15.0099 9.92677 15.1241 9.92678C15.7773 9.92678 15.495 10.8513 15.5564 11.2809C16.7836 10.1095 16.7523 9.98541 17.0045 9.98541C17.3523 9.98541 17.565 10.4177 17.3332 10.6468L16.3473 11.6259L17.4123 13.0277C17.76 13.4818 17.0659 14.0013 16.7223 13.5459V13.5431ZM9.98182 12.219H10.845L10.4141 11L9.98182 12.219ZM10.4141 11L9.98182 12.219H10.845L10.4141 11ZM10.4141 11L9.98182 12.219H10.845L10.4141 11Z"
+                                    fill="#3E2723"/>
                             </g>
                             <defs>
                                 <clipPath id="clip0_3391_30114">
@@ -135,17 +153,21 @@
                             @if( (new MedicalPermission())->isMedicalPermission())
                                 <a class="dropdown-item" href="{{ route('homeAdmin') }}">{{ __('home.Dashboar') }}</a>
                             @else
-                                <a class="dropdown-item" href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
-                                <a class="dropdown-item" href="{{route('booking.list.by.user')}}">{{ __('home.My booking') }}</a>
+                                <a class="dropdown-item"
+                                   href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
+                                <a class="dropdown-item"
+                                   href="{{route('booking.list.by.user')}}">{{ __('home.My booking') }}</a>
                             @endif
                             <a class="dropdown-item" href="{{route('logoutProcess')}}">{{ __('home.Logout') }}</a>
                         </div>
                     </div>
                 @else
-                    <button class="account_control" id="show_login" data-toggle="modal" data-target="#staticBackdrop">{{ __('home.Log In') }}
+                    <button class="account_control" id="show_login" data-toggle="modal"
+                            data-target="#staticBackdrop">{{ __('home.Log In') }}
                     </button>
                     <div>|</div>
-                    <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">{{ __('home.Sign Up') }}
+                    <button type="button" class="account_control" data-toggle="modal"
+                            data-target="#modalRegister">{{ __('home.Sign Up') }}
                     </button>
                 @endif
             </div>
@@ -168,7 +190,8 @@
                 <div class="header-right d-flex align-items-center">
                     @if(Auth::check())
                         <div class="dropdown">
-                            <div class="d-flex dropdown-toggle justify-content-between" type="button" data-toggle="dropdown"
+                            <div class="d-flex dropdown-toggle justify-content-between" type="button"
+                                 data-toggle="dropdown"
                                  aria-expanded="false">
                                 <div class="d-flex align-items-center mr-2">
                                     {{Auth::user()->username}}
@@ -177,19 +200,24 @@
                             </div>
                             <div class="dropdown-menu">
                                 @if( (new MedicalPermission())->isMedicalPermission())
-                                    <a class="dropdown-item" href="{{ route('homeAdmin') }}">{{ __('home.Dashboar') }}</a>
+                                    <a class="dropdown-item"
+                                       href="{{ route('homeAdmin') }}">{{ __('home.Dashboar') }}</a>
                                 @else
-                                    <a class="dropdown-item" href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
-                                    <a class="dropdown-item" href="{{route('booking.list.by.user')}}">{{ __('home.My booking') }}</a>
+                                    <a class="dropdown-item"
+                                       href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
+                                    <a class="dropdown-item"
+                                       href="{{route('booking.list.by.user')}}">{{ __('home.My booking') }}</a>
                                 @endif
                                 <a class="dropdown-item" href="{{route('logoutProcess')}}">{{ __('home.Logout') }}</a>
                             </div>
                         </div>
                     @else
-                        <button class="account_control" id="show_login" data-toggle="modal" data-target="#staticBackdrop">{{ __('home.Log In') }}
+                        <button class="account_control" id="show_login" data-toggle="modal"
+                                data-target="#staticBackdrop">{{ __('home.Log In') }}
                         </button>
                         <div>|</div>
-                        <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">{{ __('home.Sign Up') }}
+                        <button type="button" class="account_control" data-toggle="modal"
+                                data-target="#modalRegister">{{ __('home.Sign Up') }}
                         </button>
                     @endif
                 </div>
@@ -315,7 +343,8 @@
                                                 <option>Choose...</option>
                                                 <option value="{{Role::BUSINESS }}">{{ __('home.BUSINESS') }}</option>
                                                 <option value="{{Role::MEDICAL }}">{{ __('home.MEDICAL') }}</option>
-                                                <option value="{{Role::NORMAL }}" selected>{{ __('home.NORMAL') }}</option>
+                                                <option value="{{Role::NORMAL }}"
+                                                        selected>{{ __('home.NORMAL') }}</option>
                                             </select>
                                         </div>
                                         <div class="form-element">
@@ -330,6 +359,39 @@
                                             <label for="member" id="labelFileUploadSignup"></label>
                                             <input type="file" id="fileupload" name="fileupload"
                                                    accept="image/*, .pdf, .doc, .docx">
+                                        </div>
+                                        <div class="form-element" id="element-doctor" style="display: none;">
+                                            <div>
+                                                <label for="name_doctor">{{ __('home.Name') }}</label>
+                                                <input type="text" id="name_doctor" name="name_doctor"
+                                                       placeholder="{{ __('home.Name') }}">
+                                            </div>
+                                            <div class="mt-3">
+                                                <label for="contact_phone">{{ __('home.CONTACT INFO') }}</label>
+                                                <input type="number" id="contact_phone" name="contact_phone"
+                                                       placeholder="0123456789">
+                                            </div>
+                                            <div class="mt-3">
+                                                <label for="experience">{{ __('home.EXPERIENCE') }}</label>
+                                                <input type="text" id="experience" name="experience"
+                                                       placeholder="{{ __('home.EXPERIENCE') }}">
+                                            </div>
+                                            <div class="mt-3">
+                                                <label for="hospital">{{ __('home.HOSPITAL NAME') }}</label>
+                                                <input type="text" id="hospital" name="hospital"
+                                                       placeholder="{{ __('home.HOSPITAL NAME') }}">
+                                            </div>
+                                            <div class="mt-3">
+                                                <label
+                                                    for="specialized_services">{{ __('home.SPECIALIZED SERVICES') }}</label>
+                                                <input type="text" id="specialized_services" name="specialized_services"
+                                                       placeholder="{{ __('home.SPECIALIZED SERVICES') }}">
+                                            </div>
+                                            <div class="mt-3">
+                                                <label for="services_info">{{ __('home.SERVICE INFO') }}</label>
+                                                <input type="text" id="services_info" name="services_info"
+                                                       placeholder="{{ __('home.SERVICE INFO') }}">
+                                            </div>
                                         </div>
                                         <div class="form-element">
                                             <label for="email">{{ __('home.Email') }}</label>
@@ -349,7 +411,8 @@
                                         </div>
                                         <div class="form-element">
                                             <input id="remember-me" type="checkbox" required>
-                                            <label for="remember-me">{{ __('home.Agree to Terms of Service and Privacy Policy') }}</label>
+                                            <label
+                                                for="remember-me">{{ __('home.Agree to Terms of Service and Privacy Policy') }}</label>
                                         </div>
                                     </div>
                                 </div>
@@ -433,7 +496,37 @@
                     break;
             }
             $('#member').empty().append(html);
-        })
+
+            let member = $('#member').val();
+            loadDoctor(member);
+        });
+
+        $('#member').on('change', function () {
+            let value = $(this).val();
+            loadDoctor(value);
+        });
+
+        function loadDoctor(value) {
+            if (value == '{{Role::DOCTORS}}') {
+                $('#element-doctor').show();
+                $('#name_doctor').attr('required', true);
+                $('#contact_phone').attr('required', true);
+                $('#experience').attr('required', true);
+                $('#hospital').attr('required', true);
+                $('#rate').attr('required', true);
+                $('#specialized_services').attr('required', true);
+                $('#services_info').attr('required', true);
+            } else {
+                $('#element-doctor').hide();
+                $('#name_doctor').attr('required', false);
+                $('#contact_phone').attr('required', false);
+                $('#experience').attr('required', false);
+                $('#hospital').attr('required', false);
+                $('#rate').attr('required', false);
+                $('#specialized_services').attr('required', false);
+                $('#services_info').attr('required', false);
+            }
+        }
     })
 </script>
 
