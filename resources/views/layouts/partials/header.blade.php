@@ -305,7 +305,8 @@
                             </div>
                             <div class="sign--up d-flex justify-content-center">
                                 <p>{{ __('home.Do not have an account') }}?</p>
-                                <a href="" data-toggle="modal" data-target="#modalRegister" data-dismiss="modal">{{ __('home.Sign up') }}</a>
+                                <a href="" data-toggle="modal" data-target="#modalRegister"
+                                   data-dismiss="modal">{{ __('home.Sign up') }}</a>
                             </div>
                         </div>
                     </div>
@@ -392,6 +393,29 @@
                                                 <input type="text" id="services_info" name="services_info"
                                                        placeholder="{{ __('home.SERVICE INFO') }}">
                                             </div>
+                                        </div>
+                                        <div id="element-hospital">
+                                            <div class="d-flex form-element">
+                                                <div class="col-md-6 pl-0">
+                                                    <label for="open_date">{{ __('home.Thời gian bắt đầu') }}</label>
+                                                    <input class="input-time" id="open_date" name="open_date" type="time" placeholder="">
+                                                </div>
+                                                <div class="col-md-6 pr-0">
+                                                    <label for="close_date">{{ __('home.Thời gian kết thúc') }}</label>
+                                                    <input class="input-time" id="close_date" name="close_date" type="time" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="form-element">
+                                                <label for="address">{{ __('home.Address') }}</label>
+                                                <input id="address" name="address" type="text"
+                                                       placeholder="{{ __('home.Address') }}">
+                                            </div>
+                                            <div class="form-element">
+                                                <label for="representative">{{ __('home.REPRESENTATIVE DOCTOR') }}</label>
+                                                <input id="representative" name="representative" type="text"
+                                                       placeholder="{{ __('home.REPRESENTATIVE DOCTOR') }}">
+                                            </div>
+
                                         </div>
                                         <div class="form-element">
                                             <label for="email">{{ __('home.Email') }}</label>
