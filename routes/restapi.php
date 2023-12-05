@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\BackendAnswerController;
 use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\restapi\CategoryApi;
 use App\Http\Controllers\restapi\ClinicApi;
+use App\Http\Controllers\restapi\DepartmentApi;
 use App\Http\Controllers\restapi\DoctorDepartmentApi;
 use App\Http\Controllers\restapi\DoctorInfoApi;
 use App\Http\Controllers\restapi\NewsApi;
@@ -14,6 +15,7 @@ use App\Http\Controllers\restapi\QrCodeApi;
 use App\Http\Controllers\restapi\ReadAddressApi;
 use App\Http\Controllers\restapi\ReviewApi;
 use App\Http\Controllers\restapi\ShortVideoApi;
+use App\Http\Controllers\restapi\SymptomsApi;
 use App\Http\Controllers\restapi\TopicVideoApi;
 use Illuminate\Support\Facades\Route;
 
@@ -41,12 +43,14 @@ Route::group(['prefix' => 'clinics'], function () {
     Route::get('/list', [ClinicApi::class, 'getAll'])->name('clinics.restapi.list');
     Route::get('/user/{id}', [ClinicApi::class, 'getAllByUserId'])->name('clinics.restapi.user');
     Route::get('/detail/{id}', [ClinicApi::class, 'detail'])->name('clinics.restapi.detail');
+    Route::get('/filter', [ClinicApi::class, 'searchByDepartmentAndSymptoms'])->name('clinics.restapi.department.symptom');
 });
 
 Route::group(['prefix' => 'pharmacies'], function () {
     Route::get('/list', [PharmacyApi::class, 'getAll'])->name('pharmacies.restapi.list');
     Route::get('/user/{id}', [PharmacyApi::class, 'getAllByUserId'])->name('pharmacies.restapi.user');
     Route::get('/detail/{id}', [PharmacyApi::class, 'detail'])->name('pharmacies.restapi.detail');
+    Route::get('/filter', [PharmacyApi::class, 'searchByDepartmentAndSymptoms'])->name('pharmacies.restapi.department.symptom');
 });
 
 Route::group(['prefix' => 'doctors-info'], function () {
@@ -119,6 +123,16 @@ Route::group(['prefix' => 'address'], function () {
 
 Route::group(['prefix' => 'products-medicines'], function () {
     Route::get('/category/{id}', [ProductMedicineApi::class, 'findMedicineByCategory'])->name('restapi.get.products.medicines.category');
+});
+
+Route::group(['prefix' => 'departments'], function () {
+    Route::get('/list', [DepartmentApi::class, 'getList'])->name('restapi.departments.list');
+    Route::get('/detail/{id}', [DepartmentApi::class, 'detail'])->name('restapi.departments.detail');
+});
+
+Route::group(['prefix' => 'symptoms'], function () {
+    Route::get('/list', [SymptomsApi::class, 'getList'])->name('restapi.symptoms.list');
+    Route::get('/detail/{id}', [SymptomsApi::class, 'detail'])->name('restapi.symptoms.detail');
 });
 
 Route::get('/users/by-role/{role_id}', [\App\Http\Controllers\ProfileController::class, 'getUsersByRoleId'])->name('role.user');

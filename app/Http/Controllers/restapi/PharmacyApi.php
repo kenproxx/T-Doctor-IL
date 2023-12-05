@@ -35,6 +35,27 @@ class PharmacyApi extends Controller
         return response()->json($response);
     }
 
+    public function searchByDepartmentAndSymptoms(Request $request)
+    {
+        $symptomID = $request->input('symptom');
+        $department = $request->input('department');
+        if ($symptomID && $department) {
+            $clinics = Clinic::whereRaw("FIND_IN_SET(?, symptom) > 0", [$symptomID])
+                ->whereRaw("FIND_IN_SET(?, department) > 0", [$department])
+                ->where('status', ClinicStatus::ACTIVE)
+                ->orderBy('id', 'desc')
+                ->get();
+        } else {
+            $clinics = Clinic::whereRaw("FIND_IN_SET(?, symptom) > 0", [$symptomID])
+                ->orWhereRaw("FIND_IN_SET(?, department) > 0", [$department])
+                ->where('status', ClinicStatus::ACTIVE)
+                ->orderBy('id', 'desc')
+                ->get();
+        }
+
+        return response()->json($clinics);
+    }
+
     public function getAllByUserId($id)
     {
         $pharmacies = DB::table('clinics')
