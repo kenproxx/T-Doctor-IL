@@ -53,12 +53,14 @@ class AdminSymptomsApi extends Controller
             $thumbnail = $symptom->thumbnail;
         }
         $name = $request->input('name');
+        $department = $request->input('department');
         $description = $request->input('description');
 
         $user_id = $request->input('user_id');
         $status = $request->input('status');
 
         $symptom->name = $name;
+        $symptom->department_id = $department;
         $symptom->thumbnail = $thumbnail;
         $symptom->description = $description;
         $symptom->status = $status;

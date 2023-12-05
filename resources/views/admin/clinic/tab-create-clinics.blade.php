@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 <style>
+    .list-department,
+    .list-symptoms,
     .list-service {
         list-style-type: none;
         padding: 0;
@@ -7,10 +9,14 @@
         display: flex;
     }
 
+    .list-department li,
+    .list-symptoms li,
     .list-service li {
         margin-right: 20px; /* Adjust as needed */
     }
 
+    .list-department li:last-child,
+    .list-symptoms li:last-child,
     .list-service li:last-child {
         margin-right: 0;
     }
@@ -151,7 +157,7 @@
                 <ul class="list-service">
                     @foreach($services as $service)
                         <li class="new-select">
-                            <input onchange="getInput();" class="service_clinic_item" value="{{$service->id}}"
+                            <input onchange="getInputService();" class="service_clinic_item" value="{{$service->id}}"
                                    id="service_{{$service->id}}"
                                    name="service_clinic"
                                    type="checkbox">
@@ -160,6 +166,39 @@
                     @endforeach
                 </ul>
             </div>
+
+            <div class="form-group">
+                <label for="department">{{ __('home.Department') }}</label>
+                <input type="text" class="form-control" id="department" name="department_text" disabled>
+                <ul class="list-department">
+                    @foreach($departments as $department)
+                        <li class="new-select">
+                            <input onchange="getInputDepartment();" class="department_item" value="{{$department->id}}"
+                                   id="department_{{$department->id}}"
+                                   name="department"
+                                   type="checkbox">
+                            <label for="department_{{$department->id}}">{{$department->name}}</label>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+
+            <div class="form-group">
+                <label for="symptom">{{ __('home.symptoms') }}</label>
+                <input type="text" class="form-control" id="symptom" name="symptom" disabled>
+                <ul class="list-symptoms">
+                    @foreach($symptoms as $symptom)
+                        <li class="new-select">
+                            <input onchange="getInputSymptom();" class="symptom_item" value="{{$symptom->id}}"
+                                   id="symptom_{{$symptom->id}}"
+                                   name="symptom"
+                                   type="checkbox">
+                            <label for="symptom_{{$symptom->id}}">{{$symptom->name}}</label>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+
             <div class="row">
                 <div class="col-md-4">
                     <label for="open_date">{{ __('home.open_date') }}</label>
@@ -186,6 +225,11 @@
                     <input type="text" name="longitude" id="longitude" class="form-control">
                     <input type="text" name="latitude" id="latitude" class="form-control">
                     <input type="text" name="clinics_service" id="clinics_service" class="form-control">
+
+                    <label for="departments"></label><input type="text" name="departments" id="departments"
+                                                            class="form-control">
+                    <label for="symptoms"></label><input type="text" name="symptoms" id="symptoms"
+                                                         class="form-control">
                 </div>
             </div>
             <button type="button" class="btn btn-primary up-date-button mt-4">{{ __('home.Save') }}</button>
@@ -269,6 +313,9 @@
                 formData.append("type", $('#type').val());
                 formData.append("status", $('#status').val());
                 formData.append("clinics_service", $('#clinics_service').val());
+
+                formData.append("departments", $('#departments').val());
+                formData.append("symptoms", $('#symptoms').val());
 
                 var filedata = document.getElementById("gallery");
                 var i = 0, len = filedata.files.length, img, reader, file;
@@ -460,7 +507,7 @@
             return array;
         }
 
-        function getInput() {
+        function getInputService() {
             let items = document.getElementsByClassName('service_clinic_item');
 
             arrayItem = checkArray(arrayItem, items);
@@ -474,8 +521,45 @@
 
             arrayItem.sort();
             let value = arrayItem.toString();
-            console.log(value)
             $('#clinics_service').val(value);
+        }
+
+        let arrayDepartment = [];
+        let arrayNameDepartment = [];
+        function getInputDepartment() {
+            let items = document.getElementsByClassName('department_item');
+
+            arrayDepartment = checkArray(arrayDepartment, items);
+            arrayNameDepartment = getListName(arrayNameDepartment, items)
+
+            let listName = arrayNameDepartment.toString();
+            if (listName) {
+                $('#department').val(listName);
+            }
+
+            arrayDepartment.sort();
+            let value = arrayDepartment.toString();
+            $('#departments').val(value);
+        }
+
+        let arraySymptom = [];
+        let arrayNameSymptom = [];
+        function getInputSymptom() {
+            let items = document.getElementsByClassName('symptom_item');
+
+            arraySymptom = checkArray(arraySymptom, items);
+            arrayNameSymptom = getListName(arrayNameSymptom, items)
+
+            let listName = arrayNameSymptom.toString();
+
+            if (listName) {
+                $('#symptom').val(listName);
+            }
+
+            arraySymptom.sort();
+            let value = arraySymptom.toString();
+            console.log(value)
+            $('#symptoms').val(value);
         }
     </script>
 @endsection

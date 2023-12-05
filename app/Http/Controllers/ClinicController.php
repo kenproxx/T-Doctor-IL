@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Enums\BookingStatus;
 use App\Enums\ClinicStatus;
+use App\Enums\DepartmentStatus;
 use App\Enums\ServiceClinicStatus;
+use App\Enums\SymptomStatus;
 use App\Models\Booking;
 use App\Models\Clinic;
+use App\Models\Department;
 use App\Models\ServiceClinic;
+use App\Models\Symptom;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,8 +50,10 @@ class ClinicController extends Controller
 
     public function create()
     {
+        $departments = Department::where('status', DepartmentStatus::ACTIVE)->get();
+        $symptoms = Symptom::where('status', SymptomStatus::ACTIVE)->get();
         $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
-        return view('admin.clinic.tab-create-clinics', compact('services'));
+        return view('admin.clinic.tab-create-clinics', compact('services', 'departments', 'symptoms'));
     }
 
     public function edit($id)
@@ -56,7 +62,9 @@ class ClinicController extends Controller
         $reflector = new \ReflectionClass('App\Enums\TypeTimeWork');
         $types = $reflector->getConstants();
         $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
-        return view('admin.clinic.tab-edit-clinics', compact('clinic', 'types', 'services'));
+        $departments = Department::where('status', DepartmentStatus::ACTIVE)->get();
+        $symptoms = Symptom::where('status', SymptomStatus::ACTIVE)->get();
+        return view('admin.clinic.tab-edit-clinics', compact('clinic', 'types', 'services', 'departments', 'symptoms'));
     }
 
     public function booking($id)
