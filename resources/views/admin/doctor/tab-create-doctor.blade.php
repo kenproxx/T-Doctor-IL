@@ -291,14 +291,14 @@
                 </select>
             </div>
             <div class="col-sm-4">
-                <label for="year_of_experience">Năm kinh nghiệm</label>
+                <label for="year_of_experience">{{ __('home.Năm kinh nghiệm') }}</label>
                 <input type="number" class="form-control" id="year_of_experience" name="year_of_experience"
                        value="">
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6">
-                <label for="apply_show">Apply Show</label>
+                <label for="apply_show">{{ __('home.Apply Show') }}</label>
                 <input type="text" class="form-control" id="apply_show" name="apply_show" disabled>
                 @php
                     $arrayApply = [
@@ -326,7 +326,7 @@
             </div>
         </div>
         <input hidden="" id="address_code" name="address_code" value="">
-        <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
+        <button type="button" class="btn btn-primary up-date-button mt-md-4">{{ __('home.Save') }}</button>
     </form>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>

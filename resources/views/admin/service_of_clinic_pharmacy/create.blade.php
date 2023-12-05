@@ -17,21 +17,21 @@
     <form enctype="multipart/form-data">
         <div class="row">
             <div class="col-sm-4">
-                <label for="name">Tên </label>
+                <label for="name">{{ __('home.Name') }} </label>
                 <input type="text" class="form-control" id="name" name="name">
             </div>
             <div class="col-sm-4">
-                <label for="name_en">Tên Anh</label>
+                <label for="name_en">{{ __('home.name_en') }}</label>
                 <input type="text" class="form-control" id="name_en" name="name_en">
             </div>
             <div class="col-sm-4">
-                <label for="name_laos">Tên Lào</label>
+                <label for="name_laos">{{ __('home.name_laos') }}</label>
                 <input type="text" class="form-control" id="name_laos" name="name_laos">
             </div>
             <input type="hidden" value="{{ \Illuminate\Support\Facades\Auth::user()->id }}" id="user_id" name="user_id">
         </div>
     </form>
-    <button type="button" onclick="submitForm()" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
+    <button type="button" onclick="submitForm()" class="btn btn-primary up-date-button mt-md-4">{{ __('home.Save') }}</button>
     <script>
         const token = `{{ $_COOKIE['accessToken'] }}`;
 

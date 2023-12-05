@@ -4,7 +4,7 @@
 @section('main-content')
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">Edit</h1>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('home.Edit') }}</h1>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -16,11 +16,11 @@
     <div>
         <form>
             <div>
-                <label for="username">Username</label>
+                <label for="username">{{ __('home.Username') }}</label>
                 <input type="text" class="form-control" id="username" name="username">
             </div>
             <div>
-                <label for="member">Member</label>
+                <label for="member">{{ __('home.Member') }}</label>
                 <select id="member" name="member" class="form-select form-control">
                     <option value="{{ Role::DOCTORS }}">{{ Role::DOCTORS }}</option>
                     <option value="{{ Role::PHAMACISTS }}">{{ Role::PHAMACISTS }}</option>
@@ -32,15 +32,15 @@
                 </select>
             </div>
             <div>
-                <label for="email">Email</label>
+                <label for="email">{{ __('home.Email') }}</label>
                 <input type="email" class="form-control" id="email" name="email">
             </div>
             <div>
-                <label for="password">Password</label>
+                <label for="password">{{ __('home.Password') }}</label>
                 <input type="password" class="form-control" id="password" name="password">
             </div>
             <div>
-                <label for="password_confirm">Enter the Password</label>
+                <label for="password_confirm">{{ __('home.Enter the Password') }}</label>
                 <input type="password" class="form-control" id="password_confirm" name="password_confirm">
             </div>
         </form>
@@ -48,7 +48,7 @@
             <label for="manager_id"></label><input type="text" class="form-control" id="manager_id" name="manager_id" value="{{Auth::user()->id}}">
         </div>
     </div>
-    <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
+    <button type="button" class="btn btn-primary up-date-button mt-md-4">{{ __('home.Save') }}</button>
     <script>
         const token = `{{ $_COOKIE['accessToken'] }}`;
         $(document).ready(function () {

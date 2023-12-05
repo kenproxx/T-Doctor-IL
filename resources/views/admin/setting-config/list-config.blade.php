@@ -1,42 +1,42 @@
 @extends('layouts.admin')
 @section('title', 'General configuration')
 @section('main-content')
-    <h1 class="h3 mb-4 text-gray-800">General configuration</h1>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('home.Cấu hình chung') }} </h1>
     @if(!$settingConfig)
         <form id="form" action="{{route('api.backend.setting.create')}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
-                <div class="col-sm-6"><label>logo</label>
+                <div class="col-sm-6"><label>{{ __('home.logo') }} </label>
                     <input type="file" class="form-control" id="logo" name="logo[]" multiple accept="image/*" value="">
                 </div>
-                <div class="col-sm-6"><label>favicon</label>
+                <div class="col-sm-6"><label>{{ __('home.favicon') }} </label>
                     <input type="file" class="form-control" id="favicon" name="favicon[]" multiple accept="image/*">
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6"><label>Banner quảng cáo</label>
+                <div class="col-sm-6"><label>{{ __('home.Banner quảng cáo') }} </label>
                     <input type="file" class="form-control" id="ad_banner_position" name="ad_banner_position[]" multiple
                            accept="image/*">
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4"><label for="website_description">Mô tả việt</label>
+                <div class="col-sm-4"><label for="website_description">{{ __('home.Mô tả việt') }} </label>
                     <textarea class="form-control" name="website_description" id="website_description"></textarea>
                 </div>
-                <div class="col-sm-4"><label for="website_description_en">Mô tả anh</label>
+                <div class="col-sm-4"><label for="website_description_en">{{ __('home. Mô tả anh') }}</label>
                     <textarea class="form-control" name="website_description_en" id="website_description_en"></textarea>
                 </div>
-                <div class="col-sm-4"><label for="website_description_laos">Mô tả lào</label>
+                <div class="col-sm-4"><label for="website_description_laos">{{ __('home.Mô tả lào') }} </label>
                     <textarea class="form-control" name="website_description_laos"
                               id="website_description_laos"></textarea>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4"><label for="address">Địa chỉ</label>
+                <div class="col-sm-4"><label for="address">{{ __('home.Địa chỉ') }} </label>
                     <input type="text" class="form-control" id="address" name="address"></div>
-                <div class="col-sm-4"><label for="email">email</label>
+                <div class="col-sm-4"><label for="email">{{ __('home.Email') }} </label>
                     <input type="email" class="form-control" id="email" name="email" value=""></div>
-                <div class="col-sm-4"><label for="phone">số điện thoại</label>
+                <div class="col-sm-4"><label for="phone">{{ __('home.PhoneNumber') }} </label>
                     <input type="number" class="form-control" id="phone" name="phone"
                            value=""></div>
             </div>
@@ -54,7 +54,7 @@
             </div>
 
 
-            <button type="submit" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
+            <button type="submit" class="btn btn-primary up-date-button mt-md-4">{{ __('home.Save') }}</button>
         </form>
     @else
         <form id="form" action="{{route('api.backend.setting.update',$settingConfig->id)}}" method="post"
@@ -62,7 +62,7 @@
             @method('POST')
             @csrf
             <div class="row">
-                <div class="col-sm-6"><label>logo</label>
+                <div class="col-sm-6"><label>{{ __('home.logo') }}</label>
                     <input type="file" class="form-control" id="logo" name="logo[]" multiple accept="image/*"
                            value="{{$settingConfig->logo}}">
                     <div class="d-flex">
@@ -76,7 +76,7 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="col-sm-6"><label>favicon</label>
+                <div class="col-sm-6"><label>{{ __('home.favicon') }}</label>
                     <input type="file" class="form-control" id="favicon" name="favicon[]" multiple accept="image/*"
                            value="{{$settingConfig->favicon}}">
                     <div class="d-flex">
@@ -92,7 +92,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-6"><label>Banner quảng cáo</label>
+                <div class="col-sm-6"><label>{{ __('home.Banner quảng cáo') }}</label>
                     <input type="file" class="form-control" id="ad_banner_position" name="ad_banner_position[]" multiple
                            accept="image/*" value="{{$settingConfig->ad_banner_position}}">
                     <div class="d-flex">
@@ -108,27 +108,27 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4"><label>Mô tả việt</label>
+                <div class="col-sm-4"><label>{{ __('home.Mô tả việt') }}</label>
                     <textarea class="form-control" name="website_description"
                               id="website_description">{{$settingConfig->website_description}}</textarea>
                 </div>
-                <div class="col-sm-4"><label>Mô tả anh</label>
+                <div class="col-sm-4"><label>{{ __('home.Mô tả anh') }}</label>
                     <textarea class="form-control" name="website_description_en"
                               id="website_description_en">{{$settingConfig->website_description_en}}</textarea>
                 </div>
-                <div class="col-sm-4"><label>Mô tả lào</label>
+                <div class="col-sm-4"><label>{{ __('home.Mô tả lào') }}</label>
                     <textarea class="form-control" name="website_description_laos"
                               id="website_description_laos">{{$settingConfig->website_description_laos}}</textarea>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4"><label>Địa chỉ</label>
+                <div class="col-sm-4"><label>{{ __('home.Địa chỉ') }}</label>
                     <input type="text" class="form-control" id="address" name="address"
                            value="{{$settingConfig->address}}"></div>
-                <div class="col-sm-4"><label>email</label>
+                <div class="col-sm-4"><label>{{ __('home.Email') }}</label>
                     <input type="email" class="form-control" id="email" name="email" value="{{$settingConfig->email}}">
                 </div>
-                <div class="col-sm-4"><label>số điện thoại</label>
+                <div class="col-sm-4"><label>{{ __('home.Phone Number') }}</label>
                     <input type="number" class="form-control" id="phone" name="phone"
                            value="{{$settingConfig->phone}}"></div>
             </div>
@@ -148,7 +148,7 @@
                 <div class="col-sm-4"><label>kakao</label>
                     <input type="text" class="form-control" id="kakao" name="kakao" value="{{$listSocialLinks[4]}}"></div>
             </div>
-            <button type="submit" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
+            <button type="submit" class="btn btn-primary up-date-button mt-md-4">{{ __('home.Save') }}</button>
         </form>
     @endif
 @endsection

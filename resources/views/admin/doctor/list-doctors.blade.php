@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-    List Doctor
+    {{ __('home.List Doctor') }}
 @endsection
 @section('main-content')
     <style>

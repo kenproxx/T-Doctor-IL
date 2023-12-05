@@ -10,12 +10,12 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Thumbnail</th>
-            <th scope="col">Chuyên Môn</th>
-            <th scope="col">Năm kinh nghiệm</th>
-            <th scope="col">Dịch vụ cung cấp</th>
-            <th scope="col">Thời gian</th>
-            <th scope="col">Những ngày làm việc</th>
+            <th scope="col">{{ __('home.Thumbnail') }}</th>
+            <th scope="col">{{ __('home.Chuyên Môn') }}</th>
+            <th scope="col">{{ __('home.Năm kinh nghiệm') }}</th>
+            <th scope="col">{{ __('home.Dịch vụ cung cấp') }}</th>
+            <th scope="col">{{ __('home.Thời gian') }}</th>
+            <th scope="col">{{ __('home.Những ngày làm việc') }}</th>
         </tr>
         </thead>
         <tbody id="ProductsAdmin">

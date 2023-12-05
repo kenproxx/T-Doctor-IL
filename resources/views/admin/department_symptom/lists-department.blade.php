@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-    List Departments
+    {{ __('home.List Departments') }}
 @endsection
 @section('main-content')
     <style>
@@ -28,9 +28,9 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th scope="col">Tên chuyên khoa</th>
-            <th scope="col">Mô tả</th>
-            <th scope="col">Ảnh đại diện</th>
+            <th scope="col">{{ __('home.Tên chuyên khoa') }}</th>
+            <th scope="col">{{ __('home.Mô tả') }}</th>
+            <th scope="col">{{ __('home.Ảnh đại diện') }}</th>
         </tr>
         </thead>
         <tbody id="ProductsAdmin">
