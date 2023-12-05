@@ -39,7 +39,8 @@ class BusinessApi extends Controller
 
         $name = (new MainController())->vn_to_str($name);
 
-        $clinics = Clinic::join('users', 'users.id', '=', 'clinics.user_id')
+        $clinics = DB::table('clinics')
+            ->join('users', 'users.id', '=', 'clinics.user_id')
             ->when($name, function ($query) use ($name) {
                 $query->orWhere(DB::raw('LOWER(clinics.name)'), 'like', '%' . strtolower($name) . '%');
             })
