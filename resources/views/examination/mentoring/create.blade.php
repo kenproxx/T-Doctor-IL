@@ -14,7 +14,7 @@
     <div class="container">
         <form enctype="multipart/form-data">
             <div class="form-group">
-                <label for="content-question">{{ __('home.Title) }}</label>
+                <label for="content-question">{{ __('home.Title') }}</label>
                 <input type="text" class="form-control" id="title"/>
             </div>
             <div class="form-group">

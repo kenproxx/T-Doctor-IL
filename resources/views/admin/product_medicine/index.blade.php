@@ -21,13 +21,13 @@
         <thead>
         <tr>
             <th scope="col">STT</th>
-            <th scope="col">Tên sản phẩm</th>
-            <th scope="col">Ảnh thumb</th>
-            <th scope="col">object_</th>
-            <th scope="col">filter_</th>
-            <th scope="col">category</th>
-            <th scope="col">trạng thái</th>
-            <th scope="col">Thao tác</th>
+            <th scope="col">{{ __('home.Tên sản phẩm') }}</th>
+            <th scope="col">{{ __('home.Ảnh thumb') }}</th>
+            <th scope="col">{{ __('home.Object') }}</th>
+            <th scope="col">{{ __('home.Filter') }}</th>
+            <th scope="col">{{ __('home.Category') }}</th>
+            <th scope="col">{{ __('home.Trạng thái') }}</th>
+            <th scope="col">{{ __('home.Thao tác') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -50,8 +50,8 @@
                 <td>{{ $productMedicine->status }}</td>
                 <td>
                     <a href="{{ route('api.backend.product-medicine.edit', ['id' => $productMedicine->id]) }}"
-                       class="btn btn-primary">Edit</a>
-                    <button onclick="deleteCategoryProduct({{ $productMedicine->id }})" class="btn btn-danger">Delete
+                       class="btn btn-primary">{{ __('home.Edit') }}</a>
+                    <button onclick="deleteCategoryProduct({{ $productMedicine->id }})" class="btn btn-danger">{{ __('home.Delete') }}
                     </button>
                 </td>
             </tr>

@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 @section('title')
-    List Service Clinics
+    {{ __('home.List Service Clinics') }}
 @endsection
 @section('main-content')
     <div class="">
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800">List Service Clinics</h1>
-        <a href="{{route('user.service.clinics.create')}}" class="btn btn-primary mb-3">Add</a>
+        <h1 class="h3 mb-4 text-gray-800">{{ __('home.List Service Clinics') }}</h1>
+        <a href="{{route('user.service.clinics.create')}}" class="btn btn-primary mb-3">{{ __('home.Add') }}</a>
         @if (session('success'))
             <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -18,9 +18,9 @@
         <table class="table" id="tableListService">
             <thead>
             <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Status</th>
-                <th scope="col">Active</th>
+                <th scope="col">{{ __('home.Name') }}</th>
+                <th scope="col">{{ __('home.Status') }}</th>
+                <th scope="col">{{ __('home.Active') }}</th>
             </tr>
             </thead>
             <tbody id="tbodyListService">

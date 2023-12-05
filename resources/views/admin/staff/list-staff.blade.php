@@ -5,8 +5,8 @@
 
     </style>
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">List Staff</h1>
-    <a href="{{ route('staff.create') }}" class="btn btn-primary mb-3">Add</a>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('home.List Staff') }}</h1>
+    <a href="{{ route('staff.create') }}" class="btn btn-primary mb-3">{{ __('home.Add') }}</a>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -19,12 +19,12 @@
     <table class="table table-striped">
         <thead>
         <tr>
-            <th scope="col">username</th>
-            <th scope="col">name</th>
-            <th scope="col">email</th>
-            <th scope="col">type</th>
-            <th scope="col">status</th>
-            <th scope="col">Action</th>
+            <th scope="col">{{ __('home.Username') }}</th>
+            <th scope="col">{{ __('home.Name') }}</th>
+            <th scope="col">{{ __('home.Email') }}</th>
+            <th scope="col">{{ __('home.type') }}</th>
+            <th scope="col">{{ __('home.Status') }}</th>
+            <th scope="col">{{ __('home.Action') }}</th>
         </tr>
         </thead>
         <tbody>
@@ -36,7 +36,7 @@
                 <td>{{ $user->type }}</td>
                 <td>{{ $user->status }}</td>
                 <td><a href="{{ route('staff.edit', $user->id) }}"> Edit</a> | <a href="#"
-                                                                                  onclick="deleteStaff('{{ $user->id }}')">Delete</a>
+                                                                                  onclick="deleteStaff('{{ $user->id }}')">{{ __('home.Delete') }}</a>
                 </td>
             </tr>
         @endforeach
