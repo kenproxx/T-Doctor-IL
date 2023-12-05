@@ -133,11 +133,13 @@ Route::group(['prefix' => 'products-medicines'], function () {
 Route::group(['prefix' => 'departments'], function () {
     Route::get('/list', [DepartmentApi::class, 'getList'])->name('restapi.departments.list');
     Route::get('/detail/{id}', [DepartmentApi::class, 'detail'])->name('restapi.departments.detail');
+    Route::get('/symptoms/{id}', [DepartmentApi::class, 'getBySymptomID'])->name('restapi.departments.symptoms');
 });
 
 Route::group(['prefix' => 'symptoms'], function () {
     Route::get('/list', [SymptomsApi::class, 'getList'])->name('restapi.symptoms.list');
     Route::get('/detail/{id}', [SymptomsApi::class, 'detail'])->name('restapi.symptoms.detail');
+    Route::get('/department/{id}', [SymptomsApi::class, 'getListByDepartment'])->name('restapi.symptoms.department');
 });
 
 Route::get('/users/by-role/{role_id}', [\App\Http\Controllers\ProfileController::class, 'getUsersByRoleId'])->name('role.user');
