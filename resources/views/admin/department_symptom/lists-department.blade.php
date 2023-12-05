@@ -38,7 +38,7 @@
                 <tr>
                     <td>{{$department->name}}</td>
                     <td>{{$department->description}}</td>
-                    <td><img src="{{ asset('storage/' . $department->thumbnail) }}" alt="Image" width="50px"></td>
+                    <td><img src="{{ asset($department->thumbnail) }}" alt="Image" width="50px"></td>
                 </tr>
             @endforeach
 

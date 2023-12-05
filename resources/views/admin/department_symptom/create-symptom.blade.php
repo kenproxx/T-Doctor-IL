@@ -19,8 +19,17 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="description">{{ __('home.Mô tả') }}:</label>
-                                <input name="description" id="description" class="form-control" required></input>
+                                <label for="description">Mô tả:</label>
+                                <input name="description" id="description" class="form-control" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="department">Department:</label>
+                                <select id="department" class="form-control" name="department">
+                                    @foreach($departments as $department)
+                                        <option value="{{$department->id}}">{{$department->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group">
