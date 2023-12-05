@@ -47,7 +47,7 @@ class AdminSymptomsApi extends Controller
     {
         if ($request->hasFile('thumbnail')) {
             $item = $request->file('thumbnail');
-            $itemPath = $item->store('product_medicine', 'public');
+            $itemPath = $item->store('symptoms', 'public');
             $thumbnail = asset('storage/' . $itemPath);
         } else {
             $thumbnail = $symptom->thumbnail;

@@ -45,7 +45,7 @@ class HomeController extends Controller
 
     public function listClinics()
     {
-        $reflector = new \ReflectionClass('App\Enums\TypeBussiness');
+        $reflector = new \ReflectionClass('App\Enums\TypeBusiness');
         $types = $reflector->getConstants();
         return view('admin.clinic.list-clinics', compact('types'));
     }

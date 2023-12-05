@@ -118,11 +118,11 @@
                     <label for="status">{{ __('home.Status') }}</label>
                     <select class="custom-select" id="status" name="status">
                         <option
-                            value="{{ \App\Enums\ClinicStatus::ACTIVE }}">{{ \App\Enums\ClinicStatus::ACTIVE }}</option>
+                                value="{{ \App\Enums\ClinicStatus::ACTIVE }}">{{ \App\Enums\ClinicStatus::ACTIVE }}</option>
                         <option
-                            value="{{ \App\Enums\ClinicStatus::INACTIVE }}">{{ \App\Enums\ClinicStatus::INACTIVE }}</option>
+                                value="{{ \App\Enums\ClinicStatus::INACTIVE }}">{{ \App\Enums\ClinicStatus::INACTIVE }}</option>
                         <option
-                            value="{{ \App\Enums\ClinicStatus::DELETED }}">{{ \App\Enums\ClinicStatus::DELETED }}</option>
+                                value="{{ \App\Enums\ClinicStatus::DELETED }}">{{ \App\Enums\ClinicStatus::DELETED }}</option>
                     </select>
                 </div>
                 <div class="col-md-6">
@@ -131,11 +131,11 @@
                         <option value="{{\App\Enums\TypeTimeWork::ALL}}">{{\App\Enums\TypeTimeWork::ALL}}</option>
                         <option value="{{\App\Enums\TypeTimeWork::NONE}}">{{\App\Enums\TypeTimeWork::NONE}}</option>
                         <option
-                            value="{{\App\Enums\TypeTimeWork::OFFICE_HOURS}}">{{\App\Enums\TypeTimeWork::OFFICE_HOURS}}</option>
+                                value="{{\App\Enums\TypeTimeWork::OFFICE_HOURS}}">{{\App\Enums\TypeTimeWork::OFFICE_HOURS}}</option>
                         <option
-                            value="{{\App\Enums\TypeTimeWork::ONLY_AFTERNOON}}">{{\App\Enums\TypeTimeWork::ONLY_MORNING}}</option>
+                                value="{{\App\Enums\TypeTimeWork::ONLY_AFTERNOON}}">{{\App\Enums\TypeTimeWork::ONLY_MORNING}}</option>
                         <option
-                            value="{{\App\Enums\TypeTimeWork::ONLY_AFTERNOON}}">{{\App\Enums\TypeTimeWork::ONLY_AFTERNOON}}</option>
+                                value="{{\App\Enums\TypeTimeWork::ONLY_AFTERNOON}}">{{\App\Enums\TypeTimeWork::ONLY_AFTERNOON}}</option>
                         <option value="{{\App\Enums\TypeTimeWork::OTHER}}">{{\App\Enums\TypeTimeWork::OTHER}}</option>
                     </select>
                 </div>
@@ -173,11 +173,11 @@
                     <label for="type">{{ __('home.type') }}</label>
                     <select class="type-select form-control" id="type" name="type">
                         <option
-                            value="{{\App\Enums\TypeBussiness::CLINICS}}">{{\App\Enums\TypeBussiness::CLINICS}}</option>
+                                value="{{\App\Enums\TypeBusiness::CLINICS}}">{{\App\Enums\TypeBusiness::CLINICS}}</option>
                         <option
-                            value="{{\App\Enums\TypeBussiness::PHARMACIES}}">{{\App\Enums\TypeBussiness::PHARMACIES}}</option>
+                                value="{{\App\Enums\TypeBusiness::PHARMACIES}}">{{\App\Enums\TypeBusiness::PHARMACIES}}</option>
                         <option
-                            value="{{\App\Enums\TypeBussiness::HOSPITALS}}">{{\App\Enums\TypeBussiness::HOSPITALS}}</option>
+                                value="{{\App\Enums\TypeBusiness::HOSPITALS}}">{{\App\Enums\TypeBusiness::HOSPITALS}}</option>
                     </select>
                 </div>
 

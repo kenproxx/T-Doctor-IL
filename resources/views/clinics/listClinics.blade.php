@@ -9,7 +9,7 @@
             $address = DB::table('clinics')
                   ->join('users', 'users.id', '=', 'clinics.user_id')
                         ->where('clinics.status', \App\Enums\ClinicStatus::ACTIVE)
-                        ->where('clinics.type', \App\Enums\TypeBussiness::CLINICS)
+                        ->where('clinics.type', \App\Enums\TypeBusiness::CLINICS)
                         ->select('clinics.*', 'users.email')
                         ->cursor()
                         ->map(function ($item) {

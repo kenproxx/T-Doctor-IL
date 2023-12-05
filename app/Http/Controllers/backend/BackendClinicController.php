@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Enums\ClinicStatus;
-use App\Enums\TypeBussiness;
+use App\Enums\TypeBusiness;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Clinic;
@@ -19,19 +19,19 @@ class BackendClinicController extends Controller
 {
     public function getAll()
     {
-        $clinics = Clinic::where('type', TypeBussiness::CLINICS)->get();
+        $clinics = Clinic::where('type', TypeBusiness::CLINICS)->get();
         return response()->json($clinics);
     }
 
     public function getAllPharmacies()
     {
-        $clinics = Clinic::where('type', TypeBussiness::PHARMACIES)->get();
+        $clinics = Clinic::where('type', TypeBusiness::PHARMACIES)->get();
         return response()->json($clinics);
     }
 
     public function getAllHospitals()
     {
-        $clinics = Clinic::where('type', TypeBussiness::HOSPITALS)->get();
+        $clinics = Clinic::where('type', TypeBusiness::HOSPITALS)->get();
         return response()->json($clinics);
     }
 
@@ -70,12 +70,12 @@ class BackendClinicController extends Controller
             $clinics = Clinic::where([
                 ['status', $status],
                 ['user_id', $id]
-            ])->where('type', TypeBussiness::CLINICS)->get();
+            ])->where('type', TypeBusiness::CLINICS)->get();
         } else {
             $clinics = Clinic::where([
                 ['status', '!=', ClinicStatus::DELETED],
                 ['user_id', $id]
-            ])->where('type', TypeBussiness::CLINICS)->get();
+            ])->where('type', TypeBusiness::CLINICS)->get();
         }
         return response()->json($clinics);
     }

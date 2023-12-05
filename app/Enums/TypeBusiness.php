@@ -4,7 +4,7 @@ namespace App\Enums;
 
 use BenSampo\Enum\Enum;
 
-final class TypeBussiness extends Enum
+final class TypeBusiness extends Enum
 {
     const CLINICS = 'CLINICS';
     const PHARMACIES = 'PHARMACIES';

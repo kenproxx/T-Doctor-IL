@@ -7,6 +7,7 @@ use App\Http\Controllers\restapi\ClinicApi;
 use App\Http\Controllers\restapi\DepartmentApi;
 use App\Http\Controllers\restapi\DoctorDepartmentApi;
 use App\Http\Controllers\restapi\DoctorInfoApi;
+use App\Http\Controllers\restapi\BusinessApi;
 use App\Http\Controllers\restapi\NewsApi;
 use App\Http\Controllers\restapi\PharmacyApi;
 use App\Http\Controllers\restapi\ProductInfoApi;
@@ -37,6 +38,10 @@ Route::group(['prefix' => 'products'], function () {
     Route::get('/clinics/{id}', [ProductInfoApi::class, 'getByClinic'])->name('products.api.clinics');
     Route::get('/search', [ProductInfoApi::class, 'search'])->name('products.api.search');
     Route::get('/department/{id}', [ProductInfoApi::class, 'findByDepartment'])->name('products.restapi.department');
+});
+
+Route::group(['prefix' => 'medicals'], function () {
+    Route::get('/list', [BusinessApi::class, 'getList'])->name('medicals.restapi.list');
 });
 
 Route::group(['prefix' => 'clinics'], function () {
