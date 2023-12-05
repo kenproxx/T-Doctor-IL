@@ -4,6 +4,7 @@ namespace App\Http\Controllers\restapi;
 
 use App\Enums\ClinicStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MainController;
 use App\Models\Clinic;
 use App\Models\Commune;
 use App\Models\Department;
@@ -36,28 +37,30 @@ class BusinessApi extends Controller
     {
         $name = $request->input('name');
 
+        $name = (new MainController())->vn_to_str($name);
+
         return DB::table('clinics')
             ->join('users', 'users.id', '=', 'clinics.user_id')
             ->when($name, function ($query) use ($name) {
-                return $query->orWhere('clinics.name', 'like', '%' . $name . '%');
+                return $query->orWhere(DB::raw('LOWER(clinics.name)'), 'like', '%' . strtolower($name) . '%');
             })
             ->when($name, function ($query) use ($name) {
-                $departments = Department::where('name', 'like', '%' . $name . '%')->get();
+                $departments = Department::where(DB::raw('LOWER(name)'), 'like', '%' . strtolower($name) . '%')->get();
                 $arrayDepartmentID = null;
                 foreach ($departments as $department) {
                     $arrayDepartmentID[] = $department->id;
                 }
-                if ($arrayDepartmentID){
+                if ($arrayDepartmentID) {
                     return $query->orWhereRaw("FIND_IN_SET(?, department) > 0", $arrayDepartmentID);
                 }
             })
             ->when($name, function ($query) use ($name) {
-                $symptoms = Symptom::where('name', 'like', '%' . $name . '%')->get();
+                $symptoms = Symptom::where(DB::raw('LOWER(name)'), 'like', '%' . strtolower($name) . '%')->get();
                 $arraySymptomID = null;
                 foreach ($symptoms as $symptom) {
                     $arraySymptomID[] = $symptom->id;
                 }
-                if ($arraySymptomID){
+                if ($arraySymptomID) {
                     return $query->orWhereRaw("FIND_IN_SET(?, symptom) > 0", $arraySymptomID);
                 }
             })
