@@ -42,6 +42,7 @@ Route::group(['prefix' => 'products'], function () {
 
 Route::group(['prefix' => 'medicals'], function () {
     Route::get('/list', [BusinessApi::class, 'getList'])->name('medicals.restapi.list');
+    Route::get('/filter', [BusinessApi::class, 'searchByDepartmentAndSymptoms'])->name('medicals.restapi.filter');
 });
 
 Route::group(['prefix' => 'clinics'], function () {
