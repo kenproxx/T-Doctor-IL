@@ -7,7 +7,7 @@ use App\Enums\DoctorInfoStatus;
 use App\Enums\online_medicine\OnlineMedicineStatus;
 use App\Enums\QuestionStatus;
 use App\Enums\SearchMentoring;
-use App\Enums\TypeBussiness;
+use App\Enums\TypeBusiness;
 use App\Enums\TypeMedical;
 use App\Enums\TypeTimeWork;
 use App\Enums\UserStatus;
@@ -95,20 +95,20 @@ class ExaminationController extends Controller
 
     public function bestPharmacists()
     {
-        $bestPhamrmacists = Clinic::where('type', TypeBussiness::PHARMACIES)->orderBy('count',
+        $bestPhamrmacists = Clinic::where('type', TypeBusiness::PHARMACIES)->orderBy('count',
             'DESC')->limit(16)->get();
         return view('examination.bestpharmacists', compact('bestPhamrmacists'));
     }
 
     public function newPharmacists()
     {
-        $newPhamrmacists = Clinic::where('type', TypeBussiness::PHARMACIES)->orderBy('id', 'DESC')->limit(16)->get();
+        $newPhamrmacists = Clinic::where('type', TypeBusiness::PHARMACIES)->orderBy('id', 'DESC')->limit(16)->get();
         return view('examination.newpharmacists', compact('newPhamrmacists'));
     }
 
     public function availablePharmacists()
     {
-        $availablePhamrmacists = Clinic::where('type', TypeBussiness::PHARMACIES)->where('time_work',
+        $availablePhamrmacists = Clinic::where('type', TypeBusiness::PHARMACIES)->where('time_work',
             TypeTimeWork::ALL)->limit(16)->get();
         return view('examination.availablepharmacists', compact('availablePhamrmacists'));
     }

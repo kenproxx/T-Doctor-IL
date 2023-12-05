@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\restapi;
 
 use App\Enums\ClinicStatus;
-use App\Enums\TypeBussiness;
+use App\Enums\TypeBusiness;
 use App\Http\Controllers\Controller;
 use App\Models\Clinic;
 use App\Models\User;
@@ -17,7 +17,7 @@ class PharmacyApi extends Controller
         $pharmacies = DB::table('clinics')
             ->join('users', 'users.id', '=', 'clinics.user_id')
             ->where('clinics.status', ClinicStatus::ACTIVE)
-            ->where('clinics.type', TypeBussiness::PHARMACIES)
+            ->where('clinics.type', TypeBusiness::PHARMACIES)
             ->select('clinics.*', 'users.email')
             ->get();
         return response()->json($pharmacies);
@@ -61,7 +61,7 @@ class PharmacyApi extends Controller
         $pharmacies = DB::table('clinics')
             ->join('users', 'users.id', '=', 'clinics.user_id')
             ->where('clinics.status', ClinicStatus::ACTIVE)
-            ->where('clinics.type', TypeBussiness::PHARMACIES)
+            ->where('clinics.type', TypeBusiness::PHARMACIES)
             ->where('clinics.user_id', $id)
             ->select('clinics.*', 'users.email')
             ->get();

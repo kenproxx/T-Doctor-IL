@@ -49,7 +49,7 @@ class AdminDepartmentApi extends Controller
 
         if ($request->hasFile('thumbnail')) {
             $item = $request->file('thumbnail');
-            $itemPath = $item->store('product_medicine', 'public');
+            $itemPath = $item->store('departments', 'public');
             $thumbnail = asset('storage/' . $itemPath);
         } else {
             $thumbnail = $department->thumbnail;

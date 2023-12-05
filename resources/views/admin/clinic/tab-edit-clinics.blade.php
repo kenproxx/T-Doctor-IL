@@ -140,11 +140,11 @@
                     <label for="status">{{ __('home.Status') }}</label>
                     <select class="custom-select" id="status" name="status">
                         <option
-                            value="{{ \App\Enums\ClinicStatus::ACTIVE }}" {{ $clinic->status === \App\Enums\ClinicStatus::ACTIVE ? 'selected' : '' }}>{{ \App\Enums\ClinicStatus::ACTIVE }}</option>
+                                value="{{ \App\Enums\ClinicStatus::ACTIVE }}" {{ $clinic->status === \App\Enums\ClinicStatus::ACTIVE ? 'selected' : '' }}>{{ \App\Enums\ClinicStatus::ACTIVE }}</option>
                         <option
-                            value="{{ \App\Enums\ClinicStatus::INACTIVE }}" {{ $clinic->status === \App\Enums\ClinicStatus::INACTIVE ? 'selected' : '' }}>{{ \App\Enums\ClinicStatus::INACTIVE }}</option>
+                                value="{{ \App\Enums\ClinicStatus::INACTIVE }}" {{ $clinic->status === \App\Enums\ClinicStatus::INACTIVE ? 'selected' : '' }}>{{ \App\Enums\ClinicStatus::INACTIVE }}</option>
                         <option
-                            value="{{ \App\Enums\ClinicStatus::DELETED }}" {{ $clinic->status === \App\Enums\ClinicStatus::DELETED ? 'selected' : '' }}>{{ \App\Enums\ClinicStatus::DELETED }}</option>
+                                value="{{ \App\Enums\ClinicStatus::DELETED }}" {{ $clinic->status === \App\Enums\ClinicStatus::DELETED ? 'selected' : '' }}>{{ \App\Enums\ClinicStatus::DELETED }}</option>
                     </select>
                 </div>
                 <div class="col-md-6">
@@ -152,7 +152,7 @@
                     <select class="custom-select" id="time_work" name="time_work">
                         @foreach($types as $type)
                             <option
-                                {{ $type == $clinic->time_work ? 'selected' : ''}} value="{{ $type }}">{{ $type }}</option>
+                                    {{ $type == $clinic->time_work ? 'selected' : ''}} value="{{ $type }}">{{ $type }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -196,19 +196,22 @@
                     <label for="type">{{ __('home.type') }}</label>
                     <select class="type-select form-control" id="type" name="time_work">
                         <option
-                            value="{{\App\Enums\TypeBussiness::CLINICS}}" {{ $clinic->type === \App\Enums\TypeBussiness::CLINICS ? 'selected' : '' }}>{{\App\Enums\TypeBussiness::CLINICS}}</option>
+                                value="{{\App\Enums\TypeBusiness::CLINICS}}" {{ $clinic->type === \App\Enums\TypeBusiness::CLINICS ? 'selected' : '' }}>{{\App\Enums\TypeBusiness::CLINICS}}</option>
                         <option
-                            value="{{\App\Enums\TypeBussiness::PHARMACIES}}" {{ $clinic->type === \App\Enums\TypeBussiness::PHARMACIES ? 'selected' : '' }}>{{\App\Enums\TypeBussiness::PHARMACIES}}</option>
+                                value="{{\App\Enums\TypeBusiness::PHARMACIES}}" {{ $clinic->type === \App\Enums\TypeBusiness::PHARMACIES ? 'selected' : '' }}>{{\App\Enums\TypeBusiness::PHARMACIES}}</option>
                         <option
-                            value="{{\App\Enums\TypeBussiness::HOSPITALS}}" {{ $clinic->type === \App\Enums\TypeBussiness::HOSPITALS ? 'selected' : '' }}>{{\App\Enums\TypeBussiness::HOSPITALS}}</option>
+                                value="{{\App\Enums\TypeBusiness::HOSPITALS}}" {{ $clinic->type === \App\Enums\TypeBusiness::HOSPITALS ? 'selected' : '' }}>{{\App\Enums\TypeBusiness::HOSPITALS}}</option>
                     </select>
                 </div>
 
                 <div hidden="">
-                    <label for="combined_address"></label><input type="text" name="combined_address" id="combined_address" class="form-control">
-                    <label for="longitude"></label><input type="text" name="longitude" id="longitude" class="form-control">
+                    <label for="combined_address"></label><input type="text" name="combined_address"
+                                                                 id="combined_address" class="form-control">
+                    <label for="longitude"></label><input type="text" name="longitude" id="longitude"
+                                                          class="form-control">
                     <label for="latitude"></label><input type="text" name="latitude" id="latitude" class="form-control">
-                    <label for="clinics_service"></label><input type="text" name="clinics_service" id="clinics_service" class="form-control">
+                    <label for="clinics_service"></label><input type="text" name="clinics_service" id="clinics_service"
+                                                                class="form-control">
                 </div>
             </div>
             <button type="button" class="btn btn-primary up-date-button mt-4">{{ __('home.Save') }}</button>
