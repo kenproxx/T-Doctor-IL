@@ -151,7 +151,7 @@
                         </div>
                         <div class="dropdown-menu">
                             @if( (new MedicalPermission())->isMedicalPermission())
-                                <a class="dropdown-item" href="{{ route('homeAdmin') }}">{{ __('home.Dashboar') }}</a>
+                                <a class="dropdown-item" href="{{ route('admin.home') }}">{{ __('home.Dashboar') }}</a>
                             @else
                                 <a class="dropdown-item"
                                    href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
@@ -201,7 +201,7 @@
                             <div class="dropdown-menu">
                                 @if( (new MedicalPermission())->isMedicalPermission())
                                     <a class="dropdown-item"
-                                       href="{{ route('homeAdmin') }}">{{ __('home.Dashboar') }}</a>
+                                       href="{{ route('admin.home') }}">{{ __('home.Dashboar') }}</a>
                                 @else
                                     <a class="dropdown-item"
                                        href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
