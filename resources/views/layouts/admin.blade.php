@@ -1,72 +1,47 @@
-@php use App\Models\RoleUser; @endphp
-@php use App\Models\Role; @endphp
+<!DOCTYPE html>
+<html lang="en">
 
-
-    <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Laravel SB Admin 2">
-    <meta name="author" content="Alejandro RH">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title> @yield('title') </title>
+    <title> @yield('title')</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
-    <!-- Fonts -->
-    <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+    <!-- Favicons -->
+    <link href="{{ asset('admin/img/favicon.png')}}" rel="icon">
+    <link href="{{ asset('admin/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
     <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/list-config.css') }}" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe6qi9czJ2Z6SLnV9sSUzce0nuzhRm3hg"></script>
+    <!-- Vendor CSS Files -->
+    <link href="{{ asset('admin/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('admin/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+    <link href="{{ asset('admin/vendor/boxicons/css/boxicons.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('admin/vendor/quill/quill.snow.css')}}" rel="stylesheet">
+    <link href="{{ asset('admin/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
+    <link href="{{ asset('admin/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+    <link href="{{ asset('admin/vendor/simple-datatables/style.css')}}" rel="stylesheet">
 
+    <!-- Template Main CSS File -->
+    <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
 
-    <!-- Favicon -->
-    <link href="{{ asset('img/favicon.png') }}" rel="icon" type="image/png">
 </head>
-
-<style>
-    .loading-overlay-master {
-        display: none;
-        background: rgba(255, 255, 255, 0.7);
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        top: 0;
-        z-index: 9998;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .loading-overlay-master.is-active {
-        display: flex;
-    }
-
-    .code {
-        font-family: monospace;
-        /*   font-size: .9em; */
-        color: #dd4a68;
-        background-color: rgb(238, 238, 238);
-        padding: 0 3px;
-    }
-</style>
-
 @php
     //lấy ra toàn bộ role của user hiện tại
-    $roles = RoleUser::where('user_id', Auth::user()->id)->pluck('role_id')->toArray();
+    $roles = \App\Models\RoleUser::where('user_id', Auth::user()->id)->pluck('role_id')->toArray();
     $isStaff = false;
     $isNormal = false;
     foreach ($roles as $role){
-        $roleNames = Role::where('id', $role)->pluck('name');
+        $roleNames = \App\Models\Role::where('id', $role)->pluck('name');
             if ($roleNames->contains('PAITENTS')
                     || $roleNames->contains('NORMAL PEOPLE')
             ){
@@ -86,400 +61,500 @@
 
     }
 @endphp
-<body id="page-top">
-<div class="loading-overlay-master">
-    <span class="fas fa-spinner fa-3x fa-spin"></span>
-</div>
-<!-- Page Wrapper -->
-<div id="wrapper">
-    <!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<body>
 
-        <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('home')}}">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
-            </div>
-            <div class="sidebar-brand-text mx-3">KRMEDI Admin <sup>2</sup></div>
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="/" class="logo d-flex align-items-center">
+            <img src="{{ asset('admin/img/logo.png')}}" alt="">
+            <span class="d-none d-lg-block">KRMEDI</span>
         </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
 
-        <!-- Divider -->
-        <hr class="sidebar-divider my-0">
+    <div class="search-bar">
+        <form class="search-form d-flex align-items-center" method="POST" action="#">
+            <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+        </form>
+    </div><!-- End Search Bar -->
 
+    <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+
+            <li class="nav-item d-block d-lg-none">
+                <a class="nav-link nav-icon search-bar-toggle " href="#">
+                    <i class="bi bi-search"></i>
+                </a>
+            </li><!-- End Search Icon-->
+
+            <li class="nav-item dropdown">
+
+                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                    <i class="bi bi-bell"></i>
+                    <span class="badge bg-primary badge-number">4</span>
+                </a><!-- End Notification Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                    <li class="dropdown-header">
+                        You have 4 new notifications
+                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-exclamation-circle text-warning"></i>
+                        <div>
+                            <h4>Lorem Ipsum</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>30 min. ago</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-x-circle text-danger"></i>
+                        <div>
+                            <h4>Atque rerum nesciunt</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>1 hr. ago</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-check-circle text-success"></i>
+                        <div>
+                            <h4>Sit rerum fuga</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>2 hrs. ago</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="notification-item">
+                        <i class="bi bi-info-circle text-primary"></i>
+                        <div>
+                            <h4>Dicta reprehenderit</h4>
+                            <p>Quae dolorem earum veritatis oditseno</p>
+                            <p>4 hrs. ago</p>
+                        </div>
+                    </li>
+
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li class="dropdown-footer">
+                        <a href="#">Show all notifications</a>
+                    </li>
+
+                </ul><!-- End Notification Dropdown Items -->
+
+            </li><!-- End Notification Nav -->
+
+            <li class="nav-item dropdown">
+
+                <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                    <i class="bi bi-chat-left-text"></i>
+                    <span class="badge bg-success badge-number">3</span>
+                </a><!-- End Messages Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                    <li class="dropdown-header">
+                        You have 3 new messages
+                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="message-item">
+                        <a href="#">
+                            <img src="{{ asset('admin/img/messages-1.jpg')}}" alt="" class="rounded-circle">
+                            <div>
+                                <h4>Maria Hudson</h4>
+                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                <p>4 hrs. ago</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="message-item">
+                        <a href="#">
+                            <img src="{{ asset('admin/img/messages-2.jpg')}}" alt="" class="rounded-circle">
+                            <div>
+                                <h4>Anna Nelson</h4>
+                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                <p>6 hrs. ago</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="message-item">
+                        <a href="#">
+                            <img src="{{ asset('admin/img/messages-3.jpg')}}" alt="" class="rounded-circle">
+                            <div>
+                                <h4>David Muldon</h4>
+                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                <p>8 hrs. ago</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li class="dropdown-footer">
+                        <a href="#">Show all messages</a>
+                    </li>
+
+                </ul><!-- End Messages Dropdown Items -->
+
+            </li><!-- End Messages Nav -->
+
+            <li class="nav-item dropdown pe-3">
+
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                    <img src="{{ asset('admin/img/profile-img.jpg')}}" alt="Profile" class="rounded-circle">
+                    <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                </a><!-- End Profile Iamge Icon -->
+
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                    <li class="dropdown-header">
+                        <h6>Kevin Anderson</h6>
+                        <span>Web Designer</span>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                            <i class="bi bi-person"></i>
+                            <span>My Profile</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                            <i class="bi bi-gear"></i>
+                            <span>Account Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                            <i class="bi bi-question-circle"></i>
+                            <span>Need Help?</span>
+                        </a>
+                    </li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span>Sign Out</span>
+                        </a>
+                    </li>
+
+                </ul><!-- End Profile Dropdown Items -->
+            </li><!-- End Profile Nav -->
+
+        </ul>
+    </nav><!-- End Icons Navigation -->
+
+</header>
+<!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
         @if(!$isNormal)
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item {{ Nav::isRoute('homeAdmin') }}">
-                <a class="nav-link" href="{{ route('homeAdmin') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>{{ __('home.Dashboar') }}</span></a>
+            <!-- Dashboard Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('homeAdmin') }}">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
             </li>
-            <!-- Nav Item - List Products -->
-            <li class="nav-item {{ Nav::isRoute('homeAdmin.list.product') }}">
-                <a class="nav-link" href="{{ route('homeAdmin.list.product') }}">
-                    <i class="fa-regular fa-rectangle-list"></i>
-                    <span>{{ __('home.Selling/Buying') }}</span></a>
-            </li>
+            <!-- End Dashboard Nav -->
 
-            <!-- Nav Item - List Coupon -->
-            <li class="nav-item {{ Nav::isRoute('homeAdmin.list.coupons') }}">
-                <a class="nav-link" href="{{ route('homeAdmin.list.coupons') }}">
-                    <i class="fa-solid fa-house-chimney-medical"></i>
-                    <span>{{ __('home.List Coupon') }}</span></a>
+            <!-- Selling/Buying Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#selling-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-menu-button-wide"></i><span>{{ __('home.Selling/Buying') }}</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="selling-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{{ route('homeAdmin.list.product') }}">
+                            <i class="bi bi-circle"></i><span>{{ __('home.Selling/Buying') }}</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
-            <li class="nav-item {{ Nav::isRoute('api.backend.connect.video.index3') }}">
-                <a class="nav-link" href="{{ route('api.backend.connect.video.index3') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>{{ __('Call video3') }}</span></a>
+            <!-- End Selling/Buying Nav -->
+
+            <!-- List Coupon Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#coupon-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-medium"></i><span>{{ __('home.List Coupon') }}</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="coupon-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{{ route('homeAdmin.list.coupons') }}">
+                            <i class="bi bi-circle"></i><span>{{ __('home.List Coupon') }}</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
+            <!-- End List Coupon Nav -->
+
+            <!-- Call video Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#call-video-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-camera-video"></i><span>{{ __('home.Call video') }}</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="call-video-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{{ route('api.backend.connect.video.index3') }}">
+                            <i class="bi bi-circle"></i><span>{{ __('home.Call video') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- End Call video Nav -->
+
             @if(!$isStaff)
-                <!-- Nav Item - List Service Clinics -->
+                <!-- Clinics Nav -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('user.service.clinics.list') }}">
-                        <i class="fa-solid fa-house-chimney-medical"></i>
-                        <span>{{ __('home.Service Clinics') }}</span></a>
+                    <a class="nav-link collapsed" data-bs-target="#clinics-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-robot"></i><span>{{ __('home.Clinics/Pharmacies') }}</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="clinics-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('homeAdmin.list.clinics') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.List Clinics') }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('user.service.clinics.list') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Service Clinics') }}</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-                <!-- Nav Item - List Clinics -->
-                <li class="nav-item {{ Nav::isRoute('homeAdmin.list.clinics') }}">
-                    <a class="nav-link" href="{{ route('homeAdmin.list.clinics') }}">
-                        <i class="fa-solid fa-house-chimney-medical"></i>
-                        <span>{{ __('home.List Clinics') }}</span></a>
-                </li>
-                <!-- Nav Item - List Topic Video -->
+                <!-- End Clinics Nav -->
+
+                <!-- Videos Nav -->
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('user.topic.videos.list') }}">
-                        <i class="fa-solid fa-house-chimney-medical"></i>
-                        <span>{{ __('home.Topic Videos') }}</span></a>
+                    <a class="nav-link collapsed" data-bs-target="#videos-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-film"></i><span>{{ __('home.Videos') }}</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="videos-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="#">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Short Videos') }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('user.topic.videos.list') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Topic Videos') }}</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-                <!-- Nav Item - New Event -->
-                <li class="nav-item {{ Nav::isRoute('api.new-event.index') }}">
-                    <a class="nav-link" href="{{ route('api.new-event.index') }}">
-                        <i class="fa-solid fa-house-chimney-medical"></i>
-                        <span>{{ __('home.New Event') }}</span></a>
-                </li>
-                <li class="nav-item {{ Nav::isRoute('api.backend.category-product.index') }}">
-                    <a class="nav-link" href="{{ route('api.backend.category-product.index') }}">
-                        <i class="fa-solid fa-house-chimney-medical"></i>
-                        <span>{{ __('home.Category Product') }}</span></a>
-                </li>
-                <li class="nav-item {{ Nav::isRoute('api.backend.account-register.index') }}">
-                    <a class="nav-link" href="{{ route('api.backend.account-register.index') }}">
-                        <i class="fa-solid fa-house-chimney-medical"></i>
-                        <span>{{ __('home.Duyệt đăng ký phòng khám') }}</span></a>
-                </li>
-                <li class="nav-item {{ Nav::isRoute('api.backend.product-medicine.index') }}">
-                    <a class="nav-link" href="{{ route('api.backend.product-medicine.index') }}">
-                        <i class="fa-solid fa-house-chimney-medical"></i>
-                        <span>{{ __('home.Product Medicine') }}</span></a>
-                </li>
+                <!-- End Videos Nav -->
 
-                <!-- Nav Item - List Doctor -->
-                <li class="nav-item {{ Nav::isRoute('homeAdmin.list.doctors') }}">
-                    <a class="nav-link" href="{{ route('homeAdmin.list.doctors') }}">
-                        <i class="fa-solid fa-user-doctor"></i>
-                        <span>{{ __('home.Examination') }}</span></a>
+                <!-- Product Medicine Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-file-medical"></i><span>{{ __('home.Product Medicine') }}</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('api.backend.product-medicine.index') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Product Medicine') }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('api.backend.category-product.index') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Category Product') }}</span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-                <li class="nav-item {{ Nav::isRoute('homeAdmin.list.staff') }}">
-                    <a class="nav-link" href="{{ route('homeAdmin.list.staff') }}">
-                        <i class="fa-solid fa-user-doctor"></i>
-                        <span>{{ __('home.Nhân viên') }}</span></a>
-                </li>
-                <li class="nav-item {{ Nav::isRoute('homeAdmin.list.config') }}">
-                    <a class="nav-link" href="{{ route('homeAdmin.list.config') }}">
-                        <i class="fa-solid fa-user-doctor"></i>
-                        <span>{{ __('home.Cấu hình chung') }}</span></a>
-                </li>
-                <li class="nav-item {{ Nav::isRoute('homeAdmin.list.booking') }}">
-                    <a class="nav-link" href="{{ route('homeAdmin.list.booking') }}">
-                        <i class="fa-solid fa-user-doctor"></i>
-                        <span>{{ __('home.Booking') }}</span></a>
-                </li>
-                <li class="nav-item {{ Nav::isRoute('homeAdmin.list.booking') }}">
-                    <a class="nav-link" href="{{ route('department.index') }}">
-                        <i class="fa-solid fa-user-doctor"></i>
-                        <span>{{ __('home.departments') }}</span></a>
-                </li>
-                <li class="nav-item {{ Nav::isRoute('homeAdmin.list.booking') }}">
-                    <a class="nav-link" href="{{ route('symptom.index') }}">
-                        <i class="fa-solid fa-user-doctor"></i>
-                        <span>{{ __('home.symptoms') }}</span></a>
-                </li>
+                <!-- End Product Medicine Nav -->
 
+                <!-- News/Events Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-newspaper"></i><span>{{ __('home.New Event') }}</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('api.new-event.index') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.New Event') }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End News/Events Nav -->
+
+                <!-- Examination Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-layout-text-window-reverse"></i><span>{{ __('home.Examination') }}</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('homeAdmin.list.doctors') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Examination') }}<</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('api.backend.account-register.index') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Duyệt đăng ký phòng khám') }}<</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('homeAdmin.list.staff') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Nhân viên') }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Examination Nav -->
+
+                <!-- Booking Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-bar-chart"></i><span>{{ __('home.Booking') }}</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('homeAdmin.list.booking') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Booking') }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Booking Nav -->
+
+                <!-- Config Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-gem"></i><span>{{ __('home.Cấu hình chung') }}</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('homeAdmin.list.config') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Cấu hình chung') }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Config Nav -->
+
+                <!-- End Departments/Symptoms Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#department-symptom-nav" data-bs-toggle="collapse"
+                       href="#">
+                        <i class="bi bi-bar-chart"></i><span>{{ __('home.departments') }}</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="department-symptom-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('department.index') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.departments') }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('symptom.index') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.symptoms') }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Departments/Symptoms Nav -->
             @endif
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
         @endif
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            {{ __('home.Settings') }}
-        </div>
 
-        <!-- Nav Item - Profile -->
-        <li class="nav-item {{ Nav::isRoute('profile') }}">
-            <a class="nav-link" href="{{ route('profile') }}">
-                <i class="fas fa-fw fa-user"></i>
-                <span>{{ __('home.Profile') }}</span>
+        <li class="nav-heading">{{ __('home.Settings') }}</li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('profile') }}">
+                <i class="bi bi-person"></i>
+                <span>Profile</span>
             </a>
         </li>
+        <!-- End Profile Page Nav -->
 
-        <!-- Nav Item - About -->
-        <li class="nav-item {{ Nav::isRoute('about') }}">
-            <a class="nav-link" href="{{ route('about') }}">
-                <i class="fas fa-fw fa-hands-helping"></i>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('about') }}">
+                <i class="bi bi-play"></i>
                 <span>{{ __('home.About') }}</span>
             </a>
         </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
-
-        <!-- Sidebar Toggler (Sidebar) -->
-        <div class="text-center d-none d-md-inline">
-            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-        </div>
+        <!-- End About Page Nav -->
 
     </ul>
-    <!-- End of Sidebar -->
 
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
+</aside>
+<!-- End Sidebar-->
 
-        <!-- Main Content -->
-        <div id="content">
+<!-- ======= Main ======= -->
+<main id="main" class="main">
+    @yield('main-content')
+</main>
+<!-- End -->
 
-            <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
-
-                <!-- Topbar Search -->
-                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="{{ __('home.Search for...') }}"
-                               aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
-
-                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                    <li class="nav-item dropdown no-arrow d-sm-none">
-                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-search fa-fw"></i>
-                        </a>
-                        <!-- Dropdown - Messages -->
-                        <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                             aria-labelledby="searchDropdown">
-                            <form class="form-inline mr-auto w-100 navbar-search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control bg-light border-0 small"
-                                           placeholder="{{ __('home.Search for...') }}" aria-label="Search"
-                                           aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-primary" type="button">
-                                            <i class="fas fa-search fa-sm"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-
-                    <!-- Nav Item - Alerts -->
-                    <li class="nav-item dropdown no-arrow mx-1">
-                        <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-bell fa-fw"></i>
-                            <!-- Counter - Alerts -->
-                            <span class="badge badge-danger badge-counter">3+</span>
-                        </a>
-                        <!-- Dropdown - Alerts -->
-                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                             aria-labelledby="alertsDropdown">
-                            <h6 class="dropdown-header">
-                                {{ __('home.Alerts Center') }}
-                            </h6>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-primary">
-                                        <i class="fas fa-file-alt text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">{{ __('home.December 12, 2019') }}</div>
-                                    <span class="font-weight-bold">{{ __('home.A new monthly report is ready to download') }}!</span>
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-success">
-                                        <i class="fas fa-donate text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">{{ __('home.December 7, 2019') }}</div>
-                                    {{ __('home.$290.29 has been deposited into your account') }}!
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="mr-3">
-                                    <div class="icon-circle bg-warning">
-                                        <i class="fas fa-exclamation-triangle text-white"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="small text-gray-500">{{ __('home.December 2, 2019') }}</div>
-                                    {{ __("home.Spending Alert: We've noticed unusually high spending for your account.") }}
-                                </div>
-                            </a>
-                            <a class="dropdown-item text-center small text-gray-500" href="#">{{ __('home.Show All Alerts') }}</a>
-                        </div>
-                    </li>
-
-                    <!-- Nav Item - Messages -->
-                    <li class="nav-item dropdown no-arrow mx-1">
-                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-envelope fa-fw"></i>
-                            <!-- Counter - Messages -->
-                            <span class="badge badge-danger badge-counter">7</span>
-                        </a>
-                        <!-- Dropdown - Messages -->
-                        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                             aria-labelledby="messagesDropdown">
-                            <h6 class="dropdown-header">
-                                {{ __('home.Message Center') }}
-                            </h6>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60"
-                                         alt="">
-                                    <div class="status-indicator bg-success"></div>
-                                </div>
-                                <div class="font-weight-bold">
-                                    <div class="text-truncate">{{ __("home.Hi there! I am wondering if you can help me with a problem I've been having") }}.
-                                    </div>
-                                    <div class="small text-gray-500">{{ __('home.Emily Fowler · 58m') }}</div>
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="https://source.unsplash.com/AU4VPcFN4LE/60x60"
-                                         alt="">
-                                    <div class="status-indicator"></div>
-                                </div>
-                                <div>
-                                    <div class="text-truncate">{{ __('home.I have the photos that you ordered last month, how would you like them sent to you') }}?
-                                    </div>
-                                    <div class="small text-gray-500">Jae Chun · 1d</div>
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="https://source.unsplash.com/CS2uCrpNzJY/60x60"
-                                         alt="">
-                                    <div class="status-indicator bg-warning"></div>
-                                </div>
-                                <div>
-                                    <div class="text-truncate">{{ __("home.Last month's report looks great, I am very happy with the progress so far, keep up the good work") }}!
-                                    </div>
-                                    <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                </div>
-                            </a>
-                            <a class="dropdown-item d-flex align-items-center" href="#">
-                                <div class="dropdown-list-image mr-3">
-                                    <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                         alt="">
-                                    <div class="status-indicator bg-success"></div>
-                                </div>
-                                <div>
-                                    <div class="text-truncate">{{ __("home.Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...") }}
-                                    </div>
-                                    <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                </div>
-                            </a>
-                            <a class="dropdown-item text-center small text-gray-500" href="#">{{ __('home.Read More Messages') }}</a>
-                        </div>
-                    </li>
-
-                    <div class="topbar-divider d-none d-sm-block"></div>
-
-                    <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
-                            <figure class="img-profile rounded-circle avatar font-weight-bold"
-                                    data-initial="{{ Auth::user()->avt }}"></figure>
-                        </a>
-                        <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                             aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="{{ route('profile') }}">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                {{ __('home.Profile') }}
-                            </a>
-                            <a class="dropdown-item" href="javascript:void(0)">
-                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                {{ __('home.Settings') }}
-                            </a>
-                            <a class="dropdown-item" href="javascript:void(0)">
-                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                {{ __('home.Activity Log') }}
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{route('logoutProcess')}}">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                {{ __('home.Logout') }}
-                            </a>
-                        </div>
-                    </li>
-
-                </ul>
-
-            </nav>
-            <!-- End of Topbar -->
-
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-
-                @yield('main-content')
-
-            </div>
-            <!-- /.container-fluid -->
-
-        </div>
-        <!-- End of Main Content -->
-
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>{{ __('home.Copyright &copy; Alejandro RH ') }}{{ now()->year }}</span>
-                </div>
-            </div>
-        </footer>
-        <!-- End of Footer -->
-
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>KRMEDI</span></strong>. All Rights Reserved
     </div>
-    <!-- End of Content Wrapper -->
-
-</div>
-
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+    <div class="credits">
+        Designed by <a href="#">KRMEDI</a>
+    </div>
+</footer>
+<!-- End Footer -->
 
 <!-- Logout Modal-->
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -492,7 +567,9 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">{{ __("home.Select 'Logout' below if you are ready to end your current session") }}.</div>
+            <div class="modal-body">{{ __("home.Select 'Logout' below if you are ready to end your current session") }}
+                .
+            </div>
             <div class="modal-footer">
                 <button class="btn btn-link" type="button" data-dismiss="modal">{{ __('Cancel') }}</button>
                 <a class="btn btn-danger" href="{{ route('logoutProcess') }}"
@@ -505,20 +582,27 @@
     </div>
 </div>
 
-<!-- Scripts -->
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+        class="bi bi-arrow-up-short"></i></a>
 
-<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-<script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+<!-- Vendor JS Files -->
+<script src="{{ asset('admin/vendor/apexcharts/apexcharts.min.js')}}"></script>
+<script src="{{ asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{ asset('admin/vendor/chart.js/chart.umd.js')}}"></script>
+<script src="{{ asset('admin/vendor/echarts/echarts.min.js')}}"></script>
+<script src="{{ asset('admin/vendor/quill/quill.min.js')}}"></script>
+<script src="{{ asset('admin/vendor/simple-datatables/simple-datatables.js')}}"></script>
+<script src="{{ asset('admin/vendor/tinymce/tinymce.min.js')}}"></script>
+<script src="{{ asset('admin/vendor/php-email-form/validate.js')}}"></script>
 
-@include('components.head.tinymce-config')
-</body>
-
+<!-- Template Main JS File -->
+<script src="{{ asset('admin/js/main.js')}}"></script>
 <script>
     function loadingMasterPage() {
         let overlay = document.getElementsByClassName('loading-overlay-master')[0]
         overlay.classList.toggle('is-active')
     }
 </script>
+</body>
 
 </html>
