@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\DepartmentStatus;
+use App\Enums\SymptomStatus;
+use App\Models\Department;
 use App\Models\Symptom;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SymptomController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $symptoms = Symptom::all();
 
         return view('admin.department_symptom.lists-symptom', ['symptoms' => $symptoms]);
@@ -15,25 +20,35 @@ class SymptomController extends Controller
 
     public function create()
     {
-        return view('admin.department_symptom.create-symptom');
+        $departments = Department::where('status', DepartmentStatus::ACTIVE)->get();
+        return view('admin.department_symptom.create-symptom', compact('departments'));
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        $data = $request->except(['_token']);
-
+        $symptom = new Symptom();
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('symptoms/', 'public');
-            $data['thumbnail'] = $imagePath;
+            $item = $request->file('image');
+            $itemPath = $item->store('symptoms', 'public');
+            $thumbnail = asset('storage/' . $itemPath);
+        } else {
+            $thumbnail = $symptom->thumbnail;
         }
+        $name = $request->input('name');
+        $department = $request->input('department');
+        $description = $request->input('description');
 
-        Symptom::create($data);
+        $user_id = Auth::user()->id;
+        $status = SymptomStatus::ACTIVE;
+
+        $symptom->name = $name;
+        $symptom->department_id = $department;
+        $symptom->thumbnail = $thumbnail;
+        $symptom->description = $description;
+        $symptom->status = $status;
+        $symptom->user_id = $user_id;
+
+        $symptom->save();
 
         return redirect()->route('symptom.index')->with('success', 'Symptoms created successfully.');
     }

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\DepartmentStatus;
 use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DepartmentController extends Controller
 {
@@ -20,20 +22,27 @@ class DepartmentController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
-
-        $data = $request->except(['_token']);
+        $department = new Department();
+        $name = $request->input('name');
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('departments/', 'public');
-            $data['thumbnail'] = $imagePath;
+            $item = $request->file('image');
+            $itemPath = $item->store('departments', 'public');
+            $thumbnail = asset('storage/' . $itemPath);
+        } else {
+            $thumbnail = $department->thumbnail;
         }
 
-        Department::create($data);
+        $description = $request->input('description');
+        $status = DepartmentStatus::ACTIVE;
+        $user_id = Auth::user()->id;
+
+        $department->name = $name;
+        $department->thumbnail = $thumbnail;
+        $department->description = $description;
+        $department->status = $status;
+        $department->user_id = $user_id;
+        $department->save();
 
         return redirect()->route('department.index')->with('success', 'Department created successfully.');
     }

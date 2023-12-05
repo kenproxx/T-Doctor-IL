@@ -38,7 +38,7 @@
             <tr>
                 <td>{{$symptom->name}}</td>
                 <td>{{$symptom->description}}</td>
-                <td><img src="{{ asset('storage/' . $symptom->thumbnail) }}" alt="Image" width="50px"></td>
+                <td><img src="{{ asset($symptom->thumbnail) }}" alt="Image" width="50px"></td>
             </tr>
         @endforeach
 
