@@ -22,6 +22,8 @@
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
 
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
     <!-- Vendor CSS Files -->
     <link href="{{ asset('admin/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{ asset('admin/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
@@ -278,7 +280,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="#">
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('logoutProcess') }}">
                             <i class="bi bi-box-arrow-right"></i>
                             <span>Sign Out</span>
                         </a>
@@ -299,7 +301,7 @@
         @if(!$isNormal)
             <!-- Dashboard Nav -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('homeAdmin') }}">
+                <a class="nav-link collapsed" href="{{ route('admin.home') }}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -555,32 +557,6 @@
     </div>
 </footer>
 <!-- End Footer -->
-
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">{{ __('home.Ready to Leave') }}?</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">{{ __("home.Select 'Logout' below if you are ready to end your current session") }}
-                .
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-link" type="button" data-dismiss="modal">{{ __('Cancel') }}</button>
-                <a class="btn btn-danger" href="{{ route('logoutProcess') }}"
-                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-                <form id="logout-form" action="{{ route('logoutProcess') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>

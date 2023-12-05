@@ -32,24 +32,80 @@ class BusinessApi extends Controller
         return response()->json($items);
     }
 
+    public function search(Request $request)
+    {
+        $name = $request->input('name');
+
+        return DB::table('clinics')
+            ->join('users', 'users.id', '=', 'clinics.user_id')
+            ->when($name, function ($query) use ($name) {
+                return $query->orWhere('clinics.name', 'like', '%' . $name . '%');
+            })
+            ->when($name, function ($query) use ($name) {
+                $departments = Department::where('name', 'like', '%' . $name . '%')->get();
+                $arrayDepartmentID = null;
+                foreach ($departments as $department) {
+                    $arrayDepartmentID[] = $department->id;
+                }
+                if ($arrayDepartmentID){
+                    return $query->orWhereRaw("FIND_IN_SET(?, department) > 0", $arrayDepartmentID);
+                }
+            })
+            ->when($name, function ($query) use ($name) {
+                $symptoms = Symptom::where('name', 'like', '%' . $name . '%')->get();
+                $arraySymptomID = null;
+                foreach ($symptoms as $symptom) {
+                    $arraySymptomID[] = $symptom->id;
+                }
+                if ($arraySymptomID){
+                    return $query->orWhereRaw("FIND_IN_SET(?, symptom) > 0", $arraySymptomID);
+                }
+            })
+            ->where('clinics.status', ClinicStatus::ACTIVE)
+            ->select('clinics.*', 'users.email')
+            ->cursor()
+            ->map(function ($item) {
+                /*Find service*/
+                $array = explode(',', $item->service_id);
+                $services = ServiceClinic::whereIn('id', $array)->get();
+                /*Find Address*/
+                $array = explode(',', $item->address);
+                $addressP = Province::where('id', $array[1] ?? null)->first();
+                $addressD = District::where('id', $array[2] ?? null)->first();
+                $addressC = Commune::where('id', $array[3] ?? null)->first();
+                /*Find department*/
+                $list_departments = explode(',', $item->department);
+                $departments = Department::whereIn('id', $list_departments)->get();
+                /*Find symptom*/
+                $list_symptoms = explode(',', $item->symptom);
+                $symptoms = Symptom::whereIn('id', $list_symptoms)->get();
+                /* Convert to array*/
+                $clinic = (array)$item;
+                /*Show service*/
+                $clinic['total_services'] = $services->count();
+                $clinic['services'] = $services->toArray();
+                /*Merge address*/
+                if ($addressP == null) {
+                    $clinic['addressInfo'] = '';
+                    return $clinic;
+                }
+                $clinic['addressInfo'] = $addressC['name'] . ',' . $addressD['name'] . ',' . $addressP['name'];
+                /* Show departments*/
+                $clinic['total_departments'] = $departments->count();
+                $clinic['departments'] = $departments->toArray();
+                /* Show symptoms*/
+                $clinic['total_symptoms'] = $symptoms->count();
+                $clinic['symptoms'] = $symptoms->toArray();
+                return $clinic;
+            });
+    }
+
     public function searchByDepartmentAndSymptoms(Request $request)
     {
         $symptomID = $request->input('symptom');
         $type = $request->input('type');
         $department = $request->input('department');
-        if ($type) {
-            if ($symptomID && $department) {
-                $clinics = $this->getClinics($type, $symptomID, $department);
-            } else {
-                $clinics = $this->getClinics($type, $symptomID, $department);
-            }
-        } else {
-            if ($symptomID && $department) {
-                $clinics = $this->getClinics($type, $symptomID, $department);
-            } else {
-                $clinics = $this->getClinics($type, $symptomID, $department);
-            }
-        }
+        $clinics = $this->getClinics($type, $symptomID, $department);
         return response()->json($clinics);
     }
 

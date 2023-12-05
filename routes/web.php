@@ -253,11 +253,6 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/send', 'SendMessageController@index')->name('send');
 Route::post('/postMessage', 'SendMessageController@sendMessage')->name('postMessage');
 
-
-Route::group(['middleware' => ['medical']], function () {
-    Route::get('/admin', [\App\Http\Controllers\HomeController::class, 'home'])->name('homeAdmin');
-});
-
 // QrCode
 Route::group(['prefix' => 'qr-code'], function () {
     Route::get('/doctor-info/{id}', [DoctorInfoController::class, 'showFromQrCode'])->name('qr.code.show.doctor.info');

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\BackendNewEventController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\restapi\admin\AdminTopicVideoApi;
 use App\Http\Controllers\restapi\admin\AminServiceClinicApi;
 use Illuminate\Support\Facades\Route;
@@ -15,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('home', [HomeController::class, 'admin'])->name('admin.home');
 
 Route::group(['prefix' => 'new-event'], function () {
     Route::get('index', [BackendNewEventController::class, 'index'])->name('api.new-event.index');
