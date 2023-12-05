@@ -26,16 +26,9 @@ class HomeController extends Controller
         return view('home', compact('coupons', 'products'));
     }
 
-    public function home()
+    public function admin()
     {
-        $users = User::count();
-
-        $widget = [
-            'users' => $users,
-            //...
-        ];
-
-        return view('admin.home-admin', compact('widget'));
+        return view('admin.home-admin');
     }
 
     public function listProduct()
