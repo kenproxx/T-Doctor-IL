@@ -10,12 +10,12 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Thumbnail</th>
-            <th scope="col">Gallery</th>
-            <th scope="col">Name</th>
-            <th scope="col">Location</th>
-            <th scope="col">Prise</th>
-            <th scope="col">Edit</th>
+            <th scope="col">{{ __('home.Thumbnail') }}</th>
+            <th scope="col">{{ __('home.Gallery') }}</th>
+            <th scope="col">{{ __('home.Name') }}</th>
+            <th scope="col">{{ __('home.Location') }}</th>
+            <th scope="col">{{ __('home.Price') }}</th>
+            <th scope="col">{{ __('home.Edit') }}</th>
         </tr>
         </thead>
         <tbody id="ProductsAdmin">

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-    Edit Selling/Buying
+    {{ __('home.Edit Selling/Buying') }}
 @endsection
 @section('main-content')
     <!-- Page Heading -->
@@ -17,15 +17,15 @@
         <div>
             <div class="row">
                 <div class="col-md-4">
-                    <label for="name">Name</label>
+                    <label for="name">{{ __('home.Name') }}</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{$product->name}}">
                 </div>
                 <div class="col-md-4">
-                    <label for="name_en">Name English</label>
+                    <label for="name_en">{{ __('home.name_en') }}</label>
                     <input type="text" class="form-control" id="name_en" name="name_en" value="{{$product->name_en}}">
                 </div>
                 <div class="col-md-4">
-                    <label for="name_laos">Name Laos</label>
+                    <label for="name_laos">{{ __('home.name_laos') }}</label>
                     <input type="text" class="form-control" id="name_laos" name="name_laos"
                            value="{{$product->name_laos}}">
                 </div>
@@ -34,34 +34,34 @@
 
             <div class="row">
                 <div class="col-sm-4">
-                    <label for="description">Mô tả việt</label>
+                    <label for="description">{{ __('home.Mô tả dài việt') }}</label>
                     <textarea class="form-control" name="description"
                               id="description">{{$product->description}}</textarea>
                 </div>
                 <div class="col-sm-4">
-                    <label for="description_en">Mô tả anh</label>
+                    <label for="description_en">{{ __('home.Mô tả dài anh') }}</label>
                     <textarea class="form-control" name="description_en"
                               id="description_en">{{$product->description_en}}</textarea>
                 </div>
                 <div class="col-sm-4">
-                    <label for="description_laos">Mô tả lào</label>
+                    <label for="description_laos">{{ __('home.Mô tả dài lào') }}</label>
                     <textarea class="form-control" name="description_laos"
                               id="description_laos">{{$product->description_laos}}</textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
-                    <label for="brand_name">Brand Name</label>
+                    <label for="brand_name">{{ __('home.Brand Name') }}</label>
                     <input type="text" class="form-control" id="brand_name" name="brand_name"
                            value="{{$product->brand_name}}">
                 </div>
                 <div class="col-md-4">
-                    <label for="brand_name_en">Brand Name English</label>
+                    <label for="brand_name_en">{{ __('home.Brand Name English') }}</label>
                     <input type="text" class="form-control" id="brand_name_en" name="brand_name_en"
                            value="{{$product->brand_name_en}}">
                 </div>
                 <div class="col-md-4">
-                    <label for="brand_name_laos">Brand Name Laos</label>
+                    <label for="brand_name_laos">{{ __('home.Brand Name Laos') }}</label>
                     <input type="text" class="form-control" id="brand_name_laos" name="brand_name_laos"
                            value="{{$product->brand_name_laos}}">
                 </div>
@@ -69,7 +69,7 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <label for="category_id">Category</label>
+                    <label for="category_id">{{ __('home.Category') }}</label>
                     <select class="custom-select" id="category_id" name="category_id">
                         @foreach($categories as $category)
                             <option {{ $category->id == $product->category_id ? 'checked' : '' }}
@@ -94,12 +94,12 @@
                 </div>
             </div>
             <div>
-                <label>Thumbnail</label>
+                <label>{{ __('home.Thumbnail') }}</label>
                 <input type="file" class="form-control" id="thumbnail" name="thumbnail" multiple accept="image/*">
                 <img width="50px" src="{{$product->thumbnail}}" alt="thumbnail">
             </div>
             <div>
-                <label for="gallery">Gallery</label>
+                <label for="gallery">{{ __('home.Gallery') }}</label>
                 <input type="file" class="form-control" id="gallery" name="gallery[]" multiple accept="image/*">
                 @php
                     $galleryArray = explode(',', $product->gallery);
@@ -109,34 +109,34 @@
                 @endforeach
             </div>
             <div>
-                <label for="price">Price</label>
+                <label for="price">{{ __('home.Price') }}</label>
                 <input type="number" class="form-control" id="price" name="price" value="{{$product->price}}">
             </div>
             <div>
-                <label for="price_unit">Price Unit</label>
+                <label for="price_unit">{{ __('home.Price Unit') }}</label>
                 <input type="text" class="form-control" id="price_unit" name="price_unit"
                        value="{{$product->price_unit}}">
             </div>
 
             <div class="row">
                 <div class="col-sm-4">
-                    <label for="ads_plan">Ads Plan</label>
+                    <label for="ads_plan">{{ __('home.Ads Plan') }}</label>
                     <select id="ads_plan" name="ads_plan" class="custom-select">
-                        <option {{$product->ads_plan == 1 ? 'selected' : ''}} value="1">Platinum</option>
-                        <option {{$product->ads_plan == 2 ? 'selected' : ''}} value="2">Premium</option>
-                        <option {{$product->ads_plan == 3 ? 'selected' : ''}} value="3">Silver</option>
+                        <option {{$product->ads_plan == 1 ? 'selected' : ''}} value="1">{{ __('home.Platinum') }}</option>
+                        <option {{$product->ads_plan == 2 ? 'selected' : ''}} value="2">{{ __('home.Premium') }}</option>
+                        <option {{$product->ads_plan == 3 ? 'selected' : ''}} value="3">{{ __('home.Silver') }}</option>
                     </select>
                 </div>
                 <div class="col-sm-4">
-                    <label for="ads_period">Ads Period</label>
+                    <label for="ads_period">{{ __('home.Ads Period') }}</label>
                     <select id="ads_period" name="ads_period" class="custom-select">
-                        <option {{$product->ads_period == 1 ? 'selected' : ''}} value="1">5 Day</option>
-                        <option {{$product->ads_period == 2 ? 'selected' : ''}} value="2">10 Day</option>
-                        <option {{$product->ads_period == 3 ? 'selected' : ''}} value="3">15 Day</option>
-                        <option {{$product->ads_period == 4 ? 'selected' : ''}} value="4">20 Day</option>
+                        <option {{$product->ads_period == 1 ? 'selected' : ''}} value="1">{{ __('home.5 Day') }}</option>
+                        <option {{$product->ads_period == 2 ? 'selected' : ''}} value="2">{{ __('home.10 Day') }}</option>
+                        <option {{$product->ads_period == 3 ? 'selected' : ''}} value="3">{{ __('home.15 Day') }}</option>
+                        <option {{$product->ads_period == 4 ? 'selected' : ''}} value="4">{{ __('home.20 Day') }}</option>
                     </select>
                 </div>
-                <div class="col-sm-4"><label for="status">Trạng thái</label>
+                <div class="col-sm-4"><label for="status">{{ __('home.Trạng thái') }}</label>
                     <select class="custom-select" id="status" name="status" {{ !$isAdmin ? 'disabled' : '' }}>
                         <option value="{{ \App\Enums\ProductStatus::ACTIVE }}"
                             {{ $product->status == \App\Enums\ProductStatus::ACTIVE ? 'selected' : '' }}>
@@ -152,11 +152,11 @@
             </div>
 
             <div hidden="">
-                <label for="user_id">User</label>
+                <label for="user_id">{{ __('home.Username') }}</label>
                 <input type="text" class="form-control" id="user_id" name="user_id" value="{{Auth::user()->id}}">
             </div>
         </div>
-        <button type="button" class="btn btn-primary mt-md-4" id="editProducts">Lưu</button>
+        <button type="button" class="btn btn-primary mt-md-4" id="editProducts">{{ __('home.Save') }}</button>
     </form>
     <script>
         const token = `{{ $_COOKIE['accessToken'] }}`;

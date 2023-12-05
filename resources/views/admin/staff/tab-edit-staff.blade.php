@@ -17,12 +17,12 @@
     @endif
     <form>
         <div>
-            <label for="username">Username</label>
+            <label for="username">{{ __('home.Username') }}</label>
             <input type="text" class="form-control" id="username" name="username" value="{{ $user->username ?? '' }}">
         </div>
         <div>
 
-            <label for="member">Member</label>
+            <label for="member">{{ __('home.Member') }}</label>
             <select id="member" name="member" class="form-select form-control">
                 <option value="{{ Role::DOCTORS }}" {{ $role == Role::DOCTORS ? 'selected' : '' }}>Doctors</option>
                 <option value="{{ Role::PHAMACISTS }}" {{ $role == Role::PHAMACISTS ? 'selected' : '' }}>Pharmacists</option>
@@ -35,19 +35,19 @@
 
         </div>
         <div>
-            <label for="email">Email</label>
+            <label for="email">{{ __('home.Email') }}</label>
             <input type="email" class="form-control" id="email" name="email" value="{{ $user->email ?? '' }}">
         </div>
         <div>
-            <label for="password">Password</label>
+            <label for="password">{{ __('home.Password') }}</label>
             <input type="password" class="form-control" id="password" name="password">
         </div>
         <div>
-            <label for="password_confirm">Enter the Password</label>
+            <label for="password_confirm">{{ __('home.Enter the Password') }}</label>
             <input type="password" class="form-control" id="password_confirm" name="password_confirm">
         </div>
         <div>
-            <label for="status">Status</label>
+            <label for="status">{{ __('home.Status') }}</label>
             <select id="status" name="status" class="form-select form-control">
                 <option value="{{ UserStatus::ACTIVE }}" {{ $user->status == UserStatus::ACTIVE ? 'selected' : '' }}>{{ UserStatus::ACTIVE }}</option>
                 <option value="{{ UserStatus::DELETED }}" {{ $user->status == UserStatus::DELETED ? 'selected' : '' }}>{{ UserStatus::DELETED }}</option>
@@ -55,7 +55,7 @@
 
     </form>
 
-    <button type="button" class="btn btn-primary up-date-button mt-md-4" onclick="updateUser()">Lưu</button>
+    <button type="button" class="btn btn-primary up-date-button mt-md-4" onclick="updateUser()">{{ __('home.Save') }}</button>
 
     <script>
         const token = `{{ $_COOKIE['accessToken'] }}`;

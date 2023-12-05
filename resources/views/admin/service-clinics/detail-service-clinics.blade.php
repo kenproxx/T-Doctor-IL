@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('title')
-    Detail Service Clinics
+    {{ __('home.Detail Service Clinics') }}
 @endsection
 @section('main-content')
     <div class="container">
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800">Detail Service Clinics</h1>
+        <h1 class="h3 mb-4 text-gray-800">{{ __('home.Detail Service Clinics') }}</h1>
         @if (session('success'))
             <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -17,31 +17,31 @@
         <form>
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label for="name">Name</label>
+                    <label for="name">{{ __('home.Name') }}</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{ $service->name }}" required>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="name_en">Name EN</label>
+                    <label for="name_en">{{ __('home.name_en') }}</label>
                     <input type="text" class="form-control" id="name_en" value="{{ $service->name_en }}" name="name_en">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="name_laos">Name Laos</label>
+                    <label for="name_laos">{{ __('home.name_laos') }}</label>
                     <input type="text" class="form-control" id="name_laos" value="{{ $service->name_laos }}"
                            name="name_laos">
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <label for="status">Status</label>
+                    <label for="status">{{ __('home.Status') }}</label>
                     <select id="status" class="form-control">
-                        <option {{ $service->status == 'ACTIVE' ? 'selected' : '' }} value="ACTIVE">ACTIVE</option>
-                        <option {{ $service->status == 'INACTIVE' ? 'selected' : '' }} value="INACTIVE">INACTIVE
+                        <option {{ $service->status == 'ACTIVE' ? 'selected' : '' }} value="ACTIVE">{{ __('home.Active') }}</option>
+                        <option {{ $service->status == 'INACTIVE' ? 'selected' : '' }} value="INACTIVE">{{ __('home.Inactive') }}
                         </option>
                     </select>
                 </div>
             </div>
             <button type="button" onclick="updateService('{{ $service->id }}');" class="btn btn-primary float-right">
-                Save
+                {{ __('home.Save') }}
             </button>
         </form>
     </div>
