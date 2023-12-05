@@ -31,17 +31,54 @@
             <th scope="col">{{ __('home.Tên chuyên khoa') }}</th>
             <th scope="col">{{ __('home.Mô tả') }}</th>
             <th scope="col">{{ __('home.Ảnh đại diện') }}</th>
+            <th scope="col">{{ __('home.Action') }}</th>
         </tr>
         </thead>
         <tbody id="ProductsAdmin">
         @foreach($symptoms as $symptom)
             <tr>
-                <td>{{$symptom->name}}</td>
+                <td>
+                    <a href="{{ route('symptom.edit', $symptom->id) }}">
+                        {{$symptom->name}}
+                    </a>
+                </td>
                 <td>{{$symptom->description}}</td>
                 <td><img src="{{ asset($symptom->thumbnail) }}" alt="Image" width="50px"></td>
+                <td>
+                    <a href="{{ route('symptom.edit', $symptom->id) }}" class="btn btn-success">Edit</a>
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete('{{ $symptom->id }}')">
+                        Delete
+                    </button>
+                </td>
             </tr>
         @endforeach
 
         </tbody>
     </table>
+    <script>
+        function confirmDelete(id) {
+            if (confirm('Are you sure you want to delete!')) {
+                deleteSymptom(id);
+            }
+        }
+
+        async function deleteSymptom(id) {
+            let token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
+            let url = `{{ route('api.medical.symptoms.delete', ['id'=>':id']) }}`;
+            url = url.replace(':id', id);
+
+            await fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+
+            })
+                .then(response => {
+                    alert('Delete success!');
+                    window.location.reload();
+                })
+                .catch(error => console.log(error));
+        }
+    </script>
 @endsection

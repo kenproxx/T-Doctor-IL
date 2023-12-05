@@ -14,6 +14,7 @@ use App\Http\Controllers\CalcViewQuestionController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\connect\CallVideoController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DoctorInfoController;
 use App\Http\Controllers\ExaminationController;
 use App\Http\Controllers\FleaMarketController;
@@ -28,6 +29,7 @@ use App\Http\Controllers\restapi\BookingApi;
 use App\Http\Controllers\ReviewStoreController;
 use App\Http\Controllers\ServiceClinicController;
 use App\Http\Controllers\ShortVideoController;
+use App\Http\Controllers\SymptomController;
 use App\Http\Controllers\TopicVideoController;
 use App\Http\Controllers\WhatFreeToDay;
 use Illuminate\Support\Facades\Route;
@@ -179,19 +181,6 @@ Route::group(['prefix' => 'address'], function () {
     Route::post('commune', [AddressController::class, 'getListCommune'])->name('address.get.list.commune');
 });
 
-Route::group(['prefix' => 'department'], function () {
-    Route::get('list', [\App\Http\Controllers\DepartmentController::class, 'index'])->name('department.index');
-    Route::get('create', [\App\Http\Controllers\DepartmentController::class, 'create'])->name('department.create');
-    Route::post('store', [\App\Http\Controllers\DepartmentController::class, 'store'])->name('departments.store');
-
-});
-
-Route::group(['prefix' => 'symptom'], function () {
-    Route::get('list', [\App\Http\Controllers\SymptomController::class, 'index'])->name('symptom.index');
-    Route::get('create', [\App\Http\Controllers\SymptomController::class, 'create'])->name('symptom.create');
-    Route::post('store', [\App\Http\Controllers\SymptomController::class, 'store'])->name('symptom.store');
-});
-
 Route::middleware(['auth'])->group(function () {
     Route::post('/save-user-login-social', [AuthSocialController::class, 'saveUser'])->name('save.user.login.social');
 
@@ -220,6 +209,22 @@ Route::middleware(['auth'])->group(function () {
         Route::get('list', [TopicVideoController::class, 'getList'])->name('user.topic.videos.list');
         Route::get('detail/{id}', [TopicVideoController::class, 'detail'])->name('user.topic.videos.detail');
         Route::get('create', [TopicVideoController::class, 'create'])->name('user.topic.videos.create');
+    });
+
+    Route::group(['prefix' => 'department'], function () {
+        Route::get('list', [DepartmentController::class, 'index'])->name('department.index');
+        Route::get('create', [DepartmentController::class, 'create'])->name('department.create');
+        Route::post('store', [DepartmentController::class, 'store'])->name('departments.store');
+        Route::get('edit/{id}', [DepartmentController::class, 'edit'])->name('departments.edit');
+        Route::post('update/{id}', [DepartmentController::class, 'update'])->name('departments.update');
+    });
+
+    Route::group(['prefix' => 'symptom'], function () {
+        Route::get('list', [SymptomController::class, 'index'])->name('symptom.index');
+        Route::get('create', [SymptomController::class, 'create'])->name('symptom.create');
+        Route::post('store', [SymptomController::class, 'store'])->name('symptom.store');
+        Route::get('edit/{id}', [SymptomController::class, 'edit'])->name('symptom.edit');
+        Route::post('update/{id}', [SymptomController::class, 'update'])->name('symptom.update');
     });
 
     Route::group(['prefix' => 'connect'], function () {
