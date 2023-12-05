@@ -39,29 +39,23 @@ class BusinessApi extends Controller
 
         $name = (new MainController())->vn_to_str($name);
 
-        return DB::table('clinics')
+        $clinics = DB::table('clinics')
             ->join('users', 'users.id', '=', 'clinics.user_id')
             ->when($name, function ($query) use ($name) {
-                return $query->orWhere(DB::raw('LOWER(clinics.name)'), 'like', '%' . strtolower($name) . '%');
+                $query->orWhere(DB::raw('LOWER(clinics.name)'), 'like', '%' . strtolower($name) . '%');
             })
             ->when($name, function ($query) use ($name) {
                 $departments = Department::where(DB::raw('LOWER(name)'), 'like', '%' . strtolower($name) . '%')->get();
-                $arrayDepartmentID = null;
-                foreach ($departments as $department) {
-                    $arrayDepartmentID[] = $department->id;
-                }
+                $arrayDepartmentID = $departments->pluck('id')->toArray();
                 if ($arrayDepartmentID) {
-                    return $query->orWhereRaw("FIND_IN_SET(?, department) > 0", $arrayDepartmentID);
+                    $query->orWhereRaw("FIND_IN_SET(?, department) > 0", $arrayDepartmentID);
                 }
             })
             ->when($name, function ($query) use ($name) {
                 $symptoms = Symptom::where(DB::raw('LOWER(name)'), 'like', '%' . strtolower($name) . '%')->get();
-                $arraySymptomID = null;
-                foreach ($symptoms as $symptom) {
-                    $arraySymptomID[] = $symptom->id;
-                }
+                $arraySymptomID = $symptoms->pluck('id')->toArray();
                 if ($arraySymptomID) {
-                    return $query->orWhereRaw("FIND_IN_SET(?, symptom) > 0", $arraySymptomID);
+                    $query->orWhereRaw("FIND_IN_SET(?, symptom) > 0", $arraySymptomID);
                 }
             })
             ->where('clinics.status', ClinicStatus::ACTIVE)
@@ -101,6 +95,7 @@ class BusinessApi extends Controller
                 $clinic['symptoms'] = $symptoms->toArray();
                 return $clinic;
             });
+        return response()->json($clinics);
     }
 
     public function searchByDepartmentAndSymptoms(Request $request)
