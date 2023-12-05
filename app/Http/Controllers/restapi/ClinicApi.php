@@ -6,8 +6,8 @@ use App\Enums\ClinicStatus;
 use App\Enums\TypeBussiness;
 use App\Http\Controllers\Controller;
 use App\Models\Clinic;
-use App\Models\ServiceClinic;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ClinicApi extends Controller
@@ -38,6 +38,26 @@ class ClinicApi extends Controller
                 return $clinic;
             });
 
+        return response()->json($clinics);
+    }
+
+    public function searchByDepartmentAndSymptoms(Request $request)
+    {
+        $symptomID = $request->input('symptom');
+        $department = $request->input('department');
+        if ($symptomID && $department) {
+            $clinics = Clinic::whereRaw("FIND_IN_SET(?, symptom) > 0", [$symptomID])
+                ->whereRaw("FIND_IN_SET(?, department) > 0", [$department])
+                ->where('status', ClinicStatus::ACTIVE)
+                ->orderBy('id', 'desc')
+                ->get();
+        } else {
+            $clinics = Clinic::whereRaw("FIND_IN_SET(?, symptom) > 0", [$symptomID])
+                ->orWhereRaw("FIND_IN_SET(?, department) > 0", [$department])
+                ->where('status', ClinicStatus::ACTIVE)
+                ->orderBy('id', 'desc')
+                ->get();
+        }
         return response()->json($clinics);
     }
 

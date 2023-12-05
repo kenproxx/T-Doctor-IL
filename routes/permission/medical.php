@@ -18,12 +18,14 @@ use App\Http\Controllers\DoctorInfoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\restapi\admin\AdminBookingApi;
+use App\Http\Controllers\restapi\admin\AdminDepartmentApi;
 use App\Http\Controllers\restapi\admin\AdminDoctorDepartmentApi;
 use App\Http\Controllers\restapi\admin\AdminDoctorInfoApi;
 use App\Http\Controllers\restapi\admin\AdminNewsApi;
 use App\Http\Controllers\restapi\admin\AdminPhamacitisApi;
 use App\Http\Controllers\restapi\admin\AdminPharmacyApi;
 use App\Http\Controllers\restapi\admin\AdminShortVideoApi;
+use App\Http\Controllers\restapi\admin\AdminSymptomsApi;
 use App\Http\Controllers\restapi\CartApi;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StaffController;
@@ -314,4 +316,22 @@ Route::group(['prefix' => 'short-videos'], function () {
     Route::put('/update/{id}', [AdminShortVideoApi::class, 'update'])->name('api.medical.short.videos.update');
     Route::put('/change/{id}', [AdminShortVideoApi::class, 'changeStatus'])->name('api.medical.short.videos.changeStatus');
     Route::delete('/delete/{id}', [AdminShortVideoApi::class, 'delete'])->name('api.medical.short.videos.delete');
+});
+
+/* Departments api */
+Route::group(['prefix' => 'departments'], function () {
+    Route::get('/list', [AdminDepartmentApi::class, 'getList'])->name('api.medical.departments.list');
+    Route::get('/detail/{id}', [AdminDepartmentApi::class, 'detail'])->name('api.medical.departments.detail');
+    Route::post('/create', [AdminDepartmentApi::class, 'create'])->name('api.medical.departments.create');
+    Route::post('/update/{id}', [AdminDepartmentApi::class, 'update'])->name('api.medical.departments.update');
+    Route::delete('/delete/{id}', [AdminDepartmentApi::class, 'delete'])->name('api.medical.departments.delete');
+});
+
+/* Symptoms api */
+Route::group(['prefix' => 'symptoms'], function () {
+    Route::get('/list', [AdminSymptomsApi::class, 'getList'])->name('api.medical.symptoms.list');
+    Route::get('/detail/{id}', [AdminSymptomsApi::class, 'detail'])->name('api.medical.symptoms.detail');
+    Route::post('/create', [AdminSymptomsApi::class, 'create'])->name('api.medical.symptoms.create');
+    Route::post('/update/{id}', [AdminSymptomsApi::class, 'update'])->name('api.medical.symptoms.update');
+    Route::delete('/delete/{id}', [AdminSymptomsApi::class, 'delete'])->name('api.medical.symptoms.delete');
 });

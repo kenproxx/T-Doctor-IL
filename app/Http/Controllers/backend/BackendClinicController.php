@@ -107,6 +107,9 @@ class BackendClinicController extends Controller
             $type = $request->input('type');
             $clinics_service = $request->input('clinics_service');
 
+            $department = $request->input('departments');
+            $symptoms = $request->input('symptoms');
+
             if ($request->hasFile('gallery')) {
                 $galleryPaths = array_map(function ($image) {
                     $itemPath = $image->store('gallery', 'public');
@@ -134,6 +137,9 @@ class BackendClinicController extends Controller
             $clinic->type = $type;
             $clinic->service_id = $clinics_service;
 //            $clinic->type = TypeBussiness::CLINICS;
+
+            $clinic->department = $department;
+            $clinic->symptom = $symptoms;
 
             $address = [
                 'nation_id' => $nation_id,
@@ -201,6 +207,9 @@ class BackendClinicController extends Controller
             $status = $request->input('status') ?? $clinic->status;
             $clinics_service = $request->input('clinics_service');
 
+            $department = $request->input('departments') ?? $clinic->department;
+            $symptoms = $request->input('symptoms') ?? $clinic->symptom;
+
             if ($request->hasFile('gallery')) {
                 $galleryPaths = array_map(function ($image) {
                     $itemPath = $image->store('gallery', 'public');
@@ -227,6 +236,9 @@ class BackendClinicController extends Controller
                 'district_id' => $district_id,
                 'commune_id' => $commune_id
             ];
+
+            $clinic->department = $department;
+            $clinic->symptom = $symptoms;
 
             $clinic->address = implode(',', $address);
 

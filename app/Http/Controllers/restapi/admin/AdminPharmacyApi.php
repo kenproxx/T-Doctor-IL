@@ -28,7 +28,8 @@ class AdminPharmacyApi extends Controller
         return response()->json($pharmacies);
     }
 
-    public function getAllPharmacy(Request $request) {
+    public function getAllPharmacy(Request $request)
+    {
 
         $status = $request->input('status');
         if ($status && $status != ClinicStatus::DELETED) {
@@ -82,6 +83,9 @@ class AdminPharmacyApi extends Controller
             $close_date = $request->input('close_date');
             $introduce = $request->input('introduce');
 
+            $department = $request->input('departments');
+            $symptoms = $request->input('symptoms');
+
             if ($request->hasFile('gallery')) {
                 $galleryPaths = array_map(function ($image) {
                     $itemPath = $image->store('gallery', 'public');
@@ -118,6 +122,9 @@ class AdminPharmacyApi extends Controller
             $pharmacy->introduce = $introduce;
             $pharmacy->gallery = $gallery;
             $pharmacy->status = $status ?? ClinicStatus::ACTIVE;
+
+            $pharmacy->department = $department;
+            $pharmacy->symptom = $symptoms;
 
             if (!$user_id) {
                 return response("UserID not null!", 400);
@@ -171,6 +178,9 @@ class AdminPharmacyApi extends Controller
             $introduce = $request->input('introduce') ?? $pharmacy->introduce;
             $status = $request->input('status') ?? $pharmacy->status;
 
+            $department = $request->input('departments') ?? $pharmacy->department;;
+            $symptoms = $request->input('symptoms') ?? $pharmacy->symptom;;
+
             if ($request->hasFile('gallery')) {
                 $galleryPaths = array_map(function ($image) {
                     $itemPath = $image->store('gallery', 'public');
@@ -203,6 +213,9 @@ class AdminPharmacyApi extends Controller
             $pharmacy->introduce = $introduce;
             $pharmacy->gallery = $gallery;
             $pharmacy->status = $status ?? ClinicStatus::ACTIVE;
+
+            $pharmacy->department = $department;
+            $pharmacy->symptom = $symptoms;
 
             $success = $pharmacy->save();
             if ($success) {
