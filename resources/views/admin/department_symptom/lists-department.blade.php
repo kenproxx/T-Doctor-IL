@@ -31,17 +31,53 @@
             <th scope="col">{{ __('home.Tên chuyên khoa') }}</th>
             <th scope="col">{{ __('home.Mô tả') }}</th>
             <th scope="col">{{ __('home.Ảnh đại diện') }}</th>
+            <th scope="col">{{ __('home.Action') }}</th>
         </tr>
         </thead>
         <tbody id="ProductsAdmin">
-            @foreach($departments as $department)
-                <tr>
-                    <td>{{$department->name}}</td>
-                    <td>{{$department->description}}</td>
-                    <td><img src="{{ asset($department->thumbnail) }}" alt="Image" width="50px"></td>
-                </tr>
-            @endforeach
-
+        @foreach($departments as $department)
+            <tr>
+                <td>
+                    <a href="{{ route('departments.edit', $department->id) }}">
+                        {{$department->name}}
+                    </a>
+                </td>
+                <td>{{$department->description}}</td>
+                <td><img src="{{ asset($department->thumbnail) }}" alt="Image" width="50px"></td>
+                <td>
+                    <a href="{{ route('departments.edit', $department->id) }}" class="btn btn-success">Edit</a>
+                    <button type="button" class="btn btn-danger" onclick="confirmDelete('{{ $department->id }}')">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
+    <script>
+        function confirmDelete(id) {
+            if (confirm('Are you sure you want to delete!')) {
+                deleteDepartment(id);
+            }
+        }
+
+        async function deleteDepartment(id) {
+            let token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
+            let url = `{{ route('api.medical.departments.delete', ['id'=>':id']) }}`;
+            url = url.replace(':id', id);
+
+            await fetch(url, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+
+            })
+                .then(response => {
+                    alert('Delete success!');
+                    window.location.reload();
+                })
+                .catch(error => console.log(error));
+        }
+    </script>
 @endsection
