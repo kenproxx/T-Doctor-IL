@@ -44,5 +44,6 @@ class VerifyCsrfToken extends Middleware
         '/api/users-social/**',
         '/api/messages/**',
         'auth/*',
+        'medicine/search'
     ];
 }

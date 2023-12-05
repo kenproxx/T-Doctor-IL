@@ -206,7 +206,6 @@
             formData.append('category', categoryMedicine);
             formData.append('location', locationMedicine);
 
-            formData.append('_token', '{{ csrf_token() }}');
             try {
                 $.ajax({
                     url: `{{route('medicine.search')}}`,
