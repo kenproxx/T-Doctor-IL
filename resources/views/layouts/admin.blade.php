@@ -557,6 +557,7 @@
     </div>
 </footer>
 <!-- End Footer -->
+@include('components.head.tinymce-config')
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
@@ -568,7 +569,6 @@
 <script src="{{ asset('admin/vendor/echarts/echarts.min.js')}}"></script>
 <script src="{{ asset('admin/vendor/quill/quill.min.js')}}"></script>
 <script src="{{ asset('admin/vendor/simple-datatables/simple-datatables.js')}}"></script>
-<script src="{{ asset('admin/vendor/tinymce/tinymce.min.js')}}"></script>
 <script src="{{ asset('admin/vendor/php-email-form/validate.js')}}"></script>
 
 <!-- Template Main JS File -->
