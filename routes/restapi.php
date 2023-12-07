@@ -9,6 +9,7 @@ use App\Http\Controllers\restapi\DoctorDepartmentApi;
 use App\Http\Controllers\restapi\DoctorInfoApi;
 use App\Http\Controllers\restapi\BusinessApi;
 use App\Http\Controllers\restapi\NewsApi;
+use App\Http\Controllers\restapi\OrderApi;
 use App\Http\Controllers\restapi\PharmacyApi;
 use App\Http\Controllers\restapi\ProductInfoApi;
 use App\Http\Controllers\restapi\ProductMedicineApi;
@@ -38,6 +39,12 @@ Route::group(['prefix' => 'products'], function () {
     Route::get('/clinics/{id}', [ProductInfoApi::class, 'getByClinic'])->name('products.api.clinics');
     Route::get('/search', [ProductInfoApi::class, 'search'])->name('products.api.search');
     Route::get('/department/{id}', [ProductInfoApi::class, 'findByDepartment'])->name('products.restapi.department');
+});
+
+Route::group(['prefix' => 'orders'], function () {
+    Route::get('/get-by-user/{id}', [OrderApi::class, 'getAllByUser'])->name('restapi.api.orders.list');
+    Route::get('/detail/{id}', [OrderApi::class, 'detail'])->name('restapi.api.orders.detail');
+    Route::put('/cancel/{id}', [OrderApi::class, 'cancelOrder'])->name('restapi.api.orders.cancel');
 });
 
 Route::group(['prefix' => 'medicals'], function () {

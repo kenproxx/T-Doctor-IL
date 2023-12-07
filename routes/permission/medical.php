@@ -22,6 +22,7 @@ use App\Http\Controllers\restapi\admin\AdminDepartmentApi;
 use App\Http\Controllers\restapi\admin\AdminDoctorDepartmentApi;
 use App\Http\Controllers\restapi\admin\AdminDoctorInfoApi;
 use App\Http\Controllers\restapi\admin\AdminNewsApi;
+use App\Http\Controllers\restapi\admin\AdminOrderApi;
 use App\Http\Controllers\restapi\admin\AdminPhamacitisApi;
 use App\Http\Controllers\restapi\admin\AdminPharmacyApi;
 use App\Http\Controllers\restapi\admin\AdminShortVideoApi;
@@ -62,6 +63,13 @@ Route::group(['prefix' => 'products'], function () {
     Route::get('/edit/{id}', [ProductInfoController::class, 'edit'])->name('product.edit');
     Route::put('/update/{id}', [ProductInfoController::class, 'update'])->name('product.update');
 
+});
+
+Route::group(['prefix' => 'orders'], function () {
+    Route::get('/getAll', [AdminOrderApi::class, 'getAll'])->name('medical.api.orders.list');
+    Route::get('/detail/{id}', [AdminOrderApi::class, 'detail'])->name('medical.api.orders.detail');
+    Route::put('/update-status/{id}', [AdminOrderApi::class, 'updateStatus'])->name('medical.api.orders.update');
+    Route::delete('/delete/{id}', [AdminOrderApi::class, 'delete'])->name('medical.api.orders.delete');
 });
 
 Route::group(['prefix' => 'staffs'], function () {
