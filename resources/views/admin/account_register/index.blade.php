@@ -21,7 +21,7 @@
         <tr>
             <th scope="col">STT</th>
             <th scope="col">{{ __('home.Username') }}</th>
-            <th scope="col">{{ __('home.email') }}</th>
+            <th scope="col">{{ __('home.Email') }}</th>
             <th scope="col">{{ __('home.type') }}</th>
             <th scope="col">{{ __('home.Member') }}</th>
             <th scope="col">{{ __('home.Status') }}</th>

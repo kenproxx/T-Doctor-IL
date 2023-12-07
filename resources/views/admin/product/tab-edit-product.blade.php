@@ -4,7 +4,7 @@
 @endsection
 @section('main-content')
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">{{ __('Edit') }}</h1>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('home.Edit') }}</h1>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -99,7 +99,7 @@
                 <img width="50px" src="{{$product->thumbnail}}" alt="thumbnail">
             </div>
             <div>
-                <label for="gallery">{{ __('home.Gallery') }}</label>
+                <label for="gallery">{{ __('home.gallery') }}</label>
                 <input type="file" class="form-control" id="gallery" name="gallery[]" multiple accept="image/*">
                 @php
                     $galleryArray = explode(',', $product->gallery);

@@ -101,7 +101,7 @@
                 <div id="localParticiapntContainer" class="w-48 h-48 rounded-3xl bg-gray-900 relative">
                     <video id="localVideoTag" src="" autoplay class="object-contain w-full rounded-t-3xl"></video>
                     <div id="localUsername" class="absolute h-8 w-full bg-gray-700 rounded-b-3xl bottom-0 text-white text-center font-bold pt-1">
-                        Me
+                        {{ __('home.Me') }}
                     </div>
                 </div>
             </div>
@@ -128,7 +128,7 @@
 
         <div id="leaveMeetingView" class="hidden">
             <h1 class="text-center text-3xl mt-10 font-bold">
-                You have left the meeting
+                {{ __('home.You have left the meeting') }}
             </h1>
         </div>
     </body>

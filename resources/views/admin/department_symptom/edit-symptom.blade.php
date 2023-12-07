@@ -18,12 +18,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="description">Mô tả:</label>
+                                <label for="description">{{ __('home.Mô tả') }}:</label>
                                 <input name="description" id="description" class="form-control" required value="{{ $symptom->description }}">
                             </div>
 
                             <div class="form-group">
-                                <label for="department">Department:</label>
+                                <label for="department">{{ __('home.Department') }}:</label>
                                 <select id="department" class="form-control" name="department">
                                     @foreach($departments as $department)
                                         <option {{ $symptom->department_id == $department->id ? 'selected' : '' }}

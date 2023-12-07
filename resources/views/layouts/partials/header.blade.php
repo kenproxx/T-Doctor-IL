@@ -306,7 +306,7 @@
                             <div class="sign--up d-flex justify-content-center">
                                 <p>{{ __('home.Do not have an account') }}?</p>
                                 <a href="" data-toggle="modal" data-target="#modalRegister"
-                                   data-dismiss="modal">{{ __('home.Sign up') }}</a>
+                                   data-dismiss="modal">{{ __('home.form-element text-center') }}</a>
                             </div>
                         </div>
                     </div>

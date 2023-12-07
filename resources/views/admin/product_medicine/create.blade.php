@@ -5,7 +5,7 @@
 @section('main-content')
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">{{ __('home.Create') }}</h1>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('home.create') }}</h1>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -98,7 +98,7 @@
                 <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*">
             </div>
             <div>
-                <label for="gallery">{{ __('home.Gallery') }}</label>
+                <label for="gallery">{{ __('home.gallery') }}</label>
                 <input type="file" class="form-control" id="gallery" name="gallery[]" multiple accept="image/*">
             </div>
             <div class="row">

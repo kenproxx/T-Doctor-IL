@@ -5,7 +5,7 @@
 
     </style>
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">{{ __('List Clinics') }}</h1>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('home.List Clinics') }}</h1>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand btn btn-primary mb-3" href="{{route('clinics.create.product')}}"> <span
                 class="text-white">{{ __('home.Add') }}</span></a>

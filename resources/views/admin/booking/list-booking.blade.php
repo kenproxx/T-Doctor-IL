@@ -18,7 +18,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">{{ __('home.Người đăng ký') }}</th>
-                <th scope="col">{{ __('home.Clinics') }}</th>
+                <th scope="col">{{ __('home.clinics') }}</th>
                 <th scope="col">{{ __('home.giờ vào') }}</th>
                 <th scope="col">{{ __('home.dịch vụ') }}</th>
                 <th scope="col">{{ __('home.Trạng thái') }}</th>
