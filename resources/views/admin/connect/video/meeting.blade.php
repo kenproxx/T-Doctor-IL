@@ -471,13 +471,19 @@
 
     $("#leaveMeeting").on("click", async function () {
         await meeting.leaveMeeting();
-        // handleDownloadRecord();
+        handleChangeStatusDownloadRecord();
         $("#meetingView").addClass("hidden");
         $("#leaveMeetingView").removeClass("hidden");
     });
 
-    function handleDownloadRecord() {
-        axios.get(`{{ route('download.record') }}`,
+    function handleChangeStatusDownloadRecord() {
+        let thisUrl = window.location.href;
+        thisUrl = thisUrl.split('/');
+        let roomName = thisUrl[thisUrl.length - 1];
+        let url = "{{ route('download.change.status', ['roomName' => ':roomName']) }}";
+        url = url.replace(':roomName', roomName);
+
+        axios.get(url,
             {
                 Accept: 'application/json',
             }).then((response) => {

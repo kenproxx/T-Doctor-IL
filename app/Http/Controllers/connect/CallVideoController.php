@@ -72,6 +72,7 @@ class CallVideoController extends Controller
         $queueDownload->user_id_1 = Cache::get('user_id_1');
         $queueDownload->user_id_2 = Cache::get('user_id_2');
         $queueDownload->room_name = $roomName;
+        $queueDownload->status = false;
         $queueDownload->save();
 
         Cache::delete('user_id_1');
@@ -119,9 +120,19 @@ class CallVideoController extends Controller
         }
     }
 
+    public function changeStatusQueueDownloadRecord($roomName)
+    {
+        $queueDownload = QueueDownloadChatVideo::where('room_name', $roomName)->first();
+
+        if ($queueDownload) {
+            $queueDownload->status = true;
+            $queueDownload->save();
+        }
+    }
+
     public function handleDownloadRecordByRoomName()
     {
-        $queueDownloads = QueueDownloadChatVideo::all();
+        $queueDownloads = QueueDownloadChatVideo::where('status', true)->get();
 
         if (count($queueDownloads) == 0) {
             return;
@@ -131,7 +142,7 @@ class CallVideoController extends Controller
             $recordIds = $this->getRecordIdByRoomName($queueDownload->room_name);
 
             foreach ($recordIds['data'] as $recordId) {
-                $response = $this->downloadRecordByRoomName($recordId['_id'], $queueDownload->user_id_1, $queueDownload->user_id_2);
+                $response = $this->downloadRecordByRoomName($recordId['_id'], $queueDownload->user_id_1, $queueDownload->user_id_2, $queueDownload->room_name);
             }
             $queueDownload->delete();
         }
@@ -145,7 +156,7 @@ class CallVideoController extends Controller
         return $response->json();
     }
 
-    private function downloadRecordByRoomName($recordingId, $user_id_1, $user_id_2)
+    private function downloadRecordByRoomName($recordingId, $user_id_1, $user_id_2, $roomName)
     {
 
         // Contains logic to validate existing meeting
@@ -162,7 +173,7 @@ class CallVideoController extends Controller
 
             $pathFile = 'public/connect/video/'.$fileName;
 
-            Storage::put($pathFile, $response->body());
+            Storage::put($pathFile, $response->getBody()->getContents());
 
             $chat = new Chat();
 
