@@ -41,7 +41,7 @@
 </style>
 @section('main-content')
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">{{ __('Edit') }}</h1>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('home.Edit') }}</h1>
     <form method="post" action="{{ route('api.backend.clinics.update', ['id' => $clinic->id]) }}">
         @csrf
         @method('POST')

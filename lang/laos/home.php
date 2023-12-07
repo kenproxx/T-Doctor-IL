@@ -543,7 +543,22 @@ return [
     'favicon' => 'favicon',
     'Banner quảng cáo' => 'ປ້າຍໂຄສະນາ',
     'Địa chỉ' => 'ທີ່ຢູ່',
-    'List Staff' => 'ລາຍຊື່ພະນັກງານ'
+    'List Staff' => 'ລາຍຊື່ພະນັກງານ',
+    'First' => 'ທໍາອິດ',
+    'Last' => 'ສຸດທ້າຍ',
+    'Handle' => 'ຈັບ',
+    'Me' => 'ຂ້ອຍ',
+    'You have left the meeting' => 'ທ່ານໄດ້ອອກຈາກກອງປະຊຸມ',
+    'Update Symptoms' => 'ອັບເດດອາການ',
+    'List products' => 'ລາຍການຜະລິດຕະພັນ',
+    'List product medicine' => 'ລາຍຊື່ຢາຜະລິດຕະພັນ',
+    'Today' => 'ມື້​ນີ້',
+    'This Month' => 'ເດືອນ​ນີ້',
+    'This Year' => 'ປີ​ນີ້',
+    'Sales' => 'ການຂາຍ',
+    'Revenue' => 'ລາຍຮັບ',
+    'Customers' => 'ລູກຄ້າ',
+    'Reports' => 'ບົດລາຍງານ'
 
 
 

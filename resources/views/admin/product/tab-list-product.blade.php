@@ -11,7 +11,7 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">{{ __('home.Thumbnail') }}</th>
-            <th scope="col">{{ __('home.Gallery') }}</th>
+            <th scope="col">{{ __('home.gallery') }}</th>
             <th scope="col">{{ __('home.Name') }}</th>
             <th scope="col">{{ __('home.Location') }}</th>
             <th scope="col">{{ __('home.Price') }}</th>

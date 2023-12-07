@@ -12,7 +12,7 @@
 <!-- Form to add new address -->
 <form id="addAddressForm">
     @csrf
-    <label for="newAddress">New Address:</label>
+    <label for="newAddress">{{ __('home.New Address') }}:</label>
     <input type="text" id="newAddress" name="newAddress" required>
     <button type="button" onclick="addNewAddress()">{{ __('home.Save') }}</button>
 </form>

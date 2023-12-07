@@ -3,7 +3,7 @@
 @endphp
 @extends('layouts.admin')
 @section('title')
-    Edit Doctor
+    {{ __('home.Edit Product') }}
 @endsection
 @section('main-content')
     <style>

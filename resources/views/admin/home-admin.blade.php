@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 @section('title')
-    Dashboard
+    {{ __('home.Dashboard') }}
 @endsection
 @section('main-content')
     <div class="pagetitle">
         <h1>Dashboard</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
+                <li class="breadcrumb-item"><a href="/">{{ __('home.Home') }}</a></li>
+                <li class="breadcrumb-item active">{{ __('home.Dashboard') }}</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -31,14 +31,14 @@
                                         <h6>Filter</h6>
                                     </li>
 
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ __('home.Today') }}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ __('home.This Month') }}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ __('home.This Year') }}</a></li>
                                 </ul>
                             </div>
 
                             <div class="card-body">
-                                <h5 class="card-title">Sales <span>| Today</span></h5>
+                                <h5 class="card-title">{{ __('home.Sales') }} <span>| {{ __('home.Today') }}</span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -66,14 +66,14 @@
                                         <h6>Filter</h6>
                                     </li>
 
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ __('home.Today') }}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ __('home.This Month') }}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ __('home.This Year') }}</a></li>
                                 </ul>
                             </div>
 
                             <div class="card-body">
-                                <h5 class="card-title">Revenue <span>| This Month</span></h5>
+                                <h5 class="card-title">{{ __('home.Revenue') }} <span>| {{ __('home.This Month') }}</span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -102,14 +102,14 @@
                                         <h6>Filter</h6>
                                     </li>
 
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ __('home.Today') }}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ __('home.This Month') }}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ __('home.This Year') }}</a></li>
                                 </ul>
                             </div>
 
                             <div class="card-body">
-                                <h5 class="card-title">Customers <span>| This Year</span></h5>
+                                <h5 class="card-title">{{ __('home.Customers') }} <span>| {{ __('home.This Year') }}</span></h5>
 
                                 <div class="d-flex align-items-center">
                                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
@@ -138,14 +138,14 @@
                                         <h6>Filter</h6>
                                     </li>
 
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ __('home.Today') }}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ __('home.This Month') }}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ __('home.This Year') }}</a></li>
                                 </ul>
                             </div>
 
                             <div class="card-body">
-                                <h5 class="card-title">Reports <span>/Today</span></h5>
+                                <h5 class="card-title">{{ __('home.Reports') }} <span>/{{ __('home.Today') }}</span></h5>
 
                                 <!-- Line Chart -->
                                 <div id="reportsChart"></div>

@@ -128,7 +128,7 @@
                 <img class="mt-3" src="{{ asset($productMedicine->thumbnail) }}" alt="" width="80px" height="80xp">
             </div>
             <div>
-                <label>{{ __('home.Gallery') }}</label>
+                <label>{{ __('home.gallery') }}</label>
                 <input type="file" class="form-control" id="gallery" name="gallery[]" multiple accept="image/*">
                 @php
                     $gallery = $productMedicine->gallery;

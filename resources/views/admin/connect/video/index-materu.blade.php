@@ -80,9 +80,9 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">{{ __('home.First') }}</th>
+            <th scope="col">{{ __('home.Last') }}</th>
+            <th scope="col">{{ __('home.Handle') }}</th>
         </tr>
         </thead>
         <tbody>

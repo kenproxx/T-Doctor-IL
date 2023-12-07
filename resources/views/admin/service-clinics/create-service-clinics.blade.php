@@ -5,7 +5,7 @@
 @section('main-content')
     <div class="container">
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800">{{ __('home.Create Service Clinics') }}</h1>
+        <h1 class="h3 mb-4 text-gray-800">  {{ __('home.Create Service Clinics') }}</h1>
         @if (session('success'))
             <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}

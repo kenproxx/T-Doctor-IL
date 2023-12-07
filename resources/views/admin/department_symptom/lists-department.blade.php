@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-    {{ __('home.List Departments') }}
+    {{ __('home.list-departments') }}
 @endsection
 @section('main-content')
     <style>

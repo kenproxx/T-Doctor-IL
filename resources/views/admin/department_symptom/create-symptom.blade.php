@@ -7,7 +7,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('home.Create Symptom') }}</div>
+                    <div class="card-header">{{ __('home.Create Symptoms') }}</div>
 
                     <div class="card-body">
                         <form action="{{ route('symptom.store') }}" method="post" enctype="multipart/form-data">
@@ -19,12 +19,12 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="description">Mô tả:</label>
+                                <label for="description">{{ __('home.Mô tả') }}:</label>
                                 <input name="description" id="description" class="form-control" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="department">Department:</label>
+                                <label for="department">{{ __('home.departments') }}:</label>
                                 <select id="department" class="form-control" name="department">
                                     @foreach($departments as $department)
                                         <option value="{{$department->id}}">{{$department->name}}</option>

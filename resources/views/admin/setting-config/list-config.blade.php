@@ -20,13 +20,13 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4"><label for="website_description">{{ __('home.Mô tả việt') }} </label>
+                <div class="col-sm-4"><label for="website_description">{{ __('home.Mô tả ngắn việt') }} </label>
                     <textarea class="form-control" name="website_description" id="website_description"></textarea>
                 </div>
-                <div class="col-sm-4"><label for="website_description_en">{{ __('home. Mô tả anh') }}</label>
+                <div class="col-sm-4"><label for="website_description_en">{{ __('home.Mô tả ngắn anh') }}</label>
                     <textarea class="form-control" name="website_description_en" id="website_description_en"></textarea>
                 </div>
-                <div class="col-sm-4"><label for="website_description_laos">{{ __('home.Mô tả lào') }} </label>
+                <div class="col-sm-4"><label for="website_description_laos">{{ __('home.Mô tả ngắn lào') }} </label>
                     <textarea class="form-control" name="website_description_laos"
                               id="website_description_laos"></textarea>
                 </div>
@@ -108,15 +108,15 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4"><label>{{ __('home.Mô tả việt') }}</label>
+                <div class="col-sm-4"><label>{{ __('home.Mô tả ngắn việt') }}</label>
                     <textarea class="form-control" name="website_description"
                               id="website_description">{{$settingConfig->website_description}}</textarea>
                 </div>
-                <div class="col-sm-4"><label>{{ __('home.Mô tả anh') }}</label>
+                <div class="col-sm-4"><label>{{ __('home.Mô tả ngắn anh') }}</label>
                     <textarea class="form-control" name="website_description_en"
                               id="website_description_en">{{$settingConfig->website_description_en}}</textarea>
                 </div>
-                <div class="col-sm-4"><label>{{ __('home.Mô tả lào') }}</label>
+                <div class="col-sm-4"><label>{{ __('home.Mô tả ngắn lào') }}</label>
                     <textarea class="form-control" name="website_description_laos"
                               id="website_description_laos">{{$settingConfig->website_description_laos}}</textarea>
                 </div>
@@ -128,7 +128,7 @@
                 <div class="col-sm-4"><label>{{ __('home.Email') }}</label>
                     <input type="email" class="form-control" id="email" name="email" value="{{$settingConfig->email}}">
                 </div>
-                <div class="col-sm-4"><label>{{ __('home.Phone Number') }}</label>
+                <div class="col-sm-4"><label>{{ __('home.PhoneNumber') }}</label>
                     <input type="number" class="form-control" id="phone" name="phone"
                            value="{{$settingConfig->phone}}"></div>
             </div>

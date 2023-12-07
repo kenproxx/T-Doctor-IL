@@ -7,7 +7,7 @@
 
     </style>
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">List product medicine</h1>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('home.List product medicine') }}</h1>
     <a href="{{ route('api.backend.product-medicine.create') }}" class="btn btn-primary mb-3">Add</a>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
@@ -66,7 +66,7 @@
         const token = `{{ $_COOKIE['accessToken'] ?? ''}}`;
 
         function deleteCategoryProduct(id) {
-            if (confirm('Bạn có chắc chắn muốn xóa không?')) {
+            if (confirm('{{ __('home.Bạn có chắc chắn muốn xóa không') }}?')) {
 
                 loadingMasterPage();
                 let url = '{{ route('api.backend.product-medicine.destroy', ['id' => ':id']) }}';

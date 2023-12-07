@@ -554,7 +554,22 @@ return [
     'favicon' => 'biểu tượng yêu thích',
     'Banner quảng cáo' => 'Quảng cáo biểu ngữ',
     'Địa chỉ' => 'Địa chỉ',
-    'List Staff' => 'Danh sách nhân viên'
+    'List Staff' => 'Danh sách nhân viên',
+    'First' => 'Đầu tiên',
+    'Last' => 'Cuối cùng',
+    'Handle' => 'Xử lý',
+    'Me' => 'Tôi',
+    'You have left the meeting' => 'Bạn đã rời khỏi cuộc họp',
+    'Update Symptoms' => 'Cập nhật triệu chứng',
+    'List products' => 'Liệt kê sản phẩm',
+    'List product medicine' => 'Liệt kê sản phẩm thuốc',
+    'Today' => 'Hôm nay',
+    'This Month' => 'Tháng này',
+    'This Year' => 'Năm nay',
+    'Sales' => 'Việc bán hàng',
+    'Revenue' => 'Doanh thu',
+    'Customers' => 'Khách hàng',
+    'Reports' => 'Báo cáo'
 
 
 
