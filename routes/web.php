@@ -247,7 +247,7 @@ Route::middleware(['auth'])->group(function () {
 
             Route::post("/validateMeeting", [CallVideoController::class, 'validateMeeting'])->name("validateMeeting");
 
-            Route::get("/handle-download-record/{roomName}", [CallVideoController::class, 'handleDownloadRecordByRoomName'])->name("download.record");
+            Route::get("/handle-change-status-download-record/{roomName}", [CallVideoController::class, 'changeStatusQueueDownloadRecord'])->name("download.change.status");
 
             Route::get("/meeting/{meetingId}", function($meetingId) {
 
