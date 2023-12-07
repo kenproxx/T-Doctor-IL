@@ -27,6 +27,7 @@ use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecruitmentController;
 use App\Http\Controllers\restapi\BookingApi;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReviewStoreController;
 use App\Http\Controllers\ServiceClinicController;
 use App\Http\Controllers\ShortVideoController;
@@ -198,6 +199,11 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'orders'], function () {
         Route::get('admin/list', [OrderController::class, 'index'])->name('view.admin.orders.index');
         Route::get('admin/detail/{id}', [OrderController::class, 'detail'])->name('view.admin.orders.detail');
+    });
+
+    Route::group(['prefix' => 'reviews'], function () {
+        Route::get('admin/list', [ReviewController::class, 'index'])->name('view.admin.reviews.index');
+        Route::get('admin/detail/{id}', [ReviewController::class, 'detail'])->name('view.admin.reviews.detail');
     });
 
     Route::group(['prefix' => 'short-video'], function () {
