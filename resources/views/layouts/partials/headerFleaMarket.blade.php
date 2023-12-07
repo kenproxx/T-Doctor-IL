@@ -24,7 +24,7 @@
                             <div class="d-flex align-items-center mr-2">
                                 {{Auth::user()->username}}
                             </div>
-                            <img src="{{asset('img/user-circle.png')}}">
+                            <img src="{{asset('img/user-circle.png')}}" alt="">
                         </div>
                         <div class="dropdown-menu">
                             @if( (new MedicalPermission())->isMedicalPermission())
@@ -55,12 +55,12 @@
                     </div>
                     <div class="align-items-center row">
                         <a href="{{route('home')}}">
-                            <img class="w-100px" src="{{asset('img/icons_logo/logo-new.png')}}">
+                            <img class="w-100px" src="{{asset('img/icons_logo/logo-new.png')}}" alt="">
                         </a>
                     </div>
                     <div class="header-detail--right d-flex">
                         <div class="ml-2 user">
-                            <img src="{{asset('img/user-circle.png')}}">
+                            <img src="{{asset('img/user-circle.png')}}" alt="">
                         </div>
                     </div>
                 </div>
@@ -70,7 +70,7 @@
         <div class="offcanvas offcanvas-start" tabindex="-1" id="fleaMarketNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
                 <a href="{{route('home')}}" class="offcanvas-title" id="offcanvasNavbarLabel"><img class="w-100"
-                                                                                                   src="{{asset('img/icons_logo/logo-new.png')}}"></a>
+                                                                                                   src="{{asset('img/icons_logo/logo-new.png')}}" alt=""></a>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
@@ -134,13 +134,13 @@
                                     </div>
                                     <div class="form-signin d-flex justify-content-around">
                                         <button type="button" class="login-with-btn"><img
-                                                src="{{asset('img/icons_logo/facebook_logo.png')}}"/></button>
+                                                src="{{asset('img/icons_logo/facebook_logo.png')}}" alt=""/></button>
                                         <a href="{{ route('login.google') }}" class="login-with-btn"><img
                                                 src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/></a>
                                         <button type="button" class="login-with-btn"><img
-                                                src="{{asset('img/icons_logo/apple_logo.png')}}"/></button>
+                                                src="{{asset('img/icons_logo/apple_logo.png')}}" alt=""/></button>
                                         <button type="button" class="login-with-btn"><img
-                                                src="{{asset('img/icons_logo/kakao-talk_logo.png')}}"/></button>
+                                                src="{{asset('img/icons_logo/kakao-talk_logo.png')}}" alt=""/></button>
                                     </div>
                                     <div class="sign--up d-flex justify-content-center">
                                         <p>{{ __('home.Do not have an account') }}?</p>
@@ -332,13 +332,13 @@
                                     </div>
                                     <div class="form-signin" style="display: flex; justify-content: space-around">
                                         <button type="button" class="login-with-btn"><img
-                                                src="{{asset('img/icons_logo/facebook_logo.png')}}"/></button>
+                                                src="{{asset('img/icons_logo/facebook_logo.png')}}" alt=""/></button>
                                         <a href="{{ route('login.google') }}" class="login-with-btn"><img
                                                 src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/></a>
                                         <button type="button" class="login-with-btn"><img
-                                                src="{{asset('img/icons_logo/apple_logo.png')}}"/></button>
+                                                src="{{asset('img/icons_logo/apple_logo.png')}}" alt=""/></button>
                                         <button type="button" class="login-with-btn"><img
-                                                src="{{asset('img/icons_logo/kakao-talk_logo.png')}}"/></button>
+                                                src="{{asset('img/icons_logo/kakao-talk_logo.png')}}" alt=""/></button>
                                     </div>
                                     <div class="sign--up d-flex justify-content-center">
                                         <p>{{ __('home.Do you already have an account') }}?</p>
@@ -347,9 +347,9 @@
                                     </div>
                                 </div>
                                 <div hidden="">
-                                    <input type="text" name="combined_address" id="combined_address" class="form-control">
-                                    <input type="text" name="longitude" id="longitude" class="form-control">
-                                    <input type="text" name="latitude" id="latitude" class="form-control">
+                                    <label for="combined_address"></label><input type="text" name="combined_address" id="combined_address" class="form-control">
+                                    <label for="longitude"></label><input type="text" name="longitude" id="longitude" class="form-control">
+                                    <label for="latitude"></label><input type="text" name="latitude" id="latitude" class="form-control">
                                 </div>
                             </form>
                         </div>
