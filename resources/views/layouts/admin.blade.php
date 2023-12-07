@@ -267,12 +267,12 @@
 
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
                     <img src="{{ asset('admin/img/profile-img.jpg')}}" alt="Profile" class="rounded-circle">
-                    <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+                    <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->username }}</span>
                 </a><!-- End Profile Iamge Icon -->
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>Kevin Anderson</h6>
+                        <h6>{{ Auth::user()->username }}</h6>
                         <span>Web Designer</span>
                     </li>
                     <li>
@@ -353,6 +353,22 @@
                 </ul>
             </li>
             <!-- End Selling/Buying Nav -->
+
+            <!-- Order Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#orders-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-menu-button-wide"></i><span>{{ __('home.Order') }}</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="orders-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{{ route('view.admin.orders.index') }}">
+                            <i class="bi bi-circle"></i><span>{{ __('home.Order') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- End Order Nav -->
 
             <!-- List Coupon Nav -->
             <li class="nav-item">

@@ -22,6 +22,7 @@ use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\NewEventController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecruitmentController;
@@ -192,6 +193,11 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/return-checkout', [CheckoutController::class, 'returnCheckout'])->name('return.checkout.payment');
         Route::post('/imm', [CheckoutController::class, 'checkoutByImm'])->name('user.checkout.imm');
         Route::post('/vnpay', [CheckoutController::class, 'checkoutByVNPay'])->name('user.checkout.vnpay');
+    });
+
+    Route::group(['prefix' => 'orders'], function () {
+        Route::get('admin/list', [OrderController::class, 'index'])->name('view.admin.orders.index');
+        Route::get('admin/detail/{id}', [OrderController::class, 'detail'])->name('view.admin.orders.detail');
     });
 
     Route::group(['prefix' => 'short-video'], function () {
