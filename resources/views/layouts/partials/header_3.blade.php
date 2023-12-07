@@ -34,7 +34,7 @@
                                 <div class="d-flex align-items-center mr-2">
                                     {{Auth::user()->username}}
                                 </div>
-                                <img src="{{asset('img/user-circle.png')}}">
+                                <img src="{{asset('img/user-circle.png')}}" alt="">
                             </div>
                             <div class="dropdown-menu">
                                 @if( (new MedicalPermission())->isMedicalPermission())
@@ -102,13 +102,13 @@
                             </div>
                             <div class="form-signin d-flex justify-content-around">
                                 <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/facebook_logo.png')}}"/></button>
+                                        src="{{asset('img/icons_logo/facebook_logo.png')}}" alt=""/></button>
                                 <a href="{{ route('login.google') }}" class="login-with-btn"><img
                                         src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/></a>
                                 <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/apple_logo.png')}}"/></button>
+                                        src="{{asset('img/icons_logo/apple_logo.png')}}" alt=""/></button>
                                 <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/kakao-talk_logo.png')}}"/></button>
+                                        src="{{asset('img/icons_logo/kakao-talk_logo.png')}}" alt=""/></button>
                             </div>
                             <div class="sign--up d-flex justify-content-center">
                                 <p>{{ __('home.Do not have an account') }}?</p>
@@ -298,13 +298,13 @@
                             </div>
                             <div class="form-signin" style="display: flex; justify-content: space-around">
                                 <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/facebook_logo.png')}}"/></button>
+                                        src="{{asset('img/icons_logo/facebook_logo.png')}}" alt=""/></button>
                                 <a href="{{ route('login.google') }}" class="login-with-btn"><img
                                         src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/></a>
                                 <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/apple_logo.png')}}"/></button>
+                                        src="{{asset('img/icons_logo/apple_logo.png')}}" alt=""/></button>
                                 <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/kakao-talk_logo.png')}}"/></button>
+                                        src="{{asset('img/icons_logo/kakao-talk_logo.png')}}" alt=""/></button>
                             </div>
                             <div class="sign--up d-flex justify-content-center">
                                 <p>{{ __('home.Do you already have an account') }}?</p>
@@ -313,9 +313,9 @@
                             </div>
                         </div>
                         <div hidden="">
-                            <input type="text" name="combined_address" id="combined_address" class="form-control">
-                            <input type="text" name="longitude" id="longitude" class="form-control">
-                            <input type="text" name="latitude" id="latitude" class="form-control">
+                            <label for="combined_address"></label><input type="text" name="combined_address" id="combined_address" class="form-control">
+                            <label for="longitude"></label><input type="text" name="longitude" id="longitude" class="form-control">
+                            <label for="latitude"></label><input type="text" name="latitude" id="latitude" class="form-control">
                         </div>
                     </form>
                 </div>
