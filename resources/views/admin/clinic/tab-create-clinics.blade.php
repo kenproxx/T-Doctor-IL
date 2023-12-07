@@ -1,4 +1,7 @@
 @extends('layouts.admin')
+@section('title')
+    Create Business
+@endsection
 <style>
     .list-department,
     .list-symptoms,

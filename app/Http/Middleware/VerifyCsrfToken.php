@@ -45,6 +45,7 @@ class VerifyCsrfToken extends Middleware
         '/api/service-clinics/**',
         '/api/users-social/**',
         '/api/messages/**',
+        '/api/business-favourites/**',
         'auth/*',
         'medicine/search'
     ];
