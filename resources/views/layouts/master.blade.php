@@ -153,5 +153,28 @@
             $('#modal-call-alert').modal('hide')
         });
     });
+
+    function handleDownloadRecord() {
+        axios.get(`{{ route('download.record') }}`,
+            {
+                Accept: 'application/json',
+            }).then((response) => {
+        });
+    }
+
+    let worker = new Worker('{{ asset('js/downloadWorker.js') }}');
+
+    // startDownload();
+
+    function startDownload() {
+        // Gửi tin nhắn đến worker để bắt đầu xử lý
+        worker.postMessage('start');
+    }
+
+    // Nghe sự kiện khi worker hoàn tất
+    worker.onmessage = function(event) {
+        // Dọn dẹp và kết thúc worker
+        worker.terminate();
+    };
 </script>
 </html>

@@ -22,6 +22,7 @@ use App\Models\Question;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
