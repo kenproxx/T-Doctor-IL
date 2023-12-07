@@ -357,7 +357,7 @@
             <!-- Order Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#orders-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>{{ __('home.Order') }}</span><i
+                    <i class="bi bi-view-list"></i><span>{{ __('home.Order') }}</span><i
                         class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="orders-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -423,6 +423,22 @@
                     </ul>
                 </li>
                 <!-- End Clinics Nav -->
+
+                <!-- Review Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#reviews-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-image-alt"></i><span>{{ __('home.Reviews') }}</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="reviews-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('view.admin.reviews.index') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Reviews') }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Review Nav -->
 
                 <!-- Videos Nav -->
                 <li class="nav-item">

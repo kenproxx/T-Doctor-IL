@@ -153,5 +153,6 @@
             $('#modal-call-alert').modal('hide')
         });
     });
+
 </script>
 </html>

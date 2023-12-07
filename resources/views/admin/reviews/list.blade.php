@@ -1,0 +1,104 @@
+@extends('layouts.admin')
+@section('title')
+    {{ __('home.List Reviews') }}
+@endsection
+@section('main-content')
+    <h3 class="text-center">Review Management</h3>
+    <table class="table table-striped" id="tableReviewsManagement">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">FullName</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Address</th>
+            <th scope="col">Star</th>
+            <th scope="col">Content</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+        </tr>
+        </thead>
+        <tbody id="tbodyTableReviewsManagement">
+
+        </tbody>
+    </table>
+
+    <script>
+        let token = `{{ $_COOKIE['accessToken'] }}`;
+        let accessToken = `Bearer ` + token;
+        let headers = {
+            "Authorization": accessToken
+        };
+
+        $(document).ready(function () {
+            async function loadReviews() {
+                let reviewUrl = `{{ route('api.backend.reviews.list') }}`;
+
+                await $.ajax({
+                    url: reviewUrl,
+                    method: "GET",
+                    headers: headers,
+                    success: function (response) {
+                        renderReviews(response);
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+            loadReviews();
+
+            function renderReviews(response) {
+                let html = ``;
+                for (let i = 0; i < response.length; i++) {
+                    let data = response[i];
+
+                    let reviewDetailUrl = `{{ route('view.admin.reviews.detail', ['id'=> ':id']) }}`;
+                    reviewDetailUrl = reviewDetailUrl.replace(':id', '');
+
+                    html = html + `<tr>
+                                        <th scope="row">${i + 1}</th>
+                                        <td>${data.name}</td>
+                                        <td>${data.email}</td>
+                                        <td>${data.phone}</td>
+                                        <td>${data.address}</td>
+                                        <td>${data.star}</td>
+                                        <td>${data.content}</td>
+                                        <td>${data.status}</td>
+                                        <td>
+                                            <a href="${reviewDetailUrl + data.id}" class="btn btn-success" >Detail</a>
+                                            <button type="button" class="btn btn-danger" id="btnDelete" onclick="confirmDeleteReviews('${data.id}')">Delete</button>
+                                        </td>
+                                    </tr>`;
+                }
+                $('#tbodyTableReviewsManagement').empty().append(html);
+            }
+
+        })
+
+        function confirmDeleteReviews(id) {
+            if (confirm('Are you sure you want to delete!')) {
+                deleteReviews(id);
+            }
+        }
+
+        async function deleteReviews(id) {
+            let reviewDeleteUrl = `{{ route('api.backend.reviews.delete', ['id'=>':id']) }}`;
+            reviewDeleteUrl = reviewDeleteUrl.replace(':id', id);
+
+            await $.ajax({
+                url: reviewDeleteUrl,
+                method: "DELETE",
+                headers: headers,
+                success: function (response) {
+                    alert('Delete success!');
+                    window.location.reload();
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+@endsection

@@ -100,15 +100,15 @@
                                                 $arrayItem = explode(',', $listItem);
                                             @endphp
                                             <tbody>
-                                                @foreach($arrayItem as $item)
-                                                    @php
-                                                        $item = str_replace(' ', '', $item);
-                                                    @endphp
-                                                    <tr>
-                                                        <td>{{ $item }}:</td>
-                                                        <td>{{ $doctor[$item] }}</td>
-                                                    </tr>
-                                                @endforeach
+                                            @foreach($arrayItem as $item)
+                                                @php
+                                                    $item = str_replace(' ', '', $item);
+                                                @endphp
+                                                <tr>
+                                                    <td>{{ $item }}:</td>
+                                                    <td>{{ $doctor[$item] }}</td>
+                                                </tr>
+                                            @endforeach
                                             </tbody>
                                         @else
                                             <p class="text-danger">{{ __('home.The information is encrypted') }}</p>
@@ -144,13 +144,15 @@
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
                                                     data-bs-target="#videos" type="button" role="tab"
-                                                    aria-controls="profile" aria-selected="false">{{ __('home.Videos') }}
+                                                    aria-controls="profile"
+                                                    aria-selected="false">{{ __('home.Videos') }}
                                             </button>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link" id="contact-tab" data-bs-toggle="tab"
                                                     data-bs-target="#audios" type="button" role="tab"
-                                                    aria-controls="contact" aria-selected="false">{{ __('home.Audios') }}
+                                                    aria-controls="contact"
+                                                    aria-selected="false">{{ __('home.Audios') }}
                                             </button>
                                         </li>
                                     </ul>
@@ -185,11 +187,14 @@
                                         </div>
                                         <div class="tab-pane fade" id="videos" role="tabpanel"
                                              aria-labelledby="profile-tab">
-                                            <div class="row" id="list-videos">
+                                            <div id="list-videos">
                                                 @foreach($arrayVideos as $video)
-                                                    <div class="col-md-3">
+                                                    @php
+                                                        $video = str_replace('public', 'storage', $video);
+                                                    @endphp
+                                                    <div class="row">
                                                         <video style="max-width: 150px" controls>
-                                                            <source src="{{  asset($video) }}" type="video/*">
+                                                            <source src="{{  asset($video) }}">
                                                         </video>
                                                     </div>
                                                 @endforeach

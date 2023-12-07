@@ -31,13 +31,13 @@ class DoctorInfoController extends Controller
     {
         if (Auth::check()) {
             $user = Auth::user();
-            $doctor = DoctorInfo::find($id);
-            $userDoctor = User::find($doctor->created_by);
+            $doctor = User::find($id);
+
             $messageDoctor = Chat::where([
-                ['from_user_id', $userDoctor->id],
+                ['from_user_id', $doctor->id],
                 ['to_user_id', $user->id]
             ])->orWhere([
-                ['to_user_id', $userDoctor->id],
+                ['to_user_id', $doctor->id],
                 ['from_user_id', $user->id]
             ])->get();
             return view('qrCode.doctor-info', compact('messageDoctor', 'doctor'));
