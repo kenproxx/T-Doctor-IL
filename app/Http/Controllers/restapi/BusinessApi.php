@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\restapi;
 
 use App\Enums\ClinicStatus;
+use App\Enums\ReviewStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MainController;
 use App\Models\Clinic;
@@ -10,6 +11,7 @@ use App\Models\Commune;
 use App\Models\Department;
 use App\Models\District;
 use App\Models\Province;
+use App\Models\Review;
 use App\Models\ServiceClinic;
 use App\Models\Symptom;
 use Illuminate\Http\Request;
@@ -78,6 +80,17 @@ class BusinessApi extends Controller
                 $symptoms = Symptom::whereIn('id', $list_symptoms)->get();
                 /* Convert to array*/
                 $clinic = (array)$item;
+                /* Count and calc review*/
+                $reviews = Review::where('clinic_id', $item->id)
+                    ->where('status', ReviewStatus::APPROVED)
+                    ->get();
+                $totalReview = $reviews->count();
+                $totalStar = $reviews->sum('star');
+                $calcReview = ($totalReview > 0) ? ($totalStar / $totalReview) : 0;
+
+                $clinic['total_reviews'] = $totalReview;
+                $clinic['calc_reviews'] = $calcReview;
+                $clinic['total_star'] = $totalStar;
                 /*Show service*/
                 $clinic['total_services'] = $services->count();
                 $clinic['services'] = $services->toArray();
@@ -140,6 +153,17 @@ class BusinessApi extends Controller
                 $symptoms = Symptom::whereIn('id', $list_symptoms)->get();
                 /* Convert to array*/
                 $clinic = (array)$item;
+                /* Count and calc review*/
+                $reviews = Review::where('clinic_id', $item->id)
+                    ->where('status', ReviewStatus::APPROVED)
+                    ->get();
+                $totalReview = $reviews->count();
+                $totalStar = $reviews->sum('star');
+                $calcReview = ($totalReview > 0) ? ($totalStar / $totalReview) : 0;
+
+                $clinic['total_reviews'] = $totalReview;
+                $clinic['calc_reviews'] = $calcReview;
+                $clinic['total_star'] = $totalStar;
                 /*Show service*/
                 $clinic['total_services'] = $services->count();
                 $clinic['services'] = $services->toArray();
