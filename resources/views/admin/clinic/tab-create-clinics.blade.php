@@ -6,7 +6,6 @@
         list-style-type: none;
         padding: 0;
         margin: 0;
-        display: flex;
     }
 
     .list-department li,
@@ -122,7 +121,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="status">{{ __('home.Status') }}</label>
-                    <select class="custom-select" id="status" name="status">
+                    <select class="form-select" id="status" name="status">
                         <option
                                 value="{{ \App\Enums\ClinicStatus::ACTIVE }}">{{ \App\Enums\ClinicStatus::ACTIVE }}</option>
                         <option
@@ -133,7 +132,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="time_work">{{ __('home.Time work') }}</label>
-                    <select class="custom-select" id="time_work" name="time_work">
+                    <select class="form-select" id="time_work" name="time_work">
                         <option value="{{\App\Enums\TypeTimeWork::ALL}}">{{\App\Enums\TypeTimeWork::ALL}}</option>
                         <option value="{{\App\Enums\TypeTimeWork::NONE}}">{{\App\Enums\TypeTimeWork::NONE}}</option>
                         <option
@@ -210,7 +209,7 @@
                 </div>
                 <div class="col-md-4">
                     <label for="type">{{ __('home.type') }}</label>
-                    <select class="type-select form-control" id="type" name="type">
+                    <select class="form-select" id="type" name="type">
                         <option
                                 value="{{\App\Enums\TypeBusiness::CLINICS}}">{{\App\Enums\TypeBusiness::CLINICS}}</option>
                         <option

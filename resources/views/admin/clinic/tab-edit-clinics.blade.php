@@ -9,7 +9,6 @@
         list-style-type: none;
         padding: 0;
         margin: 0;
-        display: flex;
     }
 
     .list-department li,
@@ -147,7 +146,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="status">{{ __('home.Status') }}</label>
-                    <select class="custom-select" id="status" name="status">
+                    <select class="form-select" id="status" name="status">
                         <option
                             value="{{ \App\Enums\ClinicStatus::ACTIVE }}" {{ $clinic->status === \App\Enums\ClinicStatus::ACTIVE ? 'selected' : '' }}>{{ \App\Enums\ClinicStatus::ACTIVE }}</option>
                         <option
@@ -158,7 +157,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="time_work">{{ __('home.Time work') }}</label>
-                    <select class="custom-select" id="time_work" name="time_work">
+                    <select class="form-select" id="time_work" name="time_work">
                         @foreach($types as $type)
                             <option
                                 {{ $type == $clinic->time_work ? 'selected' : ''}} value="{{ $type }}">{{ $type }}</option>
@@ -243,7 +242,7 @@
                 </div>
                 <div class="col-md-4">
                     <label for="type">{{ __('home.type') }}</label>
-                    <select class="type-select form-control" id="type" name="time_work">
+                    <select class="form-select" id="type" name="time_work">
                         <option
                             value="{{\App\Enums\TypeBusiness::CLINICS}}" {{ $clinic->type === \App\Enums\TypeBusiness::CLINICS ? 'selected' : '' }}>{{\App\Enums\TypeBusiness::CLINICS}}</option>
                         <option

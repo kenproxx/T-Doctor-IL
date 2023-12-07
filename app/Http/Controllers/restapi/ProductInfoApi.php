@@ -84,13 +84,13 @@ class ProductInfoApi extends Controller
         if ($status) {
             if ($clinic) {
                 $products = ProductInfo::where('status', $status)
-                    ->where('created_by', $clinic->id)
+                    ->where('created_by', $clinic->user_id)
                     ->get();
             }
         } else {
             if ($clinic) {
                 $products = ProductInfo::where('status', '!=', ProductStatus::DELETED)
-                    ->where('created_by', $clinic->id)
+                        ->where('created_by', $clinic->user_id)
                     ->get();
             }
         }
