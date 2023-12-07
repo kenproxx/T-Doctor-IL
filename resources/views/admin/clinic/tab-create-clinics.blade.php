@@ -237,6 +237,7 @@
             <button type="button" class="btn btn-primary up-date-button mt-4">{{ __('home.Save') }}</button>
         </div>
     </form>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe6qi9czJ2Z6SLnV9sSUzce0nuzhRm3hg"></script>
     <script>
         $(document).ready(function () {
             // Lắng nghe sự kiện onchange của các dropdown tỉnh, huyện, xã
@@ -285,13 +286,22 @@
                     'Authorization': `Bearer ${token}`
                 };
                 let province = $('#province_id').val();
-                let myProvince = province.split('-');
+                let myProvince = [];
+                if (province) {
+                    myProvince = province.split('-');
+                }
 
                 let district = $('#district_id').val();
-                let myDistrict = district.split('-');
+                let myDistrict = [];
+                if (district) {
+                    myDistrict = district.split('-');
+                }
 
                 let commune = $('#commune_id').val();
-                let myCommune = commune.split('-');
+                let myCommune = [];
+                if (commune) {
+                    myCommune = commune.split('-');
+                }
 
                 const formData = new FormData();
                 formData.append("name", $('#name').val());
