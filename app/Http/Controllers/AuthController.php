@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ClinicStatus;
 use App\Enums\UserStatus;
+use App\Models\Clinic;
 use App\Models\Role;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -83,7 +86,26 @@ class AuthController extends Controller
             $passwordConfirm = $request->input('passwordConfirm');
             $member = $request->input('member');
             $type = $request->input('type');
+            $openDate = $request->input('open_date');
+            $closeDate = $request->input('close_date');
+            $province_id = $request->input('province_id');
+            $district_id = $request->input('district_id');
+            $commune_id = $request->input('commune_id');
+            $address_detail = $request->input('address');
+            $time_work = $request->input('time_work');
 
+            $address = $request->input('combined_address');
+            $representative = $request->input('representative');
+            $latitude = $request->input('latitude');
+            $longitude = $request->input('longitude');
+            $experienceHospital = $request->input('experienceHospital');
+            if ($province_id && $district_id && $commune_id) {
+                $province = explode('-', $province_id);
+                $district = explode('-', $district_id);
+                $commune = explode('-', $commune_id);
+            }
+
+            $currentDate = Carbon::now();
 
 
             $user = new User();
@@ -164,18 +186,19 @@ class AuthController extends Controller
                 $user->name = '';
                 $user->phone = '';
             }
+
             $user->last_name = '';
             $user->password = $passwordHash;
             $user->username = $username;
             $user->address_code = '';
             $user->type = $type;
             $user->member = $member;
-
             if ($checkPending) {
                 $user->status = UserStatus::PENDING;
             } else {
                 $user->status = UserStatus::ACTIVE;
             }
+
             $success = $user->save();
             if ($success) {
                 (new MainController())->createRoleUser($member, $username);
@@ -184,6 +207,46 @@ class AuthController extends Controller
                     auth()->login($user, true);
                     toast('Register success!', 'success', 'top-left');
                     return redirect()->route('profile');
+                }
+                if ($user->member == 'HOSPITALS') {
+
+                    $openDateTime = Carbon::createFromFormat('Y-m-d H:i', $currentDate->format('Y-m-d') . ' ' . $openDate);
+                    $closeDateTime = Carbon::createFromFormat('Y-m-d H:i', $currentDate->format('Y-m-d') . ' ' . $closeDate);
+                    $formattedOpenDateTime = $openDateTime->format('Y-m-d\TH:i');
+                    $formattedCloseDateTime = $closeDateTime->format('Y-m-d\TH:i');
+
+                    $hospital = new Clinic();
+                    $hospital->address_detail = $address_detail;
+                    $hospital->address = ','.$province[0].','.$district[0].','.$commune[0];
+
+                    $hospital->name = $representative;
+                    $hospital->latitude = $latitude;
+                    $hospital->longitude = $longitude;
+                    $hospital->open_date = $formattedOpenDateTime ?? '';
+                    $hospital->close_date = $formattedCloseDateTime ?? '';
+                    $hospital->experience = $experienceHospital;
+                    $hospital->gallery = $img ?? '';
+                    $hospital->user_id = $user->id;
+                    $hospital->time_work = $time_work;
+                    $hospital->status = ClinicStatus::ACTIVE;
+                    $hospital->type = 'HOSPITALS';
+                    $hospital->save();
+
+                    $newUser = User::find($user->id);
+                    $newUser->province_id = $province[0];
+                    $newUser->district_id = $district[0];
+                    $newUser->commune_id = $commune[0];
+                    $newUser->address_code = $province[2];
+                    $newUser->detail_address = $address_detail;
+                    $newUser->year_of_experience = $experienceHospital;
+                    $newUser->bac_si_dai_dien = $representative;
+                    $newUser->name = $representative;
+                    $newUser->save();
+
+
+                    toast('Register success!', 'success', 'top-left');
+                    return redirect()->route('home');
+
                 }
 
                 toast('Register success!', 'success', 'top-left');
