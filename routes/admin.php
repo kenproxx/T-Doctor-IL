@@ -17,8 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('home', [HomeController::class, 'admin'])->name('admin.home');
-
 Route::group(['prefix' => 'new-event'], function () {
     Route::get('index', [BackendNewEventController::class, 'index'])->name('api.new-event.index');
     Route::get('create', [BackendNewEventController::class, 'create'])->name('api.new-event.create');
