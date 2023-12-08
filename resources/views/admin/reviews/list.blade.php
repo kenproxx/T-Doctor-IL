@@ -10,7 +10,7 @@
             <th scope="col">#</th>
             <th scope="col">{{ __('home.Full Name') }}</th>
             <th scope="col">{{ __('home.Email') }}</th>
-            <th scope="col">{{ __('home.Phone Number') }}</th>
+            <th scope="col">{{ __('home.PhoneNumber') }}</th>
             <th scope="col">{{ __('home.Addresses') }}</th>
             <th scope="col">{{ __('home.Star') }}</th>
             <th scope="col">{{ __('home.Content') }}</th>

@@ -99,7 +99,7 @@
                         {{ csrf_field() }}
                         <input type="hidden" name="user_id_1" value="{{ \Illuminate\Support\Facades\Auth::user()->id }}">
                         <input type="hidden" name="user_id_2" value="{{ $user->id }}">
-                        <button type="submit" class="mt-1 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Create New Meeting</button>
+                        <button type="submit" class="mt-1 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">{{ __('home.Create New Meeting') }}</button>
                     </form>
                 </td>
                 @endif

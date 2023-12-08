@@ -82,7 +82,7 @@
             <td>${item.status} </td>
             <td>${item.startDate} - ${item.endDate}</td>
             <td>${item.status}</td>
-            <td><a href="${urlView}"> Xem đơn đăng ký </a> | <a href="${urlEdit}"> Edit</a> | <a href="#" onclick="checkDelete(${item.id})">Delete</a></td>
+            <td><a href="${urlView}"> {{ __('home.Xem đơn đăng ký') }} </a> | <a href="${urlEdit}"> {{ __('home.Edit') }}</a> | <a href="#" onclick="checkDelete(${item.id})">{{ __('home.Delete') }}</a></td>
         </tr>`;
             }
             await $('#ProductsAdmin').empty().append(html);
