@@ -29,7 +29,7 @@
                         <a class="nav-link font-14-mobi" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="profile" aria-selected="false">{{ __('home.Review') }}</a>
                     </li>
                     <li class="nav-item col-4">
-                        <a class="nav-link font-14-mobi" id="wishList-tab" data-toggle="tab" href="#wishList" role="tab" aria-controls="contact" aria-selected="false">{{ __('home.Wish List') }}</a>
+                        <a class="nav-link font-14-mobi" id="wishList-tab" data-toggle="tab" href="#wishList" role="tab" aria-controls="contact" aria-selected="false">{{ __('home.Wish list') }}</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">

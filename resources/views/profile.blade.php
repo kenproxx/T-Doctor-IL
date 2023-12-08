@@ -18,7 +18,7 @@
         }
     </style>
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">{{ __('Profile') }}</h1>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('home.Profile') }}</h1>
 
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
@@ -189,7 +189,7 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
-                                    <label for="avt">Ảnh đại diện </label>
+                                    <label for="avt">{{ __('home.Ảnh đại diện') }} </label>
                                     <input type="file" class="form-control" id="avt" name="avt" accept="image/*, .pdf, .doc, .docx">
                                 </div>
                             </div>
@@ -214,7 +214,7 @@
                                 <div class="col-lg-4">
                                     <div class="form-group focused">
                                         <label class="form-control-label"
-                                               for="confirm_password">{{ __('home.Confirm password') }}</label>
+                                               for="confirm_password">{{ __('home.Confirm Password') }}</label>
                                         <input type="password" id="confirm_password" class="form-control"
                                                name="password_confirmation" placeholder="Confirm password">
                                     </div>
@@ -222,30 +222,30 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <label for="detail_address">địa chỉ chi tiết việt</label>
+                                    <label for="detail_address">{{ __('home.địa chỉ chi tiết việt') }}</label>
                                     <input class="form-control" name="detail_address" id="detail_address"
                                            value="{{$doctor->detail_address}}">
                                 </div>
                                 <div class="col-sm-4">
-                                    <label for="detail_address_en">địa chỉ chi tiết anh</label>
+                                    <label for="detail_address_en">{{ __('home.địa chỉ chi tiết anh') }}</label>
                                     <input class="form-control" name="detail_address_en" id="detail_address_en"
                                            value="{{$doctor->detail_address_en}}">
                                 </div>
                                 <div class="col-sm-4">
-                                    <label for="detail_address_laos">địa chỉ chi tiết lào</label>
+                                    <label for="detail_address_laos">{{ __('home.địa chỉ chi tiết lào') }}</label>
                                     <input class="form-control" name="detail_address_laos" id="detail_address_laos"
                                            value="{{$doctor->detail_address_laos}}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-4">
-                                    <label for="province_id">Tỉnh</label>
+                                    <label for="province_id">{{ __('home.Tỉnh') }}</label>
                                     <select name="province_id" id="province_id" class="form-control">
 
                                     </select>
                                 </div>
                                 <div class="col-sm-4">
-                                    <label for="district_id">Quận</label>
+                                    <label for="district_id">{{ __('home.Quận') }}</label>
                                     @php
                                         $district = \App\Models\District::find($doctor->district_id);
                                     @endphp
@@ -254,11 +254,11 @@
                                             <option value="{{$district->id}}-{{$district->code}}"> {{$district->name}}</option>
 
                                         @endif
-                                            <option value="">Chọn quận</option>
+                                            <option value="">{{ __('home.Chọn quận') }}</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-4">
-                                    <label for="commune_id">Xã</label>
+                                    <label for="commune_id">{{ __('home.Xã') }}</label>
                                     @php
                                         $commune = \App\Models\Commune::find($doctor->commune_id);
                                     @endphp
@@ -266,7 +266,7 @@
                                         @if(!$commune == null)
                                             <option value="{{$commune->id}}-{{$commune->code}}">{{$commune->name}}</option>
                                         @endif
-                                            <option value="">Chọn xã</option>
+                                            <option value="">{{ __('home.Chọn xã') }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -317,44 +317,44 @@
                                 <h1>Info doctor</h1>
 
                                 <div class="row">
-                                    <div class="col-sm-4"><label for="specialty">chuyên môn việt</label>
+                                    <div class="col-sm-4"><label for="specialty">{{ __('home.chuyên môn việt') }}</label>
                                         <input type="text" class="form-control" id="specialty" name="specialty" value="{{$doctor->specialty}}">
                                     </div>
-                                    <div class="col-sm-4"><label for="specialty_en">chuyên môn anh</label>
+                                    <div class="col-sm-4"><label for="specialty_en">{{ __('home.chuyên môn anh') }}</label>
                                         <input type="text" class="form-control" id="specialty_en" name="specialty_en"
                                                value="{{$doctor->specialty_en}}"></div>
-                                    <div class="col-sm-4"><label for="specialty_laos">chuyên môn lào</label>
+                                    <div class="col-sm-4"><label for="specialty_laos">{{ __('home.chuyên môn lào') }}</label>
                                         <input type="text" class="form-control" id="specialty_laos" name="specialty_laos"
                                                value="{{$doctor->specialty_laos}}"></div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label for="service">Dịch vụ cung cấp việt</label>
+                                        <label for="service">{{ __('home.Dịch vụ cung cấp việt') }}</label>
                                         <textarea class="form-control" name="service" id="service">{{$doctor->service}}</textarea>
                                     </div>
                                     <div class="col-sm-4">
-                                        <label for="service_en">Dịch vụ cung cấp anh</label>
+                                        <label for="service_en">{{ __('home.Dịch vụ cung cấp anh') }}</label>
                                         <textarea class="form-control" name="service_en" id="service_en">{{$doctor->service_en}}</textarea>
                                     </div>
                                     <div class="col-sm-4">
-                                        <label for="service_laos">Dịch vụ cung cấp lào</label>
+                                        <label for="service_laos">{{ __('home.Dịch vụ cung cấp lào') }}</label>
                                         <textarea class="form-control" name="service_laos"
                                                   id="service_laos">{{$doctor->service_laos}}</textarea>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label for="service_price">Giá dịch vụ việt</label>
+                                        <label for="service_price">{{ __('home.Giá dịch vụ việt') }}</label>
                                         <input class="form-control" type="number" name="service_price" id="service_price"
                                                value="{{$doctor->service_price}}">
                                     </div>
                                     <div class="col-sm-4">
-                                        <label for="service_price_en">Giá dịch vụ anh</label>
+                                        <label for="service_price_en">{{ __('home.Giá dịch vụ anh') }}</label>
                                         <input class="form-control" type="number" name="service_price_en" id="service_price_en"
                                                value="{{$doctor->service_price_en}}">
                                     </div>
                                     <div class="col-sm-4">
-                                        <label for="service_price_laos">Giá dịch vụ lào</label>
+                                        <label for="service_price_laos">{{ __('home.Giá dịch vụ lào') }}</label>
                                         <input class="form-control" type="number" name="service_price_laos" id="service_price_laos"
                                                value="{{$doctor->service_price_laos}}">
                                     </div>
@@ -369,37 +369,37 @@
                                     @endphp
                                     @if(!$working1 == null && !$working2 == null)
                                         <div class="col-sm-3">
-                                            <label for="time_working_1_start">Thời gian làm việc bắt đầu</label>
+                                            <label for="time_working_1_start">{{ __('home.Thời gian làm việc bắt đầu') }}</label>
                                             <input type="time" class="form-control" id="time_working_1_start" name="time_working_1_start"
                                                    value="{{ $arrayWorking1[0] }}">
                                         </div>
                                         <div class="col-sm-3">
-                                            <label for="time_working_1_end">Thời gian làm việc kết thúc</label>
+                                            <label for="time_working_1_end">{{ __('home.Thời gian làm việc kết thúc') }}</label>
                                             <input type="time" class="form-control" id="time_working_1_end" name="time_working_1_end"
                                                    value="{{ $arrayWorking1[1] }}">
                                         </div>
                                         <div class="col-sm-3">
-                                            <label for="time_working_2_start">Những này làm việc bắt đầu</label>
+                                            <label for="time_working_2_start">{{ __('home.Những này làm việc bắt đầu') }}</label>
                                             <select name="time_working_2_start" id="time_working_2_start" class="form-control">
-                                                <option {{ $arrayWorking2[0] == 'T2' ? 'selected' : '' }} value="T2">Thứ 2</option>
-                                                <option {{ $arrayWorking2[0] == 'T3' ? 'selected' : '' }}  value="T3">Thứ 3</option>
-                                                <option {{ $arrayWorking2[0] == 'T4' ? 'selected' : '' }}  value="T4">Thứ 4</option>
-                                                <option {{ $arrayWorking2[0] == 'T5' ? 'selected' : '' }}  value="T5">Thứ 5</option>
-                                                <option {{ $arrayWorking2[0] == 'T6' ? 'selected' : '' }}  value="T6">Thứ 6</option>
-                                                <option {{ $arrayWorking2[0] == 'T7' ? 'selected' : '' }}  value="T7">Thứ 7</option>
-                                                <option {{ $arrayWorking2[0] == 'CN' ? 'selected' : '' }}  value="CN">Chủ nhật</option>
+                                                <option {{ $arrayWorking2[0] == 'T2' ? 'selected' : '' }} value="T2">{{ __('home.Thứ 2') }}</option>
+                                                <option {{ $arrayWorking2[0] == 'T3' ? 'selected' : '' }}  value="T3">{{ __('home.Thứ 3') }}</option>
+                                                <option {{ $arrayWorking2[0] == 'T4' ? 'selected' : '' }}  value="T4">{{ __('home.Thứ 4') }}</option>
+                                                <option {{ $arrayWorking2[0] == 'T5' ? 'selected' : '' }}  value="T5">{{ __('home.Thứ 5') }}</option>
+                                                <option {{ $arrayWorking2[0] == 'T6' ? 'selected' : '' }}  value="T6">{{ __('home.Thứ 6') }}</option>
+                                                <option {{ $arrayWorking2[0] == 'T7' ? 'selected' : '' }}  value="T7">{{ __('home.Thứ 7') }}</option>
+                                                <option {{ $arrayWorking2[0] == 'CN' ? 'selected' : '' }}  value="CN">{{ __('home.Chủ nhật') }}</option>
                                             </select>
                                         </div>
                                         <div class="col-sm-3">
-                                            <label for="time_working_2_end">Những này làm việc kết thúc</label>
+                                            <label for="time_working_2_end">{{ __('home.Những này làm việc kết thúc') }}</label>
                                             <select name="time_working_2_end" id="time_working_2_end" class="form-control">
-                                                <option {{ $arrayWorking2[1] == 'T2' ? 'selected' : '' }}  value="T2">Thứ 2</option>
-                                                <option {{ $arrayWorking2[1] == 'T3' ? 'selected' : '' }}  value="T3">Thứ 3</option>
-                                                <option {{ $arrayWorking2[1] == 'T4' ? 'selected' : '' }}  value="T4">Thứ 4</option>
-                                                <option {{ $arrayWorking2[1] == 'T5' ? 'selected' : '' }}  value="T5">Thứ 5</option>
-                                                <option {{ $arrayWorking2[1] == 'T6' ? 'selected' : '' }}  value="T6">Thứ 6</option>
-                                                <option {{ $arrayWorking2[1] == 'T7' ? 'selected' : '' }}  value="T7">Thứ 7</option>
-                                                <option {{ $arrayWorking2[1] == 'CN' ? 'selected' : '' }}  value="CN">Chủ nhật</option>
+                                                <option {{ $arrayWorking2[1] == 'T2' ? 'selected' : '' }}  value="T2">{{ __('home.Thứ 2') }}</option>
+                                                <option {{ $arrayWorking2[1] == 'T3' ? 'selected' : '' }}  value="T3">{{ __('home.Thứ 3') }}</option>
+                                                <option {{ $arrayWorking2[1] == 'T4' ? 'selected' : '' }}  value="T4">{{ __('home.Thứ 4') }}</option>
+                                                <option {{ $arrayWorking2[1] == 'T5' ? 'selected' : '' }}  value="T5">{{ __('home.Thứ 5') }}</option>
+                                                <option {{ $arrayWorking2[1] == 'T6' ? 'selected' : '' }}  value="T6">{{ __('home.Thứ 6') }}</option>
+                                                <option {{ $arrayWorking2[1] == 'T7' ? 'selected' : '' }}  value="T7">{{ __('home.Thứ 7') }}</option>
+                                                <option {{ $arrayWorking2[1] == 'CN' ? 'selected' : '' }}  value="CN">{{ __('home.Chủ nhật') }}</option>
                                             </select>
                                         </div>
 
@@ -408,38 +408,38 @@
                                         <input type="text" class="form-control d-none" id="apply_for" name="apply_for">
                                     @else
                                     <div class="col-sm-3">
-                                        <label for="time_working_1_start">Thời gian làm việc bắt đầu</label>
+                                        <label for="time_working_1_start">{{ __('home.Thời gian làm việc bắt đầu') }}</label>
                                         <input type="time" class="form-control" id="time_working_1_start"
                                                name="time_working_1_start"
                                                value="00:00">
                                     </div>
                                     <div class="col-sm-3">
-                                        <label for="time_working_1_end">Thời gian làm việc kết thúc</label>
+                                        <label for="time_working_1_end">{{ __('home.Thời gian làm việc kết thúc') }}</label>
                                         <input type="time" class="form-control" id="time_working_1_end"
                                                name="time_working_1_end" value="23:59">
                                     </div>
                                     <div class="col-sm-3">
-                                        <label for="time_working_2_start">Những này làm việc bắt đầu</label>
+                                        <label for="time_working_2_start">{{ __('home.Addresses') }}{{ __('home.Những này làm việc bắt đầu') }}</label>
                                         <select name="time_working_2_start" id="time_working_2_start" class="form-control">
-                                            <option value="T2">Thứ 2</option>
-                                            <option value="T3">Thứ 3</option>
-                                            <option value="T4">Thứ 4</option>
-                                            <option value="T5">Thứ 5</option>
-                                            <option value="T6">Thứ 6</option>
-                                            <option value="T7">Thứ 7</option>
-                                            <option value="CN">Chủ nhật</option>
+                                            <option value="T2">{{ __('home.Thứ 2') }}</option>
+                                            <option value="T3">{{ __('home.Thứ 3') }}</option>
+                                            <option value="T4">{{ __('home.Thứ 4') }}</option>
+                                            <option value="T5">{{ __('home.Thứ 5') }}</option>
+                                            <option value="T6">{{ __('home.Thứ 6') }}</option>
+                                            <option value="T7">{{ __('home.Thứ 7') }}</option>
+                                            <option value="CN">{{ __('home.Chủ nhật') }}</option>
                                         </select>
                                     </div>
                                     <div class="col-sm-3">
                                         <label for="time_working_2_end">Những này làm việc kết thúc</label>
                                         <select name="time_working_2_end" id="time_working_2_end" class="form-control">
-                                            <option value="T2">Thứ 2</option>
-                                            <option value="T3">Thứ 3</option>
-                                            <option value="T4">Thứ 4</option>
-                                            <option value="T5">Thứ 5</option>
-                                            <option value="T6">Thứ 6</option>
-                                            <option value="T7">Thứ 7</option>
-                                            <option value="CN">Chủ nhật</option>
+                                            <option value="T2">{{ __('home.Thứ 2') }}</option>
+                                            <option value="T3">{{ __('home.Thứ 3') }}</option>
+                                            <option value="T4"{{ __('home.Thứ 4') }}></option>
+                                            <option value="T5">{{ __('home.Thứ 5') }}</option>
+                                            <option value="T6">{{ __('home.Thứ 6') }}</option>
+                                            <option value="T7">{{ __('home.Thứ 7') }}</option>
+                                            <option value="CN">{{ __('home.Chủ nhật') }}</option>
                                         </select>
                                     </div>
 
@@ -451,7 +451,7 @@
                                         @endif
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-4"><label for="department_id">Department</label>
+                                    <div class="col-sm-4"><label for="department_id">{{ __('home.Department') }}</label>
                                         <select class="form-select" id="department_id" name="department_id">
                                             @php
                                                 $departments = \App\Models\DoctorDepartment::where('status', \App\Enums\DoctorDepartmentStatus::ACTIVE)->get();
@@ -462,13 +462,13 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-4">
-                                        <label for="year_of_experience">Năm kinh nghiệm</label>
+                                        <label for="year_of_experience">{{ __('home.Năm kinh nghiệm') }}</label>
                                         <input type="number" class="form-control" id="year_of_experience" name="year_of_experience"
                                                value="{{$doctor->year_of_experience}}">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="apply_show">Apply Show</label>
+                                    <label for="apply_show">{{ __('home.Apply Show') }}</label>
                                     <input type="text" class="form-control" id="apply_show" name="apply_show" disabled>
                                     @php
                                         $arrayApply = [

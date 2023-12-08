@@ -598,7 +598,22 @@ return [
     'Start Upload Video' => 'ເລີ່ມອັບໂຫລດວິດີໂອ',
     'topic' => 'ຫົວຂໍ້',
     'Video' => 'ວິດີໂອ',
-    'Upload' => 'ອັບໂຫຼດ'
+    'Upload' => 'ອັບໂຫຼດ',
+    'Chọn quận' => 'ເລືອກເມືອງ',
+    'Chọn xã' => 'ເລືອກຊຸມຊົນ',
+    'List Order' => 'ລາຍການຄໍາສັ່ງ',
+    'Detail Review' => 'ການທົບທວນຄືນລາຍລະອຽດ',
+    'Content' => 'ເນື້ອໃນ',
+    'BusinessName' => 'ຊື່ບໍລິສັດ',
+    'Star' => 'ດາວ',
+    'List Reviews' => 'ລາຍການການທົບທວນຄືນ',
+    'Review Management' => 'ທົບທວນການຄຸ້ມຄອງ',
+    'increase' => 'ເພີ່ມ​ຂຶ້ນ',
+    'decrease' => 'ຫຼຸດລົງ',
+    'Pay' => 'ຈ່າຍ',
+    'comment' => 'ຄໍາເຫັນ',
+    'Like' => 'ມັກ',
+    'Add Review' => 'ເພີ່ມການທົບທວນຄືນ'
 
 
 

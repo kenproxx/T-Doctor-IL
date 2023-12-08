@@ -102,7 +102,7 @@
                 </div>
             </div>
             <div class="col-sm-4">
-                <label for="avt">Ảnh đại diện </label>
+                <label for="avt">{{ __('home.Ảnh đại diện') }} </label>
                 <input type="file" class="form-control" id="avt" name="avt" accept="image/*, .pdf, .doc, .docx">
             </div>
         </div>

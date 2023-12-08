@@ -258,7 +258,7 @@ return [
     'New/Events' => 'Sự kiện mới',
     'Examination' => 'Thăm ',
     'Clinic/Pharmacies' => 'Phòng Khám/ Hiệu thuốc',
-    "What's free" => "what",
+    "What's free" => "Voucher",
     'Dashboar' => 'bảng điều khiển',
     'Trang cá nhân' => 'Trang cá nhân',
     'My booking' => 'Đặt phòng của tôi',
@@ -609,7 +609,23 @@ return [
     'Start Upload Video' => 'Bắt đầu tải video lên',
     'topic' => 'đề tài',
     'Video' => 'Băng hình',
-    'Upload' => 'Tải lên'
+    'Upload' => 'Tải lên',
+    'Chọn quận' => 'Chọn quận',
+    'Chọn xã' => 'Chọn xã',
+    'List Order' => 'Danh sách đơn đặt hàng',
+    'Detail Review' => 'Đánh giá chi tiết',
+    'Content' => 'Nội dung',
+    'BusinessName' => 'Tên doanh nghiệp',
+    'Star' => 'Sao',
+    'List Reviews' => 'Danh sách đánh giá',
+    'Review Management' => 'Quản lý đánh giá',
+    'increase' => 'tăng',
+    'decrease' => 'giảm bớt',
+    'Pay' => 'Chi trả',
+    'comment' => 'bình luận',
+    'Like' => 'Thích',
+    'Add Review' => 'Thêm nhận xét'
+
 
 
 
