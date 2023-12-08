@@ -3,22 +3,22 @@
     {{ __('home.List Order') }}
 @endsection
 @section('main-content')
-    <h3 class="text-center">Order Management</h3>
+    <h3 class="text-center">{{ __('home.Order Management') }}</h3>
     <table class="table table-striped" id="tableOrderManagement">
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">FullName</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Address</th>
-            <th scope="col">Total Product Price</th>
-            <th scope="col">Total Shipping Price</th>
-            <th scope="col">Total Discount Price</th>
-            <th scope="col">Total Price</th>
-            <th scope="col">Order Method</th>
-            <th scope="col">Status</th>
-            <th scope="col">Action</th>
+            <th scope="col">{{ __('home.Full Name') }}</th>
+            <th scope="col">{{ __('home.Email') }}</th>
+            <th scope="col">{{ __('home.PhoneNumber') }}</th>
+            <th scope="col">{{ __('home.Địa chỉ') }}</th>
+            <th scope="col">{{ __('home.Total Product Price') }}</th>
+            <th scope="col">{{ __('home.Total Shipping Price') }}</th>
+            <th scope="col">{{ __('home.Total Discount Price') }}</th>
+            <th scope="col">{{ __('home.Total Price') }}</th>
+            <th scope="col">{{ __('home.Order Method') }}</th>
+            <th scope="col">{{ __('home.Status') }}</th>
+            <th scope="col">{{ __('home.Action') }}</th>
         </tr>
         </thead>
         <tbody id="tbodyTableOrderManagement">

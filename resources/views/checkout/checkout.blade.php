@@ -126,7 +126,7 @@
                                    value="{{ \Illuminate\Support\Facades\Auth::user()->phone }}" required>
                         </div>
                         <div class="form-group">
-                            <label class="label-input" for="address_detail">{{ __('home.Address') }}<span
+                            <label class="label-input" for="address_detail">{{ __('home.Addresses') }}<span
                                     class="text-danger">*</span></label>
                             <div class="row">
                                 <div class="col-md-6">

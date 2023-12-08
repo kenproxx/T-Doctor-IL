@@ -131,8 +131,8 @@
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                     <li class="dropdown-header">
-                        You have 4 new notifications
-                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        {{ __('home.You have 4 new notifications') }}
+                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">{{ __('home.View all') }}</span></a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -190,7 +190,7 @@
                         <hr class="dropdown-divider">
                     </li>
                     <li class="dropdown-footer">
-                        <a href="#">Show all notifications</a>
+                        <a href="#">{{ __('home.Show all notifications') }}</a>
                     </li>
 
                 </ul><!-- End Notification Dropdown Items -->
@@ -206,8 +206,8 @@
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
                     <li class="dropdown-header">
-                        You have 3 new messages
-                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        {{ __('home.You have 3 new messages') }}
+                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">{{ __('home.View all') }}</span></a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -256,7 +256,7 @@
                     </li>
 
                     <li class="dropdown-footer">
-                        <a href="#">Show all messages</a>
+                        <a href="#">{{ __('home.Show all messages') }}</a>
                     </li>
 
                 </ul><!-- End Messages Dropdown Items -->
@@ -273,7 +273,7 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
                         <h6>{{ Auth::user()->username }}</h6>
-                        <span>Web Designer</span>
+                        <span>{{ __('home.Web Designer') }}</span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -282,7 +282,7 @@
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                             <i class="bi bi-person"></i>
-                            <span>My Profile</span>
+                            <span>{{ __('home.My Profile') }}</span>
                         </a>
                     </li>
                     <li>
@@ -292,7 +292,7 @@
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                             <i class="bi bi-gear"></i>
-                            <span>Account Settings</span>
+                            <span>{{ __('home.Account Settings') }}</span>
                         </a>
                     </li>
                     <li>

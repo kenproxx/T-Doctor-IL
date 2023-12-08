@@ -112,7 +112,7 @@
 
         <div class="other-clinics">
             <div class="title">
-                Other Clinics/Pharmacies
+                {{ __('home.Other Clinics/Pharmacies') }}
             </div>
 
             @include('component.clinic')

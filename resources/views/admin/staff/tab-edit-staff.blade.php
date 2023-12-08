@@ -24,13 +24,13 @@
 
             <label for="member">{{ __('home.Member') }}</label>
             <select id="member" name="member" class="form-select form-control">
-                <option value="{{ Role::DOCTORS }}" {{ $role == Role::DOCTORS ? 'selected' : '' }}>Doctors</option>
-                <option value="{{ Role::PHAMACISTS }}" {{ $role == Role::PHAMACISTS ? 'selected' : '' }}>Pharmacists</option>
-                <option value="{{ Role::THERAPISTS }}" {{ $role == Role::THERAPISTS ? 'selected' : '' }}>Therapists</option>
-                <option value="{{ Role::ESTHETICIANS }}" {{ $role == Role::ESTHETICIANS ? 'selected' : '' }}>Estheticians</option>
-                <option value="{{ Role::NURSES }}" {{ $role == Role::NURSES ? 'selected' : '' }}>Nurses</option>
-                <option value="{{ Role::PAITENTS }}" {{ $role == Role::PAITENTS ? 'selected' : '' }}>Patients</option>
-                <option value="{{ Role::NORMAL_PEOPLE }}" {{ $role == Role::NORMAL_PEOPLE ? 'selected' : '' }}>Normal People</option>
+                <option value="{{ Role::DOCTORS }}" {{ $role == Role::DOCTORS ? 'selected' : '' }}>{{ __('home.Doctors') }}</option>
+                <option value="{{ Role::PHAMACISTS }}" {{ $role == Role::PHAMACISTS ? 'selected' : '' }}>{{ __('home.Pharmacists') }}</option>
+                <option value="{{ Role::THERAPISTS }}" {{ $role == Role::THERAPISTS ? 'selected' : '' }}>{{ __('home.THERAPISTS') }}</option>
+                <option value="{{ Role::ESTHETICIANS }}" {{ $role == Role::ESTHETICIANS ? 'selected' : '' }}>{{ __('home.ESTHETICIANS') }}</option>
+                <option value="{{ Role::NURSES }}" {{ $role == Role::NURSES ? 'selected' : '' }}>{{ __('home.NURSES') }}</option>
+                <option value="{{ Role::PAITENTS }}" {{ $role == Role::PAITENTS ? 'selected' : '' }}>{{ __('home.Patients') }}</option>
+                <option value="{{ Role::NORMAL_PEOPLE }}" {{ $role == Role::NORMAL_PEOPLE ? 'selected' : '' }}>{{ __('home.NORMAL PEOPLE') }}</option>
             </select>
 
         </div>

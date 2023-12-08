@@ -28,7 +28,7 @@
                         </div>
                         <div class="dropdown-menu">
                             @if( (new MedicalPermission())->isMedicalPermission())
-                                <a class="dropdown-item" href="{{ route('admin.home') }}">{{ __('home.Dashboar') }}</a>
+                                <a class="dropdown-item" href="{{ route('admin.home') }}">{{ __('home.Dashboard') }}</a>
                             @else
                                 <a class="dropdown-item" href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
                             @endif
@@ -144,7 +144,7 @@
                                     </div>
                                     <div class="sign--up d-flex justify-content-center">
                                         <p>{{ __('home.Do not have an account') }}?</p>
-                                        <a href="" data-toggle="modal" data-target="#modalRegister" data-dismiss="modal">{{ __('home.Sign up') }}</a>
+                                        <a href="" data-toggle="modal" data-target="#modalRegister" data-dismiss="modal">{{ __('home.Sign Up') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -321,7 +321,7 @@
                                 </div>
                                 <div id="other-option">
                                     <div class="form-element text-center">
-                                        <button type="submit">{{ __('home.Sign up') }}</button>
+                                        <button type="submit">{{ __('home.Sign Up') }}</button>
                                     </div>
                                     <div class="other_sign">
                                         <div class="line"></div>
@@ -343,7 +343,7 @@
                                     <div class="sign--up d-flex justify-content-center">
                                         <p>{{ __('home.Do you already have an account') }}?</p>
                                         <a href="#" data-toggle="modal" data-target="#staticBackdrop" data-dismiss="modal">
-                                            {{ __('home.Log in') }}</a>
+                                            {{ __('home.Log In') }}</a>
                                     </div>
                                 </div>
                                 <div hidden="">

@@ -569,7 +569,31 @@ return [
     'Sales' => 'Sales',
     'Revenue' => 'Revenue',
     'Customers' => 'Customers',
-    'Reports' => 'Reports'
+    'Reports' => 'Reports',
+    'Detail Order' => 'Detail Order',
+    'Total Product Price' => 'Total Product Price',
+    'Total Shipping Price' => 'Total Shipping Price',
+    'Total Discount Price' => 'Total Discount Price',
+    'Total Price' => 'Total Price',
+    'Order Method' => 'Order Method',
+    'Quantity' => 'Quantity',
+    'Order Management' => 'Order Management',
+    'Doctors' => 'Doctors',
+    'Pharmacists' => 'Pharmacists',
+    'Patients' => 'Patients',
+    'Multiple Image Upload' => 'Multiple Image Upload',
+    'Others' => 'Others',
+    'REPRESENTATIVE DOCTOR' => 'REPRESENTATIVE DOCTOR',
+    'You have 4 new notifications' => 'You have 4 new notifications',
+    'View all' => 'View all',
+    'Lorem Ipsum' => 'Lorem Ipsum',
+    'Show all notifications' => 'Show all notifications',
+    'You have 3 new messages' => 'You have 3 new messages',
+    'Show all messages' => 'Show all messages',
+    'Web Designer' => 'Web Designer',
+    'My Profile' => 'My Profile',
+    'Account Settings' => 'Account Settings'
+
 
 
 
