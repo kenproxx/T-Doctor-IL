@@ -592,7 +592,25 @@ return [
     'Show all messages' => 'Show all messages',
     'Web Designer' => 'Web Designer',
     'My Profile' => 'My Profile',
-    'Account Settings' => 'Account Settings'
+    'Account Settings' => 'Account Settings',
+    'Need Help' => 'Need Help',
+    'Sign Out' => 'Sign Out',
+    'Selling/Buying' => 'Selling/Buying',
+    'Call video' => 'Call video',
+    'Display navigation directions' => 'Display navigation directions',
+    'Số lượng' => 'Quantity',
+    'Create Short Video Public' => 'Create Short Video Public',
+    'City' => 'City',
+    'State' => 'State',
+    'Zip' => 'Zip',
+    'Check me out' => 'Check me out',
+    'Sign in' => 'Sign in',
+    'Your browser does not support the video tag' => 'Your browser does not support the video tag',
+    'Start Upload Video' => 'Start Upload Video',
+    'topic' => 'topic',
+    'Video' => 'Video',
+    'Upload' => 'Upload'
+
 
 
 

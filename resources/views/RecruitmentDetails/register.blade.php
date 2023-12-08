@@ -323,7 +323,7 @@
                                 </div>
                                 <div class="col-12 rm-pd-on-mobile">
                                     <div class="form-group">
-                                        <div class="text-font-16 mt-4">{{ __('home.AchievementL') }}</div>
+                                        <div class="text-font-16 mt-4">{{ __('home.Achievement') }}</div>
                                         <textarea class="ac-textarea mt-3"
                                                   placeholder="Enter an introduction about yourself"></textarea>
                                     </div>

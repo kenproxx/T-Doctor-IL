@@ -302,7 +302,7 @@
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
                             <i class="bi bi-question-circle"></i>
-                            <span>Need Help?</span>
+                            <span>{{ __('home.Need Help') }}?</span>
                         </a>
                     </li>
                     <li>
@@ -312,7 +312,7 @@
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="{{ route('logoutProcess') }}">
                             <i class="bi bi-box-arrow-right"></i>
-                            <span>Sign Out</span>
+                            <span>{{ __('home.Sign Out') }}</span>
                         </a>
                     </li>
 
@@ -333,7 +333,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('admin.home') }}">
                     <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
+                    <span>{{ __('home.Dashboard') }}</span>
                 </a>
             </li>
             <!-- End Dashboard Nav -->

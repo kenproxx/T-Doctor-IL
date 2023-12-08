@@ -592,7 +592,24 @@ return [
     'Show all messages' => 'Hiển thị tất cả tin nhắn',
     'Web Designer' => 'Nhà thiết kế web',
     'My Profile' => 'Thông tin của tôi',
-    'Account Settings' => 'Cài đặt tài khoản'
+    'Account Settings' => 'Cài đặt tài khoản',
+    'Need Help' => 'Cần giúp đỡ',
+    'Sign Out' => 'Đăng xuất',
+    'Selling/Buying' => 'Bán/Mua',
+    'Call video' => 'Gọi video',
+    'Display navigation directions' => 'Hiển thị chỉ đường điều hướng',
+    'Số lượng' => 'Số lượng',
+    'Create Short Video Public' => 'Tạo video ngắn công khai',
+    'City' => 'Thành phố',
+    'State' => 'Tình trạng',
+    'Zip' => 'Mã zip',
+    'Check me out' => 'Kiểm tra tôi',
+    'Sign in' => 'Đăng nhập',
+    'Your browser does not support the video tag' => 'Trình duyệt của bạn không hỗ trợ thẻ video',
+    'Start Upload Video' => 'Bắt đầu tải video lên',
+    'topic' => 'đề tài',
+    'Video' => 'Băng hình',
+    'Upload' => 'Tải lên'
 
 
 
