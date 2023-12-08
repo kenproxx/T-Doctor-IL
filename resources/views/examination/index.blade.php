@@ -92,7 +92,10 @@
                     let item = res[i];
                     let mainUrl = detailDoctor.replace(':id', item['id']);
                     let imageDoctor = item.avt;
-                    let myArray = imageDoctor.split("/storage");
+                    let myArray = [];
+                    if (imageDoctor) {
+                        myArray = imageDoctor.split("/storage");
+                    }
                     html = html + `<div class="col-md-3" >
                                     <div class="card">
                             <i class="bi bi-heart"></i>
@@ -124,7 +127,10 @@
                     let item = res[i];
                     let mainUrl = detailDoctor.replace(':id', item['id']);
                     let imageDoctor = item['thumbnail'];
-                    let myArray = imageDoctor.split("/storage");
+                    let myArray = [];
+                    if (imageDoctor) {
+                        myArray = imageDoctor.split("/storage");
+                    }
                     html = html + `<div class="card col-md-3" >
                               <i class="bi bi-heart"></i>
                             <img src=" ${url}${myArray[1]} " class="card-img-top" alt="...">

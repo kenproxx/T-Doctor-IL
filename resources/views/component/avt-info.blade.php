@@ -43,7 +43,7 @@
         <div class="d-flex col-md-4">
             @if( Auth::user()== null || $id != Auth::user()->id)
                 <form action="{{route('flea.market.sell.product')}}" class=" flea-button mr-3">
-                    <button class="flea-btn width-88">{{ __('home.Read') }}{{ __('home.FOLLOW') }}</button>
+                    <button class="flea-btn width-88">{{ __('home.FOLLOW') }}</button>
                 </form>
             @else
                 <form action="{{route('flea.market.sell.product')}}" class=" flea-button mr-3">

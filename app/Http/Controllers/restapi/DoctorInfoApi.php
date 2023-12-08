@@ -64,10 +64,10 @@ class DoctorInfoApi extends Controller
 
     public function detail(Request $request, $id)
     {
-        $doctor_infos = DoctorInfo::where('id', $id)
-            ->where('hocham_hocvi', TypeMedical::DOCTORS)
+        $doctor_infos = User::where('id', $id)
+            ->where('member', TypeMedical::DOCTORS)
             ->first();
-        if (!$doctor_infos || $doctor_infos->status != DoctorInfoStatus::ACTIVE) {
+        if (!$doctor_infos || $doctor_infos->status != UserStatus::ACTIVE) {
             return response('Not found', 404);
         }
         return response()->json($doctor_infos);

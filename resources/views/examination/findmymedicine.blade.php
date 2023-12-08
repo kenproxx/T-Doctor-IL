@@ -23,7 +23,7 @@
     }
 
     .swiper-container {
-        width: 800px;
+        width: 100%;
         height: 250px;
     }
 
@@ -61,25 +61,11 @@
                     </div>
                 </div>
             </div>
-            <div class="list-category container">
-                {{--            <nav class="navbar navbar-expand-lg navbar-light bg-light">--}}
-                {{--                <div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
-                {{--                    <ul class="navbar-nav mr-auto">--}}
-                {{--                        @foreach($categoryMedicines as $categoryMedicine)--}}
-                {{--                            <li class="nav-item item-category medicine-product text-center " data-medicine="{{ $categoryMedicine }}">--}}
-                {{--                                <div class="center-container d-flex justify-content-center align-items-center">--}}
-                {{--                                    <img class="img-item-category" src="{{ asset($categoryMedicine->thumbnail) }}" alt="">--}}
-                {{--                                </div>--}}
-                {{--                                <p class="nav-link">{{ $categoryMedicine->name }}</p>--}}
-                {{--                            </li>--}}
-                {{--                        @endforeach--}}
-                {{--                    </ul>--}}
-                {{--                </div>--}}
-                {{--            </nav>--}}
+            <div class="container">
+                <!-- Slider main container -->
                 <div class="swiper-container">
                     <!-- Additional required wrapper -->
-                    <div class="swiper-wrapper swiper-wrapper-0">
-                        <!-- Slides -->
+                    <div class="swiper-wrapper">
                         @foreach($categoryMedicines as $categoryMedicine)
                             <div class="nav-item swiper-slide">
                                 <div class="item-category medicine-product text-center"
@@ -93,6 +79,10 @@
                             </div>
                         @endforeach
                     </div>
+
+                    <!-- If we need navigation buttons -->
+{{--                    <div class="swiper-button-prev"></div>--}}
+{{--                    <div class="swiper-button-next"></div>--}}
                 </div>
             </div>
             <div id="list-find-my-medicine">
@@ -102,7 +92,7 @@
                             <p>{{ __('home.Best Pharmacists') }}</p>
                         </div>
                         <div class="ms-auto p-2"><a
-                                href="{{route('examination.bestpharmacists')}}">{{ __('home.See all') }}</a></div>
+                                    href="{{route('examination.bestpharmacists')}}">{{ __('home.See all') }}</a></div>
                     </div>
                 </div>
                 <div class="row list-doctor m-auto">
@@ -117,11 +107,12 @@
                                     <img src="{{asset($bestPhamrmacist->thumbnail)}}" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <a href="#"><h5
-                                                class="card-title"> {{ $bestPhamrmacist->name }}</h5></a>
+                                                    class="card-title"> {{ $bestPhamrmacist->name }}</h5></a>
                                         <p class="card-text_1">{{ __('home.Location') }}:
                                             <b>{{ $province->name }}</b></p>
                                         <p class="card-text_1">{{ __('home.Working time') }}:
-                                            <b> {{ $bestPhamrmacist->time_working_1  }} :  {{ $bestPhamrmacist->time_working_2 }}
+                                            <b> {{ $bestPhamrmacist->time_working_1  }}
+                                                : {{ $bestPhamrmacist->time_working_2 }}
                                             </b>
                                         </p>
                                     </div>
@@ -136,7 +127,7 @@
                             <p>{{ __('home.New Pharmacists') }}</p>
                         </div>
                         <div class="ms-auto p-2"><a
-                                href="{{route('examination.newpharmacists')}}">{{ __('home.See all') }}</a></div>
+                                    href="{{route('examination.newpharmacists')}}">{{ __('home.See all') }}</a></div>
                     </div>
                 </div>
                 <div class="row list-doctor m-auto">
@@ -151,11 +142,12 @@
                                     <img src="{{asset($newPhamrmacist->thumbnail)}}" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <a href="#"><h5
-                                                class="card-title"> {{ $newPhamrmacist->name }}</h5></a>
+                                                    class="card-title"> {{ $newPhamrmacist->name }}</h5></a>
                                         <p class="card-text_1">{{ __('home.Location') }}:
                                             <b>{{ $province->name }}</b></p>
                                         <p class="card-text_1">{{ __('home.Working time') }}:
-                                            <b> {{ $newPhamrmacist->time_working_1  }} :  {{ $newPhamrmacist->time_working_2 }}
+                                            <b> {{ $newPhamrmacist->time_working_1  }}
+                                                : {{ $newPhamrmacist->time_working_2 }}
                                             </b>
                                         </p>
                                     </div>
@@ -170,7 +162,8 @@
                             <p>{{ __('home.24/7 Available Pharmacists') }}</p>
                         </div>
                         <div class="ms-auto p-2"><a
-                                href="{{route('examination.availablepharmacists')}}">{{ __('home.See all') }}</a></div>
+                                    href="{{route('examination.availablepharmacists')}}">{{ __('home.See all') }}</a>
+                        </div>
                     </div>
                 </div>
                 <div class="row list-doctor m-auto">
@@ -185,11 +178,12 @@
                                     <img src="{{asset($allPhamrmacist->thumbnail)}}" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <a href="#"><h5
-                                                class="card-title"> {{ $allPhamrmacist->name }}</h5></a>
+                                                    class="card-title"> {{ $allPhamrmacist->name }}</h5></a>
                                         <p class="card-text_1">{{ __('home.Location') }}:
                                             <b>{{ $province->name }}</b></p>
                                         <p class="card-text_1">{{ __('home.Working time') }}:
-                                            <b> {{ $allPhamrmacist->time_working_1  }} :  {{ $allPhamrmacist->time_working_2 }}
+                                            <b> {{ $allPhamrmacist->time_working_1  }}
+                                                : {{ $allPhamrmacist->time_working_2 }}
                                             </b>
                                         </p>
                                     </div>
@@ -204,7 +198,7 @@
                             <p>{{ __('home.Hot deal medicine') }}</p>
                         </div>
                         <div class="ms-auto p-2"><a
-                                href="{{route('examination.hotdealmedicine')}}">{{ __('home.See all') }}</a></div>
+                                    href="{{route('examination.hotdealmedicine')}}">{{ __('home.See all') }}</a></div>
                     </div>
                 </div>
                 <div class="row list-doctor m-auto">
@@ -219,7 +213,7 @@
                                     <img src="{{asset($hotMedicine->thumbnail)}}" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <a href="{{ route('medicine.detail', $hotMedicine->id) }}"><h5
-                                                class="card-title">{{ $hotMedicine->name }}</h5></a>
+                                                    class="card-title">{{ $hotMedicine->name }}</h5></a>
                                         <p class="card-text_1">{{ __('home.Location') }}:
                                             <b>{{ $user->address_code }}</b></p>
                                         <p class="card-text_1">{{ __('home.Price') }}:
@@ -236,7 +230,7 @@
                             <p>{{ __('home.New medicine') }}</p>
                         </div>
                         <div class="ms-auto p-2"><a
-                                href="{{route('examination.newmedicine')}}">{{ __('home.See all') }}</a></div>
+                                    href="{{route('examination.newmedicine')}}">{{ __('home.See all') }}</a></div>
                     </div>
                 </div>
                 <div class="row list-doctor  m-auto">
@@ -251,7 +245,7 @@
                                     <img src="{{asset($newMedicine->thumbnail)}}" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <a href="{{ route('medicine.detail', $newMedicine->id) }}"><h5
-                                                class="card-title">{{ $newMedicine->name }}</h5></a>
+                                                    class="card-title">{{ $newMedicine->name }}</h5></a>
                                         <p class="card-text_1">{{ __('home.Location') }}:
                                             <b>{{ $user->address_code }}</b></p>
                                         <p class="card-text_1">{{ __('home.Price') }}:
@@ -268,7 +262,7 @@
                             <p>{{ __('home.Recommended') }}</p>
                         </div>
                         <div class="ms-auto p-2"><a
-                                href="{{route('examination.recommended')}}">{{ __('home.See all') }}</a></div>
+                                    href="{{route('examination.recommended')}}">{{ __('home.See all') }}</a></div>
                     </div>
                 </div>
                 <div class="row list-doctor m-auto">
@@ -284,7 +278,7 @@
                                          alt="...">
                                     <div class="card-body">
                                         <a href="{{ route('medicine.detail', $recommendedMedicine->id) }}"><h5
-                                                class="card-title">{{ $recommendedMedicine->name }}</h5></a>
+                                                    class="card-title">{{ $recommendedMedicine->name }}</h5></a>
                                         <p class="card-text_1">{{ __('home.Location') }}:
                                             <b>{{ $user->address_code }}</b></p>
                                         <p class="card-text_1">{{ __('home.Price') }}:
@@ -318,7 +312,7 @@
                                         <img src="{{asset($function_food->thumbnail)}}" class="card-img-top" alt="...">
                                         <div class="card-body">
                                             <a href="{{ route('medicine.detail', $function_food->id) }}"><h5
-                                                    class="card-title">{{ $function_food->name }}</h5></a>
+                                                        class="card-title">{{ $function_food->name }}</h5></a>
                                             <p class="card-text_1">{{ __('home.Location') }}:
                                                 <b>{{ $user->address_code }}</b></p>
                                             <p class="card-text_1">{{ __('home.Price') }}:
@@ -390,45 +384,30 @@
                 });
             }
 
-            var mySwiper = new Swiper ('.swiper-container', {
-                speed: 400,
-                spaceBetween: 100,
-                initialSlide: 0,
-                //truewrapper adoptsheight of active slide
-                autoHeight: false,
-                // Optional parameters
-                direction: 'horizontal',
+            var mySwiper = new Swiper('.swiper-container', {
                 loop: true,
-                // delay between transitions in ms
-                autoplay: 5000,
-                autoplayStopOnLast: false, // loop false also
-                // If we need pagination
-                pagination: '.swiper-pagination',
-                paginationType: "bullets",
-
-                // Navigation arrows
                 nextButton: '.swiper-button-next',
                 prevButton: '.swiper-button-prev',
-
-                // And if we need scrollbar
-                //scrollbar: '.swiper-scrollbar',
-                // "slide", "fade", "cube", "coverflow" or "flip"
-                effect: 'slide',
-                // Distance between slides in px.
-                spaceBetween: 60,
-                //
-                slidesPerView: 2,
-                //
-                centeredSlides: true,
-                //
-                slidesOffsetBefore: 0,
-                //
-                grabCursor: true,
-            })
-
+                slidesPerView: 3,
+                paginationClickable: true,
+                spaceBetween: 20,
+                breakpoints: {
+                    1920: {
+                        slidesPerView: 4,
+                        spaceBetween: 20
+                    },
+                    1028: {
+                        slidesPerView: 3,
+                        spaceBetween: 20
+                    },
+                    480: {
+                        slidesPerView: 2,
+                        spaceBetween: 10
+                    }
+                }
+            });
         })
     </script>
-    </div>
     </div>
 @endsection
 
