@@ -624,7 +624,17 @@ return [
     'Pay' => 'Chi trả',
     'comment' => 'bình luận',
     'Like' => 'Thích',
-    'Add Review' => 'Thêm nhận xét'
+    'Add Review' => 'Thêm nhận xét',
+    'Reviews' => 'Đánh giá',
+    'Title English' => 'Tiêu đề tiếng Anh',
+    'Title Laos' => 'Tiêu đề Lào',
+    'Description' => 'Miêu tả',
+    'Description English' => 'Mô tả tiếng Anh',
+    'Description Laos' => 'Mô tả Lào',
+    'MedicalName' => 'Tên y tế',
+    'Parent' => 'Cha mẹ',
+    'Detail' => 'Chi tiết',
+    'Xem đơn đăng ký' => 'Xem đơn đăng ký'
 
 
 

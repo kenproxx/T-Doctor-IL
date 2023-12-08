@@ -237,7 +237,7 @@
                                                         @if(str_contains($message->files, '.mp4'))
                                                             <video src="{{  asset($message->files) }}" controls
                                                                    style="max-width: 300px">
-                                                                Your browser does not support the video tag.
+                                                                {{ __('home.Your browser does not support the video tag') }}.
                                                             </video>
                                                         @elseif(str_contains($message->files, '.mp3'))
                                                             <audio controls="controls" style="max-width: 300px">
@@ -264,7 +264,7 @@
                                                         @if(str_contains($message->files, '.mp4'))
                                                             <video src="{{  asset($message->files) }}" controls
                                                                    style="max-width: 300px">
-                                                                Your browser does not support the video tag.
+                                                                {{ __('home.Your browser does not support the video tag') }}.
                                                             </video>
                                                         @elseif(str_contains($message->files, '.mp3'))
                                                             <audio controls="controls" style="max-width: 300px">

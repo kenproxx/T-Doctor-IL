@@ -613,7 +613,17 @@ return [
     'Pay' => 'ຈ່າຍ',
     'comment' => 'ຄໍາເຫັນ',
     'Like' => 'ມັກ',
-    'Add Review' => 'ເພີ່ມການທົບທວນຄືນ'
+    'Add Review' => 'ເພີ່ມການທົບທວນຄືນ',
+    'Reviews' => 'ການທົບທວນຄືນ',
+    'Title English' => 'ຊື່ພາສາອັງກິດ',
+    'Title Laos' => 'ຊື່ປະເທດລາວ',
+    'Description' => 'ລາຍລະອຽດ',
+    'Description English' => 'ລາຍ​ລະ​ອຽດ​ພາ​ສາ​ອັງ​ກິດ​',
+    'Description Laos' => 'Description ປະເທດລາວ',
+    'MedicalName' => 'ຊື່ທາງການແພດ',
+    'Parent' => 'ພໍ່ແມ່',
+    'Detail' => 'ລາຍລະອຽດ',
+    'Xem đơn đăng ký' => 'ເບິ່ງຄໍາຮ້ອງສະຫມັກ'
 
 
 

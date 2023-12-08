@@ -10,7 +10,7 @@
                     <video controls>
                         <source src="{{ asset($video->file) }}" type="video/mp4">
                         <source src="{{ asset($video->file) }}" type="video/ogg">
-                        Your browser does not support the video tag.
+                        {{ __('home.Your browser does not support the video tag') }}.
                     </video>
                 </div>
                 <div class="col-md-4 action-video">
