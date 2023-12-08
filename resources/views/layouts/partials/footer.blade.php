@@ -163,7 +163,7 @@
                     </li>
                     <li class="other_card">
                         <span class="status_color" style="--status_color: #a4a4a4"></span>
-                        <p class="status_message">{{ __('home.Podcas') }}t</p>
+                        <p class="status_message">{{ __('home.Podcast') }}t</p>
                     </li>
                     <li class="other_card">
                         <span class="status_color" style="--status_color: #a4a4a4"></span>

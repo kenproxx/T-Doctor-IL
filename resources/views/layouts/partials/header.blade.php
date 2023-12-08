@@ -151,7 +151,7 @@
                         </div>
                         <div class="dropdown-menu">
                             @if( (new MedicalPermission())->isMedicalPermission())
-                                <a class="dropdown-item" href="{{ route('admin.home') }}">{{ __('home.Dashboar') }}</a>
+                                <a class="dropdown-item" href="{{ route('admin.home') }}">{{ __('home.Dashboard') }}</a>
                             @else
                                 <a class="dropdown-item"
                                    href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
@@ -413,9 +413,9 @@
                                                        placeholder="{{ __('home.EXPERIENCE') }}">
                                             </div>
                                             <div class="form-element">
-                                                <label for="address">{{ __('home.Address') }}</label>
+                                                <label for="address">{{ __('home.Addresses') }}</label>
                                                 <input id="address" name="address" type="text"
-                                                       placeholder="{{ __('home.Address') }}">
+                                                       placeholder="{{ __('home.Addresses') }}">
                                             </div>
                                             <div class="form-element">
                                                 <label for="province_id">{{ __('home.Tỉnh') }}</label>
@@ -483,7 +483,7 @@
                         </div>
                         <div id="other-option">
                             <div class="form-element text-center">
-                                <button type="submit">{{ __('home.Sign up') }}</button>
+                                <button type="submit">{{ __('home.Sign Up') }}</button>
                             </div>
                             <div class="other_sign">
                                 <div class="line"></div>
@@ -505,7 +505,7 @@
                             <div class="sign--up d-flex justify-content-center">
                                 <p>{{ __('home.Do you already have an account') }}?</p>
                                 <a href="#" data-toggle="modal" data-target="#staticBackdrop" data-dismiss="modal">
-                                    {{ __('home.Log in') }}</a>
+                                    {{ __('home.Log In') }}</a>
                             </div>
                         </div>
                         <div hidden="">

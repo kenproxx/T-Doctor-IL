@@ -558,7 +558,31 @@ return [
     'Sales' => 'ການຂາຍ',
     'Revenue' => 'ລາຍຮັບ',
     'Customers' => 'ລູກຄ້າ',
-    'Reports' => 'ບົດລາຍງານ'
+    'Reports' => 'ບົດລາຍງານ',
+    'Detail Order' => 'ລາຍລະອຽດຄໍາສັ່ງ',
+    'Total Product Price' => 'ລາຄາສິນຄ້າທັງໝົດ',
+    'Total Shipping Price' => 'ລາຄາສົ່ງທັງໝົດ',
+    'Total Discount Price' => 'ລາຄາສ່ວນຫຼຸດທັງໝົດ',
+    'Total Price' => 'ລາ​ຄາ​ລວມ',
+    'Order Method' => 'ວິທີການສັ່ງຊື້',
+    'Quantity' => 'ປະລິມານ',
+    'Order Management' => 'ການຈັດການຄໍາສັ່ງ',
+    'Doctors' => 'ທ່ານໝໍ',
+    'Pharmacists' => 'ຮ້ານຂາຍຢາ',
+    'Patients' => 'ຄົນເຈັບ',
+    'Multiple Image Upload' => 'ອັບໂຫຼດຮູບຫຼາຍຮູບ',
+    'Others' => 'ອື່ນໆ',
+    'REPRESENTATIVE DOCTOR' => 'ທ່ານໝໍຜູ້ຕາງຫນ້າ',
+    'You have 4 new notifications' => 'ທ່ານມີ 4 ການແຈ້ງເຕືອນໃຫມ່',
+    'View all' => 'ເບິ່ງ​ທັງ​ຫມົດ',
+    'Lorem Ipsum' => 'Lorem Ipsum',
+    'Show all notifications' => 'ສະແດງການແຈ້ງເຕືອນທັງໝົດ',
+    'You have 3 new messages' => 'ທ່ານມີ 3 ຂໍ້ຄວາມໃໝ່',
+    'Show all messages' => 'ສະແດງຂໍ້ຄວາມທັງໝົດ',
+    'Web Designer' => 'ຜູ້ອອກແບບເວັບ',
+    'My Profile' => 'ໂປຣໄຟລ໌ຂອງຂ້ອຍ',
+    'Account Settings' => 'ຕັ້ງ​ຄ່າ​ບັນ​ຊີ'
+
 
 
 

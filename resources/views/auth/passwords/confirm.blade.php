@@ -50,7 +50,7 @@
                                     @if (Route::has('password.request'))
                                         <div class="text-center">
                                             <a class="small" href="{{ route('password.request') }}">
-                                                {{ __('home.Forgot Password?') }}
+                                                {{ __('home.Forgot Password') }}?
                                             </a>
                                         </div>
                                     @endif
