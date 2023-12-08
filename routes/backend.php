@@ -18,6 +18,7 @@ Route::group(['prefix' => 'users'], function () {
     Route::post('/change-phone', [UserApi::class, 'changePhoneNumber'])->name('user.change.phone');
     Route::post('/change-password', [UserApi::class, 'changePassword'])->name('user.change.password');
     Route::post('/change-avatar', [UserApi::class, 'changeAvt'])->name('user.change.avatar');
+    Route::get('/search-doctor', [UserApi::class, 'searchDoctor'])->name('api.backend.user.doctor.search');
 });
 
 Route::group(['prefix' => 'users-social'], function () {
