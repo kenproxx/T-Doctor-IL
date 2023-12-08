@@ -255,7 +255,7 @@
                 <div class="modal-content" style="width: 770px; height: 886px">
                     <div class="modal-header">
                         <h5 class="modal-title text-font-24 mt-0"
-                            id="modalRegisterMoreLabel">{{ __('home.Add educatio') }}n</h5>
+                            id="modalRegisterMoreLabel">{{ __('home.Add education') }}n</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -296,7 +296,7 @@
 
                                             </div>
                                             <div class="form-group">
-                                                <div class="text-font-16 mt-4">{{ __('home.From month ') }}<span class="red-color">*</span>
+                                                <div class="text-font-16 mt-4">{{ __('home.From month') }} <span class="red-color">*</span>
                                                 </div>
                                                 <input type="month" class="ac-birth mt-2" name="phone" id="phone"
                                                        placeholder=""

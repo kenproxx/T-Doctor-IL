@@ -7,7 +7,7 @@
     <div class="d-flex justify-content-center">
         <div id="filter" class="d-flex w-100 ">
             <div class="d-flex flex-fill">
-                <div class="filter_option"><p>{{ __('home.Category ') }}<i class="bi bi-chevron-expand"></i></p></div>
+                <div class="filter_option"><p>{{ __('home.Category') }}<i class="bi bi-chevron-expand"></i></p></div>
                 <div class="filter_option"><p>{{ __('home.Position') }} <i class="bi bi-chevron-expand"></i></p></div>
                 <div class="filter_option"><p>{{ __('home.Location') }} <i class="bi bi-chevron-expand"></i></p></div>
                 <div class="filter_option"><p>{{ __('home.Experience') }} <i class="bi bi-chevron-expand"></i></p></div>

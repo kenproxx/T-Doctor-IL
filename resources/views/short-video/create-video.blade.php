@@ -4,40 +4,40 @@
     @include('layouts.partials.header')
     @include('component.banner')
     <div class="container">
-        <h3 class="text-center">Create Short Video Public</h3>
+        <h3 class="text-center">{{ __('home.Create Short Video Public') }} </h3>
         <form>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="inputEmail4">Email</label>
+                    <label for="inputEmail4">{{ __('home.Email') }} </label>
                     <input type="email" class="form-control" id="inputEmail4">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputPassword4">Password</label>
+                    <label for="inputPassword4">{{ __('home.Password') }} </label>
                     <input type="password" class="form-control" id="inputPassword4">
                 </div>
             </div>
             <div class="form-group">
-                <label for="inputAddress">Address</label>
+                <label for="inputAddress">{{ __('home.Addresses') }} </label>
                 <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
             </div>
             <div class="form-group">
-                <label for="inputAddress2">Address 2</label>
+                <label for="inputAddress2">{{ __('home.Addresses') }} 2</label>
                 <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="inputCity">City</label>
+                    <label for="inputCity">{{ __('home.City') }}</label>
                     <input type="text" class="form-control" id="inputCity">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="inputState">State</label>
+                    <label for="inputState">{{ __('home.State') }}</label>
                     <select id="inputState" class="form-control">
-                        <option selected>Choose...</option>
+                        <option selected>{{ __('home.Choose...') }}</option>
                         <option>...</option>
                     </select>
                 </div>
                 <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
+                    <label for="inputZip">{{ __('home.Zip') }}</label>
                     <input type="text" class="form-control" id="inputZip">
                 </div>
             </div>
@@ -45,11 +45,11 @@
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="gridCheck">
                     <label class="form-check-label" for="gridCheck">
-                        Check me out
+                        {{ __('home.Check me out') }}
                     </label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
+            <button type="submit" class="btn btn-primary">{{ __('home.Sign in') }}</button>
         </form>
     </div>
 @endsection

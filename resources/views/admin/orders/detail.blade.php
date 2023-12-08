@@ -7,50 +7,50 @@
     <div class="container">
         <div class="row">
             <div class="form-group col-md-4">
-                <label for="full_name">FullName</label>
+                <label for="full_name">{{ __('home.Full Name') }}</label>
                 <input disabled type="text" class="form-control" id="full_name" value="{{ $order->full_name }}">
             </div>
             <div class="form-group col-md-4">
-                <label for="email">Email</label>
+                <label for="email">{{ __('home.Email') }}</label>
                 <input disabled value="{{ $order->email }}" type="email" class="form-control" id="email">
             </div>
             <div class="form-group col-md-4">
-                <label for="phone">PhoneNumber</label>
+                <label for="phone">{{ __('home.PhoneNumber') }}</label>
                 <input disabled value="{{ $order->phone }}" type="text" class="form-control" id="phone">
             </div>
         </div>
         <div class="form-group">
-            <label for="address">Address</label>
+            <label for="address">{{ __('home.Addresses') }}</label>
             <input disabled value="{{ $order->address }}" type="text" class="form-control" id="address"
                    placeholder="Apartment, studio, or floor">
         </div>
         <div class="row">
             <div class="form-group col-md-3">
-                <label for="total_price">Total Product Price</label>
+                <label for="total_price">{{ __('home.Total Product Price') }}</label>
                 <input disabled value="{{ $order->total_price }}" type="text" class="form-control" id="total_price">
             </div>
             <div class="form-group col-md-3">
-                <label for="shipping_price">Total Shipping Price</label>
+                <label for="shipping_price">{{ __('home.Total Shipping Price') }}</label>
                 <input disabled value="{{ $order->shipping_price }}" type="text" class="form-control"
                        id="shipping_price">
             </div>
             <div class="form-group col-md-3">
-                <label for="discount_price">Total Discount Price</label>
+                <label for="discount_price">{{ __('home.Total Discount Price') }}</label>
                 <input disabled value="{{ $order->discount_price }}" type="text" class="form-control"
                        id="discount_price">
             </div>
             <div class="form-group col-md-3">
-                <label for="total">Total Price</label>
+                <label for="total">{{ __('home.Total Price') }}</label>
                 <input disabled value="{{ $order->total }}" type="text" class="form-control" id="total">
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-6">
-                <label for="order_method">Order Method</label>
+                <label for="order_method">{{ __('home.Order Method') }}</label>
                 <input disabled value="{{ $order->order_method }}" type="text" class="form-control" id="order_method">
             </div>
             <div class="form-group col-md-6">
-                <label for="status">Status</label>
+                <label for="status">{{ __('home.Status') }}</label>
                 <select id="status" class="form-select">
                     @foreach($status as $item)
                         @if($item != 'DELETED')
@@ -66,9 +66,9 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Product Name</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Price</th>
+                <th scope="col">{{ __('home.Product Name') }}</th>
+                <th scope="col">{{ __('home.Quantity') }}</th>
+                <th scope="col">{{ __('home.Price') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -92,7 +92,7 @@
             </tbody>
         </table>
         <div class="text-center mt-3 ">
-            <button type="button" class="btn btn-primary" id="btnSaveOrder">Save</button>
+            <button type="button" class="btn btn-primary" id="btnSaveOrder">{{ __('home.Save') }}</button>
         </div>
     </div>
 
