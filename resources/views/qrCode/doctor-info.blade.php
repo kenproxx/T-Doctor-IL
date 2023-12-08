@@ -190,7 +190,7 @@
                                             <div id="list-videos">
                                                 @foreach($arrayVideos as $video)
                                                     @php
-                                                        $video = str_replace('public', 'storage', $video);
+                                                        $video = str_replace('public', 'public/storage', $video);
                                                     @endphp
                                                     <div class="row">
                                                         <video style="max-width: 150px" controls>
