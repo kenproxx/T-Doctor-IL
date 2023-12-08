@@ -62,7 +62,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="category_id">{{ __('home.Category') }}</label>
-                    <select class="custom-select" id="category_id" name="category_id">
+                    <select class="form-select" id="category_id" name="category_id">
                         @foreach($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
                         @endforeach
@@ -73,7 +73,7 @@
                         $provinces = \App\Models\Province::all();
                     @endphp
                     <label for="province_id">Province</label>
-                    <select class="custom-select" id="province_id" name="province_id">
+                    <select class="form-select" id="province_id" name="province_id">
                         @foreach($provinces as $province)
                             <option value="{{$province->id}}">{{$province->name}}</option>
                         @endforeach
@@ -102,7 +102,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="ads_plan">{{ __('home.Ads Plan') }}</label>
-                    <select id="ads_plan" name="ads_plan" class="custom-select">
+                    <select id="ads_plan" name="ads_plan" class="form-select">
                         <option value="1">{{ __('home.Platinum') }}</option>
                         <option value="2">{{ __('home.Premium') }}</option>
                         <option value="3">{{ __('home.Silver') }}</option>
@@ -110,7 +110,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="ads_period">{{ __('home.Ads Period') }}</label>
-                    <select id="ads_period" name="ads_period" class="custom-select">
+                    <select id="ads_period" name="ads_period" class="form-select">
                         <option value="1">{{ __('home.5 Day') }}</option>
                         <option value="2">{{ __('home.10 Day') }}</option>
                         <option value="3">{{ __('home.15 Day') }}</option>

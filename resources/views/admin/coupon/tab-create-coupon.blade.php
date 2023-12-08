@@ -194,7 +194,7 @@
                 <input type="number" class="form-control" id="max_register" name="max_register">
             </div>
             <div class="col-sm-6"><label for="clinic_id">{{ __('home.Đơn vị áp dụng') }}</label>
-                <select class="custom-select" id="clinic_id">
+                <select class="form-select" id="clinic_id">
                     <option selected>{{ __('home.Choose...') }}</option>
                 </select>
             </div>

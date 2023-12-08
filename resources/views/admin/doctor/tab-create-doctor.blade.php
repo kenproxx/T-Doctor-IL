@@ -264,14 +264,14 @@
         <div class="row">
 
             <div class="col-sm-4"><label for="department_id">{{ __('home.Department') }}</label>
-                <select class="custom-select" id="department_id" name="department_id">
+                <select class="form-select" id="department_id" name="department_id">
                     @foreach($departments as $department)
                         <option value=" {{$department->id}}"> {{$department->name}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-sm-4"><label for="status">{{ __('home.Trạng thái') }}</label>
-                <select class="custom-select" id="status" name="status">
+                <select class="form-select" id="status" name="status">
                     <option value="{{ \App\Enums\UserStatus::PENDING }}">
                         {{ \App\Enums\UserStatus::PENDING }}
                     </option>
