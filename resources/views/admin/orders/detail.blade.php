@@ -66,7 +66,7 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">{{ __('home.Product Name') }}</th>
+                <th scope="col">{{ __('home.Product name') }}</th>
                 <th scope="col">{{ __('home.Quantity') }}</th>
                 <th scope="col">{{ __('home.Price') }}</th>
             </tr>

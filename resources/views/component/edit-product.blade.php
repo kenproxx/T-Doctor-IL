@@ -63,9 +63,9 @@
                                     </div>
 
                                     <div class="justify-content-between edit-button">
-                                        <a onclick="deleteProduct(${data.product.id})" class="apply-bt apply-bt_delete w-45 align-items-center justify-content-center d-flex">Delete</a>
+                                        <a onclick="deleteProduct(${data.product.id})" class="apply-bt apply-bt_delete w-45 align-items-center justify-content-center d-flex">{{ __('home.Delete') }}</a>
                                         <form action="${urlEdit}" class="w-45">
-                                            <button type="submit" class="apply-bt apply-bt_edit w-100">Edit</button>
+                                            <button type="submit" class="apply-bt apply-bt_edit w-100">{{ __('home.Edit') }}</button>
                                         </form>
                                     </div>
                                 </div>

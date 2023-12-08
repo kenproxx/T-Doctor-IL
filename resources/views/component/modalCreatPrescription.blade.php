@@ -71,7 +71,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn cancel" data-dismiss="modal">{{ __('home.CANCEL') }}</button>
-                <button type="button" class="btn pay">Pay</button>
+                <button type="button" class="btn pay">{{ __('home.Pay') }}</button>
             </div>
         </div>
     </div>
