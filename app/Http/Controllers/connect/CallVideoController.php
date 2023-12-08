@@ -82,6 +82,10 @@ class CallVideoController extends Controller
         $PUSHER_APP_SECRET = env('PUSHER_APP_SECRET', 'c6cafb046a45494f80b2');
         $PUSHER_APP_ID = env('PUSHER_APP_ID', '1714303');
 
+        $PUSHER_APP_KEY = '3ac4f810445d089829e8';
+        $PUSHER_APP_SECRET = 'c6cafb046a45494f80b2';
+        $PUSHER_APP_ID = '1714303';
+
         $pusher = new Pusher($PUSHER_APP_KEY, $PUSHER_APP_SECRET, $PUSHER_APP_ID, $options);
 
         $pusher->trigger('send-message', 'send-message', $data);
@@ -142,9 +146,8 @@ class CallVideoController extends Controller
             $recordIds = $this->getRecordIdByRoomName($queueDownload->room_name);
 
             foreach ($recordIds['data'] as $recordId) {
-                $response = $this->downloadRecordByRoomName($recordId['_id'], $queueDownload->user_id_1, $queueDownload->user_id_2, $queueDownload->room_name);
+                $response = $this->downloadRecordByRoomName($recordId['_id'], $queueDownload);
             }
-            $queueDownload->delete();
         }
     }
 
@@ -156,7 +159,7 @@ class CallVideoController extends Controller
         return $response->json();
     }
 
-    private function downloadRecordByRoomName($recordingId, $user_id_1, $user_id_2, $roomName)
+    private function downloadRecordByRoomName($recordingId, $queueDownload)
     {
 
         // Contains logic to validate existing meeting
@@ -164,7 +167,9 @@ class CallVideoController extends Controller
 
         $url = $downloadUrl['url'];
 
-        $response = Http::get($url);
+        $timeout = 21600; // time out 6h
+
+        $response = Http::timeout($timeout)->get($url);
 
         if ($response->successful()) {
             $pathInfo = pathinfo(parse_url($url, PHP_URL_PATH));
@@ -180,14 +185,14 @@ class CallVideoController extends Controller
 //            user_id_1 là người gọi
 //            user_id_2 là người nhận/bác sĩ đươc gọi
 
-            $chat->from_user_id = $user_id_1;
-            $chat->to_user_id = $user_id_2;
+            $chat->from_user_id = $queueDownload->user_id_1;
+            $chat->to_user_id = $queueDownload->user_id_2;
             $chat->chat_message = "File VIDEO CALL";
             $chat->files = $pathFile;
 
             $chat->save();
 
-            $this->deleteByRecordId($recordingId);
+            $this->deleteByRecordId($recordingId, $queueDownload);
 
             // Optionally, you can return the local path or URL of the downloaded file
             return $fileName;
@@ -197,10 +202,11 @@ class CallVideoController extends Controller
         }
     }
 
-    private function deleteByRecordId($recordingId)
+    private function deleteByRecordId($recordingId, $queueDownload)
     {
         // Contains logic to validate existing meeting
         $response = Http::delete("https://$this->METERED_DOMAIN/api/v1/recording/$recordingId?secretKey=$this->METERED_SECRET_KEY");
+        $queueDownload->delete();
     }
 
 
