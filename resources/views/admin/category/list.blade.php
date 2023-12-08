@@ -4,12 +4,13 @@
 @endsection
 @section('main-content')
     <h3 class="text-center">Category Management</h3>
+    <a href="{{ route('view.admin.category.create') }}" class="btn btn-primary mb-3">Create</a>
     <table class="table table-striped" id="tableCategoryManagement">
         <thead>
         <tr>
             <th scope="col">#</th>
             <th scope="col">Title</th>
-            <th scope="col">Star</th>
+            <th scope="col">Description</th>
             <th scope="col">Parent</th>
             <th scope="col">Status</th>
             <th scope="col">Action</th>
@@ -29,7 +30,7 @@
 
         $(document).ready(function () {
             async function loadCategory() {
-                let categoryUrl = `{{ route('api.medical.categorys.doctors.list')  }}`;
+                let categoryUrl = `{{ route('api.business.categories.list')  }}`;
 
                 await $.ajax({
                     url: categoryUrl,
@@ -52,13 +53,13 @@
                 for (let i = 0; i < response.length; i++) {
                     let data = response[i];
 
-                    let categoryDetailUrl = `{{ route('view.categorys.doctor.detail', ['id'=>':id']) }}`;
+                    let categoryDetailUrl = `{{ route('view.admin.category.detail', ['id'=>':id']) }}`;
                     categoryDetailUrl = categoryDetailUrl.replace(':id', data.id);
 
                     html = html + `<tr>
                                         <th scope="row">${i + 1}</th>
-                                        <td>${data.title}</td>
-                                        <td>${data.number_star}</td>
+                                        <td>${data.name}</td>
+                                        <td>${data.description}</td>
                                         <td>${data.parent_id}</td>
                                         <td>${data.status}</td>
                                         <td>
@@ -79,7 +80,7 @@
         }
 
         async function deleteCategory(id) {
-            let categoryDeleteUrl = `{{ route('api.medical.categorys.doctors.delete', ['id'=>':id']) }}`;
+            let categoryDeleteUrl = `{{ route('api.business.categories.delete', ['id'=>':id']) }}`;
             categoryDeleteUrl = categoryDeleteUrl.replace(':id', id);
 
             await $.ajax({

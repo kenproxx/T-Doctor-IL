@@ -196,6 +196,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::group(['prefix' => 'categories'], function () {
         Route::get('admin/list', [CategoryController::class, 'index'])->name('view.admin.category.index');
+        Route::get('admin/create', [CategoryController::class, 'create'])->name('view.admin.category.create');
         Route::get('admin/detail/{id}', [CategoryController::class, 'detail'])->name('view.admin.category.detail');
     });
 
