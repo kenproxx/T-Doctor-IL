@@ -405,7 +405,7 @@
                         </div>
                     </div>
                     <div class="text-wrapper-5">
-                        <button type="button" class="btn mx-2 w-100 h-100" onclick="submitCommentMain()">comment
+                        <button type="button" class="btn mx-2 w-100 h-100" onclick="submitCommentMain()">{{ __('home.comment') }}
                         </button>
                     </div>
                 </div>
@@ -419,13 +419,13 @@
                 @endphp
 
                 @if(!Auth::check())
-                    <button type="button" class="btn btn-primary mx-2 button-main" onclick="alertLogin()">Like</button>
+                    <button type="button" class="btn btn-primary mx-2 button-main" onclick="alertLogin()">{{ __('home.Like') }}</button>
                 @else
                     <button type="button" class="btn btn-primary mx-2 button-main"
                             onclick="changeEmotion()">{{ $isLike ? ( $isLike->is_like ? 'Dislike' : 'Like' ) : 'Like'}}</button>
                 @endif
                 @if($isMedical)
-                    <button type="button" class="btn btn-primary mx-2 button-main" onclick="replyCommentMain()">Reply
+                    <button type="button" class="btn btn-primary mx-2 button-main" onclick="replyCommentMain()">{{ __('home.Reply') }}
                     </button>
                 @endif
             </div>
@@ -473,7 +473,7 @@
                         </div>
                         <div class="text-wrapper-5">
                             <button type="button" class="btn mx-2 w-100 h-100"
-                                    onclick="submitComment('{{ $index }}')">comment
+                                    onclick="submitComment('{{ $index }}')">{{ __('home.comment') }}
                             </button>
                         </div>
                     </div>

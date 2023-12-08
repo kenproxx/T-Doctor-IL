@@ -21,7 +21,7 @@
                 <a class="{{ $routeName == 'examination.findmymedicine' ? 'active' : '' }}"
                    href="{{ route('examination.findmymedicine') }}">{{ __('home.Find my medicine') }}</a>
                 <a class="{{ $routeName == 'examination.mentoring' ? 'active' : '' }}"
-                   href="{{route('examination.mentoring')}}">Mentoring</a>
+                   href="{{route('examination.mentoring')}}">{{ __('home.Mentoring') }}</a>
                 <a class="{{ $routeName == 'examination.mypersonaldoctor' ? 'active' : '' }}"
                    href="{{ route('examination.mypersonaldoctor') }}">{{ __('home.My personal doctor') }}</a>
             </div>
@@ -88,7 +88,7 @@
                             <div class="form-element">
                                 <input id="remember-me" type="checkbox">
                                 <label for="remember-me">{{ __('home.Remember password') }}</label>
-                                <a href="#">{{ __('home.Forgot password') }}?</a>
+                                <a href="#">{{ __('home.Forgot Password') }}?</a>
                             </div>
                             <div class="form-element text-center">
                                 <button>{{ __('home.Login') }}</button>

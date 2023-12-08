@@ -45,7 +45,7 @@ return [
     'Máy tạo oxy 5 lít Reiwa K5BW' => 'Reiwa K5BW 5 liter oxygen generator',
     'FOLLOW' => 'Follow',
     'Start' => 'Start',
-    'Direction' => 'Chỉ đườ',
+    'Direction' => 'Direction',
     'Booking' => 'Booking',
     "Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho bạn bè cùng sử dụng" => "First time using service through the app but the quality and service at the salon are too good. Whenever you book, you'll be on time without having to wait like everywhere else. Hopefully occasionally the app will have many incentives to recommend to friends to use",
     'Addresses' => 'Addresses',
@@ -609,7 +609,24 @@ return [
     'Start Upload Video' => 'Start Upload Video',
     'topic' => 'topic',
     'Video' => 'Video',
-    'Upload' => 'Upload'
+    'Upload' => 'Upload',
+    'Chọn quận' => 'Select district',
+    'Chọn xã' => 'Select commune',
+    'List Order' => 'List Order',
+    'Detail Review' => 'Detail Review',
+    'Content' => 'Content',
+    'BusinessName' => 'BusinessName',
+    'Star' => 'Star',
+    'List Reviews' => 'List Reviews',
+    'Review Management' => 'Review Management',
+    'increase' => 'increase',
+    'decrease' => 'decrease',
+    'Pay' => 'Pay',
+    'comment' => 'comment',
+    'Like' => 'Like',
+    'Add Review' => 'Add Review'
+
+
 
 
 
