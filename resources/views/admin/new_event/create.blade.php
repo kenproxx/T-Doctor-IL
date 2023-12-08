@@ -62,7 +62,7 @@
         <div class="row">
             <div class="col-sm-4">
                 <label for="status">{{ __('home.Status') }}</label>
-                <select class="custom-select" id="status" name="status">
+                <select class="form-select" id="status" name="status">
                     <option
                         value="{{ NewEventStatus::ACTIVE }}">{{ NewEventStatus::ACTIVE }}</option>
                     <option
@@ -71,7 +71,7 @@
             </div>
             <div class="col-sm-4">
                 <label for="type">{{ __('home.Loại') }}</label>
-                <select class="custom-select" id="type" name="type">
+                <select class="form-select" id="type" name="type">
                     <option
                         value="{{ NewEventType::NEWS }}">{{ NewEventType::NEWS }}</option>
                     <option

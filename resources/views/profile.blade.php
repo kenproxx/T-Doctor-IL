@@ -449,7 +449,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-4"><label for="department_id">Department</label>
-                                        <select class="custom-select" id="department_id" name="department_id">
+                                        <select class="form-select" id="department_id" name="department_id">
                                             @php
                                                 $departments = \App\Models\DoctorDepartment::where('status', \App\Enums\DoctorDepartmentStatus::ACTIVE)->get();
                                             @endphp

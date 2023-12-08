@@ -64,7 +64,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <label for="category_id">{{ __('home.Category') }}</label>
-                    <select class="custom-select" id="category_id" name="category_id">
+                    <select class="form-select" id="category_id" name="category_id">
                         <option value="0">{{ __('home.Khác') }}</option>
                         @if($categoryProductMedicine)
                             @foreach($categoryProductMedicine as $index => $cateProductMedicine)
@@ -75,7 +75,7 @@
                 </div>
                 <div class="col-md-4">
                     <label for="object_">{{ __('home.Object') }}</label>
-                    <select class="custom-select" id="object_" name="object_">
+                    <select class="form-select" id="object_" name="object_">
                         <option value="{{ ObjectOnlineMedicine::KIDS }}">{{ __('home.For kids') }}</option>
                         <option value="{{ ObjectOnlineMedicine::FOR_WOMEN }}">{{ __('home.For women') }}
                         </option>
@@ -86,7 +86,7 @@
                 </div>
                 <div class="col-md-4">
                     <label for="filter_">{{ __('home.Filter') }}</label>
-                    <select class="custom-select" id="filter_" name="filter_">
+                    <select class="form-select" id="filter_" name="filter_">
                         <option value="{{ FilterOnlineMedicine::HEALTH }}">{{ __('home.Heath') }}</option>
                         <option value="{{ FilterOnlineMedicine::BEAUTY }}">{{ __('home.Beauty') }}</option>
                         <option value="{{ FilterOnlineMedicine::PET }}">{{ __('home.Pets') }}</option>
@@ -112,7 +112,7 @@
                 </div>
                 <div class="col-md-4">
                     <label for="status">{{ __('home.Status') }}</label>
-                    <select class="custom-select" id="status" name="status">
+                    <select class="form-select" id="status" name="status">
                         <option
                             value="{{ OnlineMedicineStatus::APPROVED }}">{{ OnlineMedicineStatus::APPROVED }}</option>
                         <option

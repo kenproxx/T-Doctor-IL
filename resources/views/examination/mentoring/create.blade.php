@@ -24,7 +24,7 @@
             </div>
             <div class="form-group">
                 <label for="category">{{ __('home.Select Category') }}</label>
-                <select class="custom-select" id="category">
+                <select class="form-select" id="category">
                     <option selected value="0">{{ __('home.Choose...') }}</option>
                     <option value="{{ \App\Enums\MentoringCategory::HEALTH }}">{{ __('home.Heath') }}</option>
                     <option value="{{ \App\Enums\MentoringCategory::BEAUTY }}">{{ __('home.Beauty') }}</option>

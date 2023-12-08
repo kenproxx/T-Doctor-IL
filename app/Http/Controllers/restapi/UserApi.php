@@ -248,7 +248,7 @@ class UserApi extends Controller
         $listDoctor = User::where('member', TypeMedical::DOCTORS)
             ->where('status', UserStatus::ACTIVE)
             ->when($name, function ($query) use ($name) {
-                $query->where(DB::raw('LOWER(users.name)'), 'like', '%' . strtolower($name) . '%');
+                $query->orWhere(DB::raw('LOWER(users.name)'), 'like', '%' . strtolower($name) . '%');
             })
             ->when($name, function ($query) use ($name) {
                 $departments = Department::where(DB::raw('LOWER(name)'), 'like', '%' . strtolower($name) . '%')->get();

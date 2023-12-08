@@ -40,7 +40,7 @@
             </div>
             <div class="col-sm-6">
                 <label for="status">{{ __('home.Status') }}</label>
-                <select class="custom-select" id="status" name="status">
+                <select class="form-select" id="status" name="status">
                     <option
                         value="1" {{ $categoryProduct->status == 1 ? 'selected' : '' }}>{{ __('home.Active') }}
                     </option>

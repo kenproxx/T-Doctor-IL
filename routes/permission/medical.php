@@ -21,6 +21,7 @@ use App\Http\Controllers\restapi\admin\AdminBookingApi;
 use App\Http\Controllers\restapi\admin\AdminDepartmentApi;
 use App\Http\Controllers\restapi\admin\AdminDoctorDepartmentApi;
 use App\Http\Controllers\restapi\admin\AdminDoctorInfoApi;
+use App\Http\Controllers\restapi\admin\AdminDoctorReviewApi;
 use App\Http\Controllers\restapi\admin\AdminNewsApi;
 use App\Http\Controllers\restapi\admin\AdminOrderApi;
 use App\Http\Controllers\restapi\admin\AdminPhamacitisApi;
@@ -193,24 +194,13 @@ Route::group(['prefix' => 'reviews'], function () {
     Route::delete('/delete/{id}', [BackendReviewController::class, 'delete'])->name('api.backend.reviews.delete');
 });
 
-//Route::group(['prefix' => 'categories'], function () {
-//    Route::get('/list', [BackendCategoryController::class, 'getAll'])->name('api.backend.categories.list');
-//    Route::get('/detail/{id}', [BackendCategoryController::class, 'detail'])->name('api.backend.categories.detail');
-//    Route::get('/user/{id}', [BackendCategoryController::class, 'getAllByUser'])->name('api.backend.categories.user');
-////    Route::get('/clinic/{id}', [BackendCategoryController::class, 'getByClinic'])->name('api.backend.categories.clinic');
-//    Route::post('/create', [BackendCategoryController::class, 'create'])->name('api.backend.categories.create');
-//    Route::put('/update/{id}', [BackendCategoryController::class, 'update'])->name('api.backend.categories.update');
-//    Route::delete('/delete/{id}', [BackendCategoryController::class, 'delete'])->name('api.backend.categories.delete');
-//});
+Route::group(['prefix' => 'reviews-doctor'], function () {
+    Route::get('/list', [AdminDoctorReviewApi::class, 'getList'])->name('api.medical.reviews.doctors.list');
+    Route::get('/detail/{id}', [AdminDoctorReviewApi::class, 'detail'])->name('api.medical.reviews.doctors.create');
+    Route::put('/change/{id}', [AdminDoctorReviewApi::class, 'updateStatus'])->name('api.medical.reviews.doctors.change.status');
+    Route::delete('/delete/{id}', [AdminDoctorReviewApi::class, 'delete'])->name('api.medical.reviews.doctors.delete');
+});
 
-//Route::group(['prefix' => 'coupons'], function () {
-//    Route::get('/list', [BackendCouponController::class, 'getAll'])->name('api.backend.coupons.list');
-//    Route::post('/create', [BackendCouponController::class, 'create'])->name('api.backend.coupons.create');
-//    Route::post('/update/{id}', [BackendCouponController::class, 'update'])->name('api.backend.coupons.update');
-//    Route::delete('/delete/{id}', [BackendCouponController::class, 'delete'])->name('api.backend.coupons.delete');
-//});
-//
-//
 Route::group(['prefix' => 'doctors-info'], function () {
     Route::get('/list', [AdminDoctorInfoApi::class, 'getAll'])->name('api.backend.doctors.info.list');
     Route::get('/list-doctor', [AdminDoctorInfoApi::class, 'getAllByUser'])->name('api.backend.doctors.info.list.by.user');

@@ -14,7 +14,7 @@
         <div class="row medicine-search">
             <div class="medicine-search--left col-md-3 d-flex justify-content-around">
                 <div class="title">
-                    <select class="custom-select" id="category_id" name="category_id"
+                    <select class="form-select" id="category_id" name="category_id"
                             onchange="categoryFilterMedicine(this.value)">
                         <option value="">{{ __('home.Category') }}</option>
                         @if($categoryMedicines)
@@ -25,7 +25,7 @@
                     </select>
                 </div>
                 <div class="title">
-                    <select class="custom-select" id="category_id" name="category_id"
+                    <select class="form-select" id="category_id" name="category_id"
                             onchange="locationFilterMedicine(this.value)">
                         <option value="">{{ __('home.Location') }}</option>
                         @if($provinces)

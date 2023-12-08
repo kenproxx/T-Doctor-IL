@@ -319,7 +319,7 @@
         <div class="row">
 
             <div class="col-sm-4"><label for="department_id">{{ __('home.departments') }}</label>
-                <select class="custom-select" id="department_id" name="department_id">
+                <select class="form-select" id="department_id" name="department_id">
                     @foreach($departments as $department)
                         <option
                             {{ $department->id == $doctor->department_id ? 'selected' : ''}} value=" {{$department->id}}"> {{$department->name}}</option>
@@ -327,7 +327,7 @@
                 </select>
             </div>
             <div class="col-sm-4"><label for="status">{{ __('home.Trạng thái') }}</label>
-                <select class="custom-select" id="status" name="status">
+                <select class="form-select" id="status" name="status">
                     <option
                         {{ $doctor->status == \App\Enums\UserStatus::PENDING ? 'selected' : ''}}
                         value="{{ \App\Enums\UserStatus::PENDING }}">
