@@ -17,8 +17,10 @@
                     class="clinic-search--left col-md-12 d-flex justify-content-between clinic-search--center align-items-center">
                     <div class="clinic-search--left col-md-6 justify-content-around mobile-hidden">
                         <div class="title mobile-hidden">{{ __('home.All') }} <i class="bi bi-arrow-down-up"></i></div>
-                        <div class="title mobile-hidden">{{ __('home.Category') }} <i class="bi bi-arrow-down-up"></i></div>
-                        <div class="title mobile-hidden">{{ __('home.Location') }} <i class="bi bi-arrow-down-up"></i></div>
+                        <div class="title mobile-hidden">{{ __('home.Category') }} <i class="bi bi-arrow-down-up"></i>
+                        </div>
+                        <div class="title mobile-hidden">{{ __('home.Location') }} <i class="bi bi-arrow-down-up"></i>
+                        </div>
                     </div>
 
                     <div class="search-box col-md-5">
@@ -40,10 +42,12 @@
                 <input onkeyup="performSearch()" id="inputSearch" placeholder="{{ __('home.Search for anything…') }}">
             </div>
             <div class="d-flex col-md-4 justify-content-between align-items-center">
+                @if(auth()->user()->type!= \App\Enums\Role::NORMAL)
+                    <a href="#" onclick="checkLogin()" class="col-md-4 flea-button">
+                        {{ __('home.Sell my product') }}
+                    </a>
+                @endif
 
-                <a href="#" onclick="checkLogin()" class="col-md-4 flea-button">
-                    {{ __('home.Sell my product') }}
-                </a>
                 <a href="#" onclick="checkLoginWishStore()" class="col-md-4 flea-button flea-btn">
                     {{ __('home.Go to my store') }}
                 </a>
@@ -58,8 +62,10 @@
                     <div class="flea-text">{{ __('home.Filter') }}</div>
                     @foreach($departments as $department)
                         <div>
-                            <input type="checkbox" onchange="performSearch()" name="category_{{$department->id}}" id="category_{{$department->id}}">
-                            <label for="category_{{$department->id}}" class="flea-text-gray">{{$department->name}}</label>
+                            <input type="checkbox" onchange="performSearch()" name="category_{{$department->id}}"
+                                   id="category_{{$department->id}}">
+                            <label for="category_{{$department->id}}"
+                                   class="flea-text-gray">{{$department->name}}</label>
                         </div>
                     @endforeach
                     <div class="flea-text-sp">{{ __('home.See all categories') }}</div>
@@ -206,6 +212,7 @@
                 window.location.href = '{{route('flea.market.my.store' )}}';
             }
         }
+
         function checkLoginWish() {
             if (token === undefined) {
                 $('#staticBackdrop').modal('show');
@@ -213,6 +220,7 @@
                 window.location.href = '{{ route('flea.market.wish.list') }}';
             }
         }
+
         function checkLogin() {
             if (token === undefined) {
                 $('#staticBackdrop').modal('show');
@@ -438,7 +446,8 @@
                         tab = `
                              <a class="button-heart" data-favorite="0">
                                 <i id="icon-heart-${item.id}" class="${isFavorite} bi" data-product-id="${item.id}" onclick="addProductToWishList(${item.id})"></i>
-                            </a>`;}
+                            </a>`;
+                    }
                     var html = `
                     <div class="col-md-3 col-6">
                         <div class="product-item">

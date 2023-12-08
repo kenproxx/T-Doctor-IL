@@ -13,6 +13,9 @@
             border-radius: 50% !important;
             border: 1px solid #cccccc;
         }
+        .input-group-text {
+            height: 100%;
+        }
     </style>
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('Profile') }}</h1>
@@ -40,7 +43,7 @@
         <div class="col-lg-4 order-lg-2">
 
             <div class="card shadow mb-4">
-                <div class="card-profile-image mt-4">
+                <div class="card-profile-image mt-4 d-flex justify-content-center">
                     <img class="avatar-user" src="{{ Auth::user()->avt }}" alt=""
                          style="max-width: 100px; max-height: 100px">
                 </div>
@@ -65,47 +68,47 @@
                                 <span class="input-group-text" id="basic-addon1"><i
                                         class="fa-brands fa-facebook w-icon-px"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="facebook" name="facebook"
-                                   value="{{ $socialUser->facebook ?? '' }}">
+                            <label for="facebook"></label><input type="text" class="form-control" id="facebook" name="facebook"
+                                                                 value="{{ $socialUser->facebook ?? '' }}">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i
                                         class="fa-brands fa-tiktok w-icon-px"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="tiktok" name="tiktok"
-                                   value="{{ $socialUser->tiktok ?? '' }}">
+                            <label for="tiktok"></label><input type="text" class="form-control" id="tiktok" name="tiktok"
+                                                               value="{{ $socialUser->tiktok ?? '' }}">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i class="fa-brands fa-instagram"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="instagram" name="instagram"
-                                   value="{{ $socialUser->instagram ?? '' }}">
+                            <label for="instagram"></label><input type="text" class="form-control" id="instagram" name="instagram"
+                                                                  value="{{ $socialUser->instagram ?? '' }}">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i
                                         class="fa-brands fa-google"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="google_review" name="google_review"
-                                   value="{{ $socialUser->google_review ?? '' }}">
+                            <label for="google_review"></label><input type="text" class="form-control" id="google_review" name="google_review"
+                                                                      value="{{ $socialUser->google_review ?? '' }}">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i
                                         class="fa-brands fa-youtube w-icon-px"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="youtube" name="youtube"
-                                   value="{{ $socialUser->youtube ?? '' }}">
+                            <label for="youtube"></label><input type="text" class="form-control" id="youtube" name="youtube"
+                                                                value="{{ $socialUser->youtube ?? '' }}">
                         </div>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1"><i
                                         class="fa-solid fa-hashtag"></i></span>
                             </div>
-                            <input type="text" class="form-control" id="other" name="other"
-                                   value="{{ $socialUser->other ?? '' }}">
+                            <label for="other"></label><input type="text" class="form-control" id="other" name="other"
+                                                              value="{{ $socialUser->other ?? '' }}">
                         </div>
 
                         <input type="hidden" id="user_id" name="user_id"
@@ -498,7 +501,7 @@
                         </div>
 
                         <!-- Button -->
-                        <div class="pl-lg-4">
+                        <div class="pl-lg-4 mt-4">
                             <div class="row">
                                 <div class="col text-center">
                                     <button type="submit" class="btn btn-primary">{{ __('home.Save Changes') }}</button>
