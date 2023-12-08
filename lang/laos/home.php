@@ -581,7 +581,24 @@ return [
     'Show all messages' => 'ສະແດງຂໍ້ຄວາມທັງໝົດ',
     'Web Designer' => 'ຜູ້ອອກແບບເວັບ',
     'My Profile' => 'ໂປຣໄຟລ໌ຂອງຂ້ອຍ',
-    'Account Settings' => 'ຕັ້ງ​ຄ່າ​ບັນ​ຊີ'
+    'Account Settings' => 'ຕັ້ງ​ຄ່າ​ບັນ​ຊີ',
+    'Need Help' => 'ຕ້ອງ​ການ​ຄວາມ​ຊ່ວຍ​ເຫຼືອ',
+    'Sign Out' => 'ອອກ​ຈາກ​ລະ​ບົບ',
+    'Selling/Buying' => 'ຂາຍ/ຊື້',
+    'Call video' => 'ໂທວິດີໂອ',
+    'Display navigation directions' => 'ສະແດງທິດທາງການນໍາທາງ',
+    'Số lượng' => 'ປະລິມານ',
+    'Create Short Video Public' => 'ສ້າງວິດີໂອສັ້ນສາທາລະນະ',
+    'City' => 'ເມືອງ',
+    'State' => 'ລັດ',
+    'Zip' => 'Zip',
+    'Check me out' => 'ກວດເບິ່ງຂ້ອຍອອກ',
+    'Sign in' => 'ເຂົ້າ​ສູ່​ລະ​ບົບ',
+    'Your browser does not support the video tag' => 'ຕົວທ່ອງເວັບຂອງທ່ານບໍ່ສະຫນັບສະຫນູນແທັກວິດີໂອ',
+    'Start Upload Video' => 'ເລີ່ມອັບໂຫລດວິດີໂອ',
+    'topic' => 'ຫົວຂໍ້',
+    'Video' => 'ວິດີໂອ',
+    'Upload' => 'ອັບໂຫຼດ'
 
 
 
