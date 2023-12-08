@@ -120,7 +120,7 @@ class BusinessApi extends Controller
         return response()->json($clinics);
     }
 
-    public function getClinics($type, $symptomID, $department)
+    private function getClinics($type, $symptomID, $department)
     {
         return DB::table('clinics')
             ->join('users', 'users.id', '=', 'clinics.user_id')
@@ -181,5 +181,10 @@ class BusinessApi extends Controller
                 $clinic['symptoms'] = $symptoms->toArray();
                 return $clinic;
             });
+    }
+
+    public function filter(Request $request)
+    {
+
     }
 }
