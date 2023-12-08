@@ -10,7 +10,7 @@ a {
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
     position: fixed;
     background: white;
-    z-index: 1;
+    z-index: 2;
     top: 0;
     right: 0;
     left: 0;
@@ -26,10 +26,16 @@ a {
 .flag-item {
     margin: 0 16px;
 }
-
-.header {
+.header-30px {
     margin-top: 30px;
-    /*top: 40px;*/
+    z-index: 2;
+}
+.header {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    background: white;
+    width: 100%;
 }
 .header-flea {
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);

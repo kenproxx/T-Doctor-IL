@@ -125,7 +125,7 @@
                 </div>
             </div>
         </div>
-        <div class="header d-flex justify-content-around align-items-center header-pc">
+        <div class="header-30px d-flex justify-content-around align-items-center header-pc">
             <div class="header-left">
                 <a href="{{route('home')}}"><img class="w-100" src="{{asset('img/icons_logo/logo-new.png')}}"
                                                  alt="logo"></a>
