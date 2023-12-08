@@ -433,7 +433,12 @@
                     <ul id="reviews-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
                             <a href="{{ route('view.admin.reviews.index') }}">
-                                <i class="bi bi-circle"></i><span>{{ __('home.Reviews') }}</span>
+                                <i class="bi bi-circle"></i><span>{{ __('home.Reviews Clinic/Hospital/Pharmacy') }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('view.reviews.doctor.index') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Reviews Doctor') }}</span>
                             </a>
                         </li>
                     </ul>
@@ -507,12 +512,12 @@
                     <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
                             <a href="{{ route('homeAdmin.list.doctors') }}">
-                                <i class="bi bi-circle"></i><span>{{ __('home.Examination') }}<</span>
+                                <i class="bi bi-circle"></i><span>{{ __('home.Examination') }}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('api.backend.account-register.index') }}">
-                                <i class="bi bi-circle"></i><span>{{ __('home.Duyệt đăng ký phòng khám') }}<</span>
+                                <i class="bi bi-circle"></i><span>{{ __('home.Duyệt đăng ký phòng khám') }}</span>
                             </a>
                         </li>
                         <li>

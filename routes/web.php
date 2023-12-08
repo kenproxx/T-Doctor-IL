@@ -16,6 +16,7 @@ use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\connect\CallVideoController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DoctorInfoController;
+use App\Http\Controllers\DoctorReviewController;
 use App\Http\Controllers\ExaminationController;
 use App\Http\Controllers\FleaMarketController;
 use App\Http\Controllers\frontend\HomeController;
@@ -209,6 +210,11 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'short-video'], function () {
         Route::get('', [ShortVideoController::class, 'showVideo'])->name('short.videos.show');
         Route::get('/{id}', [ShortVideoController::class, 'detail'])->name('short.videos.item');
+    });
+
+    Route::group(['prefix' => 'reviews-doctor'], function () {
+        Route::get('', [DoctorReviewController::class, 'index'])->name('view.reviews.doctor.index');
+        Route::get('/{id}', [DoctorReviewController::class, 'detail'])->name('view.reviews.doctor.detail');
     });
 
     Route::group(['prefix' => 'service-clinics'], function () {
