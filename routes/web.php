@@ -11,6 +11,7 @@ use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\backend\BackendWishListController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CalcViewQuestionController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\connect\CallVideoController;
@@ -19,11 +20,12 @@ use App\Http\Controllers\DoctorInfoController;
 use App\Http\Controllers\DoctorReviewController;
 use App\Http\Controllers\ExaminationController;
 use App\Http\Controllers\FleaMarketController;
-use App\Http\Controllers\frontend\HomeController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\NewEventController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PharmaciesController;
 use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecruitmentController;
@@ -108,8 +110,8 @@ Route::group(['prefix' => 'questions'], function () {
 });
 
 Route::group(['prefix' => 'pharmacies'], function () {
-    Route::get('/list-pharmacies', [\App\Http\Controllers\PharmaciesController::class, 'index'])->name('api.pharmacies.list');
-    Route::get('/detail-pharmacies/{id}', [\App\Http\Controllers\PharmaciesController::class, 'detailPharmacies'])->name('api.pharmacies.detail');
+    Route::get('/list-pharmacies', [PharmaciesController::class, 'index'])->name('api.pharmacies.list');
+    Route::get('/detail-pharmacies/{id}', [PharmaciesController::class, 'detailPharmacies'])->name('api.pharmacies.detail');
 });
 
 Route::group(['prefix' => 'mentoring'], function () {
@@ -185,10 +187,17 @@ Route::group(['prefix' => 'address'], function () {
 });
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('admin/home', [HomeController::class, 'admin'])->name('admin.home');
+
     Route::post('/save-user-login-social', [AuthSocialController::class, 'saveUser'])->name('save.user.login.social');
 
     Route::get('profile', [ProfileController::class, 'index'])->name('profile');
     Route::put('profile-update', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::group(['prefix' => 'categories'], function () {
+        Route::get('admin/list', [CategoryController::class, 'index'])->name('view.admin.category.index');
+        Route::get('admin/detail/{id}', [CategoryController::class, 'detail'])->name('view.admin.category.detail');
+    });
 
     Route::group(['prefix' => 'checkout'], function () {
         Route::get('/', [CheckoutController::class, 'index'])->name('user.checkout.index');
@@ -213,8 +222,8 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::group(['prefix' => 'reviews-doctor'], function () {
-        Route::get('', [DoctorReviewController::class, 'index'])->name('view.reviews.doctor.index');
-        Route::get('/{id}', [DoctorReviewController::class, 'detail'])->name('view.reviews.doctor.detail');
+        Route::get('admin/list', [DoctorReviewController::class, 'index'])->name('view.reviews.doctor.index');
+        Route::get('admin/detail/{id}', [DoctorReviewController::class, 'detail'])->name('view.reviews.doctor.detail');
     });
 
     Route::group(['prefix' => 'service-clinics'], function () {

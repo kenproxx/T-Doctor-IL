@@ -132,7 +132,8 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
                     <li class="dropdown-header">
                         {{ __('home.You have 4 new notifications') }}
-                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">{{ __('home.View all') }}</span></a>
+                        <a href="#"><span
+                                class="badge rounded-pill bg-primary p-2 ms-2">{{ __('home.View all') }}</span></a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -207,7 +208,8 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
                     <li class="dropdown-header">
                         {{ __('home.You have 3 new messages') }}
-                        <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">{{ __('home.View all') }}</span></a>
+                        <a href="#"><span
+                                class="badge rounded-pill bg-primary p-2 ms-2">{{ __('home.View all') }}</span></a>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -348,6 +350,11 @@
                     <li>
                         <a href="{{ route('homeAdmin.list.product') }}">
                             <i class="bi bi-circle"></i><span>{{ __('home.Selling/Buying') }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('view.admin.category.index') }}">
+                            <i class="bi bi-circle"></i><span>{{ __('home.Category') }}</span>
                         </a>
                     </li>
                 </ul>
