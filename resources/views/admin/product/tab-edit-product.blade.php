@@ -70,7 +70,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <label for="category_id">{{ __('home.Category') }}</label>
-                    <select class="custom-select" id="category_id" name="category_id">
+                    <select class="form-select" id="category_id" name="category_id">
                         @foreach($categories as $category)
                             <option {{ $category->id == $product->category_id ? 'checked' : '' }}
                                     value="{{$category->id}}">
@@ -85,7 +85,7 @@
                     @endphp
                     <label for="province_id">province_id</label>
 
-                    <select class="custom-select" id="province_id" name="province_id">
+                    <select class="form-select" id="province_id" name="province_id">
                         @foreach($provinces as $province)
                             <option
                                     value="{{$province->id}}" {{$province->id == $product->province_id ? 'selected' : ''}}>{{$province->name}}</option>
@@ -121,7 +121,7 @@
             <div class="row">
                 <div class="col-sm-4">
                     <label for="ads_plan">{{ __('home.Ads Plan') }}</label>
-                    <select id="ads_plan" name="ads_plan" class="custom-select">
+                    <select id="ads_plan" name="ads_plan" class="form-select">
                         <option {{$product->ads_plan == 1 ? 'selected' : ''}} value="1">{{ __('home.Platinum') }}</option>
                         <option {{$product->ads_plan == 2 ? 'selected' : ''}} value="2">{{ __('home.Premium') }}</option>
                         <option {{$product->ads_plan == 3 ? 'selected' : ''}} value="3">{{ __('home.Silver') }}</option>
@@ -129,7 +129,7 @@
                 </div>
                 <div class="col-sm-4">
                     <label for="ads_period">{{ __('home.Ads Period') }}</label>
-                    <select id="ads_period" name="ads_period" class="custom-select">
+                    <select id="ads_period" name="ads_period" class="form-select">
                         <option {{$product->ads_period == 1 ? 'selected' : ''}} value="1">{{ __('home.5 Day') }}</option>
                         <option {{$product->ads_period == 2 ? 'selected' : ''}} value="2">{{ __('home.10 Day') }}</option>
                         <option {{$product->ads_period == 3 ? 'selected' : ''}} value="3">{{ __('home.15 Day') }}</option>
@@ -137,7 +137,7 @@
                     </select>
                 </div>
                 <div class="col-sm-4"><label for="status">{{ __('home.Trạng thái') }}</label>
-                    <select class="custom-select" id="status" name="status" {{ !$isAdmin ? 'disabled' : '' }}>
+                    <select class="form-select" id="status" name="status" {{ !$isAdmin ? 'disabled' : '' }}>
                         <option value="{{ \App\Enums\ProductStatus::ACTIVE }}"
                             {{ $product->status == \App\Enums\ProductStatus::ACTIVE ? 'selected' : '' }}>
                             {{ \App\Enums\ProductStatus::ACTIVE }}

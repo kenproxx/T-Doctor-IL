@@ -186,12 +186,12 @@
                 <input type="number" class="form-control" id="max_register" name="max_register" value="{{ $coupon->max_register }}">
             </div>
             <div class="col-sm-4"><label for="clinic_id">{{ __('home.Đơn vị áp dụng') }}</label>
-                <select class="custom-select" id="clinic_id">
+                <select class="form-select" id="clinic_id">
                     <option selected>{{ __('home.Choose...') }}</option>
                 </select>
             </div>
             <div class="col-sm-4"><label for="status">{{ __('home.Trạng thái') }}</label>
-                <select class="custom-select" id="status" name="status" {{ !$isAdmin ? 'disabled' : '' }}>
+                <select class="form-select" id="status" name="status" {{ !$isAdmin ? 'disabled' : '' }}>
                     <option value="{{ \App\Enums\CouponStatus::ACTIVE }}" {{ $coupon->status === \App\Enums\CouponStatus::ACTIVE ? 'selected' : '' }}>
                         {{ \App\Enums\CouponStatus::ACTIVE }}
                     </option>

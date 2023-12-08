@@ -43,7 +43,7 @@
         </div>
         <div class="row">
             <div class="col-sm-4"><label for="status">{{ __('home.Trạng thái') }}</label>
-                <select class="custom-select" id="status" name="status">
+                <select class="form-select" id="status" name="status">
                     <option value="{{ \App\Enums\BookingStatus::PENDING }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::PENDING ? 'selected' : '' }}>
                         {{ \App\Enums\BookingStatus::PENDING }}
                     </option>

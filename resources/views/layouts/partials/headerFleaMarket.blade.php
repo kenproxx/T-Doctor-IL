@@ -278,7 +278,7 @@
                                                     </div>
                                                     <div class="form-element">
                                                         <label for="time_work">{{ __('home.Time work') }}</label>
-                                                        <select class="custom-select" id="time_work" name="time_work">
+                                                        <select class="form-select" id="time_work" name="time_work">
                                                             <option
                                                                 value="{{\App\Enums\TypeTimeWork::ALL}}">{{\App\Enums\TypeTimeWork::ALL}}</option>
                                                             <option
