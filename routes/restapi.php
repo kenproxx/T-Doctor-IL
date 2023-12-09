@@ -8,6 +8,7 @@ use App\Http\Controllers\restapi\DepartmentApi;
 use App\Http\Controllers\restapi\DoctorDepartmentApi;
 use App\Http\Controllers\restapi\DoctorInfoApi;
 use App\Http\Controllers\restapi\BusinessApi;
+use App\Http\Controllers\restapi\MedicalApi;
 use App\Http\Controllers\restapi\NewsApi;
 use App\Http\Controllers\restapi\OrderApi;
 use App\Http\Controllers\restapi\PharmacyApi;
@@ -48,10 +49,14 @@ Route::group(['prefix' => 'orders'], function () {
     Route::put('/cancel/{id}', [OrderApi::class, 'cancelOrder'])->name('restapi.api.orders.cancel');
 });
 
+Route::group(['prefix' => 'business'], function () {
+    Route::get('/list', [BusinessApi::class, 'getList'])->name('business.restapi.list');
+    Route::get('/search', [BusinessApi::class, 'search'])->name('business.restapi.search');
+    Route::get('/filter', [BusinessApi::class, 'searchByDepartmentAndSymptoms'])->name('business.restapi.filter');
+});
+
 Route::group(['prefix' => 'medicals'], function () {
-    Route::get('/list', [BusinessApi::class, 'getList'])->name('medicals.restapi.list');
-    Route::get('/search', [BusinessApi::class, 'search'])->name('medicals.restapi.search');
-    Route::get('/filter', [BusinessApi::class, 'searchByDepartmentAndSymptoms'])->name('medicals.restapi.filter');
+    Route::get('/filter', [MedicalApi::class, 'searchByDepartmentAndSymptoms'])->name('medicals.restapi.filter');
 });
 
 Route::group(['prefix' => 'clinics'], function () {
@@ -77,6 +82,8 @@ Route::group(['prefix' => 'doctors-info'], function () {
     Route::get('/my-doctors/{id}', [DoctorInfoApi::class, 'getMyDoctor'])->name('doctors.info.restapi.my.doctor');
     Route::get('/search-doctor', [DoctorInfoApi::class, 'searchDoctor'])->name('api.backend.user.doctor.search');
 });
+
+
 
 Route::group(['prefix' => 'doctors-departments'], function () {
     Route::get('/list', [DoctorDepartmentApi::class, 'getAll'])->name('doctors.departments.list');
