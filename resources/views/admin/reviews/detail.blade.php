@@ -7,37 +7,37 @@
     <div class="container">
         <div class="row">
             <div class="form-group col-md-4">
-                <label for="name">FullName</label>
+                <label for="name">{{ __('home.Full Name') }}</label>
                 <input disabled type="text" class="form-control" id="name" value="{{ $review->name }}">
             </div>
             <div class="form-group col-md-4">
-                <label for="email">Email</label>
+                <label for="email">{{ __('home.Email') }}</label>
                 <input disabled value="{{ $review->email }}" type="email" class="form-control" id="email">
             </div>
             <div class="form-group col-md-4">
-                <label for="phone">PhoneNumber</label>
+                <label for="phone">{{ __('home.PhoneNumber') }}</label>
                 <input disabled value="{{ $review->phone }}" type="text" class="form-control" id="phone">
             </div>
         </div>
         <div class="form-group">
-            <label for="address">Address</label>
+            <label for="address">{{ __('home.Addresses') }}</label>
             <input disabled value="{{ $review->address }}" type="text" class="form-control" id="address">
         </div>
         <div class="form-group">
-            <label for="content">Content</label>
+            <label for="content">{{ __('home.Content') }}</label>
             <input disabled value="{{ $review->content }}" type="text" class="form-control" id="content">
         </div>
         <div class="row">
             <div class="form-group col-md-6">
-                <label for="business">BusinessName</label>
+                <label for="business">{{ __('home.BusinessName') }}</label>
                 <input disabled value="{{ $business->name }}" type="text" class="form-control" id="business">
             </div>
             <div class="form-group col-md-2">
-                <label for="star">Star</label>
+                <label for="star">{{ __('home.Star') }}</label>
                 <input disabled value="{{ $review->star }}" type="text" class="form-control" id="star">
             </div>
             <div class="form-group col-md-4">
-                <label for="status">Status</label>
+                <label for="status">{{ __('home.Status') }}</label>
                 <select id="status" class="form-select">
                     @foreach($status as $item)
                         @if($item != 'DELETED')
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="text-center mt-3 ">
-            <button type="button" class="btn btn-primary" id="btnSaveReview">Save</button>
+            <button type="button" class="btn btn-primary" id="btnSaveReview">{{ __('home.Save') }}</button>
         </div>
     </div>
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\restapi\BookingApi;
 use App\Http\Controllers\restapi\BusinessFavouriteApi;
 use App\Http\Controllers\restapi\DoctorReviewApi;
+use App\Http\Controllers\restapi\MedicalFavouriteApi;
 use App\Http\Controllers\restapi\MessageApi;
 use App\Http\Controllers\restapi\ServiceClinicApi;
 use App\Http\Controllers\restapi\SocialUserApi;
@@ -55,7 +56,14 @@ Route::group(['prefix' => 'business-favourites'], function () {
     Route::get('list-by-users', [BusinessFavouriteApi::class, 'getAll'])->name('api.backend.business.favourites.list');
     Route::get('list-by-business', [BusinessFavouriteApi::class, 'findByUserIdAndBusinessID'])->name('api.backend.business.favourites.business');
     Route::post('create', [BusinessFavouriteApi::class, 'create'])->name('api.backend.business.favourites.create');
-    Route::delete('delete/{id}', [BusinessFavouriteApi::class, 'delete'])->name('api.backend.business.favourites.detail');
+    Route::delete('delete/{id}', [BusinessFavouriteApi::class, 'delete'])->name('api.backend.business.favourites.delete');
+});
+
+Route::group(['prefix' => 'medical-favourites'], function () {
+    Route::get('list-by-users', [MedicalFavouriteApi::class, 'getAll'])->name('api.backend.medical.favourites.list');
+    Route::get('list-by-medical', [MedicalFavouriteApi::class, 'findByUserIdAndMedicalID'])->name('api.backend.medical.favourites.medical');
+    Route::post('create', [MedicalFavouriteApi::class, 'create'])->name('api.backend.medical.favourites.create');
+    Route::delete('delete/{id}', [MedicalFavouriteApi::class, 'delete'])->name('api.backend.medical.favourites.delete');
 });
 
 Route::group(['prefix' => 'booking'], function () {

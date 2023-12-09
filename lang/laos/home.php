@@ -598,7 +598,32 @@ return [
     'Start Upload Video' => 'ເລີ່ມອັບໂຫລດວິດີໂອ',
     'topic' => 'ຫົວຂໍ້',
     'Video' => 'ວິດີໂອ',
-    'Upload' => 'ອັບໂຫຼດ'
+    'Upload' => 'ອັບໂຫຼດ',
+    'Chọn quận' => 'ເລືອກເມືອງ',
+    'Chọn xã' => 'ເລືອກຊຸມຊົນ',
+    'List Order' => 'ລາຍການຄໍາສັ່ງ',
+    'Detail Review' => 'ການທົບທວນຄືນລາຍລະອຽດ',
+    'Content' => 'ເນື້ອໃນ',
+    'BusinessName' => 'ຊື່ບໍລິສັດ',
+    'Star' => 'ດາວ',
+    'List Reviews' => 'ລາຍການການທົບທວນຄືນ',
+    'Review Management' => 'ທົບທວນການຄຸ້ມຄອງ',
+    'increase' => 'ເພີ່ມ​ຂຶ້ນ',
+    'decrease' => 'ຫຼຸດລົງ',
+    'Pay' => 'ຈ່າຍ',
+    'comment' => 'ຄໍາເຫັນ',
+    'Like' => 'ມັກ',
+    'Add Review' => 'ເພີ່ມການທົບທວນຄືນ',
+    'Reviews' => 'ການທົບທວນຄືນ',
+    'Title English' => 'ຊື່ພາສາອັງກິດ',
+    'Title Laos' => 'ຊື່ປະເທດລາວ',
+    'Description' => 'ລາຍລະອຽດ',
+    'Description English' => 'ລາຍ​ລະ​ອຽດ​ພາ​ສາ​ອັງ​ກິດ​',
+    'Description Laos' => 'Description ປະເທດລາວ',
+    'MedicalName' => 'ຊື່ທາງການແພດ',
+    'Parent' => 'ພໍ່ແມ່',
+    'Detail' => 'ລາຍລະອຽດ',
+    'Xem đơn đăng ký' => 'ເບິ່ງຄໍາຮ້ອງສະຫມັກ'
 
 
 

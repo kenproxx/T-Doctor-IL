@@ -110,7 +110,7 @@
                             <p>{{ __('home.Review') }}</p>
                         </div>
                         <div class="ms-auto p-2">
-                            <button class="btn btn-primary" type="button" onclick="showOrHidden(1);">Add Review</button>
+                            <button class="btn btn-primary" type="button" onclick="showOrHidden(1);">{{ __('home.Add Review') }}</button>
                         </div>
                     </div>
                 </div>

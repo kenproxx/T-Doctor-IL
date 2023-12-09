@@ -120,7 +120,7 @@
                                     <div class="form-element">
                                         <input id="remember-me" type="checkbox">
                                         <label for="remember-me">{{ __('home.Remember password') }}</label>
-                                        <a href="#">Forgot password?</a>
+                                        <a href="#">{{ __('home.Forgot Password') }}?</a>
                                     </div>
                                     <div class="form-element text-center">
                                         <button>{{ __('home.Login') }}</button>

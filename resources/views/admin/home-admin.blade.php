@@ -4,7 +4,7 @@
 @endsection
 @section('main-content')
     <div class="pagetitle">
-        <h1>Dashboard</h1>
+        <h1>{{ __('home.Dashboard') }}</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">{{ __('home.Home') }}</a></li>
@@ -28,7 +28,7 @@
                                 <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                     <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
+                                        <h6>{{ __('home.Filter') }}</h6>
                                     </li>
 
                                     <li><a class="dropdown-item" href="#">{{ __('home.Today') }}</a></li>
@@ -46,7 +46,7 @@
                                     </div>
                                     <div class="ps-3">
                                         <h6>145</h6>
-                                        <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                                        <span class="text-success small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">{{ __('home.increase') }}</span>
 
                                     </div>
                                 </div>
@@ -63,7 +63,7 @@
                                 <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                     <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
+                                        <h6>{{ __('home.Filter') }}</h6>
                                     </li>
 
                                     <li><a class="dropdown-item" href="#">{{ __('home.Today') }}</a></li>
@@ -81,7 +81,7 @@
                                     </div>
                                     <div class="ps-3">
                                         <h6>$3,264</h6>
-                                        <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">increase</span>
+                                        <span class="text-success small pt-1 fw-bold">8%</span> <span class="text-muted small pt-2 ps-1">{{ __('home.increase') }}</span>
 
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@
                                 <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                     <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
+                                        <h6>{{ __('home.Filter') }}</h6>
                                     </li>
 
                                     <li><a class="dropdown-item" href="#">{{ __('home.Today') }}</a></li>
@@ -117,7 +117,7 @@
                                     </div>
                                     <div class="ps-3">
                                         <h6>1244</h6>
-                                        <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">decrease</span>
+                                        <span class="text-danger small pt-1 fw-bold">12%</span> <span class="text-muted small pt-2 ps-1">{{ __('home.decrease') }}</span>
 
                                     </div>
                                 </div>
@@ -135,7 +135,7 @@
                                 <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                     <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
+                                        <h6>{{ __('home.Filter') }}</h6>
                                     </li>
 
                                     <li><a class="dropdown-item" href="#">{{ __('home.Today') }}</a></li>
