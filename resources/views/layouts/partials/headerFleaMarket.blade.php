@@ -13,8 +13,8 @@
             </div>
             <div class="col-md-4 header-detail--center d-flex justify-content-sm-around">
                 <a class="active" href="{{route('flea-market.index')}}">{{ __('home.My store') }}</a>
-                <a href="{{route('flea.market.sell.product')}}">{{ __('home.Sell my product') }}</a>
-                <a href="{{route('flea.market.wish.list')}}">{{ __('home.Wish list') }}</a>
+                <a onclick="checkLogin()" >{{ __('home.Sell my product') }}</a>
+                <a onclick="checkLoginWish()" >{{ __('home.Wish list') }}</a>
             </div>
             <div class="header-right d-flex align-items-center w-25">
                 @if(Auth::check())
@@ -24,22 +24,27 @@
                             <div class="d-flex align-items-center mr-2">
                                 {{Auth::user()->username}}
                             </div>
-                            <img src="{{asset('img/user-circle.png')}}" alt="">
+                            <img src="{{asset('img/user-circle.png')}}">
                         </div>
                         <div class="dropdown-menu">
                             @if( (new MedicalPermission())->isMedicalPermission())
                                 <a class="dropdown-item" href="{{ route('admin.home') }}">{{ __('home.Dashboard') }}</a>
                             @else
-                                <a class="dropdown-item" href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
+                                <a class="dropdown-item"
+                                   href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
+                                <a class="dropdown-item"
+                                   href="{{route('booking.list.by.user')}}">{{ __('home.My booking') }}</a>
                             @endif
                             <a class="dropdown-item" href="{{route('logoutProcess')}}">{{ __('home.Logout') }}</a>
                         </div>
                     </div>
                 @else
-                    <button class="account_control" id="show_login" data-toggle="modal" data-target="#staticBackdrop">{{ __('home.Log In') }}
+                    <button class="account_control" id="show_login" data-toggle="modal"
+                            data-target="#staticBackdrop">{{ __('home.Log In') }}
                     </button>
                     <div>|</div>
-                    <button type="button" class="account_control" data-toggle="modal" data-target="#modalRegister">{{ __('home.Sign Up') }}
+                    <button type="button" class="account_control" data-toggle="modal"
+                            data-target="#modalRegister">{{ __('home.Sign Up') }}
                     </button>
                 @endif
             </div>
@@ -58,10 +63,39 @@
                             <img class="w-100px" src="{{asset('img/icons_logo/logo-new.png')}}" alt="">
                         </a>
                     </div>
-                    <div class="header-detail--right d-flex">
-                        <div class="ml-2 user">
-                            <img src="{{asset('img/user-circle.png')}}" alt="">
-                        </div>
+                    <div class="header-right d-flex align-items-center">
+                        @if(Auth::check())
+                            <div class="dropdown">
+                                <div class="d-flex dropdown-toggle justify-content-between" type="button"
+                                     data-toggle="dropdown"
+                                     aria-expanded="false">
+                                    <div class="d-flex align-items-center mr-2">
+                                        {{Auth::user()->username}}
+                                    </div>
+                                    <img src="{{asset('img/user-circle.png')}}">
+                                </div>
+                                <div class="dropdown-menu">
+                                    @if( (new MedicalPermission())->isMedicalPermission())
+                                        <a class="dropdown-item"
+                                           href="{{ route('admin.home') }}">{{ __('home.Dashboar') }}</a>
+                                    @else
+                                        <a class="dropdown-item"
+                                           href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
+                                        <a class="dropdown-item"
+                                           href="{{route('booking.list.by.user')}}">{{ __('home.My booking') }}</a>
+                                    @endif
+                                    <a class="dropdown-item" href="{{route('logoutProcess')}}">{{ __('home.Logout') }}</a>
+                                </div>
+                            </div>
+                        @else
+                            <button class="account_control" id="show_login" data-toggle="modal"
+                                    data-target="#staticBackdrop">{{ __('home.Log In') }}
+                            </button>
+                            <div>|</div>
+                            <button type="button" class="account_control" data-toggle="modal"
+                                    data-target="#modalRegister">{{ __('home.Sign Up') }}
+                            </button>
+                        @endif
                     </div>
                 </div>
             </nav>
@@ -82,13 +116,13 @@
                         <a class="nav-link" href="{{route('flea-market.index')}}">{{ __('home.My store') }}</a>
                     </li>
                     <li class="nav-item button-nav-header mb-3">
-                        <a class="nav-link" href="{{route('flea.market.sell.product')}}">{{ __('home.Sell my product') }}</a>
+                        <a class="nav-link" onclick="checkLogin()">{{ __('home.Sell my product') }}</a>
                     </li>
                     <li class="nav-item button-nav-header mb-3">
-                        <a class="nav-link" href="{{route('flea.market.wish.list')}}">{{ __('home.Wish list') }}</a>
+                        <a class="nav-link" onclick="checkLoginWish()">{{ __('home.Wish list') }}</a>
                     </li>
                     <li class="nav-item button-nav-header mb-3">
-                        <a class="nav-link" href="{{route('flea.market.my.store')}}">{{ __('home.Go to my store') }}</a>
+                        <a class="nav-link" onclick="checkLoginWishStore()">{{ __('home.Go to my store') }}</a>
                     </li>
                     <li class="nav-item button-nav-header mb-3">
                         <a class="nav-link" href="#">{{ __('home.Log out') }}</a>
@@ -357,6 +391,40 @@
                 </div>
             </div>
         </div>
+        <script>
+            function getCookie(name) {
+                var value = "; " + document.cookie;
+                var parts = value.split("; " + name + "=");
+                if (parts.length === 2) return parts.pop().split(";").shift();
+            }
+
+            var token = getCookie('accessToken');
+
+            function checkLoginWishStore() {
+                let userId = `{{ Auth::check() ? Auth::user()->id : null }}`;
+                if (!userId) {
+                    $('#staticBackdrop').modal('show');
+                } else {
+                    window.location.href = '{{route('flea.market.my.store' )}}';
+                }
+            }
+
+            function checkLoginWish() {
+                if (token === undefined) {
+                    $('#staticBackdrop').modal('show');
+                } else {
+                    window.location.href = '{{ route('flea.market.wish.list') }}';
+                }
+            }
+
+            function checkLogin() {
+                if (token === undefined) {
+                    $('#staticBackdrop').modal('show');
+                } else {
+                    window.location.href = '{{route('flea.market.sell.product')}}';
+                }
+            }
+        </script>
         <script>
             $(document).ready(function () {
                 // Lắng nghe sự kiện onchange của các dropdown tỉnh, huyện, xã
