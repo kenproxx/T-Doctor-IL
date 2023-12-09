@@ -67,8 +67,8 @@
                                         <td>${data.content}</td>
                                         <td>${data.status}</td>
                                         <td>
-                                            <a href="${reviewDetailUrl + data.id}" class="btn btn-success" >Detail</a>
-                                            <button type="button" class="btn btn-danger" id="btnDelete" onclick="confirmDeleteReviews('${data.id}')">Delete</button>
+                                            <a href="${reviewDetailUrl + data.id}" class="btn btn-success" >{{ __('home.Detail') }}</a>
+                                            <button type="button" class="btn btn-danger" id="btnDelete" onclick="confirmDeleteReviews('${data.id}')">{{ __('home.Delete') }}</button>
                                         </td>
                                     </tr>`;
                 }

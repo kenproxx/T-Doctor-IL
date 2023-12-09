@@ -8,42 +8,42 @@
         <form>
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="name">Name</label>
+                    <label for="name">{{ __('home.Name') }}</label>
                     <input type="text" class="form-control" id="name" required value="{{ $category->name }}">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="name_en">Name English</label>
+                    <label for="name_en">{{ __('home.name_en') }}</label>
                     <input type="text" class="form-control" id="name_en" value="{{ $category->name_en }}">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="name_laos">Name Laos</label>
+                    <label for="name_laos">{{ __('home.name_laos') }}</label>
                     <input type="text" class="form-control" id="name_laos" value="{{ $category->name_laos }}">
                 </div>
             </div>
             <div class="form-group">
-                <label for="description">Description</label>
+                <label for="description">{{ __('home.Description') }}</label>
                 <input type="text" class="form-control" id="description" placeholder="Description" value="{{ $category->description }}">
             </div>
             <div class="form-group">
-                <label for="description_en">Description English</label>
+                <label for="description_en">{{ __('home.Description English') }}</label>
                 <input type="text" class="form-control" id="description_en" placeholder="Description English" value="{{ $category->description_en }}">
             </div>
             <div class="form-group">
-                <label for="description_laos">Description Laos</label>
+                <label for="description_laos">{{ __('home.Description Laos') }}</label>
                 <input type="text" class="form-control" id="description_laos" placeholder="Description Laos" value="{{ $category->description_laos }}">
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="thumbnail">Thumbnail</label>
+                    <label for="thumbnail">{{ __('home.Thumbnail') }}</label>
                     <input type="file" class="form-control" id="thumbnail" required>
                     @if($category->thumbnail)
                         <img src="{{ asset($category->thumbnail) }}" alt="" width="80px">
                     @endif
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="parent_id">Parent</label>
+                    <label for="parent_id">{{ __('home.Parent') }}</label>
                     <select id="parent_id" class="form-select">
-                        <option value="0">Choose...</option>
+                        <option value="0">{{ __('home.Choose...') }}</option>
                         @foreach($categories as $value)
                             <option {{$category->parent_id == $value->id ? 'selected' : ''}} value="{{$value->id}}">{{$value->name}}</option>
                         @endforeach
@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="text-center mt-3">
-                <button type="button" class="btn btn-primary" id="btnSaveCategory">Save</button>
+                <button type="button" class="btn btn-primary" id="btnSaveCategory">{{ __('home.Save') }}</button>
             </div>
         </form>
     </div>

@@ -80,7 +80,7 @@
 @section('content')
     @include('layouts.partials.header_3')
     <div class="container" style="margin-top: 100px">
-        <h3 class="text-center">Doctor Information QrCode</h3>
+        <h3 class="text-center">{{ __('home.Doctor Information QrCode') }}</h3>
         @if($doctor)
             <div class="container">
                 <div class="card">

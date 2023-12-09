@@ -312,7 +312,7 @@
                                                 </select>
                                             </div>
                                             <div class="form-group">
-                                                <div class="text-font-16 mt-4 mt-110">{{ __('home.To month ') }}<span
+                                                <div class="text-font-16 mt-4 mt-110">{{ __('home.To month') }}<span
                                                         class="red-color">*</span></div>
                                                 <input type="month" class="ac-email mt-2"
                                                        placeholder=""

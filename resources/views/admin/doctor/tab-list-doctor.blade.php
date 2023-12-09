@@ -104,7 +104,7 @@
             <td>${item.service} </td>
             <td>${item.time_working_1}</td>
             <td>${item.time_working_2}</td>
-            <td><a href="${urlEdit}"> Edit</a> | <a href="#" onclick="checkDelete(${item.id})">Delete</a></td>
+            <td><a href="${urlEdit}"> {{ __('home.Edit') }}</a> | <a href="#" onclick="checkDelete(${item.id})">{{ __('home.Delete') }}</a></td>
         </tr>`;
         }
         await $('#ProductsAdmin').empty().append(html);
