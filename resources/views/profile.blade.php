@@ -431,7 +431,7 @@
                                         </select>
                                     </div>
                                     <div class="col-sm-3">
-                                        <label for="time_working_2_end">Những này làm việc kết thúc</label>
+                                        <label for="time_working_2_end">{{ __('home.Những này làm việc kết thúc') }}</label>
                                         <select name="time_working_2_end" id="time_working_2_end" class="form-control">
                                             <option value="T2">{{ __('home.Thứ 2') }}</option>
                                             <option value="T3">{{ __('home.Thứ 3') }}</option>

@@ -3,16 +3,16 @@
     {{ __('home.List Review Doctors') }}
 @endsection
 @section('main-content')
-    <h3 class="text-center">Review Doctor Management</h3>
+    <h3 class="text-center">{{ __('home.Review Doctor Management') }}</h3>
     <table class="table table-striped" id="tableReviewsDoctorManagement">
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Star</th>
-            <th scope="col">Parent</th>
-            <th scope="col">Status</th>
-            <th scope="col">Action</th>
+            <th scope="col">{{ __('home.Title') }}</th>
+            <th scope="col">{{ __('home.Star') }}</th>
+            <th scope="col">{{ __('home.Parent') }}</th>
+            <th scope="col">{{ __('home.Status') }}</th>
+            <th scope="col">{{ __('home.Action') }}</th>
         </tr>
         </thead>
         <tbody id="tbodyTableReviewsDoctorManagement">
@@ -62,8 +62,8 @@
                                         <td>${data.parent_id}</td>
                                         <td>${data.status}</td>
                                         <td>
-                                            <a href="${reviewDetailUrl}" class="btn btn-success" >Detail</a>
-                                            <button type="button" class="btn btn-danger" id="btnDelete" onclick="confirmDeleteReviewsDoctor('${data.id}')">Delete</button>
+                                            <a href="${reviewDetailUrl}" class="btn btn-success" >{{ __('home.Detail') }}</a>
+                                            <button type="button" class="btn btn-danger" id="btnDelete" onclick="confirmDeleteReviewsDoctor('${data.id}')">{{ __('home.Delete') }}</button>
                                         </td>
                                     </tr>`;
                 }

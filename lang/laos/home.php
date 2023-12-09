@@ -623,7 +623,18 @@ return [
     'MedicalName' => 'ຊື່ທາງການແພດ',
     'Parent' => 'ພໍ່ແມ່',
     'Detail' => 'ລາຍລະອຽດ',
-    'Xem đơn đăng ký' => 'ເບິ່ງຄໍາຮ້ອງສະຫມັກ'
+    'Xem đơn đăng ký' => 'ເບິ່ງຄໍາຮ້ອງສະຫມັກ',
+    'If you did not receive the email' => 'ຖ້າທ່ານບໍ່ໄດ້ຮັບອີເມວ',
+    'Doctor Information QrCode' => 'ຂໍ້ມູນທ່ານຫມໍ QrCode',
+    'Reviews Clinic/Hospital/Pharmacy' => 'ທົບທວນຄືນຄລີນິກ/ໂຮງໝໍ/ຮ້ານຂາຍຢາ',
+    'Reviews Doctor' => 'ທົບທວນທ່ານໝໍ',
+    'Short Videos' => 'ວິດີໂອສັ້ນ',
+    'Topic Videos' => 'ວິດີໂອຫົວຂໍ້',
+    'Edit Business' => 'ແກ້ໄຂທຸລະກິດ',
+    'Category Management' => 'ການຈັດການປະເພດ',
+    'Review Doctor Management' => 'ທົບທວນການຄຸ້ມຄອງທ່ານຫມໍ',
+    'List Topic Videos' => 'ລາຍການວິດີໂອຫົວຂໍ້'
+
 
 
 
