@@ -81,11 +81,26 @@
                     }
                 });
             }
+            async function callListDoctor24h() {
+                await $.ajax({
+                    url: `{{route('doctors.info.restapi.list.getDoctor24h')}}/?size=4`,
+                    method: 'GET',
+                    success: function (list) {
+                        console.log(list)
+                        showListDoctor(list);
+                    },
+                    error: function (exception) {
+                        console.log(exception)
+                    }
+                });
+            }
 
             callListDoctor();
+            // callListDoctor24h();
 
-            function showListDoctor(res) {
+            function showListDoctor(res,list) {
                 let html = ``;
+                let listDoctor = ``;
                 let url = `{{ asset('storage') }}`;
                 let detailDoctor = `{{ route('examination.doctor_info', ['id' => ':id']) }}`;
                 for (let i = 0; i < res.length; i++) {
@@ -109,9 +124,33 @@
                         </div>
                     </div>`;
                 }
+                if (list) {
+                    for (let i = 0; i < list.length; i++) {
+                        let item24h = list[i];
+                        let mainUrl = detailDoctor.replace(':id', item24h['id']);
+                        let imageDoctor24h = item24h.avt;
+                        let myArray24h = [];
+                        if (imageDoctor24h) {
+                            myArray24h = imageDoctor24h.split("/storage");
+                        }
+                        listDoctor = listDoctor + `<div class="col-md-3" >
+                                    <div class="card">
+                            <i class="bi bi-heart"></i>
+                            <img src=" ${url}${myArray24h[1]} " class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <a href="${mainUrl}"><h5 class="card-title">${item24h['name']}</h5></a>
+                                <p class="card-text">{{ __('home.Specialty') }}: ${item24h['specialty']}</p>
+                                <p class="card-text_1">{{ __('home.Location') }}: <b>${item24h['detail_address']}</b></p>
+                                <p class="card-text_1">{{ __('home.Working time') }}: <b>${item24h['time_working_1']}</b></p>
+                            </div>
+                        </div>
+                    </div>`;
+                    }
+                }
+
                 $('#list-doctor-new').empty().append(html);
                 $('#list-doctor-best').empty().append(html);
-                $('#list-doctor-available').empty().append(html);
+                $('#list-doctor-available').empty().append(listDoctor);
             }
 
             $('.doctor-department').on('click', function () {
@@ -173,9 +212,7 @@
         })
     </script>
     <script>
-        var token = `{{ $_COOKIE['accessToken'] }}`;
         function performSearchDoctor() {
-            let accessToken = `Bearer ` + token;
             var searchInput = document.getElementById('inputSearchDoctor');
             var searchValue = searchInput.value;
             var formData = {
@@ -185,19 +222,16 @@
             $.ajax({
                 url: "{{ route('api.backend.user.doctor.search') }}",
                 method: "GET",
-                headers: {
-                    "Authorization": accessToken
-                },
                 data: formData,
                 success: function (response) {
-                    showListDoctor(response);
+                    showSearchListDoctor(response);
                 },
                 error: function (error) {
                     console.log(error);
                 }
             });
         }
-        function showListDoctor(res) {
+        function showSearchListDoctor(res) {
             let html = ``;
             let url = `{{ asset('storage') }}`;
             let detailDoctor = `{{ route('examination.doctor_info', ['id' => ':id']) }}`;
@@ -229,4 +263,3 @@
 
     </script>
 @endsection
-

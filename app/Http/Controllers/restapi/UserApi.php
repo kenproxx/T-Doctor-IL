@@ -241,31 +241,4 @@ class UserApi extends Controller
         }
     }
 
-    public function searchDoctor(Request $request)
-    {
-        $name = $request->input('keyword');
-        $name = (new MainController())->vn_to_str($name);
-        $listDoctor = User::where('member', TypeMedical::DOCTORS)
-            ->where('status', UserStatus::ACTIVE)
-            ->when($name, function ($query) use ($name) {
-                $query->orWhere(DB::raw('LOWER(users.name)'), 'like', '%' . strtolower($name) . '%');
-            })
-            ->when($name, function ($query) use ($name) {
-                $departments = Department::where(DB::raw('LOWER(name)'), 'like', '%' . strtolower($name) . '%')->get();
-                $arrayDepartmentID = $departments->pluck('id')->toArray();
-                if ($arrayDepartmentID) {
-                    $query->orWhereRaw("FIND_IN_SET(?, department_id) > 0", $arrayDepartmentID);
-                }
-            })
-            ->when($name, function ($query) use ($name) {
-                $symptoms = Symptom::where(DB::raw('LOWER(name)'), 'like', '%' . strtolower($name) . '%')->get();
-                $arraySymptomID = $symptoms->pluck('id')->toArray();
-                if ($arraySymptomID) {
-                    $query->orWhereRaw("FIND_IN_SET(?, symptom_id) > 0", $arraySymptomID);
-                }
-            })
-            ->orderBy('id', 'desc')
-            ->get();
-        return response()->json($listDoctor);
-    }
 }

@@ -19,6 +19,7 @@ use App\Http\Controllers\restapi\ReviewApi;
 use App\Http\Controllers\restapi\ShortVideoApi;
 use App\Http\Controllers\restapi\SymptomsApi;
 use App\Http\Controllers\restapi\TopicVideoApi;
+use App\Http\Controllers\restapi\UserApi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,10 +70,12 @@ Route::group(['prefix' => 'pharmacies'], function () {
 
 Route::group(['prefix' => 'doctors-info'], function () {
     Route::get('/list', [DoctorInfoApi::class, 'getAll'])->name('doctors.info.restapi.list');
+    Route::get('/list/doctor24h', [DoctorInfoApi::class, 'getDoctor24h'])->name('doctors.info.restapi.list.getDoctor24h');
     Route::get('/user/{id}', [DoctorInfoApi::class, 'findByUser'])->name('doctors.info.restapi.user');
     Route::get('/department/{id}', [DoctorInfoApi::class, 'findByDepartment'])->name('doctors.info.restapi.department');
     Route::get('/detail/{id}', [DoctorInfoApi::class, 'detail'])->name('doctors.info.restapi.detail');
     Route::get('/my-doctors/{id}', [DoctorInfoApi::class, 'getMyDoctor'])->name('doctors.info.restapi.my.doctor');
+    Route::get('/search-doctor', [DoctorInfoApi::class, 'searchDoctor'])->name('api.backend.user.doctor.search');
 });
 
 Route::group(['prefix' => 'doctors-departments'], function () {
