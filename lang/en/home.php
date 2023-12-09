@@ -634,7 +634,17 @@ return [
     'MedicalName' => 'Medical Name',
     'Parent' => 'Parent',
     'Detail' => 'Detail',
-    'Xem đơn đăng ký' => 'See application registration'
+    'Xem đơn đăng ký' => 'See application registration',
+    'If you did not receive the email' => 'If you did not receive the email',
+    'Doctor Information QrCode' => 'Doctor Information QrCode',
+    'Reviews Clinic/Hospital/Pharmacy' => 'home.Reviews Clinic/Hospital/Pharmacy',
+    'Reviews Doctor' => 'Reviews Doctor',
+    'Short Videos' => 'Short Videos',
+    'Topic Videos' => 'Topic Videos',
+    'Edit Business' => 'Edit Business',
+    'Category Management' => 'Category Management',
+    'Review Doctor Management' => 'Review Doctor Management',
+    'List Topic Videos' => ''
 
 
 

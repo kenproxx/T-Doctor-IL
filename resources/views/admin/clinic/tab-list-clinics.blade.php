@@ -105,7 +105,7 @@
             <td>${item.open_date}</td>
             <td>${item.close_date}</td>
             <td>${item.status}</td>
-            <td><a href="${urlEdit}"> Edit</a> | <a href="#" onclick="checkDelete(${item.id})">Delete</a></td>
+            <td><a href="${urlEdit}"> {{ __('home.Edit') }}</a> | <a href="#" onclick="checkDelete(${item.id})">{{ __('home.Delete') }}</a></td>
         </tr>`;
         }
         await $('#ClinicsAdmin').empty().append(html);

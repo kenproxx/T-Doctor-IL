@@ -634,7 +634,17 @@ return [
     'MedicalName' => 'Tên y tế',
     'Parent' => 'Cha mẹ',
     'Detail' => 'Chi tiết',
-    'Xem đơn đăng ký' => 'Xem đơn đăng ký'
+    'Xem đơn đăng ký' => 'Xem đơn đăng ký',
+    'If you did not receive the email' => 'Nếu bạn không nhận được email',
+    'Doctor Information QrCode' => 'Thông tin bác sĩ QrCode',
+    'Reviews Clinic/Hospital/Pharmacy' => 'Đánh giá Phòng khám/Bệnh viện/Nhà thuốc',
+    'Reviews Doctor' => 'Nhận xét bác sĩ',
+    'Short Videos' => 'Video ngắn',
+    'Topic Videos' => 'Video chủ đề',
+    'Edit Business' => 'Chỉnh sửa doanh nghiệp',
+    'Category Management' => 'Quản lý danh mục',
+    'Review Doctor Management' => 'Đánh giá quản lý bác sĩ',
+    'List Topic Videos' => 'Liệt kê các video chủ đề'
 
 
 
