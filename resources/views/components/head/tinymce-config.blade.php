@@ -1,7 +1,7 @@
 <script src="{{ asset('js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
 <script>
     tinymce.init({
-        selector: 'textarea',
+        selector: 'textarea:not(div.composer textarea)',
         plugins: 'image media',
         toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | image | table ',
         file_picker_callback: function (cb, value, meta) {
