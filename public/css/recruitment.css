@@ -489,6 +489,9 @@ a, input, button {
         color: #929292;
     }
     .add-cv-bt {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         border-radius: 8px;
         height: 48px;
         width: 270px;

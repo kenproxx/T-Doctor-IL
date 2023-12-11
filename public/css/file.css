@@ -449,7 +449,7 @@
 }
 .medicine-search--center .search-box input {
   width: 100%;
-  padding-left: 8%;
+  padding-left: 15%;
   height: 48px;
   background: rgb(247, 247, 247);
   font-size: 14px;
@@ -590,7 +590,7 @@
 }
 .clinic-search--center .search-box input {
   width: 100%;
-  padding-left: 8%;
+  padding-left: 15%;
   height: 48px;
   background: rgb(247, 247, 247);
   font-size: 14px;

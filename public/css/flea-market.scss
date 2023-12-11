@@ -124,8 +124,18 @@ p {
 
     .flea-search {
 
+        i {
+            position: absolute;
+            display: block;
+            width: 2.375rem;
+            height: 2.375rem;
+            line-height: 2.375rem;
+            text-align: center;
+            pointer-events: none;
+            color: #aaa;
+        }
         input {
-            padding-left: 16px;
+            padding-left: 40px;
             border-radius: 8px;
             background: #F3F3F3;
             width: 100%;

@@ -6,15 +6,14 @@
             color: red;
         }
     </style>
-    @include('layouts.partials.header')
+    @include('layouts.partials.headerFleaMarket')
     <body>
     @include('component.banner')
 
     <div class="container mt-70">
         <div class="container pc-hidden">
             <div class="row clinic-search">
-                <div
-                    class="clinic-search--left col-md-12 d-flex justify-content-between clinic-search--center align-items-center">
+                <div class="clinic-search--left col-md-12 d-flex justify-content-between clinic-search--center align-items-center">
                     <div class="clinic-search--left col-md-6 justify-content-around mobile-hidden">
                         <div class="title mobile-hidden">{{ __('home.All') }} <i class="bi bi-arrow-down-up"></i></div>
                         <div class="title mobile-hidden">{{ __('home.Category') }} <i class="bi bi-arrow-down-up"></i>
@@ -24,7 +23,7 @@
                     </div>
 
                     <div class="search-box col-md-5">
-                        <input class="m-0" type="search" name="focus" placeholder="Search" id="search-input" value="">
+                        <input class="m-0" type="search" onkeyup="performSearch()" name="focus" placeholder="Search" id="inputSearch" value="">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                     <div class="flex-fill">
@@ -39,15 +38,17 @@
         <div class="d-flex mt-70 mobile-hidden">
             <div class="col-md-3 flea-content ">{{ __('home.Flea market') }}</div>
             <div class="col-md-5 flea-search d-flex align-items-center">
-                <input onkeyup="performSearch()" id="inputSearch" placeholder="{{ __('home.Search for anything…') }}">
+                <i class="fa fa-search form-control-search"></i>
+                <label for="inputSearch"></label><input onkeyup="performSearch()" id="inputSearch" placeholder="{{ __('home.Search for anything…') }}">
             </div>
             <div class="d-flex col-md-4 justify-content-between align-items-center">
-                @if(auth()->user()->type!= \App\Enums\Role::NORMAL)
-                    <a href="#" onclick="checkLogin()" class="col-md-4 flea-button">
-                        {{ __('home.Sell my product') }}
-                    </a>
+                @if(Auth::check())
+                    @if(auth()->user()->type!= \App\Enums\Role::NORMAL)
+                        <a href="#" onclick="checkLogin()" class="col-md-4 flea-button">
+                            {{ __('home.Sell my product') }}
+                        </a>
+                    @endif
                 @endif
-
                 <a href="#" onclick="checkLoginWishStore()" class="col-md-4 flea-button flea-btn">
                     {{ __('home.Go to my store') }}
                 </a>
@@ -126,34 +127,14 @@
             <div class="offcanvas-body">
                 <div class="border-radius ">
                     <div class="flea-text">{{ __('home.Filter') }}</div>
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label class="flea-text-gray">{{ __('home.All') }} (96)</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label class="flea-text-gray">{{ __('home.Equipments') }} (71)</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label class="flea-text-gray">{{ __('home.Furniture') }} (55)</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label class="flea-text-gray">{{ __('home.Medicine') }} (54)</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label class="flea-text-gray">{{ __('home.Cosmetics') }} (49)</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label class="flea-text-gray">{{ __('home.Furniture') }} (53)</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label class="flea-text-gray">{{ __('home.Others') }} (47)</label>
-                    </div>
+                    @foreach($departments as $department)
+                        <div>
+                            <input type="checkbox" onchange="performSearch()" name="category_{{$department->id}}"
+                                   id="category_{{$department->id}}">
+                            <label for="category_{{$department->id}}"
+                                   class="flea-text-gray">{{$department->name}}</label>
+                        </div>
+                    @endforeach
                     <div class="flea-text-sp">{{ __('home.See all categories') }}</div>
                 </div>
                 <div class="border-radius mt-3 ">
@@ -178,17 +159,17 @@
                             </div>
                             <div class="range-input">
                                 <input type="range" onchange="performSearch()" class="rangePrice range-min" min="0"
-                                       max="10000000" value="2500000" step="1000">
+                                       max="100000" value="25000" step="1000">
                                 <input type="range" onchange="performSearch()" class="rangePrice range-max" min="0"
-                                       max="10000000" value="7500000" step="1000">
+                                       max="100000" value="75000" step="1000">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="d-flex justify-content-center">
-                    <button class="add-cv-bt w-100 apply-bt_delete col-6">{{ __('home.Refresh') }}</button>
+                    <a href="" class="add-cv-bt w-100 apply-bt_delete col-6">{{ __('home.Refresh') }}</a>
                     <form action="#" class="col-6 pr-0">
-                        <button type="submit" class="add-cv-bt apply-bt_edit w-100">{{ __('home.Apply') }}</button>
+                        <button type="button" data-bs-dismiss="offcanvas" aria-label="Close" class="add-cv-bt apply-bt_edit w-100">{{ __('home.Apply') }}</button>
                     </form>
                 </div>
             </div>
