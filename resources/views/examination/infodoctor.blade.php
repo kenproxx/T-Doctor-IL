@@ -34,7 +34,9 @@
                 <div id="title" class="d-flex justify-content-center">
                     <div class="d-flex list-title">
                         <div class="list--doctor p-0">
-                            <a class="back" href="{{route('examination.index')}}"><p><i class="bi bi-arrow-left"></i>{{ __('home.Detailed information Doctor') }}</p></a>
+                            <a class="back" href="{{route('examination.index')}}"><p><i
+                                        class="bi bi-arrow-left"></i>{{ __('home.Detailed information Doctor') }}</p>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -96,11 +98,12 @@
                             <button>{{ __('home.Chat') }}</button>
                             <form method="post" action="{{ route('createMeeting') }}" target="_blank">
                                 {{ csrf_field() }}
-                                <input type="hidden" name="user_id_1" value="@if(Auth::check()) {{ \Illuminate\Support\Facades\Auth::user()->id }} @endif">
+                                <input type="hidden" name="user_id_1"
+                                       value="@if(Auth::check()) {{ \Illuminate\Support\Facades\Auth::user()->id }} @endif">
                                 <input type="hidden" name="user_id_2" value="{{ $doctor->id }}">
                                 <button type="submit">{{ __('home.Videocall') }}</button>
                             </form>
-{{--                            <button>{{ __('home.Videocall') }}</button>--}}
+                            {{--                            <button>{{ __('home.Videocall') }}</button>--}}
                         </div>
                     </div>
                 </div>
@@ -110,7 +113,8 @@
                             <p>{{ __('home.Review') }}</p>
                         </div>
                         <div class="ms-auto p-2">
-                            <button class="btn btn-primary" type="button" onclick="showOrHidden(1);">{{ __('home.Add Review') }}</button>
+                            <button class="btn btn-primary" type="button"
+                                    onclick="showOrHidden(1);">{{ __('home.Add Review') }}</button>
                         </div>
                     </div>
                 </div>
@@ -276,19 +280,31 @@
                 let html = ``;
                 for (let i = 0; i < response.length; i++) {
                     let data = response[i];
-                    let parent = data.parent;
+                    let parent = data.parent[0];
                     let listChild = data.child;
                     let htmlChild = ``;
                     for (let j = 0; j < listChild.length; j++) {
                         let child = listChild[j];
+
+                        let itemImg = null;
+                        let username = null;
+                        let isGuest = child.is_guest;
+                        if (isGuest === true) {
+                            itemImg = `<img src="{{ asset('img/avt_default.jpg') }}" alt="" class="avt-user-review">`;
+                            username = child.username;
+                        } else {
+                            itemImg = `<img src="${child.user.avt}" alt="" class="avt-user-review">`;
+                            username = child.user.username;
+                        }
+
                         htmlChild = htmlChild + `<div class="rv_ctn justify-content-center mt-5">
                                                         <div class="user_rv d-flex">
                                                     <div class="user d-flex">
                                                         <div class="">
-                                                            <img src="${child.avt}" alt="" class="avt-user-review">
+                                                            ${itemImg}
                                                         </div>
                                                         <div class="">
-                                                            <p>${child.username}</p>
+                                                            <p>${username}</p>
                                                         </div>
 
                                                     </div>
@@ -318,26 +334,37 @@
                                 <button type="button" onclick="showOrHiddenChild(0, '${parent.id}');"
                                         class="btn btn-secondary btnHiddenForm col-md-6">
                                     {{ __('home.CANCEL') }}
-                                </button>
-                            </div>
-                            <div class="recruitment-details--btn col-md-6 justify-content-start d-flex">
-                                <button class="btn col-md-6 btn-send" type="button" onclick="addReview('${parent.id}');">
+                    </button>
+                </div>
+                <div class="recruitment-details--btn col-md-6 justify-content-start d-flex">
+                    <button class="btn col-md-6 btn-send" type="button" onclick="addReview('${parent.id}');">
                                     {{ __('home.Submit') }}
-                                </button>
-                            </div>
-                        </div>
-                    </div>`;
+                    </button>
+                </div>
+            </div>
+        </div>`;
 
                     htmlChild = htmlChild + htmlReviewFormChild;
+
+                    let itemImg = null;
+                    let username = null;
+                    let isGuestNew = parent.is_guest;
+                    if (isGuestNew === true) {
+                        itemImg = `<img src="{{ asset('img/avt_default.jpg') }}" alt="" class="avt-user-review">`;
+                        username = parent.username;
+                    } else {
+                        itemImg = `<img src="${parent.user.avt}" alt="" class="avt-user-review">`;
+                        username = parent.user.username;
+                    }
 
                     html = html + `<div class="rv_ctn justify-content-center">
                         <div class="user_rv d-flex">
                             <div class="user d-flex">
                                 <div class="">
-                                    <img src="${parent.avt}" alt="" class="avt-user-review">
+                                    ${itemImg}
                                 </div>
                                 <div class="">
-                                    <p>${parent.username}</p>
+                                    <p>${username}</p>
                                 </div>
 
                             </div>
