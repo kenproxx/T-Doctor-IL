@@ -406,6 +406,11 @@
                             <i class="bi bi-circle"></i><span>{{ __('home.Call video') }}</span>
                         </a>
                     </li>
+                    <li>
+                        <a href="{{ route('api.backend.connect.chat.index') }}">
+                            <i class="bi bi-circle"></i><span>{{ __('home.chat message') }}</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <!-- End Call video Nav -->
