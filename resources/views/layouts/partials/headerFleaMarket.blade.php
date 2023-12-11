@@ -124,9 +124,19 @@
                     <li class="nav-item button-nav-header mb-3">
                         <a class="nav-link" onclick="checkLoginWishStore()">{{ __('home.Go to my store') }}</a>
                     </li>
-                    <li class="nav-item button-nav-header mb-3">
-                        <a class="nav-link" href="#">{{ __('home.Log out') }}</a>
-                    </li>
+                    @if(Auth::check())
+                        <li class="nav-item button-nav-header mb-3">
+                            <a class="nav-link" href="#">{{ __('home.Log out') }}</a>
+                        </li>
+                    @else
+                        <li class="nav-item button-nav-header mb-3">
+                            <a class="nav-link" href="#" data-toggle="modal" data-target="#staticBackdrop">{{ __('home.Log In') }}</a>
+                        </li>
+                        <li class="nav-item button-nav-header mb-3">
+                            <a class="nav-link" href="#" data-toggle="modal" data-target="#modalRegister">{{ __('home.Sign Up') }}</a>
+                        </li>
+                    @endif
+
 
                 </ul>
             </div>
