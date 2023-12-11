@@ -102,6 +102,10 @@ class DoctorReviewApi extends Controller
         $created_by = $request->input('user_id');
         $doctor_id = $request->input('doctor_id');
 
+        if (!$created_by) {
+            $created_by = 0;
+        }
+
         $parent_id = $request->input('parent_id');
 
         $review->title = $title;
