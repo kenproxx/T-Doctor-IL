@@ -4,6 +4,7 @@ namespace App\Http\Controllers\restapi\admin;
 
 use App\Enums\DoctorReviewStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\restapi\DoctorReviewApi;
 use App\Models\DoctorReview;
 use Illuminate\Http\Request;
 
@@ -42,6 +43,7 @@ class AdminDoctorReviewApi extends Controller
 
             $reviewDoctor->status = $status;
             $success = $reviewDoctor->save();
+            (new DoctorReviewApi())->calcReview($reviewDoctor);
             if ($success) {
                 return response()->json($reviewDoctor);
             }
@@ -60,6 +62,7 @@ class AdminDoctorReviewApi extends Controller
             }
 
             $reviewDoctor->status = DoctorReviewStatus::DELETED;
+            (new DoctorReviewApi())->calcReview($reviewDoctor);
             $success = $reviewDoctor->save();
             if ($success) {
                 return response('Delete success!', 200);

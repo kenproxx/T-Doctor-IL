@@ -57,6 +57,7 @@ Route::group(['prefix' => 'business'], function () {
 
 Route::group(['prefix' => 'medicals'], function () {
     Route::get('/filter', [MedicalApi::class, 'searchByDepartmentAndSymptoms'])->name('medicals.restapi.filter');
+    Route::get('/all-filter', [MedicalApi::class, 'searchMedical'])->name('medicals.restapi.all.filter');
 });
 
 Route::group(['prefix' => 'clinics'], function () {

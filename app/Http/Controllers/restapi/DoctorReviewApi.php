@@ -5,6 +5,7 @@ namespace App\Http\Controllers\restapi;
 use App\Enums\DoctorReviewStatus;
 use App\Http\Controllers\Controller;
 use App\Models\DoctorReview;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -73,6 +74,9 @@ class DoctorReviewApi extends Controller
             $review = new DoctorReview();
             $review = $this->store($request, $review);
             $success = $review->save();
+
+            $this->calcReview($review);
+
             if ($success) {
                 return response()->json($review);
             }
@@ -123,12 +127,27 @@ class DoctorReviewApi extends Controller
         return $review;
     }
 
+    public function calcReview($review)
+    {
+        $reviews = DoctorReview::where('doctor_id', $review->doctor_id)
+            ->where('status', DoctorReviewStatus::APPROVED)
+            ->get();
+        $totalReview = $reviews->count();
+        $totalStar = $reviews->sum('number_star');
+        $calcReview = ($totalReview > 0) ? ($totalStar / $totalReview) : 0;
+
+        $user = User::find($review->doctor_id);
+        $user->average_star = $calcReview;
+        $user->save();
+    }
+
     public function update(Request $request, $id)
     {
         try {
             $review = DoctorReview::find($id);
             $review = $this->store($request, $review);
             $success = $review->save();
+            $this->calcReview($review);
             if ($success) {
                 return response()->json($review);
             }
@@ -145,6 +164,9 @@ class DoctorReviewApi extends Controller
             if (!$review || $review->status == DoctorReviewStatus::DELETED) {
                 return response('Not found!', 404);
             }
+            $review->status = DoctorReviewStatus::DELETED;
+            $review->save();
+            $this->calcReview($review);
             return response('Delete success!', 200);
         } catch (\Exception $exception) {
             return response($exception, 400);
