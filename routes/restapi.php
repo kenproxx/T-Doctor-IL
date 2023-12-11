@@ -8,6 +8,7 @@ use App\Http\Controllers\restapi\DepartmentApi;
 use App\Http\Controllers\restapi\DoctorDepartmentApi;
 use App\Http\Controllers\restapi\DoctorInfoApi;
 use App\Http\Controllers\restapi\BusinessApi;
+use App\Http\Controllers\restapi\DoctorReviewApi;
 use App\Http\Controllers\restapi\MedicalApi;
 use App\Http\Controllers\restapi\NewsApi;
 use App\Http\Controllers\restapi\OrderApi;
@@ -84,7 +85,13 @@ Route::group(['prefix' => 'doctors-info'], function () {
     Route::get('/search-doctor', [DoctorInfoApi::class, 'searchDoctor'])->name('api.backend.user.doctor.search');
 });
 
-
+Route::group(['prefix' => 'api/doctor-reviews'], function () {
+    Route::get('/list', [DoctorReviewApi::class, 'getAll'])->name('api.backend.doctor.reviews.list');
+    Route::get('/doctor/{id}', [DoctorReviewApi::class, 'getAllByDoctorID'])->name('api.backend.doctor.reviews.doctor');
+    Route::get('/user/{id}', [DoctorReviewApi::class, 'getAllByUserID'])->name('api.backend.doctor.reviews.user');
+    Route::get('/detail/{id}', [DoctorReviewApi::class, 'findById'])->name('api.backend.doctor.reviews.detail');
+    Route::post('/create', [DoctorReviewApi::class, 'create'])->name('api.backend.doctor.reviews.create');
+});
 
 Route::group(['prefix' => 'doctors-departments'], function () {
     Route::get('/list', [DoctorDepartmentApi::class, 'getAll'])->name('doctors.departments.list');

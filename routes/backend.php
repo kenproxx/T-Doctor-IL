@@ -73,16 +73,6 @@ Route::group(['prefix' => 'booking'], function () {
     Route::post('/cancel/{userId}/{bookingId}/{status}', [BookingApi::class, 'bookingCancel'])->name('api.user.booking.status');
 });
 
-Route::group(['prefix' => 'doctor-reviews'], function () {
-    Route::get('/list', [DoctorReviewApi::class, 'getAll'])->name('api.backend.doctor.reviews.list');
-    Route::get('/doctor/{id}', [DoctorReviewApi::class, 'getAllByDoctorID'])->name('api.backend.doctor.reviews.doctor');
-    Route::get('/user/{id}', [DoctorReviewApi::class, 'getAllByUserID'])->name('api.backend.doctor.reviews.user');
-    Route::get('/detail/{id}', [DoctorReviewApi::class, 'findById'])->name('api.backend.doctor.reviews.detail');
-    Route::post('/create', [DoctorReviewApi::class, 'create'])->name('api.backend.doctor.reviews.create');
-    Route::post('/update/{id}', [DoctorReviewApi::class, 'update'])->name('api.backend.doctor.reviews.update');
-    Route::delete('/delete/{id}', [DoctorReviewApi::class, 'delete'])->name('api.backend.doctor.reviews.delete');
-});
-
 Route::group(['prefix' => 'messages'], function () {
     Route::post('/create', [MessageApi::class, 'create'])->name('api.backend.messages.create');
 });
