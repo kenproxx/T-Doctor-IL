@@ -194,6 +194,7 @@ class AdminDoctorInfoApi extends Controller
         }
 
         $department_id = $request->input('department_id');
+        $symptom_id = $request->input('symptom_id');
         $address_code = $request->input('address_code');
 
 
@@ -251,6 +252,7 @@ class AdminDoctorInfoApi extends Controller
         $doctor->apply_for = $apply_for;
 
         $doctor->department_id = $department_id;
+        $doctor->symptom_id = $symptom_id;
         return $doctor->save();
     }
 
