@@ -15,6 +15,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\connect\CallVideoController;
+use App\Http\Controllers\connect\ChatMessageController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DoctorInfoController;
 use App\Http\Controllers\DoctorReviewController;
@@ -273,6 +274,11 @@ Route::middleware(['auth'])->group(function () {
                     'MEETING_ID' => $meetingId
                 ]);
             })->name('joinMeeting');
+        });
+
+        Route::group(['prefix' => 'chat'], function () {
+            Route::get('index', [ChatMessageController::class, 'index'])->name('api.backend.connect.chat.index');
+
         });
     });
 
