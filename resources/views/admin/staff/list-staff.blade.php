@@ -35,7 +35,7 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->type }}</td>
                 <td>{{ $user->status }}</td>
-                <td><a href="{{ route('staff.edit', $user->id) }}"> Edit</a> | <a href="#"
+                <td><a href="{{ route('staff.edit', $user->id) }}">{{ __('home.Edit') }} </a> | <a href="#"
                                                                                   onclick="deleteStaff('{{ $user->id }}')">{{ __('home.Delete') }}</a>
                 </td>
             </tr>

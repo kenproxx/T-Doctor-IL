@@ -5,8 +5,8 @@
 @section('main-content')
     <div class="">
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800">List Topic Videos</h1>
-        <a href="{{route('user.topic.videos.create')}}" class="btn btn-primary mb-3">Add</a>
+        <h1 class="h3 mb-4 text-gray-800">{{ __('home.List Topic Videos') }}</h1>
+        <a href="{{route('user.topic.videos.create')}}" class="btn btn-primary mb-3">{{ __('home.Add') }}</a>
         @if (session('success'))
             <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -18,9 +18,9 @@
         <table class="table" id="tableListTopic">
             <thead>
             <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Status</th>
-                <th scope="col">Active</th>
+                <th scope="col">{{ __('home.Name') }}</th>
+                <th scope="col">{{ __('home.Status') }}</th>
+                <th scope="col">{{ __('home.Active') }}</th>
             </tr>
             </thead>
             <tbody id="tbodyListTopic">
@@ -62,8 +62,8 @@
                         <td>${data.name}</td>
                         <td>${data.status}</td>
                         <td>
-                            <a href="${detail}" class="btn btn-secondary">Detail</a>
-                            <button onclick="deleteTopic('${data.id}')"  class="btn btn-danger">Delete</button>
+                            <a href="${detail}" class="btn btn-secondary">{{ __('home.Detail') }}</a>
+                            <button onclick="deleteTopic('${data.id}')"  class="btn btn-danger">{{ __('home.Delete') }}</button>
                         </td>
                     </tr>`;
             }
