@@ -106,9 +106,9 @@
                 let buttonHtml = '';
 
                 if (item.status === 'PENDING') {
-                    buttonHtml = `<a href="#" onclick="checkDelete(${item.id}, 'Delete')">Delete</a>`;
+                    buttonHtml = `<a href="#" onclick="checkDelete(${item.id}, 'Delete')">{{ __('home.Delete') }}</a>`;
                 } else if (item.status === 'CANCEL') {
-                    buttonHtml = `<a href="#" onclick="checkDelete(${item.id}, 'Apply')">Apply</a>`;
+                    buttonHtml = `<a href="#" onclick="checkDelete(${item.id}, 'Apply')">{{ __('home.Apply') }}</a>`;
                 }
 
                 let productHtml = `

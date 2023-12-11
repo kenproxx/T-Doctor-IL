@@ -7,7 +7,7 @@
         </div>
 
         <form class="search-box col-md-5">
-            <input class="m-0" type="search" name="focus" placeholder="Search" id="search-input" value="">
+            <input class="m-0" type="search" name="focus" placeholder="{{ __('home.Search for anything…') }}" id="search-input" value="">
             <i class="fa-solid fa-magnifying-glass"></i>
         </form>
         <div class="flex-fill"><button class="css-button"><i class="bi bi-filter"></i></button></div>

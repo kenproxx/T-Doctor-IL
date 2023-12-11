@@ -45,9 +45,9 @@
                 <td>{{$symptom->description}}</td>
                 <td><img src="{{ asset($symptom->thumbnail) }}" alt="Image" width="50px"></td>
                 <td>
-                    <a href="{{ route('symptom.edit', $symptom->id) }}" class="btn btn-success">Edit</a>
+                    <a href="{{ route('symptom.edit', $symptom->id) }}" class="btn btn-success">{{ __('home.EditÏÏ') }}</a>
                     <button type="button" class="btn btn-danger" onclick="confirmDelete('{{ $symptom->id }}')">
-                        Delete
+                        {{ __('home.Delete') }}
                     </button>
                 </td>
             </tr>
