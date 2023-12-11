@@ -55,7 +55,7 @@ class MedicalApi extends Controller
             $type = TypeMedical::DOCTORS;
         }
         $query = DB::table('users')
-            ->where('users.type', $type)
+            ->where('users.member', $type)
             ->where('users.status', UserStatus::ACTIVE);
 
         if ($experience) {
