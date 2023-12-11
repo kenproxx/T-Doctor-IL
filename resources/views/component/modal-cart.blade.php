@@ -117,7 +117,7 @@
     }
 
     function deleteProductCart(id) {
-        let ok = confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?');
+        let ok = confirm('{{ __('home.Bạn có chắc chắn muốn xóa sản phẩm này không') }}?');
         if (!ok) {
             return;
         }

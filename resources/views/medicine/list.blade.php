@@ -38,7 +38,7 @@
             </div>
             <div class="medicine-search--center col-md-6 row d-flex justify-content-between">
                 <form class="search-box col-md-10">
-                    <input type="search" name="focus" placeholder="Search" id="search-input" value="">
+                    <input type="search" name="focus" placeholder="{{ __('home.Search for anything…') }}" id="search-input" value="">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </form>
                 @if(Auth::check())

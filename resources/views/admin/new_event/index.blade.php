@@ -36,7 +36,7 @@
                 <td class="d-flex">
                     <a href="{{ route('api.new-event.edit', ['id' => $newEvent->id]) }}"
                        class="btn btn-primary mr-2">{{ __('home.Edit') }}</a>
-                    <button type="button" class="btn btn-danger" onclick="deleteNewEvent({{ $newEvent->id }})">Delete
+                    <button type="button" class="btn btn-danger" onclick="deleteNewEvent({{ $newEvent->id }})">{{ __('home.Delete') }}
                     </button>
                 </td>
             </tr>

@@ -632,7 +632,7 @@ return [
     'Description English' => 'Description English',
     'Description Laos' => 'Description Laos',
     'MedicalName' => 'Medical Name',
-    'Parent' => 'Parent',
+    'Parent' => 'Choose category parent',
     'Detail' => 'Detail',
     'Xem đơn đăng ký' => 'See application registration',
     'If you did not receive the email' => 'If you did not receive the email',
@@ -644,7 +644,15 @@ return [
     'Edit Business' => 'Edit Business',
     'Category Management' => 'Category Management',
     'Review Doctor Management' => 'Review Doctor Management',
-    'List Topic Videos' => ''
+    'List Topic Videos' => 'List Topic Videos',
+    'Không có thông tin số tiền hợp lệ' => 'No valid amount information available',
+    'Không có thông tin ngày giờ hợp lệ' => 'There is no valid date and time information',
+    'Giao dịch thành công' => 'Successful transaction',
+    'Giao dịch không thành công' => 'Transaction failed',
+    'Chữ ký không hợp lệ' => 'Invalid signature',
+    'Bạn có chắc chắn muốn xóa sản phẩm này không' => 'Are you sure you want to delete this product',
+    "What’s free details" => "What’s free details",
+    'Create Category' => 'Create Category'
 
 
 
