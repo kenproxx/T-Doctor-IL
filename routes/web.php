@@ -16,6 +16,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\connect\CallVideoController;
 use App\Http\Controllers\connect\ChatMessageController;
+use App\Http\Controllers\connect\WidgetChatController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DoctorInfoController;
 use App\Http\Controllers\DoctorReviewController;
@@ -88,6 +89,7 @@ Route::group(['prefix' => 'wish-lists'], function () {
 Route::group(['prefix' => 'examination'], function () {
     Route::get('/index', [ExaminationController::class, 'index'])->name('examination.index');
     Route::get('/doctor-info/{id}', [ExaminationController::class, 'infoDoctor'])->name('examination.doctor_info');
+    Route::get('/chat-with-doctor/{id}', [ExaminationController::class, 'chatWithDoctor'])->name('examination.doctor_info.chat');
     Route::get('/best-doctor', [ExaminationController::class, 'bestDoctor'])->name('examination.best_doctor');
     Route::get('/new-doctor', [ExaminationController::class, 'newDoctor'])->name('examination.new_doctor');
     Route::get('/available-doctor', [ExaminationController::class, 'availableDoctor'])->name('examination.available_doctor');
@@ -279,6 +281,10 @@ Route::middleware(['auth'])->group(function () {
         Route::group(['prefix' => 'chat'], function () {
             Route::get('index', [ChatMessageController::class, 'index'])->name('api.backend.connect.chat.index');
 
+            Route::get('getListUserWasConnect', [WidgetChatController::class, 'getListUserWasConnect'])
+                ->name('api.backend.connect.chat.getListUserWasConnect');
+            Route::get('getMessageByUserId/{id}', [WidgetChatController::class, 'getMessageByUserId'])
+                ->name('api.backend.connect.chat.getMessageByUserId');
         });
     });
 

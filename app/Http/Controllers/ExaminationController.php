@@ -229,4 +229,9 @@ class ExaminationController extends Controller
         return view('examination.mentoring.detail', compact('question', 'answers'));
     }
 
+    public function chatWithDoctor($id)
+    {
+        return view('admin.connect.chat.index', compact('id'));
+    }
+
 }

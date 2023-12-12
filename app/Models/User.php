@@ -60,7 +60,24 @@ class User extends Authenticatable  implements JWTSubject
         if (!$id) {
             return '';
         }
+
         $user = User::where('id', $id)->first();
+
+        if (!$user) {
+            return '';
+        }
+
+        if (!$user->name && !$user->last_name) {
+            return 'No name';
+        }
+
+        if (!$user->name) {
+            $user->name = '';
+        }
+        if (!$user->last_name) {
+            $user->last_name = '';
+        }
+
         return $user->name . ' ' . $user->last_name;
     }
 
@@ -97,6 +114,36 @@ class User extends Authenticatable  implements JWTSubject
             return '';
         }
         return Role::where('id', $role->role_id)->first()->name;
+    }
+
+    //get email by id
+    public static function getEmailByID($id)
+    {
+        if (!$id) {
+            return '';
+        }
+        $user = User::where('id', $id)->first();
+        if (!$user) {
+            return '';
+        }
+        return $user->email ?? 'noemail@gmail.com';
+    }
+
+    //get avt by id
+    public static function getAvtByID($id)
+    {
+        if (!$id) {
+            return '';
+        }
+        $user = User::where('id', $id)->first();
+        if (!$user) {
+            return '';
+        }
+
+        if (!$user->avt) {
+            return '/img/user-circle.png';
+        }
+        return $user->avt ;
     }
 
 }

@@ -20,6 +20,34 @@
     </div>
 
     <script>
+
+        $(document).ready(function () {
+            // loadChatUser();
+        });
+
+
+        function loadChatUser() {
+            let id = '{{ $id }}';
+            if (!id) {
+                return;
+            }
+            let currentUserId = '{{ auth()->user()->id }}';
+
+            $.ajax({
+                url: '/api/conversation/' + id + '/' + currentUserId,
+                method: 'GET',
+                dataType: 'json',
+                success: (response) => {
+                    this.messages = response.data;
+                    this.selectedContact = id;
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            });
+
+        }
+
     </script>
 
 @endsection
