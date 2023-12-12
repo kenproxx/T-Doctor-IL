@@ -9,7 +9,7 @@
             <div class="d-flex flex-fill">
                 <div class="filter_option"><p>{{ __('home.Category') }} <i class="bi bi-chevron-expand"></i></p></div>
                 <div class="filter_option"><p>{{ __('home.Position') }} <i class="bi bi-chevron-expand"></i></p></div>
-                <div class="filter_option"><p>{{ __('home.Location') }} <i class="bi bi-chevron-expand"></i></p></div>
+                <div class="filter_option"><p>{{ __('home.Location') }}<i class="bi bi-chevron-expand"></i></p></div>
                 <div class="filter_option"><p>{{ __('home.Experience') }} <i class="bi bi-chevron-expand"></i></p></div>
             </div>
             <div class="form-group has-search">

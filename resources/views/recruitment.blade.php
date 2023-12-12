@@ -146,7 +146,7 @@
                 <div id="rank" class="d-flex">
                     <div class="col-10 rank_title p-0">
                         <img src="{{asset('img/silver_rank.png')}}" width="398px" height="60px">
-                        <h2>SILVER</h2>
+                        <h2>{{ __('home.Silver') }}</h2>
                     </div>
                     <div class="col-1 ms-auto p-2"><a href="{{route('recruitment_detail')}}">{{ __('home.See all') }}</a></div>
 

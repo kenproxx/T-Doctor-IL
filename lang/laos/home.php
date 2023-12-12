@@ -642,7 +642,8 @@ return [
     'Bạn có chắc chắn muốn xóa sản phẩm này không' => 'ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບຜະລິດຕະພັນນີ້',
     "What’s free details" => "ລາຍລະອຽດຟຣີແມ່ນຫຍັງ",
     'Dashboard' => 'ແຜງໜ້າປັດ',
-    'Create Category' => 'ສ້າງຫມວດຫມູ່'
+    'Create Category' => 'ສ້າງຫມວດຫມູ່',
+    'Toàn quốc' => 'ທົ່ວປະເທດ'
 
 
 

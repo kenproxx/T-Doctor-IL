@@ -218,9 +218,9 @@
                                                        placeholder="{{ __('home.EXPERIENCE') }}">
                                             </div>
                                             <div class="form-element">
-                                                <label for="address">{{ __('home.Address') }}</label>
+                                                <label for="address">{{ __('home.Addresses') }}</label>
                                                 <input id="address" name="address" type="text"
-                                                       placeholder="{{ __('home.Address') }}">
+                                                       placeholder="{{ __('home.Addresses') }}">
                                             </div>
                                             <div class="form-element">
                                                 <label for="province_id">{{ __('home.Tỉnh') }}</label>

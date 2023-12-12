@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="div-5">
                                     <div class="text-wrapper-3">{{ __('home.From of employment') }}</div>
-                                    <div class="text-wrapper-4">1 year</div>
+                                    <div class="text-wrapper-4">1 {{ __('home.year') }}</div>
                                 </div>
                             </div>
                             <div class="div-4">

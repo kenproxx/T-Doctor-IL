@@ -39,7 +39,7 @@
                 <button type="button" class="btn btn-secondary mx-2 button_create_question" onclick="history.back()">
                     {{ __('home.CANCEL') }}
                 </button>
-                <button type="button" class="btn btn-primary mx-2 button_create_question" id="btn_submit" onclick="submitButton()">Submit</button>
+                <button type="button" class="btn btn-primary mx-2 button_create_question" id="btn_submit" onclick="submitButton()">{{ __('home.Submit') }}</button>
             </div>
         </form>
     </div>

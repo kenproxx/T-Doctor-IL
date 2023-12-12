@@ -7,7 +7,7 @@
             <a href="{{route('medicine.detail', $medicine->id)}}">{{ $medicine->name }}</a>
         </div>
         <div class="location-pro d-flex">
-                Location: <p>{{ $medicine->location_name ?? 'Toàn quốc'}}</p>
+            {{ __('home.Location') }}: <p>{{ $medicine->location_name ??  __('home.Toàn quốc') }}</p>
         </div>
         <div class="price-pro">
             {{ $medicine->price }} {{ $medicine->unit_price }}

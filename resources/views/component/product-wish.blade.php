@@ -72,7 +72,7 @@
                                         <a href="${url}">${product.name}</a>
                                     </div>
                                     <div class="location-pro d-flex">
-                                        Location: <p>${product.province_id}</p>
+                                        {{ __('home.Location') }}: <p>${product.province_id}</p>
                                     </div>
                                     <div class="price-pro">
                                         ${product.price} ${product.price_unit}
