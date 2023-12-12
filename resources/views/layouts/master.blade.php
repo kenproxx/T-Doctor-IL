@@ -47,8 +47,6 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.textcomplete/1.8.0/jquery.textcomplete.js"></script>
 
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
 </head>
 
 <style>
