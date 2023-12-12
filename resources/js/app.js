@@ -315,10 +315,29 @@ jquery("#leaveMeeting").on("click", async function() {
 window.Vue = require('vue');
 
 import ChatApp from './components/ChatApp'
+import WidgetChat from './components/WidgetChat'
 
 const app = new Vue({
     el: '#app',
     components:{
-        ChatApp
+        ChatApp,
+        WidgetChat
     },
 });
+
+import Echo from 'laravel-echo';
+import Pusher from 'pusher-js';
+
+window.Pusher = Pusher;
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: process.env.MIX_PUSHER_APP_KEY,
+    cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+    encrypted: true,
+    // forceTLS: true
+});
+Echo.channel(`messages.${this.user.id}`)
+    .listen('NewMessage', (e) => {
+        this.handleIncoming(e.message)
+    });

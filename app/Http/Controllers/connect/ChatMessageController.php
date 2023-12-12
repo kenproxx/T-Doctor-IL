@@ -13,7 +13,8 @@ class ChatMessageController extends Controller
      */
     public function index()
     {
-        return view('admin.connect.chat.index');
+        $id = '';
+        return view('admin.connect.chat.index', compact('id'));
     }
 
     /**

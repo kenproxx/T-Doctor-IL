@@ -19,10 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/contact-list/{id}', [ContactController::class, 'getContactList']);
+Route::get('/contact-list/{id}', [ContactController::class, 'getContactList'])->name('chat.contact-list');
 
 
-Route::get('/conversation/{id}/{auth_id}', [ContactController::class, 'getMessages']);
+Route::get('/conversation/{id}/{auth_id}', [ContactController::class, 'getMessages'])->name('chat.conversation');
 
 
-Route::post('/conversation/send', [ContactController::class, 'sendNewMessage']);
+Route::post('/conversation/send', [ContactController::class, 'sendNewMessage'])->name('chat.send-message');
