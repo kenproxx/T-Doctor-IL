@@ -26,7 +26,7 @@
                         <div class="mb-30">
                             <div class="justify-content-between align-items-center d-flex mt-4">
                                 <div class="ac-text_content ">{{ __('home.Related news') }}</div>
-                                <div class="flea-content-product"><a href="{{route('index.new')}}">See all</a></div>
+                                <div class="flea-content-product"><a href="{{route('index.new')}}">{{ __('home.See all') }}</a></div>
                             </div>
                         </div>
                         <div class="d-flex row">

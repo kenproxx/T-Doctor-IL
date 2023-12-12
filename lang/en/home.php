@@ -652,7 +652,8 @@ return [
     'Chữ ký không hợp lệ' => 'Invalid signature',
     'Bạn có chắc chắn muốn xóa sản phẩm này không' => 'Are you sure you want to delete this product',
     "What’s free details" => "What’s free details",
-    'Create Category' => 'Create Category'
+    'Create Category' => 'Create Category',
+    'Toàn quốc' => 'Nationwide'
 
 
 

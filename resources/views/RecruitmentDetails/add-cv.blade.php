@@ -71,7 +71,7 @@
                             <div class="mt-2">
                                 <div class="d-flex">
                                     <input type="radio" class="web-tick-box mr-1" name="marital">
-                                    <label class="mb-0 mr-5"><strong>Single</strong></label>
+                                    <label class="mb-0 mr-5"><strong>{{ __('home.Single') }}</strong></label>
                                     <input type="radio" class="web-tick-box mr-1" name="marital">
                                     <label class="mb-0"><strong>{{ __('home.Married') }}</strong></label>
                                 </div>

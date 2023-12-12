@@ -67,7 +67,7 @@
                                         Null
                                     @endif
                                 </strong></p>
-                            <p style="color: #929292">Brand name:<strong class="flea-prise">
+                            <p style="color: #929292">{{ __('home.Brand name') }}:<strong class="flea-prise">
                                     {{$pr_json->brand_name}}</strong></p>
                         </div>
                         <div class="div-7 d-flex justify-content-between">

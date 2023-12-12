@@ -14,7 +14,7 @@
                 <div class="apply-text">
                     <strong>CV Trần Đình Phi</strong>
                     <div class="mt-1">
-                        <span>Update: </span><strong> 29/09/2023</strong>
+                        <span>{{ __('home.Update') }}: </span><strong> 29/09/2023</strong>
                     </div>
                 </div>
                 <div class="d-flex">
@@ -33,7 +33,7 @@
                 <div class="apply-text">
                     <strong>CV Trần Đình Phi</strong>
                     <div class="mt-1">
-                        <span>Update: </span><strong> 29/09/2023</strong>
+                        <span>{{ __('home.Update') }}: </span><strong> 29/09/2023</strong>
                     </div>
                 </div>
                 <div class="d-flex">
@@ -52,7 +52,7 @@
                 <div class="apply-text">
                     <strong>CV Trần Đình Phi</strong>
                     <div class="mt-1">
-                        <span>Update: </span><strong> 29/09/2023</strong>
+                        <span>{{ __('home.Update') }}: </span><strong> 29/09/2023</strong>
                     </div>
                 </div>
                 <div class="d-flex">

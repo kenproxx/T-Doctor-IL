@@ -65,7 +65,7 @@
                             <div class="text-font-16 mt-4">
                                 <p><span>{{ __('home.Nation') }} </span> <span class="red-color">*</span></p>
                                 <div class="w-100 mt-2">
-                                    <input class="web ac-nation" placeholder="Please choose....">
+                                    <input class="web ac-nation" placeholder="{{ __('home.Please choose....') }}">
                                 </div>
                             </div>
                             <div class="text-font-16 mt-4">

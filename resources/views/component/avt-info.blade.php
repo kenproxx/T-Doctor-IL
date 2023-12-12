@@ -14,7 +14,7 @@
                         $address = DB::table('provinces')->where('code_name', $info->address_code)->first();
                 @endphp
                 <div class="name font-18-mobi">{{$info->name}} {{$info->last_name}}</div>
-                <p class="location-info font-14-mobi">Location: <strong class="hanoi font-14-mobi">
+                <p class="location-info font-14-mobi">{{ __('home.Location') }}: <strong class="hanoi font-14-mobi">
                         @if(!empty($address))
                             {{$address->name}}
                         @else

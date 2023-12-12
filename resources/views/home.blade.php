@@ -588,7 +588,7 @@
                                                     $province = Province::find($product->province_id);
                                                 @endphp
                                                 @if($province)
-                                                    <p class="card-text">Location: <b>{{ $province->name}}</b></p>
+                                                    <p class="card-text">{{ __('home.Location') }}: <b>{{ $province->name}}</b></p>
                                                 @endif
                                             @endif
                                             <h4>{{ $product->price }}</h4>

@@ -77,7 +77,7 @@
                                 <div class="dropdown-menu">
                                     @if( (new MedicalPermission())->isMedicalPermission())
                                         <a class="dropdown-item"
-                                           href="{{ route('admin.home') }}">{{ __('home.Dashboar') }}</a>
+                                           href="{{ route('admin.home') }}">{{ __('home.Dashboard') }}</a>
                                     @else
                                         <a class="dropdown-item"
                                            href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
@@ -109,7 +109,7 @@
             </div>
             <div class="offcanvas-body">
                 <div class="text-center-info align-items-start d-flex mb-3">
-                    <a href="{{route('home')}}" class="text-center-info"><i class="fa-solid fa-angles-left"></i><span>{{ __('home.Flea marrket') }}</span></a>
+                    <a href="{{route('home')}}" class="text-center-info"><i class="fa-solid fa-angles-left"></i><span>{{ __('home.Flea market') }}</span></a>
                 </div>
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item button-nav-header mb-3">
@@ -295,9 +295,9 @@
                                                                placeholder="{{ __('home.EXPERIENCE') }}">
                                                     </div>
                                                     <div class="form-element">
-                                                        <label for="address">{{ __('home.Address') }}</label>
+                                                        <label for="address">{{ __('home.Addresses') }}</label>
                                                         <input id="address" name="address" type="text"
-                                                               placeholder="{{ __('home.Address') }}">
+                                                               placeholder="{{ __('home.Addresses') }}">
                                                     </div>
                                                     <div class="form-element">
                                                         <label for="province_id">{{ __('home.Tỉnh') }}</label>

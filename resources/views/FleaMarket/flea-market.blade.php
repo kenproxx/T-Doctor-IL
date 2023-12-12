@@ -18,12 +18,12 @@
                         <div class="title mobile-hidden">{{ __('home.All') }} <i class="bi bi-arrow-down-up"></i></div>
                         <div class="title mobile-hidden">{{ __('home.Category') }} <i class="bi bi-arrow-down-up"></i>
                         </div>
-                        <div class="title mobile-hidden">{{ __('home.Location') }} <i class="bi bi-arrow-down-up"></i>
+                        <div class="title mobile-hidden">{{ __('home.Location') }}<i class="bi bi-arrow-down-up"></i>
                         </div>
                     </div>
 
                     <div class="search-box col-md-5">
-                        <input class="m-0" type="{{ __('home.Search for anything…') }}" onkeyup="performSearch()" name="focus" placeholder="Search" id="inputSearch" value="">
+                        <input class="m-0" type="Search" onkeyup="performSearch()" name="focus" placeholder="{{ __('home.Search for anything…') }}" id="inputSearch" value="">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                     <div class="flex-fill">

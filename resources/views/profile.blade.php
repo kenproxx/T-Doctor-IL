@@ -200,7 +200,7 @@
                                         <label class="form-control-label"
                                                for="current_password">{{ __('home.Current password') }}</label>
                                         <input type="password" id="current_password" class="form-control"
-                                               name="current_password" placeholder="Current password">
+                                               name="current_password" placeholder="{{ __('home.Current password') }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -208,7 +208,7 @@
                                         <label class="form-control-label"
                                                for="new_password">{{ __('home.New password') }}</label>
                                         <input type="password" id="new_password" class="form-control"
-                                               name="new_password" placeholder="New password">
+                                               name="new_password" placeholder="{{ __('home.New password') }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
@@ -216,7 +216,7 @@
                                         <label class="form-control-label"
                                                for="confirm_password">{{ __('home.Confirm Password') }}</label>
                                         <input type="password" id="confirm_password" class="form-control"
-                                               name="password_confirmation" placeholder="Confirm password">
+                                               name="password_confirmation" placeholder="{{ __('home.Confirm Password') }}">
                                     </div>
                                 </div>
                             </div>

@@ -350,7 +350,7 @@
                             <img src="${url}${myArray[1]}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <a href="${mainUrl}"><h5 class="card-title">${item['name']}</h5></a>
-                                <p class="card-text_1">Location: <b>${item['address_code']}</b></p>
+                                <p class="card-text_1">{{ __('home.Location') }}: <b>${item['address_code']}</b></p>
                                 <p class="card-text_1">Price: <b>${item['price']} ${item['unit_price']}</b></p>
                             </div>
                             </div>

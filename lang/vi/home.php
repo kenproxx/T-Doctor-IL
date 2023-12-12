@@ -653,7 +653,8 @@ return [
     'Bạn có chắc chắn muốn xóa sản phẩm này không' => 'Bạn có chắc chắn muốn xóa sản phẩm này không',
     "What’s free details" => 'Chi tiết miễn phí',
     'Dashboard' => 'Bảng điều khiển',
-    'Create Category' => 'Tạo danh mục'
+    'Create Category' => 'Tạo danh mục',
+    'Toàn quốc' => 'Toàn quốc'
 
 
 
