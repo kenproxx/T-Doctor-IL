@@ -5,6 +5,7 @@
     .h-80 {
         height: 80%;
     }
+
     #heading {
         text-transform: uppercase;
         color: #673AB7;
@@ -34,49 +35,6 @@
 
     #msform fieldset:not(:first-of-type) {
         display: none
-    }
-
-    #msform input,
-    #msform textarea {
-        padding: 8px 15px 8px 15px;
-        border: 1px solid #ccc;
-        border-radius: 0px;
-        margin-bottom: 25px;
-        margin-top: 2px;
-        width: 100%;
-        box-sizing: border-box;
-        font-family: montserrat;
-        color: #2C3E50;
-        background-color: #ECEFF1;
-        font-size: 16px;
-        letter-spacing: 1px
-    }
-
-    #msform input:focus,
-    #msform textarea:focus {
-        -moz-box-shadow: none !important;
-        -webkit-box-shadow: none !important;
-        box-shadow: none !important;
-        border: 1px solid #673AB7;
-        outline-width: 0
-    }
-
-    #msform .action-button {
-        width: 100px;
-        background: #673AB7;
-        font-weight: bold;
-        color: white;
-        border: 0 none;
-        border-radius: 0px;
-        cursor: pointer;
-        padding: 10px 5px;
-        margin: 10px 0px 10px 5px;
-        float: right
-    }
-
-    #msform .action-button:hover,
-    #msform .action-button:focus {
-        background-color: #311B92
     }
 
     #msform .action-button-previous {
@@ -733,7 +691,7 @@
 <div class="modal modal-xl modal fade" id="modalForgetPassword" data-backdrop="static" data-keyboard="false"
      tabindex="-1" aria-labelledby="modalForgetPasswordLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-        <div class="modal-content h-80" >
+        <div class="modal-content h-80">
 
             <div class="modal-body">
                 <div class="container-fluid">
@@ -763,13 +721,18 @@
                                                     <h2 class="steps">Step 1 - 3</h2>
                                                 </div>
                                             </div>
-                                            <label class="fieldlabels">Email: *</label> <input type="email" name="email"
-                                                                                               placeholder="Email Id"/>
-                                            <label class="fieldlabels">Username: *</label> <input type="text"
-                                                                                                  name="uname"
-                                                                                                  placeholder="UserName"/>
+                                            <label class="fieldlabels">Email: *</label>
+                                            <select class="custom-select" name="type_account">
+                                                <option value="email">Email</option>
+                                                <option value="2">SDT</option>
+                                            </select>
+                                            <label class="fieldlabels">Username: *</label>
+                                            <input type="text" class="form-control"
+                                                   name="uname"
+                                                   />
+
                                         </div>
-                                        <input type="button" name="next" class="next action-button" value="Next"/>
+                                        <input type="button" name="next" class="next btn btn-primary mt-2" value="Next"/>
                                     </fieldset>
                                     <fieldset>
                                         <div class="form-card">
