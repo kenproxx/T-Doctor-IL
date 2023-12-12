@@ -621,7 +621,7 @@ return [
     'Description English' => 'ລາຍ​ລະ​ອຽດ​ພາ​ສາ​ອັງ​ກິດ​',
     'Description Laos' => 'Description ປະເທດລາວ',
     'MedicalName' => 'ຊື່ທາງການແພດ',
-    'Parent' => 'ພໍ່ແມ່',
+    'Parent' => 'ເລືອກໝວດໝູ່',
     'Detail' => 'ລາຍລະອຽດ',
     'Xem đơn đăng ký' => 'ເບິ່ງຄໍາຮ້ອງສະຫມັກ',
     'If you did not receive the email' => 'ຖ້າທ່ານບໍ່ໄດ້ຮັບອີເມວ',
@@ -633,7 +633,16 @@ return [
     'Edit Business' => 'ແກ້ໄຂທຸລະກິດ',
     'Category Management' => 'ການຈັດການປະເພດ',
     'Review Doctor Management' => 'ທົບທວນການຄຸ້ມຄອງທ່ານຫມໍ',
-    'List Topic Videos' => 'ລາຍການວິດີໂອຫົວຂໍ້'
+    'List Topic Videos' => 'ລາຍການວິດີໂອຫົວຂໍ້',
+    'Không có thông tin số tiền hợp lệ' => 'ບໍ່ມີຂໍ້ມູນຈໍານວນທີ່ຖືກຕ້ອງ',
+    'Không có thông tin ngày giờ hợp lệ' => 'ບໍ່ມີຂໍ້ມູນວັນທີ ແລະເວລາທີ່ຖືກຕ້ອງ',
+    'Giao dịch thành công' => 'ການເຮັດທຸລະກໍາສໍາເລັດ',
+    'Giao dịch không thành công' => 'ທຸລະກຳລົ້ມເຫລວ',
+    'Chữ ký không hợp lệ' => 'ລາຍເຊັນບໍ່ຖືກຕ້ອງ',
+    'Bạn có chắc chắn muốn xóa sản phẩm này không' => 'ທ່ານແນ່ໃຈບໍ່ວ່າຕ້ອງການລຶບຜະລິດຕະພັນນີ້',
+    "What’s free details" => "ລາຍລະອຽດຟຣີແມ່ນຫຍັງ",
+    'Dashboard' => 'ແຜງໜ້າປັດ',
+    'Create Category' => 'ສ້າງຫມວດຫມູ່'
 
 
 

@@ -23,7 +23,7 @@
                     </div>
 
                     <div class="search-box col-md-5">
-                        <input class="m-0" type="search" onkeyup="performSearch()" name="focus" placeholder="Search" id="inputSearch" value="">
+                        <input class="m-0" type="{{ __('home.Search for anything…') }}" onkeyup="performSearch()" name="focus" placeholder="Search" id="inputSearch" value="">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                     <div class="flex-fill">

@@ -137,8 +137,8 @@ Route::group(['prefix' => 'coupons'], function () {
     Route::get('/search', [BackendCouponController::class, 'search'])->name('coupons.clinic');
 });
 
-Route::group(['prefix' => 'qr-code'], function () {
-    Route::post('/doctor-info', [QrCodeApi::class, 'doctorInfo'])->name('qr.code.api.show.doctor.info');
+Route::group(['prefix' => 'api/qr-code'], function () {
+    Route::get('/doctor-info/{id}', [QrCodeApi::class, 'doctorInfo'])->name('qr.code.api.show.doctor.info');
 });
 
 Route::group(['prefix' => 'categories'], function () {

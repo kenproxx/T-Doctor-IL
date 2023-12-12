@@ -433,7 +433,7 @@
                                                 <div class="text-font-16 mt-4">{{ __('home.licensing unit') }} <span
                                                         class="red-color">*</span></div>
                                                 <input type="text" class="ac-email mt-2"
-                                                       placeholder="Enter keywords to search" required>
+                                                       placeholder="{{ __('home.Search for anything…') }}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6 pl-0">

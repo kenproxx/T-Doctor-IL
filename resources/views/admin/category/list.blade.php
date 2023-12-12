@@ -4,7 +4,7 @@
 @endsection
 @section('main-content')
     <h3 class="text-center">{{ __('home.Category Management') }}</h3>
-    <a href="{{ route('view.admin.category.create') }}" class="btn btn-primary mb-3">Create</a>
+    <a href="{{ route('view.admin.category.create') }}" class="btn btn-primary mb-3">{{ __('home.create') }}</a>
     <table class="table table-striped" id="tableCategoryManagement">
         <thead>
         <tr>

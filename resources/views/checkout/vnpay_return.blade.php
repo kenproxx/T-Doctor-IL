@@ -63,7 +63,7 @@
                            $formattedAmount = rtrim($formattedAmount, '.');
                            echo $formattedAmount . " VND";
                        } else {
-                           echo "Không có thông tin số tiền hợp lệ.";
+                           echo  __('home.Không có thông tin số tiền hợp lệ') .;
                        }
                        ?></label>
             </div>
@@ -79,7 +79,7 @@
                            $formattedDate = date("Y-m-d H:i:s", strtotime($vnp_PayDate));
                            echo $formattedDate;
                        } else {
-                           echo "Không có thông tin ngày giờ hợp lệ";
+                           echo __('home.Không có thông tin ngày giờ hợp lệ')"";
                        }
                        ?></label>
             </div>
@@ -101,12 +101,12 @@
                     <?php
                     if ($secureHash == $vnp_SecureHash) {
                         if ($_GET['vnp_ResponseCode'] == '00') {
-                            echo "<span style='color:blue'>GD Thanh cong</span>";
+                            echo "<span style='color:blue'>__('home.Giao dịch thành công')</span>";
                         } else {
-                            echo "<span style='color:red'>GD Khong thanh cong</span>";
+                            echo "<span style='color:red'>__('home.Giao dịch không thành công')</span>";
                         }
                     } else {
-                        echo "<span style='color:red'>Chu ky khong hop le</span>";
+                        echo "<span style='color:red'>__('home.Chữ ký không hợp lệ')</span>";
                     }
                     ?>
 

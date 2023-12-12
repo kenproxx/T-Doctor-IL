@@ -3,51 +3,51 @@
     {{ __('home.Create Category') }}
 @endsection
 @section('main-content')
-    <h3 class="text-center">Create Category</h3>
+    <h3 class="text-center"> {{ __('home.Create Category') }}</h3>
     <div class="container">
         <form>
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="name">Name</label>
+                    <label for="name">{{ __('home.Name') }}</label>
                     <input type="text" class="form-control" id="name" required>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="name_en">Name English</label>
+                    <label for="name_en">{{ __('home.name_en') }}</label>
                     <input type="text" class="form-control" id="name_en">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="name_laos">Name Laos</label>
+                    <label for="name_laos">{{ __('home.name_laos') }}</label>
                     <input type="text" class="form-control" id="name_laos">
                 </div>
             </div>
             <div class="form-group">
-                <label for="description">Description</label>
-                <input type="text" class="form-control" id="description" placeholder="Description">
+                <label for="description">{{ __('home.Description') }}</label>
+                <input type="text" class="form-control" id="description" placeholder="{{ __('home.Description') }}">
             </div>
             <div class="form-group">
-                <label for="description_en">Description English</label>
-                <input type="text" class="form-control" id="description_en" placeholder="Description English">
+                <label for="description_en">{{ __('home.Description English') }}</label>
+                <input type="text" class="form-control" id="description_en" placeholder="{{ __('home.Description English') }}">
             </div>
             <div class="form-group">
-                <label for="description_laos">Description Laos</label>
-                <input type="text" class="form-control" id="description_laos" placeholder="Description Laos">
+                <label for="description_laos">{{ __('home.Description Laos') }}</label>
+                <input type="text" class="form-control" id="description_laos" placeholder="{{ __('home.Description Laos') }}">
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="thumbnail">Thumbnail</label>
+                    <label for="thumbnail">{{ __('home.Thumbnail') }}</label>
                     <input type="file" class="form-control" id="thumbnail" required>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="parent_id">Parent</label>
+                    <label for="parent_id">{{ __('home.Parent') }}</label>
                     <select id="parent_id" class="form-select">
-                        <option value="0">Choose...</option>
+                        <option value="0">{{ __('home.Choose...') }}</option>
                         @foreach($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="status">Status</label>
+                    <label for="status">{{ __('home.Status') }}</label>
                     <select id="status" class="form-select">
                         @foreach($status as $item)
                             @if($item != 'DELETED')
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="text-center mt-3">
-                <button type="button" class="btn btn-primary" id="btnCreate">Create</button>
+                <button type="button" class="btn btn-primary" id="btnCreate">{{ __('home.create') }}</button>
             </div>
         </form>
     </div>

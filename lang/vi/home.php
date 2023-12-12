@@ -199,7 +199,7 @@ return [
     'Detailed description' => 'Miêu tả cụ thể',
     'Enter an introduction about yourself' => 'Nhập phần giới thiệu về bản thân',
     'When promoting your website and exposing the website address, use of site will be suspended' => 'Khi quảng bá trang web của bạn và để lộ địa chỉ trang web, việc sử dụng trang web sẽ bị đình chỉ',
-    'Photo' => 'hình chụp',
+    'Photo' => 'Hình chụp',
     'Chọn ảnh' => 'Chọn ảnh',
     'Please choose you advertisement plan' => 'Vui lòng chọn cho bạn kế hoạch quảng cáo',
     'Platinum' => 'Bạch kim',
@@ -429,7 +429,7 @@ return [
     'Tên người đăng ký' => 'Tên người đăng ký',
     'Thời gian bắt đầu' => 'Thời gian bắt đầu',
     'Thời gian kết thúc' => 'Thời gian kết thúc',
-    'create' => 'tạo nên',
+    'create' => 'Tạo',
     'Title Anh' => 'Tiêu đề Anh',
     'Title Lào' => 'Tiêu đề Lào',
     'Thumbnail' => 'Hình nhỏ',
@@ -632,7 +632,7 @@ return [
     'Description English' => 'Mô tả tiếng Anh',
     'Description Laos' => 'Mô tả Lào',
     'MedicalName' => 'Tên y tế',
-    'Parent' => 'Cha mẹ',
+    'Parent' => 'Chọn category cha',
     'Detail' => 'Chi tiết',
     'Xem đơn đăng ký' => 'Xem đơn đăng ký',
     'If you did not receive the email' => 'Nếu bạn không nhận được email',
@@ -644,7 +644,17 @@ return [
     'Edit Business' => 'Chỉnh sửa doanh nghiệp',
     'Category Management' => 'Quản lý danh mục',
     'Review Doctor Management' => 'Đánh giá quản lý bác sĩ',
-    'List Topic Videos' => 'Liệt kê các video chủ đề'
+    'List Topic Videos' => 'Liệt kê các video chủ đề',
+    'Không có thông tin số tiền hợp lệ' => 'Không có thông tin số tiền hợp lệ',
+    'Không có thông tin ngày giờ hợp lệ' => 'Không có thông tin ngày giờ hợp lệ',
+    'Giao dịch thành công' => 'Giao dịch thành công',
+    'Giao dịch không thành công' => 'Giao dịch không thành công',
+    'Chữ ký không hợp lệ' => 'Chữ ký không hợp lệ',
+    'Bạn có chắc chắn muốn xóa sản phẩm này không' => 'Bạn có chắc chắn muốn xóa sản phẩm này không',
+    "What’s free details" => 'Chi tiết miễn phí',
+    'Dashboard' => 'Bảng điều khiển',
+    'Create Category' => 'Tạo danh mục'
+
 
 
 
