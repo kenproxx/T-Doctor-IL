@@ -47,6 +47,8 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.textcomplete/1.8.0/jquery.textcomplete.js"></script>
 
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
 </head>
 
 <style>
@@ -125,7 +127,9 @@
 
 </body>
 @include('components.head.tinymce-config')
-<script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+@include('components.head.chat-message')
+
+@stack('scripts')
 
 <script>
     function loadingMasterPage() {

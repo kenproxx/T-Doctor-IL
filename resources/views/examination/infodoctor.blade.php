@@ -95,7 +95,7 @@
                             <span>{{ $doctor->response_rate }}%</span>
                         </div>
                         <div id="opt_btn" class="d-flex">
-                            <button>{{ __('home.Chat') }}</button>
+                            <a onclick="handleStartChatWithDoctor('{{ $doctor->id }}')"><button>{{ __('home.Chat') }}</button></a>
                             <form method="post" action="{{ route('createMeeting') }}" target="_blank">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="user_id_1"
@@ -431,7 +431,68 @@
 
                 input.value = star.checked ? value : value - 1;
             }
+
+            function handleStartChatWithDoctor(id) {
+                getMessage(id);
+                loadDisplayMessage(id);
+                showOrHiddenChat();
+            }
+
+            async function getMessage(id) {
+                let url = `{{ route('api.backend.connect.chat.getMessageByUserId', ['id' => ':id']) }}`;
+                url = url.replace(':id', id);
+                let data = [];
+
+                let result = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': accessToken
+                    },
+                })
+
+                if (result.ok) {
+                     data = await result.json();
+                    renderMessage(data);
+                }
+            }
+
+            function showOrHiddenChat() {
+                document.getElementById('chat-circle').click();
+            }
+
+            function loadDisplayMessage(id) {
+                var friendDivs = document.querySelectorAll('.friend');
+
+                friendDivs.forEach(function(div) {
+                    // Lấy giá trị data-id của từng div
+                    var dataId = div.getAttribute('data-id');
+
+                    // Kiểm tra xem data-id có bằng currentId hay không
+                    if (dataId === id) {
+                        div.click();
+                    }
+                });
+            }
+
+            function renderMessage(data) {
+                let html = '';
+                let currentUserId = '{{ Auth::check() ? Auth::user()->id : '' }}';
+                data.forEach((msg) => {
+                    let isMySeen = msg.from_user_id === currentUserId ? 'right' : '';
+
+                    html += `<div class="message ${isMySeen}">
+                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/1_copy.jpg"/>
+                        <div class="bubble">
+                            ${msg.chat_message}
+                            <div class="corner"></div>
+                        </div>
+                    </div>`
+                });
+
+                document.getElementById('chat-messages').innerHTML = html;
+            }
         </script>
+
     @endif
 @endsection
 
