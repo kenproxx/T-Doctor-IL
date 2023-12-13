@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+@php use App\Models\RoleUser; @endphp
+@php use App\Models\Role; @endphp
+    <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -64,15 +66,19 @@
         background-color: rgb(238, 238, 238);
         padding: 0 3px;
     }
+
+    ul#header-popup-message-unseen {
+        width: 330px;
+    }
 </style>
 
 @php
     //lấy ra toàn bộ role của user hiện tại
-    $roles = \App\Models\RoleUser::where('user_id', Auth::user()->id)->pluck('role_id')->toArray();
+    $roles = RoleUser::where('user_id', Auth::user()->id)->pluck('role_id')->toArray();
     $isStaff = false;
     $isNormal = false;
     foreach ($roles as $role){
-        $roleNames = \App\Models\Role::where('id', $role)->pluck('name');
+        $roleNames = Role::where('id', $role)->pluck('name');
             if ($roleNames->contains('PAITENTS')
                     || $roleNames->contains('NORMAL PEOPLE')
             ){
@@ -109,7 +115,8 @@
 
     <div class="search-bar">
         <form class="search-form d-flex align-items-center" method="POST" action="#">
-            <input type="text" name="query" placeholder="{{ __('home.Search for anything…') }}" title="Enter search keyword">
+            <input type="text" name="query" placeholder="{{ __('home.Search for anything…') }}"
+                   title="Enter search keyword">
             <button type="submit" title="Search"><i class="bi bi-search"></i></button>
         </form>
     </div><!-- End Search Bar -->
@@ -203,64 +210,12 @@
 
                 <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
                     <i class="bi bi-chat-left-text"></i>
-                    <span class="badge bg-success badge-number">3</span>
+                    <span class="badge bg-success badge-number" id="count-message-unseen"></span>
                 </a><!-- End Messages Icon -->
 
-                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                    <li class="dropdown-header">
-                        {{ __('home.You have 3 new messages') }}
-                        <a href="#"><span
-                                class="badge rounded-pill bg-primary p-2 ms-2">{{ __('home.View all') }}</span></a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
+                <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages"
+                    id="header-popup-message-unseen">
 
-                    <li class="message-item">
-                        <a href="#">
-                            <img src="{{ asset('admin/img/messages-1.jpg')}}" alt="" class="rounded-circle">
-                            <div>
-                                <h4>Maria Hudson</h4>
-                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                <p>4 hrs. ago</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="message-item">
-                        <a href="#">
-                            <img src="{{ asset('admin/img/messages-2.jpg')}}" alt="" class="rounded-circle">
-                            <div>
-                                <h4>Anna Nelson</h4>
-                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                <p>6 hrs. ago</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="message-item">
-                        <a href="#">
-                            <img src="{{ asset('admin/img/messages-3.jpg')}}" alt="" class="rounded-circle">
-                            <div>
-                                <h4>David Muldon</h4>
-                                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                <p>8 hrs. ago</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li class="dropdown-footer">
-                        <a href="#">{{ __('home.Show all messages') }}</a>
-                    </li>
 
                 </ul><!-- End Messages Dropdown Items -->
 
@@ -661,4 +616,79 @@
 </script>
 </body>
 
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.11.2/dist/echo.iife.js"></script>
+
+<script>
+    let currentId = '{{ Auth::check() ? Auth::user()->id : '' }}';
+
+    window.Pusher = Pusher;
+    window.Echo = new Echo({
+        broadcaster: 'pusher',
+        key: 'e700f994f98dbb41ea9f',
+        cluster: 'eu',
+        encrypted: true,
+    });
+
+    window.Echo.private("messages." + currentId).listen('NewMessage', function (e) {
+        if (!isApiBackendConnectChatIndex()) {
+            loadMessageUnseen();
+        }
+    });
+
+    loadMessageUnseen();
+
+    function loadMessageUnseen() {
+        $.ajax({
+            url: '{{ route('admin.list.chat.unseen') }}',
+            method: 'GET',
+            success: function (data) {
+                renderMessageUnseen(data.messages)
+            }
+        })
+    }
+
+    function isApiBackendConnectChatIndex() {
+        // Kiểm tra xem route hiện tại có phải là 'api.backend.connect.chat.index' hay không
+        return '{{ Route::currentRouteName() }}' === 'api.backend.connect.chat.index';
+    }
+
+    function renderMessageUnseen(data) {
+
+        if (data.length === 0) {
+            $('#header-popup-message-unseen').html(`<li class="dropdown-header">
+                        {{ __('home.You have no new messages') }}
+            </li>`)
+            return;
+        }
+
+        let countUnseen = data[0].total;
+        editBadgesMessageUnseen(countUnseen);
+
+        let html = '';
+        html += `<li class="dropdown-header">
+                        {{ __('home.You have ') }} ${countUnseen} {{ __(' new messages') }}
+        </li>`
+        data.forEach(function (item) {
+            html += `<li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li class="message-item">
+                        <a href="{{ route('api.backend.connect.chat.index') }}">
+                            <img src="${item.avt}" alt="" class="rounded-circle">
+                            <div>
+                                <h4>${item.name_from}</h4>
+                                <p>${item.chat_message}</p>
+                                <p>${item.timeAgo}</p>
+                            </div>
+                        </a>
+                    </li>`;
+        })
+        $('#header-popup-message-unseen').html(html);
+    }
+
+    function editBadgesMessageUnseen(countUnseen) {
+        $('#count-message-unseen').text(countUnseen);
+    }
+</script>
 </html>

@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Enums\CouponStatus;
+use App\Enums\MessageStatus;
 use App\Enums\ProductStatus;
 use App\Enums\SettingStatus;
 use App\Models\Booking;
+use App\Models\Chat;
 use App\Models\Coupon;
 use App\Models\CouponApply;
 use App\Models\ProductInfo;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use ReflectionClass;
 
 class HomeController extends Controller
 {
@@ -31,6 +34,57 @@ class HomeController extends Controller
         return view('admin.home-admin');
     }
 
+    public function listMessageUnseen()
+    {
+        // lấy tất cả tin nhắn chua doc cua user hien tai
+        $messages = Chat::where([
+            ['to_user_id', Auth::id()],
+            ['message_status', MessageStatus::UNSEEN]
+        ])->orderBy('created_at', 'desc')->get();
+        $messages->map(function ($message) use ($messages) {
+
+            $message->name_from = User::getNameByID($message->from_user_id);
+            $message->avt = User::getAvtByID($message->from_user_id);
+            $message->chat_message = $this->limitText($message->chat_message);
+            $message->timeAgo = $this->textTimeAgo($message->created_at);
+            $message->total = $messages->count();
+
+        });
+
+        return response()->json([
+            'messages' => $messages,
+        ]);
+    }
+
+    private function limitText($text, $maxLength = 255, $ellipsis = '...')
+    {
+        if (strlen($text) <= $maxLength) {
+            return $text;
+        } else {
+            return substr($text, 0, $maxLength).$ellipsis;
+        }
+    }
+
+    private function textTimeAgo($createdAt)
+    {
+        $now = now();
+        $timeDifference = $now->diffInMinutes($createdAt);
+
+        if ($timeDifference < 60) {
+            // Nếu thời gian nhỏ hơn 1 giờ
+            $timeAgo = $timeDifference.' phút trước';
+        } elseif ($timeDifference >= 60 && $timeDifference < 1440) {
+            // Nếu thời gian từ 1 giờ đến 24 giờ
+            $hours = floor($timeDifference / 60);
+            $timeAgo = $hours.' giờ trước';
+        } else {
+            // Nếu thời gian sau 24 giờ
+            $days = floor($timeDifference / 1440);
+            $timeAgo = $days.' ngày trước';
+        }
+        return $timeAgo;
+    }
+
     public function listProduct()
     {
         return view('admin.product.list-product');
@@ -38,7 +92,7 @@ class HomeController extends Controller
 
     public function listClinics()
     {
-        $reflector = new \ReflectionClass('App\Enums\TypeBusiness');
+        $reflector = new ReflectionClass('App\Enums\TypeBusiness');
         $types = $reflector->getConstants();
         return view('admin.clinic.list-clinics', compact('types'));
     }
@@ -56,7 +110,7 @@ class HomeController extends Controller
 
     public function listDoctor()
     {
-        $reflector = new \ReflectionClass('App\Enums\TypeMedical');
+        $reflector = new ReflectionClass('App\Enums\TypeMedical');
         $types = $reflector->getConstants();
         return view('admin.doctor.list-doctors', compact('types'));
     }

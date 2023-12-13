@@ -379,8 +379,6 @@
     </div>
 </div>
 
-<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.11.2/dist/echo.iife.js"></script>
 
 <script>
 
@@ -389,14 +387,6 @@
     let currentId = '{{ Auth::check() ? Auth::user()->id : '' }}';
 
     let totalMessageUnseen = 0;
-
-    window.Pusher = Pusher;
-    window.Echo = new Echo({
-        broadcaster: 'pusher',
-        key: 'e700f994f98dbb41ea9f',
-        cluster: 'eu',
-        encrypted: true,
-    });
 
     window.Echo.private("messages." + currentId).listen('NewMessage', function (e) {
         renderMessageReceive(e);
@@ -418,7 +408,6 @@
             dataType: "json",
 
             success: function (data) {
-                console.log(data)
             },
             error: function (e) {
                 console.log(e);
@@ -428,18 +417,12 @@
     }
 
     function calculateTotalMessageUnseen(e) {
-        console.log(e)
-        console.log(chatUserId)
 
         if (e.message.from === chatUserId) {
-            console.log(123)
             return;
         }
-        console.log(456)
 
         totalMessageUnseen++;
-
-        console.log('totalMessageUnseen', totalMessageUnseen)
 
         $('#totalMsgUnseen').html(totalMessageUnseen);
 
