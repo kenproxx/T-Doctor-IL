@@ -4,15 +4,7 @@
     @include('layouts.partials.header')
     @include('component.banner')
 
-    <style>
-        .text-short-description {
-            max-height: calc(3 * (2.2em));
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: pre-line;
-        }
-
-    </style>
+    <link href="{{ asset('css/whatfree.css') }}" rel="stylesheet">
     <div class="container">
         @include('What-free.header-wFree')
         <div class="clinics-list">

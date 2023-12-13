@@ -5,13 +5,7 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('home.List Booking') }}</h1>
     {{--    <a href="{{route('coupon.create.product')}}" class="btn btn-primary mb-3">Add</a>--}}
-    <style>
-        td {
-            overflow: hidden;
-            max-width: 300px;
-            height: 80px;
-        }
-    </style>
+    <link href="{{ asset('css/listbooking.css') }}" rel="stylesheet">
     <div class="">
         <table class="table table-striped">
             <thead>

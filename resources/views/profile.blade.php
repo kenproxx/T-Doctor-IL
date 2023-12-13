@@ -2,21 +2,7 @@
 @extends('layouts.admin')
 
 @section('main-content')
-
-    <style>
-        .w-icon-px {
-            width: 14px;
-        }
-
-        .avatar-user {
-            vertical-align: middle;
-            border-radius: 50% !important;
-            border: 1px solid #cccccc;
-        }
-        .input-group-text {
-            height: 100%;
-        }
-    </style>
+    <link href="{{ asset('css/profile.css') }}" rel="stylesheet">
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('home.Profile') }}</h1>
 

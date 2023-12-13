@@ -3,19 +3,11 @@
 @extends('layouts.admin')
 @section('title', 'List Coupon')
 @section('main-content')
-    <style>
-
-    </style>
+    <link href="{{ asset('css/tablistapplycoupon.css') }}" rel="stylesheet">
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('home.List Apply of Coupon') }}</h1>
 
-    <style>
-        td {
-            overflow: hidden;
-            max-width: 300px;
-            height: 80px;
-        }
-    </style>
+
     <div class="">
         <table class="table table-striped">
             <thead>

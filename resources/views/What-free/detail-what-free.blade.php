@@ -3,43 +3,7 @@
 @section('title', 'What free')
 @section('content')
 
-    <style>
-        #select-sns-apply .button {
-            float: left;
-            margin: 0 5px 0 0;
-            width: 100px;
-            height: 40px;
-            position: relative;
-            z-index: 0;
-        }
-
-        #select-sns-apply .button label,
-        #select-sns-apply .button input {
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-        }
-
-        #select-sns-apply .button input[type="radio"] {
-            opacity: 0.011;
-            z-index: 100;
-        }
-
-        #select-sns-apply .button input[type="radio"]:checked + label {
-            background: #20b8be;
-            border-radius: 4px;
-        }
-
-        #select-sns-apply .button label {
-            cursor: pointer;
-            z-index: 90;
-            line-height: 1.8em;
-        }
-
-    </style>
+    <link href="{{ asset('css/detailwhatfree.css') }}" rel="stylesheet">
     @include('layouts.partials.header')
     @include('component.banner')
     <div class="recruitment-details ">

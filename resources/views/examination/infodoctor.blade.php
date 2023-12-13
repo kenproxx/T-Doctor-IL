@@ -1,30 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Doctor Info')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-    .btn-send {
-        background: #45C3D2 !important;
-        color: #fff !important;
-    }
-
-    .btn-send:hover {
-        background: rgba(69, 195, 210, 0.66) !important;
-    }
-
-    .fa-2xl {
-        cursor: pointer;
-    }
-
-    .avt-user-review {
-        border: 1px solid #ccc;
-        border-radius: 50%;
-        width: 80px;
-    }
-
-    .checked {
-        color: #FFCF26;
-    }
-</style>
+<link href="{{ asset('css/infodoctor.css') }}" rel="stylesheet">
 @section('content')
     @include('layouts.partials.header_3')
     @include('component.banner')

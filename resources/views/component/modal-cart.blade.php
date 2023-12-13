@@ -1,37 +1,7 @@
 @php use App\Enums\TypeProductCart; @endphp
 @php use App\Models\online_medicine\ProductMedicine; @endphp
 @php use App\Models\ProductInfo;use Illuminate\Support\Facades\Auth; @endphp
-<style>
-    .change-quantity {
-        width: 100%;
-        display: flex;
-        align-items: center;
-    }
-
-    .value-button {
-        display: inline-block;
-        width: 40px;
-        text-align: center;
-        font-size: 24px;
-    }
-
-    .value-button:hover {
-        cursor: pointer;
-    }
-
-    input.number {
-        text-align: center;
-        border: none;
-        width: 40px;
-        height: 40px;
-        font-size: 18px;
-        font-weight: 800;
-    }
-
-    input:focus-visible {
-        border: none !important;
-    }
-</style>
+<link href="{{ asset('css/modalcart.css') }}" rel="stylesheet">
 <div class="modal modal-cart fade" id="modalCart" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

@@ -4,66 +4,7 @@
 @extends('layouts.master')
 @section('title', 'Home')
 @section('content')
-    <style>
-        .border-flea-market {
-            border-radius: 16px;
-            padding: 16px;
-        }
-
-        .object-fit-cover {
-            object-fit: cover;
-        }
-
-        .title-div-flea-market {
-            white-space: nowrap;
-            overflow: hidden;
-        }
-
-        .background-modal {
-            background: #FFFFFF;
-            max-height: 820px;
-            overflow-y: scroll;
-            margin: 20px;
-        }
-
-        ::-webkit-scrollbar {
-            display: none;
-        }
-
-        .border-button-close {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-        }
-
-        .border-button-close span {
-            padding: 0 5px;
-            border-radius: 32px;
-            background: #FFF;
-        }
-
-        .gm-style-iw {
-            padding: 0 !important;
-        }
-
-        button.gm-ui-hover-effect {
-            top: 10px !important;
-            right: 10px !important;
-            border-radius: 20px !important;
-            background: white !important;
-        }
-
-        .background-modal {
-            max-width: 400px;
-        }
-
-        .button-follow {
-            max-height: 30px;
-        }
-    </style>
+    <link href="{{ asset('css/home.css') }}" rel="stylesheet">
     @include('layouts.partials.header')
     @include('component.banner')
     <div>

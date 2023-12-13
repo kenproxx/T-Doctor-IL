@@ -1,8 +1,4 @@
-<style>
-    .bi-heart-fill {
-        color: red;
-    }
-</style>
+<link href="{{ asset('css/tabproductflea.css') }}" rel="stylesheet">
 <div class="img-union"><img src="{{asset('img/flea-market/platinum.png')}}" alt=""></div>
 <div class="page d-flex flex-wrap" id="productsAdsPlan1"></div>
 <div class="img-union "><img src="{{asset('img/flea-market/premium.png')}}" alt=""></div>
