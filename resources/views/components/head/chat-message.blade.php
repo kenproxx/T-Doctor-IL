@@ -1,4 +1,5 @@
 @php use Illuminate\Support\Facades\Auth; @endphp
+
 <style>
     #widget-chat #center-text {
         display: flex;
@@ -696,8 +697,26 @@
     </div>
 </div>
 
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.11.2/dist/echo.iife.js"></script>
+
 <script>
+
     let chatUserId;
+
+    let currentId = '{{ Auth::check() ? Auth::user()->id : '' }}';
+
+    window.Pusher = Pusher;
+    window.Echo = new Echo({
+        broadcaster: 'pusher',
+        key: 'e700f994f98dbb41ea9f',
+        cluster: 'eu',
+        encrypted: true,
+    });
+
+    window.Echo.private("messages." + currentId ).listen('NewMessage', function (e) {
+        renderMessageReceive(e);
+    });
 
     function genListUserWasConnect(data) {
         let html = '';
@@ -716,10 +735,23 @@
         setOnclickFriend();
     }
 
+    function renderMessageReceive(element) {
+        let html = `<div class="message">
+                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/1_copy.jpg"/>
+                        <div class="bubble">
+                            ${element.message.text}
+                            <div class="corner"></div>
+                        </div>
+                    </div>`
+        $('#chat-messages').append(html);
+        autoScrollChatBox();
+    }
+
     function setOnclickFriend() {
         $(".friend").each(function () {
             $(this).click(function () {
                 chatUserId = $(this).data('id');
+                handleStartChat(chatUserId);
 
                 var childOffset = $(this).offset();
                 var parentOffset = $(this).parent().parent().offset();
@@ -776,14 +808,13 @@
                         $('#friendslist').fadeIn();
                     }, 50);
                 });
-
+                autoScrollChatBox();
             });
         });
     }
 
     // Gắn sự kiện keyup cho input
     $('#text-chatMessage').keypress(function (event) {
-        console.log(Echo)
         // Kiểm tra xem nút nhấn có phải là Enter (mã 13) hay không
         if (event.keyCode === 13) {
             // Xử lý sự kiện khi nhấn Enter
@@ -833,7 +864,15 @@
         $('#text-chatMessage').val('');
 
         //scroll to bottom
+        autoScrollChatBox();
+    }
+
+    function autoScrollChatBox() {
         $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
+    }
+
+    function loadMessageReceive () {
+
     }
 </script>
 
@@ -987,6 +1026,49 @@
 
     });
 
+    function handleStartChat(id) {
+        getMessage(id);
+    }
+
+    async function getMessage(id) {
+        let token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
+        let accessToken = `Bearer ` + token;
+
+        let url = `{{ route('api.backend.connect.chat.getMessageByUserId', ['id' => ':id']) }}`;
+        url = url.replace(':id', id);
+        let data = [];
+
+        let result = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': accessToken
+            },
+        })
+
+        if (result.ok) {
+            data = await result.json();
+            renderMessage(data);
+        }
+    }
+
+    function renderMessage(data) {
+        let html = '';
+        let currentUserId = '{{ Auth::check() ? Auth::user()->id : '' }}';
+        data.forEach((msg) => {
+            let isMySeen = msg.from_user_id === currentUserId ? 'right' : '';
+
+            html += `<div class="message ${isMySeen}">
+                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/1_copy.jpg"/>
+                        <div class="bubble">
+                            ${msg.chat_message}
+                            <div class="corner"></div>
+                        </div>
+                    </div>`
+        });
+
+        document.getElementById('chat-messages').innerHTML = html;
+    }
+
     function getListUserWasConnect() {
         if (!'{{ Auth::check() }}') {
             return;
@@ -1003,12 +1085,12 @@
             }
         });
     }
+
     getListUserWasConnect();
 
 </script>
 
 <script>
-
 
 
 </script>

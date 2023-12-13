@@ -330,6 +330,11 @@ import Pusher from 'pusher-js';
 
 window.Pusher = Pusher;
 
+window.pusher = new Pusher('3ac4f810445d089829e8', {
+    cluster: 'ap1', // specify your cluster here
+    encrypted: true
+});
+
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: process.env.MIX_PUSHER_APP_KEY,
