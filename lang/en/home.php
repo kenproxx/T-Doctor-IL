@@ -425,7 +425,7 @@ return [
     'Bạn có chắc chắn muốn thay đổi không' => 'Are you sure you want to change',
     'List Booking' => 'List Booking',
     'Người đăng ký' => 'Subscribers',
-    'giờ vào' => 'time to enter',
+    'giờ vào' => 'Time to enter',
     'Trạng thái' => 'Status',
     'Tên người đăng ký' => 'Name of registrant',
     'Thời gian bắt đầu' => 'Start time',
@@ -533,7 +533,7 @@ return [
     'Short Description' => 'Short Description',
     'Loại' => 'Type',
     'News Events' => 'News Events',
-    'người tạo' => 'creator',
+    'người tạo' => 'Creator',
     'List Selling/Buying' => 'List Selling/Buying',
     'Create Selling/Buying' => 'Create Selling/Buying',
     'Brand Name English' => 'Brand Name English',
@@ -552,8 +552,8 @@ return [
     'List Service Clinics' => 'List Service Clinics',
     'List service of clinic pharmacy' => 'List service of clinic pharmacy',
     'Sửa' => 'Fix',
-    'logo' => 'logo',
-    'favicon' => 'favicon',
+    'logo' => 'Logo',
+    'favicon' => 'Favicon',
     'Banner quảng cáo' => 'Banner advertising',
     'Địa chỉ' => 'Address',
     'List Staff' => 'List Staff',
@@ -639,7 +639,7 @@ return [
     'Xem đơn đăng ký' => 'See application registration',
     'If you did not receive the email' => 'If you did not receive the email',
     'Doctor Information QrCode' => 'Doctor Information QrCode',
-    'Reviews Clinic/Hospital/Pharmacy' => 'home.Reviews Clinic/Hospital/Pharmacy',
+    'Reviews Clinic/Hospital/Pharmacy' => 'Reviews Clinic/Hospital/Pharmacy',
     'Reviews Doctor' => 'Reviews Doctor',
     'Short Videos' => 'Short Videos',
     'Topic Videos' => 'Topic Videos',
@@ -655,7 +655,9 @@ return [
     'Bạn có chắc chắn muốn xóa sản phẩm này không' => 'Are you sure you want to delete this product',
     "What’s free details" => "What’s free details",
     'Create Category' => 'Create Category',
-    'Toàn quốc' => 'Nationwide'
+    'Toàn quốc' => 'Nationwide',
+    'chat message' => 'Chat message',
+    'ChatBot' => 'ChatBot'
 
 
 
