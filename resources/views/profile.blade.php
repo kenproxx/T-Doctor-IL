@@ -467,6 +467,18 @@
                                                value="{{$doctor->year_of_experience}}">
                                     </div>
                                 </div>
+                            <div class="row">
+                                <div class="form-element">
+                                    <input name="prescription" type="checkbox" id="prescription" value="{{ $doctor->prescription == null ? '0' : '1' }}" {{ $doctor->prescription == null ? '' : 'checked' }} >
+                                    <label
+                                        for="prescription">{{ __('home.prescription') }}</label>
+                                </div>
+                                <div class="form-element">
+                                    <input name="free" type="checkbox" id="free" value="{{ $doctor->free == null ? '1' : '0' }}" {{ $doctor->free == null ? '' : 'checked' }}>
+                                    <label
+                                        for="free">{{ __('home.free') }}</label>
+                                </div>
+                            </div>
                                 <div class="form-group">
                                     <label for="apply_show">{{ __('home.Apply Show') }}</label>
                                     <input type="text" class="form-control" id="apply_show" name="apply_show" disabled>
@@ -750,5 +762,32 @@
 
         }
     </script>
+    <script>
+        $( document ).ready(function() {
+            document.getElementById('prescription').addEventListener('change', function() {
+                if (this.checked) {
+                    this.value = 1;
+                } else {
+                    this.value = 2;
+                }
 
+                var freeCheckbox = document.getElementById('free');
+                var freeValue = freeCheckbox.checked ? 1 : 0;
+
+            });
+
+            document.getElementById('free').addEventListener('change', function() {
+                if (this.checked) {
+                    this.value = 1;
+                } else {
+                    this.value = 0;
+                }
+
+                var prescriptionCheckbox = document.getElementById('prescription');
+                var prescriptionValue = prescriptionCheckbox.checked ? 1 : 2;
+
+            });
+
+        });
+    </script>
 @endsection

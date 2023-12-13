@@ -629,6 +629,16 @@
                                             <input id="email" name="email" type="email" placeholder="exmaple@gmail.com"
                                                    required>
                                         </div>
+                                        <div class="form-element">
+                                            <input name="prescription" type="checkbox" value="1">
+                                            <label
+                                                for="prescription">{{ __('home.prescription') }}</label>
+                                        </div>
+                                        <div class="form-element">
+                                            <input name="free" type="checkbox" value="1">
+                                            <label
+                                                for="free">{{ __('home.free') }}</label>
+                                        </div>
 
                                         <div class="form-element">
                                             <label for="password">{{ __('home.Password') }}</label>
