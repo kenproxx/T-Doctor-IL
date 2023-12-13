@@ -643,7 +643,9 @@ return [
     "What’s free details" => "ລາຍລະອຽດຟຣີແມ່ນຫຍັງ",
     'Dashboard' => 'ແຜງໜ້າປັດ',
     'Create Category' => 'ສ້າງຫມວດຫມູ່',
-    'Toàn quốc' => 'ທົ່ວປະເທດ'
+    'Toàn quốc' => 'ທົ່ວປະເທດ',
+    'chat message' => 'ຂໍ້ຄວາມສົນທະນາ',
+    'ChatBot' => 'Chat Bot'
 
 
 

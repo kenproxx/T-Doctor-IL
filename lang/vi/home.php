@@ -656,7 +656,9 @@ return [
     "What’s free details" => 'Chi tiết miễn phí',
     'Dashboard' => 'Bảng điều khiển',
     'Create Category' => 'Tạo danh mục',
-    'Toàn quốc' => 'Toàn quốc'
+    'Toàn quốc' => 'Toàn quốc',
+    'chat message' => 'Tin nhắn trò chuyện',
+    'ChatBot' => 'Bot trò chuyện'
 
 
 
