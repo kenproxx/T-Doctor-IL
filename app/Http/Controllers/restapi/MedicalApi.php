@@ -45,34 +45,40 @@ class MedicalApi extends Controller
         $fullTime = $request->input('fulltime');
         $experience = $request->input('experience');
         $type = $request->input('type');
-        $medicals = $this->processSearchMedical($type, $star, $experience);
+        $free = $request->input('free');
+        $prescription = $request->input('prescription');
+        $medicals = $this->processSearchMedical($type, $star, $experience, $free, $prescription);
         return response()->json($medicals);
     }
 
-    private function processSearchMedical($type, $star, $experience)
+    private function processSearchMedical($type, $star, $experience, $prescription, $free)
     {
         if (!$type) {
             $type = TypeMedical::DOCTORS;
         }
-        $query = DB::table('users')
-            ->where('users.member', $type)
-            ->where('users.status', UserStatus::ACTIVE);
+
+        $query = User::where('member', $type)
+            ->where('status', UserStatus::ACTIVE);
+
+        if ($prescription !== null) {
+            $query->where('prescription', $prescription);
+        }
+
+        if ($free !== null) {
+            $query->where('free', $free);
+        }
 
         if ($experience) {
             $aboutYear = explode('-', $experience);
-            $minYear = $aboutYear[0];
-            $maxYear = $aboutYear[1];
-            $query->whereBetween('users.year_of_experience', [$minYear, $maxYear]);
+            $query->whereBetween('year_of_experience', [$aboutYear[0], $aboutYear[1]]);
         }
 
         if ($star) {
             $aboutStar = explode('-', $star);
-            $minStar = $aboutStar[0];
-            $maxStar = $aboutStar[1];
-            $query->whereBetween('users.average_star', [$minStar, $maxStar]);
+            $query->whereBetween('average_star', [$aboutStar[0], $aboutStar[1]]);
         }
 
-        $result = $query->orderBy('users.id', 'desc')->get();
+        $result = $query->orderByDesc('id')->get();
         return $result;
     }
 }

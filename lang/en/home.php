@@ -1,5 +1,7 @@
 <?php
 return [
+    'prescription' => 'rescription ?',
+    'free' => 'Free ?',
     'list-departments' => "List Departments",
     'add-new-department' => 'Add new department',
     'departments' => 'Departments',

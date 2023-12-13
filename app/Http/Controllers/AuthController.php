@@ -182,6 +182,8 @@ class AuthController extends Controller
                 $user->hospital = $hospital ?? '';
                 $user->specialty = $specialized_services ?? '';
                 $user->service = $services_info ?? '';
+                $user->prescription = $request->input('prescription');
+                $user->free = $request->input('free');
             } else {
                 $user->name = '';
                 $user->phone = '';

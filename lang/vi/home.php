@@ -1,5 +1,7 @@
 <?php
 return [
+    'prescription' => 'Kê đơn thuốc trực tuyến ?',
+    'free' => 'Tư vấn miễn phí ?',
     'list-departments' => "Danh sách chuyên khoa",
     'add-new-department' => 'Thêm mới chuyên khoa',
     'departments' => 'Chuyên khoa',
