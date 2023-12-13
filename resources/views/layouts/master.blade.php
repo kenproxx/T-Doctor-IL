@@ -129,8 +129,6 @@
 @include('components.head.tinymce-config')
 @include('components.head.chat-message')
 
-@stack('scripts')
-
 <script>
     function loadingMasterPage() {
         let overlay = document.getElementsByClassName('loading-overlay-master')[0]
