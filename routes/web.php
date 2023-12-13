@@ -192,6 +192,8 @@ Route::group(['prefix' => 'address'], function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('admin/home', [HomeController::class, 'admin'])->name('admin.home');
 
+    Route::get('admin/chat-unseen', [HomeController::class, 'listMessageUnseen'])->name('admin.list.chat.unseen');
+
     Route::post('/save-user-login-social', [AuthSocialController::class, 'saveUser'])->name('save.user.login.social');
 
     Route::get('profile', [ProfileController::class, 'index'])->name('profile');
