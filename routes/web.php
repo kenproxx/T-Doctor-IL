@@ -285,6 +285,8 @@ Route::middleware(['auth'])->group(function () {
                 ->name('api.backend.connect.chat.getListUserWasConnect');
             Route::get('getMessageByUserId/{id}', [WidgetChatController::class, 'getMessageByUserId'])
                 ->name('api.backend.connect.chat.getMessageByUserId');
+            Route::get('seen-message/{id}', [WidgetChatController::class, 'handleSeenMessage'])
+                ->name('api.backend.connect.chat.seen-message');
         });
     });
 

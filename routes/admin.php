@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\backend\BackendNewEventController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\restapi\admin\AdminTopicVideoApi;
 use App\Http\Controllers\restapi\admin\AminServiceClinicApi;
 use Illuminate\Support\Facades\Route;
