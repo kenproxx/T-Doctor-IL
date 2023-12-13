@@ -1,12 +1,4 @@
-<style>
-    .fa-2xl {
-        /*color: #FFCF26;*/
-        cursor: pointer;
-    }
-    .checked {
-        color: #fac325;
-    }
-</style>
+<link href="{{ asset('css/tabcreatereviewstore.css') }}" rel="stylesheet">
 <div class="recruitment-details ">
     <div class="container-fluid">
         <div class="recruitment-details--title"><a href="{{route('flea.market.product.shop.info',$id)}}"><i

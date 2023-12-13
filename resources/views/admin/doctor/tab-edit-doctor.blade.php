@@ -6,38 +6,7 @@
     {{ __('home.Edit Product') }}
 @endsection
 @section('main-content')
-    <style>
-        .list-apply {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-        }
-
-        .list-apply li {
-            margin-right: 20px; /* Adjust as needed */
-        }
-
-        .list-apply li:last-child {
-            margin-right: 0;
-        }
-
-        .new-select {
-            display: flex;
-            align-items: center;
-        }
-
-        .new-select input {
-            margin-right: 5px; /* Adjust as needed */
-        }
-
-        .new-select label {
-            margin-top: 10px;
-        }
-
-        /* Add more styles as needed */
-
-    </style>
+    <link href="{{ asset('css/tabeditdoctor.css') }}" rel="stylesheet">
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('home.Edit Product') }}</h1>
     @if (session('success'))

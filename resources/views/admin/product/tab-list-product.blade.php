@@ -1,10 +1,4 @@
-<style>
-    td {
-        overflow: hidden;
-        max-width: 300px;
-        height: 80px;
-    }
-</style>
+<link href="{{ asset('css/tablistproduct.css') }}" rel="stylesheet">
 <div class="">
     <table class="table table-striped">
         <thead>

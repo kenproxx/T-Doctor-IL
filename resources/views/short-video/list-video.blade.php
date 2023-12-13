@@ -1,18 +1,7 @@
 @extends('layouts.master')
 @section('title', 'Short Videos')
 @section('content')
-    <style>
-        .user-avt {
-            border: 1px solid #ccc;
-            border-radius: 50px;
-            max-width: 100px;
-        }
-
-        video {
-            max-width: 50%;
-            height: auto;
-        }
-    </style>
+    <link href="{{ asset('css/listvideo.css') }}" rel="stylesheet">
     @include('layouts.partials.header')
     @include('component.banner')
     <div class="container">

@@ -4,12 +4,8 @@
     @include('layouts.partials.header_3')
     @include('component.banner')
 
-    <style>
-        .button_create_question {
-            padding: 10px 110px;
-            display: flex;
-            align-items: center;
-        }
+    <link href="{{ asset('css/create.css') }}" rel="stylesheet"><style>
+
     </style>
     <div class="container">
         <form enctype="multipart/form-data">

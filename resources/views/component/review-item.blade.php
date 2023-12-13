@@ -3,14 +3,7 @@
 {{--    </p>--}}
 {{--@else--}}
     @foreach($reviewStore as $review)
-        <style>
-            .cl-yellow {
-                color: #FFC107;
-            }
-            .fa-regular {
-                color: #929292;
-            }
-        </style>
+        <link href="{{ asset('css/reviewitem.css') }}" rel="stylesheet">
         <div class="rv_item-1">
             <div class="d-flex justify-content-between rv-header align-items-center">
                 <div class="d-flex rv-header--left">

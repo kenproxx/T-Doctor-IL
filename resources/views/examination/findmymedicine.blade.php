@@ -1,36 +1,6 @@
 @extends('layouts.master')
 @section('title', 'Find By Medicine')
-<style>
-    .list-category {
-        width: 80%;
-        overflow: hidden;
-        margin: auto 8px;
-    }
-
-    .item-category {
-        cursor: pointer;
-        margin: auto 8px;
-    }
-
-    .center-container {
-        height: 60%;
-    }
-
-    .img-item-category {
-        max-width: 200px;
-        border: 1px solid #ccc;
-        border-radius: 50%;
-    }
-
-    .swiper-container {
-        width: 100%;
-        height: 250px;
-    }
-
-    .swiper-wrapper-0 {
-        z-index: 0 !important;
-    }
-</style>
+<link href="{{ asset('css/findmymedicine.css') }}" rel="stylesheet">
 @section('content')
     @include('layouts.partials.header_3')
     @include('component.banner')

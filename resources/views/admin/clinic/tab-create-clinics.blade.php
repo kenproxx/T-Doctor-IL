@@ -2,43 +2,7 @@
 @section('title')
     Create Business
 @endsection
-<style>
-    .list-department,
-    .list-symptoms,
-    .list-service {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .list-department li,
-    .list-symptoms li,
-    .list-service li {
-        margin-right: 20px; /* Adjust as needed */
-    }
-
-    .list-department li:last-child,
-    .list-symptoms li:last-child,
-    .list-service li:last-child {
-        margin-right: 0;
-    }
-
-    .new-select {
-        display: flex;
-        align-items: center;
-    }
-
-    .new-select input {
-        margin-right: 5px; /* Adjust as needed */
-    }
-
-    .new-select label {
-        margin-top: 10px;
-    }
-
-    /* Add more styles as needed */
-
-</style>
+<link href="{{ asset('css/tabcreateclinics.css') }}" rel="stylesheet">
 @section('main-content')
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('home.create') }}</h1>
