@@ -315,13 +315,11 @@ jquery("#leaveMeeting").on("click", async function() {
 window.Vue = require('vue');
 
 import ChatApp from './components/ChatApp'
-import WidgetChat from './components/WidgetChat'
 
 const app = new Vue({
     el: '#app',
     components:{
         ChatApp,
-        WidgetChat
     },
 });
 

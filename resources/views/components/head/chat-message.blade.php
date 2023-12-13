@@ -1,15 +1,6 @@
 @php use Illuminate\Support\Facades\Auth; @endphp
 
 <style>
-    #widget-chat #center-text {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-
-    }
 
     #widget-chat #chat-circle {
         position: fixed;
@@ -23,16 +14,6 @@
         padding: 28px;
         cursor: pointer;
         box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.6), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
-    }
-
-    #widget-chat .btn#my-btn {
-        background: white;
-        padding-top: 13px;
-        padding-bottom: 12px;
-        border-radius: 45px;
-        padding-right: 40px;
-        padding-left: 40px;
-        color: #5865C3;
     }
 
     #widget-chat #chat-overlay {
@@ -97,102 +78,6 @@
         z-index: -1;
     }
 
-    #widget-chat #chat-input {
-        background: #f4f7f9;
-        width: 100%;
-        position: relative;
-        height: 47px;
-        padding-top: 10px;
-        padding-right: 50px;
-        padding-bottom: 10px;
-        padding-left: 15px;
-        border: none;
-        resize: none;
-        outline: none;
-        border: 1px solid #ccc;
-        color: #888;
-        border-top: none;
-        border-bottom-right-radius: 5px;
-        border-bottom-left-radius: 5px;
-        overflow: hidden;
-    }
-
-    #widget-chat .chat-input > form {
-        margin-bottom: 0;
-    }
-
-    #widget-chat #chat-input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-        color: #ccc;
-    }
-
-    #widget-chat #chat-input::-moz-placeholder { /* Firefox 19+ */
-        color: #ccc;
-    }
-
-    #widget-chat #chat-input:-ms-input-placeholder { /* IE 10+ */
-        color: #ccc;
-    }
-
-    #widget-chat #chat-input:-moz-placeholder { /* Firefox 18- */
-        color: #ccc;
-    }
-
-    #widget-chat .chat-submit {
-        position: absolute;
-        bottom: 3px;
-        right: 10px;
-        background: transparent;
-        box-shadow: none;
-        border: none;
-        border-radius: 50%;
-        color: #5A5EB9;
-        width: 35px;
-        height: 35px;
-    }
-
-    #widget-chat .chat-logs {
-        padding: 15px;
-        height: 370px;
-        overflow-y: scroll;
-    }
-
-    #widget-chat .chat-logs::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-        background-color: #F5F5F5;
-    }
-
-    #widget-chat .chat-logs::-webkit-scrollbar {
-        width: 5px;
-        background-color: #F5F5F5;
-    }
-
-    #widget-chat .chat-logs::-webkit-scrollbar-thumb {
-        background-color: #5A5EB9;
-    }
-
-
-    @media only screen and (max-width: 500px) {
-        #widget-chat .chat-logs {
-            height: 40vh;
-        }
-    }
-
-    #widget-chat .chat-msg.user > .msg-avatar img {
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        float: left;
-        width: 15%;
-    }
-
-    #widget-chat .chat-msg.self > .msg-avatar img {
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        float: right;
-        width: 15%;
-    }
-
     #widget-chat .cm-msg-text {
         background: white;
         padding: 10px 15px 10px 15px;
@@ -204,65 +89,13 @@
         margin-bottom: 20px;
         border-radius: 30px;
     }
-
-    #widget-chat .chat-msg {
-        clear: both;
-    }
-
-    #widget-chat .chat-msg.self > .cm-msg-text {
-        float: right;
-        margin-right: 10px;
-        background: #5A5EB9;
-        color: white;
-    }
-
-    #widget-chat .cm-msg-button > ul > li {
-        list-style: none;
-        float: left;
-        width: 50%;
-    }
-
-    #widget-chat .cm-msg-button {
-        clear: both;
-        margin-bottom: 70px;
-    }
 </style>
 
 <style>
-    #widget-chat #view-code {
-        color: #89a2b5;
-        opacity: 0.7;
-        font-size: 14px;
-        text-transform: uppercase;
-        font-weight: 700;
-        text-decoration: none;
-        position: absolute;
-        top: 660px;
-        left: 50%;
-        margin-left: -50px;
-        z-index: 200;
-    }
-
-    #widget-chat #view-code:hover {
-        opacity: 1;
-    }
-
-    #widget-chat #chatbox {
-        width: 290px;
-        background: #fff;
-        border-radius: 6px;
-        overflow: hidden;
-        height: 484px;
-        position: absolute;
-        top: 200px;
-        left: 50%;
-        margin-left: -155px;
-    }
 
     #widget-chat #friendslist {
         top: 0;
         left: 0;
-        width: 290px;
         height: 484px;
     }
 
@@ -284,15 +117,6 @@
         float: left;
     }
 
-    #widget-chat .floatingImg {
-        width: 40px;
-        border-radius: 50%;
-        position: absolute;
-        top: 0;
-        left: 12px;
-        border: 3px solid #fff;
-    }
-
     #widget-chat .friend p {
         padding: 15px 0 0 0;
         float: left;
@@ -312,50 +136,7 @@
         color: #aab8c2;
     }
 
-    #widget-chat .friend .status {
-        background: #26c281;
-        border-radius: 50%;
-        width: 9px;
-        height: 9px;
-        position: absolute;
-        top: 31px;
-        right: 17px;
-    }
-
-    #widget-chat .friend .status.away {
-        background: #ffce54;
-    }
-
-    #widget-chat .friend .status.inactive {
-        background: #eaeef0;
-    }
-
-    #widget-chat #search {
-        background: #e3e9ed url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/search.png") -11px 0 no-repeat;
-        height: 60px;
-        width: 290px;
-        position: absolute;
-        bottom: 0;
-        left: 0;
-    }
-
-    #widget-chat #searchfield {
-        background: #e3e9ed;
-        margin: 21px 0 0 55px;
-        border: none;
-        padding: 0;
-        font-size: 14px;
-        font-family: "Open Sans", sans-serif;
-        font-weight: 400;
-        color: #8198ac;
-    }
-
-    #widget-chat #searchfield:focus {
-        outline: 0;
-    }
-
     #widget-chat #chatview {
-        width: 290px;
         height: 484px;
         top: 0;
         left: 0;
@@ -371,14 +152,7 @@
     }
 
     #widget-chat .p1 #profile {
-        background: #fff url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/timeline1.png") 0 0 no-repeat;
-    }
-
-    #widget-chat #profile .avatar {
-        width: 68px;
-        border: 3px solid #fff;
-        margin: 23px 0 0;
-        border-radius: 50%;
+        background: #fff url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/timeline1.png") 0 0 content-box;
     }
 
     #widget-chat #profile p {
@@ -411,7 +185,6 @@
     #widget-chat #chat-messages {
         opacity: 0;
         margin-top: 30px;
-        width: 290px;
         height: 270px;
         overflow-y: scroll;
         overflow-x: hidden;
@@ -509,9 +282,8 @@
         position: absolute;
         bottom: 0;
         right: 0px;
-        width: 290px;
+        width: 100%;
         background: #fff;
-        padding-bottm: 50px;
     }
 
     #widget-chat #sendmessage input {
@@ -562,84 +334,6 @@
         opacity: 1;
     }
 
-    #widget-chat .cx, #widget-chat .cy {
-        background: #fff;
-        position: absolute;
-        width: 0px;
-        top: 15px;
-        right: 15px;
-        height: 3px;
-        -webkit-transition: all 250ms ease-in-out;
-        -moz-transition: all 250ms ease-in-out;
-        -ms-transition: all 250ms ease-in-out;
-        -o-transition: all 250ms ease-in-out;
-        transition: all 250ms ease-in-out;
-    }
-
-    #widget-chat .cx.s1, #widget-chat .cy.s1 {
-        right: 0;
-        width: 20px;
-        -webkit-transition: all 100ms ease-out;
-        -moz-transition: all 100ms ease-out;
-        -ms-transition: all 100ms ease-out;
-        -o-transition: all 100ms ease-out;
-        transition: all 100ms ease-out;
-    }
-
-    #widget-chat .cy.s2 {
-        -ms-transform: rotate(50deg);
-        -webkit-transform: rotate(50deg);
-        transform: rotate(50deg);
-        -webkit-transition: all 100ms ease-out;
-        -moz-transition: all 100ms ease-out;
-        -ms-transition: all 100ms ease-out;
-        -o-transition: all 100ms ease-out;
-        transition: all 100ms ease-out;
-    }
-
-    #widget-chat .cy.s3 {
-        -ms-transform: rotate(45deg);
-        -webkit-transform: rotate(45deg);
-        transform: rotate(45deg);
-        -webkit-transition: all 100ms ease-out;
-        -moz-transition: all 100ms ease-out;
-        -ms-transition: all 100ms ease-out;
-        -o-transition: all 100ms ease-out;
-        transition: all 100ms ease-out;
-    }
-
-    #widget-chat .cx.s1 {
-        right: 0;
-        width: 20px;
-        -webkit-transition: all 100ms ease-out;
-        -moz-transition: all 100ms ease-out;
-        -ms-transition: all 100ms ease-out;
-        -o-transition: all 100ms ease-out;
-        transition: all 100ms ease-out;
-    }
-
-    #widget-chat .cx.s2 {
-        -ms-transform: rotate(140deg);
-        -webkit-transform: rotate(140deg);
-        transform: rotate(140deg);
-        -webkit-transition: all 100ms ease-out;
-        -moz-transition: all 100ms ease-out;
-        -ms-transition: all 100 ease-out;
-        -o-transition: all 100ms ease-out;
-        transition: all 100ms ease-out;
-    }
-
-    #widget-chat .cx.s3 {
-        -ms-transform: rotate(135deg);
-        -webkit-transform: rotate(135deg);
-        transform: rotate(135deg);
-        -webkit-transition: all 100 ease-out;
-        -moz-transition: all 100ms ease-out;
-        -ms-transition: all 100ms ease-out;
-        -o-transition: all 100ms ease-out;
-        transition: all 100ms ease-out;
-    }
-
     #widget-chat #chatview, #widget-chat #sendmessage {
         overflow: hidden;
         border-radius: 6px;
@@ -660,31 +354,19 @@
         </div>
         <div class="chat-box-body">
             <div id="friendslist">
-
-                <div id="friends">
-
-                    <div id="search">
-                        <input type="text" id="searchfield" value="Search contacts..."/>
-                    </div>
-
-                </div>
-
+                <div id="friends"></div>
             </div>
 
             <div id="chatview" class="p1">
                 <div id="profile">
-
                     <div id="close">
-                        <div class="cy"></div>
-                        <div class="cx"></div>
+                        <i class="fa-solid fa-x"></i>
                     </div>
 
                     <p></p>
                     <span></span>
                 </div>
-                <div id="chat-messages">
-
-                </div>
+                <div id="chat-messages"></div>
 
                 <div id="sendmessage">
                     <input type="text" value="Send message..." id="text-chatMessage"/>
@@ -714,7 +396,7 @@
         encrypted: true,
     });
 
-    window.Echo.private("messages." + currentId ).listen('NewMessage', function (e) {
+    window.Echo.private("messages." + currentId).listen('NewMessage', function (e) {
         renderMessageReceive(e);
     });
 
@@ -759,7 +441,6 @@
                 var clone = $(this).find('img').eq(0).clone();
                 var top = childTop + 12 + "px";
 
-                $(clone).css({'top': top}).addClass("floatingImg").appendTo("#chatbox");
 
                 setTimeout(function () {
                     $("#profile p").addClass("animate");
@@ -767,20 +448,7 @@
                 }, 100);
                 setTimeout(function () {
                     $("#chat-messages").addClass("animate");
-                    $('.cx, .cy').addClass('s1');
-                    setTimeout(function () {
-                        $('.cx, .cy').addClass('s2');
-                    }, 100);
-                    setTimeout(function () {
-                        $('.cx, .cy').addClass('s3');
-                    }, 200);
                 }, 150);
-
-                $('.floatingImg').animate({
-                    'width': "68px",
-                    'left': '108px',
-                    'top': '20px'
-                }, 200);
 
                 var name = $(this).find("p strong").html();
                 var email = $(this).find("p span").html();
@@ -794,14 +462,6 @@
 
                 $('#close').unbind("click").click(function () {
                     $("#chat-messages, #profile, #profile p").removeClass("animate");
-                    $('.cx, .cy').removeClass("s1 s2 s3");
-                    $('.floatingImg').animate({
-                        'width': "40px",
-                        'top': top,
-                        'left': '12px'
-                    }, 200, function () {
-                        $('.floatingImg').remove()
-                    });
 
                     setTimeout(function () {
                         $('#chatview').fadeOut();
@@ -871,116 +531,10 @@
         $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
     }
 
-    function loadMessageReceive () {
-
-    }
 </script>
 
 <script>
     $(function () {
-        var INDEX = 0;
-        $("#chat-submit").click(function (e) {
-            e.preventDefault();
-            var msg = $("#chat-input").val();
-            if (msg.trim() == "") {
-                return false;
-            }
-            generate_message(msg, "self");
-            var buttons = [
-                {
-                    name: "Existing User",
-                    value: "existing"
-                },
-                {
-                    name: "New User",
-                    value: "new"
-                }
-            ];
-            setTimeout(function () {
-                generate_message(msg, "user");
-            }, 1000);
-        });
-
-        function generate_message(msg, type) {
-            INDEX++;
-            var str = "";
-            str += "<div id='cm-msg-" + INDEX + "' class=\"chat-msg " + type + '">';
-            str += '          <span class="msg-avatar">';
-            str +=
-                '            <img src="https://image.crisp.im/avatar/operator/196af8cc-f6ad-4ef7-afd1-c45d5231387c/240/?1483361727745">';
-            str += "          </span>";
-            str += '          <div class="cm-msg-text">';
-            str += msg;
-            str += "          </div>";
-            str += "        </div>";
-            $(".chat-logs").append(str);
-            $("#cm-msg-" + INDEX)
-                .hide()
-                .fadeIn(300);
-            if (type == "self") {
-                $("#chat-input").val("");
-            }
-            $(".chat-logs")
-                .stop()
-                .animate({scrollTop: $(".chat-logs")[0].scrollHeight}, 1000);
-        }
-
-        function generate_button_message(msg, buttons) {
-            /* Buttons should be object array
-              [
-                {
-                  name: 'Existing User',
-                  value: 'existing'
-                },
-                {
-                  name: 'New User',
-                  value: 'new'
-                }
-              ]
-            */
-            INDEX++;
-            var btn_obj = buttons
-                .map(function (button) {
-                    return (
-                        '              <li class="button"><a href="javascript:;" class="btn btn-primary chat-btn" chat-value="' +
-                        button.value +
-                        '">' +
-                        button.name +
-                        "</a></li>"
-                    );
-                })
-                .join("");
-            var str = "";
-            str += "<div id='cm-msg-" + INDEX + '\' class="chat-msg user">';
-            str += '          <span class="msg-avatar">';
-            str +=
-                '            <img src="https://image.crisp.im/avatar/operator/196af8cc-f6ad-4ef7-afd1-c45d5231387c/240/?1483361727745">';
-            str += "          </span>";
-            str += '          <div class="cm-msg-text">';
-            str += msg;
-            str += "          </div>";
-            str += '          <div class="cm-msg-button">';
-            str += "            <ul>";
-            str += btn_obj;
-            str += "            </ul>";
-            str += "          </div>";
-            str += "        </div>";
-            $(".chat-logs").append(str);
-            $("#cm-msg-" + INDEX)
-                .hide()
-                .fadeIn(300);
-            $(".chat-logs")
-                .stop()
-                .animate({scrollTop: $(".chat-logs")[0].scrollHeight}, 1000);
-            $("#chat-input").attr("disabled", true);
-        }
-
-        $(document).delegate(".chat-btn", "click", function () {
-            var value = $(this).attr("chat-value");
-            var name = $(this).html();
-            $("#chat-input").attr("disabled", false);
-            generate_message(name, "self");
-        });
 
         $("#chat-circle").click(function () {
             $("#chat-circle").toggle("scale");
@@ -999,18 +553,6 @@
 
         var preloadbg = document.createElement("img");
         preloadbg.src = "https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/timeline1.png";
-
-        $("#searchfield").focus(function () {
-            if ($(this).val() == "Search contacts...") {
-                $(this).val("");
-            }
-        });
-        $("#searchfield").focusout(function () {
-            if ($(this).val() == "") {
-                $(this).val("Search contacts...");
-
-            }
-        });
 
         $("#sendmessage input").focus(function () {
             if ($(this).val() == "Send message...") {
@@ -1087,11 +629,6 @@
     }
 
     getListUserWasConnect();
-
-</script>
-
-<script>
-
 
 </script>
 

@@ -125,7 +125,8 @@
 
 </body>
 @include('components.head.tinymce-config')
-@include('components.head.chat-message')
+
+@includeWhen(Auth::check(),'components.head.chat-message' )
 
 <script>
     function loadingMasterPage() {
