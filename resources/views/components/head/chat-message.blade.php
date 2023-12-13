@@ -349,7 +349,6 @@
 
     <div class="chat-box">
         <div class="chat-box-header">
-            ChatBot
             <span class="chat-box-toggle"><i class="fa-solid fa-x"></i></span>
         </div>
         <div class="chat-box-body">
@@ -379,6 +378,8 @@
     </div>
 </div>
 
+<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.11.2/dist/echo.iife.js"></script>
 
 <script>
 
@@ -443,6 +444,18 @@
 
     function genListUserWasConnect(data) {
         let html = '';
+
+        if (data.length == 0) {
+            // html hiển thị "Bạn chưa chat với bác sĩ nào"
+
+            html = `<p>
+                            <strong>Bạn chưa chat với bác sĩ nào</strong>
+                        </p>`;
+            $('#friends').html(html);
+
+            return;
+        }
+
         $.each(data, function (index, item) {
             let countUnseen = item.count_unread_message;
             if (countUnseen === 0) {
@@ -542,6 +555,7 @@
     // Gắn sự kiện keyup cho input
     $('#text-chatMessage').keypress(function (event) {
         // Kiểm tra xem nút nhấn có phải là Enter (mã 13) hay không
+        console.log(event.keyCode)
         if (event.keyCode === 13) {
             // Xử lý sự kiện khi nhấn Enter
             sendMessageChatWidget();
@@ -664,6 +678,10 @@
         let html = '';
         let currentUserId = '{{ Auth::check() ? Auth::user()->id : '' }}';
         data.forEach((msg) => {
+            if (!msg.chat_message) {
+                return;
+            }
+
             let isMySeen = msg.from_user_id === currentUserId ? 'right' : '';
 
             html += `<div class="message ${isMySeen}">

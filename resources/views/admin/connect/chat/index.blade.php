@@ -25,7 +25,6 @@
             // loadChatUser();
         });
 
-
         function loadChatUser() {
             let id = '{{ $id }}';
             if (!id) {
@@ -45,9 +44,7 @@
                     console.log(error);
                 }
             });
-
         }
-
     </script>
 
 @endsection

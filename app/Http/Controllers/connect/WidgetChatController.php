@@ -67,14 +67,29 @@ class WidgetChatController extends Controller
 
     public function getMessageByUserId($id)
     {
-        // lấy danh sách user đã kết nối với user hiện tại qua bảng chat
+        // Lấy danh sách user đã kết nối với user hiện tại qua bảng chat
         $currentUserId = auth()->user()->id;
-        $listMessageByUser = Chat::where(function ($query) use ($currentUserId, $id) {
-            $query->where([['from_user_id', $currentUserId], ['to_user_id', $id]])->orWhere([
-                ['from_user_id', $id],
-                ['to_user_id', $currentUserId]
+
+        $listMessageByUser = Chat::where([
+            ['from_user_id', $currentUserId],
+            ['to_user_id', $id]
+        ])->orWhere([
+            ['from_user_id', $id],
+            ['to_user_id', $currentUserId]
+        ])->get();
+
+        if ($listMessageByUser->isEmpty()) {
+            // Nếu danh sách trống, tạo một bản ghi chat mới
+            $newChat = Chat::create([
+                'from_user_id' => $currentUserId,
+                'to_user_id' => $id,
+                'chat_message' => '',
+                'message_status' => MessageStatus::SEEN
             ]);
-        })->get();
+
+            // Gọi lại hàm để lấy danh sách message sau khi đã tạo
+            return $this->getMessageByUserId($id);
+        }
 
         return response()->json($listMessageByUser);
     }

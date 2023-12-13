@@ -9,6 +9,7 @@ use App\Models\Chat;
 use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ContactController extends Controller
@@ -17,9 +18,21 @@ class ContactController extends Controller
     {
         $contacts = User::where('id', '!=', $id)->get();
 
+        $listUserWasConnect = Chat::where('to_user_id', $id)
+            ->orWhere('from_user_id', $id)
+            ->get(['from_user_id', 'to_user_id'])
+            ->toArray();
+
+        $uniqueUserIds = array_unique(array_merge(array_column($listUserWasConnect, 'from_user_id'), array_column($listUserWasConnect, 'to_user_id')));
+
+        $uniqueUserIds = array_diff($uniqueUserIds, [$id]);
+
+        $listContact = User::whereIn('id', $uniqueUserIds)->get();
+
         $unreadIds = Message::select(DB::raw(' `from` as sender_id, count(`from`) as messages_count'))->where('to',
                 $id)->where('read', false)->groupBy('from')->get();
-        $contacts = $contacts->map(function ($contact) use ($unreadIds) {
+
+        $contacts = $listContact->map(function ($contact) use ($unreadIds) {
             $contactUnread = $unreadIds->where('sender_id', $contact->id)->first();
             $contact->unread = $contactUnread ? $contactUnread->messages_count : 0;
             return $contact;
