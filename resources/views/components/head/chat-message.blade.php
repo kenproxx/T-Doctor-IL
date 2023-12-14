@@ -51,6 +51,13 @@
 
     let totalMessageUnseen = 0;
 
+    window.Echo = new Echo({
+        broadcaster: 'pusher',
+        key: 'e700f994f98dbb41ea9f',
+        cluster: 'eu',
+        encrypted: true,
+    });
+
     window.Echo.private("messages." + currentId).listen('NewMessage', function (e) {
         renderMessageReceive(e);
         handleSeenMessage();
@@ -345,8 +352,9 @@
 
             let isMySeen = msg.from_user_id === currentUserId ? 'right' : '';
 
+
             html += `<div class="message ${isMySeen}">
-                        <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/1_copy.jpg"/>
+                        <img src="${msg.from_avatar}"/>
                         <div class="bubble">
                             ${msg.chat_message}
                             <div class="corner"></div>

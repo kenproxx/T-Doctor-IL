@@ -78,6 +78,11 @@ class WidgetChatController extends Controller
             ['to_user_id', $currentUserId]
         ])->get();
 
+        $listMessageByUser = $listMessageByUser->map(function ($item) {
+            $item->from_avatar = User::getAvtByID($item->from_user_id);
+            return $item;
+        });
+
         if ($listMessageByUser->isEmpty()) {
             // Nếu danh sách trống, tạo một bản ghi chat mới
             $newChat = Chat::create([
