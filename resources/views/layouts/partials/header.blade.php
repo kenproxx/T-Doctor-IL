@@ -1,4 +1,4 @@
-@php use App\Enums\Role;use App\Enums\TypeTimeWork;use App\Http\Middleware\MedicalPermission;use Illuminate\Support\Facades\Auth; @endphp
+@php use App\Enums\CommonType;use App\Enums\Role;use App\Enums\TypeTimeWork;use App\Http\Middleware\MedicalPermission;use Illuminate\Support\Facades\Auth; @endphp
 
 <link href="{{ asset('css/header.css') }}" rel="stylesheet">
 <header class="container">
@@ -545,9 +545,9 @@
                                 <form id="msform">
                                     <!-- progressbar -->
                                     <ul id="progressbar">
-                                        <li class="active" id="account"><strong>Account</strong></li>
-                                        <li id="personal"><strong>Personal</strong></li>
-                                        <li id="confirm"><strong>Finish</strong></li>
+                                        <li class="active" id="account"><strong>Thông tin tài khoản</strong></li>
+                                        <li id="personal"><strong>Nhập OTP</strong></li>
+                                        <li id="confirm"><strong>Hoàn thành</strong></li>
                                     </ul>
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-striped progress-bar-animated"
@@ -564,44 +564,46 @@
                                                     <h2 class="steps">Step 1 - 3</h2>
                                                 </div>
                                             </div>
-                                            <label class="fieldlabels">Email: *</label>
-                                            <select class="custom-select" name="type_account">
-                                                <option value="email">Email</option>
-                                                <option value="2">SDT</option>
+                                            <label class="fieldlabels">Tìm tài khoản của bạn</label>
+                                            <select class="custom-select" name="type_account" id="type_account"
+                                                    onchange="reloadLabel()">
+                                                <option value="{{ CommonType::EMAIL }}">Email</option>
+                                                <option value="{{ CommonType::PHONE }}">Phone</option>
                                             </select>
-                                            <label class="fieldlabels">Username: *</label>
-                                            <input type="text" class="form-control"
-                                                   name="uname"
-                                                   />
-
+                                            <label class="fieldlabels" id="label-account-info">Email: *</label>
+                                            <input type="text" required class="form-control" id="valueFindUser"
+                                            />
                                         </div>
-                                        <input type="button" name="next" class="next btn btn-primary mt-2" value="Next"/>
+                                        <input type="button" onclick="sendOTP(this)" name="next"
+                                               class="next btn btn-primary mt-2" value="Next"/>
                                     </fieldset>
                                     <fieldset>
                                         <div class="form-card">
                                             <div class="row">
                                                 <div class="col-7">
-                                                    <h2 class="fs-title">Personal Information:</h2>
+                                                    <h2 class="fs-title">Đổi mật khẩu</h2>
                                                 </div>
                                                 <div class="col-5">
                                                     <h2 class="steps">Step 2 - 3</h2>
                                                 </div>
                                             </div>
-                                            <label class="fieldlabels">First Name: *</label> <input type="text"
-                                                                                                    name="fname"
-                                                                                                    placeholder="First Name"/>
-                                            <label class="fieldlabels">Last Name: *</label> <input type="text"
-                                                                                                   name="lname"
-                                                                                                   placeholder="Last Name"/>
-                                            <label class="fieldlabels">Contact No.: *</label> <input type="text"
-                                                                                                     name="phno"
-                                                                                                     placeholder="Contact No."/>
-                                            <label class="fieldlabels">Alternate Contact No.: *</label> <input
-                                                type="text" name="phno_2" placeholder="Alternate Contact No."/>
+                                            <label class="fieldlabels">OTP</label>
+                                            <input type="number" maxlength="6" class="form-control"
+                                                   id="forget-password-otp"
+                                            />
+
+                                            <label class="fieldlabels" id="label-account-info">Mật khẩu mới</label>
+                                            <input type="password" class="form-control" id="forget-new-password"/>
+
+                                            <label class="fieldlabels" id="label-account-info">Nhập lại mật khẩu</label>
+                                            <input type="password" class="form-control" id="forget-re-new-password"/>
                                         </div>
-                                        <input type="button" name="next" class="next action-button" value="Next"/>
-                                        <input type="button" name="previous" class="previous action-button-previous"
+                                        <input type="button" name="previous" class="previous btn btn-secondary mt-2"
                                                value="Previous"/>
+                                        <input type="button" name="next" class="next btn btn-primary mt-2"
+                                               onclick="checkOTP(this)"
+                                               value="Next"/>
+
                                     </fieldset>
                                     <fieldset>
                                         <div class="form-card">
@@ -615,10 +617,6 @@
                                             </div>
                                             <br><br>
                                             <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br>
-                                            <div class="row justify-content-center">
-                                                <div class="col-3"><img src="https://i.imgur.com/GwStPmg.png"
-                                                                        class="fit-image"></div>
-                                            </div>
                                             <br><br>
                                             <div class="row justify-content-center">
                                                 <div class="col-7 text-center">
@@ -643,41 +641,136 @@
 
 {{--script modal forget password--}}
 <script>
-    $(document).ready(function () {
+    var steps = $("fieldset").length;
 
-        var current_fs, next_fs, previous_fs; //fieldsets
-        var opacity;
-        var current = 1;
-        var steps = $("fieldset").length;
+    var current_fs, next_fs, previous_fs; //fieldsets
+    var opacity;
+    var current = 1;
+    setProgressBar(current);
 
-        setProgressBar(current);
+    let isNextStep = false;
 
-        $(".next").click(function () {
+    function reloadLabel() {
+        // document.getElementById('label-account-info').innerHTML = document.getElementById('type_account').value + ': *';
+        let type = document.getElementById('type_account').value;
+        switch (type) {
+            case '{{ CommonType::EMAIL }}':
+                document.getElementById('label-account-info').innerHTML = 'Email: *';
+                // change type input
+                document.getElementById('valueFindUser').type = 'email';
+                break;
+            case '{{ CommonType::PHONE }}':
+                document.getElementById('label-account-info').innerHTML = 'Phone: *';
+                // change type input
+                document.getElementById('valueFindUser').type = 'number';
+                break;
+        }
 
-            current_fs = $(this).parent();
-            next_fs = $(this).parent().next();
+    }
+
+    function sendOTP(element) {
+        loadingMasterPage();
+
+        let value = document.getElementById('valueFindUser').value;
+        let type_account = document.getElementById('type_account').value;
+
+        let url = '{{ route('user.forget.password.send') }}';
+        let data = {
+            'type': type_account,
+            'value': value
+        };
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            dataType: 'json',
+            data: data,
+            success: function (data) {
+                loadingMasterPage();
+                goToNextStep(element);
+            },
+            error: function (data) {
+                loadingMasterPage();
+                alert(data.responseJSON);
+            }
+        });
+    }
+
+    function checkOTP(element) {
+        let otp = document.getElementById('forget-password-otp').value;
+        let value = document.getElementById('valueFindUser').value;
+        let type_account = document.getElementById('type_account').value;
+
+        let password = document.getElementById('forget-new-password').value;
+        let rePassword = document.getElementById('forget-re-new-password').value;
+
+        // check password min length 8
+        if (password.length < 8) {
+            alert('Mật khẩu phải có ít nhất 8 ký tự');
+            return;
+        }
+
+        if (password !== rePassword) {
+            alert('Mật khẩu không trùng khớp');
+            return;
+        }
+
+        loadingMasterPage();
+
+        let url = '{{ route('user.forget.password.check') }}';
+
+        let data = {
+            'type': type_account,
+            'value': value,
+            'otp': otp,
+            'password': password,
+            'rePassword': rePassword
+        };
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            dataType: 'json',
+            data: data,
+            success: function (data) {
+                goToNextStep(element)
+                loadingMasterPage();
+                alert(data);
+            },
+            error: function (data) {
+                loadingMasterPage();
+                alert(data.responseJSON);
+            }
+        });
+    }
+
+    function goToNextStep(element) {
+        current_fs = $(element).parent();
+        next_fs = $(element).parent().next();
 
 //Add Class Active
-            $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+        $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
 
 //show the next fieldset
-            next_fs.show();
+        next_fs.show();
 //hide the current fieldset with style
-            current_fs.animate({opacity: 0}, {
-                step: function (now) {
+        current_fs.animate({opacity: 0}, {
+            step: function (now) {
 // for making fielset appear animation
-                    opacity = 1 - now;
+                opacity = 1 - now;
 
-                    current_fs.css({
-                        'display': 'none',
-                        'position': 'relative'
-                    });
-                    next_fs.css({'opacity': opacity});
-                },
-                duration: 500
-            });
-            setProgressBar(++current);
+                current_fs.css({
+                    'display': 'none',
+                    'position': 'relative'
+                });
+                next_fs.css({'opacity': opacity});
+            },
+            duration: 500
         });
+        setProgressBar(++current);
+    }
+
+    $(document).ready(function () {
 
         $(".previous").click(function () {
 
@@ -707,18 +800,19 @@
             setProgressBar(--current);
         });
 
-        function setProgressBar(curStep) {
-            var percent = parseFloat(100 / steps) * curStep;
-            percent = percent.toFixed();
-            $(".progress-bar")
-                .css("width", percent + "%")
-        }
 
         $(".submit").click(function () {
             return false;
         })
 
     });
+
+    function setProgressBar(curStep) {
+        var percent = parseFloat(100 / steps) * curStep;
+        percent = percent.toFixed();
+        $(".progress-bar")
+            .css("width", percent + "%")
+    }
 
 </script>
 <script>
