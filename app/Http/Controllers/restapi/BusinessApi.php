@@ -123,12 +123,13 @@ class BusinessApi extends Controller
         $facilities = $request->input('facilities');
         $equipment = $request->input('equipment');
         $costs = $request->input('costs');
+        $aboutStar = $request->input('about-star');
 
-        $clinics = $this->getClinics($type, $symptomID, $department, $emergency, $insurance, $parking, $information, $facilities, $equipment, $costs);
+        $clinics = $this->getClinics($type, $symptomID, $department, $emergency, $insurance, $parking, $information, $facilities, $equipment, $costs, $aboutStar);
         return response()->json($clinics);
     }
 
-    private function getClinics($type, $symptomID, $department, $emergency, $insurance, $parking, $information, $facilities, $equipment, $costs)
+    private function getClinics($type, $symptomID, $department, $emergency, $insurance, $parking, $information, $facilities, $equipment, $costs, $aboutStar)
     {
         return DB::table('clinics')
             ->join('users', 'users.id', '=', 'clinics.user_id')
@@ -162,6 +163,10 @@ class BusinessApi extends Controller
             ->when(!empty($costs), function ($query) use ($costs) {
                 $aboutStar = explode(',', $costs);
                 return $query->whereBetween('costs', [$aboutStar[0], $aboutStar[1]]);
+            })
+            ->when($aboutStar, function ($query) use ($aboutStar) {
+                $star = explode('-', $aboutStar);
+                $query->whereBetween('clinics.average_star', [$star[0], $star[1]]);
             })
             ->where('clinics.status', ClinicStatus::ACTIVE)
             ->select('clinics.*', 'users.email')
