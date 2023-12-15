@@ -51,6 +51,7 @@ class VerifyCsrfToken extends Middleware
         '/api/medical-favourites/**',
         '/orders/**',
         'auth/*',
-        'medicine/search'
+        'medicine/search',
+        'forget-password/*'
     ];
 }

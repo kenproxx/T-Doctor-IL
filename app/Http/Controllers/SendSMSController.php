@@ -25,7 +25,7 @@ class SendSMSController extends Controller
         $this->unicode = '0';
     }
 
-    private function sendSMS($user_id, $to, $content)
+    public function sendSMS($user_id, $to, $content)
     {
         $SmsId = random_int(100000, 999999) . "-" . time();
         $url = "https://api.s247.vn:8443/api/sms?site=" . $this->site . "&LoginName=" . $this->loginName

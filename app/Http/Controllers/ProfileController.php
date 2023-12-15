@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CommonType;
 use App\Enums\DoctorDepartmentStatus;
 use App\Models\DoctorDepartment;
 use App\Models\Nation;
@@ -11,8 +12,10 @@ use App\Models\SocialUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -177,5 +180,143 @@ class ProfileController extends Controller
     private function isHasPhone($phone)
     {
         return User::where('phone', $phone)->where('id', '!=', Auth::id())->exists();
+    }
+
+    public function handleForgetPassword(Request $request)
+    {
+        $type = $request->input('type');
+        $value = $request->input('value');
+
+        switch ($type) {
+            case CommonType::EMAIL:
+                $validator = Validator::make(['email' => $value], [
+                    'email' => 'required|email',
+                ]);
+
+                if ($validator->fails()) {
+                    return response()->json('Invalid email format.', 422);
+                }
+
+                $user = User::where('email', $value)->first();
+
+                if (!$user) {
+                    return response()->json('Không tìm thấy user', 422);
+                }
+
+                $sendMail = $this->sendOTPEmail($value, $user);
+
+                if (!$sendMail) {
+                    return response()->json('Gửi mã OTP thất bại, thử lại', 422);
+                }
+
+                return response()->json('Gửi mã OTP thành công', 200);
+                break;
+            case CommonType::PHONE:
+                $validator = Validator::make(['phone' => $value], [
+                    'phone' => 'required|numeric|min:8',
+                ]);
+
+                if ($validator->fails()) {
+                    return response()->json('Invalid phone format.', 422);
+                }
+
+                $user = User::where('phone', $value)->first();
+
+                if (!$user) {
+                    return response()->json('Không tìm thấy user', 422);
+                }
+
+                $sendOTP = $this->sendOTPSMS($value, $user);
+
+                if ($sendOTP) {
+                    return response()->json('Gửi mã OTP thành công', 200);
+                } else {
+                    return response()->json('Gửi mã OTP thất bại, thử lại', 422);
+                }
+                break;
+
+            default:
+                return response()->json('Lỗi, thử lại', 422);
+        }
+
+    }
+
+    private function sendOTPEmail($value, $user)
+    {
+        $otp = random_int(100000, 999999);
+        $content = "Mã OTP của bạn là: ".$otp;
+
+        // lưu cache otp 5 phút
+        $key = 'otp_'.$user->id;
+        $expiresAt = now()->addMinutes(5);
+        Cache::put($key, $otp, $expiresAt);
+
+        $mailFrom = 'support.il.vietnam@gmail.com';
+        $tieuDe = 'Mã OTP';
+        $content = 'Mã OTP của bạn là: '.$otp;
+
+        (new MailController())->sendEmail($value, $mailFrom, $tieuDe, $content);
+
+        return true;
+    }
+
+    private function sendOTPSMS($value, $user)
+    {
+        $sms = new SendSMSController();
+        $otp = random_int(100000, 999999);
+        $content = "Mã OTP của bạn là: ".$otp;
+
+        // lưu cache otp 5 phút
+        $key = 'otp_'.$user->id;
+        $expiresAt = now()->addMinutes(5);
+        Cache::put($key, $otp, $expiresAt);
+
+        return $sms->sendSMS($user->id, $value, $content);
+    }
+
+    public function checkOTP(Request $request)
+    {
+        $type = $request->input('type');
+        $value = $request->input('value');
+        $otp = $request->input('otp');
+        $password = $request->input('password');
+        $rePassword = $request->input('rePassword');
+
+        if ($password != $rePassword) {
+            return response()->json('Mật khẩu không trùng khớp', 422);
+        }
+
+        $user = null;
+
+        if ($type == CommonType::PHONE) {
+            $user = User::where('phone', $value)->first();
+        } else {
+            if ($type == CommonType::EMAIL) {
+                $user = User::where('email', $value)->first();
+            }
+        }
+
+        if (!$user) {
+            return response()->json('Không tìm thấy user', 422);
+        }
+
+        //check otp với cache
+
+        $key = 'otp_'.$user->id;
+        $otpCache = Cache::get($key);
+
+        if (!$otpCache) {
+            return response()->json('OTP hết hạn, thao tác lại', 422);
+        }
+
+        if ($otpCache != $otp) {
+            return response()->json('OTP sai', 422);
+        }
+
+        $user->password = Hash::make($password);
+        $user->save();
+        Cache::forget($key);
+
+        return response()->json('Đổi mật khẩu thành công', 200);
     }
 }

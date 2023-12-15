@@ -65,6 +65,9 @@ Route::get('/login-google', [AuthSocialController::class, 'getGoogleSignInUrl'])
 Route::get('/login-google-callback', [AuthSocialController::class, 'loginCallback'])->name('login.google.callback');
 Route::get('/login-role', [AuthSocialController::class, 'chooseRole'])->name('login.social.choose.role');
 
+Route::post('forget-password/send', [ProfileController::class, 'handleForgetPassword'])->name('user.forget.password.send');
+Route::post('forget-password/check', [ProfileController::class, 'checkOTP'])->name('user.forget.password.check');
+
 Route::group(['prefix' => 'news-events'], function () {
     Route::get('', [NewEventController::class, 'index'])->name('index.new');
     Route::get('detail/{id}', [NewEventController::class, 'detail'])->name('detail.new');
