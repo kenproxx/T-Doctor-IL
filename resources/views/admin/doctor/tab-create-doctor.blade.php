@@ -87,9 +87,16 @@
                 <input class="form-control" id="passwordConfirm" name="passwordConfirm" minlength="8"
                        type="password" placeholder="********" required>
             </div>
-                        <div class="col-sm-4 d-flex justify-content-start align-items-center">
-                            <span id='message'></span>
-                        </div>
+{{--                        <div class="col-sm-4 d-flex justify-content-start align-items-center">--}}
+{{--                            <span id='message'></span>--}}
+{{--                        </div>--}}
+            <div class="form-element col-md-4">
+                <label for="workspace">Workplace</label>
+                <input class="form-control" id="workspace" type="text" name="workspace">
+            </div>
+        </div>
+        <div class="row">
+
         </div>
         <div class="row">
             <div class="form-element col-md-6">
@@ -331,7 +338,7 @@
                 };
                 const formData = new FormData();
                 const fieldNames = [
-                    "specialty", "specialty_en", "specialty_laos",
+                    "specialty", "specialty_en", "specialty_laos","workspace",
                     "service_price", "service_price_en", "service_price_laos",
                     "detail_address", "detail_address_en", "detail_address_laos",
                     "province_id", "district_id", "commune_id",

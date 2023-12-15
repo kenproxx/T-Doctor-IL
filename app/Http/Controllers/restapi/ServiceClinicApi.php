@@ -73,12 +73,14 @@ class ServiceClinicApi extends Controller
         $name_laos = $request->input('name_laos');
         $user_id = $request->input('user_id');
         $status = $request->input('status');
+        $servicePrice = $request->input('service_price');
 
         $service->name = $name;
         $service->name_en = $name_en;
         $service->name_laos = $name_laos;
         $service->user_id = $user_id;
         $service->status = $status;
+        $service->service_price = $servicePrice;
 
         return $service;
     }

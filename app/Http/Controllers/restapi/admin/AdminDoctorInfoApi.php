@@ -185,6 +185,7 @@ class AdminDoctorInfoApi extends Controller
         $detail_address_laos = $request->input('detail_address_laos');
 
         $updated_by = $request->input('updated_by');
+        $workspace = $request->input('workspace');
 
         $hospital = $request->input('hospital');
         $hospital_en = $request->input('hospital_en');
@@ -206,6 +207,7 @@ class AdminDoctorInfoApi extends Controller
         $doctor->username = $username;
         $doctor->last_name = $last_name;
         $doctor->phone = $phone;
+        $doctor->workplace = $workspace;
         $doctor->email = $email;
         if ($password) {
             $passwordHash = Hash::make($password);
