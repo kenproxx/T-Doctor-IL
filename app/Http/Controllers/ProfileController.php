@@ -26,7 +26,8 @@ class ProfileController extends Controller
         $nations = Nation::all();
         $doctor = User::where('id', Auth::user()->id)->first();
         $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
-        return view('profile', compact('roles', 'roleItem', 'isAdmin', 'socialUser', 'nations', 'doctor','departments'));
+        return view('profile',
+            compact('roles', 'roleItem', 'isAdmin', 'socialUser', 'nations', 'doctor', 'departments'));
     }
 
     public function infoUser($userId)
@@ -69,7 +70,7 @@ class ProfileController extends Controller
             'name' => 'required|string|max:255',
             'last_name' => 'nullable|string|max:255',
 
-            'email' => 'required|string|email|max:255|unique:users,email,' . Auth::user()->id,
+            'email' => 'required|string|email|max:255|unique:users,email,'.Auth::user()->id,
             'phone' => 'required|string|max:255',
 
             'address_code' => 'required|string|max:255',
@@ -99,16 +100,21 @@ class ProfileController extends Controller
         $user->email = $request->input('email');
         $user->phone = $request->input('phone');
 
+        if ($this->isHasPhone($user->phone)) {
+            toast('Error, Phone already exited!', 'error', 'top-left');
+            return back();
+        }
+
         $user->address_code = $request->input('address_code');
 
 //        $user->nation_id = $request->input('nation_id');
         $province = $request->input('province_id');
         $district = $request->input('district_id');
         $commune = $request->input('commune_id');
-        if ($district == null){
+        if ($district == null) {
             return response('Cần cập nhật địa chỉ thành phố', 400);
         }
-        if ($commune == null){
+        if ($commune == null) {
             return response('Cần cập nhật địa chỉ quận/huyện', 400);
         }
         $province_id = explode('-', $province);
@@ -145,7 +151,7 @@ class ProfileController extends Controller
         if ($request->hasFile('avt')) {
             $item = $request->file('avt');
             $itemPath = $item->store('license', 'public');
-            $img = asset('storage/' . $itemPath);
+            $img = asset('storage/'.$itemPath);
             $user->avt = $img;
         }
         $user->created_by = $request->input('created_by');
@@ -166,5 +172,10 @@ class ProfileController extends Controller
         $user->save();
 
         return redirect()->route('profile')->withSuccess('Profile updated successfully.');
+    }
+
+    private function isHasPhone($phone)
+    {
+        return User::where('phone', $phone)->where('id', '!=', Auth::id())->exists();
     }
 }
