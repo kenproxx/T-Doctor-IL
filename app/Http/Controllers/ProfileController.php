@@ -74,7 +74,7 @@ class ProfileController extends Controller
             'last_name' => 'nullable|string|max:255',
 
             'email' => 'required|string|email|max:255|unique:users,email,'.Auth::user()->id,
-            'phone' => 'required|string|max:255',
+            'phone' => 'required|string|max:255|unique:users,phone,'.Auth::user()->id,
 
             'address_code' => 'required|string|max:255',
 
@@ -102,12 +102,6 @@ class ProfileController extends Controller
 
         $user->email = $request->input('email');
         $user->phone = $request->input('phone');
-
-        if ($this->isHasPhone($user->phone)) {
-            toast('Error, Phone already exited!', 'error', 'top-left');
-            return back();
-        }
-
         $user->address_code = $request->input('address_code');
 
 //        $user->nation_id = $request->input('nation_id');
@@ -175,11 +169,6 @@ class ProfileController extends Controller
         $user->save();
 
         return redirect()->route('profile')->withSuccess('Profile updated successfully.');
-    }
-
-    private function isHasPhone($phone)
-    {
-        return User::where('phone', $phone)->where('id', '!=', Auth::id())->exists();
     }
 
     public function handleForgetPassword(Request $request)
