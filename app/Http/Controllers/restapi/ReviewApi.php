@@ -67,6 +67,17 @@ class ReviewApi extends Controller
             $review->status = ReviewStatus::APPROVED;
 
             $success = $review->save();
+
+            $listReview = Review::where('clinic_id', $clinic_id)
+                ->where('status', ReviewStatus::APPROVED)
+                ->get();
+
+            $totalReview = $listReview->count();
+            $totalStar = $listReview->sum('star');
+            $calcReview = ($totalReview > 0) ? ($totalStar / $totalReview) : 0;
+            $clinic->average_star = $calcReview;
+            $clinic->save();
+
             if ($success) {
                 return response()->json($review);
             }
