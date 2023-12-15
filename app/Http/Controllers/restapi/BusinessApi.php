@@ -159,7 +159,7 @@ class BusinessApi extends Controller
             ->when($equipment, function ($query) use ($equipment) {
                 return $query->where('equipment', 'LIKE', '%' . $equipment . '%');
             })
-            ->when($costs, function ($query) use ($costs) {
+            ->when(!empty($costs), function ($query) use ($costs) {
                 $aboutStar = explode(',', $costs);
                 return $query->whereBetween('costs', [$aboutStar[0], $aboutStar[1]]);
             })
