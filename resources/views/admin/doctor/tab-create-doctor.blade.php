@@ -122,6 +122,21 @@
         </div>
         <div class="row">
             <div class="col-sm-4">
+                <label for="about_vn">Thông tin giới thiệu (Tiếng Việt)</label>
+                <textarea class="form-control" name="about_vn" id="about_vn"></textarea>
+            </div>
+            <div class="col-sm-4">
+                <label for="about_en">Thông tin giới thiệu (Tiếng Anh)</label>
+                <textarea class="form-control" name="about_en" id="about_en"></textarea>
+            </div>
+            <div class="col-sm-4">
+                <label for="about_laos">Thông tin giới thiệu (Tiếng Lào)</label>
+                <textarea class="form-control" name="about_laos"
+                          id="about_laos"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
                 <label for="service">{{ __('home.Dịch vụ cung cấp việt') }}</label>
                 <textarea class="form-control" name="service" id="service"></textarea>
             </div>
@@ -138,17 +153,17 @@
         <div class="row">
             <div class="col-sm-4">
                 <label for="service_price">{{ __('home.Giá dịch vụ việt') }}</label>
-                <input class="form-control" type="number" name="service_price" id="service_price"
+                <input class="form-control" type="text" name="service_price" id="service_price"
                        value="">
             </div>
             <div class="col-sm-4">
                 <label for="service_price_en">{{ __('home.Giá dịch vụ anh') }}</label>
-                <input class="form-control" type="number" name="service_price_en" id="service_price_en"
+                <input class="form-control" type="text" name="service_price_en" id="service_price_en"
                        value="">
             </div>
             <div class="col-sm-4">
                 <label for="service_price_laos">{{ __('home.Giá dịch vụ lào') }}</label>
-                <input class="form-control" type="number" name="service_price_laos" id="service_price_laos"
+                <input class="form-control" type="text" name="service_price_laos" id="service_price_laos"
                        value="">
             </div>
         </div>
@@ -324,7 +339,7 @@
                     "name", "year_of_experience", "status", "department_id", "username", "email", "phone", "last_name", "password", "passwordConfirm", "member", "type"
                 ];
                 const fieldTextareaTiny = [
-                    "service", "service_en", "service_laos",
+                    "service", "service_en", "service_laos", "about_vn", "about_en", "about_laos",
                 ];
 
                 fieldNames.forEach(fieldName => {

@@ -156,6 +156,10 @@ class AdminDoctorInfoApi extends Controller
         $service_en = $request->input('service_en');
         $service_laos = $request->input('service_laos');
 
+        $about_vn = $request->input('about_vn');
+        $about_en = $request->input('about_en');
+        $about_lao = $request->input('about_laos');
+
         $service_price = $request->input('service_price');
         $service_price_en = $request->input('service_price_en');
         $service_price_laos = $request->input('service_price_laos');
@@ -222,6 +226,10 @@ class AdminDoctorInfoApi extends Controller
         $doctor->service = $service;
         $doctor->service_en = $service_en;
         $doctor->service_laos = $service_laos;
+
+        $doctor->abouts = $about_vn;
+        $doctor->abouts_en = $about_en;
+        $doctor->abouts_lao = $about_lao;
 
         $doctor->service_price = $service_price;
         $doctor->service_price_en = $service_price_en;
