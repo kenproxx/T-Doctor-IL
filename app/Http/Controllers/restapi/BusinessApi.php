@@ -116,11 +116,19 @@ class BusinessApi extends Controller
         $symptomID = $request->input('symptom');
         $type = $request->input('type');
         $department = $request->input('department');
-        $clinics = $this->getClinics($type, $symptomID, $department);
+        $emergency = $request->input('emergency');
+        $insurance = $request->input('insurance');
+        $parking = $request->input('parking');
+        $information = $request->input('information');
+        $facilities = $request->input('facilities');
+        $equipment = $request->input('equipment');
+        $costs = $request->input('costs');
+
+        $clinics = $this->getClinics($type, $symptomID, $department, $emergency, $insurance, $parking, $information, $facilities, $equipment, $costs);
         return response()->json($clinics);
     }
 
-    private function getClinics($type, $symptomID, $department)
+    private function getClinics($type, $symptomID, $department, $emergency, $insurance, $parking, $information, $facilities, $equipment, $costs)
     {
         return DB::table('clinics')
             ->join('users', 'users.id', '=', 'clinics.user_id')
@@ -132,6 +140,28 @@ class BusinessApi extends Controller
             })
             ->when($department, function ($query) use ($department) {
                 return $query->whereRaw("FIND_IN_SET(?, department) > 0", [$department]);
+            })
+            ->when($emergency, function ($query) use ($emergency) {
+                return $query->whereRaw("FIND_IN_SET(?, emergency) > 0", [$emergency]);
+            })
+            ->when($insurance, function ($query) use ($insurance) {
+                return $query->whereRaw("FIND_IN_SET(?, insurance) > 0", [$insurance]);
+            })
+            ->when($parking, function ($query) use ($parking) {
+                return $query->whereRaw("FIND_IN_SET(?, parking) > 0", [$parking]);
+            })
+            ->when($information, function ($query) use ($information) {
+                return $query->where('information', 'LIKE', '%' . $information . '%');
+            })
+            ->when($facilities, function ($query) use ($facilities) {
+                return $query->where('facilities', 'LIKE', '%' . $facilities . '%');
+            })
+            ->when($equipment, function ($query) use ($equipment) {
+                return $query->where('equipment', 'LIKE', '%' . $equipment . '%');
+            })
+            ->when($costs, function ($query) use ($costs) {
+                $aboutStar = explode(',', $costs);
+                return $query->whereBetween('costs', [$aboutStar[0], $aboutStar[1]]);
             })
             ->where('clinics.status', ClinicStatus::ACTIVE)
             ->select('clinics.*', 'users.email')
@@ -179,9 +209,11 @@ class BusinessApi extends Controller
                 /* Show symptoms*/
                 $clinic['total_symptoms'] = $symptoms->count();
                 $clinic['symptoms'] = $symptoms->toArray();
+
                 return $clinic;
             });
     }
+
 
     public function filter(Request $request)
     {

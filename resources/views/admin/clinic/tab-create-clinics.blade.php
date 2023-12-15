@@ -3,6 +3,148 @@
     Create Business
 @endsection
 <link href="{{ asset('css/tabcreateclinics.css') }}" rel="stylesheet">
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+    .dropdown {
+        position: relative;
+        margin-bottom: 20px;
+    }
+    .dropdown .dropdown-list {
+        padding: 25px 20px;
+        background: #fff;
+        position: absolute;
+        top: 50px;
+        left: 0;
+        right: 0;
+        border: 1px solid rgba(0, 0, 0, .2);
+        max-height: 223px;
+        overflow-y: auto;
+        background: #fff;
+        display: none;
+        z-index: 10;
+    }
+    .dropdown .checkbox {
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+    .dropdown .dropdown-label {
+        display: block;
+        height: 44px;
+        font-size: 16px;
+        line-height: 42px;
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, .2);
+        padding: 0 40px 0 20px;
+        cursor: pointer;
+        position: relative;
+    }
+    .dropdown .dropdown-label:before {
+        content: '▼';
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: transform 0.25s;
+        transform-origin: center center;
+    }
+    .dropdown.open .dropdown-list {
+        display: block;
+    }
+    .dropdown.open .checkbox {
+        transition: 2s opacity 2s;
+        opacity: 1;
+    }
+    .dropdown.open .dropdown-label:before {
+        transform: translateY(-50%) rotate(-180deg);
+    }
+    .checkbox {
+        margin-bottom: 20px;
+    }
+    .checkbox:last-child {
+        margin-bottom: 0;
+    }
+    .checkbox .checkbox-custom {
+        display: none;
+    }
+    .checkbox .checkbox-custom-label {
+        display: inline-block;
+        position: relative;
+        vertical-align: middle;
+        cursor: pointer;
+    }
+    .checkbox .checkbox-custom + .checkbox-custom-label:before {
+        content: '';
+        background: transparent;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
+        text-align: center;
+        width: 12px;
+        height: 12px;
+        border: 1px solid rgba(0, 0, 0, .3);
+        border-radius: 2px;
+        margin-top: -2px;
+    }
+    .checkbox .checkbox-custom:checked + .checkbox-custom-label:after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 4px;
+        height: 4px;
+        padding: 2px;
+        transform: rotate(45deg);
+        text-align: center;
+        border: solid #000;
+        border-width: 0 2px 2px 0;
+    }
+    .checkbox .checkbox-custom-label {
+        line-height: 16px;
+        font-size: 16px;
+        margin-right: 0;
+        margin-left: 0;
+        color: black;
+    }
+
+
+    .list-department,
+    .list-symptoms,
+    .list-service {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .list-department li,
+    .list-symptoms li,
+    .list-service li {
+        margin-right: 20px; /* Adjust as needed */
+    }
+
+    .list-department li:last-child,
+    .list-symptoms li:last-child,
+    .list-service li:last-child {
+        margin-right: 0;
+    }
+
+    .new-select {
+        display: flex;
+        align-items: center;
+    }
+
+    .new-select input {
+        margin-right: 5px; /* Adjust as needed */
+    }
+
+    .new-select label {
+        margin-top: 10px;
+    }
+
+    /* Add more styles as needed */
+
+</style>
 @section('main-content')
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('home.create') }}</h1>
@@ -198,6 +340,178 @@
                                                          class="form-control">
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-element">
+                        <input name="emergency" id="emergency" type="checkbox" value="1">
+                        <label for="emergency">Is there an emergency room?</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-element">
+                        <input name="insurance" id="insurance" type="checkbox" value="1">
+                        <label for="insurance">Is health insurance applicable?</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-element">
+                        <input name="parking" id="parking" type="checkbox" value="1">
+                        <label for="parking">Is there parking??</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-element">
+                        <label for="costs">Medical examination costs?</label>
+                        <input name="costs" id="costs" type="number" placeholder="Nhập chi khám chữa bệnh trung bình">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="information">Hospital information</label>
+                    <div class="dropdown" data-target="hospital_information">
+                        <label class="dropdown-label">Select Options</label>
+                        <input type="hidden" name="hospital_information" id="hospital_information" />
+                        <div class="dropdown-list">
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_01"/>
+                                <label for="checkbox-custom_01" class="checkbox-custom-label">Pediatric examination/treatment</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_02"/>
+                                <label for="checkbox-custom_02" class="checkbox-custom-label">Emergency department</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_03"/>
+                                <label for="checkbox-custom_03" class="checkbox-custom-label">Female doctor</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_04"/>
+                                <label for="checkbox-custom_04" class="checkbox-custom-label">Specialized hospital</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_05"/>
+                                <label for="checkbox-custom_05" class="checkbox-custom-label">Check health certificate</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_06"/>
+                                <label for="checkbox-custom_06" class="checkbox-custom-label">Physical examination</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_06"/>
+                                <label for="checkbox-custom_06" class="checkbox-custom-label">Rapid antigen test</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_07"/>
+                                <label for="checkbox-custom_07" class="checkbox-custom-label">PCR test</label>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="information">Hospital facilities</label>
+                    <div class="dropdown" data-target="hospital_facilities">
+                        <label class="dropdown-label">Select Options</label>
+                        <input type="hidden" name="hospital_facilities" id="hospital_facilities" />
+                        <div class="dropdown-list">
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_21"/>
+                                <label for="checkbox-custom_21" class="checkbox-custom-label">Intensive care unit</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_22"/>
+                                <label for="checkbox-custom_22" class="checkbox-custom-label">General hospital room</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_23"/>
+                                <label for="checkbox-custom_23" class="checkbox-custom-label">High-class hospital room</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_24"/>
+                                <label for="checkbox-custom_24" class="checkbox-custom-label">Surgery room</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_25"/>
+                                <label for="checkbox-custom_25" class="checkbox-custom-label">Emergency room</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_26"/>
+                                <label for="checkbox-custom_26" class="checkbox-custom-label">Physiotherapy room</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="information">Hospital equipment</label>
+                    <div class="dropdown" data-target="hospital_equipment">
+                        <label class="dropdown-label">Select Options</label>
+                        <input type="hidden" name="hospital_equipment" id="hospital_equipment" />
+                        <div class="dropdown-list">
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_27"/>
+                                <label for="checkbox-custom_27" class="checkbox-custom-label">CT</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_28"/>
+                                <label for="checkbox-custom_28" class="checkbox-custom-label">MRI</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_29"/>
+                                <label for="checkbox-custom_29" class="checkbox-custom-label">Bone density meter</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_30"/>
+                                <label for="checkbox-custom_30" class="checkbox-custom-label">Positron tomography (PET)</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_31"/>
+                                <label for="checkbox-custom_31" class="checkbox-custom-label">Tumor treatment device (CYBER KNIFE)</label>
+                            </div>
+
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_33"/>
+                                <label for="checkbox-custom_33" class="checkbox-custom-label">Ultrasound imaging equipment</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_32"/>
+                                <label for="checkbox-custom_32" class="checkbox-custom-label">Tumor treatment devices (proton therapy devices)</label>
+                            </div>
+
+                            <div class="checkbox">
+                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_34"/>
+                                <label for="checkbox-custom_34" class="checkbox-custom-label">Artificial kidney equipment for hemodialysis</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
             <button type="button" class="btn btn-primary up-date-button mt-4">{{ __('home.Save') }}</button>
         </div>
     </form>
@@ -292,6 +606,13 @@
 
                 formData.append("departments", $('#departments').val());
                 formData.append("symptoms", $('#symptoms').val());
+                formData.append("emergency", $('#emergency').val());
+                formData.append("insurance", $('#insurance').val());
+                formData.append("parking", $('#parking').val());
+                formData.append("facilities", $('#hospital_facilities').val());
+                formData.append("equipment", $('#hospital_equipment').val());
+                formData.append("information", $('#hospital_information').val());
+                formData.append("costs", $('#costs').val());
 
                 var filedata = document.getElementById("gallery");
                 var i = 0, len = filedata.files.length, img, reader, file;
@@ -538,4 +859,65 @@
             $('#symptoms').val(value);
         }
     </script>
+    <script>
+        function checkboxDropdown(el, targetInputId) {
+            var $el = $(el);
+
+            function updateHiddenInputValues($dropdown, targetInputId) {
+                var result = [];
+                var $label = $dropdown.find('.dropdown-label');
+                $dropdown.find('.check:checked').each(function () {
+                    var labelText = $(this).next('.checkbox-custom-label').text().trim();
+                    result.push(labelText);
+                });
+                $('#' + targetInputId).val(result.join(', '));
+            }
+
+            function updateStatus($dropdown) {
+                var $label = $dropdown.find('.dropdown-label');
+                updateHiddenInputValues($dropdown, $dropdown.attr('data-target'));
+                if (!$label.text().trim()) {
+                    $label.html('Select Options');
+                }
+            }
+
+            $el.each(function () {
+                var $dropdown = $(this),
+                    $label = $dropdown.find('.dropdown-label'),
+                    $checkAll = $dropdown.find('.check-all'),
+                    $inputs = $dropdown.find('.check');
+
+                $label.on('click', () => {
+                    $dropdown.toggleClass('open');
+                });
+
+                $checkAll.on('change', function () {
+                    var checked = $(this).is(':checked');
+                    $inputs.prop('checked', checked);
+                    updateStatus($dropdown);
+                });
+
+                $inputs.on('change', function () {
+                    updateStatus($dropdown);
+                });
+
+                $(document).on('click touchstart', e => {
+                    if (!$(e.target).closest($dropdown).length) {
+                        $dropdown.removeClass('open');
+                    }
+                });
+            });
+        }
+
+        checkboxDropdown('.dropdown[data-target="hospital_information"]', 'hospital_information');
+        checkboxDropdown('.dropdown[data-target="hospital_facilities"]', 'hospital_facilities');
+        checkboxDropdown('.dropdown[data-target="hospital_equipment"]', 'hospital_equipment');
+    </script>
+
+
+
+
+
+
+
 @endsection

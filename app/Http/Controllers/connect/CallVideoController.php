@@ -176,7 +176,7 @@ class CallVideoController extends Controller
 
             $fileName = $pathInfo['basename'];
 
-            $pathFile = '/www/wwwroot/krmedi.vn/public/storage/connect/video/'.$fileName;
+            $pathFile = 'public/connect/video/'.$fileName;
 
             Storage::put($pathFile, $response->getBody()->getContents());
 

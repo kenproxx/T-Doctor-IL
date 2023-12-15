@@ -107,6 +107,14 @@ class BackendClinicController extends Controller
             $type = $request->input('type');
             $clinics_service = $request->input('clinics_service');
 
+            $emergency = $request->has('emergency') ? $request->input('emergency') : 0;
+            $insurance = $request->has('insurance') ? $request->input('insurance') : 0;
+            $parking = $request->has('parking') ? $request->input('parking') : 0;
+            $information = $request->input('information');
+            $facilities = $request->input('facilities');
+            $equipment = $request->input('equipment');
+            $costs = $request->input('costs');
+
             $department = $request->input('departments');
             $symptoms = $request->input('symptoms');
 
@@ -155,6 +163,13 @@ class BackendClinicController extends Controller
             $clinic->introduce = $introduce;
             $clinic->gallery = $gallery;
             $clinic->status = $status ?? ClinicStatus::ACTIVE;
+            $clinic->emergency = $emergency;
+            $clinic->insurance = $insurance;
+            $clinic->parking = $parking;
+            $clinic->information = $information;
+            $clinic->facilities = $facilities;
+            $clinic->equipment = $equipment;
+            $clinic->costs = $costs;
 
 
             if (!$user_id) {
@@ -165,7 +180,6 @@ class BackendClinicController extends Controller
                     return response("User not found!", 400);
                 }
             }
-
             $success = $clinic->save();
             if ($success) {
                 return response()->json($clinic);
