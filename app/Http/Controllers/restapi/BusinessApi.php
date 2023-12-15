@@ -207,7 +207,17 @@ class BusinessApi extends Controller
                     $clinic['addressInfo'] = '';
                     return $clinic;
                 }
-                $clinic['addressInfo'] = $addressC['name'] . ',' . $addressD['name'] . ',' . $addressP['name'];
+                $addressInfo = '';
+                if ($addressC) {
+                    $addressInfo = $addressInfo . $addressC['name'];
+                }
+                if ($addressD) {
+                    $addressInfo = $addressInfo . ',' . $addressD['name'];
+                }
+                if ($addressP) {
+                    $addressInfo = $addressInfo . ',' . $addressP['name'];
+                }
+                $clinic['addressInfo'] = $addressInfo;
                 /* Show departments*/
                 $clinic['total_departments'] = $departments->count();
                 $clinic['departments'] = $departments->toArray();
