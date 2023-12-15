@@ -510,6 +510,16 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label for="selectOption">Chọn một tùy chọn:</label>
+                        <select name="representative_doctor" id="representative_doctor">
+                            @foreach($doctorLists as $kry => $doctor)
+                                <option value="{{$doctor->id}}">{{$doctor->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
 
             </div>
             <button type="button" class="btn btn-primary up-date-button mt-4">{{ __('home.Save') }}</button>
@@ -612,6 +622,7 @@
                 formData.append("facilities", $('#hospital_facilities').val());
                 formData.append("equipment", $('#hospital_equipment').val());
                 formData.append("information", $('#hospital_information').val());
+                formData.append("representative_doctor", $('#representative_doctor').val());
                 formData.append("costs", $('#costs').val());
 
                 var filedata = document.getElementById("gallery");

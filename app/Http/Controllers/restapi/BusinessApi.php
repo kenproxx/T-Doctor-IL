@@ -14,6 +14,7 @@ use App\Models\Province;
 use App\Models\Review;
 use App\Models\ServiceClinic;
 use App\Models\Symptom;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -176,6 +177,8 @@ class BusinessApi extends Controller
             ->select('clinics.*', 'users.email')
             ->cursor()
             ->map(function ($item) {
+                /*find usser*/
+                $detailDoctor = User::where('id', $item->representative_doctor)->get();
                 /*Find service*/
                 $array = explode(',', $item->service_id);
                 $services = ServiceClinic::whereIn('id', $array)->get();
@@ -228,6 +231,7 @@ class BusinessApi extends Controller
                 /* Show symptoms*/
                 $clinic['total_symptoms'] = $symptoms->count();
                 $clinic['symptoms'] = $symptoms->toArray();
+                $clinic['info_doctor'] = $detailDoctor->toArray();
 
                 return $clinic;
             });

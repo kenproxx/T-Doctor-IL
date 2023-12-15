@@ -7,11 +7,13 @@ use App\Enums\ClinicStatus;
 use App\Enums\DepartmentStatus;
 use App\Enums\ServiceClinicStatus;
 use App\Enums\SymptomStatus;
+use App\Enums\TypeUser;
 use App\Models\Booking;
 use App\Models\Clinic;
 use App\Models\Department;
 use App\Models\ServiceClinic;
 use App\Models\Symptom;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,7 +55,8 @@ class ClinicController extends Controller
         $departments = Department::where('status', DepartmentStatus::ACTIVE)->get();
         $symptoms = Symptom::where('status', SymptomStatus::ACTIVE)->get();
         $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
-        return view('admin.clinic.tab-create-clinics', compact('services', 'departments', 'symptoms'));
+        $doctorLists = User::where('member', TypeUser::DOCTORS)->get();
+        return view('admin.clinic.tab-create-clinics', compact('services', 'departments', 'symptoms', 'doctorLists'));
     }
 
     public function edit($id)

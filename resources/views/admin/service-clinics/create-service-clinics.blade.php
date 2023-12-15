@@ -25,6 +25,10 @@
                     <input type="text" class="form-control" id="name_en" name="name_en">
                 </div>
                 <div class="form-group col-md-4">
+                    <label for="service_price">Giá dịc vụ</label>
+                    <input type="number" class="form-control" id="service_price" name="service_price">
+                </div>
+                <div class="form-group col-md-4">
                     <label for="name_laos">{{ __('home.name_laos') }}</label>
                     <input type="text" class="form-control" id="name_laos" name="name_laos">
                 </div>
@@ -50,6 +54,7 @@
 
             let data = {
                 name: document.getElementById('name').value,
+                service_price: document.getElementById('service_price').value,
                 name_en: document.getElementById('name_en').value,
                 name_laos: document.getElementById('name_laos').value,
                 user_id: `{{ Auth::check() ? Auth::user()->id : '' }}`,

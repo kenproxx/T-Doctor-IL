@@ -114,6 +114,7 @@ class BackendClinicController extends Controller
             $facilities = $request->input('facilities');
             $equipment = $request->input('equipment');
             $costs = $request->input('costs');
+            $representativeDoctor = $request->input('representative_doctor');
 
             $department = $request->input('departments');
             $symptoms = $request->input('symptoms');
@@ -144,6 +145,7 @@ class BackendClinicController extends Controller
             $clinic->time_work = $time_work;
             $clinic->type = $type;
             $clinic->service_id = $clinics_service;
+            $clinic->representative_doctor = $representativeDoctor;
 //            $clinic->type = TypeBussiness::CLINICS;
 
             $clinic->department = $department;
