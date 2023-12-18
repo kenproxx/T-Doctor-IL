@@ -156,7 +156,6 @@
             </div>
         </div>
         <script>
-            let token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
             let accessToken = `Bearer ` + token;
 
             async function addReview(child) {
@@ -260,21 +259,22 @@
                     let parent = data.parent[0];
                     let listChild = data.child;
                     let htmlChild = ``;
-                    for (let j = 0; j < listChild.length; j++) {
-                        let child = listChild[j];
+                    if (listChild){
+                        for (let j = 0; j < listChild.length; j++) {
+                            let child = listChild[j];
 
-                        let itemImg = null;
-                        let username = null;
-                        let isGuest = child.is_guest;
-                        if (isGuest === true) {
-                            itemImg = `<img src="{{ asset('img/avt_default.jpg') }}" alt="" class="avt-user-review">`;
-                            username = child.username;
-                        } else {
-                            itemImg = `<img src="${child.user.avt}" alt="" class="avt-user-review">`;
-                            username = child.user.username;
-                        }
+                            let itemImg = null;
+                            let username = null;
+                            let isGuest = child.is_guest;
+                            if (isGuest === true) {
+                                itemImg = `<img src="{{ asset('img/avt_default.jpg') }}" alt="" class="avt-user-review">`;
+                                username = child.username;
+                            } else {
+                                itemImg = `<img src="${child.user.avt}" alt="" class="avt-user-review">`;
+                                username = child.user.username;
+                            }
 
-                        htmlChild = htmlChild + `<div class="rv_ctn justify-content-center mt-5">
+                            htmlChild = htmlChild + `<div class="rv_ctn justify-content-center mt-5">
                                                         <div class="user_rv d-flex">
                                                     <div class="user d-flex">
                                                         <div class="">
@@ -295,6 +295,7 @@
                                                     </p>
                                                 </div>
                                             </div>`;
+                        }
                     }
 
                     let htmlReviewFormChild = `<div class="form-add-review-child d-none mb-2" id="form_add_review_child_${parent.id}">
