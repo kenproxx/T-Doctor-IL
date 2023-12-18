@@ -1154,7 +1154,10 @@ span.material-symbols-outlined {
 .card-body {
     padding: 0 !important;
     gap: 8px;
-    margin-top: 12px;
+    /*margin-top: 12px;*/
+}
+.col-sm-6 .table-responsive .table {
+    margin-bottom: 0;
 }
 
 .card-img-top {
@@ -1262,7 +1265,12 @@ span.material-symbols-outlined {
     top: 15px;
 
 }
-
+img.img-responsive {
+    max-height: 500px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
 .list-doctor11 {
     gap: 30px;
 }
