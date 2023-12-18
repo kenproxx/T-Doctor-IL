@@ -1270,8 +1270,6 @@ span.material-symbols-outlined {
 .card {
     min-height: 390px;
 !important;
-    max-height: 390px;
-!important;
 }
 
 .pagination {
