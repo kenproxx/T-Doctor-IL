@@ -194,7 +194,6 @@
         });
 
         var replyCommentElements = document.querySelectorAll(".reply-comment");
-        let token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
         let headers = {
             'Authorization': `Bearer ${token}`
         };
