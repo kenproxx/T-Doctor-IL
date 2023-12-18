@@ -45,19 +45,19 @@
                 </div>
             </div>
         @endif
-        <h3 class="text-center">{{ __('home.Chat History') }}</h3>
         @if(count($messageDoctor) > 0)
-            <section style="background-color: #eee;" class="ml-3">
-                <div class="container py-5">
+            <h3 class="text-center mt-4">{{ __('home.Chat History') }}</h3>
+            <section style="background-color: #eee;" class="">
+                <div class="container">
 
-                    <div class="row d-flex justify-content-center mr-4">
+                    <div class="row d-flex justify-content-center">
                         <div class="col-md-8 col-lg-6 col-xl-4">
                             <div class="card" style="border-radius: 15px;">
                                 <div class="text-center">
                                     <h3 class="file-shared">{{ __('home.Shared files') }}</h3>
                                 </div>
                                 <div class="card-body">
-                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <ul class="nav nav-tabs w-100" id="myTab" role="tablist" >
                                         <li class="nav-item" role="presentation">
                                             <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
                                                     data-bs-target="#images" type="button" role="tab"
@@ -117,7 +117,7 @@
                                                         $video = str_replace('public', 'public/storage', $video);
                                                     @endphp
                                                     <div class="row">
-                                                        <video style="max-width: 150px" controls>
+                                                        <video controls>
                                                             <source src="{{  asset($video) }}">
                                                         </video>
                                                     </div>
@@ -128,8 +128,8 @@
                                              aria-labelledby="contact-tab">
                                             <div class="row" id="list-audios">
                                                 @foreach($arrayAudios as $audio)
-                                                    <div class="col-md-3">
-                                                        <audio controls="controls" style="max-width: 150px">
+                                                    <div class="col">
+                                                        <audio controls="controls" >
                                                             <source src="{{  asset($audio) }}"
                                                                     type="audio/mpeg">
                                                         </audio>
@@ -174,12 +174,12 @@
                                                         @endif
                                                     @endif
                                                 </div>
-                                                <img src="{{ Auth::user()->avt }}"
+                                                <img src="@if(Auth::user()->avt != null) {{ Auth::user()->avt }} @else  https://i0.wp.com/sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png @endif"
                                                      alt="avatar 1" style="width: 45px; height: 100%;">
                                             </div>
                                         @else
                                             <div class="d-flex flex-row justify-content-start mb-4">
-                                                <img src="{{ $doctor->thumbnail }}"
+                                                <img src="{{ $doctor->avt }}"
                                                      alt="avatar 1" style="width: 45px; height: 100%;">
                                                 <div class="p-3 ms-3"
                                                      style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">
