@@ -47,7 +47,7 @@
         @endif
         @if(count($messageDoctor) > 0)
             <h3 class="text-center mt-4">{{ __('home.Chat History') }}</h3>
-            <section style="background-color: #eee;" class="">
+            <section>
                 <div class="container">
 
                     <div class="row d-flex justify-content-center">
@@ -153,7 +153,7 @@
                                 <div class="card-body" style="overflow-y: scroll; max-height: 500px" id="message_area">
                                     @foreach($messageDoctor as $message)
                                         @if($message->from_user_id == Auth::user()->id)
-                                            <div class="d-flex flex-row justify-content-end mb-4">
+                                            <div class="d-flex flex-row justify-content-end mb-4 mr-2">
                                                 <div class="p-3 me-3 border"
                                                      style="border-radius: 15px; background-color: #fbfbfb;">
                                                     <p class="small mb-0">{!! $message->chat_message !!}</p>
@@ -178,7 +178,7 @@
                                                      alt="avatar 1" style="width: 45px; height: 100%;">
                                             </div>
                                         @else
-                                            <div class="d-flex flex-row justify-content-start mb-4">
+                                            <div class="d-flex flex-row justify-content-start mb-4 ml-2">
                                                 <img src="{{ $doctor->avt }}"
                                                      alt="avatar 1" style="width: 45px; height: 100%;">
                                                 <div class="p-3 ms-3"
