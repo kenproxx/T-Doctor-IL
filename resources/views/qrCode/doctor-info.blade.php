@@ -15,7 +15,7 @@
                                                                         class="img-responsive"></div>
                             </div>
                             <div class="col-lg-7 col-md-7 col-sm-6">
-                                <h3 class="box-title mt-5">{{ $doctor->name }}</h3>
+                                <h3 class="box-title mt-3 p-3">{{ $doctor->name }}</h3>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-product">
                                         @if($doctor->apply_for != 'none')
@@ -30,7 +30,7 @@
                                                 @endphp
                                                 <tr>
                                                     <td>{{ $item }}:</td>
-                                                    <td>{{ $doctor[$item] }}</td>
+                                                    <td>{!! $doctor[$item] !!} </td>
                                                 </tr>
                                             @endforeach
                                             </tbody>
