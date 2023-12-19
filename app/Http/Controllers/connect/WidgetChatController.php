@@ -4,6 +4,7 @@ namespace App\Http\Controllers\connect;
 
 use App\Enums\MessageStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\HomeController;
 use App\Models\Chat;
 use App\Models\Message;
 use App\Models\User;
@@ -18,7 +19,6 @@ class WidgetChatController extends Controller
         $listUserWasConnect = Chat::where(function ($query) use ($currentUserId) {
             $query->where('from_user_id', $currentUserId)->orWhere('to_user_id', $currentUserId);
         })->pluck('from_user_id', 'to_user_id')->toArray();
-
 
         $uniqueUserIds = array_unique(array_merge(array_keys($listUserWasConnect), array_values($listUserWasConnect)));
 
@@ -61,8 +61,12 @@ class WidgetChatController extends Controller
 
         //lấy tổng các tin nhắn chưa đọc gửi tới user hiện tại
 
+        $online = (new HomeController())->userOnlineStatus();
 
-        return response()->json($userInfoArray);
+        return response()->json([
+            'connected' => $userInfoArray,
+            'online' => $online
+        ]);
     }
 
     public function getMessageByUserId($id)

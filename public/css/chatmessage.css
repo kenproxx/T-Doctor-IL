@@ -56,10 +56,9 @@
 
 #widget-chat .chat-box-body {
     position: relative;
-    height: 370px;
-    height: auto;
+    height: 45vh;
     border: 1px solid #ccc;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 #widget-chat .chat-box-body:after {
@@ -130,7 +129,7 @@
 }
 
 #widget-chat #chatview {
-    height: 484px;
+    height: 100%;
     top: 0;
     left: 0;
     display: none;
@@ -178,7 +177,7 @@
 #widget-chat #chat-messages {
     opacity: 0;
     margin-top: 30px;
-    height: 270px;
+    height: 200px;
     overflow-y: scroll;
     overflow-x: hidden;
     padding-right: 20px;
@@ -330,4 +329,6 @@
 #widget-chat #chatview, #widget-chat #sendmessage {
     overflow: hidden;
     border-radius: 6px;
+    position: relative;
+    bottom: 0;
 }
