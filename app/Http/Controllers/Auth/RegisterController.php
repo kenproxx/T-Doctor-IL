@@ -2,13 +2,20 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\ClinicStatus;
+use App\Enums\TypeTimeWork;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MainController;
+use App\Models\Clinic;
+use App\Models\Commune;
+use App\Models\District;
+use App\Models\Province;
 use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
@@ -34,6 +41,17 @@ class RegisterController extends Controller
             $prescription = $request->input('prescription');
             $free = $request->input('free_question');
             $abouts = $request->input('abouts_doctor');
+
+            /* Only type business */
+            $open_date = $request->input('open_date');
+            $close_date = $request->input('close_date');
+            $experienceHospital = $request->input('experienceHospital');
+            $address = $request->input('address');
+            $province_id = $request->input('province_id');
+            $district_id = $request->input('district_id');
+            $commune_id = $request->input('commune_id');
+            $representative = $request->input('representative');
+            $time_work = $request->input('time_work') ?? TypeTimeWork::ALL;
 
             $isEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
             if (!$isEmail) {
@@ -109,6 +127,42 @@ class RegisterController extends Controller
             }
 
             $success = $user->save();
+
+            if ($user->type == \App\Enums\Role::BUSINESS) {
+                $clinic = new Clinic();
+
+                $formattedOpenDateTime = Carbon::parse($open_date);
+                $formattedCloseDateTime = Carbon::parse($close_date);
+
+                $clinic->address_detail = $address;
+                $province = Province::find($province_id);
+                $district = District::find($district_id);
+                $commune = Commune::find($commune_id);
+                $clinic->address = $address . ',' . $province->name . ',' . $district->name . ',' . $commune->name;
+
+                $clinic->name = $representative;
+                $clinic->open_date = $formattedOpenDateTime ?? '';
+                $clinic->close_date = $formattedCloseDateTime ?? '';
+                $clinic->experience = $experienceHospital;
+                $clinic->gallery = '';
+                $clinic->user_id = $user->id;
+                $clinic->time_work = $time_work;
+                $clinic->status = ClinicStatus::ACTIVE;
+                $clinic->type =$member;
+                $clinic->representative_doctor = $representative;
+
+                $clinic->save();
+
+                $user->province_id = $province_id;
+                $user->district_id = $district_id;
+                $user->commune_id = $commune_id;
+                $user->address_code = $province->name;
+                $user->detail_address = $address;
+                $user->year_of_experience = $experienceHospital;
+                $user->bac_si_dai_dien = $representative;
+                $user->name = $representative;
+                $user->save();
+            }
 
             if ($success) {
                 (new MainController())->createRoleUser($member, $username);
