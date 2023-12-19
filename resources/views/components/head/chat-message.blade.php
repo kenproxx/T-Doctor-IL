@@ -78,7 +78,7 @@
 
     let chatUserId;
 
-    let currentId = '{{ Auth::check() ? Auth::user()->id : '' }}';
+    let currentUserIdChat = '{{ Auth::check() ? Auth::user()->id : '' }}';
 
     let totalMessageUnseen = 0;
 
@@ -89,7 +89,7 @@
         encrypted: true,
     });
 
-    window.Echo.private("messages." + currentId).listen('NewMessage', function (e) {
+    window.Echo.private("messages." + currentUserIdChat).listen('NewMessage', function (e) {
         renderMessageReceive(e);
         handleSeenMessage();
         calculateTotalMessageUnseen(e);
