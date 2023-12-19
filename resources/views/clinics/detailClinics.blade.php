@@ -36,7 +36,6 @@
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAl8bmtXj3F5lPG_mbD5Pj9mGSu2LCzrrE"></script>
     <script>
-        var token = `{{ $_COOKIE['accessToken'] }}`;
         let accessToken = `Bearer ` + token;
         var locations = {!! json_encode($coordinatesArray) !!};
         var jsonServices = {!! json_encode($services) !!};
