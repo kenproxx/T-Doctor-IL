@@ -38,6 +38,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\SetLocale::class,
             \Illuminate\Session\Middleware\StartSession::class,
+            \App\Http\Middleware\UserActivity::class,
         ],
 
         'api' => [
@@ -70,5 +71,6 @@ class Kernel extends HttpKernel
         'business' => \App\Http\Middleware\BusinessPermission::class,
         'medical' => \App\Http\Middleware\MedicalPermission::class,
         'normal' => \App\Http\Middleware\NormalPermission::class,
+        'user.active' => \App\Http\Middleware\UserActivity::class,
     ];
 }

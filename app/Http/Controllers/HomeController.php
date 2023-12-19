@@ -14,6 +14,7 @@ use App\Models\ProductInfo;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use ReflectionClass;
 
 class HomeController extends Controller
@@ -63,6 +64,22 @@ class HomeController extends Controller
         } else {
             return substr($text, 0, $maxLength).$ellipsis;
         }
+    }
+
+    public function userOnlineStatus()
+    {
+        if (!Auth::check()) {
+            return;
+        }
+
+        $users = User::where('id', '!=', Auth::id())->get();
+        $listUserOnline = [];
+        foreach ($users as $user) {
+            if (Cache::has('user-is-online|'.$user->id)) {
+                array_push($listUserOnline, $user);
+            }
+        }
+        return $listUserOnline;
     }
 
     private function textTimeAgo($createdAt)

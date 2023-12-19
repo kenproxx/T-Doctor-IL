@@ -14,8 +14,35 @@
             <span class="chat-box-toggle"><i class="fa-solid fa-x"></i></span>
         </div>
         <div class="chat-box-body">
-            <div id="friendslist">
-                <div id="friends"></div>
+
+            <ul class="nav nav-tabs" role="tablist" id="chat-widget-navbar">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="chat-widget-all-online" data-toggle="tab"
+                            data-target="#chat-widget-all-online-tabs" type="button" role="tab" aria-controls="home"
+                            aria-selected="true">Đang online
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="chat-widget-connected" data-toggle="tab"
+                            data-target="#chat-widget-connected-tabs" type="button" role="tab" aria-controls="profile"
+                            aria-selected="false">Đã connect
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="chat-widget-all-online-tabs" role="tabpanel"
+                     aria-labelledby="chat-widget-all-online">
+                    <div id="friendslist-all-online">
+                        <div id="friends-all-online"></div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="chat-widget-connected-tabs" role="tabpanel"
+                     aria-labelledby="chat-widget-connected">
+                    <div id="friendslist-connected">
+                        <div id="friends-connected"></div>
+                    </div>
+                </div>
+
             </div>
 
             <div id="chatview" class="p1">
@@ -33,9 +60,10 @@
                     <input type="text" value="Send message..." id="text-chatMessage"/>
                     <button id="send-chatMessage" onclick="sendMessageChatWidget()"></button>
                 </div>
-
             </div>
+
         </div>
+
 
     </div>
 </div>
@@ -44,6 +72,9 @@
 <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.11.2/dist/echo.iife.js"></script>
 
 <script>
+
+    const CHAT_TYPE_ALL_ONLINE = 'all-online';
+    const CHAT_TYPE_CONNECTED = 'connected';
 
     let chatUserId;
 
@@ -111,27 +142,42 @@
         });
     }
 
-    function genListUserWasConnect(data) {
+    function genListUserWasConnect(data, type) {
         let html = '';
 
         if (data.length == 0) {
             // html hiển thị "Bạn chưa chat với bác sĩ nào"
 
-            html = `<p>
-                            <strong>Bạn chưa chat với bác sĩ nào</strong>
+
+            switch (type) {
+                case CHAT_TYPE_ALL_ONLINE:
+
+                    html = `<p>
+                            <strong>Không có ai đang online</strong>
                         </p>`;
-            $('#friends').html(html);
+
+                    $('#friendslist-all-online #friends-all-online').html(html);
+                    break;
+                case CHAT_TYPE_CONNECTED:
+
+                    html = `<p>
+                            <strong>Bạn chưa chat với ai</strong>
+                        </p>`;
+
+                    $('#friendslist-connected #friends-connected').html(html);
+                    break;
+            }
 
             return;
         }
 
         $.each(data, function (index, item) {
             let countUnseen = item.count_unread_message;
-            if (countUnseen === 0) {
+            if (countUnseen === 0 || !countUnseen) {
                 countUnseen = '';
             }
 
-            html += `<div class="friend" data-id=${item.id} data-msg-unseen="${item.count_unread_message}">
+            html += `<div class="friend" data-id=${item.id} data-msg-unseen="${countUnseen}">
                         <img src="${item.avt}"/>
                         <p>
                             <strong>${item.name}
@@ -143,7 +189,15 @@
                     </div>`;
         });
 
-        $('#friends').html(html);
+        switch (type) {
+            case CHAT_TYPE_ALL_ONLINE:
+                $('#friendslist-all-online #friends-all-online').html(html);
+                break;
+            case CHAT_TYPE_CONNECTED:
+                $('#friendslist-connected #friends-connected').html(html);
+                break;
+        }
+
 
         setOnclickFriend();
     }
@@ -163,6 +217,7 @@
     function setOnclickFriend() {
         $(".friend").each(function () {
             $(this).click(function () {
+
                 chatUserId = $(this).data('id');
                 handleSeenMessage();
                 handleStartChat(chatUserId);
@@ -189,9 +244,9 @@
                 $("#profile span").html(email);
 
                 $(".message").not(".right").find("img").attr("src", $(clone).attr("src"));
-                $('#friendslist').fadeOut();
+                $(this).parent().fadeOut();
+                $('#chat-widget-navbar').fadeOut();
                 $('#chatview').fadeIn();
-
 
                 $('#close').unbind("click").click(function () {
                     chatUserId = '';
@@ -199,10 +254,10 @@
 
                     setTimeout(function () {
                         $('#chatview').fadeOut();
-                        $('#friendslist').fadeIn();
+                        $(this).parent().fadeIn();
+                        $('#chat-widget-navbar').fadeIn();
                     }, 50);
                 });
-                autoScrollChatBox();
             });
         });
     }
@@ -279,9 +334,7 @@
         $('#chat-messages').scrollTop($('#chat-messages')[0].scrollHeight);
     }
 
-</script>
 
-<script>
     $(function () {
 
         $("#chat-circle").click(function () {
@@ -362,6 +415,7 @@
         });
 
         document.getElementById('chat-messages').innerHTML = html;
+        autoScrollChatBox();
     }
 
     function getListUserWasConnect() {
@@ -373,8 +427,9 @@
             type: "GET",
             dataType: "json",
             success: function (data) {
-                genListUserWasConnect(data);
-                renderTotalMessageUnseen(data);
+                genListUserWasConnect(data.connected, CHAT_TYPE_CONNECTED);
+                genListUserWasConnect(data.online, CHAT_TYPE_ALL_ONLINE);
+                renderTotalMessageUnseen(data.connected);
             },
             error: function (e) {
                 console.log(e);
