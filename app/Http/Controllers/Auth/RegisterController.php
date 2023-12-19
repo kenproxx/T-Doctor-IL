@@ -132,9 +132,11 @@ class RegisterController extends Controller
 
             if ($user->type == \App\Enums\Role::BUSINESS) {
                 $clinic = new Clinic();
-
-                $formattedOpenDateTime = Carbon::parse($open_date);
-                $formattedCloseDateTime = Carbon::parse($close_date);
+                $currentDate = Carbon::now();
+                $openDateTime = Carbon::createFromFormat('Y-m-d H:i', $currentDate->format('Y-m-d') . ' ' . $open_date);
+                $closeDateTime = Carbon::createFromFormat('Y-m-d H:i', $currentDate->format('Y-m-d') . ' ' . $close_date);
+                $formattedOpenDateTime = $openDateTime->format('Y-m-d\TH:i');
+                $formattedCloseDateTime = $closeDateTime->format('Y-m-d\TH:i');
 
                 $clinic->address_detail = $address;
                 $province = Province::find($province_id);
