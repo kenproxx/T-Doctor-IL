@@ -75,7 +75,6 @@
         </div>
     </div>
     <script>
-        let token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
         let headers = {
             'Authorization': `Bearer ${token}`
         };

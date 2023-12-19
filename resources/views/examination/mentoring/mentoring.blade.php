@@ -24,8 +24,7 @@
         <!-- Init jquery-comments -->
         <script type="text/javascript">
             let data;
-            const token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
-            const headers = {
+            let headers = {
                 'Authorization': `Bearer ${token}`
             };
             $.ajax({
@@ -161,6 +160,7 @@
                     processData: false,
                     data: formData,
                     success: function (response) {
+                        console.log(response)
                         renderJsonToHTML(response);
                     },
                     error: function (exception) {

@@ -330,10 +330,9 @@
         });
     </script>
     <script>
-        const token = `{{ $_COOKIE['accessToken'] }}`;
         $(document).ready(function () {
             $('.up-date-button').on('click', function () {
-                const headers = {
+                let headers = {
                     'Authorization': `Bearer ${token}`
                 };
                 const formData = new FormData();

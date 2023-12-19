@@ -53,7 +53,6 @@
         </form>
     </div>
     <script>
-        let token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
         let accessToken = `Bearer ` + token;
 
         $(document).ready(function () {

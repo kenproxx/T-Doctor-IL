@@ -567,7 +567,6 @@
 
     </script>
     <script>
-        const token = `{{ $_COOKIE['accessToken'] }}`;
         $(document).ready(function () {
             $('.up-date-button').on('click', function () {
                 const headers = {

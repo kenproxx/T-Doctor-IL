@@ -50,7 +50,6 @@
     </div>
 
     <script>
-        var token = `{{ $_COOKIE['accessToken'] }}`;
         const INVALID = '{{ CouponApplyStatus::INVALID }}';
         const VALID = '{{ CouponApplyStatus::VALID }}';
         const REWARD = '{{ CouponApplyStatus::REWARDED }}';

@@ -36,7 +36,6 @@
     </form>
     <button type="button" onclick="submitForm()" class="btn btn-primary up-date-button mt-md-4">{{ __('home.Save') }}</button>
     <script>
-        const token = `{{ $_COOKIE['accessToken'] }}`;
 
         function submitForm() {
             loadingMasterPage();

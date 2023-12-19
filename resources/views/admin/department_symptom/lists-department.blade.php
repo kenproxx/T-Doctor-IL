@@ -62,7 +62,6 @@
         }
 
         async function deleteDepartment(id) {
-            let token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
             let url = `{{ route('api.medical.departments.delete', ['id'=>':id']) }}`;
             url = url.replace(':id', id);
 

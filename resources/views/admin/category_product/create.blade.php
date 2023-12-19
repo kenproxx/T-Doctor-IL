@@ -49,7 +49,6 @@
     </form>
     <button type="button" onclick="submitForm()" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
     <script>
-        const token = `{{ $_COOKIE['accessToken'] }}`;
 
         function submitForm() {
             loadingMasterPage();

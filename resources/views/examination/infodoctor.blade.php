@@ -156,7 +156,6 @@
             </div>
         </div>
         <script>
-            let token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
             let accessToken = `Bearer ` + token;
 
             async function addReview(child) {
@@ -245,7 +244,6 @@
                         }
                     })
                     .then(response => {
-                        console.log(response)
                         renderReview(response);
                     })
                     .catch(error => console.log(error));
@@ -258,23 +256,39 @@
                 for (let i = 0; i < response.length; i++) {
                     let data = response[i];
                     let parent = data.parent[0];
+
+                    let star = parent.number_star;
+                    let starHtml = ``;
+                    for (let d = 1; d < 6; d++) {
+                        if(d <= star){
+                            starHtml = starHtml + `<i class="fa-solid fa-star" style="color: #fac325"></i>`;
+                        } else {
+                            starHtml = starHtml + `<i class="fa-solid fa-star" style="color: #ccc"></i>`;
+                        }
+                    }
+
                     let listChild = data.child;
                     let htmlChild = ``;
-                    for (let j = 0; j < listChild.length; j++) {
-                        let child = listChild[j];
+                    if (listChild){
+                        for (let j = 0; j < listChild.length; j++) {
+                            let child = listChild[j];
 
-                        let itemImg = null;
-                        let username = null;
-                        let isGuest = child.is_guest;
-                        if (isGuest === true) {
-                            itemImg = `<img src="{{ asset('img/avt_default.jpg') }}" alt="" class="avt-user-review">`;
-                            username = child.username;
-                        } else {
-                            itemImg = `<img src="${child.user.avt}" alt="" class="avt-user-review">`;
-                            username = child.user.username;
-                        }
+                            let itemImg = null;
+                            let username = null;
+                            let isGuest = child.is_guest;
+                            if (isGuest === true) {
+                                itemImg = `<img src="{{ asset('img/avt_default.jpg') }}" alt="" class="avt-user-review">`;
+                                if (child.username){
+                                    username = child.username;
+                                } else {
+                                    username = 'Guest';
+                                }
+                            } else {
+                                itemImg = `<img src="${child.user.avt}" alt="" class="avt-user-review">`;
+                                username = child.user.username;
+                            }
 
-                        htmlChild = htmlChild + `<div class="rv_ctn justify-content-center mt-5">
+                            htmlChild = htmlChild + `<div class="rv_ctn justify-content-center mt-5">
                                                         <div class="user_rv d-flex">
                                                     <div class="user d-flex">
                                                         <div class="">
@@ -287,6 +301,7 @@
                                                     </div>
                                                     <div class="time">
                                                         <p>${child.created_at}</p>
+                                                        <p></p>
                                                     </div>
                                                 </div>
                                                 <div class="cmt flex-column">
@@ -295,6 +310,7 @@
                                                     </p>
                                                 </div>
                                             </div>`;
+                        }
                     }
 
                     let htmlReviewFormChild = `<div class="form-add-review-child d-none mb-2" id="form_add_review_child_${parent.id}">
@@ -328,7 +344,11 @@
                     let isGuestNew = parent.is_guest;
                     if (isGuestNew === true) {
                         itemImg = `<img src="{{ asset('img/avt_default.jpg') }}" alt="" class="avt-user-review">`;
-                        username = parent.username;
+                        if (parent.username){
+                            username = parent.username;
+                        } else {
+                            username = 'Guest';
+                        }
                     } else {
                         itemImg = `<img src="${parent.user.avt}" alt="" class="avt-user-review">`;
                         username = parent.user.username;
@@ -345,8 +365,9 @@
                                 </div>
 
                             </div>
-                            <div class="time">
-                                <p>${parent.created_at}</p>
+                            <div class="text-end">
+                                <div>${parent.created_at}</div>
+                                <div>${starHtml}</div>
                             </div>
                         </div>
                         <div class="cmt flex-column">

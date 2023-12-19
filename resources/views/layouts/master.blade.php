@@ -34,7 +34,9 @@
     <link rel="stylesheet" href="{{asset('css/responsive.css')}}">
     <link rel="stylesheet" href="{{asset('css/responsive-mobi.css')}}">
     <link rel="stylesheet" href="{{asset('css/news.css')}}">
-
+    <script>
+        const token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
+    </script>
     <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
     {{--    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>--}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

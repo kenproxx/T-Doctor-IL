@@ -6,7 +6,6 @@
 <div class="img-union"><img src="{{asset('img/flea-market/silver.png')}}" alt=""></div>
 <div class="page d-flex flex-wrap" id="productsAdsPlan3"></div>
 <script>
-    var token = `${getCookie('accessToken')}`;
 
     function isLogin() {
         if (token == 'undefined') {

@@ -82,7 +82,6 @@
     </form>
     <script>
 
-        const token = `{{ $_COOKIE['accessToken'] }}`;
 
         $(document).ready(function () {
             $('.up-date-button').on('click', function () {
@@ -137,7 +136,6 @@
         genSelectOption();
 
         async function genSelectOption() {
-            const token = `{{ $_COOKIE['accessToken'] }}`;
             const headers = {
                 'Authorization': `Bearer ${token}`
             };

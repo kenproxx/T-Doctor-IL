@@ -47,7 +47,6 @@
         {{$listNewEvent->links()}}
     </div>
     <script>
-        const token = `{{ $_COOKIE['accessToken'] ?? ''}}`;
 
         function deleteNewEvent(id) {
             if (confirm('{{ __('home.Bạn có chắc chắn muốn xóa không') }}?')) {

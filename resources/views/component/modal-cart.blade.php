@@ -92,7 +92,6 @@
             return;
         }
         loadingMasterPage();
-        const token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
         const headers = {
             'Authorization': `Bearer ${token}`
         };
@@ -128,7 +127,6 @@
     }
 
     async function changeQuantity(id, quantity) {
-        let token = document.getElementById('accessToken').value;
 
         const headers = {
             'Authorization': `Bearer ${token}`

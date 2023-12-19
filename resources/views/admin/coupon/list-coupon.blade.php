@@ -34,7 +34,6 @@
     </div>
 
     <script>
-        var token = `{{ $_COOKIE['accessToken'] }}`;
         $(document).ready(function () {
             callListProduct(token);
             async function callListProduct(token) {
