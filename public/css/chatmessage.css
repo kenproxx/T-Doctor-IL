@@ -102,6 +102,14 @@
     cursor: pointer;
 }
 
+#chat-widget-navbar li {
+    width: 50%;
+}
+
+#chat-widget-navbar li button{
+    width: 100%;
+}
+
 #widget-chat .friend img {
     width: 40px;
     border-radius: 50%;

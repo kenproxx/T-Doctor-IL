@@ -103,6 +103,7 @@
         let url = `{{ route('api.backend.connect.chat.seen-message', ['id' => ':id']) }}`;
         url = url.replace(':id', chatUserId);
 
+
         $.ajax({
             url: url,
             type: "GET",
@@ -129,7 +130,7 @@
 
         // duyệt class friend, tìm ra div có data-id = e.message.from
         // tăng thêm 1 span.badge
-        $(".friend").each(function () {
+        $("#friendslist-connected .friend").each(function () {
 
             if ($(this).data('id') === e.message.from) {
                 let countUnseen = $(this).data('msg-unseen');
@@ -171,9 +172,18 @@
             return;
         }
 
+        let isShowBadge = false;
+
+        if (type === CHAT_TYPE_CONNECTED) {
+            isShowBadge = true;
+        }
+
         $.each(data, function (index, item) {
             let countUnseen = item.count_unread_message;
             if (countUnseen === 0 || !countUnseen) {
+                countUnseen = '';
+            }
+            if (!isShowBadge) {
                 countUnseen = '';
             }
 
@@ -244,7 +254,8 @@
                 $("#profile span").html(email);
 
                 $(".message").not(".right").find("img").attr("src", $(clone).attr("src"));
-                $(this).parent().fadeOut();
+                let parent = $(this).parent();
+                parent.fadeOut();
                 $('#chat-widget-navbar').fadeOut();
                 $('#chatview').fadeIn();
 
@@ -254,7 +265,8 @@
 
                     setTimeout(function () {
                         $('#chatview').fadeOut();
-                        $(this).parent().fadeIn();
+                        // $(this).parent().show();
+                        parent.fadeIn();
                         $('#chat-widget-navbar').fadeIn();
                     }, 50);
                 });
@@ -438,7 +450,7 @@
     }
 
     function renderTotalMessageUnseen(data) {
-        if (data.length == 0) {
+        if (data.length < 1) {
             return;
         }
         totalMessageUnseen = data[0]['total_unread_message'];

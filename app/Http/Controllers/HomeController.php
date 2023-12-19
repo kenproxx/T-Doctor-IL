@@ -69,7 +69,7 @@ class HomeController extends Controller
     public function userOnlineStatus()
     {
         if (!Auth::check()) {
-            return;
+            return null;
         }
 
         $users = User::where('id', '!=', Auth::id())->get();

@@ -63,6 +63,14 @@ class WidgetChatController extends Controller
 
         $online = (new HomeController())->userOnlineStatus();
 
+        //sắp xếp user theo số tin nhắn chưa đọc
+        usort($userInfoArray, function ($a, $b) {
+            return $b['count_unread_message'] <=> $a['count_unread_message'];
+        });
+        usort($online, function ($a, $b) {
+            return $b['count_unread_message'] <=> $a['count_unread_message'];
+        });
+
         return response()->json([
             'connected' => $userInfoArray,
             'online' => $online
