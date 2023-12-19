@@ -89,6 +89,8 @@ class RegisterController extends Controller
                 $img = asset('storage/' . $itemPath);
                 $user->business_license_img = $img;
                 $checkPending = true;
+                $user->prescription = $prescription ? (int)$prescription : 0;
+                $user->free = $free ? (int)$free : 0;
             }
 
             if ($type == \App\Enums\Role::MEDICAL) {
