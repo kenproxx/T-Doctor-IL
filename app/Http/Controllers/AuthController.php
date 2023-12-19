@@ -195,6 +195,10 @@ class AuthController extends Controller
             $user->address_code = '';
             $user->type = $type;
             $user->member = $member;
+            $user->abouts = 'default';
+            $user->abouts_en = 'default';
+            $user->abouts_lao = 'default';
+
             if ($checkPending) {
                 $user->status = UserStatus::PENDING;
             } else {
@@ -257,7 +261,6 @@ class AuthController extends Controller
             toast('Register fail!', 'error', 'top-left');
             return back();
         } catch (Exception $exception) {
-            dd($exception);
             toast('Error, Please try again!', 'error', 'top-left');
             return back();
         }
