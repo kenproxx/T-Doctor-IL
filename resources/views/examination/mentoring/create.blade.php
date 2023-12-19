@@ -41,7 +41,6 @@
     </div>
 
     <script>
-        const token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
         function submitButton() {
             if (!token) {
                 alert('Please login to apply')

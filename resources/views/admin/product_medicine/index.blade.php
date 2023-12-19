@@ -63,7 +63,6 @@
         {{$productMedicines->links()}}
     </div>
     <script>
-        const token = `{{ $_COOKIE['accessToken'] ?? ''}}`;
 
         function deleteCategoryProduct(id) {
             if (confirm('{{ __('home.Bạn có chắc chắn muốn xóa không') }}?')) {

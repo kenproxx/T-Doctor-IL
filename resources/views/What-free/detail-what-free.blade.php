@@ -139,7 +139,6 @@
         </div>
     </div>
     <script>
-        const token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
 
         var selectedOption = document.querySelector('input[name="sns_option"]:checked');
 

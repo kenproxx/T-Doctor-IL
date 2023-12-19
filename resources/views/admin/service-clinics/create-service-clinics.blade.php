@@ -46,7 +46,6 @@
         </form>
     </div>
     <script>
-        let token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
         let accessToken = `Bearer ` + token;
 
         async function createService() {

@@ -709,8 +709,7 @@
     <script>
         function submitForm() {
             loadingMasterPage();
-            const token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
-            const headers = {
+            let headers = {
                 'Authorization': `Bearer ${token}`
             };
             const formData = new FormData();

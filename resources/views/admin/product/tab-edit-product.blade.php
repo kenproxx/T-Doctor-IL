@@ -159,7 +159,6 @@
         <button type="button" class="btn btn-primary mt-md-4" id="editProducts">{{ __('home.Save') }}</button>
     </form>
     <script>
-        const token = `{{ $_COOKIE['accessToken'] }}`;
         $(document).ready(function () {
             $('#editProducts').on('click', function () {
                 const headers = {

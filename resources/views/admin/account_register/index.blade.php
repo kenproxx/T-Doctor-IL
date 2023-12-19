@@ -57,7 +57,6 @@
         {{$users->links()}}
     </div>
     <script>
-        const token = `{{ $_COOKIE['accessToken'] ?? ''}}`;
 
         function updateUser(id, value) {
             if (confirm('{{ __('home.Bạn có chắc chắn muốn thay đổi không') }}?')) {

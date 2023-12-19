@@ -44,7 +44,7 @@
         </tbody>
     </table>
     <script>
-        const token = `{{ $_COOKIE['accessToken'] ?? ''}}`;
+
 
         function deleteStaff(id) {
             const headers = {

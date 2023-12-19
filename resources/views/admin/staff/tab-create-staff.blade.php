@@ -50,7 +50,6 @@
     </div>
     <button type="button" class="btn btn-primary up-date-button mt-md-4">{{ __('home.Save') }}</button>
     <script>
-        const token = `{{ $_COOKIE['accessToken'] }}`;
         $(document).ready(function () {
             $('.up-date-button').on('click', function () {
                 const headers = {

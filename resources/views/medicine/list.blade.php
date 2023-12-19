@@ -193,7 +193,6 @@
         let locationMedicine = [];
 
         function masterFilterMedicine() {
-            const token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
 
             loadingMasterPage();
             const headers = {
