@@ -97,7 +97,6 @@
     </form>
     <script>
 
-        const token = `{{ $_COOKIE['accessToken'] }}`;
         $(document).ready(function () {
             $('.up-date-button').on('click', function () {
                 const headers = {
@@ -152,8 +151,7 @@
         genSelectOption();
 
         async function genSelectOption() {
-            const token = `{{ $_COOKIE['accessToken'] }}`;
-            const headers = {
+            let headers = {
                 'Authorization': `Bearer ${token}`
             };
             let response = await fetch(`{{route('api.backend.clinics.all-clinic-active')}}`, {

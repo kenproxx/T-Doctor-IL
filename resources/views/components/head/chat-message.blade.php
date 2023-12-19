@@ -322,7 +322,6 @@
     }
 
     async function getMessage(id) {
-        let token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
         let accessToken = `Bearer ` + token;
 
         let url = `{{ route('api.backend.connect.chat.getMessageByUserId', ['id' => ':id']) }}`;

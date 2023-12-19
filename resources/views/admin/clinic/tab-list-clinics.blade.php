@@ -18,7 +18,6 @@
     </table>
 </div>
 <script>
-    const token = `{{ $_COOKIE['accessToken'] }}`;
 
     $(document).ready(() => {
 

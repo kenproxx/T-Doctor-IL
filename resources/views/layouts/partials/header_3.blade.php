@@ -452,8 +452,6 @@
                 if (parts.length === 2) return parts.pop().split(";").shift();
             }
 
-            var token = getCookie('accessToken');
-
             function checkLoginWishStore() {
                 let userId = `{{ Auth::check() ? Auth::user()->id : null }}`;
                 if (!userId) {

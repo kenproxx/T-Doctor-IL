@@ -58,7 +58,6 @@
     <button type="button" class="btn btn-primary up-date-button mt-md-4" onclick="updateUser()">{{ __('home.Save') }}</button>
 
     <script>
-        const token = `{{ $_COOKIE['accessToken'] }}`;
 
         function updateUser() {
             const headers = {

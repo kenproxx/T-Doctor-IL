@@ -1,7 +1,6 @@
 <link href="{{ asset('css/jquerycommment.css') }}" rel="stylesheet">
 <script>
 
-    let token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
     let headers = {
         'Authorization': `Bearer ${token}`
     };

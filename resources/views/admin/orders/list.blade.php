@@ -27,7 +27,6 @@
     </table>
 
     <script>
-        let token = `{{ $_COOKIE['accessToken'] }}`;
         let accessToken = `Bearer ` + token;
         let headers = {
             "Authorization": accessToken

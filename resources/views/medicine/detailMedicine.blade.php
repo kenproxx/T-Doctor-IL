@@ -106,7 +106,6 @@
     @endif
 
     <script>
-        let token = document.getElementById('accessToken').value;
         $(document).ready(function () {
             $('.list img').click(function () {
                 $(".main").attr("src", $(this).attr('src'));

@@ -63,7 +63,6 @@
         }
 
         async function deleteSymptom(id) {
-            let token = `{{ $_COOKIE['accessToken'] ?? '' }}`;
             let url = `{{ route('api.medical.symptoms.delete', ['id'=>':id']) }}`;
             url = url.replace(':id', id);
 

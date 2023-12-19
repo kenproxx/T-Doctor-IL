@@ -248,7 +248,6 @@
         });
     </script>
     <script>
-        const token = `{{ $_COOKIE['accessToken'] }}`;
         let imgGallery = [];
         document.getElementById('gallery').addEventListener('change', function () {
             const imagePreviews = document.getElementById('imagePreview');
