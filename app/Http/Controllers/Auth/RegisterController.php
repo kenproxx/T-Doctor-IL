@@ -16,12 +16,24 @@ class RegisterController extends Controller
     public function register(Request $request)
     {
         try {
+            /* All user */
             $email = $request->input('email');
             $username = $request->input('username');
             $password = $request->input('password');
             $passwordConfirm = $request->input('passwordConfirm');
             $member = $request->input('member');
             $type = $request->input('type');
+
+            /* Only type medical */
+            $name = $request->input('name_doctor');
+            $contact_phone = $request->input('contact_phone');
+            $experience = $request->input('experience');
+            $name_hospital = $request->input('name_hospital');
+            $specialized_services = $request->input('specialized_services');
+            $services_info = $request->input('services_info');
+            $prescription = $request->input('prescription');
+            $free = $request->input('free_question');
+            $abouts = $request->input('abouts_doctor');
 
             $isEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
             if (!$isEmail) {
@@ -50,7 +62,7 @@ class RegisterController extends Controller
 
             $checkPending = false;
             if ($type == \App\Enums\Role::BUSINESS) {
-                // kiểm tra xem fileupload có tồn tại không, nếu không th ì thông báo lỗi
+                // kiểm tra xem fileupload có tồn tại không, nếu không thì thông báo lỗi
                 if (!$request->hasFile('fileupload')) {
                     return response('Cần up file giấy phép kinh doanh', 400);
                 }
@@ -62,7 +74,7 @@ class RegisterController extends Controller
             }
 
             if ($type == \App\Enums\Role::MEDICAL) {
-                // kiểm tra xem fileupload có tồn tại không, nếu không th ì thông báo lỗi
+                // kiểm tra xem fileupload có tồn tại không, nếu không thì thông báo lỗi
                 if (!$request->hasFile('fileupload')) {
                     return response('Cần up file giấy phép nghề nghiệp', 400);
                 }
@@ -71,14 +83,22 @@ class RegisterController extends Controller
                 $img = asset('storage/' . $itemPath);
                 $user->medical_license_img = $img;
                 $checkPending = true;
+                /* Set data for user type with medical */
+                $user->year_of_experience = $experience ?? '';
+                $user->hospital = $name_hospital ?? '';
+                $user->specialty = $specialized_services ?? '';
+                $user->service = $services_info ?? '';
+                $user->prescription = $prescription ? (int)$prescription : 0;
+                $user->free = $free ? (int)$free : 0;
+                $user->abouts = $abouts ?? '';
             }
 
             $user->email = $email;
-            $user->name = '';
-            $user->last_name = '';
+            $user->name = $name ?? '';
+            $user->last_name = $name ?? '';
             $user->username = $username;
             $user->password = Hash::make($password);
-            $user->phone = '';
+            $user->phone = $contact_phone ?? '';
             $user->address_code = '';
             $user->type = $type;
 

@@ -462,15 +462,17 @@
                                             <input id="email" name="email" type="email" placeholder="exmaple@gmail.com"
                                                    required>
                                         </div>
-                                        <div class="form-element">
-                                            <input name="prescription" type="checkbox" value="1">
-                                            <label
-                                                for="prescription">{{ __('home.prescription') }}</label>
-                                        </div>
-                                        <div class="form-element">
-                                            <input name="free" type="checkbox" value="1">
-                                            <label
-                                                for="free">{{ __('home.free') }}</label>
+                                        <div id="action-doctor" style="display: none">
+                                            <div class="form-element">
+                                                <input name="prescription" type="checkbox" value="1">
+                                                <label
+                                                    for="prescription">{{ __('home.prescription') }}</label>
+                                            </div>
+                                            <div class="form-element">
+                                                <input name="free" type="checkbox" value="1">
+                                                <label
+                                                    for="free">{{ __('home.free') }}</label>
+                                            </div>
                                         </div>
 
                                         <div class="form-element">
@@ -900,19 +902,17 @@
             }
             $('#member').empty().append(html);
 
-            let member = $('#member').val();
-            loadHospital(member);
-            loadDoctor(member);
+            let type = $(this).val();
+            loadData(type);
         });
 
-        $('#member').on('change', function () {
-            let value = $(this).val();
+        function loadData(value) {
             loadDoctor(value);
             loadHospital(value);
-        });
+        }
 
         function loadDoctor(value) {
-            if (value == '{{Role::DOCTORS}}') {
+            if (value == '{{Role::MEDICAL}}') {
                 $('#element-doctor').show();
                 $('#name_doctor').attr('required', true);
                 $('#contact_phone').attr('required', true);
@@ -921,6 +921,7 @@
                 $('#rate').attr('required', true);
                 $('#specialized_services').attr('required', true);
                 $('#services_info').attr('required', true);
+                $('#action-doctor').show();
             } else {
                 $('#element-doctor').hide();
                 $('#name_doctor').attr('required', false);
@@ -930,11 +931,12 @@
                 $('#rate').attr('required', false);
                 $('#specialized_services').attr('required', false);
                 $('#services_info').attr('required', false);
+                $('#action-doctor').hide();
             }
         }
 
         function loadHospital(value) {
-            if (value == '{{Role::HOSPITALS}}') {
+            if (value == '{{Role::BUSINESS}}') {
                 $('#element-hospital').show();
                 $('#open_date').attr('required', true);
                 $('#close_date').attr('required', true);
@@ -945,6 +947,7 @@
                 $('#commune_id').attr('required', true);
                 $('#representative').attr('required', true);
                 $('#time_work').attr('required', true);
+                $('#action-doctor').show();
             } else {
                 $('#element-hospital').hide();
                 $('#open_date').attr('required', false);
@@ -956,6 +959,7 @@
                 $('#commune_id').attr('required', false);
                 $('#representative').attr('required', false);
                 $('#time_work').attr('required', false);
+                $('#action-doctor').hide();
             }
         }
     })
