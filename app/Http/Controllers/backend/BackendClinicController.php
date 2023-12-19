@@ -221,6 +221,7 @@ class BackendClinicController extends Controller
             $close_date = $request->input('close_date') ?? $clinic->close_date;
             $introduce = $request->input('introduce') ?? $clinic->introduce;
             $status = $request->input('status') ?? $clinic->status;
+            $type = $request->input('type') ?? $clinic->type;
             $clinics_service = $request->input('clinics_service');
 
             $department = $request->input('departments') ?? $clinic->department;
@@ -262,6 +263,7 @@ class BackendClinicController extends Controller
             $clinic->close_date = $close_date ?? Carbon::now()->addHours(7)->addDay();
             $clinic->introduce = $introduce;
             $clinic->gallery = $gallery;
+            $clinic->type = $type;
             $clinic->status = $status ?? ClinicStatus::ACTIVE;
             $clinic->service_id = $clinics_service;
 
