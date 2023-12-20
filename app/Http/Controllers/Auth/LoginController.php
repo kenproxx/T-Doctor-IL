@@ -36,7 +36,7 @@ class LoginController extends Controller
             }
 
             $existToken = $user->token;
-            if ($existToken){
+            if ($existToken) {
                 return response('The account is already logged in elsewhere!', 400);
             }
 
@@ -54,6 +54,20 @@ class LoginController extends Controller
             return response("Login fail!", 400);
         } catch (\Exception $exception) {
             return response("Login error!", 400);
+        }
+    }
+
+
+    public function logout(Request $request)
+    {
+        try {
+            $user_id = $request->input('user_id');
+            $user = User::find($user_id);
+            $user->token = null;
+            $user->save();
+            return response('Logout success!', 200);
+        } catch (\Exception $exception) {
+            return response($exception, 400);
         }
     }
 }

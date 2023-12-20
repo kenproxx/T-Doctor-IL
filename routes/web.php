@@ -349,6 +349,7 @@ Route::middleware(['user.active'])->group(function () {
 //Auth
     Route::group(['prefix' => 'auth'], function () {
         Route::post('/login', [LoginController::class, 'login'])->name('api.user.login');
+        Route::post('/logout', [LoginController::class, 'logout'])->name('api.user.logout');
         Route::post('/register', [RegisterController::class, 'register'])->name('api.user.register');
     });
 //Product
