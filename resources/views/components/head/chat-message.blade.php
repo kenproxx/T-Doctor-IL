@@ -77,6 +77,7 @@
     const CHAT_TYPE_CONNECTED = 'connected';
 
     let chatUserId;
+    let isShowOpenWidget;
 
     let currentUserIdChat = '{{ Auth::check() ? Auth::user()->id : '' }}';
 
@@ -120,7 +121,7 @@
 
     function calculateTotalMessageUnseen(e) {
 
-        if (e.message.from === chatUserId) {
+        if (isShowOpenWidget) {
             return;
         }
 
@@ -227,6 +228,7 @@
     function setOnclickFriend() {
         $(".friend").each(function () {
             $(this).click(function () {
+                isShowOpenWidget = true;
 
                 chatUserId = $(this).data('id');
                 handleSeenMessage();
@@ -255,19 +257,19 @@
 
                 $(".message").not(".right").find("img").attr("src", $(clone).attr("src"));
                 let parent = $(this).parent();
-                parent.fadeOut();
-                $('#chat-widget-navbar').fadeOut();
-                $('#chatview').fadeIn();
+                parent.hide();
+                $('#chat-widget-navbar').hide();
+                $('#chatview').show();
 
                 $('#close').unbind("click").click(function () {
-                    chatUserId = '';
+                    isShowOpenWidget = false;
                     $("#chat-messages, #profile, #profile p").removeClass("animate");
 
                     setTimeout(function () {
-                        $('#chatview').fadeOut();
+                        $('#chatview').hide();
                         // $(this).parent().show();
-                        parent.fadeIn();
-                        $('#chat-widget-navbar').fadeIn();
+                        parent.show();
+                        $('#chat-widget-navbar').show();
                     }, 50);
                 });
             });
@@ -355,7 +357,7 @@
         });
 
         $(".chat-box-toggle").click(function () {
-            chatUserId = '';
+            isShowOpenWidget = false;
             $("#chat-circle").toggle("scale");
             $(".chat-box").toggle("scale");
         });
@@ -387,6 +389,8 @@
     }
 
     async function getMessage(id) {
+        document.getElementById('chat-messages').innerHTML = '';
+
         let accessToken = `Bearer ` + token;
 
         let url = `{{ route('api.backend.connect.chat.getMessageByUserId', ['id' => ':id']) }}`;
@@ -408,6 +412,7 @@
 
     function renderMessage(data) {
         let html = '';
+
         let currentUserId = '{{ Auth::check() ? Auth::user()->id : '' }}';
         data.forEach((msg) => {
             if (!msg.chat_message) {
@@ -455,9 +460,10 @@
         }
         totalMessageUnseen = data[0]['total_unread_message'];
 
-        if (totalMessageUnseen > 0) {
-            $('#chat-circle').append(`<span class="badge badge-light text-black" id="totalMsgUnseen">${totalMessageUnseen}</span>`);
+        if (totalMessageUnseen <= 1) {
+            totalMessageUnseen = '';
         }
+        $('#chat-circle').append(`<span class="badge badge-light text-black" id="totalMsgUnseen">${totalMessageUnseen}</span>`);
     }
 
     getListUserWasConnect();

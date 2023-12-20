@@ -363,11 +363,6 @@
                             <i class="bi bi-circle"></i><span>{{ __('home.Call video') }}</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('api.backend.connect.chat.index') }}">
-                            <i class="bi bi-circle"></i><span>{{ __('home.chat message') }}</span>
-                        </a>
-                    </li>
                 </ul>
             </li>
             <!-- End Call video Nav -->
@@ -609,23 +604,7 @@
 <script src="{{ asset('admin/vendor/simple-datatables/simple-datatables.js')}}"></script>
 <script src="{{ asset('admin/vendor/php-email-form/validate.js')}}"></script>
 
-
-
-<script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.textcomplete/1.8.0/jquery.textcomplete.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 
 <!-- Template Main JS File -->
 <script src="{{ asset('admin/js/main.js')}}"></script>
