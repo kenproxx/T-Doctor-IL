@@ -195,6 +195,10 @@ class AuthController extends Controller
             $user->address_code = '';
             $user->type = $type;
             $user->member = $member;
+            $user->abouts = 'default';
+            $user->abouts_en = 'default';
+            $user->abouts_lao = 'default';
+
             if ($checkPending) {
                 $user->status = UserStatus::PENDING;
             } else {
