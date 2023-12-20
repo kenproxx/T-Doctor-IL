@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -37,19 +38,22 @@ class LoginController extends Controller
 
             $existToken = $user->token;
             if ($existToken) {
-                return response('The account is already logged in elsewhere!', 400);
-            }
-
-            if (Auth::attempt($credentials)) {
-                $token = JWTAuth::fromUser($user);
-                $user->token = $token;
-                $user->save();
-                $response = $user->toArray();
-                $roleUser = RoleUser::where('user_id', $user->id)->first();
-                $role = Role::find($roleUser->role_id);
-                $response['role'] = $role->name;
-                $response['accessToken'] = $token;
-                return response()->json($response);
+                try {
+                    $user = JWTAuth::setToken($existToken)->toUser();
+                    return response('The account is already logged in elsewhere!', 400);
+                } catch (Exception $e) {
+                    if (Auth::attempt($credentials)) {
+                        $token = JWTAuth::fromUser($user);
+                        $user->token = $token;
+                        $user->save();
+                        $response = $user->toArray();
+                        $roleUser = RoleUser::where('user_id', $user->id)->first();
+                        $role = Role::find($roleUser->role_id);
+                        $response['role'] = $role->name;
+                        $response['accessToken'] = $token;
+                        return response()->json($response);
+                    }
+                }
             }
             return response("Login fail!", 400);
         } catch (\Exception $exception) {
