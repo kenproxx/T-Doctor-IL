@@ -80,13 +80,6 @@ Route::group(['prefix' => 'staffs'], function () {
 
 });
 
-Route::group(['prefix' => 'clinics'], function () {
-    Route::get('/detail/{id}', [ClinicController::class, 'show'])->name('clinics.detail');
-    Route::get('/create', [ClinicController::class, 'create'])->name('clinics.create.product');
-    Route::get('/edit/{id}', [ClinicController::class, 'edit'])->name('clinics.edit');
-    Route::put('/update/{id}', [ClinicController::class, 'update'])->name('clinics.update');
-
-});
 
 Route::group(['prefix' => 'coupon'], function () {
     Route::get('detail/{id}', [CouponController::class, 'show'])->name('coupon.detail');
@@ -135,6 +128,10 @@ Route::group(['prefix' => 'clinics'], function () {
     Route::put('/update/{id}', [BackendClinicController::class, 'update'])->name('api.backend.clinics.update');
     Route::post('/edit/{id}', [BackendClinicController::class, 'update'])->name('api.backend.clinics.edit');
     Route::delete('/delete/{id}', [BackendClinicController::class, 'delete'])->name('api.backend.clinics.delete');
+    Route::get('/detail/{id}', [ClinicController::class, 'show'])->name('clinics.detail');
+    Route::get('/create', [ClinicController::class, 'create'])->name('clinics.create.product');
+    Route::get('/edit/{id}', [ClinicController::class, 'edit'])->name('clinics.edit');
+    Route::put('/updated/{id}', [ClinicController::class, 'update'])->name('clinics.update');
 });
 
 Route::group(['prefix' => 'pharmacies'], function () {
@@ -149,17 +146,6 @@ Route::group(['prefix' => 'pharmacies'], function () {
 
 Route::group(['prefix' => 'pharmacy'], function () {
     Route::get('/list', [AdminPharmacyApi::class, 'getAllPharmacy'])->name('api.backend.pharmacy.list');
-});
-
-Route::group(['prefix' => 'questions'], function () {
-    Route::get('/list', [BackendQuestionController::class, 'getAll'])->name('api.backend.questions.list');
-    Route::get('/user/{id}', [BackendQuestionController::class, 'getAllByUserId'])->name('api.backend.questions.user');
-//    Route::get('/detail/{id}', [BackendQuestionController::class, 'detail'])->name('api.backend.questions.detail');
-    Route::post('/create', [BackendQuestionController::class, 'create'])->name('api.backend.questions.create');
-    Route::put('/change/{id}', [BackendQuestionController::class, 'upgradeStatus'])->name('api.backend.questions.change.status');
-    Route::put('/update/{id}', [BackendQuestionController::class, 'update'])->name('api.backend.questions.update');
-    Route::delete('/delete/{id}', [BackendQuestionController::class, 'delete'])->name('api.backend.questions.delete');
-    Route::delete('/delete-list', [BackendQuestionController::class, 'deleteMultil'])->name('api.backend.questions.delete.list');
 });
 
 Route::group(['prefix' => 'answers'], function () {

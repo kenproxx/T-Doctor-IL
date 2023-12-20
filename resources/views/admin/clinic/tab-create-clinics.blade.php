@@ -2,150 +2,150 @@
 @section('title')
     Create Business
 @endsection
-<link href="{{ asset('css/tabcreateclinics.css') }}" rel="stylesheet">
-<style>
-
-    * {
-        box-sizing: border-box;
-    }
-    .dropdown {
-        position: relative;
-        margin-bottom: 20px;
-    }
-    .dropdown .dropdown-list {
-        padding: 25px 20px;
-        background: #fff;
-        position: absolute;
-        top: 50px;
-        left: 0;
-        right: 0;
-        border: 1px solid rgba(0, 0, 0, .2);
-        max-height: 223px;
-        overflow-y: auto;
-        background: #fff;
-        display: none;
-        z-index: 10;
-    }
-    .dropdown .checkbox {
-        opacity: 0;
-        transition: opacity 0.2s;
-    }
-    .dropdown .dropdown-label {
-        display: block;
-        height: 44px;
-        font-size: 16px;
-        line-height: 42px;
-        background: #fff;
-        border: 1px solid rgba(0, 0, 0, .2);
-        padding: 0 40px 0 20px;
-        cursor: pointer;
-        position: relative;
-    }
-    .dropdown .dropdown-label:before {
-        content: '▼';
-        position: absolute;
-        right: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-        transition: transform 0.25s;
-        transform-origin: center center;
-    }
-    .dropdown.open .dropdown-list {
-        display: block;
-    }
-    .dropdown.open .checkbox {
-        transition: 2s opacity 2s;
-        opacity: 1;
-    }
-    .dropdown.open .dropdown-label:before {
-        transform: translateY(-50%) rotate(-180deg);
-    }
-    .checkbox {
-        margin-bottom: 20px;
-    }
-    .checkbox:last-child {
-        margin-bottom: 0;
-    }
-    .checkbox .checkbox-custom {
-        display: none;
-    }
-    .checkbox .checkbox-custom-label {
-        display: inline-block;
-        position: relative;
-        vertical-align: middle;
-        cursor: pointer;
-    }
-    .checkbox .checkbox-custom + .checkbox-custom-label:before {
-        content: '';
-        background: transparent;
-        display: inline-block;
-        vertical-align: middle;
-        margin-right: 10px;
-        text-align: center;
-        width: 12px;
-        height: 12px;
-        border: 1px solid rgba(0, 0, 0, .3);
-        border-radius: 2px;
-        margin-top: -2px;
-    }
-    .checkbox .checkbox-custom:checked + .checkbox-custom-label:after {
-        content: '';
-        position: absolute;
-        top: 2px;
-        left: 4px;
-        height: 4px;
-        padding: 2px;
-        transform: rotate(45deg);
-        text-align: center;
-        border: solid #000;
-        border-width: 0 2px 2px 0;
-    }
-    .checkbox .checkbox-custom-label {
-        line-height: 16px;
-        font-size: 16px;
-        margin-right: 0;
-        margin-left: 0;
-        color: black;
-    }
-
-
-    .list-department,
-    .list-symptoms,
-    .list-service {
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    .list-department li,
-    .list-symptoms li,
-    .list-service li {
-        margin-right: 20px; /* Adjust as needed */
-    }
-
-    .list-department li:last-child,
-    .list-symptoms li:last-child,
-    .list-service li:last-child {
-        margin-right: 0;
-    }
-
-    .new-select {
-        display: flex;
-        align-items: center;
-    }
-
-    .new-select input {
-        margin-right: 5px; /* Adjust as needed */
-    }
-
-    .new-select label {
-        margin-top: 10px;
-    }
-
-    /* Add more styles as needed */
-
-</style>
 @section('main-content')
+    <link href="{{ asset('css/tabcreateclinics.css') }}" rel="stylesheet">
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+        .dropdown {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .dropdown .dropdown-list {
+            padding: 25px 20px;
+            background: #fff;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            right: 0;
+            border: 1px solid rgba(0, 0, 0, .2);
+            max-height: 223px;
+            overflow-y: auto;
+            background: #fff;
+            display: none;
+            z-index: 10;
+        }
+        .dropdown .checkbox {
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .dropdown .dropdown-label {
+            display: block;
+            height: 44px;
+            font-size: 16px;
+            line-height: 42px;
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, .2);
+            padding: 0 40px 0 20px;
+            cursor: pointer;
+            position: relative;
+        }
+        .dropdown .dropdown-label:before {
+            content: '▼';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.25s;
+            transform-origin: center center;
+        }
+        .dropdown.open .dropdown-list {
+            display: block;
+        }
+        .dropdown.open .checkbox {
+            transition: 2s opacity 2s;
+            opacity: 1;
+        }
+        .dropdown.open .dropdown-label:before {
+            transform: translateY(-50%) rotate(-180deg);
+        }
+        .checkbox {
+            margin-bottom: 20px;
+        }
+        .checkbox:last-child {
+            margin-bottom: 0;
+        }
+        .checkbox .checkbox-custom {
+            display: none;
+        }
+        .checkbox .checkbox-custom-label {
+            display: inline-block;
+            position: relative;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+        .checkbox .checkbox-custom + .checkbox-custom-label:before {
+            content: '';
+            background: transparent;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+            text-align: center;
+            width: 12px;
+            height: 12px;
+            border: 1px solid rgba(0, 0, 0, .3);
+            border-radius: 2px;
+            margin-top: -2px;
+        }
+        .checkbox .checkbox-custom:checked + .checkbox-custom-label:after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 4px;
+            height: 4px;
+            padding: 2px;
+            transform: rotate(45deg);
+            text-align: center;
+            border: solid #000;
+            border-width: 0 2px 2px 0;
+        }
+        .checkbox .checkbox-custom-label {
+            line-height: 16px;
+            font-size: 16px;
+            margin-right: 0;
+            margin-left: 0;
+            color: black;
+        }
+
+
+        .list-department,
+        .list-symptoms,
+        .list-service {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .list-department li,
+        .list-symptoms li,
+        .list-service li {
+            margin-right: 20px; /* Adjust as needed */
+        }
+
+        .list-department li:last-child,
+        .list-symptoms li:last-child,
+        .list-service li:last-child {
+            margin-right: 0;
+        }
+
+        .new-select {
+            display: flex;
+            align-items: center;
+        }
+
+        .new-select input {
+            margin-right: 5px; /* Adjust as needed */
+        }
+
+        .new-select label {
+            margin-top: 10px;
+        }
+
+        /* Add more styles as needed */
+
+    </style>
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('home.create') }}</h1>
     @if (session('success'))
@@ -156,10 +156,9 @@
             </button>
         </div>
     @endif
-    <form method="post" action="{{ route('api.backend.clinics.create') }}">
+    <form>
         @csrf
         @method('POST')
-
         <div>
             <div class="row">
                 <div class="col-md-4">
@@ -219,8 +218,8 @@
             </div>
             <div>
                 <label for="introduce">{{ __('home.introduce') }}</label>
-                <input type="text" class="form-control" id="introduce" name="introduce" required
-                       value="">
+                <textarea type="text" class="form-control" id="introduce" name="introduce" required
+                       value=""></textarea>
             </div>
             <div>
                 <label>{{ __('home.gallery') }}</label>
@@ -414,9 +413,7 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -566,6 +563,8 @@
         });
 
     </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         $(document).ready(function () {
             $('.up-date-button').on('click', function () {
@@ -593,6 +592,7 @@
                 const formData = new FormData();
                 formData.append("name", $('#name').val());
                 formData.append("name_en", $('#name_en').val());
+                formData.append("name_laos", $('#name_laos').val());
                 formData.append("phone", $('#phone').val());
                 formData.append("email", $('#email').val());
                 formData.append("combined_address", $('#combined_address').val());
@@ -604,7 +604,6 @@
                 formData.append("province_id", myProvince[0]);
                 formData.append("district_id", myDistrict[0]);
                 formData.append("commune_id", myCommune[0]);
-                formData.append("introduce", $('#introduce').val());
                 formData.append("open_date", $('#open_date').val());
                 formData.append("close_date", $('#close_date').val());
                 formData.append("user_id", $('#user_id').val());
@@ -623,6 +622,13 @@
                 formData.append("information", $('#hospital_information').val());
                 formData.append("representative_doctor", $('#representative_doctor').val());
                 formData.append("costs", $('#costs').val());
+                const fieldTextareaTiny = [
+                    'introduce'
+                ];
+                fieldTextareaTiny.forEach(fieldTextarea => {
+                    const content = tinymce.get(fieldTextarea).getContent();
+                    formData.append(fieldTextarea, content);
+                });
 
                 var filedata = document.getElementById("gallery");
                 var i = 0, len = filedata.files.length, img, reader, file;
@@ -640,11 +646,15 @@
                         processData: false,
                         data: formData,
                         success: function (response) {
-                            alert('success');
+                            toastr.success('Create success', 'Success');
                             window.location.href = `{{route('homeAdmin.list.clinics')}}`;
                         },
-                        error: function (exception) {
-                            console.log(exception)
+                        error: function (xhr) {
+                            if (xhr.status === 400) {
+                                toastr.error(xhr.responseText, 'Error');
+                            } else {
+                                toastr.error('Create error, Please try again!', 'Error');
+                            }
                         }
                     });
                 } catch (error) {
