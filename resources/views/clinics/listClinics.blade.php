@@ -27,7 +27,17 @@
                                 $clinic['addressInfo'] = '';
                                 return $clinic;
                             }
-                            $clinic['addressInfo'] = $addressC['name'] . ',' . $addressD['name'] . ',' . $addressP['name'];
+                            if ($addressD == null) {
+                                $clinic['addressInfo'] = $addressP['name'];
+                                return $clinic;
+                            }
+                            if ($addressC == null) {
+                                $clinic['addressInfo'] = $addressD['name'] . ',' . $addressP['name'];
+                                return $clinic;
+                            }
+                            if ($clinic['address_detail'] == null){
+                                $clinic['addressInfo'] = $addressC['name'] . ',' . $addressD['name'] . ',' . $addressP['name'];
+                            }
                             return $clinic;
                         });
             $adr = $address->toArray();
