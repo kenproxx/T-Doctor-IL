@@ -87,6 +87,7 @@
             <div class="col-sm-4">
                 <label>{{ __('home.Thumbnail') }}</label>
                 <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*">
+                <img src="{{ asset($newEvent->thumbnail) }}" alt="" style="max-width: 100px">
             </div>
             <input type="hidden" id="id" name="id" value="{{ $newEvent->id ?? '' }}">
         </div>

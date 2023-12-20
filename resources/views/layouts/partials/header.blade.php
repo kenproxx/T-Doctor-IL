@@ -150,14 +150,10 @@
                             <img src="{{asset('img/user-circle.png')}}">
                         </div>
                         <div class="dropdown-menu">
-                            @if( (new MedicalPermission())->isMedicalPermission())
-                                <a class="dropdown-item" href="{{ route('admin.home') }}">{{ __('home.Dashboard') }}</a>
-                            @else
-                                <a class="dropdown-item"
-                                   href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
-                                <a class="dropdown-item"
-                                   href="{{route('booking.list.by.user')}}">{{ __('home.My booking') }}</a>
-                            @endif
+                            <a class="dropdown-item"
+                               href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
+                            <a class="dropdown-item"
+                               href="{{route('booking.list.by.user')}}">{{ __('home.My booking') }}</a>
                             <a class="dropdown-item" href="{{route('logoutProcess')}}">{{ __('home.Logout') }}</a>
                         </div>
                     </div>
@@ -199,15 +195,10 @@
                                 <img src="{{asset('img/user-circle.png')}}">
                             </div>
                             <div class="dropdown-menu">
-                                @if( (new MedicalPermission())->isMedicalPermission())
-                                    <a class="dropdown-item"
-                                       href="{{ route('admin.home') }}">{{ __('home.Dashboard') }}</a>
-                                @else
-                                    <a class="dropdown-item"
-                                       href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
-                                    <a class="dropdown-item"
-                                       href="{{route('booking.list.by.user')}}">{{ __('home.My booking') }}</a>
-                                @endif
+                                <a class="dropdown-item"
+                                   href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
+                                <a class="dropdown-item"
+                                   href="{{route('booking.list.by.user')}}">{{ __('home.My booking') }}</a>
                                 <a class="dropdown-item" href="{{route('logoutProcess')}}">{{ __('home.Logout') }}</a>
                             </div>
                         </div>

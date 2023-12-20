@@ -35,21 +35,40 @@ class DepartmentController extends Controller
     {
         $department = Department::find($id);
         $name = $request->input('name');
+        $name_en = $request->input('name_en');
+        $name_laos = $request->input('name_laos');
+
+        if (!$name || !$name_en || !$name_laos) {
+            alert()->error('Error', 'Please enter the name input!');
+            return back();
+        }
 
         if ($request->hasFile('image')) {
             $item = $request->file('image');
             $itemPath = $item->store('departments', 'public');
             $thumbnail = asset('storage/' . $itemPath);
-        } else {
-            $thumbnail = $department->thumbnail;
+            $department->thumbnail = $thumbnail;
         }
 
-        $description = $request->input('description');
         $status = DepartmentStatus::ACTIVE;
 
+        $description = $request->input('description');
+        $description_en = $request->input('description_en');
+        $description_laos = $request->input('description_laos');
+
+        if (!$description || !$description_en || !$description_laos) {
+            alert()->error('Error', 'Please enter the description input!');
+            return back();
+        }
+
         $department->name = $name;
-        $department->thumbnail = $thumbnail;
+        $department->name_en = $name_en;
+        $department->name_laos = $name_laos;
+
         $department->description = $description;
+        $department->description_en = $description_en;
+        $department->description_laos = $description_laos;
+
         $department->status = $status;
         $department->save();
 
@@ -60,22 +79,45 @@ class DepartmentController extends Controller
     {
         $department = new Department();
         $name = $request->input('name');
+        $name_en = $request->input('name_en');
+        $name_laos = $request->input('name_laos');
+
+        if (!$name || !$name_en || !$name_laos) {
+            alert()->error('Error', 'Please enter the name input!');
+            return back();
+        }
 
         if ($request->hasFile('image')) {
             $item = $request->file('image');
             $itemPath = $item->store('departments', 'public');
             $thumbnail = asset('storage/' . $itemPath);
         } else {
-            $thumbnail = $department->thumbnail;
+            alert()->error('Error', 'Please upload image!');
+            return back();
         }
 
         $description = $request->input('description');
+        $description_en = $request->input('description_en');
+        $description_laos = $request->input('description_laos');
+
+        if (!$description || !$description_en || !$description_laos) {
+            alert()->error('Error', 'Please enter the description input!');
+            return back();
+        }
+
         $status = DepartmentStatus::ACTIVE;
         $user_id = Auth::user()->id;
 
         $department->name = $name;
+        $department->name_en = $name_en;
+        $department->name_laos = $name_laos;
+
         $department->thumbnail = $thumbnail;
+
         $department->description = $description;
+        $department->description_en = $description_en;
+        $department->description_laos = $description_laos;
+
         $department->status = $status;
         $department->user_id = $user_id;
         $department->save();

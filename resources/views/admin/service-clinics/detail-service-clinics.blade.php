@@ -15,19 +15,23 @@
             </div>
         @endif
         <form>
-            <div class="form-row">
-                <div class="form-group col-md-4">
+            <div class="row">
+                <div class="form-group col-md-3">
                     <label for="name">{{ __('home.Name') }}</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{ $service->name }}" required>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <label for="name_en">{{ __('home.name_en') }}</label>
                     <input type="text" class="form-control" id="name_en" value="{{ $service->name_en }}" name="name_en">
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <label for="name_laos">{{ __('home.name_laos') }}</label>
                     <input type="text" class="form-control" id="name_laos" value="{{ $service->name_laos }}"
                            name="name_laos">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="service_price">Giá dịc vụ</label>
+                    <input type="number" class="form-control" id="service_price" name="service_price" value="{{ $service->service_price }}">
                 </div>
             </div>
             <div class="form-row">
@@ -54,6 +58,7 @@
 
             let data = {
                 name: document.getElementById('name').value,
+                service_price: document.getElementById('service_price').value,
                 name_en: document.getElementById('name_en').value,
                 name_laos: document.getElementById('name_laos').value,
                 user_id: `{{ Auth::check() ? Auth::user()->id : '' }}`,
