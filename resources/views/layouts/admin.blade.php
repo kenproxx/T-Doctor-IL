@@ -363,11 +363,6 @@
                             <i class="bi bi-circle"></i><span>{{ __('home.Call video') }}</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('api.backend.connect.chat.index') }}">
-                            <i class="bi bi-circle"></i><span>{{ __('home.chat message') }}</span>
-                        </a>
-                    </li>
                 </ul>
             </li>
             <!-- End Call video Nav -->
@@ -595,6 +590,7 @@
 </footer>
 <!-- End Footer -->
 @include('components.head.tinymce-config')
+@includeWhen(Auth::check(),'components.head.chat-message' )
 
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
@@ -607,6 +603,8 @@
 <script src="{{ asset('admin/vendor/quill/quill.min.js')}}"></script>
 <script src="{{ asset('admin/vendor/simple-datatables/simple-datatables.js')}}"></script>
 <script src="{{ asset('admin/vendor/php-email-form/validate.js')}}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
 
 <!-- Template Main JS File -->
 <script src="{{ asset('admin/js/main.js')}}"></script>
