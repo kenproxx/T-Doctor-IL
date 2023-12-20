@@ -54,6 +54,9 @@ class LoginController extends Controller
                         return response()->json($response);
                     }
                 }
+            } else {
+                $user->token = JWTAuth::fromUser($user);
+                $user->save();
             }
             return response()->json($user);
         } catch (\Exception $exception) {
