@@ -2,14 +2,13 @@
 @section('title')
     {{ __('home.Edit Business') }}
 @endsection
-<link href="{{ asset('css/tabeditclinics.css') }}" rel="stylesheet">
 @section('main-content')
+    <link href="{{ asset('css/tabeditclinics.css') }}" rel="stylesheet">
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('home.Edit') }}</h1>
-    <form method="post" action="{{ route('api.backend.clinics.update', ['id' => $clinic->id]) }}">
+    <form>
         @csrf
         @method('POST')
-
         <div>
             <div class="row">
                 <div class="col-md-4">
@@ -94,8 +93,9 @@
             </div>
             <div>
                 <label for="introduce">{{ __('home.introduce') }}</label>
-                <input type="text" class="form-control" id="introduce" name="introduce" required
-                       value="{{$clinic->introduce}}">
+                <textarea type="text" class="form-control" id="introduce" name="introduce" required>
+                    {{$clinic->introduce}}
+                </textarea>
             </div>
             <div>
                 <label>{{ __('home.gallery') }}</label>
@@ -226,16 +226,186 @@
                                                                 class="form-control">
 
                     <label for="departments"></label><input type="text" name="departments" id="departments"
-                                                               class="form-control">
+                                                            class="form-control">
                     <label for="symptoms"></label><input type="text" name="symptoms" id="symptoms"
-                                                               class="form-control">
+                                                         class="form-control">
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-element">
+                        <input name="emergency" id="emergency" type="checkbox" value="1" @if($clinic->emergency == 1) checked @endif>
+                        <label for="emergency">Is there an emergency room?</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-element">
+                        <input name="insurance" id="insurance" type="checkbox" value="1" @if($clinic->insurance == 1) checked @endif>
+                        <label for="insurance">Is health insurance applicable?</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-element">
+                        <input name="parking" id="parking" type="checkbox" value="1" @if($clinic->parking == 1) checked @endif>
+                        <label for="parking">Is there parking?</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-element">
+                        <label for="costs">Medical examination costs?</label>
+                        <input name="costs" id="costs" type="number" value="{{$clinic->costs}}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="information">Hospital information</label>
+                    <div class="dropdown" data-target="hospital_information">
+                        <label class="dropdown-label">Select Options</label>
+                        <input type="hidden" name="hospital_information" id="hospital_information" value="{{$clinic->information}}"/>
+                        <div class="dropdown-list">
+                            @php
+                                $arrayInformation = explode(',',$clinic->information);
+                                $options = [
+                                    "Pediatric examination/treatment",
+                                    " Emergency department",
+                                    " Female doctor",
+                                    " Specialized hospital",
+                                    " Check health certificate",
+                                    " Physical examination",
+                                    " Rapid antigen test",
+                                    " PCR test",
+                                ];
+                            @endphp
+                            @foreach($options as $key => $option)
+                                <div class="checkbox">
+                                    <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
+                                           id="checkbox-custom_{{ $key }}" value="{{ $option }}"
+                                           @if(in_array($option, $arrayInformation, true) || in_array($option, explode(', ', old('hospital_information', '')))) checked @endif />
+
+                                    <label for="checkbox-custom_{{ $key }}"
+                                           class="checkbox-custom-label">{{ $option }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="information">Hospital facilities</label>
+                    <div class="dropdown" data-target="hospital_facilities">
+                        <label class="dropdown-label">Select Options</label>
+                        <input type="hidden" name="hospital_facilities" id="hospital_facilities" value="{{$clinic->facilities}}"/>
+                        <div class="dropdown-list">
+                            @php
+                                $arrayFacilities = explode(',', $clinic->facilities);
+                                $facilityOptions = [
+                                    "Intensive care unit",
+                                    " General hospital room",
+                                    " High-class hospital room",
+                                    " Surgery room",
+                                    " Emergency room",
+                                    " Physiotherapy room",
+                                ];
+                            @endphp
+                            @foreach($facilityOptions as $key => $facilityOption)
+                                <div class="checkbox">
+                                    <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
+                                           id="checkbox-custom_{{ $key + 21 }}" value="{{ $facilityOption }}"
+                                           @if(in_array($facilityOption, $arrayFacilities, true) || in_array($facilityOption, explode(', ', old('hospital_facilities', '')))) checked @endif />
+
+                                    <label for="checkbox-custom_{{ $key + 21 }}"
+                                           class="checkbox-custom-label">{{ $facilityOption }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="information">Hospital equipment</label>
+                    <div class="dropdown" data-target="hospital_equipment">
+                        <label class="dropdown-label">Select Options</label>
+                        <input type="hidden" name="hospital_equipment" id="hospital_equipment" value="{{$clinic->equipment}}"/>
+                        <div class="dropdown-list">
+                            @php
+                                $arrayEquipment = explode(',', $clinic->equipment);
+                                $equipmentOptions = [
+                                    "CT",
+                                    " MRI",
+                                    " Bone density meter",
+                                    " Positron tomography (PET)",
+                                    " Tumor treatment device (CYBER KNIFE)",
+                                    " Ultrasound imaging equipment",
+                                    " Tumor treatment devices (proton therapy devices)",
+                                    " Artificial kidney equipment for hemodialysis",
+                                ];
+                            @endphp
+                            @foreach($equipmentOptions as $key => $equipmentOption)
+                                <div class="checkbox">
+                                    <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
+                                           id="checkbox-custom_{{ $key + 27 }}" value="{{ $equipmentOption }}"
+                                           @if(in_array($equipmentOption, $arrayEquipment, true) || in_array($equipmentOption, explode(', ', old('hospital_equipment', '')))) checked @endif />
+
+                                    <label for="checkbox-custom_{{ $key + 27 }}"
+                                           class="checkbox-custom-label">{{ $equipmentOption }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <button type="button" class="btn btn-primary up-date-button mt-4">{{ __('home.Save') }}</button>
         </div>
     </form>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe6qi9czJ2Z6SLnV9sSUzce0nuzhRm3hg"></script>
+    <script>
+        $(document).ready(function () {
+            // Lắng nghe sự kiện onchange của các dropdown tỉnh, huyện, xã
+            $('#province_id, #district_id, #commune_id').on('change', function () {
+                // Gọi hàm để lưu địa chỉ khi có sự thay đổi
+                saveAddressOnChange();
+            });
+
+            function saveAddressOnChange() {
+                // Lấy giá trị từ các dropdown
+                var provinceId = $('#province_id').val();
+                var codeProvinceId = getCodeFromValue(provinceId);
+
+                var districtId = $('#district_id').val();
+                var codeDistrictId = getCodeFromValue(districtId);
+
+                var communeId = $('#commune_id').val();
+                var codeCommuneId = getCodeFromValue(communeId);
+
+                // Lấy địa chỉ chi tiết từ input
+                var detailAddress = $('#address_detail').val();
+
+                // Gộp các giá trị vào một chuỗi cách nhau bởi dấu phẩy
+                var combinedAddress = [detailAddress, codeCommuneId, codeDistrictId, codeProvinceId, 'Việt Nam'].join(',');
+                // Gán giá trị vào input ẩn
+                $('#combined_address').val(combinedAddress);
+                addNewAddress();
+            }
+
+            function getCodeFromValue(value) {
+                // Hàm này nhận một giá trị của dropdown và trả về mã code nếu có
+                if (value) {
+                    let myArray = value.split('-');
+                    return myArray.length > 2 ? myArray[2] : '';
+                }
+                return '';
+            }
+        });
+
+    </script>
     <script>
         $(document).ready(function () {
             // Lắng nghe sự kiện onchange của các dropdown tỉnh, huyện, xã
@@ -304,18 +474,18 @@
                 const formData = new FormData();
                 formData.append("name", $('#name').val());
                 formData.append("name_en", $('#name_en').val());
+                formData.append("name_laos", $('#name_laos').val());
                 formData.append("phone", $('#phone').val());
                 formData.append("email", $('#email').val());
                 formData.append("combined_address", $('#combined_address').val());
                 formData.append("longitude", $('#longitude').val());
                 formData.append("latitude", $('#latitude').val());
                 formData.append("address_detail", $('#address_detail').val());
-                formData.append("address_detail_en", $('#detail_address_en').val());
-                formData.append("address_detail_laos", $('#detail_address_laos').val());
+                formData.append("address_detail_en", $('#address_detail_en').val());
+                formData.append("address_detail_laos", $('#address_detail_laos').val());
                 formData.append("province_id", myProvince[0]);
                 formData.append("district_id", myDistrict[0]);
                 formData.append("commune_id", myCommune[0]);
-                formData.append("introduce", $('#introduce').val());
                 formData.append("open_date", $('#open_date').val());
                 formData.append("close_date", $('#close_date').val());
                 formData.append("user_id", $('#user_id').val());
@@ -326,6 +496,21 @@
 
                 formData.append("departments", $('#departments').val());
                 formData.append("symptoms", $('#symptoms').val());
+                formData.append("emergency", $('#emergency').val());
+                formData.append("insurance", $('#insurance').val());
+                formData.append("parking", $('#parking').val());
+                formData.append("facilities", $('#hospital_facilities').val());
+                formData.append("equipment", $('#hospital_equipment').val());
+                formData.append("information", $('#hospital_information').val());
+                formData.append("representative_doctor", $('#representative_doctor').val());
+                formData.append("costs", $('#costs').val());
+                const fieldTextareaTiny = [
+                    'introduce'
+                ];
+                fieldTextareaTiny.forEach(fieldTextarea => {
+                    const content = tinymce.get(fieldTextarea).getContent();
+                    formData.append(fieldTextarea, content);
+                });
 
                 var filedata = document.getElementById("gallery");
                 var i = 0, len = filedata.files.length, img, reader, file;
@@ -558,6 +743,7 @@
 
         let arrayDepartment = [];
         let arrayNameDepartment = [];
+
         function getInputDepartment() {
             let items = document.getElementsByClassName('department_item');
 
@@ -576,6 +762,7 @@
 
         let arraySymptom = [];
         let arrayNameSymptom = [];
+
         function getInputSymptom() {
             let items = document.getElementsByClassName('symptom_item');
 
@@ -597,5 +784,73 @@
         getInputService();
         getInputDepartment();
         getInputSymptom();
+    </script>
+    <script>
+        // Thêm sự kiện change cho các checkbox cụ thể
+        document.getElementById('emergency').addEventListener('change', function() {
+            this.value = this.checked ? 1 : 0;
+        });
+
+        document.getElementById('insurance').addEventListener('change', function() {
+            this.value = this.checked ? 1 : 0;
+        });
+
+        document.getElementById('parking').addEventListener('change', function() {
+            this.value = this.checked ? 1 : 0;
+        });
+    </script>
+    <script>
+        function checkboxDropdown(el, targetInputId) {
+            var $el = $(el);
+
+            function updateHiddenInputValues($dropdown, targetInputId) {
+                var result = [];
+                var $label = $dropdown.find('.dropdown-label');
+                $dropdown.find('.check:checked').each(function () {
+                    var labelText = $(this).next('.checkbox-custom-label').text().trim();
+                    result.push(labelText);
+                });
+                $('#' + targetInputId).val(result.join(', '));
+            }
+
+            function updateStatus($dropdown) {
+                var $label = $dropdown.find('.dropdown-label');
+                updateHiddenInputValues($dropdown, $dropdown.attr('data-target'));
+                if (!$label.text().trim()) {
+                    $label.html('Select Options');
+                }
+            }
+
+            $el.each(function () {
+                var $dropdown = $(this),
+                    $label = $dropdown.find('.dropdown-label'),
+                    $checkAll = $dropdown.find('.check-all'),
+                    $inputs = $dropdown.find('.check');
+
+                $label.on('click', () => {
+                    $dropdown.toggleClass('open');
+                });
+
+                $checkAll.on('change', function () {
+                    var checked = $(this).is(':checked');
+                    $inputs.prop('checked', checked);
+                    updateStatus($dropdown);
+                });
+
+                $inputs.on('change', function () {
+                    updateStatus($dropdown);
+                });
+
+                $(document).on('click touchstart', e => {
+                    if (!$(e.target).closest($dropdown).length) {
+                        $dropdown.removeClass('open');
+                    }
+                });
+            });
+        }
+
+        checkboxDropdown('.dropdown[data-target="hospital_information"]', 'hospital_information');
+        checkboxDropdown('.dropdown[data-target="hospital_facilities"]', 'hospital_facilities');
+        checkboxDropdown('.dropdown[data-target="hospital_equipment"]', 'hospital_equipment');
     </script>
 @endsection

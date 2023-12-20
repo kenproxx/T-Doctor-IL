@@ -67,7 +67,8 @@ class ClinicController extends Controller
         $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
         $departments = Department::where('status', DepartmentStatus::ACTIVE)->get();
         $symptoms = Symptom::where('status', SymptomStatus::ACTIVE)->get();
-        return view('admin.clinic.tab-edit-clinics', compact('clinic', 'types', 'services', 'departments', 'symptoms'));
+        $doctorLists = User::where('member', TypeUser::DOCTORS)->get();
+        return view('admin.clinic.tab-edit-clinics', compact('clinic', 'types', 'services', 'departments', 'symptoms', 'doctorLists'));
     }
 
     public function booking($id)

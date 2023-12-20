@@ -80,13 +80,6 @@ Route::group(['prefix' => 'staffs'], function () {
 
 });
 
-Route::group(['prefix' => 'clinics'], function () {
-    Route::get('/detail/{id}', [ClinicController::class, 'show'])->name('clinics.detail');
-    Route::get('/create', [ClinicController::class, 'create'])->name('clinics.create.product');
-    Route::get('/edit/{id}', [ClinicController::class, 'edit'])->name('clinics.edit');
-    Route::put('/update/{id}', [ClinicController::class, 'update'])->name('clinics.update');
-
-});
 
 Route::group(['prefix' => 'coupon'], function () {
     Route::get('detail/{id}', [CouponController::class, 'show'])->name('coupon.detail');
@@ -135,6 +128,10 @@ Route::group(['prefix' => 'clinics'], function () {
     Route::put('/update/{id}', [BackendClinicController::class, 'update'])->name('api.backend.clinics.update');
     Route::post('/edit/{id}', [BackendClinicController::class, 'update'])->name('api.backend.clinics.edit');
     Route::delete('/delete/{id}', [BackendClinicController::class, 'delete'])->name('api.backend.clinics.delete');
+    Route::get('/detail/{id}', [ClinicController::class, 'show'])->name('clinics.detail');
+    Route::get('/create', [ClinicController::class, 'create'])->name('clinics.create.product');
+    Route::get('/edit/{id}', [ClinicController::class, 'edit'])->name('clinics.edit');
+    Route::put('/updated/{id}', [ClinicController::class, 'update'])->name('clinics.update');
 });
 
 Route::group(['prefix' => 'pharmacies'], function () {
