@@ -151,17 +151,6 @@ Route::group(['prefix' => 'pharmacy'], function () {
     Route::get('/list', [AdminPharmacyApi::class, 'getAllPharmacy'])->name('api.backend.pharmacy.list');
 });
 
-Route::group(['prefix' => 'questions'], function () {
-    Route::get('/list', [BackendQuestionController::class, 'getAll'])->name('api.backend.questions.list');
-    Route::get('/user/{id}', [BackendQuestionController::class, 'getAllByUserId'])->name('api.backend.questions.user');
-//    Route::get('/detail/{id}', [BackendQuestionController::class, 'detail'])->name('api.backend.questions.detail');
-    Route::post('/create', [BackendQuestionController::class, 'create'])->name('api.backend.questions.create');
-    Route::put('/change/{id}', [BackendQuestionController::class, 'upgradeStatus'])->name('api.backend.questions.change.status');
-    Route::put('/update/{id}', [BackendQuestionController::class, 'update'])->name('api.backend.questions.update');
-    Route::delete('/delete/{id}', [BackendQuestionController::class, 'delete'])->name('api.backend.questions.delete');
-    Route::delete('/delete-list', [BackendQuestionController::class, 'deleteMultil'])->name('api.backend.questions.delete.list');
-});
-
 Route::group(['prefix' => 'answers'], function () {
     Route::get('/list', [BackendAnswerController::class, 'getAll'])->name('api.backend.answers.list');
     Route::get('/question/{id}', [BackendAnswerController::class, 'getAllByQuestion'])->name('api.backend.answers.question');
