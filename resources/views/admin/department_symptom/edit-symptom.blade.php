@@ -10,21 +10,46 @@
                     <div class="card-header">{{ __('home.Update Symptoms') }}</div>
 
                     <div class="card-body">
-                        <form action="{{ route('symptom.update', $symptom->id) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('symptom.update', $symptom->id) }}" method="post"
+                              enctype="multipart/form-data">
                             @csrf
-                            <div class="form-group">
-                                <label for="name">{{ __('home.Name') }}:</label>
-                                <input type="text" name="name" id="name" class="form-control" required value="{{ $symptom->name }}">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label for="name">{{ __('home.Name') }}:</label>
+                                    <input type="text" name="name" id="name" class="form-control"
+                                           value="{{ $symptom->name }}" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="name_en">{{ __('home.name_en') }}:</label>
+                                    <input type="text" name="name_en" id="name_en" class="form-control"
+                                           value="{{ $symptom->name_en }}" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="name_laos">{{ __('home.name_laos') }}:</label>
+                                    <input type="text" name="name_laos" id="name_laos" class="form-control"
+                                           value="{{ $symptom->name_laos }}" required>
+                                </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="description">{{ __('home.Mô tả') }}:</label>
-                                <input name="description" id="description" class="form-control" required value="{{ $symptom->description }}">
+                                <label for="description">{{ __('home.Description') }}:</label>
+                                <input name="description" id="description" class="form-control"
+                                       value="{{ $symptom->description }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description_en">{{ __('home.Description English') }}:</label>
+                                <input name="description_en" id="description_en" class="form-control"
+                                       value="{{ $symptom->description_en }}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="description_laos">{{ __('home.Description Laos') }}:</label>
+                                <input name="description_laos" id="description_laos" class="form-control"
+                                       value="{{ $symptom->description_laos }}" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="department">{{ __('home.Department') }}:</label>
-                                <select id="department" class="form-control" name="department">
+                                <select id="department" class="form-control form-select" name="department">
                                     @foreach($departments as $department)
                                         <option {{ $symptom->department_id == $department->id ? 'selected' : '' }}
                                                 value="{{$department->id}}">

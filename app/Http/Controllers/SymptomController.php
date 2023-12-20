@@ -37,23 +37,43 @@ class SymptomController extends Controller
     public function update(Request $request, $id)
     {
         $symptom = Symptom::find($id);
+        $department = $request->input('department');
         if ($request->hasFile('image')) {
             $item = $request->file('image');
             $itemPath = $item->store('symptoms', 'public');
             $thumbnail = asset('storage/' . $itemPath);
-        } else {
-            $thumbnail = $symptom->thumbnail;
+            $symptom->thumbnail = $thumbnail;
         }
-        $name = $request->input('name');
-        $department = $request->input('department');
-        $description = $request->input('description');
 
-        $status = SymptomStatus::ACTIVE;
+        $name = $request->input('name');
+        $name_en = $request->input('name_en');
+        $name_laos = $request->input('name_laos');
+
+        if (!$name || !$name_en || !$name_laos) {
+            alert()->error('Error', 'Please enter the name input!');
+            return back();
+        }
 
         $symptom->name = $name;
+        $symptom->name_en = $name_en;
+        $symptom->name_laos = $name_laos;
+
         $symptom->department_id = $department;
-        $symptom->thumbnail = $thumbnail;
+
+        $description = $request->input('description');
+        $description_en = $request->input('description_en');
+        $description_laos = $request->input('description_laos');
+
+        if (!$description || !$description_en || !$description_laos) {
+            alert()->error('Error', 'Please enter the description input!');
+            return back();
+        }
+
         $symptom->description = $description;
+        $symptom->description_en = $description_en;
+        $symptom->description_laos = $description_laos;
+
+        $status = SymptomStatus::ACTIVE;
         $symptom->status = $status;
 
         $symptom->save();
@@ -64,24 +84,50 @@ class SymptomController extends Controller
     public function store(Request $request)
     {
         $symptom = new Symptom();
+
+        $name = $request->input('name');
+        $name_en = $request->input('name_en');
+        $name_laos = $request->input('name_laos');
+
+        if (!$name || !$name_en || !$name_laos) {
+            alert()->error('Error', 'Please enter the name input!');
+            return back();
+        }
+
         if ($request->hasFile('image')) {
             $item = $request->file('image');
             $itemPath = $item->store('symptoms', 'public');
             $thumbnail = asset('storage/' . $itemPath);
+            $symptom->thumbnail = $thumbnail;
         } else {
-            $thumbnail = $symptom->thumbnail;
+            alert()->error('Error', 'Please upload image!');
+            return back();
         }
-        $name = $request->input('name');
+
         $department = $request->input('department');
+
         $description = $request->input('description');
+        $description_en = $request->input('description_en');
+        $description_laos = $request->input('description_laos');
+
+        if (!$description || !$description_en || !$description_laos) {
+            alert()->error('Error', 'Please enter the description input!');
+            return back();
+        }
 
         $user_id = Auth::user()->id;
         $status = SymptomStatus::ACTIVE;
 
         $symptom->name = $name;
+        $symptom->name_en = $name_en;
+        $symptom->name_laos = $name_laos;
+
         $symptom->department_id = $department;
-        $symptom->thumbnail = $thumbnail;
+
         $symptom->description = $description;
+        $symptom->description_en = $description_en;
+        $symptom->description_laos = $description_laos;
+
         $symptom->status = $status;
         $symptom->user_id = $user_id;
 

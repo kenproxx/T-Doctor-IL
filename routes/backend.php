@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\backend\BackendCouponApplyController;
 use App\Http\Controllers\backend\BackendCouponController;
+use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\restapi\BookingApi;
 use App\Http\Controllers\restapi\BusinessFavouriteApi;
 use App\Http\Controllers\restapi\DoctorReviewApi;
@@ -24,6 +25,16 @@ Route::group(['prefix' => 'users'], function () {
 Route::group(['prefix' => 'users-social'], function () {
     Route::post('modify', [SocialUserApi::class, 'createOrEdit'])->name('user.social.update');
     Route::get('list-social/{id}', [SocialUserApi::class, 'getSocialByUserId'])->name('list-social');
+});
+
+Route::group(['prefix' => 'questions'], function () {
+    Route::get('/list', [BackendQuestionController::class, 'getAll'])->name('api.backend.questions.list');
+    Route::get('/user/{id}', [BackendQuestionController::class, 'getAllByUserId'])->name('api.backend.questions.user');
+    Route::post('/create', [BackendQuestionController::class, 'create'])->name('api.backend.questions.create');
+    Route::put('/change/{id}', [BackendQuestionController::class, 'upgradeStatus'])->name('api.backend.questions.change.status');
+    Route::put('/update/{id}', [BackendQuestionController::class, 'update'])->name('api.backend.questions.update');
+    Route::delete('/delete/{id}', [BackendQuestionController::class, 'delete'])->name('api.backend.questions.delete');
+    Route::delete('/delete-list', [BackendQuestionController::class, 'deleteMultil'])->name('api.backend.questions.delete.list');
 });
 
 Route::group(['prefix' => 'coupons-apply'], function () {
