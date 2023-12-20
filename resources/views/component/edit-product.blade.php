@@ -43,7 +43,7 @@
                         let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`.replace(':id', data.product.id);
                         let urlEdit = `{{ route('flea.market.edit.product', ['id' => ':id']) }}`.replace(':id', data.product.id);
                         html += `
-                        <div class="col-md-4 col-6 item">
+                        <div class="col-md-3 col-6">
                             <div class="product-item">
                                 <div class="img-pro justify-content-center d-flex">
                                     <img src="${data.product.thumbnail}" alt="">
@@ -51,7 +51,7 @@
                                 <div class="content-pro">
                                     <div class="">
                                         <div class="name-product" style="height: auto">
-                                            <a href="${url}">${data.product.name}</a>
+                                            <a class="name-product--fleaMarket" href="${url}">${data.product.name}</a>
                                         </div>
                                         <div class="location-pro d-flex" style="color: #929292">
                                             Location: <p>${data.province.name}</p>
