@@ -80,15 +80,15 @@ class BackendProductMedicineController extends Controller
         );
 
         //check name
-        if (empty($params['name']) && empty($params['name_en']) && empty($params['name_laos'])) {
+        if (empty($params['name']) || empty($params['name_en']) || empty($params['name_laos'])) {
             return response('Tên sản phẩm không được để trống', 400);
         }
         //check description
-        if (empty($params['description']) && empty($params['description_en']) && empty($params['description_laos'])) {
+        if (empty($params['description']) || empty($params['description_en']) || empty($params['description_laos'])) {
             return response('Mô tả sản phẩm không được để trống', 400);
         }
         //check brand_name
-        if (empty($params['brand_name']) && empty($params['brand_name_en']) && empty($params['brand_name_laos'])) {
+        if (empty($params['brand_name']) || empty($params['brand_name_en']) || empty($params['brand_name_laos'])) {
             return response('Tên thương hiệu không được để trống', 400);
         }
 
@@ -135,15 +135,15 @@ class BackendProductMedicineController extends Controller
         );
 
         //check name
-        if (empty($params['name']) && empty($params['name_en']) && empty($params['name_laos'])) {
+        if (empty($params['name']) || empty($params['name_en']) || empty($params['name_laos'])) {
             return response('Tên sản phẩm không được để trống', 400);
         }
         //check description
-        if (empty($params['description']) && empty($params['description_en']) && empty($params['description_laos'])) {
+        if (empty($params['description']) || empty($params['description_en']) || empty($params['description_laos'])) {
             return response('Mô tả sản phẩm không được để trống', 400);
         }
         //check brand_name
-        if (empty($params['brand_name']) && empty($params['brand_name_en']) && empty($params['brand_name_laos'])) {
+        if (empty($params['brand_name']) || empty($params['brand_name_en']) || empty($params['brand_name_laos'])) {
             return response('Tên thương hiệu không được để trống', 400);
         }
 
