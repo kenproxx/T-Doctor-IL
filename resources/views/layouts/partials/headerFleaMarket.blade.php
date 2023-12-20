@@ -9,12 +9,13 @@
                     <img src="{{asset('img/icons_logo/logo-new.png')}}" alt="Logo" width="177px" height="42px"
                          class="d-inline-block align-text-top">
                 </a>
-                <a class="back" href="{{route('home')}}"><h5><i class="fa-solid fa-angles-left"></i>{{ __('home.Flea market') }} </h5></a>
+                <a class="back" href="{{route('home')}}"><h5><i
+                            class="fa-solid fa-angles-left"></i>{{ __('home.Flea market') }} </h5></a>
             </div>
             <div class="col-md-4 header-detail--center d-flex justify-content-sm-around">
                 <a class="active" href="{{route('flea-market.index')}}">{{ __('home.My store') }}</a>
-                <a onclick="checkLogin()" >{{ __('home.Sell my product') }}</a>
-                <a onclick="checkLoginWish()" >{{ __('home.Wish list') }}</a>
+                <a onclick="checkLogin()">{{ __('home.Sell my product') }}</a>
+                <a onclick="checkLoginWish()">{{ __('home.Wish list') }}</a>
             </div>
             <div class="header-right d-flex align-items-center w-25">
                 @if(Auth::check())
@@ -27,14 +28,10 @@
                             <img src="{{asset('img/user-circle.png')}}">
                         </div>
                         <div class="dropdown-menu">
-                            @if( (new MedicalPermission())->isMedicalPermission())
-                                <a class="dropdown-item" href="{{ route('admin.home') }}">{{ __('home.Dashboard') }}</a>
-                            @else
-                                <a class="dropdown-item"
-                                   href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
-                                <a class="dropdown-item"
-                                   href="{{route('booking.list.by.user')}}">{{ __('home.My booking') }}</a>
-                            @endif
+                            <a class="dropdown-item"
+                               href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
+                            <a class="dropdown-item"
+                               href="{{route('booking.list.by.user')}}">{{ __('home.My booking') }}</a>
                             <a class="dropdown-item" href="{{route('logoutProcess')}}">{{ __('home.Logout') }}</a>
                         </div>
                     </div>
@@ -75,16 +72,12 @@
                                     <img src="{{asset('img/user-circle.png')}}">
                                 </div>
                                 <div class="dropdown-menu">
-                                    @if( (new MedicalPermission())->isMedicalPermission())
-                                        <a class="dropdown-item"
-                                           href="{{ route('admin.home') }}">{{ __('home.Dashboard') }}</a>
-                                    @else
-                                        <a class="dropdown-item"
-                                           href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
-                                        <a class="dropdown-item"
-                                           href="{{route('booking.list.by.user')}}">{{ __('home.My booking') }}</a>
-                                    @endif
-                                    <a class="dropdown-item" href="{{route('logoutProcess')}}">{{ __('home.Logout') }}</a>
+                                    <a class="dropdown-item"
+                                       href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
+                                    <a class="dropdown-item"
+                                       href="{{route('booking.list.by.user')}}">{{ __('home.My booking') }}</a>
+                                    <a class="dropdown-item"
+                                       href="{{route('logoutProcess')}}">{{ __('home.Logout') }}</a>
                                 </div>
                             </div>
                         @else
@@ -101,15 +94,18 @@
             </nav>
         </div>
         {{-- modal menu --}}
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="fleaMarketNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="fleaMarketNavbar"
+             aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
                 <a href="{{route('home')}}" class="offcanvas-title" id="offcanvasNavbarLabel"><img class="w-100"
-                                                                                                   src="{{asset('img/icons_logo/logo-new.png')}}" alt=""></a>
+                                                                                                   src="{{asset('img/icons_logo/logo-new.png')}}"
+                                                                                                   alt=""></a>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body">
                 <div class="text-center-info align-items-start d-flex mb-3">
-                    <a href="{{route('home')}}" class="text-center-info"><i class="fa-solid fa-angles-left"></i><span>{{ __('home.Flea market') }}</span></a>
+                    <a href="{{route('home')}}" class="text-center-info"><i
+                            class="fa-solid fa-angles-left"></i><span>{{ __('home.Flea market') }}</span></a>
                 </div>
                 <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                     <li class="nav-item button-nav-header mb-3">
@@ -130,10 +126,12 @@
                         </li>
                     @else
                         <li class="nav-item button-nav-header mb-3">
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#staticBackdrop">{{ __('home.Log In') }}</a>
+                            <a class="nav-link" href="#" data-toggle="modal"
+                               data-target="#staticBackdrop">{{ __('home.Log In') }}</a>
                         </li>
                         <li class="nav-item button-nav-header mb-3">
-                            <a class="nav-link" href="#" data-toggle="modal" data-target="#modalRegister">{{ __('home.Sign Up') }}</a>
+                            <a class="nav-link" href="#" data-toggle="modal"
+                               data-target="#modalRegister">{{ __('home.Sign Up') }}</a>
                         </li>
                     @endif
 
@@ -141,7 +139,8 @@
                 </ul>
             </div>
         </div>
-        <div class="modal fade" id="staticBackdrop" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+        <div class="modal fade" id="staticBackdrop" data-keyboard="false" tabindex="-1"
+             aria-labelledby="staticBackdropLabel"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content" id="modal_login">
@@ -188,7 +187,8 @@
                                     </div>
                                     <div class="sign--up d-flex justify-content-center">
                                         <p>{{ __('home.Do not have an account') }}?</p>
-                                        <a href="" data-toggle="modal" data-target="#modalRegister" data-dismiss="modal">{{ __('home.Sign Up') }}</a>
+                                        <a href="" data-toggle="modal" data-target="#modalRegister"
+                                           data-dismiss="modal">{{ __('home.Sign Up') }}</a>
                                     </div>
                                 </div>
                             </div>
@@ -197,7 +197,8 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modalRegister" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+        <div class="modal fade" id="modalRegister" data-keyboard="false" tabindex="-1"
+             aria-labelledby="staticBackdropLabel"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content" id="modal_register">
@@ -216,7 +217,8 @@
                                             <div>
                                                 <div class="form-element">
                                                     <label for="username">{{ __('home.Username') }}</label>
-                                                    <input id="username" name="username" type="text" placeholder="exmaple"
+                                                    <input id="username" name="username" type="text"
+                                                           placeholder="exmaple"
                                                            required>
                                                 </div>
                                                 <div class="form-element">
@@ -224,8 +226,10 @@
                                                     <select id="type" name="type" class="form-select"
                                                             onchange="showInputFileUpload(this.value)">
                                                         <option>Choose...</option>
-                                                        <option value="{{Role::BUSINESS }}">{{ __('home.BUSINESS') }}</option>
-                                                        <option value="{{Role::MEDICAL }}">{{ __('home.MEDICAL') }}</option>
+                                                        <option
+                                                            value="{{Role::BUSINESS }}">{{ __('home.BUSINESS') }}</option>
+                                                        <option
+                                                            value="{{Role::MEDICAL }}">{{ __('home.MEDICAL') }}</option>
                                                         <option value="{{Role::NORMAL }}"
                                                                 selected>{{ __('home.NORMAL') }}</option>
                                                     </select>
@@ -233,8 +237,10 @@
                                                 <div class="form-element">
                                                     <label for="member">{{ __('home.Member') }}</label>
                                                     <select id="member" name="member" class="form-select">
-                                                        <option value="{{Role::PAITENTS }}">{{ __('home.PAITENTS') }}</option>
-                                                        <option value="{{Role::NORMAL_PEOPLE }}">{{ __('home.NORMAL PEOPLE') }}
+                                                        <option
+                                                            value="{{Role::PAITENTS }}">{{ __('home.PAITENTS') }}</option>
+                                                        <option
+                                                            value="{{Role::NORMAL_PEOPLE }}">{{ __('home.NORMAL PEOPLE') }}
                                                         </option>
                                                     </select>
                                                 </div>
@@ -267,7 +273,8 @@
                                                     <div class="mt-3">
                                                         <label
                                                             for="specialized_services">{{ __('home.SPECIALIZED SERVICES') }}</label>
-                                                        <input type="text" id="specialized_services" name="specialized_services"
+                                                        <input type="text" id="specialized_services"
+                                                               name="specialized_services"
                                                                placeholder="{{ __('home.SPECIALIZED SERVICES') }}">
                                                     </div>
                                                     <div class="mt-3">
@@ -279,19 +286,23 @@
                                                 <div id="element-hospital" style="display: none;">
                                                     <div class="d-flex form-element">
                                                         <div class="col-md-6 pl-0">
-                                                            <label for="open_date">{{ __('home.Thời gian bắt đầu') }}</label>
+                                                            <label
+                                                                for="open_date">{{ __('home.Thời gian bắt đầu') }}</label>
                                                             <input class="input-time" id="open_date" name="open_date"
                                                                    type="time" placeholder="">
                                                         </div>
                                                         <div class="col-md-6 pr-0">
-                                                            <label for="close_date">{{ __('home.Thời gian kết thúc') }}</label>
+                                                            <label
+                                                                for="close_date">{{ __('home.Thời gian kết thúc') }}</label>
                                                             <input class="input-time" id="close_date" name="close_date"
                                                                    type="time" placeholder="">
                                                         </div>
                                                     </div>
                                                     <div class="mt-3 form-element">
-                                                        <label for="experienceHospital">{{ __('home.EXPERIENCE') }}</label>
-                                                        <input type="number" id="experienceHospital" name="experienceHospital"
+                                                        <label
+                                                            for="experienceHospital">{{ __('home.EXPERIENCE') }}</label>
+                                                        <input type="number" id="experienceHospital"
+                                                               name="experienceHospital"
                                                                placeholder="{{ __('home.EXPERIENCE') }}">
                                                     </div>
                                                     <div class="form-element">
@@ -301,12 +312,14 @@
                                                     </div>
                                                     <div class="form-element">
                                                         <label for="province_id">{{ __('home.Tỉnh') }}</label>
-                                                        <select name="province_id" id="province_id" class="form-control">
+                                                        <select name="province_id" id="province_id"
+                                                                class="form-control">
                                                         </select>
                                                     </div>
                                                     <div class="form-element">
                                                         <label for="district_id">{{ __('home.Quận') }}</label>
-                                                        <select name="district_id" id="district_id" class="form-control">
+                                                        <select name="district_id" id="district_id"
+                                                                class="form-control">
                                                         </select>
                                                     </div>
                                                     <div class="form-element">
@@ -340,7 +353,8 @@
                                                 </div>
                                                 <div class="form-element">
                                                     <label for="email">{{ __('home.Email') }}</label>
-                                                    <input id="email" name="email" type="email" placeholder="exmaple@gmail.com"
+                                                    <input id="email" name="email" type="email"
+                                                           placeholder="exmaple@gmail.com"
                                                            required>
                                                 </div>
 
@@ -350,7 +364,8 @@
                                                            placeholder="********" required>
                                                 </div>
                                                 <div class="form-element">
-                                                    <label for="passwordConfirm">{{ __('home.Enter the Password') }}</label>
+                                                    <label
+                                                        for="passwordConfirm">{{ __('home.Enter the Password') }}</label>
                                                     <input id="passwordConfirm" name="passwordConfirm" minlength="8"
                                                            type="password" placeholder="********" required>
                                                 </div>
@@ -386,14 +401,19 @@
                                     </div>
                                     <div class="sign--up d-flex justify-content-center">
                                         <p>{{ __('home.Do you already have an account') }}?</p>
-                                        <a href="#" data-toggle="modal" data-target="#staticBackdrop" data-dismiss="modal">
+                                        <a href="#" data-toggle="modal" data-target="#staticBackdrop"
+                                           data-dismiss="modal">
                                             {{ __('home.Log In') }}</a>
                                     </div>
                                 </div>
                                 <div hidden="">
-                                    <label for="combined_address"></label><input type="text" name="combined_address" id="combined_address" class="form-control">
-                                    <label for="longitude"></label><input type="text" name="longitude" id="longitude" class="form-control">
-                                    <label for="latitude"></label><input type="text" name="latitude" id="latitude" class="form-control">
+                                    <label for="combined_address"></label><input type="text" name="combined_address"
+                                                                                 id="combined_address"
+                                                                                 class="form-control">
+                                    <label for="longitude"></label><input type="text" name="longitude" id="longitude"
+                                                                          class="form-control">
+                                    <label for="latitude"></label><input type="text" name="latitude" id="latitude"
+                                                                         class="form-control">
                                 </div>
                             </form>
                         </div>
@@ -551,6 +571,7 @@
                         $('#services_info').attr('required', false);
                     }
                 }
+
                 function loadHospital(value) {
                     if (value == '{{Role::HOSPITALS}}') {
                         $('#element-hospital').show();

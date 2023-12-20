@@ -30,7 +30,8 @@
                 <div class="header-right d-flex align-items-center w-100">
                     @if(Auth::check())
                         <div class="dropdown col-md-6">
-                            <div class="d-flex dropdown-toggle justify-content-between" type="button" data-toggle="dropdown"
+                            <div class="d-flex dropdown-toggle justify-content-between" type="button"
+                                 data-toggle="dropdown"
                                  aria-expanded="false">
                                 <div class="d-flex align-items-center mr-2">
                                     {{Auth::user()->username}}
@@ -38,11 +39,8 @@
                                 <img src="{{asset('img/user-circle.png')}}" alt="">
                             </div>
                             <div class="dropdown-menu">
-                                @if( (new MedicalPermission())->isMedicalPermission())
-                                    <a class="dropdown-item" href="{{ route('admin.home') }}">{{ __('home.Dashboard') }}</a>
-                                @else
-                                    <a class="dropdown-item" href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
-                                @endif
+                                <a class="dropdown-item"
+                                   href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
                                 <a class="dropdown-item" href="{{route('logoutProcess')}}">{{ __('home.Logout') }}</a>
                             </div>
                         </div>
@@ -89,15 +87,10 @@
                                     <img src="{{asset('img/user-circle.png')}}">
                                 </div>
                                 <div class="dropdown-menu">
-                                    @if( (new MedicalPermission())->isMedicalPermission())
-                                        <a class="dropdown-item"
-                                           href="{{ route('admin.home') }}">{{ __('home.Dashboard') }}</a>
-                                    @else
-                                        <a class="dropdown-item"
-                                           href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
-                                        <a class="dropdown-item"
-                                           href="{{route('booking.list.by.user')}}">{{ __('home.My booking') }}</a>
-                                    @endif
+                                    <a class="dropdown-item"
+                                       href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
+                                    <a class="dropdown-item"
+                                       href="{{route('booking.list.by.user')}}">{{ __('home.My booking') }}</a>
                                     <a class="dropdown-item"
                                        href="{{route('logoutProcess')}}">{{ __('home.Logout') }}</a>
                                 </div>

@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ClinicStatus;
 use App\Enums\UserStatus;
+use App\Models\Clinic;
 use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -62,6 +64,10 @@ class AuthSocialController extends Controller
                 $newUser->type = "OTHERS";
                 $newUser->email_verified_at = now();
                 $newUser->avt = $googleUser->getAvatar();
+
+                $newUser->abouts = '';
+                $newUser->abouts_en = '';
+                $newUser->abouts_lao = '';
 
                 $newUser->save();
 
@@ -145,18 +151,58 @@ class AuthSocialController extends Controller
     {
         try {
             $user = Auth::user();
-
+            /* All role */
             $name = $request->input('name');
             $lastname = $request->input('last_name');
             $phone = $request->input('phone');
             $address_code = $request->input('address_code');
-
+            /* Info user */
             $email = $request->input('email');
             $username = $request->input('username');
             $password = $request->input('password');
             $passwordConfirm = $request->input('passwordConfirm');
             $member = $request->input('member');
+            $type = $request->input('type');
 
+            /* Only for role medical */
+            $doctor_name = $request->input('doctor_name');
+            $doctor_phone = $request->input('doctor_phone');
+            $experience = $request->input('experience');
+            $doctor_hospital = $request->input('doctor_hospital');
+            $specialized_services = $request->input('specialized_services');
+            $services_info = $request->input('services_info');
+
+            /* Only for role business */
+            $open_date = $request->input('open_date');
+            $close_date = $request->input('close_date');
+            $time_work = $request->input('time_work') ?? 'ALL';
+            $address = $request->input('address');
+            $representative = $request->input('representative');
+
+            $prescription = $request->input('prescription') ?? 0;
+            $free = $request->input('free') ?? 0;
+
+            /* More role other */
+            $checkPending = false;
+            if ($type != \App\Enums\Role::NORMAL) {
+                if (!$request->hasFile('file_upload')) {
+                    toast('Please upload your license ', 'error', 'top-left');
+                    return back();
+                }
+                $item = $request->file('file_upload');
+                $itemPath = $item->store('license', 'public');
+                $img = asset('storage/' . $itemPath);
+                $user->medical_license_img = $img;
+                $checkPending = true;
+            }
+
+            if ($checkPending) {
+                $user->status = UserStatus::PENDING;
+            } else {
+                $user->status = UserStatus::ACTIVE;
+            }
+
+            /* Handle logic code */
             $isEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
             if (!$isEmail) {
                 toast('Error, Email invalid!', 'error', 'top-left');
@@ -199,11 +245,55 @@ class AuthSocialController extends Controller
             $user->address_code = $address_code;
             $user->password = Hash::make($password);
 
-            $user->type = $request->input('type');
-            $user->status = UserStatus::ACTIVE;
+            $user->type = $type;
+            $user->member = $member;
+
+            /* Value member medical */
+            if ($type == \App\Enums\Role::MEDICAL) {
+                $user->name = $doctor_name;
+                $user->phone = $doctor_phone;
+                $user->year_of_experience = $experience ?? '';
+                $user->hospital = $doctor_hospital ?? '';
+                $user->specialty = $specialized_services ?? '';
+                $user->service = $services_info ?? '';
+                $user->prescription = $prescription;
+                $user->free = $free;
+            }
 
             $success = $user->save();
 
+            /* Value member business */
+            $currentDate = Carbon::now();
+            if ($type == \App\Enums\Role::BUSINESS) {
+                $openDateTime = Carbon::createFromFormat('Y-m-d H:i', $currentDate->format('Y-m-d') . ' ' . $open_date);
+                $closeDateTime = Carbon::createFromFormat('Y-m-d H:i', $currentDate->format('Y-m-d') . ' ' . $close_date);
+
+                $clinic = new Clinic();
+
+                $formattedOpenDateTime = $openDateTime->format('Y-m-d\TH:i');
+                $formattedCloseDateTime = $closeDateTime->format('Y-m-d\TH:i');
+
+                $clinic->address_detail = $address;
+                $clinic->address = $address;
+
+                $clinic->name = $representative;
+                $clinic->open_date = $formattedOpenDateTime ?? '';
+                $clinic->close_date = $formattedCloseDateTime ?? '';
+                $clinic->experience = $experience;
+                $clinic->user_id = $user->id;
+                $clinic->gallery = $user->avt;
+                $clinic->time_work = $time_work;
+                $clinic->status = ClinicStatus::ACTIVE;
+                $clinic->representative_doctor = $representative;
+                $clinic->type = $member;
+                $clinic->save();
+
+                $user->detail_address = $address;
+                $user->year_of_experience = $experience;
+                $user->bac_si_dai_dien = $representative;
+                $user->name = $name;
+                $user->save();
+            }
 
             if ($success) {
                 $role = Role::where('name', $member)->first();
@@ -223,6 +313,7 @@ class AuthSocialController extends Controller
             toast('Register error!', 'error', 'top-left');
             return back();
         } catch (\Exception $exception) {
+            dd($exception);
             toast('Error, Please try again!', 'error', 'top-left');
             return back();
         }
