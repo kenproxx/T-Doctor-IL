@@ -72,7 +72,7 @@ class BackendCategoryProductController extends Controller
         $params = $request->only('name', 'name_en', 'name_laos', 'status',);
 
         // kiểm tra 1 trong những name phải khác null
-        if (empty($params['name']) && empty($params['name_en']) && empty($params['name_laos'])) {
+        if (empty($params['name']) || empty($params['name_en']) || empty($params['name_laos'])) {
             return response('Tên danh mục không được để trống', 400);
         }
 
@@ -106,7 +106,7 @@ class BackendCategoryProductController extends Controller
         $params = $request->only('name', 'name_en', 'name_laos', 'status',);
 
         // kiểm tra 1 trong những name phải khác null
-        if (empty($params['name']) && empty($params['name_en']) && empty($params['name_laos'])) {
+        if (empty($params['name']) || empty($params['name_en']) || empty($params['name_laos'])) {
             return response('Tên danh mục không được để trống', 400);
         }
 
@@ -115,7 +115,7 @@ class BackendCategoryProductController extends Controller
             $itemPath = $item->store('product', 'public');
             $thumbnail = asset('storage/' . $itemPath);
         } else {
-            $thumbnail = '';
+            return response('Thumbnail không được để trống', 400);
         }
 
         $categoryProduct = new CategoryProduct();
