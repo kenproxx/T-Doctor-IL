@@ -130,32 +130,32 @@
 
 @includeWhen(Auth::check(),'components.head.chat-message' )
 
-{{--<script>--}}
-{{--    function loadingMasterPage() {--}}
-{{--        let overlay = document.getElementsByClassName('loading-overlay-master')[0]--}}
-{{--        overlay.classList.toggle('is-active')--}}
-{{--    }--}}
+<script>
+    function loadingMasterPage() {
+        let overlay = document.getElementsByClassName('loading-overlay-master')[0]
+        overlay.classList.toggle('is-active')
+    }
 
-{{--    var pusher = new Pusher('3ac4f810445d089829e8', {--}}
-{{--        cluster: 'ap1', // specify your cluster here--}}
-{{--        encrypted: true--}}
-{{--    });--}}
-{{--    // Subscribe to the channel we specified in our Laravel Event--}}
-{{--    var channel = pusher.subscribe('send-message');--}}
-{{--    // Bind a function to a Event (the full Laravel class)--}}
-{{--    channel.bind('send-message', function (data) {--}}
-{{--        let thisUser = '{{Auth::user()->id ?? ''}}'--}}
-{{--        if (data.to != thisUser) {--}}
-{{--            return;--}}
-{{--        }--}}
-{{--        $('#modal-call-alert').modal('show')--}}
-{{--        document.getElementById('modal-call-alert-label').innerHTML = 'Cuộc gọi từ ' + data.from--}}
+    var pusher = new Pusher('3ac4f810445d089829e8', {
+        cluster: 'ap1', // specify your cluster here
+        encrypted: true
+    });
+    // Subscribe to the channel we specified in our Laravel Event
+    var channel = pusher.subscribe('send-message');
+    // Bind a function to a Event (the full Laravel class)
+    channel.bind('send-message', function (data) {
+        let thisUser = '{{Auth::user()->id ?? ''}}'
+        if (data.to != thisUser) {
+            return;
+        }
+        $('#modal-call-alert').modal('show')
+        document.getElementById('modal-call-alert-label').innerHTML = 'Cuộc gọi từ ' + data.from
 
-{{--        document.getElementById('ReceiveCall').addEventListener('click', function () {--}}
-{{--            window.open(data.content, '_blank');--}}
-{{--            $('#modal-call-alert').modal('hide')--}}
-{{--        });--}}
-{{--    });--}}
+        document.getElementById('ReceiveCall').addEventListener('click', function () {
+            window.open(data.content, '_blank');
+            $('#modal-call-alert').modal('hide')
+        });
+    });
 
-{{--</script>--}}
+</script>
 </html>
