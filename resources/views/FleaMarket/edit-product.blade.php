@@ -50,9 +50,9 @@
                                 <div class="text-font-16 font-14-mobi mt-45 mt-3">
                                     <p><span>{{ __('home.Location') }} </span> <span class="red-color">*</span></p>
                                     <div class="w-100 mt-2">
-                                        <select class="ac-choose font-16-mobi mt-2" id="province_id"
-                                                name="province_id checkValid"
-                                                required>
+                                        <select class="ac-choose font-16-mobi mt-2" id="province_idProduct"
+                                                                                        name="province_idProduct checkValid"
+                                                                                        required>
                                             @php
                                                 $e_productName = \App\Models\Province::find($e_product->province_id);
                                             @endphp
@@ -299,7 +299,7 @@
                 formData.append("brand_name", $('#brand_name').val());
                 formData.append("brand_name_en", $('#brand_name').val());
                 formData.append("brand_name_laos", $('#brand_name').val());
-                formData.append("province_id", $('#province_id').val());
+                formData.append("province_id", $('#province_idProduct').val());
                 formData.append("price", $('#price').val());
                 formData.append("price_unit", 'VND');
                 formData.append("ads_plan", (selectedValueAdd));

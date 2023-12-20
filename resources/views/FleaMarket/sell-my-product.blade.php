@@ -16,11 +16,13 @@
                 <div class="col-md-12">
                     <div class="">
                         <div class="">
-                            <div class="text-font-24 font-16-mobi mt-3 mt-md-4">{{ __('home.Product information') }}</div>
+                            <div
+                                class="text-font-24 font-16-mobi mt-3 mt-md-4">{{ __('home.Product information') }}</div>
                         </div>
                         <div class="p-0 col-md-12 border-top">
                             <div class="text-font-16 mt-4 font-14-mobi">
-                                <p><label for="name">{{ __('home.Product name') }} </label><span class="red-color"> *</span></p>
+                                <p><label for="name">{{ __('home.Product name') }} </label><span
+                                        class="red-color"> *</span></p>
                                 <div class="w-100 mt-2">
                                     <input class="ac-email font-16-mobi checkValid" required name="name" id="name"
                                            value=""
@@ -31,7 +33,8 @@
                         <div class="d-block d-md-flex ">
                             <div class="col-md-6 pl-0 pr-0 pr-md-3">
                                 <div class="text-font-16 mt-md-4 mt-3 font-14-mobi">
-                                    <p><label for="category_id">{{ __('home.Category') }} </label><span class="red-color"> *</span></p>
+                                    <p><label for="category_id">{{ __('home.Category') }} </label><span
+                                            class="red-color"> *</span></p>
                                     <div class="w-100 mt-md-2">
 
                                         <select class="ac-choose font-16-mobi mt-2" name="category_id checkValid"
@@ -43,10 +46,11 @@
                                     </div>
                                 </div>
                                 <div class="text-font-16 font-14-mobi mt-45 mt-3">
-                                    <p><label for="province_id">{{ __('home.Location') }} </label> <span class="red-color">*</span></p>
+                                    <p><label for="province_idProduct">{{ __('home.Location') }} </label> <span
+                                            class="red-color">*</span></p>
                                     <div class="w-100 mt-2">
-                                        <select class="ac-choose font-16-mobi mt-2" id="province_id"
-                                                name="province_id checkValid"
+                                        <select class="ac-choose font-16-mobi mt-2" id="province_idProduct"
+                                                name="province_idProduct checkValid"
                                                 required>
                                             @foreach($province as $item)
                                                 <option value="{{$item->id}}">{{$item->name}}</option>
@@ -64,13 +68,16 @@
                                                    name="brand_name" id="brand_name" placeholder="0123456789">
                                         </div>
                                         <div class="pr-0 col-md-3 mt-2 col-4">
-                                            <a href="#" id="disabledInput" class="no-brand">{{ __('home.No Brand') }}</a>
+                                            <a href="#" id="disabledInput"
+                                               class="no-brand">{{ __('home.No Brand') }}</a>
                                         </div>
                                     </div>
-                                    <small class="fs-12">{{ __("home.If you don't remember the brand name, you can leave it blank or click to select no brand") }}</small>
+                                    <small
+                                        class="fs-12">{{ __("home.If you don't remember the brand name, you can leave it blank or click to select no brand") }}</small>
                                 </div>
                                 <div class="text-font-16 font-14-mobi mt-md-4 mt-3">
-                                    <p><label for="price">{{ __('home.Price') }} </label> <span class="red-color">*</span></p>
+                                    <p><label for="price">{{ __('home.Price') }} </label> <span
+                                            class="red-color">*</span></p>
                                     <div class="w-100 mt-2">
                                         <input class="web ac-nation font-16-mobi mt-2" name="price checkValid" required
                                                id="price"
@@ -83,7 +90,8 @@
                 </div>
                 <div class="cv-about col-md-12">
                     <div class="">
-                        <label for="description" class="text-font-24 font-14-mobi mt-md-4 mt-3">{{ __('home.Detailed description') }}</label>
+                        <label for="description"
+                               class="text-font-24 font-14-mobi mt-md-4 mt-3">{{ __('home.Detailed description') }}</label>
                     </div>
                     <div class="mt-md-3 mt-2 font-16-mobi">
                         <textarea class="form-control ac-textarea mt-md-3 checkValid" name="description"
@@ -108,14 +116,16 @@
                                 </label>
                                 <input type="file" id="gallery" name="gallery[]" style="display: none;" multiple
                                        accept="image/*">
-                                <button id="chooseImageBtn" type="button" style="display: none">{{ __('home.Chọn ảnh') }}</button>
+                                <button id="chooseImageBtn" type="button"
+                                        style="display: none">{{ __('home.Chọn ảnh') }}</button>
                             </div>
                         </div>
                     </div>
 
                 </div>
                 <div class="text-font-24 mt-4 col-md-12 font-14-mobi">
-                    <p><span>{{ __('home.Please choose you adertisement plan') }} </span><span class="red-color">*</span></p>
+                    <p><span>{{ __('home.Please choose you adertisement plan') }} </span><span
+                            class="red-color">*</span></p>
                     <div class="mt-2 d-flex font-12-mobi">
                         <div class="text-wrapper-input col-md-4 d-flex pl-0">
                             <input type="radio" class="web-tick-box" name="ads_plan" id="ads_plan1" value="1">
@@ -166,6 +176,8 @@
         </form>
     </div>
     </body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
         document.getElementById('chooseImageBtn').addEventListener('click', function () {
             document.getElementById('gallery').click();
@@ -240,7 +252,7 @@
                 formData.append("brand_name", $('#brand_name').val());
                 formData.append("brand_name_en", $('#brand_name').val());
                 formData.append("brand_name_laos", $('#brand_name').val());
-                formData.append("province_id", $('#province_id').val());
+                formData.append("province_id", $('#province_idProduct').val());
                 formData.append("price", $('#price').val());
                 formData.append("price_unit", 'VND');
                 formData.append("ads_plan", (selectedValueAdd));
@@ -265,29 +277,26 @@
                 formData.append('thumbnail', photo);
                 formData.append('status', 'ACTIVE');
                 try {
-                    if (selectedValueAdd && $('#name').val() && $('#price').val()) {
-                        if (photo) {
-                            $.ajax({
-                                url: `{{route('api.backend.products.create')}}`,
-                                method: 'POST',
-                                headers: headers,
-                                contentType: false,
-                                cache: false,
-                                processData: false,
-                                data: formData,
-                                success: function (response) {
-                                    alert('success');
-                                    window.location.reload();
-                                },
-                                error: function (exception) {
-                                }
-                            });
-                        } else {
-                            alert('Please enter thumbnail!');
+                    $.ajax({
+                        url: `{{route('api.backend.products.create')}}`,
+                        method: 'POST',
+                        headers: headers,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: formData,
+                        success: function (response) {
+                            toastr.success('Create success', 'Success');
+                            window.location.href = "{{ route('flea-market.index') }}";
+                        },
+                        error: function (xhr) {
+                            if (xhr.status === 400) {
+                                toastr.error(xhr.responseText, 'Error');
+                            } else {
+                                toastr.error('Create error, Please try again!', 'Error');
+                            }
                         }
-                    } else {
-                        alert('Please enter input!');
-                    }
+                    });
                 } catch (error) {
                     throw error;
                 }
