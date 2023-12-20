@@ -218,8 +218,7 @@
             </div>
             <div>
                 <label for="introduce">{{ __('home.introduce') }}</label>
-                <textarea type="text" class="form-control" id="introduce" name="introduce" required
-                       value=""></textarea>
+                <textarea type="text" class="form-control" id="introduce" name="introduce" required></textarea>
             </div>
             <div>
                 <label>{{ __('home.gallery') }}</label>

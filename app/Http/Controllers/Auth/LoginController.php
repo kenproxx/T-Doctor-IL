@@ -35,8 +35,15 @@ class LoginController extends Controller
                 }
             }
 
+            $existToken = $user->token;
+            if ($existToken){
+                return response('The account is already logged in elsewhere!', 400);
+            }
+
             if (Auth::attempt($credentials)) {
                 $token = JWTAuth::fromUser($user);
+                $user->token = $token;
+                $user->save();
                 $response = $user->toArray();
                 $roleUser = RoleUser::where('user_id', $user->id)->first();
                 $role = Role::find($roleUser->role_id);

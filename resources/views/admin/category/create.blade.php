@@ -26,11 +26,13 @@
             </div>
             <div class="form-group">
                 <label for="description_en">{{ __('home.Description English') }}</label>
-                <input type="text" class="form-control" id="description_en" placeholder="{{ __('home.Description English') }}">
+                <input type="text" class="form-control" id="description_en"
+                       placeholder="{{ __('home.Description English') }}">
             </div>
             <div class="form-group">
                 <label for="description_laos">{{ __('home.Description Laos') }}</label>
-                <input type="text" class="form-control" id="description_laos" placeholder="{{ __('home.Description Laos') }}">
+                <input type="text" class="form-control" id="description_laos"
+                       placeholder="{{ __('home.Description Laos') }}">
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
@@ -88,10 +90,12 @@
                     formData.append(fieldName, $(`#${fieldName}`).val());
                 });
 
+                let file = $('#thumbnail')[0].files[0];
                 formData.append("user_id", '{{ Auth::user()->id }}');
-                formData.append("thumbnail", $('#thumbnail')[0].files[0]);
+                formData.append("thumbnail", file);
 
-                if ($('#name').val() && $('#description').val()) {
+                if ($('#name').val() && $('#name_laos').val() && $('#name_en').val() &&
+                    $('#description').val() && $('#description_en').val() && $('#description_laos').val() && file) {
                     await $.ajax({
                         url: categoryUrl,
                         method: 'POST',

@@ -121,6 +121,7 @@
                     headers: headers,
                     data: data,
                     success: function (response) {
+                        alert('Update success!')
                         window.location.href = orderUrl;
                     },
                     error: function (error) {
