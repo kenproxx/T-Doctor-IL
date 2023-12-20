@@ -37,8 +37,7 @@ class LoginController extends Controller
             }
 
             $existToken = $user->token;
-//            dd($existToken);
-            if ($existToken) {
+            if ($existToken ) {
                 try {
                     $user = JWTAuth::setToken($existToken)->toUser();
                     return response('The account is already logged in elsewhere!', 400);
@@ -56,7 +55,7 @@ class LoginController extends Controller
                     }
                 }
             }
-//            return response("Login fail!", 400);
+            return response()->json($user);
         } catch (\Exception $exception) {
             return response("Login error!", 400);
         }
