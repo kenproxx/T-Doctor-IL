@@ -37,6 +37,7 @@ class LoginController extends Controller
             }
 
             $existToken = $user->token;
+//            dd($existToken);
             if ($existToken) {
                 try {
                     $user = JWTAuth::setToken($existToken)->toUser();
@@ -55,7 +56,7 @@ class LoginController extends Controller
                     }
                 }
             }
-            return response("Login fail!", 400);
+//            return response("Login fail!", 400);
         } catch (\Exception $exception) {
             return response("Login error!", 400);
         }
