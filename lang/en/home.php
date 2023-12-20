@@ -444,7 +444,7 @@ return [
     'địa chỉ chi tiết việt' => 'Vietnamese detailed address',
     'địa chỉ chi tiết anh' => 'Detailed address in English',
     'địa chỉ chi tiết lào' => 'Detailed address in Laos',
-    'Tỉnh' => 'Conscious',
+    'Tỉnh' => 'Province',
     'Quận' => 'District',
     'Xã' => 'Commune',
     'introduce' => 'introduce',
