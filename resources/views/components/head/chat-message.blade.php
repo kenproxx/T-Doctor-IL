@@ -77,8 +77,9 @@
     const CHAT_TYPE_CONNECTED = 'connected';
 
     let chatUserId;
+    let isShowOpenWidget;
 
-    let currentId = '{{ Auth::check() ? Auth::user()->id : '' }}';
+    let currentUserIdChat = '{{ Auth::check() ? Auth::user()->id : '' }}';
 
     let totalMessageUnseen = 0;
 
@@ -89,7 +90,7 @@
         encrypted: true,
     });
 
-    window.Echo.private("messages." + currentId).listen('NewMessage', function (e) {
+    window.Echo.private("messages." + currentUserIdChat).listen('NewMessage', function (e) {
         renderMessageReceive(e);
         handleSeenMessage();
         calculateTotalMessageUnseen(e);
@@ -102,6 +103,7 @@
 
         let url = `{{ route('api.backend.connect.chat.seen-message', ['id' => ':id']) }}`;
         url = url.replace(':id', chatUserId);
+
 
         $.ajax({
             url: url,
@@ -119,7 +121,7 @@
 
     function calculateTotalMessageUnseen(e) {
 
-        if (e.message.from === chatUserId) {
+        if (isShowOpenWidget) {
             return;
         }
 
@@ -129,7 +131,7 @@
 
         // duyệt class friend, tìm ra div có data-id = e.message.from
         // tăng thêm 1 span.badge
-        $(".friend").each(function () {
+        $("#friendslist-connected .friend").each(function () {
 
             if ($(this).data('id') === e.message.from) {
                 let countUnseen = $(this).data('msg-unseen');
@@ -171,9 +173,18 @@
             return;
         }
 
+        let isShowBadge = false;
+
+        if (type === CHAT_TYPE_CONNECTED) {
+            isShowBadge = true;
+        }
+
         $.each(data, function (index, item) {
             let countUnseen = item.count_unread_message;
             if (countUnseen === 0 || !countUnseen) {
+                countUnseen = '';
+            }
+            if (!isShowBadge) {
                 countUnseen = '';
             }
 
@@ -217,6 +228,7 @@
     function setOnclickFriend() {
         $(".friend").each(function () {
             $(this).click(function () {
+                isShowOpenWidget = true;
 
                 chatUserId = $(this).data('id');
                 handleSeenMessage();
@@ -244,18 +256,20 @@
                 $("#profile span").html(email);
 
                 $(".message").not(".right").find("img").attr("src", $(clone).attr("src"));
-                $(this).parent().fadeOut();
-                $('#chat-widget-navbar').fadeOut();
-                $('#chatview').fadeIn();
+                let parent = $(this).parent();
+                parent.hide();
+                $('#chat-widget-navbar').hide();
+                $('#chatview').show();
 
                 $('#close').unbind("click").click(function () {
-                    chatUserId = '';
+                    isShowOpenWidget = false;
                     $("#chat-messages, #profile, #profile p").removeClass("animate");
 
                     setTimeout(function () {
-                        $('#chatview').fadeOut();
-                        $(this).parent().fadeIn();
-                        $('#chat-widget-navbar').fadeIn();
+                        $('#chatview').hide();
+                        // $(this).parent().show();
+                        parent.show();
+                        $('#chat-widget-navbar').show();
                     }, 50);
                 });
             });
@@ -343,7 +357,7 @@
         });
 
         $(".chat-box-toggle").click(function () {
-            chatUserId = '';
+            isShowOpenWidget = false;
             $("#chat-circle").toggle("scale");
             $(".chat-box").toggle("scale");
         });
@@ -375,6 +389,8 @@
     }
 
     async function getMessage(id) {
+        document.getElementById('chat-messages').innerHTML = '';
+
         let accessToken = `Bearer ` + token;
 
         let url = `{{ route('api.backend.connect.chat.getMessageByUserId', ['id' => ':id']) }}`;
@@ -396,6 +412,7 @@
 
     function renderMessage(data) {
         let html = '';
+
         let currentUserId = '{{ Auth::check() ? Auth::user()->id : '' }}';
         data.forEach((msg) => {
             if (!msg.chat_message) {
@@ -438,14 +455,15 @@
     }
 
     function renderTotalMessageUnseen(data) {
-        if (data.length == 0) {
+        if (data.length < 1) {
             return;
         }
         totalMessageUnseen = data[0]['total_unread_message'];
 
-        if (totalMessageUnseen > 0) {
-            $('#chat-circle').append(`<span class="badge badge-light text-black" id="totalMsgUnseen">${totalMessageUnseen}</span>`);
+        if (totalMessageUnseen <= 1) {
+            totalMessageUnseen = '';
         }
+        $('#chat-circle').append(`<span class="badge badge-light text-black" id="totalMsgUnseen">${totalMessageUnseen}</span>`);
     }
 
     getListUserWasConnect();

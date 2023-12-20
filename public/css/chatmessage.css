@@ -58,7 +58,7 @@
     position: relative;
     height: 45vh;
     border: 1px solid #ccc;
-    overflow: scroll;
+    overflow: auto;
 }
 
 #widget-chat .chat-box-body:after {
@@ -102,6 +102,14 @@
     cursor: pointer;
 }
 
+#chat-widget-navbar li {
+    width: 50%;
+}
+
+#chat-widget-navbar li button{
+    width: 100%;
+}
+
 #widget-chat .friend img {
     width: 40px;
     border-radius: 50%;
@@ -113,6 +121,7 @@
     padding: 15px 0 0 0;
     float: left;
     width: 220px;
+    margin-bottom: 0;
 }
 
 #widget-chat .friend p strong {
@@ -331,4 +340,8 @@
     border-radius: 6px;
     position: relative;
     bottom: 0;
+}
+
+#widget-chat .badge-light {
+    background-color: #f8f9fa;
 }
