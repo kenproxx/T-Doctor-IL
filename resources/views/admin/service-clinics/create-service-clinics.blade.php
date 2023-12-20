@@ -15,22 +15,22 @@
             </div>
         @endif
         <form>
-            <div class="form-row">
-                <div class="form-group col-md-4">
+            <div class="row">
+                <div class="form-group col-md-3">
                     <label for="name">{{ __('home.Name') }}</label>
                     <input type="text" class="form-control" id="name" name="name" required>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <label for="name_en">{{ __('home.name_en') }}</label>
                     <input type="text" class="form-control" id="name_en" name="name_en">
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="service_price">Giá dịc vụ</label>
-                    <input type="number" class="form-control" id="service_price" name="service_price">
-                </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-3">
                     <label for="name_laos">{{ __('home.name_laos') }}</label>
                     <input type="text" class="form-control" id="name_laos" name="name_laos">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="service_price">Giá dịc vụ</label>
+                    <input type="number" class="form-control" id="service_price" name="service_price">
                 </div>
             </div>
             <div class="form-row">

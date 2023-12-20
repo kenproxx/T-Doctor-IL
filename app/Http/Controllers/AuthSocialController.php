@@ -313,7 +313,6 @@ class AuthSocialController extends Controller
             toast('Register error!', 'error', 'top-left');
             return back();
         } catch (\Exception $exception) {
-            dd($exception);
             toast('Error, Please try again!', 'error', 'top-left');
             return back();
         }
