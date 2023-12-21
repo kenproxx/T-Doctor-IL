@@ -715,6 +715,7 @@
                 break;
             }
         }
+        return isValid;
     }
 </script>
 </html>
