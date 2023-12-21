@@ -162,10 +162,12 @@
             /* Tạo fn appendDataForm ở admin blade*/
             appendDataForm(arrField, formData, isValid);
 
-            const fieldTextareaTiny = ["description", "description_en", "description_laos"
-            ];
+            const fieldTextareaTiny = ["description", "description_en", "description_laos"];
             fieldTextareaTiny.forEach(fieldTextarea => {
                 const content = tinymce.get(fieldTextarea).getContent();
+                if (!content) {
+                    isValid = false;
+                }
                 formData.append(fieldTextarea, content);
             });
 
@@ -176,6 +178,9 @@
                 formData.append('gallery[]', file);
             }
             const photo = $('#thumbnail')[0].files[0];
+            if (!photo){
+                isValid = false;
+            }
             formData.append('thumbnail', photo);
             formData.append('status', 'ACTIVE');
             if (isValid) {
@@ -199,6 +204,8 @@
                 } catch (error) {
                     throw error;
                 }
+            } else {
+                alert('Please check input not empty!')
             }
         }
     </script>
