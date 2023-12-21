@@ -260,6 +260,8 @@
                         </div>`;
             } else {
                 data.forEach(async function (item) {
+                    let url = `{{ route('medicine.detail', ['id' => ':id']) }}`;
+                    url = url.replace(':id', item.id);
                     html += `<div class="col-md-3">
                                 <div class="product-item">
                                     <div class="img-pro">
@@ -267,7 +269,7 @@
                                     </div>
                                     <div class="content-pro">
                                         <div class="name-pro">
-                                            <a href="">${item.name}</a>
+                                            <a href="${url}">${item.name}</a>
                                         </div>
                                         <div class="location-pro d-flex">
                                             Location: <p>${item.location_name ?? 'Toàn quốc'}</p>
