@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\backend\BackendNewEventController;
 use App\Http\Controllers\restapi\admin\AdminTopicVideoApi;
+use App\Http\Controllers\restapi\admin\AdminUserApi;
 use App\Http\Controllers\restapi\admin\AminServiceClinicApi;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,14 @@ Route::group(['prefix' => 'new-event'], function () {
     Route::get('edit/{id}', [BackendNewEventController::class, 'edit'])->name('api.new-event.edit');
     Route::post('update', [BackendNewEventController::class, 'update'])->name('api.new-event.update');
     Route::post('destroy/{id}', [BackendNewEventController::class, 'destroy'])->name('api.new-event.destroy');
+});
+
+Route::group(['prefix' => 'users'], function () {
+    Route::get('index', [AdminUserApi::class, 'getAllUser'])->name('api.admin.users.index');
+    Route::get('detail/{id}', [AdminUserApi::class, 'detail'])->name('api.admin.users.detail');
+    Route::post('create', [AdminUserApi::class, 'create'])->name('api.admin.users.create');
+    Route::post('update/{id}', [AdminUserApi::class, 'update'])->name('api.admin.users.update');
+    Route::delete('delete/{id}', [AdminUserApi::class, 'delete'])->name('api.admin.users.delete');
 });
 
 Route::group(['prefix' => 'service-clinics'], function () {
