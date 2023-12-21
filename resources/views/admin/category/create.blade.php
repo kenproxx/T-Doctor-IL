@@ -86,16 +86,17 @@
                     "parent_id", "status",
                 ];
 
-                fieldNames.forEach(fieldName => {
-                    formData.append(fieldName, $(`#${fieldName}`).val());
-                });
+                let isValid = true;
+                appendDataForm(fieldNames, formData, isValid);
 
                 let file = $('#thumbnail')[0].files[0];
                 formData.append("user_id", '{{ Auth::user()->id }}');
+                if (!file) {
+                    isValid = false;
+                }
                 formData.append("thumbnail", file);
 
-                if ($('#name').val() && $('#name_laos').val() && $('#name_en').val() &&
-                    $('#description').val() && $('#description_en').val() && $('#description_laos').val() && file) {
+                if (isValid) {
                     await $.ajax({
                         url: categoryUrl,
                         method: 'POST',

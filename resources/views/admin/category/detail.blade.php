@@ -89,9 +89,8 @@
                     "parent_id", "status",
                 ];
 
-                fieldNames.forEach(fieldName => {
-                    formData.append(fieldName, $(`#${fieldName}`).val());
-                });
+                let isValid = true;
+                appendDataForm(fieldNames, formData, isValid);
 
                 formData.append("thumbnail", $('#thumbnail')[0].files[0]);
 
