@@ -690,6 +690,32 @@
     function editBadgesMessageUnseen(countUnseen) {
         $('#count-message-unseen').text(countUnseen);
     }
+
+    function validInputByID(input) {
+        let labelElement = $(`label[for='${input}']`);
+        let text = labelElement.text();
+        if (!text) {
+            text = 'The input'
+        }
+        text = text + ' not empty!'
+        return text;
+    }
+
+    function appendDataForm(arrField, formData, isValid) {
+        for (let i = 0; i < arrField.length; i++) {
+            let field = arrField[i];
+            let value = $(`#${field}`).val().trim();
+
+            if (value && value !== '') {
+                formData.append(field, value);
+            } else {
+                isValid = false;
+                let message = validInputByID(field);
+                alert(message);
+                break;
+            }
+        }
+    }
 </script>
 </html>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">

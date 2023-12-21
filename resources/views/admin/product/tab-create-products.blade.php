@@ -82,7 +82,8 @@
             </div>
             <div>
                 <label>{{ __('home.Thumbnail') }}</label>
-                <input type="file" class="form-control" id="thumbnail" name="thumbnail" multiple accept="image/*" required>
+                <input type="file" class="form-control" id="thumbnail" name="thumbnail" multiple accept="image/*"
+                       required>
             </div>
             <div>
                 <label>{{ __('home.gallery') }}</label>
@@ -120,8 +121,10 @@
                 <div class="col-md-4">
                     <label for="status">{{ __('home.Status') }}</label>
                     <select id="status" name="status" class="form-select">
-                        <option value="{{ \App\Enums\ProductStatus::ACTIVE }}">{{ \App\Enums\ProductStatus::ACTIVE }}</option>
-                        <option value="{{ \App\Enums\ProductStatus::ACTIVE }}">{{ \App\Enums\ProductStatus::ACTIVE }}</option>
+                        <option
+                            value="{{ \App\Enums\ProductStatus::ACTIVE }}">{{ \App\Enums\ProductStatus::ACTIVE }}</option>
+                        <option
+                            value="{{ \App\Enums\ProductStatus::ACTIVE }}">{{ \App\Enums\ProductStatus::ACTIVE }}</option>
                     </select>
                 </div>
             </div>
@@ -130,14 +133,18 @@
                 <input type="text" class="form-control" id="user_id" name="user_id" value="{{Auth::user()->id}}">
             </div>
         </div>
-        <button type="submit" class="btn btn-primary up-date-button mt-md-4">{{ __('home.Save') }}</button>
+        <button type="button" class="btn btn-primary up-create-button mt-md-4">{{ __('home.Save') }}</button>
     </form>
     <script>
         $(document).ready(function () {
             $('#form-create-product').submit(function (e) {
                 e.preventDefault();
-                createProduct();
+                // createProduct();
             });
+
+            $('.up-create-button').on('click', function () {
+                createProduct();
+            })
         })
 
         async function createProduct() {
@@ -145,19 +152,16 @@
                 'Authorization': `Bearer ${token}`
             };
             const formData = new FormData();
-            formData.append("name", $('#name').val());
-            formData.append("name_en", $('#name_en').val());
-            formData.append("name_laos", $('#name_laos').val());
-            formData.append("category_id", $('#category_id').val());
-            formData.append("brand_name", $('#brand_name').val());
-            formData.append("brand_name_en", $('#brand_name_en').val());
-            formData.append("brand_name_laos", $('#brand_name_laos').val());
-            formData.append("province_id", $('#province_id').val());
-            formData.append("price", $('#price').val());
-            formData.append("price_unit", $('#price_unit').val());
-            formData.append("ads_plan", $('#ads_plan').val());
-            formData.append("ads_period", $('#ads_period').val());
-            formData.append("user_id", $('#user_id').val());
+
+            const arrField = ['name', 'name_en', 'name_laos',
+                'category_id', 'brand_name', 'brand_name_en',
+                'brand_name_laos', 'province_id', 'price',
+                'price_unit', 'ads_plan', 'ads_period', 'user_id'];
+
+            let isValid = true
+            /* Tạo fn appendDataForm ở admin blade*/
+            appendDataForm(arrField, formData, isValid);
+
             const fieldTextareaTiny = ["description", "description_en", "description_laos"
             ];
             fieldTextareaTiny.forEach(fieldTextarea => {
@@ -174,25 +178,27 @@
             const photo = $('#thumbnail')[0].files[0];
             formData.append('thumbnail', photo);
             formData.append('status', 'ACTIVE');
-            try {
-                await $.ajax({
-                    url: `{{route('api.backend.products.create')}}`,
-                    method: 'POST',
-                    headers: headers,
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    data: formData,
-                    success: function (response) {
-                        alert('success');
-                        window.location.href = `{{route('homeAdmin.list.product')}}`;
-                    },
-                    error: function (exception) {
-                        console.log(exception)
-                    }
-                });
-            } catch (error) {
-                throw error;
+            if (isValid) {
+                try {
+                    await $.ajax({
+                        url: `{{route('api.backend.products.create')}}`,
+                        method: 'POST',
+                        headers: headers,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: formData,
+                        success: function (response) {
+                            alert('success');
+                            window.location.href = `{{route('homeAdmin.list.product')}}`;
+                        },
+                        error: function (exception) {
+                            console.log(exception)
+                        }
+                    });
+                } catch (error) {
+                    throw error;
+                }
             }
         }
     </script>

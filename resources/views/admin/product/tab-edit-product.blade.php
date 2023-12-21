@@ -171,16 +171,17 @@
                     "brand_name_en", "province_id", "price",
                     "price_unit", "ads_plan", "ads_period", "user_id", "name_laos", "brand_name_laos"
                 ];
+
+                let isValid = true
+                /* Tạo fn appendDataForm ở admin blade*/
+                appendDataForm(fieldNames, formDataEdit, isValid);
+
                 const fieldTextareaTiny = [
                     "description", "description_en", "description_laos"
                 ];
                 fieldTextareaTiny.forEach(fieldTextarea => {
                     const content = tinymce.get(fieldTextarea).getContent();
                     formDataEdit.append(fieldTextarea, content);
-                });
-
-                fieldNames.forEach(fieldName => {
-                    formDataEdit.append(fieldName, $(`#${fieldName}`).val());
                 });
 
 
@@ -193,27 +194,29 @@
                 const photoGallery = $('#gallery')[0].files;
                 const photo = $('#thumbnail')[0].files[0];
                 formDataEdit.append('thumbnail', photo);
-                formDataEdit.append('status', 'ACTIVE');
+                formDataEdit.append('status', $('#status').val());
 
-                try {
-                    $.ajax({
-                        url: `{{route('api.backend.product.updatePost',$product->id)}}`,
-                        method: 'POST',
-                        headers: headers,
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        data: formDataEdit,
-                        success: function (response) {
-                            alert('success');
-                            window.location.href = `{{route('homeAdmin.list.product')}}`
-                        },
-                        error: function (exception) {
-                            console.log(exception)
-                        }
-                    });
-                } catch (error) {
-                    throw error;
+                if(isValid){
+                    try {
+                        $.ajax({
+                            url: `{{route('api.backend.product.updatePost',$product->id)}}`,
+                            method: 'POST',
+                            headers: headers,
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            data: formDataEdit,
+                            success: function (response) {
+                                alert('success');
+                                window.location.href = `{{route('homeAdmin.list.product')}}`
+                            },
+                            error: function (exception) {
+                                console.log(exception)
+                            }
+                        });
+                    } catch (error) {
+                        throw error;
+                    }
                 }
             })
         })
