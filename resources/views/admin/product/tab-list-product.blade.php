@@ -5,7 +5,6 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">{{ __('home.Thumbnail') }}</th>
-            <th scope="col">{{ __('home.gallery') }}</th>
             <th scope="col">{{ __('home.Name') }}</th>
             <th scope="col">{{ __('home.Location') }}</th>
             <th scope="col">{{ __('home.Price') }}</th>
@@ -57,7 +56,6 @@
             html = html + `<tr>
             <th scope="row">${rowNumber}</th>
             <td><img class="mr-2 w-auto h-100" src="${item.thumbnail}" alt=""></td>
-            <td>${img}</td>
             <td>${item.name}</td>
             <td>${item.province_name}</td>
             <td>${item.price} ${item.price_unit}</td>
