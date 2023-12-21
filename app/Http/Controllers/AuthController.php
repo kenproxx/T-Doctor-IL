@@ -18,65 +18,6 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
-    {
-        try {
-            $loginRequest = $request->input('email');
-            $password = $request->input('password');
-
-            $credentials = [
-                'email' => $loginRequest,
-                'password' => $password,
-            ];
-
-            $user = User::where('email', $loginRequest)->first();
-            if (!$user) {
-                toast('Account not found!', 'error', 'top-left');
-                return back();
-            } else {
-                if ($user) {
-                    switch ($user->status) {
-                        case UserStatus::ACTIVE:
-                            break;
-                        case UserStatus::INACTIVE:
-                            toast('Account not active!', 'error', 'top-left');
-                            return back();
-                        case UserStatus::BLOCKED:
-                            toast('Account has been blocked!', 'error', 'top-left');
-                            return back();
-                        case UserStatus::DELETED:
-                            toast('Account has been deleted!', 'error', 'top-left');
-                            return back();
-                        case UserStatus::PENDING:
-                            toast('Account is pending!', 'error', 'top-left');
-                            return back();
-                    }
-                }
-            }
-
-            if (Auth::attempt($credentials)) {
-                $token = JWTAuth::fromUser($user);
-                setCookie('accessToken', $token);
-                toast('Welcome ' . $user->email, 'success', 'top-left');
-
-                $role_user = DB::table('role_users')->where('user_id', $user->id)->first();
-                $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
-
-                if ($roleNames->contains('DOCTORS') || $roleNames->contains('PHAMACISTS') || $roleNames->contains('THERAPISTS') || $roleNames->contains('ESTHETICIANS') || $roleNames->contains('NURSES') || $roleNames->contains('PHARMACEUTICAL COMPANIES') || $roleNames->contains('HOSPITALS') || $roleNames->contains('CLINICS') || $roleNames->contains('PHARMACIES') || $roleNames->contains('SPAS') || $roleNames->contains('OTHERS') || $roleNames->contains('ADMIN')) {
-                    return redirect(route('admin.home'));
-                }
-
-                return redirect(route('home'));
-            } else {
-                toast('Email or password incorrect', 'error', 'top-left');
-            }
-            return back();
-        } catch (Exception $exception) {
-            toast('Error, Please try again!', 'error', 'top-left');
-            return back();
-        }
-    }
-
     public function register(Request $request)
     {
         try {
@@ -223,7 +164,7 @@ class AuthController extends Controller
 
                     $hospital = new Clinic();
                     $hospital->address_detail = $address_detail;
-                    $hospital->address = ','.$province[0].','.$district[0].','.$commune[0];
+                    $hospital->address = ',' . $province[0] . ',' . $district[0] . ',' . $commune[0];
 
                     $hospital->name = $representative;
                     $hospital->latitude = $latitude;
@@ -266,8 +207,83 @@ class AuthController extends Controller
         }
     }
 
+    public function login(Request $request)
+    {
+        try {
+            $loginRequest = $request->input('email');
+            $password = $request->input('password');
+
+            $credentials = [
+                'email' => $loginRequest,
+                'password' => $password,
+            ];
+
+            $user = User::where('email', $loginRequest)->first();
+            if (!$user) {
+                toast('Account not found!', 'error', 'top-left');
+                return back();
+            }
+
+            switch ($user->status) {
+                case UserStatus::ACTIVE:
+                    break;
+                case UserStatus::INACTIVE:
+                    toast('Account not active!', 'error', 'top-left');
+                    return back();
+                case UserStatus::BLOCKED:
+                    toast('Account has been blocked!', 'error', 'top-left');
+                    return back();
+                case UserStatus::DELETED:
+                    toast('Account has been deleted!', 'error', 'top-left');
+                    return back();
+                case UserStatus::PENDING:
+                    toast('Account is pending!', 'error', 'top-left');
+                    return back();
+            }
+
+            $existToken = $user->token;
+            if ($existToken) {
+                try {
+                    $user = JWTAuth::setToken($existToken)->toUser();
+                    toast('The account is already logged in elsewhere!', 'error', 'top-left');
+                    return back();
+                } catch (Exception $e) {
+
+                }
+            }
+
+            if (Auth::attempt($credentials)) {
+                $token = JWTAuth::fromUser($user);
+                $user->token = $token;
+                $user->save();
+                setCookie('accessToken', $token);
+                toast('Welcome ' . $user->email, 'success', 'top-left');
+
+                $role_user = DB::table('role_users')->where('user_id', $user->id)->first();
+                $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
+
+                if ($roleNames->contains('DOCTORS') || $roleNames->contains('PHAMACISTS') || $roleNames->contains('THERAPISTS') || $roleNames->contains('ESTHETICIANS') || $roleNames->contains('NURSES') || $roleNames->contains('PHARMACEUTICAL COMPANIES') || $roleNames->contains('HOSPITALS') || $roleNames->contains('CLINICS') || $roleNames->contains('PHARMACIES') || $roleNames->contains('SPAS') || $roleNames->contains('OTHERS') || $roleNames->contains('ADMIN')) {
+                    return redirect(route('admin.home'));
+                }
+
+                return redirect(route('home'));
+            } else {
+                toast('Email or password incorrect', 'error', 'top-left');
+            }
+            return back();
+        } catch (Exception $exception) {
+            toast('Error, Please try again!', 'error', 'top-left');
+            return back();
+        }
+    }
+
     public function logout(Request $request)
     {
+        if (Auth::check()) {
+            $user = Auth::user();
+            $user->token = null;
+            $user->save();
+        }
         Auth::logout();
         setCookie('accessToken', null);
         return redirect('/');
