@@ -1,5 +1,7 @@
 @extends('layouts.admin')
-
+@section('title')
+    {{ __('home.List Category product') }}
+@endsection
 @section('main-content')
     <style>
 

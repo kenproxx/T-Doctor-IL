@@ -90,7 +90,7 @@
                 ];
 
                 let isValid = true;
-                appendDataForm(fieldNames, formData, isValid);
+                isValid =  appendDataForm(fieldNames, formData, isValid);
 
                 formData.append("thumbnail", $('#thumbnail')[0].files[0]);
 

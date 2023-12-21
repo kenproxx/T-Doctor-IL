@@ -1,7 +1,9 @@
 @php use App\Enums\NewEventStatus; @endphp
 @php use App\Enums\NewEventType; @endphp
 @extends('layouts.admin')
-
+@section('title')
+    {{ __('home.Create Category product') }}
+@endsection
 @section('main-content')
 
     <!-- Page Heading -->

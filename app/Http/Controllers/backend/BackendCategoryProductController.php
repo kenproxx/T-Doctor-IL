@@ -13,7 +13,7 @@ class BackendCategoryProductController extends Controller
      */
     public function index()
     {
-        $categoryProducts = CategoryProduct::where('status', 1)->paginate(20);
+        $categoryProducts = CategoryProduct::paginate(20);
         return view('admin.category_product.index', compact('categoryProducts'));
     }
 

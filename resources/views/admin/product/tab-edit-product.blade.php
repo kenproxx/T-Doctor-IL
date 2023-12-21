@@ -95,7 +95,7 @@
             </div>
             <div>
                 <label>{{ __('home.Thumbnail') }}</label>
-                <input type="file" class="form-control" id="thumbnail" name="thumbnail" multiple accept="image/*">
+                <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*">
                 <img width="50px" src="{{$product->thumbnail}}" alt="thumbnail">
             </div>
             <div>
@@ -174,7 +174,7 @@
 
                 let isValid = true
                 /* Tạo fn appendDataForm ở admin blade*/
-                appendDataForm(fieldNames, formDataEdit, isValid);
+                isValid =  appendDataForm(fieldNames, formDataEdit, isValid);
 
                 const fieldTextareaTiny = [
                     "description", "description_en", "description_laos"

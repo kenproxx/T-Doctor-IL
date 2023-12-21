@@ -82,7 +82,7 @@
             </div>
             <div>
                 <label>{{ __('home.Thumbnail') }}</label>
-                <input type="file" class="form-control" id="thumbnail" name="thumbnail" multiple accept="image/*"
+                <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*"
                        required>
             </div>
             <div>
@@ -160,7 +160,7 @@
 
             let isValid = true
             /* Tạo fn appendDataForm ở admin blade*/
-            appendDataForm(arrField, formData, isValid);
+            isValid =  appendDataForm(arrField, formData, isValid);
 
             const fieldTextareaTiny = ["description", "description_en", "description_laos"];
             fieldTextareaTiny.forEach(fieldTextarea => {
@@ -173,12 +173,18 @@
 
             var filedata = document.getElementById("gallery");
             var i = 0, len = filedata.files.length, img, reader, file;
-            for (i; i < len; i++) {
-                file = filedata.files[i];
-                formData.append('gallery[]', file);
+
+            if (len > 0){
+                for (i; i < len; i++) {
+                    file = filedata.files[i];
+                    formData.append('gallery[]', file);
+                }
+            } else {
+                isValid = false;
             }
+
             const photo = $('#thumbnail')[0].files[0];
-            if (!photo){
+            if (!photo) {
                 isValid = false;
             }
             formData.append('thumbnail', photo);

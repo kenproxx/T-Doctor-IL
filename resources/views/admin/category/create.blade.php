@@ -87,7 +87,7 @@
                 ];
 
                 let isValid = true;
-                appendDataForm(fieldNames, formData, isValid);
+                isValid =  appendDataForm(fieldNames, formData, isValid);
 
                 let file = $('#thumbnail')[0].files[0];
                 formData.append("user_id", '{{ Auth::user()->id }}');

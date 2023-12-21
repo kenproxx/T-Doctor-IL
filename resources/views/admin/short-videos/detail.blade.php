@@ -104,7 +104,7 @@
 
                 let isValid = true
                 /* Tạo fn appendDataForm ở admin blade*/
-                appendDataForm(arrField, formDataEdit, isValid);
+                isValid =  appendDataForm(arrField, formDataEdit, isValid);
 
                 const video = $('#file')[0].files[0];
                 formDataEdit.append('file_videos', video);
