@@ -54,6 +54,15 @@ class ClinicApi extends Controller
                     $clinic['addressInfo'] = '';
                     return $clinic;
                 }
+                if ($addressC == null) {
+                    $clinic['addressInfo'] = '';
+                    return $clinic;
+                }
+                if ($addressD == null) {
+                    $clinic['addressInfo'] = '';
+                    return $clinic;
+                }
+
                 $clinic['addressInfo'] = $addressC['name'] . ',' . $addressD['name'] . ',' . $addressP['name'];
                 return $clinic;
             });
