@@ -32,6 +32,7 @@
 
 #widget-chat .chat-box {
     display: none;
+    z-index: 888;
     background: #efefef;
     position: fixed;
     right: 30px;
