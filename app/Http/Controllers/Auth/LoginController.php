@@ -61,7 +61,7 @@ class LoginController extends Controller
                 $response['accessToken'] = $token;
                 return response()->json($response);
             }
-            return response()->json($user);
+            return response()->json($this->returnMessage('Login fail!'), 400);
         } catch (\Exception $exception) {
             return response($this->returnMessage('Login error!'), 400);
         }
