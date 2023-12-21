@@ -27,29 +27,28 @@ class LoginController extends Controller
 
             $user = User::where('email', $loginRequest)->first();
             if (!$user) {
-                return response("User not found!", 404);
+                return response($this->returnMessage('User not found!'), 404);
             } else {
                 if ($user && $user->status == UserStatus::INACTIVE) {
-                    return response("User not active!", 400);
+                    return response($this->returnMessage('User not active!'), 400);
                 } else if ($user && $user->status == UserStatus::BLOCKED) {
-                    return response("User has been blocked!", 400);
+                    return response($this->returnMessage('User has been blocked!'), 400);
                 }
             }
 
-            $isLogin = false;
             $existToken = $user->token;
-            if ($existToken ) {
+            if ($existToken) {
                 try {
                     $user = JWTAuth::setToken($existToken)->toUser();
-                    $isLogin = true;
+                    return response($this->returnMessage('The account is already logged in elsewhere!'), 400);
                 } catch (Exception $e) {
-                   $isLogin = false;
+
                 }
             }
 
-            if ($isLogin){
-                return response('The account is already logged in elsewhere!', 400);
-            }
+//            if ($isLogin){
+//                return response('The account is already logged in elsewhere!', 400);
+//            }
 
             if (Auth::attempt($credentials)) {
                 $token = JWTAuth::fromUser($user);
@@ -64,7 +63,7 @@ class LoginController extends Controller
             }
             return response()->json($user);
         } catch (\Exception $exception) {
-            return response("Login error!", 400);
+            return response($this->returnMessage('Login error!'), 400);
         }
     }
 
@@ -76,9 +75,14 @@ class LoginController extends Controller
             $user = User::find($user_id);
             $user->token = null;
             $user->save();
-            return response('Logout success!', 200);
+            return response($this->returnMessage('Logout success!'), 200);
         } catch (\Exception $exception) {
             return response($exception, 400);
         }
+    }
+
+    public function returnMessage($message)
+    {
+        return ['message' => $message];
     }
 }
