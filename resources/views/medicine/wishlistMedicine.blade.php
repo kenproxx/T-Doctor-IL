@@ -12,20 +12,22 @@
             </div>
             <div class="medicine-search--center col-md-6 row d-flex justify-content-between">
                 <form class="search-box col-md-10">
-                    <input type="search" name="focus" placeholder="{{ __('home.Search for...') }}" id="search-input" value="">
+                    <input type="search" name="focus" placeholder="{{ __('home.Search for...') }}" id="search-input"
+                           value="">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </form>
                 <button type="button" data-toggle="modal" data-target="#modalCart" class="shopping-bag">
                     <i class="fa-solid fa-bag-shopping"></i>
                     <div class="text-wrapper">1</div>
                 </button>
-                @include('component.modal-cart')
+{{--                                @include('component.modal-cart')--}}
             </div>
             <div class="medicine-search--right col-md-3 d-flex row justify-content-between">
                 <div class="col-md-6 ">
                     <div class="div-wrapper">
-                        <button type="button" data-toggle="modal" data-target="#modalCreatPrescription">{{ __('home.Create prescription') }}
-                        </button>
+                        <a data-toggle="modal"
+                                data-target="#modalCreatPrescription">{{ __('home.Create prescription') }}
+                        </a>
                     </div>
                 </div>
                 @include('component.modalCreatPrescription')
@@ -115,9 +117,7 @@
             <div class="col-md-9 medicine-list--item">
                 <div class="page row ">
                     @for($i = 0; $i < 12; $i++)
-                        <div class="col-md-4 item">
-                            @include('component.product-wish')
-                        </div>
+                        @include('component.product-wish')
                     @endfor
                 </div>
                 <nav aria-label="Page navigation example" class="d-flex justify-content-center">

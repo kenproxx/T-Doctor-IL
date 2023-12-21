@@ -78,18 +78,29 @@
                             </div>
                             <div class="brand-name mt-2 mb-2">
                                 <label class="text-wrapper-2" for="quantity">{{ __('home.Số lượng') }}: </label>
-                                <input type="number" min="1" value="1" id="quantity" class="w-25 input-quantity">
+                                <input type="number" min="1" value="1" id="quantity" class="w-25 input-quantity p-2">
                             </div>
                         </div>
                         <input type="text" value="{{ $medicine->id }}" id="productID" class="d-none">
                         <input type="text" value="{{ TypeProductCart::MEDICINE }}" id="type_product"
                                class="d-none">
+                        @php
+                            $prMedicine = \Illuminate\Support\Facades\DB::table('product_medicines')->where('id', $medicine->id)->first();
+                        @endphp
                         <div class="row">
-                            <div class="col-6">
-                                <button id="btnVisitStore" class="btn btn-secondary w-100">{{ __('home.Visit store') }}</button>
+                            <div class="col-6  d-flex align-center justify-center">
+                                @if(Auth::user() == null || Auth::user()->id != $prMedicine->user_id)
+                                    <a href="{{route('flea.market.product.shop.info',$prMedicine->user_id)}}" class="button-visitStore btn btn-secondary w-100 d-flex align-center justify-center">
+                                        {{ __('home.Visit store') }}
+                                    </a>
+                                @else
+                                    <a href="{{route('flea.market.my.store')}}" class="button-visitStore btn btn-secondary w-100 d-flex align-center justify-center">
+                                        {{ __('home.My store') }}
+                                    </a>
+                                @endif
                             </div>
                             <div class="col-6">
-                                <button id="btnBuyNow" class="btn btn-primary w-100">{{ __('home.Buy now') }}</button>
+                                <button id="btnBuyNow" class=" button-buyNow btn btn-primary w-100">{{ __('home.Buy now') }}</button>
                             </div>
                         </div>
                     </div>

@@ -38,7 +38,7 @@
             </div>
             <div class="medicine-search--center col-md-6 row d-flex justify-content-between">
                 <form class="search-box col-md-10">
-                    <input type="search" name="focus" placeholder="{{ __('home.Search for anything…') }}" id="search-input" value="">
+                    <input type="search" onkeyup="performSearch()" name="focus" placeholder="{{ __('home.Search for anything…') }}" id="search-input" value="">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </form>
                 @if(Auth::check())
@@ -57,8 +57,8 @@
             <div class="medicine-search--right col-md-3 d-flex row justify-content-between">
                 <div class="col-md-6 ">
                     <div class="div-wrapper">
-                        <button type="button" data-toggle="modal" data-target="#modalCreatPrescription">{{ __('home.Create prescription') }}
-                        </button>
+                        <a type="button" data-toggle="modal" data-target="#modalCreatPrescription">{{ __('home.Create prescription') }}
+                        </a>
                     </div>
                 </div>
                 @include('component.modalCreatPrescription')
@@ -132,24 +132,32 @@
                         </div>
                     </div>
                 </div>
-                <div class="price">
-                    <div class="text-wrapper">{{ __('home.Price') }}</div>
-                    <div class="wrapper">
-                        <div class="price-input">
-                            <div class="field">
-                                <input type="number" class="input-min" value="0">
+                <div class="border-radius mt-3 ">
+                    <div class="d-flex">
+                        <div class="wrapper">
+                            <header>
+                                <h2>{{ __('home.Price') }}</h2>
+                            </header>
+                            <div class="price-input">
+                                <div class="field">
+                                    <input type="number" onchange="performSearch()" id="inputProductMin"
+                                           class="rangePrice input-min" value="0">
+                                </div>
+                                <div class="separator">-</div>
+                                <div class="field">
+                                    <input type="number" onchange="performSearch()" id="inputProductMax"
+                                           class="rangePrice input-max" value="0">
+                                </div>
                             </div>
-                            <div class="separator">-</div>
-                            <div class="field">
-                                <input type="number" class="input-max" value="0">
+                            <div class="slider">
+                                <div class="progress"></div>
                             </div>
-                        </div>
-                        <div class="slider">
-                            <div class="progress"></div>
-                        </div>
-                        <div class="range-input">
-                            <input type="range" class="range-min" min="0" max="10000" value="2500" step="100">
-                            <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
+                            <div class="range-input">
+                                <input type="range" onchange="performSearch()" class="rangePrice range-min" min="0"
+                                       max="10000000" value="2500000" step="1000">
+                                <input type="range" onchange="performSearch()" class="rangePrice range-max" min="0"
+                                       max="10000000" value="7500000" step="1000">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -168,6 +176,33 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function performSearch() {
+
+            var searchInput = document.getElementById('search-input');
+            var searchValue = searchInput.value;
+
+            var formData = {
+                name: searchValue,
+                status: 'ACTIVE',
+                min_price: $('#inputProductMin').val(),
+                max_price: $('#inputProductMax').val(),
+            };
+
+            $.ajax({
+                url: `{{route('medicine.search')}}`,
+                method: "POST",
+                data: formData,
+                success: function (response) {
+                    renderJson2Html(response);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+    </script>
     <script>
 
         let filterMedicine = [];
@@ -199,7 +234,7 @@
                     processData: false,
                     data: formData,
                     success: function (data) {
-                        renderJson2Html(data.data);
+                        renderJson2Html(data);
                     },
                     error: function (exception) {
                     }
@@ -213,7 +248,10 @@
         }
 
         function renderJson2Html(data) {
+            console.log(data)
             let html = '';
+            data = data.data;
+            document.getElementById('content-medicine').innerHTML = html;
             if (data.length === 0) {
                 html = `<div class="col-md-12">
                             <div class="alert alert-danger" role="alert">
@@ -222,14 +260,16 @@
                         </div>`;
             } else {
                 data.forEach(async function (item) {
-                    html += `<div class="col-md-4 item">
+                    let url = `{{ route('medicine.detail', ['id' => ':id']) }}`;
+                    url = url.replace(':id', item.id);
+                    html += `<div class="col-md-3">
                                 <div class="product-item">
                                     <div class="img-pro">
                                         <img src="${item.thumbnail}" alt="">
                                     </div>
                                     <div class="content-pro">
                                         <div class="name-pro">
-                                            <a href="">${item.name}</a>
+                                            <a href="${url}">${item.name}</a>
                                         </div>
                                         <div class="location-pro d-flex">
                                             Location: <p>${item.location_name ?? 'Toàn quốc'}</p>
