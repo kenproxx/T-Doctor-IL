@@ -41,7 +41,7 @@
                     <a href="{{ url('/') . asset($user->business_license_img ?? $user->medical_license_img) }}"
                        class="btn btn-info" target="_blank">{{ __('home.View License') }}
                     </a>
-                    <button onclick="updateUser('{{ $user->id }}', '{{ UserStatus::DELETED }}')"
+                    <button onclick="updateUser('{{ $user->id }}', '{{ UserStatus::BLOCKED }}')"
                             class="btn btn-danger">{{ __('home.Reject') }}
                     </button>
                     <button onclick="updateUser('{{ $user->id }}', '{{ UserStatus::ACTIVE }}')"

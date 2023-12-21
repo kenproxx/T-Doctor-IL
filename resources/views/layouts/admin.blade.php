@@ -418,7 +418,7 @@
                     </a>
                     <ul id="videos-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
-                            <a href="#">
+                            <a href="{{ route('web.videos.list') }}">
                                 <i class="bi bi-circle"></i><span>{{ __('home.Short Videos') }}</span>
                             </a>
                         </li>
