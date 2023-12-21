@@ -654,6 +654,30 @@
   overflow-x: hidden;
 }
 
+.button-visitStore {
+  border-radius: 8px;
+  background: var(--Grey-Light, #D6D6D6);
+  display: flex;
+  padding: 11px 50px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex: 1 0 0;
+  border: 0;
+}
+
+.button-buyNow {
+  border-radius: 8px;
+  background: var(--secon1, #088180);
+  display: flex;
+  padding: 11px 50px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex: 1 0 0;
+  border: 0;
+}
+
 .clinic-item {
   border: 1px solid rgb(234, 234, 234);
   padding: 10px 14px;

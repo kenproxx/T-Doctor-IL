@@ -48,7 +48,7 @@ class MedicineController extends Controller
                 ->where('type_product', TypeProductCart::MEDICINE)
                 ->get();
         }
-        return view('medicine.detailMedicine', compact('medicine', 'categoryMedicines', 'carts'));
+        return view('medicine.detailMedicine', compact('medicine', 'categoryMedicines', 'carts', 'id'));
     }
 
     public function wishList()
