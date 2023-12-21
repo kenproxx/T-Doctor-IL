@@ -20,14 +20,14 @@
                     <i class="fa-solid fa-bag-shopping"></i>
                     <div class="text-wrapper">1</div>
                 </button>
-                {{--                @include('component.modal-cart')--}}
+{{--                                @include('component.modal-cart')--}}
             </div>
             <div class="medicine-search--right col-md-3 d-flex row justify-content-between">
                 <div class="col-md-6 ">
                     <div class="div-wrapper">
-                        <button type="button" data-toggle="modal"
+                        <a data-toggle="modal"
                                 data-target="#modalCreatPrescription">{{ __('home.Create prescription') }}
-                        </button>
+                        </a>
                     </div>
                 </div>
                 @include('component.modalCreatPrescription')
