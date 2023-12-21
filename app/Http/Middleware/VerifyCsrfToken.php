@@ -17,6 +17,7 @@ class VerifyCsrfToken extends Middleware
         '/admin/bookings/**',
         '/admin/new-event/**',
         '/admin/topic-videos/**',
+        '/admin/users/**',
         '/api/reviews-doctor/**',
         //api
         '/api/products/**',
