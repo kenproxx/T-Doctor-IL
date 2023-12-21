@@ -181,6 +181,9 @@
                 ];
                 fieldTextareaTiny.forEach(fieldTextarea => {
                     const content = tinymce.get(fieldTextarea).getContent();
+                    if (!content){
+                        isValid = false;
+                    }
                     formDataEdit.append(fieldTextarea, content);
                 });
 
@@ -217,6 +220,8 @@
                     } catch (error) {
                         throw error;
                     }
+                } else {
+                    alert('Please check input not empty!')
                 }
             })
         })

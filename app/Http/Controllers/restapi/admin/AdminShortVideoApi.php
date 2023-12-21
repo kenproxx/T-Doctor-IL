@@ -136,7 +136,40 @@ class AdminShortVideoApi extends Controller
                 return response('Not found!', 404);
             }
 
-            $video->title = $request->input('title');
+            $title = $request->input('title');
+            $title_en = $request->input('title_en');
+            $title_laos = $request->input('title_laos');
+
+            $views = $request->input('views');
+            $shares = $request->input('shares');
+            $reactions = $request->input('reactions');
+
+            $topic = $request->input('topic_id');
+            $status = $request->input('status');
+
+            $video->title = $title;
+            $video->title_en = $title_en;
+            $video->title_laos = $title_laos;
+
+            $video->topic_id = $topic;
+            $video->status = $status;
+
+            $video->views = $views;
+            $video->shares = $shares;
+            $video->reactions = $reactions;
+
+            if ($request->hasFile('file_videos')) {
+
+                $fileSize = $request->file('file_videos')->getSize();
+                if ($fileSize > 31457280) {
+                    return response()->json(['error' => 'File size exceeds the limit of 30MB.'], 400);
+                }
+
+                $item = $request->file('file_videos');
+                $itemPath = $item->store('short_video', 'public');
+                $file = asset('storage/' . $itemPath);
+                $video->file = $file;
+            }
 
             $success = $video->save();
             if ($success) {
@@ -184,7 +217,7 @@ class AdminShortVideoApi extends Controller
 
             $success = $video->save();
             if ($success) {
-                return response('Delete success!', 400);
+                return response('Delete success!', 200);
             }
             return response('Delete error!', 400);
         } catch (\Exception $exception) {

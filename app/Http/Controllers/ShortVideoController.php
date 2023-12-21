@@ -6,6 +6,7 @@ use App\Enums\ShortVideoStatus;
 use App\Enums\TopicVideoStatus;
 use App\Models\ShortVideo;
 use App\Models\TopicVideo;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class ShortVideoController extends Controller
@@ -32,5 +33,19 @@ class ShortVideoController extends Controller
     {
         $topics = TopicVideo::where('status', TopicVideoStatus::ACTIVE)->get();
         return view('short-video.create-video', compact('topics'));
+    }
+
+    /* Admin Manager short video */
+    public function getList()
+    {
+        return view('admin.short-videos.list');
+    }
+
+    public function getById($id)
+    {
+        $video = ShortVideo::find($id);
+        $user = User::find($video->user_id);
+        $topics = TopicVideo::where('status', TopicVideoStatus::ACTIVE)->get();
+        return view('admin.short-videos.detail', compact('video', 'user', 'topics'));
     }
 }

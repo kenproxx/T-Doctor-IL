@@ -256,8 +256,13 @@ Route::middleware(['user.active'])->group(function () {
         });
 
         Route::group(['prefix' => 'short-video'], function () {
-            Route::get('', [ShortVideoController::class, 'showVideo'])->name('short.videos.show');
-            Route::get('/{id}', [ShortVideoController::class, 'detail'])->name('short.videos.item');
+            Route::get('show', [ShortVideoController::class, 'showVideo'])->name('short.videos.show');
+            Route::get('show/{id}', [ShortVideoController::class, 'detail'])->name('short.videos.item');
+        });
+
+        Route::group(['prefix' => 'short-video'], function () {
+            Route::get('list', [ShortVideoController::class, 'getList'])->name('web.videos.list');
+            Route::get('detail/{id}', [ShortVideoController::class, 'getById'])->name('web.videos.detail');
         });
 
         Route::group(['prefix' => 'reviews-doctor'], function () {

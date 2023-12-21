@@ -288,7 +288,7 @@ Route::group(['prefix' => 'short-videos'], function () {
     Route::get('/detail/{id}', [AdminShortVideoApi::class, 'detail'])->name('api.medical.short.videos.detail');
 
     Route::post('/create', [AdminShortVideoApi::class, 'create'])->name('api.medical.short.videos.create');
-    Route::put('/update/{id}', [AdminShortVideoApi::class, 'update'])->name('api.medical.short.videos.update');
+    Route::post('/update/{id}', [AdminShortVideoApi::class, 'update'])->name('api.medical.short.videos.update');
     Route::put('/change/{id}', [AdminShortVideoApi::class, 'changeStatus'])->name('api.medical.short.videos.changeStatus');
     Route::delete('/delete/{id}', [AdminShortVideoApi::class, 'delete'])->name('api.medical.short.videos.delete');
 });
