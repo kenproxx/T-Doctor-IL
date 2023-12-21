@@ -19,7 +19,7 @@
                     <i class="fa-solid fa-bag-shopping"></i>
                     <div class="text-wrapper">1</div>
                 </button>
-                @include('component.modal-cart')
+{{--                @include('component.modal-cart')--}}
             </div>
             <div class="medicine-search--right col-md-3 d-flex row justify-content-between">
                 <div class="col-md-6 ">
@@ -115,9 +115,7 @@
             <div class="col-md-9 medicine-list--item">
                 <div class="page row ">
                     @for($i = 0; $i < 12; $i++)
-                        <div class="col-md-4 item">
                             @include('component.product-wish')
-                        </div>
                     @endfor
                 </div>
                 <nav aria-label="Page navigation example" class="d-flex justify-content-center">
