@@ -1,7 +1,9 @@
 @php use App\Enums\online_medicine\ObjectOnlineMedicine; @endphp
 @php use App\Enums\online_medicine\FilterOnlineMedicine; @endphp
 @extends('layouts.admin')
-
+@section('title')
+    {{ __('home.List product medicine') }}
+@endsection
 @section('main-content')
     <style>
 

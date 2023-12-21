@@ -1,7 +1,9 @@
 @php use App\Enums\online_medicine\ObjectOnlineMedicine; @endphp
 @php use App\Enums\online_medicine\FilterOnlineMedicine;use App\Enums\online_medicine\OnlineMedicineStatus; @endphp
 @extends('layouts.admin')
-
+@section('title')
+    {{ __('home.Create product medicine') }}
+@endsection
 @section('main-content')
 
     <!-- Page Heading -->

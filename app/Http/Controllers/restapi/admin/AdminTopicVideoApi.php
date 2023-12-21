@@ -75,8 +75,8 @@ class AdminTopicVideoApi extends Controller
     private function saveTopic($request, $topicVideo)
     {
         $name = $request->input('name');
-        $name_en = $name;
-        $name_laos = $name;
+        $name_en = $request->input('name_en');
+        $name_laos = $request->input('name_laos');
 
         if ($request->hasFile('thumbnail')) {
             $item = $request->file('thumbnail');

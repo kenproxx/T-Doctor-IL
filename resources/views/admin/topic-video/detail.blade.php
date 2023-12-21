@@ -15,7 +15,7 @@
             </div>
         @endif
         <form>
-            <div class="form-row">
+            <div class="row">
                 <div class="form-group col-md-4">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{ $topicVideo->name }}"
@@ -32,7 +32,7 @@
                            name="name_laos">
                 </div>
             </div>
-            <div class="form-row">
+            <div class="row">
                 <div class="form-group col-md-4">
                     <label for="thumbnail">Thumbnail</label>
                     <input type="file" class="form-control" id="thumbnail" name="thumbnail" multiple accept="image/*">
@@ -72,7 +72,8 @@
                 const photo = $('#thumbnail')[0].files[0];
                 formDataEdit.append('thumbnail', photo);
 
-                if (document.getElementById('name').value) {
+                if (document.getElementById('name').value &&
+                    document.getElementById('name_en').value && document.getElementById('name_laos').value) {
                     try {
                         $.ajax({
                             url: url,
