@@ -1,0 +1,288 @@
+@media (max-width: 480px) {
+    .container {
+        max-width: 480px;
+        width: 100%;
+    }
+}
+@media (max-width: 779px) {
+
+}
+@media (min-width: 780px){
+    .container {
+        max-width: 1440px;
+        width: 100%;
+    }
+}
+@media all {
+    .container {
+        .justify-content-between.mt-homeNew {
+            margin-top: 150px;
+
+            .title-homeNew {
+                color: #333;
+                font-size: 40px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                text-transform: capitalize;
+                width: 100%;
+
+                .text-title {
+                    &--new1 {
+                        color: #007E85;
+                        font-size: 40px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
+                        text-transform: capitalize;
+                    }
+
+                    &--new2 {
+                        color: #6EAB36;
+                        font-size: 40px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
+                        text-transform: capitalize;
+                    }
+                }
+            }
+
+            .content_homeNew {
+                color: rgba(0, 0, 0, 0.70);
+                font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                letter-spacing: 0.8px;
+                text-transform: capitalize;
+            }
+
+            .img-container {
+                position: relative;
+                overflow: hidden;
+                //width: 400px; /* Đặt kích thước của container */
+                //height: 300px;
+            }
+
+            .img-doctor__homeNew {
+                position: relative;
+                width: 100%;
+                height: 100%;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    position: relative;
+                    z-index: 1; /* Đặt z-index để hình phía trước hiển thị phía trên */
+                    transition: transform 0.5s;
+
+                    &:hover {
+                        transform: scale(1.1);
+                    }
+
+                    &::before,
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-size: cover; /* Chọn kiểu fill cho hình nền */
+                        transition: transform 0.5s;
+                    }
+
+                    &::before {
+                        //background-image: url("/public/img/homeNew-img/Property 1=Variant2.png");
+                        z-index: 0; /* Đặt z-index để hình nền phía trước hiển thị phía dưới */
+                        transform-origin: center; /* Đặt điểm trung tâm cho transform */
+                        transform: scale(1); /* Ban đầu có kích thước bằng 1 */
+                    }
+
+                    &::after {
+                        background-image: url("/public/img/homeNew-img/Vector.png");
+                        z-index: -1; /* Đặt z-index để hình nền phía sau hiển thị phía dưới cùng */
+                        transform-origin: center; /* Đặt điểm trung tâm cho transform */
+                        transform: scale(0.9); /* Ban đầu có kích thước nhỏ hơn 1 */
+                    }
+                }
+            }
+
+
+        }
+
+        .align-center {
+            .title-whatFree--homeNew {
+                text-align: center;
+
+                span {
+                    color: var(--Black, #000);
+                    font-size: 48px;
+                    font-style: normal;
+                    font-weight: 800;
+                    line-height: normal;
+                }
+
+            }
+
+            .nav-header--homeNew {
+                li.nav-item {
+                    a.nav-link {
+                        color: var(--Grey-Dark, #929292);
+                        text-align: center;
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: normal;
+                        padding: 0;
+
+                        &.active {
+                            color: var(--secon1, #088180);
+                            text-align: center;
+                            font-size: 18px;
+                            font-style: normal;
+                            font-weight: 800;
+                            line-height: normal;
+                        }
+                    }
+                }
+
+            }
+        }
+
+        #myTabContent{
+            .card-homeNew {
+                display: flex;
+                padding: 16px;
+                align-items: flex-start;
+                gap: 10px;
+                border-radius: 24px;
+                border: 1px solid var(--White-Light, #F3F3F3);
+                background: var(--White, #FFF);
+                transition: all 0.1s ease;
+                .content__item {
+                    padding: 0;
+                    &__img{
+                        width: 100%;
+                        height: 216px;
+                        object-fit: cover;
+                        border-radius: 10px;
+                    }
+                    &__title{
+                        margin-top: 24px;
+                        color: #007E85;
+                        font-feature-settings: 'clig' off, 'liga' off;
+                        font-size: 24px;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 34px;
+                        display: -webkit-box;
+                        //line-height: 1.3;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+                    &__describe{
+                        color: #555;
+                        font-feature-settings: 'clig' off, 'liga' off;
+                        margin-top: 12px;
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 400;
+                        line-height: 30px;
+                        p{
+                            display: -webkit-box;
+                            line-height: 1.3;
+                            -webkit-line-clamp: 3;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                    }
+                    &-link{
+                        //color: var(--secon1, #088180);
+                        text-align: justify;
+                        font-feature-settings: 'clig' off, 'liga' off;
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 18px;
+                        position: relative;
+                        display: inline-block;
+                        color: #088180; /* Màu chữ của Learn more */
+                        text-decoration: none;
+                        transition: color 0.3s;
+
+                        &:hover {
+                            color: #088180; /* Màu chữ khi hover */
+                        }
+
+                        &::after {
+                            content: '';
+                            position: absolute;
+                            top: 50%;
+                            left: 100%;
+                            transform: translate(0%, -100%);
+                            display: block;
+                            width: 30px; /* Điều chỉnh độ dài của đường */
+                            height: 2px; /* Điều chỉnh độ rộng của đường */
+                            background-color: #088180; /* Màu của đường */
+                            transition: width 0.5s;
+                            opacity: 0; /* Ẩn đường ban đầu */
+                        }
+
+                        &:hover::after {
+                            width: 50px; /* Điều chỉnh chiều dài của đường khi hover */
+                            opacity: 1; /* Hiển thị đường khi hover */
+                        }
+
+                    }
+                }
+                &:hover{
+                    border-radius: 24px;
+                    border: 1px solid var(--secon1, #088180);
+                    background: var(--White, #FFF);
+                    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+                }
+
+            }
+        }
+        #map-location{
+            .text-map--homeNew {
+                h3{
+                    color: var(--Black, #1A202C);
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 800 !important;
+                    line-height: normal;
+                }
+                p{
+                    color: var(--Grey-Dark, #929292);
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: normal;
+                }
+            }
+            #allAddressesMap{
+                border-radius: 24px;
+                clip-path: polygon(0% 0%, 100% 0%, 100% 84%, 0% 100%, 0% 80%);
+            }
+        }
+        #find-doctor--homeNew {
+            margin-top: 20px;
+            .title-findDoctor--homeNew {
+                color: var(--Black, #000);
+                text-align: center;
+                font-size: 48px;
+                font-style: normal;
+                font-weight: 800;
+                line-height: normal;
+            }
+        }
+
+    }
+}

@@ -722,8 +722,8 @@
   height: 80px;
 }
 .clinic-item .img-detail .img-item img {
-  width: 100%;
-  height: 100%;
+  width: 80px !important;
+  height: 80px !important;
   object-fit: cover;
 }
 

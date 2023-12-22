@@ -311,7 +311,7 @@ a {
 #map-location .content-item {
     justify-items: center;
     width: 1170px;
-    height: 570px;
+    /*height: 570px;*/
 }
 
 #map-location .content-item #address {

@@ -25,7 +25,7 @@ class HomeController extends Controller
         if (!Auth::check()) {
             setCookie('accessToken', null);
         }
-        $coupons = Coupon::where('status', CouponStatus::ACTIVE)->get();
+        $coupons = Coupon::where('status', CouponStatus::ACTIVE)->paginate(6);
         $products = ProductInfo::where('status', ProductStatus::ACTIVE)->get();
         return view('home', compact('coupons', 'products'));
     }
