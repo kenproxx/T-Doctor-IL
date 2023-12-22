@@ -28,7 +28,7 @@ class ProductInfoController extends Controller
 
     public function createProduct()
     {
-        $categories = Category::where('status', CategoryProductStatus::ACTIVE)->get();
+        $categories = Category::where('status', CategoryStatus::ACTIVE)->get();
         return view('admin.product.tab-create-products', compact('categories'));
     }
 

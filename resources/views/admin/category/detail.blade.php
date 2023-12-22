@@ -20,17 +20,22 @@
                     <input type="text" class="form-control" id="name_laos" value="{{ $category->name_laos }}">
                 </div>
             </div>
-            <div class="form-group">
-                <label for="description">{{ __('home.Description') }}</label>
-                <input type="text" class="form-control" id="description" placeholder="Description" value="{{ $category->description }}">
-            </div>
-            <div class="form-group">
-                <label for="description_en">{{ __('home.Description English') }}</label>
-                <input type="text" class="form-control" id="description_en" placeholder="Description English" value="{{ $category->description_en }}">
-            </div>
-            <div class="form-group">
-                <label for="description_laos">{{ __('home.Description Laos') }}</label>
-                <input type="text" class="form-control" id="description_laos" placeholder="Description Laos" value="{{ $category->description_laos }}">
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="description">{{ __('home.Description') }}</label>
+                    <textarea class="form-control" id="description" placeholder="{{ __('home.Description') }}"
+                              rows="3">{{ $category->description }}</textarea>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="description_en">{{ __('home.Description English') }}</label>
+                    <textarea class="form-control" id="description_en" placeholder="{{ __('home.Description English') }}"
+                              rows="3">{{ $category->description_en }}</textarea>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="description_laos">{{ __('home.Description Laos') }}</label>
+                    <textarea class="form-control" id="description_laos" placeholder="{{ __('home.Description Laos') }}"
+                              rows="3">{{ $category->description_laos }}</textarea>
+                </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
@@ -45,7 +50,8 @@
                     <select id="parent_id" class="form-select">
                         <option value="0">{{ __('home.Choose...') }}</option>
                         @foreach($categories as $value)
-                            <option {{$category->parent_id == $value->id ? 'selected' : ''}} value="{{$value->id}}">{{$value->name}}</option>
+                            <option
+                                {{$category->parent_id == $value->id ? 'selected' : ''}} value="{{$value->id}}">{{$value->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -54,7 +60,8 @@
                     <select id="status" class="form-select">
                         @foreach($status as $item)
                             @if($item != 'DELETED')
-                                <option {{$category->status == $item ? 'selected' : ''}} value="{{ $item }}">{{ $item }}</option>
+                                <option
+                                    {{$category->status == $item ? 'selected' : ''}} value="{{ $item }}">{{ $item }}</option>
                             @endif
                         @endforeach
                     </select>
@@ -85,32 +92,53 @@
 
                 const fieldNames = [
                     "name", "name_en", "name_laos",
-                    "description", "description_en", "description_laos",
                     "parent_id", "status",
                 ];
 
                 let isValid = true;
-                isValid =  appendDataForm(fieldNames, formData, isValid);
+
+                const fieldTextareaTiny = [
+                    'description', 'description_en', 'description_laos',
+                ];
+
+                fieldTextareaTiny.forEach(fieldTextarea => {
+                    const content = tinymce.get(fieldTextarea).getContent();
+                    if (!content) {
+                        isValid = false;
+                    }
+                    formData.append(fieldTextarea, content);
+                });
+
+                isValid = appendDataForm(fieldNames, formData, isValid);
 
                 formData.append("thumbnail", $('#thumbnail')[0].files[0]);
 
-                await $.ajax({
-                    url: reviewUpdateUrl,
-                    method: 'POST',
-                    headers: headers,
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    data: formData,
-                    success: function (response) {
-                        alert('Update success!')
-                        window.location.href = reviewUrl;
-                    },
-                    error: function (error) {
-                        console.log(error);
-                        alert('Update error!')
-                    }
-                });
+               if (isValid){
+                   try {
+                       await $.ajax({
+                           url: reviewUpdateUrl,
+                           method: 'POST',
+                           headers: headers,
+                           contentType: false,
+                           cache: false,
+                           processData: false,
+                           data: formData,
+                           success: function (response) {
+                               alert('Update success!')
+                               window.location.href = reviewUrl;
+                           },
+                           error: function (error) {
+                               console.log(error);
+                               alert('Update error!')
+                           }
+                       });
+                   } catch (e) {
+                       console.log(e)
+                       alert('Error, Please try again!');
+                   }
+               } else {
+                   alert('Please check input require!')
+               }
             }
         })
     </script>

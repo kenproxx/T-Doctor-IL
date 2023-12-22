@@ -630,7 +630,7 @@ return [
     'Reviews' => 'Đánh giá',
     'Title English' => 'Tiêu đề tiếng Anh',
     'Title Laos' => 'Tiêu đề Lào',
-    'Description' => 'Miêu tả',
+    'Description' => 'Mô tả',
     'Description English' => 'Mô tả tiếng Anh',
     'Description Laos' => 'Mô tả Lào',
     'MedicalName' => 'Tên y tế',
