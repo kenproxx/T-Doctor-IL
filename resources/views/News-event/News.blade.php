@@ -9,10 +9,10 @@
                 @php
                     $news = $listNews->first();
                 @endphp
-            @if($news)
+                @if($news)
                     <a class="col-md-5 pl-0" href="{{route('detail.new',$news->id)}} ">
                         <div class="d-flex">
-                            <div >
+                            <div>
                                 <img class="w-100 b-radius-8px" src="{{$news->thumbnail}}">
                             </div>
                             <div class="col-md-7 pr-0">
@@ -21,7 +21,7 @@
                             </div>
                         </div>
                     </a>
-            @endif
+                @endif
 
                 <div class="mt-4">
                     <p class="text-content-product">{{ __('home.All news') }}</p>
@@ -51,23 +51,7 @@
                     @endforeach
                 </div>
                 <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">{{ __('home.Previous') }}</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">{{ __('home.Next') }}</span>
-                            </a>
-                        </li>
-                    </ul>
+                    {{ $listNews->links() }}
                 </nav>
             @else
                 <div class="d-flex justify-content-center">
@@ -85,7 +69,7 @@
                 @php
                     $Event = $listEvent->first();
                 @endphp
-            @if($Event)
+                @if($Event)
                     <a href="{{route('detail.new',$Event->id)}}">
                         <div class="d-flex">
                             <div class="col-md-5 pl-0">
@@ -97,7 +81,7 @@
                             </div>
                         </div>
                     </a>
-            @endif
+                @endif
                 <div class="mt-4">
                     <p class="text-content-product">{{ __('home.All Event') }}</p>
                 </div>
@@ -126,23 +110,7 @@
                     @endforeach
                 </div>
                 <nav aria-label="Page navigation example" class="d-flex justify-content-center">
-                    <ul class="pagination">
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                                <span class="sr-only">{{ __('home.Previous') }}</span>
-                            </a>
-                        </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                                <span class="sr-only">{{ __('home.Next') }}</span>
-                            </a>
-                        </li>
-                    </ul>
+                    {{ $listEvent->links() }}
                 </nav>
             @endif
         </div>
