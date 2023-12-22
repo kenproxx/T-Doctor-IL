@@ -1,7 +1,9 @@
 @php use App\Enums\online_medicine\ObjectOnlineMedicine; @endphp
 @php use App\Enums\online_medicine\FilterOnlineMedicine;use App\Enums\UserStatus;use App\Models\User; @endphp
 @extends('layouts.admin')
-
+@section('title')
+    List Member
+@endsection
 @section('main-content')
     <style>
 
@@ -29,16 +31,16 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($users as $index => $user)
+        @foreach($users as $user)
             <tr>
-                <th scope="row">{{ $index + 1 }}</th>
+                <th scope="row">{{ $loop->index + 1 }}</th>
                 <td>{{ $user->username }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->type }}</td>
                 <td>{{ User::getMemberNameByID($user->id) }}</td>
                 <td>{{ $user->status }}</td>
                 <td>
-                    <a href="{{ url('/') . asset($user->business_license_img ?? $user->medical_license_img) }}"
+                    <a href="{{ asset($user->business_license_img ?? $user->medical_license_img) }}"
                        class="btn btn-info" target="_blank">{{ __('home.View License') }}
                     </a>
                     <button onclick="updateUser('{{ $user->id }}', '{{ UserStatus::BLOCKED }}')"

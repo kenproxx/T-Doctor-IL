@@ -3,7 +3,7 @@
 @endphp
 @extends('layouts.admin')
 @section('title')
-    {{ __('home.Edit Product') }}
+    {{ __('home.Edit Doctor') }}
 @endsection
 @section('main-content')
     <link href="{{ asset('css/tabeditdoctor.css') }}" rel="stylesheet">
