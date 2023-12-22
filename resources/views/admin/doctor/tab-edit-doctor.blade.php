@@ -362,6 +362,20 @@
             <input hidden="" id="address_code" name="address_code" value="{{$doctor->address_code}}">
             <input hidden="" id="update_by" name="update_by" value="{{Auth::user()->id}}">
         </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <label for="about_vn">{{ __('home.About') }}</label>
+                <textarea class="form-control" id="about_vn" rows="3"></textarea>
+            </div>
+            <div class="col-sm-4">
+                <label for="about_en">{{ __('home.About') }}</label>
+                <textarea class="form-control" id="about_en" rows="3"></textarea>
+            </div>
+            <div class="col-sm-4">
+                <label for="about_laos">{{ __('home.About') }}</label>
+                <textarea class="form-control" id="about_laos" rows="3"></textarea>
+            </div>
+        </div>
         <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
     </form>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -384,6 +398,7 @@
                 ];
                 const fieldTextareaTiny = [
                     "service", "service_en", "service_laos",
+                    "about_vn", "about_en", "about_laos",
                 ];
 
                 fieldNames.forEach(fieldName => {

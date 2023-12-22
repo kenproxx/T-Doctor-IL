@@ -336,6 +336,7 @@
                     'Authorization': `Bearer ${token}`
                 };
                 const formData = new FormData();
+
                 const fieldNames = [
                     "specialty", "specialty_en", "specialty_laos","workspace",
                     "service_price", "service_price_en", "service_price_laos",
@@ -344,6 +345,9 @@
                     "time_working_1", "time_working_2", "apply_for", "address_code",
                     "name", "year_of_experience", "status", "department_id", "username", "email", "phone", "last_name", "password", "passwordConfirm", "member", "type"
                 ];
+
+
+
                 const fieldTextareaTiny = [
                     "service", "service_en", "service_laos", "about_vn", "about_en", "about_laos",
                 ];
