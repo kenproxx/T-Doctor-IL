@@ -8,6 +8,7 @@ return [
     'Free with mission' => 'ຟຣີກັບພາລະກິດ',
     'Discounted service' => 'ບໍລິການຫຼຸດລາຄາ',
     'Read' => 'ອ່ານ',
+    'Learn more' => 'ຮູ້ວ່າອື່ນໆ',
     'Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247' => 'ທັນທີໄດ້ຮັບບັດກວດກາອອນໄລນ໌ມູນຄ່າ 250k ຈາກ Med247 Clinic',
     'Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...' => 'ຕອນບ່າຍມື້ວານນີ້, ຂ້ອຍໄດ້ຮັບໂທລະສັບຈາກເພື່ອນຮ່ວມງານ, ຂໍຄໍາແນະນໍາກ່ຽວກັບເດັກຍິງທີ່ຕາບອດຫຼັງຈາກຖືກສັກຢາ fillers. ເຖິງແມ່ນວ່າມີ ...',
     'News / Events' => 'ຂ່າວ/ເຫດການ',
