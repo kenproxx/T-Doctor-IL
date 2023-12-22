@@ -34,7 +34,6 @@
                     <input type="text" class="form-control" id="name_laos" name="name_laos" value="">
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-sm-4"><label for="description">{{ __('home.Mô tả dài việt') }}</label>
                     <textarea class="form-control" name="description" id="description"></textarea>
@@ -125,7 +124,8 @@
         </div>
     </form>
 
-    <button type="button" onclick="submitForm()" class="btn btn-primary up-date-button mt-md-4">{{ __('home.Save') }}</button>
+    <button type="button" onclick="submitForm()"
+            class="btn btn-primary up-date-button mt-md-4">{{ __('home.Save') }}</button>
     <script>
 
         function submitForm() {
@@ -141,11 +141,19 @@
                 'category_id', 'object_', 'filter_', 'price', 'status', 'unit_price'
             ];
 
+            let isValid = true
+            /* Tạo fn appendDataForm ở admin blade*/
+            isValid = appendDataForm(arrField, formData, isValid);
+
             var filedata = document.getElementById("gallery");
             var i = 0, len = filedata.files.length, img, reader, file;
-            for (i; i < len; i++) {
-                file = filedata.files[i];
-                formData.append('gallery[]', file);
+            if (len > 0) {
+                for (i; i < len; i++) {
+                    file = filedata.files[i];
+                    formData.append('gallery[]', file);
+                }
+            } else {
+                isValid = false;
             }
 
             const fieldTextareaTiny = [
@@ -153,40 +161,47 @@
             ];
             fieldTextareaTiny.forEach(fieldTextarea => {
                 const content = tinymce.get(fieldTextarea).getContent();
+                if (!content){
+                    isValid = false;
+                }
                 formData.append(fieldTextarea, content);
-            });
-
-            arrField.forEach((field) => {
-                formData.append(field, $(`#${field}`).val().trim());
             });
 
             const photo = $('#thumbnail')[0].files[0];
             formData.append('thumbnail', photo);
+            if (!photo) {
+                isValid = false;
+            }
             formData.append('user_id', '{{ Auth::user()->id }}');
             formData.append('_token', '{{ csrf_token() }}');
 
-            try {
-                $.ajax({
-                    url: `{{route('api.backend.product-medicine.store')}}`,
-                    method: 'POST',
-                    headers: headers,
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    data: formData,
-                    success: function (data) {
-                        alert(data);
-                        loadingMasterPage();
-                        window.location.href = `{{route('api.backend.product-medicine.index')}}`;
-                    },
-                    error: function (exception) {
-                        alert(exception.responseText);
-                        loadingMasterPage();
-                    }
-                });
-            } catch (error) {
+            if (isValid){
+                try {
+                    $.ajax({
+                        url: `{{route('api.backend.product-medicine.store')}}`,
+                        method: 'POST',
+                        headers: headers,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            alert(data);
+                            loadingMasterPage();
+                            window.location.href = `{{route('api.backend.product-medicine.index')}}`;
+                        },
+                        error: function (exception) {
+                            alert(exception.responseText);
+                            loadingMasterPage();
+                        }
+                    });
+                } catch (error) {
+                    loadingMasterPage();
+                    throw error;
+                }
+            } else {
+                alert('Please check input empty!');
                 loadingMasterPage();
-                throw error;
             }
         }
     </script>

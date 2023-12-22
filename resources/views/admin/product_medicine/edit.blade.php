@@ -188,16 +188,19 @@
                 formData.append('gallery[]', file);
             }
 
+            let isValid = true
+            /* Tạo fn appendDataForm ở admin blade*/
+            isValid = appendDataForm(arrField, formData, isValid);
+
             const fieldTextareaTiny = [
                 'description', 'description_en', 'description_laos',
             ];
             fieldTextareaTiny.forEach(fieldTextarea => {
                 const content = tinymce.get(fieldTextarea).getContent();
+                if (!content){
+                    isValid = false;
+                }
                 formData.append(fieldTextarea, content);
-            });
-
-            arrField.forEach((field) => {
-                formData.append(field, $(`#${field}`).val().trim());
             });
 
             const photo = $('#thumbnail')[0].files[0];
@@ -205,28 +208,33 @@
 
             formData.append('_token', '{{ csrf_token() }}');
 
-            try {
-                $.ajax({
-                    url: `{{route('api.backend.product-medicine.update')}}`,
-                    method: 'POST',
-                    headers: headers,
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    data: formData,
-                    success: function (data) {
-                        alert(data);
-                        loadingMasterPage();
-                        window.location.href = `{{route('api.backend.product-medicine.index')}}`;
-                    },
-                    error: function (exception) {
-                        alert(exception.responseText);
-                        loadingMasterPage();
-                    }
-                });
-            } catch (error) {
+            if (isValid){
+                try {
+                    $.ajax({
+                        url: `{{route('api.backend.product-medicine.update')}}`,
+                        method: 'POST',
+                        headers: headers,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            alert(data);
+                            loadingMasterPage();
+                            window.location.href = `{{route('api.backend.product-medicine.index')}}`;
+                        },
+                        error: function (exception) {
+                            alert(exception.responseText);
+                            loadingMasterPage();
+                        }
+                    });
+                } catch (error) {
+                    loadingMasterPage();
+                    throw error;
+                }
+            } else {
+                alert('Please check input require!')
                 loadingMasterPage();
-                throw error;
             }
         }
     </script>

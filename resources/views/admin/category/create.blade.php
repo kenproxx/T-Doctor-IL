@@ -20,19 +20,22 @@
                     <input type="text" class="form-control" id="name_laos">
                 </div>
             </div>
-            <div class="form-group">
-                <label for="description">{{ __('home.Description') }}</label>
-                <input type="text" class="form-control" id="description" placeholder="{{ __('home.Description') }}">
-            </div>
-            <div class="form-group">
-                <label for="description_en">{{ __('home.Description English') }}</label>
-                <input type="text" class="form-control" id="description_en"
-                       placeholder="{{ __('home.Description English') }}">
-            </div>
-            <div class="form-group">
-                <label for="description_laos">{{ __('home.Description Laos') }}</label>
-                <input type="text" class="form-control" id="description_laos"
-                       placeholder="{{ __('home.Description Laos') }}">
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label for="description">{{ __('home.Description') }}</label>
+                    <textarea class="form-control" id="description" placeholder="{{ __('home.Description') }}"
+                              rows="3"></textarea>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="description_en">{{ __('home.Description English') }}</label>
+                    <textarea class="form-control" id="description_en" placeholder="{{ __('home.Description English') }}"
+                              rows="3"></textarea>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="description_laos">{{ __('home.Description Laos') }}</label>
+                    <textarea class="form-control" id="description_laos" placeholder="{{ __('home.Description Laos') }}"
+                              rows="3"></textarea>
+                </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
@@ -82,12 +85,22 @@
 
                 const fieldNames = [
                     "name", "name_en", "name_laos",
-                    "description", "description_en", "description_laos",
                     "parent_id", "status",
                 ];
 
                 let isValid = true;
-                isValid =  appendDataForm(fieldNames, formData, isValid);
+                isValid = appendDataForm(fieldNames, formData, isValid);
+
+                const fieldTextareaTiny = [
+                    'description', 'description_en', 'description_laos',
+                ];
+                fieldTextareaTiny.forEach(fieldTextarea => {
+                    const content = tinymce.get(fieldTextarea).getContent();
+                    if (!content){
+                        isValid = false;
+                    }
+                    formData.append(fieldTextarea, content);
+                });
 
                 let file = $('#thumbnail')[0].files[0];
                 formData.append("user_id", '{{ Auth::user()->id }}');

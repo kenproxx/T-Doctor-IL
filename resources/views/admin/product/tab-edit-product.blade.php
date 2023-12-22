@@ -72,7 +72,7 @@
                     <label for="category_id">{{ __('home.Category') }}</label>
                     <select class="form-select" id="category_id" name="category_id">
                         @foreach($categories as $category)
-                            <option {{ $category->id == $product->category_id ? 'checked' : '' }}
+                            <option {{ $category->id == $product->category_id ? 'selected' : '' }}
                                     value="{{$category->id}}">
                                 {{$category->name}}
                             </option>
