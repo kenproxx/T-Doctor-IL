@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MainController;
 use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\User;
@@ -46,9 +47,7 @@ class LoginController extends Controller
                 }
             }
 
-//            if ($isLogin){
-//                return response('The account is already logged in elsewhere!', 400);
-//            }
+            (new MainController())->removeCouponExpiredAndAddCouponActive();
 
             if (Auth::attempt($credentials)) {
                 $token = JWTAuth::fromUser($user);
@@ -75,6 +74,7 @@ class LoginController extends Controller
             $user = User::find($user_id);
             $user->token = null;
             $user->save();
+            (new MainController())->removeCouponExpiredAndAddCouponActive();
             return response($this->returnMessage('Logout success!'), 200);
         } catch (\Exception $exception) {
             return response($exception, 400);

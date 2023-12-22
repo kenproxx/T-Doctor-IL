@@ -16,63 +16,87 @@
     <form id="form" enctype="multipart/form-data">
         @csrf
         <div class="row">
-            <div class="col-sm-4"><label for="title">{{ __('home.tiêu đề việt') }}</label>
-                <input type="text" class="form-control" id="title" name="title" value="{{ $coupon->title }}"></div>
-            <div class="col-sm-4"><label for="title_en">{{ __('home.tiêu đề anh') }}</label>
-                <input type="text" class="form-control" id="title_en" name="title_en" value="{{ $coupon->title_en }}"></div>
-            <div class="col-sm-4"><label for="title_laos">{{ __('home.tiêu đề lào') }}</label>
+            <div class="col-sm-4">
+                <label for="title">{{ __('home.tiêu đề việt') }}</label>
+                <input type="text" class="form-control" id="title" name="title" value="{{ $coupon->title }}">
+            </div>
+            <div class="col-sm-4">
+                <label for="title_en">{{ __('home.tiêu đề anh') }}</label>
+                <input type="text" class="form-control" id="title_en" name="title_en" value="{{ $coupon->title_en }}">
+            </div>
+            <div class="col-sm-4">
+                <label for="title_laos">{{ __('home.tiêu đề lào') }}</label>
                 <input type="text" class="form-control" id="title_laos" name="title_laos"
-                       value="{{ $coupon->title_laos }}"></div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4"><label for="short_description">{{ __('home.Mô tả ngắn việt') }}</label>
-                <textarea class="form-control" name="short_description" id="short_description">{{ $coupon->short_description }}</textarea>
-            </div>
-            <div class="col-sm-4"><label for="short_description_en">{{ __('home.Mô tả ngắn anh') }}</label>
-                <textarea class="form-control" name="short_description_en" id="short_description_en">{{ $coupon->short_description_en }}</textarea>
-            </div>
-            <div class="col-sm-4"><label for="short_description_laos">{{ __('home.Mô tả ngắn lào') }}</label>
-                <textarea class="form-control" name="short_description_laos" id="short_description_laos">{{ $coupon->short_description_laos }}</textarea>
+                       value="{{ $coupon->title_laos }}">
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><label for="description">{{ __('home.Mô tả dài việt') }}</label>
+            <div class="col-sm-4">
+                <label for="short_description">{{ __('home.Mô tả ngắn việt') }}</label>
+                <textarea class="form-control" name="short_description"
+                          id="short_description">{{ $coupon->short_description }}</textarea>
+            </div>
+            <div class="col-sm-4">
+                <label for="short_description_en">{{ __('home.Mô tả ngắn anh') }}</label>
+                <textarea class="form-control" name="short_description_en"
+                          id="short_description_en">{{ $coupon->short_description_en }}</textarea>
+            </div>
+            <div class="col-sm-4">
+                <label for="short_description_laos">{{ __('home.Mô tả ngắn lào') }}</label>
+                <textarea class="form-control" name="short_description_laos"
+                          id="short_description_laos">{{ $coupon->short_description_laos }}</textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <label for="description">{{ __('home.Mô tả dài việt') }}</label>
                 <textarea class="form-control" name="description" id="description">{{ $coupon->description }}</textarea>
             </div>
-            <div class="col-sm-4"><label for="description_en">{{ __('home.Mô tả dài anh') }}</label>
-                <textarea class="form-control" name="description_en" id="description_en">{{ $coupon->description_en }}</textarea>
+            <div class="col-sm-4">
+                <label for="description_en">{{ __('home.Mô tả dài anh') }}</label>
+                <textarea class="form-control" name="description_en"
+                          id="description_en">{{ $coupon->description_en }}</textarea>
             </div>
-            <div class="col-sm-4"><label for="description_laos">{{ __('home.Mô tả dài lào') }}</label>
-                <textarea class="form-control" name="description_laos" id="description_laos">{{ $coupon->description_laos }}</textarea>
+            <div class="col-sm-4">
+                <label for="description_laos">{{ __('home.Mô tả dài lào') }}</label>
+                <textarea class="form-control" name="description_laos"
+                          id="description_laos">{{ $coupon->description_laos }}</textarea>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6"><label for="startDate">{{ __('home.Thời gian bắt đầu') }}</label>
-                <input type="datetime-local" class="form-control" id="startDate" name="startDate" value="{{ $coupon->startDate }}"></div>
-            <div class="col-sm-6"><label for="endDate">{{ __('home.Thời gian kết thúc') }}</label>
-                <input type="datetime-local" class="form-control" id="endDate" name="endDate" value="{{ $coupon->endDate }}"></div>
+            <div class="col-sm-6">
+                <label for="startDate">{{ __('home.Thời gian bắt đầu') }}</label>
+                <input type="datetime-local" class="form-control" id="startDate" name="startDate"
+                       value="{{ $coupon->startDate }}"></div>
+            <div class="col-sm-6">
+                <label for="endDate">{{ __('home.Thời gian kết thúc') }}</label>
+                <input type="datetime-local" class="form-control" id="endDate" name="endDate"
+                       value="{{ $coupon->endDate }}"></div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><label for="max_register">{{ __('home.Số lượng đký tối đa') }}</label>
-                <input type="number" class="form-control" id="max_register" name="max_register" value="{{ $coupon->max_register }}">
+            <div class="col-sm-4">
+                <label for="max_register">{{ __('home.Số lượng đký tối đa') }}</label>
+                <input type="number" class="form-control" id="max_register" name="max_register"
+                       value="{{ $coupon->max_register }}">
             </div>
-            <div class="col-sm-4"><label for="clinic_id">{{ __('home.Đơn vị áp dụng') }}</label>
+            <div class="col-sm-4">
+                <label for="clinic_id">{{ __('home.Đơn vị áp dụng') }}</label>
                 <select class="form-select" id="clinic_id">
                     <option selected>{{ __('home.Choose...') }}</option>
                 </select>
             </div>
             <div class="col-sm-4"><label for="status">{{ __('home.Trạng thái') }}</label>
                 <select class="form-select" id="status" name="status" {{ !$isAdmin ? 'disabled' : '' }}>
-                    <option value="{{ \App\Enums\CouponStatus::ACTIVE }}" {{ $coupon->status === \App\Enums\CouponStatus::ACTIVE ? 'selected' : '' }}>
+                    <option
+                        value="{{ \App\Enums\CouponStatus::ACTIVE }}" {{ $coupon->status === \App\Enums\CouponStatus::ACTIVE ? 'selected' : '' }}>
                         {{ \App\Enums\CouponStatus::ACTIVE }}
                     </option>
-                    <option value="{{ \App\Enums\CouponStatus::INACTIVE }}" {{ $coupon->status === \App\Enums\CouponStatus::INACTIVE ? 'selected' : '' }}>
+                    <option
+                        value="{{ \App\Enums\CouponStatus::INACTIVE }}" {{ $coupon->status === \App\Enums\CouponStatus::INACTIVE ? 'selected' : '' }}>
                         {{ \App\Enums\CouponStatus::INACTIVE }}
                     </option>
-                    <option value="{{ \App\Enums\CouponStatus::DELETED }}" {{ $coupon->status === \App\Enums\CouponStatus::DELETED ? 'selected' : '' }}>
-                        {{ \App\Enums\CouponStatus::DELETED }}
-                    </option>
-                    <option value="{{ \App\Enums\CouponStatus::PENDING }}" {{ $coupon->status === \App\Enums\CouponStatus::PENDING ? 'selected' : '' }}>
+                    <option
+                        value="{{ \App\Enums\CouponStatus::PENDING }}" {{ $coupon->status === \App\Enums\CouponStatus::PENDING ? 'selected' : '' }}>
                         {{ \App\Enums\CouponStatus::PENDING }}
                     </option>
                 </select>
@@ -83,7 +107,8 @@
             <div class="col-sm-12"><label>{{ __('home.Ảnh bìa') }}</label>
                 <div class="box">
 
-                    <div class="js--image-preview"><img src="{{ asset($coupon->thumbnail) }}" class="w-100 h-100" style="object-fit: cover" alt=""></div>
+                    <div class="js--image-preview"><img src="{{ asset($coupon->thumbnail) }}" class="w-100 h-100"
+                                                        style="object-fit: cover" alt=""></div>
                     <div class="upload-options">
                         <label>
                             <input type="file" class="image-upload" accept="image/*" id="thumbnail" name="thumbnail"/>
@@ -92,7 +117,6 @@
                 </div>
             </div>
         </div>
-
         <button type="button" class="btn btn-primary up-date-button mt-md-4">{{ __('home.Save') }}</button>
     </form>
     <script>
@@ -114,36 +138,53 @@
                     "description", "description_en", "description_laos"
                 ];
 
-                fieldNames.forEach(fieldName => {
-                    formData.append(fieldName, $(`#${fieldName}`).val());
-                });
+                let item =  $('#max_register');
+                let quantity = item.val();
+                if (quantity < 1) {
+                    quantity = 1;
+                }
+                item.val(quantity);
+
+                let isValid = true
+                /* Tạo fn appendDataForm ở admin blade*/
+                isValid = appendDataForm(fieldNames, formData, isValid);
+
                 fieldTextareaTiny.forEach(fieldTextarea => {
                     const content = tinymce.get(fieldTextarea).getContent();
+                    if (!content) {
+                        isValid = false;
+                    }
                     formData.append(fieldTextarea, content);
                 });
 
                 formData.append("user_id", '{{ \Illuminate\Support\Facades\Auth::user()->id }}');
                 formData.append("thumbnail", $('#thumbnail')[0].files[0]);
 
-                try {
-                    $.ajax({
-                        url: `{{route('api.backend.coupons.update', ['id' => $coupon->id])}}`,
-                        method: 'post',
-                        headers: headers,
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        data: formData,
-                        success: function () {
-                            alert('success');
-                            window.location.href = '{{ route('homeAdmin.list.coupons') }}';
-                        },
-                        error: function (exception) {
-                            console.log(exception);
-                        }
-                    });
-                } catch (error) {
-                    throw error;
+                if (isValid){
+                    try {
+                        $.ajax({
+                            url: `{{route('api.backend.coupons.update', ['id' => $coupon->id])}}`,
+                            method: 'post',
+                            headers: headers,
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            data: formData,
+                            success: function () {
+                                alert('Update success!');
+                                window.location.href = '{{ route('homeAdmin.list.coupons') }}';
+                            },
+                            error: function (exception) {
+                                console.log(exception);
+                                alert('Update error!');
+                            }
+                        });
+                    } catch (error) {
+                        console.log(error)
+                        alert('Error, Please try again!');
+                    }
+                } else {
+                    alert('Please check input require!');
                 }
             })
         })
@@ -159,10 +200,15 @@
                 headers: headers,
             });
             let html = '';
+            let clinic_id = `{{ $coupon->clinic_id }}`;
             if (response.ok) {
                 const data = await response.json();
                 data.forEach(item => {
-                    html += `<option value="${item.id}">${item.name}</option>`
+                    let select = ``;
+                    if (item.id == clinic_id){
+                        select = `selected`;
+                    }
+                    html += `<option ${select} value="${item.id}">${item.name}</option>`
                 })
                 $('#clinic_id').html(html);
             }
@@ -175,28 +221,28 @@
 
             uploadField.addEventListener('change', getFile);
 
-            function getFile(e){
+            function getFile(e) {
                 let file = e.currentTarget.files[0];
                 checkType(file);
             }
 
-            function previewImage(file){
+            function previewImage(file) {
                 let thumb = box.querySelector('.js--image-preview'),
                     reader = new FileReader();
 
                 thumb.innerHTML = '';
-                reader.onload = function() {
+                reader.onload = function () {
                     thumb.style.backgroundImage = 'url(' + reader.result + ')';
                 }
                 reader.readAsDataURL(file);
                 thumb.className += ' js--no-default';
             }
 
-            function checkType(file){
+            function checkType(file) {
                 let imageType = /image.*/;
                 if (!file.type.match(imageType)) {
                     throw 'Datei ist kein Bild';
-                } else if (!file){
+                } else if (!file) {
                     throw 'Kein Bild gewählt';
                 } else {
                     previewImage(file);
@@ -213,17 +259,17 @@
             initImageUpload(box);
         }
 
-        function initDropEffect(box){
+        function initDropEffect(box) {
             let area, drop, areaWidth, areaHeight, maxDistance, dropWidth, dropHeight, x, y;
 
             // get clickable area for drop effect
             area = box.querySelector('.js--image-preview');
             area.addEventListener('click', fireRipple);
 
-            function fireRipple(e){
+            function fireRipple(e) {
                 area = e.currentTarget
                 // create drop
-                if(!drop){
+                if (!drop) {
                     drop = document.createElement('span');
                     drop.className = 'drop';
                     this.appendChild(drop);
@@ -246,8 +292,8 @@
 
                 // calculate relative coordinates of click
                 // logic: click coordinates relative to page - parent's position relative to page - half of self height/width to make it controllable from the center
-                x = e.pageX - this.offsetLeft - (parseInt(dropWidth, 10)/2);
-                y = e.pageY - this.offsetTop - (parseInt(dropHeight, 10)/2) - 30;
+                x = e.pageX - this.offsetLeft - (parseInt(dropWidth, 10) / 2);
+                y = e.pageY - this.offsetTop - (parseInt(dropHeight, 10) / 2) - 30;
 
                 // position drop and animate
                 drop.style.top = y + 'px';

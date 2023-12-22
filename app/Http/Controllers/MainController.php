@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CouponStatus;
 use App\Enums\TypeUser;
+use App\Models\Coupon;
 use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\User;
 use DB;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -195,5 +198,16 @@ class MainController extends Controller
             $randomString .= $characters[random_int(0, $charactersLength - 1)];
         }
         return $randomString;
+    }
+
+    public function removeCouponExpiredAndAddCouponActive()
+    {
+        $nowTime = Carbon::now()->addHours(7);
+        Coupon::where('endDate', '<=', $nowTime)
+            ->where('status', CouponStatus::ACTIVE)
+            ->update(['status' => CouponStatus::INACTIVE]);
+        Coupon::where('endDate', '>', $nowTime)
+            ->where('startDate', '<=', $nowTime)
+            ->update(['status' => CouponStatus::ACTIVE]);
     }
 }

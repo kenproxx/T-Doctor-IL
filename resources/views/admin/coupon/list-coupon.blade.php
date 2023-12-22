@@ -21,7 +21,6 @@
                 <th scope="col">#</th>
                 <th scope="col">{{ __('home.Tiêu đề') }}</th>
                 <th scope="col">{{ __('home.Lượng người đăng ký') }}</th>
-                <th scope="col">{{ __('home.Trạng thái') }}</th>
                 <th scope="col">{{ __('home.Thời hạn') }}</th>
                 <th scope="col">{{ __('home.Trạng thái') }}</th>
                 <th scope="col">{{ __('home.Thao tác') }}</th>
@@ -69,7 +68,6 @@
             <th scope="row">${ i + 1 }</th>
             <td>${item.title}</td>
             <td>${item.registered} / ${item.max_register ?? 0}</td>
-            <td>${item.status} </td>
             <td>${item.startDate} - ${item.endDate}</td>
             <td>${item.status}</td>
             <td><a href="${urlView}"> {{ __('home.Xem đơn đăng ký') }} </a> | <a href="${urlEdit}"> {{ __('home.Edit') }}</a> | <a href="#" onclick="checkDelete(${item.id})">{{ __('home.Delete') }}</a></td>
@@ -99,7 +97,7 @@
         }
 
         function checkDelete(value) {
-            if (confirm("Press a button!") == true) {
+            if (confirm('Are you sure you want to delete?') == true) {
                 deleteCoupon(token, value)
             }
         }

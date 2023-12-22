@@ -125,7 +125,7 @@
     }
 
     function checkDelete(value) {
-        if (confirm("Press a button!") == true) {
+        if (confirm('Are you sure you want to delete?') == true) {
             deleteClinics(token, value)
         }
     }
