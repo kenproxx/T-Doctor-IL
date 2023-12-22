@@ -47,10 +47,9 @@ class DoctorInfoController extends Controller
     public function create()
     {
         $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
-        $users = $this->returnListUser();
         $reflector = new \ReflectionClass('App\Enums\TypeMedical');
         $types = $reflector->getConstants();
-        return view('admin.doctor.tab-create-doctor', compact('departments', 'users', 'types'));
+        return view('admin.doctor.tab-create-doctor', compact('departments',  'types'));
     }
 
     public function listDepartment() {
@@ -64,7 +63,7 @@ class DoctorInfoController extends Controller
 //        $listUsers = User::whereHas('roles', function ($query) {
 //            $query->where('role_id', 11);
 //        })->get();
-//        $users = null;
+        $users = null;
         $listUsers = User::where('status', UserStatus::ACTIVE)->get();
         foreach ($listUsers as $user) {
             $doctor = DoctorInfo::where('created_by', $user->id)->where('status', '!=', DoctorInfoStatus::DELETED)->first();
@@ -81,10 +80,9 @@ class DoctorInfoController extends Controller
         if (!$doctor) {
             return response("doctor not found", 404);
         }
-        $users = $this->returnListUser();
         $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
         $reflector = new \ReflectionClass('App\Enums\TypeMedical');
         $types = $reflector->getConstants();
-        return view('admin.doctor.tab-edit-doctor', compact('doctor', 'departments', 'users', 'types'));
+        return view('admin.doctor.tab-edit-doctor', compact('doctor', 'departments', 'types'));
     }
 }
