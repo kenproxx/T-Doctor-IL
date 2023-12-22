@@ -7,7 +7,9 @@ use App\Enums\TypeMedical;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MainController;
+use App\Models\Booking;
 use App\Models\Chat;
+use App\Models\Clinic;
 use App\Models\Department;
 use App\Models\DoctorInfo;
 use App\Models\Symptom;
@@ -120,28 +122,50 @@ class DoctorInfoApi extends Controller
 
     public function getMyDoctor($id)
     {
-        $message_doctor = Chat::where('from_user_id', $id)->get();
-        $array_to_ids = null;
-        foreach ($message_doctor as $message) {
-            $array_to_ids[] = $message->to_user_id;
+        $arrUserIds = [];
+
+        // lấy danh sách user đã từng chat với user hiện tại
+        $listWasChat = Chat::where('from_user_id', $id)
+            ->orWhere('to_user_id', $id)
+            ->select('to_user_id', 'from_user_id')
+            ->get();
+
+        foreach ($listWasChat as $chat) {
+            array_push($arrUserIds, $chat->to_user_id);
+            array_push($arrUserIds, $chat->from_user_id);
         }
-        $array_to_ids = array_unique($array_to_ids);
-//        dd($array_to_ids);
-        $users = User::whereIn('id', $array_to_ids)
+
+        // lấy danh sách user đã từng đặt lịch khám với user hiện tại
+        $listWasBookingClinic = Booking::where('user_id', $id)
+            ->select('clinic_id')
+            ->get();
+
+        foreach ($listWasBookingClinic as $clinic) {
+            $user_id = Clinic::where('id', $clinic->clinic_id)->first()->user_id;
+            array_push($arrUserIds, $user_id);
+        }
+
+
+        /*
+         * cần bổ sung lấy danh sách các bác sỹ từng follow
+        */
+
+        // tạo mảng chứa các giá trị duy nhất
+        $arrUserIds = array_unique($arrUserIds);
+
+        // xóa id của user hiện tại khỏi mảng
+        $arrUserIds = array_diff($arrUserIds, [$id]);
+
+        $listUser = User::whereIn('id', $arrUserIds)
+            ->where('member', TypeMedical::DOCTORS)
             ->where('status', UserStatus::ACTIVE)
-            ->get();
-        $array_doctor_ids = null;
-        foreach ($users as $user) {
-            $array_doctor_ids[] = $user->id;
-        }
+            ->cursor()
+            ->map(function ($user) use (&$mapUserNames) {
+                $user->name = User::getNameByID($user->id);
+                return $user;
+            });
 
-        $array_doctor_ids = array_unique($array_doctor_ids);
-        $doctorInfos = DoctorInfo::whereIn('created_by', $array_doctor_ids)
-            ->where('status', DoctorInfoStatus::ACTIVE)
-            ->where('created_by', '!=', $id)
-            ->where('hocham_hocvi', TypeMedical::DOCTORS)
-            ->get();
 
-        return response()->json($doctorInfos);
+        return response()->json($listUser);
     }
 }
