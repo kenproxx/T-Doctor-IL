@@ -468,5 +468,38 @@
 
     getListUserWasConnect();
 
+    function handleStartChatWithDoctor(id) {
+        hideTabActive();
+        getMessage(id);
+        loadDisplayMessage(id);
+        showOrHiddenChat();
+    }
+
+    function hideTabActive() {
+        let tabActive = document.querySelectorAll('.tab-pane.fade');
+        tabActive.forEach(function (tab) {
+            tab.classList.remove('active');
+            tab.classList.remove('show');
+        });
+    }
+
+    function showOrHiddenChat() {
+        document.getElementById('chat-circle').click();
+    }
+
+    function loadDisplayMessage(id) {
+        var friendDivs = document.querySelectorAll('.friend');
+
+        friendDivs.forEach(function(div) {
+            // Lấy giá trị data-id của từng div
+            var dataId = div.getAttribute('data-id');
+
+            // Kiểm tra xem data-id có bằng currentId hay không
+            if (dataId === id) {
+                div.click();
+            }
+        });
+    }
+
 </script>
 
