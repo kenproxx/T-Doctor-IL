@@ -18,49 +18,71 @@
     <form id="form" enctype="multipart/form-data">
         @csrf
         <div class="row">
-            <div class="col-sm-4"><label for="title">{{ __('home.tiêu đề việt') }}</label>
-                <input type="text" class="form-control" id="title" name="title"></div>
-            <div class="col-sm-4"><label for="title_en">{{ __('home.tiêu đề anh') }}</label>
-                <input type="text" class="form-control" id="title_en" name="title_en" value=""></div>
-            <div class="col-sm-4"><label for="title_laos">{{ __('home.tiêu đề lào') }}</label>
-                <input type="text" class="form-control" id="title_laos" name="title_laos"
-                       value=""></div>
+            <div class="col-sm-4">
+                <label for="title">{{ __('home.tiêu đề việt') }}</label>
+                <input type="text" class="form-control" id="title" name="title">
+            </div>
+            <div class="col-sm-4">
+                <label for="title_en">{{ __('home.tiêu đề anh') }}</label>
+                <input type="text" class="form-control" id="title_en" name="title_en">
+            </div>
+            <div class="col-sm-4">
+                <label for="title_laos">{{ __('home.tiêu đề lào') }}</label>
+                <input type="text" class="form-control" id="title_laos" name="title_laos">
+            </div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><label for="short_description">{{ __('home.Mô tả ngắn việt') }}</label>
+            <div class="col-sm-4">
+                <label for="short_description">{{ __('home.Mô tả ngắn việt') }}</label>
                 <textarea class="form-control" name="short_description" id="short_description"></textarea>
             </div>
-            <div class="col-sm-4"><label for="short_description_en">{{ __('home.Mô tả ngắn anh') }}</label>
+            <div class="col-sm-4">
+                <label for="short_description_en">{{ __('home.Mô tả ngắn anh') }}</label>
                 <textarea class="form-control" name="short_description_en" id="short_description_en"></textarea>
             </div>
-            <div class="col-sm-4"><label for="short_description_laos">{{ __('home.Mô tả ngắn lào') }}</label>
+            <div class="col-sm-4">
+                <label for="short_description_laos">{{ __('home.Mô tả ngắn lào') }}</label>
                 <textarea class="form-control" name="short_description_laos" id="short_description_laos"></textarea>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><label for="description">{{ __('home.Mô tả dài việt') }}</label>
+            <div class="col-sm-4">
+                <label for="description">{{ __('home.Mô tả dài việt') }}</label>
                 <textarea class="form-control" name="description" id="description"></textarea>
             </div>
-            <div class="col-sm-4"><label for="description_en">{{ __('home.Mô tả dài anh') }}</label>
+            <div class="col-sm-4">
+                <label for="description_en">{{ __('home.Mô tả dài anh') }}</label>
                 <textarea class="form-control" name="description_en" id="description_en"></textarea>
             </div>
-            <div class="col-sm-4"><label for="description_laos">{{ __('home.Mô tả dài lào') }}</label>
+            <div class="col-sm-4">
+                <label for="description_laos">{{ __('home.Mô tả dài lào') }}</label>
                 <textarea class="form-control" name="description_laos" id="description_laos"></textarea>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6"><label for="startDate">{{ __('home.Thời gian bắt đầu') }}</label>
+            <div class="col-sm-6">
+                <label for="startDate">{{ __('home.Thời gian bắt đầu') }}</label>
                 <input type="datetime-local" class="form-control" id="startDate" name="startDate"></div>
-            <div class="col-sm-6"><label for="endDate">{{ __('home.Thời gian kết thúc') }}</label>
+            <div class="col-sm-6">
+                <label for="endDate">{{ __('home.Thời gian kết thúc') }}</label>
                 <input type="datetime-local" class="form-control" id="endDate" name="endDate"></div>
         </div>
         <div class="row">
-            <div class="col-sm-6"><label for="max_register">{{ __('home.Số lượng đký tối đa') }}</label>
-                <input type="number" class="form-control" id="max_register" name="max_register">
+            <div class="col-sm-4">
+                <label for="max_register">{{ __('home.Số lượng đký tối đa') }}</label>
+                <input type="number" min="1" value="1" class="form-control" id="max_register" name="max_register">
             </div>
-            <div class="col-sm-6"><label for="clinic_id">{{ __('home.Đơn vị áp dụng') }}</label>
+            <div class="col-sm-4">
+                <label for="clinic_id">{{ __('home.Đơn vị áp dụng') }}</label>
                 <select class="form-select" id="clinic_id">
                     <option selected>{{ __('home.Choose...') }}</option>
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <label for="status">{{ __('home.Status') }}</label>
+                <select class="form-select" id="status" disabled>
+                    <option value="{{ CouponStatus::ACTIVE }}">{{ CouponStatus::ACTIVE }}</option>
+                    <option value="{{ CouponStatus::INACTIVE }}">{{ CouponStatus::INACTIVE }}</option>
                 </select>
             </div>
         </div>
@@ -81,8 +103,6 @@
         <button type="button" class="btn btn-primary up-date-button mt-md-4">{{ __('home.Save') }}</button>
     </form>
     <script>
-
-
         $(document).ready(function () {
             $('.up-date-button').on('click', function () {
                 const headers = {
@@ -92,43 +112,64 @@
 
                 const fieldNames = [
                     "title", "title_en", "title_laos", "startDate", "endDate",
-                    "max_register", "status" ,"clinic_id"
+                    "max_register", "clinic_id"
                 ];
                 const fieldTextareaTiny = [
                     "short_description", "short_description_en", "short_description_laos",
                     "description", "description_en", "description_laos"
                 ];
 
-                fieldNames.forEach(fieldName => {
-                    formData.append(fieldName, $(`#${fieldName}`).val());
-                });
+                let item =  $('#max_register');
+                let quantity = item.val();
+                if (quantity < 1) {
+                    quantity = 1;
+                }
+                item.val(quantity);
+
+                let isValid = true
+                /* Tạo fn appendDataForm ở admin blade*/
+                isValid = appendDataForm(fieldNames, formData, isValid);
+
                 fieldTextareaTiny.forEach(fieldTextarea => {
                     const content = tinymce.get(fieldTextarea).getContent();
+                    if (!content) {
+                        isValid = false;
+                    }
                     formData.append(fieldTextarea, content);
                 });
 
                 formData.append("user_id", '{{ Auth::user()->id }}');
-                formData.append("thumbnail", $('#thumbnail')[0].files[0]);
+                let photo = $('#thumbnail')[0].files[0];
+                formData.append('thumbnail', photo);
+                if (!photo) {
+                    isValid = false;
+                }
 
-                try {
-                    $.ajax({
-                        url: `{{route('api.backend.coupons.create')}}`,
-                        method: 'POST',
-                        headers: headers,
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        data: formData,
-                        success: function () {
-                            alert('success');
-                            window.location.href = '{{ route('homeAdmin.list.coupons') }}'
-                        },
-                        error: function (exception) {
-                            console.log(exception)
-                        }
-                    });
-                } catch (error) {
-                    throw error;
+                if (isValid) {
+                    try {
+                        $.ajax({
+                            url: `{{route('api.backend.coupons.create')}}`,
+                            method: 'POST',
+                            headers: headers,
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            data: formData,
+                            success: function () {
+                                alert('Create success!');
+                                window.location.href = '{{ route('homeAdmin.list.coupons') }}'
+                            },
+                            error: function (exception) {
+                                console.log(exception);
+                                alert('Create error!');
+                            }
+                        });
+                    } catch (error) {
+                        console.log(error);
+                        alert('Error, Please try again!');
+                    }
+                } else {
+                    alert('Please check input require!')
                 }
             })
         })

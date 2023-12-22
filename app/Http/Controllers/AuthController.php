@@ -241,6 +241,8 @@ class AuthController extends Controller
                     return back();
             }
 
+            (new MainController())->removeCouponExpiredAndAddCouponActive();
+
             $existToken = $user->token;
             if ($existToken) {
                 try {
@@ -284,6 +286,7 @@ class AuthController extends Controller
             $user->token = null;
             $user->save();
         }
+        (new MainController())->removeCouponExpiredAndAddCouponActive();
         Auth::logout();
         setCookie('accessToken', null);
         return redirect('/');

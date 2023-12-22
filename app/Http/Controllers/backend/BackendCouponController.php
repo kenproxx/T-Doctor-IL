@@ -11,10 +11,25 @@ use App\Models\Role;
 use App\Models\RoleUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class BackendCouponController extends Controller
 {
+
+    public function getAll()
+    {
+        if ($this->isAdmin()) {
+            $coupons = Coupon::where('status', '!=', CouponStatus::DELETED)->get();
+        } else {
+            if (Auth::user()->manager_id) {
+                $clinic_id = Clinic::where('user_id', Auth::user()->manager_id)->pluck('id');
+            } else {
+                $clinic_id = Clinic::where('user_id', Auth::user()->id)->pluck('id');
+            }
+            $coupons = Coupon::whereIn('clinic_id', $clinic_id)->get();
+        }
+
+        return response()->json($coupons);
+    }
 
     public function isAdmin()
     {
@@ -27,23 +42,6 @@ class BackendCouponController extends Controller
         } else {
             return false;
         }
-    }
-    public function getAll()
-    {
-
-
-        if ($this->isAdmin()) {
-            $coupons = Coupon::all();
-        } else {
-            if (Auth::user()->manager_id) {
-                $clinic_id = Clinic::where('user_id', Auth::user()->manager_id)->pluck('id');
-            } else {
-                $clinic_id = Clinic::where('user_id', Auth::user()->id)->pluck('id');
-            }
-            $coupons = Coupon::whereIn('clinic_id', $clinic_id)->get();
-        }
-
-        return response()->json($coupons);
     }
 
     public function getListCouponForUser()
@@ -133,6 +131,74 @@ class BackendCouponController extends Controller
         }
     }
 
+    private function saveCoupon($coupon, $request)
+    {
+        $title = $request->input('title');
+        $title_en = $request->input('title_en');
+        $title_laos = $request->input('title_laos');
+
+        $description = $request->input('description');
+        $description_en = $request->input('description_en');
+        $description_laos = $request->input('description_laos');
+
+        $short_description = $request->input('short_description');
+        $short_description_en = $request->input('short_description_en');
+        $short_description_laos = $request->input('short_description_laos');
+
+        $startDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+
+        $max_register = $request->input('max_register');
+
+        $user_id = $request->input('user_id');
+
+        $clinic_id = $request->input('clinic_id');
+
+        $status = $request->input('status');
+        if (!$status) {
+            if ($this->isAdmin()) {
+                $status = CouponStatus::ACTIVE;
+            } else {
+                $status = CouponStatus::PENDING;
+            }
+        }
+
+        $code = 'CP' . $user_id . (new MainController())->generateRandomString(8);
+
+        if ($request->hasFile('thumbnail')) {
+            $item = $request->file('thumbnail');
+            $itemPath = $item->store('coupon', 'public');
+            $thumbnail = asset('storage/' . $itemPath);
+        } else {
+            $thumbnail = $coupon->thumbnail;
+        }
+
+        $coupon->title = $title;
+        $coupon->title_en = $title_en;
+        $coupon->title_laos = $title_laos;
+
+        $coupon->description = $description;
+        $coupon->description_en = $description_en;
+        $coupon->description_laos = $description_laos;
+
+        $coupon->short_description = $short_description;
+        $coupon->short_description_en = $short_description_en;
+        $coupon->short_description_laos = $short_description_laos;
+
+        $coupon->startDate = $startDate;
+        $coupon->endDate = $endDate;
+
+        $coupon->max_register = $max_register;
+
+        $coupon->user_id = $user_id;
+
+        $coupon->status = $status;
+        $coupon->code = $code;
+        $coupon->thumbnail = $thumbnail;
+        $coupon->clinic_id = $clinic_id;
+
+        $success = $coupon->save();
+    }
 
     public function update(Request $request, $id)
     {
@@ -166,76 +232,6 @@ class BackendCouponController extends Controller
             return response('Delete error!', 400);
         } catch (\Exception $exception) {
             return response($exception, 400);
-        }
-    }
-
-    private function saveCoupon($coupon, $request)
-    {
-        $title = $request->input('title');
-        $title_en = $request->input('title_en');
-        $title_laos = $request->input('title_laos');
-
-        $description = $request->input('description');
-        $description_en = $request->input('description_en');
-        $description_laos = $request->input('description_laos');
-
-        $short_description = $request->input('short_description');
-        $short_description_en = $request->input('short_description_en');
-        $short_description_laos = $request->input('short_description_laos');
-
-        $startDate = $request->input('startDate');
-        $endDate = $request->input('endDate');
-
-        $max_register = $request->input('max_register');
-
-        $user_id = $request->input('user_id');
-
-        $clinic_id = $request->input('clinic_id');
-
-        if ($this->isAdmin()) {
-            $status = CouponStatus::ACTIVE;
-        } else {
-            $status = CouponStatus::PENDING;
-        }
-
-        $code = 'CP' . $user_id . (new MainController())->generateRandomString(8);
-
-        if ($request->hasFile('thumbnail')) {
-            $item = $request->file('thumbnail');
-            $itemPath = $item->store('coupon', 'public');
-            $thumbnail = asset('storage/' . $itemPath);
-        } else {
-            $thumbnail = '';
-        }
-
-        $coupon->title = $title;
-        $coupon->title_en = $title_en;
-        $coupon->title_laos = $title_laos;
-
-        $coupon->description = $description;
-        $coupon->description_en = $description_en;
-        $coupon->description_laos = $description_laos;
-
-        $coupon->short_description = $short_description;
-        $coupon->short_description_en = $short_description_en;
-        $coupon->short_description_laos = $short_description_laos;
-
-        $coupon->startDate = $startDate;
-        $coupon->endDate = $endDate;
-
-        $coupon->max_register = $max_register;
-
-        $coupon->user_id = $user_id;
-
-        $coupon->status = $status;
-        $coupon->code = $code;
-        $coupon->thumbnail = $thumbnail;
-        $coupon->clinic_id = $clinic_id;
-
-        $success = $coupon->save();
-
-        if (!$success) {
-            return response('Bad request!', 400);
         }
     }
 }
