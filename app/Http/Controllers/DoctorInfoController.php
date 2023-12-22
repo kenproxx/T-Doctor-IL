@@ -77,7 +77,7 @@ class DoctorInfoController extends Controller
     public function edit($id)
     {
         $doctor = User::find($id);
-        if (!$doctor) {
+        if (!$doctor || $doctor->status == UserStatus::DELETED) {
             return response("doctor not found", 404);
         }
         $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();

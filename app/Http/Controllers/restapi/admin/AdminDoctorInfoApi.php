@@ -7,7 +7,6 @@ use App\Enums\TypeMedical;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MainController;
-use App\Models\DoctorInfo;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +32,7 @@ class AdminDoctorInfoApi extends Controller
     public function getAllByUser()
     {
         $doctor_infos_byUser = User::where('member', TypeMedical::DOCTORS)
+            ->where('status', '!=', UserStatus::DELETED)
             ->get();
         return response()->json($doctor_infos_byUser);
     }
