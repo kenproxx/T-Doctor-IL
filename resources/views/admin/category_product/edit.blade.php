@@ -66,35 +66,41 @@
 
             const arrField = ['name', 'name_en', 'name_laos', 'status', 'id'];
 
-            arrField.forEach((field) => {
-                formData.append(field, $(`#${field}`).val().trim());
-            });
+            let isValid = true
+            /* Tạo fn appendDataForm ở admin blade*/
+            isValid = appendDataForm(arrField, formData, isValid);
+
             formData.append('thumbnail', $('#thumbnail')[0].files[0]);
 
             formData.append('_token', '{{ csrf_token() }}');
 
-            try {
-                $.ajax({
-                    url: `{{route('api.backend.category-product.update')}}`,
-                    method: 'POST',
-                    headers: headers,
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    data: formData,
-                    success: function (data) {
-                        alert(data);
-                        loadingMasterPage();
-                        window.location.href = `{{route('api.backend.category-product.index')}}`;
-                    },
-                    error: function (exception) {
-                        alert(exception.responseText);
-                        loadingMasterPage();
-                    }
-                });
-            } catch (error) {
+            if (isValid){
+                try {
+                    $.ajax({
+                        url: `{{route('api.backend.category-product.update')}}`,
+                        method: 'POST',
+                        headers: headers,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: formData,
+                        success: function (data) {
+                            alert(data);
+                            loadingMasterPage();
+                            window.location.href = `{{route('api.backend.category-product.index')}}`;
+                        },
+                        error: function (exception) {
+                            alert(exception.responseText);
+                            loadingMasterPage();
+                        }
+                    });
+                } catch (error) {
+                    loadingMasterPage();
+                    throw error;
+                }
+            } else {
+                alert('Please check input require!')
                 loadingMasterPage();
-                throw error;
             }
         }
     </script>
