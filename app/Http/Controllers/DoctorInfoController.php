@@ -36,7 +36,7 @@ class DoctorInfoController extends Controller
                 ['from_user_id', $id],
                 ['to_user_id', $user->id]
             ])->orWhere([
-                ['to_user_id',$id],
+                ['to_user_id', $id],
                 ['from_user_id', $user->id]
             ])->get();
             return view('qrCode.doctor-info', compact('messageDoctor', 'doctor'));
@@ -49,13 +49,26 @@ class DoctorInfoController extends Controller
         $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
         $reflector = new \ReflectionClass('App\Enums\TypeMedical');
         $types = $reflector->getConstants();
-        return view('admin.doctor.tab-create-doctor', compact('departments',  'types'));
+        return view('admin.doctor.tab-create-doctor', compact('departments', 'types'));
     }
 
-    public function listDepartment() {
+    public function listDepartment()
+    {
         $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
 
         return response()->json($departments);
+    }
+
+    public function edit($id)
+    {
+        $doctor = User::find($id);
+        if (!$doctor || $doctor->status == UserStatus::DELETED) {
+            return back();
+        }
+        $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
+        $reflector = new \ReflectionClass('App\Enums\TypeMedical');
+        $types = $reflector->getConstants();
+        return view('admin.doctor.tab-edit-doctor', compact('doctor', 'departments', 'types'));
     }
 
     private function returnListUser()
@@ -72,17 +85,5 @@ class DoctorInfoController extends Controller
             }
         }
         return collect($users);
-    }
-
-    public function edit($id)
-    {
-        $doctor = User::find($id);
-        if (!$doctor || $doctor->status == UserStatus::DELETED) {
-            return response("doctor not found", 404);
-        }
-        $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
-        $reflector = new \ReflectionClass('App\Enums\TypeMedical');
-        $types = $reflector->getConstants();
-        return view('admin.doctor.tab-edit-doctor', compact('doctor', 'departments', 'types'));
     }
 }
