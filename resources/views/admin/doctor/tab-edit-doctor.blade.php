@@ -98,11 +98,16 @@
             <div class="form-element col-md-6">
                 <label for="member">{{ __('home.Member') }}</label>
                 <select id="member" name="member" class="form-select form-control">
-                    <option value="{{Role::DOCTORS}}" selected>{{ __('home.DOCTOR') }}</option>
-                    <option value="{{Role::PHAMACISTS}}">{{ __('home.PHAMACISTS') }}</option>
-                    <option value="{{Role::THERAPISTS}}">{{ __('home.THERAPISTS') }}</option>
-                    <option value="{{Role::ESTHETICIANS}}">{{ __('home.ESTHETICIANS') }}</option>
-                    <option value="{{Role::NURSES}}">{{ __('home.NURSES') }}</option>
+                    <option {{ $doctor->member == Role::DOCTORS ? 'selected' : '' }} value="{{Role::DOCTORS}}"
+                            selected>{{ __('home.DOCTOR') }}</option>
+                    <option
+                        {{ $doctor->member == Role::PHAMACISTS ? 'selected' : '' }} value="{{Role::PHAMACISTS}}">{{ __('home.PHAMACISTS') }}</option>
+                    <option
+                        {{ $doctor->member == Role::THERAPISTS ? 'selected' : '' }} value="{{Role::THERAPISTS}}">{{ __('home.THERAPISTS') }}</option>
+                    <option
+                        {{ $doctor->member == Role::ESTHETICIANS ? 'selected' : '' }} value="{{Role::ESTHETICIANS}}">{{ __('home.ESTHETICIANS') }}</option>
+                    <option
+                        {{ $doctor->member == Role::NURSES ? 'selected' : '' }} value="{{Role::NURSES}}">{{ __('home.NURSES') }}</option>
                 </select>
             </div>
         </div>
@@ -216,25 +221,39 @@
                 <div class="col-sm-3">
                     <label for="time_working_2_start">{{ __('home.Những này làm việc bắt đầu') }}</label>
                     <select name="time_working_2_start" id="time_working_2_start" class="form-control">
-                        <option {{ $arrayWorking2[0] == 'T2' ? 'selected' : '' }} value="T2">{{ __('home.Thứ 2') }}</option>
-                        <option {{ $arrayWorking2[0] == 'T3' ? 'selected' : '' }}  value="T3">{{ __('home.Thứ 3') }}</option>
-                        <option {{ $arrayWorking2[0] == 'T4' ? 'selected' : '' }}  value="T4">{{ __('home.Thứ 4') }}</option>
-                        <option {{ $arrayWorking2[0] == 'T5' ? 'selected' : '' }}  value="T5">{{ __('home.Thứ 5') }}</option>
-                        <option {{ $arrayWorking2[0] == 'T6' ? 'selected' : '' }}  value="T6">{{ __('home.Thứ 6') }}</option>
-                        <option {{ $arrayWorking2[0] == 'T7' ? 'selected' : '' }}  value="T7">{{ __('home.Thứ 7') }}</option>
-                        <option {{ $arrayWorking2[0] == 'CN' ? 'selected' : '' }}  value="CN">{{ __('home.Chủ nhật') }}</option>
+                        <option
+                            {{ $arrayWorking2[0] == 'T2' ? 'selected' : '' }} value="T2">{{ __('home.Thứ 2') }}</option>
+                        <option
+                            {{ $arrayWorking2[0] == 'T3' ? 'selected' : '' }}  value="T3">{{ __('home.Thứ 3') }}</option>
+                        <option
+                            {{ $arrayWorking2[0] == 'T4' ? 'selected' : '' }}  value="T4">{{ __('home.Thứ 4') }}</option>
+                        <option
+                            {{ $arrayWorking2[0] == 'T5' ? 'selected' : '' }}  value="T5">{{ __('home.Thứ 5') }}</option>
+                        <option
+                            {{ $arrayWorking2[0] == 'T6' ? 'selected' : '' }}  value="T6">{{ __('home.Thứ 6') }}</option>
+                        <option
+                            {{ $arrayWorking2[0] == 'T7' ? 'selected' : '' }}  value="T7">{{ __('home.Thứ 7') }}</option>
+                        <option
+                            {{ $arrayWorking2[0] == 'CN' ? 'selected' : '' }}  value="CN">{{ __('home.Chủ nhật') }}</option>
                     </select>
                 </div>
                 <div class="col-sm-3">
                     <label for="time_working_2_end">{{ __('home.Những này làm việc kết thúc') }}</label>
                     <select name="time_working_2_end" id="time_working_2_end" class="form-control">
-                        <option {{ $arrayWorking2[1] == 'T2' ? 'selected' : '' }}  value="T2">{{ __('home.Thứ 2') }}</option>
-                        <option {{ $arrayWorking2[1] == 'T3' ? 'selected' : '' }}  value="T3">{{ __('home.Thứ 3') }}</option>
-                        <option {{ $arrayWorking2[1] == 'T4' ? 'selected' : '' }}  value="T4">{{ __('home.Thứ 4') }}</option>
-                        <option {{ $arrayWorking2[1] == 'T5' ? 'selected' : '' }}  value="T5">{{ __('home.Thứ 5') }}</option>
-                        <option {{ $arrayWorking2[1] == 'T6' ? 'selected' : '' }}  value="T6">{{ __('home.Thứ 6') }}</option>
-                        <option {{ $arrayWorking2[1] == 'T7' ? 'selected' : '' }}  value="T7">{{ __('home.Thứ 7') }}</option>
-                        <option {{ $arrayWorking2[1] == 'CN' ? 'selected' : '' }}  value="CN">{{ __('home.Chủ nhật') }}</option>
+                        <option
+                            {{ $arrayWorking2[1] == 'T2' ? 'selected' : '' }}  value="T2">{{ __('home.Thứ 2') }}</option>
+                        <option
+                            {{ $arrayWorking2[1] == 'T3' ? 'selected' : '' }}  value="T3">{{ __('home.Thứ 3') }}</option>
+                        <option
+                            {{ $arrayWorking2[1] == 'T4' ? 'selected' : '' }}  value="T4">{{ __('home.Thứ 4') }}</option>
+                        <option
+                            {{ $arrayWorking2[1] == 'T5' ? 'selected' : '' }}  value="T5">{{ __('home.Thứ 5') }}</option>
+                        <option
+                            {{ $arrayWorking2[1] == 'T6' ? 'selected' : '' }}  value="T6">{{ __('home.Thứ 6') }}</option>
+                        <option
+                            {{ $arrayWorking2[1] == 'T7' ? 'selected' : '' }}  value="T7">{{ __('home.Thứ 7') }}</option>
+                        <option
+                            {{ $arrayWorking2[1] == 'CN' ? 'selected' : '' }}  value="CN">{{ __('home.Chủ nhật') }}</option>
                     </select>
                 </div>
 
@@ -365,15 +384,15 @@
         <div class="row">
             <div class="col-sm-4">
                 <label for="about_vn">{{ __('home.About') }}</label>
-                <textarea class="form-control" id="about_vn" rows="3"></textarea>
+                <textarea class="form-control" id="about_vn" rows="3">{{ $doctor->abouts }}</textarea>
             </div>
             <div class="col-sm-4">
                 <label for="about_en">{{ __('home.About') }}</label>
-                <textarea class="form-control" id="about_en" rows="3"></textarea>
+                <textarea class="form-control" id="about_en" rows="3">{{ $doctor->abouts_en }}</textarea>
             </div>
             <div class="col-sm-4">
                 <label for="about_laos">{{ __('home.About') }}</label>
-                <textarea class="form-control" id="about_laos" rows="3"></textarea>
+                <textarea class="form-control" id="about_laos" rows="3">{{ $doctor->abouts_lao }}</textarea>
             </div>
         </div>
         <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
@@ -393,22 +412,34 @@
                     "service_price", "service_price_en", "service_price_laos",
                     "detail_address", "detail_address_en", "detail_address_laos",
                     "province_id", "district_id", "commune_id",
-                    "time_working_1", "time_working_2", "apply_for", "address_code","update_by",
-                    "name", "year_of_experience", "status", "department_id", "username", "email", "phone", "last_name", "password", "passwordConfirm", "member", "type"
+                    "time_working_1", "time_working_2", "apply_for", "address_code", "update_by",
+                    "name", "year_of_experience", "status", "department_id", "username", "email", "phone", "last_name", "member", "type"
                 ];
+
+                const passwords = [
+                    "password", "passwordConfirm",
+                ];
+
                 const fieldTextareaTiny = [
                     "service", "service_en", "service_laos",
                     "about_vn", "about_en", "about_laos",
                 ];
 
-                fieldNames.forEach(fieldName => {
+                passwords.forEach(fieldName => {
                     formData.append(fieldName, $(`#${fieldName}`).val());
                 });
+
+                let isValid = true
+                /* Tạo fn appendDataForm ở admin blade*/
+                isValid = appendDataForm(fieldNames, formData, isValid);
 
                 /* Temporary don't use tinymce because this was error
                 *  and move the necessary ids(service, service_en, service_laos) to fieldNames array*/
                 fieldTextareaTiny.forEach(fieldTextarea => {
                     const content = tinymce.get(fieldTextarea).getContent();
+                    if (!content) {
+                        isValid = false;
+                    }
                     formData.append(fieldTextarea, content);
                 });
 
@@ -418,25 +449,31 @@
                 formData.append('_token', '{{ csrf_token() }}');
                 formData.append("user_id", '{{ \Illuminate\Support\Facades\Auth::user()->id }}');
 
-                try {
-                    $.ajax({
-                        url: `{{route('api.backend.doctors.info.update.doctor', ['id' => $doctor->id])}}`,
-                        method: 'post',
-                        headers: headers,
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        data: formData,
-                        success: function () {
-                            alert('success');
-                            window.location.href = '{{route('homeAdmin.list.doctors')}}';
-                        },
-                        error: function (exception) {
-                            console.log(exception);
-                        }
-                    });
-                } catch (error) {
-                    throw error;
+                if (isValid) {
+                    try {
+                        $.ajax({
+                            url: `{{route('api.backend.doctors.info.update.doctor', ['id' => $doctor->id])}}`,
+                            method: 'post',
+                            headers: headers,
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            data: formData,
+                            success: function () {
+                                alert('Update success!');
+                                window.location.href = '{{route('homeAdmin.list.doctors')}}';
+                            },
+                            error: function (exception) {
+                                console.log(exception);
+                                alert('Update error!');
+                            }
+                        });
+                    } catch (error) {
+                        console.log(error);
+                        alert('Error, Please try again!');
+                    }
+                } else {
+                    alert('Please check input not empty!')
                 }
             })
 
