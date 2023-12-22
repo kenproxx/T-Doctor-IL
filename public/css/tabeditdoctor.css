@@ -2,7 +2,6 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
-    display: flex;
 }
 
 .list-apply li {
@@ -20,8 +19,4 @@
 
 .new-select input {
     margin-right: 5px; /* Adjust as needed */
-}
-
-.new-select label {
-    margin-top: 10px;
 }

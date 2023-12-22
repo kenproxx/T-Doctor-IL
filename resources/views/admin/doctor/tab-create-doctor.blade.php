@@ -87,9 +87,9 @@
                 <input class="form-control" id="passwordConfirm" name="passwordConfirm" minlength="8"
                        type="password" placeholder="********" required>
             </div>
-{{--                        <div class="col-sm-4 d-flex justify-content-start align-items-center">--}}
-{{--                            <span id='message'></span>--}}
-{{--                        </div>--}}
+            {{--                        <div class="col-sm-4 d-flex justify-content-start align-items-center">--}}
+            {{--                            <span id='message'></span>--}}
+            {{--                        </div>--}}
             <div class="form-element col-md-4">
                 <label for="workspace">Workplace</label>
                 <input class="form-control" id="workspace" type="text" name="workspace">
@@ -160,17 +160,17 @@
         <div class="row">
             <div class="col-sm-4">
                 <label for="service_price">{{ __('home.Giá dịch vụ việt') }}</label>
-                <input class="form-control" type="text" name="service_price" id="service_price"
+                <input class="form-control" type="number" min="0" name="service_price" id="service_price"
                        value="">
             </div>
             <div class="col-sm-4">
                 <label for="service_price_en">{{ __('home.Giá dịch vụ anh') }}</label>
-                <input class="form-control" type="text" name="service_price_en" id="service_price_en"
+                <input class="form-control" type="number" min="0" name="service_price_en" id="service_price_en"
                        value="">
             </div>
             <div class="col-sm-4">
                 <label for="service_price_laos">{{ __('home.Giá dịch vụ lào') }}</label>
-                <input class="form-control" type="text" name="service_price_laos" id="service_price_laos"
+                <input class="form-control" type="number" min="0" name="service_price_laos" id="service_price_laos"
                        value="">
             </div>
         </div>
@@ -276,9 +276,6 @@
                     <option value="{{ \App\Enums\UserStatus::BLOCKED }}">
                         {{ \App\Enums\UserStatus::BLOCKED }}
                     </option>
-                    <option value="{{ \App\Enums\UserStatus::DELETED }}">
-                        {{ \App\Enums\UserStatus::DELETED }}
-                    </option>
                 </select>
             </div>
             <div class="col-sm-4">
@@ -338,7 +335,7 @@
                 const formData = new FormData();
 
                 const fieldNames = [
-                    "specialty", "specialty_en", "specialty_laos","workspace",
+                    "specialty", "specialty_en", "specialty_laos", "workspace",
                     "service_price", "service_price_en", "service_price_laos",
                     "detail_address", "detail_address_en", "detail_address_laos",
                     "province_id", "district_id", "commune_id",
@@ -346,56 +343,59 @@
                     "name", "year_of_experience", "status", "department_id", "username", "email", "phone", "last_name", "password", "passwordConfirm", "member", "type"
                 ];
 
-
+                let isValid = true
+                /* Tạo fn appendDataForm ở admin blade*/
+                isValid = appendDataForm(fieldNames, formData, isValid);
 
                 const fieldTextareaTiny = [
                     "service", "service_en", "service_laos", "about_vn", "about_en", "about_laos",
                 ];
 
-                fieldNames.forEach(fieldName => {
-                    formData.append(fieldName, $(`#${fieldName}`).val());
-                });
-
-
                 fieldTextareaTiny.forEach(fieldTextarea => {
                     const content = tinymce.get(fieldTextarea).getContent();
+                    if (!content) {
+                        isValid = false;
+                    }
                     formData.append(fieldTextarea, content);
                 });
 
                 formData.append("created_by", '{{ \Illuminate\Support\Facades\Auth::user()->id }}');
                 formData.append("apply_for", $('#apply_for').val());
                 const photo = $('#avt')[0].files[0];
+                if (!photo) {
+                    isValid = false;
+                }
                 formData.append('avt', photo);
                 formData.append('_token', '{{ csrf_token() }}');
 
-                if (photo) {
-                        try {
-                            $.ajax({
-                                url: `{{route('api.backend.doctors.info.create')}}`,
-                                method: 'POST',
-                                headers: headers,
-                                contentType: false,
-                                cache: false,
-                                processData: false,
-                                data: formData,
-                                success: function () {
-                                    toastr.success('Create success', 'Success');
-                                    window.location.href = '{{ route('homeAdmin.list.doctors') }}';
-                                },
-                                error: function (xhr) {
-                                    if (xhr.status === 400) {
-                                        toastr.error(xhr.responseText, 'Error');
-                                    } else {
-                                        toastr.error('Create error, Please try again!', 'Error');
-                                    }
-                                    console.log(xhr);
+                if (isValid) {
+                    try {
+                        $.ajax({
+                            url: `{{route('api.backend.doctors.info.create')}}`,
+                            method: 'POST',
+                            headers: headers,
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            data: formData,
+                            success: function () {
+                                alert('Create success', 'Success');
+                                window.location.href = '{{ route('homeAdmin.list.doctors') }}';
+                            },
+                            error: function (xhr) {
+                                if (xhr.status === 400) {
+                                    alert(xhr.responseText, 'Error');
+                                } else {
+                                    alert('Create error, Please try again!', 'Error');
                                 }
-                            });
-                        } catch (error) {
-                            throw error;
-                        }
+                                console.log(xhr);
+                            }
+                        });
+                    } catch (error) {
+                        alert('Create error!');
+                    }
                 } else {
-                    toastr.error('Please choosing thumbnail!');
+                    alert('Please check input valid!');
                 }
             })
 
