@@ -3,6 +3,12 @@
 @section('content')
     @include('layouts.partials.header_3')
     @include('component.banner')
+
+    <style>
+        .list-doctor .card img {
+            height: 300px;
+        }
+    </style>
     <div class="container">
         <div class="d-flex">
             <div class="col-md-3 mr-2">
@@ -34,7 +40,6 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="review" role="tabpanel" aria-labelledby="review-tab">
-                            {{--                            @include('component.review-item')--}}
                         </div>
                         <div class="tab-pane fade" id="wishList" role="tabpanel" aria-labelledby="wishList-tab">
                             <div class="row">
@@ -84,25 +89,18 @@
                 let html = ``;
                 for (let i = 0; i < res.length; i++) {
                     let data = res[i];
-
-                    let mainUrl = `{{asset('/storage')}}`;
-
-                    let imageDoctor = data['thumbnail'];
-                    let myArray = imageDoctor.split("/storage");
-
-                    let img = mainUrl + myArray[1];
-
                     let route = `{{route('examination.doctor_info', ['id'=>':id'])}}`;
                     route = route.replace(':id', data['id']);
 
-                    html = html + `<div class="card col-md-4">
+                    html = html + `<div class="col-md-4">
+                                    <div class="card" >
                                     <i class="bi bi-heart"></i>
-                                    <img src="${img}" class="card-img-top" alt="...">
+                                    <img src="${data.avt}" class="card-img-top" alt="...">
                                     <div class="card-body">
-                                        <a href="${route}"><h5 class="card-title">${data['name']}</h5></a>
+                                        <a href="${route}" target="_blank"><h5 class="card-title">${data['name']}</h5></a>
                                         <p class="card-text_1">{{ __('home.Location') }}: <b>Hanoi</b></p>
                                         <p class="card-text_1">{{ __('home.Working time') }}: <b>${data['time_working_1']} - ${data['time_working_2']}</b></p>
-                                        <button class="delete-1">{{ __('home.Delete') }}</button>
+                                    </div>
                                     </div>
                                 </div>`;
                 }
