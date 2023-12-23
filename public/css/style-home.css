@@ -117,12 +117,76 @@
     font-weight: 800;
     line-height: normal;
   }
+  .container #myTabContent .product-item {
+    border-radius: 16px;
+    background: #088180;
+    padding: 0;
+  }
+  .container #myTabContent .product-item .img-pro img {
+    border-radius: 13px 13px 0px 100px;
+  }
+  .container #myTabContent .product-item .img-pro i {
+    display: flex;
+    padding: 8px;
+    align-items: flex-start;
+    gap: 10px;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    border-radius: 51px;
+    background: var(--Light, #EAEAEA);
+  }
+  .container #myTabContent .product-item .img-pro .icon-chuyen-khoa {
+    display: flex;
+    padding: 8px;
+    align-items: flex-start;
+    gap: 10px;
+    position: absolute;
+    left: 15px;
+    bottom: 0;
+    border-radius: 51px;
+    background: var(--Light, #EAEAEA);
+  }
+  .container #myTabContent .product-item .img-pro .icon-chuyen-khoa img {
+    width: 30px;
+    height: 30px;
+    border-radius: 22px;
+  }
+  .container #myTabContent .product-item .content-pro .name-product a {
+    color: var(--White, #FFF);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    min-height: 24px;
+  }
+  .container #myTabContent .product-item .content-pro .location-pro p {
+    margin: 0;
+    color: var(--White, #FFF);
+    text-align: center;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  .container #myTabContent .product-item .content-pro .price-pro {
+    color: var(--White, #FFF);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+  }
+  .container #myTabContent .product-item:hover {
+    border-radius: 16px;
+    background: #088180;
+    box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.25);
+  }
   .container #myTabContent .card-homeNew {
     display: flex;
     padding: 16px;
     align-items: flex-start;
     gap: 10px;
-    border-radius: 24px;
+    border-radius: 16px;
     border: 1px solid var(--White-Light, #F3F3F3);
     background: var(--White, #FFF);
     transition: all 0.1s ease;
