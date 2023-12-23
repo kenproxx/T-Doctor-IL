@@ -378,7 +378,7 @@
                     @endforeach
                 </ul>
             </div>
-            <input hidden="" id="address_code" name="address_code" value="{{$doctor->address_code}}">
+            <input hidden="" id="address_code" name="address_code" value="{{$doctor->address_code ?? 'code_default'}}">
             <input hidden="" id="update_by" name="update_by" value="{{Auth::user()->id}}">
         </div>
         <div class="row">

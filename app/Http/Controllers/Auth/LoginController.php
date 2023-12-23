@@ -34,6 +34,8 @@ class LoginController extends Controller
                     return response($this->returnMessage('User not active!'), 400);
                 } else if ($user && $user->status == UserStatus::BLOCKED) {
                     return response($this->returnMessage('User has been blocked!'), 400);
+                } else if ($user && $user->status == UserStatus::PENDING) {
+                    return response($this->returnMessage('User not approve!'), 400);
                 }
             }
 
@@ -66,6 +68,10 @@ class LoginController extends Controller
         }
     }
 
+    public function returnMessage($message)
+    {
+        return ['message' => $message];
+    }
 
     public function logout(Request $request)
     {
@@ -79,10 +85,5 @@ class LoginController extends Controller
         } catch (\Exception $exception) {
             return response($exception, 400);
         }
-    }
-
-    public function returnMessage($message)
-    {
-        return ['message' => $message];
     }
 }

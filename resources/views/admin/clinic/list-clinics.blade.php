@@ -1,5 +1,7 @@
 @extends('layouts.admin')
-
+@section('title')
+    List Business
+@endsection
 @section('main-content')
     <style>
 

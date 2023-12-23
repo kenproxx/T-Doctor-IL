@@ -704,7 +704,7 @@
     function appendDataForm(arrField, formData, isValid) {
         for (let i = 0; i < arrField.length; i++) {
             let field = arrField[i];
-            let value = $(`#${field}`).val().trim();
+            let value = $(`#${field}`).val();
 
             if (value && value !== '') {
                 formData.append(field, value);
@@ -721,3 +721,47 @@
 </html>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+    async function getLocation() {
+        if (navigator.geolocation) {
+            await navigator.geolocation.getCurrentPosition(showPosition);
+            let locale = localStorage.getItem('countryCode');
+            let country = localStorage.getItem('location');
+            document.cookie = "countryCode=" + locale;
+            document.cookie = "country=" + country;
+        } else {
+            alert("Geolocation is not supported by this browser.")
+        }
+    }
+
+    async function showPosition(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        await getCountryFromCoordinates(latitude, longitude);
+    }
+
+    function getCountryFromCoordinates(latitude, longitude) {
+        const apiUrl = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data.address && data.address.country && data.address.country_code) {
+                    const countryName = data.address.country;
+                    const countryCode = data.address.country_code;
+
+                    localStorage.setItem('location', countryName);
+                    localStorage.setItem('countryCode', countryCode);
+                    localStorage.setItem('latitude', latitude);
+                    localStorage.setItem('longitude', longitude);
+                } else {
+
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    getLocation();
+</script>

@@ -4,7 +4,7 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">{{ __('home.gallery') }}</th>
+            <th scope="col">{{ __('home.Thumbnail') }}</th>
             <th scope="col">{{ __('home.Name') }}</th>
             <th scope="col">{{ __('home.Addresses') }}</th>
             <th scope="col">{{ __('home.open_date') }}</th>
@@ -67,7 +67,6 @@
 
 
     async function renderClinics(res) {
-        console.log(res)
         let html = ``;
 
         for (let i = 0; i < res.length; i++) {
@@ -76,20 +75,19 @@
             let item = res[i];
             let rowNumber = i + 1;
 
-                let gallery = item.gallery;
-                let arrayGallery = [];
+            let gallery = item.gallery;
+            let arrayGallery = [];
 
-                if (gallery) {
-                    arrayGallery = gallery.split(',');
-                }
+            if (gallery) {
+                arrayGallery = gallery.split(',');
+            }
 
-                let img = ``;
-                for (let j = 0; j < arrayGallery.length; j++) {
-                    img = img + `<img class="mr-2 w-auto h-100" src="${arrayGallery[j]}" alt="">`;
-                }
+            let img = ``;
+
+            img = `<img class="mr-2 w-auto h-100" src="${arrayGallery[0]}" alt="">`;
 
 
-                html = html + `<tr>
+            html = html + `<tr>
             <th scope="row">${rowNumber}</th>
             <td>${img}</td>
             <td>${item.name}</td>
