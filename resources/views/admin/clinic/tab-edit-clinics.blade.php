@@ -3,7 +3,164 @@
     {{ __('home.Edit Business') }}
 @endsection
 @section('main-content')
-    <link href="{{ asset('css/tabeditclinics.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/tabcreateclinics.css') }}" rel="stylesheet">
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .dropdown {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .dropdown .dropdown-list {
+            padding: 25px 20px;
+            background: #fff;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            right: 0;
+            border: 1px solid rgba(0, 0, 0, .2);
+            max-height: 223px;
+            overflow-y: auto;
+            background: #fff;
+            display: none;
+            z-index: 10;
+        }
+
+        .dropdown .checkbox {
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .dropdown .dropdown-label {
+            display: block;
+            height: 44px;
+            font-size: 16px;
+            line-height: 42px;
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, .2);
+            padding: 0 40px 0 20px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .dropdown .dropdown-label:before {
+            content: '▼';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.25s;
+            transform-origin: center center;
+        }
+
+        .dropdown.open .dropdown-list {
+            display: block;
+        }
+
+        .dropdown.open .checkbox {
+            transition: 2s opacity 2s;
+            opacity: 1;
+        }
+
+        .dropdown.open .dropdown-label:before {
+            transform: translateY(-50%) rotate(-180deg);
+        }
+
+        .checkbox {
+            margin-bottom: 20px;
+        }
+
+        .checkbox:last-child {
+            margin-bottom: 0;
+        }
+
+        .checkbox .checkbox-custom {
+            display: none;
+        }
+
+        .checkbox .checkbox-custom-label {
+            display: inline-block;
+            position: relative;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+
+        .checkbox .checkbox-custom + .checkbox-custom-label:before {
+            content: '';
+            background: transparent;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 10px;
+            text-align: center;
+            width: 12px;
+            height: 12px;
+            border: 1px solid rgba(0, 0, 0, .3);
+            border-radius: 2px;
+            margin-top: -2px;
+        }
+
+        .checkbox .checkbox-custom:checked + .checkbox-custom-label:after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 4px;
+            height: 4px;
+            padding: 2px;
+            transform: rotate(45deg);
+            text-align: center;
+            border: solid #000;
+            border-width: 0 2px 2px 0;
+        }
+
+        .checkbox .checkbox-custom-label {
+            line-height: 16px;
+            font-size: 16px;
+            margin-right: 0;
+            margin-left: 0;
+            color: black;
+        }
+
+
+        .list-department,
+        .list-symptoms,
+        .list-service {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .list-department li,
+        .list-symptoms li,
+        .list-service li {
+            margin-right: 20px; /* Adjust as needed */
+        }
+
+        .list-department li:last-child,
+        .list-symptoms li:last-child,
+        .list-service li:last-child {
+            margin-right: 0;
+        }
+
+        .new-select {
+            display: flex;
+            align-items: center;
+        }
+
+        .new-select input {
+            margin-right: 5px; /* Adjust as needed */
+        }
+
+        .new-select label {
+            margin-top: 10px;
+        }
+
+        /* Add more styles as needed */
+
+    </style>
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('home.Edit') }}</h1>
     <form>
@@ -38,22 +195,25 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4"><label for="address_detail">{{ __('home.địa chỉ chi tiết việt') }}</label>
+                <div class="col-sm-4">
+                    <label for="address_detail">{{ __('home.địa chỉ chi tiết việt') }}</label>
                     <input type="text" class="form-control" name="address_detail" id="address_detail"
                            value="{{$clinic->address_detail}}">
                 </div>
-                <div class="col-sm-4"><label for="address_detail_en">{{ __('home.địa chỉ chi tiết anh') }}</label>
+                <div class="col-sm-4">
+                    <label for="address_detail_en">{{ __('home.địa chỉ chi tiết anh') }}</label>
                     <input type="text" class="form-control" name="address_detail_en" id="address_detail_en"
                            value="{{$clinic->address_detail_en}}">
                 </div>
-                <div class="col-sm-4"><label for="address_detail_laos">{{ __('home.địa chỉ chi tiết lào') }}</label>
+                <div class="col-sm-4">
+                    <label for="address_detail_laos">{{ __('home.địa chỉ chi tiết lào') }}</label>
                     <input type="text" class="form-control" name="address_detail_laos" id="address_detail_laos"
                            value="{{$clinic->address_detail_laos}}">
                 </div>
             </div>
             <div class="row">
                 @php
-                    $combinedAddress = $clinic->address; // Thay bằng giá trị thực tế của bạn
+                    $combinedAddress = $clinic->address;
                     $addressParts = explode(',', $combinedAddress);
                     $detailAddress = $addressParts[0];
                     $codeProvince = $addressParts[1];
@@ -234,19 +394,22 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-element">
-                        <input name="emergency" id="emergency" type="checkbox" value="1" @if($clinic->emergency == 1) checked @endif>
+                        <input name="emergency" id="emergency" type="checkbox" value="1"
+                               @if($clinic->emergency == 1) checked @endif>
                         <label for="emergency">Is there an emergency room?</label>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-element">
-                        <input name="insurance" id="insurance" type="checkbox" value="1" @if($clinic->insurance == 1) checked @endif>
+                        <input name="insurance" id="insurance" type="checkbox" value="1"
+                               @if($clinic->insurance == 1) checked @endif>
                         <label for="insurance">Is health insurance applicable?</label>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-element">
-                        <input name="parking" id="parking" type="checkbox" value="1" @if($clinic->parking == 1) checked @endif>
+                        <input name="parking" id="parking" type="checkbox" value="1"
+                               @if($clinic->parking == 1) checked @endif>
                         <label for="parking">Is there parking?</label>
                     </div>
                 </div>
@@ -263,7 +426,8 @@
                     <label for="information">Hospital information</label>
                     <div class="dropdown" data-target="hospital_information">
                         <label class="dropdown-label">Select Options</label>
-                        <input type="hidden" name="hospital_information" id="hospital_information" value="{{$clinic->information}}"/>
+                        <input type="hidden" name="hospital_information" id="hospital_information"
+                               value="{{$clinic->information}}"/>
                         <div class="dropdown-list">
                             @php
                                 $arrayInformation = explode(',',$clinic->information);
@@ -297,7 +461,8 @@
                     <label for="information">Hospital facilities</label>
                     <div class="dropdown" data-target="hospital_facilities">
                         <label class="dropdown-label">Select Options</label>
-                        <input type="hidden" name="hospital_facilities" id="hospital_facilities" value="{{$clinic->facilities}}"/>
+                        <input type="hidden" name="hospital_facilities" id="hospital_facilities"
+                               value="{{$clinic->facilities}}"/>
                         <div class="dropdown-list">
                             @php
                                 $arrayFacilities = explode(',', $clinic->facilities);
@@ -330,7 +495,8 @@
                     <label for="information">Hospital equipment</label>
                     <div class="dropdown" data-target="hospital_equipment">
                         <label class="dropdown-label">Select Options</label>
-                        <input type="hidden" name="hospital_equipment" id="hospital_equipment" value="{{$clinic->equipment}}"/>
+                        <input type="hidden" name="hospital_equipment" id="hospital_equipment"
+                               value="{{$clinic->equipment}}"/>
                         <div class="dropdown-list">
                             @php
                                 $arrayEquipment = explode(',', $clinic->equipment);
@@ -357,6 +523,17 @@
                             @endforeach
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label for="representative_doctor">Chọn một tùy chọn:</label>
+                    <select name="representative_doctor" class="form-select" id="representative_doctor">
+                        @foreach($doctorLists as $kry => $doctor)
+                            <option value="{{$doctor->id}}">{{$doctor->name}}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
 
@@ -433,6 +610,15 @@
                 // Gán giá trị vào input ẩn
                 $('#combined_address').val(combinedAddress);
                 addNewAddress();
+                let latitude = $('#latitude');
+                let longitude = $('#longitude');
+                if (!latitude.val()) {
+                    latitude.val(localStorage.getItem('latitude'))
+                }
+
+                if (!longitude.val()) {
+                    longitude.val(localStorage.getItem('longitude'))
+                }
             }
 
             function getCodeFromValue(value) {
@@ -472,76 +658,75 @@
 
 
                 const formData = new FormData();
-                formData.append("name", $('#name').val());
-                formData.append("name_en", $('#name_en').val());
-                formData.append("name_laos", $('#name_laos').val());
-                formData.append("phone", $('#phone').val());
-                formData.append("email", $('#email').val());
-                formData.append("combined_address", $('#combined_address').val());
-                formData.append("longitude", $('#longitude').val());
-                formData.append("latitude", $('#latitude').val());
-                formData.append("address_detail", $('#address_detail').val());
-                formData.append("address_detail_en", $('#address_detail_en').val());
-                formData.append("address_detail_laos", $('#address_detail_laos').val());
-                formData.append("province_id", myProvince[0]);
-                formData.append("district_id", myDistrict[0]);
-                formData.append("commune_id", myCommune[0]);
-                formData.append("open_date", $('#open_date').val());
-                formData.append("close_date", $('#close_date').val());
-                formData.append("user_id", $('#user_id').val());
-                formData.append("time_work", $('#time_work').val());
-                formData.append("type", $('#type').val());
-                formData.append("status", $('#status').val());
-                formData.append("clinics_service", $('#clinics_service').val());
 
-                formData.append("departments", $('#departments').val());
-                formData.append("symptoms", $('#symptoms').val());
-                formData.append("emergency", $('#emergency').val());
-                formData.append("insurance", $('#insurance').val());
-                formData.append("parking", $('#parking').val());
-                formData.append("facilities", $('#hospital_facilities').val());
-                formData.append("equipment", $('#hospital_equipment').val());
-                formData.append("information", $('#hospital_information').val());
-                formData.append("representative_doctor", $('#representative_doctor').val());
-                formData.append("costs", $('#costs').val());
+                const arrFieldEmpty = [
+                    "facilities", "equipment", "information", "emergency", "insurance", "parking",
+                ];
+
+                const arrField = [
+                    "name", "name_en", "name_laos", "phone", "combined_address", "costs",
+                    "longitude", "latitude", "address_detail", "address_detail_en", "email",
+                    "address_detail_laos", "province_id", "district_id", "commune_id",
+                    "open_date", "close_date", "user_id", "time_work", "type", "status",
+                    "clinics_service", "departments", "symptoms", "representative_doctor",
+                ];
+
+                arrFieldEmpty.forEach(data => {
+                    formData.append(data, $(`#${data}`).val());
+                });
+
+                let isValid = true
+                /* Tạo fn appendDataForm ở admin blade */
+                isValid = appendDataForm(arrField, formData, isValid);
+
                 const fieldTextareaTiny = [
                     'introduce'
                 ];
+
                 fieldTextareaTiny.forEach(fieldTextarea => {
                     const content = tinymce.get(fieldTextarea).getContent();
+                    if (!content) {
+                        isValid = false;
+                    }
                     formData.append(fieldTextarea, content);
                 });
 
-                var filedata = document.getElementById("gallery");
-                var i = 0, len = filedata.files.length, img, reader, file;
+                let filedata = document.getElementById("gallery");
+                let i = 0, len = filedata.files.length, img, reader, file;
                 for (i; i < len; i++) {
                     file = filedata.files[i];
                     formData.append('gallery[]', file);
                 }
-                try {
-                    $.ajax({
-                        url: `{{route('api.backend.clinics.edit',$clinic->id)}}`,
-                        method: 'POST',
-                        headers: headers,
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        data: formData,
-                        success: function (response) {
-                            alert('success');
-                            window.location.href = `{{route('homeAdmin.list.clinics')}}`;
-                        },
-                        error: function (xhr) {
-                            if (xhr.status === 400) {
-                                toastr.error(xhr.responseText, 'Error');
-                            } else {
-                                toastr.error('Create error, Please try again!', 'Error');
+
+                if (isValid){
+                    try {
+                        $.ajax({
+                            url: `{{route('api.backend.clinics.edit',$clinic->id)}}`,
+                            method: 'POST',
+                            headers: headers,
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            data: formData,
+                            success: function (response) {
+                                alert('Update success!');
+                                window.location.href = `{{route('homeAdmin.list.clinics')}}`;
+                            },
+                            error: function (xhr) {
+                                if (xhr.status === 400) {
+                                    alert('Update error!');
+                                } else {
+                                    alert('Update error! Please try again!');
+                                }
+                                console.log(xhr);
                             }
-                            console.log(xhr);
-                        }
-                    });
-                } catch (error) {
-                    throw error;
+                        });
+                    } catch (error) {
+                        console.log(error);
+                        alert('Error! Please try again!');
+                    }
+                } else {
+                    alert('Please enter input require!')
                 }
             })
         })
@@ -787,15 +972,15 @@
     </script>
     <script>
         // Thêm sự kiện change cho các checkbox cụ thể
-        document.getElementById('emergency').addEventListener('change', function() {
+        document.getElementById('emergency').addEventListener('change', function () {
             this.value = this.checked ? 1 : 0;
         });
 
-        document.getElementById('insurance').addEventListener('change', function() {
+        document.getElementById('insurance').addEventListener('change', function () {
             this.value = this.checked ? 1 : 0;
         });
 
-        document.getElementById('parking').addEventListener('change', function() {
+        document.getElementById('parking').addEventListener('change', function () {
             this.value = this.checked ? 1 : 0;
         });
     </script>

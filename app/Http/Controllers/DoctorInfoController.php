@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\DoctorDepartmentStatus;
+use App\Enums\DepartmentStatus;
 use App\Enums\DoctorInfoStatus;
 use App\Enums\UserStatus;
 use App\Models\Chat;
-use App\Models\DoctorDepartment;
+use App\Models\Department;
 use App\Models\DoctorInfo;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -46,7 +46,7 @@ class DoctorInfoController extends Controller
 
     public function create()
     {
-        $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
+        $departments = Department::where('status', DepartmentStatus::ACTIVE)->get();
         $reflector = new \ReflectionClass('App\Enums\TypeMedical');
         $types = $reflector->getConstants();
         return view('admin.doctor.tab-create-doctor', compact('departments', 'types'));
@@ -54,7 +54,7 @@ class DoctorInfoController extends Controller
 
     public function listDepartment()
     {
-        $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
+        $departments = Department::where('status', DepartmentStatus::ACTIVE)->get();
 
         return response()->json($departments);
     }
@@ -65,7 +65,7 @@ class DoctorInfoController extends Controller
         if (!$doctor || $doctor->status == UserStatus::DELETED) {
             return back();
         }
-        $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
+        $departments = Department::where('status', DepartmentStatus::ACTIVE)->get();
         $reflector = new \ReflectionClass('App\Enums\TypeMedical');
         $types = $reflector->getConstants();
         return view('admin.doctor.tab-edit-doctor', compact('doctor', 'departments', 'types'));

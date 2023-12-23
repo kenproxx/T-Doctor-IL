@@ -19,19 +19,25 @@ class BackendClinicController extends Controller
 {
     public function getAll()
     {
-        $clinics = Clinic::where('type', TypeBusiness::CLINICS)->get();
+        $clinics = Clinic::where('type', TypeBusiness::CLINICS)
+            ->where('status', '!=', ClinicStatus::DELETED)
+            ->get();
         return response()->json($clinics);
     }
 
     public function getAllPharmacies()
     {
-        $clinics = Clinic::where('type', TypeBusiness::PHARMACIES)->get();
+        $clinics = Clinic::where('type', TypeBusiness::PHARMACIES)
+            ->where('status', '!=', ClinicStatus::DELETED)
+            ->get();
         return response()->json($clinics);
     }
 
     public function getAllHospitals()
     {
-        $clinics = Clinic::where('type', TypeBusiness::HOSPITALS)->get();
+        $clinics = Clinic::where('type', TypeBusiness::HOSPITALS)
+            ->where('status', '!=', ClinicStatus::DELETED)
+            ->get();
         return response()->json($clinics);
     }
 
@@ -198,7 +204,6 @@ class BackendClinicController extends Controller
             $symptoms = $request->input('symptoms');
 
 
-
             $status = $request->input('status');
 
             $clinic->name = $name;
@@ -302,7 +307,6 @@ class BackendClinicController extends Controller
             $equipment = $request->input('equipment') ?? $clinic->equipment;
             $costs = $request->input('costs') ?? $clinic->costs;
             $representativeDoctor = $request->input('representative_doctor') ?? $clinic->representative_doctor;
-
 
 
             $department = $request->input('departments') ?? $clinic->department;
