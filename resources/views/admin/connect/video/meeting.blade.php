@@ -26,9 +26,7 @@
 
     </script>
 
-    {{--        @vite(['resources/css/app.css', 'resources/js/app.js'])--}}
-    <script src="{{ asset('build/assets/app.ec67c3ec.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('build/assets/app.2ac464e5.css') }}">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="antialiased">
 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -109,14 +107,15 @@
         </div>
     </div>
 
-            <div id="remoteParticipantContainer" class="flex flex-col space-y-4">
-                <div id="localParticiapntContainer" class="w-48 h-48 rounded-3xl bg-gray-900 relative">
-                    <video id="localVideoTag" src="" autoplay class="object-contain w-full rounded-t-3xl"></video>
-                    <div id="localUsername" class="absolute h-8 w-full bg-gray-700 rounded-b-3xl bottom-0 text-white text-center font-bold pt-1">
-                        {{ __('home.Me') }}
-                    </div>
-                </div>
+    <div id="remoteParticipantContainer" class="flex flex-col space-y-4">
+        <div id="localParticiapntContainer" class="w-48 h-48 rounded-3xl bg-gray-900 relative">
+            <video id="localVideoTag" src="" autoplay class="object-contain w-full rounded-t-3xl"></video>
+            <div id="localUsername"
+                 class="absolute h-8 w-full bg-gray-700 rounded-b-3xl bottom-0 text-white text-center font-bold pt-1">
+                {{ __('home.Me') }}
             </div>
+        </div>
+    </div>
 
     <div class="flex flex-col space-y-2">
         <button id='toggleMicrophone' class="bg-gray-400 w-10 h-10 rounded-md p-2">
@@ -154,12 +153,12 @@
     </div>
 </div>
 
-        <div id="leaveMeetingView" class="hidden">
-            <h1 class="text-center text-3xl mt-10 font-bold">
-                {{ __('home.You have left the meeting') }}
-            </h1>
-        </div>
-    </body>
+<div id="leaveMeetingView" class="hidden">
+    <h1 class="text-center text-3xl mt-10 font-bold">
+        {{ __('home.You have left the meeting') }}
+    </h1>
+</div>
+</body>
 
 <script>
 
