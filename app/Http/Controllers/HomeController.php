@@ -15,6 +15,7 @@ use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Hash;
 use ReflectionClass;
 
 class HomeController extends Controller
@@ -22,6 +23,7 @@ class HomeController extends Controller
 
     public function index()
     {
+        dd(Hash::make(12345678));
         if (!Auth::check()) {
             setCookie('accessToken', null);
         }
