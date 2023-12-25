@@ -48,7 +48,7 @@
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     };
-                    console.log(currentLocation)
+                    // console.log(currentLocation)
                     callback(currentLocation);
                 });
             } else {
@@ -304,6 +304,7 @@
             let services = ``;
             for (let i = 0; i < response.length; i++) {
                 let data = response[i];
+                // console.log(data)
                 services = services + `<div class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
                                     <div class="fs-14 font-weight-600">
                                         <span>${data.name}</span>
@@ -322,6 +323,7 @@
         $(document).ready(function () {
             $(document).on('click', '#modalToggle', function () {
                 let service = localStorage.getItem('services');
+                // console.log(service)
                 var html = `<form method="post" action="{{route('clinic.booking.store')}}" class="p-3">
             @csrf
                 <div class="fs-18px justify-content-start d-flex mb-md-4 mt-2">
@@ -337,8 +339,6 @@
                                         <span>{{ __('home.Booking') }}</span>
                                     </div>
                                     <div class="mt-md-3">
-
-
                                         <section>
                                             <div class=" d-block">
                                                 <div class="small-12 ">
@@ -361,9 +361,20 @@
                                                        readonly>
                                             </div>
                                         </section>
-
                                     </div>
                                 </div>
+                                <div class="border-bottom fs-16px mb-md-3">
+                                    <span>{{ __('home.select member family') }}</span>
+                                    </div>
+                                    <div>
+                                    Bản thân
+                                    <select class="form-control" name="member_family_id" id="member_family_id">
+                                        <option value="{{$userId}}">{{ __('home.Bản thân') }}</option>
+                                        @foreach($memberFamily as $member)
+                                            <option value="{{$member->id}}">{{$member->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    </div>
                                 <div class="border-bottom fs-16px mb-md-3">
                                     <span>{{ __('home.Main service') }}</span>
                                 </div>
@@ -458,7 +469,7 @@
                             const selectedDateTime = date + ' ' + selectedTime;
 
                             document.getElementById('selectedTime').value = selectedDateTime;
-                            console.log(selectedDateTime);
+                            // console.log(selectedDateTime);
 
                             formSubmit.classList.remove('disabled');
                         }
@@ -499,7 +510,7 @@
                                 container.classList.remove('hide');
                                 container.classList.add('fade-in');
                                 checkInInput.value = date;
-                                console.log(checkInInput.value)
+                                // console.log(checkInInput.value)
                             }, 500);
                         } else {
                             spinner('start');

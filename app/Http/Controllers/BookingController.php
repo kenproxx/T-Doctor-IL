@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Enums\BookingStatus;
 use App\Enums\ServiceClinicStatus;
 use App\Models\Booking;
+use App\Models\Clinic;
 use App\Models\ServiceClinic;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use League\OAuth1\Client\Server\User;
 
 class BookingController extends Controller
 {
@@ -18,7 +21,23 @@ class BookingController extends Controller
         $id = Auth::user()->id;
         return view('bookings.listBooking', compact('id'));
     }
-
+    public function detailBooking($id)
+    {
+        $booking = Booking::find($id);
+        $clinic = Clinic::find($booking->clinic_id);
+        $user = Auth::user();
+        if ($booking->member_family_id == null) {
+            $memberFamily = null;
+        } else {
+            $memberFamily = \DB::table('family_management')
+                ->where('user_id', $booking->user_id)
+                ->where('id', $booking->member_family_id)->get();
+        }
+        $serviceBookings = explode(',', $booking->service);
+        $service = ServiceClinic::whereIn('id', $serviceBookings)->get();
+        $isAdmin = (new MainController())->checkAdmin();
+        return view('bookings.detailBooking', compact('booking', 'clinic', 'user', 'memberFamily', 'service', 'isAdmin'));
+    }
     public function edit($id)
     {
         $bookings_edit = Booking::find($id);
