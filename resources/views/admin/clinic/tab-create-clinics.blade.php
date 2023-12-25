@@ -394,7 +394,6 @@
                         'PCR_test'=>'PCR test',
                     ];
             @endphp
-
             <div class="row">
                 <div class="col-md-12">
                     <label for="information">Hospital information</label>
@@ -405,7 +404,7 @@
                             @foreach($hospital_information as  $key => $value)
                                 <div class="checkbox">
                                     <input type="checkbox" name="dropdown-group"
-                                           class="check {{ $key }} checkbox-custom"
+                                           class="check {{ $key }} hospital_information_name checkbox-custom"
                                            value="{{ $value }}"
                                            id="hospital_information_{{ $key }}"/>
                                     <label for="hospital_information_{{ $key }}" class="checkbox-custom-label">
@@ -428,7 +427,6 @@
                         'Physiotherapy_room'=>'Physiotherapy room',
                     ];
             @endphp
-
             <div class="row">
                 <div class="col-md-12">
                     <label for="information">Hospital facilities</label>
@@ -439,7 +437,7 @@
                             @foreach($hospital_facilities as  $key => $value)
                                 <div class="checkbox">
                                     <input type="checkbox" name="dropdown-group"
-                                           class="check {{ $key }} checkbox-custom"
+                                           class="check {{ $key }} hospital_facilities_name checkbox-custom"
                                            value="{{ $value }}"
                                            id="hospital_facilities_{{$key}}"/>
                                     <label for="hospital_facilities_{{$key}}"
@@ -473,7 +471,7 @@
                             @foreach($hospital_equipment as  $key => $value)
                                 <div class="checkbox">
                                     <input type="checkbox" name="hospital_equipment" value="{{$value}}"
-                                           class="check {{ $key }} hospital_equipment checkbox-custom"
+                                           class="check {{ $key }} hospital_equipment_name checkbox-custom"
                                            id="hospital_equipment_{{ $key }}"/>
                                     <label for="hospital_equipment_{{ $key }}"
                                            class="checkbox-custom-label">{{$value}}</label>
@@ -492,7 +490,6 @@
                         </select>
                     </div>
                 </div>
-
             </div>
             <button type="button" class="btn btn-primary up-date-button mt-4">{{ __('home.Save') }}</button>
         </div>
@@ -577,7 +574,7 @@
                 const formData = new FormData();
 
                 const arrFieldEmpty = [
-                    "facilities", "equipment", "information", "emergency", "insurance", "parking",
+                    "hospital_facilities", "hospital_equipment", "hospital_information", "emergency", "insurance", "parking",
                 ];
 
                 const arrField = [
@@ -928,17 +925,29 @@
     {{-- Load data equipment, facilities, information--}}
     <script>
         $(document).ready(function () {
-            let list_item = $('.hospital_equipment');
-            list_item.on('click', function () {
-                let item_checked = $('input[class="hospital_equipment"]:checked');
-                let arrayItem = null;
-                for (let i = 0; i < item_checked.length; i++) {
-                    let data = item_checked[i];
-                    if (arrayItem){
-                        arrayItem = arrayItem + ', ' + data.val();
-                    }
-                }
-            })
-        })
+            $('.hospital_equipment_name').on('click', function () {
+                let arrayItem = $('.hospital_equipment_name:checked').map(function () {
+                    return $(this).val();
+                }).get().join(', ');
+
+                $('#hospital_equipment').val(arrayItem);
+            });
+
+            $('.hospital_facilities_name').on('click', function () {
+                let arrayItem = $('.hospital_facilities_name:checked').map(function () {
+                    return $(this).val();
+                }).get().join(', ');
+
+                $('#hospital_facilities').val(arrayItem);
+            });
+
+            $('.hospital_information_name').on('click', function () {
+                let arrayItem = $('.hospital_information_name:checked').map(function () {
+                    return $(this).val();
+                }).get().join(', ');
+
+                $('#hospital_information').val(arrayItem);
+            });
+        });
     </script>
 @endsection
