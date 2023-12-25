@@ -10,6 +10,7 @@ use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\backend\BackendWishListController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\BookingResultController;
 use App\Http\Controllers\CalcViewQuestionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
@@ -342,6 +343,11 @@ Route::middleware(['user.active'])->group(function () {
             });
         });
 
+        /* Booking result */
+        Route::group(['prefix' => 'web/booking-result'], function () {
+            Route::get('/list', [BookingResultController::class, 'getList'])->name('web.booking.result.list');
+            Route::get('/detail/{id}', [BookingResultController::class, 'detail'])->name('web.booking.result.detail');
+        });
     });
 
     Route::get('/send', 'SendMessageController@index')->name('send');

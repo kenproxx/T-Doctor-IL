@@ -19,16 +19,48 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>Larry</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>Larry</td>
-                <td>Larry</td>
-            </tr>
+            @foreach($results as $result)
+                <tr>
+                    <th scope="row"> {{ $loop->index + 1 }}</th>
+                    @php
+                        $list_service = $result->service_name;
+                        $array_service = explode(',', $list_service);
+                        $services = \App\Models\ServiceClinic::whereIn('id', $array_service)
+                            ->where('status', \App\Enums\ServiceClinicStatus::ACTIVE)
+                            ->get();
+                        $service_name = null;
+                        foreach ($services as $item){
+                            if ($service_name){
+                                $service_name = $service_name . ', ' . $item->name;
+                            } else {
+                                $service_name = $item->name;
+                            }
+                        }
+                    @endphp
+                    <td>
+                        {{ $service_name }}
+                    </td>
+                    <td>
+                        {{ $result->result }}
+                    </td>
+                    <td>
+                        {{ $result->code }}
+                    </td>
+                    @php
+                        $created_by = \App\Models\User::find($result->created_by);
+                    @endphp
+                    <td>
+                        @if($created_by)
+                            {{ $created_by->username }}
+                        @endif
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>Larry</td>
+                    <td>Larry</td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>

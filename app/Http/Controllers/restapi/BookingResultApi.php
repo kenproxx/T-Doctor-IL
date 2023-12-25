@@ -25,10 +25,7 @@ class BookingResultApi extends Controller
     {
         $business_id = $request->input('business_id');
 
-        $books = Booking::where('clinic_id', $business_id)
-            ->where('status', '=', BookingStatus::APPROVED)
-            ->where('is_result', 1)
-            ->get();
+        $books = Booking::where('clinic_id', $business_id)->get();
         if (count($books) < 1) {
             return response((new MainApi())->returnMessage('Booking Empty'), 200);
         }
