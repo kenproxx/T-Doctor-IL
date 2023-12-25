@@ -23,7 +23,6 @@ class HomeController extends Controller
 
     public function index()
     {
-        dd(Hash::make(12345678));
         if (!Auth::check()) {
             setCookie('accessToken', null);
         }
