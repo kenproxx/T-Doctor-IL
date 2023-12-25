@@ -18,6 +18,7 @@ use App\Http\Controllers\DoctorInfoController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\restapi\admin\AdminBookingApi;
+use App\Http\Controllers\restapi\admin\AdminBookingResultApi;
 use App\Http\Controllers\restapi\admin\AdminDepartmentApi;
 use App\Http\Controllers\restapi\admin\AdminDoctorDepartmentApi;
 use App\Http\Controllers\restapi\admin\AdminDoctorInfoApi;
@@ -309,4 +310,14 @@ Route::group(['prefix' => 'symptoms'], function () {
     Route::post('/create', [AdminSymptomsApi::class, 'create'])->name('api.medical.symptoms.create');
     Route::post('/update/{id}', [AdminSymptomsApi::class, 'update'])->name('api.medical.symptoms.update');
     Route::delete('/delete/{id}', [AdminSymptomsApi::class, 'delete'])->name('api.medical.symptoms.delete');
+});
+
+/* Booking result*/
+Route::group(['prefix' => 'booking-result'], function () {
+    Route::get('/list', [AdminBookingResultApi::class, 'getAll'])->name('api.medical.booking.result.list');
+    Route::get('/list-business/{id}', [AdminBookingResultApi::class, 'getAllByBusiness'])->name('api.medical.booking.result.business');
+    Route::get('/detail/{id}', [AdminBookingResultApi::class, 'delete'])->name('api.medical.booking.result.detail');
+    Route::post('/create', [AdminBookingResultApi::class, 'create'])->name('api.medical.booking.result.create');
+    Route::post('/update/{id}', [AdminBookingResultApi::class, 'update'])->name('api.medical.booking.result.update');
+    Route::delete('/delete/{id}', [AdminBookingResultApi::class, 'delete'])->name('api.medical.booking.result.delete');
 });

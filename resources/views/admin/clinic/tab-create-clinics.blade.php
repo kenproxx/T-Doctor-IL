@@ -381,6 +381,20 @@
                     </div>
                 </div>
             </div>
+
+            @php
+                $hospital_information = [
+                        'Pediatric_examination/treatment'=>'Pediatric examination/treatment',
+                        'Emergency_department'=>'Emergency department',
+                        'Female_doctor'=>'Female doctor',
+                        'Specialized_hospital'=>'Specialized hospital',
+                        'Check_health_certificate'=>'Check health certificate',
+                        'Physical_examination'=>'Physical examination',
+                        'Rapid_antigen_test'=>'Rapid antigen test',
+                        'PCR_test'=>'PCR test',
+                    ];
+            @endphp
+
             <div class="row">
                 <div class="col-md-12">
                     <label for="information">Hospital information</label>
@@ -388,62 +402,33 @@
                         <label class="dropdown-label">Select Options</label>
                         <input type="hidden" name="hospital_information" id="hospital_information"/>
                         <div class="dropdown-list">
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_01"/>
-                                <label for="checkbox-custom_01" class="checkbox-custom-label">Pediatric
-                                    examination/treatment</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_02"/>
-                                <label for="checkbox-custom_02" class="checkbox-custom-label">Emergency
-                                    department</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_03"/>
-                                <label for="checkbox-custom_03" class="checkbox-custom-label">Female doctor</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_04"/>
-                                <label for="checkbox-custom_04" class="checkbox-custom-label">Specialized
-                                    hospital</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_05"/>
-                                <label for="checkbox-custom_05" class="checkbox-custom-label">Check health
-                                    certificate</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_06"/>
-                                <label for="checkbox-custom_06" class="checkbox-custom-label">Physical
-                                    examination</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_06"/>
-                                <label for="checkbox-custom_06" class="checkbox-custom-label">Rapid antigen test</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_07"/>
-                                <label for="checkbox-custom_07" class="checkbox-custom-label">PCR test</label>
-                            </div>
+                            @foreach($hospital_information as  $key => $value)
+                                <div class="checkbox">
+                                    <input type="checkbox" name="dropdown-group"
+                                           class="check {{ $key }} checkbox-custom"
+                                           value="{{ $value }}"
+                                           id="hospital_information_{{ $key }}"/>
+                                    <label for="hospital_information_{{ $key }}" class="checkbox-custom-label">
+                                        {{ $value }}
+                                    </label>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
+
+            @php
+                $hospital_facilities = [
+                        'Intensive_care_unit'=>'Intensive care unit',
+                        'General_hospital_room'=>'General hospital room',
+                        'High-class_hospital_room'=>'High-class hospital room',
+                        'Surgery_room'=>'Surgery room',
+                        'Emergency_room'=>'Emergency room',
+                        'Physiotherapy_room'=>'Physiotherapy room',
+                    ];
+            @endphp
+
             <div class="row">
                 <div class="col-md-12">
                     <label for="information">Hospital facilities</label>
@@ -451,49 +436,33 @@
                         <label class="dropdown-label">Select Options</label>
                         <input type="hidden" name="hospital_facilities" id="hospital_facilities"/>
                         <div class="dropdown-list">
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_21"/>
-                                <label for="checkbox-custom_21" class="checkbox-custom-label">Intensive care
-                                    unit</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_22"/>
-                                <label for="checkbox-custom_22" class="checkbox-custom-label">General hospital
-                                    room</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_23"/>
-                                <label for="checkbox-custom_23" class="checkbox-custom-label">High-class hospital
-                                    room</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_24"/>
-                                <label for="checkbox-custom_24" class="checkbox-custom-label">Surgery room</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_25"/>
-                                <label for="checkbox-custom_25" class="checkbox-custom-label">Emergency room</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_26"/>
-                                <label for="checkbox-custom_26" class="checkbox-custom-label">Physiotherapy room</label>
-                            </div>
+                            @foreach($hospital_facilities as  $key => $value)
+                                <div class="checkbox">
+                                    <input type="checkbox" name="dropdown-group"
+                                           class="check {{ $key }} checkbox-custom"
+                                           value="{{ $value }}"
+                                           id="hospital_facilities_{{$key}}"/>
+                                    <label for="hospital_facilities_{{$key}}"
+                                           class="checkbox-custom-label">{{ $value }}</label>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
-
             </div>
+
+            @php
+                $hospital_equipment = [
+                        'CT'=>'CT',
+                        'MRI'=>'MRI',
+                        'Bone_density_meter'=>'Bone density meter',
+                        'Positron_tomography_(PET)'=>'Positron tomography (PET)',
+                        'Tumor_treatment_device_(CYBER_KNIFE)'=>'Tumor treatment device (CYBER KNIFE)',
+                        'Ultrasound_imaging_equipment'=>'Ultrasound imaging equipment',
+                        'Tumor_treatment_devices_(proton_therapy_devices)'=>'Tumor treatment devices (proton therapy devices)',
+                        'Artificial_kidney_equipment_for_hemodialysis'=>'Artificial kidney equipment for hemodialysis',
+                    ];
+            @endphp
             <div class="row">
                 <div class="col-md-12">
                     <label for="information">Hospital equipment</label>
@@ -501,60 +470,15 @@
                         <label class="dropdown-label">Select Options</label>
                         <input type="hidden" name="hospital_equipment" id="hospital_equipment"/>
                         <div class="dropdown-list">
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_27"/>
-                                <label for="checkbox-custom_27" class="checkbox-custom-label">CT</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_28"/>
-                                <label for="checkbox-custom_28" class="checkbox-custom-label">MRI</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_29"/>
-                                <label for="checkbox-custom_29" class="checkbox-custom-label">Bone density meter</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_30"/>
-                                <label for="checkbox-custom_30" class="checkbox-custom-label">Positron tomography
-                                    (PET)</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_31"/>
-                                <label for="checkbox-custom_31" class="checkbox-custom-label">Tumor treatment device
-                                    (CYBER KNIFE)</label>
-                            </div>
-
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_33"/>
-                                <label for="checkbox-custom_33" class="checkbox-custom-label">Ultrasound imaging
-                                    equipment</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_32"/>
-                                <label for="checkbox-custom_32" class="checkbox-custom-label">Tumor treatment devices
-                                    (proton therapy devices)</label>
-                            </div>
-
-                            <div class="checkbox">
-                                <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
-                                       id="checkbox-custom_34"/>
-                                <label for="checkbox-custom_34" class="checkbox-custom-label">Artificial kidney
-                                    equipment for hemodialysis</label>
-                            </div>
+                            @foreach($hospital_equipment as  $key => $value)
+                                <div class="checkbox">
+                                    <input type="checkbox" name="hospital_equipment" value="{{$value}}"
+                                           class="check {{ $key }} hospital_equipment checkbox-custom"
+                                           id="hospital_equipment_{{ $key }}"/>
+                                    <label for="hospital_equipment_{{ $key }}"
+                                           class="checkbox-custom-label">{{$value}}</label>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -574,6 +498,7 @@
         </div>
     </form>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe6qi9czJ2Z6SLnV9sSUzce0nuzhRm3hg"></script>
+    {{-- Call api create busniess --}}
     <script>
         $(document).ready(function () {
             // Lắng nghe sự kiện onchange của các dropdown tỉnh, huyện, xã
@@ -999,5 +924,21 @@
         checkboxDropdown('.dropdown[data-target="hospital_information"]', 'hospital_information');
         checkboxDropdown('.dropdown[data-target="hospital_facilities"]', 'hospital_facilities');
         checkboxDropdown('.dropdown[data-target="hospital_equipment"]', 'hospital_equipment');
+    </script>
+    {{-- Load data equipment, facilities, information--}}
+    <script>
+        $(document).ready(function () {
+            let list_item = $('.hospital_equipment');
+            list_item.on('click', function () {
+                let item_checked = $('input[class="hospital_equipment"]:checked');
+                let arrayItem = null;
+                for (let i = 0; i < item_checked.length; i++) {
+                    let data = item_checked[i];
+                    if (arrayItem){
+                        arrayItem = arrayItem + ', ' + data.val();
+                    }
+                }
+            })
+        })
     </script>
 @endsection

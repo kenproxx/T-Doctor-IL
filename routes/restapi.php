@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\backend\BackendAnswerController;
 use App\Http\Controllers\backend\BackendCouponController;
+use App\Http\Controllers\restapi\BookingResultApi;
 use App\Http\Controllers\restapi\CategoryApi;
 use App\Http\Controllers\restapi\ClinicApi;
 use App\Http\Controllers\restapi\DepartmentApi;
@@ -171,3 +172,11 @@ Route::group(['prefix' => 'symptoms'], function () {
 
 Route::get('/users/by-role/{role_id}', [\App\Http\Controllers\ProfileController::class, 'getUsersByRoleId'])->name('role.user');
 Route::get('/service/{serviceId}', [\App\Http\Controllers\restapi\admin\AminServiceClinicApi::class, 'getServiceById'])->name('service.by.id');
+
+/* Booking result*/
+Route::group(['prefix' => 'booking-result'], function () {
+    Route::get('/list', [BookingResultApi::class, 'getListByUser'])->name('restapi.booking.result.list');
+    Route::get('/list-business/{id}', [BookingResultApi::class, 'getListByBusinessID'])->name('restapi.booking.result.business');
+    Route::get('/detail/{id}', [BookingResultApi::class, 'detail'])->name('restapi.booking.result.detail');
+    Route::delete('/delete/{id}', [BookingResultApi::class, 'delete'])->name('restapi.booking.result.delete');
+});
