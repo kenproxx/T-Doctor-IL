@@ -45,7 +45,7 @@
                             <p>${item.open_date} - ${item.close_date} </p>
                         </div>
                         <div class="location">
-                            <div class="text-overflow d-flex"><i class="fa-solid fa-location-dot pr-2"></i>${item.address_detail} ${item.addressInfo}</div> - <span>10Km</span>
+                            <div class="text-overflow d-flex"><i class="fa-solid fa-location-dot pr-2"></i>${item.addressInfo}</div> - <span>>=10Km</span>
                         </div>
                         <div class="service">
                             Service: ${serviceHtml}

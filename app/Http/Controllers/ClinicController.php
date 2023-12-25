@@ -43,11 +43,15 @@ class ClinicController extends Controller
     public function detail($id)
     {
         $bookings = Clinic::find($id);
+        $userId = Auth::user()->id;
         if (!$bookings || $bookings->status != ClinicStatus::ACTIVE) {
             return response("Product not found", 404);
         }
+        $memberFamily = \DB::table('family_management')
+            ->where('user_id', Auth::user()->id)
+            ->get();
         $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
-        return view('clinics.detailClinics', compact('id', 'bookings', 'services'));
+        return view('clinics.detailClinics', compact('id', 'bookings', 'services', 'memberFamily', 'userId'));
     }
 
     public function create()
@@ -129,6 +133,13 @@ class ClinicController extends Controller
         $clinicID = $request->input('clinic_id');
         $checkOut = $request->input('check_out');
         $service = $request->input('service');
+        $member = $request->input('member_family_id');
+        if ($member == 0 || $member == null) {
+            $memberFamily = Auth::user()->id;
+        }
+        else {
+            $memberFamily = $member;
+        }
         if (is_array($service)) {
             $servicesAsString = implode(',', $service);
         } else {
@@ -143,6 +154,7 @@ class ClinicController extends Controller
         $booking->status = BookingStatus::PENDING;
 //        $booking->check_out = $checkOut;
         $booking->service = $servicesAsString;
+        $booking->member_family_id = $memberFamily;
 
         return $booking;
     }

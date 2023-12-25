@@ -414,6 +414,14 @@
                 </div>
             </div>
         </div>
+        <div id="recruitment-homeNew">
+            <div class="d-flex">
+                <div class="col-md-8">
+
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
     </div>
 
     <div class="banner1">
@@ -426,60 +434,6 @@
                 <p>{{ __('home.Hire staffs cheaper, find your staffs faster') }}</p>
                 <div>
                     <div class="section1-content">
-                        <div class="item-bkg">
-                            <div class="recruitment__item d-flex ">
-                                <img
-                                    class="content__item__image"
-                                    src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                    alt=""
-                                />
-                                <div>
-                                    <h6>
-                                        {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
-                                    </h6>
-                                    <div class="content__item__describe">
-                                        {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
-                                    </div>
-                                    <p class="content__item-link">{{ __('home.Read') }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-bkg">
-                            <div class="recruitment__item d-flex ">
-                                <img
-                                    class="content__item__image"
-                                    src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                    alt=""
-                                />
-                                <div>
-                                    <h6>
-                                        {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
-                                    </h6>
-                                    <div class="content__item__describe">
-                                        {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
-                                    </div>
-                                    <p class="content__item-link">{{ __('home.Read') }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item-bkg">
-                            <div class="recruitment__item d-flex ">
-                                <img
-                                    class="content__item__image"
-                                    src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                    alt=""
-                                />
-                                <div>
-                                    <h6>
-                                        {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
-                                    </h6>
-                                    <div class="content__item__describe">
-                                        {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
-                                    </div>
-                                    <p class="content__item-link">{{ __('home.Read') }}</p>
-                                </div>
-                            </div>
-                        </div>
                         <div class="item-bkg">
                             <div class="recruitment__item d-flex ">
                                 <img

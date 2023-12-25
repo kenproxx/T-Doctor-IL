@@ -50,10 +50,6 @@ class ClinicApi extends Controller
 
                 $clinic['total_services'] = $services->count();
                 $clinic['services'] = $services->toArray();
-                if ($addressP == null) {
-                    $clinic['addressInfo'] = '';
-                    return $clinic;
-                }
                 if ($addressC == null) {
                     $clinic['addressInfo'] = '';
                     return $clinic;
@@ -62,8 +58,12 @@ class ClinicApi extends Controller
                     $clinic['addressInfo'] = '';
                     return $clinic;
                 }
+                if ($addressP == null) {
+                    $clinic['addressInfo'] = '';
+                    return $clinic;
+                }
 
-                $clinic['addressInfo'] = $addressC['name'] . ',' . $addressD['name'] . ',' . $addressP['name'];
+                $clinic['addressInfo'] = $addressC['full_name'] . ',' . $addressD['full_name'] . ',' . $addressP['full_name'];
                 return $clinic;
             });
 
