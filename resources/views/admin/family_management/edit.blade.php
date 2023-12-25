@@ -175,18 +175,6 @@
 
         function showAllProvince(res) {
             let html = ``;
-            for (let i = 0; i < res.length; i++) {
-                let data = res[i];
-                let code = data.code;
-
-                html = html + `<option class="province province-item" data-code="${code}" value="${data.code}">${data.name}</option>`;
-            }
-            $('#province_id').empty().append(html);
-            callGetAllDistricts($('#province_id').find(':selected').val());
-        }
-
-        function showAllDistricts(res) {
-            let html = ``;
             let provinceCode = '{{ $member->province_id ?? '' }}';
             let selected = '';
             for (let i = 0; i < res.length; i++) {
@@ -194,7 +182,23 @@
                 let code = data.code;
                 selected = provinceCode === code ? 'selected' : '';
 
-                html = html + `<option class="district district-item"  value="${data.code}">${data.name}</option>`;
+                html = html + `<option ${selected} class="province province-item" data-code="${code}" value="${data.code}">${data.name}</option>`;
+            }
+            $('#province_id').empty().append(html);
+
+            callGetAllDistricts($('#province_id').find(':selected').val());
+        }
+
+        function showAllDistricts(res) {
+            let html = ``;
+            let provinceCode = '{{ $member->district_id ?? '' }}';
+            let selected = '';
+            for (let i = 0; i < res.length; i++) {
+                let data = res[i];
+                let code = data.code;
+                selected = provinceCode === code ? 'selected' : '';
+
+                html = html + `<option ${selected} class="district district-item" value="${data.code}">${data.name}</option>`;
             }
             $('#district_id').empty().append(html);
             callGetAllCommunes($('#district_id').find(':selected').val());
@@ -202,9 +206,14 @@
 
         function showAllCommunes(res) {
             let html = ``;
+            let provinceCode = '{{ $member->ward_id ?? '' }}';
+            let selected = '';
             for (let i = 0; i < res.length; i++) {
                 let data = res[i];
-                html = html + `<option value="${data.code}">${data.name}</option>`;
+                let code = data.code;
+                selected = provinceCode === code ? 'selected' : '';
+
+                html = html + `<option ${selected} value="${data.code}">${data.name}</option>`;
             }
             $('#ward_id').empty().append(html);
         }

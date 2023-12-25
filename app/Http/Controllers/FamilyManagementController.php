@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\FamilyManagementEnum;
+use App\Enums\Role;
 use App\Enums\UserStatus;
 use App\Models\FamilyManagement;
 use App\Models\User;
@@ -44,7 +45,7 @@ class FamilyManagementController extends Controller
 
         $userInFamily = FamilyManagement::where('family_code', $family_code)->pluck('user_id')->toArray();
 
-        $users = User::where([['id', '!=', auth()->user()->id], ['status', '=', UserStatus::ACTIVE]])->whereNotIn('id',
+        $users = User::where([['id', '!=', auth()->user()->id], ['status', '=', UserStatus::ACTIVE], ['member', '=', Role::NORMAL_PEOPLE]])->whereNotIn('id',
                 $userInFamily)->get();
 
         return view('admin.family_management.add_member', compact('users'));

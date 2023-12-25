@@ -16,8 +16,8 @@
         <tr>
             <th scope="col">{{ __('home.STT') }}</th>
             <th scope="col">{{ __('home.ma gia dinh') }}</th>
-            <th scope="col">{{ __('home.Tên thành viên') }}</th>
-            <th scope="col">{{ __('home.quan hệ với chủ hộ') }}</th>
+            <th scope="col">{{ __('home.ten thanh vien') }}</th>
+            <th scope="col">{{ __('home.quan he voi chu ho') }}</th>
             <th scope="col">{{ __('home.Action') }}</th>
         </tr>
         </thead>
@@ -49,7 +49,7 @@
             @endforeach
         @else
             <tr>
-                <td colspan="5" class="text-center">{{ __('home.No data') }}</td>
+                <td colspan="5" class="text-center">{{ __('home.no data') }}</td>
             </tr>
         @endif
 

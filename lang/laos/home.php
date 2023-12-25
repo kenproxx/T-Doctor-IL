@@ -664,4 +664,13 @@ return [
     'ChatBot' => 'Chat Bot',
     'no data' => 'ບໍ່​ມີ​ຂໍ້​ມູນ',
 
+    'Gia dinh' => 'ຄອບຄົວ',
+    'ma gia dinh' => 'ລະຫັດຄອບຄົວ',
+    'STT' => 'No .',
+    'ten thanh vien' => 'ຊື່ສະມາຊິກ',
+    'quan he voi chu ho' => 'ຄວາມສະເພາະການມາຊື່ຄອບຄົວ',
+    'Them thanh vien moi' => 'ເພີ່ມສະມາຊິກໃໝ່',
+    'Nam' => 'ຊາຍ',
+    'Nu' => 'ຍິງ',
+    'Ward' => 'ບ້ານ',
 ];

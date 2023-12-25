@@ -676,5 +676,13 @@ return [
     'ChatBot' => 'ChatBot',
     'no data' => 'No Data',
 
-
+    'Gia dinh' => 'Family',
+    'ma gia dinh' => 'Family code',
+    'STT' => 'No.',
+    'ten thanh vien' => 'Member name',
+    'quan he voi chu ho' => 'Relationship with the head of household',
+    'Them thanh vien moi' => 'Add new member',
+    'Nam' => 'Male',
+    'Nu' => 'Female',
+    'Ward' => 'Ward',
 ];

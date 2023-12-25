@@ -676,4 +676,14 @@ return [
     'ChatBot' => 'Bot trò chuyện',
     'no data' => 'Không có dữ liệu',
 
+    'Gia dinh' => 'Gia đình',
+    'ma gia dinh' => 'Mã gia đình',
+    'STT' => 'Số thứ tự',
+    'ten thanh vien' => 'Tên thành viên',
+    'quan he voi chu ho' => 'Quan hệ với chủ hộ',
+    'Them thanh vien moi' => 'Thêm thành viên mới',
+    'Nam' => 'Nam',
+    'Nu' => 'Nữ',
+    'Ward' => 'Phường/Xã',
+
 ];
