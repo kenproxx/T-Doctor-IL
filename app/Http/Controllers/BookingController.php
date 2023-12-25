@@ -6,7 +6,6 @@ use App\Enums\BookingStatus;
 use App\Enums\ServiceClinicStatus;
 use App\Models\Booking;
 use App\Models\ServiceClinic;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -17,17 +16,20 @@ class BookingController extends Controller
     public function index()
     {
         $id = Auth::user()->id;
-        return view('bookings.listBooking',compact('id'));
+        return view('bookings.listBooking', compact('id'));
     }
+
     public function edit($id)
     {
         $bookings_edit = Booking::find($id);
         $owner = $bookings_edit->clinic->user_id;
-        $service = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
+        $serviceID = $bookings_edit->service;
+        $arrayService = explode(',', $serviceID);
+        $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
         $isAdmin = (new MainController())->checkAdmin();
 
         if ($owner == Auth::id() || $isAdmin) {
-            return view('admin.booking.tab-edit-booking', compact('bookings_edit', 'isAdmin', 'service'));
+            return view('admin.booking.tab-edit-booking', compact('bookings_edit', 'isAdmin', 'services'));
         } else {
             session()->flash('error', 'You do not have permission.');
             return \redirect()->back();
@@ -39,8 +41,6 @@ class BookingController extends Controller
     {
         try {
             $booking = Booking::find($id);
-            $userID = $request->input('user_id');
-            $clinicID = $request->input('clinic_id');
             $checkIn = $request->input('check_in');
             $checkOut = $request->input('check_out');
             $servicesArray = $request->input('services');
@@ -50,10 +50,12 @@ class BookingController extends Controller
             } else {
                 $servicesAsString = $servicesArray;
             }
-            $time = $request->input('selectedTime');
+            $is_result = $request->input('is_result');
+            if (!$is_result) {
+                $is_result = 0;
+            }
 
-            $booking->user_id = $userID;
-            $booking->clinic_id = $clinicID;
+            $booking->is_result = $is_result;
             $booking->check_in = $checkIn;
             $booking->check_out = $checkOut;
             $booking->service = $servicesAsString;
@@ -84,7 +86,7 @@ class BookingController extends Controller
                 alert()->success('Delete success!');
                 return back();
             }
-            return response(');Delete error!', 400);
+            return response('Delete error!', 400);
         } catch (\Exception $exception) {
             return response($exception, 400);
         }

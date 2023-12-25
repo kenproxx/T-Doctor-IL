@@ -1,5 +1,7 @@
 @extends('layouts.admin')
-
+@section('title')
+    {{ __('home.List Booking') }}
+@endsection
 @section('main-content')
 
     <!-- Page Heading -->
@@ -50,7 +52,8 @@
                         <form action="{{route('api.backend.booking.delete',$item->id)}}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="ml-3 btn btn-primary btn-danger">{{ __('home.Delete') }}</button>
+                            <button type="submit"
+                                    class="ml-3 btn btn-primary btn-danger">{{ __('home.Delete') }}</button>
                         </form>
                     </td>
                 </tr>
