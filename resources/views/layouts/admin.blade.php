@@ -37,7 +37,7 @@
     <link href="{{ asset('admin/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
     <link href="{{ asset('admin/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
     <link href="{{ asset('admin/vendor/simple-datatables/style.css')}}" rel="stylesheet">
-
+    <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
     <!-- Template Main CSS File -->
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
 
@@ -101,6 +101,7 @@
     }
 @endphp
 <body>
+@include('sweetalert::alert')
 <div class="loading-overlay-master">
     <span class="fas fa-spinner fa-3x fa-spin"></span>
 </div>

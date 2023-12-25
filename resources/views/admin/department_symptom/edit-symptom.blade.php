@@ -33,18 +33,18 @@
 
                             <div class="form-group">
                                 <label for="description">{{ __('home.Description') }}:</label>
-                                <input name="description" id="description" class="form-control"
-                                       value="{{ $symptom->description }}" required>
+                                <textarea class="form-control" name="description" id="description"
+                                          rows="3">{{ $symptom->description }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="description_en">{{ __('home.Description English') }}:</label>
-                                <input name="description_en" id="description_en" class="form-control"
-                                       value="{{ $symptom->description_en }}" required>
+                                <textarea class="form-control" name="description_en" id="description_en"
+                                          rows="3">{{ $symptom->description_en }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="description_laos">{{ __('home.Description Laos') }}:</label>
-                                <input name="description_laos" id="description_laos" class="form-control"
-                                       value="{{ $symptom->description_laos }}" required>
+                                <textarea class="form-control" name="description_laos" id="description_laos"
+                                          rows="3">{{ $symptom->description_laos }}</textarea>
                             </div>
 
                             <div class="form-group">
@@ -61,7 +61,7 @@
 
                             <div class="form-group">
                                 <label for="image">{{ __('home.Ảnh đại diện') }}:</label>
-                                <input type="file" name="image" id="image" class="form-control-file" accept="image/*">
+                                <input type="file" name="image" id="image" class="form-control" accept="image/*">
                                 <img src="{{ asset($symptom->thumbnail) }}" alt="l.l" width="80px">
                             </div>
 

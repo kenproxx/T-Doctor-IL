@@ -71,9 +71,6 @@
                             <a href="{{ route('web.booking.result.detail', $result->id) }}" class="btn btn-primary">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
-                            <button type="button" class="btn btn-danger btnDelete" data-id="{{ $result->id }}">
-                                <i class="fa-regular fa-trash-can"></i>
-                            </button>
                         </div>
                     </td>
                 </tr>
@@ -81,43 +78,4 @@
             </tbody>
         </table>
     </div>
-    <script>
-        let accessToken = `Bearer ` + token;
-        let headers = {
-            "Authorization": accessToken
-        };
-
-        $(document).ready(function () {
-            $('.btnDelete').on('click', function () {
-                let id = $(this).data('id');
-                if (confirm('Are you sure you want to delete?') === true) {
-                    deleteResult(id);
-                }
-            })
-
-            function deleteResult(id) {
-                let url = `{{ route('api.medical.booking.result.delete', ['id'=>':id']) }}`
-                url = url.replace(':id', id);
-
-                try {
-                    $.ajax({
-                        url: url,
-                        method: 'DELETE',
-                        headers: headers,
-                        success: function (response) {
-                            alert('Delete success!')
-                            window.location.reload();
-                        },
-                        error: function (error) {
-                            console.log(error);
-                            alert('Delete error!')
-                        }
-                    });
-                } catch (e) {
-                    console.log(e)
-                    alert('Error, Please try again!');
-                }
-            }
-        })
-    </script>
 @endsection

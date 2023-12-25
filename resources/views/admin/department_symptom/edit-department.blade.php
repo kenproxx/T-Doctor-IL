@@ -1,13 +1,13 @@
 @extends('layouts.admin')
 @section('title')
-    {{ __('home.Edit Department') }}
+    {{ __('home.Edit') }}
 @endsection
 @section('main-content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('home.Edit Department') }}</div>
+                    <div class="card-header">{{ __('home.Edit') }}</div>
 
                     <div class="card-body">
                         <form action="{{ route('departments.update', $department->id) }}" method="post"
@@ -34,23 +34,23 @@
 
                             <div class="form-group">
                                 <label for="description">{{ __('home.Description') }}:</label>
-                                <input name="description" id="description" class="form-control"
-                                       value="{{ $department->description }}" required>
+                                <textarea class="form-control" name="description" id="description"
+                                          rows="3">{{ $department->description }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="description_en">{{ __('home.Description English') }}:</label>
-                                <input name="description_en" id="description_en" class="form-control"
-                                       value="{{ $department->description_en }}" required>
+                                <textarea class="form-control" name="description_en" id="description_en"
+                                          rows="3">{{ $department->description_en }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="description_laos">{{ __('home.Description Laos') }}:</label>
-                                <input name="description_laos" id="description_laos" class="form-control"
-                                       value="{{ $department->description_laos }}" required>
+                                <textarea class="form-control" name="description_laos" id="description_laos"
+                                          rows="3">{{ $department->description_laos }}</textarea>
                             </div>
 
                             <div class="form-group">
                                 <label for="image">{{ __('home.Ảnh đại diện') }}:</label>
-                                <input type="file" name="image" id="image" class="form-control-file" accept="image/*">
+                                <input type="file" name="image" id="image" class="form-control" accept="image/*">
                                 <img src="{{ asset($department->thumbnail) }}" alt="" width="80px">
                             </div>
 

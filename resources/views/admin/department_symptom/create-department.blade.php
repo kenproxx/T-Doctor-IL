@@ -30,15 +30,15 @@
 
                             <div class="form-group">
                                 <label for="description">{{ __('home.Description') }}:</label>
-                                <input name="description" id="description" class="form-control" required>
+                                <textarea class="form-control" name="description" id="description" rows="3"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="description_en">{{ __('home.Description English') }}:</label>
-                                <input name="description_en" id="description_en" class="form-control" required>
+                                <textarea class="form-control" name="description_en" id="description_en" rows="3"></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="description_laos">{{ __('home.Description Laos') }}:</label>
-                                <input name="description_laos" id="description_laos" class="form-control" required>
+                                <textarea class="form-control" name="description_laos" id="description_laos" rows="3"></textarea>
                             </div>
 
                             <div class="form-group">

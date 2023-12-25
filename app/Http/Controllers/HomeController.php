@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\BookingStatus;
 use App\Enums\CouponStatus;
 use App\Enums\MessageStatus;
 use App\Enums\ProductStatus;
@@ -63,8 +64,28 @@ class HomeController extends Controller
         if (strlen($text) <= $maxLength) {
             return $text;
         } else {
-            return substr($text, 0, $maxLength).$ellipsis;
+            return substr($text, 0, $maxLength) . $ellipsis;
         }
+    }
+
+    private function textTimeAgo($createdAt)
+    {
+        $now = now();
+        $timeDifference = $now->diffInMinutes($createdAt);
+
+        if ($timeDifference < 60) {
+            // Nếu thời gian nhỏ hơn 1 giờ
+            $timeAgo = $timeDifference . ' phút trước';
+        } elseif ($timeDifference >= 60 && $timeDifference < 1440) {
+            // Nếu thời gian từ 1 giờ đến 24 giờ
+            $hours = floor($timeDifference / 60);
+            $timeAgo = $hours . ' giờ trước';
+        } else {
+            // Nếu thời gian sau 24 giờ
+            $days = floor($timeDifference / 1440);
+            $timeAgo = $days . ' ngày trước';
+        }
+        return $timeAgo;
     }
 
     public function userOnlineStatus()
@@ -76,31 +97,11 @@ class HomeController extends Controller
         $users = User::where('id', '!=', Auth::id())->get();
         $listUserOnline = [];
         foreach ($users as $user) {
-            if (Cache::has('user-is-online|'.$user->id)) {
+            if (Cache::has('user-is-online|' . $user->id)) {
                 array_push($listUserOnline, $user);
             }
         }
         return $listUserOnline;
-    }
-
-    private function textTimeAgo($createdAt)
-    {
-        $now = now();
-        $timeDifference = $now->diffInMinutes($createdAt);
-
-        if ($timeDifference < 60) {
-            // Nếu thời gian nhỏ hơn 1 giờ
-            $timeAgo = $timeDifference.' phút trước';
-        } elseif ($timeDifference >= 60 && $timeDifference < 1440) {
-            // Nếu thời gian từ 1 giờ đến 24 giờ
-            $hours = floor($timeDifference / 60);
-            $timeAgo = $hours.' giờ trước';
-        } else {
-            // Nếu thời gian sau 24 giờ
-            $days = floor($timeDifference / 1440);
-            $timeAgo = $days.' ngày trước';
-        }
-        return $timeAgo;
     }
 
     public function listProduct()
@@ -154,7 +155,9 @@ class HomeController extends Controller
 
     public function listBooking()
     {
-        $bookings = Booking::paginate(20);
+        $bookings = Booking::where('status', '!=', BookingStatus::DELETE)
+            ->orderBy('id', 'desc')
+            ->paginate(20);
 
         return view('admin.booking.list-booking', compact('bookings'));
     }

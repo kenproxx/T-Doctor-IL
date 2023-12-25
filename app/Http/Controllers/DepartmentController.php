@@ -11,7 +11,9 @@ class DepartmentController extends Controller
 {
     public function index()
     {
-        $departments = Department::where('status', DepartmentStatus::ACTIVE)->get();
+        $departments = Department::where('status', DepartmentStatus::ACTIVE)
+            ->orderBy('id', 'desc')
+            ->get();
 
         return view('admin.department_symptom.lists-department', ['departments' => $departments]);
     }

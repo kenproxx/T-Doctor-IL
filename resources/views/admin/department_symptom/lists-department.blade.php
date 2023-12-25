@@ -29,7 +29,6 @@
         <thead>
         <tr>
             <th scope="col">{{ __('home.Tên chuyên khoa') }}</th>
-            <th scope="col">{{ __('home.Mô tả') }}</th>
             <th scope="col">{{ __('home.Ảnh đại diện') }}</th>
             <th scope="col">{{ __('home.Action') }}</th>
         </tr>
@@ -42,13 +41,14 @@
                         {{$department->name}}
                     </a>
                 </td>
-                <td>{{$department->description}}</td>
                 <td><img src="{{ asset($department->thumbnail) }}" alt="Image" width="50px"></td>
                 <td>
-                    <a href="{{ route('departments.edit', $department->id) }}" class="btn btn-success">{{ __('home.Edit') }}</a>
-                    <button type="button" class="btn btn-danger" onclick="confirmDelete('{{ $department->id }}')">
-                        {{ __('home.Delete') }}
-                    </button>
+                   <div class="d-flex align-items-center">
+                       <a href="{{ route('departments.edit', $department->id) }}" class="btn btn-success">{{ __('home.Edit') }}</a>
+                       <button type="button" class="btn btn-danger" onclick="confirmDelete('{{ $department->id }}')">
+                           {{ __('home.Delete') }}
+                       </button>
+                   </div>
                 </td>
             </tr>
         @endforeach
