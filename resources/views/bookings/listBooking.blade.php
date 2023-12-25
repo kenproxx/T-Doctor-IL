@@ -96,30 +96,31 @@
             let htmlCancel = ``;
             let htmlComplete = ``;
 
-            const baseUrl = '{{ route("clinic.detail", ["id" => ":id"]) }}';
+            const baseUrl = '{{ route("booking.detail.by.user", ["id" => ":id"]) }}';
 
             for (let i = 0; i < res.length; i++) {
                 let item = res[i];
-                let urlDetail = baseUrl.replace(':id', item.clinic_id);
+                console.log(item)
+                let urlDetail = baseUrl.replace(':id', item.id );
 
                 let buttonHtml = '';
 
                 if (item.status === 'PENDING') {
-                    buttonHtml = `<a href="#" onclick="checkDelete(${item.id}, 'Delete')">{{ __('home.Delete') }}</a>`;
+                    buttonHtml = `<a href="#" onclick="checkDelete(${item.id}, 'Delete')">{{ __('home.Cancel') }}</a>`;
                 } else if (item.status === 'CANCEL') {
                     buttonHtml = `<a href="#" onclick="checkDelete(${item.id}, 'Apply')">{{ __('home.Apply') }}</a>`;
                 }
 
                 let productHtml = `
                      <div class="border-radius mb-3 d-flex">
-                        <div class="col-md-9">
+                        <div class="col-md-10">
                             <a href="${urlDetail}">
                               <div>{{ __('home.Thời gian vào') }}: ${item.check_in} </div>
                               <div> {{ __('home.clinics') }}: ${item.clinic_id} </div>
                               <div>{{ __('home.dịch vụ') }}: ${item.service} </div>
                             </a>
                          </div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             ${buttonHtml}
                         </div>
                      </div>

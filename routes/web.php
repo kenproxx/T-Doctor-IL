@@ -176,6 +176,7 @@ Route::middleware(['user.active'])->group(function () {
 
     Route::group(['prefix' => 'booking'], function () {
         Route::get('/lists', [BookingController::class, 'index'])->name('booking.list.by.user');
+        Route::get('/booking-detail/{id}', [BookingController::class, 'detailBooking'])->name('booking.detail.by.user');
         Route::get('/list-by-users/{id}/{status}',
             [BookingApi::class, 'getAllBookingByUserId'])->name('booking.list.users');
         Route::delete('/delete-booking/{id}', [BookingApi::class, 'cancelBooking'])->name('booking.delete.users');

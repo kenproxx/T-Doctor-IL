@@ -117,6 +117,7 @@
                     for (let j = 0; j < arrayGallery.length; j++) {
                         img += `<img class="mr-2 w-auto h-100 img-item1" src="${arrayGallery[j]}" alt="">`;
                     }
+                    console.log(item)
                     let serviceHtml = ``;
                     let service = item.services;
                     for (let j = 0; j < service.length; j++) {

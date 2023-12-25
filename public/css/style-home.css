@@ -124,6 +124,8 @@
   }
   .container #myTabContent .product-item .img-pro img {
     border-radius: 13px 13px 0px 100px;
+    height: 237px;
+    object-fit: cover;
   }
   .container #myTabContent .product-item .img-pro i {
     display: flex;
