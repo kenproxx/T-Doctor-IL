@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\FamilyManagementEnum;
+use App\Enums\UserStatus;
 use App\Models\FamilyManagement;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,29 +14,137 @@ class FamilyManagementController extends Controller
 {
     public function index()
     {
+        $user = auth()->user();
+        $family = FamilyManagement::where('user_id', $user->id)->first();
+
+        $family_code = $family ? $family->family_code : null;
+
+        $family_members = $family_code ? FamilyManagement::where('family_code',
+            $family_code)->get() : collect(); // Use an empty collection if family_code is null
+
+        return view('admin.family_management.index', compact('family_members'));
     }
 
 
     public function create()
     {
+        return view('admin.family_management.create_family');
     }
 
-    public function store(Request $request)
+    public function addMember()
     {
+        $thisFamily = FamilyManagement::where('user_id', auth()->user()->id)->first();
+        if (!$thisFamily) {
+            return response()->json([
+                'message' => 'Bạn chưa có thông tin gia đình',
+            ], 400);
+        }
 
+        $family_code = $thisFamily->family_code;
 
+        $userInFamily = FamilyManagement::where('family_code', $family_code)->pluck('user_id')->toArray();
+
+        $users = User::where([['id', '!=', auth()->user()->id], ['status', '=', UserStatus::ACTIVE]])->whereNotIn('id',
+                $userInFamily)->get();
+
+        return view('admin.family_management.add_member', compact('users'));
+    }
+
+    public function store(Request $request, $type)
+    {
+        $family = null;
+        switch ($type) {
+            case FamilyManagementEnum::CREATE_FAMILY:
+                $family = FamilyManagement::where('user_id', auth()->user()->id)->first();
+
+                if ($family) {
+                    return response()->json([
+                        'message' => 'Bạn đã có thông tin gia đình',
+                    ], 400);
+                }
+
+                $family = new FamilyManagement();
+                $family->family_code = (new MainController())->generateRandomString(10);
+                $family->user_id = auth()->user()->id;
+                break;
+            case FamilyManagementEnum::ADD_MEMBER_FAMILY:
+                $family = FamilyManagement::where('user_id', auth()->user()->id)->first();
+                if (!$family) {
+                    return response()->json([
+                        'message' => 'Bạn chưa có thông tin gia đình',
+                    ], 400);
+                }
+                $family_code = $family->family_code;
+
+                $family = new FamilyManagement();
+                $family->family_code = $family_code;
+                $family->user_id = $request->input('user_id');
+
+                break;
+        }
+
+        if (!$family) {
+            return redirect()->back()->with('error', 'Không tìm thấy thông tin gia đình');
+        }
+
+        $params = $request->only('relationship', 'name', 'date_of_birth', 'number_phone', 'email', 'sex', 'province_id',
+            'district_id', 'ward_id', 'detail_address');
+        $family->fill($params);
+        $family->save();
+        return response()->json([
+            'message' => 'Thêm thông tin gia đình thành công',
+        ], 200);
     }
 
     public function edit($id)
     {
+        $currentUser = auth()->user()->id;
+        $member = FamilyManagement::where('id', $id)->first();
+
+        $thisFamily = FamilyManagement::where('user_id', $currentUser)->first();
+        if (!$thisFamily) {
+            return response()->json([
+                'message' => 'Bạn chưa có thông tin gia đình',
+            ], 400);
+        }
+
+        $users = User::where('id', $member->user_id)->first();
+
+        return view('admin.family_management.edit', compact('member', 'id', 'users'));
     }
 
     public function update(Request $request, $id)
     {
+        $member = FamilyManagement::where('id', $id)->first();
+
+        if (!$member) {
+            return response()->json([
+                'message' => 'Không tìm thấy thông tin gia đình',
+            ], 400);
+        }
+        $params = $request->only('user_id', 'relationship', 'name', 'date_of_birth', 'number_phone', 'email', 'sex',
+            'province_id', 'district_id', 'ward_id', 'detail_address');
+        $member->fill($params);
+        $member->save();
+        return response()->json([
+            'message' => 'Cập nhật thông tin gia đình thành công',
+        ], 200);
+
     }
 
     public function destroy($id)
     {
+        $member = FamilyManagement::where('id', $id)->first();
+
+        if (!$member) {
+            return response()->json([
+                'message' => 'Không tìm thấy thông tin gia đình',
+            ], 400);
+        }
+
+        $member->delete();
+
+        return redirect()->back();
     }
 
 

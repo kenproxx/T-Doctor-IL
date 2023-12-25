@@ -36,7 +36,7 @@ class NormalPermission
             $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
 
             if ($roleNames->contains('PAITENTS')
-                || $roleNames->contains('NORMAL_PEOPLE')
+                || $roleNames->contains('NORMAL PEOPLE')
                 || $roleNames->contains('DOCTORS')
                 || $roleNames->contains('PHAMACISTS')
                 || $roleNames->contains('THERAPISTS')
