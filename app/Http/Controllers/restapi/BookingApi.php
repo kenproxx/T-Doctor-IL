@@ -46,6 +46,15 @@ class BookingApi extends Controller
         }
     }
 
+    public function detail($id)
+    {
+        $booking = Booking::find($id);
+        if (!$booking || $booking->status == BookingStatus::DELETE) {
+            return response('Not found!', 404);
+        }
+        return response()->json($booking);
+    }
+
     public function getAllBookingByUserId($id, $status,  Request $request)
     {
         $user = User::find($id);
