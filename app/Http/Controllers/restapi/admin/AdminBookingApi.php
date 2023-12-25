@@ -114,6 +114,10 @@ class AdminBookingApi extends Controller
                 return response('Not found!', 404);
             }
 
+            if ($booking->status == BookingStatus::COMPLETE) {
+                return response('Không thể xóa khi đã hoàn thành!', 400);
+            }
+
             $booking->status = BookingStatus::DELETE;
             $success = $booking->save();
             if ($success) {

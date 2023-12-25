@@ -7,11 +7,9 @@ use App\Enums\ServiceClinicStatus;
 use App\Models\Booking;
 use App\Models\Clinic;
 use App\Models\ServiceClinic;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use League\OAuth1\Client\Server\User;
 
 class BookingController extends Controller
 {
@@ -21,6 +19,7 @@ class BookingController extends Controller
         $id = Auth::user()->id;
         return view('bookings.listBooking', compact('id'));
     }
+
     public function detailBooking($id)
     {
         $booking = Booking::find($id);
@@ -38,6 +37,7 @@ class BookingController extends Controller
         $isAdmin = (new MainController())->checkAdmin();
         return view('bookings.detailBooking', compact('booking', 'clinic', 'user', 'memberFamily', 'service', 'isAdmin'));
     }
+
     public function edit($id)
     {
         $bookings_edit = Booking::find($id);
@@ -94,13 +94,18 @@ class BookingController extends Controller
     public function delete($id)
     {
         try {
-            $setting = Booking::find($id);
-            if (!$setting || $setting->status == BookingStatus::CANCEL) {
-                return response('Not found', 404);
+            $booking = Booking::find($id);
+            if (!$booking || $booking->status == BookingStatus::DELETE) {
+                return back();
             }
 
-            $setting->status = BookingStatus::DELETE;
-            $success = $setting->save();
+            if ($booking->status == BookingStatus::COMPLETE) {
+                alert()->error('Không thể xóa khi đã hoàn thành!');
+                return back();
+            }
+
+            $booking->status = BookingStatus::DELETE;
+            $success = $booking->save();
             if ($success) {
                 alert()->success('Delete success!');
                 return back();

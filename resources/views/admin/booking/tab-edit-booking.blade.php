@@ -87,19 +87,25 @@
             <input type="text" name="services" id="services"
                    class="form-control d-none">
             <button type="submit" class="btn btn-primary up-date-button mt-4">{{ __('home.Save') }}</button>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-success mt-4" data-toggle="modal" data-target="#exampleModal">
-                Create result
-            </button>
+            @if($bookings_edit->is_result == 1 && $bookings_edit->status === \App\Enums\BookingStatus::COMPLETE )
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-success mt-4" data-toggle="modal" data-target="#exampleModalComplete">
+                    Create result
+                </button>
+            @else
+                <button type="button" class="btn btn-success mt-4" data-toggle="modal" data-target="#exampleModal">
+                    Create result
+                </button>
+            @endif
         </form>
     </div>
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModalComplete" tabindex="-1" aria-labelledby="exampleModalLabelComplete" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create new result</h5>
+                    <h5 class="modal-title" id="exampleModalLabelComplete">Create new result</h5>
                     <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -177,6 +183,27 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+                    <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Please update status for booking with "Completed" and Select Result to create result!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         let arrayService = [];
         let arrayNameService = [];

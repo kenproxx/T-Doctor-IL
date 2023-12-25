@@ -178,5 +178,4 @@ Route::group(['prefix' => 'booking-result'], function () {
     Route::get('/list', [BookingResultApi::class, 'getListByUser'])->name('restapi.booking.result.list');
     Route::get('/list-business', [BookingResultApi::class, 'getListByBusinessID'])->name('restapi.booking.result.business');
     Route::get('/detail/{id}', [BookingResultApi::class, 'detail'])->name('restapi.booking.result.detail');
-    Route::delete('/delete/{id}', [BookingResultApi::class, 'delete'])->name('restapi.booking.result.delete');
 });
