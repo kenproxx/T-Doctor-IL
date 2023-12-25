@@ -53,6 +53,7 @@ class VerifyCsrfToken extends Middleware
         '/orders/**',
         'auth/*',
         'medicine/search',
-        'forget-password/*'
+        'forget-password/*',
+        'examination/search'
     ];
 }

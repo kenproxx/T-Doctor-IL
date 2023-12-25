@@ -6,55 +6,66 @@
     @include('component.banner')
     <div class="container ">
         <div id="examination-scene">
-            <div class="d-flex justify-content-center">
-                <div id="filter" class="box--1 d-flex ">
-                    <div class="d-flex flex-fill">
-                        <div class="filter_option" style="list-style: none;">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ __('home.Category') }}
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+            <div class="row medicine-search">
+                <div class="medicine-search--left col-md-3 d-flex justify-content-around">
+                    <div class="title">
+                        <select class="form-select" id="category_id" name="category_id"
+                                onchange="searchByCategory(this.value)">
+                            <option value="">{{ __('home.Category') }}</option>
+                            @if($categoryMedicines)
+                                @foreach($categoryMedicines as $index => $cateProductMedicine)
+                                    <option value="{{ $cateProductMedicine->id }}">{{ $cateProductMedicine->name }}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+                    <div class="title">
+                        <select class="form-select" id="location_id" name="location_id"
+                                onchange="searchByLocation(this.value)">
+                            <option value="">{{ __('home.Location') }}</option>
+                            @if($provinces)
+                                @foreach($provinces as $index => $province)
+                                    <option value="{{ $province->id }}">{{ $province->full_name }}</option>
+                                @endforeach
+                            @endif
+                        </select>
+                    </div>
+                </div>
+                <div class="medicine-search--center col-md-6 row d-flex justify-content-between">
+                    <form class="search-box col-md-10">
+                        <input type="search" oninput="searchByName(this.value)" name="focus" placeholder="{{ __('home.Search for anything…') }}" id="search-input" value="">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </form>
+                </div>
+            </div>
+
+
+            {{--
+                        <div class="container">
+                            <!-- Slider main container -->
+                            <div class="swiper-container">
+                                <!-- Additional required wrapper -->
+                                <div class="swiper-wrapper">
                                     @foreach($categoryMedicines as $categoryMedicine)
-                                        <a class="dropdown-item medicine-product" href="#"
-                                           data-medicine="{{ $categoryMedicine }}">{{ $categoryMedicine->name }}</a>
+                                        <div class="nav-item swiper-slide">
+                                            <div class="item-category medicine-product text-center"
+                                                 data-medicine="{{ $categoryMedicine }}">
+                                                <div class="center-container d-flex justify-content-center align-items-center">
+                                                    <img class="img-item-category" src="{{ asset($categoryMedicine->thumbnail) }}"
+                                                         alt="">
+                                                </div>
+                                                <p class="nav-link">{{ $categoryMedicine->name }}</p>
+                                            </div>
+                                        </div>
                                     @endforeach
                                 </div>
-                            </li>
-                        </div>
-                        <div class="filter_option"><p>{{ __('home.Location') }}</p></div>
-                    </div>
-                    <div class="form-group has-search">
-                        <span class="fa fa-search form-control-feedback"></span>
-                        <input type="text" class="form-control" placeholder="{{ __('home.Search for anything…') }}">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <!-- Slider main container -->
-                <div class="swiper-container">
-                    <!-- Additional required wrapper -->
-                    <div class="swiper-wrapper">
-                        @foreach($categoryMedicines as $categoryMedicine)
-                            <div class="nav-item swiper-slide">
-                                <div class="item-category medicine-product text-center"
-                                     data-medicine="{{ $categoryMedicine }}">
-                                    <div class="center-container d-flex justify-content-center align-items-center">
-                                        <img class="img-item-category" src="{{ asset($categoryMedicine->thumbnail) }}"
-                                             alt="">
-                                    </div>
-                                    <p class="nav-link">{{ $categoryMedicine->name }}</p>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
 
-                    <!-- If we need navigation buttons -->
-{{--                    <div class="swiper-button-prev"></div>--}}
-{{--                    <div class="swiper-button-next"></div>--}}
-                </div>
-            </div>
+                            </div>
+                        </div>
+
+                        --}}
+
             <div id="list-find-my-medicine">
                 <div class="d-flex justify-content-center" style="padding: 12px">
                     <div class="list-title d-flex">
@@ -68,13 +79,13 @@
                 <div class="row list-doctor m-auto">
                     @if(count($bestPhamrmacists) > 0)
                         @foreach($bestPhamrmacists as $bestPhamrmacist)
-                            <div class="col-md-3">
+                            <div class="col-sm-3">
                                 <div class="card">
                                     <i class="bi bi-heart"></i>
                                     @php
                                         $province = \App\Models\Province::find($bestPhamrmacist->province_id)
                                     @endphp
-                                    <img src="{{asset($bestPhamrmacist->thumbnail)}}" class="card-img-top" alt="...">
+                                    <img src="{{asset($bestPhamrmacist->avt)}}" class="card-img-top" alt="Ảnh bác sỹ">
                                     <div class="card-body">
                                         <a href="#"><h5
                                                     class="card-title"> {{ $bestPhamrmacist->name }}</h5></a>
@@ -89,6 +100,8 @@
                                 </div>
                             </div>
                         @endforeach
+                    @else
+                        <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
                     @endif
                 </div>
                 <div class="d-flex justify-content-center" style="padding: 12px">
@@ -103,7 +116,7 @@
                 <div class="row list-doctor m-auto">
                     @if(count($newPhamrmacists) > 0)
                         @foreach($newPhamrmacists as $newPhamrmacist)
-                            <div class="col-md-3">
+                            <div class="col-sm-3">
                                 <div class="card ">
                                     <i class="bi bi-heart"></i>
                                     @php
@@ -124,6 +137,8 @@
                                 </div>
                             </div>
                         @endforeach
+                    @else
+                        <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
                     @endif
                 </div>
                 <div class="d-flex justify-content-center" style="padding: 12px">
@@ -139,7 +154,7 @@
                 <div class="row list-doctor m-auto">
                     @if(count($allPhamrmacists) > 0)
                         @foreach($allPhamrmacists as $allPhamrmacist)
-                            <div class="col-md-3">
+                            <div class="col-sm-3">
                                 <div class="card ">
                                     <i class="bi bi-heart"></i>
                                     @php
@@ -160,6 +175,8 @@
                                 </div>
                             </div>
                         @endforeach
+                    @else
+                        <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
                     @endif
                 </div>
                 <div class="d-flex justify-content-center" style="padding: 12px">
@@ -177,7 +194,7 @@
                             @php
                                 $user = \App\Models\User::find($hotMedicine->user_id);
                             @endphp
-                            <div class="col-md-3">
+                            <div class="col-sm-3">
                                 <div class="card">
                                     <i class="bi bi-heart"></i>
                                     <img src="{{asset($hotMedicine->thumbnail)}}" class="card-img-top" alt="...">
@@ -192,6 +209,8 @@
                                 </div>
                             </div>
                         @endforeach
+                    @else
+                        <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
                     @endif
                 </div>
                 <div class="d-flex justify-content-center" style="padding: 12px">
@@ -209,7 +228,7 @@
                             @php
                                 $user = \App\Models\User::find($newMedicine->user_id);
                             @endphp
-                            <div class="col-md-3">
+                            <div class="col-sm-3">
                                 <div class="card">
                                     <i class="bi bi-heart"></i>
                                     <img src="{{asset($newMedicine->thumbnail)}}" class="card-img-top" alt="...">
@@ -224,6 +243,8 @@
                                 </div>
                             </div>
                         @endforeach
+                    @else
+                        <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
                     @endif
                 </div>
                 <div class="d-flex justify-content-center" style="padding: 12px">
@@ -241,7 +262,7 @@
                             @php
                                 $user = \App\Models\User::find($recommendedMedicine->user_id);
                             @endphp
-                            <div class="col-md-3">
+                            <div class="col-sm-3">
                                 <div class="card">
                                     <i class="bi bi-heart"></i>
                                     <img src="{{asset($recommendedMedicine->thumbnail)}}" class="card-img-top"
@@ -259,6 +280,8 @@
                             </div>
 
                         @endforeach
+                    @else
+                        <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
                     @endif
                 </div>
                 <div class="d-flex justify-content-center" style="padding: 12px">
@@ -276,7 +299,7 @@
                                 @php
                                     $user = \App\Models\User::find($function_food->user_id);
                                 @endphp
-                                <div class=" col-md-3">
+                                <div class=" col-sm-3">
                                     <div class="card">
                                         <i class="bi bi-heart"></i>
                                         <img src="{{asset($function_food->thumbnail)}}" class="card-img-top" alt="...">
@@ -291,12 +314,60 @@
                                     </div>
                                 </div>
                             @endforeach
-                        @endif
+                        @else
+                        <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
+                    @endif
+                    @else
+                        <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
                     @endif
                 </div>
             </div>
         </div>
         <script>
+
+            let category_id = '';
+            let location_id = '';
+            let name = '';
+
+            function handleSearch() {
+                let url = `{{ route('examination.findmymedicine') }}`;
+                url += `?category_id=${category_id}&location_id=${location_id}&name=${name}`;
+
+                try {
+                    $.ajax({
+                        url: url,
+                        method: 'GET',
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        success: function (response) {
+                            console.log(response)
+                        },
+                        error: function (exception) {
+                        }
+                    });
+                } catch (error) {
+                    throw error;
+                }
+
+            }
+
+            function searchByCategory(value) {
+                category_id = value;
+                handleSearch();
+            }
+
+            function searchByLocation(value) {
+                location_id = value;
+                handleSearch();
+            }
+
+            function searchByName(value) {
+                name = value;
+                handleSearch();
+            }
+
+
             $(document).ready(function () {
                 $('.medicine-product').on('click', function () {
                     $('.medicine-product').removeClass('active');
@@ -314,7 +385,7 @@
                         let mainUrl = detail.replace(':id', item['id']);
                         let imageDoctor = item['thumbnail'];
                         let myArray = imageDoctor.split("/storage");
-                        html = html + `<div class=" col-md-3">
+                        html = html + `<div class=" col-sm-3">
                                 <div class="card">
                             <i class="bi bi-heart"></i>
                             <img src="${url}${myArray[1]}" class="card-img-top" alt="...">

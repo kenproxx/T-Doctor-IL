@@ -18,6 +18,7 @@ use App\Models\DoctorDepartment;
 use App\Models\DoctorInfo;
 use App\Models\online_medicine\CategoryProduct;
 use App\Models\online_medicine\ProductMedicine;
+use App\Models\Province;
 use App\Models\Question;
 use App\Models\User;
 use Carbon\Carbon;
@@ -57,41 +58,60 @@ class ExaminationController extends Controller
         return view('examination.availabledoctor');
     }
 
-    public function findMyMedicine()
+    public function findMyMedicine(Request $request)
     {
-        $bestPhamrmacists = User::where('member', TypeMedical::PHAMACISTS)
-            ->where('status', UserStatus::ACTIVE)
-            ->orderBy('id', 'DESC')
-            ->limit(16)
-            ->get();
-        $newPhamrmacists = User::where('member', TypeMedical::PHAMACISTS)
-            ->where('status', UserStatus::ACTIVE)
-            ->orderBy('id', 'DESC')
-            ->limit(16)
-            ->get();
-        $allPhamrmacists = User::where('member', TypeMedical::PHAMACISTS)
-            ->where('status', UserStatus::ACTIVE)
+        $arrParam = $request->all();
+        $categoryId = array_key_exists('category_id', $arrParam) ? $arrParam['category_id'] : null;
+        $locationId = array_key_exists('location_id', $arrParam) ? $arrParam['location_id'] : null;
+        $name = array_key_exists('name', $arrParam) ? $arrParam['name'] : null;
+
+        $query = User::where('member', TypeMedical::PHAMACISTS)
+            ->where('status', UserStatus::ACTIVE);
+
+        if (!empty($categoryId)) {
+            $query->where('category_id', $categoryId);
+        }
+
+        if (!empty($locationId)) {
+            $query->where('location_id', $locationId);
+        }
+
+        if (!empty($name)) {
+            $query->where('name', 'LIKE', '%' . $name . '%');
+        }
+
+
+        $limitPerPages = 8;
+
+        $bestPhamrmacists = $query->orderBy('id', 'DESC')->limit($limitPerPages)->get();
+
+        $newPhamrmacists = $query->orderBy('id', 'DESC')->limit($limitPerPages)->get();
+
+        $allPhamrmacists = $query
             ->where('time_working_1', '00:00-23:59')
             ->where('time_working_2', 'T2-CN')
-            ->limit(16)
+            ->limit($limitPerPages)
             ->get();
 
-        $hotMedicines = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->limit(16)->get();
-        $newMedicines = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->orderBy('id',
-            'DESC')->limit(16)->get();
-        $recommendedMedicines = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->limit(16)->get();
+        $provinces = Province::all();
+
+        $categoryMedicines = CategoryProduct::where('status', true)->get();
+
+        $query = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED);
+        $newMedicines = $query->orderBy('id', 'DESC')->limit($limitPerPages)->get();
+        $recommendedMedicines = $query->limit($limitPerPages)->get();
+        $hotMedicines = $query->limit($limitPerPages)->get();
 
         $category_function = CategoryProduct::where('name', 'Functional Foods')->first();
         $function_foods = null;
         if ($category_function) {
             $function_foods = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->where('category_id',
-                $category_function->id)->limit(16)->get();
+                $category_function->id)->limit($limitPerPages)->get();
         }
 
-        $categoryMedicines = CategoryProduct::where('status', true)->get();
         return view('examination.findmymedicine',
             compact('bestPhamrmacists', 'newPhamrmacists', 'allPhamrmacists', 'hotMedicines', 'newMedicines',
-                'recommendedMedicines', 'categoryMedicines', 'function_foods'));
+                'recommendedMedicines', 'categoryMedicines', 'function_foods', 'provinces', 'categoryMedicines'));
     }
 
     public function bestPharmacists()
@@ -233,5 +253,17 @@ class ExaminationController extends Controller
     {
         return view('admin.connect.chat.index', compact('id'));
     }
+
+    public function searchInFindMyMedicine(Request $request)
+    {
+
+        $category_id = $request->input('category_id');
+        $location_id = $request->input('location_id');
+        $name = $request->input('name');
+
+
+        dd($request->all());
+    }
+
 
 }
