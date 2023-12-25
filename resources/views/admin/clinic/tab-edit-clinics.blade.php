@@ -377,18 +377,21 @@
                 </div>
 
                 <div hidden="">
-                    <label for="combined_address"></label><input type="text" name="combined_address"
-                                                                 id="combined_address" class="form-control">
-                    <label for="longitude"></label><input type="text" name="longitude" id="longitude"
-                                                          class="form-control">
-                    <label for="latitude"></label><input type="text" name="latitude" id="latitude" class="form-control">
-                    <label for="clinics_service"></label><input type="text" name="clinics_service" id="clinics_service"
-                                                                class="form-control">
-
-                    <label for="departments"></label><input type="text" name="departments" id="departments"
-                                                            class="form-control">
-                    <label for="symptoms"></label><input type="text" name="symptoms" id="symptoms"
-                                                         class="form-control">
+                    <label for="combined_address"></label>
+                    <input type="text" name="combined_address" id="combined_address" value="{{ $clinic->address }}"
+                           class="form-control">
+                    <label for="longitude"></label>
+                    <input type="text" name="longitude" id="longitude" class="form-control"
+                           value="{{ $clinic->longitude }}">
+                    <label for="latitude"></label>
+                    <input type="text" name="latitude" id="latitude" class="form-control"
+                           value="{{ $clinic->latitude }}">
+                    <label for="clinics_service"></label>
+                    <input type="text" name="clinics_service" id="clinics_service" class="form-control">
+                    <label for="departments"></label>
+                    <input type="text" name="departments" id="departments" class="form-control">
+                    <label for="symptoms"></label>
+                    <input type="text" name="symptoms" id="symptoms" class="form-control">
                 </div>
             </div>
             <div class="row">
@@ -444,10 +447,10 @@
                             @endphp
                             @foreach($options as $key => $option)
                                 <div class="checkbox">
-                                    <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
+                                    <input type="checkbox" name="dropdown-group"
+                                           class="check hospital_information_name checkbox-custom"
                                            id="checkbox-custom_{{ $key }}" value="{{ $option }}"
                                            @if(in_array($option, $arrayInformation, true) || in_array($option, explode(', ', old('hospital_information', '')))) checked @endif />
-
                                     <label for="checkbox-custom_{{ $key }}"
                                            class="checkbox-custom-label">{{ $option }}</label>
                                 </div>
@@ -477,10 +480,10 @@
                             @endphp
                             @foreach($facilityOptions as $key => $facilityOption)
                                 <div class="checkbox">
-                                    <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
+                                    <input type="checkbox" name="dropdown-group"
+                                           class="check hospital_facilities_name checkbox-custom"
                                            id="checkbox-custom_{{ $key + 21 }}" value="{{ $facilityOption }}"
                                            @if(in_array($facilityOption, $arrayFacilities, true) || in_array($facilityOption, explode(', ', old('hospital_facilities', '')))) checked @endif />
-
                                     <label for="checkbox-custom_{{ $key + 21 }}"
                                            class="checkbox-custom-label">{{ $facilityOption }}</label>
                                 </div>
@@ -489,7 +492,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-md-12">
                     <label for="hospital_equipment">Hospital equipment</label>
@@ -513,10 +515,10 @@
                             @endphp
                             @foreach($equipmentOptions as $key => $equipmentOption)
                                 <div class="checkbox">
-                                    <input type="checkbox" name="dropdown-group" class="check checkbox-custom"
+                                    <input type="checkbox" name="dropdown-group"
+                                           class="check hospital_equipment_name checkbox-custom"
                                            id="checkbox-custom_{{ $key + 27 }}" value="{{ $equipmentOption }}"
                                            @if(in_array($equipmentOption, $arrayEquipment, true) || in_array($equipmentOption, explode(', ', old('hospital_equipment', '')))) checked @endif />
-
                                     <label for="checkbox-custom_{{ $key + 27 }}"
                                            class="checkbox-custom-label">{{ $equipmentOption }}</label>
                                 </div>
@@ -531,7 +533,8 @@
                     <label for="representative_doctor">Chọn một tùy chọn:</label>
                     <select name="representative_doctor" class="form-select" id="representative_doctor">
                         @foreach($doctorLists as $kry => $doctor)
-                            <option value="{{$doctor->id}}">{{$doctor->name}}</option>
+                            <option {{ $doctor->id == $clinic->representative_doctor ? 'selected' : '' }}
+                                    value="{{$doctor->id}}">{{$doctor->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -570,6 +573,15 @@
                 // Gán giá trị vào input ẩn
                 $('#combined_address').val(combinedAddress);
                 addNewAddress();
+                let latitude = $('#latitude');
+                let longitude = $('#longitude');
+                if (!latitude.val()) {
+                    latitude.val(localStorage.getItem('latitude'))
+                }
+
+                if (!longitude.val()) {
+                    longitude.val(localStorage.getItem('longitude'))
+                }
             }
 
             function getCodeFromValue(value) {
@@ -660,20 +672,17 @@
                 const formData = new FormData();
 
                 const arrFieldEmpty = [
-                    "hospital_facilities", "hospital_equipment", "hospital_information", "emergency", "insurance", "parking",
+                    "hospital_facilities", "hospital_equipment", "hospital_information",
+                    "emergency", "insurance", "parking", "combined_address",
                 ];
 
                 const arrField = [
-                    "name", "name_en", "name_laos", "phone", "combined_address", "costs",
+                    "name", "name_en", "name_laos", "phone", "costs",
                     "longitude", "latitude", "address_detail", "address_detail_en", "email",
                     "address_detail_laos", "province_id", "district_id", "commune_id",
                     "open_date", "close_date", "user_id", "time_work", "type", "status",
                     "clinics_service", "departments", "symptoms", "representative_doctor",
                 ];
-
-                arrField.forEach(data => {
-                    console.log(data, $(`#${data}`).val());
-                })
 
                 arrFieldEmpty.forEach(data => {
                     formData.append(data, $(`#${data}`).val());
@@ -702,7 +711,7 @@
                     formData.append('gallery[]', file);
                 }
 
-                if (isValid){
+                if (isValid) {
                     try {
                         $.ajax({
                             url: `{{route('api.backend.clinics.edit',$clinic->id)}}`,
@@ -1041,5 +1050,48 @@
         checkboxDropdown('.dropdown[data-target="hospital_information"]', 'hospital_information');
         checkboxDropdown('.dropdown[data-target="hospital_facilities"]', 'hospital_facilities');
         checkboxDropdown('.dropdown[data-target="hospital_equipment"]', 'hospital_equipment');
+    </script>
+    <script>
+        $(document).ready(function () {
+            loadDataHospitalEquipment();
+            loadDataHospitalFacilities();
+            loadDataHospitalInformation();
+
+            $('.hospital_equipment_name').on('click', function () {
+                loadDataHospitalEquipment();
+            });
+
+            $('.hospital_facilities_name').on('click', function () {
+                loadDataHospitalFacilities();
+            });
+
+            $('.hospital_information_name').on('click', function () {
+                loadDataHospitalInformation();
+            });
+        });
+
+
+        function loadDataHospitalEquipment() {
+            let arrayItem = $('.hospital_equipment_name:checked').map(function () {
+                return $(this).val();
+            }).get().join(', ');
+
+            $('#hospital_equipment').val(arrayItem);
+        }
+
+        function loadDataHospitalFacilities() {
+            let arrayItem = $('.hospital_facilities_name:checked').map(function () {
+                return $(this).val();
+            }).get().join(', ');
+
+            $('#hospital_facilities').val(arrayItem);
+        }
+
+        function loadDataHospitalInformation() {
+            let arrayItem = $('.hospital_information_name:checked').map(function () {
+                return $(this).val();
+            }).get().join(', ');
+            $('#hospital_information').val(arrayItem);
+        }
     </script>
 @endsection
