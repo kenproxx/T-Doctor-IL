@@ -401,4 +401,6 @@ Route::middleware(['user.active'])->group(function () {
     Route::get('/info-user/{id}', [ProfileController::class, 'infoUser'])->name('info.user');
     Route::get('/department', [DoctorInfoController::class, 'listDepartment'])->name('list.department');
 
+
+
 });
