@@ -10,6 +10,7 @@ use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\backend\BackendWishListController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\BookingResultController;
 use App\Http\Controllers\CalcViewQuestionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
@@ -179,6 +180,7 @@ Route::middleware(['user.active'])->group(function () {
         Route::get('/booking-detail/{id}', [BookingController::class, 'detailBooking'])->name('booking.detail.by.user');
         Route::get('/list-by-users/{id}/{status}',
             [BookingApi::class, 'getAllBookingByUserId'])->name('booking.list.users');
+        Route::get('/detail/{id}', [BookingApi::class, 'detail'])->name('restapi.booking.detail');
         Route::delete('/delete-booking/{id}', [BookingApi::class, 'cancelBooking'])->name('booking.delete.users');
         Route::delete('/cancel-booking/{id}', [BookingApi::class, 'bookingCancel'])->name('booking.ancel.users');
         Route::get('/search', [BackendProductInfoController::class, 'search'])->name('backend.booking.search');
@@ -343,6 +345,11 @@ Route::middleware(['user.active'])->group(function () {
             });
         });
 
+        /* Booking result */
+        Route::group(['prefix' => 'web/booking-result'], function () {
+            Route::get('/list/{id}', [BookingResultController::class, 'getList'])->name('web.booking.result.list');
+            Route::get('/detail/{id}', [BookingResultController::class, 'detail'])->name('web.booking.result.detail');
+        });
     });
 
     Route::get('/send', 'SendMessageController@index')->name('send');
