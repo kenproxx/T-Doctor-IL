@@ -24,10 +24,13 @@ Route::group(['prefix' => 'question-like'], function () {
 
 Route::group(['prefix' => 'family-managementt'], function () {
     Route::get('index', [FamilyManagementController::class, 'index'])->name('api.backend.family-management.index');
-    Route::post('store', [FamilyManagementController::class, 'store'])->name('api.backend.family-management.store');
-    Route::post('update', [FamilyManagementController::class, 'update'])->name('api.backend.family-management.update');
-    Route::post('destroy',
-        [FamilyManagementController::class, 'changeEmotion'])->name('api.backend.family-management.destroy');
+    Route::get('create', [FamilyManagementController::class, 'create'])->name('api.backend.family-management.create');
+    Route::get('addMember', [FamilyManagementController::class, 'addMember'])->name('api.backend.family-management.addMember');
+    Route::post('store/{type}', [FamilyManagementController::class, 'store'])->name('api.backend.family-management.store');
+    Route::get('edit/{id}', [FamilyManagementController::class, 'edit'])->name('api.backend.family-management.edit');
+    Route::post('update/{id}', [FamilyManagementController::class, 'update'])->name('api.backend.family-management.update');
+    Route::post('destroy/{id}',
+        [FamilyManagementController::class, 'destroy'])->name('api.backend.family-management.destroy');
 });
 
 Route::group(['prefix' => 'family-management'], function () {

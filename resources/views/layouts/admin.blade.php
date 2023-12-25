@@ -557,7 +557,7 @@
                 </a>
                 <ul id="department-symptom-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="{{ route('department.index') }}">
+                        <a href="{{ route('api.backend.family-management.index') }}">
                             <i class="bi bi-circle"></i><span>{{ __('home.Gia dinh') }}</span>
                         </a>
                     </li>

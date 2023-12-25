@@ -4,28 +4,24 @@
 @section('main-content')
 
     <div class="container">
-        <input type="hidden" value="{{ $id }}" class="form-control" id="id" name="id">
-
         <div class="row">
             <div class="col-sm-6">
                 <label for="name">{{ __('home.Name') }}</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ $member->name ?? '' }}">
+                <input type="text" class="form-control" id="name" name="name">
             </div>
             <div class="col-sm-6">
                 <label for="date_of_birth">{{ __('home.Date of birth') }}</label>
-                <input type="date" class="form-control" id="date_of_birth" name="date_of_birth"
-                       value="{{ $member->date_of_birth ?? '' }}">
+                <input type="date" class="form-control" id="date_of_birth" name="date_of_birth">
             </div>
         </div>
         <div class="row">
             <div class="col-sm-6">
                 <label for="number_phone">{{ __('home.PhoneNumber') }}</label>
-                <input type="number" class="form-control" id="number_phone" name="number_phone"
-                       value="{{ $member->number_phone ?? '' }}">
+                <input type="number" class="form-control" id="number_phone" name="number_phone">
             </div>
             <div class="col-sm-6">
                 <label for="email">{{ __('home.Email') }}</label>
-                <input type="email" class="form-control" id="email" name="email" value="{{ $member->email ?? '' }}">
+                <input type="email" class="form-control" id="email" name="email">
             </div>
         </div>
         <div class="row">
@@ -40,8 +36,7 @@
                 <label for="relationship">{{ __('home.quan he voi chu ho') }}</label>
                 <select class="custom-select form-control" id="relationship" name="relationship">
                     @foreach(RelationshipFamily::asArray() as $key => $value)
-                        <option
-                            {{ $value == $member->relationship ? 'selected' : '' }} value="{{ $value }}">{{ $key }}</option>
+                        <option value="{{ $value }}">{{ $key }}</option>
                     @endforeach
                 </select>
             </div>
@@ -63,18 +58,16 @@
         <div class="row">
             <div class="col-sm-6">
                 <label for="ward_id">{{ __('home.Ward') }}</label>
-                <input type="text" class="form-control" id="ward_id" name="ward_id"
-                       value="{{ $member->ward_id ?? '' }}">
+                <input type="text" class="form-control" id="ward_id" name="ward_id">
             </div>
             <div class="col-sm-6">
                 <label for="detail_address">{{ __('home.Addresses') }}</label>
-                <input type="text" class="form-control" id="detail_address" name="detail_address"
-                       value="{{ $member->detail_address ?? '' }}">
+                <input type="text" class="form-control" id="detail_address" name="detail_address">
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-sm-4">
-                <button class="btn btn-primary" type="button" onclick="submitForm()">Sửa</button>
+                <button class="btn btn-primary" type="button" onclick="submitForm()">Tạo</button>
             </div>
         </div>
     </div>
@@ -105,8 +98,8 @@
                 return;
             }
 
-            let url = `{{route('api.backend.family-management.update', ['id' => ':id'])}}`;
-            url = url.replace(':id', $('#id').val());
+            let url = `{{route('api.backend.family-management.store', ['type' => ':type'])}}`;
+            url = url.replace(':type', '{{ FamilyManagementEnum::CREATE_FAMILY }}');
 
             formData.append('_token', '{{ csrf_token() }}');
             $.ajax({
