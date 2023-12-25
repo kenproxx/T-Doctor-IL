@@ -414,18 +414,50 @@
                 </div>
             </div>
         </div>
-        <div id="recruitment-homeNew">
-            <div class="d-flex">
-                <div class="col-md-8">
-
-                </div>
-                <div class="col-md-4"></div>
-            </div>
-        </div>
     </div>
 
     <div class="banner1">
         <img src="{{asset('img/icons_logo/Rectangle 23814.png')}}" alt="">
+    </div>
+    <div class="container mt-4">
+        <div id="recruitment-homeNew">
+            <div>
+                <h2>{{ __('home.Recruitment') }}</h2>
+                <p>{{ __('home.Hire staffs cheaper, find your staffs faster') }}</p>
+            </div>
+            <div class="d-flex">
+                <div class="col-md-8 d-flex">
+                    <div class="col-md-4">
+                        <img src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
+                    </div>
+                    <div class="col-md-8">
+                        <h6>
+                            {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
+                        </h6>
+                        <div class="content__item__describe">
+                            {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
+                        </div>
+                        <p class="content__item-link">{{ __('home.Read') }}</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="w-100">
+                        <div class="describe-item">
+                            <h3>{{ __('home.24/7 AVAILABLE') }}</h3>
+                            <p>{{ __('home.You can find available clinics/pharmacies') }}</p>
+                        </div>
+                        <div class="describe-item" hidden="">
+                            <h3>{{ __('home.HOME CARE SERVICE') }}</h3>
+                            <p>{{ __("home.Don't come to us! We will come to you") }}!</p>
+                        </div>
+                        <div class="describe-item">
+                            <h3>{{ __('home.MANY LOCATION') }}</h3>
+                            <p>{{ __('home.More than 1500 Doctors, 1000 Pharmacists, 1000 Hospitals always wait for you') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <div id="recruitment_board" class="d-flex justify-content-center">
         <div id="content-bkg" class="content-item d-flex justify-content-center ">
