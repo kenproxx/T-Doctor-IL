@@ -35,7 +35,7 @@
                 @else
                     @if($memberFamily != null)
                         <div>{{ __('home.Name') }}: {{$memberFamily->first()->name}}</div>
-                        <div>{{ __('home.relationship') }}: {{$memberFamily->first()->relationship}}</div>
+                        <div>{{ __('home.relationship') }}: {{ \App\Enums\RelationshipFamily::getLabels()[$memberFamily->first()->relationship] ?? $memberFamily->first()->relationship }}</div>
                         <div>{{ __('home.Sexs') }}: {{$memberFamily->first()->sex}}</div>
                         <div>{{ __('home.Date of birth') }}: {{$memberFamily->first()->date_of_birth}}</div>
                     @endif

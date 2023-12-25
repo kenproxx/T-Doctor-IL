@@ -165,11 +165,11 @@
   .container #myTabContent .product-item .content-pro .location-pro p {
     margin: 0;
     color: var(--White, #FFF);
-    text-align: center;
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    min-height: 85px;
   }
   .container #myTabContent .product-item .content-pro .price-pro {
     color: var(--White, #FFF);

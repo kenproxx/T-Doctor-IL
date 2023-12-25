@@ -205,11 +205,12 @@
                     .location-pro p {
                         margin: 0;
                         color: var(--White, #FFF);
-                        text-align: center;
+                        //text-align: center;
                         font-size: 18px;
                         font-style: normal;
                         font-weight: 600;
                         line-height: normal;
+                        min-height: 85px;
                     }
                     .price-pro {
                         color: var(--White, #FFF);
