@@ -345,7 +345,7 @@ Route::middleware(['user.active'])->group(function () {
 
         /* Booking result */
         Route::group(['prefix' => 'web/booking-result'], function () {
-            Route::get('/list', [BookingResultController::class, 'getList'])->name('web.booking.result.list');
+            Route::get('/list/{id}', [BookingResultController::class, 'getList'])->name('web.booking.result.list');
             Route::get('/detail/{id}', [BookingResultController::class, 'detail'])->name('web.booking.result.detail');
         });
     });

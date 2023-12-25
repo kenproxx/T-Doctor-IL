@@ -44,16 +44,23 @@
                     <td>{{$service_names}}</td>
                     <td>{{$item->status}}</td>
                     <td class="d-flex">
+                        <form action="{{ route('web.booking.result.list', $item->id) }}" method="get">
+                            <button type="submit" class="btn btn-secondary">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                        </form>
                         <form action="{{route('api.backend.booking.edit',$item->id)}}" method="get">
-                            @csrf
-                            <button type="submit" class="btn btn-primary">Edit</button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
                         </form>
 
                         <form action="{{route('api.backend.booking.delete',$item->id)}}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button type="submit"
-                                    class="ml-3 btn btn-primary btn-danger">{{ __('home.Delete') }}</button>
+                            <button type="submit" class="ml-3 btn btn-primary btn-danger">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </button>
                         </form>
                     </td>
                 </tr>
