@@ -646,40 +646,7 @@ return [
     'Create Category' => 'ສ້າງຫມວດຫມູ່',
     'Toàn quốc' => 'ທົ່ວປະເທດ',
     'chat message' => 'ຂໍ້ຄວາມສົນທະນາ',
-    'ChatBot' => 'Chat Bot'
+    'ChatBot' => 'Chat Bot',
+    'no data' => 'ບໍ່​ມີ​ຂໍ້​ມູນ',
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-,
 ];

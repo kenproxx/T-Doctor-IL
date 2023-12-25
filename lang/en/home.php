@@ -658,38 +658,8 @@ return [
     'Create Category' => 'Create Category',
     'Toàn quốc' => 'Nationwide',
     'chat message' => 'Chat message',
-    'ChatBot' => 'ChatBot'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    'ChatBot' => 'ChatBot',
+    'no data' => 'No Data',
 
 
 ];

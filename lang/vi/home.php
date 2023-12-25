@@ -659,29 +659,7 @@ return [
     'Create Category' => 'Tạo danh mục',
     'Toàn quốc' => 'Toàn quốc',
     'chat message' => 'Tin nhắn trò chuyện',
-    'ChatBot' => 'Bot trò chuyện'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    'ChatBot' => 'Bot trò chuyện',
+    'no data' => 'Không có dữ liệu',
 
 ];
