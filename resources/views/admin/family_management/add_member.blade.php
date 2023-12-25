@@ -7,11 +7,16 @@
         <div class="row">
             <div class="col-sm-6">
                 <label for="user_id">{{ __('home.Username') }}</label>
-                <select class="custom-select form-control" id="user_id" name="user_id">
-                    @foreach($users as $id => $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
-                    @endforeach
-                </select>
+                @if($users->isNotEmpty())
+                    <select class="custom-select form-control" id="user_id" name="user_id">
+                        @foreach($users as $id => $user)
+                            <option value="{{ $user->id }}">{{ $user->name }} - {{ $user->email }}</option>
+                        @endforeach
+                    </select>
+                @else
+                    <input type="text" class="form-control" id="user_id" name="user_id" disabled
+                           placeholder="Không có user nào có role là Normal">
+                @endif
             </div>
         </div>
         <div class="row">

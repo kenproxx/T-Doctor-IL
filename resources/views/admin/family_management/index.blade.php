@@ -31,7 +31,8 @@
                     <td>{{ $member->name }}</td>
                     <td>{{ RelationshipFamily::getLabels()[$member->relationship] ?? $member->relationship }}</td>
                     <td class="d-flex">
-                        <form style="margin-right: 10px" action="{{route('api.backend.family-management.edit',$member->id)}}" method="get">
+                        <form style="margin-right: 10px"
+                              action="{{route('api.backend.family-management.edit',$member->id)}}" method="get">
                             <button type="submit" class="btn btn-primary">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </button>
