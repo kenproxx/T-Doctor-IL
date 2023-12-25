@@ -416,17 +416,17 @@
                 <div class="col-md-3">
                     <div class="form-element">
                         <label for="costs">Medical examination costs?</label>
-                        <input name="costs" id="costs" type="number" value="{{$clinic->costs}}">
+                        <input name="costs" class="form-control" id="costs" type="number" value="{{$clinic->costs}}">
                     </div>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <label for="information">Hospital information</label>
+                    <label for="hospital_information">Hospital information</label>
                     <div class="dropdown" data-target="hospital_information">
                         <label class="dropdown-label">Select Options</label>
-                        <input type="hidden" name="hospital_information" id="hospital_information"
+                        <input class="d-none" name="hospital_information" id="hospital_information"
                                value="{{$clinic->information}}"/>
                         <div class="dropdown-list">
                             @php
@@ -458,10 +458,10 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <label for="information">Hospital facilities</label>
+                    <label for="hospital_facilities">Hospital facilities</label>
                     <div class="dropdown" data-target="hospital_facilities">
                         <label class="dropdown-label">Select Options</label>
-                        <input type="hidden" name="hospital_facilities" id="hospital_facilities"
+                        <input class="d-none" name="hospital_facilities" id="hospital_facilities"
                                value="{{$clinic->facilities}}"/>
                         <div class="dropdown-list">
                             @php
@@ -492,10 +492,10 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <label for="information">Hospital equipment</label>
+                    <label for="hospital_equipment">Hospital equipment</label>
                     <div class="dropdown" data-target="hospital_equipment">
                         <label class="dropdown-label">Select Options</label>
-                        <input type="hidden" name="hospital_equipment" id="hospital_equipment"
+                        <input class="d-none" name="hospital_equipment" id="hospital_equipment"
                                value="{{$clinic->equipment}}"/>
                         <div class="dropdown-list">
                             @php
@@ -660,7 +660,7 @@
                 const formData = new FormData();
 
                 const arrFieldEmpty = [
-                    "facilities", "equipment", "information", "emergency", "insurance", "parking",
+                    "hospital_facilities", "hospital_equipment", "hospital_information", "emergency", "insurance", "parking",
                 ];
 
                 const arrField = [
@@ -670,6 +670,10 @@
                     "open_date", "close_date", "user_id", "time_work", "type", "status",
                     "clinics_service", "departments", "symptoms", "representative_doctor",
                 ];
+
+                arrField.forEach(data => {
+                    console.log(data, $(`#${data}`).val());
+                })
 
                 arrFieldEmpty.forEach(data => {
                     formData.append(data, $(`#${data}`).val());

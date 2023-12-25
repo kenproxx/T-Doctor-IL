@@ -44,9 +44,16 @@ class BackendCouponController extends Controller
         }
     }
 
-    public function getListCouponForUser()
+    public function getListCouponForUser(Request $request)
     {
-        $coupons = Coupon::where('status', '=', CouponStatus::ACTIVE)->get();
+        $type = $request->input('type');
+        if ($type) {
+            $coupons = Coupon::where('status', '=', CouponStatus::ACTIVE)
+                ->where('type', $type)
+                ->get();
+        } else {
+            $coupons = Coupon::where('status', '=', CouponStatus::ACTIVE)->get();
+        }
         return response()->json($coupons);
     }
 
@@ -153,6 +160,7 @@ class BackendCouponController extends Controller
         $user_id = $request->input('user_id');
 
         $clinic_id = $request->input('clinic_id');
+        $type = $request->input('type');
 
         $status = $request->input('status');
         if (!$status) {
@@ -189,6 +197,7 @@ class BackendCouponController extends Controller
         $coupon->endDate = $endDate;
 
         $coupon->max_register = $max_register;
+        $coupon->type = $type;
 
         $coupon->user_id = $user_id;
 
