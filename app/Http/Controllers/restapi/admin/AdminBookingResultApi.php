@@ -64,13 +64,14 @@ class AdminBookingResultApi extends Controller
             }
             return response((new MainApi())->returnMessage('Create error!'), 400);
         } catch (\Exception $exception) {
+            dd($exception);
             return response((new MainApi())->returnMessage('Error, Please try again!'), 400);
         }
     }
 
     private function store($request, $result)
     {
-        $service_name = $request->input('service_name');
+        $service_name = $request->input('service_result');
 
         $code = 'BR' . (new MainController())->generateRandomString(8);
 
@@ -78,7 +79,7 @@ class AdminBookingResultApi extends Controller
         $result_input_en = $request->input('result_en');
         $result_input_laos = $request->input('result_laos');
 
-        $booking_id = $request->input('booking_id ');
+        $booking_id = $request->input('booking_id');
 
         $detail = $request->input('detail');
         $detail_en = $request->input('detail_en');

@@ -315,7 +315,7 @@ Route::group(['prefix' => 'symptoms'], function () {
 /* Booking result*/
 Route::group(['prefix' => 'booking-result'], function () {
     Route::get('/list', [AdminBookingResultApi::class, 'getAll'])->name('api.medical.booking.result.list');
-    Route::get('/list-business/{id}', [AdminBookingResultApi::class, 'getAllByBusiness'])->name('api.medical.booking.result.business');
+    Route::get('/list-business', [AdminBookingResultApi::class, 'getAllByBusiness'])->name('api.medical.booking.result.business');
     Route::get('/detail/{id}', [AdminBookingResultApi::class, 'delete'])->name('api.medical.booking.result.detail');
     Route::post('/create', [AdminBookingResultApi::class, 'create'])->name('api.medical.booking.result.create');
     Route::post('/update/{id}', [AdminBookingResultApi::class, 'update'])->name('api.medical.booking.result.update');
