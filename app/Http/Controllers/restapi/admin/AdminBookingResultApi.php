@@ -9,6 +9,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\restapi\MainApi;
 use App\Models\Booking;
 use App\Models\BookingResult;
+use App\Models\Clinic;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +25,8 @@ class AdminBookingResultApi extends Controller
             ->map(function ($item) {
                 $result = (array)$item;
                 $booking = Booking::find($item->booking_id);
+                $clinic = Clinic::find($booking->clinic_id);
+                $result['clinics'] = $clinic->toArray();
                 $value = Carbon::parse($booking->created_at);
                 $appointment_date = $value->addHours(7)->format('Y-m-d H:i:s');
                 $result['appointment_date'] = $appointment_date;

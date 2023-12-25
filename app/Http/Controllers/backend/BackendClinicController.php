@@ -21,6 +21,7 @@ class BackendClinicController extends Controller
     {
         $clinics = Clinic::where('type', TypeBusiness::CLINICS)
             ->where('status', '!=', ClinicStatus::DELETED)
+            ->orderBy('id', 'desc')
             ->get();
         return response()->json($clinics);
     }
@@ -29,6 +30,7 @@ class BackendClinicController extends Controller
     {
         $clinics = Clinic::where('type', TypeBusiness::PHARMACIES)
             ->where('status', '!=', ClinicStatus::DELETED)
+            ->orderBy('id', 'desc')
             ->get();
         return response()->json($clinics);
     }
@@ -37,6 +39,7 @@ class BackendClinicController extends Controller
     {
         $clinics = Clinic::where('type', TypeBusiness::HOSPITALS)
             ->where('status', '!=', ClinicStatus::DELETED)
+            ->orderBy('id', 'desc')
             ->get();
         return response()->json($clinics);
     }
@@ -179,15 +182,15 @@ class BackendClinicController extends Controller
             $emergency = $request->has('emergency') ? $request->input('emergency') : 0;
             $insurance = $request->has('insurance') ? $request->input('insurance') : 0;
             $parking = $request->has('parking') ? $request->input('parking') : 0;
-            $information = $request->input('information');
+            $information = $request->input('hospital_information');
             if ($information == null) {
                 return response("Hospital information not null!", 400);
             }
-            $facilities = $request->input('facilities');
+            $facilities = $request->input('hospital_facilities');
             if ($facilities == null) {
                 return response("Hospital facilities not null!", 400);
             }
-            $equipment = $request->input('equipment');
+            $equipment = $request->input('hospital_equipment');
             if ($equipment == null) {
                 return response("Hospital equipment not null!", 400);
             }
@@ -302,9 +305,9 @@ class BackendClinicController extends Controller
             $emergency = $request->has('emergency') ? $request->input('emergency') : 0;
             $insurance = $request->has('insurance') ? $request->input('insurance') : 0;
             $parking = $request->has('parking') ? $request->input('parking') : 0;
-            $information = $request->input('information') ?? $clinic->information;
-            $facilities = $request->input('facilities') ?? $clinic->facilities;
-            $equipment = $request->input('equipment') ?? $clinic->equipment;
+            $information = $request->input('hospital_information') ?? $clinic->information;
+            $facilities = $request->input('hospital_facilities') ?? $clinic->facilities;
+            $equipment = $request->input('hospital_equipment') ?? $clinic->equipment;
             $costs = $request->input('costs') ?? $clinic->costs;
             $representativeDoctor = $request->input('representative_doctor') ?? $clinic->representative_doctor;
 
