@@ -83,7 +83,10 @@ class AdminBookingResultApi extends Controller
 
         $user_id = $request->input('user_id');
         $created_by = $request->input('created_by');
-        $status = BookingResultStatus::ACTIVE;
+        $status =  $request->input('status');
+        if (!$status){
+            $status = BookingResultStatus::ACTIVE;
+        }
 
         if ($request->hasFile('files')) {
             $galleryPaths = array_map(function ($image) {

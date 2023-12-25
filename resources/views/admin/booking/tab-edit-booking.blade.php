@@ -316,7 +316,7 @@
                             success: function (response) {
                                 alert('Create success!')
                                 // window.location.href = ``;
-                                window.location.reload();
+                                window.location.href = `{{ route('web.booking.result.list', $bookings_edit->id) }}`;
                             },
                             error: function (error) {
                                 console.log(error);

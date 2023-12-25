@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Enums\BookingResultStatus;
+use App\Enums\ServiceClinicStatus;
 use App\Models\BookingResult;
+use App\Models\ServiceClinic;
 use Illuminate\Support\Facades\Auth;
 
 class BookingResultController extends Controller
@@ -32,6 +34,7 @@ class BookingResultController extends Controller
         if (!$result || $result->status == BookingResultStatus::DELETED) {
             return back();
         }
-        return view('admin.booking.detail-booking-result', compact('result'));
+        $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
+        return view('admin.booking.detail-booking-result', compact('result', 'services'));
     }
 }
