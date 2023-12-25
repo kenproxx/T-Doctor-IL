@@ -8,16 +8,18 @@ use Illuminate\Support\Facades\Auth;
 
 class BookingResultController extends Controller
 {
-    public function getList()
+    public function getList($id)
     {
         $isAdmin = (new MainController())->checkAdmin();
         if ($isAdmin) {
             $results = BookingResult::where('status', '!=', BookingResultStatus::DELETED)
                 ->orderBy('id', 'desc')
+                ->where('booking_id', $id)
                 ->get();
         } else {
             $results = BookingResult::where('status', '!=', BookingResultStatus::DELETED)
                 ->orderBy('id', 'desc')
+                ->where('booking_id', $id)
                 ->where('user_id', Auth::user()->id)
                 ->get();
         }

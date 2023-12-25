@@ -54,11 +54,28 @@
                             {{ $created_by->username }}
                         @endif
                     </td>
+                    @php
+                        $booking = \App\Models\Booking::find($result->booking_id);
+                        $business = \App\Models\Clinic::find($booking->clinic_id);
+                    @endphp
                     <td>
-
+                        @if($business)
+                            {{ $business->name }}
+                        @endif
                     </td>
-                    <td>Larry</td>
-                    <td>Larry</td>
+                    <td>
+                        {{ $result->status }}
+                    </td>
+                    <td>
+                        <div class="list-action d-flex align-items-center">
+                            <a href="{{ route('web.booking.result.detail', $result->id) }}" class="btn btn-primary">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <button type="button" class="btn btn-danger">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
