@@ -29,7 +29,6 @@
         <thead>
         <tr>
             <th scope="col">{{ __('home.Tên chuyên khoa') }}</th>
-            <th scope="col">{{ __('home.Mô tả') }}</th>
             <th scope="col">{{ __('home.Ảnh đại diện') }}</th>
             <th scope="col">{{ __('home.Action') }}</th>
         </tr>
@@ -42,13 +41,14 @@
                         {{$symptom->name}}
                     </a>
                 </td>
-                <td>{{$symptom->description}}</td>
                 <td><img src="{{ asset($symptom->thumbnail) }}" alt="Image" width="50px"></td>
                 <td>
-                    <a href="{{ route('symptom.edit', $symptom->id) }}" class="btn btn-success">{{ __('home.Edit') }}</a>
-                    <button type="button" class="btn btn-danger" onclick="confirmDelete('{{ $symptom->id }}')">
-                        {{ __('home.Delete') }}
-                    </button>
+                    <div class="d-flex align-items-center">
+                        <a href="{{ route('symptom.edit', $symptom->id) }}" class="btn btn-success">{{ __('home.Edit') }}</a>
+                        <button type="button" class="btn btn-danger" onclick="confirmDelete('{{ $symptom->id }}')">
+                            {{ __('home.Delete') }}
+                        </button>
+                    </div>
                 </td>
             </tr>
         @endforeach

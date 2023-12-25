@@ -13,13 +13,17 @@ class SymptomController extends Controller
 {
     public function index()
     {
-        $symptoms = Symptom::where('status', SymptomStatus::ACTIVE)->get();
+        $symptoms = Symptom::where('status', SymptomStatus::ACTIVE)
+            ->orderBy('id', 'desc')
+            ->get();
         return view('admin.department_symptom.lists-symptom', ['symptoms' => $symptoms]);
     }
 
     public function create()
     {
-        $departments = Department::where('status', DepartmentStatus::ACTIVE)->get();
+        $departments = Department::where('status', DepartmentStatus::ACTIVE)
+            ->orderBy('id', 'desc')
+            ->get();
         return view('admin.department_symptom.create-symptom', compact('departments'));
     }
 
@@ -30,7 +34,9 @@ class SymptomController extends Controller
     public function edit($id)
     {
         $symptom = Symptom::find($id);
-        $departments = Department::where('status', DepartmentStatus::ACTIVE)->get();
+        $departments = Department::where('status', DepartmentStatus::ACTIVE)
+            ->orderBy('id', 'desc')
+            ->get();
         return view('admin.department_symptom.edit-symptom', compact('symptom', 'departments'));
     }
 
