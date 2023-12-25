@@ -36,6 +36,7 @@ class VerifyCsrfToken extends Middleware
         '/api/departments/**',
         '/api/symptoms/**',
         '/api/orders/**',
+        '/api/family-management/**',
         // clients
         '/reviews/**',
         '/reviews/**',

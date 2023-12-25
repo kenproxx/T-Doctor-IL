@@ -1,18 +1,7 @@
 <?php
 
-use App\Http\Controllers\backend\BackendAnswerController;
-use App\Http\Controllers\backend\BackendCategoryController;
-use App\Http\Controllers\backend\BackendClinicController;
-use App\Http\Controllers\backend\BackendCouponApplyController;
-use App\Http\Controllers\backend\BackendCouponController;
-use App\Http\Controllers\backend\BackendProductInfoController;
-use App\Http\Controllers\backend\BackendQuestionController;
-use App\Http\Controllers\backend\BackendReviewController;
-use App\Http\Controllers\backend\BackendWishListController;
+use App\Http\Controllers\FamilyManagementController;
 use App\Http\Controllers\QuestionLikesController;
-use App\Http\Controllers\restapi\admin\AdminDoctorInfoApi;
-use App\Http\Controllers\restapi\admin\AdminPharmacyApi;
-use App\Http\Controllers\restapi\UserApi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +16,24 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'question-like'], function () {
-    Route::get('is-like/{questionId}/{userId}', [QuestionLikesController::class, 'checkEmotion'])->name('api.backend.question-like.check');
-    Route::post('change/{questionId}/{userId}', [QuestionLikesController::class, 'changeEmotion'])->name('api.backend.question-like.change');
+    Route::get('is-like/{questionId}/{userId}',
+        [QuestionLikesController::class, 'checkEmotion'])->name('api.backend.question-like.check');
+    Route::post('change/{questionId}/{userId}',
+        [QuestionLikesController::class, 'changeEmotion'])->name('api.backend.question-like.change');
 });
 
+Route::group(['prefix' => 'family-managementt'], function () {
+    Route::get('index', [FamilyManagementController::class, 'index'])->name('api.backend.family-management.index');
+    Route::post('store', [FamilyManagementController::class, 'store'])->name('api.backend.family-management.store');
+    Route::post('update', [FamilyManagementController::class, 'update'])->name('api.backend.family-management.update');
+    Route::post('destroy',
+        [FamilyManagementController::class, 'changeEmotion'])->name('api.backend.family-management.destroy');
+});
+
+Route::group(['prefix' => 'family-management'], function () {
+    Route::get('index/{user_id}', [FamilyManagementController::class, 'indexApi']);
+    Route::post('create/{user_id}', [FamilyManagementController::class, 'createApi']);
+    Route::post('store/{current_user_id}/{user_id}', [FamilyManagementController::class, 'storeApi']);
+    Route::put('update/{user_id}', [FamilyManagementController::class, 'updateApi']);
+    Route::delete('destroy/{user_id}', [FamilyManagementController::class, 'destroyApi']);
+});
