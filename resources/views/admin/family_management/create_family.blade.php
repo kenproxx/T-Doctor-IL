@@ -58,7 +58,8 @@
         <div class="row">
             <div class="col-sm-6">
                 <label for="ward_id">{{ __('home.Ward') }}</label>
-                <input type="text" class="form-control" id="ward_id" name="ward_id">
+                <select class="custom-select form-control" id="ward_id" name="ward_id">
+                </select>
             </div>
             <div class="col-sm-6">
                 <label for="detail_address">{{ __('home.Addresses') }}</label>
@@ -83,6 +84,7 @@
             // Set the max attribute of the date input field
             document.getElementById('date_of_birth').max = currentDate;
 
+            document.getElementById('date_of_birth').value = currentDate;
         }
 
         function submitForm() {

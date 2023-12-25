@@ -95,6 +95,7 @@
             // Set the max attribute of the date input field
             document.getElementById('date_of_birth').max = currentDate;
 
+            document.getElementById('date_of_birth').value = currentDate;
         }
 
         function submitForm() {

@@ -150,7 +150,28 @@ class FamilyManagementController extends Controller
 
     public function indexApi($user_id)
     {
+        $user = User::where('id', $user_id)->first();
 
+        if (!$user) {
+            return response()->json([
+                'message' => 'Không tìm thấy người dùng',
+            ], 400);
+        }
+
+        $family = FamilyManagement::where('user_id', $user_id)->first();
+
+        if (!$family) {
+            return response()->json([
+                'message' => 'Nguời dùng chưa có thông tin gia đình',
+            ], 400);
+        }
+
+        $family_code = $family->family_code;
+
+        $family_members = $family_code ? FamilyManagement::where('family_code',
+            $family_code)->get() : collect(); // Use an empty collection if family_code is null
+
+        return response()->json($family_members, 200);
     }
 
     public function createApi(Request $request, $user_id)
@@ -214,8 +235,10 @@ class FamilyManagementController extends Controller
         ]);
     }
 
-    public function storeApi(Request $request, $current_user_id, $user_id)
+    public function storeApi(Request $request, $current_user_id)
     {
+        $user_id = $request->input('user_id');
+
         $user = User::where('id', $user_id)->first();
 
         if (!$user) {
@@ -252,7 +275,7 @@ class FamilyManagementController extends Controller
         $family->family_code = $familyCurrentUser->family_code;
 
 
-        $params = $request->only('relationship', 'name', 'date_of_birth', 'number_phone', 'email', 'sex', 'province_id',
+        $params = $request->only( 'relationship', 'name', 'date_of_birth', 'number_phone', 'email', 'sex', 'province_id',
             'district_id', 'ward_id', 'detail_address');
         $family->fill($params);
 
