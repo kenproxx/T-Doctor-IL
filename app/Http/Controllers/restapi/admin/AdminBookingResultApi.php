@@ -23,10 +23,7 @@ class AdminBookingResultApi extends Controller
     {
         $business_id = $request->input('business_id');
 
-        $books = Booking::where('clinic_id', $business_id)
-            ->where('is_result', 1)
-            ->where('status', '=', BookingStatus::APPROVED)
-            ->get();
+        $books = Booking::where('clinic_id', $business_id)->get();
         if (count($books) < 1) {
             return response((new MainApi())->returnMessage('Booking Empty'), 200);
         }
@@ -64,7 +61,6 @@ class AdminBookingResultApi extends Controller
             }
             return response((new MainApi())->returnMessage('Create error!'), 400);
         } catch (\Exception $exception) {
-            dd($exception);
             return response((new MainApi())->returnMessage('Error, Please try again!'), 400);
         }
     }

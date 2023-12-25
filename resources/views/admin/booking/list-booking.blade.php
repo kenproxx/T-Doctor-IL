@@ -24,7 +24,7 @@
             <tbody>
             @foreach($bookings as $item)
                 <tr>
-                    <th scope="row">{{$item->id}}</th>
+                    <th scope="row">{{ $loop->index + 1 }}</th>
                     <td>
                         @php
                             $user = \App\Models\User::find($item->user_id)->pluck('name')->first();
