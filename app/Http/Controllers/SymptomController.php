@@ -15,7 +15,7 @@ class SymptomController extends Controller
     {
         $symptoms = Symptom::where('status', SymptomStatus::ACTIVE)
             ->orderBy('id', 'desc')
-            ->get();
+            ->paginate(10);
         return view('admin.department_symptom.lists-symptom', ['symptoms' => $symptoms]);
     }
 

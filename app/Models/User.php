@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable  implements JWTSubject
+class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;
 
@@ -18,7 +18,7 @@ class User extends Authenticatable  implements JWTSubject
      */
     protected $fillable = [
         'name', 'last_name', 'email', 'password',
-        'username', 'phone', 'address_code', 'status','type',
+        'username', 'phone', 'address_code', 'status', 'type',
         'provider_id', 'provider_name', 'prescription', 'free', 'abouts', 'abouts_en', 'abouts_lao', 'workspace',
         'last_seen'
     ];
@@ -40,21 +40,6 @@ class User extends Authenticatable  implements JWTSubject
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class, 'role_users', 'user_id', 'role_id');
-    }
-
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
 
     public static function getNameByID($id)
     {
@@ -100,7 +85,15 @@ class User extends Authenticatable  implements JWTSubject
         return false;
     }
 
-    //get member name by id
+    public static function isExistPhone($phone)
+    {
+        $user = User::where('phone', $phone)->first();
+        if ($user) {
+            return true;
+        }
+        return false;
+    }
+
     public static function getMemberNameByID($id)
     {
         if (!$id) {
@@ -117,7 +110,6 @@ class User extends Authenticatable  implements JWTSubject
         return Role::where('id', $role->role_id)->first()->name;
     }
 
-    //get email by id
     public static function getEmailByID($id)
     {
         if (!$id) {
@@ -130,7 +122,6 @@ class User extends Authenticatable  implements JWTSubject
         return $user->email ?? 'noemail@gmail.com';
     }
 
-    //get avt by id
     public static function getAvtByID($id)
     {
         if (!$id) {
@@ -144,7 +135,28 @@ class User extends Authenticatable  implements JWTSubject
         if (!$user->avt) {
             return '/img/user-circle.png';
         }
-        return $user->avt ;
+        return $user->avt;
+    }
+
+    //get member name by id
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'role_users', 'user_id', 'role_id');
+    }
+
+    //get email by id
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    //get avt by id
+
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 
 }

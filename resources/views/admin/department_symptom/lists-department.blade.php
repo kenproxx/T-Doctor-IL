@@ -44,9 +44,11 @@
                 <td><img src="{{ asset($department->thumbnail) }}" alt="Image" width="50px"></td>
                 <td>
                    <div class="d-flex align-items-center">
-                       <a href="{{ route('departments.edit', $department->id) }}" class="btn btn-success">{{ __('home.Edit') }}</a>
+                       <a href="{{ route('departments.edit', $department->id) }}" class="btn btn-success">
+                           <i class="fa-solid fa-pen-to-square"></i>
+                       </a>
                        <button type="button" class="btn btn-danger" onclick="confirmDelete('{{ $department->id }}')">
-                           {{ __('home.Delete') }}
+                           <i class="fa-regular fa-trash-can"></i>
                        </button>
                    </div>
                 </td>
@@ -54,6 +56,9 @@
         @endforeach
         </tbody>
     </table>
+    <div class="d-flex justify-content-center align-items-center">
+        {{$departments->links()}}
+    </div>
     <script>
         function confirmDelete(id) {
             if (confirm('Are you sure you want to delete!')) {
