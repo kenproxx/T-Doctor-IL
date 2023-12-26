@@ -12,7 +12,7 @@ class ProductInfoApi extends Controller
 {
     public function index()
     {
-        $products = ProductInfo::where('status', ProductStatus::ACTIVE)->get();
+        $products = ProductInfo::where('status', ProductStatus::ACTIVE)->orderBy('id', 'desc')->get();
         return response()->json($products);
     }
 

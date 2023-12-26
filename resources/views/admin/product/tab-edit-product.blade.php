@@ -13,20 +13,22 @@
             </button>
         </div>
     @endif
-    <form id="form" >
+    <form id="form">
         <div>
             <div class="row">
                 <div class="col-md-4">
                     <label for="name">{{ __('home.Name') }}</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{$product->name}}">
+                    <input type="text" class="form-control" id="name" name="name" maxlength="200"
+                           value="{{$product->name}}">
                 </div>
                 <div class="col-md-4">
                     <label for="name_en">{{ __('home.name_en') }}</label>
-                    <input type="text" class="form-control" id="name_en" name="name_en" value="{{$product->name_en}}">
+                    <input type="text" class="form-control" id="name_en" name="name_en" maxlength="200"
+                           value="{{$product->name_en}}">
                 </div>
                 <div class="col-md-4">
                     <label for="name_laos">{{ __('home.name_laos') }}</label>
-                    <input type="text" class="form-control" id="name_laos" name="name_laos"
+                    <input type="text" class="form-control" id="name_laos" name="name_laos" maxlength="200"
                            value="{{$product->name_laos}}">
                 </div>
 
@@ -53,16 +55,19 @@
                 <div class="col-md-4">
                     <label for="brand_name">{{ __('home.Brand Name') }}</label>
                     <input type="text" class="form-control" id="brand_name" name="brand_name"
+                           maxlength="200"
                            value="{{$product->brand_name}}">
                 </div>
                 <div class="col-md-4">
                     <label for="brand_name_en">{{ __('home.Brand Name English') }}</label>
                     <input type="text" class="form-control" id="brand_name_en" name="brand_name_en"
+                           maxlength="200"
                            value="{{$product->brand_name_en}}">
                 </div>
                 <div class="col-md-4">
                     <label for="brand_name_laos">{{ __('home.Brand Name Laos') }}</label>
                     <input type="text" class="form-control" id="brand_name_laos" name="brand_name_laos"
+                           maxlength="200"
                            value="{{$product->brand_name_laos}}">
                 </div>
             </div>
@@ -73,6 +78,7 @@
                     <select class="form-select" id="category_id" name="category_id">
                         @foreach($categories as $category)
                             <option {{ $category->id == $product->category_id ? 'selected' : '' }}
+                                    data-limit="50" class="text-shortcut"
                                     value="{{$category->id}}">
                                 {{$category->name}}
                             </option>
@@ -83,57 +89,67 @@
                     @php
                         $provinces = \App\Models\Province::find($product->province_id)->get();
                     @endphp
-                    <label for="province_id">province_id</label>
+                    <label for="province_id">{{ __('home.Province') }}</label>
 
                     <select class="form-select" id="province_id" name="province_id">
                         @foreach($provinces as $province)
                             <option
-                                    value="{{$province->id}}" {{$province->id == $product->province_id ? 'selected' : ''}}>{{$province->name}}</option>
+                                value="{{$province->id}}" {{$province->id == $product->province_id ? 'selected' : ''}}>{{$province->name}}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
-            <div>
-                <label>{{ __('home.Thumbnail') }}</label>
-                <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*">
-                <img width="50px" src="{{$product->thumbnail}}" alt="thumbnail">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label>{{ __('home.Thumbnail') }}</label>
+                    <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*">
+                    <img width="50px" src="{{$product->thumbnail}}" alt="thumbnail">
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="gallery">{{ __('home.gallery') }}</label>
+                    <input type="file" class="form-control" id="gallery" name="gallery[]" multiple accept="image/*">
+                    @php
+                        $galleryArray = explode(',', $product->gallery);
+                    @endphp
+                    @foreach($galleryArray as $productImg)
+                        <img width="50px" src="{{$productImg}}" alt="gallery">
+                    @endforeach
+                </div>
             </div>
-            <div>
-                <label for="gallery">{{ __('home.gallery') }}</label>
-                <input type="file" class="form-control" id="gallery" name="gallery[]" multiple accept="image/*">
-                @php
-                    $galleryArray = explode(',', $product->gallery);
-                @endphp
-                @foreach($galleryArray as $productImg)
-                    <img width="50px" src="{{$productImg}}" alt="gallery">
-                @endforeach
-            </div>
-            <div>
-                <label for="price">{{ __('home.Price') }}</label>
-                <input type="number" class="form-control" id="price" name="price" value="{{$product->price}}">
-            </div>
-            <div>
-                <label for="price_unit">{{ __('home.Price Unit') }}</label>
-                <input type="text" class="form-control" id="price_unit" name="price_unit"
-                       value="{{$product->price_unit}}">
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label for="price">{{ __('home.Price') }}</label>
+                    <input type="number" class="form-control" id="price" name="price" value="{{$product->price}}">
+                </div>
+                <div class="col-md-6 form-group">
+                    <label for="price_unit">{{ __('home.Price Unit') }}</label>
+                    <input type="text" class="form-control" id="price_unit" name="price_unit"
+                           value="{{$product->price_unit}}">
+                </div>
             </div>
 
             <div class="row">
                 <div class="col-sm-4">
                     <label for="ads_plan">{{ __('home.Ads Plan') }}</label>
                     <select id="ads_plan" name="ads_plan" class="form-select">
-                        <option {{$product->ads_plan == 1 ? 'selected' : ''}} value="1">{{ __('home.Platinum') }}</option>
-                        <option {{$product->ads_plan == 2 ? 'selected' : ''}} value="2">{{ __('home.Premium') }}</option>
+                        <option
+                            {{$product->ads_plan == 1 ? 'selected' : ''}} value="1">{{ __('home.Platinum') }}</option>
+                        <option
+                            {{$product->ads_plan == 2 ? 'selected' : ''}} value="2">{{ __('home.Premium') }}</option>
                         <option {{$product->ads_plan == 3 ? 'selected' : ''}} value="3">{{ __('home.Silver') }}</option>
                     </select>
                 </div>
                 <div class="col-sm-4">
                     <label for="ads_period">{{ __('home.Ads Period') }}</label>
                     <select id="ads_period" name="ads_period" class="form-select">
-                        <option {{$product->ads_period == 1 ? 'selected' : ''}} value="1">{{ __('home.5 Day') }}</option>
-                        <option {{$product->ads_period == 2 ? 'selected' : ''}} value="2">{{ __('home.10 Day') }}</option>
-                        <option {{$product->ads_period == 3 ? 'selected' : ''}} value="3">{{ __('home.15 Day') }}</option>
-                        <option {{$product->ads_period == 4 ? 'selected' : ''}} value="4">{{ __('home.20 Day') }}</option>
+                        <option
+                            {{$product->ads_period == 1 ? 'selected' : ''}} value="1">{{ __('home.5 Day') }}</option>
+                        <option
+                            {{$product->ads_period == 2 ? 'selected' : ''}} value="2">{{ __('home.10 Day') }}</option>
+                        <option
+                            {{$product->ads_period == 3 ? 'selected' : ''}} value="3">{{ __('home.15 Day') }}</option>
+                        <option
+                            {{$product->ads_period == 4 ? 'selected' : ''}} value="4">{{ __('home.20 Day') }}</option>
                     </select>
                 </div>
                 <div class="col-sm-4"><label for="status">{{ __('home.Trạng thái') }}</label>
@@ -174,14 +190,14 @@
 
                 let isValid = true
                 /* Tạo fn appendDataForm ở admin blade*/
-                isValid =  appendDataForm(fieldNames, formDataEdit, isValid);
+                isValid = appendDataForm(fieldNames, formDataEdit, isValid);
 
                 const fieldTextareaTiny = [
                     "description", "description_en", "description_laos"
                 ];
                 fieldTextareaTiny.forEach(fieldTextarea => {
                     const content = tinymce.get(fieldTextarea).getContent();
-                    if (!content){
+                    if (!content) {
                         isValid = false;
                     }
                     formDataEdit.append(fieldTextarea, content);
@@ -199,7 +215,7 @@
                 formDataEdit.append('thumbnail', photo);
                 formDataEdit.append('status', $('#status').val());
 
-                if(isValid){
+                if (isValid) {
                     try {
                         $.ajax({
                             url: `{{route('api.backend.product.updatePost',$product->id)}}`,
