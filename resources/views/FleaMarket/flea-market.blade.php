@@ -13,7 +13,8 @@
     <div class="container mt-70">
         <div class="container pc-hidden">
             <div class="row clinic-search">
-                <div class="clinic-search--left col-md-12 d-flex justify-content-between clinic-search--center align-items-center">
+                <div
+                    class="clinic-search--left col-md-12 d-flex justify-content-between clinic-search--center align-items-center">
                     <div class="clinic-search--left col-md-6 justify-content-around mobile-hidden">
                         <div class="title mobile-hidden">{{ __('home.All') }} <i class="bi bi-arrow-down-up"></i></div>
                         <div class="title mobile-hidden">{{ __('home.Category') }} <i class="bi bi-arrow-down-up"></i>
@@ -23,7 +24,8 @@
                     </div>
 
                     <div class="search-box col-md-5">
-                        <input class="m-0" type="Search" onkeyup="performSearch()" name="focus" placeholder="{{ __('home.Search for anything…') }}" id="inputSearch" value="">
+                        <input class="m-0" type="Search" onkeyup="performSearch()" name="focus"
+                               placeholder="{{ __('home.Search for anything…') }}" id="inputSearch" value="">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                     <div class="flex-fill">
@@ -39,23 +41,35 @@
             <div class="col-md-3 flea-content ">{{ __('home.Flea market') }}</div>
             <div class="col-md-5 flea-search d-flex align-items-center">
                 <i class="fa fa-search form-control-search"></i>
-                <label for="inputSearch"></label><input onkeyup="performSearch()" id="inputSearch" placeholder="{{ __('home.Search for anything…') }}">
+                <label for="inputSearch"></label><input onkeyup="performSearch()" id="inputSearch"
+                                                        placeholder="{{ __('home.Search for anything…') }}">
             </div>
-            <div class="d-flex col-md-4 justify-content-between align-items-center">
-                @if(Auth::check())
-                    @if(auth()->user()->type!= \App\Enums\Role::NORMAL)
+
+            @if(Auth::check())
+                @if(auth()->user()->type!= \App\Enums\Role::NORMAL)
+                    <div class="d-flex col-md-4 justify-content-between align-items-center">
                         <a href="#" onclick="checkLogin()" class="col-md-4 flea-button">
                             {{ __('home.Sell my product') }}
                         </a>
-                    @endif
+                        <a href="#" onclick="checkLoginWishStore()" class="col-md-4 flea-button flea-btn">
+                            {{ __('home.Go to my store') }}
+                        </a>
+                        <a href="#" onclick="checkLoginWish()" class="col-md-4 flea-button flea-btn">
+                            {{ __('home.Wish list') }}
+                        </a>
+                    </div>
+                @else
+                    <div class="d-flex col-md-4 justify-content-start align-items-center">
+                        <a href="#" onclick="checkLoginWishStore()" class="col-md-4 flea-button flea-btn mr-3">
+                            {{ __('home.Go to my store') }}
+                        </a>
+                        <a href="#" onclick="checkLoginWish()" class="col-md-4 flea-button flea-btn">
+                            {{ __('home.Wish list') }}
+                        </a>
+                    </div>
                 @endif
-                <a href="#" onclick="checkLoginWishStore()" class="col-md-4 flea-button flea-btn">
-                    {{ __('home.Go to my store') }}
-                </a>
-                <a href="#" onclick="checkLoginWish()" class="col-md-4 flea-button flea-btn">
-                    {{ __('home.Wish list') }}
-                </a>
-            </div>
+            @endif
+
         </div>
         <div class="d-flex mt-88">
             <div class="col-md-3  mobile-hidden">
@@ -169,7 +183,8 @@
                 <div class="d-flex justify-content-center">
                     <a href="" class="add-cv-bt w-100 apply-bt_delete col-6">{{ __('home.Refresh') }}</a>
                     <form action="#" class="col-6 pr-0">
-                        <button type="button" data-bs-dismiss="offcanvas" aria-label="Close" class="add-cv-bt apply-bt_edit w-100">{{ __('home.Apply') }}</button>
+                        <button type="button" data-bs-dismiss="offcanvas" aria-label="Close"
+                                class="add-cv-bt apply-bt_edit w-100">{{ __('home.Apply') }}</button>
                     </form>
                 </div>
             </div>
