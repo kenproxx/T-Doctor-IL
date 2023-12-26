@@ -26,12 +26,14 @@ class BookingResultApi extends Controller
                 $booking = Booking::find($item->booking_id);
                 $clinic = Clinic::find($booking->clinic_id);
                 $result['clinics'] = $clinic->toArray();
-                $value = Carbon::parse($booking->created_at);
-                $appointment_date = $value->addHours(7)->format('Y-m-d H:i:s');
-                $result['appointment_date'] = $appointment_date;
-                $value = Carbon::parse($item->created_at);
-                $results_date = $value->addHours(7)->format('Y-m-d H:i:s');
-                $result['results_date'] = $results_date;
+                $result['appointment_date'] = $booking->created_at->addHours(7)->format('Y-m-d H:i:s');
+                $result['results_date'] = Carbon::parse($item->created_at)->addHours(7)->format('Y-m-d H:i:s');
+                $result_value = $item->result;
+                $value_result = '[' . $result_value . ']';
+                $array_result = json_decode($value_result, true);
+                $result['result'] = $array_result;
+                $result['result_en'] = $array_result;
+                $result['result_laos'] = $array_result;
                 return $result;
             });
 
@@ -67,6 +69,12 @@ class BookingResultApi extends Controller
         if (!$result || $result->status == BookingResultStatus::DELETED) {
             return response((new MainApi())->returnMessage('Not found'), 404);
         }
+        $result_value = $result->result;
+        $value_result = '[' . $result_value . ']';
+        $array_result = json_decode($value_result, true);
+        $result->result = $array_result;
+        $result->result_en = $array_result;
+        $result->result_laos = $array_result;
         return response()->json($result);
     }
 
