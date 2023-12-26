@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\CommonType;
 use App\Enums\DoctorDepartmentStatus;
+use App\Enums\UserStatus;
 use App\Models\DoctorDepartment;
 use App\Models\Nation;
 use App\Models\Role;
@@ -73,8 +74,8 @@ class ProfileController extends Controller
             'name' => 'required|string|max:255',
             'last_name' => 'nullable|string|max:255',
 
-            'email' => 'required|string|email|max:255|unique:users,email,'.Auth::user()->id,
-            'phone' => 'required|string|max:255|unique:users,phone,'.Auth::user()->id,
+            'email' => 'required|string|email|max:255',
+            'phone' => 'required|string|max:255',
 
             'address_code' => 'required|string|max:255',
 
@@ -88,9 +89,33 @@ class ProfileController extends Controller
         $user = User::findOrFail(Auth::user()->id);
 
         if ($username != Auth::user()->username) {
-            $oldUser = User::where('username', $username)->first();
+            $oldUser = User::where('username', $username)
+                ->where('status', '!=', UserStatus::DELETED)
+                ->first();
             if ($oldUser) {
                 toast('Error, Username already exited!', 'error', 'top-left');
+                return back();
+            }
+        }
+
+        $email = $request->input('email');
+        $phone = $request->input('phone');
+        if ($email != Auth::user()->email) {
+            $oldUser = User::where('email', $email)
+                ->where('status', '!=', UserStatus::DELETED)
+                ->first();
+            if ($oldUser) {
+                toast('Error, Email already exited!', 'error', 'top-left');
+                return back();
+            }
+        }
+
+        if ($phone != Auth::user()->phone) {
+            $oldUser = User::where('phone', $phone)
+                ->where('status', '!=', UserStatus::DELETED)
+                ->first();
+            if ($oldUser) {
+                toast('Error, Phone already exited!', 'error', 'top-left');
                 return back();
             }
         }
@@ -148,7 +173,7 @@ class ProfileController extends Controller
         if ($request->hasFile('avt')) {
             $item = $request->file('avt');
             $itemPath = $item->store('license', 'public');
-            $img = asset('storage/'.$itemPath);
+            $img = asset('storage/' . $itemPath);
             $user->avt = $img;
         }
         $user->created_by = $request->input('created_by');
@@ -233,16 +258,16 @@ class ProfileController extends Controller
     private function sendOTPEmail($value, $user)
     {
         $otp = random_int(100000, 999999);
-        $content = "Mã OTP của bạn là: ".$otp;
+        $content = "Mã OTP của bạn là: " . $otp;
 
         // lưu cache otp 5 phút
-        $key = 'otp_'.$user->id;
+        $key = 'otp_' . $user->id;
         $expiresAt = now()->addMinutes(5);
         Cache::put($key, $otp, $expiresAt);
 
         $mailFrom = 'support.il.vietnam@gmail.com';
         $tieuDe = 'Mã OTP';
-        $content = 'Mã OTP của bạn là: '.$otp;
+        $content = 'Mã OTP của bạn là: ' . $otp;
 
         (new MailController())->sendEmail($value, $mailFrom, $tieuDe, $content);
 
@@ -253,10 +278,10 @@ class ProfileController extends Controller
     {
         $sms = new SendSMSController();
         $otp = random_int(100000, 999999);
-        $content = "Mã OTP của bạn là: ".$otp;
+        $content = "Mã OTP của bạn là: " . $otp;
 
         // lưu cache otp 5 phút
-        $key = 'otp_'.$user->id;
+        $key = 'otp_' . $user->id;
         $expiresAt = now()->addMinutes(5);
         Cache::put($key, $otp, $expiresAt);
 
@@ -291,7 +316,7 @@ class ProfileController extends Controller
 
         //check otp với cache
 
-        $key = 'otp_'.$user->id;
+        $key = 'otp_' . $user->id;
         $otpCache = Cache::get($key);
 
         if (!$otpCache) {
