@@ -420,54 +420,267 @@
         <img src="{{asset('img/icons_logo/Rectangle 23814.png')}}" alt="">
     </div>
     <div class="container mt-4">
-        <div id="recruitment-homeNew">
-            <div>
-                <h2>{{ __('home.Recruitment') }}</h2>
+        <div id="recruitment-homeNew" class="p-3">
+            <div class="title-recruitment--homeNew">
+                <span>{{ __('home.Recruitment') }}</span>
                 <p>{{ __('home.Hire staffs cheaper, find your staffs faster') }}</p>
             </div>
-            <div class="d-flex">
-                <div class="col-md-8 d-flex">
-                    <div class="col-md-4">
-                        <img src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
-                    </div>
-                    <div class="col-md-8">
-                        <h6>
-                            {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
-                        </h6>
-                        <div class="content__item__describe">
-                            {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
+            <div class="d-flex main-recruitment--homeNew">
+                <div class="col-md-7 pl-0 main-card--homeNew">
+                    <div class="d-flex content-recruitment--homeNew">
+                        <div class="col-md-3 p-0">
+                            <img src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
                         </div>
-                        <p class="content__item-link">{{ __('home.Read') }}</p>
+                        <div class="col-md-9 text-title--card">
+                            <span>
+                                {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
+                            </span>
+                            <div class="content__item__describe">
+                                {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex content-recruitment--homeNew">
+                        <div class="col-md-3 p-0">
+                            <img src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
+                        </div>
+                        <div class="col-md-9 text-title--card">
+                            <span>
+                                {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
+                            </span>
+                            <div class="content__item__describe">
+                                {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex content-recruitment--homeNew">
+                        <div class="col-md-3 p-0">
+                            <img src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
+                        </div>
+                        <div class="col-md-9 text-title--card">
+                            <span>
+                                {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
+                            </span>
+                            <div class="content__item__describe">
+                                {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex content-recruitment--homeNew">
+                        <div class="col-md-3 p-0">
+                            <img src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
+                        </div>
+                        <div class="col-md-9 text-title--card">
+                            <span>
+                                {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
+                            </span>
+                            <div class="content__item__describe">
+                                {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="w-100">
                         <div class="describe-item">
-                            <h3>{{ __('home.24/7 AVAILABLE') }}</h3>
-                            <p>{{ __('home.You can find available clinics/pharmacies') }}</p>
-                        </div>
-                        <div class="describe-item" hidden="">
-                            <h3>{{ __('home.HOME CARE SERVICE') }}</h3>
-                            <p>{{ __("home.Don't come to us! We will come to you") }}!</p>
+                            <span>{{ __('home.HIRE CHEAPER') }}</span>
+                            <p>{{ __('home.Only 500000vnđ, you can hire your staffs.') }}</p>
                         </div>
                         <div class="describe-item">
-                            <h3>{{ __('home.MANY LOCATION') }}</h3>
-                            <p>{{ __('home.More than 1500 Doctors, 1000 Pharmacists, 1000 Hospitals always wait for you') }}</p>
+                            <span>{{ __('home.EASY TO FIND STAFFS') }}</span>
+                            <p>{{ __("home.Through us, find your staffs more easier") }}!</p>
                         </div>
+                        <div class="describe-item">
+                            <span>{{ __('home.BETTER MATCHING RATE') }}</span>
+                            <p>{{ __('home.Through us, you can hire right person') }}</p>
+                        </div>
+                    </div>
+                    <div class="mt-auto p-2 button-bottom-right">
+                        <button class="btn-see-all ">{{ __('home.See all') }}</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="recruitment_board" class="d-flex justify-content-center">
-        <div id="content-bkg" class="content-item d-flex justify-content-center ">
-            <div id="recruitment" class="p-2 w-100">
-                <h2>{{ __('home.Recruitment') }}</h2>
+    <div class="banner1">
+        <img src="{{asset('img/icons_logo/Rectangle 23818.png')}}" alt="" style="">
+    </div>
+    <div class="container mt-4">
+        <div id="recruitment-homeNew" class="p-3">
+            <div class="title-recruitment--homeNew">
+                <span>{{ __('home.Flea market') }}</span>
                 <p>{{ __('home.Hire staffs cheaper, find your staffs faster') }}</p>
-                <div>
+            </div>
+            <div class="d-flex main-recruitment--homeNew">
+                <div class="col-md-7 pl-0 main-card--homeNew">
+                    <div class="row">
+                        @foreach($products as $product)
+                            <div class="col-sm-4 pt-4">
+                                <a href="{{ route('flea.market.product.detail', $product->id) }}" target="_blank">
+                                    <div class="card border-flea-market" style="height: 375px;">
+                                        <img src="{{asset($product->thumbnail ?? 'img/item_shopping.png')}}"
+                                             class="card-img-top object-fit-cover img-fleaMarket--homeNew" alt="...">
+                                        <div class="card-body card-body-fleaMarket--homeNew">
+                                            <h5 class="card-title title-div-flea-market--homeNew">{{ $product->name }}</h5>
+                                            @if($product->province_id)
+                                                @php
+                                                    $province = Province::find($product->province_id);
+                                                @endphp
+                                                @if($province)
+                                                    <p class="card-text--homeNew"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                                            <g clip-path="url(#clip0_5603_17012)">
+                                                                <path d="M4.16602 11.9046C2.62321 12.5852 1.66602 13.5337 1.66602 14.5827C1.66602 16.6538 5.39698 18.3327 9.99935 18.3327C14.6017 18.3327 18.3327 16.6538 18.3327 14.5827C18.3327 13.5337 17.3755 12.5852 15.8327 11.9046M14.9993 6.66602C14.9993 10.0524 11.2493 11.666 9.99935 14.166C8.74935 11.666 4.99935 10.0524 4.99935 6.66602C4.99935 3.90459 7.23793 1.66602 9.99935 1.66602C12.7608 1.66602 14.9993 3.90459 14.9993 6.66602ZM10.8327 6.66602C10.8327 7.12625 10.4596 7.49935 9.99935 7.49935C9.53911 7.49935 9.16602 7.12625 9.16602 6.66602C9.16602 6.20578 9.53911 5.83268 9.99935 5.83268C10.4596 5.83268 10.8327 6.20578 10.8327 6.66602Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_5603_17012">
+                                                                    <rect width="20" height="20" fill="white"/>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg> &nbsp; {{ $province->name}}</p>
+                                                @endif
+                                            @endif
+                                            <span class="price-fleaMarket--homeNew">{{ $product->price }} VND</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="w-100">
+                        <div class="describe-item">
+                            <span>{{ __('home.BUY YOUR EQUIPMENT CHEAP') }}</span>
+                            <p>{{ __('home.Find your products you though us.') }}</p>
+                        </div>
+                        <div class="describe-item">
+                            <span>{{ __('home.EASY TO FIND YOUR BUYER') }}</span>
+                            <p>{{ __("home.Please find your buyers around you more easy") }}!</p>
+                        </div>
+                        <div class="describe-item">
+                            <span>{{ __('home.SELL YOUR OLD MACHINE FAST') }}</span>
+                            <p>{{ __('home.Throrugh us, you can sell your unnecessarry  products in you clinics to other clinics around you.') }}</p>
+                        </div>
+                    </div>
+                    <div class="mt-auto p-2 button-bottom-right">
+                        <button class="btn-see-all ">{{ __('home.See all') }}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="banner1">
+        <img src="{{asset('img/Rectangle 23815.png')}}" alt="">
+    </div>
+    <div class="container">
+        <div id="find-doctor--homeNew item-information">
+            <div class="title-findDoctor--homeNew">
+                <span class="py-3 text-center">{{ __('home.Buy online') }}</span>
+                <p>{{ __("home.Don't struggle finding, we are always ready for you") }}</p>
+            </div>
+            <div class="d-flex nav-header--homeNew justify-content-center mt-3">
+                <ul class="nav nav-pills nav-fill d-flex justify-content-between w-50">
+                    <li class="nav-item">
+                        <a class="nav-link active font-14-mobi" id="popularProduct-tab" data-toggle="tab" href="#popularProduct"
+                           role="tab" aria-controls="popularProduct" aria-selected="true">{{ __('home.Popular') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link font-14-mobi" id="recommended-tab" data-toggle="tab" href="#recommended"
+                           role="tab" aria-controls="recommended"
+                           aria-selected="false">{{ __('home.Recommended') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link font-14-mobi" id="newProducts-tab" data-toggle="tab" href="#newProducts"
+                           role="tab" aria-controls="newProducts"
+                           aria-selected="true">{{ __('home.New product') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link font-14-mobi" id="hotDeal-tab" data-toggle="tab" href="#hotDeal"
+                           role="tab" aria-controls="hotDeal"
+                           aria-selected="true">{{ __('home.Hot deal') }}</a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="tab-content mt-4" id="myTabContent">
+                <div class="tab-pane fade show active" id="popularProduct" role="tabpanel" aria-labelledby="popularProduct-tab">
+                    <div class="row">
+                        @php
+                            $doctors = \App\Models\User::where('member', \App\Enums\TypeUser::DOCTORS)->get();
+                        @endphp
+                        @if($doctors == '')
+                            <h1 class="d-flex align-items-center justify-content-center mt-4">null</h1>
+                        @else
+                            @foreach($doctors as $doctor)
+                                <div class="col-md-3 col-6">
+                                    <div class="p-3">
+                                        <div class="product-item">
+                                            <div class="img-pro h-100 justify-content-center d-flex">
+                                                <img src="{{$doctor->avt}}" alt="">
+                                                <a class="button-heart" data-favorite="0">
+                                                    <i id="icon-heart" class="bi-heart bi"
+                                                       data-product-id="${product.id}"
+                                                       onclick="addProductToWishList(${product.id})"></i>
+                                                </a>
+                                                <s class="icon-chuyen-khoa">
+                                                    @php
+                                                        $department = \App\Models\Department::where('id',$doctor->department_id)->value('thumbnail');
+                                                    @endphp
+                                                    <img src="{{$department}}">
+                                                </s>
+                                            </div>
+                                            <div class="content-pro p-3">
+                                                <div class="">
+                                                    <div class="name-product" style="height: auto">
+                                                        <a class="name-product--fleaMarket"
+                                                           href="{{ route('examination.doctor_info', $doctor->id) }}">{{$doctor->name}}</a>
+                                                    </div>
+                                                    <div class="location-pro d-flex">
+                                                        <p>{!! $doctor->service !!}</p>
+                                                    </div>
+                                                    <div class="price-pro">
+                                                        @php
+                                                            $addressP = \App\Models\Province::where('id', $doctor->province_id)->value('name');
+                                                        @endphp
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+                                                            <g clip-path="url(#clip0_5506_14919)">
+                                                                <path d="M4.66602 12.8382C3.12321 13.5188 2.16602 14.4673 2.16602 15.5163C2.16602 17.5873 5.89698 19.2663 10.4993 19.2663C15.1017 19.2663 18.8327 17.5873 18.8327 15.5163C18.8327 14.4673 17.8755 13.5188 16.3327 12.8382M15.4993 7.59961C15.4993 10.986 11.7493 12.5996 10.4993 15.0996C9.24935 12.5996 5.49935 10.986 5.49935 7.59961C5.49935 4.83819 7.73793 2.59961 10.4993 2.59961C13.2608 2.59961 15.4993 4.83819 15.4993 7.59961ZM11.3327 7.59961C11.3327 8.05985 10.9596 8.43294 10.4993 8.43294C10.0391 8.43294 9.66602 8.05985 9.66602 7.59961C9.66602 7.13937 10.0391 6.76628 10.4993 6.76628C10.9596 6.76628 11.3327 7.13937 11.3327 7.59961Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_5506_14919">
+                                                                    <rect width="20" height="20" fill="white" transform="translate(0.5 0.933594)"/>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg> &nbsp; {{$addressP}}
+                                                    </div>
+                                                    <div class="price-pro">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
+                                                            <g clip-path="url(#clip0_5506_14923)">
+                                                                <path d="M10.4993 5.93294V10.9329L13.8327 12.5996M18.8327 10.9329C18.8327 15.5353 15.1017 19.2663 10.4993 19.2663C5.89698 19.2663 2.16602 15.5353 2.16602 10.9329C2.16602 6.33057 5.89698 2.59961 10.4993 2.59961C15.1017 2.59961 18.8327 6.33057 18.8327 10.9329Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_5506_14923">
+                                                                    <rect width="20" height="20" fill="white" transform="translate(0.5 0.933594)"/>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg> &nbsp; {{$doctor->time_working_1}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
+                    <div class="pagination mt-4 d-flex align-items-center justify-content-center">
+                        {{--                        {{ $coupons->links() }}--}}
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="recommended" role="tabpanel" aria-labelledby="recommended-tab">
                     <div class="section1-content">
-                        <div class="item-bkg">
-                            <div class="recruitment__item d-flex ">
+                        <div class="px-5 py-2">
+                            <div class="content__item d-flex gap-3">
                                 <img
                                     class="content__item__image"
                                     src="{{asset('img/icons_logo/image 1.jpeg')}}"
@@ -486,182 +699,30 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div id="describe" class="d-flex align-items-center flex-column mb-3">
-                <div class="p-5 w-100">
-                    <div class="describe-item">
-                        <h3>{{ __('home.24/7 AVAILABLE') }}</h3>
-                        <p>{{ __('home.You can find available clinics/pharmacies') }}</p>
-                    </div>
-                    <div class="describe-item" hidden="">
-                        <h3>{{ __('home.HOME CARE SERVICE') }}</h3>
-                        <p>{{ __("home.Don't come to us! We will come to you") }}!</p>
-                    </div>
-                    <div class="describe-item">
-                        <h3>{{ __('home.MANY LOCATION') }}</h3>
-                        <p>{{ __('home.More than 1500 Doctors, 1000 Pharmacists, 1000 Hospitals always wait for you') }}</p>
-                    </div>
-                </div>
-                <div class="mt-auto p-2">
-                    <button class="btn-see-all ">{{ __('home.See all') }}</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="banner1">
-        <img src="{{asset('img/Rectangle 23815.png')}}" alt="" style="">
-    </div>
-    <div id="flea_market_board" class="d-flex justify-content-center">
-        <div id="content-bkg" class="col-10 content-item d-flex justify-content-center ">
-            <div id="flea-market" class="col-8 p-2 w-100">
-                <h2>{{ __('home.Flea market') }}</h2>
-                <p>{{ __('home.Hire staffs cheaper, find your staffs faster') }}</p>
-                <div class="section1-content">
-
-                    <div class="row">
-                        @foreach($products as $product)
-                            <div class="col-sm-4 pt-4">
-                                <a href="{{ route('flea.market.product.detail', $product->id) }}" target="_blank">
-                                    <div class="card border-flea-market" style="height: 342px">
-                                        <img src="{{asset($product->thumbnail ?? 'img/item_shopping.png')}}"
-                                             class="card-img-top object-fit-cover" alt="...">
-                                        <div class="card-body">
-                                            <h5 class="card-title title-div-flea-market">{{ $product->name }}</h5>
-                                            @if($product->province_id)
-                                                @php
-                                                    $province = Province::find($product->province_id);
-                                                @endphp
-                                                @if($province)
-                                                    <p class="card-text">{{ __('home.Location') }}:
-                                                        <b>{{ $province->name}}</b></p>
-                                                @endif
-                                            @endif
-                                            <h4>{{ $product->price }}</h4>
-                                        </div>
-                                    </div>
-                                </a>
+                <div class="tab-pane fade" id="newProducts" role="tabpanel" aria-labelledby="newProducts-tab">
+                    <div class="section1-content mt-5">
+                        <div class="px-5 py-2">
+                            <div class="content__item d-flex gap-3">
+                                <img
+                                    class="content__item__image"
+                                    src="{{asset('img/icons_logo/image 1.jpeg')}}"
+                                    alt=""
+                                />
+                                <div>
+                                    <h6>
+                                        {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
+                                    </h6>
+                                    <p>
+                                        {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
+                                    </p>
+                                    <p class="content__item-link">{{ __('home.Read') }}</p>
+                                </div>
                             </div>
-                        @endforeach
-                    </div>
-
-                </div>
-            </div>
-            <div id="describe" class="d-flex align-items-center flex-column mb-3">
-                <div class="p-5 w-100">
-                    <div class="describe-item">
-                        <h3>{{ __('home.24/7 AVAILABLE') }}</h3>
-                        <p>{{ __('home.You can find available clinics/pharmacies') }}</p>
-                    </div>
-                    <div class="describe-item" hidden="">
-                        <h3>{{ __('home.HOME CARE SERVICE') }}</h3>
-                        <p>{{ __("home.Don't come to us! We will come to you") }}!</p>
-                    </div>
-                    <div class="describe-item">
-                        <h3>{{ __('home.MANY LOCATION') }}</h3>
-                        <p>{{ __('home.More than 1500 Doctors, 1000 Pharmacists, 1000 Hospitals always wait for you') }}</p>
-                    </div>
-                </div>
-                <div class="mt-auto p-2">
-                    <a href="{{ route('flea-market.index') }}">
-                        <button class="btn-see-all ">{{ __('home.See all') }}</button>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="banner1">
-        <img src="{{asset('img/Rectangle 23815.png')}}" alt="">
-    </div>
-    <div id="item-information" style="padding-top: 15px; margin-top: 20px">
-        <h1>{{ __('home.Buy online') }}</h1>
-        <p>{{ __("home.Don't struggle finding, we are always ready for you") }}</p>
-        <div id="list-option" style="padding-top: 15px" class="d-flex justify-content-around ">
-            <div class="option-menu d-flex justify-content-center">
-                <ul class="nav nav-pills nav-fill">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">{{ __('home.Popular') }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">{{ __('home.Recommended') }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">{{ __('home.New product') }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">{{ __('home.Hot deal') }}</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-
-        <div class="container">
-            <div id="list-item" class="d-flex row">
-                <div class="col-md-3 mt-3">
-                    <div class="card" style="width: 237px; height: 361px">
-                        <i class="bi bi-heart"></i>
-                        <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
-                             height="237px">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ __('home.Máy tạo oxy 5 lít Reiwa K5BW') }}</h5>
-                            <p class="card-text">{{ __('home.Location') }}: <b>Hanoi</b></p>
-                            <h4>599.000</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mt-3">
-                    <div class="card" style="width: 237px; height: 361px">
-                        <i class="bi bi-heart"></i>
-                        <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
-                             height="237px">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ __('home.Máy tạo oxy 5 lít Reiwa K5BW') }}</h5>
-                            <p class="card-text">{{ __('home.Location') }}: <b>Hanoi</b></p>
-                            <h4>599.000</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mt-3">
-                    <div class="card" style="width: 237px; height: 361px">
-                        <i class="bi bi-heart"></i>
-                        <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
-                             height="237px">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ __('home.Máy tạo oxy 5 lít Reiwa K5BW') }}</h5>
-                            <p class="card-text">{{ __('home.Location') }}: <b>Hanoi</b></p>
-                            <h4>599.000</h4>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 mt-3">
-                    <div class="card" style="width: 237px; height: 361px">
-                        <i class="bi bi-heart"></i>
-                        <img src="{{asset('img/item_shopping.png')}}" class="card-img-top" alt="..." width="237px"
-                             height="237px">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ __('home.Máy tạo oxy 5 lít Reiwa K5BW') }}</h5>
-                            <p class="card-text">{{ __('home.Location') }}: <b>Hanoi</b></p>
-                            <h4>599.000</h4>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link">{{ __('home.Previous') }}</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">{{ __('home.Next') }}</a>
-                </li>
-            </ul>
-        </nav>
     </div>
     @php
         $addresses = \App\Models\Clinic::all();

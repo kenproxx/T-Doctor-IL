@@ -1275,10 +1275,7 @@ img.img-responsive {
     gap: 30px;
 }
 
-.card {
-    min-height: 390px;
-!important;
-}
+
 
 .pagination {
     padding-bottom: 10px;
