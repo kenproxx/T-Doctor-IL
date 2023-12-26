@@ -1,10 +1,356 @@
+@php use App\Models\Department;use App\Models\Province; @endphp
+@php use App\Models\User; @endphp
 @extends('layouts.master')
 @section('title', 'Find By Medicine')
 <link href="{{ asset('css/findmymedicine.css') }}" rel="stylesheet">
 @section('content')
     @include('layouts.partials.header_3')
     @include('component.banner')
-    <div class="container ">
+
+    <style>
+        .bi-heart-fill {
+            color: red;
+        }
+
+        .find-my-medicine .frame {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 0px 0px 16px;
+            position: relative;
+            background-color: #088180;
+            border-radius: 16px;
+        }
+
+        .find-my-medicine .frame .rectangle {
+            position: relative;
+            width: 100%;
+            height: 273px;
+        }
+
+        .find-my-medicine .frame .div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 0px 0px 0px 16px;
+            position: relative;
+            align-self: stretch;
+            width: 100%;
+            flex: 0 0 auto;
+        }
+
+        .find-my-medicine .frame .text-wrapper {
+            position: relative;
+            width: fit-content;
+            margin-top: -1px;
+            font-family: var(--body-1-extra-font-family);
+            font-weight: var(--body-1-extra-font-weight);
+            color: var(--white);
+            font-size: var(--body-1-extra-font-size);
+            text-align: center;
+            letter-spacing: var(--body-1-extra-letter-spacing);
+            line-height: var(--body-1-extra-line-height);
+            font-style: var(--body-1-extra-font-style);
+        }
+
+        .find-my-medicine .frame .div-2 {
+            display: inline-flex;
+            align-items: flex-start;
+            gap: 12px;
+            position: relative;
+            flex: 0 0 auto;
+        }
+
+        .find-my-medicine .frame .img {
+            position: relative;
+            width: 20px;
+            height: 20px;
+        }
+
+        .find-my-medicine .frame .text-wrapper-2 {
+            position: relative;
+            width: fit-content;
+            margin-top: -1px;
+            font-family: var(--body-4-extra-font-family);
+            font-weight: var(--body-4-extra-font-weight);
+            color: var(--white);
+            font-size: var(--body-4-extra-font-size);
+            text-align: center;
+            letter-spacing: var(--body-4-extra-letter-spacing);
+            line-height: var(--body-4-extra-line-height);
+            font-style: var(--body-4-extra-font-style);
+        }
+
+        .find-my-medicine .frame .frame-wrapper-heart {
+            display: inline-flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px;
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: var(--light);
+            border-radius: 51px;
+        }
+
+        .find-my-medicine .frame .frame-wrapper-heart i {
+            font-size: 24px;
+        }
+
+        .find-my-medicine .frame .component {
+            position: absolute;
+            top: 217px;
+            left: 15px;
+        }
+
+        .find-my-medicine .department-div {
+            padding: 8px;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        .find-my-medicine .department-div .fills {
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+        }
+
+        .find-my-medicine .frame .group {
+            position: absolute;
+            width: 116px;
+            height: 114px;
+            top: -19px;
+            left: -19px;
+        }
+
+        .find-my-medicine .frame .overlap-group {
+            position: relative;
+            width: 95px;
+            height: 95px;
+            top: 19px;
+            left: 19px;
+            background-image: url(https://c.animaapp.com/ItWXPcpR/img/rectangle-23800-2.svg);
+            background-size: 100% 100%;
+        }
+
+        .find-my-medicine .frame .text-wrapper-3 {
+            position: absolute;
+            height: 23px;
+            top: 25px;
+            left: 16px;
+            transform: rotate(-45deg);
+            font-family: var(--body-1-extra-font-family);
+            font-weight: var(--body-1-extra-font-weight);
+            color: #ffffff;
+            font-size: var(--body-1-extra-font-size);
+            letter-spacing: var(--body-1-extra-letter-spacing);
+            line-height: var(--body-1-extra-line-height);
+            font-style: var(--body-1-extra-font-style);
+        }
+
+        .find-my-medicine .border-img {
+            border-radius: 13px 13px 0px 100px;
+            object-fit: cover;
+        }
+
+
+        .find-my-medicine-2 .frame {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
+            position: relative;
+            background-color: #088180;
+            border-radius: 24px;
+            border: 1px solid;
+            border-color: var(--grey-medium);
+        }
+
+        .find-my-medicine-2 .frame .rectangle {
+            position: relative;
+            object-fit: cover;
+        }
+
+        .find-my-medicine-2 .frame .div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 16px;
+            position: relative;
+            align-self: stretch;
+            width: 100%;
+            flex: 0 0 auto;
+        }
+
+        .find-my-medicine-2 .frame .div-2 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 0px 0px 0px 16px;
+            position: relative;
+            align-self: stretch;
+            width: 100%;
+            flex: 0 0 auto;
+        }
+
+        .find-my-medicine-2 .frame .text-wrapper {
+            position: relative;
+            width: fit-content;
+            margin-top: -1px;
+            font-family: var(--body-1-extra-font-family);
+            font-weight: var(--body-1-extra-font-weight);
+            color: var(--white);
+            font-size: var(--body-1-extra-font-size);
+            text-align: center;
+            letter-spacing: var(--body-1-extra-letter-spacing);
+            line-height: var(--body-1-extra-line-height);
+            font-style: var(--body-1-extra-font-style);
+        }
+
+        .find-my-medicine-2 .frame .div-3 {
+            display: inline-flex;
+            align-items: flex-start;
+            gap: 12px;
+            position: relative;
+            flex: 0 0 auto;
+        }
+
+        .find-my-medicine-2 .frame .marker-pin {
+            position: relative;
+            width: 20px;
+            height: 20px;
+        }
+
+        .find-my-medicine-2 .frame .text-wrapper-2 {
+            position: relative;
+            width: fit-content;
+            margin-top: -1px;
+            font-family: var(--body-4-extra-font-family);
+            font-weight: var(--body-4-extra-font-weight);
+            color: var(--white);
+            font-size: var(--body-4-extra-font-size);
+            text-align: center;
+            letter-spacing: var(--body-4-extra-letter-spacing);
+            line-height: var(--body-4-extra-line-height);
+            font-style: var(--body-4-extra-font-style);
+        }
+
+        .find-my-medicine-2 .frame .text-wrapper-3 {
+            position: relative;
+            width: fit-content;
+            font-family: var(--subtitle-1-extra-font-family);
+            font-weight: var(--subtitle-1-extra-font-weight);
+            color: var(--white);
+            font-size: var(--subtitle-1-extra-font-size);
+            text-align: center;
+            letter-spacing: var(--subtitle-1-extra-letter-spacing);
+            line-height: var(--subtitle-1-extra-line-height);
+            font-style: var(--subtitle-1-extra-font-style);
+        }
+
+        .find-my-medicine-2 .frame .div-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 16px 40px;
+            position: relative;
+            flex: 0 0 auto;
+            margin-bottom: -1px;
+            margin-right: -1px;
+            background-color: var(--white);
+            border-radius: 60px 0px 24px 0px;
+            overflow: hidden;
+        }
+
+        .find-my-medicine-2 .frame .text-wrapper-4 {
+            position: relative;
+            width: fit-content;
+            font-family: var(--subtitle-1-extra-font-family);
+            font-weight: var(--subtitle-1-extra-font-weight);
+            color: var(--black);
+            font-size: var(--subtitle-1-extra-font-size);
+            letter-spacing: var(--subtitle-1-extra-letter-spacing);
+            line-height: var(--subtitle-1-extra-line-height);
+            font-style: var(--subtitle-1-extra-font-style);
+        }
+
+        .find-my-medicine-2 .frame .img {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            top: 20px;
+            left: 225px;
+        }
+
+        .find-my-medicine-2 .frame .group {
+            position: absolute;
+            width: 116px;
+            height: 114px;
+            top: -19px;
+            left: -19px;
+        }
+
+        .find-my-medicine-2 .frame .overlap-group {
+            position: relative;
+            width: 95px;
+            height: 95px;
+            top: 19px;
+            left: 19px;
+            background-image: url(https://c.animaapp.com/ItWXPcpR/img/rectangle-23800-2.svg);
+            background-size: 100% 100%;
+        }
+
+        .find-my-medicine-2 .frame .text-wrapper-5 {
+            position: absolute;
+            height: 23px;
+            top: 26px;
+            left: 19px;
+            transform: rotate(-45deg);
+            font-family: var(--body-1-extra-font-family);
+            font-weight: var(--body-1-extra-font-weight);
+            color: #ffffff;
+            font-size: var(--body-1-extra-font-size);
+            letter-spacing: var(--body-1-extra-letter-spacing);
+            line-height: var(--body-1-extra-line-height);
+            font-style: var(--body-1-extra-font-style);
+        }
+
+        .find-my-medicine-2 .text-wrapper.text-ellipsis {
+            text-overflow: ellipsis;
+        }
+
+        .find-my-medicine-2 .frame .frame-wrapper-heart {
+            display: inline-flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 8px;
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background-color: var(--light);
+            border-radius: 51px;
+        }
+
+        .find-my-medicine-2 .frame .frame-wrapper-heart i {
+            font-size: 24px;
+        }
+
+        .find-my-medicine-2 .border-img {
+            border-radius: 13px 13px 100px 0px;
+            object-fit: cover;
+        }
+
+        .find-my-medicine .frame:hover, .find-my-medicine-2 .frame:hover {
+            border-radius: 22px;
+            background: #088180;
+            box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.25);
+        }
+
+    </style>
+    <div class="container">
         <div id="examination-scene">
 
             <div class="row medicine-search">
@@ -15,7 +361,8 @@
                             <option value="">{{ __('home.Category') }}</option>
                             @if($categoryMedicines)
                                 @foreach($categoryMedicines as $index => $cateProductMedicine)
-                                    <option value="{{ $cateProductMedicine->id }}">{{ $cateProductMedicine->name }}</option>
+                                    <option
+                                        value="{{ $cateProductMedicine->id }}">{{ $cateProductMedicine->name }}</option>
                                 @endforeach
                             @endif
                         </select>
@@ -34,37 +381,12 @@
                 </div>
                 <div class="medicine-search--center col-md-6 row d-flex justify-content-between">
                     <form class="search-box col-md-10">
-                        <input type="search" oninput="searchByName(this.value)" name="focus" placeholder="{{ __('home.Search for anything…') }}" id="search-input" value="">
+                        <input type="search" oninput="searchByName(this.value)" name="focus"
+                               placeholder="{{ __('home.Search for anything…') }}" id="search-input" value="">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </form>
                 </div>
             </div>
-
-
-            {{--
-                        <div class="container">
-                            <!-- Slider main container -->
-                            <div class="swiper-container">
-                                <!-- Additional required wrapper -->
-                                <div class="swiper-wrapper">
-                                    @foreach($categoryMedicines as $categoryMedicine)
-                                        <div class="nav-item swiper-slide">
-                                            <div class="item-category medicine-product text-center"
-                                                 data-medicine="{{ $categoryMedicine }}">
-                                                <div class="center-container d-flex justify-content-center align-items-center">
-                                                    <img class="img-item-category" src="{{ asset($categoryMedicine->thumbnail) }}"
-                                                         alt="">
-                                                </div>
-                                                <p class="nav-link">{{ $categoryMedicine->name }}</p>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-
-                            </div>
-                        </div>
-
-                        --}}
 
             <div id="list-find-my-medicine">
                 <div class="d-flex justify-content-center" style="padding: 12px">
@@ -73,32 +395,42 @@
                             <p>{{ __('home.Best Pharmacists') }}</p>
                         </div>
                         <div class="ms-auto p-2"><a
-                                    href="{{route('examination.bestpharmacists')}}">{{ __('home.See all') }}</a></div>
+                                href="{{route('examination.bestpharmacists')}}">{{ __('home.See all') }}</a></div>
                     </div>
                 </div>
-                <div class="row list-doctor m-auto">
+                <div class="row list-doctor m-auto find-my-medicine">
                     @if(count($bestPhamrmacists) > 0)
-                        @foreach($bestPhamrmacists as $bestPhamrmacist)
-                            <div class="col-sm-3">
-                                <div class="card">
-                                    <i class="bi bi-heart"></i>
+                        @foreach($bestPhamrmacists as $pharmacist)
+
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                                <div class="frame m-4">
+                                    <img loading="lazy" class="rectangle border-img"
+                                         src="{{asset($pharmacist->avt)}}"/>
+                                    <div class="div mt-3">
+                                        <div class="text-wrapper">{{ $pharmacist->name }}</div>
+                                        <div class="div-2">
+                                            @php
+                                                $province = Province::find($pharmacist->province_id)
+                                            @endphp
+                                            <img loading="lazy" class="img" src="{{ asset('img/location.png') }}"/>
+                                            <div class="text-wrapper-2">{{ $province->name }}</div>
+                                        </div>
+                                        <div class="div-2">
+                                            <img loading="lazy" class="img" src="{{ asset('img/clock.png') }}"/>
+                                            <div
+                                                class="text-wrapper-2">{{ $pharmacist->time_working_1 }} {{ $pharmacist->time_working_2 }}</div>
+                                        </div>
+                                    </div>
                                     @php
-                                        $province = \App\Models\Province::find($bestPhamrmacist->province_id)
+                                        $department = Department::find($pharmacist->department_id);
                                     @endphp
-                                    <img src="{{asset($bestPhamrmacist->avt)}}" class="card-img-top" alt="Ảnh bác sỹ">
-                                    <div class="card-body">
-                                        <a href="#"><h5
-                                                    class="card-title"> {{ $bestPhamrmacist->name }}</h5></a>
-                                        <p class="card-text_1">{{ __('home.Location') }}:
-                                            <b>{{ $province->name }}</b></p>
-                                        <p class="card-text_1">{{ __('home.Working time') }}:
-                                            <b> {{ $bestPhamrmacist->time_working_1  }}
-                                                : {{ $bestPhamrmacist->time_working_2 }}
-                                            </b>
-                                        </p>
+                                    <div class="frame-wrapper-heart"><i class="bi-heart bi"></i></div>
+                                    <div class="component department-div">
+                                        <img loading="lazy" class="fills" src="{{ $department->thumbnail }}"/>
                                     </div>
                                 </div>
                             </div>
+
                         @endforeach
                     @else
                         <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
@@ -110,32 +442,49 @@
                             <p>{{ __('home.New Pharmacists') }}</p>
                         </div>
                         <div class="ms-auto p-2"><a
-                                    href="{{route('examination.newpharmacists')}}">{{ __('home.See all') }}</a></div>
+                                href="{{route('examination.newpharmacists')}}">{{ __('home.See all') }}</a></div>
                     </div>
                 </div>
-                <div class="row list-doctor m-auto">
+                <div class="row list-doctor m-auto find-my-medicine">
                     @if(count($newPhamrmacists) > 0)
-                        @foreach($newPhamrmacists as $newPhamrmacist)
-                            <div class="col-sm-3">
-                                <div class="card ">
-                                    <i class="bi bi-heart"></i>
+                        @foreach($newPhamrmacists as $pharmacist)
+
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                                <div class="frame m-4">
+                                    <img loading="lazy" class="rectangle border-img"
+                                         src="{{asset($pharmacist->avt)}}"/>
+                                    <div class="div mt-3">
+                                        <a href="{{ route('examination.doctor_info', ['id' => $pharmacist->id]) }}">
+                                            <div class="text-wrapper">{{ $pharmacist->name }}</div>
+                                        </a>
+                                        <div class="div-2">
+                                            @php
+                                                $province = Province::find($pharmacist->province_id)
+                                            @endphp
+                                            <img loading="lazy" class="img" src="{{ asset('img/location.png') }}"/>
+                                            <div class="text-wrapper-2">{{ $province->name }}</div>
+                                        </div>
+                                        <div class="div-2">
+                                            <img loading="lazy" class="img" src="{{ asset('img/clock.png') }}"/>
+                                            <div
+                                                class="text-wrapper-2">{{ $pharmacist->time_working_1 }} {{ $pharmacist->time_working_2 }}</div>
+                                        </div>
+                                    </div>
                                     @php
-                                        $province = \App\Models\Province::find($newPhamrmacist->province_id)
+                                        $department = Department::find($pharmacist->department_id);
                                     @endphp
-                                    <img src="{{asset($newPhamrmacist->thumbnail)}}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <a href="#"><h5
-                                                    class="card-title"> {{ $newPhamrmacist->name }}</h5></a>
-                                        <p class="card-text_1">{{ __('home.Location') }}:
-                                            <b>{{ $province->name }}</b></p>
-                                        <p class="card-text_1">{{ __('home.Working time') }}:
-                                            <b> {{ $newPhamrmacist->time_working_1  }}
-                                                : {{ $newPhamrmacist->time_working_2 }}
-                                            </b>
-                                        </p>
+                                    <div class="frame-wrapper-heart"><i class="bi-heart bi"></i></div>
+                                    <div class="component department-div">
+                                        <img loading="lazy" class="fills" src="{{ $department->thumbnail }}"/>
+                                    </div>
+                                    <div class="group">
+                                        <div class="overlap-group">
+                                            <div class="text-wrapper-3">New</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                         @endforeach
                     @else
                         <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
@@ -147,33 +496,44 @@
                             <p>{{ __('home.24/7 Available Pharmacists') }}</p>
                         </div>
                         <div class="ms-auto p-2"><a
-                                    href="{{route('examination.availablepharmacists')}}">{{ __('home.See all') }}</a>
+                                href="{{route('examination.availablepharmacists')}}">{{ __('home.See all') }}</a>
                         </div>
                     </div>
                 </div>
-                <div class="row list-doctor m-auto">
+                <div class="row list-doctor m-auto find-my-medicine">
                     @if(count($allPhamrmacists) > 0)
-                        @foreach($allPhamrmacists as $allPhamrmacist)
-                            <div class="col-sm-3">
-                                <div class="card ">
-                                    <i class="bi bi-heart"></i>
+                        @foreach($allPhamrmacists as $pharmacist)
+
+                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
+                                <div class="frame m-4">
+                                    <img loading="lazy" class="rectangle border-img"
+                                         src="{{asset($pharmacist->avt)}}"/>
+                                    <div class="div mt-3">
+                                        <div class="text-wrapper">{{ $pharmacist->name }}</div>
+                                        <div class="div-2">
+                                            @php
+                                                $province = Province::find($pharmacist->province_id)
+                                            @endphp
+                                            <img loading="lazy" class="img" src="{{ asset('img/location.png') }}"/>
+                                            <div
+                                                class="text-wrapper-2">{{ $province->name ?? ( __('home.Toàn quốc')) }}</div>
+                                        </div>
+                                        <div class="div-2">
+                                            <img loading="lazy" class="img" src="{{ asset('img/clock.png') }}"/>
+                                            <div
+                                                class="text-wrapper-2">{{ $pharmacist->time_working_1 }} {{ $pharmacist->time_working_2 }}</div>
+                                        </div>
+                                    </div>
                                     @php
-                                        $province = \App\Models\Province::find($allPhamrmacist->province_id)
+                                        $department = Department::find($pharmacist->department_id);
                                     @endphp
-                                    <img src="{{asset($allPhamrmacist->thumbnail)}}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <a href="#"><h5
-                                                    class="card-title"> {{ $allPhamrmacist->name }}</h5></a>
-                                        <p class="card-text_1">{{ __('home.Location') }}:
-                                            <b>{{ $province->name }}</b></p>
-                                        <p class="card-text_1">{{ __('home.Working time') }}:
-                                            <b> {{ $allPhamrmacist->time_working_1  }}
-                                                : {{ $allPhamrmacist->time_working_2 }}
-                                            </b>
-                                        </p>
+                                    <div class="frame-wrapper-heart"><i class="bi-heart bi"></i></div>
+                                    <div class="component department-div">
+                                        <img loading="lazy" class="fills" src="{{ $department->thumbnail }}"/>
                                     </div>
                                 </div>
                             </div>
+
                         @endforeach
                     @else
                         <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
@@ -185,28 +545,52 @@
                             <p>{{ __('home.Hot deal medicine') }}</p>
                         </div>
                         <div class="ms-auto p-2"><a
-                                    href="{{route('examination.hotdealmedicine')}}">{{ __('home.See all') }}</a></div>
+                                href="{{route('examination.hotdealmedicine')}}">{{ __('home.See all') }}</a></div>
                     </div>
                 </div>
-                <div class="row list-doctor m-auto">
+                <div class="row list-doctor m-auto find-my-medicine-2">
                     @if(count($hotMedicines) > 0)
-                        @foreach($hotMedicines as $hotMedicine)
+                        @foreach($hotMedicines as $medicine)
                             @php
-                                $user = \App\Models\User::find($hotMedicine->user_id);
+                                $user = User::find($medicine->user_id);
+                                $province = Province::find($user->province_id)
                             @endphp
-                            <div class="col-sm-3">
-                                <div class="card">
-                                    <i class="bi bi-heart"></i>
-                                    <img src="{{asset($hotMedicine->thumbnail)}}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <a href="{{ route('medicine.detail', $hotMedicine->id) }}"><h5
-                                                    class="card-title">{{ $hotMedicine->name }}</h5></a>
-                                        <p class="card-text_1">{{ __('home.Location') }}:
-                                            <b>{{ $user->address_code }}</b></p>
-                                        <p class="card-text_1">{{ __('home.Price') }}:
-                                            <b>{{ $hotMedicine->price }} {{ $hotMedicine->unit_price }}</b></p>
+                            <div class="col-sm-3 mb-3">
+                                <div class="m-4">
+                                    <div class="frame w-100"><img loading="lazy" class="rectangle border-img"
+                                                                  src="{{asset($medicine->thumbnail)}}"/>
+                                        <div class="div">
+                                            <div class="div-2">
+                                                <a class="w-100" href="{{ route('medicine.detail', $medicine->id) }}">
+                                                    <div
+                                                        class="text-wrapper text-nowrap overflow-hidden text-ellipsis w-100">{{ $medicine->name }}</div>
+                                                </a>
+                                                <div class="div-3"><img loading="lazy" class="marker-pin"
+                                                                        src="{{ asset('img/location.png') }}"/>
+
+                                                    <div
+                                                        class="text-wrapper-2">{{ $province->name ?? ( __('home.Toàn quốc')) }}</div>
+                                                </div>
+                                                <div
+                                                    class="text-wrapper-3">{{ $medicine->price }} {{ $medicine->unit_price }}</div>
+                                            </div>
+                                            <div class="div-wrapper">
+                                                <a href="{{ route('medicine.detail', $medicine->id) }}">
+                                                    <div class="text-wrapper-4">See Detail</div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="frame-wrapper-heart"><i class="bi-heart bi"></i></div>
+
+                                        <div class="group">
+                                            <div class="overlap-group">
+                                                <div class="text-wrapper-5">75%</div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
+
                             </div>
                         @endforeach
                     @else
@@ -219,28 +603,46 @@
                             <p>{{ __('home.New medicine') }}</p>
                         </div>
                         <div class="ms-auto p-2"><a
-                                    href="{{route('examination.newmedicine')}}">{{ __('home.See all') }}</a></div>
+                                href="{{route('examination.newmedicine')}}">{{ __('home.See all') }}</a></div>
                     </div>
                 </div>
-                <div class="row list-doctor  m-auto">
+                <div class="row list-doctor m-auto find-my-medicine-2">
                     @if(count($newMedicines) > 0)
-                        @foreach($newMedicines as $newMedicine)
-                            @php
-                                $user = \App\Models\User::find($newMedicine->user_id);
-                            @endphp
-                            <div class="col-sm-3">
-                                <div class="card">
-                                    <i class="bi bi-heart"></i>
-                                    <img src="{{asset($newMedicine->thumbnail)}}" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <a href="{{ route('medicine.detail', $newMedicine->id) }}"><h5
-                                                    class="card-title">{{ $newMedicine->name }}</h5></a>
-                                        <p class="card-text_1">{{ __('home.Location') }}:
-                                            <b>{{ $user->address_code }}</b></p>
-                                        <p class="card-text_1">{{ __('home.Price') }}:
-                                            <b>{{ $newMedicine->price }} {{ $newMedicine->unit_price }}</b></p>
+                        @foreach($newMedicines as $medicine)
+                            <div class="col-sm-3 mb-3">
+                                <div class="m-4">
+                                    <div class="frame w-100"><img loading="lazy" class="rectangle border-img"
+                                                                  src="{{asset($medicine->thumbnail)}}"/>
+                                        <div class="div">
+                                            <div class="div-2">
+                                                <a class="w-100" href="{{ route('medicine.detail', $medicine->id) }}">
+                                                    <div
+                                                        class="text-wrapper text-nowrap overflow-hidden text-ellipsis w-100">{{ $medicine->name }}</div>
+                                                </a>
+                                                <div class="div-3"><img loading="lazy" class="marker-pin"
+                                                                        src="{{ asset('img/location.png') }}"/>
+                                                    <div class="text-wrapper-2">Ha Noi</div>
+                                                </div>
+                                                <div
+                                                    class="text-wrapper-3">{{ $medicine->price }} {{ $medicine->unit_price }}</div>
+                                            </div>
+                                            <div class="div-wrapper">
+                                                <a href="{{ route('medicine.detail', $medicine->id) }}">
+                                                    <div class="text-wrapper-4">See Detail</div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="frame-wrapper-heart"><i class="bi-heart bi"></i></div>
+
+                                        <div class="group">
+                                            <div class="overlap-group">
+                                                <div class="text-wrapper-5">75%</div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
+
                             </div>
                         @endforeach
                     @else
@@ -253,32 +655,47 @@
                             <p>{{ __('home.Recommended') }}</p>
                         </div>
                         <div class="ms-auto p-2"><a
-                                    href="{{route('examination.recommended')}}">{{ __('home.See all') }}</a></div>
+                                href="{{route('examination.recommended')}}">{{ __('home.See all') }}</a></div>
                     </div>
                 </div>
-                <div class="row list-doctor m-auto">
+                <div class="row list-doctor m-auto find-my-medicine-2">
                     @if(count($recommendedMedicines) > 0)
-                        @foreach($recommendedMedicines as $recommendedMedicine)
-                            @php
-                                $user = \App\Models\User::find($recommendedMedicine->user_id);
-                            @endphp
-                            <div class="col-sm-3">
-                                <div class="card">
-                                    <i class="bi bi-heart"></i>
-                                    <img src="{{asset($recommendedMedicine->thumbnail)}}" class="card-img-top"
-                                         alt="...">
-                                    <div class="card-body">
-                                        <a href="{{ route('medicine.detail', $recommendedMedicine->id) }}"><h5
-                                                    class="card-title">{{ $recommendedMedicine->name }}</h5></a>
-                                        <p class="card-text_1">{{ __('home.Location') }}:
-                                            <b>{{ $user->address_code }}</b></p>
-                                        <p class="card-text_1">{{ __('home.Price') }}:
-                                            <b>{{ $recommendedMedicine->price }} {{ $recommendedMedicine->unit_price }}</b>
-                                        </p>
+                        @foreach($recommendedMedicines as $medicine)
+                            <div class="col-sm-3 mb-3">
+                                <div class="m-4">
+                                    <div class="frame w-100"><img loading="lazy" class="rectangle border-img"
+                                                                  src="{{asset($medicine->thumbnail)}}"/>
+                                        <div class="div">
+                                            <div class="div-2">
+                                                <a class="w-100" href="{{ route('medicine.detail', $medicine->id) }}">
+                                                    <div
+                                                        class="text-wrapper text-nowrap overflow-hidden text-ellipsis w-100">{{ $medicine->name }}</div>
+                                                </a>
+                                                <div class="div-3"><img loading="lazy" class="marker-pin"
+                                                                        src="{{ asset('img/location.png') }}"/>
+                                                    <div class="text-wrapper-2">Ha Noi</div>
+                                                </div>
+                                                <div
+                                                    class="text-wrapper-3">{{ $medicine->price }} {{ $medicine->unit_price }}</div>
+                                            </div>
+                                            <div class="div-wrapper">
+                                                <a href="{{ route('medicine.detail', $medicine->id) }}">
+                                                    <div class="text-wrapper-4">See Detail</div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="frame-wrapper-heart"><i class="bi-heart bi"></i></div>
+
+                                        <div class="group">
+                                            <div class="overlap-group">
+                                                <div class="text-wrapper-5">75%</div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         @endforeach
                     @else
                         <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
@@ -292,31 +709,45 @@
                         <div class="ms-auto p-2"><a href="#">{{ __('home.See all') }}</a></div>
                     </div>
                 </div>
-                <div class="row list-doctor m-auto">
-                    @if($function_foods)
-                        @if(count($function_foods) > 0)
-                            @foreach($function_foods as $function_food)
-                                @php
-                                    $user = \App\Models\User::find($function_food->user_id);
-                                @endphp
-                                <div class=" col-sm-3">
-                                    <div class="card">
-                                        <i class="bi bi-heart"></i>
-                                        <img src="{{asset($function_food->thumbnail)}}" class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                            <a href="{{ route('medicine.detail', $function_food->id) }}"><h5
-                                                        class="card-title">{{ $function_food->name }}</h5></a>
-                                            <p class="card-text_1">{{ __('home.Location') }}:
-                                                <b>{{ $user->address_code }}</b></p>
-                                            <p class="card-text_1">{{ __('home.Price') }}:
-                                                <b>{{ $function_food->price }} {{ $function_food->unit_price }}</b></p>
+                <div class="row list-doctor m-auto find-my-medicine-2">
+                    @if(count($function_foods) > 0)
+                        @foreach($function_foods as $medicine)
+                            <div class="col-sm-3 mb-3">
+                                <div class="m-4">
+                                    <div class="frame w-100"><img loading="lazy" class="rectangle border-img"
+                                                                  src="{{asset($medicine->thumbnail)}}"/>
+                                        <div class="div">
+                                            <div class="div-2">
+                                                <a class="w-100" href="{{ route('medicine.detail', $medicine->id) }}">
+                                                    <div
+                                                        class="text-wrapper text-nowrap overflow-hidden text-ellipsis w-100">{{ $medicine->name }}</div>
+                                                </a>
+                                                <div class="div-3"><img loading="lazy" class="marker-pin"
+                                                                        src="{{ asset('img/location.png') }}"/>
+                                                    <div class="text-wrapper-2">Ha Noi</div>
+                                                </div>
+                                                <div
+                                                    class="text-wrapper-3">{{ $medicine->price }} {{ $medicine->unit_price }}</div>
+                                            </div>
+                                            <div class="div-wrapper">
+                                                <a href="{{ route('medicine.detail', $medicine->id) }}">
+                                                    <div class="text-wrapper-4">See Detail</div>
+                                                </a>
+                                            </div>
                                         </div>
+                                        <div class="frame-wrapper-heart"><i class="bi-heart bi"></i></div>
+
+                                        <div class="group">
+                                            <div class="overlap-group">
+                                                <div class="text-wrapper-5">75%</div>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
-                            @endforeach
-                        @else
-                        <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
-                    @endif
+
+                            </div>
+                        @endforeach
                     @else
                         <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
                     @endif
@@ -376,6 +807,11 @@
                     callListDoctorByDepartment(medicine);
                 })
 
+                $('.frame .frame-wrapper-heart').on('click', function () {
+                    $(this).find('i').toggleClass('bi-heart');
+                    $(this).find('i').toggleClass('bi-heart-fill');
+                })
+
                 function showListMedicineByCategory(res, medicine) {
                     let html = ``;
                     let url = `{{ asset('storage') }}`;
@@ -388,7 +824,7 @@
                         html = html + `<div class=" col-sm-3">
                                 <div class="card">
                             <i class="bi bi-heart"></i>
-                            <img src="${url}${myArray[1]}" class="card-img-top" alt="...">
+                            <img loading="lazy" src="${url}${myArray[1]}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <a href="${mainUrl}"><h5 class="card-title">${item['name']}</h5></a>
                                 <p class="card-text_1">{{ __('home.Location') }}: <b>${item['address_code']}</b></p>
@@ -412,43 +848,43 @@
 
                 async function callListDoctorByDepartment(department) {
                     let url = `{{route('restapi.get.products.medicines.category', ['id' => ':id'])}}/?size=4`;
-                url = url.replace(':id', department['id']);
-                await $.ajax({
-                    url: url,
-                    method: 'GET',
-                    success: function (response) {
-                        showListMedicineByCategory(response, department);
-                    },
-                    error: function (exception) {
-                        console.log(exception)
+                    url = url.replace(':id', department['id']);
+                    await $.ajax({
+                        url: url,
+                        method: 'GET',
+                        success: function (response) {
+                            showListMedicineByCategory(response, department);
+                        },
+                        error: function (exception) {
+                            console.log(exception)
+                        }
+                    });
+                }
+
+                var mySwiper = new Swiper('.swiper-container', {
+                    loop: true,
+                    nextButton: '.swiper-button-next',
+                    prevButton: '.swiper-button-prev',
+                    slidesPerView: 3,
+                    paginationClickable: true,
+                    spaceBetween: 20,
+                    breakpoints: {
+                        1920: {
+                            slidesPerView: 4,
+                            spaceBetween: 20
+                        },
+                        1028: {
+                            slidesPerView: 3,
+                            spaceBetween: 20
+                        },
+                        480: {
+                            slidesPerView: 2,
+                            spaceBetween: 10
+                        }
                     }
                 });
-            }
-
-            var mySwiper = new Swiper('.swiper-container', {
-                loop: true,
-                nextButton: '.swiper-button-next',
-                prevButton: '.swiper-button-prev',
-                slidesPerView: 3,
-                paginationClickable: true,
-                spaceBetween: 20,
-                breakpoints: {
-                    1920: {
-                        slidesPerView: 4,
-                        spaceBetween: 20
-                    },
-                    1028: {
-                        slidesPerView: 3,
-                        spaceBetween: 20
-                    },
-                    480: {
-                        slidesPerView: 2,
-                        spaceBetween: 10
-                    }
-                }
-            });
-        })
-    </script>
+            })
+        </script>
     </div>
 @endsection
 

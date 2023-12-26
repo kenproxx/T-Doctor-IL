@@ -64,7 +64,8 @@
                     <label for="category_id">{{ __('home.Category') }}</label>
                     <select class="form-select" id="category_id" name="category_id">
                         @foreach($categories as $category)
-                            <option value="{{$category->id}}">{{$category->name}}</option>
+                            <option data-limit="50" class="text-shortcut"
+                                    value="{{$category->id}}">{{$category->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -160,7 +161,7 @@
 
             let isValid = true
             /* Tạo fn appendDataForm ở admin blade*/
-            isValid =  appendDataForm(arrField, formData, isValid);
+            isValid = appendDataForm(arrField, formData, isValid);
 
             const fieldTextareaTiny = ["description", "description_en", "description_laos"];
             fieldTextareaTiny.forEach(fieldTextarea => {
@@ -174,7 +175,7 @@
             var filedata = document.getElementById("gallery");
             var i = 0, len = filedata.files.length, img, reader, file;
 
-            if (len > 0){
+            if (len > 0) {
                 for (i; i < len; i++) {
                     file = filedata.files[i];
                     formData.append('gallery[]', file);

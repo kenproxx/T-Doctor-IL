@@ -510,7 +510,7 @@ return [
     'Tên coupon' => 'Tên phiếu giảm giá',
     'tên người đăng ký' => 'Tên người đăng ký',
     'Email người đăng ký' => 'Email người đăng ký',
-    'loại hình đăng ký' => 'oại hình đăng ký',
+    'loại hình đăng ký' => 'Loại hình đăng ký',
     'Link social người đăng ký' => 'Liên kết xã hội của người đăng ký',
     'Bạn có chắc chắn muốn thay đổi trạng thái của coupon này' => 'Bạn chắc chắn muốn thay đổi trạng thái của phiếu giảm giá này',
     'List Doctor' => 'Danh sách bác sĩ',
