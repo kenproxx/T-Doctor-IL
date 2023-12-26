@@ -186,6 +186,8 @@ Route::middleware(['user.active'])->group(function () {
         Route::get('/search', [BackendProductInfoController::class, 'search'])->name('backend.booking.search');
     });
 
+    Route::get('/policy', [AddressMapController::class, 'policy'])->name('policy.index');
+
 
     Route::get('/address', [AddressMapController::class, 'index']);
     Route::post('/save-address', [AddressMapController::class, 'store']);
