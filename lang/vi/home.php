@@ -73,6 +73,7 @@ return [
     'Recommended' => 'Khuyến khích',
     'New product' => 'Sản phẩm mới',
     'Hot deal' => 'Ưu đãi hấp dẫn',
+    'See details' => 'Xem chi tiết',
     'Máy tạo oxy 5 lít Reiwa K5BW' => 'Máy tạo oxy 5 lít Reiwa K5BW',
     'FOLLOW' => 'THEO DÕI',
     'Start' => 'Bắt đầu',

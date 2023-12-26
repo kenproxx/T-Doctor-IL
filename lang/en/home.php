@@ -45,6 +45,7 @@ return [
     'Recommended' => 'Recommended',
     'New product' => 'New product',
     'Hot deal' => 'Hot deal',
+    'See details' => 'See details',
     'Máy tạo oxy 5 lít Reiwa K5BW' => 'Reiwa K5BW 5 liter oxygen generator',
     'FOLLOW' => 'Follow',
     'Start' => 'Start',

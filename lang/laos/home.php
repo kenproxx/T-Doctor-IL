@@ -67,6 +67,7 @@ return [
     'Recommended' => 'ແນະນຳ',
     'New product' => 'ຜະລິດຕະພັນໃຫມ່',
     'Hot deal' => 'ຂໍ້ສະເໜີຮ້ອນ',
+    'See details' => 'ເບິ່ງລາຍລະອຽດ',
     'Máy tạo oxy 5 lít Reiwa K5BW' => 'ເຄື່ອງຜະລິດອົກຊີເຈນ Reiwa K5BW 5 ລິດ',
     'FOLLOW' => 'ເທໂອດີ',
     'Start' => 'ເລີ່ມ',
