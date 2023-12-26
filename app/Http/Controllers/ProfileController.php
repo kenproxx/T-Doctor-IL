@@ -193,7 +193,8 @@ class ProfileController extends Controller
         }
         $user->save();
 
-        return redirect()->route('profile')->withSuccess('Profile updated successfully.');
+        toast('Success, Update profile success!', 'success', 'top-left');
+        return redirect()->route('profile');
     }
 
     public function handleForgetPassword(Request $request)
