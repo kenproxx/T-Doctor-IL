@@ -2,18 +2,46 @@
     .container {
         max-width: 480px;
         width: 100%;
+
+        .item-information, #find-doctor--homeNew, .align-center {
+            .nav-header--homeNew {
+                ul.nav-fill {
+                    width: 100%;
+                }
+            }
+        }
+        #recruitment-homeNew{
+            .main-recruitment--homeNew{
+                .main-title-card--homeNew{
+                    min-height: 450px;
+                }
+            }
+        }
     }
 }
+
 @media (max-width: 779px) {
 
 }
-@media (min-width: 780px){
+
+@media (min-width: 780px) {
     .container {
         max-width: 1440px;
         width: 100%;
+        .item-information, #find-doctor--homeNew, .align-center {
+            .nav-header--homeNew {
+                ul.nav-fill {
+                    width: 50%;
+                }
+            }
+        }
     }
 }
+
 @media all {
+    .bg-homeNew {
+        background: var(--White-Light, #F3F3F3);
+    }
     .container {
         .justify-content-between.mt-homeNew {
             margin-top: 150px;
@@ -152,18 +180,20 @@
             }
         }
 
-        #myTabContent{
+        #myTabContent {
             .product-item {
-                border-radius: 16px;
+                border-radius: 25px;
                 background: #088180;
                 padding: 0;
+
                 .img-pro {
                     img {
-                        border-radius: 13px 13px 0px 100px;
-                        height: 237px;
+                        border-radius: 24px 24px 0px 100px;
+                        height: 300px;
                         object-fit: cover;
                     }
-                    i{
+
+                    i {
                         display: flex;
                         padding: 8px;
                         align-items: flex-start;
@@ -174,6 +204,7 @@
                         border-radius: 51px;
                         background: var(--Light, #EAEAEA);
                     }
+
                     .icon-chuyen-khoa {
                         display: flex;
                         padding: 8px;
@@ -184,16 +215,18 @@
                         bottom: 0;
                         border-radius: 51px;
                         background: var(--Light, #EAEAEA);
-                        img{
+
+                        img {
                             width: 30px;
                             height: 30px;
                             border-radius: 22px;
                         }
                     }
                 }
+
                 .content-pro {
                     .name-product {
-                        a{
+                        a {
                             color: var(--White, #FFF);
                             font-size: 18px;
                             font-style: normal;
@@ -202,6 +235,7 @@
                             min-height: 24px;
                         }
                     }
+
                     .location-pro p {
                         margin: 0;
                         color: var(--White, #FFF);
@@ -212,6 +246,7 @@
                         line-height: normal;
                         min-height: 85px;
                     }
+
                     .price-pro {
                         color: var(--White, #FFF);
                         font-size: 16px;
@@ -220,30 +255,35 @@
                         line-height: normal;
                     }
                 }
-                &:hover{
-                    border-radius: 16px;
+
+                &:hover {
+                    border-radius: 25px;
                     background: #088180;
                     box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.25);
                 }
             }
+
             .card-homeNew {
                 display: flex;
                 padding: 16px;
                 align-items: flex-start;
                 gap: 10px;
-                border-radius: 16px;
+                border-radius: 25px;
                 border: 1px solid var(--White-Light, #F3F3F3);
                 background: var(--White, #FFF);
                 transition: all 0.1s ease;
+
                 .content__item {
                     padding: 0;
-                    &__img{
+
+                    &__img {
                         width: 100%;
                         height: 216px;
                         object-fit: cover;
                         border-radius: 10px;
                     }
-                    &__title{
+
+                    &__title {
                         margin-top: 24px;
                         color: #007E85;
                         font-feature-settings: 'clig' off, 'liga' off;
@@ -258,7 +298,8 @@
                         overflow: hidden;
                         text-overflow: ellipsis;
                     }
-                    &__describe{
+
+                    &__describe {
                         color: #555;
                         font-feature-settings: 'clig' off, 'liga' off;
                         margin-top: 12px;
@@ -266,7 +307,8 @@
                         font-style: normal;
                         font-weight: 400;
                         line-height: 30px;
-                        p{
+
+                        p {
                             display: -webkit-box;
                             line-height: 1.3;
                             -webkit-line-clamp: 3;
@@ -275,7 +317,8 @@
                             text-overflow: ellipsis;
                         }
                     }
-                    &-link{
+
+                    &-link {
                         //color: var(--secon1, #088180);
                         text-align: justify;
                         font-feature-settings: 'clig' off, 'liga' off;
@@ -314,7 +357,8 @@
 
                     }
                 }
-                &:hover{
+
+                &:hover {
                     border-radius: 24px;
                     border: 1px solid var(--secon1, #088180);
                     background: var(--White, #FFF);
@@ -323,16 +367,18 @@
 
             }
         }
-        #map-location{
+
+        #map-location {
             .text-map--homeNew {
-                h3{
+                h3 {
                     color: var(--Black, #1A202C);
                     font-size: 18px;
                     font-style: normal;
                     font-weight: 800 !important;
                     line-height: normal;
                 }
-                p{
+
+                p {
                     color: var(--Grey-Dark, #929292);
                     font-size: 16px;
                     font-style: normal;
@@ -340,13 +386,16 @@
                     line-height: normal;
                 }
             }
-            #allAddressesMap{
+
+            #allAddressesMap {
                 border-radius: 24px;
                 clip-path: polygon(0% 0%, 100% 0%, 100% 84%, 0% 100%, 0% 80%);
             }
         }
+
         #find-doctor--homeNew {
             margin-top: 20px;
+
             .title-findDoctor--homeNew {
                 color: var(--Black, #000);
                 text-align: center;
@@ -356,16 +405,18 @@
                 line-height: normal;
             }
         }
-        #recruitment-homeNew{
-            .title-recruitment--homeNew{
-                span{
+
+        #recruitment-homeNew {
+            .title-recruitment--homeNew {
+                span {
                     color: var(--Black, #000);
                     font-size: 32px;
                     font-style: normal;
                     font-weight: 800;
                     line-height: normal;
                 }
-                p{
+
+                p {
                     color: var(--Grey-Dark, #929292);
                     font-size: 18px;
                     font-style: normal;
@@ -375,22 +426,26 @@
                 }
 
             }
-            .main-recruitment--homeNew{
-                .main-card--homeNew{
+
+            .main-recruitment--homeNew {
+                .main-card--homeNew {
                     height: 500px;
                     overflow-y: auto;
                     display: flex;
                     flex-direction: column;
-                    .border-flea-market{
+
+                    .border-flea-market {
                         .card-body-fleaMarket--homeNew {
                             margin: 12px 0;
                         }
                     }
+
                     .img-fleaMarket--homeNew {
                         height: 188px;
                         border-radius: 8px;
                         object-fit: cover;
                     }
+
                     .title-div-flea-market--homeNew {
                         color: #000;
                         font-size: 16px;
@@ -404,12 +459,14 @@
                         text-overflow: ellipsis;
                         min-height: 63px;
                     }
+
                     .card-text--homeNew {
                         color: var(--Black, #000);
                         font-style: normal;
                         font-weight: 800;
                         line-height: normal;
                     }
+
                     .price-fleaMarket--homeNew {
                         color: #000;
                         font-size: 18px;
@@ -418,13 +475,15 @@
                         line-height: normal;
                     }
                 }
+
                 .button-bottom-right {
                     bottom: 0;
                     position: absolute;
                     right: 0;
                 }
             }
-            .content-recruitment--homeNew{
+
+            .content-recruitment--homeNew {
                 border-radius: 12px;
                 border: 1px solid var(--Light, #EAEAEA);
                 background: var(--White, #FFF);
@@ -432,16 +491,19 @@
                 gap: 12px;
                 align-self: stretch;
                 margin-bottom: 21px;
-                img{
+
+                img {
                     height: 100%;
                     object-fit: cover;
                     border-radius: 12px;
                     border: 1px solid var(--Light, #EAEAEA);
                     background: var(--White, #FFF);
                 }
+
                 .text-title--card {
                     padding: 8px;
-                    span{
+
+                    span {
                         color: var(--Grey-Balck, #424242);
                         font-size: 16px;
                         font-style: normal;
@@ -451,10 +513,12 @@
 
                 }
             }
-            border-radius: 16px;
+
+            border-radius: 25px;
             background: var(--White-Light, #F3F3F3);
+
             .describe-item {
-                span{
+                span {
                     color: var(--Black, #1A202C);
                     font-size: 24px;
                     font-style: normal;
@@ -462,7 +526,8 @@
                     line-height: normal;
                     padding-bottom: 8px;
                 }
-                p{
+
+                p {
                     color: var(--Grey-Dark, #929292);
                     font-size: 18px;
                     font-style: normal;
@@ -474,5 +539,109 @@
             }
         }
 
+        .item-information {
+            .title-findProduct--homeNew {
+                text-align: center;
+
+                span {
+                    color: var(--Black, #000);
+                    text-align: center;
+                    font-size: 48px;
+                    font-style: normal;
+                    font-weight: 800;
+                    line-height: normal;
+                }
+
+                p {
+                    color: var(--Grey-Dark, #929292);
+                    text-align: center;
+                    font-size: 24px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: normal;
+                }
+
+            }
+
+            #myTabContent {
+                .product-item {
+                    border-radius: 25px;
+
+                    .location-pro {
+                        color: var(--White, #FFF);
+                        font-size: 16px;
+                        font-style: normal;
+                        font-weight: 800;
+                        line-height: normal;
+                    }
+
+                    .prices-pro {
+                        color: var(--White, #FFF);
+                        font-size: 24px;
+                        font-style: normal;
+                        font-weight: 800;
+                        line-height: normal;
+                    }
+
+                    .SeeDetail {
+                        display: flex;
+                        padding: 16px 40px;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 10px;
+                        border-radius: 86px 0px 36px 0px;
+                        width: 70%;
+                        background: var(--White, #FFF);
+                        border: 0;
+                    }
+
+                    .img_product--homeNew {
+                        img {
+                            border-radius: 24px 24px 100px 0px;
+                            background: url(<path-to-image>), lightgray 50% / cover no-repeat;
+                        }
+
+                    }
+
+                    .content-pro {
+                        .name-product {
+                            a {
+                                color: var(--White, #FFF);
+                                font-size: 18px;
+                                font-style: normal;
+                                font-weight: 800;
+                                line-height: normal;
+                                min-height: 50px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .nav-header--homeNew {
+                ul.nav-fill {
+                    li.nav-item {
+                        a.nav-link {
+                            color: var(--Grey-Dark, #929292);
+                            text-align: center;
+                            font-size: 16px;
+                            font-style: normal;
+                            font-weight: 400;
+                            line-height: normal;
+                            padding: 0;
+
+                            &.active {
+                                color: var(--secon1, #088180);
+                                text-align: center;
+                                font-size: 18px;
+                                font-style: normal;
+                                font-weight: 800;
+                                line-height: normal;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
