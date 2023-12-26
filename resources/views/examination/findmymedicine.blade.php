@@ -1,5 +1,7 @@
-@php use App\Models\Department;use App\Models\Province; @endphp
-@php use App\Models\User; @endphp
+@php use App\Models\Department;use App\Models\MedicalFavourite;use App\Models\Province; @endphp
+@php use App\Models\User;use Illuminate\Support\Facades\Auth;
+ $currentUserId = Auth::user()->id ?? '';
+@endphp
 @extends('layouts.master')
 @section('title', 'Find By Medicine')
 <link href="{{ asset('css/findmymedicine.css') }}" rel="stylesheet">
@@ -401,36 +403,7 @@
                 <div class="row list-doctor m-auto find-my-medicine">
                     @if(count($bestPhamrmacists) > 0)
                         @foreach($bestPhamrmacists as $pharmacist)
-
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                                <div class="frame m-4">
-                                    <img loading="lazy" class="rectangle border-img"
-                                         src="{{asset($pharmacist->avt)}}"/>
-                                    <div class="div mt-3">
-                                        <div class="text-wrapper">{{ $pharmacist->name }}</div>
-                                        <div class="div-2">
-                                            @php
-                                                $province = Province::find($pharmacist->province_id)
-                                            @endphp
-                                            <img loading="lazy" class="img" src="{{ asset('img/location.png') }}"/>
-                                            <div class="text-wrapper-2">{{ $province->name }}</div>
-                                        </div>
-                                        <div class="div-2">
-                                            <img loading="lazy" class="img" src="{{ asset('img/clock.png') }}"/>
-                                            <div
-                                                class="text-wrapper-2">{{ $pharmacist->time_working_1 }} {{ $pharmacist->time_working_2 }}</div>
-                                        </div>
-                                    </div>
-                                    @php
-                                        $department = Department::find($pharmacist->department_id);
-                                    @endphp
-                                    <div class="frame-wrapper-heart"><i class="bi-heart bi"></i></div>
-                                    <div class="component department-div">
-                                        <img loading="lazy" class="fills" src="{{ $department->thumbnail }}"/>
-                                    </div>
-                                </div>
-                            </div>
-
+                            @include('examination.component_doctor_findmymedicine', ['pharmacist' => $pharmacist])
                         @endforeach
                     @else
                         <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
@@ -448,43 +421,7 @@
                 <div class="row list-doctor m-auto find-my-medicine">
                     @if(count($newPhamrmacists) > 0)
                         @foreach($newPhamrmacists as $pharmacist)
-
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                                <div class="frame m-4">
-                                    <img loading="lazy" class="rectangle border-img"
-                                         src="{{asset($pharmacist->avt)}}"/>
-                                    <div class="div mt-3">
-                                        <a href="{{ route('examination.doctor_info', ['id' => $pharmacist->id]) }}">
-                                            <div class="text-wrapper">{{ $pharmacist->name }}</div>
-                                        </a>
-                                        <div class="div-2">
-                                            @php
-                                                $province = Province::find($pharmacist->province_id)
-                                            @endphp
-                                            <img loading="lazy" class="img" src="{{ asset('img/location.png') }}"/>
-                                            <div class="text-wrapper-2">{{ $province->name }}</div>
-                                        </div>
-                                        <div class="div-2">
-                                            <img loading="lazy" class="img" src="{{ asset('img/clock.png') }}"/>
-                                            <div
-                                                class="text-wrapper-2">{{ $pharmacist->time_working_1 }} {{ $pharmacist->time_working_2 }}</div>
-                                        </div>
-                                    </div>
-                                    @php
-                                        $department = Department::find($pharmacist->department_id);
-                                    @endphp
-                                    <div class="frame-wrapper-heart"><i class="bi-heart bi"></i></div>
-                                    <div class="component department-div">
-                                        <img loading="lazy" class="fills" src="{{ $department->thumbnail }}"/>
-                                    </div>
-                                    <div class="group">
-                                        <div class="overlap-group">
-                                            <div class="text-wrapper-3">New</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
+                            @include('examination.component_doctor_findmymedicine', ['pharmacist' => $pharmacist])
                         @endforeach
                     @else
                         <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
@@ -503,37 +440,7 @@
                 <div class="row list-doctor m-auto find-my-medicine">
                     @if(count($allPhamrmacists) > 0)
                         @foreach($allPhamrmacists as $pharmacist)
-
-                            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-                                <div class="frame m-4">
-                                    <img loading="lazy" class="rectangle border-img"
-                                         src="{{asset($pharmacist->avt)}}"/>
-                                    <div class="div mt-3">
-                                        <div class="text-wrapper">{{ $pharmacist->name }}</div>
-                                        <div class="div-2">
-                                            @php
-                                                $province = Province::find($pharmacist->province_id)
-                                            @endphp
-                                            <img loading="lazy" class="img" src="{{ asset('img/location.png') }}"/>
-                                            <div
-                                                class="text-wrapper-2">{{ $province->name ?? ( __('home.Toàn quốc')) }}</div>
-                                        </div>
-                                        <div class="div-2">
-                                            <img loading="lazy" class="img" src="{{ asset('img/clock.png') }}"/>
-                                            <div
-                                                class="text-wrapper-2">{{ $pharmacist->time_working_1 }} {{ $pharmacist->time_working_2 }}</div>
-                                        </div>
-                                    </div>
-                                    @php
-                                        $department = Department::find($pharmacist->department_id);
-                                    @endphp
-                                    <div class="frame-wrapper-heart"><i class="bi-heart bi"></i></div>
-                                    <div class="component department-div">
-                                        <img loading="lazy" class="fills" src="{{ $department->thumbnail }}"/>
-                                    </div>
-                                </div>
-                            </div>
-
+                            @include('examination.component_doctor_findmymedicine', ['pharmacist' => $pharmacist])
                         @endforeach
                     @else
                         <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
@@ -551,47 +458,7 @@
                 <div class="row list-doctor m-auto find-my-medicine-2">
                     @if(count($hotMedicines) > 0)
                         @foreach($hotMedicines as $medicine)
-                            @php
-                                $user = User::find($medicine->user_id);
-                                $province = Province::find($user->province_id)
-                            @endphp
-                            <div class="col-sm-3 mb-3">
-                                <div class="m-4">
-                                    <div class="frame w-100"><img loading="lazy" class="rectangle border-img"
-                                                                  src="{{asset($medicine->thumbnail)}}"/>
-                                        <div class="div">
-                                            <div class="div-2">
-                                                <a class="w-100" href="{{ route('medicine.detail', $medicine->id) }}">
-                                                    <div
-                                                        class="text-wrapper text-nowrap overflow-hidden text-ellipsis w-100">{{ $medicine->name }}</div>
-                                                </a>
-                                                <div class="div-3"><img loading="lazy" class="marker-pin"
-                                                                        src="{{ asset('img/location.png') }}"/>
-
-                                                    <div
-                                                        class="text-wrapper-2">{{ $province->name ?? ( __('home.Toàn quốc')) }}</div>
-                                                </div>
-                                                <div
-                                                    class="text-wrapper-3">{{ $medicine->price }} {{ $medicine->unit_price }}</div>
-                                            </div>
-                                            <div class="div-wrapper">
-                                                <a href="{{ route('medicine.detail', $medicine->id) }}">
-                                                    <div class="text-wrapper-4">See Detail</div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="frame-wrapper-heart"><i class="bi-heart bi"></i></div>
-
-                                        <div class="group">
-                                            <div class="overlap-group">
-                                                <div class="text-wrapper-5">75%</div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
+                            @include('examination.component_medicine_findmymedicine', ['medicine' => $medicine])
                         @endforeach
                     @else
                         <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
@@ -609,41 +476,7 @@
                 <div class="row list-doctor m-auto find-my-medicine-2">
                     @if(count($newMedicines) > 0)
                         @foreach($newMedicines as $medicine)
-                            <div class="col-sm-3 mb-3">
-                                <div class="m-4">
-                                    <div class="frame w-100"><img loading="lazy" class="rectangle border-img"
-                                                                  src="{{asset($medicine->thumbnail)}}"/>
-                                        <div class="div">
-                                            <div class="div-2">
-                                                <a class="w-100" href="{{ route('medicine.detail', $medicine->id) }}">
-                                                    <div
-                                                        class="text-wrapper text-nowrap overflow-hidden text-ellipsis w-100">{{ $medicine->name }}</div>
-                                                </a>
-                                                <div class="div-3"><img loading="lazy" class="marker-pin"
-                                                                        src="{{ asset('img/location.png') }}"/>
-                                                    <div class="text-wrapper-2">Ha Noi</div>
-                                                </div>
-                                                <div
-                                                    class="text-wrapper-3">{{ $medicine->price }} {{ $medicine->unit_price }}</div>
-                                            </div>
-                                            <div class="div-wrapper">
-                                                <a href="{{ route('medicine.detail', $medicine->id) }}">
-                                                    <div class="text-wrapper-4">See Detail</div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="frame-wrapper-heart"><i class="bi-heart bi"></i></div>
-
-                                        <div class="group">
-                                            <div class="overlap-group">
-                                                <div class="text-wrapper-5">75%</div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
+                            @include('examination.component_medicine_findmymedicine', ['medicine' => $medicine])
                         @endforeach
                     @else
                         <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
@@ -661,41 +494,7 @@
                 <div class="row list-doctor m-auto find-my-medicine-2">
                     @if(count($recommendedMedicines) > 0)
                         @foreach($recommendedMedicines as $medicine)
-                            <div class="col-sm-3 mb-3">
-                                <div class="m-4">
-                                    <div class="frame w-100"><img loading="lazy" class="rectangle border-img"
-                                                                  src="{{asset($medicine->thumbnail)}}"/>
-                                        <div class="div">
-                                            <div class="div-2">
-                                                <a class="w-100" href="{{ route('medicine.detail', $medicine->id) }}">
-                                                    <div
-                                                        class="text-wrapper text-nowrap overflow-hidden text-ellipsis w-100">{{ $medicine->name }}</div>
-                                                </a>
-                                                <div class="div-3"><img loading="lazy" class="marker-pin"
-                                                                        src="{{ asset('img/location.png') }}"/>
-                                                    <div class="text-wrapper-2">Ha Noi</div>
-                                                </div>
-                                                <div
-                                                    class="text-wrapper-3">{{ $medicine->price }} {{ $medicine->unit_price }}</div>
-                                            </div>
-                                            <div class="div-wrapper">
-                                                <a href="{{ route('medicine.detail', $medicine->id) }}">
-                                                    <div class="text-wrapper-4">See Detail</div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="frame-wrapper-heart"><i class="bi-heart bi"></i></div>
-
-                                        <div class="group">
-                                            <div class="overlap-group">
-                                                <div class="text-wrapper-5">75%</div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
+                            @include('examination.component_medicine_findmymedicine', ['medicine' => $medicine])
                         @endforeach
                     @else
                         <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
@@ -712,41 +511,7 @@
                 <div class="row list-doctor m-auto find-my-medicine-2">
                     @if(count($function_foods) > 0)
                         @foreach($function_foods as $medicine)
-                            <div class="col-sm-3 mb-3">
-                                <div class="m-4">
-                                    <div class="frame w-100"><img loading="lazy" class="rectangle border-img"
-                                                                  src="{{asset($medicine->thumbnail)}}"/>
-                                        <div class="div">
-                                            <div class="div-2">
-                                                <a class="w-100" href="{{ route('medicine.detail', $medicine->id) }}">
-                                                    <div
-                                                        class="text-wrapper text-nowrap overflow-hidden text-ellipsis w-100">{{ $medicine->name }}</div>
-                                                </a>
-                                                <div class="div-3"><img loading="lazy" class="marker-pin"
-                                                                        src="{{ asset('img/location.png') }}"/>
-                                                    <div class="text-wrapper-2">Ha Noi</div>
-                                                </div>
-                                                <div
-                                                    class="text-wrapper-3">{{ $medicine->price }} {{ $medicine->unit_price }}</div>
-                                            </div>
-                                            <div class="div-wrapper">
-                                                <a href="{{ route('medicine.detail', $medicine->id) }}">
-                                                    <div class="text-wrapper-4">See Detail</div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="frame-wrapper-heart"><i class="bi-heart bi"></i></div>
-
-                                        <div class="group">
-                                            <div class="overlap-group">
-                                                <div class="text-wrapper-5">75%</div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
+                            @include('examination.component_medicine_findmymedicine', ['medicine' => $medicine])
                         @endforeach
                     @else
                         <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
@@ -782,6 +547,7 @@
                 }
 
             }
+
 
             function searchByCategory(value) {
                 category_id = value;
