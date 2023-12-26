@@ -27,7 +27,8 @@
                 </div>
                 <div class="form-group has-search">
                     <span class="fa fa-search form-control-feedback"></span>
-                    <input type="text" onkeyup="performSearchDoctor()" id="inputSearchDoctor" class="form-control" placeholder="{{ __('home.Search for anything…') }}">
+                    <input type="text" onkeyup="performSearchDoctor()" id="inputSearchDoctor" class="form-control"
+                           placeholder="{{ __('home.Search for anything…') }}">
                 </div>
             </div>
         </div>
@@ -37,22 +38,18 @@
                     <div class="list--doctor p-0">
                         <p>{{ __('home.Best doctor') }}</p>
                     </div>
-                    <div class="ms-auto p-2"><a href="{{route('examination.best_doctor')}}">{{ __('home.See all') }}</a></div>
+                    <div class="ms-auto p-2"><a href="{{route('examination.best_doctor')}}">{{ __('home.See all') }}</a>
+                    </div>
                 </div>
             </div>
-{{--            <div id="list-doctor-best" class="list-doctor row m-auto p-0">--}}
-
-
-{{--            </div>--}}
-
             <div class="row list-doctor m-auto find-my-medicine">
-            @if(count($bestDoctorInfos) > 0)
-                @foreach($bestDoctorInfos as $pharmacist)
-                    @include('examination.component_doctor_findmymedicine', ['pharmacist' => $pharmacist])
-                @endforeach
-            @else
-                <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
-            @endif
+                @if(count($bestDoctorInfos) > 0)
+                    @foreach($bestDoctorInfos as $pharmacist)
+                        @include('examination.component_doctor_findmymedicine', ['pharmacist' => $pharmacist])
+                    @endforeach
+                @else
+                    <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
+                @endif
             </div>
 
 
@@ -61,7 +58,8 @@
                     <div class="list--doctor p-0">
                         <p>{{ __('home.New doctor') }}</p>
                     </div>
-                    <div class="ms-auto p-2"><a href="{{route('examination.new_doctor')}}">{{ __('home.See all') }}</a></div>
+                    <div class="ms-auto p-2"><a href="{{route('examination.new_doctor')}}">{{ __('home.See all') }}</a>
+                    </div>
                 </div>
             </div>
             <div class="row list-doctor m-auto find-my-medicine">
@@ -78,7 +76,8 @@
                     <div class="list--doctor p-0">
                         <p>{{ __('home.24/7 Available doctor') }}</p>
                     </div>
-                    <div class="ms-auto p-2"><a href="{{route('examination.available_doctor')}}">{{ __('home.See all') }}</a></div>
+                    <div class="ms-auto p-2"><a
+                            href="{{route('examination.available_doctor')}}">{{ __('home.See all') }}</a></div>
                 </div>
             </div>
             <div class="row list-doctor m-auto find-my-medicine">

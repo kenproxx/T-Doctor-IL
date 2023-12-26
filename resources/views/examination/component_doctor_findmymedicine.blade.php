@@ -89,6 +89,7 @@
 
     .find-my-medicine .frame .frame-wrapper-heart i {
         font-size: 24px;
+        height: 100%;
     }
 
     .find-my-medicine .frame .component {
@@ -156,7 +157,7 @@
 </style>
 
 <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-    <div class="frame m-4">
+    <div class="frame m-4 component-doctor">
         <img loading="lazy" class="rectangle border-img"
              src="{{asset($pharmacist->avt)}}"/>
         <div class="div mt-3">
@@ -201,8 +202,14 @@
     </div>
 </div>
 
-
 <script>
+    $(document).ready(function () {
+        $('.frame.component-doctor .frame-wrapper-heart').on('click', function () {
+            $(this).find('i').toggleClass('bi-heart');
+            $(this).find('i').toggleClass('bi-heart-fill');
+        })
+    });
+
     function handleAddToWishList(id, type) {
 
         let headers = {

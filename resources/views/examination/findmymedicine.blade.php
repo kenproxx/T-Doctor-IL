@@ -230,11 +230,6 @@
                     callListDoctorByDepartment(medicine);
                 })
 
-                $('.frame .frame-wrapper-heart').on('click', function () {
-                    $(this).find('i').toggleClass('bi-heart');
-                    $(this).find('i').toggleClass('bi-heart-fill');
-                })
-
                 function showListMedicineByCategory(res, medicine) {
                     let html = ``;
                     let url = `{{ asset('storage') }}`;
