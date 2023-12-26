@@ -7,6 +7,7 @@ use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Models\MedicalFavourite;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,18 +16,15 @@ class MedicalFavouriteApi extends Controller
     public function getAll(Request $request)
     {
         $userID = $request->input('user_id');
-        $medical_favourites = DB::table('medical_favourites')
-            ->join('users', 'users.id', '=', 'medical_favourites.medical_id')
-            ->where('medical_favourites.user_id', $userID)
-            ->select('medical_favourites.*', 'users.name')
-            ->cursor()
-            ->map(function ($item) {
-                $user = User::find($item->medical_id);
-                /* Convert to array*/
-                $medical_favourite = (array)$item;
-                $medical_favourite['doctor_info'] = $user;
-                return $medical_favourite;
-            });
+        $medical_favourites = DB::table('medical_favourites')->join('users', 'users.id', '=',
+            'medical_favourites.medical_id')->where('medical_favourites.user_id',
+            $userID)->select('medical_favourites.*', 'users.name')->cursor()->map(function ($item) {
+            $user = User::find($item->medical_id);
+            /* Convert to array*/
+            $medical_favourite = (array)$item;
+            $medical_favourite['doctor_info'] = $user;
+            return $medical_favourite;
+        });
 
         return response()->json($medical_favourites);
     }
@@ -36,20 +34,16 @@ class MedicalFavouriteApi extends Controller
         $userID = $request->input('user_id');
         $medical_id = $request->input('medical_id');
 
-        $medical_favourites = DB::table('medical_favourites')
-            ->join('users', 'users.id', '=', 'medical_favourites.user_id')
-            ->where('medical_favourites.user_id', $userID)
-            ->where('medical_favourites.medical_id', $medical_id)
-            ->where('users.status', UserStatus::ACTIVE)
-            ->select('medical_favourites.*')
-            ->cursor()
-            ->map(function ($item) {
-                $user = User::find($item->medical_id);
-                /* Convert to array*/
-                $medical_favourite = (array)$item;
-                $medical_favourite['doctor_info'] = $user;
-                return $medical_favourite;
-            });
+        $medical_favourites = DB::table('medical_favourites')->join('users', 'users.id', '=',
+            'medical_favourites.user_id')->where('medical_favourites.user_id',
+            $userID)->where('medical_favourites.medical_id', $medical_id)->where('users.status',
+            UserStatus::ACTIVE)->select('medical_favourites.*')->cursor()->map(function ($item) {
+            $user = User::find($item->medical_id);
+            /* Convert to array*/
+            $medical_favourite = (array)$item;
+            $medical_favourite['doctor_info'] = $user;
+            return $medical_favourite;
+        });
 
         return response()->json($medical_favourites);
     }
@@ -93,9 +87,53 @@ class MedicalFavouriteApi extends Controller
                 return response()->json($medical_favourite);
             }
             return response('Adding favorite medical encountered an error', 400);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response($exception, 400);
         }
+    }
+
+    public function updateWishListMedical(Request $request)
+    {
+        $userID = $request->input('user_id');
+        $medical_id = $request->input('medical_id');
+        $medical_type = $request->input('medical_type');
+
+        $mediFavourite = MedicalFavourite::where([
+            ['user_id', $userID],
+            ['medical_id', $medical_id],
+            ['type', $medical_type]
+        ])->first();
+
+        if (!$mediFavourite) {
+            $mediFavourite = new MedicalFavourite();
+            $mediFavourite->user_id = $userID;
+            $mediFavourite->medical_id = $medical_id;
+            $mediFavourite->type = $medical_type;
+
+            $success = $mediFavourite->save();
+            if ($success) {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Add to wishlist success'
+                ]);
+            }
+        } else {
+            $success = MedicalFavourite::where([
+                ['user_id', $userID],
+                ['medical_id', $medical_id],
+                ['type', $medical_type]
+            ])->delete();
+            if ($success) {
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Remove from wishlist success'
+                ]);
+            }
+        }
+        return response()->json([
+            'status' => false,
+            'message' => 'Add to wishlist error'
+        ]);
     }
 
     public function delete($id)

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Enums\DoctorDepartmentStatus;
-use App\Enums\DoctorInfoStatus;
 use App\Enums\online_medicine\OnlineMedicineStatus;
 use App\Enums\QuestionStatus;
 use App\Enums\SearchMentoring;
@@ -15,7 +14,6 @@ use App\Models\Answer;
 use App\Models\CalcViewQuestion;
 use App\Models\Clinic;
 use App\Models\DoctorDepartment;
-use App\Models\DoctorInfo;
 use App\Models\online_medicine\CategoryProduct;
 use App\Models\online_medicine\ProductMedicine;
 use App\Models\Province;
@@ -23,7 +21,6 @@ use App\Models\Question;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
@@ -65,8 +62,7 @@ class ExaminationController extends Controller
         $locationId = array_key_exists('location_id', $arrParam) ? $arrParam['location_id'] : null;
         $name = array_key_exists('name', $arrParam) ? $arrParam['name'] : null;
 
-        $query = User::where('member', TypeMedical::PHAMACISTS)
-            ->where('status', UserStatus::ACTIVE);
+        $query = User::where('member', TypeMedical::PHAMACISTS)->where('status', UserStatus::ACTIVE);
 
         if (!empty($categoryId)) {
             $query->where('category_id', $categoryId);
@@ -77,7 +73,7 @@ class ExaminationController extends Controller
         }
 
         if (!empty($name)) {
-            $query->where('name', 'LIKE', '%' . $name . '%');
+            $query->where('name', 'LIKE', '%'.$name.'%');
         }
 
 
@@ -87,11 +83,8 @@ class ExaminationController extends Controller
 
         $newPhamrmacists = $query->orderBy('id', 'DESC')->limit($limitPerPages)->get();
 
-        $allPhamrmacists = $query
-            ->where('time_working_1', '00:00-23:59')
-            ->where('time_working_2', 'T2-CN')
-            ->limit($limitPerPages)
-            ->get();
+        $allPhamrmacists = $query->where('time_working_1', '00:00-23:59')->where('time_working_2',
+                'T2-CN')->limit($limitPerPages)->get();
 
         $provinces = Province::all();
 
@@ -116,8 +109,7 @@ class ExaminationController extends Controller
 
     public function bestPharmacists()
     {
-        $bestPhamrmacists = Clinic::where('type', TypeBusiness::PHARMACIES)->orderBy('count',
-            'DESC')->limit(16)->get();
+        $bestPhamrmacists = Clinic::where('type', TypeBusiness::PHARMACIES)->orderBy('count', 'DESC')->limit(16)->get();
         return view('examination.bestpharmacists', compact('bestPhamrmacists'));
     }
 
