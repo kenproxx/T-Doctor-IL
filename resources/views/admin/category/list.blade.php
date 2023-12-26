@@ -57,8 +57,12 @@
 
                     html = html + `<tr>
                                         <th scope="row">${i + 1}</th>
-                                        <td>${data.name}</td>
-                                        <td>${data.description}</td>
+                                        <td>
+                                            <span class="text-shortcut">${data.name}</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-shortcut">${data.description}</span>
+                                        </td>
                                         <td>${data.parent_id}</td>
                                         <td>${data.status}</td>
                                         <td>

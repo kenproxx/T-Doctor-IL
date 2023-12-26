@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\BookingStatus;
+use App\Enums\CouponApplyStatus;
 use App\Enums\CouponStatus;
 use App\Enums\MessageStatus;
 use App\Enums\ProductStatus;
@@ -16,7 +17,6 @@ use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Hash;
 use ReflectionClass;
 
 class HomeController extends Controller
@@ -123,7 +123,10 @@ class HomeController extends Controller
 
     public function listApplyCoupon($id)
     {
-        $applyCoupons = CouponApply::where('coupon_id', $id)->get();
+        $applyCoupons = CouponApply::where('coupon_id', $id)
+            ->where('status', '!=', CouponApplyStatus::DELETED)
+            ->orderBy('id', 'desc')
+            ->paginate(10);
         return view('admin.coupon.tab-list-apply-coupon', compact('applyCoupons'));
     }
 
