@@ -92,8 +92,9 @@
 @include('sweetalert::alert')
 <div id="content">
     @yield('content')
-    @include('layouts.partials.footer')
 </div>
+@include('layouts.partials.footer')
+
 <!-- Back to top -->
 <div class="btn-back-to-top" id="myBtn">
     <span class="symbol-btn-back-to-top">

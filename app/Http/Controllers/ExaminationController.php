@@ -29,7 +29,18 @@ class ExaminationController extends Controller
     public function index()
     {
         $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
-        return view('examination.index', compact('departments'));
+
+        $perPage = 12;
+
+        $query = User::where('member', TypeMedical::DOCTORS)->where('status', UserStatus::ACTIVE);
+
+        $bestDoctorInfos = $query->limit($perPage)->get();
+        $newDoctorInfos = $query->orderBy('id', 'DESC')->limit($perPage)->get();
+        $availableDoctorInfos = $query->where('time_working_1', '00:00-23:59')->where('time_working_2',
+            'T2-CN')->limit($perPage)->get();
+
+        return view('examination.index',
+            compact('departments', 'bestDoctorInfos', 'newDoctorInfos', 'availableDoctorInfos'));
     }
 
     public function infoDoctor($id)
@@ -42,17 +53,36 @@ class ExaminationController extends Controller
 
     public function bestDoctor()
     {
-        return view('examination.bestdoctor');
+        $perPage = 12;
+
+        $query = User::where('member', TypeMedical::DOCTORS)->where('status', UserStatus::ACTIVE);
+
+        $doctors = $query->paginate($perPage);
+        $title = __('home.Best doctor');
+        return view('examination.showDoctorByType', compact('doctors', 'title'));
     }
 
     public function newDoctor()
     {
-        return view('examination.newdoctor');
+        $perPage = 12;
+
+        $query = User::where('member', TypeMedical::DOCTORS)->where('status', UserStatus::ACTIVE);
+
+        $doctors = $query->orderBy('id', 'DESC')->paginate($perPage);
+        $title = __('home.New doctor');
+        return view('examination.showDoctorByType', compact('doctors', 'title'));
     }
 
     public function availableDoctor()
     {
-        return view('examination.availabledoctor');
+        $perPage = 12;
+
+        $query = User::where('member', TypeMedical::DOCTORS)->where('status', UserStatus::ACTIVE);
+
+        $doctors = $query->where('time_working_1', '00:00-23:59')->where('time_working_2',
+            'T2-CN')->paginate($perPage);
+        $title = __('home.24/7 Available doctor');
+        return view('examination.showDoctorByType', compact('doctors', 'title'));
     }
 
     public function findMyMedicine(Request $request)
@@ -84,7 +114,7 @@ class ExaminationController extends Controller
         $newPhamrmacists = $query->orderBy('id', 'DESC')->limit($limitPerPages)->get();
 
         $allPhamrmacists = $query->where('time_working_1', '00:00-23:59')->where('time_working_2',
-                'T2-CN')->limit($limitPerPages)->get();
+            'T2-CN')->limit($limitPerPages)->get();
 
         $provinces = Province::all();
 
