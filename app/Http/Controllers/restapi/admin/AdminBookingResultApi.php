@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\restapi\admin;
 
 use App\Enums\BookingResultStatus;
-use App\Enums\BookingStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\restapi\MainApi;
@@ -88,7 +87,10 @@ class AdminBookingResultApi extends Controller
     {
         $service_name = $request->input('service_result');
 
-        $code = 'BR' . (new MainController())->generateRandomString(8);
+        $code = $request->input('code');
+        if (!$code){
+            $code = 'BR' . (new MainController())->generateRandomString(8);
+        }
 
         $result_input = $request->input('result');
         $result_input_en = $request->input('result_en');
@@ -102,8 +104,8 @@ class AdminBookingResultApi extends Controller
 
         $user_id = $request->input('user_id');
         $created_by = $request->input('created_by');
-        $status =  $request->input('status');
-        if (!$status){
+        $status = $request->input('status');
+        if (!$status) {
             $status = BookingResultStatus::ACTIVE;
         }
 

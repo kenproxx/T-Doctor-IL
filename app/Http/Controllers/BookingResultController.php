@@ -35,6 +35,9 @@ class BookingResultController extends Controller
             return back();
         }
         $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
-        return view('admin.booking.detail-booking-result', compact('result', 'services'));
+
+        $value_result = '[' . $result->result . ']';
+        $array_result = json_decode($value_result, true);
+        return view('admin.booking.detail-booking-result', compact('result', 'services', 'array_result'));
     }
 }

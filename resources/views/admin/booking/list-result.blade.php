@@ -10,7 +10,6 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">ServiceName</th>
-                <th scope="col">Result</th>
                 <th scope="col">Code</th>
                 <th scope="col">Create By</th>
                 <th scope="col">BusinessName</th>
@@ -39,9 +38,6 @@
                     @endphp
                     <td>
                         {{ $service_name }}
-                    </td>
-                    <td>
-                        {{ $result->result }}
                     </td>
                     <td>
                         {{ $result->code }}
