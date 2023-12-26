@@ -40,27 +40,30 @@
                 <td>{{ User::getMemberNameByID($user->id) }}</td>
                 <td>{{ $user->status }}</td>
                 <td>
-                    <a href="{{ asset($user->business_license_img ?? $user->medical_license_img) }}"
-                       class="btn btn-info" target="_blank">{{ __('home.View License') }}
-                    </a>
-                    <button onclick="updateUser('{{ $user->id }}', '{{ UserStatus::BLOCKED }}')"
-                            class="btn btn-danger">{{ __('home.Reject') }}
-                    </button>
-                    <button onclick="updateUser('{{ $user->id }}', '{{ UserStatus::ACTIVE }}')"
-                            class="btn btn-primary">{{ __('home.Approve') }}
-                    </button>
+                    @if($user->business_license_img || $user->medical_license_img)
+                        <a href="{{ asset($user->business_license_img ?? $user->medical_license_img) }}"
+                           class="btn btn-info" target="_blank">{{ __('home.View License') }}
+                        </a>
+                    @else
+                        <button type="button" onclick="alertMessage()"
+                                class="btn btn-info">{{ __('home.View License') }}
+                            @endif
+                            <button onclick="updateUser('{{ $user->id }}', '{{ UserStatus::BLOCKED }}')"
+                                    class="btn btn-danger">{{ __('home.Reject') }}
+                            </button>
+                            <button onclick="updateUser('{{ $user->id }}', '{{ UserStatus::ACTIVE }}')"
+                                    class="btn btn-primary">{{ __('home.Approve') }}
+                            </button>
                 </td>
             </tr>
         @endforeach
         </tbody>
-        <div> {{$users->links()}}</div>
     </table>
     <div class="d-flex justify-content-center align-items-center">
         {{$users->links()}}
     </div>
     <script>
-
-        function updateUser(id, value) {
+        async function updateUser(id, value) {
             if (confirm('{{ __('home.Bạn có chắc chắn muốn thay đổi không') }}?')) {
 
                 loadingMasterPage();
@@ -75,7 +78,7 @@
                 formData.append('status', value);
 
                 try {
-                    $.ajax({
+                    await $.ajax({
                         url: url,
                         method: 'POST',
                         headers: headers,
@@ -99,6 +102,10 @@
             }
         }
 
+
+        function alertMessage() {
+            alert('The license not found!')
+        }
     </script>
 
 @endsection

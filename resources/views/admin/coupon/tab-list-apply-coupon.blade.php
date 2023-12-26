@@ -47,6 +47,9 @@
             @endforeach
             </tbody>
         </table>
+        <div class="d-flex justify-content-center align-items-center">
+            {{ $applyCoupons->links() }}
+        </div>
     </div>
 
     <script>
