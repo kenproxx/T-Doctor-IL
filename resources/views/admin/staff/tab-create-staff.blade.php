@@ -1,10 +1,12 @@
 @php use App\Enums\Role; @endphp
 @extends('layouts.admin')
-
+@section('title')
+    {{ __('home.create') }}
+@endsection
 @section('main-content')
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">{{ __('home.Edit') }}</h1>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('home.create') }}</h1>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -36,6 +38,10 @@
                 <input type="email" class="form-control" id="email" name="email">
             </div>
             <div>
+                <label for="phone">{{ __('home.PhoneNumber') }}</label>
+                <input type="number" class="form-control" id="phone" name="phone">
+            </div>
+            <div>
                 <label for="password">{{ __('home.Password') }}</label>
                 <input type="password" class="form-control" id="password" name="password">
             </div>
@@ -45,7 +51,8 @@
             </div>
         </form>
         <div hidden>
-            <label for="manager_id"></label><input type="text" class="form-control" id="manager_id" name="manager_id" value="{{Auth::user()->id}}">
+            <label for="manager_id"></label><input type="text" class="form-control" id="manager_id" name="manager_id"
+                                                   value="{{Auth::user()->id}}">
         </div>
     </div>
     <button type="button" class="btn btn-primary up-date-button mt-md-4">{{ __('home.Save') }}</button>
@@ -57,11 +64,12 @@
                 };
                 const formData = new FormData();
 
-                const arrField = ['username', 'member', 'email', 'password', 'password_confirm', 'manager_id'];
+                const arrField = ['username', 'member', 'email', 'phone', 'password', 'password_confirm', 'manager_id'];
 
                 arrField.forEach((field) => {
                     formData.append(field, $(`#${field}`).val().trim());
                 });
+
                 formData.append('_token', '{{ csrf_token() }}');
 
                 try {

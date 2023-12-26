@@ -25,6 +25,7 @@ class BackendStaffController extends Controller
             $username = $request->input('username');
             $member = $request->input('member');
             $email = $request->input('email');
+            $phone = $request->input('phone');
             $password = $request->input('password');
             $password_confirm = $request->input('password_confirm');
             $manager_id = $request->input('manager_id');
@@ -58,6 +59,11 @@ class BackendStaffController extends Controller
                 return response('Email đã tồn tại', 400);
             }
 
+            $isExistPhone = User::isExistPhone($phone);
+            if ($isExistPhone) {
+                return response('Phone đã tồn tại', 400);
+            }
+
             if (strlen($password) < 8) {
                 return response('Password phải có ít nhất 8 ký tự', 400);
             }
@@ -75,7 +81,7 @@ class BackendStaffController extends Controller
 
             $user->name = '';
             $user->last_name = '';
-            $user->phone = '';
+            $user->phone = $phone;
             $user->address_code = '';
 
             $success = $user->save();

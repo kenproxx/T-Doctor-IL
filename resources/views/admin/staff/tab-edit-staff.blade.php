@@ -3,10 +3,12 @@
  $role = $user->type;
 @endphp
 @extends('layouts.admin')
-
+@section('title')
+    {{ __('home.Edit') }}
+@endsection
 @section('main-content')
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">{{ __('home.create') }}</h1>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('home.Edit') }}</h1>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -37,6 +39,10 @@
         <div>
             <label for="email">{{ __('home.Email') }}</label>
             <input type="email" class="form-control" id="email" name="email" value="{{ $user->email ?? '' }}">
+        </div>
+        <div>
+            <label for="phone">{{ __('home.PhoneNumber') }}</label>
+            <input type="number" class="form-control" id="phone" name="phone">
         </div>
         <div>
             <label for="password">{{ __('home.Password') }}</label>

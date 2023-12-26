@@ -46,14 +46,14 @@
                         </a>
                     @else
                         <button type="button" onclick="alertMessage()"
-                                class="btn btn-info">{{ __('home.View License') }}
-                            @endif
-                            <button onclick="updateUser('{{ $user->id }}', '{{ UserStatus::BLOCKED }}')"
-                                    class="btn btn-danger">{{ __('home.Reject') }}
-                            </button>
-                            <button onclick="updateUser('{{ $user->id }}', '{{ UserStatus::ACTIVE }}')"
-                                    class="btn btn-primary">{{ __('home.Approve') }}
-                            </button>
+                                class="btn btn-info">{{ __('home.View License') }}</button>
+                    @endif
+                    <button onclick="updateUser('{{ $user->id }}', '{{ UserStatus::BLOCKED }}')"
+                            class="btn btn-danger">{{ __('home.Reject') }}
+                    </button>
+                    <button onclick="updateUser('{{ $user->id }}', '{{ UserStatus::ACTIVE }}')"
+                            class="btn btn-primary">{{ __('home.Approve') }}
+                    </button>
                 </td>
             </tr>
         @endforeach
