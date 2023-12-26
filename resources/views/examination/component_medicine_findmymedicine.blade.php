@@ -236,7 +236,7 @@
                 </div>
                 <div class="div-wrapper">
                     <a href="{{ route('medicine.detail', $medicine->id) }}">
-                        <div class="text-wrapper-4">See Detail</div>
+                        <div class="text-wrapper-4">{{ __('home.See details') }}</div>
                     </a>
                 </div>
             </div>
