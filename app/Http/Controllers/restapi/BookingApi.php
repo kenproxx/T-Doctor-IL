@@ -168,4 +168,11 @@ class BookingApi extends Controller
             return response()->json(['error' => 'Missing user id parameter'], 400);
         }
     }
+
+    public function getAllBooking()
+    {
+        $arrayBookings = Booking::all();
+
+        return response()->json($arrayBookings);
+    }
 }

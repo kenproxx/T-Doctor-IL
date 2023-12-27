@@ -36,17 +36,7 @@ class FamilyManagementController extends Controller
             ], 400);
         }
 
-        $family_code = $thisFamily->family_code;
-
-        $userInFamily = FamilyManagement::where('family_code', $family_code)->pluck('user_id')->toArray();
-
-        $users = User::where([
-            ['id', '!=', auth()->user()->id],
-            ['status', '=', UserStatus::ACTIVE],
-            ['member', '=', Role::NORMAL_PEOPLE]
-        ])->whereNotIn('id', $userInFamily)->get();
-
-        return view('admin.family_management.add_member', compact('users'));
+        return view('admin.family_management.add_member');
     }
 
     public function store(Request $request, $type)
@@ -136,9 +126,22 @@ class FamilyManagementController extends Controller
         }
 
         try {
-            $this->validParam($request);
+            $this->validParam($request, $id);
         } catch (ValidationException $exception) {
             return response()->json(['errors' => $exception->errors()], 400);
+        }
+
+        if ($request->hasFile('avatar')) {
+            $oldAvatarPath = $member->avatar;
+            if ($oldAvatarPath) {
+                $oldAvatarPath = str_replace(asset('storage/'), '', $oldAvatarPath);
+                Storage::disk('public')->delete($oldAvatarPath);
+            }
+
+            $item = $request->file('avatar');
+            $itemPath = $item->store('family_avatar', 'public');
+            $avatar = asset('storage/' . $itemPath);
+            $member->avatar = $avatar;
         }
 
         $params = $request->only('relationship', 'name', 'date_of_birth', 'number_phone', 'email', 'sex',
