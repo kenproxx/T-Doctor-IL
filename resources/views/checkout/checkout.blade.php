@@ -243,7 +243,7 @@
                             </div>
                         </div>
                         <div class="d-none">
-                            <input id="address" name="address" value="">
+                            <input id="address" name="address_checkout" value="">
                             <input id="order_method" name="order_method" value="">
 
                             <input id="user_id" name="user_id"
@@ -311,7 +311,8 @@
                 let address_detail = $('#address_detail').val();
 
                 let address = address_detail + '-' + district + '-' + province;
-                $('#address').val(address);
+                // $('#address').val(address);
+                document.getElementsByName('address_checkout')[0].value = address;
             })
 
             function calculateTotal() {

@@ -39,7 +39,8 @@ class CheckoutApi extends Controller
         $full_name = $request->input('full_name');
         $email = $request->input('email');
         $phone = $request->input('phone');
-        $address = $request->input('address');
+        $address = $request->input('address_checkout');
+
 
         $total = $request->input('total_fee');
         $ship = $request->input('shipping_fee');
