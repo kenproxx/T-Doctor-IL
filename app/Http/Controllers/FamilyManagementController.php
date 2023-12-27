@@ -212,19 +212,19 @@ class FamilyManagementController extends Controller
         ], 400);
     }
 
-    private function validParam($request)
+    private function validParam($request, $id = null)
     {
         $request->validate([
             'email' => [
                 'string',
                 'email',
                 'max:255',
-                Rule::unique('family_management', 'email')->ignore($request->input('email')),
+                Rule::unique('family_management', 'email')->ignore($id),
             ],
             'number_phone' => [
                 'numeric',
                 'digits_between:8,12',
-                Rule::unique('family_management', 'number_phone')->ignore($request->input('number_phone')),
+                Rule::unique('family_management', 'number_phone')->ignore($id),
             ],
         ]);
     }
@@ -293,7 +293,7 @@ class FamilyManagementController extends Controller
         }
 
         try {
-            $this->validParam($request);
+            $this->validParam($request, $family->id);
         } catch (ValidationException $exception) {
             return response()->json(['errors' => $exception->errors()], 400);
         }
