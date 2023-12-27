@@ -197,7 +197,7 @@
                 <i class="{{ $heart }} bi"></i></div>
         @endif
         <div class="component department-div">
-            <img loading="lazy" class="fills" src="{{ $department->thumbnail }}"/>
+            <img loading="lazy" class="fills" src="{{ $department->thumbnail ?? ''}}"/>
         </div>
     </div>
 </div>
