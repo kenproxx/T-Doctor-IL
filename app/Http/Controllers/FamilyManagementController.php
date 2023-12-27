@@ -8,6 +8,7 @@ use App\Enums\UserStatus;
 use App\Models\FamilyManagement;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
@@ -15,13 +16,7 @@ class FamilyManagementController extends Controller
 {
     public function index()
     {
-        $user = auth()->user();
-        $family = FamilyManagement::where('user_id', $user->id)->first();
-
-        $family_code = $family ? $family->family_code : null;
-
-        $family_members = $family_code ? FamilyManagement::where('family_code',
-            $family_code)->get() : collect(); // Use an empty collection if family_code is null
+        $family_members = FamilyManagement::where('user_id', auth()->user()->id)->get();
 
         return view('admin.family_management.index', compact('family_members'));
     }
@@ -45,8 +40,11 @@ class FamilyManagementController extends Controller
 
         $userInFamily = FamilyManagement::where('family_code', $family_code)->pluck('user_id')->toArray();
 
-        $users = User::where([['id', '!=', auth()->user()->id], ['status', '=', UserStatus::ACTIVE], ['member', '=', Role::NORMAL_PEOPLE]])->whereNotIn('id',
-                $userInFamily)->get();
+        $users = User::where([
+            ['id', '!=', auth()->user()->id],
+            ['status', '=', UserStatus::ACTIVE],
+            ['member', '=', Role::NORMAL_PEOPLE]
+        ])->whereNotIn('id', $userInFamily)->get();
 
         return view('admin.family_management.add_member', compact('users'));
     }
@@ -79,13 +77,32 @@ class FamilyManagementController extends Controller
 
                 $family = new FamilyManagement();
                 $family->family_code = $family_code;
-                $family->user_id = $request->input('user_id');
+                $family->user_id = auth()->user()->id;
 
                 break;
         }
 
         if (!$family) {
             return redirect()->back()->with('error', 'Không tìm thấy thông tin gia đình');
+        }
+
+        try {
+            $this->validParam($request);
+        } catch (ValidationException $exception) {
+            return response()->json(['errors' => $exception->errors()], 400);
+        }
+
+        if ($request->hasFile('avatar')) {
+            $oldAvatarPath = $family->avatar;
+            if ($oldAvatarPath) {
+                $oldAvatarPath = str_replace(asset('storage/'), '', $oldAvatarPath);
+                Storage::disk('public')->delete($oldAvatarPath);
+            }
+
+            $item = $request->file('avatar');
+            $itemPath = $item->store('family_avatar', 'public');
+            $avatar = asset('storage/' . $itemPath);
+            $family->avatar = $avatar;
         }
 
         $params = $request->only('relationship', 'name', 'date_of_birth', 'number_phone', 'email', 'sex', 'province_id',
@@ -99,19 +116,13 @@ class FamilyManagementController extends Controller
 
     public function edit($id)
     {
-        $currentUser = auth()->user()->id;
         $member = FamilyManagement::where('id', $id)->first();
 
-        $thisFamily = FamilyManagement::where('user_id', $currentUser)->first();
-        if (!$thisFamily) {
-            return response()->json([
-                'message' => 'Bạn chưa có thông tin gia đình',
-            ], 400);
+        if (!$member) {
+            $member = null;
         }
 
-        $users = User::where('id', $member->user_id)->first();
-
-        return view('admin.family_management.edit', compact('member', 'id', 'users'));
+        return view('admin.family_management.edit', compact('member', 'id'));
     }
 
     public function update(Request $request, $id)
@@ -123,7 +134,14 @@ class FamilyManagementController extends Controller
                 'message' => 'Không tìm thấy thông tin gia đình',
             ], 400);
         }
-        $params = $request->only('user_id', 'relationship', 'name', 'date_of_birth', 'number_phone', 'email', 'sex',
+
+        try {
+            $this->validParam($request);
+        } catch (ValidationException $exception) {
+            return response()->json(['errors' => $exception->errors()], 400);
+        }
+
+        $params = $request->only('relationship', 'name', 'date_of_birth', 'number_phone', 'email', 'sex',
             'province_id', 'district_id', 'ward_id', 'detail_address');
         $member->fill($params);
         $member->save();
@@ -149,9 +167,9 @@ class FamilyManagementController extends Controller
     }
 
 
-    public function indexApi($user_id)
+    public function indexApi($current_user_id)
     {
-        $user = User::where('id', $user_id)->first();
+        $user = User::where('id', $current_user_id)->first();
 
         if (!$user) {
             return response()->json([
@@ -159,37 +177,27 @@ class FamilyManagementController extends Controller
             ], 400);
         }
 
-        $family = FamilyManagement::where('user_id', $user_id)->first();
+        $family_members = FamilyManagement::where('user_id', $current_user_id)->get();
 
-        if (!$family) {
+        if (!$family_members) {
             return response()->json([
                 'message' => 'Nguời dùng chưa có thông tin gia đình',
             ], 400);
         }
 
-        $family_code = $family->family_code;
-
-        $family_members = $family_code ? FamilyManagement::where('family_code',
-            $family_code)->get() : collect(); // Use an empty collection if family_code is null
-
         return response()->json($family_members, 200);
     }
 
-    public function createApi(Request $request, $user_id)
+
+    // tạo mới gia đình
+    public function createApi(Request $request, $current_user_id)
     {
-        $user = User::where('id', $user_id)->first();
 
-        if (!$user) {
-            return response()->json([
-                'message' => 'Không tìm thấy người dùng',
-            ], 400);
-        }
-
-        $family = FamilyManagement::where('user_id', $user_id)->first();
+        $family = FamilyManagement::where('user_id', $current_user_id)->first();
 
         if ($family) {
             return response()->json([
-                'message' => 'Nguời dùng đã có thông tin gia đình',
+                'message' => 'Bạn đã có thông tin gia đình',
             ], 400);
         }
 
@@ -200,8 +208,88 @@ class FamilyManagementController extends Controller
         }
 
         $family = new FamilyManagement();
-        $family->user_id = $user_id;
+        $family->user_id = $current_user_id;
         $family->family_code = (new MainController())->generateRandomString(10);
+
+        $params = $request->only('relationship', 'name', 'date_of_birth', 'number_phone', 'email', 'sex', 'province_id',
+            'district_id', 'ward_id', 'detail_address');
+        $family->fill($params);
+
+        if ($request->hasFile('avatar')) {
+            $item = $request->file('avatar');
+            $itemPath = $item->store('family_avatar', 'public');
+            $avatar = asset('storage/' . $itemPath);
+            $family->avatar = $avatar;
+        }
+
+        $success = $family->save();
+
+        if ($success) {
+            return response()->json([
+                'message' => 'Tạo thông tin gia đình thành công',
+            ], 200);
+        }
+        return response()->json([
+            'message' => 'Tạo thông tin gia đình thất bại',
+        ], 400);
+    }
+
+    private function validParam($request, $id = null)
+    {
+        $request->validate([
+            'email' => [
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('family_management', 'email')->ignore($id),
+            ],
+            'number_phone' => [
+                'numeric',
+                'digits_between:8,12',
+                Rule::unique('family_management', 'number_phone')->ignore($id),
+            ],
+        ]);
+    }
+
+
+    // tạo mới thành viên gia đình
+    public function storeApi(Request $request, $current_user_id)
+    {
+
+        $user = User::where('id', $current_user_id)->first();
+
+        if (!$user) {
+            return response()->json([
+                'message' => 'Không tìm thấy người dùng',
+            ], 400);
+        }
+
+        $hasFamily = FamilyManagement::where('user_id', $current_user_id)->first();
+
+        if (!$hasFamily) {
+            return response()->json([
+                'message' => 'Cần tạo gia đình trước',
+            ], 400);
+        }
+
+        try {
+            $this->validParam($request);
+        } catch (ValidationException $exception) {
+            return response()->json(['errors' => $exception->errors()], 400);
+        }
+
+        $family = new FamilyManagement();
+
+        if ($request->hasFile('avatar')) {
+            $item = $request->file('avatar');
+            $itemPath = $item->store('family_avatar', 'public');
+            $avatar = asset('storage/' . $itemPath);
+            $family->avatar = $avatar;
+        }
+
+        $family->family_code = $hasFamily->family_code;
+
+        $family->user_id = $current_user_id;
 
         $params = $request->only('relationship', 'name', 'date_of_birth', 'number_phone', 'email', 'sex', 'province_id',
             'district_id', 'ward_id', 'detail_address');
@@ -217,104 +305,40 @@ class FamilyManagementController extends Controller
         return response()->json([
             'message' => 'Thêm thông tin gia đình thất bại',
         ], 400);
-    }
-
-    private function validParam($request)
-    {
-        $request->validate([
-            'email' => [
-                'string',
-                'email',
-                'max:255',
-                Rule::unique('family_management', 'email')->ignore($request->input('email')),
-            ],
-            'number_phone' => [
-                'numeric',
-                'digits_between:8,12',
-                Rule::unique('family_management', 'number_phone')->ignore($request->input('number_phone')),
-            ],
-        ]);
-    }
-
-    public function storeApi(Request $request, $current_user_id)
-    {
-        $user_id = $request->input('user_id');
-
-        $user = User::where('id', $user_id)->first();
-
-        if (!$user) {
-            return response()->json([
-                'message' => 'Không tìm thấy người dùng',
-            ], 400);
-        }
-
-        $family = FamilyManagement::where('user_id', $user_id)->first();
-
-        if ($family) {
-            return response()->json([
-                'message' => 'Nguời dùng đã có thông tin gia đình',
-            ], 400);
-        }
-
-        try {
-            $this->validParam($request);
-        } catch (ValidationException $exception) {
-            return response()->json(['errors' => $exception->errors()], 400);
-        }
-
-        $familyCurrentUser = FamilyManagement::where('user_id', $current_user_id)->first();
-
-        if (!$familyCurrentUser) {
-            return response()->json([
-                'message' => 'Nguời dùng chưa có thông tin gia đình',
-            ], 400);
-        }
-
-        $family = new FamilyManagement();
-
-        $family->user_id = $user_id;
-        $family->family_code = $familyCurrentUser->family_code;
-
-
-        $params = $request->only( 'relationship', 'name', 'date_of_birth', 'number_phone', 'email', 'sex', 'province_id',
-            'district_id', 'ward_id', 'detail_address');
-        $family->fill($params);
-
-        $success = $family->save();
-
-        if ($success) {
-            return response()->json([
-                'message' => 'Thêm thông tin gia đình thành công',
-            ], 200);
-        }
-        return response()->json([
-            'message' => 'Thêm thông tin gia đình thất bại',
-        ], 400);
 
     }
 
-    public function updateApi(Request $request, $user_id)
+
+    // cập nhật thông tin gia đình
+    public function updateApi(Request $request, $id)
     {
-        $user = User::where('id', $user_id)->first();
 
-        if (!$user) {
-            return response()->json([
-                'message' => 'Không tìm thấy người dùng',
-            ], 400);
-        }
-
-        $family = FamilyManagement::where('user_id', $user_id)->first();
+        $family = FamilyManagement::where('id', $id)->first();
 
         if (!$family) {
             return response()->json([
-                'message' => 'Nguời dùng chưa có thông tin gia đình',
+                'message' => 'Không tìm thấy thông tin gia đình',
             ], 400);
         }
 
         try {
-            $this->validParam($request);
+            $this->validParam($request, $family->id);
         } catch (ValidationException $exception) {
             return response()->json(['errors' => $exception->errors()], 400);
+        }
+
+        $family = FamilyManagement::where('id', $id)->first();
+        if ($request->hasFile('avatar')) {
+            $oldAvatarPath = $family->avatar;
+            if ($oldAvatarPath) {
+                $oldAvatarPath = str_replace(asset('storage/'), '', $oldAvatarPath);
+                Storage::disk('public')->delete($oldAvatarPath);
+            }
+
+            $item = $request->file('avatar');
+            $itemPath = $item->store('family_avatar', 'public');
+            $avatar = asset('storage/' . $itemPath);
+            $family->avatar = $avatar;
         }
 
         $params = $request->only('relationship', 'name', 'date_of_birth', 'number_phone', 'email', 'sex', 'province_id',
@@ -334,21 +358,14 @@ class FamilyManagementController extends Controller
         ], 400);
     }
 
-    public function destroyApi($user_id)
+    public function destroyApi($id)
     {
-        $user = User::where('id', $user_id)->first();
 
-        if (!$user) {
-            return response()->json([
-                'message' => 'Không tìm thấy người dùng',
-            ], 400);
-        }
-
-        $family = FamilyManagement::where('user_id', $user_id)->first();
+        $family = FamilyManagement::where('id', $id)->first();
 
         if (!$family) {
             return response()->json([
-                'message' => 'Nguời dùng chưa có thông tin gia đình',
+                'message' => 'Không tìm thấy thông tin gia đình',
             ], 400);
         }
 

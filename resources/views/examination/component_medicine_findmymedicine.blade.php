@@ -217,7 +217,7 @@
 @endphp
 <div class="col-sm-3 mb-3">
     <div class="m-4">
-        <div class="frame w-100"><img loading="lazy" class="rectangle border-img"
+        <div class="frame component-medicine w-100"><img loading="lazy" class="rectangle border-img"
                                       src="{{asset($medicine->thumbnail)}}"/>
             <div class="div">
                 <div class="div-2">
@@ -257,6 +257,14 @@
 
 
 <script>
+
+    $(document).ready(function () {
+        $('.frame.component-medicine .frame-wrapper-heart').on('click', function () {
+            $(this).find('i').toggleClass('bi-heart');
+            $(this).find('i').toggleClass('bi-heart-fill');
+        })
+    });
+
     function handleAddMedicineToWishList(id) {
 
         let headers = {

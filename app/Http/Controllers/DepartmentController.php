@@ -13,7 +13,7 @@ class DepartmentController extends Controller
     {
         $departments = Department::where('status', DepartmentStatus::ACTIVE)
             ->orderBy('id', 'desc')
-            ->get();
+            ->paginate(10);
 
         return view('admin.department_symptom.lists-department', ['departments' => $departments]);
     }

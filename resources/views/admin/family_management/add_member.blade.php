@@ -6,21 +6,6 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
-                <label for="user_id">{{ __('home.Username') }}</label>
-                @if($users->isNotEmpty())
-                    <select class="custom-select form-control" id="user_id" name="user_id">
-                        @foreach($users as $id => $user)
-                            <option value="{{ $user->id }}">{{ $user->name }} - {{ $user->email }}</option>
-                        @endforeach
-                    </select>
-                @else
-                    <input type="text" class="form-control" id="user_id" name="user_id" disabled
-                           placeholder="Không có user nào có role là Normal">
-                @endif
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
                 <label for="name">{{ __('home.Name') }}</label>
                 <input type="text" class="form-control" id="name" name="name">
             </div>
@@ -106,7 +91,7 @@
         function submitForm() {
             let formData = new FormData();
             let isValid = true;
-            let arrInput = ['user_id', 'name', 'date_of_birth',
+            let arrInput = ['name', 'date_of_birth',
                 'number_phone', 'email', 'sex',
                 'relationship', 'province_id', 'district_id',
                 'ward_id', 'detail_address'];
@@ -134,7 +119,18 @@
                 },
                 error: function (error) {
                     console.log(error)
-                    alert(error.responseJSON.message);
+                    if (error.responseJSON.errors) {
+                        let errors = error.responseJSON.errors;
+                        for (let key in errors) {
+                            if (errors.hasOwnProperty(key)) {
+                                let value = errors[key];
+                                alert(value[0]);
+                                break;
+                            }
+                        }
+                    } else {
+                        alert(error.responseJSON.message);
+                    }
                 }
             });
         }

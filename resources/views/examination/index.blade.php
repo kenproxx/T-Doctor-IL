@@ -27,7 +27,8 @@
                 </div>
                 <div class="form-group has-search">
                     <span class="fa fa-search form-control-feedback"></span>
-                    <input type="text" onkeyup="performSearchDoctor()" id="inputSearchDoctor" class="form-control" placeholder="{{ __('home.Search for anything…') }}">
+                    <input type="text" onkeyup="performSearchDoctor()" id="inputSearchDoctor" class="form-control"
+                           placeholder="{{ __('home.Search for anything…') }}">
                 </div>
             </div>
         </div>
@@ -37,229 +38,57 @@
                     <div class="list--doctor p-0">
                         <p>{{ __('home.Best doctor') }}</p>
                     </div>
-                    <div class="ms-auto p-2"><a href="{{route('examination.best_doctor')}}">{{ __('home.See all') }}</a></div>
+                    <div class="ms-auto p-2"><a href="{{route('examination.best_doctor')}}">{{ __('home.See all') }}</a>
+                    </div>
                 </div>
             </div>
-            <div id="list-doctor-best" class="list-doctor row m-auto p-0">
-
+            <div class="row list-doctor m-auto find-my-medicine">
+                @if(count($bestDoctorInfos) > 0)
+                    @foreach($bestDoctorInfos as $pharmacist)
+                        @include('examination.component_doctor_findmymedicine', ['pharmacist' => $pharmacist])
+                    @endforeach
+                @else
+                    <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
+                @endif
             </div>
+
+
             <div class="d-flex justify-content-center" style="padding: 12px">
                 <div id="list-title-new" class="list-title d-flex">
                     <div class="list--doctor p-0">
                         <p>{{ __('home.New doctor') }}</p>
                     </div>
-                    <div class="ms-auto p-2"><a href="{{route('examination.new_doctor')}}">{{ __('home.See all') }}</a></div>
+                    <div class="ms-auto p-2"><a href="{{route('examination.new_doctor')}}">{{ __('home.See all') }}</a>
+                    </div>
                 </div>
             </div>
-            <div id="list-doctor-new" class="list-doctor row m-auto">
-
+            <div class="row list-doctor m-auto find-my-medicine">
+                @if(count($newDoctorInfos) > 0)
+                    @foreach($newDoctorInfos as $pharmacist)
+                        @include('examination.component_doctor_findmymedicine', ['pharmacist' => $pharmacist])
+                    @endforeach
+                @else
+                    <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
+                @endif
             </div>
             <div class="d-flex justify-content-center" style="padding: 12px;">
                 <div id="list-title-available" class="list-title d-flex">
                     <div class="list--doctor p-0">
                         <p>{{ __('home.24/7 Available doctor') }}</p>
                     </div>
-                    <div class="ms-auto p-2"><a href="{{route('examination.available_doctor')}}">{{ __('home.See all') }}</a></div>
+                    <div class="ms-auto p-2"><a
+                            href="{{route('examination.available_doctor')}}">{{ __('home.See all') }}</a></div>
                 </div>
             </div>
-            <div id="list-doctor-available" class="list-doctor row m-auto">
-
+            <div class="row list-doctor m-auto find-my-medicine">
+                @if(count($availableDoctorInfos) > 0)
+                    @foreach($availableDoctorInfos as $pharmacist)
+                        @include('examination.component_doctor_findmymedicine', ['pharmacist' => $pharmacist])
+                    @endforeach
+                @else
+                    <h3 class="no-data text-center">{{ __('home.no data') }}</h3>
+                @endif
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function () {
-            async function callListDoctor() {
-                await $.ajax({
-                    url: `{{route('doctors.info.restapi.list')}}/?size=4`,
-                    method: 'GET',
-                    success: function (response) {
-                        showListDoctor(response);
-                    },
-                    error: function (exception) {
-                        console.log(exception)
-                    }
-                });
-            }
-            async function callListDoctor24h() {
-                await $.ajax({
-                    url: `{{route('doctors.info.restapi.list.getDoctor24h')}}/?size=4`,
-                    method: 'GET',
-                    success: function (list) {
-                        console.log(list)
-                        showListDoctor(list);
-                    },
-                    error: function (exception) {
-                        console.log(exception)
-                    }
-                });
-            }
-
-            callListDoctor();
-            // callListDoctor24h();
-
-            function showListDoctor(res,list) {
-                let html = ``;
-                let listDoctor = ``;
-                let url = `{{ asset('storage') }}`;
-                let detailDoctor = `{{ route('examination.doctor_info', ['id' => ':id']) }}`;
-                for (let i = 0; i < res.length; i++) {
-                    let item = res[i];
-                    let mainUrl = detailDoctor.replace(':id', item['id']);
-                    let imageDoctor = item.avt;
-                    let myArray = [];
-                    if (imageDoctor) {
-                        myArray = imageDoctor.split("/storage");
-                    }
-                    html = html + `<div class="col-md-3" >
-                                    <div class="card">
-                            <i class="bi bi-heart"></i>
-                            <img src=" ${item.avt} " class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <a href="${mainUrl}"><h5 class="card-title">${item['name']}</h5></a>
-                                <p class="card-text">{{ __('home.Specialty') }}: ${item['specialty']}</p>
-                                <p class="card-text_1">{{ __('home.Location') }}: <b>${item['detail_address']}</b></p>
-                                <p class="card-text_1">{{ __('home.Working time') }}: <b>${item['time_working_1']}</b></p>
-                            </div>
-                        </div>
-                    </div>`;
-                }
-                if (list) {
-                    for (let i = 0; i < list.length; i++) {
-                        let item24h = list[i];
-                        let mainUrl = detailDoctor.replace(':id', item24h['id']);
-                        let imageDoctor24h = item24h.avt;
-                        let myArray24h = [];
-                        if (imageDoctor24h) {
-                            myArray24h = imageDoctor24h.split("/storage");
-                        }
-                        listDoctor = listDoctor + `<div class="col-md-3" >
-                                    <div class="card">
-                            <i class="bi bi-heart"></i>
-                            <img src=" ${url}${myArray24h[1]} " class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <a href="${mainUrl}"><h5 class="card-title">${item24h['name']}</h5></a>
-                                <p class="card-text">{{ __('home.Specialty') }}: ${item24h['specialty']}</p>
-                                <p class="card-text_1">{{ __('home.Location') }}: <b>${item24h['detail_address']}</b></p>
-                                <p class="card-text_1">{{ __('home.Working time') }}: <b>${item24h['time_working_1']}</b></p>
-                            </div>
-                        </div>
-                    </div>`;
-                    }
-                }
-
-                $('#list-doctor-new').empty().append(html);
-                $('#list-doctor-best').empty().append(html);
-                $('#list-doctor-available').empty().append(listDoctor);
-            }
-
-            $('.doctor-department').on('click', function () {
-                let department = $(this).data('department');
-                callListDoctorByDepartment(department);
-            })
-
-            function showListDoctorDepartment(res, department) {
-                let html = ``;
-                let url = `{{ asset('storage') }}`;
-                let detailDoctor = `{{ route('examination.doctor_info', ['id' => ':id']) }}`;
-                for (let i = 0; i < res.length; i++) {
-                    let item = res[i];
-                    let mainUrl = detailDoctor.replace(':id', item['id']);
-                    let imageDoctor = item['thumbnail'];
-                    let myArray = [];
-                    if (imageDoctor) {
-                        myArray = imageDoctor.split("/storage");
-                    }
-                    html = html + `<div class="card col-md-3" >
-                              <i class="bi bi-heart"></i>
-                            <img src=" ${url}${myArray[1]} " class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <a href="${mainUrl}"><h5 class="card-title">${item['name']}</h5></a>
-                                <p class="card-text">{{ __('home.Specialty') }}: ${item['specialty']}</p>
-                                <p class="card-text_1">{{ __('home.Location') }}: <b>${item['detail_address']}</b></p>
-                                <p class="card-text_1">{{ __('home.Working time') }}: <b>${item['time_working_1']}</b></p>
-                            </div>
-                        </div>`;
-                }
-
-                let listDoctor = `<div id="list-doctor-department" class="list-doctor row container m-auto"> ${html} </div>`;
-                let showDepartment = `<div class="d-flex justify-content-center">
-                        <div id="list-title-department" class="list-title d-flex">
-                            <div class="list--doctor p-0">
-                                <p>${department['name']}</p>
-                            </div>
-                        <div class="ms-auto p-2"><a href="{{route('examination.index')}}">{{ __('home.See all') }}</a></div>
-                        </div>
-                    </div>`;
-                let allHtml = showDepartment + listDoctor;
-                $('#show-doctor').empty().append(allHtml);
-            }
-
-            async function callListDoctorByDepartment(department) {
-                let url = `{{route('doctors.info.restapi.department', ['id' => ':id'])}}/?size=4`;
-                url = url.replace(':id', department['id']);
-                await $.ajax({
-                    url: url,
-                    method: 'GET',
-                    success: function (response) {
-                        showListDoctorDepartment(response, department);
-                    },
-                    error: function (exception) {
-                        console.log(exception)
-                    }
-                });
-            }
-        })
-    </script>
-    <script>
-        function performSearchDoctor() {
-            var searchInput = document.getElementById('inputSearchDoctor');
-            var searchValue = searchInput.value;
-            var formData = {
-                name: searchValue,
-                status: 'ACTIVE',
-            };
-            $.ajax({
-                url: "{{ route('api.backend.user.doctor.search') }}",
-                method: "GET",
-                data: formData,
-                success: function (response) {
-                    showSearchListDoctor(response);
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
-        }
-        function showSearchListDoctor(res) {
-            let html = ``;
-            let url = `{{ asset('storage') }}`;
-            let detailDoctor = `{{ route('examination.doctor_info', ['id' => ':id']) }}`;
-            for (let i = 0; i < res.length; i++) {
-                let item = res[i];
-                let mainUrl = detailDoctor.replace(':id', item['id']);
-                let imageDoctor = item.avt;
-                let myArray = [];
-                if (imageDoctor) {
-                    myArray = imageDoctor.split("/storage");
-                }
-                html = html + `<div class="col-md-3" >
-                                    <div class="card">
-                            <i class="bi bi-heart"></i>
-                            <img src=" ${url}${myArray[1]} " class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <a href="${mainUrl}"><h5 class="card-title">${item['name']}</h5></a>
-                                <p class="card-text">{{ __('home.Specialty') }}: ${item['specialty']}</p>
-                                <p class="card-text_1">{{ __('home.Location') }}: <b>${item['detail_address']}</b></p>
-                                <p class="card-text_1">{{ __('home.Working time') }}: <b>${item['time_working_1']}</b></p>
-                            </div>
-                        </div>
-                    </div>`;
-            }
-            $('#list-doctor-new').empty().append(html);
-            $('#list-doctor-best').empty().append(html);
-            $('#list-doctor-available').empty().append(html);
-        }
-
-    </script>
 @endsection
