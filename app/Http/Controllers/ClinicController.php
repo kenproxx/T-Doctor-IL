@@ -43,15 +43,25 @@ class ClinicController extends Controller
     public function detail($id)
     {
         $bookings = Clinic::find($id);
-        $userId = Auth::user()->id;
+        if (Auth::check()) {
+            $userId = Auth::user()->id;
+            if (!$bookings || $bookings->status != ClinicStatus::ACTIVE) {
+                return response("Product not found", 404);
+            }
+            if ($userId) {
+                $memberFamily = \DB::table('family_management')
+                    ->where('user_id', Auth::user()->id)
+                    ->get();
+                $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
+                return view('clinics.detailClinics', compact('id', 'bookings', 'services', 'memberFamily', 'userId'));
+            }
+        }
         if (!$bookings || $bookings->status != ClinicStatus::ACTIVE) {
             return response("Product not found", 404);
         }
-        $memberFamily = \DB::table('family_management')
-            ->where('user_id', Auth::user()->id)
-            ->get();
+
         $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
-        return view('clinics.detailClinics', compact('id', 'bookings', 'services', 'memberFamily', 'userId'));
+        return view('clinics.detailClinics', compact('id', 'bookings', 'services'));
     }
 
     public function create()
