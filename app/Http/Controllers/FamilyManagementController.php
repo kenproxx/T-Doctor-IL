@@ -45,8 +45,11 @@ class FamilyManagementController extends Controller
 
         $userInFamily = FamilyManagement::where('family_code', $family_code)->pluck('user_id')->toArray();
 
-        $users = User::where([['id', '!=', auth()->user()->id], ['status', '=', UserStatus::ACTIVE], ['member', '=', Role::NORMAL_PEOPLE]])->whereNotIn('id',
-                $userInFamily)->get();
+        $users = User::where([
+            ['id', '!=', auth()->user()->id],
+            ['status', '=', UserStatus::ACTIVE],
+            ['member', '=', Role::NORMAL_PEOPLE]
+        ])->whereNotIn('id', $userInFamily)->get();
 
         return view('admin.family_management.add_member', compact('users'));
     }
@@ -149,9 +152,9 @@ class FamilyManagementController extends Controller
     }
 
 
-    public function indexApi($user_id)
+    public function indexApi($current_user_id)
     {
-        $user = User::where('id', $user_id)->first();
+        $user = User::where('id', $current_user_id)->first();
 
         if (!$user) {
             return response()->json([
@@ -159,37 +162,27 @@ class FamilyManagementController extends Controller
             ], 400);
         }
 
-        $family = FamilyManagement::where('user_id', $user_id)->first();
+        $family_members = FamilyManagement::where('user_id', $current_user_id)->get();
 
-        if (!$family) {
+        if (!$family_members) {
             return response()->json([
                 'message' => 'Nguời dùng chưa có thông tin gia đình',
             ], 400);
         }
 
-        $family_code = $family->family_code;
-
-        $family_members = $family_code ? FamilyManagement::where('family_code',
-            $family_code)->get() : collect(); // Use an empty collection if family_code is null
-
         return response()->json($family_members, 200);
     }
 
-    public function createApi(Request $request, $user_id)
+
+    // tạo mới gia đình
+    public function createApi(Request $request, $current_user_id)
     {
-        $user = User::where('id', $user_id)->first();
 
-        if (!$user) {
-            return response()->json([
-                'message' => 'Không tìm thấy người dùng',
-            ], 400);
-        }
-
-        $family = FamilyManagement::where('user_id', $user_id)->first();
+        $family = FamilyManagement::where('user_id', $current_user_id)->first();
 
         if ($family) {
             return response()->json([
-                'message' => 'Nguời dùng đã có thông tin gia đình',
+                'message' => 'Bạn đã có thông tin gia đình',
             ], 400);
         }
 
@@ -200,7 +193,7 @@ class FamilyManagementController extends Controller
         }
 
         $family = new FamilyManagement();
-        $family->user_id = $user_id;
+        $family->user_id = $current_user_id;
         $family->family_code = (new MainController())->generateRandomString(10);
 
         $params = $request->only('relationship', 'name', 'date_of_birth', 'number_phone', 'email', 'sex', 'province_id',
@@ -211,11 +204,11 @@ class FamilyManagementController extends Controller
 
         if ($success) {
             return response()->json([
-                'message' => 'Thêm thông tin gia đình thành công',
+                'message' => 'Tạo thông tin gia đình thành công',
             ], 200);
         }
         return response()->json([
-            'message' => 'Thêm thông tin gia đình thất bại',
+            'message' => 'Tạo thông tin gia đình thất bại',
         ], 400);
     }
 
@@ -236,11 +229,12 @@ class FamilyManagementController extends Controller
         ]);
     }
 
+
+    // tạo mới thành viên gia đình
     public function storeApi(Request $request, $current_user_id)
     {
-        $user_id = $request->input('user_id');
 
-        $user = User::where('id', $user_id)->first();
+        $user = User::where('id', $current_user_id)->first();
 
         if (!$user) {
             return response()->json([
@@ -248,11 +242,11 @@ class FamilyManagementController extends Controller
             ], 400);
         }
 
-        $family = FamilyManagement::where('user_id', $user_id)->first();
+        $hasFamily = FamilyManagement::where('user_id', $current_user_id)->first();
 
-        if ($family) {
+        if (!$hasFamily) {
             return response()->json([
-                'message' => 'Nguời dùng đã có thông tin gia đình',
+                'message' => 'Cần tạo gia đình trước',
             ], 400);
         }
 
@@ -262,21 +256,13 @@ class FamilyManagementController extends Controller
             return response()->json(['errors' => $exception->errors()], 400);
         }
 
-        $familyCurrentUser = FamilyManagement::where('user_id', $current_user_id)->first();
-
-        if (!$familyCurrentUser) {
-            return response()->json([
-                'message' => 'Nguời dùng chưa có thông tin gia đình',
-            ], 400);
-        }
-
         $family = new FamilyManagement();
 
-        $family->user_id = $user_id;
-        $family->family_code = $familyCurrentUser->family_code;
+        $family->family_code = $hasFamily->family_code;
 
+        $family->user_id = $current_user_id;
 
-        $params = $request->only( 'relationship', 'name', 'date_of_birth', 'number_phone', 'email', 'sex', 'province_id',
+        $params = $request->only('relationship', 'name', 'date_of_birth', 'number_phone', 'email', 'sex', 'province_id',
             'district_id', 'ward_id', 'detail_address');
         $family->fill($params);
 
@@ -293,21 +279,16 @@ class FamilyManagementController extends Controller
 
     }
 
-    public function updateApi(Request $request, $user_id)
+
+    // cập nhật thông tin gia đình
+    public function updateApi(Request $request, $id)
     {
-        $user = User::where('id', $user_id)->first();
 
-        if (!$user) {
-            return response()->json([
-                'message' => 'Không tìm thấy người dùng',
-            ], 400);
-        }
-
-        $family = FamilyManagement::where('user_id', $user_id)->first();
+        $family = FamilyManagement::where('id', $id)->first();
 
         if (!$family) {
             return response()->json([
-                'message' => 'Nguời dùng chưa có thông tin gia đình',
+                'message' => 'Không tìm thấy thông tin gia đình',
             ], 400);
         }
 
@@ -334,21 +315,14 @@ class FamilyManagementController extends Controller
         ], 400);
     }
 
-    public function destroyApi($user_id)
+    public function destroyApi($id)
     {
-        $user = User::where('id', $user_id)->first();
 
-        if (!$user) {
-            return response()->json([
-                'message' => 'Không tìm thấy người dùng',
-            ], 400);
-        }
-
-        $family = FamilyManagement::where('user_id', $user_id)->first();
+        $family = FamilyManagement::where('id', $id)->first();
 
         if (!$family) {
             return response()->json([
-                'message' => 'Nguời dùng chưa có thông tin gia đình',
+                'message' => 'Không tìm thấy thông tin gia đình',
             ], 400);
         }
 
