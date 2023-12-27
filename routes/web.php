@@ -184,6 +184,7 @@ Route::middleware(['user.active'])->group(function () {
         Route::delete('/delete-booking/{id}', [BookingApi::class, 'cancelBooking'])->name('booking.delete.users');
         Route::delete('/cancel-booking/{id}', [BookingApi::class, 'bookingCancel'])->name('booking.ancel.users');
         Route::get('/search', [BackendProductInfoController::class, 'search'])->name('backend.booking.search');
+        Route::get('get-all-booking', [BookingApi::class, 'getAllBooking'])->name('api.user.booking.get-all');
     });
 
     Route::get('/policy', [AddressMapController::class, 'policy'])->name('policy.index');

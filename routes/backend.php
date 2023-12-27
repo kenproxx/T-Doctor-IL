@@ -83,7 +83,6 @@ Route::group(['prefix' => 'booking'], function () {
     Route::get('/list-clinics/{id}', [BookingApi::class, 'getAllBookingByClinicID'])->name('api.booking.list.clinics');
     Route::post('create', [BookingApi::class, 'createBooking'])->name('api.user.createBooking');
     Route::post('/cancel/{userId}/{bookingId}/{status}', [BookingApi::class, 'bookingCancel'])->name('api.user.booking.status');
-    Route::get('get-all-booking', [BookingApi::class, 'getAllBooking'])->name('api.user.booking.get-all');
 });
 
 Route::group(['prefix' => 'messages'], function () {
