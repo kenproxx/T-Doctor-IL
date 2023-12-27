@@ -412,7 +412,7 @@ Route::middleware(['user.active'])->group(function () {
     Route::get('/info-user/{id}', [ProfileController::class, 'infoUser'])->name('info.user');
     Route::get('/department', [DoctorInfoController::class, 'listDepartment'])->name('list.department');
 
-
-
+    Route::get('/upload-form', [\App\Http\Controllers\ImportController::class, 'showForm'])->name('upload.form');
+    Route::post('/import-excel', [\App\Http\Controllers\ImportController::class, 'importExcel'])->name('import.excel');
 
 });

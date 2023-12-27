@@ -2,6 +2,7 @@
 
 namespace App\Models\online_medicine;
 
+use App\Models\DrugIngredients;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,4 +17,9 @@ class ProductMedicine extends Model
         'description', 'description_en', 'description_laos',
         'thumbnail', 'gallery', 'unit_price'
     ];
+
+    public function DrugIngredient()
+    {
+        return $this->hasMany(DrugIngredients::class,'product_id');
+    }
 }
