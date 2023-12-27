@@ -37,6 +37,6 @@ Route::group(['prefix' => 'family-management'], function () {
     Route::get('index/{current_user_id}', [FamilyManagementController::class, 'indexApi']);
     Route::post('create/{current_user_id}', [FamilyManagementController::class, 'createApi']);
     Route::post('store/{current_user_id}', [FamilyManagementController::class, 'storeApi']);
-    Route::put('update/{id}', [FamilyManagementController::class, 'updateApi']);
+    Route::post('update/{id}', [FamilyManagementController::class, 'updateApi']);
     Route::delete('destroy/{id}', [FamilyManagementController::class, 'destroyApi']);
 });

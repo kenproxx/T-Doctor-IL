@@ -8,6 +8,7 @@ use App\Enums\UserStatus;
 use App\Models\FamilyManagement;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
@@ -15,13 +16,7 @@ class FamilyManagementController extends Controller
 {
     public function index()
     {
-        $user = auth()->user();
-        $family = FamilyManagement::where('user_id', $user->id)->first();
-
-        $family_code = $family ? $family->family_code : null;
-
-        $family_members = $family_code ? FamilyManagement::where('family_code',
-            $family_code)->get() : collect(); // Use an empty collection if family_code is null
+        $family_members = FamilyManagement::where('user_id', auth()->user()->id)->get();
 
         return view('admin.family_management.index', compact('family_members'));
     }
@@ -82,13 +77,32 @@ class FamilyManagementController extends Controller
 
                 $family = new FamilyManagement();
                 $family->family_code = $family_code;
-                $family->user_id = $request->input('user_id');
+                $family->user_id = auth()->user()->id;
 
                 break;
         }
 
         if (!$family) {
             return redirect()->back()->with('error', 'Không tìm thấy thông tin gia đình');
+        }
+
+        try {
+            $this->validParam($request);
+        } catch (ValidationException $exception) {
+            return response()->json(['errors' => $exception->errors()], 400);
+        }
+
+        if ($request->hasFile('avatar')) {
+            $oldAvatarPath = $family->avatar;
+            if ($oldAvatarPath) {
+                $oldAvatarPath = str_replace(asset('storage/'), '', $oldAvatarPath);
+                Storage::disk('public')->delete($oldAvatarPath);
+            }
+
+            $item = $request->file('avatar');
+            $itemPath = $item->store('family_avatar', 'public');
+            $avatar = asset('storage/' . $itemPath);
+            $family->avatar = $avatar;
         }
 
         $params = $request->only('relationship', 'name', 'date_of_birth', 'number_phone', 'email', 'sex', 'province_id',
@@ -102,19 +116,13 @@ class FamilyManagementController extends Controller
 
     public function edit($id)
     {
-        $currentUser = auth()->user()->id;
         $member = FamilyManagement::where('id', $id)->first();
 
-        $thisFamily = FamilyManagement::where('user_id', $currentUser)->first();
-        if (!$thisFamily) {
-            return response()->json([
-                'message' => 'Bạn chưa có thông tin gia đình',
-            ], 400);
+        if (!$member) {
+            $member = null;
         }
 
-        $users = User::where('id', $member->user_id)->first();
-
-        return view('admin.family_management.edit', compact('member', 'id', 'users'));
+        return view('admin.family_management.edit', compact('member', 'id'));
     }
 
     public function update(Request $request, $id)
@@ -126,7 +134,14 @@ class FamilyManagementController extends Controller
                 'message' => 'Không tìm thấy thông tin gia đình',
             ], 400);
         }
-        $params = $request->only('user_id', 'relationship', 'name', 'date_of_birth', 'number_phone', 'email', 'sex',
+
+        try {
+            $this->validParam($request);
+        } catch (ValidationException $exception) {
+            return response()->json(['errors' => $exception->errors()], 400);
+        }
+
+        $params = $request->only('relationship', 'name', 'date_of_birth', 'number_phone', 'email', 'sex',
             'province_id', 'district_id', 'ward_id', 'detail_address');
         $member->fill($params);
         $member->save();
@@ -200,6 +215,13 @@ class FamilyManagementController extends Controller
             'district_id', 'ward_id', 'detail_address');
         $family->fill($params);
 
+        if ($request->hasFile('avatar')) {
+            $item = $request->file('avatar');
+            $itemPath = $item->store('family_avatar', 'public');
+            $avatar = asset('storage/' . $itemPath);
+            $family->avatar = $avatar;
+        }
+
         $success = $family->save();
 
         if ($success) {
@@ -258,6 +280,13 @@ class FamilyManagementController extends Controller
 
         $family = new FamilyManagement();
 
+        if ($request->hasFile('avatar')) {
+            $item = $request->file('avatar');
+            $itemPath = $item->store('family_avatar', 'public');
+            $avatar = asset('storage/' . $itemPath);
+            $family->avatar = $avatar;
+        }
+
         $family->family_code = $hasFamily->family_code;
 
         $family->user_id = $current_user_id;
@@ -296,6 +325,20 @@ class FamilyManagementController extends Controller
             $this->validParam($request, $family->id);
         } catch (ValidationException $exception) {
             return response()->json(['errors' => $exception->errors()], 400);
+        }
+
+        $family = FamilyManagement::where('id', $id)->first();
+        if ($request->hasFile('avatar')) {
+            $oldAvatarPath = $family->avatar;
+            if ($oldAvatarPath) {
+                $oldAvatarPath = str_replace(asset('storage/'), '', $oldAvatarPath);
+                Storage::disk('public')->delete($oldAvatarPath);
+            }
+
+            $item = $request->file('avatar');
+            $itemPath = $item->store('family_avatar', 'public');
+            $avatar = asset('storage/' . $itemPath);
+            $family->avatar = $avatar;
         }
 
         $params = $request->only('relationship', 'name', 'date_of_birth', 'number_phone', 'email', 'sex', 'province_id',

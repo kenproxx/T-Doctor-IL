@@ -123,7 +123,18 @@
                 },
                 error: function (error) {
                     console.log(error)
-                    alert(error.responseJSON.message);
+                    if (error.responseJSON.errors) {
+                        let errors = error.responseJSON.errors;
+                        for (let key in errors) {
+                            if (errors.hasOwnProperty(key)) {
+                                let value = errors[key];
+                                alert(value[0]);
+                                break;
+                            }
+                        }
+                    } else {
+                        alert(error.responseJSON.message);
+                    }
                 }
             });
         }
