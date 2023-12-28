@@ -49,7 +49,7 @@
                         <div>
                             <strong class="flea-prise">{{$pr_json->name}}</strong>
                             <div class="text-content-product">
-                                <strong class="">{{$pr_json->price}} {{$pr_json->price_unit}}</strong>
+                                <strong class="">{{number_format($pr_json->price, 0, ',', '.') }} {{$pr_json->price_unit ?? 'VND'}}</strong>
                             </div>
 
                             <p style="color: #929292">{{ __('home.Location') }}:<strong class="flea-prise">
