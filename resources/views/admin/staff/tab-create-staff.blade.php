@@ -66,31 +66,34 @@
 
                 const arrField = ['username', 'member', 'email', 'phone', 'password', 'password_confirm', 'manager_id'];
 
-                arrField.forEach((field) => {
-                    formData.append(field, $(`#${field}`).val().trim());
-                });
+                let isValid = true
+                /* Tạo fn appendDataForm ở admin blade*/
+                isValid = appendDataForm(arrField, formData, isValid);
+
 
                 formData.append('_token', '{{ csrf_token() }}');
 
-                try {
-                    $.ajax({
-                        url: `{{route('api.backend.staffs.store')}}`,
-                        method: 'POST',
-                        headers: headers,
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        data: formData,
-                        success: function () {
-                            alert('success');
-                            window.location.href = `{{route('homeAdmin.list.staff')}}`;
-                        },
-                        error: function (exception) {
-                            alert(exception.responseText);
-                        }
-                    });
-                } catch (error) {
-                    throw error;
+                if (isValid){
+                    try {
+                        $.ajax({
+                            url: `{{route('api.backend.staffs.store')}}`,
+                            method: 'POST',
+                            headers: headers,
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            data: formData,
+                            success: function () {
+                                alert('Create success!');
+                                window.location.href = `{{route('homeAdmin.list.staff')}}`;
+                            },
+                            error: function (exception) {
+                                alert(exception.responseText);
+                            }
+                        });
+                    } catch (error) {
+                        alert('Create error!');
+                    }
                 }
             })
         })

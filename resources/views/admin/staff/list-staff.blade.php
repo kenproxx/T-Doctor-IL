@@ -22,7 +22,7 @@
         <thead>
         <tr>
             <th scope="col">{{ __('home.Username') }}</th>
-            <th scope="col">{{ __('home.Name') }}</th>
+            <th scope="col">{{ __('home.PhoneNumber') }}</th>
             <th scope="col">{{ __('home.Email') }}</th>
             <th scope="col">{{ __('home.type') }}</th>
             <th scope="col">{{ __('home.Status') }}</th>
@@ -33,12 +33,17 @@
         @foreach($users as $user)
             <tr>
                 <th scope="row">{{ $user->username }}</th>
-                <td>{{ $user->name }}</td>
+                <td>{{ $user->phone }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->type }}</td>
                 <td>{{ $user->status }}</td>
-                <td><a href="{{ route('staff.edit', $user->id) }}">{{ __('home.Edit') }} </a> | <a href="#"
-                                                                                  onclick="deleteStaff('{{ $user->id }}')">{{ __('home.Delete') }}</a>
+                <td>
+                    <a href="{{ route('staff.edit', $user->id) }}">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a> |
+                    <a href="#" onclick="confirmDelete('{{ $user->id }}')">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </a>
                 </td>
             </tr>
         @endforeach
@@ -47,6 +52,11 @@
     </table>
     <script>
 
+        function confirmDelete(id) {
+            if (confirm('Are you want to delete?')){
+                deleteStaff(id)
+            }
+        }
 
         function deleteStaff(id) {
             const headers = {
@@ -69,7 +79,7 @@
                     contentType: false,
                     processData: false,
                     success: function (data) {
-                        alert('Delete success');
+                        alert('Delete success!');
                         window.location.reload();
                     },
                     error: function (exception) {
@@ -79,6 +89,7 @@
 
             } catch (error) {
                 console.error(error)
+                alert('Delete error!');
             }
         }
     </script>
