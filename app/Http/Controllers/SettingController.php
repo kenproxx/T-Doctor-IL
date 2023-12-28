@@ -8,25 +8,6 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
-    public function getAll()
-    {
-    }
-
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function createView()
-    {
-        return view('admin.setting-config.tab-create-setting');
-    }
     public function create(Request $request)
     {
         try {
@@ -100,43 +81,18 @@ class SettingController extends Controller
             $setting->save();
 
             if ($setting) {
+                alert()->success('Success', 'Create success!');
                 return back();
             }
 
-            return response("Create error!", 400);
+            alert()->error('Error', 'Create error!');
+            return back();
         } catch (\Exception $exception) {
-            return response($exception->getMessage(), 400);
+            alert()->error('Error', 'Error, Please try again!');
+            return back();
         }
     }
 
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        return view('admin.setting-config.tab-edit-settings');
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         try {
@@ -145,7 +101,6 @@ class SettingController extends Controller
             if (!$setting || $setting->status == SettingStatus::DELETED) {
                 return response('Not found', 404);
             }
-
 
             $facebook = $request->input('facebook');
             $twitter = $request->input('twitter');
@@ -201,8 +156,6 @@ class SettingController extends Controller
             $email = $request->input('email');
             $website_description = $request->input('website_description');
 
-
-
             $setting->logo = $logo;
             $setting->ad_banner_position = $ad_banner_position;
             $setting->ad_banner_link = 1;
@@ -217,9 +170,11 @@ class SettingController extends Controller
             $setting->favicon = $favicon;
             $setting->save();
 
-            return redirect()->back()->with('success', 'Update successful');
+            alert()->success('Success', 'Update success!');
+            return back();
         } catch (\Exception $exception) {
-            return response($exception->getMessage(), 400);
+            alert()->error('Error', 'Update error!');
+            return back();
         }
     }
 
