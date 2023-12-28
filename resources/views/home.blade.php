@@ -423,7 +423,7 @@
                                                                     <rect width="20" height="20" fill="white" transform="translate(0.5 0.933594)"/>
                                                                 </clipPath>
                                                             </defs>
-                                                        </svg> &nbsp;{{$medicine->price}} {{$medicine->price_unit}}
+                                                        </svg> &nbsp;{{number_format($medicine->price, 0, ',', '.') }} {{$medicine->price_unit ?? 'VND'}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -592,7 +592,7 @@
                                                         </svg> &nbsp; {{ $province->name}}</p>
                                                 @endif
                                             @endif
-                                            <span class="price-fleaMarket--homeNew">{{ $product->price }} VND</span>
+                                            <span class="price-fleaMarket--homeNew"> &nbsp;{{number_format($product->price, 0, ',', '.') }} {{$medicine->price_unit ?? 'VND'}}</span>
                                         </div>
                                     </div>
                                 </a>
@@ -725,7 +725,7 @@
                                                                     <rect width="20" height="20" fill="white" transform="translate(0.5 0.933594)"/>
                                                                 </clipPath>
                                                             </defs>
-                                                        </svg> &nbsp;{{$product->price}} {{$product->price_unit}}
+                                                        </svg>&nbsp; {{number_format($product->price, 0, ',', '.') }} {{$product->price_unit ?? 'VND'}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -792,7 +792,7 @@
                                                                     <rect width="20" height="20" fill="white" transform="translate(0.5 0.933594)"/>
                                                                 </clipPath>
                                                             </defs>
-                                                        </svg> &nbsp;{{$product->price}} {{$product->price_unit}}
+                                                        </svg> &nbsp;{{number_format($product->price, 0, ',', '.') }} {{$product->price_unit ?? 'VND'}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -859,7 +859,7 @@
                                                                     <rect width="20" height="20" fill="white" transform="translate(0.5 0.933594)"/>
                                                                 </clipPath>
                                                             </defs>
-                                                        </svg> &nbsp;{{$product->price}} {{$product->price_unit}}
+                                                        </svg> &nbsp;{{number_format($product->price, 0, ',', '.') }} {{$product->price_unit ?? 'VND'}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -926,7 +926,7 @@
                                                                     <rect width="20" height="20" fill="white" transform="translate(0.5 0.933594)"/>
                                                                 </clipPath>
                                                             </defs>
-                                                        </svg> &nbsp;{{$product->price}} {{$product->price_unit}}
+                                                        </svg> &nbsp; {{number_format($product->price, 0, ',', '.') }} {{$product->price_unit ?? 'VND'}}
                                                     </div>
                                                 </div>
                                             </div>
