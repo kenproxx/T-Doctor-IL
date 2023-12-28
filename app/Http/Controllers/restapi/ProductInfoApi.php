@@ -12,14 +12,12 @@ class ProductInfoApi extends Controller
 {
     public function index()
     {
-//        $products = ProductInfo::where('status', ProductStatus::ACTIVE)->orderBy('id', 'desc')->get();
         $products = ProductInfo::where('product_infos.status', ProductStatus::ACTIVE)
             ->leftJoin('users', 'product_infos.created_by', '=', 'users.id')
             ->leftJoin('provinces', 'provinces.id', '=', 'users.province_id')
             ->select('product_infos.*', 'provinces.name as location_name')
             ->orderBy('id', 'desc')
-//            ->paginate(15);
-        ->get();
+            ->get();
 
         return response()->json($products);
     }
@@ -56,7 +54,7 @@ class ProductInfoApi extends Controller
         $query = [];
 
         if ($name) {
-            $str = ['product_infos.name', 'like', '%' . $name . '%'];
+            $str = ['product_infos.name', 'like', '%'.$name.'%'];
             array_push($query, $str);
         }
         if ($status) {
@@ -102,7 +100,7 @@ class ProductInfoApi extends Controller
         } else {
             if ($clinic) {
                 $products = ProductInfo::where('status', '!=', ProductStatus::DELETED)
-                        ->where('created_by', $clinic->user_id)
+                    ->where('created_by', $clinic->user_id)
                     ->get();
             }
         }

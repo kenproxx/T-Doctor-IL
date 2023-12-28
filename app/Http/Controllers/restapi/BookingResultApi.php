@@ -55,7 +55,7 @@ class BookingResultApi extends Controller
         return response()->json($products);
     }
 
-    private function getListProductFromExcel($excel_file)
+    public function getListProductFromExcel($excel_file)
     {
         $excel_file = public_path($excel_file);
         $reader = Excel::toCollection(new ExcelImportClass, $excel_file)->first();

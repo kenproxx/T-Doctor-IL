@@ -9,6 +9,7 @@ use App\Models\FleaMarket;
 use App\Models\online_medicine\CategoryProduct;
 use App\Models\ProductInfo;
 use App\Models\ReviewStore;
+use App\Models\WishList;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -19,16 +20,16 @@ class FleaMarketController extends Controller
      */
     public function index()
     {
-        $productFleaMarkets = ProductInfo::where('product_infos.status', ProductStatus::ACTIVE)
-            ->leftJoin('users', 'product_infos.created_by', '=', 'users.id')
-            ->leftJoin('provinces', 'provinces.id', '=', 'users.province_id')
-            ->select('product_infos.*', 'provinces.name as location_name')
-            ->paginate(15);
         $departments = CategoryProduct::where('status', 1)->get();
-        foreach ($productFleaMarkets as $productFleaMarket) {
-            return view('FleaMarket.flea-market', compact('productFleaMarkets', 'departments','productFleaMarket'));
+        $listWishList = WishList::where('isFavorite', 1);
+
+        if (Auth::check()) {
+            $listWishList->where('user_id', Auth::user()->id);
         }
-        return view('FleaMarket.flea-market', compact('productFleaMarkets', 'departments'));
+
+        $listWishList = json_encode($listWishList->pluck('product_id')->toArray());
+
+        return view('FleaMarket.flea-market', compact('listWishList', 'departments'));
     }
 
     /**
