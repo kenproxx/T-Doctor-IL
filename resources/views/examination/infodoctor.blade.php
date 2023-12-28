@@ -218,7 +218,6 @@
                     })
                         .then(response => {
                             if (response.status == 200) {
-                                console.log(response);
                                 alert('Create success!');
                                 window.location.reload();
                             } else {
@@ -408,7 +407,6 @@
             }
 
             function starCheckEdit(value) {
-                console.log(value)
                 let input = document.getElementById('input-star-edit');
                 let star = document.getElementById('star-edit-' + value);
                 let icon = document.getElementById('icon-star-edit-' + value);

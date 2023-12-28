@@ -315,7 +315,16 @@
             $('#productsAdsPlan2').html('');
             $('#productsAdsPlan3').html('');
 
+            let adsPlan1Counter = 0;
+            let adsPlan2Counter = 0;
+            let adsPlan3Counter = 0;
+
             for (var i = 0; i < products.length; i++) {
+
+                if (adsPlan1Counter === 6 && adsPlan2Counter === 6 && adsPlan3Counter === 6) {
+                    break;
+                }
+
                 let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`;
                 url = url.replace(':id', products[i].id);
                 var product = products[i];
@@ -323,7 +332,7 @@
                 let isFavoriteClass = isUserWasWishlist(product.id);
 
                 var productHtml = `
-    <div class="col-md-3 col-6">
+    <div class="col-md-4 col-6">
         <div class="product-item">
             <div class="img-pro">
                 <img class="b-radius-8px" src="${product.thumbnail}" alt="">
@@ -351,13 +360,15 @@
                     return amount.toLocaleString('de-DE');
                 }
 
-
-                if (adsPlan === 1) {
+                if (adsPlan === 1 && adsPlan1Counter < 6) {
                     $('#productsAdsPlan1').append(productHtml);
-                } else if (adsPlan === 2) {
+                    adsPlan1Counter++;
+                } else if (adsPlan === 2 && adsPlan2Counter < 6) {
                     $('#productsAdsPlan2').append(productHtml);
-                } else if (adsPlan === 3) {
+                    adsPlan2Counter++;
+                } else if (adsPlan === 3 && adsPlan3Counter < 6) {
                     $('#productsAdsPlan3').append(productHtml);
+                    adsPlan3Counter++;
                 }
             }
         }
@@ -446,6 +457,7 @@
                         "Authorization": accessToken
                     },
                     success: function (response) {
+                        console.log(response)
                         renderProduct(response);
                         loadingMasterPage();
                     },
@@ -457,24 +469,22 @@
             }
 
             async function renderProduct(res) {
-                var productsAdsPlan1 = [];
-                var productsAdsPlan2 = [];
-                var productsAdsPlan3 = [];
+
+                let adsPlan1Counter = 0;
+                let adsPlan2Counter = 0;
+                let adsPlan3Counter = 0;
 
                 for (let i = 0; i < res.length; i++) {
+
+                    if (adsPlan1Counter === 6 && adsPlan2Counter === 6 && adsPlan3Counter === 6) {
+                        break;
+                    }
+
                     let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`;
                     url = url.replace(':id', res[i].id);
                     let item = res[i];
                     let adsPlan = item.ads_plan;
                     let userId = `{{ Auth::check() ? Auth::user()->id : null }}`;
-
-                    if (adsPlan === 1) {
-                        productsAdsPlan1.push(item);
-                    } else if (adsPlan === 2) {
-                        productsAdsPlan2.push(item);
-                    } else if (adsPlan === 3) {
-                        productsAdsPlan3.push(item);
-                    }
 
                     let isFavorite = isUserWasWishlist(item.id);
                     let created_by = item.created_by;
@@ -486,7 +496,7 @@
                             </a>`;
                     }
                     var html = `
-                    <div class="col-md-3 col-6">
+                    <div class="col-md-4 col-6">
                         <div class="product-item">
                             <div class="img-pro">
                                 <img class="b-radius-8px" src="${item.thumbnail}" alt="">
@@ -505,7 +515,7 @@
                             </div>
                         </div>
                     </div>
-                `;
+                    `;
 
                     function formatCurrency(amount) {
                         // Chuyển đổi dấu phẩy thành dấu chấm
@@ -515,12 +525,15 @@
                         return parseFloat(formattedAmount).toLocaleString('de-DE');
                     }
 
-                    if (adsPlan === 1) {
+                    if (adsPlan === 1 && adsPlan1Counter < 6) {
                         $('#productsAdsPlan1').append(html);
-                    } else if (adsPlan === 2) {
+                        adsPlan1Counter++;
+                    } else if (adsPlan === 2 && adsPlan2Counter < 6) {
                         $('#productsAdsPlan2').append(html);
-                    } else if (adsPlan === 3) {
+                        adsPlan2Counter++;
+                    } else if (adsPlan === 3 && adsPlan3Counter < 6) {
                         $('#productsAdsPlan3').append(html);
+                        adsPlan3Counter++;
                     }
                 }
             }
