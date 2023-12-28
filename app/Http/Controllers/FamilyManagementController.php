@@ -361,6 +361,18 @@ class FamilyManagementController extends Controller
         ], 400);
     }
 
+    public function listMemberAPI($userID) {
+        $listMember = FamilyManagement::where('user_id', $userID) ->get();
+
+        if ($listMember) {
+            return response()->json($listMember);
+        }
+
+        return response()->json([
+            'message' => 'Chưa có thành viên khác trong gia điình.',
+        ], 404);
+    }
+
     public function destroyApi($id)
     {
 
