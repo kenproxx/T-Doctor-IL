@@ -694,4 +694,17 @@ return [
     'Create product medicine' => 'ສ້າງຜະລິດຕະພັນຢາ',
     'avatar' => 'ຮູບແທນຕົວ',
     'Không có sự kiện nào' => 'ບໍ່ມີກິດຈະກຳໃຫມ່',
+
+    //Please enter product name, Please choose category, Please enter brand name
+    // Please choose province, Please enter price, Please enter description, Please choose image
+    //Please choose ads plan, Please choose ads period
+    'Please enter product name' => 'ກະລຸນາປ້ອນຊື່ຜະລິດຕະພັນ',
+    'Please choose category' => 'ກະລຸນາເລືອກຫມວດຫມູ່',
+    'Please enter brand name' => 'ກະລຸນາປ້ອນຊື່ຍີ່ຫໍ້',
+    'Please choose province' => 'ກະລຸນາເລືອກແຂວງ',
+    'Please enter price' => 'ກະລຸນາປ້ອນລາຄາ',
+    'Please enter description' => 'ກະລຸນາປ້ອນລາຍລະອຽດ',
+    'Please choose image' => 'ກະລຸນາເລືອກຮູບພາບ',
+    'Please choose ads plan' => 'ກະລຸນາເລືອກແຜນການໂຄສະນາ',
+    'Please choose ads period' => 'ກະລຸນາເລືອກໄລຍະເວລາໂຄສະນາ',
 ];

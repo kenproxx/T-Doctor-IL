@@ -706,4 +706,17 @@ return [
     'Create product medicine' => 'Tạo sản phẩm thuốc',
     'avatar' => 'Hình đại diện',
     'Không có sự kiện nào' => 'Không có sự kiện nào',
+
+    //Please enter product name, Please choose category, Please enter brand name
+    // Please choose province, Please enter price, Please enter description, Please choose image
+    //Please choose ads plan, Please choose ads period
+    'Please enter product name' => 'Vui lòng nhập tên sản phẩm',
+    'Please choose category' => 'Vui lòng chọn danh mục',
+    'Please enter brand name' => 'Vui lòng nhập tên thương hiệu',
+    'Please choose province' => 'Vui lòng chọn tỉnh',
+    'Please enter price' => 'Vui lòng nhập giá',
+    'Please enter description' => 'Vui lòng nhập mô tả',
+    'Please choose image' => 'Vui lòng chọn hình ảnh',
+    'Please choose ads plan' => 'Vui lòng chọn kế hoạch quảng cáo',
+    'Please choose ads period' => 'Vui lòng chọn thời gian quảng cáo',
 ];
