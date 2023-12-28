@@ -1,3 +1,4 @@
+@php use Illuminate\Support\Facades\Auth; @endphp
 @extends('layouts.master')
 @section('title', 'Doctor Info')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -72,11 +73,13 @@
                             <span>{{ $doctor->response_rate }}%</span>
                         </div>
                         <div id="opt_btn" class="d-flex">
-                            <a onclick="handleStartChatWithDoctor('{{ $doctor->id }}')"><button>{{ __('home.Chat') }}</button></a>
+                            <a onclick="handleStartChatWithDoctor('{{ $doctor->id }}')">
+                                <button>{{ __('home.Chat') }}</button>
+                            </a>
                             <form method="post" action="{{ route('createMeeting') }}" target="_blank">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="user_id_1"
-                                       value="@if(Auth::check()) {{ \Illuminate\Support\Facades\Auth::user()->id }} @endif">
+                                       value="@if(Auth::check()) {{ Auth::user()->id }} @endif">
                                 <input type="hidden" name="user_id_2" value="{{ $doctor->id }}">
                                 <button type="submit">{{ __('home.Videocall') }}</button>
                             </form>
@@ -260,7 +263,7 @@
                     let star = parent.number_star;
                     let starHtml = ``;
                     for (let d = 1; d < 6; d++) {
-                        if(d <= star){
+                        if (d <= star) {
                             starHtml = starHtml + `<i class="fa-solid fa-star" style="color: #fac325"></i>`;
                         } else {
                             starHtml = starHtml + `<i class="fa-solid fa-star" style="color: #ccc"></i>`;
@@ -269,7 +272,7 @@
 
                     let listChild = data.child;
                     let htmlChild = ``;
-                    if (listChild){
+                    if (listChild) {
                         for (let j = 0; j < listChild.length; j++) {
                             let child = listChild[j];
 
@@ -278,7 +281,7 @@
                             let isGuest = child.is_guest;
                             if (isGuest === true) {
                                 itemImg = `<img src="{{ asset('img/avt_default.jpg') }}" alt="" class="avt-user-review">`;
-                                if (child.username){
+                                if (child.username) {
                                     username = child.username;
                                 } else {
                                     username = 'Guest';
@@ -344,7 +347,7 @@
                     let isGuestNew = parent.is_guest;
                     if (isGuestNew === true) {
                         itemImg = `<img src="{{ asset('img/avt_default.jpg') }}" alt="" class="avt-user-review">`;
-                        if (parent.username){
+                        if (parent.username) {
                             username = parent.username;
                         } else {
                             username = 'Guest';
@@ -428,21 +431,6 @@
                 }
 
                 input.value = star.checked ? value : value - 1;
-            }
-
-            function handleStartChatWithDoctor(id) {
-                /* tất cả các hàm dưới đây đều ở trong file chat-message.blade.php
-                * id nhận vào là id của người dùng cần chat
-                * hàm hideTabActive() dùng để ẩn tất cả các tab đang active
-                * hàm getMessage(id) dùng để lấy tin nhắn của người dùng đó với người dùng hiện tại
-                * hàm loadDisplayMessage(id) dùng để load tin nhắn của người dùng đó với người dùng hiện tại
-                * hàm showOrHiddenChat() dùng để hiển thị widget chat
-                */
-
-                hideTabActive();
-                getMessage(id);
-                loadDisplayMessage(id);
-                showOrHiddenChat();
             }
 
         </script>

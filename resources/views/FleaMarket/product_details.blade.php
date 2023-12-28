@@ -80,7 +80,7 @@
                                     {{ __('home.My store') }}
                                 </a>
                             @endif
-                            <button id="button-apply" class="text-wrapper-5">{{ __('home.Send message') }}</button>
+                            <button id="button-apply" class="text-wrapper-5" onclick="handleStartChatWithDoctor('{{ $pr_json->created_by }}')">{{ __('home.Send message') }}</button>
                         </div>
                     </div>
                 </div>
