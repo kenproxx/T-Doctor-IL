@@ -66,11 +66,11 @@
             </div>
 
             <div class="row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label for="files">File Attachments</label>
-                    <input type="file" multiple class="form-control" id="files" name="files[]">
+                    <input type="file" accept="image/*" multiple class="form-control" id="files" name="files[]">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-3">
                     <label for="status">Status</label>
                     <select class="form-select" name="status" id="status">
                         <option
@@ -84,6 +84,17 @@
                             {{ \App\Enums\BookingResultStatus::INACTIVE }}
                         </option>
                     </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="prescriptions">File Prescriptions</label>
+                    <input type="file"
+                           accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                           class="form-control" id="prescriptions" name="prescriptions">
+                </div>
+                <div class="form-group col-md-2">
+                    <button type="button" class="btnDownloadFile btn btn-outline-warning mt-4">
+                        Xem đơn đã upload
+                    </button>
                 </div>
             </div>
             @php
@@ -101,6 +112,7 @@
                     @endforeach
                 @endif
             </div>
+
             <div class="form-group">
                 <label for="detail">Detail</label>
                 <textarea class="form-control" id="detail" rows="5">{{ $result->detail }}</textarea>
@@ -277,6 +289,9 @@
                     formData.append(fieldTextarea, content);
                 });
 
+                let excel_file = $('#prescriptions')[0].files[0];
+                formData.append('prescriptions', excel_file);
+
                 let files_data = document.getElementById('files');
                 let i = 0, len = files_data.files.length, img, reader, file;
                 for (i; i < len; i++) {
@@ -309,6 +324,14 @@
                         alert('Error, Please try again!');
                     }
                 }
+            })
+
+            $('.btnDownloadFile').on('click', function () {
+                let url = `{{ route('user.download.file', $result->id) }}`;
+                let alertMessage = `Vui lòng nhập vào file theo định dạng mẫu đã được viết sẵn! Chúng tôi không khuyến khích bất kì hành động thay đổi định dạng file hoặc cấu trúc dữ liệu trong file vì điều này sẽ ảnh hướng đến việc đọc hiểu dữ liệu.`
+                alert(alertMessage);
+                console.log(url);
+                window.location.href = url;
             })
         })
 

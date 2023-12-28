@@ -126,6 +126,21 @@
                             <label for="files">File Attachments</label>
                             <input type="file" multiple class="form-control" id="files" name="files[]">
                         </div>
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label for="prescriptions">File Prescriptions
+                                    <span class="text-danger"> *</span>
+                                </label>
+                                <input type="file" multiple class="form-control" id="prescriptions"
+                                       accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                       name="prescriptions">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <button type="button" class="btnGetFile btn btn-outline-warning mt-4">
+                                    Xem đơn mẫu
+                                </button>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label for="detail">Detail</label>
                             <textarea class="form-control" id="detail" rows="5"></textarea>
@@ -354,6 +369,12 @@
                     formData.append('files[]', file);
                 }
 
+                let excel_file = $('#prescriptions')[0].files[0];
+                if (!excel_file) {
+                    isValid = false;
+                }
+                formData.append('prescriptions', excel_file);
+
                 if (isValid) {
                     try {
                         $.ajax({
@@ -381,6 +402,12 @@
                 } else {
                     alert('Sorry, Please enter input require!');
                 }
+            })
+
+            $('.btnGetFile').on('click', function () {
+                window.location.href = `{{ route('user.download') }}`;
+                let alertMessage = `Vui lòng nhập vào file theo định dạng mẫu đã được viết sẵn! Chúng tôi không khuyến khích bất kì hành động thay đổi định dạng file hoặc cấu trúc dữ liệu trong file vì điều này sẽ ảnh hướng đến việc đọc hiểu dữ liệu.`
+                alert(alertMessage);
             })
         })
 
