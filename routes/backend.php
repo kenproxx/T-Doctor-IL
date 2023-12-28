@@ -107,4 +107,6 @@ Route::group(['prefix' => 'messages'], function () {
 
 Route::group(['prefix' => 'checkout'], function () {
     Route::post('imm', [CheckoutApi::class, 'checkoutByImm']);
+    Route::post('vnpay', [CheckoutController::class, 'checkoutByVNPay']);
+
 });

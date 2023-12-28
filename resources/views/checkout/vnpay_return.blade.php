@@ -53,7 +53,7 @@
                 <label><?php echo $_GET['vnp_TxnRef'] ?></label>
             </div>
             <div class="form-group col-12 col-md-6">
-                <label>{{ __('home.Số tiền') }}:</label>
+                <label>{{ __('home.Số tiền') }} </label>
                 <label><?php
                        $vnp_Amount = $_GET['vnp_Amount'];
 
@@ -63,7 +63,7 @@
                            $formattedAmount = rtrim($formattedAmount, '.');
                            echo $formattedAmount . " VND";
                        } else {
-                           echo  __('home.Không có thông tin số tiền hợp lệ') .;
+                           echo  __('home.Không có thông tin số tiền hợp lệ');
                        }
                        ?></label>
             </div>
@@ -79,7 +79,7 @@
                            $formattedDate = date("Y-m-d H:i:s", strtotime($vnp_PayDate));
                            echo $formattedDate;
                        } else {
-                           echo __('home.Không có thông tin ngày giờ hợp lệ')"";
+                           echo __('home.Không có thông tin ngày giờ hợp lệ');
                        }
                        ?></label>
             </div>
