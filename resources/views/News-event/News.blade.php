@@ -3,6 +3,25 @@
 @section('content')
     @include('layouts.partials.header')
     @include('component.banner')
+    <style>
+        .max-2-line-title {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 44px;
+        }
+
+        .max-5-line-title {
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            min-height: 130px;
+        }
+    </style>
     <div class="recruitment-details ">
         <div class="container">
             @if($listNews)
@@ -10,12 +29,12 @@
                     $news = $listNews->first();
                 @endphp
                 @if($news)
-                    <a class="col-md-5 pl-0" href="{{route('detail.new',$news->id)}} ">
+                    <a href="{{route('detail.new',$news->id)}}">
                         <div class="d-flex">
-                            <div>
+                            <div class="col-md-5 pl-0">
                                 <img class="w-100 b-radius-8px" src="{{$news->thumbnail}}">
                             </div>
-                            <div class="col-md-7 pr-0">
+                            <div class="col-md-7 pr-0 max-5-line-title">
                                 <strong class="text-content-product">{{$news->title}}</strong>
                                 <p class="text-gray mt-3">{!! $news->short_description !!}</p>
                             </div>
@@ -29,24 +48,20 @@
                 <div class="d-flex row">
                     @foreach($listNews as $news)
                         <div class="col-md-6 padding-news">
-                            <div class="d-flex border-8px w-100">
-                                <div class="col-md-3 p-0 content__item__image">
-                                    <img class="content__item__image" src="{{$news->thumbnail}}">
-                                </div>
-                                <div class="col-md-9 pr-0">
-                                    <a href="{{route('detail.new',$news->id)}}" class="w-100">
+                            <a href="{{route('detail.new',$news->id)}}">
+                                <div class="d-flex border-8px w-100">
+                                    <div class="col-md-3 p-0 content__item__image">
+                                        <img class="content__item__image" src="{{$news->thumbnail}}">
+                                    </div>
+                                    <div class="col-md-9 pr-0">
 
-                                        <strong class="fs-16px">{{$news->title}}</strong>
-                                        <div>
+                                        <strong class="fs-16px max-2-line-title">{{$news->title}}</strong>
+                                        <div class="max-5-line-title">
                                             <p class="fs-12px mt-2">{!! $news->short_description !!}</p>
                                         </div>
-                                    </a>
+                                    </div>
                                 </div>
-                                <div class="d-flex justify-content-end align-items-end"
-                                     style="position: absolute;bottom: 30px;right: 30px;">
-                                    <a href="{{route('detail.new',$news->id)}}">{{ __('home.Read more') }}</a>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                     @endforeach
                 </div>
@@ -75,7 +90,7 @@
                             <div class="col-md-5 pl-0">
                                 <img class="w-100 b-radius-8px" src="{{$Event->thumbnail}}">
                             </div>
-                            <div class="col-md-7 pr-0">
+                            <div class="col-md-7 pr-0 max-5-line-title">
                                 <strong class="text-content-product">{{$Event->title}}</strong>
                                 <p class="text-gray mt-3">{!! $Event->short_description !!}</p>
                             </div>
@@ -86,26 +101,22 @@
                     <p class="text-content-product">{{ __('home.All Event') }}</p>
                 </div>
                 <div class="d-flex row">
-                    @foreach($listEvent as $Event)
+                    @foreach($listEvent as $event)
                         <div class="col-md-6 padding-news">
-                            <div class="d-flex border-8px w-100">
-                                <div class="col-md-3 p-0 content__item__image">
-                                    <img class="content__item__image" src="{{$Event->thumbnail}}">
-                                </div>
-                                <div class="col-md-9 pr-0">
-                                    <a href="{{route('detail.new',$Event->id)}}" class="w-100">
+                            <a href="{{route('detail.new',$event->id)}}">
+                                <div class="d-flex border-8px w-100">
+                                    <div class="col-md-3 p-0 content__item__image">
+                                        <img class="content__item__image" src="{{$event->thumbnail}}">
+                                    </div>
+                                    <div class="col-md-9 pr-0">
 
-                                        <strong class="fs-16px">{{$Event->title}}</strong>
-                                        <div>
-                                            <p class="fs-12px mt-2">{!! $Event->short_description !!}</p>
+                                        <strong class="fs-16px max-2-line-title">{{$event->title}}</strong>
+                                        <div class="max-5-line-title">
+                                            <p class="fs-12px mt-2">{!! $event->short_description !!}</p>
                                         </div>
-                                    </a>
+                                    </div>
                                 </div>
-                                <div class="d-flex justify-content-end align-items-end"
-                                     style="position: absolute;bottom: 30px;right: 30px;">
-                                    <a href="{{route('detail.new',$Event->id)}}">{{ __('home.Read more') }}</a>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                     @endforeach
                 </div>
