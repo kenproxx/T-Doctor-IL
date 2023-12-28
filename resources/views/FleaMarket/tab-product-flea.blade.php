@@ -28,7 +28,8 @@
                     product_id: productId
                 },
                 headers: {
-                    "Authorization": `Bearer ${token}`
+                    "Authorization": `Bearer ${token}`,
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function (response) {
                     let item = $('#icon-heart-' + id);
@@ -118,12 +119,16 @@
                                     Location: <p>${item.province_id}</p>
                                 </div>
                                 <div class="price-pro">
-                                    ${item.price} ${item.price_unit}
+                                    ${formatCurrency(item.price)} ${item.price_unit ?? 'VND'}
                                 </div>
                             </div>
                         </div>
                     </div>
                 `;
+                function formatCurrency(amount) {
+                    const formattedAmount = amount.toString().replace(/,/g, '.');
+                    return parseFloat(formattedAmount).toLocaleString('de-DE');
+                }
                 if (adsPlan === 1) {
                     $('#productsAdsPlan1').append(html);
                 } else if (adsPlan === 2) {

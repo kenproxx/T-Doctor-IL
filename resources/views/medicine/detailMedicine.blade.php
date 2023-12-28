@@ -57,7 +57,7 @@
                     <div class="product-details">
                         <div class="body">
                             <p class="text-wrapper">{{ $medicine->name }}</p>
-                            <div class="price">{{ $medicine->price }} {{ $medicine->unit_price }}</div>
+                            <div class="price">{{number_format($medicine->price, 0, ',', '.') }} {{$medicine->price_unit ?? 'VND'}}</div>
                             <div class="brand-name d-flex">
                                 <div class="text-wrapper-2">{{ __('home.Location') }}:</div>
                                 @php
