@@ -704,4 +704,5 @@ return [
     'cac thanh phan thuoc cach nhau boi dau phay' => 'Các thành phần thuốc cách nhau bởi dấu phẩy',
     'Edit product medicine' => 'Chỉnh sửa sản phẩm thuốc',
     'Create product medicine' => 'Tạo sản phẩm thuốc',
+    'avatar' => 'Hình đại diện',
 ];
