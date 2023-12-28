@@ -3,6 +3,7 @@
 use App\Http\Controllers\backend\BackendCouponApplyController;
 use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\backend\BackendQuestionController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\restapi\BookingApi;
 use App\Http\Controllers\restapi\BusinessFavouriteApi;
 use App\Http\Controllers\restapi\CheckoutApi;
@@ -106,4 +107,6 @@ Route::group(['prefix' => 'messages'], function () {
 
 Route::group(['prefix' => 'checkout'], function () {
     Route::post('imm', [CheckoutApi::class, 'checkoutByImm']);
+    Route::post('vnpay', [CheckoutController::class, 'checkoutByVNPay']);
+
 });

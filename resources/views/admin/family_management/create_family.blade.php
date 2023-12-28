@@ -106,12 +106,18 @@
                 return;
             }
 
+            // check file avatar not empty
+            let file = $('#avatar')[0].files[0];
+            if (!file) {
+                alert('Vui lòng chọn ảnh đại diện');
+                return;
+            }
+
             let url = `{{route('api.backend.family-management.store', ['type' => ':type'])}}`;
             url = url.replace(':type', '{{ FamilyManagementEnum::CREATE_FAMILY }}');
 
             formData.append('_token', '{{ csrf_token() }}');
             // push file avatar to form data
-            let file = $('#avatar')[0].files[0];
             if (file) {
                 formData.append('avatar', file);
             }
