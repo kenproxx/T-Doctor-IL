@@ -333,7 +333,7 @@
                     <a href="${url}">${product.name}</a>
                 </div>
                 <div class="location-pro d-flex">
-                    Location: <p>${product.location_name ?? 'Toàn quốc'}</p>
+                    {{ __('home.Location') }}: <p>${product.location_name ?? 'Toàn quốc'}</p>
                 </div>
                 <div class="price-pro">
                     ${formatCurrency(product.price)} ${product.price_unit}
@@ -467,7 +467,7 @@
                                     <a href="${url}">${item.name}</a>
                                 </div>
                                 <div class="location-pro d-flex">
-                                    Location: <p>${item.location_name ?? 'Toàn quốc'}</p>
+                                    {{ __('home.Location') }}: <p>${item.location_name ?? 'Toàn quốc'}</p>
                                 </div>
                                 <div class="price-pro">
                                     ${formatCurrency(item.price)} ${item.price_unit}
