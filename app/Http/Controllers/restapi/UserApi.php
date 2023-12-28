@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers\restapi;
 
-use App\Enums\TypeMedical;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\MainController;
-use App\Models\Department;
-use App\Models\Symptom;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserApi extends Controller
@@ -241,4 +236,10 @@ class UserApi extends Controller
         }
     }
 
+    /* Datatime */
+    public function logout()
+    {
+        User::where('token', '!=', null)->update(['token' => null]);
+        return response('Logout done!', 200);
+    }
 }

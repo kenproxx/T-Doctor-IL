@@ -35,6 +35,7 @@ use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecruitmentController;
 use App\Http\Controllers\restapi\BookingApi;
+use App\Http\Controllers\restapi\UserApi;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReviewStoreController;
 use App\Http\Controllers\ServiceClinicController;
@@ -371,6 +372,7 @@ Route::middleware(['user.active'])->group(function () {
         Route::post('/login', [LoginController::class, 'login'])->name('api.user.login');
         Route::post('/logout', [LoginController::class, 'logout'])->name('api.user.logout');
         Route::post('/register', [RegisterController::class, 'register'])->name('api.user.register');
+        Route::post('/logout-all', [UserApi::class, 'logout']);
     });
 //Product
     Route::group(['prefix' => 'products'], function () {
