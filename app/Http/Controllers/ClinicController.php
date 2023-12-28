@@ -143,13 +143,8 @@ class ClinicController extends Controller
         $clinicID = $request->input('clinic_id');
         $checkOut = $request->input('check_out');
         $service = $request->input('service');
-        $member = $request->input('member_family_id');
-        if ($member == 0 || $member == null) {
-            $memberFamily = Auth::user()->id;
-        }
-        else {
-            $memberFamily = $member;
-        }
+        $memberFamily = $request->input('member_family_id');
+
         if (is_array($service)) {
             $servicesAsString = implode(',', $service);
         } else {
