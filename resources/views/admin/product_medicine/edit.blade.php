@@ -141,6 +141,14 @@
                 @endforeach
             </div>
             <div class="row">
+                <div class="col-sm-12">
+                    <label for="ingredient">{{ __('home.ingredient') }}</label>
+                    <input type="text" class="form-control" id="ingredient" name="ingredient"
+                           value="{{ $drugIngredient->component_name ?? '' }}"
+                           placeholder="{{ __('home.cac thanh phan thuoc cach nhau boi dau phay') }}">
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-4">
                     <label for="price">{{ __('home.Price') }}</label>
                     <input type="number" class="form-control" id="price" name="price"
@@ -148,7 +156,8 @@
                 </div>
                 <div class="col-md-4">
                     <label for="unit_price">{{ __('home.Price Unit') }}</label>
-                    <input type="text" class="form-control" id="unit_price" name="unit_price" value="{{ $productMedicine->unit_price ?? '' }}">
+                    <input type="text" class="form-control" id="unit_price" name="unit_price"
+                           value="{{ $productMedicine->unit_price ?? '' }}">
                 </div>
                 <div class="col-md-4">
                     <label for="status">{{ __('home.Status') }}</label>
@@ -156,7 +165,7 @@
                         <option
                             value="{{ OnlineMedicineStatus::APPROVED }}" {{ $productMedicine->price == OnlineMedicineStatus::APPROVED ? 'selected' : '' }}>{{ OnlineMedicineStatus::APPROVED }}</option>
                         <option
-                            value="{{ OnlineMedicineStatus::DELETED }}" {{ $productMedicine->price == OnlineMedicineStatus::DELETED ? 'selected' : '' }}>{{ \App\Enums\online_medicine\OnlineMedicineStatus::DELETED }}</option>
+                            value="{{ OnlineMedicineStatus::DELETED }}" {{ $productMedicine->price == OnlineMedicineStatus::DELETED ? 'selected' : '' }}>{{ OnlineMedicineStatus::DELETED }}</option>
                     </select>
                 </div>
             </div>
@@ -164,7 +173,8 @@
         </div>
     </form>
 
-    <button type="button" onclick="submitForm()" class="btn btn-primary up-date-button mt-md-4">{{ __('home.Save') }}</button>
+    <button type="button" onclick="submitForm()"
+            class="btn btn-primary up-date-button mt-md-4">{{ __('home.Save') }}</button>
     <script>
 
         function submitForm() {
@@ -178,7 +188,8 @@
             const arrField = [
                 'name', 'name_en', 'name_laos',
                 'brand_name', 'brand_name_en', 'brand_name_laos',
-                'category_id', 'object_', 'filter_', 'price', 'status', 'id', 'unit_price'
+                'category_id', 'object_', 'filter_', 'price', 'status', 'id', 'unit_price',
+                'ingredient'
             ]
 
             var filedata = document.getElementById("gallery");
@@ -197,7 +208,7 @@
             ];
             fieldTextareaTiny.forEach(fieldTextarea => {
                 const content = tinymce.get(fieldTextarea).getContent();
-                if (!content){
+                if (!content) {
                     isValid = false;
                 }
                 formData.append(fieldTextarea, content);
@@ -208,7 +219,7 @@
 
             formData.append('_token', '{{ csrf_token() }}');
 
-            if (isValid){
+            if (isValid) {
                 try {
                     $.ajax({
                         url: `{{route('api.backend.product-medicine.update')}}`,

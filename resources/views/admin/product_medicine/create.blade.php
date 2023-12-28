@@ -94,13 +94,22 @@
                     </select>
                 </div>
             </div>
-            <div>
-                <label for="thumbnail">{{ __('home.Thumbnail') }}</label>
-                <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*">
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="thumbnail">{{ __('home.Thumbnail') }}</label>
+                    <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*">
+                </div>
+                <div class="col-md-6">
+                    <label for="gallery">{{ __('home.gallery') }}</label>
+                    <input type="file" class="form-control" id="gallery" name="gallery[]" multiple accept="image/*">
+                </div>
             </div>
-            <div>
-                <label for="gallery">{{ __('home.gallery') }}</label>
-                <input type="file" class="form-control" id="gallery" name="gallery[]" multiple accept="image/*">
+            <div class="row">
+                <div class="col-sm-12">
+                    <label for="ingredient">{{ __('home.ingredient') }}</label>
+                    <input type="text" class="form-control" id="ingredient" name="ingredient"
+                           placeholder="{{ __('home.cac thanh phan thuoc cach nhau boi dau phay') }}">
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-4">
@@ -138,7 +147,8 @@
             const arrField = [
                 'name', 'name_en', 'name_laos',
                 'brand_name', 'brand_name_en', 'brand_name_laos',
-                'category_id', 'object_', 'filter_', 'price', 'status', 'unit_price'
+                'category_id', 'object_', 'filter_', 'price', 'status', 'unit_price',
+                'ingredient'
             ];
 
             let isValid = true
@@ -161,7 +171,7 @@
             ];
             fieldTextareaTiny.forEach(fieldTextarea => {
                 const content = tinymce.get(fieldTextarea).getContent();
-                if (!content){
+                if (!content) {
                     isValid = false;
                 }
                 formData.append(fieldTextarea, content);
@@ -175,7 +185,7 @@
             formData.append('user_id', '{{ Auth::user()->id }}');
             formData.append('_token', '{{ csrf_token() }}');
 
-            if (isValid){
+            if (isValid) {
                 try {
                     $.ajax({
                         url: `{{route('api.backend.product-medicine.store')}}`,

@@ -688,4 +688,8 @@ return [
     'Nu' => 'ຍິງ',
     'Ward' => 'ບ້ານ',
     'no name' => 'ບໍ່ມີຊື່',
+    'ingredient' => 'ອາຫານ',
+    'cac thanh phan thuoc cach nhau boi dau phay' => 'ອາຫານທີ່ມີຄ່າຕ່າງໆກັບຂັ້ນຕອນຕໍ່ກັບຕົວປ່ຽນ',
+    'Edit product medicine' => 'ແກ້ໄຂຜະລິດຕະພັນຢາ',
+    'Create product medicine' => 'ສ້າງຜະລິດຕະພັນຢາ',
 ];
