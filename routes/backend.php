@@ -3,10 +3,9 @@
 use App\Http\Controllers\backend\BackendCouponApplyController;
 use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\backend\BackendQuestionController;
-use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\restapi\BookingApi;
 use App\Http\Controllers\restapi\BusinessFavouriteApi;
-use App\Http\Controllers\restapi\DoctorReviewApi;
+use App\Http\Controllers\restapi\CheckoutApi;
 use App\Http\Controllers\restapi\MedicalFavouriteApi;
 use App\Http\Controllers\restapi\MessageApi;
 use App\Http\Controllers\restapi\ServiceClinicApi;
@@ -32,21 +31,28 @@ Route::group(['prefix' => 'questions'], function () {
     Route::get('/list', [BackendQuestionController::class, 'getAll'])->name('api.backend.questions.list');
     Route::get('/user/{id}', [BackendQuestionController::class, 'getAllByUserId'])->name('api.backend.questions.user');
     Route::post('/create', [BackendQuestionController::class, 'create'])->name('api.backend.questions.create');
-    Route::put('/change/{id}', [BackendQuestionController::class, 'upgradeStatus'])->name('api.backend.questions.change.status');
+    Route::put('/change/{id}',
+        [BackendQuestionController::class, 'upgradeStatus'])->name('api.backend.questions.change.status');
     Route::put('/update/{id}', [BackendQuestionController::class, 'update'])->name('api.backend.questions.update');
     Route::delete('/delete/{id}', [BackendQuestionController::class, 'delete'])->name('api.backend.questions.delete');
-    Route::delete('/delete-list', [BackendQuestionController::class, 'deleteMultil'])->name('api.backend.questions.delete.list');
+    Route::delete('/delete-list',
+        [BackendQuestionController::class, 'deleteMultil'])->name('api.backend.questions.delete.list');
 });
 
 Route::group(['prefix' => 'coupons-apply'], function () {
     Route::get('/list', [BackendCouponApplyController::class, 'getAll'])->name('api.backend.coupons-apply.list');
-    Route::get('/detail/{id}', [BackendCouponApplyController::class, 'detail'])->name('api.backend.coupons-apply.detail');
-    Route::get('/user/{id}', [BackendCouponApplyController::class, 'getAllByUser'])->name('api.backend.coupons-apply.user');
+    Route::get('/detail/{id}',
+        [BackendCouponApplyController::class, 'detail'])->name('api.backend.coupons-apply.detail');
+    Route::get('/user/{id}',
+        [BackendCouponApplyController::class, 'getAllByUser'])->name('api.backend.coupons-apply.user');
     Route::post('/create', [BackendCouponApplyController::class, 'create'])->name('api.backend.coupons-apply.create');
-    Route::put('/update/{id}', [BackendCouponApplyController::class, 'update'])->name('api.backend.coupons-apply.update');
-    Route::delete('/delete/{id}', [BackendCouponApplyController::class, 'delete'])->name('api.backend.coupons-apply.delete');
+    Route::put('/update/{id}',
+        [BackendCouponApplyController::class, 'update'])->name('api.backend.coupons-apply.update');
+    Route::delete('/delete/{id}',
+        [BackendCouponApplyController::class, 'delete'])->name('api.backend.coupons-apply.delete');
 
-    Route::post('change-status', [BackendCouponApplyController::class, 'updateStatus'])->name('api.backend.coupons-apply.update-status');
+    Route::post('change-status',
+        [BackendCouponApplyController::class, 'updateStatus'])->name('api.backend.coupons-apply.update-status');
 });
 
 Route::group(['prefix' => 'coupons'], function () {
@@ -58,32 +64,40 @@ Route::group(['prefix' => 'coupons'], function () {
 
 Route::group(['prefix' => 'service-clinics'], function () {
     Route::get('list', [ServiceClinicApi::class, 'getAll'])->name('api.backend.service.clinic.list');
-    Route::get('list-by-clinics/{id}', [ServiceClinicApi::class, 'getAllByClinics'])->name('api.backend.service.clinic.list.clinics');
-    Route::get('list-by-user/{id}', [ServiceClinicApi::class, 'getAllByUserId'])->name('api.backend.service.clinic.list.user');
+    Route::get('list-by-clinics/{id}',
+        [ServiceClinicApi::class, 'getAllByClinics'])->name('api.backend.service.clinic.list.clinics');
+    Route::get('list-by-user/{id}',
+        [ServiceClinicApi::class, 'getAllByUserId'])->name('api.backend.service.clinic.list.user');
     Route::get('detail/{id}', [ServiceClinicApi::class, 'detail'])->name('api.backend.service.clinic.detail');
     Route::post('create', [ServiceClinicApi::class, 'create'])->name('api.backend.service.clinic.create');
 });
 
 Route::group(['prefix' => 'business-favourites'], function () {
     Route::get('list-by-users', [BusinessFavouriteApi::class, 'getAll'])->name('api.backend.business.favourites.list');
-    Route::get('list-by-business', [BusinessFavouriteApi::class, 'findByUserIdAndBusinessID'])->name('api.backend.business.favourites.business');
+    Route::get('list-by-business',
+        [BusinessFavouriteApi::class, 'findByUserIdAndBusinessID'])->name('api.backend.business.favourites.business');
     Route::post('create', [BusinessFavouriteApi::class, 'create'])->name('api.backend.business.favourites.create');
-    Route::delete('delete/{id}', [BusinessFavouriteApi::class, 'delete'])->name('api.backend.business.favourites.delete');
+    Route::delete('delete/{id}',
+        [BusinessFavouriteApi::class, 'delete'])->name('api.backend.business.favourites.delete');
 });
 
 Route::group(['prefix' => 'medical-favourites'], function () {
     Route::get('list-by-users', [MedicalFavouriteApi::class, 'getAll'])->name('api.backend.medical.favourites.list');
-    Route::get('list-by-medical', [MedicalFavouriteApi::class, 'findByUserIdAndMedicalID'])->name('api.backend.medical.favourites.medical');
+    Route::get('list-by-medical',
+        [MedicalFavouriteApi::class, 'findByUserIdAndMedicalID'])->name('api.backend.medical.favourites.medical');
     Route::post('create', [MedicalFavouriteApi::class, 'create'])->name('api.backend.medical.favourites.create');
     Route::delete('delete/{id}', [MedicalFavouriteApi::class, 'delete'])->name('api.backend.medical.favourites.delete');
-    Route::post('update-wishlist', [MedicalFavouriteApi::class, 'updateWishListMedical'])->name('api.backend.medical.favourites.update.wishlist');
+    Route::post('update-wishlist',
+        [MedicalFavouriteApi::class, 'updateWishListMedical'])->name('api.backend.medical.favourites.update.wishlist');
 });
 
 Route::group(['prefix' => 'booking'], function () {
-    Route::get('/list-users/{id}/{status}', [BookingApi::class, 'getAllBookingByUserId'])->name('api.booking.list.users');
+    Route::get('/list-users/{id}/{status}',
+        [BookingApi::class, 'getAllBookingByUserId'])->name('api.booking.list.users');
     Route::get('/list-clinics/{id}', [BookingApi::class, 'getAllBookingByClinicID'])->name('api.booking.list.clinics');
     Route::post('create', [BookingApi::class, 'createBooking'])->name('api.user.createBooking');
-    Route::post('/cancel/{userId}/{bookingId}/{status}', [BookingApi::class, 'bookingCancel'])->name('api.user.booking.status');
+    Route::post('/cancel/{userId}/{bookingId}/{status}',
+        [BookingApi::class, 'bookingCancel'])->name('api.user.booking.status');
 });
 
 Route::group(['prefix' => 'messages'], function () {
@@ -91,5 +105,5 @@ Route::group(['prefix' => 'messages'], function () {
 });
 
 Route::group(['prefix' => 'checkout'], function () {
-    Route::post('imm', [\App\Http\Controllers\restapi\CheckoutApi::class, 'checkoutByImm']);
+    Route::post('imm', [CheckoutApi::class, 'checkoutByImm']);
 });
