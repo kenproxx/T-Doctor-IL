@@ -196,6 +196,9 @@
         background: #088180;
         box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.25);
     }
+    .rectangle {
+        height: 273px;
+    }
 
 </style>
 
@@ -217,7 +220,8 @@
 @endphp
 <div class="col-sm-3 mb-3">
     <div class="m-4">
-        <div class="frame component-medicine w-100"><img loading="lazy" class="rectangle border-img"
+        <div class="frame component-medicine w-100">
+            <img loading="lazy" class="rectangle border-img"
                                       src="{{asset($medicine->thumbnail)}}"/>
             <div class="div">
                 <div class="div-2">
@@ -232,7 +236,7 @@
                             class="text-wrapper-2">{{ $province->name ?? ( __('home.Toàn quốc')) }}</div>
                     </div>
                     <div
-                        class="text-wrapper-3">{{ $medicine->price }} {{ $medicine->unit_price }}</div>
+                        class="text-wrapper-3">{{ number_format($medicine->price, 0, ',', '.' ) }} {{ $medicine->unit_price ?? 'VND'}}</div>
                 </div>
                 <div class="div-wrapper">
                     <a href="{{ route('medicine.detail', $medicine->id) }}">

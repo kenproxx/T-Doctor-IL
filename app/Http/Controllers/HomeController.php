@@ -6,6 +6,7 @@ use App\Enums\BookingStatus;
 use App\Enums\CouponApplyStatus;
 use App\Enums\CouponStatus;
 use App\Enums\MessageStatus;
+use App\Enums\online_medicine\OnlineMedicineStatus;
 use App\Enums\ProductStatus;
 use App\Enums\SettingStatus;
 use App\Enums\UserStatus;
@@ -13,6 +14,7 @@ use App\Models\Booking;
 use App\Models\Chat;
 use App\Models\Coupon;
 use App\Models\CouponApply;
+use App\Models\online_medicine\ProductMedicine;
 use App\Models\ProductInfo;
 use App\Models\Setting;
 use App\Models\User;
@@ -30,7 +32,15 @@ class HomeController extends Controller
         }
         $coupons = Coupon::where('status', CouponStatus::ACTIVE)->paginate(6);
         $products = ProductInfo::where('status', ProductStatus::ACTIVE)->paginate(12);
-        return view('home', compact('coupons', 'products'));
+        $medicines = ProductMedicine::where('product_medicines.status', OnlineMedicineStatus::APPROVED)
+            ->leftJoin('users', 'product_medicines.user_id', '=', 'users.id')
+            ->leftJoin('provinces', 'provinces.id', '=', 'users.province_id')
+            ->select('product_medicines.*', 'provinces.name as location_name')
+            ->paginate(15);
+        foreach ($medicines as $medicine) {
+
+        }
+        return view('home', compact('coupons', 'products', 'medicines', 'medicine'));
     }
 
     public function admin()
