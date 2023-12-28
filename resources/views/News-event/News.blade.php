@@ -24,7 +24,7 @@
     </style>
     <div class="recruitment-details ">
         <div class="container">
-            @if($listNews)
+            @if($listNews && count($listNews) > 0)
                 @php
                     $news = $listNews->first();
                 @endphp
@@ -69,6 +69,9 @@
                     {{ $listNews->links() }}
                 </nav>
             @else
+                <div class="mt-4">
+                    <p class="text-content-product">{{ __('home.All news') }}</p>
+                </div>
                 <div class="d-flex justify-content-center">
                     <h3>{{ __('home.Không có tin tức nào') }}</h3>
                 </div>
@@ -80,7 +83,7 @@
     </div>
     <div class="recruitment-details ">
         <div class="container">
-            @if($listEvent)
+            @if($listEvent && count($listEvent) > 0)
                 @php
                     $Event = $listEvent->first();
                 @endphp
@@ -123,6 +126,13 @@
                 <nav aria-label="Page navigation example" class="d-flex justify-content-center">
                     {{ $listEvent->links() }}
                 </nav>
+            @else
+                <div class="mt-4">
+                    <p class="text-content-product">{{ __('home.All Event') }}</p>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <h3>{{ __('home.Không có sự kiện nào') }}</h3>
+                </div>
             @endif
         </div>
     </div>

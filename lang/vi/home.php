@@ -705,4 +705,5 @@ return [
     'Edit product medicine' => 'Chỉnh sửa sản phẩm thuốc',
     'Create product medicine' => 'Tạo sản phẩm thuốc',
     'avatar' => 'Hình đại diện',
+    'Không có sự kiện nào' => 'Không có sự kiện nào',
 ];

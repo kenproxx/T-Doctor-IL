@@ -706,4 +706,5 @@ return [
     'Edit product medicine' => 'Edit product medicine',
     'Create product medicine' => 'Create product medicine',
     'avatar' => 'Avatar',
+    'Không có sự kiện nào' => 'No events',
 ];

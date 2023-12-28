@@ -693,4 +693,5 @@ return [
     'Edit product medicine' => 'ແກ້ໄຂຜະລິດຕະພັນຢາ',
     'Create product medicine' => 'ສ້າງຜະລິດຕະພັນຢາ',
     'avatar' => 'ຮູບແທນຕົວ',
+    'Không có sự kiện nào' => 'ບໍ່ມີກິດຈະກຳໃຫມ່',
 ];
