@@ -113,6 +113,13 @@
             formData.append('_token', '{{ csrf_token() }}');
             // push file avatar to form data
             let file = $('#avatar')[0].files[0];
+
+            // check file avatar not empty
+            if (!file) {
+                alert('Vui lòng chọn ảnh đại diện');
+                return;
+            }
+
             if (file) {
                 formData.append('avatar', file);
             }
