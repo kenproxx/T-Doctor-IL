@@ -8,6 +8,7 @@ use App\Enums\CouponStatus;
 use App\Enums\MessageStatus;
 use App\Enums\ProductStatus;
 use App\Enums\SettingStatus;
+use App\Enums\UserStatus;
 use App\Models\Booking;
 use App\Models\Chat;
 use App\Models\Coupon;
@@ -144,9 +145,7 @@ class HomeController extends Controller
 
     public function listStaff()
     {
-        //get list staff by manager_id = auth()->id()
-        $users = User::where('manager_id', Auth::id())->get();
-
+        $users = User::where('manager_id', Auth::id())->where('status', '!=', UserStatus::DELETED)->paginate(20);
         return view('admin.staff.list-staff', compact('users'));
     }
 
