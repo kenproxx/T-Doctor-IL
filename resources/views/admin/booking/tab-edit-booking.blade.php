@@ -29,6 +29,17 @@
                     <input type="text" class="form-control" id="service_text" name="service_text" disabled>
                     @php
                         $arrayService = explode(',', $bookings_edit->service);
+                        $list_service_name = \App\Models\ServiceClinic::whereIn('id', $arrayService)
+                            ->where('status', \App\Enums\ServiceClinicStatus::ACTIVE)
+                            ->get();
+                        $names = null;
+                        foreach ($list_service_name as $item){
+                            if ($names){
+                                $names = $names .','. $item->name;
+                            } else {
+                                $names = $item->name;
+                            }
+                        }
                     @endphp
                     <ul class="list-service " style="list-style: none; padding-left: 0">
                         @foreach($services as $service)
@@ -420,7 +431,7 @@
                                 <div class="service-result">
                                     <div class="form-group">
                                         <label for="service_name">Service Name</label>
-                                        <input type="text" class="form-control" id="service_name" disabled
+                                        <input type="text" class="form-control" id="service_name" disabled value="{{ $names }}"
                                                placeholder="Apartment, studio, or floor">
                                         <ul class="list-service" style="list-style: none; padding-left: 0">
                                             @foreach($services as $service)
@@ -435,7 +446,7 @@
         </ul>
         <div class="d-none">
             <label for="service_result">Service Result</label>
-            <input type="text" class="form-control service_result" id="service_result" name="service_result">
+            <input type="text" class="form-control service_result" value="{{$bookings_edit->service}}" id="service_result" name="service_result">
         </div>
     </div>
     <div class="form-group">
