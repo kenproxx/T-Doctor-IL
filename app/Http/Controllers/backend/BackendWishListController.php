@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\WishList;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class BackendWishListController extends Controller
@@ -23,6 +24,19 @@ class BackendWishListController extends Controller
             '1')->select('wish_lists.*', 'product_infos.*')->get();
 
         return response()->json($wishLists);
+    }
+
+    public function reGet()
+    {
+        $listWishList = WishList::where('isFavorite', 1);
+
+        if (Auth::check()) {
+            $listWishList->where('user_id', Auth::user()->id);
+        }
+
+        $listWishList = json_encode($listWishList->pluck('product_id')->toArray());
+
+        return response()->json($listWishList);
     }
 
     public function findByUserIdAndProductId(Request $request)
