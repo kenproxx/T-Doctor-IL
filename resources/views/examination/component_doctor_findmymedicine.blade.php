@@ -1,6 +1,15 @@
 @php use App\Models\MedicalFavourite;use App\Models\Province; @endphp
 @php use App\Models\Department;use Illuminate\Support\Facades\Auth; @endphp
 <style>
+    .title-best__doctor {
+        display: -webkit-box;
+        line-height: 1.3;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        height: 24px;
+    }
     .bi-heart-fill {
         color: red;
     }
@@ -154,6 +163,7 @@
         box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.25);
     }
 
+
 </style>
 
 <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
@@ -161,7 +171,7 @@
         <img loading="lazy" class="rectangle border-img"
              src="{{asset($pharmacist->avt)}}"/>
         <div class="div mt-3">
-            <a target="_blank" href="{{ route('examination.doctor_info', ['id' => $pharmacist->id]) }}">
+            <a target="_blank" class="title-best__doctor" href="{{ route('examination.doctor_info', ['id' => $pharmacist->id]) }}">
                 <div class="text-wrapper">{{ $pharmacist->name ?? __('home.no name') }}</div>
             </a>
             <div class="div-2">
@@ -185,9 +195,9 @@
                 ['type', '=', $pharmacist->type],
             ])->first();
 
-            $heart = 'bi-heart';
+            $heart = 'bi-heart d-flex';
             if ($isFavourite){
-                $heart = 'bi-heart-fill';
+                $heart = 'bi-heart-fill d-flex';
             }
 
         @endphp
