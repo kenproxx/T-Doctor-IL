@@ -364,19 +364,21 @@
                                     </div>
                                 </div>
                                 <div class="border-bottom fs-16px mb-md-3">
-                                    <span>{{ __('home.select member family') }}</span>
-                                    </div>
-                                    <div>
-                                    Bản thân
-                                    <select class="form-control" name="member_family_id" id="member_family_id">
+                                     @if(Auth::check())
+                                        <span>{{ __('home.select member family') }}</span>
+                                        </div>
+                                        <div>
+                                        Bản thân
+                                        <select class="form-control" name="member_family_id" id="member_family_id">
                                         <option value="{{$userId}}">{{ __('home.Bản thân') }}</option>
                                         @foreach($memberFamily as $member)
-                                            <option value="{{$member->id}}">{{$member->name}}</option>
+                                        <option value="{{$member->id}}">{{$member->name}}</option>
                                         @endforeach
-                                    </select>
-                                    </div>
-                                <div class="border-bottom fs-16px mb-md-3">
-                                    <span>{{ __('home.Main service') }}</span>
+                                        </select>
+                                            </div>
+                                        @endif
+                <div class="border-bottom fs-16px mb-md-3">
+                <span>{{ __('home.Main service') }}</span>
                                 </div>
                                ${service}
                                 <div class="border-bottom mt-md-4 fs-16px mb-md-3">
