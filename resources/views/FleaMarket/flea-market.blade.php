@@ -25,7 +25,7 @@
 
                     <div class="search-box col-md-5">
                         <input class="m-0" type="Search" onkeyup="performSearch()" name="focus"
-                               placeholder="{{ __('home.Search for anything…') }}" id="inputSearch" value="">
+                               placeholder="{{ __('home.Search for anything…') }}" id="inputSearchMobile" value="">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </div>
                     <div class="flex-fill">
@@ -41,8 +41,8 @@
             <div class="col-md-3 flea-content ">{{ __('home.Flea market') }}</div>
             <div class="col-md-5 flea-search d-flex align-items-center">
                 <i class="fa fa-search form-control-search"></i>
-                <label for="inputSearch"></label><input onkeyup="performSearch()" id="inputSearch"
-                                                        placeholder="{{ __('home.Search for anything…') }}">
+                <label for="inputSearch"></label><input onkeyup="performSearch()" id="inputSearch" type="Search"
+                                                        placeholder="{{ __('home.Search for anything…') }}" value="">
             </div>
 
             @if(Auth::check())
@@ -268,6 +268,12 @@
         function performSearch() {
             var searchInput = document.getElementById('inputSearch');
             var searchValue = searchInput.value;
+            var inputSearchMobile = document.getElementById('inputSearchMobile');
+            var searchValueMobile = inputSearchMobile.value;
+            if (searchValueMobile) {
+                searchValue = searchValueMobile;
+            }
+            console.log(searchValue)
 
             var departmentIds = [];
             var departmentInputs = document.querySelectorAll('input[name^="category_"]');
@@ -314,28 +320,34 @@
                 var isFavoriteClass = product.isFavorit ? 'bi-heart-fill' : 'bi-heart';
 
                 var productHtml = `
-            <div class="col-md-3 col-6">
-                <div class="product-item">
-                    <div class="img-pro">
-                        <img class="b-radius-8px" src="${product.thumbnail}" alt="">
-                        <a class="button-heart" data-favorite="0">
-                            <i id="icon-heart-${product.id}" class="${isFavoriteClass} bi" data-product-id="${product.id}" onclick="addProductToWishList(${product.id})"></i>
-                        </a>
-                    </div>
-                    <div class="content-pro">
-                        <div class="name-pro">
-                            <a href="${url}">${product.name}</a>
-                        </div>
-                        <div class="location-pro d-flex">
-                            Location: <p>${product.province_id}</p>
-                        </div>
-                        <div class="price-pro">
-                            ${product.price} ${product.price_unit}
-                        </div>
-                    </div>
+    <div class="col-md-3 col-6">
+        <div class="product-item">
+            <div class="img-pro">
+                <img class="b-radius-8px" src="${product.thumbnail}" alt="">
+                <a class="button-heart" data-favorite="0">
+                    <i id="icon-heart-${product.id}" class="${isFavoriteClass} bi" data-product-id="${product.id}" onclick="addProductToWishList(${product.id})"></i>
+                </a>
+            </div>
+            <div class="content-pro">
+                <div class="name-pro">
+                    <a href="${url}">${product.name}</a>
+                </div>
+                <div class="location-pro d-flex">
+                    Location: <p>${product.province_id}</p>
+                </div>
+                <div class="price-pro">
+                    ${formatCurrency(product.price)} ${product.price_unit}
                 </div>
             </div>
-        `;
+        </div>
+    </div>
+`;
+
+                function formatCurrency(amount) {
+                    // Sử dụng hàm toLocaleString để định dạng số tiền
+                    return amount.toLocaleString('en-US');
+                }
+
 
                 if (adsPlan === 1) {
                     $('#productsAdsPlan1').append(productHtml);
@@ -457,12 +469,15 @@
                                     Location: <p>${item.province_id}</p>
                                 </div>
                                 <div class="price-pro">
-                                    ${item.price} ${item.price_unit}
+                                    ${formatCurrency(item.price)} ${item.price_unit}
                                 </div>
                             </div>
                         </div>
                     </div>
                 `;
+                    function formatCurrency(amount) {
+                        return amount.toLocaleString('en-US');
+                    }
                     if (adsPlan === 1) {
                         $('#productsAdsPlan1').append(html);
                     } else if (adsPlan === 2) {
