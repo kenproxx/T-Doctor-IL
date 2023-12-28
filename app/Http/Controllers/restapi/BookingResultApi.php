@@ -4,12 +4,15 @@ namespace App\Http\Controllers\restapi;
 
 use App\Enums\BookingResultStatus;
 use App\Http\Controllers\Controller;
+use App\Imports\ExcelImportClass;
 use App\Models\Booking;
 use App\Models\BookingResult;
 use App\Models\Clinic;
+use App\Models\online_medicine\ProductMedicine;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class BookingResultApi extends Controller
 {
@@ -38,6 +41,51 @@ class BookingResultApi extends Controller
             });
 
         return response()->json($results);
+    }
+
+    public function getProductByPrescriptionsInBookingID($id)
+    {
+        $result = BookingResult::find($id);
+        if (!$result || $result->status == BookingResultStatus::DELETED) {
+            return response((new MainApi())->returnMessage('Not found'), 404);
+        }
+
+        $file_excel = $result->prescriptions;
+        $products = $this->getListProductFromExcel($file_excel);
+        return response()->json($products);
+    }
+
+    private function getListProductFromExcel($excel_file)
+    {
+        $excel_file = public_path($excel_file);
+        $reader = Excel::toCollection(new ExcelImportClass, $excel_file)->first();
+        $nameMedicineArray = [];
+        $thanhPhanThuocArray = [];
+
+        foreach ($reader->skip(1) as $row) {
+            $nameMedicineArray[] = $row[0];
+
+            $thanhPhanThuocArray[] = explode(',', $row[1]);
+        }
+
+        $products = ProductMedicine::where(function ($query) use ($nameMedicineArray) {
+            foreach ($nameMedicineArray as $nameMedicine) {
+                $query->orWhere('name', 'LIKE', '%' . $this->normalizeString($nameMedicine) . '%');
+            }
+        })
+            ->where(function ($query) use ($thanhPhanThuocArray) {
+                foreach ($thanhPhanThuocArray as $thanhPhanArray) {
+                    $query->orWhere(function ($subQuery) use ($thanhPhanArray) {
+                        foreach ($thanhPhanArray as $thanhPhan) {
+                            $subQuery->whereHas('DrugIngredient', function ($q) use ($thanhPhan) {
+                                $q->where('component_name', 'LIKE', '%' . $this->normalizeString($thanhPhan) . '%');
+                            });
+                        }
+                    });
+                }
+            })
+            ->get();
+        return $products;
     }
 
     public function getListByBusinessID(Request $request)
@@ -94,5 +142,10 @@ class BookingResultApi extends Controller
         } catch (\Exception $exception) {
             return response((new MainApi())->returnMessage('Error, Please try again!'), 400);
         }
+    }
+
+    private function normalizeString($str)
+    {
+        return strtolower(trim($str));
     }
 }

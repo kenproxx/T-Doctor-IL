@@ -21,6 +21,7 @@ use App\Http\Controllers\connect\WidgetChatController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\DoctorInfoController;
 use App\Http\Controllers\DoctorReviewController;
+use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\ExaminationController;
 use App\Http\Controllers\FleaMarketController;
 use App\Http\Controllers\HomeController;
@@ -34,6 +35,7 @@ use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecruitmentController;
 use App\Http\Controllers\restapi\BookingApi;
+use App\Http\Controllers\restapi\UserApi;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReviewStoreController;
 use App\Http\Controllers\ServiceClinicController;
@@ -370,6 +372,7 @@ Route::middleware(['user.active'])->group(function () {
         Route::post('/login', [LoginController::class, 'login'])->name('api.user.login');
         Route::post('/logout', [LoginController::class, 'logout'])->name('api.user.logout');
         Route::post('/register', [RegisterController::class, 'register'])->name('api.user.register');
+        Route::post('/logout-all', [UserApi::class, 'logout']);
     });
 //Product
     Route::group(['prefix' => 'products'], function () {
@@ -379,32 +382,32 @@ Route::middleware(['user.active'])->group(function () {
 
     /* Admin */
     Route::group(['prefix' => 'admin', 'middleware' => ['admin']], function () {
-        require_once __DIR__.'/admin.php';
+        require_once __DIR__ . '/admin.php';
     });
 
     /* Business */
     Route::group(['prefix' => 'api', 'middleware' => ['business']], function () {
-        require_once __DIR__.'/permission/business.php';
+        require_once __DIR__ . '/permission/business.php';
     });
 
     /* Medical */
     Route::group(['prefix' => 'api', 'middleware' => ['medical']], function () {
-        require_once __DIR__.'/permission/medical.php';
+        require_once __DIR__ . '/permission/medical.php';
     });
 
     /* Normal */
     Route::group(['prefix' => 'api', 'middleware' => 'normal'], function () {
-        require_once __DIR__.'/permission/normal.php';
+        require_once __DIR__ . '/permission/normal.php';
     });
 
     /* Authenticate */
     Route::group(['prefix' => 'api', 'middleware' => 'jwt'], function () {
-        require_once __DIR__.'/backend.php';
+        require_once __DIR__ . '/backend.php';
     });
 
     /* Free api */
     Route::group(['prefix' => ''], function () {
-        require_once __DIR__.'/restapi.php';
+        require_once __DIR__ . '/restapi.php';
     });
 
 // Route maps
@@ -414,5 +417,9 @@ Route::middleware(['user.active'])->group(function () {
 
     Route::get('/upload-form', [\App\Http\Controllers\ImportController::class, 'showForm'])->name('upload.form');
     Route::post('/import-excel', [\App\Http\Controllers\ImportController::class, 'importExcel'])->name('import.excel');
-
+    /*Download*/
+    Route::group(['prefix' => 'download'], function () {
+        Route::get('', [DownloadController::class, 'getDownload'])->name('user.download');
+        Route::get('file/{id}', [DownloadController::class, 'downloadFile'])->name('user.download.file');
+    });
 });

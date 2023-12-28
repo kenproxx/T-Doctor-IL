@@ -176,6 +176,7 @@ Route::get('/service/{serviceId}', [\App\Http\Controllers\restapi\admin\AminServ
 /* Booking result*/
 Route::group(['prefix' => 'booking-result'], function () {
     Route::get('/list', [BookingResultApi::class, 'getListByUser'])->name('restapi.booking.result.list');
+    Route::get('/list-medicine/{id}', [BookingResultApi::class, 'getProductByPrescriptionsInBookingID'])->name('restapi.booking.result.list.medicine');
     Route::get('/list-business', [BookingResultApi::class, 'getListByBusinessID'])->name('restapi.booking.result.business');
     Route::get('/detail/{id}', [BookingResultApi::class, 'detail'])->name('restapi.booking.result.detail');
 });

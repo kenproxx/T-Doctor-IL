@@ -85,6 +85,10 @@ class AdminBookingResultApi extends Controller
             $result = new BookingResult();
 
             $result = $this->store($request, $result);
+
+            if (!$result->prescriptions){
+                return response((new MainApi())->returnMessage('Please upload prescriptions!'), 400);
+            }
             $success = $result->save();
             if ($success) {
                 return response()->json($result);
@@ -129,6 +133,13 @@ class AdminBookingResultApi extends Controller
             $files = implode(',', $galleryPaths);
         } else {
             $files = $result->files;
+        }
+
+        if ($request->hasFile('prescriptions')) {
+            $item = $request->file('prescriptions');
+            $itemPath = $item->store('result', 'public');
+            $file = asset('storage/' . $itemPath);
+            $result->prescriptions = $file;
         }
 
         $result->service_name = $service_name;
