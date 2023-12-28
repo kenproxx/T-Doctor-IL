@@ -333,7 +333,7 @@
                     <a href="${url}">${product.name}</a>
                 </div>
                 <div class="location-pro d-flex">
-                    Location: <p>${product.province_id}</p>
+                    Location: <p>${product.location_name ?? 'Toàn quốc'}</p>
                 </div>
                 <div class="price-pro">
                     ${formatCurrency(product.price)} ${product.price_unit}
@@ -434,6 +434,7 @@
                     let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`;
                     url = url.replace(':id', res[i].id);
                     let item = res[i];
+                    console.log(item)
                     let adsPlan = item.ads_plan;
                     let userId = `{{ Auth::check() ? Auth::user()->id : null }}`;
 
@@ -466,7 +467,7 @@
                                     <a href="${url}">${item.name}</a>
                                 </div>
                                 <div class="location-pro d-flex">
-                                    Location: <p>${item.province_id}</p>
+                                    Location: <p>${item.location_name ?? 'Toàn quốc'}</p>
                                 </div>
                                 <div class="price-pro">
                                     ${formatCurrency(item.price)} ${item.price_unit}
