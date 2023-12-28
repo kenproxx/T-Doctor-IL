@@ -91,6 +91,8 @@ Route::middleware(['user.active'])->group(function () {
         Route::post('/create', [BackendWishListController::class, 'create'])->name('api.backend.wish.lists.create');
         Route::POST('/update/{id}',
             [BackendWishListController::class, 'update'])->name('api.backend.wish.lists.update');
+        Route::get('/reget',
+            [BackendWishListController::class, 'reGet'])->name('api.backend.wish.lists.reGet');
         Route::delete('/delete/{id}',
             [BackendWishListController::class, 'delete'])->name('api.backend.wish.lists.delete');
         Route::delete('/delete-list',
