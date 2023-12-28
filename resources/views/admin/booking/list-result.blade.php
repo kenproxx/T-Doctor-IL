@@ -63,10 +63,17 @@
                         {{ $result->status }}
                     </td>
                     <td>
-                        <div class="list-action d-flex align-items-center">
-                            <a href="{{ route('web.booking.result.detail', $result->id) }}" class="btn btn-primary">
-                                <i class="fa-solid fa-pen-to-square"></i>
-                            </a>
+                        <div class="d-flex align-items-center">
+                            <div class="list-action d-flex align-items-center">
+                                <a href="{{ route('web.booking.result.list.prescriptions', $result->id) }}" class="btn btn-secondary">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            </div>
+                            <div class="list-action d-flex align-items-center">
+                                <a href="{{ route('web.booking.result.detail', $result->id) }}" class="btn btn-primary">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </div>
                         </div>
                     </td>
                 </tr>
