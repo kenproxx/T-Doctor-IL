@@ -1,3 +1,4 @@
+@php use App\Enums\Role; @endphp
 @extends('layouts.master')
 @section('title', 'Flea Market')
 @section('content')
@@ -46,7 +47,7 @@
             </div>
 
             @if(Auth::check())
-                @if(auth()->user()->type!= \App\Enums\Role::NORMAL)
+                @if(auth()->user()->type!= Role::NORMAL)
                     <div class="d-flex col-md-4 justify-content-between align-items-center">
                         <a href="#" onclick="checkLogin()" class="col-md-4 flea-button">
                             {{ __('home.Sell my product') }}
@@ -192,6 +193,8 @@
     </div>
     </body>
     <script>
+        let listWishList = `{{ $listWishList }}`;
+
         function getCookie(name) {
             var value = "; " + document.cookie;
             var parts = value.split("; " + name + "=");
@@ -222,8 +225,8 @@
                 window.location.href = '{{route('flea.market.sell.product')}}';
             }
         }
-    </script>
-    <script>
+
+
         const rangeInput = document.querySelectorAll(".range-input input"),
             priceInput = document.querySelectorAll(".price-input input"),
             range = document.querySelector(".slider .progress");
@@ -266,6 +269,7 @@
 
 
         function performSearch() {
+            loadingMasterPage();
             var searchInput = document.getElementById('inputSearch');
             var searchValue = searchInput.value;
             var inputSearchMobile = document.getElementById('inputSearchMobile');
@@ -273,7 +277,6 @@
             if (searchValueMobile) {
                 searchValue = searchValueMobile;
             }
-            console.log(searchValue)
 
             var departmentIds = [];
             var departmentInputs = document.querySelectorAll('input[name^="category_"]');
@@ -297,11 +300,12 @@
                 method: "GET",
                 data: formData,
                 success: function (response) {
-                    // console.log(response);
                     renderProduct(response);
+                    loadingMasterPage();
                 },
                 error: function (error) {
                     console.log(error);
+                    loadingMasterPage();
                 }
             });
         }
@@ -311,16 +315,24 @@
             $('#productsAdsPlan2').html('');
             $('#productsAdsPlan3').html('');
 
+            let adsPlan1Counter = 0;
+            let adsPlan2Counter = 0;
+            let adsPlan3Counter = 0;
+
             for (var i = 0; i < products.length; i++) {
+
+                if (adsPlan1Counter === 6 && adsPlan2Counter === 6 && adsPlan3Counter === 6) {
+                    break;
+                }
+
                 let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`;
                 url = url.replace(':id', products[i].id);
                 var product = products[i];
-                console.log(product)
                 var adsPlan = product.ads_plan;
-                var isFavoriteClass = product.isFavorit ? 'bi-heart-fill' : 'bi-heart';
+                let isFavoriteClass = isUserWasWishlist(product.id);
 
                 var productHtml = `
-    <div class="col-md-3 col-6">
+    <div class="col-md-4 col-6">
         <div class="product-item">
             <div class="img-pro">
                 <img class="b-radius-8px" src="${product.thumbnail}" alt="">
@@ -342,18 +354,21 @@
         </div>
     </div>
 `;
+
                 function formatCurrency(amount) {
                     // Sử dụng hàm toLocaleString để định dạng số tiền
                     return amount.toLocaleString('de-DE');
                 }
 
-
-                if (adsPlan === 1) {
+                if (adsPlan === 1 && adsPlan1Counter < 6) {
                     $('#productsAdsPlan1').append(productHtml);
-                } else if (adsPlan === 2) {
+                    adsPlan1Counter++;
+                } else if (adsPlan === 2 && adsPlan2Counter < 6) {
                     $('#productsAdsPlan2').append(productHtml);
-                } else if (adsPlan === 3) {
+                    adsPlan2Counter++;
+                } else if (adsPlan === 3 && adsPlan3Counter < 6) {
                     $('#productsAdsPlan3').append(productHtml);
+                    adsPlan3Counter++;
                 }
             }
         }
@@ -365,6 +380,7 @@
             let productId = id;
             let userId = `{{ Auth::check() ? Auth::user()->id : null }}`;
             if (userId) {
+                loadingMasterPage();
                 let url = '{{ route('api.backend.wish.lists.update', ':productId') }}';
                 url = url.replace(':productId', productId);
                 $.ajax({
@@ -380,6 +396,7 @@
                     },
                     success: function (response) {
                         let item = $('#icon-heart-' + id);
+                        reGetWishList();
                         if (response.isFavorite == true) {
                             item.removeClass('bi-heart');
                             item.addClass('bi-heart-fill');
@@ -389,12 +406,35 @@
                             item.removeClass('bi-heart-fill');
                             alert('Remove product from wish list success');
                         }
+                        loadingMasterPage();
                     },
                     error: function (exception) {
+                        loadingMasterPage();
                     }
                 });
             } else {
                 $('#staticBackdrop').modal('show');
+            }
+        }
+
+        function reGetWishList() {
+            let userId = `{{ Auth::check() ? Auth::user()->id : null }}`;
+            if (userId) {
+                let url = '{{ route('api.backend.wish.lists.reGet') }}';
+                $.ajax({
+                    url: url,
+                    method: 'GET',
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function (response) {
+                        console.log(response)
+                        listWishList = response;
+                    },
+                    error: function (exception) {
+                    }
+                });
             }
         }
 
@@ -408,6 +448,7 @@
             callListProduct(token);
 
             async function callListProduct(token) {
+                loadingMasterPage();
                 let accessToken = `Bearer ` + token;
                 await $.ajax({
                     url: `{{route('products.api.list')}}`,
@@ -416,36 +457,36 @@
                         "Authorization": accessToken
                     },
                     success: function (response) {
+                        console.log(response)
                         renderProduct(response);
+                        loadingMasterPage();
                     },
                     error: function (exception) {
                         console.log(exception)
+                        loadingMasterPage();
                     }
                 });
             }
 
             async function renderProduct(res) {
-                var productsAdsPlan1 = [];
-                var productsAdsPlan2 = [];
-                var productsAdsPlan3 = [];
+
+                let adsPlan1Counter = 0;
+                let adsPlan2Counter = 0;
+                let adsPlan3Counter = 0;
 
                 for (let i = 0; i < res.length; i++) {
+
+                    if (adsPlan1Counter === 6 && adsPlan2Counter === 6 && adsPlan3Counter === 6) {
+                        break;
+                    }
+
                     let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`;
                     url = url.replace(':id', res[i].id);
                     let item = res[i];
-                    console.log(item)
                     let adsPlan = item.ads_plan;
                     let userId = `{{ Auth::check() ? Auth::user()->id : null }}`;
 
-                    if (adsPlan === 1) {
-                        productsAdsPlan1.push(item);
-                    } else if (adsPlan === 2) {
-                        productsAdsPlan2.push(item);
-                    } else if (adsPlan === 3) {
-                        productsAdsPlan3.push(item);
-                    }
-
-                    let isFavorite = item.isFavorit ? 'bi-heart-fill' : 'bi-heart';
+                    let isFavorite = isUserWasWishlist(item.id);
                     let created_by = item.created_by;
                     let tab = ``;
                     if (userId != created_by) {
@@ -455,7 +496,7 @@
                             </a>`;
                     }
                     var html = `
-                    <div class="col-md-3 col-6">
+                    <div class="col-md-4 col-6">
                         <div class="product-item">
                             <div class="img-pro">
                                 <img class="b-radius-8px" src="${item.thumbnail}" alt="">
@@ -474,7 +515,8 @@
                             </div>
                         </div>
                     </div>
-                `;
+                    `;
+
                     function formatCurrency(amount) {
                         // Chuyển đổi dấu phẩy thành dấu chấm
                         const formattedAmount = amount.toString().replace(/,/g, '.');
@@ -482,15 +524,31 @@
                         // Truyền ngôn ngữ là 'en-US' cho hàm toLocaleString
                         return parseFloat(formattedAmount).toLocaleString('de-DE');
                     }
-                    if (adsPlan === 1) {
+
+                    if (adsPlan === 1 && adsPlan1Counter < 6) {
                         $('#productsAdsPlan1').append(html);
-                    } else if (adsPlan === 2) {
+                        adsPlan1Counter++;
+                    } else if (adsPlan === 2 && adsPlan2Counter < 6) {
                         $('#productsAdsPlan2').append(html);
-                    } else if (adsPlan === 3) {
+                        adsPlan2Counter++;
+                    } else if (adsPlan === 3 && adsPlan3Counter < 6) {
                         $('#productsAdsPlan3').append(html);
+                        adsPlan3Counter++;
                     }
                 }
             }
         });
+
+        function isUserWasWishlist(productId) {
+            let isLogin = `{{ Auth::check() }}`;
+            if (!isLogin) {
+                return 'bi-heart';
+            }
+
+            if (listWishList.includes(productId)) {
+                return 'bi-heart-fill';
+            }
+            return 'bi-heart';
+        }
     </script>
 @endsection

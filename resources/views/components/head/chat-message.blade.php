@@ -468,7 +468,15 @@
 
     getListUserWasConnect();
 
-    function handleStartChatWithDoctor(id) {
+    function handleStartChatWithDoctor(id = 0) {
+        /* tất cả các hàm dưới đây đều ở trong file chat-message.blade.php
+              * id nhận vào là id của người dùng cần chat
+              * hàm hideTabActive() dùng để ẩn tất cả các tab đang active
+              * hàm getMessage(id) dùng để lấy tin nhắn của người dùng đó với người dùng hiện tại
+              * hàm loadDisplayMessage(id) dùng để load tin nhắn của người dùng đó với người dùng hiện tại
+              * hàm showOrHiddenChat() dùng để hiển thị widget chat
+              */
+
         hideTabActive();
         getMessage(id);
         loadDisplayMessage(id);
@@ -490,7 +498,7 @@
     function loadDisplayMessage(id) {
         var friendDivs = document.querySelectorAll('.friend');
 
-        friendDivs.forEach(function(div) {
+        friendDivs.forEach(function (div) {
             // Lấy giá trị data-id của từng div
             var dataId = div.getAttribute('data-id');
 

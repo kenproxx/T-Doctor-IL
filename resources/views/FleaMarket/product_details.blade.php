@@ -1,10 +1,13 @@
+@php use App\Http\Controllers\backend\BackendProductInfoController; @endphp
+@php use Illuminate\Support\Facades\DB; @endphp
+@php use Illuminate\Support\Facades\Auth; @endphp
 @extends('layouts.master')
 @section('title', 'Flea Market')
 @section('content')
     @include('layouts.partials.header')
     @include('component.banner')
     @php
-        $pr = (new \App\Http\Controllers\backend\BackendProductInfoController())->show($id);
+        $pr = (new BackendProductInfoController())->show($id);
         $productDetail = json_decode($pr->getContent());
         $pr_json = $productDetail->product;
         $galleryArray = explode(',', $pr_json->gallery);
@@ -17,7 +20,8 @@
     </style>
     <div class="recruitment-details ">
         <div class="container">
-            <div class="recruitment-details--title"><a href="{{route('flea-market.index')}}"><i class="fa-solid fa-arrow-left"></i> {{ __('home.Product details') }}</a></div>
+            <div class="recruitment-details--title"><a href="{{route('flea-market.index')}}"><i
+                        class="fa-solid fa-arrow-left"></i> {{ __('home.Product details') }}</a></div>
             <div class="row recruitment-details--content">
                 <div class="col-md-8 recruitment-details ">
                     @if(!empty($pr_json->thumbnail))
@@ -32,7 +36,8 @@
                     @endif
                     <div class="list col-2 col-md-12 mt-md-3">
                         @foreach($galleryArray as $pr_gallery)
-                            <div class="item-detail d-flex justify-content-center  border-radius-1px color-Grey-Dark mr-md-3">
+                            <div
+                                class="item-detail d-flex justify-content-center  border-radius-1px color-Grey-Dark mr-md-3">
                                 <img style="width: auto; height: 100%" src="{{asset($pr_gallery)}}" alt=""
                                      class="border mw-140px">
                             </div>
@@ -49,7 +54,7 @@
 
                             <p style="color: #929292">{{ __('home.Location') }}:<strong class="flea-prise">
                                     @php
-                                        $province = \Illuminate\Support\Facades\DB::table('provinces')->where('id', $pr_json->province_id)->first()
+                                        $province = DB::table('provinces')->where('id', $pr_json->province_id)->first()
                                     @endphp
                                     @if(!empty($province))
                                         {{$province->name}}
@@ -59,7 +64,7 @@
                                 </strong></p>
                             <p style="color: #929292">{{ __('home.Category') }}:<strong class="flea-prise">
                                     @php
-                                        $cata_json = \Illuminate\Support\Facades\DB::table('categories')->where('id', $pr_json->category_id)->first()
+                                        $cata_json = DB::table('categories')->where('id', $pr_json->category_id)->first()
                                     @endphp
                                     @if(!empty($cata_json))
                                         {{$cata_json->name}}
@@ -72,7 +77,8 @@
                         </div>
                         <div class="div-7 d-flex justify-content-between">
                             @if(Auth::user() == null || Auth::user()->id != $pr_json->created_by)
-                                <a href="{{route('flea.market.product.shop.info',$pr_json->created_by)}}" class="div-wrapper">
+                                <a href="{{route('flea.market.product.shop.info',$pr_json->created_by)}}"
+                                   class="div-wrapper">
                                     {{ __('home.Visit store') }}
                                 </a>
                             @else
@@ -80,7 +86,13 @@
                                     {{ __('home.My store') }}
                                 </a>
                             @endif
-                            <button id="button-apply" class="text-wrapper-5">{{ __('home.Send message') }}</button>
+                            @if(Auth::check())
+                                <button id="button-apply" class="text-wrapper-5"
+                                        onclick="handleStartChatWithDoctor('{{ $pr_json->created_by }}')">{{ __('home.Send message') }}</button>
+                            @else
+                                <button id="button-apply" class="text-wrapper-5"
+                                        onclick="alert('Bạn cần đăng nhập')">{{ __('home.Send message') }}</button>
+                            @endif
                         </div>
                     </div>
                 </div>
