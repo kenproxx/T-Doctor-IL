@@ -53,7 +53,8 @@
                 <td>
                     <a href="{{ route('api.backend.product-medicine.edit', ['id' => $productMedicine->id]) }}"
                        class="btn btn-primary">{{ __('home.Edit') }}</a>
-                    <button onclick="deleteCategoryProduct({{ $productMedicine->id }})" class="btn btn-danger">{{ __('home.Delete') }}
+                    <button onclick="deleteCategoryProduct({{ $productMedicine->id }})"
+                            class="btn btn-danger">{{ __('home.Delete') }}
                     </button>
                 </td>
             </tr>

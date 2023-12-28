@@ -700,4 +700,8 @@ return [
     'Nu' => 'Nữ',
     'Ward' => 'Phường/Xã',
     'no name' => 'Không có tên',
+    'ingredient' => 'Thành phần thuốc',
+    'cac thanh phan thuoc cach nhau boi dau phay' => 'Các thành phần thuốc cách nhau bởi dấu phẩy',
+    'Edit product medicine' => 'Chỉnh sửa sản phẩm thuốc',
+    'Create product medicine' => 'Tạo sản phẩm thuốc',
 ];

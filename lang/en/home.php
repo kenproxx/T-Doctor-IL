@@ -701,4 +701,8 @@ return [
     'Nu' => 'Female',
     'Ward' => 'Ward',
     'no name' => 'No name',
+    'ingredient' => 'Ingredient medicine',
+    'cac thanh phan thuoc cach nhau boi dau phay' => 'Medicine ingredients separated by commas',
+    'Edit product medicine' => 'Edit product medicine',
+    'Create product medicine' => 'Create product medicine',
 ];
