@@ -97,7 +97,7 @@ class CheckoutController extends Controller
         $full_name = $request->input('full_name');
         $email = $request->input("email");
         $phone = $request->input('phone');
-        $address = $request->input('address');
+        $address = $request->input('address_checkout');
 
         $user_id = $request->input('user_id');
 
