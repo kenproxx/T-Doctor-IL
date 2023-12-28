@@ -342,10 +342,9 @@
         </div>
     </div>
 `;
-
                 function formatCurrency(amount) {
                     // Sử dụng hàm toLocaleString để định dạng số tiền
-                    return amount.toLocaleString('en-US');
+                    return amount.toLocaleString('de-DE');
                 }
 
 
@@ -477,7 +476,11 @@
                     </div>
                 `;
                     function formatCurrency(amount) {
-                        return amount.toLocaleString('en-US');
+                        // Chuyển đổi dấu phẩy thành dấu chấm
+                        const formattedAmount = amount.toString().replace(/,/g, '.');
+
+                        // Truyền ngôn ngữ là 'en-US' cho hàm toLocaleString
+                        return parseFloat(formattedAmount).toLocaleString('de-DE');
                     }
                     if (adsPlan === 1) {
                         $('#productsAdsPlan1').append(html);
