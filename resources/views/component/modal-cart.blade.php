@@ -33,7 +33,7 @@
                                     {{ $product->name }}
                                 </div>
                                 <div class="price">
-                                    {{ $product->price }}  {{ $product->unit_price }}
+                                    {{ number_format($product->price, 0, ',', '.') }}  {{ $product->unit_price }}
                                 </div>
                             </div>
                             <div class="col-3">

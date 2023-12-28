@@ -10,11 +10,10 @@
             {{ __('home.Location') }}: <p>{{ $medicine->location_name ??  __('home.Toàn quốc') }}</p>
         </div>
         <div class="price-pro">
-            {{ $medicine->price }} {{ $medicine->unit_price }}
+            {{ number_format($medicine->price, 0, ',', '.') }} {{ $medicine->unit_price ?? 'VND' }}
         </div>
     </div>
 </div>
-
 
 
 <script>
