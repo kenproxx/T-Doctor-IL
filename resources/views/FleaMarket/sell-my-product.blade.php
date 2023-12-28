@@ -145,7 +145,8 @@
                     <p><span>{{ __('home.Advetisement period') }}</span><span class="red-color">*</span></p>
                     <div class="mt-2 d-flex font-12-mobi">
                         <div class="text-wrapper-input col-md-3 d-flex pl-0">
-                            <input type="radio" class="web-tick-box" name="ads_period" id="ads_period1" value="1">
+                            <input type="radio" class="web-tick-box" name="ads_period" id="ads_period1"
+                                   value="1">
                             <label for="ads_period1" class="ml-2"><strong>{{ __('home.5 Day') }}</strong></label>
                         </div>
                         <div class="col-md-3 d-flex text-wrapper-input pl-0 ">
@@ -238,11 +239,18 @@
         });
         $(document).ready(function () {
             $('.create-button').on('click', function () {
+
+                if (!checkValidInput()) {
+                    return;
+                }
+
                 const headers = {
                     'Authorization': `Bearer ${token}`
                 };
 
                 const formData = new FormData();
+
+
                 formData.append("name", $('#name').val());
                 formData.append("name_en", $('#name').val());
                 formData.append("name_laos", $('#name').val());
@@ -300,5 +308,79 @@
                 }
             });
         })
+
+        function checkValidInput() {
+
+            // name, name_en, name_laos, category_id,
+            // brand_name, brand_name_en, brand_name_laos,
+            // province_id, price, price_unit, ads_plan,
+            // description, ads_period,  gallery,
+
+
+            if ($('#name').val().trim() === '') {
+                alert('{{ __('home.Please enter product name') }}');
+                return false;
+            }
+            if ($('#category_id').val().trim() === '') {
+                alert('{{ __('home.Please choose category') }}');
+                return false;
+            }
+            if ($('#brand_name').val().trim() === '') {
+                alert('{{ __('home.Please enter brand name') }}');
+                return false;
+            }
+            if ($('#province_idProduct').val().trim() === '') {
+                alert('{{ __('home.Please choose province') }}');
+                return false;
+            }
+            if ($('#price').val().trim() === '') {
+                alert('{{ __('home.Please enter price') }}');
+                return false;
+            }
+            if (!tinymce.get('description').getContent()) {
+                alert('{{ __('home.Please enter description') }}');
+                return false;
+            }
+
+            // check gallery
+            var filedata = document.getElementById("gallery");
+            var len = filedata.files.length;
+
+            if (len == 0) {
+                alert('{{ __('home.Please choose image') }}');
+                return false;
+            }
+
+            // check name ads plan and ads period not null
+
+            let ads_plan = document.getElementsByName('ads_plan');
+            let ads_period = document.getElementsByName('ads_period');
+
+            let ads_period_value = false;
+            ads_plan.forEach(function (radio) {
+                if (radio.checked) {
+                    ads_period_value = true;
+                }
+            });
+
+            if (!ads_period_value) {
+                alert('{{ __('home.Please choose ads plan') }}');
+                return false;
+            }
+
+            let ads_period_value2 = false;
+            ads_period.forEach(function (radio) {
+                if (radio.checked) {
+                    ads_period_value2 = true;
+                }
+            });
+
+            if (!ads_period_value2) {
+                alert('{{ __('home.Please choose ads period') }}');
+                return false;
+            }
+            return true;
+        }
+
     </script>
 @endsection
