@@ -28,7 +28,7 @@
 
             </div>
             <div class="col-md-4">
-                @if(Auth::user()->id == $booking->member_family_id)
+                @if($memberFamily == null && $user != null)
                     <div>{{ __('home.Name') }}: {{$user->name}}</div>
                     <div>{{ __('home.PhoneNumber') }}: {{$user->phone}}</div>
                     <div>{{ __('home.Email') }}: {{$user->email}}</div>
@@ -39,15 +39,17 @@
                         <div>{{ __('home.Sexs') }}: {{$memberFamily->first()->sex}}</div>
                         <div>{{ __('home.Date of birth') }}: {{$memberFamily->first()->date_of_birth}}</div>
                     @endif
-
                 @endif
             </div>
 
 
         </div>
         <div class="justify-content-center align-items-center d-flex mt-4">
-            <a href="{{ route("clinic.detail", $booking->clinic_id) }}" class="btn button-apply-booking col-md-4">Clinic
+            <a href="{{ route("clinic.detail", $booking->clinic_id) }}" class="btn button-apply-booking col-md-4 mr-2">Clinic
                 Detail</a>
+            @if($booking->status == 'COMPLETE')
+            <a href="{{ route("clinic.detail.results", $booking->id) }}" class="btn button-cancel col-md-4">Results Detail</a>
+            @endif
         </div>
     </div>
 @endsection

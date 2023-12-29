@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\BookingStatus;
 use App\Enums\ServiceClinicStatus;
 use App\Models\Booking;
+use App\Models\BookingResult;
 use App\Models\Clinic;
 use App\Models\ServiceClinic;
 use Illuminate\Http\Request;
@@ -18,6 +19,12 @@ class BookingController extends Controller
     {
         $id = Auth::user()->id;
         return view('bookings.listBooking', compact('id'));
+    }
+
+    public function resultsDetail($id)
+    {
+        $resultBooking = BookingResult::where('booking_id', $id)->first();
+       return view('bookings.resultBooking', compact('resultBooking'));
     }
 
     public function detailBooking($id)
