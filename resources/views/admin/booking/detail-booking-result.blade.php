@@ -6,6 +6,20 @@
     <div class="container-fluid">
         <h1 class="h3 mb-4 text-gray-800">Detail Result</h1>
         <form>
+            @php
+                $arrayServiceName = explode(',', $result->service_name);
+                $list_service_name = \App\Models\ServiceClinic::whereIn('id', $arrayServiceName)
+                    ->where('status', \App\Enums\ServiceClinicStatus::ACTIVE)
+                    ->get();
+                $names = null;
+                foreach ($list_service_name as $item){
+                    if ($names){
+                        $names = $names .','. $item->name;
+                    } else {
+                        $names = $item->name;
+                    }
+                }
+            @endphp
             <div class="list-service-result mt-2 mb-3">
                 <div id="list-service-result">
                     @foreach($array_result as $item)
@@ -138,6 +152,9 @@
                 <label for="code">Code</label>
                 <input type="text" class="form-control" id="code" name="code "
                        value="{{ $result->code }}">
+                <label for="family_member">FamilyMember </label>
+                <input type="text" class="form-control" name="family_member"
+                       value="{{ $result->family_member }}" id="family_member">
             </div>
             <div class="text-center mt-5">
                 <button type="button" class="btn btn-primary btnSave">Save</button>
@@ -235,6 +252,8 @@
                 /* Tạo fn appendDataForm ở admin blade */
                 isValid = appendDataForm(arrField, formData, isValid);
 
+                formData.append('family_member', $('#family_member').val());
+
                 let my_array = [];
 
                 let result_list = document.getElementsByClassName('result');
@@ -251,6 +270,7 @@
 
                     if (!result || !result_en || !result_laos || !service_result) {
                         isValid = false;
+                        alert('Result not empty!')
                     }
 
                     if (total_service) {
@@ -345,7 +365,7 @@
                                     <div class="form-group">
                                         <label for="service_name">Service Name</label>
                                         <input type="text" class="form-control" id="service_name" disabled
-                                               placeholder="Apartment, studio, or floor">
+                                               placeholder="Apartment, studio, or floor" value="{{ $names }}">
                                         <ul class="list-service" style="list-style: none; padding-left: 0">
                                             @foreach($services as $service)
         <li class="new-select">
@@ -359,7 +379,8 @@
         </ul>
         <div class="d-none">
             <label for="service_result">Service Result</label>
-            <input type="text" class="form-control service_result" id="service_result" name="service_result">
+            <input type="text" class="form-control service_result" value="{{$result->service_name}}"
+                id="service_result" name="service_result">
         </div>
     </div>
     <div class="form-group">

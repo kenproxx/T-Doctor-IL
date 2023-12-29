@@ -168,6 +168,9 @@
                             <label for="booking_id">BookingId </label>
                             <input type="text" class="form-control" name="booking_id "
                                    value="{{ $bookings_edit->id }}" id="booking_id">
+                            <label for="family_member">FamilyMember </label>
+                            <input type="text" class="form-control" name="family_member"
+                                   value="{{ $bookings_edit->member_family_id }}" id="family_member">
                             <label for="user_id">UserID</label>
                             <input type="text" class="form-control" name="user_id" value="{{ $bookings_edit->user_id }}"
                                    id="user_id">
@@ -318,6 +321,8 @@
                 let isValid = true
                 /* Tạo fn appendDataForm ở admin blade */
                 isValid = appendDataForm(arrField, formData, isValid);
+
+                formData.append('family_member', $('#family_member').val());
 
                 let my_array = [];
 
