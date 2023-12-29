@@ -8,6 +8,7 @@ use App\Imports\ExcelImportClass;
 use App\Models\Booking;
 use App\Models\BookingResult;
 use App\Models\Clinic;
+use App\Models\FamilyManagement;
 use App\Models\online_medicine\ProductMedicine;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -23,20 +24,32 @@ class BookingResultApi extends Controller
             ->where('user_id', $user_id)
             ->where('status', '!=', BookingResultStatus::DELETED)
             ->select('booking_results.*')
+            ->orderBy('id', 'desc')
             ->cursor()
             ->map(function ($item) {
                 $result = (array)$item;
                 $booking = Booking::find($item->booking_id);
+                /* Push clinic*/
                 $clinic = Clinic::find($booking->clinic_id);
                 $result['clinics'] = $clinic->toArray();
+                /* Convert date */
                 $result['appointment_date'] = $booking->created_at->addHours(7)->format('Y-m-d H:i:s');
                 $result['results_date'] = Carbon::parse($item->created_at)->addHours(7)->format('Y-m-d H:i:s');
+                /* Push result value */
                 $result_value = $item->result;
                 $value_result = '[' . $result_value . ']';
                 $array_result = json_decode($value_result, true);
                 $result['result'] = $array_result;
                 $result['result_en'] = $array_result;
                 $result['result_laos'] = $array_result;
+                /* Fill member family*/
+                $member_family = $item->family_member;
+                $member_info = null;
+                if ($member_family) {
+                    $member = FamilyManagement::find($member_family);
+                    $member_info = $member->toArray();
+                }
+                $result['member_info'] = $member_info;
                 return $result;
             });
 
@@ -86,6 +99,11 @@ class BookingResultApi extends Controller
             })
             ->get();
         return $products;
+    }
+
+    private function normalizeString($str)
+    {
+        return strtolower(trim($str));
     }
 
     public function getListByBusinessID(Request $request)
@@ -142,10 +160,5 @@ class BookingResultApi extends Controller
         } catch (\Exception $exception) {
             return response((new MainApi())->returnMessage('Error, Please try again!'), 400);
         }
-    }
-
-    private function normalizeString($str)
-    {
-        return strtolower(trim($str));
     }
 }

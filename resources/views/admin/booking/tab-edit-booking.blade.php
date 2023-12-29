@@ -67,8 +67,8 @@
                            value="{{ $bookings_edit->check_out }}">
                 </div>
                 <div class="col-md-3">
-                    <label for="status">{{ __('home.Trạng thái') }}</label>
-                    <select class="form-select" name="status">
+                    <label for="booking_status">{{ __('home.Trạng thái') }}</label>
+                    <select class="form-select" id="booking_status" name="status">
                         <option
                             value="{{ \App\Enums\BookingStatus::PENDING }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::PENDING ? 'selected' : '' }}>
                             {{ \App\Enums\BookingStatus::PENDING }}
@@ -99,9 +99,17 @@
                    class="form-control d-none">
             <button type="submit" class="btn btn-primary up-date-button mt-4">{{ __('home.Save') }}</button>
             @if($bookings_edit->is_result == 1 && $bookings_edit->status === \App\Enums\BookingStatus::COMPLETE )
+                @php
+                    $old_result = \App\Models\BookingResult::where('booking_id', $bookings_edit->id)->first();
+                @endphp
+                @if($old_result)
+                    <label for="input_old_result"></label>
+                    <input type="text" hidden id="input_old_result" value="{{ $old_result->id }}">
+                @endif
                 <!-- Button trigger modal -->
-                <button type="button" class="btn btn-success mt-4" data-toggle="modal"
-                        data-target="#exampleModalComplete">
+                <button type="button" class="btn btn-success {{ $old_result ? 'btnUnCreate' : '' }} mt-4"
+                        data-toggle="modal"
+                        data-target="{{ $old_result ? '' : '#exampleModalComplete' }}">
                     Create result
                 </button>
             @else
@@ -307,7 +315,25 @@
         };
 
         $(document).ready(function () {
+            $(window).on('popstate', function() {
+                location.reload();
+            });
+
             $('.btnCreate').on('click', function () {
+                createBookingResult();
+            })
+
+            $('.btnUnCreate').on('click', function () {
+                unCreateBooking();
+            })
+
+            $('.btnGetFile').on('click', function () {
+                window.location.href = `{{ route('user.download') }}`;
+                let alertMessage = `Vui lòng nhập vào file theo định dạng mẫu đã được viết sẵn! Chúng tôi không khuyến khích bất kì hành động thay đổi định dạng file hoặc cấu trúc dữ liệu trong file vì điều này sẽ ảnh hướng đến việc đọc hiểu dữ liệu.`
+                alert(alertMessage);
+            })
+
+            async function createBookingResult() {
                 const formData = new FormData();
 
                 const arrField = [
@@ -393,7 +419,7 @@
 
                 if (isValid) {
                     try {
-                        $.ajax({
+                        await $.ajax({
                             url: `{{ route('api.medical.booking.result.create') }}`,
                             method: 'POST',
                             headers: headers,
@@ -418,13 +444,11 @@
                 } else {
                     alert('Sorry, Please enter input require!');
                 }
-            })
+            }
 
-            $('.btnGetFile').on('click', function () {
-                window.location.href = `{{ route('user.download') }}`;
-                let alertMessage = `Vui lòng nhập vào file theo định dạng mẫu đã được viết sẵn! Chúng tôi không khuyến khích bất kì hành động thay đổi định dạng file hoặc cấu trúc dữ liệu trong file vì điều này sẽ ảnh hướng đến việc đọc hiểu dữ liệu.`
-                alert(alertMessage);
-            })
+            function unCreateBooking() {
+                alert('Booking result already exist!');
+            }
         })
 
         function removeDuplicates(arr) {
