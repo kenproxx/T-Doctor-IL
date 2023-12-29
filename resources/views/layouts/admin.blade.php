@@ -717,7 +717,8 @@
         return text;
     }
 
-    function appendDataForm(arrField, formData, isValid) {
+    function appendDataForm(arrField, formData) {
+        let isValid = true;
         for (let i = 0; i < arrField.length; i++) {
             let field = arrField[i];
             let value = $(`#${field}`).val();

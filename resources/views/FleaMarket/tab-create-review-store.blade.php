@@ -19,7 +19,7 @@
                     </span>
                 </div>
                 <div class="mt-md-4 mb-md-5 d-flex justify-content-center">
-                    <input type="radio" name="star_number" id="star-edit-1" value="1" hidden="">
+                    <input type="radio" name="star_number" id="star-edit-1" value="1" hidden="" required>
                     <label for="star-edit-1" onclick="starCheckEdit(1)"><i id="icon-star-edit-1"
                                                                            class="fa fa-star fa-2xl p-1"></i></label>
                     <input type="radio" name="star_number" id="star-edit-2" value="2" hidden="">
@@ -44,7 +44,7 @@
             </div>
             <div class="row">
                 <div class="recruitment-details--btn col-md-6 justify-content-end d-flex">
-                    <a href="#" class="btn btn-primary button-Reset-booking col-md-6">{{ __('home.CANCEL') }}</a>
+                    <a href="{{route('flea.market.product.shop.info',$id)}}" class="btn btn-primary button-Reset-booking col-md-6">{{ __('home.CANCEL') }}</a>
                 </div>
                 <div class="recruitment-details--btn col-md-6 justify-content-start d-flex">
                     <button class="btn btn-primary col-md-6 button-apply-booking" type="submit">{{ __('home.Submit') }}</button>

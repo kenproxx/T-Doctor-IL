@@ -156,6 +156,24 @@
         });
     });
 
+    function appendDataForm(arrField, formData) {
+        let isValid = true;
+        for (let i = 0; i < arrField.length; i++) {
+            let field = arrField[i];
+            let value = $(`#${field}`).val();
+
+            if (value && value !== '') {
+                formData.append(field, value);
+            } else {
+                isValid = false;
+                let message = validInputByID(field);
+                alert(message);
+                break;
+            }
+        }
+        return isValid;
+    }
+
 </script>
 </html>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">

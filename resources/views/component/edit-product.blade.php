@@ -57,7 +57,7 @@
                                             Location: <p>${data.province.name}</p>
                                         </div>
                                         <div class="price-pro">
-                                             ${data.product.price} ${data.product.price_unit}
+                                        ${formatCurrency(data.product.price)} ${data.product.price_unit ?? 'VND'}
                                         </div>
                                     </div>
 
@@ -71,6 +71,10 @@
                             </div>
                         </div>
                     `;
+                        function formatCurrency(amount) {
+                            const formattedAmount = amount.toString().replace(/,/g, '.');
+                            return parseFloat(formattedAmount).toLocaleString('de-DE');
+                        }
                         $('#showMyProduct').empty().append(html);
                     },
                     error: function (exception) {

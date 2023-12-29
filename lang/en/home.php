@@ -707,4 +707,18 @@ return [
     'Create product medicine' => 'Create product medicine',
     'avatar' => 'Avatar',
     'Không có sự kiện nào' => 'No events',
+
+    //Please enter product name, Please choose category, Please enter brand name
+    // Please choose province, Please enter price, Please enter description, Please choose image
+    //Please choose ads plan, Please choose ads period
+    'Please enter product name' => 'Please enter product name',
+    'Please choose category' => 'Please choose category',
+    'Please enter brand name' => 'Please enter brand name',
+    'Please choose province' => 'Please choose province',
+    'Please enter price' => 'Please enter price',
+    'Please enter description' => 'Please enter description',
+    'Please choose image' => 'Please choose image',
+    'Please choose ads plan' => 'Please choose ads plan',
+    'Please choose ads period' => 'Please choose ads period',
+
 ];
