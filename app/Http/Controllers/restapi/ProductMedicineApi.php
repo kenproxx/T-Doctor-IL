@@ -4,6 +4,7 @@ namespace App\Http\Controllers\restapi;
 
 use App\Enums\online_medicine\OnlineMedicineStatus;
 use App\Http\Controllers\Controller;
+use App\Models\online_medicine\ProductMedicine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,5 +34,14 @@ class ProductMedicineApi extends Controller
             $products = (new BookingResultApi())->getListProductFromExcel($file_excel);
         }
         return response()->json($products);
+    }
+
+    public function detail($id)
+    {
+        $product = ProductMedicine::find($id);
+        if (!$product || $product->status != OnlineMedicineStatus::APPROVED) {
+            return response((new MainApi())->returnMessage('Not found'), 404);
+        }
+        return response()->json($product);
     }
 }
