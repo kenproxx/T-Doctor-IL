@@ -156,6 +156,7 @@ Route::group(['prefix' => 'address'], function () {
 
 Route::group(['prefix' => 'products-medicines'], function () {
     Route::get('/category/{id}', [ProductMedicineApi::class, 'findMedicineByCategory'])->name('restapi.get.products.medicines.category');
+    Route::get('/detail/{id}', [ProductMedicineApi::class, 'detail'])->name('restapi.get.products.medicines.detail');
 });
 
 Route::group(['prefix' => 'departments'], function () {
