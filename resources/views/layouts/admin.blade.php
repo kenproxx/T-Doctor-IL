@@ -11,9 +11,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title> @yield('title')</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
-
+    <meta content="krmedi description" name="description">
+    <meta content="krmedi" name="keywords">
     <!-- Favicons -->
     <link href="{{ asset('admin/img/favicon.png')}}" rel="icon">
     <link href="{{ asset('admin/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
