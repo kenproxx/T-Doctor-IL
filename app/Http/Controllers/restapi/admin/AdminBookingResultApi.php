@@ -113,6 +113,7 @@ class AdminBookingResultApi extends Controller
         $result_input_laos = $request->input('result_laos');
 
         $booking_id = $request->input('booking_id');
+        $family_member = $request->input('family_member');
 
         $detail = $request->input('detail');
         $detail_en = $request->input('detail_en');
@@ -151,6 +152,7 @@ class AdminBookingResultApi extends Controller
         $result->result_laos = $result_input_laos;
 
         $result->booking_id = $booking_id;
+        $result->family_member = $family_member;
 
         $result->detail = $detail;
         $result->detail_en = $detail_en;
