@@ -62,7 +62,6 @@ class BookingResultApi extends Controller
         if (!$result || $result->status == BookingResultStatus::DELETED) {
             return response((new MainApi())->returnMessage('Not found'), 404);
         }
-
         $file_excel = $result->prescriptions;
         $products = $this->getListProductFromExcel($file_excel);
         return response()->json($products);
@@ -80,7 +79,6 @@ class BookingResultApi extends Controller
 
             $thanhPhanThuocArray[] = explode(',', $row[1]);
         }
-
         $products = ProductMedicine::where(function ($query) use ($nameMedicineArray) {
             foreach ($nameMedicineArray as $nameMedicine) {
                 $query->orWhere('name', 'LIKE', '%' . $this->normalizeString($nameMedicine) . '%');

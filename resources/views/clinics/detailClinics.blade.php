@@ -370,7 +370,7 @@
                                         <div>
                                         Bản thân
                                         <select class="form-control" name="member_family_id" id="member_family_id">
-                                        <option value="{{$userId}}">{{ __('home.Bản thân') }}</option>
+                                        <option value="">{{ __('home.Bản thân') }}</option>
                                         @foreach($memberFamily as $member)
                                         <option value="{{$member->id}}">{{$member->name}}</option>
                                         @endforeach
