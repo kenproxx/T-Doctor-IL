@@ -6,6 +6,7 @@ use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\restapi\BookingApi;
 use App\Http\Controllers\restapi\BusinessFavouriteApi;
+use App\Http\Controllers\restapi\CartApi;
 use App\Http\Controllers\restapi\CheckoutApi;
 use App\Http\Controllers\restapi\MedicalFavouriteApi;
 use App\Http\Controllers\restapi\MessageApi;
@@ -105,8 +106,16 @@ Route::group(['prefix' => 'messages'], function () {
     Route::post('/create', [MessageApi::class, 'create'])->name('api.backend.messages.create');
 });
 
+/* Cart api */
+Route::group(['prefix' => 'carts'], function () {
+    Route::get('user/{id}', [CartApi::class, 'showCartByUserID'])->name('api.backend.cart.user');
+    Route::post('create', [CartApi::class, 'addToCart'])->name('api.backend.cart.create');
+    Route::post('change-quantity/{id}', [CartApi::class, 'changeQuantityCart'])->name('api.backend.cart.change.quantity');
+    Route::delete('delete/{id}', [CartApi::class, 'deleteCart'])->name('api.backend.cart.delete');
+    Route::delete('clear/{id}', [CartApi::class, 'clearCart'])->name('api.backend.cart.clear');
+});
+
 Route::group(['prefix' => 'checkout'], function () {
     Route::post('imm', [CheckoutApi::class, 'checkoutByImm']);
     Route::post('vnpay', [CheckoutController::class, 'checkoutByVNPay']);
-
 });
