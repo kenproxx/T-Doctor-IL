@@ -9,6 +9,7 @@ use App\Http\Controllers\restapi\MainApi;
 use App\Models\Booking;
 use App\Models\BookingResult;
 use App\Models\Clinic;
+use App\Models\FamilyManagement;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -24,20 +25,31 @@ class AdminBookingResultApi extends Controller
             ->map(function ($item) {
                 $result = (array)$item;
                 $booking = Booking::find($item->booking_id);
+                /* Push clinic*/
                 $clinic = Clinic::find($booking->clinic_id);
                 $result['clinics'] = $clinic->toArray();
+                /* Convert date */
                 $value = Carbon::parse($booking->created_at);
                 $appointment_date = $value->addHours(7)->format('Y-m-d H:i:s');
                 $result['appointment_date'] = $appointment_date;
                 $value = Carbon::parse($item->created_at);
                 $results_date = $value->addHours(7)->format('Y-m-d H:i:s');
                 $result['results_date'] = $results_date;
+                /* Push result value */
                 $result_value = $item->result;
                 $value_result = '[' . $result_value . ']';
                 $array_result = json_decode($value_result, true);
                 $result['result'] = $array_result;
                 $result['result_en'] = $array_result;
                 $result['result_laos'] = $array_result;
+                /* Fill member family*/
+                $member_family = $item->family_member;
+                $member_info = null;
+                if ($member_family) {
+                    $member = FamilyManagement::find($member_family);
+                    $member_info = $member->toArray();
+                }
+                $result['member_info'] = $member_info;
                 return $result;
             });
         return response()->json($results);
@@ -82,11 +94,21 @@ class AdminBookingResultApi extends Controller
     public function create(Request $request)
     {
         try {
+            $booking_id = $request->input('booking_id');
+            if (!$booking_id) {
+                return response((new MainApi())->returnMessage('Booking not empty!'), 400);
+            }
+
+            $old_result = BookingResult::where('booking_id', $booking_id)->first();
+            if ($old_result){
+                return response((new MainApi())->returnMessage('Booking result already exist!'), 400);
+            }
+
             $result = new BookingResult();
 
             $result = $this->store($request, $result);
 
-            if (!$result->prescriptions){
+            if (!$result->prescriptions) {
                 return response((new MainApi())->returnMessage('Please upload prescriptions!'), 400);
             }
             $success = $result->save();
@@ -104,7 +126,7 @@ class AdminBookingResultApi extends Controller
         $service_name = $request->input('service_result');
 
         $code = $request->input('code');
-        if (!$code){
+        if (!$code) {
             $code = 'BR' . (new MainController())->generateRandomString(8);
         }
 
