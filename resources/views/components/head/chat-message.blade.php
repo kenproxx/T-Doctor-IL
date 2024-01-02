@@ -19,13 +19,13 @@
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="chat-widget-all-online" data-toggle="tab"
                             data-target="#chat-widget-all-online-tabs" type="button" role="tab" aria-controls="home"
-                            aria-selected="true">Đang online
+                            aria-selected="true">{{ __('home.Đang trực tuyến') }}
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="chat-widget-connected" data-toggle="tab"
                             data-target="#chat-widget-connected-tabs" type="button" role="tab" aria-controls="profile"
-                            aria-selected="false">Đã connect
+                            aria-selected="false">{{ __('home.Connected') }}
                     </button>
                 </li>
             </ul>

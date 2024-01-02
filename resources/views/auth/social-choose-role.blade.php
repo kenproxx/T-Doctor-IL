@@ -127,29 +127,29 @@
             function showOnlyMedical() {
                 let html = ` <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="doctor_name">Doctor Name</label>
+                            <label for="doctor_name">{{ __('home.Doctor Name') }}</label>
                             <input required type="text" name="doctor_name" class="form-control" id="doctor_name">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="doctor_phone">Doctor Phone</label>
+                            <label for="doctor_phone">{{ __('home.Doctor Phone') }}</label>
                             <input required type="text" name="doctor_phone" class="form-control" id="doctor_phone">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="doctor_experience">Doctor Experience</label>
+                            <label for="doctor_experience">{{ __('home.Doctor Experience') }}</label>
                             <input required type="number" name="experience" class="form-control" id="doctor_experience">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="doctor_hospital">Doctor Hospital</label>
+                            <label for="doctor_hospital">{{ __('home.Doctor Hospital') }}</label>
                             <input required type="text" name="doctor_hospital" class="form-control" id="doctor_hospital">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="specialized_services">Specialized Services</label>
+                            <label for="specialized_services">{{ __('home.Specialized Services') }}</label>
                             <input required type="text" name="specialized_services" class="form-control" id="specialized_services">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="services_info">Services Info</label>
+                            <label for="services_info">{{ __('home.Services Info') }}</label>
                             <input required type="text" name="services_info" class="form-control" id="services_info">
                         </div>
                     </div>`;
@@ -159,47 +159,47 @@
             function showOnlyBusiness() {
                 let html = `<div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="open_date">Open Time</label>
+                            <label for="open_date">{{ __('home.Open Time') }}</label>
                             <input required type="time" name="open_date" class="form-control" id="open_date">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="close_date">Close Time</label>
+                            <label for="close_date">{{ __('home.Close Time') }}</label>
                             <input required type="time" name="close_date" class="form-control" id="close_date">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="time_work">Thời gian làm việc</label>
+                            <label for="time_work">{{ __('home.Thời gian làm việc') }}</label>
                             <select class="form-select" id="time_work" name="time_work">
-                                <option value="ALL">ALL</option>
-                                <option value="NONE">NONE</option>
-                                <option value="OFFICE HOURS">OFFICE HOURS</option>
-                                <option value="ONLY AFTERNOON">ONLY MORNING</option>
-                                <option value="ONLY AFTERNOON">ONLY AFTERNOON</option>
-                                <option value="OTHER">OTHER</option>
+                                <option value="ALL">{{ __('home.All') }}</option>
+                                <option value="NONE">{{ __('home.NONE') }}</option>
+                                <option value="OFFICE HOURS">{{ __('home.OFFICE HOURS') }}</option>
+                                <option value="ONLY AFTERNOON">{{ __('home.ONLY MORNING') }}</option>
+                                <option value="ONLY AFTERNOON">{{ __('home.ONLY AFTERNOON') }}</option>
+                                <option value="OTHER">{{ __('home.Other') }}</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="address">Address</label>
+                            <label for="address">{{ __('home.Addresses') }}</label>
                             <input required type="text" name="address" class="form-control" id="address">
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="representative">Representative</label>
+                            <label for="representative">{{ __('home.Representative') }}</label>
                             <input required type="text" name="representative" class="form-control" id="representative">
                         </div>
                         <div class="form-group col-md-3">
-                            <label for="experience">Experience</label>
+                            <label for="experience">{{ __('home.Experience') }}</label>
                             <input required type="number" name="experience" class="form-control" id="experience">
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <input id="prescription" name="prescription" type="checkbox" value="1">
-                            <label for="prescription">Kê đơn thuốc trực tuyến ?</label>
+                            <label for="prescription">{{ __('home.Kê đơn thuốc trực tuyến') }} ?</label>
                         </div>
                         <div class="form-group col-md-4">
                             <input id="free" name="free" type="checkbox" value="1">
-                            <label for="free">Tư vấn miễn phí ?</label>
+                            <label for="free">{{ __('home.Tư vấn miễn phí ') }}?</label>
                         </div>
                     </div>`;
                 $('#only-business').empty().append(html);
@@ -208,7 +208,7 @@
             function showRoleOther() {
                 let html = `<div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="file_upload">Upload your license</label>
+                            <label for="file_upload">{{ __('home.Upload your license') }}</label>
                             <input required type="file" name="file_upload" class="form-control" id="file_upload">
                         </div>
                     </div>`;

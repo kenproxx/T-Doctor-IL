@@ -4,7 +4,7 @@
 @endsection
 @section('main-content')
     <div class="container-fluid">
-        <h1 class="h3 mb-4 text-gray-800">Detail Result</h1>
+        <h1 class="h3 mb-4 text-gray-800">{{ __('home.Detail Result') }}</h1>
         <form>
             @php
                 $arrayServiceName = explode(',', $result->service_name);
@@ -26,7 +26,7 @@
                         <div class="service-result-item d-flex align-items-center justify-content-between border p-3">
                             <div class="service-result w-75">
                                 <div class="form-group">
-                                    <label for="service_name">Service Name</label>
+                                    <label for="service_name">{{ __('home.Service Name') }}</label>
                                     <input type="text" class="form-control" id="service_name" disabled
                                            placeholder="Apartment, studio, or floor">
                                     <ul class="list-service" style="list-style: none; padding-left: 0">
@@ -45,24 +45,24 @@
                                         @endforeach
                                     </ul>
                                     <div class="d-none">
-                                        <label for="service_result">Service Result</label>
+                                        <label for="service_result">{{ __('home.Service Result') }}</label>
                                         <input type="text" value="{{ $item['service_result'] }}"
                                                class="form-control service_result" id="service_result"
                                                name="service_result">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="result">Result</label>
+                                    <label for="result">{{ __('home.Result') }}</label>
                                     <input type="text" class="form-control result" value="{{ $item['result'] }}"
                                            id="result" placeholder="result">
                                 </div>
                                 <div class="form-group">
-                                    <label for="result_en">Result En</label>
+                                    <label for="result_en">{{ __('home.Result En') }}</label>
                                     <input type="text" class="form-control result_en" value="{{ $item['result_en'] }}"
                                            id="result_en" placeholder="result en">
                                 </div>
                                 <div class="form-group">
-                                    <label for="result_laos">Result Laos</label>
+                                    <label for="result_laos">{{ __('home.Result Laos') }}</label>
                                     <input type="text" class="form-control result_laos"
                                            value="{{ $item['result_laos'] }}" id="result_laos"
                                            placeholder="result laos">
@@ -75,17 +75,17 @@
                         </div>
                     @endforeach
                 </div>
-                <button type="button" class="btn btn-outline-primary mt-3 btnAddNewResult">Add new result
+                <button type="button" class="btn btn-outline-primary mt-3 btnAddNewResult">{{ __('home.Add new result') }}
                 </button>
             </div>
 
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="files">File Attachments</label>
+                    <label for="files">{{ __('home.File Attachments') }}</label>
                     <input type="file" accept="image/*" multiple class="form-control" id="files" name="files[]">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="status">Status</label>
+                    <label for="status">{{ __('home.Status') }}</label>
                     <select class="form-select" name="status" id="status">
                         <option
                             {{ $result->status == \App\Enums\BookingResultStatus::ACTIVE ? 'selected' : '' }}
@@ -100,14 +100,14 @@
                     </select>
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="prescriptions">File Prescriptions</label>
+                    <label for="prescriptions">{{ __('home.File Prescriptions') }}</label>
                     <input type="file"
                            accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
                            class="form-control" id="prescriptions" name="prescriptions">
                 </div>
                 <div class="form-group col-md-2">
                     <button type="button" class="btnDownloadFile btn btn-outline-warning mt-4">
-                        Xem đơn đã upload
+                        {{ __('home.Xem đơn đã upload') }}
                     </button>
                 </div>
             </div>
@@ -128,36 +128,36 @@
             </div>
 
             <div class="form-group">
-                <label for="detail">Detail</label>
+                <label for="detail">{{ __('home.Detail') }}</label>
                 <textarea class="form-control" id="detail" rows="5">{{ $result->detail }}</textarea>
             </div>
             <div class="form-group">
-                <label for="detail_en">Detail En</label>
+                <label for="detail_en">{{ __('home.Detail En') }}</label>
                 <textarea class="form-control" id="detail_en" rows="5">{{ $result->detail_en }}</textarea>
             </div>
             <div class="form-group">
-                <label for="detail_laos">Detail Lao</label>
+                <label for="detail_laos">{{ __('home.Detail Lao') }}</label>
                 <textarea class="form-control" id="detail_laos" rows="5">{{ $result->detail_laos }}</textarea>
             </div>
             <div class="d-none">
-                <label for="booking_id">BookingId </label>
+                <label for="booking_id">{{ __('home.BookingId') }} </label>
                 <input type="text" class="form-control" name="booking_id "
                        value="{{ $result->booking_id }}" id="booking_id">
-                <label for="user_id">UserID</label>
+                <label for="user_id">{{ __('home.UserID') }}</label>
                 <input type="text" class="form-control" name="user_id" value="{{ $result->user_id }}"
                        id="user_id">
-                <label for="created_by">CreatedBy</label>
+                <label for="created_by">{{ __('home.CreatedBy') }}</label>
                 <input type="text" class="form-control" id="created_by" name="created_by "
                        value="{{ $result->created_by }}">
-                <label for="code">Code</label>
+                <label for="code">{{ __('home.Code') }}</label>
                 <input type="text" class="form-control" id="code" name="code "
                        value="{{ $result->code }}">
-                <label for="family_member">FamilyMember </label>
+                <label for="family_member">{{ __('home.FamilyMember') }} </label>
                 <input type="text" class="form-control" name="family_member"
                        value="{{ $result->family_member }}" id="family_member">
             </div>
             <div class="text-center mt-5">
-                <button type="button" class="btn btn-primary btnSave">Save</button>
+                <button type="button" class="btn btn-primary btnSave">{{ __('home.Save') }}</button>
             </div>
         </form>
     </div>

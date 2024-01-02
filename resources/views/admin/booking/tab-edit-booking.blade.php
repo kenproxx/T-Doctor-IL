@@ -17,7 +17,7 @@
                     <input type="text" class="form-control" id="user" name="user" value="{{$user_name}}" disabled>
                 </div>
                 <div class="col-md-4">
-                    <label for="clinic_id">BusinessName</label>
+                    <label for="clinic_id">{{ __('home.BusinessName') }}</label>
                     @php
                         $clinic_name = \App\Models\Clinic::where('id',$bookings_edit->clinic_id)->value('name');
                     @endphp
@@ -92,7 +92,7 @@
                     <input type="checkbox" name="is_result"
                            {{ $bookings_edit->is_result == 1 ? 'checked' : '' }}
                            class="is_result" id="is_result" value="1">
-                    <label for="is_result">Result</label>
+                    <label for="is_result">{{ __('home.Result') }}</label>
                 </div>
             </div>
             <input type="text" name="services" id="services"
@@ -110,11 +110,11 @@
                 <button type="button" class="btn btn-success {{ $old_result ? 'btnUnCreate' : '' }} mt-4"
                         data-toggle="modal"
                         data-target="{{ $old_result ? '' : '#exampleModalComplete' }}">
-                    Create result
+                    {{ __('home.Create result') }}
                 </button>
             @else
                 <button type="button" class="btn btn-success mt-4" data-toggle="modal" data-target="#exampleModal">
-                    Create result
+                    {{ __('home.Create result') }}
                 </button>
             @endif
         </form>
@@ -126,7 +126,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabelComplete">Create new result</h5>
+                    <h5 class="modal-title" id="exampleModalLabelComplete">{{ __('home.Create new result') }}</h5>
                     <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -137,17 +137,17 @@
                             <div id="list-service-result">
 
                             </div>
-                            <button type="button" class="btn btn-outline-primary mt-3 btnAddNewResult">Add new result
+                            <button type="button" class="btn btn-outline-primary mt-3 btnAddNewResult">{{ __('home.Add new result') }}
                             </button>
                         </div>
 
                         <div class="form-group">
-                            <label for="files">File Attachments</label>
+                            <label for="files">{{ __('home.File Attachments') }}</label>
                             <input type="file" multiple class="form-control" id="files" name="files[]">
                         </div>
                         <div class="row">
                             <div class="form-group col-md-8">
-                                <label for="prescriptions">File Prescriptions
+                                <label for="prescriptions">{{ __('home.File Prescriptions') }}
                                     <span class="text-danger"> *</span>
                                 </label>
                                 <input type="file" multiple class="form-control" id="prescriptions"
@@ -156,43 +156,43 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <button type="button" class="btnGetFile btn btn-outline-warning mt-4">
-                                    Xem đơn mẫu
+                                    {{ __('home.Xem đơn mẫu') }}
                                 </button>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="detail">Detail</label>
+                            <label for="detail">{{ __('home.Detail') }}</label>
                             <textarea class="form-control" id="detail" rows="5"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="detail_en">Detail En</label>
+                            <label for="detail_en">{{ __('home.Detail En') }}</label>
                             <textarea class="form-control" id="detail_en" rows="5"></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="detail_laos">Detail Lao</label>
+                            <label for="detail_laos">{{ __('home.Detail Lao') }}</label>
                             <textarea class="form-control" id="detail_laos" rows="5"></textarea>
                         </div>
                         <div class="d-none">
-                            <label for="booking_id">BookingId </label>
+                            <label for="booking_id">{{ __('home.BookingId') }} </label>
                             <input type="text" class="form-control" name="booking_id "
                                    value="{{ $bookings_edit->id }}" id="booking_id">
-                            <label for="family_member">FamilyMember </label>
+                            <label for="family_member">{{ __('home.FamilyMember') }} </label>
                             <input type="text" class="form-control" name="family_member"
                                    value="{{ $bookings_edit->member_family_id }}" id="family_member">
-                            <label for="user_id">UserID</label>
+                            <label for="user_id">{{ __('home.UserID') }}</label>
                             <input type="text" class="form-control" name="user_id" value="{{ $bookings_edit->user_id }}"
                                    id="user_id">
-                            <label for="created_by">CreatedBy</label>
+                            <label for="created_by">{{ __('home.CreatedBy') }}</label>
                             <input type="text" class="form-control" id="created_by" name="created_by "
                                    value="{{ \Illuminate\Support\Facades\Auth::user()->id }}">
-                            <label for="status">Status</label>
+                            <label for="status">{{ __('home.Status') }}</label>
                             <input type="text" class="form-control" id="status" name="status"
                                    value="{{ \App\Enums\BookingResultStatus::ACTIVE }}">
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary btnCreate">Create</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('home.Close') }}</button>
+                        <button type="button" class="btn btn-primary btnCreate">{{ __('home.create') }}</button>
                     </div>
                 </form>
             </div>
@@ -204,16 +204,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ __('home.Thông báo') }}</h5>
                     <button type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Please update status for booking with "Completed" and Select Result to create result!
+                    {{ __('home.Please update status for booking with "Completed" and Select Result to create result') }}!
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('home.Close') }}</button>
                 </div>
             </div>
         </div>
