@@ -38,7 +38,7 @@
         </div>
         <div class="mt-md-2">
             <i class="text-gray mr-md-2 fa-regular fa-clock"></i>
-            <span class="fs-14 font-weight-600">Open: {{ \Carbon\Carbon::parse($bookings->open_date)->format('H:i') }} - {{ \Carbon\Carbon::parse($bookings->close_date)->format('H:i') }}
+            <span class="fs-14 font-weight-600">{{ __('home.Open') }}: {{ \Carbon\Carbon::parse($bookings->open_date)->format('H:i') }} - {{ \Carbon\Carbon::parse($bookings->close_date)->format('H:i') }}
 </span>
         </div>
         <div class="mt-md-2">

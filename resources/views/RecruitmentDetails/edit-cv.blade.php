@@ -433,7 +433,7 @@
                                                 <div class="text-font-16 mt-4">{{ __('home.licensing unit') }} <span
                                                         class="red-color">*</span></div>
                                                 <input type="text" class="ac-email mt-2"
-                                                       placeholder="Enter keywords to search" required>
+                                                       placeholder="{{ __('home.Enter keywords to search') }}" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6 pl-0">
@@ -451,7 +451,7 @@
                                     <div class="form-group">
                                         <div class="text-font-16 mt-4">{{ __('home.Attention') }}</div>
                                         <textarea class="ac-textarea mt-3"
-                                                  placeholder="Enter an introduction about yourself" style="height: 172px"></textarea>
+                                                  placeholder="{{ __('home.Enter an introduction about yourself') }}" style="height: 172px"></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12 justify-content-between d-flex">

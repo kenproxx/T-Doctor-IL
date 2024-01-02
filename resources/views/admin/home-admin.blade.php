@@ -217,26 +217,26 @@
                                 <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                     <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
+                                        <h6>{{ __('home.Filter') }}</h6>
                                     </li>
 
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ __('home.Today') }}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ __('home.This Month') }}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ __('home.This Year') }}</a></li>
                                 </ul>
                             </div>
 
                             <div class="card-body">
-                                <h5 class="card-title">Recent Sales <span>| Today</span></h5>
+                                <h5 class="card-title">{{ __('home.Recent Sales ') }}<span>| {{ __('home.Today') }}</span></h5>
 
                                 <table class="table table-borderless datatable">
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">Customer</th>
-                                        <th scope="col">Product</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Status</th>
+                                        <th scope="col">{{ __('home.Customer') }}</th>
+                                        <th scope="col">{{ __('home.Product') }}</th>
+                                        <th scope="col">{{ __('home.Price') }}</th>
+                                        <th scope="col">{{ __('home.Status') }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -291,26 +291,26 @@
                                 <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                     <li class="dropdown-header text-start">
-                                        <h6>Filter</h6>
+                                        <h6>{{ __('home.Filter') }}</h6>
                                     </li>
 
-                                    <li><a class="dropdown-item" href="#">Today</a></li>
-                                    <li><a class="dropdown-item" href="#">This Month</a></li>
-                                    <li><a class="dropdown-item" href="#">This Year</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ __('home.Today') }}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ __('home.This Month') }}</a></li>
+                                    <li><a class="dropdown-item" href="#">{{ __('home.This Year') }}</a></li>
                                 </ul>
                             </div>
 
                             <div class="card-body pb-0">
-                                <h5 class="card-title">Top Selling <span>| Today</span></h5>
+                                <h5 class="card-title">{{ __('home.Top Selling') }} <span>| {{ __('home.Today') }}</span></h5>
 
                                 <table class="table table-borderless">
                                     <thead>
                                     <tr>
-                                        <th scope="col">Preview</th>
-                                        <th scope="col">Product</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col">Sold</th>
-                                        <th scope="col">Revenue</th>
+                                        <th scope="col">{{ __('home.Preview') }}</th>
+                                        <th scope="col">{{ __('home.Product') }}</th>
+                                        <th scope="col">{{ __('home.Price') }}</th>
+                                        <th scope="col">{{ __('home.Sold') }}</th>
+                                        <th scope="col">{{ __('home.Revenue') }}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -369,17 +369,17 @@
                         <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                             <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
+                                <h6>{{ __('home.Filter') }}</h6>
                             </li>
 
-                            <li><a class="dropdown-item" href="#">Today</a></li>
-                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                            <li><a class="dropdown-item" href="#">{{ __('home.Today') }}</a></li>
+                            <li><a class="dropdown-item" href="#">{{ __('home.This Month') }}</a></li>
+                            <li><a class="dropdown-item" href="#">{{ __('home.This Year') }}</a></li>
                         </ul>
                     </div>
 
                     <div class="card-body">
-                        <h5 class="card-title">Recent Activity <span>| Today</span></h5>
+                        <h5 class="card-title">{{ __('home.Recent Activity') }} <span>| {{ __('home.Today') }}</span></h5>
 
                         <div class="activity">
 
@@ -442,17 +442,17 @@
                         <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                             <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
+                                <h6>{{ __('home.Filter') }}</h6>
                             </li>
 
-                            <li><a class="dropdown-item" href="#">Today</a></li>
-                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                            <li><a class="dropdown-item" href="#">{{ __('home.Today') }}</a></li>
+                            <li><a class="dropdown-item" href="#">{{ __('home.This Month') }}</a></li>
+                            <li><a class="dropdown-item" href="#">{{ __('home.This Year') }}</a></li>
                         </ul>
                     </div>
 
                     <div class="card-body pb-0">
-                        <h5 class="card-title">Budget Report <span>| This Month</span></h5>
+                        <h5 class="card-title">{{ __('home.Budget Report') }} <span>| {{ __('home.This Month') }}</span></h5>
 
                         <div id="budgetChart" style="min-height: 400px;" class="echart"></div>
 
@@ -516,17 +516,17 @@
                         <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                             <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
+                                <h6>{{ __('home.Filter') }}</h6>
                             </li>
 
-                            <li><a class="dropdown-item" href="#">Today</a></li>
-                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                            <li><a class="dropdown-item" href="#">{{ __('home.Today') }}</a></li>
+                            <li><a class="dropdown-item" href="#">{{ __('home.This Month') }}</a></li>
+                            <li><a class="dropdown-item" href="#">{{ __('home.This Year') }}</a></li>
                         </ul>
                     </div>
 
                     <div class="card-body pb-0">
-                        <h5 class="card-title">Website Traffic <span>| Today</span></h5>
+                        <h5 class="card-title">{{ __('home.Website Traffic') }} <span>| {{ __('home.Today') }}</span></h5>
 
                         <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
 
@@ -594,17 +594,17 @@
                         <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                             <li class="dropdown-header text-start">
-                                <h6>Filter</h6>
+                                <h6>{{ __('home.Filter') }}</h6>
                             </li>
 
-                            <li><a class="dropdown-item" href="#">Today</a></li>
-                            <li><a class="dropdown-item" href="#">This Month</a></li>
-                            <li><a class="dropdown-item" href="#">This Year</a></li>
+                            <li><a class="dropdown-item" href="#">{{ __('home.Today') }}</a></li>
+                            <li><a class="dropdown-item" href="#">{{ __('home.This Month') }}</a></li>
+                            <li><a class="dropdown-item" href="#">{{ __('home.This Year') }}</a></li>
                         </ul>
                     </div>
 
                     <div class="card-body pb-0">
-                        <h5 class="card-title">News &amp; Updates <span>| Today</span></h5>
+                        <h5 class="card-title">{{ __('home.News & Updates') }} <span>| {{ __('home.Today') }}</span></h5>
 
                         <div class="news">
                             <div class="post-item clearfix">

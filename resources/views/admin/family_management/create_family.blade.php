@@ -74,7 +74,7 @@
         </div>
         <div class="row mt-3">
             <div class="col-sm-4">
-                <button class="btn btn-primary" type="button" onclick="submitForm()">Tạo</button>
+                <button class="btn btn-primary" type="button" onclick="submitForm()">{{ __('home.create') }}</button>
             </div>
         </div>
     </div>
