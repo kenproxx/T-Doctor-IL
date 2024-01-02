@@ -468,7 +468,7 @@
   }
   .container .item-information #myTabContent .product-item .img_product--homeNew img, .container #find-doctor--homeNew #myTabContent .product-item .img_product--homeNew img {
     border-radius: 24px 24px 100px 0px;
-    background: url(<path-to-image>), lightgray 50%/cover no-repeat;
+    background: lightgray 50%/cover no-repeat;
   }
   .container .item-information #myTabContent .product-item .content-pro .name-product a, .container #find-doctor--homeNew #myTabContent .product-item .content-pro .name-product a {
     color: var(--White, #FFF);
