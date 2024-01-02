@@ -114,13 +114,11 @@
         let accessToken = `Bearer ` + token;
 
         async function renderMedicine(response) {
-            console.log(response)
             let html = ``;
             let nameResult = ``;
             let descriptionResult = ``;
             for (let i = 0; i < response.length; i++) {
                 let data = response[i];
-                console.log(data.description)
                 let reviewDetailUrl = `{{ route('medicine.detail', ['id'=>':id']) }}`;
                 reviewDetailUrl = reviewDetailUrl.replace(':id', data.id);
 
