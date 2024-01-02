@@ -1,20 +1,20 @@
 @extends('layouts.admin')
 @section('title')
-    List Result
+    {{ __('home.List Result') }}
 @endsection
 @section('main-content')
     <div class="container-fluid">
-        <h3 class="title">List Result</h3>
+        <h3 class="title">{{ __('home.List Result') }}</h3>
         <table class="table">
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">ServiceName</th>
-                <th scope="col">Code</th>
-                <th scope="col">Create By</th>
-                <th scope="col">BusinessName</th>
-                <th scope="col">Status</th>
-                <th scope="col">Action</th>
+                <th scope="col">{{ __('home.ServiceName') }}</th>
+                <th scope="col">{{ __('home.Code') }}</th>
+                <th scope="col">{{ __('home.CreatedBy') }}</th>
+                <th scope="col">{{ __('home.BusinessName') }}</th>
+                <th scope="col">{{ __('home.Status') }}</th>
+                <th scope="col">{{ __('home.Action') }}</th>
             </tr>
             </thead>
             <tbody>

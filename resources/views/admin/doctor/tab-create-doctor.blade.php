@@ -3,7 +3,7 @@
 @endphp
 @extends('layouts.admin')
 @section('title')
-    Create Doctor
+    {{ __('home.Create Doctor') }}
 @endsection
 @section('main-content')
     <link href="{{ asset('css/tabcreatedoctor.csse') }}" rel="stylesheet">
@@ -35,16 +35,16 @@
                 <div class="form-group focused">
                     <label class="form-control-label" for="name">{{ __('home.Name') }}<span
                             class="small text-danger">*</span></label>
-                    <input type="text" id="name" class="form-control" name="name" placeholder="Name" required
+                    <input type="text" id="name" class="form-control" name="name" placeholder="{{ __('home.Name') }}" required
                            value="">
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="form-group focused">
                     <label class="form-control-label"
-                           for="last_name">{{ __('home.Last name') }}</label>
+                           for="last_name"></label>
                     <input type="text" id="last_name" class="form-control" name="last_name"
-                           placeholder="Last name"
+                           placeholder="{{ __('home.Last name') }}"
                            value="">
                 </div>
             </div>
@@ -91,7 +91,7 @@
             {{--                            <span id='message'></span>--}}
             {{--                        </div>--}}
             <div class="form-element col-md-4">
-                <label for="workspace">Workplace</label>
+                <label for="workspace">{{ __('home.Workplace') }}</label>
                 <input class="form-control" id="workspace" type="text" name="workspace">
             </div>
         </div>
@@ -129,15 +129,15 @@
         </div>
         <div class="row">
             <div class="col-sm-4">
-                <label for="about_vn">Thông tin giới thiệu (Tiếng Việt)</label>
+                <label for="about_vn">{{ __('home.Thông tin giới thiệu (Tiếng Việt)') }}</label>
                 <textarea class="form-control" name="about_vn" id="about_vn"></textarea>
             </div>
             <div class="col-sm-4">
-                <label for="about_en">Thông tin giới thiệu (Tiếng Anh)</label>
+                <label for="about_en">{{ __('home.Thông tin giới thiệu (Tiếng Anh)') }}</label>
                 <textarea class="form-control" name="about_en" id="about_en"></textarea>
             </div>
             <div class="col-sm-4">
-                <label for="about_laos">Thông tin giới thiệu (Tiếng Lào)</label>
+                <label for="about_laos">{{ __('home.Thông tin giới thiệu (Tiếng Lào)') }}</label>
                 <textarea class="form-control" name="about_laos"
                           id="about_laos"></textarea>
             </div>

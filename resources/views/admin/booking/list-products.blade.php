@@ -10,9 +10,9 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Product name</th>
-                <th scope="col">Price</th>
-                <th scope="col">Category</th>
+                <th scope="col">{{ __('home.Product name') }}</th>
+                <th scope="col">{{ __('home.Price') }}</th>
+                <th scope="col">{{ __('home.Category') }}</th>
             </tr>
             </thead>
             <tbody>

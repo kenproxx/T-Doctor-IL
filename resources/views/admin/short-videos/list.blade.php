@@ -17,7 +17,7 @@
         <table class="table" id="tableListVideo">
             <thead>
             <tr>
-                <th scope="col">{{ __('home.title') }}</th>
+                <th scope="col">{{ __('home.Title') }}</th>
                 <th scope="col">{{ __('home.views') }}</th>
                 <th scope="col">{{ __('home.shares') }}</th>
                 <th scope="col">{{ __('home.reactions') }}</th>

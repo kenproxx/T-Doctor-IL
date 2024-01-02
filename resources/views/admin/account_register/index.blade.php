@@ -2,7 +2,7 @@
 @php use App\Enums\online_medicine\FilterOnlineMedicine;use App\Enums\UserStatus;use App\Models\User; @endphp
 @extends('layouts.admin')
 @section('title')
-    List Member
+    {{ __('home.List Member') }}
 @endsection
 @section('main-content')
     <style>

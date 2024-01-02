@@ -11,15 +11,15 @@
         <div class="d-md-flex justify-content-between mt-homeNew align-items-center">
             <div class="col-md-7">
                 <div class="title-homeNew">
-                    Providing Quality <span class="text-title--new1">Healthcare</span> for a <span
-                        class="text-title--new2">Brighter</span> and <span class="text-title--new2">Healthy</span>
-                    Future
+                    {{ __('home.Providing Quality') }} <span class="text-title--new1">{{ __('home.Healthcare') }}</span> {{ __('home.for a') }} <span
+                        class="text-title--new2">{{ __('home.Brighter') }}</span> {{ __('home.and') }} <span class="text-title--new2">{{ __('home.Healthy') }}</span>
+                    {{ __('home.Future') }}
                 </div>
                 <div class="content_homeNew">
-                    At our hospital, we are dedicated to providing exceptional medical care to our patients and their
-                    families.
-                    Our experienced team of medical professionals, cutting-edge technology, and compassionate approach
-                    make us a leader in the healthcare industry
+                    {{ __('home.At our hospital, we are dedicated to providing exceptional medical care to our patients and their
+                    families.') }}
+                    {{ __('home.Our experienced team of medical professionals, cutting-edge technology, and compassionate approach
+                    make us a leader in the healthcare industry') }}
                 </div>
             </div>
             <div class="col-md-5">

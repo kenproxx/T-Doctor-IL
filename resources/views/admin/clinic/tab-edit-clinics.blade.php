@@ -399,26 +399,26 @@
                     <div class="form-element">
                         <input name="emergency" id="emergency" type="checkbox" value="1"
                                @if($clinic->emergency == 1) checked @endif>
-                        <label for="emergency">Is there an emergency room?</label>
+                        <label for="emergency">{{ __('home.Is there an emergency room') }}?</label>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-element">
                         <input name="insurance" id="insurance" type="checkbox" value="1"
                                @if($clinic->insurance == 1) checked @endif>
-                        <label for="insurance">Is health insurance applicable?</label>
+                        <label for="insurance">{{ __('home.Is health insurance applicable') }}?</label>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-element">
                         <input name="parking" id="parking" type="checkbox" value="1"
                                @if($clinic->parking == 1) checked @endif>
-                        <label for="parking">Is there parking?</label>
+                        <label for="parking">{{ __('home.Is there parking') }}?</label>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-element">
-                        <label for="costs">Medical examination costs?</label>
+                        <label for="costs">{{ __('home.Medical examination costs') }}?</label>
                         <input name="costs" class="form-control" id="costs" type="number" value="{{$clinic->costs}}">
                     </div>
                 </div>
@@ -426,9 +426,9 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <label for="hospital_information">Hospital information</label>
+                    <label for="hospital_information">{{ __('home.Hospital information') }}</label>
                     <div class="dropdown" data-target="hospital_information">
-                        <label class="dropdown-label">Select Options</label>
+                        <label class="dropdown-label">{{ __('home.Select Options') }}</label>
                         <input class="d-none" name="hospital_information" id="hospital_information"
                                value="{{$clinic->information}}"/>
                         <div class="dropdown-list">
@@ -461,9 +461,9 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <label for="hospital_facilities">Hospital facilities</label>
+                    <label for="hospital_facilities">{{ __('home.Hospital facilities') }}</label>
                     <div class="dropdown" data-target="hospital_facilities">
-                        <label class="dropdown-label">Select Options</label>
+                        <label class="dropdown-label">{{ __('home.Select Options') }}</label>
                         <input class="d-none" name="hospital_facilities" id="hospital_facilities"
                                value="{{$clinic->facilities}}"/>
                         <div class="dropdown-list">
@@ -494,9 +494,9 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <label for="hospital_equipment">Hospital equipment</label>
+                    <label for="hospital_equipment">{{ __('home.Hospital equipment') }}</label>
                     <div class="dropdown" data-target="hospital_equipment">
-                        <label class="dropdown-label">Select Options</label>
+                        <label class="dropdown-label">{{ __('home.Select Options') }}</label>
                         <input class="d-none" name="hospital_equipment" id="hospital_equipment"
                                value="{{$clinic->equipment}}"/>
                         <div class="dropdown-list">
@@ -530,7 +530,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <label for="representative_doctor">Chọn một tùy chọn:</label>
+                    <label for="representative_doctor">{{ __('home.Chọn một tùy chọn') }}:</label>
                     <select name="representative_doctor" class="form-select" id="representative_doctor">
                         @foreach($doctorLists as $kry => $doctor)
                             <option {{ $doctor->id == $clinic->representative_doctor ? 'selected' : '' }}

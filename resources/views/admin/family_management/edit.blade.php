@@ -80,7 +80,7 @@
         </div>
         <div class="row mt-3">
             <div class="col-sm-4">
-                <button class="btn btn-primary" type="button" onclick="submitForm()">Sửa</button>
+                <button class="btn btn-primary" type="button" onclick="submitForm()">{{ __('home.Sửa') }}</button>
             </div>
         </div>
     </div>
