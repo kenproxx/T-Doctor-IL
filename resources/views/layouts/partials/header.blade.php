@@ -348,6 +348,13 @@
                                                 </option>
                                             </select>
                                         </div>
+                                        <div class="form-elementt" id="element-normal" style="display: none;">
+                                            <div>
+                                                <label for="medical_history">{{ __('home.Tiền sử bệnh án') }}</label>
+                                                <textarea id="medical_history" name="medical_history"
+                                                          placeholder="{{ __('home.Tiền sử bệnh án') }}"></textarea>
+                                            </div>
+                                        </div>
                                         <div class="form-element" id="elemet-upload-file-sign-up">
                                             <label for="member" id="labelFileUploadSignup"></label>
                                             <input type="file" id="fileupload" name="fileupload"
@@ -886,9 +893,12 @@
                                                 <option value="{{Role::ESTHETICIANS}}">ESTHETICIANS</option>
                                                 <option value="{{Role::NURSES}}">NURSES</option>`;
                     break;
-                default:
+                case 'NORMAL':
                     html = `<option value="{{Role::PAITENTS}}">PAITENTS</option>
                                                 <option value="{{Role::NORMAL_PEOPLE}}">NORMAL PEOPLE</option>`;
+                    break;
+                default:
+                    html = ``;
                     break;
             }
             $('#member').empty().append(html);
@@ -900,6 +910,7 @@
         function loadData(value) {
             loadDoctor(value);
             loadHospital(value);
+            loadNormal(value);
         }
 
         function loadDoctor(value) {
@@ -951,6 +962,13 @@
                 $('#representative').attr('required', false);
                 $('#time_work').attr('required', false);
                 $('#action-doctor').hide();
+            }
+        }
+        function loadNormal(value) {
+            if (value == '{{Role::NORMAL}}') {
+                $('#element-normal').show();
+            } else {
+                $('#element-normal').hide();
             }
         }
     })

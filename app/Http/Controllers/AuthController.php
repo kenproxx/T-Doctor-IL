@@ -26,6 +26,7 @@ class AuthController extends Controller
             $password = $request->input('password');
             $passwordConfirm = $request->input('passwordConfirm');
             $member = $request->input('member');
+            $medical_history = $request->input('medical_history');
             $type = $request->input('type');
             $openDate = $request->input('open_date');
             $closeDate = $request->input('close_date');
@@ -130,6 +131,11 @@ class AuthController extends Controller
                 $user->phone = '';
             }
 
+            if ($member == \App\Enums\Role::NORMAL_PEOPLE || $member == \App\Enums\Role::PAITENTS){
+                $user->medical_history = $medical_history;
+            } else {
+                $user->medical_history = '';
+            }
             $user->last_name = '';
             $user->password = $passwordHash;
             $user->username = $username;

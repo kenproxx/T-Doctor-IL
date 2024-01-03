@@ -7,6 +7,7 @@ use App\Enums\ServiceClinicStatus;
 use App\Models\Booking;
 use App\Models\BookingResult;
 use App\Models\Clinic;
+use App\Models\MedicalFavourite;
 use App\Models\ServiceClinic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +25,12 @@ class BookingController extends Controller
     public function resultsDetail($id)
     {
         $resultBooking = BookingResult::where('booking_id', $id)->first();
-       return view('bookings.resultBooking', compact('resultBooking'));
+        $medical_favourites = MedicalFavourite::where('is_favorite', 1);
+        if (Auth::check()) {
+            $medical_favourites = MedicalFavourite::where('user_id', Auth::user()->id)->where('is_favorite', 1);
+        }
+        $medical_favourites = json_encode($medical_favourites->pluck('medical_id')->toArray());
+        return view('bookings.resultBooking', compact('resultBooking', 'medical_favourites'));
     }
 
     public function detailBooking($id)

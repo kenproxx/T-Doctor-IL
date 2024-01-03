@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Enums\ProductStatus;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
+use App\Models\MedicalFavourite;
 use App\Models\ProductInfo;
 use App\Models\User;
 use App\Models\WishList;
@@ -128,6 +129,39 @@ class BackendWishListController extends Controller
             return response($exception, 400);
         }
 
+    }
+    public function updateMedical( Request $request,$id)
+    {
+        try {
+            $wishList = MedicalFavourite::where('medical_id', $id)->first();
+            $userID = $request->input('user_id');
+            $productID = $request->input('product_id');
+            if ($wishList) {
+                $isFavorite = $wishList->is_favorite;
+                $wishList->user_id = $userID;
+                $wishList->medical_id = $productID;
+                $wishList->is_favorite = !$isFavorite;
+
+                $success = $wishList->save();
+                if ($success) {
+                    return response()->json($wishList);
+                }
+                return response('Update error', 400);
+            } else {
+                $wishList = new MedicalFavourite();
+                $wishList->user_id = $userID;
+                $wishList->medical_id = $productID;
+                $wishList->is_favorite = '1';
+
+                $success = $wishList->save();
+                if ($success) {
+                    return response()->json($wishList);
+                }
+                return response('Update error', 400);
+            }
+        } catch (Exception $exception) {
+            return response($exception, 400);
+        }
     }
 
     public function deleteMultil(Request $request)

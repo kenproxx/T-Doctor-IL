@@ -207,10 +207,10 @@
     use App\Models\User;use App\Models\WishList;use Illuminate\Support\Facades\Auth;
     $user = User::find($medicine->user_id);
     $province = Province::find($user->province_id);
-    $isFavourite = WishList::where([
+    $isFavourite = \App\Models\MedicalFavourite::where([
                 ['user_id', '=', Auth::user()->id ?? ''],
-                ['product_id', '=', $medicine->id],
-                ['isFavorite', '=', '1']
+                ['medical_id', '=', $medicine->id],
+                ['is_favorite', '=', '1']
             ])->first();
 
             $heart = 'bi-heart';
@@ -246,7 +246,7 @@
             </div>
             @if(Auth::check())
                 <div class="frame-wrapper-heart" onclick="handleAddMedicineToWishList('{{ $medicine->id }}')"><i
-                        class="{{ $heart }} bi"></i></div>
+                        class="{{ $heart }} bi" id="heart-icon-{{ $medicine->id }}"></i></div>
             @endif
             <div class="group">
                 <div class="overlap-group">
@@ -277,7 +277,7 @@
 
         let user_id = `{{ Auth::user()->id ?? ''}}`;
         // chèn dữ liệu vào bảng Medical-favourites
-        let url = `{{ route('api.backend.wish.lists.update', ['id' => ':id']) }}`;
+        let url = `{{ route('api.backend.wish.lists.medical.update', ['id' => ':id']) }}`;
 
         url = url.replace(':id', id);
 
@@ -296,7 +296,15 @@
                 processData: false,
                 data: data,
                 success: function (response) {
-                    console.log(response)
+                    let heartIcon = $('#heart-icon-' + id);
+
+                    if (response.is_favorite == true) {
+                        heartIcon.removeClass('bi-heart')
+                        heartIcon.addClass('bi-heart-fill');
+                    } else {
+                        heartIcon.removeClass('bi-heart-fill');
+                        heartIcon.addClass('bi-heart');
+                    }
                 },
                 error: function (exception) {
                 }
@@ -304,6 +312,5 @@
         } catch (error) {
             throw error;
         }
-
     }
 </script>

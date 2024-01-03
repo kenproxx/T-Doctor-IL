@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\online_medicine\OnlineMedicineStatus;
 use App\Enums\TypeProductCart;
 use App\Models\Cart;
+use App\Models\MedicalFavourite;
 use App\Models\online_medicine\CategoryProduct;
 use App\Models\online_medicine\ProductMedicine;
 use Illuminate\Support\Facades\Auth;
@@ -34,8 +35,14 @@ class MedicineController extends Controller
                 ->get();
         }
         $provinces = Province::all();
+        $medical_favourites = MedicalFavourite::where('is_favorite', 1);
+        if (Auth::check()) {
+            $medical_favourites = MedicalFavourite::where('user_id', Auth::user()->id)->where('is_favorite', 1);
+        }
+        $medical_favourites = json_encode($medical_favourites->pluck('medical_id')->toArray());
 
-        return view('medicine.list', compact('medicines', 'categoryMedicines', 'provinces', 'countAllMedicine', 'carts'));
+
+        return view('medicine.list', compact('medicines', 'categoryMedicines', 'provinces', 'countAllMedicine', 'carts', 'medical_favourites'));
     }
 
     public function detail($id)
