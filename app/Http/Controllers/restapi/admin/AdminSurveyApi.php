@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\restapi\admin;
 
+use App\Enums\DepartmentStatus;
 use App\Enums\SurveyStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\restapi\MainApi;
@@ -52,7 +53,7 @@ class AdminSurveyApi extends Controller
             $survey = new Surveys();
             $survey = $this->save($request, $survey);
             $department = Department::find($survey->department_id);
-            if (!$department){
+            if (!$department || $department->status == DepartmentStatus::DELETED){
                 return response((new MainApi())->returnMessage('Department not found!'), 400);
             }
             $success = $survey->save();
