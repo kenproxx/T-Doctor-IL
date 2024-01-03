@@ -23,17 +23,22 @@ class ProductMedicineApi extends Controller
 
     public function getAllProductByExcelFile(Request $request)
     {
-        $file_excel = null;
-        if ($request->hasFile('prescriptions')) {
-            $item = $request->file('prescriptions');
-            $itemPath = $item->store('file_excel', 'public');
-            $file_excel = asset('storage/' . $itemPath);
+        try {
+            if ($request->hasFile('prescriptions')) {
+                $item = $request->file('prescriptions');
+                $itemPath = $item->store('file_excel', 'public');
+                $file_excel = asset('storage/' . $itemPath);
+            } else {
+                return response((new MainApi())->returnMessage('File prescriptions not empty!'), 400);
+            }
+            $products = [];
+            if ($file_excel) {
+                $products = (new BookingResultApi())->getListProductFromExcel($file_excel);
+            }
+            return response()->json($products);
+        } catch (\Exception $exception){
+            return response((new MainApi())->returnMessage('Error, Please try again!'), 400);
         }
-        $products = [];
-        if ($file_excel) {
-            $products = (new BookingResultApi())->getListProductFromExcel($file_excel);
-        }
-        return response()->json($products);
     }
 
     public function detail($id)
