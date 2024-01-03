@@ -62,7 +62,7 @@
                         <td>${data.status}</td>
                         <td>
                             <a href="${detail}" class="btn btn-secondary">Detail</a>
-                            <button onclick="deleteService('${data.id}')"  class="btn btn-danger">Delete</button>
+                            <button onclick="deleteService('${data.id}')"  class="btn btn-danger">{{ __('home.Delete') }}</button>
                         </td>
                     </tr>`;
             }

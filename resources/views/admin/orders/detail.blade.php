@@ -61,7 +61,7 @@
                 </select>
             </div>
         </div>
-        <h3 class="mt-3">Order Item</h3>
+        <h3 class="mt-3">{{ __('home.Order Item') }}</h3>
         <table class="table table-striped" id="tableOrderItem">
             <thead>
             <tr>

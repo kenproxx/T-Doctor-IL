@@ -16,10 +16,7 @@
                     {{ __('home.Future') }}
                 </div>
                 <div class="content_homeNew">
-                    {{ __('home.At our hospital, we are dedicated to providing exceptional medical care to our patients and their
-                    families.') }}
-                    {{ __('home.Our experienced team of medical professionals, cutting-edge technology, and compassionate approach
-                    make us a leader in the healthcare industry') }}
+                    {{ __('home.At our hospital, we are dedicated to providing exceptional medical care to our patients and their families.Our experienced team of medical professionals, cutting-edge technology, and compassionate approach make us a leader in the healthcare industry') }}
                 </div>
             </div>
             <div class="col-md-5">
@@ -60,7 +57,7 @@
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div class="row">
                             @if($coupons == '')
-                                <h1 class="d-flex align-items-center justify-content-center mt-4">Hết Voucher</h1>
+                                <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.Hết Voucher') }}</h1>
                             @else
                                 @foreach($coupons as $coupon)
                                     <a href="{{ route('what.free.detail', $coupon->id) }}" class="col-md-4" target="_blank">
@@ -311,7 +308,7 @@
 
                             @foreach($doctors as $doctor)
                             @if($doctor == '')
-                                <h1 class="d-flex align-items-center justify-content-center mt-4">null</h1>
+                                <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                             @else
                                 <div class="col-md-3 col-12">
                                     <div class="p-3">
@@ -381,7 +378,7 @@
                 <div class="tab-pane fade" id="findMedicine" role="tabpanel" aria-labelledby="findMedicine-tab">
                     <div class="row">
                         @if($medicine == '')
-                            <h1 class="d-flex align-items-center justify-content-center mt-4">null</h1>
+                            <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                         @else
                             @foreach($medicines as $medicine)
                                 <div class="col-md-3 col-12">
@@ -680,7 +677,7 @@
                 <div class="tab-pane fade show active" id="popularProduct" role="tabpanel" aria-labelledby="popularProduct-tab">
                     <div class="row">
                         @if($products == '')
-                            <h1 class="d-flex align-items-center justify-content-center mt-4">null</h1>
+                            <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                         @else
                             @foreach($products as $product)
                                 <div class="col-md-3 col-12">
@@ -738,7 +735,7 @@
                 <div class="tab-pane fade" id="recommended" role="tabpanel" aria-labelledby="recommended-tab">
                     <div class="row">
                         @if($products == '')
-                            <h1 class="d-flex align-items-center justify-content-center mt-4">null</h1>
+                            <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                         @else
                             @foreach($products as $product)
                                 <div class="col-md-3 col-12">
@@ -805,7 +802,7 @@
                 <div class="tab-pane fade" id="newProducts" role="tabpanel" aria-labelledby="newProducts-tab">
                     <div class="row">
                         @if($products == '')
-                            <h1 class="d-flex align-items-center justify-content-center mt-4">null</h1>
+                            <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                         @else
                             @foreach($products as $product)
                                 <div class="col-md-3 col-12">
@@ -872,7 +869,7 @@
                 <div class="tab-pane fade" id="hotDeal" role="tabpanel" aria-labelledby="hotDeal-tab">
                     <div class="row">
                         @if($products == '')
-                            <h1 class="d-flex align-items-center justify-content-center mt-4">null</h1>
+                            <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                         @else
                             @foreach($products as $product)
                                 <div class="col-md-3 col-12">
