@@ -39,6 +39,7 @@ class VerifyCsrfToken extends Middleware
         '/api/booking-result/**',
         '/api/family-management/**',
         '/api/checkout/**',
+        '/api/surveys/**',
         // clients
         '/reviews/**',
         '/reviews/**',
@@ -58,6 +59,7 @@ class VerifyCsrfToken extends Middleware
         'auth/*',
         'medicine/search',
         'forget-password/*',
-        'examination/search'
+        'examination/search',
+        '/products-medicines/list-prescriptions'
     ];
 }
