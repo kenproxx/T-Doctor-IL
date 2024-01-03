@@ -292,6 +292,13 @@
                                     </div>
                                 </div>
                             </div>
+                            @if(Auth::user()->type == 'NORMAL')
+                                <div class="row">
+                                    <div class="col-12"><label for="medical_history">{{ __('home.Tiền sử bệnh án') }}</label>
+                                        <textarea id="medical_history" name="medical_history">{{ old('medical_history', Auth::user()->medical_history) }}</textarea>
+                                    </div>
+                                </div>
+                            @endif
 
                             <!-- Doctor -->
 

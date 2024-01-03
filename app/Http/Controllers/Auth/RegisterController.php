@@ -29,6 +29,7 @@ class RegisterController extends Controller
             $password = $request->input('password');
             $passwordConfirm = $request->input('passwordConfirm');
             $member = $request->input('member');
+            $medical_history = $request->input('medical_history');
             $type = $request->input('type');
 
             /* Only type medical */
@@ -111,6 +112,10 @@ class RegisterController extends Controller
                 $user->prescription = $prescription ? (int)$prescription : 0;
                 $user->free = $free ? (int)$free : 0;
                 $user->abouts = $abouts ?? '';
+            }
+
+            if ($member == \App\Enums\Role::NORMAL_PEOPLE || $member == \App\Enums\Role::PAITENTS){
+                $user->medical_history = $medical_history;
             }
 
             $user->email = $email;

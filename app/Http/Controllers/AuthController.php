@@ -133,9 +133,8 @@ class AuthController extends Controller
 
             if ($member == \App\Enums\Role::NORMAL_PEOPLE || $member == \App\Enums\Role::PAITENTS){
                 $user->medical_history = $medical_history;
-            } else {
-                $user->medical_history = '';
             }
+
             $user->last_name = '';
             $user->password = $passwordHash;
             $user->username = $username;
