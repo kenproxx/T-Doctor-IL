@@ -1,23 +1,23 @@
 @extends('layouts.admin')
 @section('title')
-    {{ __('home.Create Category') }}
+    Create Survey
 @endsection
 @section('main-content')
-    <h3 class="text-center"> {{ __('home.Create Category') }}</h3>
+    <h3 class="text-center"> Create Survey </h3>
     <div class="container">
         <form>
             <div class="row">
-                <div class="form-group col-md-4">
-                    <label for="name">{{ __('home.Name') }}</label>
-                    <input type="text" class="form-control" id="name" maxlength="200" required>
+                <div class="form-group">
+                    <label for="question">Question</label>
+                    <input type="text" class="form-control" id="question" maxlength="200" required>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="name_en">{{ __('home.name_en') }}</label>
-                    <input type="text" class="form-control" maxlength="200" id="name_en" required>
+                <div class="form-group">
+                    <label for="question_en">Question EN</label>
+                    <input type="text" class="form-control" maxlength="200" id="question_en" required>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="name_laos">{{ __('home.name_laos') }}</label>
-                    <input type="text" class="form-control" maxlength="200" id="name_laos" required>
+                <div class="form-group">
+                    <label for="question_laos">Question Laos</label>
+                    <input type="text" class="form-control" maxlength="200" id="question_laos" required>
                 </div>
             </div>
             <div class="row">
@@ -38,28 +38,52 @@
                               rows="3"></textarea>
                 </div>
             </div>
+            <div class="text-danger">Lưu ý các câu trả lời được viết ngăn cách bởi dấu phẩy (,)</div>
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="thumbnail">{{ __('home.Thumbnail') }}</label>
-                    <input type="file" class="form-control" id="thumbnail" accept="image/*" required>
+                    <label for="answer">{{ __('home.Answer') }}</label>
+                    <textarea class="form-control" id="answer" placeholder="{{ __('home.Description') }}"
+                              rows="3"></textarea>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="parent_id">{{ __('home.Parent') }}</label>
-                    <select id="parent_id" class="form-select">
-                        <option value="0">{{ __('home.Choose...') }}</option>
-                        @foreach($categories as $category)
-                            <option value="{{$category->id}}" data-limit="30" class="text-shortcut">{{$category->name}}</option>
+                    <label for="answer_en">Answer En</label>
+                    <textarea class="form-control" id="answer_en"
+                              placeholder="{{ __('home.Description English') }}"
+                              rows="3"></textarea>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="answer_laos">Answer Laos</label>
+                    <textarea class="form-control" id="answer_laos" placeholder="{{ __('home.Description Laos') }}"
+                              rows="3"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="thumbnail">{{ __('home.Thumbnail') }}</label>
+                    <input type="file" class="form-control" id="thumbnail" accept="image/*">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="department_id">{{ __('home.Department') }}</label>
+                    <select id="department_id" name="department_id" class="form-select">
+                        @foreach($departments as $category)
+                            <option value="{{$category->id}}" data-limit="30"
+                                    class="text-shortcut">{{$category->name}}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="status">{{ __('home.Status') }}</label>
-                    <select id="status" class="form-select">
-                        @foreach($status as $item)
-                            @if($item != 'DELETED')
-                                <option value="{{ $item }}">{{ $item }}</option>
-                            @endif
+                <div class="form-group col-md-3">
+                    <label for="type">{{ __('home.type') }}</label>
+                    <select id="type" name="type" class="form-select">
+                        @foreach($types as $item)
+                            <option value="{{ $item }}">{{ $item }}</option>
                         @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="status">{{ __('home.type') }}</label>
+                    <select id="status" name="status" class="form-select">
+                        <option value="{{ \App\Enums\SurveyStatus::ACTIVE }}">{{ \App\Enums\SurveyStatus::ACTIVE }}</option>
+                        <option value="{{ \App\Enums\SurveyStatus::INACTIVE }}">{{ \App\Enums\SurveyStatus::INACTIVE }}</option>
                     </select>
                 </div>
             </div>
@@ -80,13 +104,13 @@
             })
 
             async function createCategory() {
-                let categoryUrl = `{{ route('api.business.categories.create')  }}`;
+                let categoryUrl = `{{ route('api.medical.surveys.create')  }}`;
 
                 const formData = new FormData();
 
                 const fieldNames = [
-                    "name", "name_en", "name_laos",
-                    "parent_id", "status",
+                    "question", "question_en", "question_laos",
+                    "department_id", "type", "status",
                 ];
 
                 let isValid = true;
@@ -94,20 +118,15 @@
 
                 const fieldTextareaTiny = [
                     'description', 'description_en', 'description_laos',
+                    'answer', 'answer_en', 'answer_laos',
                 ];
                 fieldTextareaTiny.forEach(fieldTextarea => {
                     const content = tinymce.get(fieldTextarea).getContent();
-                    if (!content) {
-                        isValid = false;
-                    }
                     formData.append(fieldTextarea, content);
                 });
 
                 let file = $('#thumbnail')[0].files[0];
                 formData.append("user_id", '{{ Auth::user()->id }}');
-                if (!file) {
-                    isValid = false;
-                }
                 formData.append("thumbnail", file);
 
                 if (isValid) {
@@ -121,7 +140,7 @@
                         data: formData,
                         success: function (response) {
                             alert('Create success!');
-                            window.location.href = `{{ route('view.admin.category.index') }}`;
+                            window.location.href = `{{ route('view.admin.surveys.index') }}`;
                         },
                         error: function (error) {
                             console.log(error);

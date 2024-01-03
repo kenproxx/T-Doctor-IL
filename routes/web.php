@@ -40,6 +40,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReviewStoreController;
 use App\Http\Controllers\ServiceClinicController;
 use App\Http\Controllers\ShortVideoController;
+use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\SymptomController;
 use App\Http\Controllers\TopicVideoController;
 use App\Http\Controllers\WhatFreeToDay;
@@ -360,6 +361,13 @@ Route::middleware(['user.active'])->group(function () {
             Route::get('/list/{id}', [BookingResultController::class, 'getList'])->name('web.booking.result.list');
             Route::get('/detail/{id}', [BookingResultController::class, 'detail'])->name('web.booking.result.detail');
             Route::get('/list-prescriptions/{id}', [BookingResultController::class, 'getListProduct'])->name('web.booking.result.list.prescriptions');
+        });
+
+        /* Surveys */
+        Route::group(['prefix' => 'surveys'], function () {
+            Route::get('medical/list', [SurveyController::class, 'getList'])->name('view.admin.surveys.index');
+            Route::get('medical/detail/{id}', [SurveyController::class, 'detail'])->name('view.admin.surveys.detail');
+            Route::get('medical/create', [SurveyController::class, 'create'])->name('view.admin.surveys.create');
         });
     });
 

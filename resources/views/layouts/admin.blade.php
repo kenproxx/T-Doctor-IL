@@ -367,6 +367,26 @@
             </li>
             <!-- End Call video Nav -->
 
+            <!-- Survey Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#survey-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-menu-button-wide"></i><span>Survey</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="survey-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{{ route('view.admin.surveys.index') }}">
+                            <i class="bi bi-circle"></i><span>List Survey</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('view.admin.surveys.create') }}">
+                            <i class="bi bi-circle"></i><span>Create Survey</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- End Survey Nav -->
             @if(!$isStaff)
                 <!-- Clinics Nav -->
                 <li class="nav-item">

@@ -42,6 +42,18 @@ class SurveyApi extends Controller
                 $array_survey['textChoices'] = $list_answer;
                 break;
 
+            case 'RADIO':
+                $array_survey['type'] = 'radio';
+                $array_answer = explode(',', $answer);
+                $list_answer = [];
+
+                foreach ($array_answer as $item) {
+                    $list_answer[] = ['key' => $item, 'value' => $item];
+                }
+
+                $array_survey['textChoices'] = $list_answer;
+                break;
+
             case 'BOOL':
                 $array_survey['type'] = 'bool';
                 $array_answer = ['Yes', 'No'];
