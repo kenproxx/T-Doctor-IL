@@ -337,7 +337,7 @@
                                                 <option value="{{Role::BUSINESS }}">{{ __('home.BUSINESS') }}</option>
                                                 <option value="{{Role::MEDICAL }}">{{ __('home.MEDICAL') }}</option>
                                                 <option value="{{Role::NORMAL }}"
-                                                        selected>{{ __('home.NORMAL') }}</option>
+                                                        >{{ __('home.NORMAL') }}</option>
                                             </select>
                                         </div>
                                         <div class="form-element">
