@@ -28,6 +28,7 @@ use App\Http\Controllers\restapi\admin\AdminOrderApi;
 use App\Http\Controllers\restapi\admin\AdminPhamacitisApi;
 use App\Http\Controllers\restapi\admin\AdminPharmacyApi;
 use App\Http\Controllers\restapi\admin\AdminShortVideoApi;
+use App\Http\Controllers\restapi\admin\AdminSurveyApi;
 use App\Http\Controllers\restapi\admin\AdminSymptomsApi;
 use App\Http\Controllers\restapi\CartApi;
 use App\Http\Controllers\SettingController;
@@ -302,11 +303,21 @@ Route::group(['prefix' => 'symptoms'], function () {
     Route::delete('/delete/{id}', [AdminSymptomsApi::class, 'delete'])->name('api.medical.symptoms.delete');
 });
 
-/* Booking result*/
+/* Booking result api*/
 Route::group(['prefix' => 'booking-result'], function () {
     Route::get('/list', [AdminBookingResultApi::class, 'getAll'])->name('api.medical.booking.result.list');
     Route::get('/list-business', [AdminBookingResultApi::class, 'getAllByBusiness'])->name('api.medical.booking.result.business');
     Route::get('/detail/{id}', [AdminBookingResultApi::class, 'detail'])->name('api.medical.booking.result.detail');
     Route::post('/create', [AdminBookingResultApi::class, 'create'])->name('api.medical.booking.result.create');
     Route::post('/update/{id}', [AdminBookingResultApi::class, 'update'])->name('api.medical.booking.result.update');
+});
+
+/* Survey api*/
+Route::group(['prefix' => 'surveys'], function () {
+    Route::get('/list', [AdminSurveyApi::class, 'getAll'])->name('api.medical.surveys.list');
+    Route::get('/list-department/{id}', [AdminSurveyApi::class, 'getAllByDepartment'])->name('api.medical.surveys.department');
+    Route::get('/detail/{id}', [AdminSurveyApi::class, 'detail'])->name('api.medical.surveys.detail');
+    Route::post('/create', [AdminSurveyApi::class, 'create'])->name('api.medical.surveys.create');
+    Route::post('/update/{id}', [AdminSurveyApi::class, 'update'])->name('api.medical.surveys.update');
+    Route::delete('/delete/{id}', [AdminSurveyApi::class, 'delete'])->name('api.medical.surveys.delete');
 });
