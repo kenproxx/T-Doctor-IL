@@ -11,18 +11,7 @@
             }
 
 @endphp
-<style>
-    .bi-heart-fill {
-        color: red;
-    }
-    .product-item .img-pro i {
-        padding: 8px;
-        border-radius: 36px;
-        background: #EAEAEA;
-        align-items: center;
-        justify-content: center;
-    }
-</style>
+
 <div class="product-item">
     <div class="img-pro">
         <img src="{{asset($medicine->thumbnail)}}" alt="">

@@ -9,7 +9,19 @@
         $isBusiness = (new MainController())->checkBusiness();
         $isMedical = (new MainController())->checkMedical();
     @endphp
-
+    <style>
+        .bi-heart-fill {
+            color: red;
+        }
+        .product-item .img-pro i {
+            padding: 8px;
+            border-radius: 36px;
+            background: #EAEAEA;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+    </style>
     <div class="medicine container">
         <div class="row medicine-search">
             <div class="medicine-search--left col-md-3 d-flex justify-content-around">
@@ -204,7 +216,7 @@
         }
     </script>
     <script>
-
+        let medical_favourites = `{{ $medical_favourites }}`;
         let filterMedicine = [];
         let objectMedicine = [];
         let priceMedicine = [];
@@ -262,10 +274,15 @@
                 data.forEach(async function (item) {
                     let url = `{{ route('medicine.detail', ['id' => ':id']) }}`;
                     url = url.replace(':id', item.id);
+                    let isFavoriteClass = isUserWasWishlist(item.id);
                     html += `<div class="col-md-3">
                                 <div class="product-item">
                                     <div class="img-pro">
                                         <img src="${item.thumbnail}" alt="">
+                                           <a class="button-heart" data-favorite="0">
+                                                <i id="heart-icon-${item.id}" class="${isFavoriteClass} bi" data-product-id="${item.id}"
+                                                       onclick="handleAddMedicineToWishList(${item.id})"></i>
+                                           </a>
                                     </div>
                                     <div class="content-pro">
                                         <div class="name-pro">
@@ -276,14 +293,30 @@
                                             <br>
                                         </div>
                                         <div class="price-pro">
-                                            ${item.price ?? 0} ${item.unit_price ?? 'VND'}
+                                            ${formatCurrency(item.price ?? 0)} ${item.unit_price ?? 'VND'}
                                             </div>
                                         </div>
                                     </div>
                             </div>`;
+                    function formatCurrency(amount) {
+                        const formattedAmount = amount.toString().replace(/,/g, '.');
+
+                        return parseFloat(formattedAmount).toLocaleString('de-DE');
+                    }
                 });
             }
             document.getElementById('content-medicine').innerHTML = html;
+        }
+        function isUserWasWishlist(medicineId) {
+            let isLogin = `{{ Auth::check() }}`;
+            if (!isLogin) {
+                return 'bi-heart';
+            }
+
+            if (medical_favourites.includes(medicineId)) {
+                return 'bi-heart-fill';
+            }
+            return 'bi-heart';
         }
 
         function searchFilterMedicine(value) {
