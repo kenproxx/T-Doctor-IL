@@ -166,11 +166,15 @@
             $('.apply-button').on('click', function () {
                 var selectedOption = document.querySelector('input[name="sns_option"]:checked');
 
+                if (!selectedOption) {
+                    alert('Xin cập nhật thông tin SNS và chọn lại');
+                    return;
+                }
+
                 if (!token) {
                     alert('Please login to apply')
                     return;
                 }
-                loadingMasterPage();
                 const headers = {
                     'Authorization': `Bearer ${token}`
                 };
@@ -190,6 +194,7 @@
                 formData.append("content", content);
                 formData.append("sns_option", selectedOption.value);
 
+                loadingMasterPage();
                 try {
                     $.ajax({
                         url: `{{route('api.backend.coupons-apply.create')}}`,
