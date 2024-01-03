@@ -789,9 +789,23 @@ return [
     'and' => 'ແລະ',
     'Healthy' => 'ສຸຂະພາບດີ',
     'Future' => 'ອະນາຄົດ',
-    'At our hospital, we are dedicated to providing exceptional medical care to our patients and their families.' => 'ຢູ່ໂຮງໝໍຂອງພວກເຮົາ, ພວກເຮົາມີຄວາມຕັ້ງໃຈທີ່ຈະໃຫ້ການດູແລທາງການແພດພິເສດແກ່ຄົນເຈັບຂອງພວກເຮົາ ແລະຄອບຄົວຂອງເຂົາເຈົ້າ.',
-    'Our experienced team of medical professionals, cutting-edge technology, and compassionate approach make us a leader in the healthcare industry' =>'ທີມງານຜູ້ຊ່ຽວຊານດ້ານການແພດທີ່ມີປະສົບການຂອງພວກເຮົາ, ເຕັກໂນໂລຢີທີ່ກ້າວຫນ້າ, ແລະວິທີການທີ່ມີຄວາມເມດຕາເຮັດໃຫ້ພວກເຮົາເປັນຜູ້ນໍາໃນອຸດສາຫະກໍາການດູແລສຸຂະພາບ.',
+    'At our hospital, we are dedicated to providing exceptional medical care to our patients and their families.Our experienced team of medical professionals, cutting-edge technology, and compassionate approach make us a leader in the healthcare industry' => 'ຢູ່ໂຮງໝໍຂອງພວກເຮົາ, ພວກເຮົາມີຄວາມຕັ້ງໃຈທີ່ຈະໃຫ້ການດູແລທາງການແພດພິເສດແກ່ຄົນເຈັບ ແລະ ຄອບຄົວຂອງເຂົາເຈົ້າ. ທີມງານແພດທີ່ມີປະສົບການຂອງພວກເຮົາ, ເທັກໂນໂລຍີທີ່ທັນສະໄໝ, ແລະວິທີການທີ່ມີຄວາມເມດຕາເຮັດໃຫ້ພວກເຮົາເປັນຜູ້ນໍາໃນອຸດສາຫະກໍາການດູແລສຸຂະພາບຂອງພວກເຮົາ.',
     'Choose Excel File' => 'ເລືອກໄຟລ໌ Excel',
-    'Import' => 'ນຳເຂົ້າ'
+    'Import' => 'ນຳເຂົ້າ',
+    'Hết Voucher' => 'ຂາຍບັດເຕີມເງິນ',
+    'null' => 'Null',
+    'Detail Category' => 'ປະເພດລາຍລະອຽດ',
+    'List Category' => 'ໝວດໝູ່',
+    'Create Category product' => 'ສ້າງປະເພດຜະລິດຕະພັນ',
+    'List Business' => 'ລາຍຊື່ທຸລະກິດ',
+    'Create Business' => 'ສ້າງທຸລະກິດ',
+    'Edit Doctor' => 'ແກ້ໄຂທ່ານໝໍ',
+    'Tao moi gia dinh' => 'ສ້າງຄອບຄົວໃຫມ່',
+    'Order Item' => 'ລາຍການສັ່ງຊື້',
+    'List Review Doctors' => 'ລາຍຊື່ແພດທົບທວນ',
+    'Detail Short Video' => 'ລາຍລະອຽດວິດີໂອສັ້ນ',
+    'Your browser does not support the video tag.' => 'ຕົວທ່ອງເວັບຂອງທ່ານບໍ່ສະຫນັບສະຫນູນແທັກວິດີໂອ.',
+    'List Short Videos' => 'ລາຍຊື່ວິດີໂອສັ້ນ',
+    'Booking Detail' => 'ລາຍລະອຽດການຈອງ'
 
 ];

@@ -801,9 +801,23 @@ return [
     'and' => 'và',
     'Healthy' => 'Khỏe mạnh',
     'Future' => 'Tương lai',
-    'At our hospital, we are dedicated to providing exceptional medical care to our patients and their families.' => 'Tại bệnh viện của chúng tôi, chúng tôi tận tâm cung cấp dịch vụ chăm sóc y tế đặc biệt cho bệnh nhân và gia đình họ.',
-    'Our experienced team of medical professionals, cutting-edge technology, and compassionate approach make us a leader in the healthcare industry' => 'Đội ngũ chuyên gia y tế giàu kinh nghiệm, công nghệ tiên tiến và cách tiếp cận tận tâm giúp chúng tôi trở thành người dẫn đầu trong ngành chăm sóc sức khỏe',
+    'At our hospital, we are dedicated to providing exceptional medical care to our patients and their families.Our experienced team of medical professionals, cutting-edge technology, and compassionate approach make us a leader in the healthcare industry' => 'Tại bệnh viện của chúng tôi, chúng tôi tận tâm cung cấp dịch vụ chăm sóc y tế đặc biệt cho bệnh nhân và gia đình họ. Đội ngũ chuyên gia y tế giàu kinh nghiệm, công nghệ tiên tiến và cách tiếp cận tận tình giúp chúng tôi trở thành người dẫn đầu trong ngành chăm sóc sức khỏe',
     'Choose Excel File' => 'Chọn tệp Excel',
-    'Import' => 'Nhập'
+    'Import' => 'Nhập',
+    'Hết Voucher' => 'Đã bán hết phiếu mua hàng',
+    'null' => 'Vô giá trị',
+    'Detail Category' => 'Danh mục chi tiết',
+    'List Category' => 'Danh sách danh mục',
+    'Create Category product' => 'Tạo danh mục sản phẩm',
+    'List Business' => 'Danh sách doanh nghiệp',
+    'Create Business' => 'Tạo doanh nghiệp',
+    'Edit Doctor' => 'Chỉnh sửa bác sĩ',
+    'Tao moi gia dinh' => 'Tạo mới gia đình',
+    'Order Item' => 'Mục thứ tự',
+    'List Review Doctors' => 'Danh sách bác sĩ đánh giá',
+    'Detail Short Video' => 'Video ngắn chi tiết',
+    'Your browser does not support the video tag.' => 'Trình duyệt của bạn không hỗ trợ thẻ video.',
+    'List Short Videos' => 'Liệt kê các video ngắn',
+    'Booking Detail' => 'Chi tiết đặt chỗ'
 
 ];

@@ -4,7 +4,7 @@
     @include('layouts.partials.header')
     @include('component.banner')
     <div class="container">
-        <h1>Booking Detail</h1>
+        <h1>{{ __('home.Booking Detail') }}</h1>
         <div class="row d-flex">
             <div class="col-md-4">
                 <div>{{ __('home.Status') }}: {{$booking->status}}</div>

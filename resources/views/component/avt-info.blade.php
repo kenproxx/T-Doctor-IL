@@ -18,7 +18,7 @@
                         @if(!empty($address))
                             {{$address->name}}
                         @else
-                            Null
+                            {{ __('home.null') }}
                         @endif
                     </strong></p>
             </div>

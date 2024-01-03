@@ -376,7 +376,7 @@
                             <p><b>${parent.title}</b><br>
                                ${parent.description}
                             </p>
-                            <button onclick="showOrHiddenChild(1, '${parent.id}');" ><i class="bi bi-reply-fill"></i> Reply</button>
+                            <button onclick="showOrHiddenChild(1, '${parent.id}');" ><i class="bi bi-reply-fill"></i> {{ __('home.Reply') }}</button>
                         </div>
                         <div class="list-review-child ml-5 mt-5">
                             ${htmlChild}

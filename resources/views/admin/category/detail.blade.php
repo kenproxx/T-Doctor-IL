@@ -56,7 +56,7 @@
                     </select>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="status">Status</label>
+                    <label for="status">{{ __('home.Status') }}</label>
                     <select id="status" class="form-select">
                         @foreach($status as $item)
                             @if($item != 'DELETED')

@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-    Create Business
+    {{ __('home.Create Business') }}
 @endsection
 @section('main-content')
     <link href="{{ asset('css/tabcreateclinics.css') }}" rel="stylesheet">
