@@ -7,9 +7,11 @@ use App\Enums\SurveyStatus;
 use App\Enums\SurveyType;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\restapi\MainApi;
+use App\Http\Controllers\restapi\SurveyApi;
 use App\Models\Department;
 use App\Models\Surveys;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminSurveyApi extends Controller
 {
@@ -31,17 +33,21 @@ class AdminSurveyApi extends Controller
     public function getAllByDepartment($id, Request $request)
     {
         $status = $request->input('status');
-        if ($status) {
-            $surveys = Surveys::where('department_id', $id)
-                ->where('status', $status)
-                ->orderBy('id', 'desc')
-                ->get();
-        } else {
-            $surveys = Surveys::where('department_id', $id)
-                ->where('status', '!=', SurveyStatus::DELETED)
-                ->orderBy('id', 'desc')
-                ->get();
-        }
+        $surveys = DB::table('surveys')
+            ->where('department_id', $id)
+            ->orderBy('id', 'desc')
+            ->when($status, function ($query) use ($status) {
+                $query->where('status', $status);
+            })
+            ->where('status', '!=', SurveyStatus::DELETED)
+            ->cursor()
+            ->map(function ($item) {
+                $survey = (array)$item;
+                $answerFormat = (new SurveyApi())->checkTypeSurvey($item->type, $item->answer);
+                $survey['answerFormat'] = $answerFormat;
+                return $survey;
+            });
+
         return response()->json($surveys);
     }
 
@@ -116,7 +122,7 @@ class AdminSurveyApi extends Controller
         $survey->thumbnail = $thumbnail;
 
         $survey->status = $status ?? SurveyStatus::ACTIVE;
-        $survey->type = $type ?? SurveyType::RADIO;
+        $survey->type = $type ?? SurveyType::BOOL;
 
         $survey->user_id = $user_id;
         $survey->department_id = $department_id;
