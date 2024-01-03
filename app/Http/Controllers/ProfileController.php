@@ -167,6 +167,7 @@ class ProfileController extends Controller
         $user->time_working_1 = $request->input('time_working_1');
         $user->time_working_2 = $request->input('time_working_2');
         $user->prescription = $request->has('prescription') ? (int)$request->input('prescription') : 0;
+        $user->medical_history = $request->input('medical_history');
 
         $user->free = $request->has('free') ? (int)$request->input('free') : 0;
 //        dd($user->prescription, $user->free);
