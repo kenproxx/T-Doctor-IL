@@ -15,26 +15,32 @@ class AdminSurveyApi extends Controller
     public function getAll(Request $request)
     {
         $status = $request->input('status');
-        $surveys = Surveys::orderBy('id', 'desc');
         if ($status) {
-            $surveys->where('status', $status);
+            $surveys = Surveys::orderBy('id', 'desc')
+                ->where('status', $status)
+                ->get();
         } else {
-            $surveys->where('status', '!=', SurveyStatus::DELETED);
+            $surveys = Surveys::orderBy('id', 'desc')
+                ->where('status', '!=', SurveyStatus::DELETED)
+                ->get();
         }
-        $surveys->get();
         return response()->json($surveys);
     }
 
     public function getAllByDepartment($id, Request $request)
     {
         $status = $request->input('status');
-        $surveys = Surveys::where('department_id', $id);
         if ($status) {
-            $surveys->where('status', $status);
+            $surveys = Surveys::where('department_id', $id)
+                ->where('status', $status)
+                ->orderBy('id', 'desc')
+                ->get();
         } else {
-            $surveys->where('status', '!=', SurveyStatus::DELETED);
+            $surveys = Surveys::where('department_id', $id)
+                ->where('status', '!=', SurveyStatus::DELETED)
+                ->orderBy('id', 'desc')
+                ->get();
         }
-        $surveys->orderBy('id', 'desc')->get();
         return response()->json($surveys);
     }
 
@@ -53,7 +59,7 @@ class AdminSurveyApi extends Controller
             $survey = new Surveys();
             $survey = $this->save($request, $survey);
             $department = Department::find($survey->department_id);
-            if (!$department || $department->status == DepartmentStatus::DELETED){
+            if (!$department || $department->status == DepartmentStatus::DELETED) {
                 return response((new MainApi())->returnMessage('Department not found!'), 400);
             }
             $success = $survey->save();
