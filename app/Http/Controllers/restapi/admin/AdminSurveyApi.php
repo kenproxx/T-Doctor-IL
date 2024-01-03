@@ -4,6 +4,7 @@ namespace App\Http\Controllers\restapi\admin;
 
 use App\Enums\DepartmentStatus;
 use App\Enums\SurveyStatus;
+use App\Enums\SurveyType;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\restapi\MainApi;
 use App\Models\Department;
@@ -95,6 +96,8 @@ class AdminSurveyApi extends Controller
         $answer_laos = $request->input('answer_laos') ?? '';
 
         $status = $request->input('status');
+        $type = $request->input('type');
+
         $user_id = $request->input('user_id');
         $department_id = $request->input('department_id');
 
@@ -113,6 +116,8 @@ class AdminSurveyApi extends Controller
         $survey->thumbnail = $thumbnail;
 
         $survey->status = $status ?? SurveyStatus::ACTIVE;
+        $survey->type = $type ?? SurveyType::RADIO;
+
         $survey->user_id = $user_id;
         $survey->department_id = $department_id;
 
