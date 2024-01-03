@@ -6,6 +6,14 @@
         .bi-heart-fill {
             color: red;
         }
+        .product-item .img-pro i {
+            padding: 8px;
+            border-radius: 36px;
+            background: #EAEAEA;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
     </style>
     @include('layouts.partials.headerFleaMarket')
     <body>
@@ -400,11 +408,9 @@
                         if (response.isFavorite == true) {
                             item.removeClass('bi-heart');
                             item.addClass('bi-heart-fill');
-                            alert('Add product to wish list success');
                         } else {
                             item.addClass('bi-heart');
                             item.removeClass('bi-heart-fill');
-                            alert('Remove product from wish list success');
                         }
                         loadingMasterPage();
                     },
