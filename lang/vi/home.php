@@ -34,6 +34,7 @@ return [
         'Thông qua chúng tôi, bạn có thể bán các sản phẩm không cần thiết của mình trong phòng khám của bạn cho các phòng khám khác xung quanh bạn.',
     'mother' => 'Mẹ',
     'father' => 'Cha',
+    'Tiền sử bệnh án' => 'Tiền sử bệnh án',
     'wife' => 'Vợ',
     'husband' => 'Chồng',
     'son' => 'Con trai',

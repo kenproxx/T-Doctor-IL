@@ -16,7 +16,13 @@
 .popup .form .form-element {
     margin: 16px;
 }
-
+.m-16 {
+    margin: 16px;
+}
+.m-16 label {
+    font-weight: 800;
+    font-size: 14px;
+}
 .popup .form .form-element label {
     font-weight: 800;
     font-size: 14px;
@@ -49,7 +55,7 @@
 .popup .form .form-element input[type="number"] {
     width: 570px;
     height: 56px;
-    padding: 20px 16px 20px 16px;
+    padding: 16px;
     border-radius: 8px;
     border: 1px;
     gap: 10px;
