@@ -117,5 +117,5 @@ Route::group(['prefix' => 'carts'], function () {
 
 Route::group(['prefix' => 'checkout'], function () {
     Route::post('imm', [CheckoutApi::class, 'checkoutByImm']);
-    Route::post('vnpay', [CheckoutController::class, 'checkoutByVNPay']);
+    Route::get('return-vnpay', [CheckoutApi::class, 'returnCheckoutVNPay']);
 });

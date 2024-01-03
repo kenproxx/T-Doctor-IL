@@ -98,4 +98,16 @@ class CheckoutApi extends Controller
 
         return $success;
     }
+
+    public function returnCheckoutVNPay(Request $request)
+    {
+        try {
+            $response = null;
+            $vnp_ResponseCode = $request->input('vnp_ResponseCode');
+            $response['vnp_ResponseCode'] = $vnp_ResponseCode;
+            return response()->json($response);
+        } catch (\Exception $exception) {
+            return response((new MainApi())->returnMessage('Error, Please try again!'), 400);
+        }
+    }
 }
