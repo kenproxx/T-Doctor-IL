@@ -1,4 +1,9 @@
 <script src="{{ asset('js/tinymce/tinymce.min.js') }}" referrerpolicy="origin"></script>
+<style>
+    .tox.tox-tinymce {
+        z-index: 0;
+    }
+</style>
 <script>
     tinymce.init({
         selector: 'textarea:not(div.composer textarea)',
