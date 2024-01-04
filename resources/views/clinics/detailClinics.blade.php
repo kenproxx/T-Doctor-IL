@@ -28,12 +28,13 @@
             @include('component.clinic')
 
         </div>
-        <div hidden="">
+        <div class="d-none">
             <input id="room_id" name="room_id" value="{{ $bookings->id }}">
             <input id="check_in" name="check_in" value="">
             <input id="check_out" name="check_out" value="">
         </div>
     </div>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAl8bmtXj3F5lPG_mbD5Pj9mGSu2LCzrrE"></script>
     <script>
         let accessToken = `Bearer ` + token;
@@ -164,49 +165,44 @@
                             <i class="text-gray mr-md-2 fa-solid fa-bookmark"></i> <span
                                 class="fs-14 font-weight-600"> {{$bookings->type}}</span>
                         </div>
-                        @for($i=0; $i<3; $i++)
-                    <div class="border-top mb-md-2">
-                        <div
-                            class="d-flex justify-content-between rv-header align-items-center mt-md-2">
-                            <div class="d-flex rv-header--left">
-                                <div class="avt-24 mr-md-2">
-                                    <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
-                                        </div>
-                                        <p class="fs-16px">Trần Đình Phi</p>
-                                    </div>
-                                    <div class="rv-header--right">
-                                        <p class="fs-14 font-weight-400">10:20 07/04/2023</p>
+                        {{--Review clinics--}}
+                    <div id="list-review">
+                        @foreach($reviews as $review)
+                                            <div class="border-top">
+                                            @php
+                                                $user_review = \App\Models\User::find($review->user_id);
+                                            @endphp
+                                            <div class="d-flex justify-content-between rv-header align-items-center mt-md-2">
+                                                @if($user_review)
+                                                    <div class="d-flex rv-header--left">
+                                                        <div class="avt-24 mr-md-2">
+                                                            <img src="{{asset($user_review->avt)}}">
+                                                            </div>
+                                                            <p class="fs-16px">{{ $user_review->username }}</p>
+                                                    </div>
+                                                @else
+                                                    <div class="d-flex rv-header--left">
+                                                        <div class="avt-24 mr-md-2">
+                                                            <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
+                                                            </div>
+                                                            <p class="fs-16px">Guest</p>
+                                                    </div>
+                                                @endif
+                                                    <div class="rv-header--right">
+                                                        <p class="fs-14 font-weight-400">{{ $review->created_at }}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="content">
+                                                    <p>
+                                                        {!! $review->content !!}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                @endforeach
+                    </div>
                                     </div>
                                 </div>
-                                <div class="content">
-                                    <p>
-                                        {{ __('home.Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho bạn bè cùng sử dụng') }}
-                    </p>
-                </div>
-            </div>
-@endfor
-                    <div class="border-top">
-                        <div
-                            class="d-flex justify-content-between rv-header align-items-center mt-md-2">
-                            <div class="d-flex rv-header--left">
-                                <div class="avt-24 mr-md-2">
-                                    <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
-                                    </div>
-                                    <p class="fs-16px">Trần Đình Phi</p>
-                                </div>
-                                <div class="rv-header--right">
-                                    <p class="fs-14 font-weight-400">10:20 07/04/2023</p>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <p>
-                                    {{ __('home.Lần đầu tiên sử dụng dịch vụ qua app nhưng chất lượng và dịch vụ tại salon quá tốt. Book giờ nào thì cứ đúng giờ đến k sợ phải chờ đợi như mọi chỗ khác. Hy vọng thi thoảng app có nhiều ưu đãi để giới thiệu cho bạn bè cùng sử dụng') }}
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>`;
+                            </div>`;
 
                     var infoWindow = new google.maps.InfoWindow({
                         content: infoWindowContent
@@ -365,18 +361,18 @@
                                 </div>
                                 <div class="border-bottom fs-16px mb-md-3">
                                      @if(Auth::check())
-                                        <span>{{ __('home.select member family') }}</span>
+                <span>{{ __('home.select member family') }}</span>
                                         </div>
                                         <div>
                                         Bản thân
                                         <select class="form-control" name="member_family_id" id="member_family_id">
                                         <option value="">{{ __('home.Bản thân') }}</option>
                                         @foreach($memberFamily as $member)
-                                        <option value="{{$member->id}}">{{$member->name}}</option>
+                <option value="{{$member->id}}">{{$member->name}}</option>
                                         @endforeach
-                                        </select>
-                                            </div>
-                                        @endif
+                </select>
+                    </div>
+@endif
                 <div class="border-bottom fs-16px mb-md-3">
                 <span>{{ __('home.Main service') }}</span>
                                 </div>

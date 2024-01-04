@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use App\Enums\BookingStatus;
 use App\Enums\ClinicStatus;
 use App\Enums\DepartmentStatus;
+use App\Enums\ReviewStatus;
 use App\Enums\ServiceClinicStatus;
 use App\Enums\SymptomStatus;
 use App\Enums\TypeUser;
 use App\Models\Booking;
 use App\Models\Clinic;
 use App\Models\Department;
+use App\Models\Review;
 use App\Models\ServiceClinic;
 use App\Models\Symptom;
 use App\Models\User;
@@ -43,6 +45,7 @@ class ClinicController extends Controller
     public function detail($id)
     {
         $bookings = Clinic::find($id);
+        $reviews = Review::where('clinic_id', $id)->where('status', ReviewStatus::APPROVED)->get();
         if (Auth::check()) {
             $userId = Auth::user()->id;
             if (!$bookings || $bookings->status != ClinicStatus::ACTIVE) {
@@ -53,7 +56,8 @@ class ClinicController extends Controller
                     ->where('user_id', Auth::user()->id)
                     ->get();
                 $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
-                return view('clinics.detailClinics', compact('id', 'bookings', 'services', 'memberFamily', 'userId'));
+                return view('clinics.detailClinics', compact('id', 'bookings', 'services',
+                    'reviews', 'memberFamily', 'userId'));
             }
         }
         if (!$bookings || $bookings->status != ClinicStatus::ACTIVE) {
@@ -61,7 +65,7 @@ class ClinicController extends Controller
         }
 
         $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
-        return view('clinics.detailClinics', compact('id', 'bookings', 'services'));
+        return view('clinics.detailClinics', compact('id', 'bookings', 'services', 'reviews'));
     }
 
     public function create()
