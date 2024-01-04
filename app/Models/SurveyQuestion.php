@@ -9,6 +9,15 @@ class SurveyQuestion extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'id',
+        'question',
+        'question_en',
+        'question_laos',
+        'department_id',
+        'type',
+    ];
+
     // 1 - n with survey_answers
     public function survey_answers()
     {

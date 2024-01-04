@@ -9,7 +9,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\restapi\MainApi;
 use App\Http\Controllers\restapi\SurveyApi;
 use App\Models\Department;
+use App\Models\SurveyAnswer;
+use App\Models\SurveyQuestion;
 use App\Models\Surveys;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -19,13 +22,9 @@ class AdminSurveyApi extends Controller
     {
         $status = $request->input('status');
         if ($status) {
-            $surveys = Surveys::orderBy('id', 'desc')
-                ->where('status', $status)
-                ->get();
+            $surveys = Surveys::orderBy('id', 'desc')->where('status', $status)->get();
         } else {
-            $surveys = Surveys::orderBy('id', 'desc')
-                ->where('status', '!=', SurveyStatus::DELETED)
-                ->get();
+            $surveys = Surveys::orderBy('id', 'desc')->where('status', '!=', SurveyStatus::DELETED)->get();
         }
         return response()->json($surveys);
     }
@@ -33,15 +32,10 @@ class AdminSurveyApi extends Controller
     public function getAllByDepartment($id, Request $request)
     {
         $status = $request->input('status');
-        $surveys = DB::table('surveys')
-            ->where('department_id', $id)
-            ->orderBy('id', 'desc')
-            ->when($status, function ($query) use ($status) {
-                $query->where('status', $status);
-            })
-            ->where('status', '!=', SurveyStatus::DELETED)
-            ->cursor()
-            ->map(function ($item) {
+        $surveys = DB::table('surveys')->where('department_id', $id)->orderBy('id', 'desc')->when($status,
+                function ($query) use ($status) {
+                    $query->where('status', $status);
+                })->where('status', '!=', SurveyStatus::DELETED)->cursor()->map(function ($item) {
                 $survey = (array)$item;
                 $answerFormat = (new SurveyApi())->checkTypeSurvey($item->type, $item->answer);
                 $survey['answerFormat'] = $answerFormat;
@@ -62,21 +56,61 @@ class AdminSurveyApi extends Controller
 
     public function create(Request $request)
     {
+//        try {
+//            $survey = new Surveys();
+//            $survey = $this->save($request, $survey);
+//            $department = Department::find($survey->department_id);
+//            if (!$department || $department->status == DepartmentStatus::DELETED) {
+//                return response((new MainApi())->returnMessage('Department not found!'), 400);
+//            }
+//            $success = $survey->save();
+//            if ($success) {
+//                return response()->json($survey);
+//            }
+//            return response((new MainApi())->returnMessage('Create error!'), 400);
+//        } catch (\Exception $exception) {
+//            return response((new MainApi())->returnMessage('Create error, Please try again!!!'), 400);
+//        }
+
         try {
-            $survey = new Surveys();
-            $survey = $this->save($request, $survey);
-            $department = Department::find($survey->department_id);
+            $survey = new SurveyQuestion();
+
+            $params = $request->only('question', 'question_en', 'question_laos', 'department_id', 'type');
+
+            $department = Department::find($params['department_id']);
             if (!$department || $department->status == DepartmentStatus::DELETED) {
                 return response((new MainApi())->returnMessage('Department not found!'), 400);
             }
-            $success = $survey->save();
-            if ($success) {
-                return response()->json($survey);
+
+            $survey->fill($params);
+            $result = $survey->save();
+
+            if (!$result) {
+                return response((new MainApi())->returnMessage('Create error, Please try again!!!'), 400);
             }
-            return response((new MainApi())->returnMessage('Create error!'), 400);
-        } catch (\Exception $exception) {
+
+            $surveyId = $survey->id;
+
+            $symbol = '@#!';
+
+            $arrAnswer_vi = explode($symbol, $request->input('answer_vi'));
+            $arrAnswer_en = explode($symbol, $request->input('answer_en'));
+            $arrAnswer_laos = explode($symbol, $request->input('answer_laos'));
+
+            for ($i = 0; $i < count($arrAnswer_vi); $i++) {
+                $answer = new SurveyAnswer();
+                $answer->survey_question_id = $surveyId;
+                $answer->answer = $arrAnswer_vi[$i];
+                $answer->answer_en = $arrAnswer_en[$i];
+                $answer->answer_laos = $arrAnswer_laos[$i];
+                $answer->save();
+            }
+
+            return response()->json($survey);
+        } catch (Exception $exception) {
             return response((new MainApi())->returnMessage('Create error, Please try again!!!'), 400);
         }
+
     }
 
     private function save($request, $survey)
@@ -88,7 +122,7 @@ class AdminSurveyApi extends Controller
         if ($request->hasFile('thumbnail')) {
             $item = $request->file('thumbnail');
             $itemPath = $item->store('surveys', 'public');
-            $thumbnail = asset('storage/' . $itemPath);
+            $thumbnail = asset('storage/'.$itemPath);
         } else {
             $thumbnail = $survey->thumbnail;
         }
@@ -144,7 +178,7 @@ class AdminSurveyApi extends Controller
                 return response()->json($survey);
             }
             return response((new MainApi())->returnMessage('Update error!'), 400);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response((new MainApi())->returnMessage('Update error, Please try again!!!'), 400);
         }
     }
@@ -162,7 +196,7 @@ class AdminSurveyApi extends Controller
                 return response((new MainApi())->returnMessage('Delete success!'), 200);
             }
             return response((new MainApi())->returnMessage('Delete error!'), 400);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             return response((new MainApi())->returnMessage('Delete error, Please try again!!!'), 400);
         }
     }
