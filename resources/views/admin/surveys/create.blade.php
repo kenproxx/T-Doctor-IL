@@ -95,6 +95,34 @@
                 </div>
             </div>
             <div class="row">
+                <div class="form-group col-md-3">
+                    <label for="department_id">{{ __('home.Department') }}</label>
+                    <select id="department_id" name="department_id" class="form-select">
+                        @foreach($departments as $category)
+                            <option value="{{$category->id}}" data-limit="30"
+                                    class="text-shortcut">{{$category->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="type">{{ __('home.type') }}</label>
+                    <select id="type" name="type" class="form-select" onchange="handleChangeType()">
+                        @foreach($types as $item)
+                            <option value="{{ $item }}">{{ $item }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="status">{{ __('home.type') }}</label>
+                    <select id="status" name="status" class="form-select">
+                        <option
+                            value="{{ SurveyStatus::ACTIVE }}">{{ SurveyStatus::ACTIVE }}</option>
+                        <option
+                            value="{{ SurveyStatus::INACTIVE }}">{{ SurveyStatus::INACTIVE }}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row" id="row-answer">
                 <div class="form-group col-md-4">
                     <label for="answer">{{ __('home.Answer') }}</label>
                     <a href="javascript:void(0)" onclick="appendAnswer('answer_vi')">Add answer</a>
@@ -137,34 +165,6 @@
                             <a href="javascript:void(0)" class="del">del</a>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-3">
-                    <label for="department_id">{{ __('home.Department') }}</label>
-                    <select id="department_id" name="department_id" class="form-select">
-                        @foreach($departments as $category)
-                            <option value="{{$category->id}}" data-limit="30"
-                                    class="text-shortcut">{{$category->name}}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="type">{{ __('home.type') }}</label>
-                    <select id="type" name="type" class="form-select">
-                        @foreach($types as $item)
-                            <option value="{{ $item }}">{{ $item }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label for="status">{{ __('home.type') }}</label>
-                    <select id="status" name="status" class="form-select">
-                        <option
-                            value="{{ SurveyStatus::ACTIVE }}">{{ SurveyStatus::ACTIVE }}</option>
-                        <option
-                            value="{{ SurveyStatus::INACTIVE }}">{{ SurveyStatus::INACTIVE }}</option>
-                    </select>
                 </div>
             </div>
             <div class="text-center mt-3">
@@ -300,6 +300,17 @@
 
         function countItem(idDiv = 'answer_vi') {
             return $('#' + idDiv).children().length;
+        }
+
+        handleChangeType();
+
+        function handleChangeType() {
+            let type = $('#type').val();
+            if (type === '{{ \App\Enums\SurveyType::TEXT }}') {
+                $('#row-answer').hide();
+            } else {
+                $('#row-answer').show();
+            }
         }
     </script>
 @endsection

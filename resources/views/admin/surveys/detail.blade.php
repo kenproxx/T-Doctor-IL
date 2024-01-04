@@ -97,7 +97,35 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" >
+
+                    <div class="form-group col-md-3">
+                        <label for="department_id">{{ __('home.Department') }}</label>
+                        <select id="department_id" name="department_id" class="form-select">
+                            @foreach($departments as $department)
+                                <option value="{{$department->id}}" data-limit="300"
+                                        {{ $department->id == $survey->department_id ? 'selected' : '' }}
+                                        class="text-shortcut">
+                                    {{$department->name}}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="type">{{ __('home.type') }}</label>
+                        <select id="type" name="type" class="form-select" onchange="handleChangeType()">
+                            @foreach(SurveyType::getArray() as $item)
+                                <option
+                                    {{ $item == $survey->type ? 'selected' : '' }}
+                                    value="{{ $item }}">
+                                    {{ $item }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row" id="row-answer">
                     <div class="form-group col-md-4">
                         <label for="answer">{{ __('home.Answer') }}</label>
                         <a href="javascript:void(0)" onclick="appendAnswer('answer_vi')">Add answer</a>
@@ -149,33 +177,6 @@
                     </div>
                 </div>
 
-                <div class="row">
-
-                    <div class="form-group col-md-3">
-                        <label for="department_id">{{ __('home.Department') }}</label>
-                        <select id="department_id" name="department_id" class="form-select">
-                            @foreach($departments as $department)
-                                <option value="{{$department->id}}" data-limit="300"
-                                        {{ $department->id == $survey->department_id ? 'selected' : '' }}
-                                        class="text-shortcut">
-                                    {{$department->name}}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="type">{{ __('home.type') }}</label>
-                        <select id="type" name="type" class="form-select">
-                            @foreach(SurveyType::getArray() as $item)
-                                <option
-                                    {{ $item == $survey->type ? 'selected' : '' }}
-                                    value="{{ $item }}">
-                                    {{ $item }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
                 <div class="text-center mt-3">
                     <button type="button" class="btn btn-primary" id="btnSaveSurvey"
                             onclick="updateSurvey()">{{ __('home.Save') }}</button>
@@ -317,6 +318,17 @@
 
         function countItem(idDiv = 'answer_vi') {
             return $('#' + idDiv).children().length;
+        }
+
+        handleChangeType();
+
+        function handleChangeType() {
+            let type = $('#type').val();
+            if (type === '{{ \App\Enums\SurveyType::TEXT }}') {
+                $('#row-answer').hide();
+            } else {
+                $('#row-answer').show();
+            }
         }
     </script>
 @endsection
