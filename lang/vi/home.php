@@ -22,7 +22,7 @@ return [
     'HIRE CHEAPER' => 'THUÊ RẺ HƠN',
     'Only 500000vnđ, you can hire your staffs.' => 'Chỉ với 500000vnđ, bạn có thể thuê nhân viên của mình.',
     'EASY TO FIND STAFFS' => 'DỄ DÀNG TÌM NHÂN VIÊN',
-    'Through us, find your staffs more easier.' => 'Thông qua chúng tôi, bạn có thể tìm thấy nhân viên của mình dễ dàng hơn.',
+    'Through us, find your staffs more easier' => 'Thông qua chúng tôi, bạn có thể tìm thấy nhân viên của mình dễ dàng hơn.',
     'BETTER MATCHING RATE' => 'TỶ LỆ PHÙ HỢP TỐT HƠN',
     'Through us, you can hire right person' => 'Thông qua chúng tôi, bạn có thể thuê đúng người',
     'BUY YOUR EQUIPMENT CHEAP' => 'MUA THIẾT BỊ CỦA BẠN RẺ HƠN',
@@ -818,6 +818,7 @@ return [
     'Detail Short Video' => 'Video ngắn chi tiết',
     'Your browser does not support the video tag.' => 'Trình duyệt của bạn không hỗ trợ thẻ video.',
     'List Short Videos' => 'Liệt kê các video ngắn',
-    'Booking Detail' => 'Chi tiết đặt chỗ'
+    'Booking Detail' => 'Chi tiết đặt chỗ',
+    'Update Category product' => 'Cập nhật danh mục sản phẩm'
 
 ];
