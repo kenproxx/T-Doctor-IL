@@ -59,4 +59,6 @@ Route::group(['prefix' => 'surveys'], function () {
 
     Route::get('get-by-department/{departmentId}', [SurveyController::class, 'getQuestionByDepartment']);
     Route::get('get-answer-by-user/{question_id}/{user_id}', [SurveyController::class, 'getAnswerByUser']);
+    Route::post('form-survey', [AdminSurveyApi::class, 'handleFormSurvey'])->name('api.medical.surveys.form.submit');
+
 });

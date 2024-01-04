@@ -10,6 +10,7 @@ use App\Http\Controllers\restapi\MainApi;
 use App\Http\Controllers\restapi\SurveyApi;
 use App\Models\Department;
 use App\Models\SurveyAnswer;
+use App\Models\SurveyAnswerUser;
 use App\Models\SurveyQuestion;
 use App\Models\Surveys;
 use Exception;
@@ -151,21 +152,6 @@ class AdminSurveyApi extends Controller
 
     public function update($id, Request $request)
     {
-//        try {
-//            $survey = Surveys::find($id);
-//            if (!$survey || $survey->status == SurveyStatus::DELETED) {
-//                return response((new MainApi())->returnMessage('Not found!'), 404);
-//            }
-//
-//            $survey = $this->save($request, $survey);
-//            $success = $survey->save();
-//            if ($success) {
-//                return response()->json($survey);
-//            }
-//            return response((new MainApi())->returnMessage('Update error!'), 400);
-//        } catch (Exception $exception) {
-//            return response((new MainApi())->returnMessage('Update error, Please try again!!!'), 400);
-//        }
 
         try {
             $survey = SurveyQuestion::find($id);
@@ -224,5 +210,26 @@ class AdminSurveyApi extends Controller
         } catch (Exception $exception) {
             return response((new MainApi())->returnMessage('Delete error, Please try again!!!'), 400);
         }
+    }
+
+    public function handleFormSurvey(Request $request)
+    {
+        foreach ($request->all() as $value) {
+            if (!array_key_exists('booking_id', $value)) {
+                return response((new MainApi())->returnMessage('Không có booking id!!!'), 400);
+            }
+            if (!array_key_exists('user_id', $value)) {
+                continue;
+            }
+            if (!array_key_exists('result', $value)) {
+                continue;
+            }
+            $survey_answer = new SurveyAnswerUser();
+            $survey_answer->result = $value['result'];
+            $survey_answer->user_id = $value['user_id'];
+            $survey_answer->booking_id = $value['booking_id'];
+            $survey_answer->save();
+        }
+        return response((new MainApi())->returnMessage('Success!!!'), 200);
     }
 }
