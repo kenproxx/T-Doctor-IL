@@ -16,7 +16,9 @@ class WhatFreeToDay extends Controller
     {
         $activeCouponsQuery = Coupon::where('status', '=', CouponStatus::ACTIVE);
 
-        $coupons = $activeCouponsQuery->whereIn('type', TypeCoupon::getArray())->orderBy('created_at', 'desc')->get();
+        $now = now('Asia/Ho_Chi_Minh');
+        $coupons = $activeCouponsQuery->whereIn('type', TypeCoupon::getArray())->where('endDate', '>',
+            $now)->orderBy('created_at', 'desc')->get();
 
         $coupons_freeToDay = $coupons->where('type', TypeCoupon::FREE_TODAY)->take(6);
         $coupons_withMission = $coupons->where('type', TypeCoupon::FREE_MISSION)->take(6);
@@ -29,10 +31,12 @@ class WhatFreeToDay extends Controller
     {
         return view('What-free.tab-free-today');
     }
+
     public function withMission()
     {
         return view('What-free.tab-with-mission');
     }
+
     public function discountedSevice()
     {
         return view('What-free.tab-discounted-sevice');
@@ -46,15 +50,15 @@ class WhatFreeToDay extends Controller
         $user_id = $coupon->user_id;
         $clinic = Clinic::where('user_id', $user_id)->first();
         if (Auth::check()) {
-            $socials = SocialUser::where('user_id', Auth::user()->id)
-                ->where('status', SocialUserStatus::ACTIVE)
-                ->first();
+            $socials = SocialUser::where('user_id', Auth::user()->id)->where('status',
+                    SocialUserStatus::ACTIVE)->first();
         } else {
             $socials = '';
         }
 
         return view('What-free.detail-what-free', compact('coupon', 'clinic', 'socials'));
     }
+
     public function campaign()
     {
         return view('What-free.my-campaign');
@@ -63,10 +67,9 @@ class WhatFreeToDay extends Controller
 
     public function seeAll($type)
     {
-        $coupons = Coupon::where('status', CouponStatus::ACTIVE)
-            ->where('type', $type)
-            ->latest('created_at')
-            ->paginate(15);
+        $now = now('Asia/Ho_Chi_Minh');
+        $coupons = Coupon::where('status', CouponStatus::ACTIVE)->where('type', $type)->where('endDate', '>',
+                $now)->latest('created_at')->paginate(15);
 
         return view('What-free.tab-see-all', compact('coupons'));
     }
