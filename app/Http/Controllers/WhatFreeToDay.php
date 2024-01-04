@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Enums\CouponStatus;
 use App\Enums\SocialUserStatus;
+use App\Enums\TypeCoupon;
 use App\Models\Clinic;
 use App\Models\Coupon;
 use App\Models\SocialUser;
@@ -13,8 +14,15 @@ class WhatFreeToDay extends Controller
 {
     public function index()
     {
-        $coupons = Coupon::where('status', '=', CouponStatus::ACTIVE)->get();
-        return view('What-free.what-free', compact('coupons'));
+        $activeCouponsQuery = Coupon::where('status', '=', CouponStatus::ACTIVE);
+
+        $coupons = $activeCouponsQuery->whereIn('type', TypeCoupon::getArray())->orderBy('created_at', 'desc')->get();
+
+        $coupons_freeToDay = $coupons->where('type', TypeCoupon::FREE_TODAY)->take(6);
+        $coupons_withMission = $coupons->where('type', TypeCoupon::FREE_MISSION)->take(6);
+        $coupons_discount = $coupons->where('type', TypeCoupon::DISCOUNT_SERVICE)->take(6);
+
+        return view('What-free.what-free', compact('coupons_freeToDay', 'coupons_withMission', 'coupons_discount'));
     }
 
     public function toDay()
