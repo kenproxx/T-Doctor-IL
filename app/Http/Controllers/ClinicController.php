@@ -144,12 +144,20 @@ class ClinicController extends Controller
         $checkOut = $request->input('check_out');
         $service = $request->input('service');
         $memberFamily = $request->input('member_family_id');
+        $medical_history = $request->input('medical_history') ?? '';
 
         if (is_array($service)) {
             $servicesAsString = implode(',', $service);
         } else {
             $servicesAsString = $service;
         }
+
+        if (is_array($medical_history)) {
+            $medical_historyAsString = implode('&&', $medical_history);
+        } else {
+            $medical_historyAsString = $medical_history;
+        }
+
         $time = $request->input('selectedTime');
         $timestamp = Carbon::parse($time);
 
@@ -157,8 +165,8 @@ class ClinicController extends Controller
         $booking->clinic_id = $clinicID;
         $booking->check_in = $timestamp;
         $booking->status = BookingStatus::PENDING;
-//        $booking->check_out = $checkOut;
         $booking->service = $servicesAsString;
+        $booking->medical_history = $medical_historyAsString;
         $booking->member_family_id = $memberFamily;
 
         return $booking;
