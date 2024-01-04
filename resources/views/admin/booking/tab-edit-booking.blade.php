@@ -459,7 +459,7 @@
         let html = `<div class="service-result-item d-flex align-items-center justify-content-between border p-3">
                                 <div class="service-result">
                                     <div class="form-group">
-                                        <label for="service_name">Service Name</label>
+                                        <label for="service_name">{{ __('home.Service Name') }}</label>
                                         <input type="text" class="form-control" id="service_name" disabled value="{{ $names }}"
                                                placeholder="Apartment, studio, or floor">
                                         <ul class="list-service" style="list-style: none; padding-left: 0">
@@ -474,21 +474,21 @@
                                                                                     @endforeach
         </ul>
         <div class="d-none">
-            <label for="service_result">Service Result</label>
+            <label for="service_result">{{ __('home.Service Result') }}</label>
             <input type="text" class="form-control service_result" value="{{$bookings_edit->service}}" id="service_result" name="service_result">
         </div>
     </div>
     <div class="form-group">
-        <label for="result">Result</label>
-        <input type="text" class="form-control result" id="result" placeholder="result">
+        <label for="result">{{ __('home.Result') }}</label>
+        <input type="text" class="form-control result" id="result" placeholder="{{ __('home.Result') }}">
     </div>
     <div class="form-group">
-        <label for="result_en">Result En</label>
-        <input type="text" class="form-control result_en" id="result_en" placeholder="result en">
+        <label for="result_en">{{ __('home.Result En') }}</label>
+        <input type="text" class="form-control result_en" id="result_en" placeholder="{{ __('home.Result En') }}">
     </div>
     <div class="form-group">
-        <label for="result_laos">Result Laos</label>
-        <input type="text" class="form-control result_laos" id="result_laos" placeholder="result laos">
+        <label for="result_laos">{{ __('home.Result Laos') }}</label>
+        <input type="text" class="form-control result_laos" id="result_laos" placeholder="{{ __('home.Result Laos') }}">
     </div>
 </div>
 <div class="action">

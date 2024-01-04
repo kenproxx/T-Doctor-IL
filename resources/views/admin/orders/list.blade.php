@@ -73,8 +73,8 @@
                                         <td>${data.order_method}</td>
                                         <td>${data.status}</td>
                                         <td>
-                                            <a href="${orderDetailUrl + data.id}" class="btn btn-success" >Detail</a>
-                                            <button type="button" class="btn btn-danger" id="btnDelete" onclick="confirmDeleteOrder('${data.id}')">Delete</button>
+                                            <a href="${orderDetailUrl + data.id}" class="btn btn-success" >{{ __('home.Detail') }}</a>
+                                            <button type="button" class="btn btn-danger" id="btnDelete" onclick="confirmDeleteOrder('${data.id}')">{{ __('home.Delete') }}</button>
                                         </td>
                                     </tr>`;
                 }
