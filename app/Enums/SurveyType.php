@@ -7,7 +7,7 @@ use BenSampo\Enum\Enum;
 final class SurveyType extends Enum
 {
     const TEXT = 'TEXT';
+    const MULTIPLE = 'MULTIPLE';
+    const BOOL = 'BOOL';
     const RADIO = 'RADIO';
-    const CHECKBOX = 'CHECKBOX';
-    const SELECT = 'SELECT';
 }
