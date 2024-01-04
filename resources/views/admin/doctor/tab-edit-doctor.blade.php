@@ -34,7 +34,7 @@
                 <div class="form-group focused">
                     <label class="form-control-label" for="name">{{ __('home.Name') }}<span
                             class="small text-danger">*</span></label>
-                    <input type="text" id="name" class="form-control" name="name" placeholder="Name" required
+                    <input type="text" id="name" class="form-control" name="name" placeholder="{{ __('home.Name') }}" required
                            value="{{ $doctor->name }}">
                 </div>
             </div>
@@ -42,7 +42,7 @@
                 <div class="form-group focused">
                     <label class="form-control-label"
                            for="last_name">{{ __('home.Last name') }}</label>
-                    <input type="text" id="last_name" class="form-control" name="last_name"
+                    <input type="text" id="{{ __('home.Last name') }}" class="form-control" name="last_name"
                            placeholder="Last name"
                            value="{{ $doctor->last_name }}">
                 </div>
@@ -62,10 +62,10 @@
             </div>
             <div class="col-sm-4">
                 <div class="form-group">
-                    <label class="form-control-label" for="phone">{{ __('home.PhoneNumber') }}r<span
+                    <label class="form-control-label" for="phone">{{ __('home.PhoneNumber') }}<span
                             class="small text-danger">*</span></label>
                     <input type="number" id="phone" class="form-control" name="phone"
-                           placeholder="Phone"
+                           placeholder="{{ __('home.PhoneNumber') }}"
                            value="{{ $doctor->phone }}" required>
                 </div>
             </div>

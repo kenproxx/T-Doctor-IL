@@ -24,52 +24,56 @@
                                value="{{ $survey->question_laos }}">
                     </div>
                 </div>
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        <label for="description">{{ __('home.Description') }}</label>
-                        <textarea class="form-control" id="description" placeholder="{{ __('home.Description') }}"
-                                  rows="3">{{ $survey->description }}</textarea>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="description_en">{{ __('home.Description English') }}</label>
-                        <textarea class="form-control" id="description_en"
-                                  placeholder="{{ __('home.Description English') }}"
-                                  rows="3">{{ $survey->description_en }}</textarea>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="description_laos">{{ __('home.Description Laos') }}</label>
-                        <textarea class="form-control" id="description_laos"
-                                  placeholder="{{ __('home.Description Laos') }}"
-                                  rows="3">{{ $survey->description_laos }}</textarea>
-                    </div>
-                </div>
-                <div class="text-danger">Lưu ý các câu trả lời được viết ngăn cách bởi dấu phẩy (,)</div>
+
+
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="answer">{{ __('home.Answer') }}</label>
-                        <textarea class="form-control" id="answer" placeholder="{{ __('home.Description') }}"
-                                  rows="3">{{ $survey->answer }}</textarea>
+                        <a href="javascript:void(0)" onclick="appendAnswer('answer_vi')">Add answer</a>
+
+                        <div id="answer_vi">
+                            <div class="item">
+                                <label>
+                                    <span>Ans 1</span>
+                                    <input type="text">
+                                </label>
+                                <a href="javascript:void(0)" class="del">del</a>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="form-group col-md-4">
                         <label for="answer_en">Answer En</label>
-                        <textarea class="form-control" id="answer_en"
-                                  placeholder="{{ __('home.Description English') }}"
-                                  rows="3">{{ $survey->answer_en }}</textarea>
+                        <a href="javascript:void(0)" onclick="appendAnswer('answer_en')">Add answer</a>
+
+                        <div id="answer_en">
+                            <div class="item">
+                                <label>
+                                    <span>Ans 1</span>
+                                    <input type="text">
+                                </label>
+                                <a href="javascript:void(0)" class="del">del</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="answer_laos">Answer Laos</label>
-                        <textarea class="form-control" id="answer_laos" placeholder="{{ __('home.Description Laos') }}"
-                                  rows="3">{{ $survey->answer_laos }}</textarea>
+                        <a href="javascript:void(0)" onclick="appendAnswer('answer_laos')">Add answer</a>
+
+                        <div id="answer_laos">
+                            <div class="item">
+                                <label>
+                                    <span>Ans 1</span>
+                                    <input type="text">
+                                </label>
+                                <a href="javascript:void(0)" class="del">del</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
                 <div class="row">
-                    <div class="form-group col-md-3">
-                        <label for="thumbnail">{{ __('home.Thumbnail') }}</label>
-                        <input type="file" class="form-control" id="thumbnail" accept="image/*">
-                        @if($survey->thumbnail)
-                            <img src="{{ asset($survey->thumbnail) }}" alt="" style="max-width: 100px">
-                        @endif
-                    </div>
+
                     <div class="form-group col-md-3">
                         <label for="department_id">{{ __('home.Department') }}</label>
                         <select id="department_id" name="department_id" class="form-select">
@@ -92,21 +96,6 @@
                                     {{ $item }}
                                 </option>
                             @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label for="status">{{ __('home.type') }}</label>
-                        <select id="status" name="status" class="form-select">
-                            <option
-                                {{ \App\Enums\SurveyStatus::ACTIVE == $survey->status ? 'selected' : '' }}
-                                value="{{ \App\Enums\SurveyStatus::ACTIVE }}">
-                                {{ \App\Enums\SurveyStatus::ACTIVE }}
-                                </option>
-                            <option
-                                {{ \App\Enums\SurveyStatus::INACTIVE == $survey->status ? 'selected' : '' }}
-                                value="{{ \App\Enums\SurveyStatus::INACTIVE }}">
-                                {{ \App\Enums\SurveyStatus::INACTIVE }}
-                            </option>
                         </select>
                     </div>
                 </div>

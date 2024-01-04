@@ -33,6 +33,7 @@ use App\Http\Controllers\restapi\admin\AdminSymptomsApi;
 use App\Http\Controllers\restapi\CartApi;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -312,12 +313,3 @@ Route::group(['prefix' => 'booking-result'], function () {
     Route::post('/update/{id}', [AdminBookingResultApi::class, 'update'])->name('api.medical.booking.result.update');
 });
 
-/* Survey api*/
-Route::group(['prefix' => 'surveys'], function () {
-    Route::get('/list', [AdminSurveyApi::class, 'getAll'])->name('api.medical.surveys.list');
-    Route::get('/list-department/{id}', [AdminSurveyApi::class, 'getAllByDepartment'])->name('api.medical.surveys.department');
-    Route::get('/detail/{id}', [AdminSurveyApi::class, 'detail'])->name('api.medical.surveys.detail');
-    Route::post('/create', [AdminSurveyApi::class, 'create'])->name('api.medical.surveys.create');
-    Route::post('/update/{id}', [AdminSurveyApi::class, 'update'])->name('api.medical.surveys.update');
-    Route::delete('/delete/{id}', [AdminSurveyApi::class, 'delete'])->name('api.medical.surveys.delete');
-});

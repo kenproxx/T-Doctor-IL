@@ -133,7 +133,7 @@ return [
     'BUY YOUR EQUIPMENT CHEAP' => 'BUY YOUR EQUIPMENT CHEAPER',
     'Only 500000vnđ, you can hire your staffs.' => 'Only 500000vnđ, you can hire your staffs.',
     'EASY TO FIND STAFFS' => 'EASY TO FIND STAFFS',
-    'Through us, find your staffs more easier.' => 'Through us, find your staffs more easier.',
+    'Through us, find your staffs more easier' => 'Through us, find your staffs more easier',
     'BETTER MATCHING RATE' => 'BETTER MATCHING RATE',
     'Through us, you can hire right person' => 'Through us, you can hire right person',
 
@@ -821,7 +821,7 @@ return [
     'Your browser does not support the video tag.' => 'Your browser does not support the video tag.',
     'List Short Videos' => 'List Short Videos',
     'Booking Detail' => 'Booking Detail',
-    'Create prescription' => 'Create prescription'
+    'Update Category product' => 'Update Category product'
 
 
 

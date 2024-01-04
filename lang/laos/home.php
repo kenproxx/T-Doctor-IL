@@ -15,7 +15,7 @@ return [
     'HIRE CHEAPER' => 'ຈ້າງພະນັກງານລາຄາຖືກກວ່າ',
     'Only 500000vnđ, you can hire your staffs.' => 'ໃຫ້ສູງສຸດ 500000vnđ, ທ່ານສາມາດຈ້າງພະນັກງານຂອງທ່ານໄດ້.',
     'EASY TO FIND STAFFS' => 'ການຊອກຫາພະນັກງານທີ່ຄົນລາຄາຖືກກວ່າ',
-    'Through us, find your staffs more easier.' => 'ຂອງທ່ານຜິດພາດການຊອກຫາພະນັກງານຂອງທ່ານຫຼາຍກວ່າເວລາທ່ານ.',
+    'Through us, find your staffs more easier' => 'ຂອງທ່ານຜິດພາດການຊອກຫາພະນັກງານຂອງທ່ານຫຼາຍກວ່າເວລາທ່ານ.',
     'BETTER MATCHING RATE' => 'ອາດຈະການກົດລະບຽບທີ່ດີທີ່ສຸດ',
     'Through us, you can hire right person' => 'ຂອງທ່ານທີ່ຈະຈ້າງພະນັກງານຄົນຖືກຕ້ອງ',
     'BUY YOUR EQUIPMENT CHEAP' => 'ຊື້ອອນໄລນ໌ພັດທະນາລາຄາຖືກກວ່າ',
@@ -807,6 +807,7 @@ return [
     'Detail Short Video' => 'ລາຍລະອຽດວິດີໂອສັ້ນ',
     'Your browser does not support the video tag.' => 'ຕົວທ່ອງເວັບຂອງທ່ານບໍ່ສະຫນັບສະຫນູນແທັກວິດີໂອ.',
     'List Short Videos' => 'ລາຍຊື່ວິດີໂອສັ້ນ',
-    'Booking Detail' => 'ລາຍລະອຽດການຈອງ'
+    'Booking Detail' => 'ລາຍລະອຽດການຈອງ',
+    'Update Category product' => 'ປັບປຸງຜະລິດຕະພັນປະເພດ'
 
 ];

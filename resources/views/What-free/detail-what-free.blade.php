@@ -87,7 +87,8 @@
                                     @endif
                                     @if($socials->google_review)
                                         <div class="button">
-                                            <input type="radio" id="sns_option_5" name="sns_option" value="google_review"/>
+                                            <input type="radio" id="sns_option_5" name="sns_option"
+                                                   value="google_review"/>
                                             <label class="btn btn-default" for="sns_option_5"><i
                                                     class="fa-brands fa-google"></i></label>
                                         </div>
@@ -166,11 +167,15 @@
             $('.apply-button').on('click', function () {
                 var selectedOption = document.querySelector('input[name="sns_option"]:checked');
 
+                if (!selectedOption) {
+                    alert('Xin cập nhật thông tin SNS và chọn lại');
+                    return;
+                }
+
                 if (!token) {
                     alert('Please login to apply')
                     return;
                 }
-                loadingMasterPage();
                 const headers = {
                     'Authorization': `Bearer ${token}`
                 };
@@ -190,6 +195,7 @@
                 formData.append("content", content);
                 formData.append("sns_option", selectedOption.value);
 
+                loadingMasterPage();
                 try {
                     $.ajax({
                         url: `{{route('api.backend.coupons-apply.create')}}`,
