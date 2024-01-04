@@ -313,15 +313,3 @@ Route::group(['prefix' => 'booking-result'], function () {
     Route::post('/update/{id}', [AdminBookingResultApi::class, 'update'])->name('api.medical.booking.result.update');
 });
 
-/* Survey api*/
-Route::group(['prefix' => 'surveys'], function () {
-    Route::get('/list', [AdminSurveyApi::class, 'getAll'])->name('api.medical.surveys.list');
-    Route::get('/list-department/{id}', [AdminSurveyApi::class, 'getAllByDepartment'])->name('api.medical.surveys.department');
-    Route::get('/detail/{id}', [AdminSurveyApi::class, 'detail'])->name('api.medical.surveys.detail');
-    Route::post('/create', [AdminSurveyApi::class, 'create'])->name('api.medical.surveys.create');
-    Route::post('/update/{id}', [AdminSurveyApi::class, 'update'])->name('api.medical.surveys.update');
-    Route::delete('/delete/{id}', [AdminSurveyApi::class, 'delete'])->name('api.medical.surveys.delete');
-
-    Route::get('get-by-department/{departmentId}', [SurveyController::class, 'getQuestionByDepartment']);
-    Route::get('get-answer-by-user/{question_id}/{user_id}', [SurveyController::class, 'getAnswerByUser']);
-});

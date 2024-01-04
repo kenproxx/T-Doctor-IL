@@ -25,25 +25,53 @@
                     </div>
                 </div>
 
-                <div class="text-danger">Lưu ý các câu trả lời được viết ngăn cách bởi dấu phẩy (,)</div>
+
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label for="answer">{{ __('home.Answer') }}</label>
-                        <textarea class="form-control" id="answer" placeholder="{{ __('home.Description') }}"
-                                  rows="3">{{ $survey->answer }}</textarea>
+                        <a href="javascript:void(0)" onclick="appendAnswer('answer_vi')">Add answer</a>
+
+                        <div id="answer_vi">
+                            <div class="item">
+                                <label>
+                                    <span>Ans 1</span>
+                                    <input type="text">
+                                </label>
+                                <a href="javascript:void(0)" class="del">del</a>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="form-group col-md-4">
                         <label for="answer_en">Answer En</label>
-                        <textarea class="form-control" id="answer_en"
-                                  placeholder="{{ __('home.Description English') }}"
-                                  rows="3">{{ $survey->answer_en }}</textarea>
+                        <a href="javascript:void(0)" onclick="appendAnswer('answer_en')">Add answer</a>
+
+                        <div id="answer_en">
+                            <div class="item">
+                                <label>
+                                    <span>Ans 1</span>
+                                    <input type="text">
+                                </label>
+                                <a href="javascript:void(0)" class="del">del</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="answer_laos">Answer Laos</label>
-                        <textarea class="form-control" id="answer_laos" placeholder="{{ __('home.Description Laos') }}"
-                                  rows="3">{{ $survey->answer_laos }}</textarea>
+                        <a href="javascript:void(0)" onclick="appendAnswer('answer_laos')">Add answer</a>
+
+                        <div id="answer_laos">
+                            <div class="item">
+                                <label>
+                                    <span>Ans 1</span>
+                                    <input type="text">
+                                </label>
+                                <a href="javascript:void(0)" class="del">del</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
                 <div class="row">
 
                     <div class="form-group col-md-3">

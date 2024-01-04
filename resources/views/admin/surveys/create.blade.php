@@ -175,10 +175,11 @@
     </div>
     <script>
         let accessToken = `Bearer ` + token;
-        const maxAnswer = 10;
         let headers = {
             "Authorization": accessToken
         };
+
+        const maxAnswer = 10;
 
         async function createCategory() {
 
