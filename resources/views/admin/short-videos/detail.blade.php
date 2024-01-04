@@ -34,17 +34,17 @@
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="views">{{ __('home.istiews') }}</label>
+                    <label for="views">{{ __('home.views') }}</label>
                     <input type="number" min="0" class="form-control" id="views" name="views"
                            value="{{ $video->views }}">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="shares">{{ __('home.Shares') }}</label>
+                    <label for="shares">{{ __('home.shares') }}</label>
                     <input type="number" min="0" class="form-control" id="shares" value="{{ $video->shares }}"
                            name="shares">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="reactions">{{ __('home.Reactions') }}</label>
+                    <label for="reactions">{{ __('home.reactions') }}</label>
                     <input type="number" min="0" class="form-control" id="reactions" value="{{ $video->reactions }}"
                            name="reactions">
                 </div>
