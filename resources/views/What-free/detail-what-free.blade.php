@@ -87,7 +87,8 @@
                                     @endif
                                     @if($socials->google_review)
                                         <div class="button">
-                                            <input type="radio" id="sns_option_5" name="sns_option" value="google_review"/>
+                                            <input type="radio" id="sns_option_5" name="sns_option"
+                                                   value="google_review"/>
                                             <label class="btn btn-default" for="sns_option_5"><i
                                                     class="fa-brands fa-google"></i></label>
                                         </div>

@@ -1,3 +1,4 @@
+@php use App\Enums\TypeCoupon; @endphp
 @extends('layouts.master')
 @section('title', 'What free')
 @section('content')
@@ -6,14 +7,14 @@
 
     <link href="{{ asset('css/whatfree.css') }}" rel="stylesheet">
     <div class="container">
-        @include('What-free.header-wFree')
 
         <div class="clinics-list">
             <div class="clinics-header margin-bottom-32 border-bottom">
                 <div class="justify-content-between align-items-center d-flex mt-4 mb-2">
                     <div class="ac-text_content ">{{ __('home.Free today') }}</div>
                     <div class="flea-content-product"><a
-                            href="{{route('what.free.to.day')}}">{{ __('home.See all') }}</a></div>
+                            href="{{route('what.free.see.all', ['type' => TypeCoupon::FREE_TODAY])}}">{{ __('home.See all') }}</a>
+                    </div>
                 </div>
             </div>
             <div class="body row">
@@ -31,7 +32,8 @@
                 <div class="justify-content-between align-items-center d-flex mt-4 mb-2">
                     <div class="ac-text_content ">{{ __('home.Free with mission') }}</div>
                     <div class="flea-content-product"><a
-                            href="{{route('what.free.to.day')}}">{{ __('home.See all') }}</a></div>
+                            href="{{route('what.free.see.all', ['type' => TypeCoupon::FREE_MISSION])}}">{{ __('home.See all') }}</a>
+                    </div>
                 </div>
             </div>
             <div class="body row">
@@ -49,7 +51,8 @@
                 <div class="justify-content-between align-items-center d-flex mt-4 mb-2">
                     <div class="ac-text_content ">{{ __('home.Discounted sevice') }}</div>
                     <div class="flea-content-product"><a
-                            href="{{route('what.free.to.day')}}">{{ __('home.See all') }}</a></div>
+                            href="{{route('what.free.see.all', ['type' => TypeCoupon::DISCOUNT_SERVICE])}}">{{ __('home.See all') }}</a>
+                    </div>
                 </div>
             </div>
             <div class="body row">

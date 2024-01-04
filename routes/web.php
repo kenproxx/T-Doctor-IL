@@ -228,6 +228,7 @@ Route::middleware(['user.active'])->group(function () {
         Route::get('/detail/{id}', [WhatFreeToDay::class, 'detail'])->name('what.free.detail');
         Route::get('/campaign', [WhatFreeToDay::class, 'campaign'])->name('what.free.campaign');
 
+        Route::get('/see-all/{type}', [WhatFreeToDay::class, 'seeAll'])->name('what.free.see.all');
     });
 
     Route::group(['prefix' => 'address'], function () {

@@ -59,4 +59,17 @@ class WhatFreeToDay extends Controller
     {
         return view('What-free.my-campaign');
     }
+
+
+    public function seeAll($type)
+    {
+        $coupons = Coupon::where('status', CouponStatus::ACTIVE)
+            ->where('type', $type)
+            ->latest('created_at')
+            ->paginate(15);
+
+        return view('What-free.tab-see-all', compact('coupons'));
+    }
+
+
 }
