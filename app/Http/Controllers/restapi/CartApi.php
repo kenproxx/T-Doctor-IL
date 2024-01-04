@@ -23,6 +23,7 @@ class CartApi extends Controller
                 } else {
                     $products = ProductInfo::find($item->product_id);
                 }
+                $cart = (array)$item;
                 $cart['products'] = $products->toArray();
                 return $cart;
             });
