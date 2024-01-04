@@ -151,6 +151,21 @@ class AdminSurveyApi extends Controller
 
     public function update($id, Request $request)
     {
+//        try {
+//            $survey = Surveys::find($id);
+//            if (!$survey || $survey->status == SurveyStatus::DELETED) {
+//                return response((new MainApi())->returnMessage('Not found!'), 404);
+//            }
+//
+//            $survey = $this->save($request, $survey);
+//            $success = $survey->save();
+//            if ($success) {
+//                return response()->json($survey);
+//            }
+//            return response((new MainApi())->returnMessage('Update error!'), 400);
+//        } catch (Exception $exception) {
+//            return response((new MainApi())->returnMessage('Update error, Please try again!!!'), 400);
+//        }
 
         try {
             $survey = SurveyQuestion::find($id);
