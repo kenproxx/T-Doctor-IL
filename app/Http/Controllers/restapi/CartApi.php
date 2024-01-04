@@ -2,15 +2,30 @@
 
 namespace App\Http\Controllers\restapi;
 
+use App\Enums\TypeProductCart;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\online_medicine\ProductMedicine;
+use App\Models\ProductInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CartApi extends Controller
 {
     public function showCartByUserID($id)
     {
-        $carts = Cart::where('user_id', $id)->get();
+        $carts = DB::table('carts')
+            ->where('user_id', $id)
+            ->cursor()
+            ->map(function ($item) {
+                if ($item->type_product == TypeProductCart::MEDICINE) {
+                    $products = ProductMedicine::find($item->product_id);
+                } else {
+                    $products = ProductInfo::find($item->product_id);
+                }
+                $cart['products'] = $products->toArray();
+                return $cart;
+            });
         return response()->json($carts);
     }
 
@@ -56,7 +71,7 @@ class CartApi extends Controller
             $cart->quantity = $quantity;
             $success = $cart->save();
             if ($success) {
-                return response('Success!', 200);
+                return response((new MainApi())->returnMessage('Update success!'), 200);
             }
             return response('Error, Please try again!', 400);
         } catch (\Exception $exception) {
