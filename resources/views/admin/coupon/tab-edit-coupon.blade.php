@@ -1,3 +1,6 @@
+@php use App\Enums\TypeCoupon; @endphp
+@php use App\Enums\CouponStatus; @endphp
+@php use Illuminate\Support\Facades\Auth; @endphp
 @extends('layouts.admin')
 @section('title', 'List Coupon')
 @section('main-content')
@@ -64,14 +67,23 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <label for="startDate">{{ __('home.Thời gian bắt đầu') }}</label>
                 <input type="datetime-local" class="form-control" id="startDate" name="startDate"
                        value="{{ $coupon->startDate }}"></div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <label for="endDate">{{ __('home.Thời gian kết thúc') }}</label>
                 <input type="datetime-local" class="form-control" id="endDate" name="endDate"
                        value="{{ $coupon->endDate }}"></div>
+            <div class="col-sm-4">
+                <label for="endDate">{{ __('home.type') }}</label>
+                <select class="form-select" id="type" name="type">
+                    @foreach(TypeCoupon::getArray() as $value)
+                        <option
+                            {{ $coupon->type == $value ? 'selected' : '' }} value="{{ $value }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
@@ -88,16 +100,16 @@
             <div class="col-sm-4"><label for="status">{{ __('home.Trạng thái') }}</label>
                 <select class="form-select" id="status" name="status" {{ !$isAdmin ? 'disabled' : '' }}>
                     <option
-                        value="{{ \App\Enums\CouponStatus::ACTIVE }}" {{ $coupon->status === \App\Enums\CouponStatus::ACTIVE ? 'selected' : '' }}>
-                        {{ \App\Enums\CouponStatus::ACTIVE }}
+                        value="{{ CouponStatus::ACTIVE }}" {{ $coupon->status === CouponStatus::ACTIVE ? 'selected' : '' }}>
+                        {{ CouponStatus::ACTIVE }}
                     </option>
                     <option
-                        value="{{ \App\Enums\CouponStatus::INACTIVE }}" {{ $coupon->status === \App\Enums\CouponStatus::INACTIVE ? 'selected' : '' }}>
-                        {{ \App\Enums\CouponStatus::INACTIVE }}
+                        value="{{ CouponStatus::INACTIVE }}" {{ $coupon->status === CouponStatus::INACTIVE ? 'selected' : '' }}>
+                        {{ CouponStatus::INACTIVE }}
                     </option>
                     <option
-                        value="{{ \App\Enums\CouponStatus::PENDING }}" {{ $coupon->status === \App\Enums\CouponStatus::PENDING ? 'selected' : '' }}>
-                        {{ \App\Enums\CouponStatus::PENDING }}
+                        value="{{ CouponStatus::PENDING }}" {{ $coupon->status === CouponStatus::PENDING ? 'selected' : '' }}>
+                        {{ CouponStatus::PENDING }}
                     </option>
                 </select>
 
@@ -130,7 +142,7 @@
 
                 const fieldNames = [
                     "title", "title_en", "title_laos", "startDate", "endDate",
-                    "max_register", "status", "clinic_id"
+                    "max_register", "status", "clinic_id", 'type'
                 ];
 
                 const fieldTextareaTiny = [
@@ -138,7 +150,7 @@
                     "description", "description_en", "description_laos"
                 ];
 
-                let item =  $('#max_register');
+                let item = $('#max_register');
                 let quantity = item.val();
                 if (quantity < 1) {
                     quantity = 1;
@@ -157,10 +169,10 @@
                     formData.append(fieldTextarea, content);
                 });
 
-                formData.append("user_id", '{{ \Illuminate\Support\Facades\Auth::user()->id }}');
+                formData.append("user_id", '{{ Auth::user()->id }}');
                 formData.append("thumbnail", $('#thumbnail')[0].files[0]);
 
-                if (isValid){
+                if (isValid) {
                     try {
                         $.ajax({
                             url: `{{route('api.backend.coupons.update', ['id' => $coupon->id])}}`,
@@ -205,7 +217,7 @@
                 const data = await response.json();
                 data.forEach(item => {
                     let select = ``;
-                    if (item.id == clinic_id){
+                    if (item.id == clinic_id) {
                         select = `selected`;
                     }
                     html += `<option ${select} value="${item.id}">${item.name}</option>`

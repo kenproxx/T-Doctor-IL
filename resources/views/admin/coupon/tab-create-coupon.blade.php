@@ -1,5 +1,5 @@
 @php use App\Enums\CouponStatus; @endphp
-@php use Illuminate\Support\Facades\Auth; @endphp
+@php use App\Enums\TypeCoupon;use Illuminate\Support\Facades\Auth; @endphp
 @extends('layouts.admin')
 @section('title', 'List Coupon')
 @section('main-content')
@@ -60,12 +60,20 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <label for="startDate">{{ __('home.Thời gian bắt đầu') }}</label>
                 <input type="datetime-local" class="form-control" id="startDate" name="startDate"></div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <label for="endDate">{{ __('home.Thời gian kết thúc') }}</label>
                 <input type="datetime-local" class="form-control" id="endDate" name="endDate"></div>
+            <div class="col-sm-4">
+                <label for="endDate">{{ __('home.type') }}</label>
+                <select class="form-select" id="type" name="type">
+                    @foreach(TypeCoupon::getArray() as $value)
+                        <option value="{{ $value }}">{{ $value }}</option>
+                    @endforeach
+                </select>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
@@ -93,7 +101,8 @@
                     <div class="js--image-preview"></div>
                     <div class="upload-options">
                         <label>
-                            <input type="file" class="image-upload" accept="image/*" id="thumbnail" name="thumbnail"/>
+                            <input type="file" class="image-upload" accept="image/*" id="thumbnail"
+                                   name="thumbnail"/>
                         </label>
                     </div>
                 </div>
@@ -112,14 +121,14 @@
 
                 const fieldNames = [
                     "title", "title_en", "title_laos", "startDate", "endDate",
-                    "max_register", "clinic_id"
+                    "max_register", "clinic_id", 'type'
                 ];
                 const fieldTextareaTiny = [
                     "short_description", "short_description_en", "short_description_laos",
                     "description", "description_en", "description_laos"
                 ];
 
-                let item =  $('#max_register');
+                let item = $('#max_register');
                 let quantity = item.val();
                 if (quantity < 1) {
                     quantity = 1;
