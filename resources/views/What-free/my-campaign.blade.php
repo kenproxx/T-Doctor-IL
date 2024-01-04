@@ -8,17 +8,21 @@
             <div class="col-md-12 medicine-list--item">
                 <ul class="nav nav-tabs row tabMystore col-md-6" role="tablist">
                     <li class="nav-item col-4">
-                        <a class="nav-link active" id="productList-tab" data-toggle="tab" href="#productList" role="tab" aria-controls="home" aria-selected="true">{{ __('home.My campaign') }}</a>
+                        <a class="nav-link active" id="productList-tab" data-toggle="tab" href="#productList" role="tab"
+                           aria-controls="home" aria-selected="true">{{ __('home.My campaign') }}</a>
                     </li>
                     <li class="nav-item col-4">
-                        <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="profile" aria-selected="false">{{ __('home.Interested campaign') }}</a>
+                        <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab"
+                           aria-controls="profile" aria-selected="false">{{ __('home.Interested campaign') }}</a>
                     </li>
                     <li class="nav-item col-4">
-                        <a class="nav-link" id="wishList-tab" data-toggle="tab" href="#wishList" role="tab" aria-controls="contact" aria-selected="false">{{ __('home.My SNS') }}</a>
+                        <a class="nav-link" id="wishList-tab" data-toggle="tab" href="#wishList" role="tab"
+                           aria-controls="contact" aria-selected="false">{{ __('home.My SNS') }}</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="productList" role="tabpanel" aria-labelledby="productList-tab">
+                    <div class="tab-pane fade show active" id="productList" role="tabpanel"
+                         aria-labelledby="productList-tab">
                         <div class="page row">
                             @for($i = 0; $i < 12; $i++)
                                 <div class="col-md-4 col-6 item">

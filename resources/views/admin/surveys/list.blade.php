@@ -10,20 +10,16 @@
         <tr>
             <th scope="col">#</th>
             <th scope="col">Question</th>
-            <th scope="col">{{ __('home.Description') }}</th>
             <th scope="col">{{ __('home.Department') }}</th>
             <th scope="col">{{ __('home.type') }}</th>
-            <th scope="col">{{ __('home.Username') }}</th>
-            <th scope="col">{{ __('home.Status') }}</th>
             <th scope="col">{{ __('home.Action') }}</th>
         </tr>
         </thead>
         <tbody id="tbodyTableSurveyManagement">
-        @foreach($surveys as $survey)
+        @foreach($surveys as $index => $survey)
             <tr>
-                <th scope="row">{{ $loop->index + 1 }}</th>
+                <th scope="row">{{ ++$index }}</th>
                 <td>{{ $survey->question }}</td>
-                <td>{{ $survey->description }}</td>
                 <td>
                     @php
                         $department = \App\Models\Department::find($survey->department_id);
@@ -31,13 +27,7 @@
                     {{ $department->name }}
                 </td>
                 <td>{{ $survey->type }}</td>
-                <td>
-                    @php
-                        $created = \App\Models\User::find($survey->user_id);
-                    @endphp
-                    {{ $created->username }}
-                </td>
-                <td>{{ $survey->status }}</td>
+
                 <td>
                     <div class="d-flex align-items-center">
                         <a href="{{ route('view.admin.surveys.detail', $survey->id) }}" class="btn btn-primary">
