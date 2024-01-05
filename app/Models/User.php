@@ -12,44 +12,15 @@ class User extends Authenticatable implements JWTSubject
     use HasFactory, Notifiable;
 
     /**
-     * @var \Illuminate\Support\HigherOrderCollectionProxy|mixed
-     */
-    public mixed $medical_history;
-    /**
-     * @var \Illuminate\Support\HigherOrderCollectionProxy|mixed
-     */
-    public mixed $nation_id;
-    /**
-     * @var \Illuminate\Support\HigherOrderCollectionProxy|mixed
-     */
-    public mixed $province_id;
-    /**
-     * @var \Illuminate\Support\HigherOrderCollectionProxy|mixed
-     */
-    public mixed $district_id;
-    /**
-     * @var \Illuminate\Support\HigherOrderCollectionProxy|mixed
-     */
-    public mixed $commune_id;
-    /**
-     * @var \Illuminate\Support\HigherOrderCollectionProxy|mixed
-     */
-    public mixed $gender;
-    /**
-     * @var \Illuminate\Support\HigherOrderCollectionProxy|mixed
-     */
-    public mixed $birthday;
-
-    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'last_name', 'email', 'password','medical_history','nation_id','province_id','district_id',
+        'name', 'last_name', 'email', 'password',
         'username', 'phone', 'address_code', 'status', 'type',
         'provider_id', 'provider_name', 'prescription', 'free', 'abouts', 'abouts_en', 'abouts_lao', 'workspace',
-        'last_seen','commune_id','gender','birthday'
+        'last_seen'
     ];
 
     /**
