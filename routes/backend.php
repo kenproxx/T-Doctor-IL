@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\BackendCouponApplyController;
 use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\restapi\AddressApi;
 use App\Http\Controllers\restapi\BookingApi;
 use App\Http\Controllers\restapi\BusinessFavouriteApi;
 use App\Http\Controllers\restapi\CartApi;
@@ -37,8 +38,6 @@ Route::group(['prefix' => 'questions'], function () {
         [BackendQuestionController::class, 'upgradeStatus'])->name('api.backend.questions.change.status');
     Route::put('/update/{id}', [BackendQuestionController::class, 'update'])->name('api.backend.questions.update');
     Route::delete('/delete/{id}', [BackendQuestionController::class, 'delete'])->name('api.backend.questions.delete');
-    Route::delete('/delete-list',
-        [BackendQuestionController::class, 'deleteMultil'])->name('api.backend.questions.delete.list');
 });
 
 Route::group(['prefix' => 'coupons-apply'], function () {
@@ -115,7 +114,17 @@ Route::group(['prefix' => 'carts'], function () {
     Route::delete('clear/{id}', [CartApi::class, 'clearCart'])->name('api.backend.cart.clear');
 });
 
+/* Checkout api */
 Route::group(['prefix' => 'checkout'], function () {
     Route::post('imm', [CheckoutApi::class, 'checkoutByImm']);
     Route::get('return-vnpay', [CheckoutApi::class, 'returnCheckoutVNPay']);
+});
+
+/* Address api */
+Route::group(['prefix' => 'address-order'], function () {
+    Route::get('user/{id}', [AddressApi::class, 'getListByUserID'])->name('api.backend.address.order.user');
+    Route::get('detail/{id}', [AddressApi::class, 'detail'])->name('api.backend.address.order.detail');
+    Route::post('create', [AddressApi::class, 'create'])->name('api.backend.address.order.create');
+    Route::put('update/{id}', [AddressApi::class, 'update'])->name('api.backend.address.order.update');
+    Route::delete('delete/{id}', [AddressApi::class, 'delete'])->name('api.backend.address.order.delete');
 });
