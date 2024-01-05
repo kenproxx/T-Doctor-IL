@@ -1,4 +1,4 @@
-@php use App\Enums\SurveyType; @endphp
+@php use App\Enums\SurveyType;  $answerIds = [];@endphp
 @extends('layouts.admin')
 @section('title')
     Detail Survey
@@ -137,11 +137,12 @@
                                         <span>Ans {{ ++$index }}</span>
                                         <input type="text" value="{{ $answer->answer }}">
                                     </label>
-                                    <a href="javascript:void(0)" class="del">del</a>
                                 </div>
+                                @php
+                                    array_push($answerIds, $answer->id);
+                                @endphp
                             @endforeach
                         </div>
-
                     </div>
                     <div class="form-group col-md-4">
                         <label for="answer_en">Answer En</label>
@@ -154,7 +155,6 @@
                                         <span>Ans {{ ++$index }}</span>
                                         <input type="text" value="{{ $answer->answer_en }}">
                                     </label>
-                                    <a href="javascript:void(0)" class="del">del</a>
                                 </div>
                             @endforeach
                         </div>
@@ -170,7 +170,6 @@
                                         <span>Ans {{ ++$index }}</span>
                                         <input type="text" value="{{ $answer->answer_laos }}">
                                     </label>
-                                    <a href="javascript:void(0)" class="del">del</a>
                                 </div>
                             @endforeach
                         </div>
@@ -191,6 +190,8 @@
             "Authorization": accessToken
         };
         const maxAnswer = 10;
+
+        let arrayAnswerId = @json($answerIds)
 
         async function updateSurvey() {
 
@@ -226,6 +227,7 @@
             formData.append("answer_vi", answer_vi);
             formData.append("answer_en", answer_en);
             formData.append("answer_laos", answer_laos);
+            formData.append("arrayAnswerId", arrayAnswerId);
 
             if (!isValid) {
                 alert('Please check input require!')

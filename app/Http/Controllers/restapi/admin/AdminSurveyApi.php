@@ -124,9 +124,11 @@ class AdminSurveyApi extends Controller
             }
 
             $surveyId = $survey->id;
-            SurveyAnswer::where('survey_question_id', $surveyId)->delete();
+
+            $arrayAnswerID = explode(',', $request->input('arrayAnswerId'));
 
             if ($params['type'] == SurveyType::TEXT) {
+                SurveyAnswer::where('survey_question_id', $surveyId)->delete();
                 return response()->json($survey);
             }
 
@@ -136,14 +138,17 @@ class AdminSurveyApi extends Controller
             $arrAnswer_en = explode($symbol, $request->input('answer_en'));
             $arrAnswer_laos = explode($symbol, $request->input('answer_laos'));
 
-            // delete old answer
-
             for ($i = 0; $i < count($arrAnswer_vi); $i++) {
                 if ($arrAnswer_vi[$i] == '' || $arrAnswer_en[$i] == '' || $arrAnswer_laos[$i] == '') {
                     continue;
                 }
 
-                $answer = new SurveyAnswer();
+                if (array_key_exists($i, $arrayAnswerID) && $arrayAnswerID[$i]) {
+                    $answer = SurveyAnswer::find($arrayAnswerID[$i]);
+                } else {
+                    $answer = new SurveyAnswer();
+                }
+
                 $answer->survey_question_id = $surveyId;
                 $answer->answer = $arrAnswer_vi[$i];
                 $answer->answer_en = $arrAnswer_en[$i];
