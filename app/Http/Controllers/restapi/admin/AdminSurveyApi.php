@@ -10,6 +10,7 @@ use App\Http\Controllers\restapi\MainApi;
 use App\Http\Controllers\restapi\SurveyApi;
 use App\Models\Department;
 use App\Models\SurveyAnswer;
+use App\Models\SurveyAnswerUser;
 use App\Models\SurveyQuestion;
 use App\Models\Surveys;
 use Exception;
@@ -74,6 +75,10 @@ class AdminSurveyApi extends Controller
                 return response((new MainApi())->returnMessage('Create error, Please try again!!!'), 400);
             }
 
+            if ($params['type'] == SurveyType::TEXT) {
+                return response()->json($survey);
+            }
+
             $surveyId = $survey->id;
 
             $symbol = '@#!';
@@ -98,57 +103,6 @@ class AdminSurveyApi extends Controller
 
     }
 
-    private function save($request, $survey)
-    {
-        $question = $request->input('question');
-        $question_en = $request->input('question_en');
-        $question_laos = $request->input('question_laos');
-
-        if ($request->hasFile('thumbnail')) {
-            $item = $request->file('thumbnail');
-            $itemPath = $item->store('surveys', 'public');
-            $thumbnail = asset('storage/'.$itemPath);
-        } else {
-            $thumbnail = $survey->thumbnail;
-        }
-
-        $description = $request->input('description') ?? '';
-        $description_en = $request->input('description_en') ?? '';
-        $description_laos = $request->input('description_laos') ?? '';
-
-        $answer = $request->input('answer') ?? '';
-        $answer_en = $request->input('answer_en') ?? '';
-        $answer_laos = $request->input('answer_laos') ?? '';
-
-        $status = $request->input('status');
-        $type = $request->input('type');
-
-        $user_id = $request->input('user_id');
-        $department_id = $request->input('department_id');
-
-        $survey->question = $question;
-        $survey->question_en = $question_en;
-        $survey->question_laos = $question_laos;
-
-        $survey->description = $description;
-        $survey->description_en = $description_en;
-        $survey->description_laos = $description_laos;
-
-        $survey->answer = $answer;
-        $survey->answer_en = $answer_en;
-        $survey->answer_laos = $answer_laos;
-
-        $survey->thumbnail = $thumbnail;
-
-        $survey->status = $status ?? SurveyStatus::ACTIVE;
-        $survey->type = $type ?? SurveyType::BOOL;
-
-        $survey->user_id = $user_id;
-        $survey->department_id = $department_id;
-
-        return $survey;
-    }
-
     public function update($id, Request $request)
     {
 
@@ -170,6 +124,11 @@ class AdminSurveyApi extends Controller
             }
 
             $surveyId = $survey->id;
+            SurveyAnswer::where('survey_question_id', $surveyId)->delete();
+
+            if ($params['type'] == SurveyType::TEXT) {
+                return response()->json($survey);
+            }
 
             $symbol = '@#!';
 
@@ -178,7 +137,6 @@ class AdminSurveyApi extends Controller
             $arrAnswer_laos = explode($symbol, $request->input('answer_laos'));
 
             // delete old answer
-            SurveyAnswer::where('survey_question_id', $surveyId)->delete();
 
             for ($i = 0; $i < count($arrAnswer_vi); $i++) {
                 if ($arrAnswer_vi[$i] == '' || $arrAnswer_en[$i] == '' || $arrAnswer_laos[$i] == '') {
@@ -209,5 +167,26 @@ class AdminSurveyApi extends Controller
         } catch (Exception $exception) {
             return response((new MainApi())->returnMessage('Delete error, Please try again!!!'), 400);
         }
+    }
+
+    public function handleFormSurvey(Request $request)
+    {
+        foreach ($request->all() as $value) {
+            if (!array_key_exists('booking_id', $value)) {
+                return response((new MainApi())->returnMessage('Không có booking id!!!'), 400);
+            }
+            if (!array_key_exists('user_id', $value)) {
+                continue;
+            }
+            if (!array_key_exists('result', $value)) {
+                continue;
+            }
+            $survey_answer = new SurveyAnswerUser();
+            $survey_answer->result = $value['result'];
+            $survey_answer->user_id = $value['user_id'];
+            $survey_answer->booking_id = $value['booking_id'];
+            $survey_answer->save();
+        }
+        return response((new MainApi())->returnMessage('Success!!!'), 200);
     }
 }
