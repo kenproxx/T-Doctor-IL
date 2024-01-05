@@ -11,12 +11,12 @@
                     } else {
                              $info = \App\Models\User::where('id', $id)->first();
                     }
-                        $address = DB::table('provinces')->where('code_name', $info->address_code)->first();
+                    $address = \App\Models\Province::where('id', $info->province_id)->value('name');
                 @endphp
                 <div class="name font-18-mobi">{{$info->name}} {{$info->last_name}}</div>
                 <p class="location-info font-14-mobi">{{ __('home.Location') }}: <strong class="hanoi font-14-mobi">
                         @if(!empty($address))
-                            {{$address->name}}
+                            {{$address}}
                         @else
                             {{ __('home.null') }}
                         @endif
