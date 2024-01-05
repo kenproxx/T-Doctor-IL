@@ -46,8 +46,9 @@ class SurveyController extends Controller
 
     public function getQuestionByDepartment($departmentId)
     {
-        $questions = SurveyQuestion::where('department_id',
-            $departmentId)->with('survey_answers') // Eager load the survey_answers relationship
+        $questions = SurveyQuestion::where('department_id', $departmentId)
+            ->orWhereIn('department_id', explode(',', $departmentId))
+            ->with('survey_answers') // Eager load the survey_answers relationship
             ->get();
         return response()->json($questions);
     }
@@ -56,10 +57,10 @@ class SurveyController extends Controller
     public function getAnswerByUser($question_id, $user_id)
     {
         $answer = SurveyQuestion::where('id', $question_id)->with([
-                'survey_answers' => function ($query) use ($user_id) {
-                    $query->where('user_id', $user_id);
-                }
-            ])->first();
+            'survey_answers' => function ($query) use ($user_id) {
+                $query->where('user_id', $user_id);
+            }
+        ])->first();
         return response()->json($answer);
     }
 
