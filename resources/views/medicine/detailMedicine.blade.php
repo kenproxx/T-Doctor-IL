@@ -19,16 +19,14 @@
                 <div class="col-md-10"></div>
                 <div class="medicine-search--center col-md-2">
                     @if(Auth::check())
-                        @if($isMedical)
-                            <button type="button" data-toggle="modal" data-target="#modalCart"
-                                    class="shopping-bag float-right">
-                                <i class="fa-solid fa-bag-shopping"></i>
-                                @if($carts && count($carts) > 0)
-                                    <div class="text-wrapper"> {{ count($carts) }}</div>
-                                @endif
-                            </button>
-                            @include('component.modal-cart')
-                        @endif
+                        <button type="button" data-toggle="modal" data-target="#modalCart"
+                                class="shopping-bag float-right">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                            @if($carts && count($carts) > 0)
+                                <div class="text-wrapper"> {{ count($carts) }}</div>
+                            @endif
+                        </button>
+                        @include('component.modal-cart')
                     @endif
 
                 </div>
@@ -57,7 +55,8 @@
                     <div class="product-details">
                         <div class="body">
                             <p class="text-wrapper">{{ $medicine->name }}</p>
-                            <div class="price">{{number_format($medicine->price, 0, ',', '.') }} {{$medicine->price_unit ?? 'VND'}}</div>
+                            <div
+                                class="price">{{number_format($medicine->price, 0, ',', '.') }} {{$medicine->price_unit ?? 'VND'}}</div>
                             <div class="brand-name d-flex">
                                 <div class="text-wrapper-2">{{ __('home.Location') }}:</div>
                                 @php
@@ -90,17 +89,23 @@
                         <div class="row">
                             <div class="col-6  d-flex align-center justify-center">
                                 @if(Auth::user() == null || Auth::user()->id != $prMedicine->user_id)
-                                    <a href="{{route('flea.market.product.shop.info',$prMedicine->user_id)}}" class="button-visitStore btn btn-secondary w-100 d-flex align-center justify-center">
+                                    <a href="{{route('flea.market.product.shop.info',$prMedicine->user_id)}}"
+                                       class="button-visitStore btn btn-secondary w-100 d-flex align-center justify-center">
                                         {{ __('home.Visit store') }}
                                     </a>
                                 @else
-                                    <a href="{{route('flea.market.my.store')}}" class="button-visitStore btn btn-secondary w-100 d-flex align-center justify-center">
+                                    <a href="{{route('flea.market.my.store')}}"
+                                       class="button-visitStore btn btn-secondary w-100 d-flex align-center justify-center">
                                         {{ __('home.My store') }}
                                     </a>
                                 @endif
                             </div>
                             <div class="col-6">
-                                <button id="btnBuyNow" class=" button-buyNow btn btn-primary w-100">{{ __('home.Buy now') }}</button>
+                                @if(Auth::check())
+                                    <button id="btnBuyNow" class=" button-buyNow btn btn-primary w-100">{{ __('home.Buy now') }}</button>
+                                @else
+                                    <button onclick="alertLogin();" class=" button-buyNow btn btn-primary w-100">{{ __('home.Buy now') }}</button>
+                                @endif
                             </div>
                         </div>
                     </div>
