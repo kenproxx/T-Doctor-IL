@@ -1,4 +1,4 @@
-@php use App\Enums\NewEventStatus;use App\Models\NewEvent;use App\Models\Province;
+@php use App\Enums\NewEventStatus;use App\Models\NewEvent;use App\Models\Province;use App\Models\User;
 
 @endphp
 @extends('layouts.master')
@@ -338,7 +338,12 @@
                                                     </div>
                                                     <div class="price-pro">
                                                         @php
-                                                            $addressP = \App\Models\Province::where('id', $doctor->province_id)->value('name');
+                                                        if ($doctor->province_id == null) {
+                                                            $addressP = 'Ha Noi';
+                                                            }
+                                                        else {
+                                                            $addressP = Province::find($doctor->province_id)->name;
+                                                            }
                                                         @endphp
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
                                                             <g clip-path="url(#clip0_5506_14919)">
@@ -349,7 +354,8 @@
                                                                     <rect width="20" height="20" fill="white" transform="translate(0.5 0.933594)"/>
                                                                 </clipPath>
                                                             </defs>
-                                                        </svg> &nbsp; {{$addressP}}
+                                                        </svg> &nbsp;
+                                                        {{$addressP}}
                                                     </div>
                                                     <div class="price-pro">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 21 21" fill="none">
