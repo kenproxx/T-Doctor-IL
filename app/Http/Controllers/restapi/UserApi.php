@@ -175,6 +175,7 @@ class UserApi extends Controller
             $birthday = $request->input('birthday');
 
             $user = User::find($userID);
+
             if ($userID && $user && $user->status == UserStatus::ACTIVE) {
                 $user->name = $name;
                 $user->last_name = $last_name;
@@ -199,7 +200,6 @@ class UserApi extends Controller
                     }
                     $user->username = $username;
                 }
-
                 $user->phone = $phone_number;
                 $user->medical_history = $medical_history;
 

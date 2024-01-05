@@ -25,6 +25,10 @@ p {
   min-height: 50px;
 }
 
+.mobile-hidden .justify-content-start a:hover {
+  color: var(--secon1, #45C3D2);
+}
+
 .container .mt-70 {
   margin-top: 70px;
 }
@@ -169,7 +173,7 @@ p {
 
 .flea-button {
   display: flex;
-  padding: 6px 16px;
+  padding: 4px 12px;
   justify-content: center;
   align-items: center;
   gap: 10px;

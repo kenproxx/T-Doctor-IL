@@ -25,7 +25,7 @@
     <div class="medicine container">
         <div class="row medicine-search">
             <div class="medicine-search--left col-md-3 d-flex justify-content-around">
-                <div class="title">
+                <div class="title pl-0 col-md-5">
                     <select class="form-select" id="category_id" name="category_id"
                             onchange="categoryFilterMedicine(this.value)">
                         <option value="">{{ __('home.Category') }}</option>
@@ -36,7 +36,7 @@
                         @endif
                     </select>
                 </div>
-                <div class="title">
+                <div class="title pr-0 col-md-7">
                     <select class="form-select" id="category_id" name="category_id"
                             onchange="locationFilterMedicine(this.value)">
                         <option value="">{{ __('home.Location') }}</option>

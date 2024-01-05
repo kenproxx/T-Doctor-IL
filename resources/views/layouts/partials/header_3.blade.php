@@ -29,14 +29,13 @@
             <div class="col-md-2 header-detail--right d-flex">
                 <div class="header-right d-flex align-items-center w-100">
                     @if(Auth::check())
-                        <div class="dropdown col-md-6">
-                            <div class="d-flex dropdown-toggle justify-content-between" type="button"
+                        <div class="dropdown col-md-6 p-0">
+                            <div class="d-flex dropdown-toggle justify-content-between overflow-hidden" type="button"
                                  data-toggle="dropdown"
                                  aria-expanded="false">
                                 <div class="d-flex align-items-center mr-2">
                                     {{Auth::user()->username}}
                                 </div>
-                                <img src="{{asset('img/user-circle.png')}}" alt="">
                             </div>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item"
@@ -45,7 +44,7 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="option">
+                            <div class="option p-2">
                                 <a href="{{ route('examination.mentoring.create') }}">{{ __('home.Ask a question') }}</a>
                             </div>
                         </div>
@@ -82,7 +81,7 @@
                                      data-toggle="dropdown"
                                      aria-expanded="false">
                                     <div class="d-flex align-items-center mr-2">
-                                        {{Auth::user()->username}}
+                                        {{Auth::user()->name}}
                                     </div>
                                     <img src="{{asset('img/user-circle.png')}}">
                                 </div>
