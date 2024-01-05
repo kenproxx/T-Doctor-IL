@@ -269,7 +269,7 @@
                     console.log(content)
                 });
                 formData.append("ads_period", (selectedValue));
-                formData.append("user_id", {{Auth::user()->id}});
+                formData.append("user_id", {{Auth::user()->id ?? ''}});
                 let photo = '';
                 var filedata = document.getElementById("gallery");
                 var i = 0, len = filedata.files.length, img, reader, file;

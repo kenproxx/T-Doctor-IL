@@ -343,12 +343,12 @@
                                         <div class="form-element">
                                             <label for="member">{{ __('home.Member') }}</label>
                                             <select id="member" name="member" class="form-select">
-                                                <option value="{{Role::PAITENTS }}">{{ __('home.PAITENTS') }}</option>
-                                                <option value="{{Role::NORMAL_PEOPLE }}">{{ __('home.NORMAL PEOPLE') }}
-                                                </option>
+{{--                                                <option value="{{Role::PAITENTS }}">{{ __('home.PAITENTS') }}</option>--}}
+{{--                                                <option value="{{Role::NORMAL_PEOPLE }}">{{ __('home.NORMAL PEOPLE') }}--}}
+{{--                                                </option>--}}
                                             </select>
                                         </div>
-                                        <div class="form-elementt" id="element-normal" style="display: none;">
+                                        <div class="form-elementt m-16" id="element-normal" style="display: none;">
                                             <div>
                                                 <label for="medical_history">{{ __('home.Tiền sử bệnh án') }}</label>
                                                 <textarea id="medical_history" name="medical_history"

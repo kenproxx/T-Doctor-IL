@@ -103,7 +103,7 @@
                     height: 100%;
                     object-fit: cover;
                     position: relative;
-                    z-index: 1; /* Đặt z-index để hình phía trước hiển thị phía trên */
+                    z-index: 0;
                     transition: transform 0.5s;
 
                     &:hover {

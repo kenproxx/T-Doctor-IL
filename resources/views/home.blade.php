@@ -377,7 +377,7 @@
                 </div>
                 <div class="tab-pane fade" id="findMedicine" role="tabpanel" aria-labelledby="findMedicine-tab">
                     <div class="row">
-                        @if($medicine == '')
+                        @if($medicines == '')
                             <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                         @else
                             @foreach($medicines as $medicine)

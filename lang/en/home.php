@@ -32,6 +32,7 @@ return [
     'Find a doctor' => 'Find a doctor',
     'Find my medicine' => 'Find my medicine',
     'Mentoring' => 'Mentoring',
+    'Tiền sử bệnh án' => 'Medical history',
     'Location' => 'Location',
     'Working time' => 'Working time',
     'Previous' => 'Previous',

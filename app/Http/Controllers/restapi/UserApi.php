@@ -160,6 +160,7 @@ class UserApi extends Controller
             $username = $request->input('username');
 
             $email = $request->input('email');
+            $medical_history = $request->input('medical_history');
             $phone_number = $request->input('phone_number');
             $current_password = $request->input('current_password');
             $new_password = $request->input('new_password');
@@ -200,6 +201,7 @@ class UserApi extends Controller
                 }
 
                 $user->phone = $phone_number;
+                $user->medical_history = $medical_history;
 
                 if ($current_password || $new_password || $confirm_password) {
                     $oldPassword = $user->password;

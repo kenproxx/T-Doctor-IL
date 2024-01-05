@@ -37,10 +37,7 @@ class HomeController extends Controller
             ->leftJoin('provinces', 'provinces.id', '=', 'users.province_id')
             ->select('product_medicines.*', 'provinces.name as location_name')
             ->paginate(15);
-        foreach ($medicines as $medicine) {
-
-        }
-        return view('home', compact('coupons', 'products', 'medicines', 'medicine'));
+        return view('home', compact('coupons', 'products', 'medicines'));
     }
 
     public function admin()

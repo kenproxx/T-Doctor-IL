@@ -116,7 +116,7 @@
                                     <a href="${url}">${item.name}</a>
                                 </div>
                                 <div class="location-pro d-flex">
-                                    Location: <p>${item.province_id}</p>
+                                    Location: <p>${item.province_name}</p>
                                 </div>
                                 <div class="price-pro">
                                     ${formatCurrency(item.price)} ${item.price_unit ?? 'VND'}
