@@ -17,6 +17,7 @@ class AdminOrderApi extends Controller
     public function getAll(Request $request)
     {
         $userID = $request->input('user_id');
+        $status = $request->input('status');
         if (!$userID) {
             return response('UserID not found', 400);
         }
@@ -30,6 +31,9 @@ class AdminOrderApi extends Controller
         if ($isAdmin) {
             $orders = DB::table('orders')
                 ->where('status', '!=', OrderStatus::DELETED)
+                ->when($status, function ($query) use ($status) {
+                    $query->where('status', $status);
+                })
                 ->orderBy('id', 'desc')
                 ->cursor()
                 ->map(function ($item) {
@@ -42,24 +46,47 @@ class AdminOrderApi extends Controller
                     return $order;
                 });
         } else {
-            $orders1 = DB::table('orders')
-                ->join('order_items', 'order_items.order_id', '=', 'orders.id')
-                ->join('product_medicines', 'order_items.product_id', '=', 'product_medicines.id')
-                ->where('product_medicines.user_id', $userID)
-                ->where('orders.type_product', TypeProductCart::MEDICINE)
-                ->where('orders.status', '!=', OrderStatus::DELETED)
-                ->select('orders.*')
-                ->get();
+            if ($status) {
+                $orders1 = DB::table('orders')
+                    ->join('order_items', 'order_items.order_id', '=', 'orders.id')
+                    ->join('product_medicines', 'order_items.product_id', '=', 'product_medicines.id')
+                    ->where('product_medicines.user_id', $userID)
+                    ->where('orders.type_product', TypeProductCart::MEDICINE)
+                    ->where('orders.status', '!=', OrderStatus::DELETED)
+                    ->where('orders.status', '=', $status)
+                    ->select('orders.*')
+                    ->get();
 
-            $orders2 = DB::table('orders')
-                ->join('order_items', 'order_items.order_id', '=', 'orders.id')
-                ->join('product_infos', 'order_items.product_id', '=', 'product_infos.id')
-                ->where('orders.type_product', TypeProductCart::FLEA_MARKET)
-                ->where('product_infos.created_by', $userID)
-                ->where('orders.status', '!=', OrderStatus::DELETED)
-                ->select('orders.*')
-                ->get();
+                $orders2 = DB::table('orders')
+                    ->join('order_items', 'order_items.order_id', '=', 'orders.id')
+                    ->join('product_infos', 'order_items.product_id', '=', 'product_infos.id')
+                    ->where('orders.type_product', TypeProductCart::FLEA_MARKET)
+                    ->where('product_infos.created_by', $userID)
+                    ->where('orders.status', '!=', OrderStatus::DELETED)
+                    ->where('orders.status', '=', $status)
+                    ->select('orders.*')
+                    ->get();
 
+            } else {
+                $orders1 = DB::table('orders')
+                    ->join('order_items', 'order_items.order_id', '=', 'orders.id')
+                    ->join('product_medicines', 'order_items.product_id', '=', 'product_medicines.id')
+                    ->where('product_medicines.user_id', $userID)
+                    ->where('orders.type_product', TypeProductCart::MEDICINE)
+                    ->where('orders.status', '!=', OrderStatus::DELETED)
+                    ->select('orders.*')
+                    ->get();
+
+                $orders2 = DB::table('orders')
+                    ->join('order_items', 'order_items.order_id', '=', 'orders.id')
+                    ->join('product_infos', 'order_items.product_id', '=', 'product_infos.id')
+                    ->where('orders.type_product', TypeProductCart::FLEA_MARKET)
+                    ->where('product_infos.created_by', $userID)
+                    ->where('orders.status', '!=', OrderStatus::DELETED)
+                    ->select('orders.*')
+                    ->get();
+
+            }
             $mergedOrders = $orders1->merge($orders2);
             $orders = $mergedOrders->toArray();
         }
