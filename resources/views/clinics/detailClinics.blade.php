@@ -319,7 +319,21 @@
         $(document).ready(function () {
             $(document).on('click', '#modalToggle', function () {
                 let service = localStorage.getItem('services');
-                // console.log(service)
+                var html = `<form method="post" action="{{route('clinic.booking.store')}}" class="p-3">
+            @csrf
+                <button id="modalToggleQuestion" data-toggle="modal" data-target="#exampleModal"
+                                class="w-100 btn btn-secondary border-button-address font-weight-800 fs-14 justify-content-center"
+                                >{{ __('home.Booking') }}
+                </button>
+                  </form>`;
+                $('#modalBooking').empty().append(html);
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '#modalToggleQuestion', function () {
+                let service = localStorage.getItem('services');
                 var html = `<form method="post" action="{{route('clinic.booking.store')}}" class="p-3">
             @csrf
                 <div class="fs-18px justify-content-start d-flex mb-md-4 mt-2">
