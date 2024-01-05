@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\restapi;
 
 use App\Enums\BookingStatus;
+use App\Enums\SurveyType;
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Clinic;
+use App\Models\SurveyAnswer;
+use App\Models\SurveyAnswerUser;
+use App\Models\SurveyQuestion;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -57,45 +61,93 @@ class BookingApi extends Controller
         return response()->json($booking);
     }
 
-    public function getAllBookingByUserId($id, $status,  Request $request)
+    public function getAllBookingByUserId($id, $status, Request $request)
     {
         $user = User::find($id);
 
-        if ($user) {
-            $roleNames = $user->roles->pluck('name')->toArray();
+        if (!$user) {
+            return response()->json(['error' => 'User not found'], 400);
+        }
+        $roleNames = $user->roles->pluck('name')->toArray();
 
-            $desiredRoles = ['CLINICS', 'HOSPITALS'];
+        $desiredRoles = ['CLINICS', 'HOSPITALS'];
 
-            $intersection = array_intersect($roleNames, $desiredRoles);
+        $intersection = array_intersect($roleNames, $desiredRoles);
 
-            if (!empty($intersection)) {
-                $myData  = Clinic::where('user_id', $id)->get();
+        if (!empty($intersection)) {
+            $myData = Clinic::where('user_id', $id)->get();
 
-                if ($myData->isNotEmpty()) {
-                    $clinicIds = $myData->pluck('id')->toArray();
+            if ($myData->isNotEmpty()) {
+                $clinicIds = $myData->pluck('id')->toArray();
 
-                    $otherClinics = Booking::whereIn('clinic_id', $clinicIds)->get();
+                $otherClinics = Booking::whereIn('clinic_id', $clinicIds)->get();
 
-                    foreach ($otherClinics as $clinic) {
-                        $arrayBooking = null;
-                        $arrayBooking = $clinic->toArray();
-                        $arrayBooking['time_convert_checkin'] = date('Y-m-d H:i:s', strtotime($clinic->check_in));
-                        $arrayBookings[] = $arrayBooking;
+                foreach ($otherClinics as $clinic) {
+                    $arrayBooking = null;
+                    $arrayBooking = $clinic->toArray();
+                    $arrayBooking['time_convert_checkin'] = date('Y-m-d H:i:s', strtotime($clinic->check_in));
+                    $arrayBookings[] = $arrayBooking;
+                }
+            }
+
+        } else {
+            $bookings = Booking::where('user_id', $id)
+                ->where('status', $status)
+                ->get();
+            $arrayBookings = null;
+
+            foreach ($bookings as $booking) {
+                $arrayBooking = null;
+                $arrayBooking = $booking->toArray();
+                $arrayBooking['time_convert_checkin'] = date('Y-m-d H:i:s', strtotime($booking->check_in));
+
+                $survey_answer_user = SurveyAnswerUser::where([['booking_id', $booking->id], ['user_id', $id]])->get();
+
+                $arrQuestion = [];
+
+                foreach ($survey_answer_user as $survey_answer) {
+                    $surveyResult = $survey_answer->result;
+
+// Tách chuỗi thành mảng sử dụng dấu '-'
+                    $parts = explode('-', $surveyResult);
+
+// Lấy idQuestion
+                    $idQuestion = $parts[0];
+
+                    $question = SurveyQuestion::find($idQuestion);
+
+                    $typeQuestion = SurveyQuestion::find($idQuestion)->type;
+
+                    if ($typeQuestion == SurveyType::TEXT) {
+                        $pos = strpos($surveyResult, '-');
+                        $answer = '';
+                        if ($pos !== false) {
+                            // Nếu tìm thấy dấu "-", cắt bỏ phần đầu của chuỗi
+                            $result = substr($surveyResult, $pos + 1);
+
+                            $answer = $result;
+                            $question['answers'] = $answer;
+
+                        }
+                        array_push($arrQuestion, $question);
+                    } else {
+
+// Lấy phần còn lại của mảng, bắt đầu từ phần tử thứ hai
+                        $idAnswersArray = array_slice($parts, 1);
+
+// Chuyển mảng thành chuỗi nếu cần
+                        $idAnswers = implode(',', $idAnswersArray);
+                        $idAnswers = explode(',', $idAnswers);
+
+                        $answer = SurveyAnswer::whereIn('id', $idAnswers)->get();
+                        $question['answers'] = $answer;
+                        array_push($arrQuestion, $question);
                     }
                 }
 
-            } else {
-                $bookings = Booking::where('user_id', $id)
-                    ->where('status', $status)
-                    ->get();
-                $arrayBookings = null;
+                $arrayBooking['question'] = $arrQuestion;
 
-                foreach ($bookings as $booking) {
-                    $arrayBooking = null;
-                    $arrayBooking = $booking->toArray();
-                    $arrayBooking['time_convert_checkin'] = date('Y-m-d H:i:s', strtotime($booking->check_in));
-                    $arrayBookings[] = $arrayBooking;
-                }
+                $arrayBookings[] = $arrayBooking;
             }
         }
 
@@ -151,7 +203,8 @@ class BookingApi extends Controller
      * @param $bookingId
      * @return \Illuminate\Http\JsonResponse
      */
-    public function bookingCancel ($userId, $bookingId, $status) {
+    public function bookingCancel($userId, $bookingId, $status)
+    {
         if ($userId) {
             $booking = Booking::where([
                 'id' => $bookingId,
