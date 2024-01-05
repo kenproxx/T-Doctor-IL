@@ -64,6 +64,8 @@ class ClinicController extends Controller
             return response("Product not found", 404);
         }
 
+        $questionByDepartment =
+
         $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
         return view('clinics.detailClinics', compact('id', 'bookings', 'services', 'reviews'));
     }
@@ -128,6 +130,9 @@ class ClinicController extends Controller
                 $booking = $this->createBooking($request, $booking);
                 $success = $booking->save();
 
+                dd($booking->id);
+                dd(json_decode($request->input('survey_checkbox')));
+
                 if ($success) {
                     alert()->success('Success', 'Booking success.');
                     return back()->with('success', 'Booking success');
@@ -143,6 +148,7 @@ class ClinicController extends Controller
 
     public function createBooking(Request $request, $booking)
     {
+
         $userID = $request->input('user_id');
         $clinicID = $request->input('clinic_id');
         $checkOut = $request->input('check_out');

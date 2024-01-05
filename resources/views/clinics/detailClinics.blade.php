@@ -49,7 +49,6 @@
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     };
-                    // console.log(currentLocation)
                     callback(currentLocation);
                 });
             } else {
@@ -168,37 +167,37 @@
                         {{--Review clinics--}}
                     <div id="list-review">
                         @foreach($reviews as $review)
-                                            <div class="border-top">
-                                            @php
-                                                $user_review = \App\Models\User::find($review->user_id);
-                                            @endphp
-                                            <div class="d-flex justify-content-between rv-header align-items-center mt-md-2">
-                                                @if($user_review)
-                                                    <div class="d-flex rv-header--left">
-                                                        <div class="avt-24 mr-md-2">
-                                                            <img src="{{asset($user_review->avt)}}">
+                    <div class="border-top">
+@php
+                        $user_review = \App\Models\User::find($review->user_id);
+                    @endphp
+                    <div class="d-flex justify-content-between rv-header align-items-center mt-md-2">
+@if($user_review)
+                    <div class="d-flex rv-header--left">
+                        <div class="avt-24 mr-md-2">
+                            <img src="{{asset($user_review->avt)}}">
                                                             </div>
                                                             <p class="fs-16px">{{ $user_review->username }}</p>
                                                     </div>
                                                 @else
-                                                    <div class="d-flex rv-header--left">
-                                                        <div class="avt-24 mr-md-2">
-                                                            <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
+                    <div class="d-flex rv-header--left">
+                        <div class="avt-24 mr-md-2">
+                            <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
                                                             </div>
                                                             <p class="fs-16px">Guest</p>
                                                     </div>
                                                 @endif
-                                                    <div class="rv-header--right">
-                                                        <p class="fs-14 font-weight-400">{{ $review->created_at }}</p>
+                    <div class="rv-header--right">
+                        <p class="fs-14 font-weight-400">{{ $review->created_at }}</p>
                                                     </div>
                                                 </div>
                                                 <div class="content">
                                                     <p>
                                                         {!! $review->content !!}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                @endforeach
+                    </p>
+                </div>
+            </div>
+@endforeach
                     </div>
                                     </div>
                                 </div>
@@ -300,7 +299,6 @@
             let services = ``;
             for (let i = 0; i < response.length; i++) {
                 let data = response[i];
-                // console.log(data)
                 services = services + `<div class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
                                     <div class="fs-14 font-weight-600">
                                         <span>${data.name}</span>
@@ -317,25 +315,153 @@
     </script>
     <script>
         $(document).ready(function () {
-            $(document).on('click', '#modalToggle', function () {
+            $(document).on('click', '#modalToggle', async function () {
+
+                $.ajax({
+                    url: '{{ route('api.survey.get-by-department', $bookings->department) }}',
+                    method: 'GET',
+                    headers: {
+                        "Authorization": accessToken
+                    },
+                    success: function (response) {
+                    },
+                    error: function (exception) {
+                    }
+                });
+
+                let response = await fetch('{{ route('api.survey.get-by-department', $bookings->department) }}', {
+                    method: 'GET',
+                    headers: {
+                        "Authorization": accessToken
+                    },
+                });
+
+                if (response.ok) {
+                    response = await response.json();
+                }
+
                 let service = localStorage.getItem('services');
                 var html = `<form method="post" action="{{route('clinic.booking.store')}}" class="p-3">
-            @csrf
-                <button id="modalToggleQuestion" data-toggle="modal" data-target="#exampleModal"
+            @csrf`
+
+                response.forEach((item) => {
+                    const idQuestion = item.id;
+
+                    let typeQuestion = item.type;
+                    if (typeQuestion === '{{ \App\Enums\SurveyType::TEXT }}') {
+                        html += `<div class="form-group">`
+                        html += `<label for="exampleInputEmail1">${item.question}</label>`;
+                        html += `<input type="text" class="form-control" data-id-question="${idQuestion}" data-type="text-answer" name="survey[${idQuestion}]" placeholder="Nhập vào câu trả lời">`;
+                        html += `</div>`;
+                    } else {
+                        if (typeQuestion === '{{ \App\Enums\SurveyType::MULTIPLE }}') {
+                            typeQuestion = 'checkbox';
+                        }
+                        if (typeQuestion === '{{ \App\Enums\SurveyType::RADIO }}') {
+                            typeQuestion = 'radio';
+                        }
+                        html += `<div class="form-group">`
+                        html += `<label class="form-check-label" for="exampleInputEmail1">${item.question}</label>`;
+
+                        item.survey_answers.forEach((answer) => {
+
+                            html += `<div class="form-check">`;
+
+                            html += `<input type="${typeQuestion}" data-type="${typeQuestion}-answer" class=form-check-input data-id-question="${idQuestion}" data-id-answer="${answer.id}"
+                                     name="survey-answer-${idQuestion}">`;
+                            html += `<label class="form-check-label" for="exampleInputEmail1">${answer.answer}</label>`;
+
+                            html += `</div>`;
+                        });
+                        html += `</div>`;
+                    }
+
+                });
+                // html += `<button type="button" onclick="getValueSurvey()"
+
+                html += `<button id="modalToggleQuestion" data-toggle="modal" data-target="#exampleModal"
                                 class="w-100 btn btn-secondary border-button-address font-weight-800 fs-14 justify-content-center"
-                                >{{ __('home.Booking') }}
+                                >123
                 </button>
-                  </form>`;
+                </form>`;
                 $('#modalBooking').empty().append(html);
+
             });
         });
+
+        function getValueSurvey() {
+
+            let arrayResultText = [];
+            let arrayResultCheckbox = [];
+            let arrayResultRadio = [];
+
+            $('input[data-type="text-answer"]').each(function () {
+                if ($(this).val()) {
+                    let result_text = $(this).data('id-question') + '-' + $(this).val();
+                    arrayResultText.push(result_text);
+                }
+            });
+
+            const checkboxInputs = $('input[data-type="checkbox-answer"]:checked');
+
+            let checkboxAnswer = $(checkboxInputs[0]).data('id-question') + '-';
+
+
+            for (let i = 0; i < checkboxInputs.length; i++) {
+                let item = $(checkboxInputs[i]);
+
+                let currentQuestion = item.data('id-question');
+                let currentAnswer = item.data('id-answer');
+                let nextQuestion = $(checkboxInputs[i + 1]).data('id-question');
+
+                if (currentQuestion === nextQuestion) {
+                    checkboxAnswer += currentAnswer + ',';
+                } else {
+                    checkboxAnswer += currentAnswer + ',';
+
+                    checkboxAnswer = checkboxAnswer.substring(0, checkboxAnswer.length - 1);
+
+                    arrayResultCheckbox.push(checkboxAnswer);
+
+                    if (i === checkboxInputs.length - 1) {
+                        break;
+                    }
+
+                    checkboxAnswer = nextQuestion + '-';
+                }
+            }
+
+            $('input[data-type="radio-answer"]:checked').each(function () {
+                let result_radio = $(this).data('id-question') + '-' + $(this).data('id-answer');
+                arrayResultRadio.push(result_radio);
+            });
+
+            // delete localStorage
+            window.localStorage.removeItem('result_text');
+            window.localStorage.removeItem('result_checkbox');
+            window.localStorage.removeItem('result_radio');
+
+            window.localStorage.setItem('result_text', JSON.stringify(arrayResultText));
+            window.localStorage.setItem('result_checkbox', JSON.stringify(arrayResultCheckbox));
+            window.localStorage.setItem('result_radio', JSON.stringify(arrayResultRadio));
+
+        }
     </script>
     <script>
         $(document).ready(function () {
-            $(document).on('click', '#modalToggleQuestion', function () {
+            $(document).on('click', '#modalToggleQuestion', async function () {
+
+                await getValueSurvey();
+
                 let service = localStorage.getItem('services');
                 var html = `<form method="post" action="{{route('clinic.booking.store')}}" class="p-3">
             @csrf
+
+                    input type="hidden" name="survey_text" value='${window.localStorage.getItem('result_text')}'>
+                    <input type="hidden" name="survey_checkbox" value='${window.localStorage.getItem('result_checkbox')}'>
+                    <input type="hidden" name="survey_radio" value='${window.localStorage.getItem('result_radio')}'>
+
+
                 <div class="fs-18px justify-content-start d-flex mb-md-4 mt-2">
                     <div class="align-items-center">
                     <a href="{{route('clinic.detail',$bookings->id)}}"><i class="fa-solid fa-chevron-left"></i></a>
@@ -396,7 +522,7 @@
                                 </div>
                                 <div class="fs-14 font-weight-600">
                                     <span>
-                                        {{$bookings->introduce}}
+                                        {!! $bookings->introduce !!}
                 </span>
             </div>
             <div hidden="">
@@ -481,7 +607,6 @@
                             const selectedDateTime = date + ' ' + selectedTime;
 
                             document.getElementById('selectedTime').value = selectedDateTime;
-                            // console.log(selectedDateTime);
 
                             formSubmit.classList.remove('disabled');
                         }
@@ -522,7 +647,6 @@
                                 container.classList.remove('hide');
                                 container.classList.add('fade-in');
                                 checkInInput.value = date;
-                                // console.log(checkInInput.value)
                             }, 500);
                         } else {
                             spinner('start');

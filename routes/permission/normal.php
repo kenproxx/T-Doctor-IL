@@ -57,7 +57,7 @@ Route::group(['prefix' => 'surveys'], function () {
     Route::post('/update/{id}', [AdminSurveyApi::class, 'update'])->name('api.medical.surveys.update');
     Route::delete('/delete/{id}', [AdminSurveyApi::class, 'delete'])->name('api.medical.surveys.delete');
 
-    Route::get('get-by-department/{departmentId}', [SurveyController::class, 'getQuestionByDepartment']);
+    Route::get('get-by-department/{departmentId}', [SurveyController::class, 'getQuestionByDepartment'])->name('api.survey.get-by-department');
     Route::get('get-answer-by-user/{question_id}/{user_id}', [SurveyController::class, 'getAnswerByUser']);
     Route::post('form-survey', [AdminSurveyApi::class, 'handleFormSurvey'])->name('api.medical.surveys.form.submit');
 
