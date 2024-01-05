@@ -584,6 +584,25 @@
                 </ul>
             </li>
         @endif
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#address-nav" data-bs-toggle="collapse"
+               href="#">
+                <i class="bi bi-app"></i><span>List Address</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="address-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('view.user.address.list') }}">
+                        <i class="bi bi-circle"></i><span>List Address</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('view.user.address.create') }}">
+                        <i class="bi bi-circle"></i><span>Create Address</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
         <li class="nav-heading">{{ __('home.Settings') }}</li>
 
@@ -818,7 +837,7 @@
         }
     }
 
-    window.onload = function() {
+    window.onload = function () {
         shortString('.text-shortcut');
     };
 </script>

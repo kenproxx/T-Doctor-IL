@@ -197,8 +197,6 @@ Route::middleware(['user.active'])->group(function () {
 
     Route::get('/policy', [AddressMapController::class, 'policy'])->name('policy.index');
 
-
-    Route::get('/address', [AddressMapController::class, 'index']);
     Route::post('/save-address', [AddressMapController::class, 'store']);
 
     Route::group(['prefix' => 'flea-market'], function () {
@@ -229,13 +227,6 @@ Route::middleware(['user.active'])->group(function () {
         Route::get('/campaign', [WhatFreeToDay::class, 'campaign'])->name('what.free.campaign');
 
         Route::get('/see-all/{type}', [WhatFreeToDay::class, 'seeAll'])->name('what.free.see.all');
-    });
-
-    Route::group(['prefix' => 'address'], function () {
-        Route::post('nation', [AddressController::class, 'getListNation'])->name('address.get.list.nation');
-        Route::post('province', [AddressController::class, 'getListProvince'])->name('address.get.list.province');
-        Route::post('district', [AddressController::class, 'getListDistrict'])->name('address.get.list.district');
-        Route::post('commune', [AddressController::class, 'getListCommune'])->name('address.get.list.commune');
     });
 
     Route::middleware(['auth'])->group(function () {
@@ -369,6 +360,13 @@ Route::middleware(['user.active'])->group(function () {
             Route::get('medical/list', [SurveyController::class, 'getList'])->name('view.admin.surveys.index');
             Route::get('medical/detail/{id}', [SurveyController::class, 'detail'])->name('view.admin.surveys.detail');
             Route::get('medical/create', [SurveyController::class, 'create'])->name('view.admin.surveys.create');
+        });
+
+        /* Address order */
+        Route::group(['prefix' => 'address'], function () {
+            Route::get('list', [AddressController::class, 'getList'])->name('view.user.address.list');
+            Route::get('detail/{id}', [AddressController::class, 'detail'])->name('view.user.address.detail');
+            Route::get('create', [AddressController::class, 'create'])->name('view.user.address.create');
         });
     });
 
