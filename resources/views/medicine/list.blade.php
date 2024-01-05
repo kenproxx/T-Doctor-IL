@@ -13,6 +13,7 @@
         .bi-heart-fill {
             color: red;
         }
+
         .product-item .img-pro i {
             padding: 8px;
             border-radius: 36px;
@@ -50,26 +51,26 @@
             </div>
             <div class="medicine-search--center col-md-6 row d-flex justify-content-between">
                 <form class="search-box col-md-10">
-                    <input type="search" onkeyup="performSearch()" name="focus" placeholder="{{ __('home.Search for anything…') }}" id="search-input" value="">
+                    <input type="search" onkeyup="performSearch()" name="focus"
+                           placeholder="{{ __('home.Search for anything…') }}" id="search-input" value="">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </form>
                 @if(Auth::check())
-                    @if($isMedical)
-                        <button type="button" data-toggle="modal" data-target="#modalCart" class="shopping-bag">
-                            <i class="fa-solid fa-bag-shopping"></i>
-                            @if($carts && count($carts) > 0)
-                                <div class="text-wrapper"> {{ count($carts) }}</div>
-                            @endif
-                        </button>
-                        @include('component.modal-cart')
-                    @endif
+                    <button type="button" data-toggle="modal" data-target="#modalCart" class="shopping-bag">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        @if($carts && count($carts) > 0)
+                            <div class="text-wrapper"> {{ count($carts) }}</div>
+                        @endif
+                    </button>
+                    @include('component.modal-cart')
                 @endif
                 @include('component.modal-cart')
             </div>
             <div class="medicine-search--right col-md-3 d-flex row justify-content-between">
                 <div class="col-md-6 ">
                     <div class="div-wrapper">
-                        <a type="button" data-toggle="modal" data-target="#modalCreatPrescription">{{ __('home.Create prescription') }}
+                        <a type="button" data-toggle="modal"
+                           data-target="#modalCreatPrescription">{{ __('home.Create prescription') }}
                         </a>
                     </div>
                 </div>
@@ -298,6 +299,7 @@
                                         </div>
                                     </div>
                             </div>`;
+
                     function formatCurrency(amount) {
                         const formattedAmount = amount.toString().replace(/,/g, '.');
 
@@ -307,6 +309,7 @@
             }
             document.getElementById('content-medicine').innerHTML = html;
         }
+
         function isUserWasWishlist(medicineId) {
             let isLogin = `{{ Auth::check() }}`;
             if (!isLogin) {

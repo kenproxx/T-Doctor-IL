@@ -174,6 +174,9 @@
         return isValid;
     }
 
+    function alertLogin() {
+        alert('Please login to continue!');
+    }
 </script>
 </html>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
