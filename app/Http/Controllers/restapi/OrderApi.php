@@ -3,26 +3,50 @@
 namespace App\Http\Controllers\restapi;
 
 use App\Enums\OrderStatus;
+use App\Enums\TypeProductCart;
 use App\Http\Controllers\Controller;
+use App\Models\online_medicine\ProductMedicine;
 use App\Models\Order;
+use App\Models\OrderItem;
+use App\Models\ProductInfo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderApi extends Controller
 {
     public function getAllByUser($id, Request $request)
     {
         $status = $request->input('status');
-        if ($status) {
-            $orders = Order::where('user_id', $id)
-                ->where('status', $status)
-                ->orderBy('id', 'desc')
-                ->get();
-        } else {
-            $orders = Order::where('user_id', $id)
-                ->where('status', '!=', OrderStatus::DELETED)
-                ->orderBy('id', 'desc')
-                ->get();
-        }
+
+        $orders = DB::table('orders')
+            ->where('user_id', $id)
+            ->where(function ($query) use ($status) {
+                if ($status) {
+                    $query->where('status', '=', $status);
+                } else {
+                    $query->where('status', '!=', OrderStatus::DELETED);
+                }
+            })
+            ->orderBy('id', 'desc')
+            ->cursor()
+            ->map(function ($item) {
+                $order_items = OrderItem::where('order_id', $item->id)->get();
+                $order = (array)$item;
+                $order['total_order_items'] = $order_items->count();
+                $order['order_items'] = $order_items->toArray();
+                $array_products = null;
+                foreach ($order_items as $order_item) {
+                    if ($order_item->type_product == TypeProductCart::MEDICINE) {
+                        $product = ProductMedicine::find($order_item->product_id);
+                    } else {
+                        $product = ProductInfo::find($order_item->product_id);
+                    }
+                    $array_products[] = $product;
+                }
+                $order['total_products'] = $array_products ? count($array_products) : 0;
+                $order['products'] = $array_products;
+                return $order;
+            });
 
         return response()->json($orders);
     }
