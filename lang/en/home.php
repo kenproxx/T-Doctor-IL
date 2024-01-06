@@ -821,7 +821,8 @@ return [
     'Your browser does not support the video tag.' => 'Your browser does not support the video tag.',
     'List Short Videos' => 'List Short Videos',
     'Booking Detail' => 'Booking Detail',
-    'Update Category product' => 'Update Category product'
+    'Update Category product' => 'Update Category product',
+    'cau hoi khao sat' => 'Survey questions',
 
 
 

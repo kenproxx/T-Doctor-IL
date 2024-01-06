@@ -18,7 +18,8 @@
                     $addressC = \App\Models\Commune::where('id', $array[3] ?? null)->first();
                 @endphp
                 <div>{{ __('home.clinics') }}: {{$clinic->name}}</div>
-                <div>{{ __('home.Addresses') }}: {{$clinic->address_detail}} - {{$addressC->name}} - {{$addressD->name}} - {{$addressP->name}}</div>
+                <div>{{ __('home.Addresses') }}: {{$clinic->address_detail}} - {{$addressC->name}} - {{$addressD->name}}
+                    - {{$addressP->name}}</div>
                 <div>{{ __('home.Main service') }}:
 
                     @foreach($service as $item)
@@ -35,20 +36,45 @@
                 @else
                     @if($memberFamily != null)
                         <div>{{ __('home.Name') }}: {{$memberFamily->first()->name}}</div>
-                        <div>{{ __('home.relationship') }}: {{ \App\Enums\RelationshipFamily::getLabels()[$memberFamily->first()->relationship] ?? $memberFamily->first()->relationship }}</div>
+                        <div>{{ __('home.relationship') }}
+                            : {{ \App\Enums\RelationshipFamily::getLabels()[$memberFamily->first()->relationship] ?? $memberFamily->first()->relationship }}</div>
                         <div>{{ __('home.Sexs') }}: {{$memberFamily->first()->sex}}</div>
                         <div>{{ __('home.Date of birth') }}: {{$memberFamily->first()->date_of_birth}}</div>
                     @endif
                 @endif
             </div>
 
-
         </div>
+
+        <div class="row">
+            <h3>{{ __('home.cau hoi khao sat') }}</h3>
+        </div>
+        <div class="row">
+
+            @foreach($arraySurvey as $survey)
+                <div class="col-sm-6">
+                    {{ $survey['question'] }}
+                </div>
+                @if($survey['type'] === \App\Enums\SurveyType::TEXT)
+                    <div class="col-sm-6">
+                        {{ $survey['answers'] }}
+                    </div>
+                @else
+                    <div class="col-sm-6">
+                        @foreach($survey['answers'] as $answer)
+                            {{ $answer['answer'] . ' - ' }}
+                        @endforeach
+                    </div>
+                @endif
+            @endforeach
+        </div>
+
         <div class="justify-content-center align-items-center d-flex mt-4">
             <a href="{{ route("clinic.detail", $booking->clinic_id) }}" class="btn button-apply-booking col-md-4 mr-2">Clinic
                 Detail</a>
             @if($booking->status == 'COMPLETE')
-            <a href="{{ route("clinic.detail.results", $booking->id) }}" class="btn button-cancel col-md-4">Results Detail</a>
+                <a href="{{ route("clinic.detail.results", $booking->id) }}" class="btn button-cancel col-md-4">Results
+                    Detail</a>
             @endif
         </div>
     </div>
