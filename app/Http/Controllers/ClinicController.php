@@ -14,6 +14,7 @@ use App\Models\Clinic;
 use App\Models\Department;
 use App\Models\Review;
 use App\Models\ServiceClinic;
+use App\Models\SurveyAnswerUser;
 use App\Models\Symptom;
 use App\Models\User;
 use Carbon\Carbon;
@@ -130,8 +131,10 @@ class ClinicController extends Controller
                 $booking = $this->createBooking($request, $booking);
                 $success = $booking->save();
 
-                dd($booking->id);
-                dd(json_decode($request->input('survey_checkbox')));
+                $bookingId = $booking->id;
+                $this->storeAnswerSurveyUser($request->input('survey_text'), $bookingId);
+                $this->storeAnswerSurveyUser($request->input('survey_checkbox'), $bookingId);
+                $this->storeAnswerSurveyUser($request->input('survey_radio'), $bookingId);
 
                 if ($success) {
                     alert()->success('Success', 'Booking success.');
@@ -143,6 +146,18 @@ class ClinicController extends Controller
         } catch (\Exception $exception) {
             alert()->error('Error', 'Please try again');
             return back()->with('error', 'Booking error');
+        }
+    }
+
+    private function storeAnswerSurveyUser($arrInput, $bookingId)
+    {
+        $arrInput = json_decode($arrInput);
+        foreach ($arrInput as $item) {
+            $answerSurveyUser = new SurveyAnswerUser();
+            $answerSurveyUser->result = $item;
+            $answerSurveyUser->booking_id = $bookingId;
+            $answerSurveyUser->user_id = Auth::id();
+            $answerSurveyUser->save();
         }
     }
 

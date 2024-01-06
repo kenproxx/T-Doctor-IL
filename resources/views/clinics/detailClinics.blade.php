@@ -457,7 +457,7 @@
                 var html = `<form method="post" action="{{route('clinic.booking.store')}}" class="p-3">
             @csrf
 
-                    input type="hidden" name="survey_text" value='${window.localStorage.getItem('result_text')}'>
+                    <input type="hidden" name="survey_text" value='${window.localStorage.getItem('result_text')}'>
                     <input type="hidden" name="survey_checkbox" value='${window.localStorage.getItem('result_checkbox')}'>
                     <input type="hidden" name="survey_radio" value='${window.localStorage.getItem('result_radio')}'>
 
