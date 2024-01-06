@@ -340,9 +340,13 @@
                     response = await response.json();
                 }
 
-                let service = localStorage.getItem('services');
+                if (response.length === 0) {
+                    modalToggleQuestion();
+                    return;
+                }
+
                 var html = `<form method="post" action="{{route('clinic.booking.store')}}" class="p-3">
-            @csrf`
+                @csrf`
 
                 response.forEach((item) => {
                     const idQuestion = item.id;
@@ -377,11 +381,10 @@
                     }
 
                 });
-                // html += `<button type="button" onclick="getValueSurvey()"
 
-                html += `<button id="modalToggleQuestion" data-toggle="modal" data-target="#exampleModal"
+                html += `<button onclick="modalToggleQuestion()" data-toggle="modal" data-target="#exampleModal"
                                 class="w-100 btn btn-secondary border-button-address font-weight-800 fs-14 justify-content-center"
-                                >123
+                                >{{ __('home.Next') }}
                 </button>
                 </form>`;
                 $('#modalBooking').empty().append(html);
@@ -446,18 +449,15 @@
             window.localStorage.setItem('result_radio', JSON.stringify(arrayResultRadio));
 
         }
-    </script>
-    <script>
-        $(document).ready(function () {
-            $(document).on('click', '#modalToggleQuestion', async function () {
 
-                await getValueSurvey();
+        async function modalToggleQuestion() {
+            await getValueSurvey();
 
-                let service = localStorage.getItem('services');
-                var html = `<form method="post" action="{{route('clinic.booking.store')}}" class="p-3">
+            let service = localStorage.getItem('services');
+            var html = `<form method="post" action="{{route('clinic.booking.store')}}" class="p-3">
             @csrf
 
-                    <input type="hidden" name="survey_text" value='${window.localStorage.getItem('result_text')}'>
+            <input type="hidden" name="survey_text" value='${window.localStorage.getItem('result_text')}'>
                     <input type="hidden" name="survey_checkbox" value='${window.localStorage.getItem('result_checkbox')}'>
                     <input type="hidden" name="survey_radio" value='${window.localStorage.getItem('result_radio')}'>
 
@@ -501,20 +501,20 @@
                                 </div>
                                 <div class="border-bottom fs-16px mb-md-3">
                                      @if(Auth::check())
-                <span>{{ __('home.select member family') }}</span>
+            <span>{{ __('home.select member family') }}</span>
                                         </div>
                                         <div>
                                         Bản thân
                                         <select class="form-control" name="member_family_id" id="member_family_id">
                                         <option value="">{{ __('home.Bản thân') }}</option>
                                         @foreach($memberFamily as $member)
-                <option value="{{$member->id}}">{{$member->name}}</option>
+            <option value="{{$member->id}}">{{$member->name}}</option>
                                         @endforeach
-                </select>
-                    </div>
+            </select>
+                </div>
 @endif
-                <div class="border-bottom fs-16px mb-md-3">
-                <span>{{ __('home.Main service') }}</span>
+            <div class="border-bottom fs-16px mb-md-3">
+            <span>{{ __('home.Main service') }}</span>
                                 </div>
                                ${service}
                                 <div class="border-bottom mt-md-4 fs-16px mb-md-3">
@@ -523,156 +523,155 @@
                                 <div class="fs-14 font-weight-600">
                                     <span>
                                         {!! $bookings->introduce !!}
-                </span>
-            </div>
-            <div hidden="">
-                <input id="clinic_id" name="clinic_id" value="{{ $bookings->id }}">
+            </span>
+        </div>
+        <div hidden="">
+            <input id="clinic_id" name="clinic_id" value="{{ $bookings->id }}">
         @if(Auth::check())
-                <input id="user_id" name="user_id" value="{{ Auth::user()->id }}">
+            <input id="user_id" name="user_id" value="{{ Auth::user()->id }}">
         @endif
 
-                </div>
+            </div>
 
-                <button class="btn mt-4 btn-primary btn-block up-date-button button-apply-booking" id="activate">Apply
-                </button>
-            </form>
+            <button class="btn mt-4 btn-primary btn-block up-date-button button-apply-booking" id="activate">Apply
+            </button>
+        </form>
 `;
-                $('#modalBooking').empty().append(html);
-                loadData();
-            });
+            $('#modalBooking').empty().append(html);
+            loadData();
+        }
 
+        function loadData() {
+            let cachedData = {};
 
-            function loadData() {
-                let cachedData = {};
+            function serviceCallSlots(date) {
+                const dt = new Date(date);
+                let ms = dt.getTime();
+                let startMs = ms - (60 * 60 * 24 * 1000 * 2);
+                const dtArr = [1, 2, 3, 4, 5].map((e) => {
+                    const innerDt = new Date(startMs);
+                    startMs += 60 * 60 * 24 * 1000;
+                    return innerDt;
+                });
+                const timeArrs = [
+                    ['9', '10', '11', '12', '1', '2', '3', '4', '5'],
+                    ['9', '10', '11', '1', '2', '3', '4', '5'],
+                    ['9', '10', '11', '12', '3', '4', '5'],
+                    ['10', '11', '2', '4'],
+                    ['11', '12', '1', '4', '5']
+                ];
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        const obj = dtArr.reduce((accum, e) => {
+                            const randomNum = Math.floor(Math.random() * 5);
+                            const dtString = e.toLocaleDateString();
+                            let parts = dtString.split('/');
+                            parts[0] = parts[0].length === 1 ? '0' + parts[0] : parts[0];
+                            parts[1] = parts[1].length === 1 ? '0' + parts[1] : parts[1];
+                            accum[parts.join('/')] = timeArrs[randomNum];
+                            return accum;
+                        }, {});
+                        resolve(obj);
+                    }, 2000);
+                })
+            }
 
-                function serviceCallSlots(date) {
-                    const dt = new Date(date);
-                    let ms = dt.getTime();
-                    let startMs = ms - (60 * 60 * 24 * 1000 * 2);
-                    const dtArr = [1, 2, 3, 4, 5].map((e) => {
-                        const innerDt = new Date(startMs);
-                        startMs += 60 * 60 * 24 * 1000;
-                        return innerDt;
-                    });
-                    const timeArrs = [
-                        ['9', '10', '11', '12', '1', '2', '3', '4', '5'],
-                        ['9', '10', '11', '1', '2', '3', '4', '5'],
-                        ['9', '10', '11', '12', '3', '4', '5'],
-                        ['10', '11', '2', '4'],
-                        ['11', '12', '1', '4', '5']
-                    ];
-                    return new Promise((resolve, reject) => {
-                        setTimeout(() => {
-                            const obj = dtArr.reduce((accum, e) => {
-                                const randomNum = Math.floor(Math.random() * 5);
-                                const dtString = e.toLocaleDateString();
-                                let parts = dtString.split('/');
-                                parts[0] = parts[0].length === 1 ? '0' + parts[0] : parts[0];
-                                parts[1] = parts[1].length === 1 ? '0' + parts[1] : parts[1];
-                                accum[parts.join('/')] = timeArrs[randomNum];
-                                return accum;
-                            }, {});
-                            resolve(obj);
-                        }, 2000);
-                    })
+            function spinner(startOrStop) {
+                const spin = document.querySelector('.spin-me');
+                if (startOrStop === 'start') {
+                    const spinner = document.createElement('i');
+                    spinner.setAttribute('class', 'fas fa-spinner fa-4x fa-spin');
+                    spin.appendChild(spinner);
+                } else {
+                    spin.innerHTML = '';
                 }
+            }
 
-                function spinner(startOrStop) {
-                    const spin = document.querySelector('.spin-me');
-                    if (startOrStop === 'start') {
-                        const spinner = document.createElement('i');
-                        spinner.setAttribute('class', 'fas fa-spinner fa-4x fa-spin');
-                        spin.appendChild(spinner);
-                    } else {
-                        spin.innerHTML = '';
+            function createSlotsDom(formSubmit, morning, afternoon, arr) {
+                [9, 10, 11, 12, 1, 2, 3, 4, 5].map((e) => {
+                    const div = document.createElement('div');
+                    div.setAttribute('class', 'item');
+
+                    const anchor = document.createElement('a');
+                    anchor.setAttribute('class', 'hollow button');
+                    anchor.setAttribute('href', 'javascript:void(0)');
+
+                    const time = (e < 10 ? '0' : '') + e + ':00';
+                    const txt = document.createTextNode(time);
+                    anchor.appendChild(txt);
+
+                    anchor.onclick = function (event) {
+                        const selectedTime = event.target.innerText;
+                        let date = document.getElementById('check_in').value;
+                        const selectedDateTime = date + ' ' + selectedTime;
+
+                        document.getElementById('selectedTime').value = selectedDateTime;
+
+                        formSubmit.classList.remove('disabled');
                     }
-                }
 
-                function createSlotsDom(formSubmit, morning, afternoon, arr) {
-                    [9, 10, 11, 12, 1, 2, 3, 4, 5].map((e) => {
-                        const div = document.createElement('div');
-                        div.setAttribute('class', 'item');
+                    if (!arr.filter(r => r == e).length) {
+                        anchor.setAttribute('disabled', 'true');
+                    }
 
-                        const anchor = document.createElement('a');
-                        anchor.setAttribute('class', 'hollow button');
-                        anchor.setAttribute('href', 'javascript:void(0)');
+                    div.appendChild(anchor);
 
-                        const time = (e < 10 ? '0' : '') + e + ':00';
-                        const txt = document.createTextNode(time);
-                        anchor.appendChild(txt);
-
-                        anchor.onclick = function (event) {
-                            const selectedTime = event.target.innerText;
-                            let date = document.getElementById('check_in').value;
-                            const selectedDateTime = date + ' ' + selectedTime;
-
-                            document.getElementById('selectedTime').value = selectedDateTime;
-
-                            formSubmit.classList.remove('disabled');
-                        }
-
-                        if (!arr.filter(r => r == e).length) {
-                            anchor.setAttribute('disabled', 'true');
-                        }
-
-                        div.appendChild(anchor);
-
-                        if (e >= 9 && e < 12) {
-                            morning.appendChild(div);
-                        } else {
-                            afternoon.appendChild(div);
-                        }
-                    });
-                }
+                    if (e >= 9 && e < 12) {
+                        morning.appendChild(div);
+                    } else {
+                        afternoon.appendChild(div);
+                    }
+                });
+            }
 
 
-                $("#datepicker").datepicker({
-                    onSelect: function (date) {
-                        const container = document.querySelector('.master-container-slots');
-                        const morning = document.querySelector('.flex-container-morning');
-                        const afternoon = document.querySelector('.flex-container-afternoon');
-                        const formSubmit = document.querySelector('.button-apply-booking');
-                        const checkInInput = document.getElementById('check_in');
+            $("#datepicker").datepicker({
+                onSelect: function (date) {
+                    const container = document.querySelector('.master-container-slots');
+                    const morning = document.querySelector('.flex-container-morning');
+                    const afternoon = document.querySelector('.flex-container-afternoon');
+                    const formSubmit = document.querySelector('.button-apply-booking');
+                    const checkInInput = document.getElementById('check_in');
 
-                        formSubmit.classList.add('disabled');
-                        container.classList.add('hide');
+                    formSubmit.classList.add('disabled');
+                    container.classList.add('hide');
 
-                        if (cachedData[date]) {
-                            spinner('start');
-                            setTimeout(() => {
-                                morning.innerHTML = '';
-                                afternoon.innerHTML = '';
+                    if (cachedData[date]) {
+                        spinner('start');
+                        setTimeout(() => {
+                            morning.innerHTML = '';
+                            afternoon.innerHTML = '';
+                            createSlotsDom(formSubmit, morning, afternoon, cachedData[date]);
+                            spinner('stop');
+                            container.classList.remove('hide');
+                            container.classList.add('fade-in');
+                            checkInInput.value = date;
+                        }, 500);
+                    } else {
+                        spinner('start');
+                        const prom = serviceCallSlots(date);
+                        setTimeout(() => {
+                            morning.innerHTML = '';
+                            afternoon.innerHTML = '';
+                            prom.then((payload) => {
+                                Object.keys(payload).map((e) => {
+                                    const cachedKeys = Object.keys(cachedData);
+                                    if (!cachedKeys.includes(e)) {
+                                        cachedData[e] = payload[e];
+                                    }
+                                });
                                 createSlotsDom(formSubmit, morning, afternoon, cachedData[date]);
                                 spinner('stop');
                                 container.classList.remove('hide');
                                 container.classList.add('fade-in');
                                 checkInInput.value = date;
-                            }, 500);
-                        } else {
-                            spinner('start');
-                            const prom = serviceCallSlots(date);
-                            setTimeout(() => {
-                                morning.innerHTML = '';
-                                afternoon.innerHTML = '';
-                                prom.then((payload) => {
-                                    Object.keys(payload).map((e) => {
-                                        const cachedKeys = Object.keys(cachedData);
-                                        if (!cachedKeys.includes(e)) {
-                                            cachedData[e] = payload[e];
-                                        }
-                                    });
-                                    createSlotsDom(formSubmit, morning, afternoon, cachedData[date]);
-                                    spinner('stop');
-                                    container.classList.remove('hide');
-                                    container.classList.add('fade-in');
-                                    checkInInput.value = date;
-                                });
-                            }, 500);
-                        }
-                        document.getElementById('check_in').value = date;
+                            });
+                        }, 500);
                     }
-                });
-            }
-        });
+                    document.getElementById('check_in').value = date;
+                }
+            });
+        }
+
     </script>
 @endsection

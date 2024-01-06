@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Enums\BookingStatus;
 use App\Enums\ServiceClinicStatus;
+use App\Enums\SurveyType;
 use App\Models\Booking;
 use App\Models\BookingResult;
 use App\Models\Clinic;
 use App\Models\MedicalFavourite;
 use App\Models\ServiceClinic;
+use App\Models\SurveyAnswer;
+use App\Models\SurveyAnswerUser;
+use App\Models\SurveyQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -48,7 +52,31 @@ class BookingController extends Controller
         $serviceBookings = explode(',', $booking->service);
         $service = ServiceClinic::whereIn('id', $serviceBookings)->get();
         $isAdmin = (new MainController())->checkAdmin();
-        return view('bookings.detailBooking', compact('booking', 'clinic', 'user', 'memberFamily', 'service', 'isAdmin'));
+
+        $surveyByBooking = SurveyAnswerUser::where([['booking_id', $id], ['user_id', Auth::id()]])->get('result');
+
+        $arraySurvey = [];
+        foreach ($surveyByBooking as $survey) {
+            $parts = explode('-', $survey->result, 2);
+            $idQuestion = $parts[0];
+
+            $question = SurveyQuestion::find($idQuestion)->toArray();
+
+            if ($question['type'] === SurveyType::TEXT) {
+                $question['answers'] = $parts[1];
+                array_push($arraySurvey, $question);
+                continue;
+            }
+
+            $idAnswer = $parts[1];
+            $idAnswer = explode(',', $idAnswer);
+            $answers = SurveyAnswer::whereIn('id', $idAnswer)->get()->toArray();
+            $question['answers'] = $answers;
+
+            array_push($arraySurvey, $question);
+        }
+
+        return view('bookings.detailBooking', compact('booking', 'clinic', 'user', 'memberFamily', 'service', 'isAdmin', 'arraySurvey'));
     }
 
     public function edit($id)

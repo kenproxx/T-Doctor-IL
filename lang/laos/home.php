@@ -808,6 +808,6 @@ return [
     'Your browser does not support the video tag.' => 'ຕົວທ່ອງເວັບຂອງທ່ານບໍ່ສະຫນັບສະຫນູນແທັກວິດີໂອ.',
     'List Short Videos' => 'ລາຍຊື່ວິດີໂອສັ້ນ',
     'Booking Detail' => 'ລາຍລະອຽດການຈອງ',
-    'Update Category product' => 'ປັບປຸງຜະລິດຕະພັນປະເພດ'
-
+    'Update Category product' => 'ປັບປຸງຜະລິດຕະພັນປະເພດ',
+    'cau hoi khao sat' => 'ຄຳຖາມການກະທົບການສອບຖາມ',
 ];
