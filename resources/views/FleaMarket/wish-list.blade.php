@@ -12,7 +12,8 @@
                     <div class="flea-text">{{ __('home.Filter') }}</div>
                     @foreach($categoryProduct as $category)
                         <div>
-                            <input type="checkbox" value="{{ $category->id }}" name="category" onchange="callListProduct()">
+                            <input type="checkbox" value="{{ $category->id }}" name="category"
+                                   onchange="callListProduct()">
                             <label class="flea-text-gray">{{ $category->name }}</label>
                         </div>
                     @endforeach
@@ -25,19 +26,25 @@
                             </header>
                             <div class="price-input">
                                 <div class="field">
-                                    <input type="number" class="input-min" value="0">
+                                    <input type="number" class="input-min" id="input-min" value="2500000"
+                                           onchange="callListProduct()">
                                 </div>
                                 <div class="separator">-</div>
                                 <div class="field">
-                                    <input type="number" class="input-max" value="0">
+                                    <input type="number" class="input-max" id="input-max" value="7500000"
+                                           onchange="callListProduct()">
                                 </div>
                             </div>
                             <div class="slider">
                                 <div class="progress"></div>
                             </div>
                             <div class="range-input">
-                                <input type="range" class="range-min" min="0" max="10000" value="2500" step="100">
-                                <input type="range" class="range-max" min="0" max="10000" value="7500" step="100">
+                                <input type="range" class="range-min" onchange="callListProduct()" id="range-min"
+                                       min="0" max="10000000"
+                                       value="2500000" step="1000">
+                                <input type="range" class="range-max" onchange="callListProduct()" id="range-max"
+                                       min="0" max="10000000"
+                                       value="7500000" step="1000">
                             </div>
                         </div>
                     </div>
@@ -84,9 +91,6 @@
 
         priceInput.forEach((input) => {
             input.addEventListener("input", (e) => {
-                let minPrice = parseInt(priceInput[0].value),
-                    maxPrice = parseInt(priceInput[1].value);
-
                 if (maxPrice - minPrice >= priceGap && maxPrice <= rangeInput[1].max) {
                     if (e.target.className === "input-min") {
                         rangeInput[0].value = minPrice;
@@ -157,6 +161,10 @@
                 }
             }
 
+            // min price, max price
+            let minPrice = document.getElementById("input-min").value;
+            let maxPrice = document.getElementById("input-max").value;
+
             let accessToken = `Bearer ` + token;
             $.ajax({
                 url: `{{ route('api.backend.wish.lists.list') }}`,
@@ -166,7 +174,9 @@
                 },
                 data: {
                     user_id: {{ Auth::check() ? Auth::user()->id : null }},
-                    category: category
+                    category: category,
+                    min_price: minPrice,
+                    max_price: maxPrice
                 },
                 success: function (response) {
                     renderWishList(response);
@@ -179,6 +189,20 @@
 
         async function renderWishList(res) {
             let html = ``;
+            if (res.length === 0) {
+                html = `<div class="col-md-12">
+                            <div class="product-item">
+                                <div class="content-pro">
+                                    <div class="name-pro">
+                                        <p>{{ __('home.no data') }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`;
+                $('#listWishList').empty().append(html);
+                return;
+            }
+
             for (let i = 0; i < res.length; i++) {
                 let product = res[i];
                 let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`.replace(':id', product.id);
