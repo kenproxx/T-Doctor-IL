@@ -34,7 +34,7 @@
             <div class="col-md-6">
                 <a href="">
                     <div class="border-HomeNew">
-                        <div class="w-75">
+                        <div class="w-75 d-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"
                                  fill="none">
                                 <g clip-path="url(#clip0_5948_32876)">
@@ -242,7 +242,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <span>Khám chuyên khoa</span></div>
+                            <span class="ml-3">Khám chuyên khoa</span></div>
                         <div class="svg-containerNho">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none">
@@ -266,7 +266,7 @@
             <div class="col-md-6">
                 <a href="">
                     <div class="border-HomeNew">
-                        <div class="w-75">
+                        <div class="w-75 d-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"
                                  fill="none">
                                 <g clip-path="url(#clip0_5948_32927)">
@@ -441,7 +441,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <span>Khám từ xa</span></div>
+                            <span class="ml-3">Khám từ xa</span></div>
                         <div class="svg-containerNho">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none">
@@ -464,7 +464,7 @@
             <div class="col-md-6">
                 <a href="">
                     <div class="border-HomeNew">
-                        <div class="w-75">
+                        <div class="w-75 d-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"
                                  fill="none">
                                 <path
@@ -478,7 +478,7 @@
                                     </linearGradient>
                                 </defs>
                             </svg>
-                            <span>Tư vẫn sức khoẻ</span></div>
+                            <span class="ml-3">Tư vẫn sức khoẻ</span></div>
                         <div class="svg-containerNho">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none">
@@ -501,7 +501,7 @@
             <div class="col-md-6">
                 <a href="">
                     <div class="border-HomeNew">
-                        <div class="w-75">
+                        <div class="w-75 d-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"
                                  fill="none">
                                 <path
@@ -665,7 +665,7 @@
                                     </linearGradient>
                                 </defs>
                             </svg>
-                            <span>Y tế gần bạn</span>
+                            <span class="ml-3">Y tế gần bạn</span>
                         </div>
                         <div class="svg-containerNho">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -2645,6 +2645,65 @@
                 <div class="tab-content mt-4" id="myTabContent">
                     <div class="tab-pane fade show active" id="popularProduct" role="tabpanel"
                          aria-labelledby="popularProduct-tab">
+                        <section>
+                            <div id="cCarousel">
+                                <div class="arrow" id="prev"><i class="fa-solid fa-chevron-left"></i></div>
+                                <div class="arrow" id="next"><i class="fa-solid fa-chevron-right"></i></div>
+
+                                <div id="carousel-vp">
+                                    <div id="cCarousel-inner">
+
+                                        <article class="cCarousel-item">
+                                            <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
+                                            <div class="infos">
+                                                <h3>Title 1 / 6</h3>
+                                                <button type="button">See</button>
+                                            </div>
+                                        </article>
+
+                                        <article class="cCarousel-item">
+                                            <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
+                                            <div class="infos">
+                                                <h3>Title 2 / 6</h3>
+                                                <button type="button">See</button>
+                                            </div>
+                                        </article>
+
+                                        <article class="cCarousel-item">
+                                            <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
+                                            <div class="infos">
+                                                <h3>Title 3 / 6</h3>
+                                                <button type="button">See</button>
+                                            </div>
+                                        </article>
+
+                                        <article class="cCarousel-item">
+                                            <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
+                                            <div class="infos">
+                                                <h3>Title 4 / 6</h3>
+                                                <button type="button">See</button>
+                                            </div>
+                                        </article>
+
+                                        <article class="cCarousel-item">
+                                            <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
+                                            <div class="infos">
+                                                <h3>Title 5 / 6</h3>
+                                                <button type="button">See</button>
+                                            </div>
+                                        </article>
+
+                                        <article class="cCarousel-item">
+                                            <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
+                                            <div class="infos">
+                                                <h3>Title 6 / 6</h3>
+                                                <button type="button">See</button>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                         <div class="row">
                             @if($productsFlea == '')
                                 <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
@@ -3184,6 +3243,69 @@
 
     </script>
     {{-- END SLIDE --}}
+    <script>
+        const prev = document.querySelector("#prev");
+        const next = document.querySelector("#next");
+
+        let carouselVp = document.querySelector("#carousel-vp");
+
+        let cCarouselInner = document.querySelector("#cCarousel-inner");
+        let carouselInnerWidth = cCarouselInner.getBoundingClientRect().width;
+
+        let leftValue = 0;
+
+        // Variable used to set the carousel movement value (card's width + gap)
+        const totalMovementSize =
+            parseFloat(
+                document.querySelector(".cCarousel-item").getBoundingClientRect().width,
+                10
+            ) +
+            parseFloat(
+                window.getComputedStyle(cCarouselInner).getPropertyValue("gap"),
+                10
+            );
+
+        prev.addEventListener("click", () => {
+            if (!leftValue == 0) {
+                leftValue -= -totalMovementSize;
+                cCarouselInner.style.left = leftValue + "px";
+            }
+        });
+
+        next.addEventListener("click", () => {
+            const carouselVpWidth = carouselVp.getBoundingClientRect().width;
+            if (carouselInnerWidth - Math.abs(leftValue) > carouselVpWidth) {
+                leftValue -= totalMovementSize;
+                cCarouselInner.style.left = leftValue + "px";
+            }
+        });
+
+        const mediaQuery510 = window.matchMedia("(max-width: 510px)");
+        const mediaQuery770 = window.matchMedia("(max-width: 770px)");
+
+        mediaQuery510.addEventListener("change", mediaManagement);
+        mediaQuery770.addEventListener("change", mediaManagement);
+
+        let oldViewportWidth = window.innerWidth;
+
+        function mediaManagement() {
+            const newViewportWidth = window.innerWidth;
+
+            if (leftValue <= -totalMovementSize && oldViewportWidth < newViewportWidth) {
+                leftValue += totalMovementSize;
+                cCarouselInner.style.left = leftValue + "px";
+                oldViewportWidth = newViewportWidth;
+            } else if (
+                leftValue <= -totalMovementSize &&
+                oldViewportWidth > newViewportWidth
+            ) {
+                leftValue -= totalMovementSize;
+                cCarouselInner.style.left = leftValue + "px";
+                oldViewportWidth = newViewportWidth;
+            }
+        }
+
+    </script>
     <script>
         function viewCoupon(id) {
             window.location.href = "/coupon/" + id;
