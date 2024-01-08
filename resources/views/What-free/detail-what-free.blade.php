@@ -8,7 +8,6 @@
     @include('component.banner')
     <div class="recruitment-details ">
         <div class="container">
-            @include('What-free.header-wFree')
             <a href="{{route('what.free')}}" class="recruitment-details--title"><i class="fa-solid fa-arrow-left"></i>
                 {{ __("home.What’s free details") }}</a>
             <div class="row recruitment-details--content">
