@@ -26,21 +26,54 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ExaminationController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $nameSearch = $request->input('nameSearch');
+        $departmentId = $request->input('department_id');
+        $provinceId = $request->input('province_id');
+        $hospitalId = $request->input('hospital_id');
+        $experienceValue = $request->input('year_of_experience');
+
         $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
 
         $perPage = 12;
 
-        $query = User::where('member', TypeMedical::DOCTORS)->where('status', UserStatus::ACTIVE);
+        $query = User::where('member', TypeMedical::DOCTORS)->where('users.status', UserStatus::ACTIVE);
 
-        $bestDoctorInfos = $query->limit($perPage)->get();
-        $newDoctorInfos = $query->orderBy('id', 'DESC')->limit($perPage)->get();
+        if (!empty($nameSearch)) {
+            $query->where('name', 'LIKE', '%' . $nameSearch . '%');
+        }
+
+        if (!empty($departmentId)) {
+            $query->where('department_id', $departmentId);
+        }
+
+        if (!empty($provinceId)) {
+            $query->where('province_id', $provinceId);
+        }
+
+        if (!empty($hospitalId)) {
+            $query->join('clinics', 'clinics.user_id', '=', 'users.id')
+                ->where('clinics.id', $hospitalId);
+        }
+
+        if (!empty($experienceValue)) {
+            $query->where('year_of_experience', $experienceValue);
+        }
+
+        $bestDoctorInfos = $query->limit($perPage)->get('users.*');
+        $newDoctorInfos = $query->orderBy('users.id', 'DESC')->limit($perPage)->get('users.*');
         $availableDoctorInfos = $query->where('time_working_1', '00:00-23:59')->where('time_working_2',
-            'T2-CN')->limit($perPage)->get();
+            'T2-CN')->limit($perPage)->get('users.*');
+
+        $provinces = Province::all();
+        $hospitals = Clinic::where('type', TypeBusiness::HOSPITALS)->get();
+        $experiences = User::distinct()->pluck('year_of_experience')->filter()->sort()->toArray();
 
         return view('examination.index',
-            compact('departments', 'bestDoctorInfos', 'newDoctorInfos', 'availableDoctorInfos'));
+            compact('departments', 'bestDoctorInfos', 'newDoctorInfos',
+                'availableDoctorInfos', 'nameSearch', 'departmentId', 'provinces', 'provinceId',
+                'hospitals', 'hospitalId', 'experiences', 'experienceValue'));
     }
 
     public function infoDoctor($id)
@@ -103,7 +136,7 @@ class ExaminationController extends Controller
         }
 
         if (!empty($name)) {
-            $query->where('name', 'LIKE', '%'.$name.'%');
+            $query->where('name', 'LIKE', '%' . $name . '%');
         }
 
 
