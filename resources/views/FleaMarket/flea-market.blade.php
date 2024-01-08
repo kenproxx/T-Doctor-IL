@@ -1,4 +1,4 @@
- @php use App\Enums\Role; @endphp
+@php use App\Enums\Role; @endphp
 @extends('layouts.master')
 @section('title', 'Flea Market')
 @section('content')
@@ -6,6 +6,7 @@
         .bi-heart-fill {
             color: red;
         }
+
         .product-item .img-pro i {
             padding: 8px;
             border-radius: 36px;
@@ -13,6 +14,14 @@
             align-items: center;
             justify-content: center;
             display: flex;
+        }
+
+        .ellipse-1-line {
+            line-height: 1.3;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     </style>
     @include('layouts.partials.headerFleaMarket')
@@ -85,11 +94,11 @@
                 <div class="border-radius ">
                     <div class="flea-text">{{ __('home.Filter') }}</div>
                     @foreach($departments as $department)
-                        <div>
+                        <div class="ellipse-1-line d-flex mb-2">
                             <input type="checkbox" onchange="performSearch()" name="category_{{$department->id}}"
                                    id="category_{{$department->id}}">
-                            <label for="category_{{$department->id}}"
-                                   class="flea-text-gray">{{$department->name}}</label>
+                            <label for="category_{{$department->id}}" style="margin-bottom: 0"
+                                   class="flea-text-gray text-nowrap ml-2">{{$department->name}}</label>
                         </div>
                     @endforeach
                     <div class="flea-text-sp">{{ __('home.See all categories') }}</div>
@@ -126,17 +135,17 @@
                 <div class="mt-100">
                     <div class=" row align-items-center justify-content-center">
                         <div class="">
-                            <img src="{{asset('img/image 16.png')}}" alt="" >
+                            <img src="{{asset('img/image 16.png')}}" alt="">
                         </div>
                     </div>
                     <div class=" row align-items-center justify-content-center">
                         <div class="">
-                            <img src="{{asset('img/image 16.png')}}" alt="" >
+                            <img src="{{asset('img/image 16.png')}}" alt="">
                         </div>
                     </div>
                     <div class=" row align-items-center justify-content-center">
                         <div class="">
-                            <img src="{{asset('img/image 16.png')}}" alt="" >
+                            <img src="{{asset('img/image 16.png')}}" alt="">
                         </div>
                     </div>
                 </div>

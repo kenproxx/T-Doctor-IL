@@ -4,6 +4,15 @@
     @include('layouts.partials.headerFleaMarket')
     <body>
     @include('component.banner')
+    <style>
+        .ellipse-1-line {
+            line-height: 1.3;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
     <div class="container mt-70">
         <div class="pc-hidden">@include('What-free.header-wFree')</div>
         <div class="d-flex mt-88">
@@ -11,10 +20,11 @@
                 <div class="border-radius ">
                     <div class="flea-text">{{ __('home.Filter') }}</div>
                     @foreach($categoryProduct as $category)
-                        <div>
+                        <div class="ellipse-1-line d-flex mb-2">
                             <input type="checkbox" value="{{ $category->id }}" name="category"
                                    onchange="callListProduct()">
-                            <label class="flea-text-gray">{{ $category->name }}</label>
+                            <label style="margin-bottom: 0"
+                                   class="flea-text-gray text-nowrap ml-2">{{ $category->name }}</label>
                         </div>
                     @endforeach
                 </div>
