@@ -165,7 +165,7 @@
                     "Authorization": accessToken
                 },
                 data: {
-                    user_id: {{ Auth::check() ? Auth::user()->id : null }},
+                    user_id: `{{ Auth::check() ? Auth::user()->id : null }}`,
                     category: category
                 },
                 success: function (response) {
