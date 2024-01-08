@@ -823,7 +823,12 @@ return [
     'Booking Detail' => 'Booking Detail',
     'Update Category product' => 'Update Category product',
     'cau hoi khao sat' => 'Survey questions',
-
+// Please enter your name, Please enter your email, Please enter your email correctly, Please enter your phone, Please enter your content
+    'Please enter your name' => 'Please enter your name',
+    'Please enter your email' => 'Please enter your email',
+    'Please enter your email correctly' => 'Please enter your email correctly',
+    'Please enter your phone' => 'Please enter your phone',
+    'Please enter your content' => 'Please enter your content',
 
 
 ];

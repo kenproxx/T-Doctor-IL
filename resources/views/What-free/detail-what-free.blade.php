@@ -107,23 +107,23 @@
                             <div class="div-4">
                                 <div class="div-5">
                                     <div class="text-wrapper-3">{{ __('home.Name') }}</div>
-                                    <input class="form-control" type="text" placeholder="example123" name="name"
+                                    <input class="form-control" type="text" name="name"
                                            id="name">
                                 </div>
                                 <div class="div-5">
                                     <div class="text-wrapper-3">{{ __('home.Email') }}</div>
-                                    <input class="form-control" type="text" placeholder="example123" name="email_"
+                                    <input class="form-control" type="text" name="email_"
                                            id="email_">
                                 </div>
                                 <div class="div-5">
                                     <div class="text-wrapper-3">{{ __('home.Contact number') }}</div>
-                                    <input class="form-control" type="text" placeholder="example123" name="phone"
+                                    <input class="form-control" type="text" name="phone"
                                            id="phone">
                                 </div>
                             </div>
                             <div>
                                 <div class="flea-prise">{{ __('home.Apply motivation') }}</div>
-                                <textarea class="form-control" placeholder="Please let me use your service"
+                                <textarea class="form-control"
                                           name="content" id="content_"></textarea>
                             </div>
                         </div>
@@ -166,15 +166,49 @@
             $('.apply-button').on('click', function () {
                 var selectedOption = document.querySelector('input[name="sns_option"]:checked');
 
+                if ('{{ !Auth::check() }}') {
+                    alert('{{ __('home.Please login to continue') }}')
+                    return;
+                }
+
                 if (!selectedOption) {
                     alert('Xin cập nhật thông tin SNS và chọn lại');
                     return;
                 }
 
                 if (!token) {
-                    alert('Please login to apply')
+                    alert('{{ __('home.Please login to continue') }}')
                     return;
                 }
+
+                if (document.getElementById('name').value === '') {
+                    alert('{{ __('home.Please enter your name') }}')
+                    return;
+                }
+
+                if (document.getElementById('email_').value === '') {
+                    alert('{{ __('home.Please enter your email') }}')
+                    return;
+                }
+
+                // check regex email
+                var email = document.getElementById('email_').value;
+                var regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+                if (!regex.test(email)) {
+                    alert('{{ __('home.Please enter your email correctly') }}')
+                    return;
+                }
+
+                if (document.getElementById('phone').value === '') {
+                    alert('{{ __('home.Please enter your phone') }}')
+                    return;
+                }
+
+                if (tinymce.get('content_').getContent() === '') {
+                    alert('{{ __('home.Please enter your content') }}')
+                    return;
+                }
+
                 const headers = {
                     'Authorization': `Bearer ${token}`
                 };
@@ -218,7 +252,7 @@
                     loadingMasterPage();
                     throw error;
                 }
-            })
+            });
         })
     </script>
 @endsection

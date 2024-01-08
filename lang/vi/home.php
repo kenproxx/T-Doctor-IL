@@ -822,5 +822,11 @@ return [
     'Booking Detail' => 'Chi tiết đặt chỗ',
     'Update Category product' => 'Cập nhật danh mục sản phẩm',
     'cau hoi khao sat' => 'Câu hỏi khảo sát',
+// Please enter your name, Please enter your email, Please enter your email correctly, Please enter your phone, Please enter your content
+    'Please enter your name' => 'Vui lòng nhập tên của bạn',
+    'Please enter your email' => 'Vui lòng nhập email của bạn',
+    'Please enter your email correctly' => 'Vui lòng nhập email của bạn đúng',
+    'Please enter your phone' => 'Vui lòng nhập số điện thoại của bạn',
+    'Please enter your content' => 'Vui lòng nhập nội dung của bạn',
 
 ];
