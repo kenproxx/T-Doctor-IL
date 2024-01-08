@@ -2645,126 +2645,71 @@
                 <div class="tab-content mt-4" id="myTabContent">
                     <div class="tab-pane fade show active" id="popularProduct" role="tabpanel"
                          aria-labelledby="popularProduct-tab">
-                        <section>
                             <div id="cCarousel">
-                                <div class="arrow" id="prev"><i class="fa-solid fa-chevron-left"></i></div>
-                                <div class="arrow" id="next"><i class="fa-solid fa-chevron-right"></i></div>
-
+                                <div class="arrow" id="prevFlea"><i class="fa-solid fa-chevron-left"></i></div>
+                                <div class="arrow" id="nextFlea"><i class="fa-solid fa-chevron-right"></i></div>
                                 <div id="carousel-vp">
                                     <div id="cCarousel-inner">
-
-                                        <article class="cCarousel-item">
-                                            <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                                            <div class="infos">
-                                                <h3>Title 1 / 6</h3>
-                                                <button type="button">See</button>
-                                            </div>
-                                        </article>
-
-                                        <article class="cCarousel-item">
-                                            <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                                            <div class="infos">
-                                                <h3>Title 2 / 6</h3>
-                                                <button type="button">See</button>
-                                            </div>
-                                        </article>
-
-                                        <article class="cCarousel-item">
-                                            <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                                            <div class="infos">
-                                                <h3>Title 3 / 6</h3>
-                                                <button type="button">See</button>
-                                            </div>
-                                        </article>
-
-                                        <article class="cCarousel-item">
-                                            <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                                            <div class="infos">
-                                                <h3>Title 4 / 6</h3>
-                                                <button type="button">See</button>
-                                            </div>
-                                        </article>
-
-                                        <article class="cCarousel-item">
-                                            <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                                            <div class="infos">
-                                                <h3>Title 5 / 6</h3>
-                                                <button type="button">See</button>
-                                            </div>
-                                        </article>
-
-                                        <article class="cCarousel-item">
-                                            <img src="https://images.unsplash.com/photo-1564292284209-60cce69f08ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2ODQ0MTA1MTJ8&ixlib=rb-4.0.3&q=80&w=400" alt="Moon">
-                                            <div class="infos">
-                                                <h3>Title 6 / 6</h3>
-                                                <button type="button">See</button>
-                                            </div>
-                                        </article>
+                                        @if($productsFlea == '')
+                                            <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
+                                        @else
+                                            @foreach($productsFlea as $product)
+                                                <div class="cCarousel-item">
+                                                    <div class="product-item">
+                                                        <div
+                                                            class="img-pro justify-content-center d-flex img_product--homeNew">
+                                                            <img src="{{$product->thumbnail}}" alt="">
+                                                            <a class="button-heart" data-favorite="0">
+                                                                <i id="icon-heart" class="bi-heart bi"
+                                                                   data-product-id="${product.id}"
+                                                                   onclick="addProductToWishList(${product.id})"></i>
+                                                            </a>
+                                                        </div>
+                                                        <div class="content-pro p-3">
+                                                            <div class="">
+                                                                <div class="name-product" style="height: auto">
+                                                                    <a class="name-product--fleaMarket"
+                                                                       href="{{ route('examination.doctor_info', $product->id) }}">{{$product->name}}</a>
+                                                                </div>
+                                                                <div class="location-pro">
+                                                                    @php
+                                                                        $addressP = \App\Models\Province::where('id', $product->province_id)->value('name');
+                                                                    @endphp
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="21"
+                                                                         height="21" viewBox="0 0 21 21" fill="none">
+                                                                        <g clip-path="url(#clip0_5506_14919)">
+                                                                            <path
+                                                                                d="M4.66602 12.8382C3.12321 13.5188 2.16602 14.4673 2.16602 15.5163C2.16602 17.5873 5.89698 19.2663 10.4993 19.2663C15.1017 19.2663 18.8327 17.5873 18.8327 15.5163C18.8327 14.4673 17.8755 13.5188 16.3327 12.8382M15.4993 7.59961C15.4993 10.986 11.7493 12.5996 10.4993 15.0996C9.24935 12.5996 5.49935 10.986 5.49935 7.59961C5.49935 4.83819 7.73793 2.59961 10.4993 2.59961C13.2608 2.59961 15.4993 4.83819 15.4993 7.59961ZM11.3327 7.59961C11.3327 8.05985 10.9596 8.43294 10.4993 8.43294C10.0391 8.43294 9.66602 8.05985 9.66602 7.59961C9.66602 7.13937 10.0391 6.76628 10.4993 6.76628C10.9596 6.76628 11.3327 7.13937 11.3327 7.59961Z"
+                                                                                stroke="white" stroke-width="2"
+                                                                                stroke-linecap="round"
+                                                                                stroke-linejoin="round"/>
+                                                                        </g>
+                                                                        <defs>
+                                                                            <clipPath id="clip0_5506_14919">
+                                                                                <rect width="20" height="20" fill="white"
+                                                                                      transform="translate(0.5 0.933594)"/>
+                                                                            </clipPath>
+                                                                        </defs>
+                                                                    </svg> &nbsp; {{$addressP}}
+                                                                </div>
+                                                                <div class="prices-pro">
+                                                                    {{number_format($product->price, 0, ',', '.') }} {{$product->price_unit ?? 'VND'}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex justify-content-end">
+                                                            <div class="SeeDetail">
+                                                                <a href="{{ route('flea.market.product.detail', $product->id) }}"
+                                                                   target="_blank">{{ __('home.See details') }}</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @endif
                                     </div>
                                 </div>
                             </div>
-                        </section>
-                        <div class="row">
-                            @if($productsFlea == '')
-                                <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
-                            @else
-                                @foreach($productsFlea as $product)
-                                    <div class="col-md-3 col-12">
-                                        <div class="p-3">
-                                            <div class="product-item">
-                                                <div
-                                                    class="img-pro h-100 justify-content-center d-flex img_product--homeNew">
-                                                    <img src="{{$product->thumbnail}}" alt="">
-                                                    <a class="button-heart" data-favorite="0">
-                                                        <i id="icon-heart" class="bi-heart bi"
-                                                           data-product-id="${product.id}"
-                                                           onclick="addProductToWishList(${product.id})"></i>
-                                                    </a>
-                                                </div>
-                                                <div class="content-pro p-3">
-                                                    <div class="">
-                                                        <div class="name-product" style="height: auto">
-                                                            <a class="name-product--fleaMarket"
-                                                               href="{{ route('examination.doctor_info', $product->id) }}">{{$product->name}}</a>
-                                                        </div>
-                                                        <div class="location-pro">
-                                                            @php
-                                                                $addressP = \App\Models\Province::where('id', $product->province_id)->value('name');
-                                                            @endphp
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="21"
-                                                                 height="21" viewBox="0 0 21 21" fill="none">
-                                                                <g clip-path="url(#clip0_5506_14919)">
-                                                                    <path
-                                                                        d="M4.66602 12.8382C3.12321 13.5188 2.16602 14.4673 2.16602 15.5163C2.16602 17.5873 5.89698 19.2663 10.4993 19.2663C15.1017 19.2663 18.8327 17.5873 18.8327 15.5163C18.8327 14.4673 17.8755 13.5188 16.3327 12.8382M15.4993 7.59961C15.4993 10.986 11.7493 12.5996 10.4993 15.0996C9.24935 12.5996 5.49935 10.986 5.49935 7.59961C5.49935 4.83819 7.73793 2.59961 10.4993 2.59961C13.2608 2.59961 15.4993 4.83819 15.4993 7.59961ZM11.3327 7.59961C11.3327 8.05985 10.9596 8.43294 10.4993 8.43294C10.0391 8.43294 9.66602 8.05985 9.66602 7.59961C9.66602 7.13937 10.0391 6.76628 10.4993 6.76628C10.9596 6.76628 11.3327 7.13937 11.3327 7.59961Z"
-                                                                        stroke="white" stroke-width="2"
-                                                                        stroke-linecap="round"
-                                                                        stroke-linejoin="round"/>
-                                                                </g>
-                                                                <defs>
-                                                                    <clipPath id="clip0_5506_14919">
-                                                                        <rect width="20" height="20" fill="white"
-                                                                              transform="translate(0.5 0.933594)"/>
-                                                                    </clipPath>
-                                                                </defs>
-                                                            </svg> &nbsp; {{$addressP}}
-                                                        </div>
-                                                        <div class="prices-pro">
-                                                            {{number_format($product->price, 0, ',', '.') }} {{$product->price_unit ?? 'VND'}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex justify-content-end">
-                                                    <div class="SeeDetail">
-                                                        <a href="{{ route('flea.market.product.detail', $product->id) }}"
-                                                           target="_blank">{{ __('home.See details') }}</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endif
-                        </div>
                     </div>
                 </div>
 
@@ -3197,6 +3142,7 @@
         $addresses = \App\Models\Clinic::all();
         $coordinatesArray = $addresses->toArray();
     @endphp
+
     {{-- SLIDE  --}}
     <script>
         let currentSlide = 0;
@@ -3243,69 +3189,6 @@
 
     </script>
     {{-- END SLIDE --}}
-    <script>
-        const prev = document.querySelector("#prev");
-        const next = document.querySelector("#next");
-
-        let carouselVp = document.querySelector("#carousel-vp");
-
-        let cCarouselInner = document.querySelector("#cCarousel-inner");
-        let carouselInnerWidth = cCarouselInner.getBoundingClientRect().width;
-
-        let leftValue = 0;
-
-        // Variable used to set the carousel movement value (card's width + gap)
-        const totalMovementSize =
-            parseFloat(
-                document.querySelector(".cCarousel-item").getBoundingClientRect().width,
-                10
-            ) +
-            parseFloat(
-                window.getComputedStyle(cCarouselInner).getPropertyValue("gap"),
-                10
-            );
-
-        prev.addEventListener("click", () => {
-            if (!leftValue == 0) {
-                leftValue -= -totalMovementSize;
-                cCarouselInner.style.left = leftValue + "px";
-            }
-        });
-
-        next.addEventListener("click", () => {
-            const carouselVpWidth = carouselVp.getBoundingClientRect().width;
-            if (carouselInnerWidth - Math.abs(leftValue) > carouselVpWidth) {
-                leftValue -= totalMovementSize;
-                cCarouselInner.style.left = leftValue + "px";
-            }
-        });
-
-        const mediaQuery510 = window.matchMedia("(max-width: 510px)");
-        const mediaQuery770 = window.matchMedia("(max-width: 770px)");
-
-        mediaQuery510.addEventListener("change", mediaManagement);
-        mediaQuery770.addEventListener("change", mediaManagement);
-
-        let oldViewportWidth = window.innerWidth;
-
-        function mediaManagement() {
-            const newViewportWidth = window.innerWidth;
-
-            if (leftValue <= -totalMovementSize && oldViewportWidth < newViewportWidth) {
-                leftValue += totalMovementSize;
-                cCarouselInner.style.left = leftValue + "px";
-                oldViewportWidth = newViewportWidth;
-            } else if (
-                leftValue <= -totalMovementSize &&
-                oldViewportWidth > newViewportWidth
-            ) {
-                leftValue -= totalMovementSize;
-                cCarouselInner.style.left = leftValue + "px";
-                oldViewportWidth = newViewportWidth;
-            }
-        }
-
-    </script>
     <script>
         function viewCoupon(id) {
             window.location.href = "/coupon/" + id;
@@ -3514,5 +3397,68 @@
         getCurrentLocation(function (currentLocation) {
             initMap(currentLocation, locations);
         });
+    </script>
+    <script>
+        const prevFlea = document.getElementById("prevFlea");
+        const nextFlea = document.getElementById("nextFlea");
+
+        let carouselVp = document.getElementById("carousel-vp");
+
+        let cCarouselInner = document.getElementById("cCarousel-inner");
+        let carouselInnerWidth = cCarouselInner.getBoundingClientRect().width;
+
+        let leftValue = 0;
+
+        // Variable used to set the carousel movement value (card's width + gap)
+        const totalMovementSize =
+            parseFloat(
+                document.querySelector(".cCarousel-item").getBoundingClientRect().width,
+                10
+            ) +
+            parseFloat(
+                window.getComputedStyle(cCarouselInner).getPropertyValue("gap"),
+                10
+            );
+
+        prevFlea.addEventListener("click", () => {
+            if (leftValue !== 0) {
+                leftValue -= -totalMovementSize;
+                cCarouselInner.style.left = leftValue + "px";
+            }
+        });
+
+        nextFlea.addEventListener("click", () => {
+            const carouselVpWidth = carouselVp.getBoundingClientRect().width;
+            if (carouselInnerWidth - Math.abs(leftValue) > carouselVpWidth) {
+                leftValue -= totalMovementSize;
+                cCarouselInner.style.left = leftValue + "px";
+            }
+        });
+
+        const mediaQuery510 = window.matchMedia("(max-width: 510px)");
+        const mediaQuery770 = window.matchMedia("(max-width: 770px)");
+
+        mediaQuery510.addEventListener("change", mediaManagement);
+        mediaQuery770.addEventListener("change", mediaManagement);
+
+        let oldViewportWidth = window.innerWidth;
+
+        function mediaManagement() {
+            const newViewportWidth = window.innerWidth;
+
+            if (leftValue <= -totalMovementSize && oldViewportWidth < newViewportWidth) {
+                leftValue += totalMovementSize;
+                cCarouselInner.style.left = leftValue + "px";
+                oldViewportWidth = newViewportWidth;
+            } else if (
+                leftValue <= -totalMovementSize &&
+                oldViewportWidth > newViewportWidth
+            ) {
+                leftValue -= totalMovementSize;
+                cCarouselInner.style.left = leftValue + "px";
+                oldViewportWidth = newViewportWidth;
+            }
+        }
+
     </script>
 @endsection
