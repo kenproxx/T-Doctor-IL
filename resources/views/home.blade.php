@@ -231,6 +231,16 @@
                                 </clipPath>
                             </defs>
                         </svg>
+                        <div class="svg-containerNho">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M16.6666 0H7.3333V7.33268L0 7.33268V16.666H7.3333V24H16.6666V16.666H24V7.33268L16.6666 7.33268V0Z" fill="#D8F6FF"/>
+                            </svg>
+                        </div>
+                        <div class="svg-container">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+                                <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd" d="M41.6667 0H18.3333V18.3327H0V41.666H18.3333V60H41.6667V41.666H60V18.3327H41.6667V0Z" fill="#D8F6FF"/>
+                            </svg>
+                        </div>
                         <span>Khám chuyên khoa</span></div>
                 </a>
 
@@ -2212,7 +2222,6 @@
     </div>
     <div class="">
         <div class="background-image_HomeNew" id="find-doctor--homeNew">
-
             <div class="container pb-5 mt-4">
                 <div class="tab-content mt-4" id="myTabContent">
                     <div class="tab-pane fade show active" id="popularProduct" role="tabpanel"
