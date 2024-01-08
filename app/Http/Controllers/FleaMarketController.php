@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\ProductStatus;
+use App\Enums\CategoryStatus;
 use App\Enums\ReviewStoreStatus;
 use App\Models\Category;
-use App\Models\FleaMarket;
-use App\Models\online_medicine\CategoryProduct;
 use App\Models\ProductInfo;
 use App\Models\ReviewStore;
 use App\Models\WishList;
@@ -20,7 +18,7 @@ class FleaMarketController extends Controller
      */
     public function index()
     {
-        $departments = CategoryProduct::where('status', 1)->get();
+        $departments = Category::where('status', CategoryStatus::ACTIVE)->get();
         $listWishList = WishList::where('isFavorite', 1);
 
         if (Auth::check()) {
@@ -45,7 +43,7 @@ class FleaMarketController extends Controller
      */
     public function wishList()
     {
-        $categoryProduct = CategoryProduct::where('status', true)->get();
+        $categoryProduct = Category::where('status', CategoryStatus::ACTIVE)->get();
         return view('FleaMarket.wish-list', compact('categoryProduct'));
     }
 
@@ -81,7 +79,7 @@ class FleaMarketController extends Controller
     {
         $user = Auth::user();
         $province = DB::table('provinces')->get();
-        $category = CategoryProduct::where('status', 1)->get();
+        $category = Category::where('status', CategoryStatus::ACTIVE)->get();
         return view('FleaMarket.sell-my-product', compact('user', 'province', 'category'));
     }
 
@@ -92,7 +90,7 @@ class FleaMarketController extends Controller
     {
         $e_product = ProductInfo::find($id);
         $provinces = DB::table('provinces')->get();
-        $departments = CategoryProduct::where('status', 1)->get();
+        $departments = Category::where('status', CategoryStatus::ACTIVE)->get();
         return view('FleaMarket.edit-product', compact('e_product', 'provinces', 'departments'));
     }
 }

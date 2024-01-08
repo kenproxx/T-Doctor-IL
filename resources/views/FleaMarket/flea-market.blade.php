@@ -1,4 +1,4 @@
-@php use App\Enums\Role; @endphp
+ @php use App\Enums\Role; @endphp
 @extends('layouts.master')
 @section('title', 'Flea Market')
 @section('content')
