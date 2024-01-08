@@ -120,6 +120,14 @@ class ExaminationController extends Controller
 
     public function findMyMedicine(Request $request)
     {
+        $nameSearch = $request->input('nameSearch');
+        $departmentId = $request->input('department_id');
+        $provinceId = $request->input('province_id');
+        $categoryProductId = $request->input('category_product');
+
+        $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
+        $provinces = Province::all();
+
         $arrParam = $request->all();
         $categoryId = array_key_exists('category_id', $arrParam) ? $arrParam['category_id'] : null;
         $locationId = array_key_exists('location_id', $arrParam) ? $arrParam['location_id'] : null;
@@ -167,7 +175,9 @@ class ExaminationController extends Controller
 
         return view('examination.findmymedicine',
             compact('bestPhamrmacists', 'newPhamrmacists', 'allPhamrmacists', 'hotMedicines', 'newMedicines',
-                'recommendedMedicines', 'categoryMedicines', 'function_foods', 'provinces', 'categoryMedicines'));
+                'recommendedMedicines', 'categoryMedicines', 'function_foods', 'provinces',
+            'departmentId', 'departments', 'provinces', 'provinceId', 'nameSearch',
+            'categoryProductId'));
     }
 
     public function bestPharmacists()
