@@ -9,7 +9,7 @@
                     if (Auth::user() != null) {
                         $info = Auth::user();
                     } else {
-                             $info = \App\Models\User::where('id', $id)->first();
+                        $info = \App\Models\User::where('id', $id)->first();
                     }
                     $address = \App\Models\Province::where('id', $info->province_id)->value('name');
                 @endphp
@@ -41,13 +41,20 @@
     <div class="col-md-2 mobile-hidden">
 
         <div class="d-flex col-md-4">
-            @if( Auth::user()== null || $id != Auth::user()->id)
-                <form class=" flea-button mr-3">
-                    <button class="flea-btn width-88">{{ __('home.FOLLOW') }}</button>
-                </form>
+            @if(\Illuminate\Support\Facades\Auth::check())
+                @if( $id != Auth::user()->id)
+                    <form class=" flea-button mr-3">
+                        <button class="flea-btn width-88">{{ __('home.FOLLOW') }}</button>
+                    </form>
+                @else
+                    <form action="{{route('flea.market.sell.product')}}" class=" flea-button mr-3">
+                        <button class="flea-btn width-88">{{ __('home.Sell my product') }}</button>
+                    </form>
+                @endif
             @else
-                <form action="{{route('flea.market.sell.product')}}" class=" flea-button mr-3">
-                    <button class="flea-btn width-88">{{ __('home.Sell my product') }}</button>
+                <form onclick="alertLogin();" class=" flea-button mr-3">
+                    <button type="button"
+                            class="flea-btn width-88">{{ __('home.FOLLOW') }}</button>
                 </form>
             @endif
         </div>

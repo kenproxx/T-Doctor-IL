@@ -56,7 +56,13 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn cancel" data-dismiss="modal">{{ __('home.CANCEL') }}</button>
-                <a href="{{ route('user.checkout.index') }}" class="btn pay">Pay</a>
+                @if(Auth::check())
+                    @if($carts->isNotEmpty())
+                        <a href="{{ route('user.checkout.index') }}" class="btn pay">Pay</a>
+                    @else
+                        <button disabled class="btn pay">Pay</button>
+                    @endif
+                @endif
             </div>
         </div>
     </div>

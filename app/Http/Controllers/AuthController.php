@@ -131,7 +131,7 @@ class AuthController extends Controller
                 $user->phone = '';
             }
 
-            if ($member == \App\Enums\Role::NORMAL_PEOPLE || $member == \App\Enums\Role::PAITENTS){
+            if ($member == \App\Enums\Role::NORMAL_PEOPLE || $member == \App\Enums\Role::PAITENTS) {
                 $user->medical_history = $medical_history;
             }
 
@@ -263,7 +263,8 @@ class AuthController extends Controller
                 $token = JWTAuth::fromUser($user);
                 $user->token = $token;
                 $user->save();
-                setCookie('accessToken', $token);
+                $expiration_time = time() + 86400;
+                setCookie('accessToken', $token, $expiration_time, '/');
                 toast('Welcome ' . $user->email, 'success', 'top-left');
 
                 $role_user = DB::table('role_users')->where('user_id', $user->id)->first();

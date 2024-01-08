@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\AddressStatus;
 use App\Enums\OrderMethod;
 use App\Http\Controllers\restapi\CheckoutApi;
+use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Role;
 use App\Models\User;
@@ -16,7 +18,19 @@ class CheckoutController extends Controller
     public function index()
     {
         $carts = Cart::where('user_id', Auth::user()->id)->get();
-        return view('checkout.checkout', compact('carts'));
+        $addresses = DB::table('addresses')
+            ->where('addresses.status', '!=', AddressStatus::DELETED)
+            ->where('addresses.user_id', Auth::user()->id)
+            ->orderBy('addresses.id', 'desc')
+            ->join('provinces', 'provinces.id', '=', 'addresses.province_id')
+            ->join('districts', 'districts.id', '=', 'addresses.district_id')
+            ->join('communes', 'communes.id', '=', 'addresses.commune_id')
+            ->select('addresses.*',
+                'provinces.full_name as provinces_name',
+                'districts.full_name as districts_name',
+                'communes.full_name as communes_name')
+            ->get();
+        return view('checkout.checkout', compact('carts', 'addresses'));
     }
 
     public function checkoutByImm(Request $request)
@@ -30,6 +44,7 @@ class CheckoutController extends Controller
             alert()->error('Error', 'Checkout error!');
             return back();
         } catch (\Exception $exception) {
+            dd($exception);
             alert()->error('Error', 'Please try again!');
             return back();
         }

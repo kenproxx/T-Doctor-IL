@@ -14,6 +14,7 @@ use App\Models\Clinic;
 use App\Models\Department;
 use App\Models\Review;
 use App\Models\ServiceClinic;
+use App\Models\SurveyAnswerUser;
 use App\Models\Symptom;
 use App\Models\User;
 use Carbon\Carbon;
@@ -63,6 +64,8 @@ class ClinicController extends Controller
         if (!$bookings || $bookings->status != ClinicStatus::ACTIVE) {
             return response("Product not found", 404);
         }
+
+        $questionByDepartment =
 
         $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
         return view('clinics.detailClinics', compact('id', 'bookings', 'services', 'reviews'));
@@ -128,6 +131,11 @@ class ClinicController extends Controller
                 $booking = $this->createBooking($request, $booking);
                 $success = $booking->save();
 
+                $bookingId = $booking->id;
+                $this->storeAnswerSurveyUser($request->input('survey_text'), $bookingId);
+                $this->storeAnswerSurveyUser($request->input('survey_checkbox'), $bookingId);
+                $this->storeAnswerSurveyUser($request->input('survey_radio'), $bookingId);
+
                 if ($success) {
                     alert()->success('Success', 'Booking success.');
                     return back()->with('success', 'Booking success');
@@ -141,8 +149,21 @@ class ClinicController extends Controller
         }
     }
 
+    private function storeAnswerSurveyUser($arrInput, $bookingId)
+    {
+        $arrInput = json_decode($arrInput);
+        foreach ($arrInput as $item) {
+            $answerSurveyUser = new SurveyAnswerUser();
+            $answerSurveyUser->result = $item;
+            $answerSurveyUser->booking_id = $bookingId;
+            $answerSurveyUser->user_id = Auth::id();
+            $answerSurveyUser->save();
+        }
+    }
+
     public function createBooking(Request $request, $booking)
     {
+
         $userID = $request->input('user_id');
         $clinicID = $request->input('clinic_id');
         $checkOut = $request->input('check_out');

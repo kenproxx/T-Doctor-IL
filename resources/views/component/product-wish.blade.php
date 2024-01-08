@@ -51,8 +51,6 @@
         }
 
         async function renderWishList(res) {
-
-            let accessToken = `Bearer ` + token;
             let html = ``;
             for (let i = 0; i < res.length; i++) {
                 let product = res[i];
@@ -82,7 +80,6 @@
                  `;
             }
             $('#listWishList').empty().append(html);
-
         }
     });
 </script>
