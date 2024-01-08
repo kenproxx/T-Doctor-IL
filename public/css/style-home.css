@@ -19,8 +19,115 @@
   .container .item-information .nav-header--homeNew ul.nav-fill, .container #find-doctor--homeNew .nav-header--homeNew ul.nav-fill, .container .align-center .nav-header--homeNew ul.nav-fill {
     width: 50%;
   }
+  .container .dots-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+  .container .dots-container .dot {
+    cursor: pointer;
+    margin: 12px;
+    width: 10px;
+    height: 10px;
+    color: #333;
+    border-radius: 50%;
+    background-color: #088180;
+    opacity: 0.35;
+  }
+  .container .dots-container .dot.active {
+    border: 8px solid rgba(8, 129, 128, 0.53);
+    opacity: 1;
+  }
+  .container body h1 {
+    text-align: center;
+  }
+  .container .slide-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1440px;
+    margin: auto;
+    position: relative;
+  }
+  .container .slide-container .slide {
+    display: none;
+    width: 100%;
+  }
+  .container .slide-container .slide.fade {
+    animation: fade 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  }
+  .container .slide-container .slide img {
+    width: 100%;
+  }
 }
 @media all {
+  .background-image_HomeNew {
+    background: url("../img/homeNew-img/background/icon_Dark.png") no-repeat 135%;
+    background-size: 1054px 845px;
+    min-height: 880px;
+    display: flex;
+    align-items: center;
+  }
+  .background-image_HomeNew .product-item {
+    border-radius: 25px;
+    background: #088180;
+    padding: 0;
+  }
+  .background-image_HomeNew .product-item .img-pro img {
+    border-radius: 24px 24px 0 100px;
+    height: 300px;
+    object-fit: cover;
+  }
+  .background-image_HomeNew .product-item .img-pro i {
+    display: flex;
+    padding: 8px;
+    align-items: flex-start;
+    gap: 10px;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    border-radius: 51px;
+    background: #EAEAEA;
+  }
+  .background-image_HomeNew .product-item .location-pro {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+  }
+  .background-image_HomeNew .product-item .prices-pro {
+    color: #FFFFFF;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+  }
+  .background-image_HomeNew .product-item .SeeDetail {
+    display: flex;
+    padding: 16px 40px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 86px 0 36px 0;
+    width: 70%;
+    background: #FFFFFF;
+    border: 0;
+  }
+  .background-image_HomeNew .product-item .img_product--homeNew img {
+    border-radius: 24px 24px 100px 0 !important;
+    background: lightgray 50%/cover no-repeat;
+    height: 300px !important;
+  }
+  .background-image_HomeNew .product-item .content-pro .name-product a {
+    color: #FFFFFF;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    min-height: 50px;
+  }
   .bg-homeNew {
     background: var(--White-Light, #F3F3F3);
   }
@@ -403,6 +510,9 @@
     font-weight: 800;
     line-height: normal;
   }
+  .container #recruitment-homeNew .describe-item {
+    margin-bottom: 20px;
+  }
   .container #recruitment-homeNew .describe-item span {
     color: var(--Black, #1A202C);
     font-size: 24px;
@@ -491,6 +601,40 @@
     color: var(--secon1, #088180);
     text-align: center;
     font-size: 18px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+  }
+  .container .titleServiceHomeNew {
+    color: #000;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+  }
+  .container .mainServiceHomeNew {
+    margin-top: 16px;
+  }
+  .container .mainServiceHomeNew .col-md-6 .border-HomeNew {
+    border-radius: 24px;
+    border: 1px solid var(--Grey-Light, #D6D6D6);
+    background: var(--White, #FFF);
+    display: flex;
+    padding: 24px;
+    align-items: center;
+    gap: 24px;
+    flex-shrink: 0;
+    margin-bottom: 30px;
+  }
+  .container .mainServiceHomeNew .col-md-6 .border-HomeNew:hover {
+    border-radius: 24px;
+    border: 1px solid var(--secon1, #088180);
+    background: var(--White, #FFF);
+    box-shadow: 0px 8px 14px 0px rgba(0, 0, 0, 0.25);
+  }
+  .container .mainServiceHomeNew span {
+    color: #000;
+    font-size: 24px;
     font-style: normal;
     font-weight: 800;
     line-height: normal;
