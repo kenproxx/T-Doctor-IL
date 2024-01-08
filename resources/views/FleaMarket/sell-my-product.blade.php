@@ -25,8 +25,7 @@
                                         class="red-color"> *</span></p>
                                 <div class="w-100 mt-2">
                                     <input class="ac-email font-16-mobi checkValid" required name="name" id="name"
-                                           value=""
-                                           placeholder="example123">
+                                           value="" >
                                 </div>
                             </div>
                         </div>
@@ -65,7 +64,7 @@
                                     <div class="w-100 mt-2 d-flex col-12 p-0">
                                         <div class="p-0 col-md-9 mt-2 col-8">
                                             <input class="web ac-nation font-16-mobi" style="max-width: 100%"
-                                                   name="brand_name" id="brand_name" placeholder="0123456789">
+                                                   name="brand_name" id="brand_name">
                                         </div>
                                         <div class="pr-0 col-md-3 mt-2 col-4">
                                             <a href="#" id="disabledInput"
@@ -79,7 +78,7 @@
                                     <p><label for="price">{{ __('home.Price') }} </label> <span
                                             class="red-color">*</span></p>
                                     <div class="w-100 mt-2">
-                                        <input class="web ac-nation font-16-mobi mt-2" name="price checkValid" required
+                                        <input class="web ac-nation font-16-mobi mt-2" type="number" name="price checkValid" required
                                                id="price"
                                                placeholder="{{ __('home.Please choose....') }}">
                                     </div>
@@ -198,6 +197,7 @@
                 alert('You can enter the brand name')
             } else {
                 inputElement.disabled = true;
+                inputElement.value = ' ';
                 alert('You can not enter the brand name')
             }
         });
@@ -266,7 +266,6 @@
                 fieldTextareaTiny.forEach(fieldTextarea => {
                     const content = tinymce.get(fieldTextarea).getContent();
                     formData.append(fieldTextarea, content);
-                    console.log(content)
                 });
                 formData.append("ads_period", (selectedValue));
                 formData.append("user_id", {{Auth::user()->id ?? ''}});
@@ -325,7 +324,7 @@
                 alert('{{ __('home.Please choose category') }}');
                 return false;
             }
-            if ($('#brand_name').val().trim() === '') {
+            if ($('#brand_name').val() === '') {
                 alert('{{ __('home.Please enter brand name') }}');
                 return false;
             }

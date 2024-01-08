@@ -5,31 +5,71 @@
     @include('component.banner')
     <div id="examination-scene" class="container ">
         <div class="d-flex w-100">
-            <div id="filter" class="box--3 d-flex justify-content-between w-100">
-                <div class="d-flex flex-fill">
-                    <div class="filter_option" style="list-style: none;">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ __('home.Department') }}
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div id="filter" class="box--3  ">
+                <form action="{{ route('examination.index') }}" method="get" class="row" id="searchForm">
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect2">{{ __('home.Department') }}</label>
+                            <select class="form-control" name="department_id" onchange="submitForm()">
+                                <option value="">{{ __('home.All') }}</option>
                                 @foreach($departments as $department)
-                                    <a class="dropdown-item doctor-department" href="#"
-                                       data-department="{{$department}}">{{$department->name}}</a>
+                                    <option href="#"
+                                            {{ $departmentId == $department->id ? 'selected' : '' }} value="{{ $department->id }}"
+                                            data-department="{{$department}}">{{$department->name}}</option>
                                 @endforeach
-                            </div>
-                        </li>
+                            </select>
+                        </div>
                     </div>
-                    <div class="filter_option"><p>{{ __('home.Position') }}</p></div>
-                    <div class="filter_option"><p>{{ __('home.Location') }}</p></div>
-                    <div class="filter_option"><p>{{ __('home.Experience') }}</p></div>
-                </div>
-                <div class="form-group has-search">
-                    <span class="fa fa-search form-control-feedback"></span>
-                    <input type="text" onkeyup="performSearchDoctor()" id="inputSearchDoctor" class="form-control"
-                           placeholder="{{ __('home.Search for anything…') }}">
-                </div>
+
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect2">{{ __('home.Location') }}</label>
+                            <select class="form-control" name="province_id" onchange="submitForm()">
+                                <option value="">{{ __('home.All') }}</option>
+                                @foreach($provinces as $province)
+                                    <option href="#" {{ $provinceId == $province->id ? 'selected' : '' }}
+                                    value="{{ $province->id }}"
+                                    >{{$province->full_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect2">{{ __('home.Hospital') }}</label>
+                            <select class="form-control" name="hospital_id" onchange="submitForm()">
+                                <option value="">{{ __('home.All') }}</option>
+                                @foreach( $hospitals as $hospital )
+                                    <option href="#" {{ $hospitalId == $hospital->id ? 'selected' : '' }}
+                                    value="{{ $hospital->id }}"
+                                    >{{ $hospital->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect2">{{ __('home.Experience') }}</label>
+                            <select class="form-control" name="year_of_experience" onchange="submitForm()">
+                                <option value="">{{ __('home.All') }}</option>
+                                @foreach( $experiences as $experience )
+                                    <option href="#" {{ $experienceValue == $experience ? 'selected' : '' }}
+                                    value="{{ $experience }}"
+                                    >{{ $experience }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <span class="fa fa-search form-control-feedback"></span>
+                            <input type="search" id="inputSearchDoctor" class="form-control"
+                                   name="nameSearch"
+                                   value="{{ $nameSearch }}"
+                                   placeholder="{{ __('home.Search for anything…') }}">
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         <div id="show-doctor">
@@ -91,4 +131,10 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function submitForm() {
+            document.getElementById('searchForm').submit();
+        }
+    </script>
 @endsection
