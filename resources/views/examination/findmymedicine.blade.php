@@ -13,38 +13,56 @@
         <div id="examination-scene">
 
             <div class="row medicine-search">
-                <div class="medicine-search--left col-md-3 d-flex justify-content-around">
-                    <div class="title">
-                        <select class="form-select" id="category_id" name="category_id"
-                                onchange="searchByCategory(this.value)">
-                            <option value="">{{ __('home.Category') }}</option>
-                            @if($categoryMedicines)
-                                @foreach($categoryMedicines as $index => $cateProductMedicine)
-                                    <option
-                                        value="{{ $cateProductMedicine->id }}">{{ $cateProductMedicine->name }}</option>
+                <form action="{{ route('examination.findmymedicine') }}" method="get" class="row" id="searchForm">
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect2">{{ __('home.Department') }}</label>
+                            <select class="form-control" name="department_id" onchange="submitForm()">
+                                <option value="">{{ __('home.All') }}</option>
+                                @foreach($departments as $department)
+                                    <option href="#"
+                                            {{ $departmentId == $department->id ? 'selected' : '' }} value="{{ $department->id }}"
+                                            data-department="{{$department}}">{{$department->name}}</option>
                                 @endforeach
-                            @endif
-                        </select>
+                            </select>
+                        </div>
                     </div>
-                    <div class="title">
-                        <select class="form-select" id="location_id" name="location_id"
-                                onchange="searchByLocation(this.value)">
-                            <option value="">{{ __('home.Location') }}</option>
-                            @if($provinces)
-                                @foreach($provinces as $index => $province)
-                                    <option value="{{ $province->id }}">{{ $province->full_name }}</option>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect2">{{ __('home.Danh mục thuoc') }}</label>
+                            <select class="form-control" name="category_product" onchange="submitForm()">
+                                <option value="">{{ __('home.All') }}</option>
+                                @foreach($categoryMedicines as $categoryProduct)
+                                    <option {{ $categoryProductId == $categoryProduct->id ? 'selected' : '' }} href="#" value="{{ $categoryProduct->id }}">{{$categoryProduct->name}}</option>
                                 @endforeach
-                            @endif
-                        </select>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="medicine-search--center col-md-6 row d-flex justify-content-between">
-                    <form class="search-box col-md-10">
-                        <input type="search" oninput="searchByName(this.value)" name="focus"
-                               placeholder="{{ __('home.Search for anything…') }}" id="search-input" value="">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </form>
-                </div>
+
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect2">{{ __('home.Location') }}</label>
+                            <select class="form-control" name="province_id" onchange="submitForm()">
+                                <option value="">{{ __('home.All') }}</option>
+                                @foreach($provinces as $province)
+                                    <option href="#" {{ $provinceId == $province->id ? 'selected' : '' }}
+                                    value="{{ $province->id }}"
+                                    >{{$province->full_name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <span class="fa fa-search form-control-feedback"></span>
+                            <input type="search" id="inputSearchDoctor" class="form-control"
+                                   name="nameSearch"
+                                   value="{{ $nameSearch }}"
+                                   placeholder="{{ __('home.Search for anything…') }}">
+                        </div>
+                    </div>
+                </form>
+
             </div>
 
             <div id="list-find-my-medicine">
@@ -259,7 +277,7 @@
                     </div>
                     <div class="ms-auto p-2"><a href="{{route('examination.findmymedicine')}}">See all</a></div>
                 </div>
-            </div>`;
+                </div>`;
                     let allHtml = showMedicine + listDoctor;
                     $('#list-find-my-medicine').empty().append(allHtml);
                 }
@@ -302,6 +320,10 @@
                     }
                 });
             })
+
+            function submitForm() {
+                document.getElementById('searchForm').submit();
+            }
         </script>
     </div>
 @endsection
