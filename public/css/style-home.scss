@@ -791,7 +791,7 @@
         .mainServiceHomeNew {
             margin-top: 16px;
 
-            .col-md-6 {
+            .col-md-6, .col-md-4 {
                 .border-HomeNew {
                     border-radius: 24px;
                     border: 1px solid var(--Grey-Light, #D6D6D6);
@@ -802,6 +802,7 @@
                     gap: 24px;
                     flex-shrink: 0;
                     margin-bottom: 30px;
+                    overflow: hidden;
 
                     &:hover {
                         border-radius: 24px;
@@ -815,23 +816,28 @@
 
                         @keyframes moveDown {
                             to {
-                                transform: translateY(50px); /* Điều chỉnh giá trị theo chiều dọc bạn muốn */
+                                transform: translateY(30px);
                             }
                         }
                     }
-
+                    img {
+                        width: 64px;
+                        height: 64px;
+                        flex-shrink: 0;
+                        border-radius: 50px;
+                        margin-right: 24px;
+                        object-fit: cover;
+                    }
                     .svg-container {
-                        overflow: hidden;
-                        position: absolute;
-                        right: 134px;
-                        top:-20px
+                        position: relative;
+                        right: 80px;
+                        top:-45px
                     }
 
                     .svg-containerNho {
-
-                        overflow: hidden;
-                        position: absolute;
-                        right: 234px;
+                        position: relative;
+                        right: 160px;
+                        top: -35px;
                     }
                 }
             }
@@ -844,5 +850,12 @@
                 line-height: normal;
             }
         }
+    }
+    .background-image_HomeNew--departments {
+        background: url(../img/homeNew-img/background/Icon.png) no-repeat 100% 100%;
+        background-size: 884px 1250px;
+        min-height: 1400px;
+        display: flex;
+        align-items: center;
     }
 }

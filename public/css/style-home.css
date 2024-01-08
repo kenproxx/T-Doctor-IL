@@ -615,7 +615,7 @@
   .container .mainServiceHomeNew {
     margin-top: 16px;
   }
-  .container .mainServiceHomeNew .col-md-6 .border-HomeNew {
+  .container .mainServiceHomeNew .col-md-6 .border-HomeNew, .container .mainServiceHomeNew .col-md-4 .border-HomeNew {
     border-radius: 24px;
     border: 1px solid var(--Grey-Light, #D6D6D6);
     background: var(--White, #FFF);
@@ -625,31 +625,39 @@
     gap: 24px;
     flex-shrink: 0;
     margin-bottom: 30px;
+    overflow: hidden;
   }
-  .container .mainServiceHomeNew .col-md-6 .border-HomeNew:hover {
+  .container .mainServiceHomeNew .col-md-6 .border-HomeNew:hover, .container .mainServiceHomeNew .col-md-4 .border-HomeNew:hover {
     border-radius: 24px;
     border: 1px solid var(--secon1, #088180);
     background: var(--White, #FFF);
     box-shadow: 0px 8px 14px 0px rgba(0, 0, 0, 0.25);
   }
-  .container .mainServiceHomeNew .col-md-6 .border-HomeNew:hover .svg-container, .container .mainServiceHomeNew .col-md-6 .border-HomeNew:hover .svg-containerNho svg {
+  .container .mainServiceHomeNew .col-md-6 .border-HomeNew:hover .svg-container, .container .mainServiceHomeNew .col-md-6 .border-HomeNew:hover .svg-containerNho svg, .container .mainServiceHomeNew .col-md-4 .border-HomeNew:hover .svg-container, .container .mainServiceHomeNew .col-md-4 .border-HomeNew:hover .svg-containerNho svg {
     animation: moveDown 0.5s forwards;
   }
   @keyframes moveDown {
     to {
-      transform: translateY(50px); /* Điều chỉnh giá trị theo chiều dọc bạn muốn */
+      transform: translateY(30px);
     }
   }
-  .container .mainServiceHomeNew .col-md-6 .border-HomeNew .svg-container {
-    overflow: hidden;
-    position: absolute;
-    right: 134px;
-    top: -20px;
+  .container .mainServiceHomeNew .col-md-6 .border-HomeNew img, .container .mainServiceHomeNew .col-md-4 .border-HomeNew img {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+    border-radius: 50px;
+    margin-right: 24px;
+    object-fit: cover;
   }
-  .container .mainServiceHomeNew .col-md-6 .border-HomeNew .svg-containerNho {
-    overflow: hidden;
-    position: absolute;
-    right: 234px;
+  .container .mainServiceHomeNew .col-md-6 .border-HomeNew .svg-container, .container .mainServiceHomeNew .col-md-4 .border-HomeNew .svg-container {
+    position: relative;
+    right: 80px;
+    top: -45px;
+  }
+  .container .mainServiceHomeNew .col-md-6 .border-HomeNew .svg-containerNho, .container .mainServiceHomeNew .col-md-4 .border-HomeNew .svg-containerNho {
+    position: relative;
+    right: 160px;
+    top: -35px;
   }
   .container .mainServiceHomeNew span {
     color: #000;
@@ -657,6 +665,13 @@
     font-style: normal;
     font-weight: 800;
     line-height: normal;
+  }
+  .background-image_HomeNew--departments {
+    background: url(../img/homeNew-img/background/Icon.png) no-repeat 100% 100%;
+    background-size: 884px 1250px;
+    min-height: 1400px;
+    display: flex;
+    align-items: center;
   }
 }
 
