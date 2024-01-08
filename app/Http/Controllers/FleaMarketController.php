@@ -45,7 +45,8 @@ class FleaMarketController extends Controller
      */
     public function wishList()
     {
-        return view('FleaMarket.wish-list');
+        $categoryProduct = CategoryProduct::where('status', true)->get();
+        return view('FleaMarket.wish-list', compact('categoryProduct'));
     }
 
     /**
