@@ -13,24 +13,36 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use function PHPUnit\Framework\isEmpty;
 
 class BackendWishListController extends Controller
 {
     public function getAll(Request $request)
     {
         $userID = $request->input('user_id');
-        $category = $request->input('category');
+        $categories = $request->input('category', []);
+        $minPrice = $request->input('min_price', 0);
+        $maxPrice = $request->input('max_price', 0);
+
         $wishLists = DB::table('wish_lists')
             ->join('users', 'users.id', '=', 'wish_lists.user_id')
             ->join('product_infos', 'product_infos.id', '=', 'wish_lists.product_id')
-            ->where('wish_lists.user_id', $userID)->where('isFavorite', '=', '1');
+            ->where('wish_lists.user_id', $userID)
+            ->where('isFavorite', 1);
 
-        if ($category) {
-            $wishLists->where('product_infos.category_id', $category);
+        if (!empty($categories)) {
+            $wishLists->whereIn('product_infos.category_id', $categories);
         }
 
-        $wishLists->select('wish_lists.*', 'product_infos.*')
-            ->get();
+        if ($minPrice > 0) {
+            $wishLists->where('product_infos.price', '>=', $minPrice);
+        }
+
+        if ($maxPrice > 0) {
+            $wishLists->where('product_infos.price', '<=', $maxPrice);
+        }
+
+        $wishLists = $wishLists->select('wish_lists.*', 'product_infos.*')->get();
 
         return response()->json($wishLists);
     }
