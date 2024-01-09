@@ -2,7 +2,7 @@
 @php use App\Models\Department;use Illuminate\Support\Facades\Auth; @endphp
 @php $isFavourite = \App\Models\MedicalFavourite::where([
                 ['user_id', '=', \Illuminate\Support\Facades\Auth::user()->id ?? ''],
-                ['medical_id', '=', $medicine->id],
+                ['medical_id', '=', $pharmacist->id],
                 ['is_favorite', '=', '1']
             ])->first();
 
