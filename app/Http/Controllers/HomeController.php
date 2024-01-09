@@ -18,6 +18,7 @@ use App\Models\online_medicine\ProductMedicine;
 use App\Models\ProductInfo;
 use App\Models\Setting;
 use App\Models\User;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use ReflectionClass;
@@ -42,15 +43,28 @@ class HomeController extends Controller
     }
     public function specialist()
     {
-        return view('chuyen-khoa.tab-chuyen-khoa-newHome');
+        $departments = \App\Models\Department::where('status', \App\Enums\DepartmentStatus::ACTIVE)->get();
+        return view('chuyen-khoa.tab-chuyen-khoa-newHome', compact('departments'));
     }
     public function specialistDepartment($id)
     {
-        return view('chuyen-khoa.danh-sach-theo-chuyen-khoa', compact('id'));
+        $doctors = \App\Models\User::where('department_id', $id)
+            ->where('status', \App\Enums\UserStatus::ACTIVE)
+            ->get();
+        $clinics = \App\Models\Clinic::where('department', $id)
+            ->where('type', \App\Enums\TypeBusiness::CLINICS)
+            ->where('status', \App\Enums\ClinicStatus::ACTIVE)
+            ->get();
+        $pharmacies = \App\Models\Clinic::where('department', $id)
+            ->where('type', \App\Enums\TypeBusiness::PHARMACIES)
+            ->where('status', \App\Enums\ClinicStatus::ACTIVE)
+            ->get();
+        return view('chuyen-khoa.danh-sach-theo-chuyen-khoa', compact('id', 'doctors', 'clinics', 'pharmacies'));
     }
-    public function specialistDetail()
+    public function specialistDetail($id)
     {
-        return view('chuyen-khoa.detail-clinic-pharmacies');
+        $clinicDetail = \App\Models\Clinic::where('id', $id)->first();
+        return view('chuyen-khoa.detail-clinic-pharmacies',compact('clinicDetail'));
     }
 
     public function admin()

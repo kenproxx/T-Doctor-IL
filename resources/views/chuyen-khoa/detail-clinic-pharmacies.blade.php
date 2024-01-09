@@ -20,18 +20,26 @@
                         </div>
                         <div class="specialList-clinics--main">
                             <div class="title-specialList-clinics">
-                                Bệnh viện đa khoa Hà Đông
+                                {{$clinicDetail->name}}
                             </div>
-                            <div class="address-specialList-clinics">
+                            <div class="address-specialList-clinics d-flex">
                                 <i class="fas fa-map-marker-alt"></i>
-                                Toà V7-B7 The Terra An Hưng, La Khê, Hà Đông
+                                @php
+                                    $array = explode(',', $clinicDetail->address);
+                                    $addressP = Province::where('id', $array[1] ?? null)->first();
+                                    $addressD = \App\Models\District::where('id', $array[2] ?? null)->first();
+                                    $addressC = \App\Models\Commune::where('id', $array[3] ?? null)->first();
+                                @endphp
+                                <div class="ml-1">{{$clinicDetail->address_detail}}
+                                    , {{$addressC->name ?? ''}} , {{$addressD->name ?? ''}}
+                                    , {{$addressP->name ?? ''}}</div>
                             </div>
                             <div class="time-working">
                                 <i class="fa-solid fa-clock"></i>
-                                Mon - Sun | 8am - 20pm
+                                {{$clinicDetail->time_work}} | {{ \Carbon\Carbon::parse($clinicDetail->open_date)->format('H:i') }} - {{ \Carbon\Carbon::parse($clinicDetail->close_date)->format('H:i') }}
                             </div>
                             <div class="group-button d-flex mt-3">
-                                <a href="{{route('home.specialist.detail')}}" class="mr-2">
+                                <a href="" class="mr-2">
                                     <div class="button-follow-specialList">
                                         Theo dõi
                                     </div>
@@ -72,52 +80,25 @@
             <div class="tab-content mt-4" id="myTabContent">
                 <div class="tab-pane fade show active" id="clinicList" role="tabpanel"
                      aria-labelledby="clinicList-tab">
-                    <div class="container">
-
+                    <div class="">
+                        {!! $clinicDetail->introduce !!}
                     </div>
                 </div>
                 <div class="tab-pane fade" id="pharmacies" role="tabpanel" aria-labelledby="pharmacies-tab">
                     <div class="row">
-                        <div class="specialList-clinics col-md-6 mt-5">
-                            <div class="border-specialList">
-                                <div class="content__item d-flex gap-3">
-                                    <div class="specialList-clinics--img">
-                                        <img class="content__item__image" src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                             alt=""/>
-                                    </div>
-                                    <div class="specialList-clinics--main">
-                                        <div class="title-specialList-clinics">
-                                            Bệnh viện đa khoa Hà Đông
-                                        </div>
-                                        <div class="address-specialList-clinics">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            Toà V7-B7 The Terra An Hưng, La Khê, Hà Đông
-                                            - <span>3 Km</span>
-                                        </div>
-                                        <div class="time-working">
-                                            <span class="color-timeWorking">
-                                                09:00 - 19:00
-                                            </span>
-                                            <span>
-                                                 / Dental Clinic
-                                            </span>
-                                        </div>
-                                        <div class="group-button d-flex mt-3">
-                                            <a href="" class="col-md-6">
-                                                <div class="button-booking-specialList">
-                                                    Đặt khám
-                                                </div>
-                                            </a>
-                                            <a href="" class="col-md-6">
-                                                <div class="button-detail-specialList">
-                                                    Xem chi tiết
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @php
+                            $galleryArray = explode(',', $clinicDetail->gallery);
+                        @endphp
+                        @foreach($galleryArray as $gallery)
+                            <img class="p-0"
+                                 style="width: 370px;
+                                 height: 365px;
+                                 object-fit: cover;
+                                 border-radius: 16px;
+
+                                 "
+                                 src="{{$gallery}}" alt="">
+                        @endforeach
                     </div>
                 </div>
                 <div class="tab-pane fade" id="doctorList" role="tabpanel" aria-labelledby="doctorList-tab">
