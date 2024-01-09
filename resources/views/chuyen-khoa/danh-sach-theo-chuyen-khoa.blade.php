@@ -1,3 +1,6 @@
+@php use App\Models\Province;
+
+@endphp
 @extends('layouts.master')
 @section('title', 'Specialist')
 @section('content')
@@ -5,9 +8,27 @@
     @include('layouts.partials.header')
     <div class="container">
         <div class="danh-sach-theo-chuyen-khoa">
-            <div class="title-findDoctor--homeNew">
-                <span class="py-3 text-center">{{ __('home.Danh sách') }}</span>
+            <a href="{{route('home')}}">
+                <div class="title-Danh-sach"><i class="fa-solid fa-arrow-left"></i> Danh sách</div>
+            </a>
+            <div class="search-specialist col-md-8">
+                <label for="search-specialist" class="search-specialist__label w-50">
+                    <i class="fas fa-search"></i>
+                    <input id="search-specialist" placeholder="Tìm kiếm cơ sở y tế">
+                </label>
+                <div class="position-absolute">|</div>
+                <label class="select-specialist__label w-50">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <select>
+                        <option value="0">Tất cả địa điểm</option>
+                        <option value="1">Hà Nội</option>
+                        <option value="2">Hồ Chí Minh</option>
+                        <option value="3">Đà Nẵng</option>
+                        <option value="4">Hải Phòng</option>
+                    </select>
+                </label>
             </div>
+
             <div class="d-flex nav-header--homeNew justify-content-center mt-3">
                 <ul class="nav nav-pills nav-fill d-flex justify-content-between">
                     <li class="nav-item">
@@ -32,31 +53,264 @@
             <div class="tab-content mt-4" id="myTabContent">
                 <div class="tab-pane fade show active" id="clinicList" role="tabpanel"
                      aria-labelledby="clinicList-tab">
-                 111
-                </div>
-                <div class="tab-pane fade" id="pharmacies" role="tabpanel" aria-labelledby="pharmacies-tab">
-                   22
-                </div>
-                <div class="tab-pane fade" id="doctorList" role="tabpanel" aria-labelledby="doctorList-tab">
-                    <div class="section1-content mt-5">
-                        <div class="px-5 py-2">
-                            <div class="content__item d-flex gap-3">
-                                <img
-                                    class="content__item__image"
-                                    src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                    alt=""
-                                />
-                                <div>
-                                    <h6>
-                                        {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
-                                    </h6>
-                                    <p>
-                                        {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
-                                    </p>
-                                    <p class="content__item-link">{{ __('home.Read') }}</p>
+                    <div class="row">
+                        <div class="specialList-clinics col-md-6 mt-5">
+                            <div class="border-specialList">
+                                <div class="content__item d-flex gap-3">
+                                    <div class="specialList-clinics--img">
+                                        <img class="content__item__image" src="{{asset('img/icons_logo/image 1.jpeg')}}"
+                                             alt=""/>
+                                    </div>
+                                    <div class="specialList-clinics--main">
+                                        <div class="title-specialList-clinics">
+                                            Bệnh viện đa khoa Hà Đông
+                                        </div>
+                                        <div class="address-specialList-clinics">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            Toà V7-B7 The Terra An Hưng, La Khê, Hà Đông
+                                            - <span>3 Km</span>
+                                        </div>
+                                        <div class="time-working">
+                                            <span class="color-timeWorking">
+                                                09:00 - 19:00
+                                            </span>
+                                            <span>
+                                                 / Dental Clinic
+                                            </span>
+                                        </div>
+                                        <div class="group-button d-flex mt-3">
+                                            <a href="" class="col-md-6">
+                                                <div class="button-booking-specialList">
+                                                    Đặt khám
+                                                </div>
+                                            </a>
+                                            <a href="" class="col-md-6">
+                                                <div class="button-detail-specialList">
+                                                    Xem chi tiết
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="specialList-clinics col-md-6 mt-5">
+                            <div class="border-specialList">
+                                <div class="content__item d-flex gap-3">
+                                    <div class="specialList-clinics--img">
+                                        <img class="content__item__image" src="{{asset('img/icons_logo/image 1.jpeg')}}"
+                                             alt=""/>
+                                    </div>
+                                    <div class="specialList-clinics--main">
+                                        <div class="title-specialList-clinics">
+                                            Bệnh viện đa khoa Hà Đông
+                                        </div>
+                                        <div class="address-specialList-clinics">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            Toà V7-B7 The Terra An Hưng, La Khê, Hà Đông
+                                            - <span>3 Km</span>
+                                        </div>
+                                        <div class="time-working">
+                                            <span class="color-timeWorking">
+                                                09:00 - 19:00
+                                            </span>
+                                            <span>
+                                                 / Dental Clinic
+                                            </span>
+                                        </div>
+                                        <div class="group-button d-flex mt-3">
+                                            <a href="" class="col-md-6">
+                                                <div class="button-booking-specialList">
+                                                    Đặt khám
+                                                </div>
+                                            </a>
+                                            <a href="" class="col-md-6">
+                                                <div class="button-detail-specialList">
+                                                    Xem chi tiết
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="specialList-clinics col-md-6 mt-5">
+                            <div class="border-specialList">
+                                <div class="content__item d-flex gap-3">
+                                    <div class="specialList-clinics--img">
+                                        <img class="content__item__image" src="{{asset('img/icons_logo/image 1.jpeg')}}"
+                                             alt=""/>
+                                    </div>
+                                    <div class="specialList-clinics--main">
+                                        <div class="title-specialList-clinics">
+                                            Bệnh viện đa khoa Hà Đông
+                                        </div>
+                                        <div class="address-specialList-clinics">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            Toà V7-B7 The Terra An Hưng, La Khê, Hà Đông
+                                            - <span>3 Km</span>
+                                        </div>
+                                        <div class="time-working">
+                                            <span class="color-timeWorking">
+                                                09:00 - 19:00
+                                            </span>
+                                            <span>
+                                                 / Dental Clinic
+                                            </span>
+                                        </div>
+                                        <div class="group-button d-flex mt-3">
+                                            <a href="" class="col-md-6">
+                                                <div class="button-booking-specialList">
+                                                    Đặt khám
+                                                </div>
+                                            </a>
+                                            <a href="" class="col-md-6">
+                                                <div class="button-detail-specialList">
+                                                    Xem chi tiết
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="pharmacies" role="tabpanel" aria-labelledby="pharmacies-tab">
+                    <div class="row">
+                        <div class="specialList-clinics col-md-6 mt-5">
+                            <div class="border-specialList">
+                                <div class="content__item d-flex gap-3">
+                                    <div class="specialList-clinics--img">
+                                        <img class="content__item__image" src="{{asset('img/icons_logo/image 1.jpeg')}}"
+                                             alt=""/>
+                                    </div>
+                                    <div class="specialList-clinics--main">
+                                        <div class="title-specialList-clinics">
+                                            Bệnh viện đa khoa Hà Đông
+                                        </div>
+                                        <div class="address-specialList-clinics">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            Toà V7-B7 The Terra An Hưng, La Khê, Hà Đông
+                                            - <span>3 Km</span>
+                                        </div>
+                                        <div class="time-working">
+                                            <span class="color-timeWorking">
+                                                09:00 - 19:00
+                                            </span>
+                                            <span>
+                                                 / Dental Clinic
+                                            </span>
+                                        </div>
+                                        <div class="group-button d-flex mt-3">
+                                            <a href="" class="col-md-6">
+                                                <div class="button-booking-specialList">
+                                                    Đặt khám
+                                                </div>
+                                            </a>
+                                            <a href="" class="col-md-6">
+                                                <div class="button-detail-specialList">
+                                                    Xem chi tiết
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="doctorList" role="tabpanel" aria-labelledby="doctorList-tab">
+                    @php
+                        $doctors = \App\Models\User::where('member', \App\Enums\TypeUser::DOCTORS)->paginate(12);
+                    @endphp
+                    <div class="row">
+
+                        @foreach($doctors as $doctor)
+                            @if($doctor == '')
+                                <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
+                            @else
+                                <div class="col-md-3 col-12">
+                                    <div class="p-3">
+                                        <div class="product-item">
+                                            <div class="img-pro h-100 justify-content-center d-flex">
+                                                <img src="{{$doctor->avt}}" alt="">
+                                                <a class="button-heart" data-favorite="0">
+                                                    <i id="icon-heart" class="bi-heart bi"
+                                                       data-product-id="${product.id}"
+                                                       onclick="addProductToWishList(${product.id})"></i>
+                                                </a>
+                                                <s class="icon-chuyen-khoa">
+                                                    @php
+                                                        $department = \App\Models\Department::where('id',$doctor->department_id)->value('thumbnail');
+                                                    @endphp
+                                                    <img src="{{$department}}">
+                                                </s>
+                                            </div>
+                                            <div class="content-pro p-3">
+                                                <div class="">
+                                                    <div class="name-product" style="height: auto">
+                                                        <a class="name-product--fleaMarket"
+                                                           href="{{ route('examination.doctor_info', $doctor->id) }}">{{$doctor->name}}</a>
+                                                    </div>
+                                                    <div class="location-pro d-flex">
+                                                        <p>{!! $doctor->service !!}</p>
+                                                    </div>
+                                                    <div class="price-pro">
+                                                        @php
+                                                            if ($doctor->province_id == null) {
+                                                                $addressP = 'Ha Noi';
+                                                                }
+                                                            else {
+                                                                $addressP = Province::find($doctor->province_id)->name;
+                                                                }
+                                                        @endphp
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="21"
+                                                             height="21" viewBox="0 0 21 21" fill="none">
+                                                            <g clip-path="url(#clip0_5506_14919)">
+                                                                <path
+                                                                    d="M4.66602 12.8382C3.12321 13.5188 2.16602 14.4673 2.16602 15.5163C2.16602 17.5873 5.89698 19.2663 10.4993 19.2663C15.1017 19.2663 18.8327 17.5873 18.8327 15.5163C18.8327 14.4673 17.8755 13.5188 16.3327 12.8382M15.4993 7.59961C15.4993 10.986 11.7493 12.5996 10.4993 15.0996C9.24935 12.5996 5.49935 10.986 5.49935 7.59961C5.49935 4.83819 7.73793 2.59961 10.4993 2.59961C13.2608 2.59961 15.4993 4.83819 15.4993 7.59961ZM11.3327 7.59961C11.3327 8.05985 10.9596 8.43294 10.4993 8.43294C10.0391 8.43294 9.66602 8.05985 9.66602 7.59961C9.66602 7.13937 10.0391 6.76628 10.4993 6.76628C10.9596 6.76628 11.3327 7.13937 11.3327 7.59961Z"
+                                                                    stroke="white" stroke-width="2"
+                                                                    stroke-linecap="round"
+                                                                    stroke-linejoin="round"/>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_5506_14919">
+                                                                    <rect width="20" height="20" fill="white"
+                                                                          transform="translate(0.5 0.933594)"/>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg> &nbsp;
+                                                        {{$addressP}}
+                                                    </div>
+                                                    <div class="price-pro">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="21"
+                                                             height="21" viewBox="0 0 21 21" fill="none">
+                                                            <g clip-path="url(#clip0_5506_14923)">
+                                                                <path
+                                                                    d="M10.4993 5.93294V10.9329L13.8327 12.5996M18.8327 10.9329C18.8327 15.5353 15.1017 19.2663 10.4993 19.2663C5.89698 19.2663 2.16602 15.5353 2.16602 10.9329C2.16602 6.33057 5.89698 2.59961 10.4993 2.59961C15.1017 2.59961 18.8327 6.33057 18.8327 10.9329Z"
+                                                                    stroke="white" stroke-width="2"
+                                                                    stroke-linecap="round"
+                                                                    stroke-linejoin="round"/>
+                                                            </g>
+                                                            <defs>
+                                                                <clipPath id="clip0_5506_14923">
+                                                                    <rect width="20" height="20" fill="white"
+                                                                          transform="translate(0.5 0.933594)"/>
+                                                                </clipPath>
+                                                            </defs>
+                                                        </svg> &nbsp; {{$doctor->time_working_1}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
+                    <div class="pagination mt-4 d-flex align-items-center justify-content-center">
+                        {{ $doctors->links() }}
                     </div>
                 </div>
             </div>

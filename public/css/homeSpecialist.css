@@ -71,6 +71,120 @@
 .container .danh-sach-theo-chuyen-khoa {
   margin-top: 200px;
 }
+.container .danh-sach-theo-chuyen-khoa .title-Danh-sach {
+  color: #000;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  margin-bottom: 32px;
+}
+.container .danh-sach-theo-chuyen-khoa .search-specialist {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+.container .danh-sach-theo-chuyen-khoa .search-specialist label {
+  color: #626264;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  position: relative;
+}
+.container .danh-sach-theo-chuyen-khoa .search-specialist label i {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+.container .danh-sach-theo-chuyen-khoa .search-specialist label input, .container .danh-sach-theo-chuyen-khoa .search-specialist label select {
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: var(--White-Light, #F3F3F3);
+  border: none;
+  padding: 10px 46px;
+  width: 100%;
+  outline: none;
+}
+.container .danh-sach-theo-chuyen-khoa .search-specialist .select-specialist__label select {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  color: var(--Grey-Dark, #929292);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.container .danh-sach-theo-chuyen-khoa .search-specialist .search-specialist__label input {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.container .danh-sach-theo-chuyen-khoa .specialList-clinics .border-specialList {
+  border-radius: 16px;
+  border: 1px solid var(--Light, #EAEAEA);
+  background: var(--White, #FFF);
+}
+.container .danh-sach-theo-chuyen-khoa .specialList-clinics .border-specialList .specialList-clinics--main .title-specialList-clinics {
+  color: var(--Black, #000);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+.container .danh-sach-theo-chuyen-khoa .specialList-clinics .border-specialList .specialList-clinics--main .address-specialList-clinics {
+  color: var(--Grey-Dark, #929292);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.container .danh-sach-theo-chuyen-khoa .specialList-clinics .border-specialList .specialList-clinics--main .address-specialList-clinics span {
+  color: var(--secon1, #088180);
+}
+.container .danh-sach-theo-chuyen-khoa .specialList-clinics .border-specialList .specialList-clinics--main .time-working {
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.container .danh-sach-theo-chuyen-khoa .specialList-clinics .border-specialList .specialList-clinics--main .time-working .color-timeWorking {
+  color: var(--secon1, #088180);
+}
+.container .danh-sach-theo-chuyen-khoa .specialList-clinics .border-specialList .specialList-clinics--main .group-button .button-booking-specialList {
+  display: flex;
+  height: 40px;
+  padding: 13px 16px 12px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex: 1 0 0;
+  border-radius: 45px;
+  background: var(--secon1, #088180);
+  color: #FFF;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.container .danh-sach-theo-chuyen-khoa .specialList-clinics .border-specialList .specialList-clinics--main .group-button .button-detail-specialList {
+  display: flex;
+  height: 40px;
+  padding: 13px 16px 12px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex: 1 0 0;
+  border-radius: 45px;
+  background: var(--White-Light, #F3F3F3);
+  color: var(--secon1, #088180);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  border: 1px solid var(--secon1, #088180);
+}
 .container .danh-sach-theo-chuyen-khoa .nav-item {
   margin: 12px;
 }
@@ -88,6 +202,7 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  height: auto;
 }
 .container .danh-sach-theo-chuyen-khoa .nav-item .nav-link {
   border-radius: 45px;
@@ -97,6 +212,72 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
+}
+.container .danh-sach-theo-chuyen-khoa .product-item {
+  border-radius: 25px;
+  background: #088180;
+  padding: 0;
+}
+.container .danh-sach-theo-chuyen-khoa .product-item .img-pro img {
+  border-radius: 24px 24px 0px 100px;
+  height: 300px;
+  object-fit: cover;
+}
+.container .danh-sach-theo-chuyen-khoa .product-item .img-pro i {
+  display: flex;
+  padding: 8px;
+  align-items: flex-start;
+  gap: 10px;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  border-radius: 51px;
+  background: var(--Light, #EAEAEA);
+}
+.container .danh-sach-theo-chuyen-khoa .product-item .img-pro .icon-chuyen-khoa {
+  display: flex;
+  padding: 8px;
+  align-items: flex-start;
+  gap: 10px;
+  position: absolute;
+  left: 15px;
+  bottom: 0;
+  border-radius: 51px;
+  background: var(--Light, #EAEAEA);
+}
+.container .danh-sach-theo-chuyen-khoa .product-item .img-pro .icon-chuyen-khoa img {
+  width: 30px;
+  height: 30px;
+  border-radius: 22px;
+}
+.container .danh-sach-theo-chuyen-khoa .product-item .content-pro .name-product a {
+  color: var(--White, #FFF);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  min-height: 24px;
+}
+.container .danh-sach-theo-chuyen-khoa .product-item .content-pro .location-pro p {
+  margin: 0;
+  color: var(--White, #FFF);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  min-height: 85px;
+}
+.container .danh-sach-theo-chuyen-khoa .product-item .content-pro .price-pro {
+  color: var(--White, #FFF);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+.container .danh-sach-theo-chuyen-khoa .product-item:hover {
+  border-radius: 25px;
+  background: #088180;
+  box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.25);
 }
 
 /*# sourceMappingURL=homeSpecialist.css.map */

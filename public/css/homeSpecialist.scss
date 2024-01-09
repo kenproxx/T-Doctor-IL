@@ -85,6 +85,153 @@
     .danh-sach-theo-chuyen-khoa {
         margin-top: 200px;
 
+        .title-Danh-sach {
+            color: #000;
+            font-size: 32px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+            margin-bottom: 32px;
+        }
+
+        .search-specialist {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            //width: 830px;
+            margin: 0 auto;
+
+            label {
+                color: #626264;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+                position: relative;
+
+                i {
+                    position: absolute;
+                    top: 16px;
+                    left: 16px;
+                }
+
+                input, select {
+                    height: 48px;
+                    flex-shrink: 0;
+                    border-radius: 10px;
+                    background: var(--White-Light, #F3F3F3);
+                    border: none;
+                    padding: 10px 46px;
+                    width: 100%;
+                    outline: none;
+                }
+            }
+
+            .select-specialist__label {
+                select {
+                    border-top-left-radius: 0px;
+                    border-bottom-left-radius: 0px;
+                    color: var(--Grey-Dark, #929292);
+                    font-size: 14px;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: normal;
+                }
+            }
+
+            .search-specialist__label {
+                input {
+                    border-top-right-radius: 0px;
+                    border-bottom-right-radius: 0px;
+                }
+            }
+
+        }
+
+        .specialList-clinics {
+            .border-specialList {
+                border-radius: 16px;
+                border: 1px solid var(--Light, #EAEAEA);
+                background: var(--White, #FFF);
+
+                .specialList-clinics--img {
+
+                }
+
+                .specialList-clinics--main {
+
+                    .title-specialList-clinics {
+                        color: var(--Black, #000);
+                        font-size: 24px;
+                        font-style: normal;
+                        font-weight: 800;
+                        line-height: normal;
+                    }
+
+                    .address-specialList-clinics {
+                        color: var(--Grey-Dark, #929292);
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
+
+                        span {
+                            color: var(--secon1, #088180);
+                        }
+                    }
+
+                    .time-working {
+                        font-size: 12px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
+
+                        .color-timeWorking {
+                            color: var(--secon1, #088180);
+
+                        }
+                    }
+
+                    .group-button {
+                        .button-booking-specialList {
+                            display: flex;
+                            height: 40px;
+                            padding: 13px 16px 12px 16px;
+                            justify-content: center;
+                            align-items: center;
+                            gap: 10px;
+                            flex: 1 0 0;
+                            border-radius: 45px;
+                            background: var(--secon1, #088180);
+                            color: #FFF;
+                            font-size: 18px;
+                            font-style: normal;
+                            font-weight: 600;
+                            line-height: normal;
+                        }
+
+                        .button-detail-specialList {
+                            display: flex;
+                            height: 40px;
+                            padding: 13px 16px 12px 16px;
+                            justify-content: center;
+                            align-items: center;
+                            gap: 10px;
+                            flex: 1 0 0;
+                            border-radius: 45px;
+                            background: var(--White-Light, #F3F3F3);
+                            color: var(--secon1, #088180);
+                            font-size: 18px;
+                            font-style: normal;
+                            font-weight: 600;
+                            line-height: normal;
+                            border: 1px solid var(--secon1, #088180);
+                        }
+                    }
+                }
+            }
+        }
+
         .nav-item {
             margin: 12px;
 
@@ -102,6 +249,7 @@
                 font-style: normal;
                 font-weight: 600;
                 line-height: normal;
+                height: auto;
             }
 
             .nav-link {
@@ -112,6 +260,87 @@
                 justify-content: center;
                 align-items: center;
                 gap: 10px;
+            }
+        }
+        .product-item {
+            border-radius: 25px;
+            background: #088180;
+            padding: 0;
+
+            .img-pro {
+                img {
+                    border-radius: 24px 24px 0px 100px;
+                    height: 300px;
+                    object-fit: cover;
+                }
+
+                i {
+                    display: flex;
+                    padding: 8px;
+                    align-items: flex-start;
+                    gap: 10px;
+                    position: absolute;
+                    right: 8px;
+                    top: 8px;
+                    border-radius: 51px;
+                    background: var(--Light, #EAEAEA);
+                }
+
+                .icon-chuyen-khoa {
+                    display: flex;
+                    padding: 8px;
+                    align-items: flex-start;
+                    gap: 10px;
+                    position: absolute;
+                    left: 15px;
+                    bottom: 0;
+                    border-radius: 51px;
+                    background: var(--Light, #EAEAEA);
+
+                    img {
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 22px;
+                    }
+                }
+            }
+
+            .content-pro {
+                .name-product {
+                    a {
+                        color: var(--White, #FFF);
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 800;
+                        line-height: normal;
+                        min-height: 24px;
+                    }
+                }
+
+                .location-pro p {
+                    margin: 0;
+                    color: var(--White, #FFF);
+                    //text-align: center;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: normal;
+                    min-height: 85px;
+                }
+
+                .price-pro {
+                    color: var(--White, #FFF);
+                    font-size: 16px;
+                    font-style: normal;
+                    font-weight: 800;
+                    line-height: normal;
+                }
+            }
+
+            &:hover {
+                border-radius: 25px;
+                background: #088180;
+                box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.25);
             }
         }
     }
