@@ -106,7 +106,7 @@
                     </div>
                 </div>
             </nav>
-        </div>=
+        </div>
     </div>
 </header>
 {{-- modal menu --}}
