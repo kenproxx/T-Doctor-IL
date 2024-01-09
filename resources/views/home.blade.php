@@ -2667,7 +2667,7 @@
                                                         </div>
                                                         <div class="content-pro p-3">
                                                             <div class="">
-                                                                <div class="name-product" style="height: auto">
+                                                                <div class="name-product" style="min-height: 48px">
                                                                     <a class="name-product--fleaMarket"
                                                                        href="{{ route('examination.doctor_info', $product->id) }}">{{$product->name}}</a>
                                                                 </div>
