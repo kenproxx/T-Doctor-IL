@@ -1,6 +1,6 @@
 .container {
+    margin-top: 200px;
     .tab-chuyen-khoa {
-        margin-top: 200px;
 
         .titleServiceHomeNew {
             color: #000;
@@ -83,7 +83,6 @@
     }
 
     .danh-sach-theo-chuyen-khoa {
-        margin-top: 200px;
 
         .title-Danh-sach {
             color: #000;
@@ -342,6 +341,109 @@
                 background: #088180;
                 box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.25);
             }
+        }
+    }
+    .detail-clinic-theo-chuyen-khoa-title {
+        .title-detail-clinic {
+            color: #000;
+            font-size: 32px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+        }
+         .border-specialList {
+
+
+            .specialList-clinics--img {
+
+            }
+
+            .specialList-clinics--main {
+
+                .title-specialList-clinics {
+                    color: var(--Black, #000);
+                    font-size: 48px;
+                    font-style: normal;
+                    font-weight: 800;
+                    line-height: normal;
+                    margin-bottom: 12px;
+                }
+
+                .address-specialList-clinics {
+                    color: #000;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 800;
+                    line-height: normal;
+
+
+                    i {
+                        color: var(--secon1, #929292);
+                    }
+                }
+
+                .time-working {
+                    color: #000;
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: 800;
+                    line-height: normal;
+
+                    i {
+                        color: var(--secon1, #929292);
+
+                    }
+                }
+
+                .group-button {
+                    .button-direct-specialList {
+                        display: flex;
+                        height: 40px;
+                        padding: 13px 16px 12px 16px;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 10px;
+                        flex: 1 0 0;
+                        border-radius: 45px;
+                        background: var(--secon1, #088180);
+                        color: #FFF;
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
+                    }
+
+                    .button-follow-specialList {
+                        display: flex;
+                        height: 40px;
+                        padding: 13px 16px 12px 16px;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 10px;
+                        flex: 1 0 0;
+                        border-radius: 45px;
+                        background: var(--White-Light, #F3F3F3);
+                        color: var(--secon1, #088180);
+                        font-size: 18px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: normal;
+                    }
+                }
+            }
+        }
+    }
+    .detail-clinic-theo-chuyen-khoa-main {
+        .nav-link.active {
+            color: #088180;
+        }
+        .nav-link {
+            color: var(--Grey-Dark, #929292);
+            text-align: center;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
         }
     }
 }

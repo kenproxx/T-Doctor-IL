@@ -46,7 +46,11 @@ class HomeController extends Controller
     }
     public function specialistDepartment($id)
     {
-        return view('chuyen-khoa.danh-sach-theo-chuyen-khoa');
+        return view('chuyen-khoa.danh-sach-theo-chuyen-khoa', compact('id'));
+    }
+    public function specialistDetail()
+    {
+        return view('chuyen-khoa.detail-clinic-pharmacies');
     }
 
     public function admin()

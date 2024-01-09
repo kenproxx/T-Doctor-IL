@@ -8,7 +8,7 @@
     @include('layouts.partials.header')
     <div class="container">
         <div class="danh-sach-theo-chuyen-khoa">
-            <a href="{{route('home')}}">
+            <a href="{{route('home.specialist')}}">
                 <div class="title-Danh-sach"><i class="fa-solid fa-arrow-left"></i> Danh sách</div>
             </a>
             <div class="search-specialist col-md-8">
@@ -84,7 +84,7 @@
                                                     Đặt khám
                                                 </div>
                                             </a>
-                                            <a href="" class="col-md-6">
+                                            <a href="{{route('home.specialist.detail')}}" class="col-md-6">
                                                 <div class="button-detail-specialList">
                                                     Xem chi tiết
                                                 </div>
