@@ -258,9 +258,10 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <span class="fa fa-search form-control-feedback"></span>
+                            <label></label>
                             <input type="search" id="inputSearchDoctor" class="form-control"
                                    name="nameSearch"
                                    value="{{ $nameSearch }}"

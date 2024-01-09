@@ -130,9 +130,17 @@ class ExaminationController extends Controller
         $categoryMedicines = CategoryProduct::where('status', true)->get();
 
         $queryPharmacists = User::where('member', TypeMedical::PHAMACISTS)->where('status', UserStatus::ACTIVE);
+        $queryMedicine = ProductMedicine::where('product_medicines.status', OnlineMedicineStatus::APPROVED);
+        $queryMedicine->join('users', 'users.id', '=', 'product_medicines.user_id');
+
 
         if (!empty($provinceId)) {
             $queryPharmacists->where('province_id', $provinceId);
+            $queryMedicine->where('users.province_id', $provinceId);
+        }
+
+        if (!empty($categoryProductId)) {
+            $queryMedicine->where('product_medicines.category_id', $categoryProductId);
         }
 
         if (!empty($departmentId)) {
@@ -141,6 +149,7 @@ class ExaminationController extends Controller
 
         if (!empty($nameSearch)) {
             $queryPharmacists->where('name', 'LIKE', '%' . $nameSearch . '%');
+            $queryMedicine->where('product_medicines.name', 'LIKE', '%' . $nameSearch . '%');
         }
 
         $limitPerPages = 8;
@@ -152,23 +161,7 @@ class ExaminationController extends Controller
         $allPhamrmacists = $queryPharmacists->where('time_working_1', '00:00-23:59')->where('time_working_2',
             'T2-CN')->limit($limitPerPages)->get();
 
-
-        $queryMedicine = ProductMedicine::where('product_medicines.status', OnlineMedicineStatus::APPROVED);
-        $queryMedicine->join('users', 'users.id', '=', 'product_medicines.user_id');
-
-        if (!empty($categoryProductId)) {
-            $queryMedicine->where('product_medicines.category_id', $categoryProductId);
-        }
-
-        if (!empty($nameSearch)) {
-            $queryMedicine->where('product_medicines.name', 'LIKE', '%' . $nameSearch . '%');
-        }
-
-        if (!empty($provinceId)) {
-            $queryMedicine->where('users.province_id', $provinceId);
-            $queryMedicine->select('product_medicines.*', 'users.province_id');
-        }
-
+        $queryMedicine->select('product_medicines.*', 'users.province_id');
         $newMedicines = $queryMedicine->orderBy('product_medicines.created_at', 'DESC')->limit($limitPerPages)->get();
         $recommendedMedicines = $queryMedicine->limit($limitPerPages)->get();
         $hotMedicines = $queryMedicine->limit($limitPerPages)->get();
