@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AddressMapController;
+use App\Http\Controllers\admin\AdminUserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
@@ -127,9 +128,6 @@ Route::middleware(['user.active'])->group(function () {
             [ExaminationController::class, 'findByCategory'])->name('examination.findByCategory');
         Route::get('/my-personal-doctor',
             [ExaminationController::class, 'myPersonalDoctor'])->name('examination.mypersonaldoctor');
-
-        Route::post('search',
-            [ExaminationController::class, 'searchInFindMyMedicine'])->name('examination.search.in.FindMyMedicine');
     });
 
     Route::group(['prefix' => 'questions'], function () {
@@ -367,6 +365,13 @@ Route::middleware(['user.active'])->group(function () {
             Route::get('list', [AddressController::class, 'getList'])->name('view.user.address.list');
             Route::get('detail/{id}', [AddressController::class, 'detail'])->name('view.user.address.detail');
             Route::get('create', [AddressController::class, 'create'])->name('view.user.address.create');
+        });
+
+        /* Admin user */
+        Route::group(['prefix' => 'admin/user'], function () {
+            Route::get('list', [AdminUserController::class, 'list'])->name('view.admin.user.list');
+            Route::get('detail/{id}', [AdminUserController::class, 'detail'])->name('view.admin.user.detail');
+            Route::get('create', [AdminUserController::class, 'create'])->name('view.admin.user.create');
         });
     });
 

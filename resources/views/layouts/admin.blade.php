@@ -1,5 +1,5 @@
-@php use App\Models\RoleUser; @endphp
-@php use App\Models\Role; @endphp
+@php use App\Models\Role;use App\Models\RoleUser; @endphp
+@php @endphp
     <!DOCTYPE html>
 <html lang="en">
 
@@ -546,7 +546,7 @@
                 </li>
                 <!-- End Config Nav -->
 
-                <!-- End Departments/Symptoms Nav -->
+                <!-- Start Departments/Symptoms Nav -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#department-symptom-nav" data-bs-toggle="collapse"
                        href="#">
@@ -568,6 +568,33 @@
                 </li>
                 <!-- End Departments/Symptoms Nav -->
             @endif
+            @php
+                $isAdmin = (new \App\Http\Controllers\MainController())->checkAdmin();
+            @endphp
+            @if($isAdmin)
+                <!-- Start Admin User Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#user-manager-nav" data-bs-toggle="collapse"
+                       href="#">
+                        <i class="bi bi-list-task"></i><span>User</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="user-manager-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('view.admin.user.list') }}">
+                                <i class="bi bi-circle"></i><span>List User</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('view.admin.user.create') }}">
+                                <i class="bi bi-circle"></i><span>Create User</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Admin User Nav -->
+
+            @endif
         @else
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#department-symptom-nav" data-bs-toggle="collapse"
@@ -587,7 +614,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#address-nav" data-bs-toggle="collapse"
                href="#">
-                <i class="bi bi-app"></i><span>List Address</span><i
+                <i class="bi bi-card-heading"></i><span>List Address</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="address-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">

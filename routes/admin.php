@@ -27,7 +27,8 @@ Route::group(['prefix' => 'new-event'], function () {
 });
 
 Route::group(['prefix' => 'users'], function () {
-    Route::get('index', [AdminUserApi::class, 'getAllUser'])->name('api.admin.users.index');
+    Route::get('index', [AdminUserApi::class, 'getAllUser'])->name('api.admin.users.list');
+    Route::get('search', [AdminUserApi::class, 'search'])->name('api.admin.users.search');
     Route::get('detail/{id}', [AdminUserApi::class, 'detail'])->name('api.admin.users.detail');
     Route::post('create', [AdminUserApi::class, 'create'])->name('api.admin.users.create');
     Route::post('update/{id}', [AdminUserApi::class, 'update'])->name('api.admin.users.update');
