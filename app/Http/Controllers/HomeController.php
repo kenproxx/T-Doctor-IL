@@ -40,6 +40,14 @@ class HomeController extends Controller
             ->paginate(15);
         return view('home', compact('coupons', 'products', 'medicines', 'productsFlea'));
     }
+    public function specialist()
+    {
+        return view('chuyen-khoa.tab-chuyen-khoa-newHome');
+    }
+    public function specialistDepartment($id)
+    {
+        return view('chuyen-khoa.danh-sach-theo-chuyen-khoa');
+    }
 
     public function admin()
     {
