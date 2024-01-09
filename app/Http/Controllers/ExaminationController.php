@@ -127,44 +127,51 @@ class ExaminationController extends Controller
 
         $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
         $provinces = Province::all();
+        $categoryMedicines = CategoryProduct::where('status', true)->get();
 
-        $arrParam = $request->all();
-        $categoryId = array_key_exists('category_id', $arrParam) ? $arrParam['category_id'] : null;
-        $locationId = array_key_exists('location_id', $arrParam) ? $arrParam['location_id'] : null;
-        $name = array_key_exists('name', $arrParam) ? $arrParam['name'] : null;
+        $queryPharmacists = User::where('member', TypeMedical::PHAMACISTS)->where('status', UserStatus::ACTIVE);
 
-        $query = User::where('member', TypeMedical::PHAMACISTS)->where('status', UserStatus::ACTIVE);
-
-        if (!empty($categoryId)) {
-            $query->where('category_id', $categoryId);
+        if (!empty($provinceId)) {
+            $queryPharmacists->where('province_id', $provinceId);
         }
 
-        if (!empty($locationId)) {
-            $query->where('location_id', $locationId);
+        if (!empty($departmentId)) {
+            $queryPharmacists->where('department_id', $departmentId);
         }
 
-        if (!empty($name)) {
-            $query->where('name', 'LIKE', '%' . $name . '%');
+        if (!empty($nameSearch)) {
+            $queryPharmacists->where('name', 'LIKE', '%' . $nameSearch . '%');
         }
-
 
         $limitPerPages = 8;
 
-        $bestPhamrmacists = $query->orderBy('id', 'DESC')->limit($limitPerPages)->get();
+        $bestPhamrmacists = $queryPharmacists->orderBy('id', 'DESC')->limit($limitPerPages)->get();
 
-        $newPhamrmacists = $query->orderBy('id', 'DESC')->limit($limitPerPages)->get();
+        $newPhamrmacists = $queryPharmacists->orderBy('id', 'DESC')->limit($limitPerPages)->get();
 
-        $allPhamrmacists = $query->where('time_working_1', '00:00-23:59')->where('time_working_2',
+        $allPhamrmacists = $queryPharmacists->where('time_working_1', '00:00-23:59')->where('time_working_2',
             'T2-CN')->limit($limitPerPages)->get();
 
-        $provinces = Province::all();
 
-        $categoryMedicines = CategoryProduct::where('status', true)->get();
+        $queryMedicine = ProductMedicine::where('product_medicines.status', OnlineMedicineStatus::APPROVED);
+        $queryMedicine->join('users', 'users.id', '=', 'product_medicines.user_id');
 
-        $query = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED);
-        $newMedicines = $query->orderBy('id', 'DESC')->limit($limitPerPages)->get();
-        $recommendedMedicines = $query->limit($limitPerPages)->get();
-        $hotMedicines = $query->limit($limitPerPages)->get();
+        if (!empty($categoryProductId)) {
+            $queryMedicine->where('product_medicines.category_id', $categoryProductId);
+        }
+
+        if (!empty($nameSearch)) {
+            $queryMedicine->where('product_medicines.name', 'LIKE', '%' . $nameSearch . '%');
+        }
+
+        if (!empty($provinceId)) {
+            $queryMedicine->where('users.province_id', $provinceId);
+            $queryMedicine->select('product_medicines.*', 'users.province_id');
+        }
+
+        $newMedicines = $queryMedicine->orderBy('product_medicines.created_at', 'DESC')->limit($limitPerPages)->get();
+        $recommendedMedicines = $queryMedicine->limit($limitPerPages)->get();
+        $hotMedicines = $queryMedicine->limit($limitPerPages)->get();
 
         $category_function = CategoryProduct::where('name', 'Functional Foods')->first();
         $function_foods = null;
@@ -176,8 +183,8 @@ class ExaminationController extends Controller
         return view('examination.findmymedicine',
             compact('bestPhamrmacists', 'newPhamrmacists', 'allPhamrmacists', 'hotMedicines', 'newMedicines',
                 'recommendedMedicines', 'categoryMedicines', 'function_foods', 'provinces',
-            'departmentId', 'departments', 'provinces', 'provinceId', 'nameSearch',
-            'categoryProductId'));
+                'departmentId', 'departments', 'provinces', 'provinceId', 'nameSearch',
+                'categoryProductId'));
     }
 
     public function bestPharmacists()
@@ -318,17 +325,5 @@ class ExaminationController extends Controller
     {
         return view('admin.connect.chat.index', compact('id'));
     }
-
-    public function searchInFindMyMedicine(Request $request)
-    {
-
-        $category_id = $request->input('category_id');
-        $location_id = $request->input('location_id');
-        $name = $request->input('name');
-
-
-        dd($request->all());
-    }
-
 
 }

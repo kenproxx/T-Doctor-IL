@@ -127,9 +127,6 @@ Route::middleware(['user.active'])->group(function () {
             [ExaminationController::class, 'findByCategory'])->name('examination.findByCategory');
         Route::get('/my-personal-doctor',
             [ExaminationController::class, 'myPersonalDoctor'])->name('examination.mypersonaldoctor');
-
-        Route::post('search',
-            [ExaminationController::class, 'searchInFindMyMedicine'])->name('examination.search.in.FindMyMedicine');
     });
 
     Route::group(['prefix' => 'questions'], function () {

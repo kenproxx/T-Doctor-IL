@@ -829,6 +829,7 @@ return [
     'Please enter your email correctly' => 'Please enter your email correctly',
     'Please enter your phone' => 'Please enter your phone',
     'Please enter your content' => 'Please enter your content',
+    'Danh mục thuoc' => 'Drug category',
 
 
 ];

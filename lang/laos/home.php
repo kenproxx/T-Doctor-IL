@@ -816,4 +816,5 @@ return [
     'Please enter your email correctly' => 'ກະລຸນາປ້ອນອີເມວຂອງທ່ານນຳກັນ',
     'Please enter your phone' => 'ກະລຸນາປ້ອນເບີໂທຂອງທ່ານ',
     'Please enter your content' => 'ກະລຸນາປ້ອນເນື້ອໃນຂອງທ່ານ',
+    'Danh mục thuoc' => 'ປະເພດຢາ',
 ];

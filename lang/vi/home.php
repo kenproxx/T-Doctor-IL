@@ -828,5 +828,6 @@ return [
     'Please enter your email correctly' => 'Vui lòng nhập email của bạn đúng',
     'Please enter your phone' => 'Vui lòng nhập số điện thoại của bạn',
     'Please enter your content' => 'Vui lòng nhập nội dung của bạn',
+    'Danh mục thuoc' => 'Danh mục thuốc',
 
 ];
