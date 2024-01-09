@@ -61,6 +61,11 @@ Route::middleware(['user.active'])->group(function () {
     Route::get('/lang/{locale}', [MainController::class, 'setLanguage'])->name('language');
 
     Route::get('/', 'HomeController@index')->name('home');
+    Route::group(['prefix' => 'home'], function () {
+        Route::get('/specialist', [HomeController::class, 'specialist'])->name('home.specialist');
+        Route::get('/specialist/{id}', [HomeController::class, 'specialistDepartment'])->name('home.specialist.department');
+
+    });
 
     Route::post('/login', [AuthController::class, 'login'])->name('loginProcess');
     Route::post('/register', [AuthController::class, 'register'])->name('registerProcess');
