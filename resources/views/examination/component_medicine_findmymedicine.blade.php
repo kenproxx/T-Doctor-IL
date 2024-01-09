@@ -1,3 +1,14 @@
+@php $isFavourite = \App\Models\MedicalFavourite::where([
+                ['user_id', '=', \Illuminate\Support\Facades\Auth::user()->id ?? ''],
+                ['medical_id', '=', $medicine->id],
+                ['is_favorite', '=', '1']
+            ])->first();
+
+            $heart = 'bi-heart';
+            if ($isFavourite){
+                $heart = 'bi-heart-fill';
+            } @endphp
+
 <div class="col-sm-3 mb-3">
     <div class="m-4">
         <div class="frame component-medicine w-100">
