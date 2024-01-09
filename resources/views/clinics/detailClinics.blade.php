@@ -317,6 +317,11 @@
         $(document).ready(function () {
             $(document).on('click', '#modalToggle', async function () {
 
+                if ('{{ !Auth::check() }}') {
+                    alert('{{ __('home.Please login to continue') }}');
+                    return;
+                }
+
                 $.ajax({
                     url: '{{ route('api.survey.get-by-department', $bookings->department) }}',
                     method: 'GET',
