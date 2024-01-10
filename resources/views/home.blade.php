@@ -1337,7 +1337,7 @@
                                             <div class="cCarousel-item">
                                                 <div class="product-item">
                                                     <div
-                                                        class="img-pro justify-content-center d-flex img_product--homeNew">
+                                                        class="img-pro justify-content-center h-auto d-flex img_product--homeNew">
                                                         <img src="{{$product->thumbnail}}" alt="">
                                                         <a class="button-heart" data-favorite="0">
                                                             <i id="icon-heart" class="bi-heart bi"
