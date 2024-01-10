@@ -53,19 +53,19 @@
 
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="form-control-label" for="new_password">{{ __('home.New password') }}
+                        <label class="form-control-label" for="password">{{ __('home.New password') }}
                             <span class="small text-danger">*</span>
                         </label>
-                        <input type="password" id="new_password" class="form-control" name="new_password"
+                        <input type="password" id="password" class="form-control" name="password"
                                placeholder="{{ __('home.New password') }}">
                     </div>
                     <div class="form-group col-md-6">
                         <label class="form-control-label"
-                               for="confirm_password">{{ __('home.Confirm Password') }}
+                               for="passwordConfirm">{{ __('home.Confirm Password') }}
                             <span class="small text-danger">*</span>
                         </label>
-                        <input type="password" id="confirm_password" class="form-control"
-                               name="password_confirmation" placeholder="{{ __('home.Confirm Password') }}">
+                        <input type="password" id="passwordConfirm" class="form-control"
+                               name="passwordConfirm" placeholder="{{ __('home.Confirm Password') }}">
                     </div>
                 </div>
                 <div class="row">
@@ -86,13 +86,13 @@
                     <div class="form-group col-md-4">
                         <label for="province_id">{{ __('home.Tỉnh') }}</label>
                         <select name="province_id" id="province_id" class="form-control form-select"
-                                onchange="callGetAllDistricts()">
+                                onchange="callGetAllDistricts($('#province_id').find(':selected').data('code'))">
                         </select>
                     </div>
                     <div class="form-group col-md-4">
                         <label for="district_id">{{ __('home.Quận') }}</label>
                         <select name="district_id" id="district_id" class="form-control form-select"
-                                onchange="callGetAllCommunes()">
+                                onchange="callGetAllCommunes($('#district_id').find(':selected').data('code'))">
                             <option value="">{{ __('home.Chọn quận') }}</option>
                         </select>
                     </div>
@@ -110,8 +110,8 @@
                                placeholder="ha_noi" value="" required>
                     </div>
                     <div class="form-group col-md-3">
-                        <label for="type_account">{{ __('home.Type Account') }}</label>
-                        <select id="type_account" name="type" class="form-select form-control">
+                        <label for="type">{{ __('home.Type Account') }}</label>
+                        <select id="type" name="type" class="form-select form-control">
                             <option value="NORMAL">Choose...</option>
                             <option value="BUSINESS">{{ __('home.BUSINESS') }}</option>
                             <option value="MEDICAL">{{ __('home.MEDICAL') }}</option>
@@ -128,15 +128,18 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label class="form-control-label" for="status">{{ __('home.Status') }}</label>
-                        <input type="text" id="status" class="form-control" name="status" value=" ">
+                        <select id="status" name="status" class="form-control form-select">
+                            <option value="ACTIVE">ACTIVE</option>
+                            <option value="INACTIVE">INACTIVE</option>
+                        </select>
                     </div>
                 </div>
 
                 <!-- Normal -->
-                <div class="only-normal d-none" id="only_normal">
+                <div class="only-normal" id="only_normal">
                     <div class="form-group">
                         <label for="medical_history">{{ __('home.Tiền sử bệnh án') }}</label>
-                        <textarea id="medical_history" name="medical_history"></textarea>
+                        <textarea id="medical_history" class="form-control" name="medical_history"></textarea>
                     </div>
                 </div>
 
@@ -158,7 +161,8 @@
                 <div class="pl-md-4 mt-4">
                     <div class="row">
                         <div class="col text-center">
-                            <button type="submit" class="btn btn-primary">{{ __('home.create') }}</button>
+                            <button type="button" id="btnCreateUser"
+                                    class="btn btn-primary">{{ __('home.create') }}</button>
                         </div>
                     </div>
                 </div>
@@ -166,8 +170,13 @@
         </div>
     </div>
     <script>
+        let accessToken = `Bearer ` + token;
+        let headers = {
+            "Authorization": accessToken
+        };
+
         $(document).ready(function () {
-            $('#type_account').on('change', function () {
+            $('#type').on('change', function () {
                 let value = $(this).val();
                 let html = ``;
                 switch (value) {
@@ -178,6 +187,9 @@
                                                 <option value="{{\App\Enums\Role::PHARMACIES}}">PHARMACIES</option>
                                                 <option value="{{\App\Enums\Role::SPAS}}">SPAS</option>
                                                 <option value="{{\App\Enums\Role::OTHERS}}">OTHERS</option>`;
+                        clearAppend();
+                        showRoleOther();
+                        showOnlyBusiness();
                         break;
                     case 'MEDICAL':
                         html = `<option value="{{\App\Enums\Role::DOCTORS}}">DOCTOR</option>
@@ -185,16 +197,108 @@
                                                 <option value="{{\App\Enums\Role::THERAPISTS}}">THERAPISTS</option>
                                                 <option value="{{\App\Enums\Role::ESTHETICIANS}}">ESTHETICIANS</option>
                                                 <option value="{{\App\Enums\Role::NURSES}}">NURSES</option>`;
+                        clearAppend();
+                        showRoleOther();
+                        showOnlyMedical();
                         break;
                     default:
                         html = `<option value="{{\App\Enums\Role::PAITENTS}}">PAITENTS</option>
                                                 <option value="{{\App\Enums\Role::NORMAL_PEOPLE}}">NORMAL PEOPLE</option>`;
+                        clearAppend();
+                        showOnlyNormal();
                         break;
                 }
                 $('#member').empty().append(html);
             })
+
+            $('#btnCreateUser').on('click', function () {
+                createUser();
+            })
         })
     </script>
+    {{-- Create new user --}}
+    <script>
+        async function createUser() {
+            const formData = new FormData();
+
+            let checking = true;
+
+            const array_default = ['username', 'name', 'last_name',
+                'email', 'phone', 'password', 'passwordConfirm',
+                'detail_address', 'detail_address_en', 'detail_address_laos',
+                'province_id', 'district_id', 'commune_id', 'address_code',
+                'type', 'member', 'status',]
+
+            const array_empty_normal = ['medical_history',]
+
+            const array_medical = ['specialty', 'specialty_en', 'specialty_laos',
+                'service', 'service_en', 'service_laos',
+                'service_price', 'service_price_en', 'service_price_laos',
+                'time_working_1', 'time_working_2', 'apply_for',
+                'department_id', 'year_of_experience',]
+
+            const array_empty_medical = ['prescription', 'free',]
+
+            let avt = $('#avt')[0].files[0];
+            formData.append('avt', avt);
+
+            let isValid = true
+            /* Tạo fn appendDataForm ở admin blade*/
+            isValid = appendDataForm(array_default, formData, isValid);
+
+            if ($('#type').val() === 'MEDICAL') {
+                isValid = appendDataForm(array_medical, formData, isValid);
+
+                let file_upload = $('#file_upload')[0].files[0];
+                if (!file_upload) {
+                    isValid = false;
+                    checking = false;
+                }
+                formData.append('file_upload', file_upload);
+
+                array_empty_medical.forEach(field => {
+                    let checked = document.getElementById(field).checked;
+                    if (checked) {
+                        formData.append(field, $(`#${field}`).val());
+                    }
+                });
+            }
+
+            array_empty_normal.forEach(field => {
+                formData.append(field, $(`#${field}`).val());
+            });
+
+            let createUserUrl = `{{ route('api.admin.users.create') }}`;
+            if (!isValid) {
+                if (!checking) {
+                    alert('Please upload your license!')
+                }
+                return;
+            }
+
+            try {
+                await $.ajax({
+                    url: createUserUrl,
+                    method: 'POST',
+                    headers: headers,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    data: formData,
+                    success: function (response) {
+                        alert('Create success!');
+                        window.location.href = `{{ route('view.admin.user.list') }}`;
+                    },
+                    error: function (error) {
+                        alert(error.responseJSON.message);
+                    }
+                });
+            } catch (e) {
+                alert('Create error!');
+            }
+        }
+    </script>
+    {{-- Append form element follow type account --}}
     <script>
         function showOnlyBusiness() {
             let html = ``;
@@ -280,7 +384,7 @@
                                         class="form-control">
                                     <option value="T2">{{ __('home.Thứ 2') }}</option>
                                     <option value="T3">{{ __('home.Thứ 3') }}</option>
-                                    <option value="T4"{{ __('home.Thứ 4') }}></option>
+                                    <option value="T4">{{ __('home.Thứ 4') }}></option>
                                     <option value="T5">{{ __('home.Thứ 5') }}</option>
                                     <option value="T6">{{ __('home.Thứ 6') }}</option>
                                     <option value="T7">{{ __('home.Thứ 7') }}</option>
@@ -298,12 +402,17 @@
                             <div class="form-group col-md-4">
                                 <label for="department_id">{{ __('home.Department') }}</label>
                                 <select class="form-select" id="department_id" name="department_id">
-                                    <option value=""> department</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label for="year_of_experience">{{ __('home.Năm kinh nghiệm') }}</label>
-                                <input type="number" class="form-control" id="year_of_experience"
+                                    @foreach($departments as $department)
+            <option value="{{$department->id}}" data-limit="300"
+                                                      class="text-shortcut">
+                                                            {{$department->name}}
+            </option>
+@endforeach
+            </select>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="year_of_experience">{{ __('home.Năm kinh nghiệm') }}</label>
+                                <input type="number" class="form-control" max="80" id="year_of_experience"
                                        name="year_of_experience" value="">
                             </div>
                         </div>
@@ -345,25 +454,134 @@
             </ul>
         </div>`;
             $('#only_medical').empty().append(html);
+
+            handleTimeOne();
         }
 
         function showRoleOther() {
             let html = `<div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="file_upload">{{ __('home.Upload your license') }}</label>
-                            <input required type="file" name="file_upload" class="form-control" id="file_upload">
+                            <input required type="file" name="file_upload" class="form-control" accept="image/*" id="file_upload">
                         </div>
                     </div>`;
             $('#two_level').empty().append(html);
         }
 
+        function showOnlyNormal() {
+            let html = `<div class="form-group">
+                        <label for="medical_history">{{ __('home.Tiền sử bệnh án') }}</label>
+                        <textarea id="medical_history" class="form-control" name="medical_history"></textarea>
+                    </div>`;
+            $('#only_normal').empty().append(html);
+        }
+
         function clearAppend() {
             $('#only_normal').empty();
-            $('#two-level').empty();
+            $('#two_level').empty();
             $('#only_medical').empty();
             $('#only_business').empty();
         }
     </script>
+    {{-- Handle input --}}
+    <script>
+        let arrayItem = [];
+        let arrayNameCategory = [];
+
+        function removeArray(arr) {
+            var what, a = arguments, L = a.length, ax;
+            while (L > 1 && arr.length) {
+                what = a[--L];
+                while ((ax = arr.indexOf(what)) !== -1) {
+                    arr.splice(ax, 1);
+                }
+            }
+            return arr;
+        }
+
+        function getListName(array, items) {
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].checked) {
+                    if (array.length == 0) {
+                        array.push(items[i].nextElementSibling.innerText);
+                    } else {
+                        let name = array.includes(items[i].nextElementSibling.innerText);
+                        if (!name) {
+                            array.push(items[i].nextElementSibling.innerText);
+                        }
+                    }
+                } else {
+                    removeArray(array, items[i].nextElementSibling.innerText)
+                }
+            }
+            return array;
+        }
+
+        function checkArray(array, listItems) {
+            for (let i = 0; i < listItems.length; i++) {
+                if (listItems[i].checked) {
+                    if (array.length == 0) {
+                        array.push(listItems[i].value);
+                    } else {
+                        let check = array.includes(listItems[i].value);
+                        if (!check) {
+                            array.push(listItems[i].value);
+                        }
+                    }
+                } else {
+                    removeArray(array, listItems[i].value);
+                }
+            }
+            return array;
+        }
+
+        function getInput() {
+            let items = document.getElementsByClassName('apply_item');
+
+            arrayItem = checkArray(arrayItem, items);
+            arrayNameCategory = getListName(arrayNameCategory, items)
+
+            let listName = arrayNameCategory.toString();
+
+            if (listName) {
+                $('#apply_show').val(listName);
+            }
+
+            arrayItem.sort();
+            let value = arrayItem.toString();
+            $('#apply_for').val(value);
+        }
+
+        function handleTimeOne() {
+            setDataForTime('time_working_1_start', 'time_working_1_end', 'time_working_1');
+            setDataForTime('time_working_2_start', 'time_working_2_end', 'time_working_2');
+
+            $('#time_working_1_start').on('change', function () {
+                setDataForTime('time_working_1_start', 'time_working_1_end', 'time_working_1')
+            })
+
+            $('#time_working_1_end').on('change', function () {
+                setDataForTime('time_working_1_start', 'time_working_1_end', 'time_working_1')
+            })
+
+            $('#time_working_2_start').on('change', function () {
+                setDataForTime('time_working_2_start', 'time_working_2_end', 'time_working_2')
+            })
+
+            $('#time_working_2_end').on('change', function () {
+                setDataForTime('time_working_2_start', 'time_working_2_end', 'time_working_2')
+            })
+        }
+
+        function setDataForTime(time_working_start, time_working_end, merge) {
+            let value_start = $('#' + time_working_start).val();
+            let value_end = $('#' + time_working_end).val();
+            let mergeValue = value_start + '-' + value_end;
+            $('#' + merge).val(mergeValue);
+        }
+
+    </script>
+    {{-- Load list address --}}
     <script>
         callGetAllProvince();
 
