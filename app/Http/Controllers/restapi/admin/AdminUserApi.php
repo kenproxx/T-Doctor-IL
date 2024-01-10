@@ -16,7 +16,16 @@ class AdminUserApi extends Controller
 {
     public function getAllUser()
     {
-        $users = User::where('status', '!=', UserStatus::DELETED)->orderBy('id', 'desc')->get();
+        $admin_role = \App\Models\Role::where('name', Role::ADMIN)->first();
+        $users_admin = DB::table('role_users')->where('role_id', $admin_role->id)->get();
+        $array_user = [];
+        foreach ($users_admin as $item) {
+            $array_user[] = $item->user_id;
+        }
+        $users = User::where('status', '!=', UserStatus::DELETED)
+            ->whereNotIn('id', $array_user)
+            ->orderBy('id', 'desc')
+            ->get();
         return response()->json($users);
     }
 
@@ -55,6 +64,10 @@ class AdminUserApi extends Controller
 
     private function saveUser($request, $user)
     {
+        $isUpdate = false;
+        if ($user->email) {
+            $isUpdate = true;
+        }
         /* All user */
         $email = $request->input('email');
         $username = $request->input('username');
@@ -83,6 +96,9 @@ class AdminUserApi extends Controller
 
         /* Only type medical */
         $experience = $request->input('year_of_experience');
+        if ($experience > 80) {
+            $experience = 80;
+        }
         $name_hospital = $request->input('name_hospital');
 
         $specialized_services = $request->input('specialty');
@@ -123,46 +139,74 @@ class AdminUserApi extends Controller
             return $this->returnArray(400, 'Email invalid!');
         }
 
-        $oldUser = User::where('email', $email)->first();
-        if ($oldUser) {
-            return $this->returnArray(400, 'Email already exited!');
+        if ($email != $user->email) {
+            $oldUser = User::where('email', $email)->first();
+            if ($oldUser) {
+                return $this->returnArray(400, 'Email already exited!');
+            }
         }
 
-        $oldUser = User::where('username', $username)->first();
-        if ($oldUser) {
-            return $this->returnArray(400, 'Username already exited!');
+        if ($phone != $user->phone) {
+            $oldUser = User::where('phone', $phone)->first();
+            if ($oldUser) {
+                return $this->returnArray(400, 'Phone already exited!');
+            }
         }
 
-        if ($password != $passwordConfirm) {
-            return $this->returnArray(400, 'Password or Password Confirm incorrect!');
+        if ($username != $user->username) {
+            $oldUser = User::where('username', $username)->first();
+            if ($oldUser) {
+                return $this->returnArray(400, 'Username already exited!');
+            }
         }
 
-        if (strlen($password) < 5) {
-            return $this->returnArray(400, 'Password invalid!');
+        if (!$isUpdate) {
+            if ($password != $passwordConfirm) {
+                return $this->returnArray(400, 'Password or Password Confirm incorrect!');
+            }
+
+            if (strlen($password) < 5) {
+                return $this->returnArray(400, 'Password invalid!');
+            }
+        } else {
+            if ($password || $passwordConfirm) {
+                if ($password != $passwordConfirm) {
+                    return $this->returnArray(400, 'Password or Password Confirm incorrect!');
+                }
+
+                if (strlen($password) < 5) {
+                    return $this->returnArray(400, 'Password invalid!');
+                }
+                $user->password = Hash::make($password);
+            }
         }
 
         if ($type == Role::BUSINESS) {
             // kiểm tra xem fileupload có tồn tại không, nếu không thì thông báo lỗi
-            if (!$request->hasFile('file_upload')) {
-                return $this->returnArray(400, 'Cần up file giấy phép kinh doanh');
+            if (!$isUpdate) {
+                if (!$request->hasFile('file_upload')) {
+                    return $this->returnArray(400, 'Cần up file giấy phép kinh doanh');
+                }
+                $item = $request->file('file_upload');
+                $itemPath = $item->store('license', 'public');
+                $img = asset('storage/' . $itemPath);
+                $user->business_license_img = $img;
             }
-            $item = $request->file('file_upload');
-            $itemPath = $item->store('license', 'public');
-            $img = asset('storage/' . $itemPath);
-            $user->business_license_img = $img;
             $user->prescription = $prescription ? (int)$prescription : 0;
             $user->free = $free ? (int)$free : 0;
         }
 
         if ($type == Role::MEDICAL) {
             // kiểm tra xem fileupload có tồn tại không, nếu không thì thông báo lỗi
-            if (!$request->hasFile('file_upload')) {
-                return $this->returnArray(400, 'Cần up file giấy phép nghề nghiệp');
+            if (!$isUpdate) {
+                if (!$request->hasFile('file_upload')) {
+                    return $this->returnArray(400, 'Cần up file giấy phép nghề nghiệp');
+                }
+                $item = $request->file('file_upload');
+                $itemPath = $item->store('license', 'public');
+                $img = asset('storage/' . $itemPath);
+                $user->medical_license_img = $img;
             }
-            $item = $request->file('file_upload');
-            $itemPath = $item->store('license', 'public');
-            $img = asset('storage/' . $itemPath);
-            $user->medical_license_img = $img;
             /* Set data for user type with medical */
             $user->year_of_experience = $experience ?? '';
             $user->hospital = $name_hospital ?? '';
@@ -199,8 +243,10 @@ class AdminUserApi extends Controller
         $user->name = $name_user ?? '';
         $user->last_name = $last_name ?? '';
         $user->username = $username;
-        $user->password = Hash::make($password);
-        $user->phone = $phone ?? '';
+        if (!$isUpdate) {
+            $user->password = Hash::make($password);
+        }
+        $user->phone = $phone;
         $user->detail_address = $detail_address;
         $user->detail_address_en = $detail_address_en;
         $user->detail_address_laos = $detail_address_laos;
@@ -218,16 +264,16 @@ class AdminUserApi extends Controller
         return $this->returnArray(200, $user);
     }
 
-    private function returnMessage($message)
-    {
-        return (new MainApi())->returnMessage($message);
-    }
-
     private function returnArray($status, $data)
     {
         $myArray['status'] = $status;
         $myArray['data'] = $data;
         return $myArray;
+    }
+
+    private function returnMessage($message)
+    {
+        return (new MainApi())->returnMessage($message);
     }
 
     public function update($id, Request $request)
@@ -236,6 +282,18 @@ class AdminUserApi extends Controller
             $user = User::find($id);
             if (!$user || $user->status == UserStatus::DELETED) {
                 return response($this->returnMessage('User not found!'), 404);
+            }
+
+            $role_user = DB::table('role_users')->where('user_id', $user->id)->first();
+            $isAdmin = false;
+            if ($role_user) {
+                $role = \App\Models\Role::find($role_user->role_id);
+                if ($role->name == Role::ADMIN) {
+                    $isAdmin = true;
+                }
+            }
+            if ($isAdmin) {
+                return response($this->returnMessage('Permission denied! Unable to access account information!'), 400);
             }
 
             $array = $this->saveUser($request, $user);

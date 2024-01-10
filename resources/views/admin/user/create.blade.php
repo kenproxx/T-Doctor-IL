@@ -256,13 +256,15 @@
                 }
                 formData.append('file_upload', file_upload);
 
+                array_empty_medical.forEach(field => {
+                    let checked = document.getElementById(field).checked;
+                    if (checked) {
+                        formData.append(field, $(`#${field}`).val());
+                    }
+                });
             }
 
             array_empty_normal.forEach(field => {
-                formData.append(field, $(`#${field}`).val());
-            });
-
-            array_empty_medical.forEach(field => {
                 formData.append(field, $(`#${field}`).val());
             });
 
@@ -410,7 +412,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="year_of_experience">{{ __('home.Năm kinh nghiệm') }}</label>
-                                <input type="number" class="form-control" id="year_of_experience"
+                                <input type="number" class="form-control" max="80" id="year_of_experience"
                                        name="year_of_experience" value="">
                             </div>
                         </div>

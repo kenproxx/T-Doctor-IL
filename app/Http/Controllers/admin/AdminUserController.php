@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Enums\DepartmentStatus;
+use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Department;
+use App\Models\User;
 
 class AdminUserController extends Controller
 {
@@ -15,7 +17,13 @@ class AdminUserController extends Controller
 
     public function detail($id)
     {
-        return view('admin.user.detail');
+        $user = User::find($id);
+        if (!$user || $user->status == UserStatus::DELETED){
+            alert()->error('Not found!');
+            return back();
+        }
+        $departments = Department::where('status', DepartmentStatus::ACTIVE)->get();
+        return view('admin.user.detail', compact('departments', 'user'));
     }
 
     public function create()
