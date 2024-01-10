@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\restapi;
 
 use App\Enums\BookingResultStatus;
+use App\Enums\online_medicine\OnlineMedicineStatus;
 use App\Http\Controllers\Controller;
 use App\Imports\ExcelImportClass;
 use App\Models\Booking;
@@ -79,6 +80,11 @@ class BookingResultApi extends Controller
 
             $thanhPhanThuocArray[] = explode(',', $row[1]);
         }
+
+        if (count($nameMedicineArray) == 0 && count($thanhPhanThuocArray) == 0) {
+            return [];
+        }
+
         $products = ProductMedicine::where(function ($query) use ($nameMedicineArray) {
             foreach ($nameMedicineArray as $nameMedicine) {
                 $query->orWhere('name', 'LIKE', '%' . $this->normalizeString($nameMedicine) . '%');
@@ -95,6 +101,7 @@ class BookingResultApi extends Controller
                     });
                 }
             })
+            ->where('status', OnlineMedicineStatus::APPROVED)
             ->get();
         return $products;
     }

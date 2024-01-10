@@ -56,7 +56,7 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </form>
                 @if(Auth::check())
-                    <button type="button" data-toggle="modal" data-target="#modalCart" class="shopping-bag">
+                    <button type="button" data-toggle="modal" data-target="#modalCart" class="btnModalCart shopping-bag">
                         <i class="fa-solid fa-bag-shopping"></i>
                         @if($carts && count($carts) > 0)
                             <div class="text-wrapper"> {{ count($carts) }}</div>

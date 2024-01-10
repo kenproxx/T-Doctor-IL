@@ -328,9 +328,10 @@
             })
 
             $('.btnGetFile').on('click', function () {
-                window.location.href = `{{ route('user.download') }}`;
                 let alertMessage = `Vui lòng nhập vào file theo định dạng mẫu đã được viết sẵn! Chúng tôi không khuyến khích bất kì hành động thay đổi định dạng file hoặc cấu trúc dữ liệu trong file vì điều này sẽ ảnh hướng đến việc đọc hiểu dữ liệu.`
-                alert(alertMessage);
+                if (confirm(alertMessage)){
+                    window.location.href = `{{ route('user.download') }}`;
+                }
             })
 
             async function createBookingResult() {
