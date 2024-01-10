@@ -1,66 +1,67 @@
 @extends('layouts.master')
 @section('title', 'Online Medicine')
 @section('content')
+    <link rel="stylesheet" href="{{asset('css/clinics-style.css')}}">
     @include('layouts.partials.header')
-    @include('component.banner')
+    @include('What-free.header-wFree')
     <div class="container">
-        @include('What-free.header-wFree')
-        @php
-            $address = DB::table('clinics')
-                  ->join('users', 'users.id', '=', 'clinics.user_id')
-                        ->where('clinics.status', \App\Enums\ClinicStatus::ACTIVE)
-                        ->where('clinics.type', \App\Enums\TypeBusiness::CLINICS)
-                        ->select('clinics.*', 'users.email')
-                        ->cursor()
-                        ->map(function ($item) {
-                            $array = explode(',', $item->service_id);
-                            $services = \App\Models\ServiceClinic::whereIn('id', $array)->get();
-                            $array = explode(',', $item->address);
-                            $addressP = \App\Models\Province::where('id', $array[1] ?? null)->first();
-                            $addressD = \App\Models\District::where('id', $array[2] ?? null)->first();
-                            $addressC = \App\Models\Commune::where('id', $array[3] ?? null)->first();
+            @php
+                $address = DB::table('clinics')
+                      ->join('users', 'users.id', '=', 'clinics.user_id')
+                            ->where('clinics.status', \App\Enums\ClinicStatus::ACTIVE)
+                            ->where('clinics.type', \App\Enums\TypeBusiness::CLINICS)
+                            ->select('clinics.*', 'users.email')
+                            ->cursor()
+                            ->map(function ($item) {
+                                $array = explode(',', $item->service_id);
+                                $services = \App\Models\ServiceClinic::whereIn('id', $array)->get();
+                                $array = explode(',', $item->address);
+                                $addressP = \App\Models\Province::where('id', $array[1] ?? null)->first();
+                                $addressD = \App\Models\District::where('id', $array[2] ?? null)->first();
+                                $addressC = \App\Models\Commune::where('id', $array[3] ?? null)->first();
 
-                            $clinic = (array)$item;
-                            $clinic['total_services'] = $services->count();
-                            $clinic['services'] = $services->toArray();
-                            if ($addressP == null) {
-                                $clinic['addressInfo'] = '';
+                                $clinic = (array)$item;
+                                $clinic['total_services'] = $services->count();
+                                $clinic['services'] = $services->toArray();
+                                if ($addressP == null) {
+                                    $clinic['addressInfo'] = '';
+                                    return $clinic;
+                                }
+                                if ($addressD == null) {
+                                    $clinic['addressInfo'] = $addressP['name'];
+                                    return $clinic;
+                                }
+                                if ($addressC == null) {
+                                    $clinic['addressInfo'] = $addressD['name'] . ',' . $addressP['name'];
+                                    return $clinic;
+                                }
+                                if ($clinic['address_detail'] == null){
+                                    $clinic['addressInfo'] = $addressC['name'] . ',' . $addressD['name'] . ',' . $addressP['name'];
+                                }
                                 return $clinic;
-                            }
-                            if ($addressD == null) {
-                                $clinic['addressInfo'] = $addressP['name'];
-                                return $clinic;
-                            }
-                            if ($addressC == null) {
-                                $clinic['addressInfo'] = $addressD['name'] . ',' . $addressP['name'];
-                                return $clinic;
-                            }
-                            if ($clinic['address_detail'] == null){
-                                $clinic['addressInfo'] = $addressC['name'] . ',' . $addressD['name'] . ',' . $addressP['name'];
-                            }
-                            return $clinic;
-                        });
-            $adr = $address->toArray();
-        @endphp
-        <div class="clinics-list">
-            <div class="clinics-header row">
-                <div class=" d-flex justify-content-between">
-                    <span class="fs-32px">{{ __('home.Suggestions near you') }}</span>
-                    <span>
+                            });
+                $adr = $address->toArray();
+            @endphp
+            <div class="clinics-list">
+                <div class="clinics-header row">
+                    <div class=" d-flex justify-content-between">
+                        <span class="fs-32px">{{ __('home.Suggestions near you') }}</span>
+                        <span>
                     <a href="">{{ __('home.See all') }}</a>
                 </span>
+                    </div>
                 </div>
-            </div>
-            <div class="body row" id="productInformation"></div>
+                <div class="body row" id="productInformation"></div>
 
-        </div>
-        <div class="other-clinics">
-            <div class="title">
-                {{ __('home.Other Clinics/Pharmacies') }}
             </div>
-            @include('component.clinic')
+            <div class="other-clinics">
+                <div class="title">
+                    {{ __('home.Other Clinics/Pharmacies') }}
+                </div>
+                @include('component.clinic')
+            </div>
         </div>
-    </div>
+
     <script>
         var addressNew = {!! json_encode($adr) !!};
         var infoWindows = [];

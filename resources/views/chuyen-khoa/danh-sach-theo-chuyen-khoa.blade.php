@@ -85,7 +85,6 @@
                                             <div class="time-working">
                                             <span class="color-timeWorking">
                                                  <span class="fs-14 font-weight-600">{{ \Carbon\Carbon::parse($clinic->open_date)->format('H:i') }} - {{ \Carbon\Carbon::parse($clinic->close_date)->format('H:i') }}</span>
-{{--                                                09:00 - 19:00--}}
                                             </span>
                                                 <span>
                                                  / Dental Clinic
