@@ -52,9 +52,9 @@ class HomeController extends Controller
     }
     public function specialistDepartment($id)
     {
-        $doctors = \App\Models\User::where('department_id', $id)
+        $doctorsSpecial = \App\Models\User::where('department_id', $id)
             ->where('status', \App\Enums\UserStatus::ACTIVE)
-            ->get();
+            ->paginate(12);
         $clinics = \App\Models\Clinic::where('department', $id)
             ->where('type', \App\Enums\TypeBusiness::CLINICS)
             ->where('status', \App\Enums\ClinicStatus::ACTIVE)
@@ -63,7 +63,7 @@ class HomeController extends Controller
             ->where('type', \App\Enums\TypeBusiness::PHARMACIES)
             ->where('status', \App\Enums\ClinicStatus::ACTIVE)
             ->get();
-        return view('chuyen-khoa.danh-sach-theo-chuyen-khoa', compact('id', 'doctors', 'clinics', 'pharmacies'));
+        return view('chuyen-khoa.danh-sach-theo-chuyen-khoa', compact('id', 'doctorsSpecial', 'clinics', 'pharmacies'));
     }
     public function specialistDetail($id)
     {

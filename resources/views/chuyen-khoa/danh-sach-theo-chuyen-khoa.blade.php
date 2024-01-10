@@ -55,7 +55,6 @@
                      aria-labelledby="clinicList-tab">
                     <div class="row">
                         @foreach($clinics as $clinic)
-                            {{--                            @dd($clinic)--}}
                             <div class="specialList-clinics col-md-6 mt-5">
                                 <div class="border-specialList">
                                     <div class="content__item d-flex gap-3">
@@ -109,140 +108,70 @@
                                 </div>
                             </div>
                         @endforeach
-
-                        <div class="specialList-clinics col-md-6 mt-5">
-                            <div class="border-specialList">
-                                <div class="content__item d-flex gap-3">
-                                    <div class="specialList-clinics--img">
-                                        <img class="content__item__image" src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                             alt=""/>
-                                    </div>
-                                    <div class="specialList-clinics--main">
-                                        <div class="title-specialList-clinics">
-                                            Bệnh viện đa khoa Hà Đông
-                                        </div>
-                                        <div class="address-specialList-clinics">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            Toà V7-B7 The Terra An Hưng, La Khê, Hà Đông
-                                            - <span>3 Km</span>
-                                        </div>
-                                        <div class="time-working">
-                                            <span class="color-timeWorking">
-                                                09:00 - 19:00
-                                            </span>
-                                            <span>
-                                                 / Dental Clinic
-                                            </span>
-                                        </div>
-                                        <div class="group-button d-flex mt-3">
-                                            <a href="" class="col-md-6">
-                                                <div class="button-booking-specialList">
-                                                    Đặt khám
-                                                </div>
-                                            </a>
-                                            <a href="" class="col-md-6">
-                                                <div class="button-detail-specialList">
-                                                    Xem chi tiết
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="specialList-clinics col-md-6 mt-5">
-                            <div class="border-specialList">
-                                <div class="content__item d-flex gap-3">
-                                    <div class="specialList-clinics--img">
-                                        <img class="content__item__image" src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                             alt=""/>
-                                    </div>
-                                    <div class="specialList-clinics--main">
-                                        <div class="title-specialList-clinics">
-                                            Bệnh viện đa khoa Hà Đông
-                                        </div>
-                                        <div class="address-specialList-clinics">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            Toà V7-B7 The Terra An Hưng, La Khê, Hà Đông
-                                            - <span>3 Km</span>
-                                        </div>
-                                        <div class="time-working">
-                                            <span class="color-timeWorking">
-                                                09:00 - 19:00
-                                            </span>
-                                            <span>
-                                                 / Dental Clinic
-                                            </span>
-                                        </div>
-                                        <div class="group-button d-flex mt-3">
-                                            <a href="" class="col-md-6">
-                                                <div class="button-booking-specialList">
-                                                    Đặt khám
-                                                </div>
-                                            </a>
-                                            <a href="" class="col-md-6">
-                                                <div class="button-detail-specialList">
-                                                    Xem chi tiết
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="pharmacies" role="tabpanel" aria-labelledby="pharmacies-tab">
                     <div class="row">
-                        <div class="specialList-clinics col-md-6 mt-5">
-                            <div class="border-specialList">
-                                <div class="content__item d-flex gap-3">
-                                    <div class="specialList-clinics--img">
-                                        <img class="content__item__image" src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                             alt=""/>
-                                    </div>
-                                    <div class="specialList-clinics--main">
-                                        <div class="title-specialList-clinics">
-                                            Bệnh viện đa khoa Hà Đông
+                        @foreach($pharmacies as $pharmacy)
+                            <div class="specialList-clinics col-md-6 mt-5">
+                                <div class="border-specialList">
+                                    <div class="content__item d-flex gap-3">
+                                        <div class="specialList-clinics--img">
+                                            @php
+                                                $galleryArray = explode(',', $pharmacy->gallery);
+                                            @endphp
+                                            <img class="content__item__image" src="{{$galleryArray[0]}}"
+                                                 alt=""/>
                                         </div>
-                                        <div class="address-specialList-clinics">
-                                            <i class="fas fa-map-marker-alt"></i>
-                                            Toà V7-B7 The Terra An Hưng, La Khê, Hà Đông
-                                            - <span>3 Km</span>
-                                        </div>
-                                        <div class="time-working">
+                                        <div class="specialList-clinics--main w-100">
+                                            <div class="title-specialList-clinics">
+                                                {{$pharmacy->name}}
+                                            </div>
+                                            <div class="address-specialList-clinics">
+                                                <i class="fas fa-map-marker-alt"></i>
+                                                @php
+                                                    $array = explode(',', $pharmacy->address);
+                                                    $addressP = Province::where('id', $array[1] ?? null)->first();
+                                                    $addressD = \App\Models\District::where('id', $array[2] ?? null)->first();
+                                                    $addressC = \App\Models\Commune::where('id', $array[3] ?? null)->first();
+                                                @endphp
+                                                <div>{{$pharmacy->address_detail}}
+                                                    , {{$addressC->name ?? ''}} , {{$addressD->name ?? ''}}
+                                                    , {{$addressP->name ?? ''}}</div>
+                                                - <span>3 Km</span>
+                                            </div>
+                                            <div class="time-working">
                                             <span class="color-timeWorking">
-                                                09:00 - 19:00
+                                                 <span class="fs-14 font-weight-600">{{ \Carbon\Carbon::parse($pharmacy->open_date)->format('H:i') }} - {{ \Carbon\Carbon::parse($pharmacy->close_date)->format('H:i') }}</span>
+{{--                                                09:00 - 19:00--}}
                                             </span>
-                                            <span>
+                                                <span>
                                                  / Dental Clinic
                                             </span>
-                                        </div>
-                                        <div class="group-button d-flex mt-3">
-                                            <a href="" class="col-md-6">
-                                                <div class="button-booking-specialList">
-                                                    Đặt khám
-                                                </div>
-                                            </a>
-                                            <a href="" class="col-md-6">
-                                                <div class="button-detail-specialList">
-                                                    Xem chi tiết
-                                                </div>
-                                            </a>
+                                            </div>
+                                            <div class="group-button d-flex mt-3">
+                                                <a href="" class="col-md-6">
+                                                    <div class="button-booking-specialList">
+                                                        Đặt khám
+                                                    </div>
+                                                </a>
+                                                <a href="{{route('home.specialist.detail', $pharmacy->id)}}" class="col-md-6">
+                                                    <div class="button-detail-specialList">
+                                                        Xem chi tiết
+                                                    </div>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
                 <div class="tab-pane fade" id="doctorList" role="tabpanel" aria-labelledby="doctorList-tab">
-                    @php
-                        $doctors = \App\Models\User::where('member', \App\Enums\TypeUser::DOCTORS)->paginate(12);
-                    @endphp
                     <div class="row">
 
-                        @foreach($doctors as $doctor)
+                        @foreach($doctorsSpecial as $doctor)
                             @if($doctor == '')
                                 <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                             @else
@@ -326,7 +255,7 @@
                         @endforeach
                     </div>
                     <div class="pagination mt-4 d-flex align-items-center justify-content-center">
-                        {{ $doctors->links() }}
+                        {{ $doctorsSpecial->links() }}
                     </div>
                 </div>
             </div>
