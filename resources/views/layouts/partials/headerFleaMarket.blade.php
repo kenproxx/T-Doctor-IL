@@ -125,7 +125,7 @@
             </li>
             @if(Auth::check())
                 <li class="nav-item button-nav-header mb-3">
-                    <a class="nav-link" href="#">{{ __('home.Log out') }}</a>
+                    <a class="nav-link" href="#">{{ __('home.Logout') }}</a>
                 </li>
             @else
                 <li class="nav-item button-nav-header mb-3">
@@ -523,23 +523,23 @@
             let html = ``;
             switch (value) {
                 case 'BUSINESS':
-                    html = `<option value="{{Role::PHARMACEUTICAL_COMPANIES}}">PHARMACEUTICAL COMPANIES</option>
-                                                <option value="{{Role::HOSPITALS}}">HOSPITALS</option>
-                                                <option value="{{Role::CLINICS}}">CLINICS</option>
-                                                <option value="{{Role::PHARMACIES}}">PHARMACIES</option>
+                    html = `<option value="{{Role::PHARMACEUTICAL_COMPANIES}}">{{ __('home.PHARMACEUTICAL COMPANIES') }}</option>
+                                                <option value="{{Role::HOSPITALS}}">{{ __('home.HOSPITALS') }}</option>
+                                                <option value="{{Role::CLINICS}}">{{ __('home.CLINICS') }}</option>
+                                                <option value="{{Role::PHARMACIES}}">{{ __('home.PHARMACIES') }}</option>
                                                 <option value="{{Role::SPAS}}">SPAS</option>
-                                                <option value="{{Role::OTHERS}}">OTHERS</option>`;
+                                                <option value="{{Role::OTHERS}}">{{ __('home.Others') }}</option>`;
                     break;
                 case 'MEDICAL':
                     html = `<option value="{{Role::DOCTORS}}">DOCTOR</option>
-                                                <option value="{{Role::PHAMACISTS}}">PHAMACISTS</option>
-                                                <option value="{{Role::THERAPISTS}}">THERAPISTS</option>
-                                                <option value="{{Role::ESTHETICIANS}}">ESTHETICIANS</option>
-                                                <option value="{{Role::NURSES}}">NURSES</option>`;
+                                                <option value="{{Role::PHAMACISTS}}">{{ __('home.PHAMACISTS') }}</option>
+                                                <option value="{{Role::THERAPISTS}}">{{ __('home.THERAPISTS') }}</option>
+                                                <option value="{{Role::ESTHETICIANS}}">{{ __('home.ESTHETICIANS') }}</option>
+                                                <option value="{{Role::NURSES}}">{{ __('home.NURSES') }}</option>`;
                     break;
                 default:
-                    html = `<option value="{{Role::PAITENTS}}">PAITENTS</option>
-                                                <option value="{{Role::NORMAL_PEOPLE}}">NORMAL PEOPLE</option>`;
+                    html = `<option value="{{Role::PAITENTS}}">{{ __('home.PAITENTS') }}</option>
+                                                <option value="{{Role::NORMAL_PEOPLE}}">{{ __('home.NORMAL PEOPLE') }}</option>`;
                     break;
             }
             $('#member').empty().append(html);

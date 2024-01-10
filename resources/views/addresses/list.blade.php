@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('title')
-    List Address
+    {{ __('home.List Address') }}
 @endsection
 @section('main-content')
-    <h3 class="text-center">List Address</h3>
+    <h3 class="text-center">   {{ __('home.List Address') }}</h3>
     <a href="{{ route('view.user.address.create') }}" class="btn btn-primary mb-3">{{ __('home.create') }}</a>
     <table class="table table-striped" id="tableAddressManagement">
         <thead>
@@ -15,7 +15,7 @@
             <th scope="col">{{ __('home.District') }}</th>
             <th scope="col">{{ __('home.Commune') }}</th>
             <th scope="col">{{ __('home.Addresses') }}</th>
-            <th scope="col">Default</th>
+            <th scope="col">{{ __('home.Default') }}</th>
             <th scope="col">{{ __('home.Action') }}</th>
         </tr>
         </thead>

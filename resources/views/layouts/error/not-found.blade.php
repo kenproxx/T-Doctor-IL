@@ -8,6 +8,6 @@
     <title>{{ __('home.Not Found') }}</title>
 </head>
 <body>
-        Not Found
+    {{ __('home.Not Found') }}
 </body>
 </html>
