@@ -1,7 +1,7 @@
 @php use App\Enums\SurveyStatus; @endphp
 @extends('layouts.admin')
 @section('title')
-    Create Survey
+    {{ __('home.Create Survey') }}
 @endsection
 @section('main-content')
     <style>
@@ -77,20 +77,20 @@
     </style>
 
 
-    <h3 class="text-center"> Create Survey </h3>
+    <h3 class="text-center"> {{ __('home.Create Survey') }}</h3>
     <div class="container">
         <form>
             <div class="row">
                 <div class="form-group">
-                    <label for="question">Question</label>
+                    <label for="question">{{ __('home.Question') }}</label>
                     <input type="text" class="form-control" id="question" maxlength="200" required>
                 </div>
                 <div class="form-group">
-                    <label for="question_en">Question EN</label>
+                    <label for="question_en">{{ __('home.Question EN') }}</label>
                     <input type="text" class="form-control" maxlength="200" id="question_en" required>
                 </div>
                 <div class="form-group">
-                    <label for="question_laos">Question Laos</label>
+                    <label for="question_laos">{{ __('home.Question Laos') }}</label>
                     <input type="text" class="form-control" maxlength="200" id="question_laos" required>
                 </div>
             </div>
@@ -125,44 +125,44 @@
             <div class="row" id="row-answer">
                 <div class="form-group col-md-4">
                     <label for="answer">{{ __('home.Answer') }}</label>
-                    <a href="javascript:void(0)" onclick="appendAnswer('answer_vi')">Add answer</a>
+                    <a href="javascript:void(0)" onclick="appendAnswer('answer_vi')">{{ __('home.Add answer') }}</a>
 
                     <div id="answer_vi">
                         <div class="item">
                             <label>
-                                <span>Ans 1</span>
+                                <span>{{ __('home.Answer') }} 1</span>
                                 <input type="text">
                             </label>
-                            <a href="javascript:void(0)" class="del">del</a>
+                            <a href="javascript:void(0)" class="del">{{ __('home.Delete') }}</a>
                         </div>
                     </div>
 
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="answer_en">Answer En</label>
-                    <a href="javascript:void(0)" onclick="appendAnswer('answer_en')">Add answer</a>
+                    <label for="answer_en">{{ __('home.Answer En') }} 1</label>
+                    <a href="javascript:void(0)" onclick="appendAnswer('answer_en')">{{ __('home.Add answer') }}</a>
 
                     <div id="answer_en">
                         <div class="item">
                             <label>
-                                <span>Ans 1</span>
+                                <span>{{ __('home.Answer') }} 1</span>
                                 <input type="text">
                             </label>
-                            <a href="javascript:void(0)" class="del">del</a>
+                            <a href="javascript:void(0)" class="del">{{ __('home.Delete') }}</a>
                         </div>
                     </div>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="answer_laos">Answer Laos</label>
-                    <a href="javascript:void(0)" onclick="appendAnswer('answer_laos')">Add answer</a>
+                    <label for="answer_laos">{{ __('home.Answer Laos') }} </label>
+                    <a href="javascript:void(0)" onclick="appendAnswer('answer_laos')">{{ __('home.Add answer') }}</a>
 
                     <div id="answer_laos">
                         <div class="item">
                             <label>
-                                <span>Ans 1</span>
+                                <span>{{ __('home.Answer') }} 1</span>
                                 <input type="text">
                             </label>
-                            <a href="javascript:void(0)" class="del">del</a>
+                            <a href="javascript:void(0)" class="del">{{ __('home.Delete') }}</a>
                         </div>
                     </div>
                 </div>
@@ -292,9 +292,9 @@
                 alert("Number of answers isn't greater than 10");
             } else {
                 n++;
-                $('#answer_vi').append("<div class='item'><label><span>Ans " + n + "</span> <input type='text'></label> <a href='javascript:void(0)' class='del'>del</a></div>");
-                $('#answer_en').append("<div class='item'><label><span>Ans " + n + "</span> <input type='text'></label> <a href='javascript:void(0)' class='del'>del</a></div>");
-                $('#answer_laos').append("<div class='item'><label><span>Ans " + n + "</span> <input type='text'></label> <a href='javascript:void(0)' class='del'>del</a></div>");
+                $('#answer_vi').append("<div class='item'><label><span>Ans " + n + "</span> <input type='text'></label> <a href='javascript:void(0)' class='del'>{{ __('home.Delete') }}</a></div>");
+                $('#answer_en').append("<div class='item'><label><span>Ans " + n + "</span> <input type='text'></label> <a href='javascript:void(0)' class='del'>{{ __('home.Delete') }}</a></div>");
+                $('#answer_laos').append("<div class='item'><label><span>Ans " + n + "</span> <input type='text'></label> <a href='javascript:void(0)' class='del'>{{ __('home.Delete') }}</a></div>");
             }
         }
 

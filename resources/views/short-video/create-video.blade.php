@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label for="inputAddress2">{{ __('home.Addresses') }} 2</label>
-                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                <input type="text" class="form-control" id="inputAddress2" placeholder="{{ __('home.Apartment, studio, or floor') }}">
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">

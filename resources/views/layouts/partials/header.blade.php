@@ -541,13 +541,13 @@
                     <div class="row justify-content-center">
                         <div class="col-sm-12 text-center p-0 mt-3 mb-2">
                             <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
-                                <h2 id="heading">Lấy lại mật khẩu</h2>
+                                <h2 id="heading">{{ __('home.Lấy lại mật khẩu') }}</h2>
                                 <form id="msform">
                                     <!-- progressbar -->
                                     <ul id="progressbar">
-                                        <li class="active" id="account"><strong>Thông tin tài khoản</strong></li>
-                                        <li id="personal"><strong>Nhập OTP</strong></li>
-                                        <li id="confirm"><strong>Hoàn thành</strong></li>
+                                        <li class="active" id="account"><strong>{{ __('home.Thông tin tài khoản') }}</strong></li>
+                                        <li id="personal"><strong>{{ __('home.Nhập OTP') }}</strong></li>
+                                        <li id="confirm"><strong>{{ __('home.Hoàn thành') }}</strong></li>
                                     </ul>
                                     <div class="progress">
                                         <div class="progress-bar progress-bar-striped progress-bar-animated"
@@ -558,19 +558,19 @@
                                         <div class="form-card">
                                             <div class="row">
                                                 <div class="col-7">
-                                                    <h2 class="fs-title">Account Information:</h2>
+                                                    <h2 class="fs-title">{{ __('home.Account Information') }}:</h2>
                                                 </div>
                                                 <div class="col-5">
-                                                    <h2 class="steps">Step 1 - 3</h2>
+                                                    <h2 class="steps">{{ __('home.Step') }} 1 - 3</h2>
                                                 </div>
                                             </div>
-                                            <label class="fieldlabels">Tìm tài khoản của bạn</label>
+                                            <label class="fieldlabels">{{ __('home.Tìm tài khoản của bạn') }}</label>
                                             <select class="custom-select" name="type_account" id="type_account"
                                                     onchange="reloadLabel()">
-                                                <option value="{{ CommonType::EMAIL }}">Email</option>
-                                                <option value="{{ CommonType::PHONE }}">Phone</option>
+                                                <option value="{{ CommonType::EMAIL }}">{{ __('home.Email') }}</option>
+                                                <option value="{{ CommonType::PHONE }}">{{ __('home.Phone Number') }}</option>
                                             </select>
-                                            <label class="fieldlabels" id="label-account-info">Email: *</label>
+                                            <label class="fieldlabels" id="label-account-info">{{ __('home.Email') }}: *</label>
                                             <input type="text" required class="form-control" id="valueFindUser"
                                             />
                                         </div>
@@ -581,10 +581,10 @@
                                         <div class="form-card">
                                             <div class="row">
                                                 <div class="col-7">
-                                                    <h2 class="fs-title">Đổi mật khẩu</h2>
+                                                    <h2 class="fs-title">{{ __('home.Đổi mật khẩu') }} </h2>
                                                 </div>
                                                 <div class="col-5">
-                                                    <h2 class="steps">Step 2 - 3</h2>
+                                                    <h2 class="steps">{{ __('home.Step') }} 2 - 3</h2>
                                                 </div>
                                             </div>
                                             <label class="fieldlabels">OTP</label>
@@ -592,10 +592,10 @@
                                                    id="forget-password-otp"
                                             />
 
-                                            <label class="fieldlabels" id="label-account-info">Mật khẩu mới</label>
+                                            <label class="fieldlabels" id="label-account-info">{{ __('home.Mật khẩu mới') }}</label>
                                             <input type="password" class="form-control" id="forget-new-password"/>
 
-                                            <label class="fieldlabels" id="label-account-info">Nhập lại mật khẩu</label>
+                                            <label class="fieldlabels" id="label-account-info">{{ __('home.Nhập lại mật khẩu') }}</label>
                                             <input type="password" class="form-control" id="forget-re-new-password"/>
                                         </div>
                                         <input type="button" name="previous" class="previous btn btn-secondary mt-2"
@@ -609,19 +609,18 @@
                                         <div class="form-card">
                                             <div class="row">
                                                 <div class="col-7">
-                                                    <h2 class="fs-title">Finish:</h2>
+                                                    <h2 class="fs-title">{{ __('home.Finish') }}:</h2>
                                                 </div>
                                                 <div class="col-5">
-                                                    <h2 class="steps">Step 3 - 3</h2>
+                                                    <h2 class="steps">{{ __('home.Step') }} 3 - 3</h2>
                                                 </div>
                                             </div>
                                             <br><br>
-                                            <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br>
+                                            <h2 class="purple-text text-center"><strong>{{ __('home.SUCCESS') }} !</strong></h2> <br>
                                             <br><br>
                                             <div class="row justify-content-center">
                                                 <div class="col-7 text-center">
-                                                    <h5 class="purple-text text-center">You Have Successfully Signed
-                                                        Up</h5>
+                                                    <h5 class="purple-text text-center">{{ __('home.You Have Successfully Signed Up') }}</h5>
                                                 </div>
                                             </div>
                                         </div>
@@ -633,7 +632,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('home.Close') }}</button>
             </div>
         </div>
     </div>

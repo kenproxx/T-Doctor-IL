@@ -323,7 +323,7 @@
                                 <div class="form-group">
                                     <div class="text-font-16 mt-4">{{ __('home.Achievement') }}</div>
                                     <textarea class="ac-textarea mt-3"
-                                              placeholder="Enter an introduction about yourself"></textarea>
+                                              placeholder="{{ __('home.Enter an introduction about yourself') }}"></textarea>
                                 </div>
                             </div>
                             <div class="col-md-12 justify-content-between d-flex">

@@ -70,11 +70,9 @@
         </div>
 
         <div class="justify-content-center align-items-center d-flex mt-4">
-            <a href="{{ route("clinic.detail", $booking->clinic_id) }}" class="btn button-apply-booking col-md-4 mr-2">Clinic
-                Detail</a>
+            <a href="{{ route("clinic.detail", $booking->clinic_id) }}" class="btn button-apply-booking col-md-4 mr-2">{{ __('home.Clinic Detail') }}</a>
             @if($booking->status == 'COMPLETE')
-                <a href="{{ route("clinic.detail.results", $booking->id) }}" class="btn button-cancel col-md-4">Results
-                    Detail</a>
+                <a href="{{ route("clinic.detail.results", $booking->id) }}" class="btn button-cancel col-md-4">{{ __('home.Results Detail') }}</a>
             @endif
         </div>
     </div>

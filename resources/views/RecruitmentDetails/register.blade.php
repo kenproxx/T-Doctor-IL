@@ -422,7 +422,7 @@
                                 @csrf
                                 <div class="col-12 rm-pd-on-mobile">
                                     <div class="form-group">
-                                        <div class="text-font-16">{{ __('home.Name of Certificate/License ') }}<span
+                                        <div class="text-font-16">{{ __('home.Name of Certificate/License') }}<span
                                                 class="red-color">*</span></div>
                                         <input type="text" class="ac-email mt-2"
                                                placeholder="example123" required>

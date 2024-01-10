@@ -1,7 +1,7 @@
 @php use App\Enums\SurveyType;  $answerIds = [];@endphp
 @extends('layouts.admin')
 @section('title')
-    Detail Survey
+    {{ __('home.Detail Survey') }}
 @endsection
 @section('main-content')
     <style>
@@ -75,23 +75,23 @@
             }
         }
     </style>
-    <h3 class="text-center">Detail Survey</h3>
+    <h3 class="text-center"> {{ __('home.Detail Survey') }}</h3>
     <div class="container">
         <div class="container">
             <form>
                 <div class="row">
                     <div class="form-group">
-                        <label for="question">Question</label>
+                        <label for="question">{{ __('home.Question') }}</label>
                         <input type="text" class="form-control" id="question" maxlength="200" required
                                value="{{ $survey->question }}">
                     </div>
                     <div class="form-group">
-                        <label for="question_en">Question EN</label>
+                        <label for="question_en">{{ __('home.Question EN') }}</label>
                         <input type="text" class="form-control" maxlength="200" id="question_en" required
                                value="{{ $survey->question_en }}">
                     </div>
                     <div class="form-group">
-                        <label for="question_laos">Question Laos</label>
+                        <label for="question_laos">{{ __('home.Question Laos') }}</label>
                         <input type="text" class="form-control" maxlength="200" id="question_laos" required
                                value="{{ $survey->question_laos }}">
                     </div>
@@ -145,7 +145,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="answer_en">Answer En</label>
+                        <label for="answer_en">{{ __('home.Answer En') }}</label>
                         <a href="javascript:void(0)" onclick="appendAnswer('answer_en')">Add answer</a>
 
                         <div id="answer_en">
@@ -160,7 +160,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="answer_laos">Answer Laos</label>
+                        <label for="answer_laos">{{ __('home.Answer Laos') }}</label>
                         <a href="javascript:void(0)" onclick="appendAnswer('answer_laos')">Add answer</a>
 
                         <div id="answer_laos">

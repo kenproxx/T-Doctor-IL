@@ -370,18 +370,18 @@
             <!-- Survey Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#survey-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-menu-button-wide"></i><span>Survey</span><i
+                    <i class="bi bi-menu-button-wide"></i><span>{{ __('home.Survey') }}</span><i
                         class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="survey-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="{{ route('view.admin.surveys.index') }}">
-                            <i class="bi bi-circle"></i><span>List Survey</span>
+                            <i class="bi bi-circle"></i><span>{{ __('home.List Survey') }}</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('view.admin.surveys.create') }}">
-                            <i class="bi bi-circle"></i><span>Create Survey</span>
+                            <i class="bi bi-circle"></i><span>{{ __('home.Create Survey') }}</span>
                         </a>
                     </li>
                 </ul>
@@ -576,18 +576,18 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#user-manager-nav" data-bs-toggle="collapse"
                        href="#">
-                        <i class="bi bi-list-task"></i><span>User</span><i
+                        <i class="bi bi-list-task"></i><span>{{ __('home.User') }}</span><i
                             class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="user-manager-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
                             <a href="{{ route('view.admin.user.list') }}">
-                                <i class="bi bi-circle"></i><span>List User</span>
+                                <i class="bi bi-circle"></i><span>{{ __('home.List User') }}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('view.admin.user.create') }}">
-                                <i class="bi bi-circle"></i><span>Create User</span>
+                                <i class="bi bi-circle"></i><span>{{ __('home.Create User') }}</span>
                             </a>
                         </li>
                     </ul>
@@ -614,18 +614,18 @@
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#address-nav" data-bs-toggle="collapse"
                href="#">
-                <i class="bi bi-card-heading"></i><span>List Address</span><i
+                <i class="bi bi-card-heading"></i><span>{{ __('home.List Address') }}</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="address-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="{{ route('view.user.address.list') }}">
-                        <i class="bi bi-circle"></i><span>List Address</span>
+                        <i class="bi bi-circle"></i><span>{{ __('home.List Address') }}</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('view.user.address.create') }}">
-                        <i class="bi bi-circle"></i><span>Create Address</span>
+                        <i class="bi bi-circle"></i><span>{{ __('home.Create Address') }} </span>
                     </a>
                 </li>
             </ul>
@@ -636,7 +636,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('profile') }}">
                 <i class="bi bi-person"></i>
-                <span>Profile</span>
+                <span>{{ __('home.Profile') }}</span>
             </a>
         </li>
         <!-- End Profile Page Nav -->

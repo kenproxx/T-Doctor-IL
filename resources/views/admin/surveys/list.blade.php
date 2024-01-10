@@ -1,15 +1,15 @@
 @extends('layouts.admin')
 @section('title')
-    List Survey
+    {{ __('home.List Survey') }}
 @endsection
 @section('main-content')
-    <h3 class="text-center">List Survey</h3>
+    <h3 class="text-center"> {{ __('home.List Survey') }}</h3>
     <a href="{{ route('view.admin.surveys.create') }}" class="btn btn-primary mb-3">{{ __('home.create') }}</a>
     <table class="table table-striped" id="tableSurveyManagement">
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Question</th>
+            <th scope="col">{{ __('home.Question') }}</th>
             <th scope="col">{{ __('home.Department') }}</th>
             <th scope="col">{{ __('home.type') }}</th>
             <th scope="col">{{ __('home.Action') }}</th>
