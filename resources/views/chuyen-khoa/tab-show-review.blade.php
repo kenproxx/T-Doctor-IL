@@ -10,11 +10,13 @@
                         $user = \App\Models\User::where('id', $review->user_id)
                         ->where('status', \App\Enums\UserStatus::ACTIVE)
                         ->first();
+
+                        $avtValue = $user->avt ?? 'https://i0.wp.com/sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png';
                     @endphp
                     <div class="avt">
-                        <img src="{{$user->avt}}" alt="">
+                        <img src="{{$avtValue}}" alt="">
                     </div>
-                    <p class="pl-2"> {{$user->name}}</p>
+                    <p class="pl-2"> {{$user->name ?? 'incognito'}}</p>
                 </div>
                 <div class="rv-header--right d-block">
                     <div>
