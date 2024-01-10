@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Enums\DepartmentStatus;
 use App\Http\Controllers\Controller;
+use App\Models\Department;
 
 class AdminUserController extends Controller
 {
@@ -18,6 +20,7 @@ class AdminUserController extends Controller
 
     public function create()
     {
-        return view('admin.user.create');
+        $departments = Department::where('status', DepartmentStatus::ACTIVE)->get();
+        return view('admin.user.create', compact('departments'));
     }
 }
