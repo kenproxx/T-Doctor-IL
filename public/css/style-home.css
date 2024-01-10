@@ -63,7 +63,7 @@
 }
 @media all {
   .background-image_HomeNew {
-    background: url("../img/homeNew-img/background/icon_Dark.png") no-repeat 135%;
+    background: url("../img/homeNew-img/background/Icon_Dark_fleaMarket.png") no-repeat 135%;
     background-size: 1054px 845px;
     min-height: 880px;
     display: flex;
@@ -762,12 +762,3 @@
 }
 
 /*# sourceMappingURL=style-home.css.map */
-
-.ellipse-4-line {
-    display: -webkit-box;
-    line-height: 1.3;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}

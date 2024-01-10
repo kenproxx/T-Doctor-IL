@@ -1326,8 +1326,8 @@
                     <div class="tab-pane fade show active" id="popularProduct" role="tabpanel"
                          aria-labelledby="popularProduct-tab">
                         <div id="cCarousel">
-                            <div class="arrow" id="prevFlea"><i class="fa-solid fa-chevron-left"></i></div>
-                            <div class="arrow" id="nextFlea"><i class="fa-solid fa-chevron-right"></i></div>
+                            <div style="z-index: 0;" class="arrow" id="prevFlea"><i class="fa-solid fa-chevron-left"></i></div>
+                            <div style="z-index: 0;" class="arrow" id="nextFlea"><i class="fa-solid fa-chevron-right"></i></div>
                             <div id="carousel-vp">
                                 <div id="cCarousel-inner">
                                     @if($productsFlea == '')
