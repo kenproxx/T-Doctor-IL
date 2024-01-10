@@ -34,7 +34,8 @@
                 <div class="form-group focused">
                     <label class="form-control-label" for="name">{{ __('home.Name') }}<span
                             class="small text-danger">*</span></label>
-                    <input type="text" id="name" class="form-control" name="name" placeholder="{{ __('home.Name') }}" required
+                    <input type="text" id="name" class="form-control" name="name" placeholder="{{ __('home.Name') }}"
+                           required
                            value="{{ $doctor->name }}">
                 </div>
             </div>
@@ -42,8 +43,8 @@
                 <div class="form-group focused">
                     <label class="form-control-label"
                            for="last_name">{{ __('home.Last name') }}</label>
-                    <input type="text" id="{{ __('home.Last name') }}" class="form-control" name="last_name"
-                           placeholder="Last name"
+                    <input type="text" id="last_name" class="form-control" name="last_name"
+                           placeholder="{{ __('home.Last name') }}"
                            value="{{ $doctor->last_name }}">
                 </div>
             </div>
@@ -429,8 +430,12 @@
                     formData.append(fieldName, $(`#${fieldName}`).val());
                 });
 
+                fieldNames.forEach(fieldName => {
+                    console.log(fieldName, $(`#${fieldName}`).val());
+                });
+
                 let isValid = true
-                /* Tạo fn appendDataForm ở admin blade*/
+                /* Tạo fn appendDataForm ở admin blade */
                 isValid = appendDataForm(fieldNames, formData, isValid);
 
                 /* Temporary don't use tinymce because this was error
@@ -449,31 +454,31 @@
                 formData.append('_token', '{{ csrf_token() }}');
                 formData.append("user_id", '{{ \Illuminate\Support\Facades\Auth::user()->id }}');
 
-                if (isValid) {
-                    try {
-                        $.ajax({
-                            url: `{{route('api.backend.doctors.info.update.doctor', ['id' => $doctor->id])}}`,
-                            method: 'post',
-                            headers: headers,
-                            contentType: false,
-                            cache: false,
-                            processData: false,
-                            data: formData,
-                            success: function () {
-                                alert('Update success!');
-                                window.location.href = '{{route('homeAdmin.list.doctors')}}';
-                            },
-                            error: function (exception) {
-                                console.log(exception);
-                                alert('Update error!');
-                            }
-                        });
-                    } catch (error) {
-                        console.log(error);
-                        alert('Error, Please try again!');
-                    }
-                } else {
+                if (!isValid) {
                     alert('Please check input not empty!')
+                    return;
+                }
+                try {
+                    $.ajax({
+                        url: `{{route('api.backend.doctors.info.update.doctor', ['id' => $doctor->id])}}`,
+                        method: 'post',
+                        headers: headers,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: formData,
+                        success: function () {
+                            alert('Update success!');
+                            window.location.href = '{{route('homeAdmin.list.doctors')}}';
+                        },
+                        error: function (exception) {
+                            console.log(exception);
+                            alert('Update error!');
+                        }
+                    });
+                } catch (error) {
+                    console.log(error);
+                    alert('Error, Please try again!');
                 }
             })
 
