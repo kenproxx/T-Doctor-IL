@@ -264,7 +264,7 @@
 
             </div>
             <div class="col-md-6">
-                <a href="">
+                <a href="{{route('examination.index')}}">
                     <div class="border-HomeNew">
                         <div class="w-75 d-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"
@@ -462,7 +462,7 @@
                 </a>
             </div>
             <div class="col-md-6">
-                <a href="">
+                <a href="{{route('examination.mentoring')}}">
                     <div class="border-HomeNew">
                         <div class="w-75 d-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"
@@ -499,7 +499,7 @@
                 </a>
             </div>
             <div class="col-md-6">
-                <a href="">
+                <a href="{{route('clinic')}}">
                     <div class="border-HomeNew">
                         <div class="w-75 d-flex align-items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"
@@ -835,7 +835,7 @@
                     @endphp
                     @foreach($departments as $departmentItem)
                         <div class="col-md-4">
-                            <a href="">
+                            <a href="{{route('home.specialist.department',$departmentItem->id)}}">
                                 <div class="border-HomeNew">
                                     <div class="w-75 d-flex align-items-center ">
                                         <img src="{{$departmentItem->thumbnail}}" alt="thumbnail">
@@ -1314,7 +1314,7 @@
                                                 <div class="cCarousel-item">
                                                     <div class="product-item">
                                                         <div
-                                                            class="img-pro justify-content-center d-flex img_product--homeNew">
+                                                            class="img-pro justify-content-center d-flex h-auto img_product--homeNew">
                                                             <img src="{{$product->thumbnail}}" alt="">
                                                             <a class="button-heart" data-favorite="0">
                                                                 <i id="icon-heart" class="bi-heart bi"
