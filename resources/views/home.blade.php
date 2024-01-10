@@ -1392,40 +1392,6 @@
                         </div>
                     </div>
                 </div>
-
-                {{--            <div id="recruitment-homeNew" class="p-3">--}}
-                {{--                <div class="title-recruitment--homeNew">--}}
-                {{--                    <span>{{ __('home.Flea market') }}</span>--}}
-                {{--                    <p>{{ __('home.Hire staffs cheaper, find your staffs faster') }}</p>--}}
-                {{--                </div>--}}
-                {{--                <div class="d-md-flex main-recruitment--homeNew">--}}
-                {{--                    <div class="col-md-7 col-12 pl-0 main-card--homeNew">--}}
-
-                {{--                        <div class="d-flex justify-content-center align-items-center">--}}
-                {{--                            {{$products->links()}}--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-                {{--                    <div class="col-md-5 main-title-card--homeNew col-12">--}}
-                {{--                        <div class="w-100">--}}
-                {{--                            <div class="describe-item">--}}
-                {{--                                <span>{{ __('home.BUY YOUR EQUIPMENT CHEAP') }}</span>--}}
-                {{--                                <p>{{ __('home.Find your products you though us.') }}</p>--}}
-                {{--                            </div>--}}
-                {{--                            <div class="describe-item">--}}
-                {{--                                <span>{{ __('home.EASY TO FIND YOUR BUYER') }}</span>--}}
-                {{--                                <p>{{ __("home.Please find your buyers around you more easy") }}!</p>--}}
-                {{--                            </div>--}}
-                {{--                            <div class="describe-item">--}}
-                {{--                                <span>{{ __('home.SELL YOUR OLD MACHINE FAST') }}</span>--}}
-                {{--                                <p>{{ __('home.Throrugh us, you can sell your unnecessarry  products in you clinics to other clinics around you.') }}</p>--}}
-                {{--                            </div>--}}
-                {{--                        </div>--}}
-                {{--                        <div class="mt-auto p-2 button-bottom-right">--}}
-                {{--                            <button class="btn-see-all ">{{ __('home.See all') }}</button>--}}
-                {{--                        </div>--}}
-                {{--                    </div>--}}
-                {{--                </div>--}}
-                {{--            </div>--}}
             </div>
         </div>
     </div>
