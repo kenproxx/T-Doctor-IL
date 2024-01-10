@@ -45,7 +45,7 @@
 
                                     </div>
                                 </a>
-                                <a href="" class="">
+                                <a href="{{route('clinic.detail',$clinicDetail->id)}}" class="">
                                     <div class="button-direct-specialList">
                                         {{ __('home.Chỉ đường') }}
                                     </div>
@@ -96,7 +96,7 @@
                                  height: 365px;
                                  object-fit: cover;
                                  border-radius: 16px;
-
+                                 margin: 15px;
                                  "
                                  src="{{$gallery}}" alt="">
                         @endforeach
