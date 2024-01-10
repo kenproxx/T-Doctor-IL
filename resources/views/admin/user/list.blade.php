@@ -10,6 +10,7 @@
         <table class="table" id="tableListUser">
             <thead>
             <tr>
+                <th scope="col">{{ __('home.STT') }}</th>
                 <th scope="col">{{ __('home.Name') }}</th>
                 <th scope="col">{{ __('home.Last Name') }}</th>
                 <th scope="col">{{ __('home.Username') }}</th>
@@ -56,6 +57,7 @@
                 let data = response[i];
                 urlDetail = urlDetail.replace(':id', data.id)
                 html = html + `<tr>
+                                    <td>${i + 1}</td>
                                     <td>${data.name}</td>
                                     <td>${data.last_name}</td>
                                     <td>${data.username}</td>
@@ -78,6 +80,7 @@
             }
 
             $('#tbodyListUser').empty().append(html);
+            loadPaginate('tableListUser', 20);
         }
 
         function confirmDeleteUser(id) {
@@ -91,18 +94,22 @@
             let deleteUrl = `{{ route('api.admin.users.delete', ['id'=>':id']) }}`;
             deleteUrl = deleteUrl.replace(':id', id);
 
-            await $.ajax({
-                url: deleteUrl,
-                method: 'DELETE',
-                headers: headers,
-                success: function (response) {
-                    alert('Delete success!');
-                    window.location.reload();
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
+            try {
+                await $.ajax({
+                    url: deleteUrl,
+                    method: 'DELETE',
+                    headers: headers,
+                    success: function (response) {
+                        alert('Delete success!');
+                        window.location.reload();
+                    },
+                    error: function (error) {
+                        alert(error.responseJSON.message);
+                    }
+                });
+            } catch (e) {
+                alert('Delete error!');
+            }
         }
     </script>
 @endsection
