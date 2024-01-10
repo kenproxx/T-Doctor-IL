@@ -349,6 +349,9 @@ img {
     width: auto;
     height: 383px;
   }
+  .container .product-item .img-pro {
+    height: 237px;
+  }
   .container .product-item .img-pro img {
     height: 100%;
     object-fit: cover;

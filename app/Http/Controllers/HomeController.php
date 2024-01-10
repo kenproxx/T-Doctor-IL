@@ -8,19 +8,23 @@ use App\Enums\CouponStatus;
 use App\Enums\MessageStatus;
 use App\Enums\online_medicine\OnlineMedicineStatus;
 use App\Enums\ProductStatus;
+use App\Enums\ReviewStatus;
 use App\Enums\SettingStatus;
 use App\Enums\UserStatus;
 use App\Models\Booking;
 use App\Models\Chat;
+use App\Models\Clinic;
 use App\Models\Coupon;
 use App\Models\CouponApply;
 use App\Models\online_medicine\ProductMedicine;
 use App\Models\ProductInfo;
+use App\Models\Review;
 use App\Models\Setting;
 use App\Models\User;
-use GuzzleHttp\Psr7\Request;
+//use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Http\Request;
 use ReflectionClass;
 
 class HomeController extends Controller
@@ -64,7 +68,32 @@ class HomeController extends Controller
     public function specialistDetail($id)
     {
         $clinicDetail = \App\Models\Clinic::where('id', $id)->first();
-        return view('chuyen-khoa.detail-clinic-pharmacies',compact('clinicDetail'));
+        return view('chuyen-khoa.detail-clinic-pharmacies',compact('clinicDetail','id'));
+    }
+
+    public function specialistReview(Request $request, $id)
+    {
+        $clinic = Clinic::find($id);
+        $cmt_review = $request->input('cmt_review');
+        $star_number = $request->input('star_number');
+        $cmt_store = new Review();
+        $cmt_store->star = $star_number;
+        $cmt_store->content = $cmt_review;
+        $cmt_store->clinic_id = $id;
+        $cmt_store->status = ReviewStatus::APPROVED;
+        if (!Auth::user()==null) {
+            $cmt_store->user_id = auth()->user()->id;
+            $cmt_store->name = $clinic->name;
+            $cmt_store->address = $clinic->address;
+            $cmt_store->phone = $clinic->phone;
+            $cmt_store->email = $clinic->email;
+            $cmt_store->save();
+            alert()->success('Đánh giá thành công');
+            return redirect()->route('home.specialist.detail', $id);
+        }else{
+            alert()->error('Bạn cần đăng nhập để đánh giá');
+            return redirect()->route('home.specialist.detail', $id);
+        }
     }
 
     public function admin()

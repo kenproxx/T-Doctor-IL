@@ -64,7 +64,8 @@ Route::middleware(['user.active'])->group(function () {
     Route::group(['prefix' => 'home'], function () {
         Route::get('/specialist', [HomeController::class, 'specialist'])->name('home.specialist');
         Route::get('/specialist/{id}', [HomeController::class, 'specialistDepartment'])->name('home.specialist.department');
-        Route::get('/detail-specialist/{id}', [HomeController::class, 'specialistDetail'])->name('home.specialist.detail');
+        Route::get('/specialist-detail/{id}', [HomeController::class, 'specialistDetail'])->name('home.specialist.detail');
+        Route::post('/specialist-review/{id}', [HomeController::class, 'specialistReview'])->name('home.specialist.review');
 
     });
 
