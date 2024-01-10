@@ -4,7 +4,7 @@
 @extends('layouts.master')
 @section('title', 'Home')
 @section('content')
-{{--    <link href="{{ asset('css/home.css') }}" rel="stylesheet">--}}
+    {{--    <link href="{{ asset('css/home.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/style-home.css') }}" rel="stylesheet">
     @include('layouts.partials.header')
     <div class="container pb-5" style="margin-top: 168px;">
@@ -708,7 +708,8 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"
                                      fill="none">
                                     <g clip-path="url(#clip0_4225_13428)">
-                                        <mask id="mask0_4225_13428" style="mask-type:luminance" maskUnits="userSpaceOnUse"
+                                        <mask id="mask0_4225_13428" style="mask-type:luminance"
+                                              maskUnits="userSpaceOnUse"
                                               x="0" y="0" width="64" height="64">
                                             <path d="M0 7.62939e-06H64V64H0V7.62939e-06Z" fill="white"/>
                                         </mask>
@@ -728,7 +729,8 @@
                                                   stroke-width="3" stroke-miterlimit="10" stroke-linecap="round"
                                                   stroke-linejoin="round"/>
                                             <path d="M39.6513 19.9842L28.6348 45.0449" stroke="#088180" stroke-width="3"
-                                                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                                  stroke-miterlimit="10" stroke-linecap="round"
+                                                  stroke-linejoin="round"/>
                                             <path
                                                 d="M30.5375 30.3451H21.3066C21.3066 30.3451 26.194 21.4862 27.0005 20.4967C27.8161 19.4961 28.5884 20.1202 28.6619 21.0028C28.7354 21.8855 28.6251 34.6836 28.6251 34.6836"
                                                 stroke="#088180" stroke-width="3" stroke-miterlimit="10"
@@ -746,33 +748,47 @@
                                                 stroke="#088180" stroke-width="3" stroke-miterlimit="10"
                                                 stroke-linecap="round" stroke-linejoin="round"/>
                                             <path d="M51.3125 5.79688V0.937501" stroke="#088180" stroke-width="3"
-                                                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                                  stroke-miterlimit="10" stroke-linecap="round"
+                                                  stroke-linejoin="round"/>
                                             <path d="M47.8671 6.7207L45.4375 2.51233" stroke="#088180" stroke-width="3"
-                                                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                                  stroke-miterlimit="10" stroke-linecap="round"
+                                                  stroke-linejoin="round"/>
                                             <path d="M57.2793 16.1329L61.4877 18.5625" stroke="#088180" stroke-width="3"
-                                                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                                  stroke-miterlimit="10" stroke-linecap="round"
+                                                  stroke-linejoin="round"/>
                                             <path d="M58.2031 12.6875H63.0625" stroke="#088180" stroke-width="3"
-                                                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                                  stroke-miterlimit="10" stroke-linecap="round"
+                                                  stroke-linejoin="round"/>
                                             <path d="M44.4219 12.6875H39.5625" stroke="#088180" stroke-width="3"
-                                                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                                  stroke-miterlimit="10" stroke-linecap="round"
+                                                  stroke-linejoin="round"/>
                                             <path d="M45.3451 9.24219L41.1367 6.81256" stroke="#088180" stroke-width="3"
-                                                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                                  stroke-miterlimit="10" stroke-linecap="round"
+                                                  stroke-linejoin="round"/>
                                             <path d="M54.7578 18.6549L57.1874 22.8633" stroke="#088180" stroke-width="3"
-                                                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                                  stroke-miterlimit="10" stroke-linecap="round"
+                                                  stroke-linejoin="round"/>
                                             <path d="M51.3125 19.5781V24.4375" stroke="#088180" stroke-width="3"
-                                                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                                  stroke-miterlimit="10" stroke-linecap="round"
+                                                  stroke-linejoin="round"/>
                                             <path d="M57.2793 9.24219L61.4877 6.81256" stroke="#088180" stroke-width="3"
-                                                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                                  stroke-miterlimit="10" stroke-linecap="round"
+                                                  stroke-linejoin="round"/>
                                             <path d="M54.7578 6.7207L57.1874 2.51233" stroke="#088180" stroke-width="3"
-                                                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                                  stroke-miterlimit="10" stroke-linecap="round"
+                                                  stroke-linejoin="round"/>
                                             <path d="M2.81836 43.4434V48.4434" stroke="#088180" stroke-width="3"
-                                                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                                  stroke-miterlimit="10" stroke-linecap="round"
+                                                  stroke-linejoin="round"/>
                                             <path d="M0.943359 45.9434H4.69336" stroke="#088180" stroke-width="3"
-                                                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                                  stroke-miterlimit="10" stroke-linecap="round"
+                                                  stroke-linejoin="round"/>
                                             <path d="M18.9922 59.7738V63.0625" stroke="#088180" stroke-width="3"
-                                                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                                  stroke-miterlimit="10" stroke-linecap="round"
+                                                  stroke-linejoin="round"/>
                                             <path d="M17.7598 61.418H20.2263" stroke="#088180" stroke-width="3"
-                                                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                                                  stroke-miterlimit="10" stroke-linecap="round"
+                                                  stroke-linejoin="round"/>
                                         </g>
                                     </g>
                                     <defs>
@@ -842,7 +858,8 @@
                                         <span>{{$departmentItem->name}}</span>
                                     </div>
                                     <div class="svg-containerNho">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                             viewBox="0 0 24 24"
                                              fill="none">
                                             <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd"
                                                   d="M16.6666 0H7.3333V7.33268L0 7.33268V16.666H7.3333V24H16.6666V16.666H24V7.33268L16.6666 7.33268V0Z"
@@ -850,7 +867,8 @@
                                         </svg>
                                     </div>
                                     <div class="svg-container">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60"
+                                             viewBox="0 0 60 60"
                                              fill="none">
                                             <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd"
                                                   d="M41.6667 0H18.3333V18.3327H0V41.666H18.3333V60H41.6667V41.666H60V18.3327H41.6667V0Z"
@@ -895,7 +913,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="tab-content mt-4" id="myTabContent">
+                <div class="tab-content py-4" id="myTabContent">
                     <div class="tab-pane fade show active" id="available" role="tabpanel"
                          aria-labelledby="available-tab">
                         @php
@@ -1069,26 +1087,31 @@
                             {{ $medicines->links() }}
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="mentoring" role="tabpanel" aria-labelledby="mentoring-tab">
+                    <div class="tab-pane fade " id="mentoring" role="tabpanel" aria-labelledby="mentoring-tab">
                         <div class="section1-content mt-5">
-                            <div class="px-5 py-2">
-                                <div class="content__item d-flex gap-3">
-                                    <img
-                                        class="content__item__image"
-                                        src="{{asset('img/icons_logo/image 1.jpeg')}}"
-                                        alt=""
-                                    />
-                                    <div>
-                                        <h6>
-                                            {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
-                                        </h6>
-                                        <p>
-                                            {{ __('home.Chiều qua, nhận được cuộc gọi của một đồng nghiệp, hỏi ý kiến về một cô gái bị mù mắt sau khi được tiêm chất làm đầy. Dù đã có ...') }}
-                                        </p>
-                                        <p class="content__item-link">{{ __('home.Read') }}</p>
-                                    </div>
+                            @foreach($questions as $question)
+                                <div class="px-5 py-2">
+                                    <a href="{{ route('examination.mentoring.show', $question->id) }}" target="_blank">
+                                        <div class="content__item d-flex gap-3">
+                                            @php
+                                                $thumbnail = explode(',', $question->gallery_public)[0];
+                                            @endphp
+                                            <img
+                                                class="content__item__image" loading="lazy"
+                                                src="{{ $thumbnail ? asset($thumbnail) : asset('img/icons_logo/image 1.jpeg')}}"
+                                                alt=""
+                                            />
+                                            <div>
+                                                <h6>
+                                                    {{ $question->title }}
+                                                </h6>
+                                                <p class="ellipse-4-line">
+                                                    {!! $question->content !!}</p>
+                                            </div>
+                                        </div>
+                                    </a>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -1302,71 +1325,71 @@
                 <div class="tab-content mt-4" id="myTabContent">
                     <div class="tab-pane fade show active" id="popularProduct" role="tabpanel"
                          aria-labelledby="popularProduct-tab">
-                            <div id="cCarousel">
-                                <div class="arrow" id="prevFlea"><i class="fa-solid fa-chevron-left"></i></div>
-                                <div class="arrow" id="nextFlea"><i class="fa-solid fa-chevron-right"></i></div>
-                                <div id="carousel-vp">
-                                    <div id="cCarousel-inner">
-                                        @if($productsFlea == '')
-                                            <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
-                                        @else
-                                            @foreach($productsFlea as $product)
-                                                <div class="cCarousel-item">
-                                                    <div class="product-item">
-                                                        <div
-                                                            class="img-pro justify-content-center d-flex img_product--homeNew">
-                                                            <img src="{{$product->thumbnail}}" alt="">
-                                                            <a class="button-heart" data-favorite="0">
-                                                                <i id="icon-heart" class="bi-heart bi"
-                                                                   data-product-id="${product.id}"
-                                                                   onclick="addProductToWishList(${product.id})"></i>
-                                                            </a>
-                                                        </div>
-                                                        <div class="content-pro p-3">
-                                                            <div class="">
-                                                                <div class="name-product" style="min-height: 48px">
-                                                                    <a class="name-product--fleaMarket"
-                                                                       href="{{ route('examination.doctor_info', $product->id) }}">{{$product->name}}</a>
-                                                                </div>
-                                                                <div class="location-pro">
-                                                                    @php
-                                                                        $addressP = \App\Models\Province::where('id', $product->province_id)->value('name');
-                                                                    @endphp
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="21"
-                                                                         height="21" viewBox="0 0 21 21" fill="none">
-                                                                        <g clip-path="url(#clip0_5506_14919)">
-                                                                            <path
-                                                                                d="M4.66602 12.8382C3.12321 13.5188 2.16602 14.4673 2.16602 15.5163C2.16602 17.5873 5.89698 19.2663 10.4993 19.2663C15.1017 19.2663 18.8327 17.5873 18.8327 15.5163C18.8327 14.4673 17.8755 13.5188 16.3327 12.8382M15.4993 7.59961C15.4993 10.986 11.7493 12.5996 10.4993 15.0996C9.24935 12.5996 5.49935 10.986 5.49935 7.59961C5.49935 4.83819 7.73793 2.59961 10.4993 2.59961C13.2608 2.59961 15.4993 4.83819 15.4993 7.59961ZM11.3327 7.59961C11.3327 8.05985 10.9596 8.43294 10.4993 8.43294C10.0391 8.43294 9.66602 8.05985 9.66602 7.59961C9.66602 7.13937 10.0391 6.76628 10.4993 6.76628C10.9596 6.76628 11.3327 7.13937 11.3327 7.59961Z"
-                                                                                stroke="white" stroke-width="2"
-                                                                                stroke-linecap="round"
-                                                                                stroke-linejoin="round"/>
-                                                                        </g>
-                                                                        <defs>
-                                                                            <clipPath id="clip0_5506_14919">
-                                                                                <rect width="20" height="20" fill="white"
-                                                                                      transform="translate(0.5 0.933594)"/>
-                                                                            </clipPath>
-                                                                        </defs>
-                                                                    </svg> &nbsp; {{$addressP}}
-                                                                </div>
-                                                                <div class="prices-pro">
-                                                                    {{number_format($product->price, 0, ',', '.') }} {{$product->price_unit ?? 'VND'}}
-                                                                </div>
+                        <div id="cCarousel">
+                            <div class="arrow" id="prevFlea"><i class="fa-solid fa-chevron-left"></i></div>
+                            <div class="arrow" id="nextFlea"><i class="fa-solid fa-chevron-right"></i></div>
+                            <div id="carousel-vp">
+                                <div id="cCarousel-inner">
+                                    @if($productsFlea == '')
+                                        <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
+                                    @else
+                                        @foreach($productsFlea as $product)
+                                            <div class="cCarousel-item">
+                                                <div class="product-item">
+                                                    <div
+                                                        class="img-pro justify-content-center d-flex img_product--homeNew">
+                                                        <img src="{{$product->thumbnail}}" alt="">
+                                                        <a class="button-heart" data-favorite="0">
+                                                            <i id="icon-heart" class="bi-heart bi"
+                                                               data-product-id="${product.id}"
+                                                               onclick="addProductToWishList(${product.id})"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="content-pro p-3">
+                                                        <div class="">
+                                                            <div class="name-product" style="min-height: 48px">
+                                                                <a class="name-product--fleaMarket"
+                                                                   href="{{ route('examination.doctor_info', $product->id) }}">{{$product->name}}</a>
                                                             </div>
-                                                        </div>
-                                                        <div class="d-flex justify-content-end">
-                                                            <div class="SeeDetail">
-                                                                <a href="{{ route('flea.market.product.detail', $product->id) }}"
-                                                                   target="_blank">{{ __('home.See details') }}</a>
+                                                            <div class="location-pro">
+                                                                @php
+                                                                    $addressP = \App\Models\Province::where('id', $product->province_id)->value('name');
+                                                                @endphp
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="21"
+                                                                     height="21" viewBox="0 0 21 21" fill="none">
+                                                                    <g clip-path="url(#clip0_5506_14919)">
+                                                                        <path
+                                                                            d="M4.66602 12.8382C3.12321 13.5188 2.16602 14.4673 2.16602 15.5163C2.16602 17.5873 5.89698 19.2663 10.4993 19.2663C15.1017 19.2663 18.8327 17.5873 18.8327 15.5163C18.8327 14.4673 17.8755 13.5188 16.3327 12.8382M15.4993 7.59961C15.4993 10.986 11.7493 12.5996 10.4993 15.0996C9.24935 12.5996 5.49935 10.986 5.49935 7.59961C5.49935 4.83819 7.73793 2.59961 10.4993 2.59961C13.2608 2.59961 15.4993 4.83819 15.4993 7.59961ZM11.3327 7.59961C11.3327 8.05985 10.9596 8.43294 10.4993 8.43294C10.0391 8.43294 9.66602 8.05985 9.66602 7.59961C9.66602 7.13937 10.0391 6.76628 10.4993 6.76628C10.9596 6.76628 11.3327 7.13937 11.3327 7.59961Z"
+                                                                            stroke="white" stroke-width="2"
+                                                                            stroke-linecap="round"
+                                                                            stroke-linejoin="round"/>
+                                                                    </g>
+                                                                    <defs>
+                                                                        <clipPath id="clip0_5506_14919">
+                                                                            <rect width="20" height="20" fill="white"
+                                                                                  transform="translate(0.5 0.933594)"/>
+                                                                        </clipPath>
+                                                                    </defs>
+                                                                </svg> &nbsp; {{$addressP}}
+                                                            </div>
+                                                            <div class="prices-pro">
+                                                                {{number_format($product->price, 0, ',', '.') }} {{$product->price_unit ?? 'VND'}}
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="d-flex justify-content-end">
+                                                        <div class="SeeDetail">
+                                                            <a href="{{ route('flea.market.product.detail', $product->id) }}"
+                                                               target="_blank">{{ __('home.See details') }}</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            @endforeach
-                                        @endif
-                                    </div>
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                             </div>
+                        </div>
                     </div>
                 </div>
 

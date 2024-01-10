@@ -9,6 +9,7 @@ use App\Enums\MessageStatus;
 use App\Enums\online_medicine\OnlineMedicineStatus;
 use App\Enums\ProductStatus;
 use App\Enums\ReviewStatus;
+use App\Enums\QuestionStatus;
 use App\Enums\SettingStatus;
 use App\Enums\UserStatus;
 use App\Models\Booking;
@@ -18,6 +19,7 @@ use App\Models\Coupon;
 use App\Models\CouponApply;
 use App\Models\online_medicine\ProductMedicine;
 use App\Models\ProductInfo;
+use App\Models\Question;
 use App\Models\Review;
 use App\Models\Setting;
 use App\Models\User;
@@ -43,7 +45,11 @@ class HomeController extends Controller
             ->leftJoin('provinces', 'provinces.id', '=', 'users.province_id')
             ->select('product_medicines.*', 'provinces.name as location_name')
             ->paginate(15);
-        return view('home', compact('coupons', 'products', 'medicines', 'productsFlea'));
+
+        $questions = Question::withCount('answers')->where('status', QuestionStatus::APPROVED)->orderBy('answers_count',
+            'desc') // Order by answer_count in descending order
+        ->take(5)->get();
+        return view('home', compact('coupons', 'products', 'medicines', 'productsFlea', 'questions'));
     }
     public function specialist()
     {
