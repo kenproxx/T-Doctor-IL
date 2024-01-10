@@ -8,10 +8,12 @@
             <div class="d-flex justify-content-between rv-header align-items-center">
                 <div class="d-flex rv-header--left">
                     @php
-                        $user = \App\Models\User::where('id', $review->user_id)->first();
+                        $user = \App\Models\User::where('id', $review->user_id)
+                        ->where('status', \App\Enums\UserStatus::ACTIVE)
+                        ->first();
                     @endphp
                     <div class="avt">
-                        <img src="{{$user->avt}}">
+                        <img src="{{$user->avt}}" alt="">
                     </div>
                     <p class="pl-2"> {{$user->name}}</p>
                 </div>
