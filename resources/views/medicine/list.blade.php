@@ -290,7 +290,7 @@
                                             <a href="${url}">${item.name}</a>
                                         </div>
                                         <div class="location-pro d-flex">
-                                            Location: <p>${item.location_name ?? 'Toàn quốc'}</p>
+                                            Location: <p>${item.location_name ?? '{{ __('home.Toàn quốc') }}'}</p>
                                             <br>
                                         </div>
                                         <div class="price-pro">

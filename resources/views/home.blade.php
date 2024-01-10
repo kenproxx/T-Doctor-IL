@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="container">
-        <div class="titleServiceHomeNew">Dịch vụ toàn diện</div>
+        <div class="titleServiceHomeNew">{{ __('home.Dịch vụ toàn diện') }}</div>
         <div class="mainServiceHomeNew row">
             <div class="col-md-6">
                 <a href="{{route('home.specialist')}}">

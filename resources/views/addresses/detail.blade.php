@@ -1,19 +1,19 @@
 @extends('layouts.admin')
 @section('title')
-    Detail Address
+    {{ __('home.Detail Address') }}
 @endsection
 @section('main-content')
-    <h3 class="text-center">Detail Address</h3>
+    <h3 class="text-center"> {{ __('home.Detail Address') }}</h3>
     <div class="container">
         <form>
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label for="username">Full Name</label>
+                    <label for="username">{{ __('home.Full Name') }}</label>
                     <input type="text" class="form-control" id="username" maxlength="200"
                            value="{{ $address->username }}" required>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="phone">Phone</label>
+                    <label for="phone">{{ __('home.Phone Number') }}</label>
                     <input type="text" class="form-control" maxlength="200" id="phone" value="{{ $address->phone }}"
                            required>
                 </div>
@@ -41,14 +41,14 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="address_detail">Address Detail</label>
+                <label for="address_detail">{{ __('home.Detail Address') }}</label>
                 <input type="text" class="form-control" value="{{ $address->address_detail }}" maxlength="200"
                        id="address_detail" required>
             </div>
             <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="is_default"
                        {{ $address->is_default == 1 ? 'checked' : '' }} value="100">
-                <label class="form-check-label" for="is_default">Set address default</label>
+                <label class="form-check-label" for="is_default"> {{ __('home.Set address default') }}</label>
             </div>
             <div class="text-center mt-3">
                 <button type="button" class="btn btn-primary" id="btnUpdate">{{ __('home.Save') }}</button>

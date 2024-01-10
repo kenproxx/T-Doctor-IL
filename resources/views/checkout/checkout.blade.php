@@ -76,7 +76,7 @@
                             </div>
                             <div class="select-address mb-3">
                                 <button type="button" class="btn btn-outline-primary" data-toggle="modal"
-                                        data-target="#modalChooseAddress">Choose address option
+                                        data-target="#modalChooseAddress">{{ __('home.Choose address option') }}
                                 </button>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
@@ -293,7 +293,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalChooseAddressLabel">List address</h5>
+                    <h5 class="modal-title" id="modalChooseAddressLabel">{{ __('home.List Address') }}</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -326,14 +326,14 @@
                     <div class="create-new-address mt-3">
                         <a href="{{ route('view.user.address.list') }}" class="btn btn-outline-success">
                             <i class="fa-solid fa-plus"></i>
-                            Create new address
+                            {{ __('home.Create new address') }}
                         </a>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('home.Close') }}</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSaveAddressSelected">
-                        Save
+                        {{ __('home.Save') }}
                     </button>
                 </div>
             </div>
