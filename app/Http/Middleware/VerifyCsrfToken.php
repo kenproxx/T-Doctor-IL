@@ -62,6 +62,7 @@ class VerifyCsrfToken extends Middleware
         'medicine/search',
         'forget-password/*',
         'examination/search',
-        '/products-medicines/list-prescriptions'
+        '/products-medicines/list-prescriptions',
+        '/products-medicines/blade-list-prescriptions',
     ];
 }

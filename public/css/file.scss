@@ -1029,7 +1029,7 @@
     }
 
     .add-img {
-        button {
+        label {
             width: 220px;
             height: 220px;
             border-radius: 8px;
@@ -1037,6 +1037,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            cursor: pointer;
 
             i {
                 color: rgba(146, 146, 146, 1);
