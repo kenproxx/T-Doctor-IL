@@ -762,3 +762,12 @@
 }
 
 /*# sourceMappingURL=style-home.css.map */
+
+.ellipse-4-line {
+    display: -webkit-box;
+    line-height: 1.3;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
