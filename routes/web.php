@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AddressMapController;
+use App\Http\Controllers\admin\AdminMedicalResultController;
 use App\Http\Controllers\admin\AdminUserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -28,6 +29,7 @@ use App\Http\Controllers\FleaMarketController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MapController;
+use App\Http\Controllers\MedicalResultController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\NewEventController;
 use App\Http\Controllers\OrderController;
@@ -361,6 +363,12 @@ Route::middleware(['user.active'])->group(function () {
             Route::get('/list-prescriptions/{id}', [BookingResultController::class, 'getListProduct'])->name('web.booking.result.list.prescriptions');
         });
 
+        /* Medical result */
+        Route::group(['prefix' => 'web/medical-result'], function () {
+            Route::get('/list', [MedicalResultController::class, 'list'])->name('web.medical.result.list');
+            Route::get('/detail/{id}', [MedicalResultController::class, 'detail'])->name('web.medical.result.detail');
+        });
+
         /* Surveys */
         Route::group(['prefix' => 'surveys'], function () {
             Route::get('medical/list', [SurveyController::class, 'getList'])->name('view.admin.surveys.index');
@@ -381,26 +389,33 @@ Route::middleware(['user.active'])->group(function () {
             Route::get('detail/{id}', [AdminUserController::class, 'detail'])->name('view.admin.user.detail');
             Route::get('create', [AdminUserController::class, 'create'])->name('view.admin.user.create');
         });
+
+        /* Admin medical result */
+        Route::group(['prefix' => 'medical-result'], function () {
+            Route::get('list', [AdminMedicalResultController::class, 'list'])->name('view.admin.medical.result.list');
+            Route::get('detail/{id}', [AdminMedicalResultController::class, 'detail'])->name('view.admin.medical.result.detail');
+            Route::get('create', [AdminMedicalResultController::class, 'create'])->name('view.admin.medical.result.create');
+        });
     });
 
     Route::get('/send', 'SendMessageController@index')->name('send');
     Route::post('/postMessage', 'SendMessageController@sendMessage')->name('postMessage');
 
-// QrCode
+    /* QrCode */
     Route::group(['prefix' => 'qr-code'], function () {
         Route::get('/doctor-info/{id}',
             [DoctorInfoController::class, 'showFromQrCode'])->name('qr.code.show.doctor.info');
     });
 
     /* List Api*/
-//Auth
+    /* Auth */
     Route::group(['prefix' => 'auth'], function () {
         Route::post('/login', [LoginController::class, 'login'])->name('api.user.login');
         Route::post('/logout', [LoginController::class, 'logout'])->name('api.user.logout');
         Route::post('/register', [RegisterController::class, 'register'])->name('api.user.register');
         Route::post('/logout-all', [UserApi::class, 'logout']);
     });
-//Product
+    /* Product */
     Route::group(['prefix' => 'products'], function () {
         Route::get('', [ProductInfoController::class, 'index'])->name('product.list');
 
@@ -436,7 +451,7 @@ Route::middleware(['user.active'])->group(function () {
         require_once __DIR__ . '/restapi.php';
     });
 
-// Route maps
+    /* Route maps */
     Route::get('explore', [MapController::class, 'explore'])->name('explore.list');
     Route::get('/info-user/{id}', [ProfileController::class, 'infoUser'])->name('info.user');
     Route::get('/department', [DoctorInfoController::class, 'listDepartment'])->name('list.department');

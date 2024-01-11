@@ -561,6 +561,28 @@
                 </li>
                 <!-- End Booking Nav -->
 
+                <!-- Start Medical Result Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#medical-result-nav" data-bs-toggle="collapse"
+                       href="#">
+                        <i class="bi bi-segmented-nav"></i><span>Medical examination results</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="medical-result-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('view.admin.medical.result.list') }}">
+                                <i class="bi bi-circle"></i><span>List examination results</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('view.admin.medical.result.create') }}">
+                                <i class="bi bi-circle"></i><span>Create examination results</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Medical Result Nav -->
+
                 <!-- Config Nav -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
@@ -627,13 +649,14 @@
 
             @endif
         @else
+            <!-- Start Family Nav -->
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#department-symptom-nav" data-bs-toggle="collapse"
+                <a class="nav-link collapsed" data-bs-target="#family-nav" data-bs-toggle="collapse"
                    href="#">
                     <i class="bi bi-bar-chart"></i><span>{{ __('home.Gia dinh') }}</span><i
                         class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="department-symptom-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <ul id="family-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="{{ route('api.backend.family-management.index') }}">
                             <i class="bi bi-circle"></i><span>{{ __('home.Gia dinh') }}</span>
@@ -641,7 +664,9 @@
                     </li>
                 </ul>
             </li>
+            <!-- End Family Nav -->
         @endif
+        <!-- Start Address Nav -->
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#address-nav" data-bs-toggle="collapse"
                href="#">
@@ -661,6 +686,24 @@
                 </li>
             </ul>
         </li>
+        <!-- End Address Nav -->
+
+        <!-- Start Medical Result Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#medical-result-ui-nav" data-bs-toggle="collapse"
+               href="#">
+                <i class="bi bi-search"></i><span>Medical examination results</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="medical-result-ui-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('web.medical.result.list') }}">
+                        <i class="bi bi-circle"></i><span>Medical examination results</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- End Medical Result Nav -->
 
         <li class="nav-heading">{{ __('home.Settings') }}</li>
 
