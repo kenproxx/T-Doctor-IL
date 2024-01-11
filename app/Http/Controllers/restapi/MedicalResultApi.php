@@ -6,16 +6,28 @@ use App\Enums\MedicalResultStatus;
 use App\Http\Controllers\Controller;
 use App\Models\MedicalResults;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MedicalResultApi extends Controller
 {
     public function getListByUser(Request $request)
     {
         $user_id = $request->input('user_id');
-        $results = MedicalResults::where('user_id', $user_id)
+        $results = DB::table('medical_results')
+            ->where('user_id', $user_id)
             ->where('status', MedicalResultStatus::APPROVED)
             ->orderBy('id', 'desc')
-            ->get();
+            ->cursor()
+            ->map(function ($item) {
+                $result_value = $item->result;
+                $result = (array)$item;
+                $value_result = '[' . $result_value . ']';
+                $array_result = json_decode($value_result, true);
+                $result['result'] = $array_result;
+                $result['result_en'] = $array_result;
+                $result['result_laos'] = $array_result;
+                return $result;
+            });
         return response()->json($results);
     }
 
