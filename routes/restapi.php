@@ -11,6 +11,7 @@ use App\Http\Controllers\restapi\DoctorDepartmentApi;
 use App\Http\Controllers\restapi\DoctorInfoApi;
 use App\Http\Controllers\restapi\DoctorReviewApi;
 use App\Http\Controllers\restapi\MedicalApi;
+use App\Http\Controllers\restapi\MedicalResultApi;
 use App\Http\Controllers\restapi\NewsApi;
 use App\Http\Controllers\restapi\OrderApi;
 use App\Http\Controllers\restapi\PharmacyApi;
@@ -182,6 +183,13 @@ Route::group(['prefix' => 'booking-result'], function () {
     Route::get('/list-medicine/{id}', [BookingResultApi::class, 'getProductByPrescriptionsInBookingID'])->name('restapi.booking.result.list.medicine');
     Route::get('/list-business', [BookingResultApi::class, 'getListByBusinessID'])->name('restapi.booking.result.business');
     Route::get('/detail/{id}', [BookingResultApi::class, 'detail'])->name('restapi.booking.result.detail');
+});
+
+/* Medical result*/
+Route::group(['prefix' => 'medical-results'], function () {
+    Route::get('/list', [MedicalResultApi::class, 'getListByUser'])->name('restapi.medical.result.list');
+    Route::get('/list-medicine/{id}', [MedicalResultApi::class, 'getProductByPrescriptionsID'])->name('restapi.medical.result.list.medicine');
+    Route::get('/detail/{id}', [MedicalResultApi::class, 'detail'])->name('restapi.medical.result.detail');
 });
 
 /* Survey api*/

@@ -23,6 +23,7 @@ use App\Http\Controllers\restapi\admin\AdminDepartmentApi;
 use App\Http\Controllers\restapi\admin\AdminDoctorDepartmentApi;
 use App\Http\Controllers\restapi\admin\AdminDoctorInfoApi;
 use App\Http\Controllers\restapi\admin\AdminDoctorReviewApi;
+use App\Http\Controllers\restapi\admin\AdminMedicalResultApi;
 use App\Http\Controllers\restapi\admin\AdminNewsApi;
 use App\Http\Controllers\restapi\admin\AdminOrderApi;
 use App\Http\Controllers\restapi\admin\AdminPhamacitisApi;
@@ -313,3 +314,11 @@ Route::group(['prefix' => 'booking-result'], function () {
     Route::post('/update/{id}', [AdminBookingResultApi::class, 'update'])->name('api.medical.booking.result.update');
 });
 
+/* Medical result*/
+Route::group(['prefix' => 'medical-results'], function () {
+    Route::get('/list', [AdminMedicalResultApi::class, 'getListByUser'])->name('api.medical.medical.result.list');
+    Route::get('/list-medicine/{id}', [AdminMedicalResultApi::class, 'getProductByPrescriptionsID'])->name('api.medical.medical.result.list.medicine');
+    Route::post('/create', [AdminMedicalResultApi::class, 'create'])->name('api.medical.medical.result.create');
+    Route::post('/update/{id}', [AdminMedicalResultApi::class, 'update'])->name('api.medical.medical.result.update');
+    Route::get('/detail/{id}', [AdminMedicalResultApi::class, 'detail'])->name('api.medical.medical.result.detail');
+});
