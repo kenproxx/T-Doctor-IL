@@ -316,7 +316,8 @@ Route::group(['prefix' => 'booking-result'], function () {
 
 /* Medical result*/
 Route::group(['prefix' => 'medical-results'], function () {
-    Route::get('/list', [AdminMedicalResultApi::class, 'getListByUser'])->name('api.medical.medical.result.list');
+    Route::get('/list', [AdminMedicalResultApi::class, 'getList'])->name('api.medical.medical.result.list');
+    Route::get('/list-user', [AdminMedicalResultApi::class, 'getListByUser'])->name('api.medical.medical.result.list.user');
     Route::get('/list-medicine/{id}', [AdminMedicalResultApi::class, 'getProductByPrescriptionsID'])->name('api.medical.medical.result.list.medicine');
     Route::post('/create', [AdminMedicalResultApi::class, 'create'])->name('api.medical.medical.result.create');
     Route::post('/update/{id}', [AdminMedicalResultApi::class, 'update'])->name('api.medical.medical.result.update');

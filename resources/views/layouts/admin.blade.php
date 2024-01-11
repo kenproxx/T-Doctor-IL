@@ -561,6 +561,28 @@
                 </li>
                 <!-- End Booking Nav -->
 
+                <!-- Start Medical Result Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#medical-result-nav" data-bs-toggle="collapse"
+                       href="#">
+                        <i class="bi bi-bar-chart"></i><span>Medical examination results</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="medical-result-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('view.admin.medical.result.list') }}">
+                                <i class="bi bi-circle"></i><span>List examination results</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('view.admin.medical.result.create') }}">
+                                <i class="bi bi-circle"></i><span>Create examination results</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Medical Result Nav -->
+
                 <!-- Config Nav -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
