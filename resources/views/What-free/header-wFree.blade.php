@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{asset('css/clinics-style.css')}}">
 <div class="background-image_Clinics">
     <div class="container">
         <div class="d-flex justify-content-center align-items-center mb-150">

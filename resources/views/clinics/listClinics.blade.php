@@ -2,6 +2,49 @@
 @section('title', 'Online Medicine')
 @section('content')
     <link rel="stylesheet" href="{{asset('css/clinics-style.css')}}">
+    <style>
+   .border-specialList {
+       border-radius: 16px;
+       border: 1px solid  #EAEAEA;
+       background:  #FFF;
+       display: flex;
+       padding: 16px;
+       align-items: flex-start;
+       gap: 16px;
+   }
+   .title-specialList-clinics {
+       color:  #000;
+       font-size: 24px;
+       font-style: normal;
+       font-weight: 800;
+       line-height: normal;
+   }
+   .address-clinics {
+       color: #929292;
+       font-size: 18px;
+       font-style: normal;
+       font-weight: 600;
+       line-height: normal;
+   }
+   .distance {
+       color: #088180;
+       font-size: 18px;
+       font-style: normal;
+       font-weight: 600;
+       line-height: normal;
+   }
+   .time-working {
+       font-size: 12px;
+       font-style: normal;
+       font-weight: 600;
+       line-height: normal;
+   }
+   .color-timeWorking {
+       color: #088180;
+
+   }
+
+    </style>
     @include('layouts.partials.header')
     @include('What-free.header-wFree')
     <div class="container">
@@ -45,9 +88,8 @@
             <div class="clinics-list">
                 <div class="clinics-header row">
                     <div class=" d-flex justify-content-between">
-                        <span class="fs-32px">{{ __('home.Suggestions near you') }}</span>
+                        <span class="fs-32px"></span>
                         <span>
-                    <a href="">{{ __('home.See all') }}</a>
                 </span>
                     </div>
                 </div>
@@ -115,46 +157,56 @@
                     let img = '';
                     let gallery = item.gallery;
                     let arrayGallery = gallery.split(',');
-                    for (let j = 0; j < arrayGallery.length; j++) {
-                        img += `<img class="mr-2 w-auto h-100 img-item1" src="${arrayGallery[j]}" alt="">`;
-                    }
-                    console.log(item)
+                    img += `<img class="mr-2 img-item1" src="${arrayGallery[0]}" alt="">`;
+                    // for (let j = 0; j < arrayGallery.length; j++) {
+                    // }
                     let serviceHtml = ``;
                     let service = item.services;
                     for (let j = 0; j < service.length; j++) {
                         let serviceItem = service[j];
                         serviceHtml = serviceHtml + `<span>${serviceItem.name},</span>`;
                     }
+                    let openDate = new Date(item.open_date);
+                    let closeDate = new Date(item.close_date);
+
+                    let formattedOpenDate = `${openDate.getHours()}:${openDate.getMinutes()}`;
+                    let formattedCloseDate = `${closeDate.getHours()}:${closeDate.getMinutes()}`;
+
+
+
 
                     let html = `
-                    <div class="col-md-4 mb-md-3">
-                        <div class="clinic-item over-x-hidden">
-                            <a class="text-overflow" href="${urlDetail}">
-                                ${item.name}
-                            </a>
-                            <div class="time d-flex">
-                                <p>${item.open_date} - ${item.close_date}</p>
+                    <div class="specialList-clinics col-md-6 mt-5">
+                        <a href="${urlDetail}">
+                            <div class="border-specialList">
+                                 <div class="content__item d-flex gap-3">
+                                      <div class="specialList-clinics--img">
+                                           ${img}
+                                      </div>
+                                      <div class="specialList-clinics--main w-100">
+                                           <div class="title-specialList-clinics">
+                                                ${item.name}
+                                           </div>
+                                      <div class="address-specialList-clinics">
+                                 <div class="d-flex align-items-center address-clinics">
+                                      <i class="fas fa-map-marker-alt mr-2"></i>
+                                      <div>${item.address_detail} ${item.addressInfo}</div>
+                                 </div>
+                                    <span class="distance"> - ${distance.toFixed(2)} Km</span>
                             </div>
-                            <div class="location">
-                                <div class="text-overflow d-flex"><i class="fa-solid fa-location-dot text-overflow pr-2"></i>${item.address_detail} ${item.addressInfo} </div>- <span>${distance.toFixed(2)} Km</span>
+                            <div class="time-working">
+                                 <span class="color-timeWorking">
+                                    <span class="fs-14 font-weight-600">${formattedOpenDate} - ${formattedCloseDate}</span>
+                                    </span>
+                                    <span>/ Dental Clinic</span>
                             </div>
-                            <div class="service">
-                                Service: ${serviceHtml}
                             </div>
-                            <div class="star d-flex">
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-fill"></i>
-                                <i class="bi bi-star-half"></i>
-                                <i class="bi bi-star"></i>
                             </div>
-                            <div class="img-detail row">
-                                <div class="col-3 img-item d-flex">
-                                    ${img}
-                                </div>
                             </div>
-                        </div>
-                    </div>`;
+                        </a>
+                    </div>
+                    `;
+
 
                     productInformationDiv.innerHTML += html;
                 }

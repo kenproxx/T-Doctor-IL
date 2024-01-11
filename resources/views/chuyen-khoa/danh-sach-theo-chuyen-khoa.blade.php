@@ -69,17 +69,19 @@
                                             <div class="title-specialList-clinics">
                                                 {{$clinic->name}}
                                             </div>
-                                            <div class="address-specialList-clinics">
-                                                <i class="fas fa-map-marker-alt"></i>
+                                            <div class="address-specialList-clinics d-flex align-items-center">
                                                 @php
                                                     $array = explode(',', $clinic->address);
                                                     $addressP = Province::where('id', $array[1] ?? null)->first();
                                                     $addressD = \App\Models\District::where('id', $array[2] ?? null)->first();
                                                     $addressC = \App\Models\Commune::where('id', $array[3] ?? null)->first();
                                                 @endphp
-                                                <div>{{$clinic->address_detail}}
-                                                    , {{$addressC->name ?? ''}} , {{$addressD->name ?? ''}}
-                                                    , {{$addressP->name ?? ''}}</div>
+                                                <div class="">
+                                                    <i class="fas fa-map-marker-alt mr-2"></i>
+                                                    <div>{{$clinic->address_detail}}
+                                                        , {{$addressC->name ?? ''}} , {{$addressD->name ?? ''}}
+                                                        , {{$addressP->name ?? ''}}</div>
+                                                </div>
                                                 - <span>3 Km</span>
                                             </div>
                                             <div class="time-working">

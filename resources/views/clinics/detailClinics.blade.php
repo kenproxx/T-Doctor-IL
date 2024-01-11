@@ -10,8 +10,8 @@
 
     <link href="{{ asset('css/detailclinics.css') }}" rel="stylesheet">
 
-    <div class="container">
-        @include('What-free.header-wFree')
+{{--    @include('What-free.header-wFree')--}}
+    <div class="container mt-150">
         @php
             $addresses = \App\Models\Clinic::where('id', $bookings->id)->get();
             $coordinatesArray = $addresses->toArray();
