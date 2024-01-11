@@ -14,6 +14,23 @@ use Illuminate\Http\Request;
 
 class AdminMedicalResultApi extends Controller
 {
+    public function getList(Request $request)
+    {
+        $user_id = $request->input('user_id');
+        $isAdmin = (new MainApi())->isAdmin($user_id);
+        if ($isAdmin) {
+            $results = MedicalResults::where('status', '!=', MedicalResultStatus::DELETED)
+                ->orderBy('id', 'desc')
+                ->get();
+        } else {
+            $results = MedicalResults::where('created_by', $user_id)
+                ->where('status', '!=', MedicalResultStatus::DELETED)
+                ->orderBy('id', 'desc')
+                ->get();
+        }
+        return response()->json($results);
+    }
+
     public function getListByUser(Request $request)
     {
         $user_id = $request->input('user_id');
@@ -64,25 +81,12 @@ class AdminMedicalResultApi extends Controller
             $result = new MedicalResults();
             $array = $this->save($request, $result);
             if ($array['status'] == 200) {
-                return response()->json($array['data']);
-            }
-            return response((new MainApi())->returnMessage($array['data']), $array['status']);
-        } catch (\Exception $exception) {
-            return response((new MainApi())->returnMessage('Error, please try again!'), 400);
-        }
-    }
-
-    public function update($id, Request $request)
-    {
-        try {
-            $result = MedicalResults::find($id);
-            if (!$result || $result->status == MedicalResultStatus::DELETED) {
-                return response((new MainApi())->returnMessage('Not found'), 404);
-            }
-
-            $array = $this->save($request, $result);
-            if ($array['status'] == 200) {
-                return response()->json($array['data']);
+                $result = $array['data'];
+                $success = $result->save();
+                if ($success){
+                    return response()->json($array['data']);
+                }
+                return response((new MainApi())->returnMessage('Create error!'), 400);
             }
             return response((new MainApi())->returnMessage($array['data']), $array['status']);
         } catch (\Exception $exception) {
@@ -171,6 +175,29 @@ class AdminMedicalResultApi extends Controller
         $myArray['status'] = $status;
         $myArray['data'] = $data;
         return $myArray;
+    }
+
+    public function update($id, Request $request)
+    {
+        try {
+            $result = MedicalResults::find($id);
+            if (!$result || $result->status == MedicalResultStatus::DELETED) {
+                return response((new MainApi())->returnMessage('Not found'), 404);
+            }
+
+            $array = $this->save($request, $result);
+            if ($array['status'] == 200) {
+                $result = $array['data'];
+                $success = $result->save();
+                if ($success){
+                    return response()->json($array['data']);
+                }
+                return response((new MainApi())->returnMessage('Update error!'), 400);
+            }
+            return response((new MainApi())->returnMessage($array['data']), $array['status']);
+        } catch (\Exception $exception) {
+            return response((new MainApi())->returnMessage('Error, please try again!'), 400);
+        }
     }
 
     public function delete($id)
