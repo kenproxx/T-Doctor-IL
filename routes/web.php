@@ -29,6 +29,7 @@ use App\Http\Controllers\FleaMarketController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MapController;
+use App\Http\Controllers\MedicalResultController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\NewEventController;
 use App\Http\Controllers\OrderController;
@@ -361,6 +362,12 @@ Route::middleware(['user.active'])->group(function () {
             Route::get('/list-prescriptions/{id}', [BookingResultController::class, 'getListProduct'])->name('web.booking.result.list.prescriptions');
         });
 
+        /* Medical result */
+        Route::group(['prefix' => 'web/medical-result'], function () {
+            Route::get('/list', [MedicalResultController::class, 'list'])->name('web.medical.result.list');
+            Route::get('/detail/{id}', [MedicalResultController::class, 'detail'])->name('web.medical.result.detail');
+        });
+
         /* Surveys */
         Route::group(['prefix' => 'surveys'], function () {
             Route::get('medical/list', [SurveyController::class, 'getList'])->name('view.admin.surveys.index');
@@ -382,7 +389,7 @@ Route::middleware(['user.active'])->group(function () {
             Route::get('create', [AdminUserController::class, 'create'])->name('view.admin.user.create');
         });
 
-        /* Admin user */
+        /* Admin medical result */
         Route::group(['prefix' => 'medical-result'], function () {
             Route::get('list', [AdminMedicalResultController::class, 'list'])->name('view.admin.medical.result.list');
             Route::get('detail/{id}', [AdminMedicalResultController::class, 'detail'])->name('view.admin.medical.result.detail');
