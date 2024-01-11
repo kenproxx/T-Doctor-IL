@@ -83,7 +83,7 @@ class AdminMedicalResultApi extends Controller
             if ($array['status'] == 200) {
                 $result = $array['data'];
                 $success = $result->save();
-                if ($success){
+                if ($success) {
                     return response()->json($array['data']);
                 }
                 return response((new MainApi())->returnMessage('Create error!'), 400);
@@ -101,6 +101,9 @@ class AdminMedicalResultApi extends Controller
         $full_name = $request->input('full_name');
         $phone = $request->input('phone');
         $address = $request->input('address');
+
+        $place = $request->input('place');
+        $datetime = $request->input('datetime');
 
         $code = $request->input('code');
         if (!$code) {
@@ -157,6 +160,9 @@ class AdminMedicalResultApi extends Controller
         $result->detail_en = $detail_en;
         $result->detail_laos = $detail_laos;
 
+        $result->place = $place;
+        $result->datetime = $datetime;
+
         $result->full_name = $full_name;
         $result->phone = $phone;
         $result->address = $address;
@@ -189,7 +195,7 @@ class AdminMedicalResultApi extends Controller
             if ($array['status'] == 200) {
                 $result = $array['data'];
                 $success = $result->save();
-                if ($success){
+                if ($success) {
                     return response()->json($array['data']);
                 }
                 return response((new MainApi())->returnMessage('Update error!'), 400);

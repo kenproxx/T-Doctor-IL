@@ -60,7 +60,16 @@
                         class="btn btn-outline-primary mt-3 btnAddNewResult">{{ __('home.Add new result') }}
                 </button>
             </div>
-
+            <div class="row">
+                <div class="form-group col-md-8">
+                    <label for="place">Place</label>
+                    <input type="text" class="form-control" id="place" value="{{ $result->place }}">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="datetime">Datetime</label>
+                    <input type="datetime-local" class="form-control" id="datetime" value="{{ $result->datetime }}">
+                </div>
+            </div>
             <div class="row">
                 <div class="form-group col-md-4">
                     <label for="files">{{ __('home.File Attachments') }}</label>
@@ -145,7 +154,8 @@
                 const formData = new FormData();
 
                 const arrField = [
-                    "full_name", "phone", "address", "created_by", "code",
+                    "full_name", "phone", "address",
+                    "created_by", "code", "place", "datetime",
                 ];
 
                 const itemList = [
