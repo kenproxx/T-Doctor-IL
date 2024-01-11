@@ -109,7 +109,7 @@ class AdminMedicalResultApi extends Controller
 
         $user = User::where('phone', $phone)->first();
         if (!$user || $user->status == UserStatus::DELETED) {
-            return $this->returnArray('400', 'User not found!');
+            return $this->returnArray('400', 'User not found, Please check your registered phone number again!!!');
         }
 
         $result_input = $request->input('result');
