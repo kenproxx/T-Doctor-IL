@@ -93,7 +93,7 @@
                                             </span>
                                             </div>
                                             <div class="group-button d-flex mt-3">
-                                                <a href="" class="col-md-6">
+                                                <a href="{{route('home.specialist.booking.detail', $clinic->id)}}" class="col-md-6">
                                                     <div class="button-booking-specialList">
                                                         Đặt khám
                                                     </div>

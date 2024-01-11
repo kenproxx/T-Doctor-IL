@@ -9,7 +9,7 @@
     <div class="container">
         <div class="detail-clinic-theo-chuyen-khoa-title">
             <a href="{{route('home.specialist')}}">
-                <div class="title-detail-clinic"><i class="fa-solid fa-arrow-left"></i> Chi tiết</div>
+                <div class="title-detail-clinic"><i class="fa-solid fa-arrow-left"></i> {{ __('home.Detail') }}</div>
             </a>
             <div class="specialList-clinics col-md-12 mt-5">
                 <div class="border-specialList">

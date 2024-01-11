@@ -77,6 +77,14 @@ class HomeController extends Controller
         return view('chuyen-khoa.detail-clinic-pharmacies',compact('clinicDetail','id'));
     }
 
+    public function bookingDetailSpecialist($id)
+    {
+        $clinicDetail = \App\Models\Clinic::where('id', $id)->first();
+        $arrayService = explode(',', $clinicDetail->service_id);
+        $services = \App\Models\ServiceClinic::whereIn('id', $arrayService)->get();
+        return view('clinics.booking-clinic-page',compact('clinicDetail','id','services'));
+    }
+
     public function specialistReview(Request $request, $id)
     {
         $clinic = Clinic::find($id);
