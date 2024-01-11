@@ -49,6 +49,16 @@
                         </button>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="form-group col-md-8">
+                        <label for="place">Place</label>
+                        <input type="text" class="form-control" id="place">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="datetime">Datetime</label>
+                        <input type="datetime-local" class="form-control" id="datetime">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="detail">{{ __('home.Detail') }}</label>
                     <textarea class="form-control" id="detail" rows="5"></textarea>
@@ -108,7 +118,8 @@
             ];
 
             const arrField = [
-                "full_name", "phone", "address", "created_by",
+                "full_name", "phone", "address",
+                "created_by", "place", "datetime",
             ];
 
             let isValid = true
