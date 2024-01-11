@@ -9,18 +9,18 @@
     <div class="container">
         <div class="danh-sach-theo-chuyen-khoa">
             <a href="{{route('home.specialist')}}">
-                <div class="title-Danh-sach"><i class="fa-solid fa-arrow-left"></i> Danh sách</div>
+                <div class="title-Danh-sach"><i class="fa-solid fa-arrow-left"></i> {{ __('home.Danh sách') }}</div>
             </a>
             <div class="search-specialist col-md-8">
                 <label for="search-specialist" class="search-specialist__label w-50">
                     <i class="fas fa-search"></i>
-                    <input id="search-specialist" placeholder="Tìm kiếm cơ sở y tế">
+                    <input id="search-specialist" placeholder="{{ __('home.Tìm kiếm cơ sở y tế') }}">
                 </label>
                 <div class="position-absolute">|</div>
                 <label class="select-specialist__label w-50">
                     <i class="fas fa-map-marker-alt"></i>
                     <select>
-                        <option value="0">Tất cả địa điểm</option>
+                        <option value="0">{{ __('home.Tất cả địa điểm') }}</option>
                         <option value="1">Hà Nội</option>
                         <option value="2">Hồ Chí Minh</option>
                         <option value="3">Đà Nẵng</option>
@@ -35,18 +35,18 @@
                         <a class="nav-link active font-14-mobi" id="clinicList-tab" data-toggle="tab"
                            href="#clinicList"
                            role="tab" aria-controls="clinicList"
-                           aria-selected="true">{{ __('home.Bệnh viện') }}</a>
+                           aria-selected="true">{{ __('home.HOSPITALS') }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link font-14-mobi" id="pharmacies-tab" data-toggle="tab"
                            href="#pharmacies"
                            role="tab" aria-controls="pharmacies"
-                           aria-selected="false">{{ __('home.Phòng khám') }}</a>
+                           aria-selected="false">{{ __('home.CLINICS') }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link font-14-mobi" id="doctorList-tab" data-toggle="tab" href="#doctorList"
                            role="tab" aria-controls="doctorList"
-                           aria-selected="true">{{ __('home.Bác sĩ') }}</a>
+                           aria-selected="true">{{ __('home.DOCTOR') }}</a>
                     </li>
                 </ul>
             </div>
@@ -89,18 +89,18 @@
                                                  <span class="fs-14 font-weight-600">{{ \Carbon\Carbon::parse($clinic->open_date)->format('H:i') }} - {{ \Carbon\Carbon::parse($clinic->close_date)->format('H:i') }}</span>
                                             </span>
                                                 <span>
-                                                 / Dental Clinic
+                                                 / {{ __('home.Dental Clinic') }}
                                             </span>
                                             </div>
                                             <div class="group-button d-flex mt-3">
                                                 <a href="" class="col-md-6">
                                                     <div class="button-booking-specialList">
-                                                        Đặt khám
+                                                        {{ __('home.Đặt khám') }}
                                                     </div>
                                                 </a>
                                                 <a href="{{route('home.specialist.detail', $clinic->id)}}" class="col-md-6">
                                                     <div class="button-detail-specialList">
-                                                        Xem chi tiết
+                                                        {{ __('home.Xem chi tiết') }}
                                                     </div>
                                                 </a>
                                             </div>
@@ -147,18 +147,18 @@
 {{--                                                09:00 - 19:00--}}
                                             </span>
                                                 <span>
-                                                 / Dental Clinic
+                                                 / {{ __('home.Dental Clinic') }}
                                             </span>
                                             </div>
                                             <div class="group-button d-flex mt-3">
                                                 <a href="" class="col-md-6">
                                                     <div class="button-booking-specialList">
-                                                        Đặt khám
+                                                        {{ __('home.Đặt khám') }}
                                                     </div>
                                                 </a>
                                                 <a href="{{route('home.specialist.detail', $pharmacy->id)}}" class="col-md-6">
                                                     <div class="button-detail-specialList">
-                                                        Xem chi tiết
+                                                        {{ __('home.Xem chi tiết') }}
                                                     </div>
                                                 </a>
                                             </div>
