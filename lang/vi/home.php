@@ -521,7 +521,7 @@ return [
     'Bạn có chắc chắn muốn thay đổi trạng thái của coupon này' => 'Bạn chắc chắn muốn thay đổi trạng thái của phiếu giảm giá này',
     'List Doctor' => 'Danh sách bác sĩ',
     'Create Doctor Information' => 'Tạo thông tin bác sĩ',
-    'DOCTOR' => 'BÁC SĨ',
+    'DOCTOR' => 'Bác sĩ',
     'PHAMACISTS' => 'DƯỢC SĨ',
     'THERAPISTS' => 'Điều DƯỠNG',
     'ESTHETICIANS' => 'CHUYÊN VIÊN THẨM MỸ',
@@ -866,15 +866,21 @@ return [
     'Finish' => 'Hoàn thành',
     'SUCCESS' => 'THÀNH CÔNG',
     'You Have Successfully Signed Up' => 'Bạn đã đăng ký thành công',
-    'PHARMACEUTICAL COMPANIES' => 'CÔNG TY DƯỢC PHẨM',
-    'HOSPITALS' => 'BỆNH VIỆN',
-    'CLINICS' => 'PHÒNG KHÁM',
-    'PHARMACIES' => 'NHÀ THUỐC',
+    'PHARMACEUTICAL COMPANIES' => 'Công ty dược',
+    'HOSPITALS' => 'Bệnh viện',
+    'CLINICS' => 'Phòng khám',
+    'PHARMACIES' => 'Nhà thuốc',
     'Survey' => 'Sự khảo sát',
     'List User' => 'Danh sách người dùng',
     'User' => 'Người dùng',
     'Create User' => 'Tạo người dùng',
-    'Dịch vụ toàn diện' => 'Dịch vụ toàn diện'
+    'Dịch vụ toàn diện' => 'Dịch vụ toàn diện',
+    'Danh sách' => 'Danh sách',
+    'Tất cả địa điểm' => 'Tất cả địa điểm',
+    'Tìm kiếm cơ sở y tế' => 'Tìm kiếm cơ sở y tế',
+    'Dental Clinic' =>'Phòng khám nha khoa',
+    'Đặt khám' => 'Đặt khám',
+    'Xem chi tiết' => 'Xem chi tiết'
 
 
 ];
