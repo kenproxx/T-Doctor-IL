@@ -68,6 +68,9 @@ Route::group(['prefix' => 'clinics'], function () {
     Route::get('/user/{id}', [ClinicApi::class, 'getAllByUserId'])->name('clinics.restapi.user');
     Route::get('/detail/{id}', [ClinicApi::class, 'detail'])->name('clinics.restapi.detail');
     Route::get('/filter', [ClinicApi::class, 'searchByDepartmentAndSymptoms'])->name('clinics.restapi.department.symptom');
+    Route::get('/search', [ClinicApi::class, 'searchClinics'])->name('clinics.restapi.search');
+    Route::get('/get-specialist', [ClinicApi::class, 'getAllSpecialist'])->name('clinics.restapi.specialist');
+    Route::get('/get-location', [ClinicApi::class, 'getAllLocation'])->name('clinics.restapi.location');
 });
 
 Route::group(['prefix' => 'pharmacies'], function () {

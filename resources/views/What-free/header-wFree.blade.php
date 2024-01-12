@@ -13,35 +13,35 @@
                               fill="black"/>
                     </svg>
                 </label>
-                <input class="m-0 form-select" type="search" name="focus" placeholder="{{ __('home.Search for anything…') }}"
-                       id="search-input" value="">
+                <input class="m-0 form-select" type="search" name="focus"
+                       placeholder="{{ __('home.Search for anything…') }}"
+                       id="search_input_clinics" value="">
             </div>
             <div class="col-md-12 p-0 d-flex">
                 <div class="col-md-5 pl-0">
-                    <select class="form-select_clinics" aria-label="Default select example">
-                        <option value="" selected>Select specialist</option>
+                    <select class="form-select_clinics" aria-label="Default select example" id="clinic_specialist">
+                        <option selected>Select specialist</option>
                     </select>
                 </div>
                 <div class="col-md-5">
-                    <select class="form-select_clinics" aria-label="Default select example">
-                        <option value="" selected>Location</option>
+                    <select class="form-select_clinics" aria-label="Default select example" id="clinic_location">
+                        <option selected>Select location</option>
                     </select>
                 </div>
                 <div class="col-md-2 d-flex justify-content-between pr-0">
                     <a href="">
                         <div class="reset-button">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none">
                                 <path
                                     d="M2 14C2 14 2.12132 14.8492 5.63604 18.364C9.15076 21.8787 14.8492 21.8787 18.364 18.364C19.6092 17.1187 20.4133 15.5993 20.7762 14M2 14V20M2 14H8M22 10C22 10 21.8787 9.15076 18.364 5.63604C14.8492 2.12132 9.15076 2.12132 5.63604 5.63604C4.39076 6.88131 3.58669 8.40072 3.22383 10M22 10V4M22 10H16"
                                     stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
                     </a>
-                    <a href="" class="col-md-8 p-0">
-                        <div class="search-button--clinics">
-                            Tìm kiếm
-                        </div>
-                    </a>
+                    <div class="search-button--clinics col-md-8 p-0" id="btnSearchClinics" style="cursor: pointer">
+                        Tìm kiếm
+                    </div>
                 </div>
             </div>
         </div>
@@ -49,22 +49,151 @@
     </div>
 
 </div>
-{{--    <div class="row clinic-search">--}}
-{{--        <div class="clinic-search--left col-md-12 d-flex justify-content-between clinic-search--center align-items-center">--}}
-{{--            --}}{{--        <div class="clinic-search--left col-md-6 justify-content-around mobile-hidden">--}}
-{{--            --}}{{--            <div class="title mobile-hidden">{{ __('home.All') }}<i class="bi bi-arrow-down-up"></i></div>--}}
-{{--            --}}{{--            <div class="title mobile-hidden">{{ __('home.Category') }}<i class="bi bi-arrow-down-up"></i></div>--}}
-{{--            --}}{{--            <div class="title mobile-hidden">{{ __('home.Location') }} <i class="bi bi-arrow-down-up"></i></div>--}}
-{{--            --}}{{--        </div>--}}
+<script>
+    let accessToken = `Bearer ` + token;
 
-{{--            <form class="search-box col-md-5">--}}
-{{--                <input class="m-0" type="search" name="focus" placeholder="{{ __('home.Search for anything…') }}"--}}
-{{--                       id="search-input" value="">--}}
-{{--                <i class="fa-solid fa-magnifying-glass"></i>--}}
-{{--            </form>--}}
-{{--            <div class="flex-fill">--}}
-{{--                <button class="css-button"><i class="bi bi-filter"></i></button>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}
+    $(document).ready(function () {
+        $('#btnSearchClinics').on('click', function () {
+            searchClinics();
+        })
+        loadSpecialist();
+        loadLocation();
+    })
+
+    async function searchClinics() {
+        loadingMasterPage();
+        let urlSearch = `{{route('clinics.restapi.search')}}`;
+
+        let search_input_clinics = document.getElementById('search_input_clinics').value;
+        let clinic_specialist = document.getElementById('clinic_specialist').value;
+        let clinic_location = document.getElementById('clinic_location').value;
+
+        urlSearch = urlSearch + `?search_input_clinics=${search_input_clinics}&clinic_specialist=${clinic_specialist}&clinic_location=${clinic_location}`;
+
+        await $.ajax({
+            url: urlSearch,
+            method: 'GET',
+            headers: {
+                "Authorization": accessToken
+            },
+            success: function (response) {
+                renderClinics(response);
+                setTimeout(() => {loadingMasterPage();}, '500');
+            },
+            error: function (exception) {
+                console.log(exception)
+                setTimeout(() => {loadingMasterPage();}, '500');
+            }
+        });
+    }
+
+    function renderClinics(response) {
+        console.log(response);
+        let html = ``;
+        for (let i = 0; i < response.length; i++) {
+            let data = response[i];
+
+            let urlDetail = "{{ route('clinic.detail', ['id' => ':id']) }}".replace(':id', data.id);
+
+            let img = '';
+            let gallery = data.gallery;
+            let arrayGallery = gallery.split(',');
+            img += `<img class="mr-2 img-item1" src="${arrayGallery[0]}" alt="">`;
+
+
+            let openDate = new Date(data.open_date);
+            let closeDate = new Date(data.close_date);
+            let open = openDate.getHours() + ":" + openDate.getMinutes();
+            let close = closeDate.getHours() + ":" + closeDate.getMinutes();
+
+            html += `
+                    <div class="specialList-clinics col-md-6 mt-5">
+                        <a href="${urlDetail}">
+                            <div class="border-specialList">
+                                 <div class="content__item d-flex gap-3">
+                                      <div class="specialList-clinics--img">
+                                           ${img}
+                                      </div>
+                                      <div class="specialList-clinics--main w-100">
+                                           <div class="title-specialList-clinics">
+                                                ${data.name}
+                                           </div>
+                                      <div class="address-specialList-clinics">
+                                 <div class="d-flex align-items-center address-clinics">
+                                      <i class="fas fa-map-marker-alt mr-2"></i>
+                                      <div>${data.address_detail} ${data.addressInfo}</div>
+                                 </div>
+                            </div>
+                            <div class="time-working">
+                                 <span class="color-timeWorking">
+                                    <span class="fs-14 font-weight-600">${open} - ${close}</span>
+                                    </span>
+                            </div>
+                            </div>
+                            </div>
+                            </div>
+                        </a>
+                    </div>
+                    `;
+        }
+        let main = `<div class="row">${html}</div>`
+        $('#listClinics').empty().append(main);
+    }
+
+    async function loadSpecialist() {
+        let urlList = `{{ route('clinics.restapi.specialist') }}`;
+
+        await $.ajax({
+            url: urlList,
+            method: 'GET',
+            headers: {
+                "Authorization": accessToken
+            },
+            success: function (response) {
+                renderSpecialist(response);
+            },
+            error: function (exception) {
+                console.log(exception)
+            }
+        });
+    }
+
+    function renderSpecialist(response) {
+        let html = `<option value="">Select specialist</option>`;
+        for (let i = 0; i < response.length; i++) {
+            let data = response[i];
+
+            html += `<option value="${data.representative_doctor}">${data.representative_doctor}</option>`;
+        }
+        $('#clinic_specialist').empty().append(html);
+    }
+
+    async function loadLocation() {
+        let urlList = `{{ route('clinics.restapi.location') }}`;
+
+        let accessToken = `Bearer ` + token;
+        await $.ajax({
+            url: urlList,
+            method: 'GET',
+            headers: {
+                "Authorization": accessToken
+            },
+            success: function (response) {
+                renderLocation(response);
+            },
+            error: function (exception) {
+                console.log(exception)
+            }
+        });
+    }
+
+    function renderLocation(response) {
+        let html = `<option value="">Select location</option>`;
+        for (let i = 0; i < response.length; i++) {
+            let data = response[i];
+
+            html += `<option value="${data.id}">${data.full_name}</option>`;
+        }
+        $('#clinic_location').empty().append(html);
+    }
+</script>
