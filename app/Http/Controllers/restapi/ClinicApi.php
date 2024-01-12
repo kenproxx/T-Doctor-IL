@@ -167,7 +167,9 @@ class ClinicApi extends Controller
         }
 
         if ($clinic_location) {
-            $clinics->where('users.province_id', $clinic_location);
+            $clinics->where('clinics.address', 'LIKE', '%' . $clinic_location . '%')
+                ->where('clinics.address', 'LIKE', '%' . $clinic_location . '%')
+                ->where('clinics.address', 'LIKE', '%' . $clinic_location . '%');
         }
 
         $clinics = $clinics->select('clinics.*', 'users.email')
@@ -252,11 +254,12 @@ class ClinicApi extends Controller
 
     public function getAllSpecialist()
     {
-        $representatives = Clinic::where('status', ClinicStatus::ACTIVE)
-            ->where('representative_doctor', '!=', null)
-            ->where('representative_doctor', '!=', '')
+        $representatives = DB::table('clinics')
+            ->where('clinics.status', ClinicStatus::ACTIVE)
+            ->join('users', 'users.id', '=', 'clinics.representative_doctor')
             ->distinct()
-            ->get('representative_doctor');
+            ->select('clinics.representative_doctor', 'users.name')
+            ->get();
         $representatives = $representatives->toArray();
         return array_filter($representatives);
     }

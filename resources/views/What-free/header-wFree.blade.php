@@ -6,14 +6,14 @@
         </div>
         <div class="border-search-clinics">
             <div class="col-md-12 p-0">
-                <label for="search-input" class="label-input-clinic">
+                <label for="search_input_clinics" class="label-input-clinic">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path fill-rule="evenodd" clip-rule="evenodd"
                               d="M14.8571 7.42857C14.8571 3.32588 11.5313 0 7.42857 0C3.32588 0 0 3.32588 0 7.42857C0 11.5313 3.32588 14.8571 7.42857 14.8571C9.26857 14.8571 10.96 14.1829 12.2629 13.0743L12.5714 13.3829V14.2857L18.2857 20L20 18.2857L14.2857 12.5714H13.3829L13.0743 12.2629C14.1829 10.96 14.8571 9.26857 14.8571 7.42857ZM2.28571 7.42857C2.28571 4.57143 4.57143 2.28571 7.42857 2.28571C10.2857 2.28571 12.5714 4.57143 12.5714 7.42857C12.5714 10.2857 10.2857 12.5714 7.42857 12.5714C4.57143 12.5714 2.28571 10.2857 2.28571 7.42857Z"
                               fill="black"/>
                     </svg>
                 </label>
-                <input class="m-0 form-select" type="search" name="focus"
+                <input class="m-0 form-select" type="search" name="focus" onkeypress="processSearchClinics();"
                        placeholder="{{ __('home.Search for anything…') }}"
                        id="search_input_clinics" value="">
             </div>
@@ -53,12 +53,27 @@
     let accessToken = `Bearer ` + token;
 
     $(document).ready(function () {
-        $('#btnSearchClinics').on('click', function () {
+        $('#btnSearchClinics').click(function () {
             searchClinics();
         })
+
+        $('#clinic_specialist').change(function () {
+            searchClinics();
+        })
+
+        $('#clinic_location').change(function () {
+            searchClinics();
+        })
+
         loadSpecialist();
         loadLocation();
     })
+
+    async function processSearchClinics() {
+        if (event.keyCode === 13 && !event.shiftKey) {
+            await searchClinics();
+        }
+    }
 
     async function searchClinics() {
         loadingMasterPage();
@@ -78,11 +93,15 @@
             },
             success: function (response) {
                 renderClinics(response);
-                setTimeout(() => {loadingMasterPage();}, '500');
+                setTimeout(() => {
+                    loadingMasterPage();
+                }, '500');
             },
             error: function (exception) {
                 console.log(exception)
-                setTimeout(() => {loadingMasterPage();}, '500');
+                setTimeout(() => {
+                    loadingMasterPage();
+                }, '500');
             }
         });
     }
@@ -159,17 +178,18 @@
     }
 
     function renderSpecialist(response) {
+        console.log(response);
         let html = `<option value="">Select specialist</option>`;
         for (let i = 0; i < response.length; i++) {
             let data = response[i];
 
-            html += `<option value="${data.representative_doctor}">${data.representative_doctor}</option>`;
+            html += `<option value="${data.representative_doctor}">${data.name}</option>`;
         }
         $('#clinic_specialist').empty().append(html);
     }
 
     async function loadLocation() {
-        let urlList = `{{ route('clinics.restapi.location') }}`;
+        let urlList = `{{ route('restapi.get.provinces') }}`;
 
         let accessToken = `Bearer ` + token;
         await $.ajax({
@@ -192,7 +212,7 @@
         for (let i = 0; i < response.length; i++) {
             let data = response[i];
 
-            html += `<option value="${data.id}">${data.full_name}</option>`;
+            html += `<option value="${data.name}">${data.full_name}</option>`;
         }
         $('#clinic_location').empty().append(html);
     }
