@@ -7,6 +7,7 @@ img {
     .container {
         max-width: 480px;
         width: 100%;
+        margin-top: 50px;
     }
     /* HEADER */
     .d-mb-flex {
@@ -393,6 +394,7 @@ img {
 
 @media (min-width: 780px) {
     .container {
+        margin-top: 200px;
         //min-width: 1440px;
     }
     .pc-hidden {

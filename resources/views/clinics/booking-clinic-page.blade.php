@@ -8,6 +8,16 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
     <link href="{{ asset('css/selectdate.css') }}" rel="stylesheet">
     <style>
+        input[type=radio] {
+            accent-color: #088180;
+        }
+        .border-booking-sv .font-weight-600 label{
+            color: #000;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+        }
         .date-active {
             background-color: blue;
 
@@ -140,7 +150,7 @@
             </a>
             <div class="specialList-clinics col-md-12 mt-5 mb-5">
                 <div class="border-specialList">
-                    <div class="content__item d-flex gap-3">
+                    <div class="content__item d-md-flex gap-3">
                         @php
                             $arrayGallery = explode(',', $clinicDetail->gallery);
 
@@ -189,17 +199,16 @@
                 </div>
             </div>
         </div>
-        <form action="{{route('clinic.booking.store')}}" method="post">
-
-            {{--            <input type="hidden" name="survey_text" value=''>--}}
-            {{--            <input type="hidden" name="survey_checkbox" value=''>--}}
-            {{--            <input type="hidden" name="survey_radio" value=''>--}}
+        <form action="{{route('booking.create.new')}}" method="post">
+            @csrf
+            @method('POST')
             <input type="hidden" name="check_in" id="check_in" value=''>
             <input type="hidden" name="check_in_time" id="check_in_time" value=''>
+            <input type="hidden" name="clinic_id" id="clinic_id" value='{{$clinicDetail->id}}'>
             <div>
                 <div></div>
                 <section>
-                    <div class="d-flex">
+                    <div class="d-md-flex">
                         <div class="small-12 col-md-3 pl-0">
                             <div>Chọn Ngày</div>
                             <div id="datepicker"></div>
@@ -226,14 +235,14 @@
             <div class="mt-5">
                 @if(Auth::check())
                     <div class="d-flex align-items-center select-memberFamily">
-                        <input class="m-0" style="width: 20px;height: 20px;" type="radio" name="memberFamily"
-                               id="yourself"><label for="yourself">Cho mình</label>
-                        <input class="m-0" style="width: 20px;height: 20px;" type="radio" name="memberFamily"
-                               id="family"><label for="family">Cho người thân</label>
+                        <input class="m-0 inputBookingFor" style="width: 20px;height: 20px;" type="radio" name="memberFamily" checked
+                               id="yourself"  value="yourself"><label for="yourself">Cho mình</label>
+                        <input class="m-0 inputBookingFor" style="width: 20px;height: 20px;" type="radio" name="memberFamily"
+                               id="family" value="family"><label for="family">Cho người thân</label>
                     </div>
                 @endif
             </div>
-            <div class="d-flex mt-5">
+            <div class="d-flex mt-5 d-none" id="my-family">
                 @foreach($memberFamilys as $memberFamily)
                     <div class="col-auto mr-3 border-8">
                         <div class="avtMember">
@@ -247,7 +256,7 @@
                         <div class="d-flex align-items-center justify-content-center">
                             # {{ \App\Enums\RelationshipFamily::getLabels()[$memberFamily->relationship] ?? $memberFamily->relationship }}</div>
                         <input style="right: 0" class="position-absolute top-0 m-2" type="radio" name="membersFamily"
-                               id="{{$memberFamily->id}}">
+                               id="{{$memberFamily->id}}" value="{{$memberFamily->id}}">
                     </div>
                 @endforeach
             </div>
@@ -280,7 +289,22 @@
     <script>
         $(document).ready(function () {
             loadData();
+
+            $('.inputBookingFor').on('change', function () {
+                checkMyFamily();
+            });
         });
+
+        function checkMyFamily() {
+            let inputChecked = document.querySelector('input[name="memberFamily"]:checked');
+            let value = inputChecked.value;
+            console.log(value);
+            if (value === 'yourself') {
+                document.getElementById('my-family').classList.add('d-none');
+            } else {
+                document.getElementById('my-family').classList.remove('d-none');
+            }
+        }
 
         function loadData() {
             let cachedData = {};

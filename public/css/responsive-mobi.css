@@ -6,6 +6,7 @@ img {
   .container {
     max-width: 480px;
     width: 100%;
+    margin-top: 50px;
   }
   /* HEADER */
   .d-mb-flex {
@@ -300,6 +301,9 @@ img {
 }
 /* END FLEA MARKET */
 @media (min-width: 780px) {
+  .container {
+    margin-top: 200px;
+  }
   .pc-hidden {
     display: none !important;
   }

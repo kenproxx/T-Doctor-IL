@@ -122,7 +122,6 @@ class ClinicController extends Controller
     public function store(Request $request)
     {
         try {
-            dd($request->all());
             if (Auth::user() == null) {
                 alert()->error('Error', 'Please login to booking.');
                 return back();

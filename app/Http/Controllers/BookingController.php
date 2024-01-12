@@ -13,6 +13,7 @@ use App\Models\ServiceClinic;
 use App\Models\SurveyAnswer;
 use App\Models\SurveyAnswerUser;
 use App\Models\SurveyQuestion;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -96,6 +97,74 @@ class BookingController extends Controller
         }
     }
 
+    public function creatBookingNew(Request $request)
+    {
+        try {
+            $clinicID = $request->input('clinic_id');
+            $service = $request->input('service');
+            $memberFamily = $request->input('memberFamily');
+            if ($memberFamily == 'family') {
+                $memberFamily = $request->input('membersFamily');
+            } else {
+                $memberFamily = null;
+            }
+            $medical_history = $request->input('medical_history') ?? '';
+
+            if (is_array($service)) {
+                $servicesAsString = implode(',', $service);
+            } else {
+                $servicesAsString = $service;
+            }
+
+            if (is_array($medical_history)) {
+                $medical_historyAsString = implode('&&', $medical_history);
+            } else {
+                $medical_historyAsString = $medical_history;
+            }
+
+            $time = $request->input('selectedTime');
+            $timestamp = Carbon::parse($time);
+            $booking = new Booking();
+
+            $booking->user_id = Auth::user()->id;
+            $booking->clinic_id = $clinicID;
+            $booking->check_in = $timestamp;
+            $booking->status = BookingStatus::PENDING;
+            $booking->service = $servicesAsString;
+            $booking->medical_history = $medical_historyAsString;
+            $booking->member_family_id = $memberFamily;
+
+            $clinicID = $booking->clinic_id;
+            $servicesAsString = $booking->service;
+            $timestamp = $booking->check_in;
+            $datetime = $timestamp->addMinutes(30);
+            $familyId = $booking->member_family_id;
+            $exitBooking = Booking::where('clinic_id', $clinicID)
+                ->where('service', $servicesAsString)
+                ->where('member_family_id', $familyId)
+                ->where('check_in', '<', $datetime)
+                ->where('status', BookingStatus::APPROVED)
+                ->get();
+            if (count($exitBooking) > 5) {
+                $array = [
+                    'message' => 'The pre-booking service has reached the allowed number! Please re-choose again!'
+                ];
+                return response($array, 400);
+            }
+            $booking->save();
+            if ($booking) {
+                alert('Booking success');
+                return back()->with('success', 'Booking success');
+            }
+            alert('Booking error');
+            return back('Create error', 400);
+        }
+        catch (\Exception $exception) {
+            alert('Booking error');
+            return back($exception, 400);
+        }
+
+    }
 
     public function update(Request $request, $id)
     {
