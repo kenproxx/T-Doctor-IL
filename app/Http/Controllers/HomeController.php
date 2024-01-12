@@ -82,7 +82,10 @@ class HomeController extends Controller
         $clinicDetail = \App\Models\Clinic::where('id', $id)->first();
         $arrayService = explode(',', $clinicDetail->service_id);
         $services = \App\Models\ServiceClinic::whereIn('id', $arrayService)->get();
-        return view('clinics.booking-clinic-page',compact('clinicDetail','id','services'));
+        $memberFamilys = \DB::table('family_management')
+            ->where('user_id', Auth::user()->id)
+            ->get();
+        return view('clinics.booking-clinic-page',compact('clinicDetail','id','services','memberFamilys'));
     }
 
     public function specialistReview(Request $request, $id)

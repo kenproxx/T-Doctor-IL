@@ -76,7 +76,7 @@
                                                     $addressD = \App\Models\District::where('id', $array[2] ?? null)->first();
                                                     $addressC = \App\Models\Commune::where('id', $array[3] ?? null)->first();
                                                 @endphp
-                                                <div class="">
+                                                <div class="d-flex">
                                                     <i class="fas fa-map-marker-alt mr-2"></i>
                                                     <div>{{$clinic->address_detail}}
                                                         , {{$addressC->name ?? ''}} , {{$addressD->name ?? ''}}

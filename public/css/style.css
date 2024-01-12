@@ -1190,6 +1190,7 @@ span.material-symbols-outlined {
     border-radius: 8px;
     width: 80px;
     height: 80px;
+    object-fit: cover;
 }
 
 /*.row{*/

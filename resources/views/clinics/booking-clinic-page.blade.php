@@ -6,7 +6,132 @@
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.1.0/foundation.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link href="{{ asset('css/selectdate.css') }}" rel="stylesheet">
+    <style>
+        .date-active {
+            background-color: blue;
 
+        }
+
+        a.hollow.button {
+            border-radius: 8px;
+            background: #F3F3F3;
+            color: #929292;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+            border: 1px solid #FFFFFF;
+            margin: 0 16px 0 0;
+        }
+
+        a.hollow.button:hover {
+            border-radius: 8px;
+            border: 1px solid #088180;
+            background: #F3F3F3;
+        }
+
+        a.hollow.button:active {
+            border-radius: 8px;
+            background: #088180;
+            color: #FFF;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+        }
+
+        .ui-state-active {
+            border-radius: 85px;
+            background-color: #088180 !important;
+        }
+
+        .ui-datepicker-inline.ui-datepicker.ui-widget.ui-widget-content.ui-helper-clearfix.ui-corner-all {
+            border-radius: 8px;
+            background: #FFF;
+            box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.20);
+            border: none;
+            padding: 16px;
+
+        }
+
+        tbody, tfoot, thead {
+            border: none;
+            background-color: #FFFFFF;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: white;
+        }
+
+        .ui-datepicker-calendar tbody tr td .ui-state-default {
+            border: none;
+            background-color: #ffffff;
+        }
+
+        .ui-datepicker-header.ui-widget-header.ui-helper-clearfix.ui-corner-all {
+            background: white;
+            border: none;
+        }
+
+        .ui-datepicker td {
+            padding: 12px;
+        }
+
+        .select-memberFamily label {
+            color: #000;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+        }
+
+        .select-service {
+            margin-top: 40px;
+            color: #000;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+
+        .checkbox-button label {
+            width: 24px;
+            height: 24px;
+            border-radius: 30px;
+        }
+
+        .border-booking-sv {
+            padding: 16px;
+        }
+
+        .button-apply-bookingNew {
+            display: flex;
+            width: 470px;
+            padding: 14px 50px;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            border-radius: 8px;
+            background: #088180;
+            border: none;
+        }
+
+        .avtMember img {
+            width: 71px;
+            height: 71px;
+            border-radius: 71px;
+            object-fit: cover;
+        }
+
+        .border-8 {
+            border-radius: 8px;
+            border: 1px solid #EAEAEA;
+            background: #FFF;
+            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+            padding: 16px;
+        }
+    </style>
     @include('layouts.partials.header')
     <div class="container">
         <div class="detail-clinic-theo-chuyen-khoa-title border-bottom">
@@ -17,7 +142,7 @@
                 <div class="border-specialList">
                     <div class="content__item d-flex gap-3">
                         @php
-                        $arrayGallery = explode(',', $clinicDetail->gallery);
+                            $arrayGallery = explode(',', $clinicDetail->gallery);
 
                         @endphp
                         <div class="specialList-clinics--img">
@@ -64,17 +189,25 @@
                 </div>
             </div>
         </div>
-        <form action="{{route('clinic.booking.store')}}" METHOD="post">
+        <form action="{{route('clinic.booking.store')}}" method="post">
+
+            {{--            <input type="hidden" name="survey_text" value=''>--}}
+            {{--            <input type="hidden" name="survey_checkbox" value=''>--}}
+            {{--            <input type="hidden" name="survey_radio" value=''>--}}
+            <input type="hidden" name="check_in" id="check_in" value=''>
+            <input type="hidden" name="check_in_time" id="check_in_time" value=''>
             <div>
-                <div>Chọn thời gian</div>
+                <div></div>
                 <section>
-                    <div class=" d-block">
-                        <div class="small-12 ">
+                    <div class="d-flex">
+                        <div class="small-12 col-md-3 pl-0">
+                            <div>Chọn Ngày</div>
                             <div id="datepicker"></div>
                         </div>
-                        <div class="small-12 ">
+                        <div class="small-12 col-md-9">
+                            <div>Chọn thời gian</div>
                             <div class="spin-me"></div>
-                            <div class="master-container-slots">
+                            <div class="master-container-slots" id="select-time-booking">
                                 <div class="morning-container fs-16px">
                                     <p>AM</p>
                                     <div class="flex-container-morning"></div>
@@ -90,40 +223,58 @@
                     </div>
                 </section>
             </div>
-            <div>
+            <div class="mt-5">
                 @if(Auth::check())
-                    <span>{{ __('home.select member family') }}</span>
-                    <div>
-                        Bản thân
-                        <select class="form-control" name="member_family_id" id="member_family_id">
-                            <option value="">{{ __('home.Bản thân') }}</option>
-                            {{--                    @foreach($memberFamily as $member)--}}
-                            {{--                        <option value="{{$member->id}}">{{$member->name}}</option>--}}
-                            {{--                    @endforeach--}}
-                        </select>
+                    <div class="d-flex align-items-center select-memberFamily">
+                        <input class="m-0" style="width: 20px;height: 20px;" type="radio" name="memberFamily"
+                               id="yourself"><label for="yourself">Cho mình</label>
+                        <input class="m-0" style="width: 20px;height: 20px;" type="radio" name="memberFamily"
+                               id="family"><label for="family">Cho người thân</label>
                     </div>
                 @endif
             </div>
+            <div class="d-flex mt-5">
+                @foreach($memberFamilys as $memberFamily)
+                    <div class="col-auto mr-3 border-8">
+                        <div class="avtMember">
+                            <img
+                                src="{{$memberFamily->avatar ?? 'https://i0.wp.com/sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png'}}"
+                                alt="">
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <label for="{{$memberFamily->id}}">{{$memberFamily->name}}</label>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center">
+                            # {{ \App\Enums\RelationshipFamily::getLabels()[$memberFamily->relationship] ?? $memberFamily->relationship }}</div>
+                        <input style="right: 0" class="position-absolute top-0 m-2" type="radio" name="membersFamily"
+                               id="{{$memberFamily->id}}">
+                    </div>
+                @endforeach
+            </div>
             <div>
-                <div>Select service</div>
+                <div class="select-service">Select service</div>
                 <div>
                     @foreach($services as $service)
                         <div class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
                             <div class="fs-14 font-weight-600">
-                                <span>{{$service->name}}</span>
+                                <label class="d-flex" for="myCheckbox{{$service->id}}">{{$service->name}}</label>
                             </div>
                             <div class="checkbox-button">
                                 <input type="checkbox" id="myCheckbox{{$service->id}}" value="{{$service->id}}"
                                        name="service[]">
-                                <label class="d-flex" for="myCheckbox{{$service->id}}">{{ __('home.Booking') }}</label>
+                                <label class="d-flex" for="myCheckbox{{$service->id}}"></label>
                             </div>
                         </div>
                     @endforeach
                 </div>
             </div>
-            <button type="submit" class="btn mt-4 btn-primary btn-block up-date-button button-apply-booking"
-                    id="activate">Apply
-            </button>
+            <div class="d-flex justify-content-center">
+                <button type="submit"
+                        class=" btn col-md-6 mt-4 btn-primary btn-block up-date-button button-apply-bookingNew "
+                        id="activate">Xác nhận đặt khám
+                </button>
+            </div>
+
         </form>
     </div>
     <script>
@@ -212,6 +363,26 @@
                         afternoon.appendChild(div);
                     }
                 });
+                selectTime();
+            }
+
+            function selectTime() {
+                const divTime = document.querySelectorAll('#select-time-booking .item > a.hollow.button');
+
+                divTime.forEach((item) => {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        console.log(item.text)
+
+                        divTime.forEach((otherItem) => {
+                            otherItem.classList.remove('bg-primary');
+                        });
+
+                        $(item).toggleClass('bg-primary');
+                        document.getElementById('check_in_time').value = item.text;
+                    })
+                })
+
             }
 
 
@@ -220,7 +391,7 @@
                     const container = document.querySelector('.master-container-slots');
                     const morning = document.querySelector('.flex-container-morning');
                     const afternoon = document.querySelector('.flex-container-afternoon');
-                    const formSubmit = document.querySelector('.button-apply-booking');
+                    const formSubmit = document.querySelector('.button-apply-bookingNew');
                     const checkInInput = document.getElementById('check_in');
 
                     formSubmit.classList.add('disabled');
@@ -259,8 +430,11 @@
                         }, 500);
                     }
                     document.getElementById('check_in').value = date;
+                    console.log(date)
                 }
             });
+
+
         }
     </script>
 @endsection
