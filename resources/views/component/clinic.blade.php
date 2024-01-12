@@ -1,15 +1,16 @@
 <style>
     .border-specialList {
         border-radius: 16px;
-        border: 1px solid  #EAEAEA;
-        background:  #FFF;
+        border: 1px solid #EAEAEA;
+        background: #FFF;
         display: flex;
         padding: 16px;
         align-items: flex-start;
         gap: 16px;
     }
+
     .title-specialList-clinics {
-        color:  #000;
+        color: #000;
         font-size: 24px;
         font-style: normal;
         font-weight: 800;
@@ -20,6 +21,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
     .address-clinics {
         color: #929292;
         font-size: 18px;
@@ -27,6 +29,7 @@
         font-weight: 600;
         line-height: normal;
     }
+
     .address-clinics div {
         display: -webkit-box;
         line-height: 1.3;
@@ -35,6 +38,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
     .distance {
         color: #088180;
         font-size: 18px;
@@ -42,12 +46,14 @@
         font-weight: 600;
         line-height: normal;
     }
+
     .time-working {
         font-size: 12px;
         font-style: normal;
         font-weight: 600;
         line-height: normal;
     }
+
     .color-timeWorking {
         color: #088180;
 
@@ -72,6 +78,7 @@
                 }
             });
         }
+
         async function renderClinics(res) {
             let html = ``;
             const baseUrl = '{{ route("clinic.detail", ["id" => ":id"]) }}';

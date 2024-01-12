@@ -3,106 +3,111 @@
 @section('content')
     <link rel="stylesheet" href="{{asset('css/clinics-style.css')}}">
     <style>
-   .border-specialList {
-       border-radius: 16px;
-       border: 1px solid  #EAEAEA;
-       background:  #FFF;
-       display: flex;
-       padding: 16px;
-       align-items: flex-start;
-       gap: 16px;
-   }
-   .title-specialList-clinics {
-       color:  #000;
-       font-size: 24px;
-       font-style: normal;
-       font-weight: 800;
-       line-height: normal;
-   }
-   .address-clinics {
-       color: #929292;
-       font-size: 18px;
-       font-style: normal;
-       font-weight: 600;
-       line-height: normal;
-   }
-   .distance {
-       color: #088180;
-       font-size: 18px;
-       font-style: normal;
-       font-weight: 600;
-       line-height: normal;
-   }
-   .time-working {
-       font-size: 12px;
-       font-style: normal;
-       font-weight: 600;
-       line-height: normal;
-   }
-   .color-timeWorking {
-       color: #088180;
+        .border-specialList {
+            border-radius: 16px;
+            border: 1px solid #EAEAEA;
+            background: #FFF;
+            display: flex;
+            padding: 16px;
+            align-items: flex-start;
+            gap: 16px;
+        }
 
-   }
+        .title-specialList-clinics {
+            color: #000;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+        }
+
+        .address-clinics {
+            color: #929292;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+
+        .distance {
+            color: #088180;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+
+        .time-working {
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+
+        .color-timeWorking {
+            color: #088180;
+
+        }
 
     </style>
     @include('layouts.partials.header')
     @include('What-free.header-wFree')
-    <div class="container">
-            @php
-                $address = DB::table('clinics')
-                      ->join('users', 'users.id', '=', 'clinics.user_id')
-                            ->where('clinics.status', \App\Enums\ClinicStatus::ACTIVE)
-                            ->where('clinics.type', \App\Enums\TypeBusiness::CLINICS)
-                            ->select('clinics.*', 'users.email')
-                            ->cursor()
-                            ->map(function ($item) {
-                                $array = explode(',', $item->service_id);
-                                $services = \App\Models\ServiceClinic::whereIn('id', $array)->get();
-                                $array = explode(',', $item->address);
-                                $addressP = \App\Models\Province::where('id', $array[1] ?? null)->first();
-                                $addressD = \App\Models\District::where('id', $array[2] ?? null)->first();
-                                $addressC = \App\Models\Commune::where('id', $array[3] ?? null)->first();
+    <div class="container" id="listClinics">
+        @php
+            $address = DB::table('clinics')
+                  ->join('users', 'users.id', '=', 'clinics.user_id')
+                        ->where('clinics.status', \App\Enums\ClinicStatus::ACTIVE)
+                        ->where('clinics.type', \App\Enums\TypeBusiness::CLINICS)
+                        ->select('clinics.*', 'users.email')
+                        ->cursor()
+                        ->map(function ($item) {
+                            $array = explode(',', $item->service_id);
+                            $services = \App\Models\ServiceClinic::whereIn('id', $array)->get();
+                            $array = explode(',', $item->address);
+                            $addressP = \App\Models\Province::where('id', $array[1] ?? null)->first();
+                            $addressD = \App\Models\District::where('id', $array[2] ?? null)->first();
+                            $addressC = \App\Models\Commune::where('id', $array[3] ?? null)->first();
 
-                                $clinic = (array)$item;
-                                $clinic['total_services'] = $services->count();
-                                $clinic['services'] = $services->toArray();
-                                if ($addressP == null) {
-                                    $clinic['addressInfo'] = '';
-                                    return $clinic;
-                                }
-                                if ($addressD == null) {
-                                    $clinic['addressInfo'] = $addressP['name'];
-                                    return $clinic;
-                                }
-                                if ($addressC == null) {
-                                    $clinic['addressInfo'] = $addressD['name'] . ',' . $addressP['name'];
-                                    return $clinic;
-                                }
-                                if ($clinic['address_detail'] == null){
-                                    $clinic['addressInfo'] = $addressC['name'] . ',' . $addressD['name'] . ',' . $addressP['name'];
-                                }
+                            $clinic = (array)$item;
+                            $clinic['total_services'] = $services->count();
+                            $clinic['services'] = $services->toArray();
+                            if ($addressP == null) {
+                                $clinic['addressInfo'] = '';
                                 return $clinic;
-                            });
-                $adr = $address->toArray();
-            @endphp
-            <div class="clinics-list">
-                <div class="clinics-header row">
-                    <div class=" d-flex justify-content-between">
-                        <span class="fs-32px"></span>
-                        <span>
+                            }
+                            if ($addressD == null) {
+                                $clinic['addressInfo'] = $addressP['name'];
+                                return $clinic;
+                            }
+                            if ($addressC == null) {
+                                $clinic['addressInfo'] = $addressD['name'] . ',' . $addressP['name'];
+                                return $clinic;
+                            }
+                            if ($clinic['address_detail'] == null){
+                                $clinic['addressInfo'] = $addressC['name'] . ',' . $addressD['name'] . ',' . $addressP['name'];
+                            }
+                            return $clinic;
+                        });
+            $adr = $address->toArray();
+        @endphp
+        <div class="clinics-list">
+            <div class="clinics-header row">
+                <div class=" d-flex justify-content-between">
+                    <span class="fs-32px"></span>
+                    <span>
                 </span>
-                    </div>
                 </div>
-                <div class="body row" id="productInformation"></div>
+            </div>
+            <div class="body row" id="productInformation"></div>
 
-            </div>
-            <div class="other-clinics">
-                <div class="title">
-                    {{ __('home.Other Clinics/Pharmacies') }}
-                </div>
-                @include('component.clinic')
-            </div>
         </div>
+        <div class="other-clinics">
+            <div class="title">
+                {{ __('home.Other Clinics/Pharmacies') }}
+            </div>
+            @include('component.clinic')
+        </div>
+    </div>
 
     <script>
         var addressNew = {!! json_encode($adr) !!};
@@ -171,9 +176,6 @@
 
                     let formattedOpenDate = `${openDate.getHours()}:${openDate.getMinutes()}`;
                     let formattedCloseDate = `${closeDate.getHours()}:${closeDate.getMinutes()}`;
-
-
-
 
                     let html = `
                     <div class="specialList-clinics col-md-6 mt-5">
