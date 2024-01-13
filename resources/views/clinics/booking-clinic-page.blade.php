@@ -243,22 +243,36 @@
                 @endif
             </div>
             <div class="d-flex mt-5 d-none" id="my-family">
-                @foreach($memberFamilys as $memberFamily)
+                @if($memberFamilys->count() == 0)
                     <div class="col-auto mr-3 border-8">
-                        <div class="avtMember">
+                        <div class="avtMember d-flex justify-content-center align-items-center">
                             <img
-                                src="{{$memberFamily->avatar ?? 'https://i0.wp.com/sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png'}}"
+                                src="https://i0.wp.com/sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png"
                                 alt="">
                         </div>
                         <div class="d-flex align-items-center justify-content-center">
-                            <label for="{{$memberFamily->id}}">{{$memberFamily->name}}</label>
+                            <label for="yourself">Bạn chưa có người thân</label>
+                            <input hidden="" type="radio" name="memberFamily" id="yourself"  value="yourself"><label for="yourself">Cho mình</label>
                         </div>
-                        <div class="d-flex align-items-center justify-content-center">
-                            # {{ \App\Enums\RelationshipFamily::getLabels()[$memberFamily->relationship] ?? $memberFamily->relationship }}</div>
-                        <input style="right: 0" class="position-absolute top-0 m-2" type="radio" name="membersFamily"
-                               id="{{$memberFamily->id}}" value="{{$memberFamily->id}}">
                     </div>
-                @endforeach
+                @else
+                    @foreach($memberFamilys as $memberFamily)
+                        <div class="col-auto mr-3 border-8">
+                            <div class="avtMember">
+                                <img
+                                    src="{{$memberFamily->avatar ?? 'https://i0.wp.com/sbcf.fr/wp-content/uploads/2018/03/sbcf-default-avatar.png'}}"
+                                    alt="">
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center">
+                                <label for="{{$memberFamily->id}}">{{$memberFamily->name}}</label>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-center">
+                                # {{ \App\Enums\RelationshipFamily::getLabels()[$memberFamily->relationship] ?? $memberFamily->relationship }}</div>
+                            <input style="right: 0" class="position-absolute top-0 m-2" type="radio" name="membersFamily"
+                                   id="{{$memberFamily->id}}" value="{{$memberFamily->id}}">
+                        </div>
+                    @endforeach
+                @endif
             </div>
             <div>
                 <div class="select-service">Select service</div>

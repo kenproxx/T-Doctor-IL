@@ -82,10 +82,23 @@ class HomeController extends Controller
         $clinicDetail = \App\Models\Clinic::where('id', $id)->first();
         $arrayService = explode(',', $clinicDetail->service_id);
         $services = \App\Models\ServiceClinic::whereIn('id', $arrayService)->get();
-        $memberFamilys = \DB::table('family_management')
-            ->where('user_id', Auth::user()->id)
-            ->get();
-        return view('clinics.booking-clinic-page',compact('clinicDetail','id','services','memberFamilys'));
+        if (Auth::check()) {
+            $userId = Auth::user()->id;
+            if (!$clinicDetail || $clinicDetail->status != \App\Enums\ClinicStatus::ACTIVE) {
+                return response("Product not found", 404);
+            }
+            if ($userId) {
+                $memberFamilys = \DB::table('family_management')
+                    ->where('user_id', Auth::user()->id)
+                    ->get();
+            }
+            else{
+                $memberFamilys = null;
+            }
+            return view('clinics.booking-clinic-page',compact('clinicDetail','id','services','memberFamilys'));
+        }
+        alert('Bạn cần đăng nhập để đặt lịch khám');
+return back();
     }
 
     public function specialistReview(Request $request, $id)
