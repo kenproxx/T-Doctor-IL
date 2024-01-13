@@ -868,6 +868,11 @@ return [
     'Tìm kiếm cơ sở y tế' => 'ຊອກຫາສະຖານທີ່ທາງການແພດ',
     'Dental Clinic' => 'ຄລີນິກປົວແຂ້ວ',
     'Đặt khám' => 'ຈອງການສອບເສັງ',
-    'Xem chi tiết' => 'ເບິ່ງລາຍລະອຽດ'
+    'Xem chi tiết' => 'ເບິ່ງລາຍລະອຽດ',
+    'Create Medical Result' => 'ສ້າງຜົນໄດ້ຮັບທາງການແພດ',
+    'Place' => 'ສະຖານທີ່',
+    'Datetime' => 'ວັນທີ',
+    'Detail Medical Result' => 'ລາຍລະອຽດຜົນການແພດ',
+    'List Medical Result' => 'ລາຍຊື່ຜົນໄດ້ຮັບທາງການແພດ'
 
 ];

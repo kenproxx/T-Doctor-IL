@@ -271,7 +271,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile') }}">
                             <i class="bi bi-person"></i>
                             <span>{{ __('home.My Profile') }}</span>
                         </a>
@@ -281,7 +281,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                        <a class="dropdown-item d-flex align-items-center" href="#">
                             <i class="bi bi-gear"></i>
                             <span>{{ __('home.Account Settings') }}</span>
                         </a>
@@ -291,7 +291,7 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                        <a class="dropdown-item d-flex align-items-center" href="#">
                             <i class="bi bi-question-circle"></i>
                             <span>{{ __('home.Need Help') }}?</span>
                         </a>
