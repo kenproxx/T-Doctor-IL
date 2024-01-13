@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('title')
-    List Medical Result
+    {{ __('home.List Medical Result') }}
 @endsection
 @section('main-content')
     <div class="">
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800"> List Medical Result </h1>
+        <h1 class="h3 mb-4 text-gray-800"> {{ __('home.List Medical Result') }} </h1>
         <a href="{{route('view.admin.medical.result.create')}}" class="btn btn-primary mb-3">{{ __('home.Add') }}</a>
         <table class="table" id="tableListMedical">
             <thead>
