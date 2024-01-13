@@ -1,25 +1,25 @@
 @extends('layouts.admin')
 @section('title')
-    Create Medical Result
+    {{ __('home.Create Medical Result') }}
 @endsection
 @section('main-content')
     <div class="">
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800"> Create Medical Result </h1>
+        <h1 class="h3 mb-4 text-gray-800">  {{ __('home.Create Medical Result') }} </h1>
         <div class="container-fluid">
             <form>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label for="full_name">Full Name</label>
+                        <label for="full_name"> {{ __('home.Full Name') }}</label>
                         <input type="text" class="form-control" id="full_name">
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="phone">Phone</label>
+                        <label for="phone"> {{ __('home.PhoneNumber') }}</label>
                         <input type="text" class="form-control" id="phone">
                     </div>
                 </div>
                 <div class="form-group mb-3">
-                    <label for="address">Address</label>
+                    <label for="address"> {{ __('home.Addresses') }}</label>
                     <input type="text" class="form-control" id="address">
                 </div>
                 <div class="list-service-result mt-2 mb-3">
@@ -51,11 +51,11 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-8">
-                        <label for="place">Place</label>
+                        <label for="place"> {{ __('home.Place') }}</label>
                         <input type="text" class="form-control" id="place">
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="datetime">Datetime</label>
+                        <label for="datetime"> {{ __('home.Datetime') }}</label>
                         <input type="datetime-local" class="form-control" id="datetime">
                     </div>
                 </div>

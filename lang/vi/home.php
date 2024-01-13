@@ -880,7 +880,12 @@ return [
     'Tìm kiếm cơ sở y tế' => 'Tìm kiếm cơ sở y tế',
     'Dental Clinic' =>'Phòng khám nha khoa',
     'Đặt khám' => 'Đặt khám',
-    'Xem chi tiết' => 'Xem chi tiết'
+    'Xem chi tiết' => 'Xem chi tiết',
+    'Create Medical Result' => 'Tạo kết quả y tế',
+    'Place' => 'Địa điểm',
+    'Datetime' => 'Ngày giờ',
+    'Detail Medical Result' => 'Chi tiết kết quả y tế',
+    'List Medical Result' => 'Liệt kê kết quả y tế'
 
 
 ];

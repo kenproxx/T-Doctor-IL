@@ -881,6 +881,11 @@ return [
     'Tìm kiếm cơ sở y tế' => 'Search for medical facilities',
     'Dental Clinic' => 'Dental Clinic',
     'Đặt khám' => 'Book an examination',
-    'Xem chi tiết' => 'See details'
+    'Xem chi tiết' => 'See details',
+    'Create Medical Result' => 'Create Medical Result',
+    'Place' => 'Place',
+    'Datetime' => 'Date time',
+    'Detail Medical Result' => 'Detail Medical Result',
+    'List Medical Result' => 'List Medical Result'
 
 ];
