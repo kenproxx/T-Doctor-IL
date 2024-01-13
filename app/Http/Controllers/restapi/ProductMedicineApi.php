@@ -6,6 +6,7 @@ use App\Enums\online_medicine\OnlineMedicineStatus;
 use App\Enums\TypeProductCart;
 use App\Http\Controllers\Controller;
 use App\Models\Cart;
+use App\Models\MedicalResults;
 use App\Models\online_medicine\ProductMedicine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -61,28 +62,32 @@ class ProductMedicineApi extends Controller
             if (count($products) > 0) {
                 $userID = Auth::user()->id;
                 $typeProduct = TypeProductCart::MEDICINE;
-
-                foreach ($products as $product) {
-                    $cart = Cart::where('user_id', $userID)
-                        ->where('product_id', $product->id)
-                        ->where('type_product', $typeProduct)
-                        ->first();
-                    if ($cart) {
-                        $cart->quantity = $cart->quantity + 1;
-                    } else {
-                        $cart = new Cart();
-                        $cart->product_id = $product->id;
-                        $cart->quantity = 1;
-                        $cart->user_id = $userID;
-                        $cart->type_product = $typeProduct;
-                    }
-                    $cart->save();
-                }
+                $this->addProductCart($products, $userID, $typeProduct);
                 return response((new MainApi())->returnMessage('Update success!'), 200);
             }
             return response((new MainApi())->returnMessage('No valid product found!'), 201);
         } catch (\Exception $exception) {
             return response((new MainApi())->returnMessage('Error, Please try again!'), 400);
+        }
+    }
+
+    public function addProductCart($products, $userID, $typeProduct)
+    {
+        foreach ($products as $product) {
+            $cart = Cart::where('user_id', $userID)
+                ->where('product_id', $product->id)
+                ->where('type_product', $typeProduct)
+                ->first();
+            if ($cart) {
+                $cart->quantity = $cart->quantity + 1;
+            } else {
+                $cart = new Cart();
+                $cart->product_id = $product->id;
+                $cart->quantity = 1;
+                $cart->user_id = $userID;
+                $cart->type_product = $typeProduct;
+            }
+            $cart->save();
         }
     }
 
@@ -93,5 +98,22 @@ class ProductMedicineApi extends Controller
             return response((new MainApi())->returnMessage('Not found'), 404);
         }
         return response()->json($product);
+    }
+
+    function addProductFromExcelFile($id)
+    {
+        $result = MedicalResults::find($id);
+        $file_excel = $result->prescriptions;
+        $products = [];
+        if ($file_excel) {
+            $products = (new BookingResultApi())->getListProductFromExcel($file_excel);
+        }
+        if (count($products) > 0) {
+            $userID = Auth::user()->id;
+            $typeProduct = TypeProductCart::MEDICINE;
+            $this->addProductCart($products, $userID, $typeProduct);
+            return response((new MainApi())->returnMessage('Success!'), 200);
+        }
+        return response((new MainApi())->returnMessage('No valid product found!'), 201);
     }
 }

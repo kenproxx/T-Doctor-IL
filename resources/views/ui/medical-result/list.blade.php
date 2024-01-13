@@ -64,8 +64,8 @@
                                     <td>${data.service_name}</td>
                                     <td>
                                          <div class="d-flex align-items-center">
-                                            <a href="${urlDetail}" class="btn btn-primary">
-                                                <i class="fa-solid fa-pen-to-square"></i>
+                                            <a href="${urlDetail}" class="btn btn-success">
+                                                <i class="fa-solid fa-eye"></i>
                                             </a>
                                          </div>
                                     </td>
