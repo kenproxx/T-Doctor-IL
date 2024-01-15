@@ -6,6 +6,9 @@ img {
   .mt-70 {
     margin-top: 70px;
   }
+  .mt-24 {
+    margin-top: 24px;
+  }
   .container {
     max-width: 480px;
     width: 100%;
