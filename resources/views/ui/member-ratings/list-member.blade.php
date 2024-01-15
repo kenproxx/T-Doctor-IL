@@ -71,6 +71,11 @@
         max-width: 50px;
         object-fit: cover;
     }
+
+    .me {
+        background-color: #36CAA9 !important;
+        color: #fff !important;
+    }
 </style>
 @section('content')
     @include('layouts.partials.header')
@@ -82,6 +87,7 @@
             <tbody id="list-user">
 
             </tbody>
+
         </table>
     </div>
     <script>
@@ -116,6 +122,8 @@
         }
 
         function renderUser(response) {
+            let is_me = false;
+
             for (let i = 0; i < response.length; i++) {
                 let user = response[i];
                 let image = ``;
@@ -127,7 +135,21 @@
                     image = no3;
                 }
 
-                html += `<tr class="me">
+                if (user.id == `{{ Auth::user()->id }}`) {
+                    is_me = true;
+                    html += `<tr class="">
+                <td class="me number">${i + 1}</td>
+                <td class="me username">
+                    <p class="me">${user.username}</p>
+                    <p class="me small">${user.email}</p>
+                </td>
+                <td class="me points">
+                    <span class="">${user.points}</span>
+                    ${image}
+                </td>
+            </tr>`;
+                } else {
+                    html += `<tr class="">
                 <td class="number">${i + 1}</td>
                 <td class="username">
                     <p>${user.username}</p>
@@ -138,9 +160,24 @@
                     ${image}
                 </td>
             </tr>`;
+                }
+            }
+
+            if (!is_me){
+                html = html + ` <tr class="">
+                <td class="me number"><p class="text-nowrap">--</p></td>
+                <td class="me username">
+                    <p class="me">{{ Auth::user()->username }}</p>
+                    <p class="me small">{{ Auth::user()->email }}</p>
+                </td>
+                <td class="me points">
+                    <span class="">{{ Auth::user()->points }}</span>
+                </td>
+            </tr>`
             }
 
             $('#list-user').empty().append(html);
+            loadPaginate('table-list-user', 50);
         }
     </script>
 @endsection
