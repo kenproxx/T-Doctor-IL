@@ -89,6 +89,9 @@ Route::middleware(['user.active'])->group(function () {
     /* Need help? */
     Route::group(['prefix' => 'need-helps'], function () {
         Route::get('/home', [AccountController::class, 'needHelp'])->name('need.helps.home');
+        Route::get('/account', [AccountController::class, 'accountHelp'])->name('need.helps.account');
+        Route::get('/reset-device', [AccountController::class, 'resetToken'])->name('need.helps.account.token');
+        Route::get('/verify-code/{id}', [AccountController::class, 'verifyCodeToken'])->name('need.helps.account.verify.code');
     });
 
     /* */

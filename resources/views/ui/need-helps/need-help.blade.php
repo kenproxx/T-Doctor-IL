@@ -12,7 +12,7 @@
         </div>
         <div class="d-flex align-items-center justify-content-center mt-3">
             <div class="d-flex flex-wrap list-action w-75">
-                <a href="#" class="col-md-3 p-3 border">
+                <a href="{{ route('need.helps.account') }}" class="col-md-3 p-3 border">
                     <div class="d-flex justify-content-center align-items-center">
                         <img class="w-25" src="https://lh3.googleusercontent.com/o9U8AvPuX9gkIYtYfNmH-_wBdTfOJ7jb0VwbLWWbERzml7oTPngODhKv2Br7A64=w64" alt="" >
                     </div>
@@ -55,9 +55,4 @@
             </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function () {
-
-        })
-    </script>
 @endsection
