@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AddressMapController;
 use App\Http\Controllers\admin\AdminMedicalResultController;
@@ -46,6 +47,7 @@ use App\Http\Controllers\ShortVideoController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\SymptomController;
 use App\Http\Controllers\TopicVideoController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WhatFreeToDay;
 use Illuminate\Support\Facades\Route;
 
@@ -76,7 +78,7 @@ Route::middleware(['user.active'])->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->name('registerProcess');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logoutProcess');
 
-
+    /* Login social */
     Route::get('/login-google', [AuthSocialController::class, 'getGoogleSignInUrl'])->name('login.google');
     Route::get('/login-google-callback', [AuthSocialController::class, 'loginCallback'])->name('login.google.callback');
     Route::get('/login-role', [AuthSocialController::class, 'chooseRole'])->name('login.social.choose.role');
@@ -85,6 +87,12 @@ Route::middleware(['user.active'])->group(function () {
         [ProfileController::class, 'handleForgetPassword'])->name('user.forget.password.send');
     Route::post('forget-password/check', [ProfileController::class, 'checkOTP'])->name('user.forget.password.check');
 
+    /* Need help? */
+    Route::group(['prefix' => 'need-helps'], function () {
+        Route::get('/home', [AccountController::class, 'needHelp'])->name('need.helps.home');
+    });
+
+    /* */
     Route::group(['prefix' => 'news-events'], function () {
         Route::get('', [NewEventController::class, 'index'])->name('index.new');
         Route::get('detail/{id}', [NewEventController::class, 'detail'])->name('detail.new');
@@ -356,7 +364,12 @@ Route::middleware(['user.active'])->group(function () {
                     [WidgetChatController::class, 'handleSeenMessage'])->name('api.backend.connect.chat.seen-message');
             });
         });
+        /* User view points */
+        Route::group(['prefix' => 'users-points'], function () {
+            Route::get('list', [UserController::class, 'listRatingUser'])->name('web.users.list.points');
+        });
 
+        /*  Admin blade */
         /* Booking result */
         Route::group(['prefix' => 'web/booking-result'], function () {
             Route::get('/list/{id}', [BookingResultController::class, 'getList'])->name('web.booking.result.list');

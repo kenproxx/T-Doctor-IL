@@ -40,8 +40,8 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="text-center">
-                                <h5 class="font-weight-bold">{{  Auth::user()->name }}</h5>
-                                <p>{{  Auth::user()->username }}</p>
+                                <h5 class="font-weight-bold">{{  Auth::user()->username }}</h5>
+                                <p>{{  Auth::user()->points }} points</p>
                             </div>
                         </div>
                     </div>

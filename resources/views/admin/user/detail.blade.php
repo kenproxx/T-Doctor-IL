@@ -419,6 +419,52 @@
                                        name="time_working_2">
                                 <input type="text" class="form-control d-none" id="apply_for" value="{{ $user->apply_for }}" name="apply_for">
                             </div>
+                            @else
+            <div class="row">
+        <div class="form-group col-md-3">
+            <label for="time_working_1_start">{{ __('home.Thời gian làm việc bắt đầu') }}</label>
+                                    <input type="time" class="form-control" id="time_working_1_start"
+                                           name="time_working_1_start" value="00:00">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="time_working_1_end">{{ __('home.Thời gian làm việc kết thúc') }}</label>
+                                    <input type="time" class="form-control" id="time_working_1_end"
+                                           name="time_working_1_end" value="23:59">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label
+                                        for="time_working_2_start">{{ __('home.Addresses') }}{{ __('home.Những này làm việc bắt đầu') }}</label>
+                                    <select name="time_working_2_start" id="time_working_2_start" class="form-control">
+                                        <option value="T2">{{ __('home.Thứ 2') }}</option>
+                                        <option value="T3">{{ __('home.Thứ 3') }}</option>
+                                        <option value="T4">{{ __('home.Thứ 4') }}</option>
+                                        <option value="T5">{{ __('home.Thứ 5') }}</option>
+                                        <option value="T6">{{ __('home.Thứ 6') }}</option>
+                                        <option value="T7">{{ __('home.Thứ 7') }}</option>
+                                        <option value="CN">{{ __('home.Chủ nhật') }}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label
+                                        for="time_working_2_end">{{ __('home.Những này làm việc kết thúc') }}</label>
+                                    <select name="time_working_2_end" id="time_working_2_end"
+                                            class="form-control">
+                                        <option value="T2">{{ __('home.Thứ 2') }}</option>
+                                        <option value="T3">{{ __('home.Thứ 3') }}</option>
+                                        <option value="T4">{{ __('home.Thứ 4') }}></option>
+                                        <option value="T5">{{ __('home.Thứ 5') }}</option>
+                                        <option value="T6">{{ __('home.Thứ 6') }}</option>
+                                        <option value="T7">{{ __('home.Thứ 7') }}</option>
+                                        <option value="CN">{{ __('home.Chủ nhật') }}</option>
+                                    </select>
+                                </div>
+
+                                <input type="text" class="form-control d-none" value="{{ $user->time_working_1 }}" id="time_working_1"
+                                       name="time_working_1">
+                                <input type="text" class="form-control d-none" value="{{ $user->time_working_2 }}" id="time_working_2"
+                                       name="time_working_2">
+                                <input type="text" class="form-control d-none" id="apply_for" value="{{ $user->apply_for }}" name="apply_for">
+                            </div>
                         @endif
             <div class="row">
                 <div class="form-group col-md-4">

@@ -4,12 +4,30 @@ namespace App\Http\Controllers\restapi;
 
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserApi extends Controller
 {
+    public function getUserByPoint(Request $request)
+    {
+        $sort_by = $request->input('sort_by') ?? 'desc';
+        $admin = Role::where('name', \App\Enums\Role::ADMIN)->first();
+        $role_admin = DB::table('role_users')->where('role_id', $admin->id)->get();
+        $array_id = [];
+        foreach ($role_admin as $item) {
+            $array_id[] = $item->user_id;
+        }
+        $users = User::where('status', '!=', UserStatus::DELETED)
+//            ->whereNotIn('id', $array_id)
+            ->orderBy('points', $sort_by)
+            ->get();
+        return response()->json($users);
+    }
+
     public function changePassword(Request $request)
     {
         try {

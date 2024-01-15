@@ -264,7 +264,7 @@
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
                         <h6>{{ Auth::user()->username }}</h6>
-                        <span>{{ __('home.Web Designer') }}</span>
+                        <span> {{ Auth::user()->points }} points</span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -716,9 +716,9 @@
         <!-- End Profile Page Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ route('about') }}">
+            <a class="nav-link collapsed" href="{{ route('web.users.list.points') }}">
                 <i class="bi bi-play"></i>
-                <span>{{ __('home.About') }}</span>
+                <span>Member ratings</span>
             </a>
         </li>
         <!-- End About Page Nav -->
