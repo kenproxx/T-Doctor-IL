@@ -925,10 +925,10 @@
                                 @if($doctor == '')
                                     <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                                 @else
-                                    <div class="col-md-3 col-12">
-                                        <div class="p-3">
+                                    <div class="col-md-3 col-6">
+                                        <div class="">
                                             <div class="product-item">
-                                                <div class="img-pro h-100 justify-content-center d-flex">
+                                                <div class="img-pro justify-content-center d-flex">
                                                     <img src="{{$doctor->avt}}" alt="">
                                                     <a class="button-heart" data-favorite="0">
                                                         <i id="icon-heart" class="bi-heart bi"
@@ -942,7 +942,7 @@
                                                         <img src="{{$department}}">
                                                     </s>
                                                 </div>
-                                                <div class="content-pro p-3">
+                                                <div class="content-pro p-md-3 p-2">
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
                                                             <a class="name-product--fleaMarket"
@@ -1014,19 +1014,19 @@
                                 <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                             @else
                                 @foreach($medicines as $medicine)
-                                    <div class="col-md-3 col-12">
-                                        <div class="p-3">
+                                    <div class="col-md-3 col-6">
+                                        <div class="">
                                             <div class="product-item">
                                                 <div
-                                                    class="img-pro h-100 justify-content-center d-flex img_product--homeNew">
+                                                    class="img-pro justify-content-center d-flex img_product--homeNew">
                                                     <img src="{{$medicine->thumbnail}}" alt="">
                                                     <a class="button-heart" data-favorite="0">
                                                         <i id="icon-heart" class="bi-heart bi"
                                                            data-product-id="${product.id}"
-                                                           onclick="addProductToWishList(${product.id})"></i>
+                                                           onclick="addProductToWishList({{$medicine->id}})"></i>
                                                     </a>
                                                 </div>
-                                                <div class="content-pro p-3">
+                                                <div class="content-pro p-md-3 p-2">
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
                                                             <a class="name-product--fleaMarket"
@@ -1088,9 +1088,9 @@
                         </div>
                     </div>
                     <div class="tab-pane fade " id="mentoring" role="tabpanel" aria-labelledby="mentoring-tab">
-                        <div class="section1-content mt-5">
+                        <div class="section1-content">
                             @foreach($questions as $question)
-                                <div class="px-5 py-2">
+                                <div class="mb-1">
                                     <a href="{{ route('examination.mentoring.show', $question->id) }}" target="_blank">
                                         <div class="content__item d-flex gap-3">
                                             @php
@@ -1123,7 +1123,7 @@
         <img src="{{asset('img/icons_logo/Rectangle 23814.png')}}" alt="">
     </div>
     <div class="container pb-5 mt-4">
-        <div id="recruitment-homeNew" class="p-3">
+        <div id="recruitment-homeNew" class="">
             <div class="title-recruitment--homeNew">
                 <span>{{ __('home.Recruitment') }}</span>
                 <p>{{ __('home.Hire staffs cheaper, find your staffs faster') }}</p>
@@ -1345,7 +1345,7 @@
                                                                onclick="addProductToWishList(${product.id})"></i>
                                                         </a>
                                                     </div>
-                                                    <div class="content-pro p-3">
+                                                    <div class="content-pro p-md-3 p-2">
                                                         <div class="">
                                                             <div class="name-product" style="min-height: 48px">
                                                                 <a class="name-product--fleaMarket"
@@ -1474,8 +1474,8 @@
                                 <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                             @else
                                 @foreach($products as $product)
-                                    <div class="col-md-3 col-12">
-                                        <div class="p-3">
+                                    <div class="col-md-3 col-6">
+                                        <div class="">
                                             <div class="product-item">
                                                 <div
                                                     class="img-pro h-100 justify-content-center d-flex img_product--homeNew">
@@ -1486,7 +1486,7 @@
                                                            onclick="addProductToWishList(${product.id})"></i>
                                                     </a>
                                                 </div>
-                                                <div class="content-pro p-3">
+                                                <div class="content-pro p-md-3 p-2">
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
                                                             <a class="name-product--fleaMarket"
@@ -1540,8 +1540,8 @@
                                 <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                             @else
                                 @foreach($products as $product)
-                                    <div class="col-md-3 col-12">
-                                        <div class="p-3">
+                                    <div class="col-md-3 col-6">
+                                        <div class="">
                                             <div class="product-item">
                                                 <div
                                                     class="img-pro h-100 justify-content-center d-flex img_product--homeNew">
@@ -1552,7 +1552,7 @@
                                                            onclick="addProductToWishList(${product.id})"></i>
                                                     </a>
                                                 </div>
-                                                <div class="content-pro p-3">
+                                                <div class="content-pro p-md-3 p-2">
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
                                                             <a class="name-product--fleaMarket"
@@ -1622,8 +1622,8 @@
                                 <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                             @else
                                 @foreach($products as $product)
-                                    <div class="col-md-3 col-12">
-                                        <div class="p-3">
+                                    <div class="col-md-3 col-6">
+                                        <div class="">
                                             <div class="product-item">
                                                 <div
                                                     class="img-pro h-100 justify-content-center d-flex img_product--homeNew">
@@ -1634,7 +1634,7 @@
                                                            onclick="addProductToWishList(${product.id})"></i>
                                                     </a>
                                                 </div>
-                                                <div class="content-pro p-3">
+                                                <div class="content-pro p-md-3 p-2">
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
                                                             <a class="name-product--fleaMarket"
@@ -1704,8 +1704,8 @@
                                 <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                             @else
                                 @foreach($products as $product)
-                                    <div class="col-md-3 col-12">
-                                        <div class="p-3">
+                                    <div class="col-md-3 col-6">
+                                        <div class="">
                                             <div class="product-item">
                                                 <div
                                                     class="img-pro h-100 justify-content-center d-flex img_product--homeNew">
@@ -1716,7 +1716,7 @@
                                                            onclick="addProductToWishList(${product.id})"></i>
                                                     </a>
                                                 </div>
-                                                <div class="content-pro p-3">
+                                                <div class="content-pro p-md-3 p-2">
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
                                                             <a class="name-product--fleaMarket"
@@ -1922,7 +1922,7 @@
 
                     <img class="b-radius" src="${arrayGallery[0]}" alt="img">
                 </div>
-                <div class="p-3">
+                <div class="p-md-3 p-2">
                     <div class="form-group">
                         <div class="d-flex justify-content-between mt-md-2">
                             <div class="fs-18px">${location.name}</div>

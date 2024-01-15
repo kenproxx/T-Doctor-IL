@@ -149,9 +149,7 @@ body::-webkit-scrollbar {
 }
 
 .content__item__image {
-    min-width: 173px;
-    max-width: 173px;
-    height: 137px;
+
     object-fit: cover;
     border-radius: 8px;
 }

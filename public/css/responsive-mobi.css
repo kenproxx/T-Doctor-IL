@@ -133,14 +133,14 @@ img {
     object-fit: cover;
   }
   .product-item .content-pro .name-product {
-    font-size: 14px;
+    font-size: 12px;
   }
   .product-item .content-pro .location-pro {
-    font-size: 10px !important;
+    font-size: 12px !important;
     margin: 3px 0;
   }
   .product-item .content-pro .price-pro {
-    font-size: 18px !important;
+    font-size: 12px !important;
   }
   .product-item .content-pro .edit-button .apply-bt {
     margin-top: 12px;
@@ -298,9 +298,135 @@ img {
   .banner {
     height: 110px;
   }
+  /* END FLEA MARKET */
+  /* NEW HOME */
+  .container #find-doctor--homeNew #myTabContent .product-item {
+    border-radius: 16px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border: none;
+  }
+  .container #find-doctor--homeNew #myTabContent .product-item .img-pro {
+    height: 162px;
+  }
+  .container #find-doctor--homeNew #myTabContent .product-item .img-pro .button-heart #icon-heart {
+    font-size: 16px;
+  }
+  .container #find-doctor--homeNew #myTabContent .product-item .img-pro .icon-chuyen-khoa {
+    left: 9px;
+  }
+  .container #find-doctor--homeNew #myTabContent .product-item .img-pro .icon-chuyen-khoa img {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+  }
+  .container #find-doctor--homeNew #myTabContent .product-item .img-pro img {
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px 16px 0px 66px;
+  }
+  .container #find-doctor--homeNew #myTabContent .product-item .name-product a.name-product--fleaMarket {
+    min-height: 25px;
+    font-size: 12px;
+  }
+  .container #find-doctor--homeNew #myTabContent .product-item .location-pro p {
+    -webkit-line-clamp: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 30px;
+  }
+  .container #findMedicine .product-item .content-pro .name-product .name-product--fleaMarket {
+    font-size: 12px;
+  }
+  .container #findMedicine .product-item .content-pro .location-pro p {
+    font-size: 12px;
+  }
+  .container #findMedicine .product-item .content-pro .prices-pro {
+    font-size: 18px;
+  }
+  .container #findMedicine .product-item .img_product--homeNew img {
+    border-radius: 16px 16px 70px 0px !important;
+  }
+  .container #findMedicine .product-item .SeeDetail {
+    border-radius: 60px 0px 16px 0px;
+    padding: 10px 22px;
+  }
+  .container #mentoring .section1-content .content__item .content__item__image {
+    width: 100px;
+    height: 60px;
+  }
+  #cCarousel {
+    position: relative;
+    max-width: 925px;
+  }
+  #cCarousel .arrow {
+    position: absolute;
+    top: 50%;
+    display: flex;
+    width: 45px;
+    height: 45px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    z-index: 1;
+    font-size: 26px;
+    color: white;
+    background: rgba(0, 0, 0, 0.4470588235);
+    cursor: pointer;
+  }
+  #cCarousel #prevFlea {
+    right: 55%;
+    top: 600px;
+  }
+  #cCarousel #nextFlea {
+    right: 38%;
+    top: 600px;
+  }
+  #carousel-vp {
+    min-height: 500px;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+  #cCarousel #cCarousel-inner {
+    display: flex;
+    position: absolute;
+    transition: 0.3s ease-in-out;
+  }
+  .cCarousel-item {
+    width: 300px;
+    height: auto;
+    border: 2px solid white;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .cCarousel-item .infos {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background: white;
+    color: black;
+  }
+  .cCarousel-item .infos button {
+    background: #222;
+    padding: 10px 30px;
+    border-radius: 15px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  /* END NEW HOME */
 }
-/* END FLEA MARKET */
 @media (min-width: 780px) {
+  .mt-200 {
+    margin-top: 200px;
+  }
   .pc-hidden {
     display: none !important;
   }
@@ -394,6 +520,116 @@ img {
     margin-top: 45px !important;
   }
   /* END FLEA MARKET */
+  /* NEW HOME */
+  .container #find-doctor--homeNew #myTabContent .product-item .img-pro {
+    height: 100%;
+  }
+  .container #find-doctor--homeNew #myTabContent .product-item .img-pro img {
+    object-fit: cover;
+  }
+  .container #find-doctor--homeNew #myTabContent .product-item .img-pro .icon-chuyen-khoa img {
+    width: 30px;
+    height: 30px;
+  }
+  .container #find-doctor--homeNew #myTabContent .product-item .name-product a.name-product--fleaMarket {
+    min-height: 50px;
+  }
+  .container #find-doctor--homeNew #myTabContent .product-item .location-pro p {
+    min-height: 55px;
+  }
+  .container #findMedicine .product-item {
+    border-radius: 25px;
+  }
+  .container #findMedicine .product-item .content-pro .name-product .name-product--fleaMarket {
+    font-size: 18px;
+  }
+  .container #findMedicine .product-item .content-pro .location-pro p {
+    font-size: 16px;
+  }
+  .container #findMedicine .product-item .content-pro .prices-pro {
+    font-size: 24px;
+  }
+  .container #findMedicine .product-item .img_product--homeNew img {
+    border-radius: 24px 24px 100px 0px !important;
+  }
+  .container #findMedicine .product-item .SeeDetail {
+    border-radius: 86px 0px 36px 0px;
+    padding: 16px 40px;
+  }
+  .container #mentoring .section1-content .content__item .content__item__image {
+    min-width: 173px;
+    max-width: 173px;
+    height: 137px;
+  }
+  #cCarousel {
+    position: relative;
+    max-width: 925px;
+  }
+  #cCarousel .arrow {
+    position: absolute;
+    top: 50%;
+    display: flex;
+    width: 45px;
+    height: 45px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    z-index: 1;
+    font-size: 26px;
+    color: white;
+    background: rgba(0, 0, 0, 0.4470588235);
+    cursor: pointer;
+  }
+  #cCarousel #prevFlea {
+    right: -250px;
+    top: 450px;
+  }
+  #cCarousel #nextFlea {
+    right: -333px;
+    top: 450px;
+  }
+  #carousel-vp {
+    min-width: 770px;
+    min-height: 600px;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+  #cCarousel #cCarousel-inner {
+    display: flex;
+    position: absolute;
+    transition: 0.3s ease-in-out;
+    gap: 10px;
+    left: 0px;
+  }
+  .cCarousel-item {
+    width: 300px;
+    height: auto;
+    border: 2px solid white;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .cCarousel-item .infos {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background: white;
+    color: black;
+  }
+  .cCarousel-item .infos button {
+    background: #222;
+    padding: 10px 30px;
+    border-radius: 15px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  /* END NEW HOME */
 }
 
 /*# sourceMappingURL=responsive-mobi.css.map */

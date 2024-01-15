@@ -6,7 +6,7 @@
 @section('content')
     <link rel="stylesheet" href="{{asset('css/homeSpecialist.css')}}">
     @include('layouts.partials.header')
-    <div class="container">
+    <div class="container mt-200">
         <div class="danh-sach-theo-chuyen-khoa">
             <a href="{{route('home.specialist')}}">
                 <div class="title-Danh-sach"><i class="fa-solid fa-arrow-left"></i> {{ __('home.Danh sách') }}</div>

@@ -378,7 +378,7 @@
                         font-style: normal;
                         font-weight: 600;
                         line-height: normal;
-                        min-height: 85px;
+
                     }
 
                     .price-pro {
@@ -701,11 +701,10 @@
 
             #myTabContent {
                 .product-item {
-                    border-radius: 25px;
 
                     .location-pro {
                         color: var(--White, #FFF);
-                        font-size: 16px;
+                        //font-size: 16px;
                         font-style: normal;
                         font-weight: 800;
                         line-height: normal;
@@ -713,7 +712,7 @@
 
                     .prices-pro {
                         color: var(--White, #FFF);
-                        font-size: 24px;
+                        //font-size: 24px;
                         font-style: normal;
                         font-weight: 800;
                         line-height: normal;
@@ -721,11 +720,9 @@
 
                     .SeeDetail {
                         display: flex;
-                        padding: 16px 40px;
                         justify-content: center;
                         align-items: center;
                         gap: 10px;
-                        border-radius: 86px 0px 36px 0px;
                         width: 70%;
                         background: var(--White, #FFF);
                         border: 0;
@@ -733,7 +730,7 @@
 
                     .img_product--homeNew {
                         img {
-                            border-radius: 24px 24px 100px 0px;
+                            //border-radius: 24px 24px 100px 0px;
                             background: lightgray 50% / cover no-repeat;
                         }
 
@@ -743,11 +740,11 @@
                         .name-product {
                             a {
                                 color: var(--White, #FFF);
-                                font-size: 18px;
+                                //font-size: 18px;
                                 font-style: normal;
                                 font-weight: 800;
                                 line-height: normal;
-                                min-height: 50px;
+                                //min-height: 50px;
                             }
                         }
                     }
@@ -866,102 +863,7 @@
         display: flex;
         align-items: center;
     }
-    #cCarousel {
-        position: relative;
-        max-width: 925px;
-    }
 
-    #cCarousel .arrow {
-        position: absolute;
-        top: 50%;
-        display: flex;
-        width: 45px;
-        height: 45px;
-        justify-content: center;
-        align-items: center;
-        border-radius: 50%;
-        z-index: 1;
-        font-size: 26px;
-        color: white;
-        background: #00000072;
-        cursor: pointer;
-    }
-
-    #cCarousel #prevFlea {
-        right: -250px;
-        top: 450px;
-    }
-
-    #cCarousel #nextFlea {
-        right: -333px;
-        top: 450px;
-    }
-
-    #carousel-vp {
-        min-width: 770px;
-        min-height: 600px;
-        display: flex;
-        //align-items: center;
-        position: relative;
-        overflow: hidden;
-    }
-
-    @media (max-width: 770px) {
-        #carousel-vp {
-            width: 510px;
-        }
-    }
-
-    @media (max-width: 510px) {
-        #carousel-vp {
-            width: 250px;
-        }
-    }
-
-    #cCarousel #cCarousel-inner {
-        display: flex;
-        position: absolute;
-        transition: 0.3s ease-in-out;
-        gap: 10px;
-        left: 0px;
-    }
-
-    .cCarousel-item {
-        width: 300px;
-        height: auto;
-        border: 2px solid white;
-        border-radius: 15px;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-    }
-
-    //.cCarousel-item img {
-    //    width: 100%;
-    //    object-fit: cover;
-    //    min-height: 246px;
-    //    color: white;
-    //}
-
-    .cCarousel-item .infos {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-around;
-        background: white;
-        color: black;
-    }
-
-    .cCarousel-item .infos button {
-        background: #222;
-        padding: 10px 30px;
-        border-radius: 15px;
-        color: white;
-        font-size: 1rem;
-        font-weight: bold;
-        cursor: pointer;
-    }
 
 
 }
