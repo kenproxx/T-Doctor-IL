@@ -3,11 +3,13 @@ img {
 }
 
 @media (max-width: 480px) {
-
+    .mt-70 {
+        margin-top: 70px;
+    }
     .container {
         max-width: 480px;
         width: 100%;
-        margin-top: 50px;
+        //margin-top: 70px;
     }
     /* HEADER */
     .d-mb-flex {
@@ -385,6 +387,16 @@ img {
 
     /* NEW HOME */
 .container {
+    .titleServiceHomeNew {
+        font-size: 18px;
+    }
+    .mainServiceHomeNew {
+        .border-HomeNew {
+            span{
+                font-size: 18px;
+            }
+        }
+    }
     #find-doctor--homeNew{
         #myTabContent{
             .product-item {
@@ -701,6 +713,16 @@ img {
 
     /* NEW HOME */
     .container {
+        .titleServiceHomeNew {
+            font-size: 32px;
+        }
+        .mainServiceHomeNew {
+            .border-HomeNew {
+                span{
+                    font-size: 24px;
+                }
+            }
+        }
         #find-doctor--homeNew{
             #myTabContent{
                 .product-item {

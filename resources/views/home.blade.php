@@ -7,7 +7,7 @@
     {{--    <link href="{{ asset('css/home.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/style-home.css') }}" rel="stylesheet">
     @include('layouts.partials.header')
-    <div class="container pb-5" style="margin-top: 168px;">
+    <div class="container pb-md-5 mt-200 mt-70">
         <div class="slide-container">
             <div class="slide">
                 <img src="{{asset('img/homeNew-img/Rectangle 23820.png')}}" alt="">
@@ -28,7 +28,7 @@
             <span class="dot"></span>
         </div>
     </div>
-    <div class="container">
+    <div class="container mt-24">
         <div class="titleServiceHomeNew">{{ __('home.Dịch vụ toàn diện') }}</div>
         <div class="mainServiceHomeNew row">
             <div class="col-md-6">
@@ -1131,10 +1131,10 @@
             <div class="d-md-flex main-recruitment--homeNew justify-content-between">
                 <div class="col-md-6 col-12 pl-0 main-card--homeNew">
                     <div class="d-flex content-recruitment--homeNew">
-                        <div class="col-md-3 p-0">
+                        <div class="col-md-3 col-4 p-0">
                             <img src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
                         </div>
-                        <div class="col-md-9 text-title--card">
+                        <div class="col-md-9 col-8 text-title--card">
                             <span>
                                 {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                             </span>

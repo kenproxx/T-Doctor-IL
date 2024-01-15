@@ -596,7 +596,6 @@
   }
   .container .titleServiceHomeNew {
     color: #000;
-    font-size: 32px;
     font-style: normal;
     font-weight: 800;
     line-height: normal;
@@ -650,7 +649,6 @@
   }
   .container .mainServiceHomeNew span {
     color: #000;
-    font-size: 24px;
     font-style: normal;
     font-weight: 800;
     max-height: 60px;
