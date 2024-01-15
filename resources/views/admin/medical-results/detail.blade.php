@@ -30,7 +30,7 @@
                                     <label for="service_name">{{ __('home.Service Name') }}</label>
                                     <input type="text" class="form-control service_result" id="service_name"
                                            value="{{ $item['service_result'] }}"
-                                           placeholder="Apartment, studio, or floor">
+                                           placeholder="{{ __('home.Apartment, studio, or floor') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="result">{{ __('home.Result') }}</label>
@@ -278,7 +278,7 @@
                                     <div class="form-group">
                                         <label for="service_name">{{ __('home.Service Name') }}</label>
                                         <input type="text" class="form-control service_result" id="service_name" value=""
-                                               placeholder="Apartment, studio, or floor">
+                                               placeholder="{{ __('home.Apartment, studio, or floor') }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="result">{{ __('home.Result') }}</label>

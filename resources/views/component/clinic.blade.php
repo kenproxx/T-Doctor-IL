@@ -127,7 +127,7 @@
                                  <span class="color-timeWorking">
                                     <span class="fs-14 font-weight-600">${formattedOpenDate} - ${formattedCloseDate}</span>
                                     </span>
-                                    <span>/ Dental Clinic</span>
+                                    <span>/ {{ __('home.Dental Clinic<') }}/span>
                             </div>
                             </div>
                             </div>

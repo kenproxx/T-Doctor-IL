@@ -476,8 +476,8 @@ return [
     'List Category product' => 'List Category product',
     'Tên category' => 'List of names',
     'Bạn có chắc chắn muốn xóa không' => 'Are you sure you want to delete',
-    'name_en' => 'name english',
-    'name_laos' => 'name laos',
+    'name_en' => 'Name English',
+    'name_laos' => 'Name Laos',
     'địa chỉ chi tiết việt' => 'Vietnamese detailed address',
     'địa chỉ chi tiết anh' => 'Detailed address in English',
     'địa chỉ chi tiết lào' => 'Detailed address in Laos',
@@ -886,6 +886,17 @@ return [
     'Place' => 'Place',
     'Datetime' => 'Date time',
     'Detail Medical Result' => 'Detail Medical Result',
-    'List Medical Result' => 'List Medical Result'
+    'List Medical Result' => 'List Medical Result',
+    'add-new-symptom' => 'add new symptom',
+    'Detail Topic Video' => 'Detail Topic Video',
+    'Chọn Ngày' => 'Select date',
+    'Chọn thời gian' => 'Choose time',
+    'Cho mình' => 'For myself',
+    'Cho người thân' => 'For relatives',
+    'Bạn chưa có người thân' => "You don't have any relatives yet",
+    'Select service' => 'Select service',
+    'Xác nhận đặt khám' => 'Confirm medical appointment',
+    'Nhập vào câu trả lời' => 'Enter your answer',
+    'Please upload your prescription file' => 'Please upload your prescription file'
 
 ];

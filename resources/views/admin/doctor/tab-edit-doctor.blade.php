@@ -26,7 +26,7 @@
                     <label class="form-control-label" for="username">{{ __('home.Username') }}<span
                             class="small text-danger">*</span></label>
                     <input type="text" id="username" class="form-control" name="username"
-                           placeholder="Username"
+                           placeholder="{{ __('home.Username') }}"
                            value="{{ $doctor->username }}">
                 </div>
             </div>

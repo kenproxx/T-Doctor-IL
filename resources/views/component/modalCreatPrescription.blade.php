@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="add-img col-md-9">
                         <div class="title">
-                            <p>Please upload your prescription file</p>
+                            <p>{{ __('home.Please upload your prescription file') }}</p>
                         </div>
                         <label id="prescriptionLabel" for="prescription">
                             <div class="upload-item-input d-flex justify-content-between">

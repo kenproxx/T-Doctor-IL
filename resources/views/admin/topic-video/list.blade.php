@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('title')
-    List Topic Videos
+    {{ __('home.List Topic Videos') }}
 @endsection
 @section('main-content')
     <div class="">

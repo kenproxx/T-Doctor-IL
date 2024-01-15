@@ -37,7 +37,7 @@
                                 <label class="label-input" for="phone_number">{{ __('home.PhoneNumber') }}
                                     <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="phone" id="phone_number"
-                                       placeholder="0989889889"
+                                       placeholder="09898***"
                                        value="{{ \Illuminate\Support\Facades\Auth::user()->phone }}" required>
                             </div>
                             <div class="form-group">

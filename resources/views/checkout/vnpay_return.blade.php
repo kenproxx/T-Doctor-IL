@@ -101,12 +101,12 @@
                     <?php
                     if ($secureHash == $vnp_SecureHash) {
                         if ($_GET['vnp_ResponseCode'] == '00') {
-                            echo "<span style='color:blue'>__('home.Giao dịch thành công')</span>";
+                            echo "<span style='color:blue'>Giao dịch thành công</span>";
                         } else {
-                            echo "<span style='color:red'>__('home.Giao dịch không thành công')</span>";
+                            echo "<span style='color:red'>Giao dịch không thành công</span>";
                         }
                     } else {
-                        echo "<span style='color:red'>__('home.Chữ ký không hợp lệ')</span>";
+                        echo "<span style='color:red'>Chữ ký không hợp lệ</span>";
                     }
                     ?>
 

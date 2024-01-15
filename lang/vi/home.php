@@ -885,7 +885,17 @@ return [
     'Place' => 'Địa điểm',
     'Datetime' => 'Ngày giờ',
     'Detail Medical Result' => 'Chi tiết kết quả y tế',
-    'List Medical Result' => 'Liệt kê kết quả y tế'
+    'List Medical Result' => 'Liệt kê kết quả y tế',
+    'Detail Topic Video' => 'Video chủ đề chi tiết',
+    'Chọn Ngày' => 'Chọn ngày',
+    'Chọn thời gian' => 'Chọn thời gian',
+    'Cho mình' => 'Cho mình',
+    'Cho người thân' => 'Cho người thân',
+    'Bạn chưa có người thân' => 'Bạn chưa có người thân',
+    'Select service' => 'Chọn dịch vụ',
+    'Xác nhận đặt khám' => 'Xác nhận đặt khám',
+    'Nhập vào câu trả lời' => 'Nhập vào câu trả lời',
+    'Please upload your prescription file' => 'Vui lòng tải lên tập tin đơn thuốc của bạn'
 
 
 ];
