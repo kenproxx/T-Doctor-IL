@@ -360,7 +360,7 @@
                     if (typeQuestion === '{{ \App\Enums\SurveyType::TEXT }}') {
                         html += `<div class="form-group">`
                         html += `<label for="exampleInputEmail1">${item.question}</label>`;
-                        html += `<input type="text" class="form-control" data-id-question="${idQuestion}" data-type="text-answer" name="survey[${idQuestion}]" placeholder="Nhập vào câu trả lời">`;
+                        html += `<input type="text" class="form-control" data-id-question="${idQuestion}" data-type="text-answer" name="survey[${idQuestion}]" placeholder="{{ __('home.Nhập vào câu trả lời') }}">`;
                         html += `</div>`;
                     } else {
                         if (typeQuestion === '{{ \App\Enums\SurveyType::MULTIPLE }}') {

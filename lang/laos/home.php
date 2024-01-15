@@ -873,6 +873,17 @@ return [
     'Place' => 'ສະຖານທີ່',
     'Datetime' => 'ວັນທີ',
     'Detail Medical Result' => 'ລາຍລະອຽດຜົນການແພດ',
-    'List Medical Result' => 'ລາຍຊື່ຜົນໄດ້ຮັບທາງການແພດ'
+    'List Medical Result' => 'ລາຍຊື່ຜົນໄດ້ຮັບທາງການແພດ',
+    'add-new-symptom' => 'ເພີ່ມອາການໃຫມ່',
+    'Detail Topic Video' => 'ວິດີໂອຫົວຂໍ້ລາຍລະອຽດ',
+    'Chọn Ngày' => 'ເລືອກວັນທີ',
+    'Chọn thời gian' => 'ເລືອກເວລາ',
+    'Cho mình' => 'ສໍາລັບຕົນເອງ',
+    'Cho người thân' => 'ສໍາລັບຍາດພີ່ນ້ອງ',
+    'Bạn chưa có người thân' => 'ເຈົ້າຍັງບໍ່ມີຍາດພີ່ນ້ອງເທື່ອ',
+    'Select service' => 'ເລືອກການບໍລິການ',
+    'Xác nhận đặt khám' => 'ຢືນຢັນການນັດພົບທາງການແພດ',
+    'Nhập vào câu trả lời' => 'ໃສ່ຄຳຕອບຂອງເຈົ້າ',
+    'Please upload your prescription file' => 'ກະລຸນາອັບໂຫຼດໄຟລ໌ຕາມໃບສັ່ງແພດຂອງທ່ານ'
 
 ];

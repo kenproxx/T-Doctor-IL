@@ -210,11 +210,11 @@
                 <section>
                     <div class="d-md-flex">
                         <div class="small-12 col-md-3 pl-0">
-                            <div>Chọn Ngày</div>
+                            <div>{{ __('home.Chọn Ngày') }}</div>
                             <div id="datepicker"></div>
                         </div>
                         <div class="small-12 col-md-9">
-                            <div>Chọn thời gian</div>
+                            <div>{{ __('home.Chọn thời gian') }}</div>
                             <div class="spin-me"></div>
                             <div class="master-container-slots" id="select-time-booking">
                                 <div class="morning-container fs-16px">
@@ -236,9 +236,9 @@
                 @if(Auth::check())
                     <div class="d-flex align-items-center select-memberFamily">
                         <input class="m-0 inputBookingFor" style="width: 20px;height: 20px;" type="radio" name="memberFamily" checked
-                               id="yourself"  value="yourself"><label for="yourself">Cho mình</label>
+                               id="yourself"  value="yourself"><label for="yourself">{{ __('home.Cho mình') }}</label>
                         <input class="m-0 inputBookingFor" style="width: 20px;height: 20px;" type="radio" name="memberFamily"
-                               id="family" value="family"><label for="family">Cho người thân</label>
+                               id="family" value="family"><label for="family">{{ __('home.Cho người thân') }}</label>
                     </div>
                 @endif
             </div>
@@ -251,8 +251,8 @@
                                 alt="">
                         </div>
                         <div class="d-flex align-items-center justify-content-center">
-                            <label for="yourself">Bạn chưa có người thân</label>
-                            <input hidden="" type="radio" name="memberFamily" id="yourself"  value="yourself"><label for="yourself">Cho mình</label>
+                            <label for="yourself">{{ __('home.Bạn chưa có người thân') }}</label>
+                            <input hidden="" type="radio" name="memberFamily" id="yourself"  value="yourself"><label for="yourself">{{ __('home.Cho mình') }}</label>
                         </div>
                     </div>
                 @else
@@ -275,7 +275,7 @@
                 @endif
             </div>
             <div>
-                <div class="select-service">Select service</div>
+                <div class="select-service">{{ __('home.Select service') }}</div>
                 <div>
                     @foreach($services as $service)
                         <div class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
@@ -294,7 +294,7 @@
             <div class="d-flex justify-content-center">
                 <button type="submit"
                         class=" btn col-md-6 mt-4 btn-primary btn-block up-date-button button-apply-bookingNew "
-                        id="activate">Xác nhận đặt khám
+                        id="activate">{{ __('home.Xác nhận đặt khám') }}
                 </button>
             </div>
 

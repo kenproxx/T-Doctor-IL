@@ -12,7 +12,7 @@
                     <input type="text" class="form-control" id="username" maxlength="200" required>
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="phone">{{ __('home.Phone Number') }}</label>
+                    <label for="phone">{{ __('home.PhoneNumber') }}</label>
                     <input type="text" class="form-control" maxlength="200" id="phone" required>
                 </div>
             </div>

@@ -58,7 +58,7 @@
                     <div class="form-group col-md-4">
                         <label for="type_user_login">{{ __('home.Type Account') }}</label>
                         <select id="type_user_login" name="type" class="form-select">
-                            <option value="NORMAL">Choose...</option>
+                            <option value="NORMAL">{{ __('home.Choose...') }}</option>
                             <option value="BUSINESS">{{ __('home.BUSINESS') }}</option>
                             <option value="MEDICAL">{{ __('home.MEDICAL') }}</option>
                             <option value="NORMAL">{{ __('home.NORMAL') }}</option>

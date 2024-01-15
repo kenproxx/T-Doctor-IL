@@ -29,7 +29,7 @@
                     <input type="text" class="form-control" id="name_laos" name="name_laos">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="service_price">Giá dịc vụ</label>
+                    <label for="service_price">{{ __('home.Giá dịch vụ') }}</label>
                     <input type="number" class="form-control" id="service_price" name="service_price">
                 </div>
             </div>

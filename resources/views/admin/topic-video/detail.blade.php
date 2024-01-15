@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('title')
-    Detail Topic Video
+    {{ __('home.Detail Topic Video') }}
 @endsection
 @section('main-content')
     <div class="container">
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800">Detail Topic Video</h1>
+        <h1 class="h3 mb-4 text-gray-800">{{ __('home.Detail Topic Video') }}</h1>
         @if (session('success'))
             <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -17,38 +17,38 @@
         <form>
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="name">Name</label>
+                    <label for="name">{{ __('home.Name') }}</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{ $topicVideo->name }}"
                            required>
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="name_en">Name EN</label>
+                    <label for="name_en">{{ __('home.name_en') }}</label>
                     <input type="text" class="form-control" id="name_en" value="{{ $topicVideo->name_en }}"
                            name="name_en">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="name_laos">Name Laos</label>
+                    <label for="name_laos">{{ __('home.name_laos') }}</label>
                     <input type="text" class="form-control" id="name_laos" value="{{ $topicVideo->name_laos }}"
                            name="name_laos">
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="thumbnail">Thumbnail</label>
+                    <label for="thumbnail">{{ __('home.Thumbnail') }}</label>
                     <input type="file" class="form-control" id="thumbnail" name="thumbnail" multiple accept="image/*">
                     <img width="100px" src="{{$topicVideo->thumbnail}}" alt="thumbnail">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="status">Status</label>
+                    <label for="status">{{ __('home.Status') }}</label>
                     <select id="status" class="form-control">
-                        <option {{ $topicVideo->status == 'ACTIVE' ? 'selected' : '' }} value="ACTIVE">ACTIVE</option>
-                        <option {{ $topicVideo->status == 'INACTIVE' ? 'selected' : '' }} value="INACTIVE">INACTIVE
+                        <option {{ $topicVideo->status == 'ACTIVE' ? 'selected' : '' }} value="ACTIVE">{{ __('home.Active') }}</option>
+                        <option {{ $topicVideo->status == 'INACTIVE' ? 'selected' : '' }} value="INACTIVE">{{ __('home.Inactive') }}
                         </option>
                     </select>
                 </div>
             </div>
             <button type="button" class="btn btn-primary float-right" id="btnUpdateTopic">
-                Save
+                {{ __('home.Save') }}
             </button>
         </form>
     </div>

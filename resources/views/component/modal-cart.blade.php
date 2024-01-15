@@ -58,9 +58,9 @@
                 <button type="button" class="btn cancel" data-dismiss="modal">{{ __('home.CANCEL') }}</button>
                 @if(Auth::check())
                     @if($carts->isNotEmpty())
-                        <a href="{{ route('user.checkout.index') }}" class="btn pay">Pay</a>
+                        <a href="{{ route('user.checkout.index') }}" class="btn pay">{{ __('home.Pay') }}</a>
                     @else
-                        <button disabled class="btn pay">Pay</button>
+                        <button disabled class="btn pay">{{ __('home.Pay') }}</button>
                     @endif
                 @endif
             </div>
