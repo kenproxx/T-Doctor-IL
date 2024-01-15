@@ -6,13 +6,13 @@
     <div class="container mt-200">
         <div class="tab-chuyen-khoa">
             <a href="{{route('home')}}">
-                <div class="titleServiceHomeNew"><i class="fa-solid fa-arrow-left"></i> Chuyên khoa</div>
+                <div class="titleServiceHomeNew"><i class="fa-solid fa-arrow-left"></i> {{ __('home.Tên chuyên khoa') }}</div>
             </a>
             <div class="mainServiceHomeNew row">
                 @if($departments->isEmpty())
                     <div class="col-md-12">
                         <div class="alert alert-danger" role="alert">
-                            {{ __('home.No data') }}
+                            {{ __('home.no data') }}
                         </div>
                     </div>
                 @else

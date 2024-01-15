@@ -164,7 +164,7 @@
 
                     return parseFloat(formattedAmount).toLocaleString('de-DE');
                 }
-                nameResult = nameResult + '-' + data.name + '<br> '+ `<div class="p-2"><h4>{{ __('home.Ingredient') }}</h4> <div class="pl-3">${data.description}</div> </div>` ;
+                nameResult = nameResult + '-' + data.name + '<br> '+ `<div class="p-2"><h4>{{ __('home.ingredient') }}</h4> <div class="pl-3">${data.description}</div> </div>` ;
             }
             await $('#resultBookingDetail').empty().append(html);
             await $('#nameResult').empty().append(nameResult);

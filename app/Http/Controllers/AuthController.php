@@ -83,7 +83,7 @@ class AuthController extends Controller
             }
 
             if ($type == \App\Enums\Role::BUSINESS) {
-                // kiểm tra xem fileupload có tồn tại không, nếu không th ì thông báo lỗi
+                /* kiểm tra xem fileupload có tồn tại không, nếu không thì thông báo lỗi */
                 if (!$request->hasFile('fileupload')) {
                     toast('Cần up file giấy phép kinh doanh', 'error', 'top-left');
                     return back();
@@ -96,7 +96,7 @@ class AuthController extends Controller
             }
 
             if ($type == \App\Enums\Role::MEDICAL) {
-                // kiểm tra xem fileupload có tồn tại không, nếu không th ì thông báo lỗi
+                /* kiểm tra xem fileupload có tồn tại không, nếu không thì thông báo lỗi */
                 if (!$request->hasFile('fileupload')) {
                     toast('Cần up file giấy phép hành nghề', 'error', 'top-left');
                     return back();
@@ -266,6 +266,10 @@ class AuthController extends Controller
                 $expiration_time = time() + 86400;
                 setCookie('accessToken', $token, $expiration_time, '/');
                 toast('Welcome ' . $user->email, 'success', 'top-left');
+
+                if ($user->points == 1000) {
+                    (new MainController())->setCouponForUser($user->id);
+                }
 
                 $role_user = DB::table('role_users')->where('user_id', $user->id)->first();
                 $roleNames = Role::where('id', $role_user->role_id)->pluck('name');

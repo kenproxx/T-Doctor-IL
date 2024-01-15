@@ -7,6 +7,7 @@ use App\Enums\ReviewStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Clinic;
 use App\Models\Review;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ReviewApi extends Controller
@@ -79,6 +80,11 @@ class ReviewApi extends Controller
             $clinic->save();
 
             if ($success) {
+                $user = User::find($userID);
+                if ($user) {
+                    $user->points = $user->points + 1;
+                    $user->save();
+                }
                 return response()->json($review);
             }
             return response('Create review error!', 400);

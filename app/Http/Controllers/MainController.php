@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\CouponApplyStatus;
 use App\Enums\CouponStatus;
 use App\Enums\TypeUser;
 use App\Models\Coupon;
+use App\Models\CouponApply;
 use App\Models\Role;
 use App\Models\RoleUser;
+use App\Models\SocialUser;
 use App\Models\User;
 use DB;
 use Illuminate\Http\Request;
@@ -200,6 +203,17 @@ class MainController extends Controller
         return $randomString;
     }
 
+    public function generateRandomNumber($length)
+    {
+        $characters = '0123456789';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[random_int(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
+
     public function removeCouponExpiredAndAddCouponActive()
     {
         $nowTime = Carbon::now()->addHours(7);
@@ -209,5 +223,49 @@ class MainController extends Controller
         Coupon::where('endDate', '>', $nowTime)
             ->where('startDate', '<=', $nowTime)
             ->update(['status' => CouponStatus::ACTIVE]);
+    }
+
+    public function setCouponForUser($userID)
+    {
+        $user = User::find($userID);
+        $coupon = Coupon::where('status', CouponStatus::ACTIVE)
+            ->where('user_id', '!=', $userID)
+            ->inRandomOrder()
+            ->first();
+
+        if ($user && $coupon) {
+            $name = $user->username;
+            $email = $user->email;
+            $phone = $user->phone;
+            $content = '';
+            $user_id = $userID;
+            $coupon_id = $coupon->id;
+
+            $social = SocialUser::where('user_id', $userID)->first();
+            if ($social) {
+                $sns_option = $social->facebook ?? $social->youtube ?? $social->tiktok ?? $social->instagram;
+
+                $couponApply = new CouponApply();
+
+                $couponApply->name = $name;
+                $couponApply->email = $email;
+                $couponApply->phone = $phone;
+                $couponApply->content = $content;
+                $couponApply->user_id = $user_id;
+                $couponApply->coupon_id = $coupon_id;
+                $couponApply->sns_option = $sns_option;
+                $couponApply->link_ = $social->facebook ?? $social->youtube ?? $social->tiktok ?? $social->instagram;
+                $couponApply->status = CouponApplyStatus::VALID;
+                $couponApply->is_apply = false;
+
+                $old_coupon = CouponApply::where('user_id', $user_id)
+                    ->where('status', CouponApplyStatus::VALID)
+                    ->where('is_apply', false)
+                    ->first();
+                if (!$old_coupon) {
+                    $couponApply->save();
+                }
+            }
+        }
     }
 }
