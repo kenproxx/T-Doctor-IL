@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\backend\BackendAnswerController;
 use App\Http\Controllers\backend\BackendCouponController;
+use App\Http\Controllers\restapi\AccountApi;
 use App\Http\Controllers\restapi\BookingResultApi;
 use App\Http\Controllers\restapi\BusinessApi;
 use App\Http\Controllers\restapi\CategoryApi;
@@ -200,4 +201,10 @@ Route::group(['prefix' => 'medical-results'], function () {
 Route::group(['prefix' => 'surveys'], function () {
     Route::get('/list-department/{id}', [SurveyApi::class, 'getAllByDepartment'])->name('restapi.surveys.department');
     Route::get('/detail/{id}', [SurveyApi::class, 'detail'])->name('restapi.surveys.detail');
+});
+
+/* Handle auth account*/
+Route::group(['prefix' => 'api/account'], function () {
+    Route::post('/send-verify-code-reset-token', [AccountApi::class, 'sendCode'])->name('restapi.account.send.verify.code.reset.token');
+    Route::post('/reset-token/{id}', [AccountApi::class, 'resetTokenLogin'])->name('restapi.account.handle.reset.token');
 });
