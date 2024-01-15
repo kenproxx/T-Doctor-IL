@@ -17,12 +17,13 @@ use App\Http\Controllers\restapi\UserApi;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'users'], function () {
-    Route::post('/update-profile', [UserApi::class, 'updateProfile'])->name('user.update.profile');
-    Route::post('/change-info', [UserApi::class, 'changeInformation'])->name('user.change.information');
-    Route::post('/change-email', [UserApi::class, 'changeEmail'])->name('user.change.email');
-    Route::post('/change-phone', [UserApi::class, 'changePhoneNumber'])->name('user.change.phone');
-    Route::post('/change-password', [UserApi::class, 'changePassword'])->name('user.change.password');
-    Route::post('/change-avatar', [UserApi::class, 'changeAvt'])->name('user.change.avatar');
+    Route::get('/list-points', [UserApi::class, 'getUserByPoint'])->name('api.backend.user.list.points');
+    Route::post('/update-profile', [UserApi::class, 'updateProfile'])->name('api.backend.user.update.profile');
+    Route::post('/change-info', [UserApi::class, 'changeInformation'])->name('api.backend.user.change.information');
+    Route::post('/change-email', [UserApi::class, 'changeEmail'])->name('api.backend.user.change.email');
+    Route::post('/change-phone', [UserApi::class, 'changePhoneNumber'])->name('api.backend.user.change.phone');
+    Route::post('/change-password', [UserApi::class, 'changePassword'])->name('api.backend.user.change.password');
+    Route::post('/change-avatar', [UserApi::class, 'changeAvt'])->name('api.backend.user.change.avatar');
 });
 
 Route::group(['prefix' => 'users-social'], function () {

@@ -112,6 +112,12 @@ class DoctorReviewApi extends Controller
             $this->calcReview($review);
 
             if ($success) {
+                $userID = $review->created_by;
+                $user = User::find($userID);
+                if ($user) {
+                    $user->points = $user->points + 1;
+                    $user->save();
+                }
                 return response()->json($review);
             }
             return response('Create error!', 400);
@@ -168,7 +174,7 @@ class DoctorReviewApi extends Controller
 
     public function calcReview($review)
     {
-        if ($review->doctor_id){
+        if ($review->doctor_id) {
             $reviews = DoctorReview::where('doctor_id', $review->doctor_id)
                 ->where('status', DoctorReviewStatus::APPROVED)
                 ->get();
