@@ -301,9 +301,6 @@ img {
 }
 /* END FLEA MARKET */
 @media (min-width: 780px) {
-  .container {
-    margin-top: 200px;
-  }
   .pc-hidden {
     display: none !important;
   }
