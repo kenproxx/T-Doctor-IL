@@ -1339,7 +1339,7 @@
         <img src="{{asset('img/icons_logo/Rectangle 23818.png')}}" alt="" style="">
     </div>
     <div class="">
-        <div class="background-image_HomeNew" style="background-color: black" id="find-doctor--homeNew">
+        <div class="background-image_HomeNew" id="find-doctor--homeNew">
             <div class="container pb-5 mt-4">
                 <div  class="tab-content mt-4 header-pc" id="myTabContent">
                     <div class="tab-pane fade show active" id="popularProduct" role="tabpanel"
