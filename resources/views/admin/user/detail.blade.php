@@ -252,7 +252,7 @@
             const array_empty_normal = ['medical_history', 'password', 'passwordConfirm',]
 
             const array_medical = ['specialty', 'specialty_en', 'specialty_laos',
-                'service', 'service_en', 'service_laos',
+                'service', 'service_en', 'service_laos', "workspace",
                 'service_price', 'service_price_en', 'service_price_laos',
                 'time_working_1', 'time_working_2', 'apply_for',
                 'department_id', 'year_of_experience',]
@@ -484,6 +484,10 @@
                                 <input type="number" class="form-control" max="80" id="year_of_experience"
                                        name="year_of_experience" value="{{ $user->year_of_experience }}">
                             </div>
+                            <div class="form-element col-md-4">
+                <label for="workspace">{{ __('home.Workplace') }}</label>
+                <input class="form-control" id="workspace" type="text" name="workspace" value="{{$user->workplace}}">
+            </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
