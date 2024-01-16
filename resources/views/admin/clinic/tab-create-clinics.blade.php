@@ -198,6 +198,20 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-md-4">
+                    <label for="username">{{ __('home.Username') }}</label>
+                    <input type="text" class="form-control" id="username" name="username" required value="">
+                </div>
+                <div class="col-md-4">
+                    <label for="password">{{ __('home.Password') }}</label>
+                    <input type="password" class="form-control" id="password" name="password" value="">
+                </div>
+                <div class="col-md-4">
+                    <label for="passwordConfirm">{{ __('home.Confirm Password') }}</label>
+                    <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" value="">
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-sm-4">
                     <label for="address_detail">{{ __('home.địa chỉ chi tiết việt') }}</label>
                     <input type="text" class="form-control" name="address_detail" id="address_detail" value="">
@@ -574,16 +588,28 @@
                 const formData = new FormData();
 
                 const arrFieldEmpty = [
-                    "hospital_facilities", "hospital_equipment", "hospital_information", "emergency", "insurance", "parking",
+                    "hospital_facilities", "hospital_equipment", "hospital_information",
+                ];
+
+                const arrFieldEmptyChecked = [
+                    "emergency", "insurance", "parking",
                 ];
 
                 const arrField = [
                     "name", "name_en", "name_laos", "phone", "combined_address", "costs",
+                    "username", "password", "passwordConfirm",
                     "longitude", "latitude", "address_detail", "address_detail_en", "email",
                     "address_detail_laos", "province_id", "district_id", "commune_id",
                     "open_date", "close_date", "user_id", "time_work", "type", "status",
                     "clinics_service", "departments", "symptoms", "representative_doctor",
                 ];
+
+                arrFieldEmptyChecked.forEach(data => {
+                    let checked = document.getElementById(data).checked;
+                    if (checked) {
+                        formData.append(data, $(`#${data}`).val());
+                    }
+                });
 
                 arrFieldEmpty.forEach(data => {
                     formData.append(data, $(`#${data}`).val());

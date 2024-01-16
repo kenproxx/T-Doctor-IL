@@ -8,7 +8,7 @@
 @section('main-content')
     <link href="{{ asset('css/tabeditdoctor.css') }}" rel="stylesheet">
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">{{ __('home.Edit Product') }}</h1>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('home.Edit') }}</h1>
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -88,6 +88,10 @@
                 <input class="form-control" id="passwordConfirm" name="passwordConfirm" minlength="8"
                        type="password" placeholder="********" required>
             </div>
+            <div class="form-element col-md-4">
+                <label for="workspace">{{ __('home.Workplace') }}</label>
+                <input class="form-control" id="workspace" type="text" name="workspace" value="{{$doctor->workplace}}">
+            </div>
         </div>
         <div class="row">
             <div class="form-element col-md-6">
@@ -113,15 +117,20 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><label for="specialty">{{ __('home.chuyên môn việt') }}</label>
+            <div class="col-sm-4">
+                <label for="specialty">{{ __('home.chuyên môn việt') }}</label>
                 <input type="text" class="form-control" id="specialty" name="specialty" value="{{$doctor->specialty}}">
             </div>
-            <div class="col-sm-4"><label for="specialty_en">{{ __('home.chuyên môn anh') }}</label>
+            <div class="col-sm-4">
+                <label for="specialty_en">{{ __('home.chuyên môn anh') }}</label>
                 <input type="text" class="form-control" id="specialty_en" name="specialty_en"
-                       value="{{$doctor->specialty_en}}"></div>
-            <div class="col-sm-4"><label for="specialty_laos">{{ __('home.chuyên môn lào') }}</label>
+                       value="{{$doctor->specialty_en}}">
+            </div>
+            <div class="col-sm-4">
+                <label for="specialty_laos">{{ __('home.chuyên môn lào') }}</label>
                 <input type="text" class="form-control" id="specialty_laos" name="specialty_laos"
-                       value="{{$doctor->specialty_laos}}"></div>
+                       value="{{$doctor->specialty_laos}}">
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
@@ -409,7 +418,7 @@
                 };
                 const formData = new FormData();
                 const fieldNames = [
-                    "specialty", "specialty_en", "specialty_laos",
+                    "specialty", "specialty_en", "specialty_laos", "workspace",
                     "service_price", "service_price_en", "service_price_laos",
                     "detail_address", "detail_address_en", "detail_address_laos",
                     "province_id", "district_id", "commune_id",

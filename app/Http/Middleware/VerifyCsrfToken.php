@@ -44,6 +44,7 @@ class VerifyCsrfToken extends Middleware
         '/api/surveys-2/**',
         '/api/address-order/**',
         '/api/account/**',
+        '/api/bookings/**',
         // clients
         '/reviews/**',
         '/reviews/**',
@@ -67,5 +68,7 @@ class VerifyCsrfToken extends Middleware
         '/products-medicines/list-prescriptions',
         '/products-medicines/by-result/**',
         '/products-medicines/blade-list-prescriptions',
+        '/check-valid-otp',
+        '/change-password',
     ];
 }
