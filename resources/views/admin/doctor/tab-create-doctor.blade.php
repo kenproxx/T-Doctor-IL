@@ -117,13 +117,16 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4"><label for="specialty">{{ __('home.chuyên môn việt') }}</label>
+            <div class="col-sm-4">
+                <label for="specialty">{{ __('home.chuyên môn việt') }}</label>
                 <input type="text" class="form-control" id="specialty" name="specialty" value="">
             </div>
-            <div class="col-sm-4"><label for="specialty_en">{{ __('home.chuyên môn anh') }}</label>
+            <div class="col-sm-4">
+                <label for="specialty_en">{{ __('home.chuyên môn anh') }}</label>
                 <input type="text" class="form-control" id="specialty_en" name="specialty_en"
                        value=""></div>
-            <div class="col-sm-4"><label for="specialty_laos">{{ __('home.chuyên môn lào') }}</label>
+            <div class="col-sm-4">
+                <label for="specialty_laos">{{ __('home.chuyên môn lào') }}</label>
                 <input type="text" class="form-control" id="specialty_laos" name="specialty_laos"
                        value=""></div>
         </div>

@@ -99,6 +99,7 @@ class AdminUserApi extends Controller
         if ($experience > 80) {
             $experience = 80;
         }
+        $workspace = $request->input('workspace');
         $name_hospital = $request->input('name_hospital');
 
         $specialized_services = $request->input('specialty');
@@ -182,7 +183,7 @@ class AdminUserApi extends Controller
         }
 
         if ($type == Role::BUSINESS) {
-            // kiểm tra xem fileupload có tồn tại không, nếu không thì thông báo lỗi
+            // kiểm tra xem file_upload có tồn tại không, nếu không thì thông báo lỗi
             if (!$isUpdate) {
                 if (!$request->hasFile('file_upload')) {
                     return $this->returnArray(400, 'Cần up file giấy phép kinh doanh');
@@ -197,7 +198,7 @@ class AdminUserApi extends Controller
         }
 
         if ($type == Role::MEDICAL) {
-            // kiểm tra xem fileupload có tồn tại không, nếu không thì thông báo lỗi
+            // kiểm tra xem file_upload có tồn tại không, nếu không thì thông báo lỗi
             if (!$isUpdate) {
                 if (!$request->hasFile('file_upload')) {
                     return $this->returnArray(400, 'Cần up file giấy phép nghề nghiệp');
@@ -226,6 +227,8 @@ class AdminUserApi extends Controller
             $user->time_working_1 = $time_working_1;
             $user->time_working_2 = $time_working_2;
             $user->apply_for = $apply_for;
+
+            $user->workplace = $workspace ?? '';
 
             $user->department_id = $department_id;
 

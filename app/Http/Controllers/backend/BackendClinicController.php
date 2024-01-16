@@ -6,6 +6,7 @@ use App\Enums\ClinicStatus;
 use App\Enums\TypeBusiness;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MainController;
 use App\Models\Clinic;
 use App\Models\Role;
 use App\Models\RoleUser;
@@ -14,6 +15,7 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class BackendClinicController extends Controller
 {
@@ -126,7 +128,7 @@ class BackendClinicController extends Controller
             if ($address_detail_laos == null) {
                 return response("Address Laos not null!", 400);
             }
-            $user_id = $request->input('user_id');
+
             $nation_id = $request->input('nation_id');
             $province_id = $request->input('province_id');
             if ($province_id == null) {
@@ -175,9 +177,7 @@ class BackendClinicController extends Controller
                 return response("Close date not null!", 400);
             }
 
-
             $type = $request->input('type');
-
 
             $emergency = $request->has('emergency') ? $request->input('emergency') : 0;
             $insurance = $request->has('insurance') ? $request->input('insurance') : 0;
@@ -206,9 +206,9 @@ class BackendClinicController extends Controller
             $department = $request->input('departments');
             $symptoms = $request->input('symptoms');
 
-
             $status = $request->input('status');
 
+            $user_id = $request->input('user_id');
             $clinic->name = $name;
             $clinic->phone = $phone;
             $clinic->email = $email;
@@ -219,12 +219,11 @@ class BackendClinicController extends Controller
             $clinic->address_detail = $address_detail;
             $clinic->address_detail_en = $address_detail_en ?? '';
             $clinic->address_detail_laos = $address_detail_laos ?? '';
-            $clinic->user_id = $user_id;
+
             $clinic->time_work = $time_work;
             $clinic->type = $type;
             $clinic->service_id = $clinics_service;
             $clinic->representative_doctor = $representativeDoctor;
-//            $clinic->type = TypeBussiness::CLINICS;
 
             $clinic->department = $department;
             $clinic->symptom = $symptoms;
@@ -235,6 +234,8 @@ class BackendClinicController extends Controller
                 'district_id' => $district_id,
                 'commune_id' => $commune_id
             ];
+
+            $clinic->created_by = $user_id ?? null;
 
             $clinic->address = implode(',', $address);
 
@@ -251,15 +252,74 @@ class BackendClinicController extends Controller
             $clinic->equipment = $equipment;
             $clinic->costs = $costs;
 
+            /* Save user */
+            $user = new User();
 
-            if (!$user_id) {
-                return response("UserID not null!", 400);
-            } else {
-                $user = User::find($user_id);
-                if (!$user || $user->status == UserStatus::DELETED || $user->status == UserStatus::BLOCKED) {
-                    return response("User not found!", 400);
-                }
+            $username = $request->input('username');
+            $password = $request->input('password');
+            $passwordConfirm = $request->input('passwordConfirm');
+
+            $isEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
+            if (!$isEmail) {
+                toast('Email invalid!', 'error', 'top-left');
+                return back();
             }
+
+            $oldUser = User::where('email', $email)->first();
+            if ($oldUser) {
+                toast('Email already exited!', 'error', 'top-left');
+                return back();
+            }
+
+            $oldUser = User::where('username', $username)->first();
+            if ($oldUser) {
+                toast('Username already exited!', 'error', 'top-left');
+                return back();
+            }
+
+            $oldUser = User::where('phone', $phone)->first();
+            if ($oldUser) {
+                toast('Phone already exited!', 'error', 'top-left');
+                return back();
+            }
+
+            if ($password != $passwordConfirm) {
+                toast('Password or Password Confirm incorrect!', 'error', 'top-left');
+                return back();
+            }
+
+            if (strlen($password) < 5) {
+                toast('Password invalid!', 'error', 'top-left');
+                return back();
+            }
+
+            $user->email = $email;
+            $user->phone = $phone;
+
+            $user->province_id = explode('-', $province_id)[0];
+            $user->district_id = explode('-', $district_id)[0];
+            $user->commune_id = explode('-', $commune_id)[0];
+            $user->detail_address = $address_detail;
+            $user->year_of_experience = 0;
+            $user->bac_si_dai_dien = $representativeDoctor;
+            $user->name = $name;
+            $user->last_name = $name;
+            $user->password = Hash::make($password);
+            $user->username = $username;
+            $user->address_code = '';
+            $user->type = \App\Enums\Role::BUSINESS;
+            $user->member = $type;
+            $user->abouts = 'default';
+            $user->abouts_en = 'default';
+            $user->abouts_lao = 'default';
+            $user->status = UserStatus::ACTIVE;
+            $user->save();
+
+            $member = \App\Enums\Role::BUSINESS;
+            (new MainController())->createRoleUser($member, $username);
+
+            $clinic->user_id = $user->id;
+
             $success = $clinic->save();
             if ($success) {
                 return response()->json($clinic);
