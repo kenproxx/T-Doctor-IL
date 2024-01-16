@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\restapi;
 
 use App\Enums\BookingStatus;
+use App\Enums\Role;
 use App\Enums\SurveyType;
 use App\Http\Controllers\ClinicController;
 use App\Http\Controllers\Controller;
@@ -13,6 +14,7 @@ use App\Models\SurveyAnswerUser;
 use App\Models\SurveyQuestion;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BookingApi extends Controller
 {
@@ -68,33 +70,26 @@ class BookingApi extends Controller
         if (!$user) {
             return response()->json(['error' => 'User not found'], 400);
         }
-        $roleNames = $user->roles->pluck('name')->toArray();
 
-        $desiredRoles = ['CLINICS', 'HOSPITALS'];
+        $business_role = \App\Models\Role::where('name', Role::BUSINESS)->first();
+        $role_user = DB::table('role_users')->where('role_id', $business_role->id)->where('user_id', $id)->first();
+        $arrayBookings = null;
+        if ($role_user) {
+            $clinic = Clinic::where('user_id', $id)->first();
+            $bookings = Booking::where('clinic_id', $clinic->id)
+                ->where('status', $status)
+                ->get();
 
-        $intersection = array_intersect($roleNames, $desiredRoles);
-
-        if (!empty($intersection)) {
-            $myData = Clinic::where('user_id', $id)->get();
-
-            if ($myData->isNotEmpty()) {
-                $clinicIds = $myData->pluck('id')->toArray();
-
-                $otherClinics = Booking::whereIn('clinic_id', $clinicIds)->get();
-
-                foreach ($otherClinics as $clinic) {
-                    $arrayBooking = null;
-                    $arrayBooking = $clinic->toArray();
-                    $arrayBooking['time_convert_checkin'] = date('Y-m-d H:i:s', strtotime($clinic->check_in));
-                    $arrayBookings[] = $arrayBooking;
-                }
+            foreach ($bookings as $booking) {
+                $arrayBooking = null;
+                $arrayBooking = $booking->toArray();
+                $arrayBooking['time_convert_checkin'] = date('Y-m-d H:i:s', strtotime($booking->check_in));
+                $arrayBookings[] = $arrayBooking;
             }
-
         } else {
             $bookings = Booking::where('user_id', $id)
                 ->where('status', $status)
                 ->get();
-            $arrayBookings = null;
 
             foreach ($bookings as $booking) {
                 $arrayBooking = null;
@@ -108,10 +103,10 @@ class BookingApi extends Controller
                 foreach ($survey_answer_user as $survey_answer) {
                     $surveyResult = $survey_answer->result;
 
-// Tách chuỗi thành mảng sử dụng dấu '-'
+                    /* Tách chuỗi thành mảng sử dụng dấu '-' */
                     $parts = explode('-', $surveyResult);
 
-// Lấy idQuestion
+                    /* Lấy idQuestion */
                     $idQuestion = $parts[0];
 
                     $question = SurveyQuestion::find($idQuestion);
@@ -122,7 +117,7 @@ class BookingApi extends Controller
                         $pos = strpos($surveyResult, '-');
                         $answer = '';
                         if ($pos !== false) {
-                            // Nếu tìm thấy dấu "-", cắt bỏ phần đầu của chuỗi
+                            /* Nếu tìm thấy dấu "-", cắt bỏ phần đầu của chuỗi */
                             $result = substr($surveyResult, $pos + 1);
 
                             $answer = $result;
@@ -132,10 +127,10 @@ class BookingApi extends Controller
                         array_push($arrQuestion, $question);
                     } else {
 
-// Lấy phần còn lại của mảng, bắt đầu từ phần tử thứ hai
+                        /* Lấy phần còn lại của mảng, bắt đầu từ phần tử thứ hai */
                         $idAnswersArray = array_slice($parts, 1);
 
-// Chuyển mảng thành chuỗi nếu cần
+                        /* Chuyển mảng thành chuỗi nếu cần */
                         $idAnswers = implode(',', $idAnswersArray);
                         $idAnswers = explode(',', $idAnswers);
 
@@ -150,7 +145,6 @@ class BookingApi extends Controller
                 $arrayBookings[] = $arrayBooking;
             }
         }
-
 
         return response()->json($arrayBookings);
     }
