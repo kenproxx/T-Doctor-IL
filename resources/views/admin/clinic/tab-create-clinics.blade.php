@@ -588,7 +588,7 @@
                 const formData = new FormData();
 
                 const arrFieldEmpty = [
-                    "hospital_facilities", "hospital_equipment", "hospital_information", "emergency", "insurance", "parking",
+                    "hospital_facilities", "hospital_equipment", "hospital_information",
                 ];
 
                 const arrFieldEmptyChecked = [
