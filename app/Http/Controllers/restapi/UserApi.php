@@ -42,19 +42,24 @@ class UserApi extends Controller
                 $check = Hash::check($currentPassword, $oldPassword);
                 if ($check) {
                     if ($newPassword != $newPasswordConfirm) {
-                        return response('New password or new password confirm incorrect', 400);
+                        return response((new MainApi())->returnMessage('New password or new password confirm incorrect!'), 400);
                     }
+
+                    if (strlen($newPassword) < 5) {
+                        return response((new MainApi())->returnMessage('Password invalid!'), 400);
+                    }
+
                     $user->password = Hash::make($newPassword);
                     $success = $user->save();
                     if ($success) {
-                        return response('Change password success!', 200);
+                        return response((new MainApi())->returnMessage('Change password success!'), 200);
                     }
-                    return response('Change password error', 400);
+                    return response((new MainApi())->returnMessage('Change password error'), 400);
                 } else {
-                    return response('Password incorrect', 400);
+                    return response((new MainApi())->returnMessage('Password incorrect'), 400);
                 }
             }
-            return response('User not found', 404);
+            return response((new MainApi())->returnMessage('User not found'), 404);
         } catch (\Exception $exception) {
             return response($exception, 500);
         }
