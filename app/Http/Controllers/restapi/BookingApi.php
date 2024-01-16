@@ -71,8 +71,21 @@ class BookingApi extends Controller
             return response()->json(['error' => 'User not found'], 400);
         }
 
-        $business_role = \App\Models\Role::where('name', Role::BUSINESS)->first();
-        $role_user = DB::table('role_users')->where('role_id', $business_role->id)->where('user_id', $id)->first();
+        $business_role1 = \App\Models\Role::where('name', Role::HOSPITALS)->first();
+        $business_role2 = \App\Models\Role::where('name', Role::PHARMACEUTICAL_COMPANIES)->first();
+        $business_role3 = \App\Models\Role::where('name', Role::CLINICS)->first();
+        $business_role4 = \App\Models\Role::where('name', Role::PHARMACIES)->first();
+        $business_role5 = \App\Models\Role::where('name', Role::SPAS)->first();
+        $business_role6 = \App\Models\Role::where('name', Role::OTHERS)->first();
+
+        $array_id = [$business_role1->id,
+            $business_role2->id,
+            $business_role3->id,
+            $business_role4->id,
+            $business_role5->id,
+            $business_role6->id,
+        ];
+        $role_user = DB::table('role_users')->whereIn('role_id',$array_id)->where('user_id', $id)->first();
         $arrayBookings = null;
         if ($role_user) {
             $clinic = Clinic::where('user_id', $id)->first();
