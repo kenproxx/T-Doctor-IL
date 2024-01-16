@@ -672,8 +672,11 @@
                 const formData = new FormData();
 
                 const arrFieldEmpty = [
-                    "hospital_facilities", "hospital_equipment", "hospital_information",
-                    "emergency", "insurance", "parking", "combined_address",
+                    "hospital_facilities", "hospital_equipment", "hospital_information", "combined_address",
+                ];
+
+                const arrFieldEmptyChecked = [
+                    "emergency", "insurance", "parking",
                 ];
 
                 const arrField = [
@@ -683,6 +686,13 @@
                     "open_date", "close_date", "user_id", "time_work", "type", "status",
                     "clinics_service", "departments", "symptoms", "representative_doctor",
                 ];
+
+                arrFieldEmptyChecked.forEach(data => {
+                    let checked = document.getElementById(data).checked;
+                    if (checked) {
+                        formData.append(data, $(`#${data}`).val());
+                    }
+                });
 
                 arrFieldEmpty.forEach(data => {
                     formData.append(data, $(`#${data}`).val());
