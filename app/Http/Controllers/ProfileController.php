@@ -290,16 +290,52 @@ class ProfileController extends Controller
         return $sms->sendSMS($user->id, $value, $content);
     }
 
-    public function checkOTP(Request $request)
+    public function checkValidOTP(Request $request)
+    {
+        $otp = $request->input('otp');
+        $type = $request->input('type');
+        $value = $request->input('value');
+
+        $user = null;
+
+        if ($type == CommonType::PHONE) {
+            $user = User::where('phone', $value)->first();
+        } else {
+            if ($type == CommonType::EMAIL) {
+                $user = User::where('email', $value)->first();
+            }
+        }
+
+        if (!$user) {
+            return response()->json('Không tìm thấy user', 400);
+        }
+
+        //check otp với cache
+
+        $key = 'otp_' . $user->id;
+        $otpCache = Cache::get($key);
+
+        if (!$otpCache) {
+            return response()->json('OTP hết hạn, thao tác lại', 400);
+        }
+
+        if ($otpCache != $otp) {
+            return response()->json('OTP sai', 422);
+        }
+        Cache::forget($key);
+
+        return response()->json('OTP hợp lệ', 200);
+    }
+
+    public function changePassword(Request $request)
     {
         $type = $request->input('type');
         $value = $request->input('value');
-        $otp = $request->input('otp');
         $password = $request->input('password');
         $rePassword = $request->input('rePassword');
 
         if ($password != $rePassword) {
-            return response()->json('Mật khẩu không trùng khớp', 422);
+            return response()->json('Mật khẩu không trùng khớp', 400);
         }
 
         $user = null;
@@ -313,7 +349,40 @@ class ProfileController extends Controller
         }
 
         if (!$user) {
-            return response()->json('Không tìm thấy user', 422);
+            return response()->json('Không tìm thấy user', 400);
+        }
+
+        $user->password = Hash::make($password);
+        $user->save();
+
+        return response()->json('Đổi mật khẩu thành công', 200);
+    }
+
+
+    public function checkOTP(Request $request)
+    {
+        $type = $request->input('type');
+        $value = $request->input('value');
+        $otp = $request->input('otp');
+        $password = $request->input('password');
+        $rePassword = $request->input('rePassword');
+
+        if ($password != $rePassword) {
+            return response()->json('Mật khẩu không trùng khớp', 400);
+        }
+
+        $user = null;
+
+        if ($type == CommonType::PHONE) {
+            $user = User::where('phone', $value)->first();
+        } else {
+            if ($type == CommonType::EMAIL) {
+                $user = User::where('email', $value)->first();
+            }
+        }
+
+        if (!$user) {
+            return response()->json('Không tìm thấy user', 400);
         }
 
         //check otp với cache
