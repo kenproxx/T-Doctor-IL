@@ -4,6 +4,21 @@
 @extends('layouts.master')
 @section('title', 'Home')
 @section('content')
+    <style>
+        /*d none when size = sm*/
+        @media (max-width: 480px) {
+            .d-sm-block {
+                display: block !important;
+            }
+        }
+        /*d block when size = md*/
+        @media (min-width: 481px) {
+            .d-md-block {
+                display: block !important;
+            }
+        }
+    </style>
+
     {{--    <link href="{{ asset('css/home.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/style-home.css') }}" rel="stylesheet">
     @include('layouts.partials.header')
@@ -697,7 +712,7 @@
                         <h2>{{ __('home.Clinics/Pharmacies') }}</h2>
                         <p>{{ __('home.Find your suitable clinics/pharmacies and book now') }}!</p>
                     </div>
-                    <div class="d-flex clip-path-container" style="height: 700px;">
+                    <div class="d-flex clip-path-container">
                         <div id="allAddressesMap" class="p-2 w-100">
 
                         </div>
@@ -798,7 +813,7 @@
                                     </defs>
                                 </svg>
                             </div>
-                            <div>
+                            <div class="title--newAddress">
                                 <h3>{{ __('home.24/7 AVAILABLE') }}</h3>
                                 <p>{{ __('home.You can find available clinics/pharmacies') }}</p>
                             </div>
@@ -822,7 +837,7 @@
                                     </defs>
                                 </svg>
                             </div>
-                            <div><h3>{{ __('home.HOME CARE SERVICE') }}</h3>
+                            <div class="title--newAddress"><h3>{{ __('home.HOME CARE SERVICE') }}</h3>
                                 <p>{{ __("home.Don't come to us! We will come to you") }}!</p>
                             </div>
                         </div>
@@ -835,7 +850,7 @@
                                         fill="#088180"/>
                                 </svg>
                             </div>
-                            <div><h3>{{ __('home.MANY LOCATION') }}</h3>
+                            <div class="title--newAddress"><h3>{{ __('home.MANY LOCATION') }}</h3>
                                 <p>{{ __('home.More than 1500 Doctors, 1000 Pharmacists, 1000 Hospitals always wait for you') }}</p>
                             </div>
                         </div>
@@ -844,13 +859,17 @@
                 </div>
             </div>
             <div class="">
-                <div class="titleServiceHomeNew">Chuyên khoa khám</div>
+                <div class="titleServiceHomeNew d-flex justify-content-between align-items-center">Chuyên khoa khám <a class="pc-hidden" href="{{route('home.specialist')}}">see more</a></div>
                 <div class="mainServiceHomeNew row">
                     @php
                         $departments = \App\Models\Department::where('status', \App\Enums\DepartmentStatus::ACTIVE)->get();
+                        $departmentsMobile = \App\Models\Department::where('status', \App\Enums\DepartmentStatus::ACTIVE)->get();
                     @endphp
-                    @foreach($departments as $departmentItem)
-                        <div class="col-md-4">
+                    @foreach($departments as $index => $departmentItem)
+                        @php
+                            $showDesktop = $index > 5;
+                        @endphp
+                        <div class="col-md-4 d-none {{ $showDesktop == true ? 'd-md-block' : 'd-sm-block' }}">
                             <a href="{{route('home.specialist.department',$departmentItem->id)}}">
                                 <div class="border-HomeNew">
                                     <div class="w-75 d-flex align-items-center ">
@@ -1144,10 +1163,10 @@
                         </div>
                     </div>
                     <div class="d-flex content-recruitment--homeNew">
-                        <div class="col-md-3 p-0">
+                        <div class="col-md-3 col-4 p-0">
                             <img src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
                         </div>
-                        <div class="col-md-9 text-title--card">
+                        <div class="col-md-9 col-8 text-title--card">
                             <span>
                                 {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                             </span>
@@ -1157,10 +1176,10 @@
                         </div>
                     </div>
                     <div class="d-flex content-recruitment--homeNew">
-                        <div class="col-md-3 p-0">
+                        <div class="col-md-3 col-4 p-0">
                             <img src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
                         </div>
-                        <div class="col-md-9 text-title--card">
+                        <div class="col-md-9 col-8 text-title--card">
                             <span>
                                 {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                             </span>
@@ -1170,10 +1189,10 @@
                         </div>
                     </div>
                     <div class="d-flex content-recruitment--homeNew">
-                        <div class="col-md-3 p-0">
+                        <div class="col-md-3 col-4 p-0">
                             <img src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
                         </div>
-                        <div class="col-md-9 text-title--card">
+                        <div class="col-md-9 col-8 text-title--card">
                             <span>
                                 {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                             </span>
@@ -1224,7 +1243,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <div>
+                            <div class="title-re">
                                 <span>{{ __('home.HIRE CHEAPER') }}</span>
                                 <p>{{ __('home.Only 500000vnđ, you can hire your staffs.') }}</p>
                             </div>
@@ -1265,7 +1284,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <div>
+                            <div class="title-re">
                                 <span>{{ __('home.EASY TO FIND STAFFS') }}</span>
                                 <p>{{ __("home.Through us, find your staffs more easier") }}!</p>
                             </div>
@@ -1303,14 +1322,14 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <div>
+                            <div class="title-re">
                                 <span>{{ __('home.BETTER MATCHING RATE') }}</span>
                                 <p>{{ __('home.Through us, you can hire right person') }}</p>
                             </div>
                         </div>
                     </div>
                     <div class="mt-auto p-2 button-bottom-right">
-                        <button class="btn-see-all ">{{ __('home.See all') }}</button>
+                        <button class="btn-see-all ">{{ __('home.Visit') }}</button>
                     </div>
                 </div>
             </div>
@@ -1320,14 +1339,16 @@
         <img src="{{asset('img/icons_logo/Rectangle 23818.png')}}" alt="" style="">
     </div>
     <div class="">
-        <div class="background-image_HomeNew" id="find-doctor--homeNew">
+        <div class="background-image_HomeNew" style="background-color: black" id="find-doctor--homeNew">
             <div class="container pb-5 mt-4">
-                <div class="tab-content mt-4" id="myTabContent">
+                <div  class="tab-content mt-4 header-pc" id="myTabContent">
                     <div class="tab-pane fade show active" id="popularProduct" role="tabpanel"
                          aria-labelledby="popularProduct-tab">
                         <div id="cCarousel">
-                            <div style="z-index: 0;" class="arrow" id="prevFlea"><i class="fa-solid fa-chevron-left"></i></div>
-                            <div style="z-index: 0;" class="arrow" id="nextFlea"><i class="fa-solid fa-chevron-right"></i></div>
+                            <div style="z-index: 0;" class="arrow" id="prevFlea"><i
+                                    class="fa-solid fa-chevron-left"></i></div>
+                            <div style="z-index: 0;" class="arrow" id="nextFlea"><i
+                                    class="fa-solid fa-chevron-right"></i></div>
                             <div id="carousel-vp">
                                 <div id="cCarousel-inner">
                                     @if($productsFlea == '')
@@ -1478,7 +1499,7 @@
                                         <div class="">
                                             <div class="product-item">
                                                 <div
-                                                    class="img-pro h-100 justify-content-center d-flex img_product--homeNew">
+                                                    class="img-pro justify-content-center d-flex img_product--homeNew">
                                                     <img src="{{$product->thumbnail}}" alt="">
                                                     <a class="button-heart" data-favorite="0">
                                                         <i id="icon-heart" class="bi-heart bi"
@@ -1544,7 +1565,7 @@
                                         <div class="">
                                             <div class="product-item">
                                                 <div
-                                                    class="img-pro h-100 justify-content-center d-flex img_product--homeNew">
+                                                    class="img-pro justify-content-center d-flex img_product--homeNew">
                                                     <img src="{{$product->thumbnail}}" alt="">
                                                     <a class="button-heart" data-favorite="0">
                                                         <i id="icon-heart" class="bi-heart bi"
@@ -1626,7 +1647,7 @@
                                         <div class="">
                                             <div class="product-item">
                                                 <div
-                                                    class="img-pro h-100 justify-content-center d-flex img_product--homeNew">
+                                                    class="img-pro justify-content-center d-flex img_product--homeNew">
                                                     <img src="{{$product->thumbnail}}" alt="">
                                                     <a class="button-heart" data-favorite="0">
                                                         <i id="icon-heart" class="bi-heart bi"
@@ -1708,7 +1729,7 @@
                                         <div class="">
                                             <div class="product-item">
                                                 <div
-                                                    class="img-pro h-100 justify-content-center d-flex img_product--homeNew">
+                                                    class="img-pro justify-content-center d-flex img_product--homeNew">
                                                     <img src="{{$product->thumbnail}}" alt="">
                                                     <a class="button-heart" data-favorite="0">
                                                         <i id="icon-heart" class="bi-heart bi"

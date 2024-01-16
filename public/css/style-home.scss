@@ -14,7 +14,7 @@
         #recruitment-homeNew {
             .main-recruitment--homeNew {
                 .main-title-card--homeNew {
-                    min-height: 450px;
+                    //min-height: 450px;
                 }
             }
         }
@@ -521,14 +521,10 @@
                 }
             }
 
-            #allAddressesMap {
-                border-radius: 24px;
-                clip-path: polygon(0% 0%, 100% 0%, 100% 84%, 0% 100%, 0% 80%);
-            }
+
         }
 
         #find-doctor--homeNew {
-            margin-top: 20px;
 
             .title-findDoctor--homeNew {
                 color: var(--Black, #000);
@@ -544,7 +540,6 @@
             .title-recruitment--homeNew {
                 span {
                     color: var(--Black, #000);
-                    font-size: 32px;
                     font-style: normal;
                     font-weight: 800;
                     line-height: normal;
@@ -552,9 +547,7 @@
 
                 p {
                     color: var(--Grey-Dark, #929292);
-                    font-size: 18px;
                     font-style: normal;
-                    font-weight: 600;
                     line-height: normal;
                     padding-bottom: 21px;
                 }
@@ -648,8 +641,7 @@
                 }
             }
 
-            border-radius: 25px;
-            background: var(--White-Light, #F3F3F3);
+
 
             .describe-item {
                 margin-bottom: 20px;
@@ -682,7 +674,6 @@
                 span {
                     color: var(--Black, #000);
                     text-align: center;
-                    font-size: 48px;
                     font-style: normal;
                     font-weight: 800;
                     line-height: normal;
@@ -691,7 +682,6 @@
                 p {
                     color: var(--Grey-Dark, #929292);
                     text-align: center;
-                    font-size: 24px;
                     font-style: normal;
                     font-weight: 600;
                     line-height: normal;

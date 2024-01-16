@@ -142,6 +142,7 @@ img {
 
         .img-pro {
             height: 146px;
+
             img {
                 height: 100%;
                 object-fit: cover;
@@ -389,104 +390,309 @@ img {
     /* END FLEA MARKET */
 
     /* NEW HOME */
-.container {
-    .titleServiceHomeNew {
-        font-size: 18px;
-    }
-    .mainServiceHomeNew {
-        .border-HomeNew {
-            span{
-                font-size: 18px;
-            }
-        }
-    }
-    #find-doctor--homeNew{
-        #myTabContent{
-            .product-item {
-                border-radius: 16px;
-                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-                border: none;
-                .img-pro {
-                    height: 162px;
-                    .button-heart {
-                        #icon-heart{
-                            font-size: 16px;
-                        }
+    .background-image_HomeNew--departments {
+        .container {
+            #map-location {
+                .title-clinics {
+                    h2 {
+                        font-size: 18px;
                     }
-                    .icon-chuyen-khoa {
-                        left: 9px;
-                        img {
-                            width: 20px;
-                            height: 20px;
-                            border-radius: 20px;
-                        }
-                    }
-                    img {
-                        height: 100%;
-                        object-fit: cover;
-                        border-radius: 16px 16px 0px 66px;
 
-                    }
-                }
-                .name-product {
-                    a.name-product--fleaMarket {
-                        min-height: 25px;
+                    p {
                         font-size: 12px;
+                        font-weight: 400;
                     }
                 }
-                .location-pro {
-                    p{
-                        -webkit-line-clamp: 1;
-                        display: -webkit-box;
-                        //line-height: 1.3;
-                        -webkit-box-orient: vertical;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        min-height: 30px;
+
+                .clip-path-container {
+                    height: 600px;
+
+                    #allAddressesMap {
+                        border-radius: 24px;
+                        clip-path: none;
+                    }
+                }
+
+                .text-map--homeNew {
+                    .mr-3 {
+                        svg {
+                            width: 40px;
+                            height: 40px;
+                        }
+                    }
+
+                    .title--newAddress {
+                        p {
+                            font-size: 12px;
+                            font-weight: 400;
+                        }
                     }
                 }
             }
         }
     }
-    #findMedicine{
-        .product-item {
-            .content-pro {
-                .name-product {
-                    .name-product--fleaMarket {
-                        font-size: 12px;
+
+    .container {
+
+        #find-doctor--homeNew {
+            .title-findProduct--homeNew {
+                span {
+                    font-size: 18px;
+                }
+                p{
+                    font-size: 12px;
+                    font-weight: 600;
+                }
+            }
+
+            #popularProduct, #recommended, #newProducts, #hotDeal {
+                .product-item {
+                    .img_product--homeNew {
+                        img {
+                            border-radius: 16px 16px 70px 0 !important;
+                        }
+                    }
+
+                    .SeeDetail {
+                        border-radius: 60px 0px 16px 0px;
+                        background: var(--White, #FFF);
+                        display: flex;
+                        padding: 10px 22px;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 10px;
+                        font-size: 16px;
+                        font-weight: 800;
                     }
                 }
-                .location-pro {
-                    p{
-                        font-size: 12px;
+            }
+        }
+
+        .titleServiceHomeNew {
+            font-size: 18px;
+
+            a {
+                color: var(--Grey-Dark, #929292);
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 800;
+                line-height: normal;
+            }
+        }
+
+        .mainServiceHomeNew {
+            .border-HomeNew {
+                .w-75 {
+                    svg {
+                        width: 40px;
+                        height: 40px;
                     }
                 }
-                .prices-pro {
+
+                span {
                     font-size: 18px;
                 }
             }
-            .img_product--homeNew {
-                img{
-                    border-radius: 16px 16px 70px 0px !important;
+        }
+
+        #find-doctor--homeNew {
+            #myTabContent {
+                .product-item {
+                    border-radius: 16px;
+                    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+                    border: none;
+
+                    .img-pro {
+                        height: 162px;
+
+                        .button-heart {
+                            #icon-heart {
+                                font-size: 16px;
+                            }
+                        }
+
+                        .icon-chuyen-khoa {
+                            left: 9px;
+
+                            img {
+                                width: 20px;
+                                height: 20px;
+                                border-radius: 20px;
+                            }
+                        }
+
+                        img {
+                            height: 100%;
+                            object-fit: cover;
+                            border-radius: 16px 16px 0px 66px;
+
+                        }
+                    }
+
+                    .name-product {
+                        a.name-product--fleaMarket {
+                            min-height: 25px;
+                            font-size: 12px;
+                        }
+                    }
+
+                    .location-pro {
+                        p {
+                            -webkit-line-clamp: 1;
+                            display: -webkit-box;
+                            //line-height: 1.3;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            min-height: 30px;
+                        }
+                    }
                 }
             }
-            .SeeDetail {
-                border-radius: 60px 0px 16px 0px;
-                padding: 10px 22px;
+        }
+
+        #findMedicine {
+            .product-item {
+                .content-pro {
+                    .name-product {
+                        .name-product--fleaMarket {
+                            font-size: 12px;
+                        }
+                    }
+
+                    .location-pro {
+                        p {
+                            font-size: 12px;
+                        }
+                    }
+
+                    .prices-pro {
+                        font-size: 18px;
+                    }
+                }
+
+                .img_product--homeNew {
+                    img {
+                        border-radius: 16px 16px 70px 0px !important;
+                    }
+                }
+
+                .SeeDetail {
+                    border-radius: 60px 0px 16px 0px;
+                    padding: 10px 22px;
+                }
+            }
+        }
+
+        #mentoring {
+            .section1-content {
+                .content__item {
+                    .content__item__image {
+                        width: 100px;
+                        height: 60px;
+                    }
+                }
+            }
+        }
+
+        #find-doctor--homeNew {
+            .title-findDoctor--homeNew {
+                span {
+                    font-size: 18px;
+                }
+            }
+        }
+
+        #recruitment-homeNew {
+            .title-recruitment--homeNew {
+                span {
+                    font-size: 18px;
+                }
+
+                p {
+                    font-size: 12px;
+                    font-weight: 400;
+                }
+            }
+
+            .main-recruitment--homeNew {
+                .main-card--homeNew {
+                    .content-recruitment--homeNew {
+                        img {
+                            //height: 50%;
+                        }
+
+                        .text-title--card {
+                            padding: 0;
+
+                            span {
+                                font-size: 14px;
+                            }
+
+                            .content__item__describe {
+                                font-size: 14px;
+                                margin: 0;
+                            }
+                        }
+
+                    }
+                }
+
+                .main-title-card--homeNew {
+                    min-height: 250px;
+                    margin-top: 21px;
+                    padding: 0;
+
+                    .describe-item {
+                        display: flex;
+
+                        svg {
+                            width: 40px;
+                            height: 40px;
+                        }
+
+                        .title-re {
+                            span {
+                                font-size: 16px;
+                            }
+
+                            p {
+                                font-size: 14px;
+                                font-weight: 400;
+                                padding: 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+        .background-image_HomeNew,#find-doctor--homeNew {
+            body { background-color: #121212;}
+            img { max-width: auto; height: auto; }
+            .container {
+                max-width: 1170px; width: 100%;
+                margin: auto;
+            }
+
+            .carousel { margin-top: 50px; margin-bottom: 50px;}
+            .carousel img { padding: 0px 2px; }
+
+
+            @media screen and (max-width: 1200px){
+                .container {
+                    max-width: 100%;
+                }
+            }
+
+            @media screen and (max-width: 1024px){
+                .carousel img {
+                    width: 100%;
+                }
             }
         }
     }
-    #mentoring{
-        .section1-content {
-            .content__item {
-                .content__item__image {
-                    width: 100px;
-                    height: 60px;
-                }
-            }
-        }
-    }
-}
     #cCarousel {
         position: relative;
         max-width: 925px;
@@ -566,7 +772,6 @@ img {
 
     /* END NEW HOME */
 }
-
 
 
 @media (max-width: 779px) {
@@ -715,19 +920,77 @@ img {
     /* END FLEA MARKET */
 
     /* NEW HOME */
+    .background-image_HomeNew--departments {
+        .container {
+            #map-location {
+                .title-clinics {
+                    h2 {
+                    }
+
+                    p {
+
+                    }
+                }
+
+                .clip-path-container {
+                    height: 700px;
+
+                    #allAddressesMap {
+                        border-radius: 24px;
+                        clip-path: polygon(0% 0%, 100% 0%, 100% 84%, 0% 100%, 0% 80%);
+                    }
+                }
+            }
+        }
+    }
     .container {
+        #find-doctor--homeNew {
+            .title-findProduct--homeNew {
+                span {
+                    font-size: 48px;
+                }
+
+                p {
+                    font-size: 24px;
+                    font-weight: 600;
+                }
+            }
+            #popularProduct, #recommended, #newProducts, #hotDeal {
+                .product-item {
+                    .img_product--homeNew {
+                        img {
+                            border-radius: 24px 24px 100px 0px !important;
+                        }
+                    }
+
+                    .SeeDetail {
+                        border-radius: 60px 0px 24px 0px;
+                        background: var(--White, #FFF);
+                        display: flex;
+                        padding: 16px 40px;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 10px;
+                        font-size: 18px;
+                        font-weight: 800;
+                    }
+                }
+            }
+        }
         .titleServiceHomeNew {
             font-size: 32px;
         }
+
         .mainServiceHomeNew {
             .border-HomeNew {
-                span{
+                span {
                     font-size: 24px;
                 }
             }
         }
-        #find-doctor--homeNew{
-            #myTabContent{
+
+        #find-doctor--homeNew {
+            #myTabContent {
                 .product-item {
                     .img-pro {
                         height: 100%;
@@ -736,6 +999,7 @@ img {
                             //height: 100%;
                             object-fit: cover;
                         }
+
                         .icon-chuyen-khoa {
                             img {
                                 width: 30px;
@@ -743,13 +1007,15 @@ img {
                             }
                         }
                     }
+
                     .name-product {
                         a.name-product--fleaMarket {
-                            min-height: 50px;
+                            min-height: 45px;
                         }
                     }
+
                     .location-pro {
-                        p{
+                        p {
                             min-height: 55px;
 
                         }
@@ -757,7 +1023,8 @@ img {
                 }
             }
         }
-        #findMedicine{
+
+        #findMedicine {
             .product-item {
                 border-radius: 25px;
 
@@ -767,27 +1034,32 @@ img {
                             font-size: 18px;
                         }
                     }
+
                     .location-pro {
-                        p{
+                        p {
                             font-size: 16px;
                         }
                     }
+
                     .prices-pro {
                         font-size: 24px;
                     }
                 }
+
                 .img_product--homeNew {
-                    img{
+                    img {
                         border-radius: 24px 24px 100px 0px !important;
                     }
                 }
+
                 .SeeDetail {
-                    border-radius: 86px 0px 36px 0px ;
+                    border-radius: 86px 0px 36px 0px;
                     padding: 16px 40px;
                 }
             }
         }
-        #mentoring{
+
+        #mentoring {
             .section1-content {
                 .content__item {
                     .content__item__image {
@@ -795,6 +1067,28 @@ img {
                         max-width: 173px;
                         height: 137px;
                     }
+                }
+            }
+        }
+
+        #find-doctor--homeNew {
+            margin-top: 20px;
+
+            .title-findDoctor--homeNew {
+
+            }
+        }
+
+        #recruitment-homeNew {
+
+            .title-recruitment--homeNew {
+                span {
+                    font-size: 32px;
+                }
+
+                p {
+                    font-size: 18px;
+                    font-weight: 600;
                 }
             }
         }

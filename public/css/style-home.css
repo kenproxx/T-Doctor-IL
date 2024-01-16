@@ -7,9 +7,6 @@
   .container .item-information .nav-header--homeNew ul.nav-fill, .container #find-doctor--homeNew .nav-header--homeNew ul.nav-fill, .container .align-center .nav-header--homeNew ul.nav-fill {
     width: 100%;
   }
-  .container #recruitment-homeNew .main-recruitment--homeNew .main-title-card--homeNew {
-    min-height: 450px;
-  }
 }
 @media (min-width: 780px) {
   .container {
@@ -404,13 +401,6 @@
     font-weight: 600;
     line-height: normal;
   }
-  .container #map-location #allAddressesMap {
-    border-radius: 24px;
-    clip-path: polygon(0% 0%, 100% 0%, 100% 84%, 0% 100%, 0% 80%);
-  }
-  .container #find-doctor--homeNew {
-    margin-top: 20px;
-  }
   .container #find-doctor--homeNew .title-findDoctor--homeNew {
     color: var(--Black, #000);
     text-align: center;
@@ -419,22 +409,15 @@
     font-weight: 800;
     line-height: normal;
   }
-  .container #recruitment-homeNew {
-    border-radius: 25px;
-    background: var(--White-Light, #F3F3F3);
-  }
   .container #recruitment-homeNew .title-recruitment--homeNew span {
     color: var(--Black, #000);
-    font-size: 32px;
     font-style: normal;
     font-weight: 800;
     line-height: normal;
   }
   .container #recruitment-homeNew .title-recruitment--homeNew p {
     color: var(--Grey-Dark, #929292);
-    font-size: 18px;
     font-style: normal;
-    font-weight: 600;
     line-height: normal;
     padding-bottom: 21px;
   }
@@ -534,7 +517,6 @@
   .container .item-information .title-findProduct--homeNew span, .container #find-doctor--homeNew .title-findProduct--homeNew span {
     color: var(--Black, #000);
     text-align: center;
-    font-size: 48px;
     font-style: normal;
     font-weight: 800;
     line-height: normal;
@@ -542,7 +524,6 @@
   .container .item-information .title-findProduct--homeNew p, .container #find-doctor--homeNew .title-findProduct--homeNew p {
     color: var(--Grey-Dark, #929292);
     text-align: center;
-    font-size: 24px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
