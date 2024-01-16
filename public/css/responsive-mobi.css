@@ -461,38 +461,73 @@ img {
     font-weight: 400;
     padding: 0;
   }
-  .container .background-image_HomeNew body, .container #find-doctor--homeNew body {
-    background-color: #121212;
+  .container .product-itemFlea {
+    border-radius: 16px;
+    border: 1px solid var(--Grey-Medium, #BFBFBF);
+    background: var(--secon1, #088180);
+    box-shadow: 0px 8px 14px 0px rgba(0, 0, 0, 0.25);
+    width: 45% !important;
+    margin: 8px 8px 20px 8px;
   }
-  .container .background-image_HomeNew img, .container #find-doctor--homeNew img {
-    max-width: auto;
-    height: auto;
+  .container .product-itemFlea .img-proFlea.justify-content-center.d-flex {
+    position: relative;
   }
-  .container .background-image_HomeNew .container, .container #find-doctor--homeNew .container {
-    max-width: 1170px;
-    width: 100%;
-    margin: auto;
+  .container .product-itemFlea .img-proFlea.justify-content-center.d-flex img {
+    border-radius: 16px 16px 70px 0px;
+    background: lightgray 50%/cover no-repeat;
+    height: 162px;
   }
-  .container .background-image_HomeNew .carousel, .container #find-doctor--homeNew .carousel {
-    margin-top: 50px;
-    margin-bottom: 50px;
+  .container .product-itemFlea .img-proFlea.justify-content-center.d-flex a.button-heart i {
+    display: flex;
+    padding: 8px;
+    align-items: flex-start;
+    gap: 10px;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    border-radius: 51px;
+    background: var(--Light, #EAEAEA);
   }
-  .container .background-image_HomeNew .carousel img, .container #find-doctor--homeNew .carousel img {
-    padding: 0px 2px;
+  .container .product-itemFlea .content-proFlea .name-productFlea {
+    font-size: 12px;
+    font-weight: 800;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: #FFFFFF;
   }
-  /* END NEW HOME */
-}
-@media screen and (max-width: 480px) and (max-width: 1200px) {
-  .container .background-image_HomeNew .container, .container #find-doctor--homeNew .container {
-    max-width: 100%;
+  .container .product-itemFlea .content-proFlea .name-productFlea a {
+    color: #FFFFFF;
   }
-}
-@media screen and (max-width: 480px) and (max-width: 1024px) {
-  .container .background-image_HomeNew .carousel img, .container #find-doctor--homeNew .carousel img {
-    width: 100%;
+  .container .product-itemFlea .content-proFlea .location-proFlea {
+    color: var(--White, #FFF);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
   }
-}
-@media (max-width: 480px) {
+  .container .product-itemFlea .content-proFlea .prices-proFlea {
+    color: var(--White, #FFF);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+  }
+  .container .product-itemFlea .SeeDetailFlea {
+    border-radius: 60px 0px 16px 0px;
+    background: var(--White, #FFF);
+    display: flex;
+    padding: 10px 22px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: var(--Black, #000);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+  }
   #cCarousel {
     position: relative;
     max-width: 925px;
@@ -558,6 +593,7 @@ img {
     font-weight: bold;
     cursor: pointer;
   }
+  /* END NEW HOME */
 }
 @media (min-width: 780px) {
   .mt-200 {
