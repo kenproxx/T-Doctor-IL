@@ -229,14 +229,14 @@ class MainController extends Controller
 
     public function parsedToken($token)
     {
-        $parsedToken = JWTAuth::setToken($token)->parseToken();
-        if ($parsedToken->check()) {
-            try {
-                JWTAuth::invalidate($token);
-            } catch (Exception $exception){
-
-            }
-        }
+//        $parsedToken = JWTAuth::setToken($token)->parseToken();
+//        if ($parsedToken->check()) {
+//            try {
+//                JWTAuth::invalidate($token);
+//            } catch (Exception $exception){
+//
+//            }
+//        }
     }
 
     public function setCouponForUser($userID)
