@@ -293,6 +293,9 @@ class AuthController extends Controller
     {
         if (Auth::check()) {
             $user = Auth::user();
+            if ($user->token) {
+                JWTAuth::manager()->invalidate($user->token);
+            }
             $user->token = null;
             $user->save();
         }
