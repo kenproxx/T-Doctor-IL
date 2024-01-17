@@ -293,12 +293,8 @@ class AuthController extends Controller
     {
         if (Auth::check()) {
             $user = Auth::user();
-            if ($user->token && $user->token != '') { {
-                try {
-                    JWTAuth::invalidate($user->token);
-                } catch (Exception $exception){
-
-                }
+            if ($user->token && $user->token != '') {
+                (new MainController())->parsedToken($user->token);
             }
             $user->token = null;
             $user->save();
