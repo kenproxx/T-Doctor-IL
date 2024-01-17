@@ -78,6 +78,9 @@ class LoginController extends Controller
         try {
             $user_id = $request->input('user_id');
             $user = User::find($user_id);
+            if ($user->token) {
+                JWTAuth::manager()->invalidate($user->token);
+            }
             $user->token = null;
             $user->save();
             (new MainController())->removeCouponExpiredAndAddCouponActive();
