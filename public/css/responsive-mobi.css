@@ -2,7 +2,7 @@ img {
   width: 100%;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 575px) {
   .mt-70 {
     margin-top: 70px !important;
   }
@@ -605,7 +605,7 @@ img {
   }
   /* END NEW HOME */
 }
-@media (min-width: 780px) {
+@media (min-width: 768px) {
   .mt-200 {
     margin-top: 200px !important;
   }
