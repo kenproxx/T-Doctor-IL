@@ -32,7 +32,7 @@
         .container {
             max-width: 1170px;
             width: 100%;
-            margin: auto;
+            /*margin: auto;*/
         }
 
         .carousel {
@@ -1406,7 +1406,9 @@
     <div class="">
         <div class="background-image_HomeNew" id="find-doctor--homeNew">
             <div class="container pb-5 mt-4">
-
+<div class="pc-hidden tt-flea">
+    Flea market
+</div>
                 <div class="carousel pc-hidden">
                     @foreach($productsFlea as $product)
                         <div class="product-itemFlea">
