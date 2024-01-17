@@ -8,6 +8,7 @@ use App\Http\Controllers\MailController;
 use App\Http\Controllers\MainController;
 use App\Models\User;
 use Illuminate\Http\Request;
+use JWTAuth;
 
 class AccountApi extends Controller
 {
@@ -65,11 +66,16 @@ class AccountApi extends Controller
                 if ($user->verify_code != $code) {
                     return response((new MainApi())->returnMessage('Verify code incorrect!'), 400);
                 }
+
+                if ($user->token) {
+                    JWTAuth::manager()->invalidate($user->token);
+                }
+
                 $user->verify_code = null;
                 $user->token = null;
                 $user->save();
-                auth()->login($user, true);
-                return response((new MainApi())->returnMessage('Reset device success! Login done!!!'), 200);
+
+                return response((new MainApi())->returnMessage('Reset device success! Please login to continue!!!'), 200);
             }
             return response((new MainApi())->returnMessage('User not found!'), 404);
         } catch (\Exception $exception) {
