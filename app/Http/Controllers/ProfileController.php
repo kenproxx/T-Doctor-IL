@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\CommonType;
 use App\Enums\DoctorDepartmentStatus;
 use App\Enums\UserStatus;
+use App\Http\Controllers\restapi\MainApi;
 use App\Models\DoctorDepartment;
 use App\Models\Nation;
 use App\Models\Role;
@@ -210,22 +211,22 @@ class ProfileController extends Controller
                 ]);
 
                 if ($validator->fails()) {
-                    return response()->json('Invalid email format.', 422);
+                    return response()->json((new MainApi())->returnMessage('Invalid email format.'), 400);
                 }
 
                 $user = User::where('email', $value)->first();
 
                 if (!$user) {
-                    return response()->json('Không tìm thấy user', 422);
+                    return response()->json((new MainApi())->returnMessage('Không tìm thấy user'), 400);
                 }
 
                 $sendMail = $this->sendOTPEmail($value, $user);
 
                 if (!$sendMail) {
-                    return response()->json('Gửi mã OTP thất bại, thử lại', 422);
+                    return response()->json((new MainApi())->returnMessage('Gửi mã OTP thất bại, thử lại'), 400);
                 }
 
-                return response()->json('Gửi mã OTP thành công', 200);
+                return response()->json((new MainApi())->returnMessage('Gửi mã OTP thành công'), 200);
                 break;
             case CommonType::PHONE:
                 $validator = Validator::make(['phone' => $value], [
@@ -233,26 +234,26 @@ class ProfileController extends Controller
                 ]);
 
                 if ($validator->fails()) {
-                    return response()->json('Invalid phone format.', 422);
+                    return response()->json((new MainApi())->returnMessage('Invalid phone format.'), 400);
                 }
 
                 $user = User::where('phone', $value)->first();
 
                 if (!$user) {
-                    return response()->json('Không tìm thấy user', 422);
+                    return response()->json((new MainApi())->returnMessage('Không tìm thấy user'), 400);
                 }
 
                 $sendOTP = $this->sendOTPSMS($value, $user);
 
                 if ($sendOTP) {
-                    return response()->json('Gửi mã OTP thành công', 200);
+                    return response()->json((new MainApi())->returnMessage('Gửi mã OTP thành công'), 200);
                 } else {
-                    return response()->json('Gửi mã OTP thất bại, thử lại', 422);
+                    return response()->json((new MainApi())->returnMessage('Gửi mã OTP thất bại, thử lại'), 400);
                 }
                 break;
 
             default:
-                return response()->json('Lỗi, thử lại', 422);
+                return response()->json((new MainApi())->returnMessage('Lỗi, thử lại'), 400);
         }
 
     }
@@ -307,7 +308,7 @@ class ProfileController extends Controller
         }
 
         if (!$user) {
-            return response()->json('Không tìm thấy user', 400);
+            return response()->json((new MainApi())->returnMessage('Không tìm thấy user'), 400);
         }
 
         //check otp với cache
@@ -316,15 +317,15 @@ class ProfileController extends Controller
         $otpCache = Cache::get($key);
 
         if (!$otpCache) {
-            return response()->json('OTP hết hạn, thao tác lại', 400);
+            return response()->json((new MainApi())->returnMessage('OTP hết hạn, thao tác lại'), 400);
         }
 
         if ($otpCache != $otp) {
-            return response()->json('OTP sai', 422);
+            return response()->json((new MainApi())->returnMessage('OTP sai'), 400);
         }
         Cache::forget($key);
 
-        return response()->json('OTP hợp lệ', 200);
+        return response()->json((new MainApi())->returnMessage('OTP hợp lệ'), 200);
     }
 
     public function changePassword(Request $request)
@@ -335,7 +336,7 @@ class ProfileController extends Controller
         $rePassword = $request->input('rePassword');
 
         if ($password != $rePassword) {
-            return response()->json('Mật khẩu không trùng khớp', 400);
+            return response()->json((new MainApi())->returnMessage('Mật khẩu không trùng khớp'), 400);
         }
 
         $user = null;
@@ -349,13 +350,13 @@ class ProfileController extends Controller
         }
 
         if (!$user) {
-            return response()->json('Không tìm thấy user', 400);
+            return response()->json((new MainApi())->returnMessage('Không tìm thấy user'), 400);
         }
 
         $user->password = Hash::make($password);
         $user->save();
 
-        return response()->json('Đổi mật khẩu thành công', 200);
+        return response()->json((new MainApi())->returnMessage('Đổi mật khẩu thành công'), 200);
     }
 
 

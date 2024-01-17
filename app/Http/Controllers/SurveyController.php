@@ -19,16 +19,16 @@ class SurveyController extends Controller
 
     public function detail($id)
     {
-        $survey = SurveyQuestion::where('id',
-            $id)->with('survey_answers') // Eager load the survey_answers relationship
-        ->first();
+        $survey = SurveyQuestion::where('id', $id)->with('survey_answers')->first();
 
         if (!$survey) {
             alert()->error('Survey not found!');
             return back();
         }
 
-        $departments = Department::where('status', '!=', DepartmentStatus::DELETED)->orderBy('id', 'desc')->get();
+        $departments = Department::where('status', '!=', DepartmentStatus::DELETED)
+            ->orderBy('id', 'desc')
+            ->get();
 
         $survey_answers = $survey->survey_answers;
 

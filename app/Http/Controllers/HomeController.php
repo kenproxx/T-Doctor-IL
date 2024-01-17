@@ -23,6 +23,7 @@ use App\Models\Question;
 use App\Models\Review;
 use App\Models\Setting;
 use App\Models\User;
+
 //use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -51,11 +52,13 @@ class HomeController extends Controller
         ->take(5)->get();
         return view('home', compact('coupons', 'products', 'medicines', 'productsFlea', 'questions'));
     }
+
     public function specialist()
     {
         $departments = \App\Models\Department::where('status', \App\Enums\DepartmentStatus::ACTIVE)->get();
         return view('chuyen-khoa.tab-chuyen-khoa-newHome', compact('departments'));
     }
+
     public function specialistDepartment($id)
     {
         $doctorsSpecial = \App\Models\User::where('department_id', $id)
@@ -71,10 +74,11 @@ class HomeController extends Controller
             ->get();
         return view('chuyen-khoa.danh-sach-theo-chuyen-khoa', compact('id', 'doctorsSpecial', 'clinics', 'pharmacies'));
     }
+
     public function specialistDetail($id)
     {
         $clinicDetail = \App\Models\Clinic::where('id', $id)->first();
-        return view('chuyen-khoa.detail-clinic-pharmacies',compact('clinicDetail','id'));
+        return view('chuyen-khoa.detail-clinic-pharmacies', compact('clinicDetail', 'id'));
     }
 
     public function bookingDetailSpecialist($id)
@@ -91,14 +95,13 @@ class HomeController extends Controller
                 $memberFamilys = \DB::table('family_management')
                     ->where('user_id', Auth::user()->id)
                     ->get();
-            }
-            else{
+            } else {
                 $memberFamilys = null;
             }
-            return view('clinics.booking-clinic-page',compact('clinicDetail','id','services','memberFamilys'));
+            return view('clinics.booking-clinic-page', compact('clinicDetail', 'id', 'services', 'memberFamilys'));
         }
         alert('Bạn cần đăng nhập để đặt lịch khám');
-return back();
+        return back();
     }
 
     public function specialistReview(Request $request, $id)
@@ -111,7 +114,7 @@ return back();
         $cmt_store->content = $cmt_review;
         $cmt_store->clinic_id = $id;
         $cmt_store->status = ReviewStatus::APPROVED;
-        if (!Auth::user()==null) {
+        if (!Auth::user() == null) {
             $cmt_store->user_id = auth()->user()->id;
             $cmt_store->name = $clinic->name;
             $cmt_store->address = $clinic->address;
@@ -120,7 +123,7 @@ return back();
             $cmt_store->save();
             alert()->success('Đánh giá thành công');
             return redirect()->route('home.specialist.detail', $id);
-        }else{
+        } else {
             alert()->error('Bạn cần đăng nhập để đánh giá');
             return redirect()->route('home.specialist.detail', $id);
         }
@@ -250,9 +253,18 @@ return back();
 
     public function listBooking()
     {
-        $bookings = Booking::where('status', '!=', BookingStatus::DELETE)
-            ->orderBy('id', 'desc')
-            ->paginate(20);
+        $isAdmin = (new MainController())->checkAdmin();
+        if ($isAdmin) {
+            $bookings = Booking::where('status', '!=', BookingStatus::DELETE)
+                ->orderBy('id', 'desc')
+                ->paginate(20);
+        } else {
+            $clinic = Clinic::where('user_id', Auth::user()->id)->first();
+            $bookings = Booking::where('status', '!=', BookingStatus::DELETE)
+                ->where('clinic_id', $clinic ? $clinic->id : '')
+                ->orderBy('id', 'desc')
+                ->paginate(20);
+        }
 
         return view('admin.booking.list-booking', compact('bookings'));
     }

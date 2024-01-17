@@ -18,7 +18,9 @@ class BackendCouponController extends Controller
     public function getAll()
     {
         if ($this->isAdmin()) {
-            $coupons = Coupon::where('status', '!=', CouponStatus::DELETED)->orderBy('created_at', 'desc')->get();
+            $coupons = Coupon::where('status', '!=', CouponStatus::DELETED)
+                ->orderBy('created_at', 'desc')
+                ->get();
         } else {
             if (Auth::user()->manager_id) {
                 $clinic_id = Clinic::where('user_id', Auth::user()->manager_id)->pluck('id');

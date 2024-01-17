@@ -4,8 +4,10 @@ namespace App\Http\Controllers\backend;
 
 use App\Enums\NewEventStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MainController;
 use App\Models\NewEvent;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BackendNewEventController extends Controller
 {
@@ -14,7 +16,17 @@ class BackendNewEventController extends Controller
      */
     public function index()
     {
-        $listNewEvent = NewEvent::paginate(20);
+        $isAdmin = (new MainController())->checkAdmin();
+        if ($isAdmin) {
+            $listNewEvent = NewEvent::where('status', '!=', NewEventStatus::DELETED)
+                ->orderByDesc('id')
+                ->paginate(20);
+        } else {
+            $listNewEvent = NewEvent::where('status', '!=', NewEventStatus::DELETED)
+                ->where('user_id', Auth::user()->id)
+                ->orderByDesc('id')
+                ->paginate(20);
+        }
         return view('admin.new_event.index', compact('listNewEvent'));
     }
 
@@ -88,7 +100,7 @@ class BackendNewEventController extends Controller
         if ($request->hasFile('thumbnail')) {
             $item = $request->file('thumbnail');
             $itemPath = $item->store('new_event', 'public');
-            $thumbnail = asset('storage/'.$itemPath);
+            $thumbnail = asset('storage/' . $itemPath);
             $params['thumbnail'] = $thumbnail;
         }
 
@@ -131,7 +143,7 @@ class BackendNewEventController extends Controller
         if ($request->hasFile('thumbnail')) {
             $item = $request->file('thumbnail');
             $itemPath = $item->store('new_event', 'public');
-            $thumbnail = asset('storage/'.$itemPath);
+            $thumbnail = asset('storage/' . $itemPath);
         } else {
             return response('Vui lòng thêm ảnh !!!', 400);
         }
