@@ -3,13 +3,17 @@
     {{ __('home.List Booking') }}
 @endsection
 @section('main-content')
-
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('home.List Booking') }}</h1>
-    {{--    <a href="{{route('coupon.create.product')}}" class="btn btn-primary mb-3">Add</a>--}}
+    <div class="d-flex align-items-center justify-content-start">
+        <div class="mb-3 col-md-3">
+            <input class="form-control" id="inputSearchBooking" type="text" placeholder="Search.."/>
+        </div>
+    </div>
+    <br>
     <link href="{{ asset('css/listbooking.css') }}" rel="stylesheet">
     <div class="">
-        <table class="table table-striped">
+        <table class="table table-striped" id="tableBooking">
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -80,5 +84,8 @@
             text: '{{ session('error') }}',
         });
         @endif
+        $(document).ready(function () {
+            searchMain('inputSearchBooking', 'tableBooking');
+        })
     </script>
 @endsection
