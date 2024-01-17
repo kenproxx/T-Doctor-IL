@@ -948,6 +948,16 @@
     };
 </script>
 <script>
+    /* Function search with inputSearch and Table */
+    function searchMain(inputSearch, tableList) {
+        $('#' + inputSearch).on('keyup', function () {
+            let value = $(this).val().toLowerCase();
+            $('#' + tableList + ' tbody tr').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    }
+
     /* Paginate for table with table is id of table and items is numbers element of table */
     function loadPaginate(table, items) {
         $('table#' + table).each(function () {
