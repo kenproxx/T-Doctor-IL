@@ -9,6 +9,7 @@ use App\Models\Clinic;
 use App\Models\Review;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReviewApi extends Controller
 {
@@ -20,8 +21,24 @@ class ReviewApi extends Controller
 
     public function getAllByClinicId($id, Request $request)
     {
-        $reviews = Review::where('status', ReviewStatus::APPROVED)->where('clinic_id', $id)->get();
-        return response()->json($reviews);
+        $reviews = DB::table('reviews')
+            ->where('status', ReviewStatus::APPROVED)
+            ->where('clinic_id', $id)
+            ->where('user_id', 0)
+            ->orderByDesc('id')
+            ->get();
+
+        $review_users = DB::table('reviews')
+            ->where('reviews.status', ReviewStatus::APPROVED)
+            ->where('reviews.clinic_id', $id)
+            ->join('users', 'users.id', '=', 'reviews.user_id')
+            ->select('reviews.*', 'users.points')
+            ->orderByDesc('reviews.id')
+            ->get();
+
+        $mergedCollection = $reviews->merge($review_users);
+        $mergedCollection->sortByDesc('id');
+        return response()->json($mergedCollection);
     }
 
     public function detail($id)
