@@ -3,7 +3,7 @@
 @section('content')
     <link rel="stylesheet" href="{{asset('css/homeSpecialist.css')}}">
     @include('layouts.partials.header')
-    <div class="container mt-200">
+    <div class="container mt-200 mt-70">
         <div class="tab-chuyen-khoa">
             <a href="{{route('home')}}">
                 <div class="titleServiceHomeNew"><i class="fa-solid fa-arrow-left"></i> {{ __('home.Tên chuyên khoa') }}</div>

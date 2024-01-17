@@ -263,7 +263,7 @@
   padding: 11px 0;
   width: 47%;
   border-radius: 8px;
-  background: var(--secon1, #45C3D2);
+  background: var(--secon1, #088180);
   color: var(--White, #FFF);
   text-align: center;
   font-size: 14px;
@@ -362,7 +362,7 @@
   padding: 11px 0;
   width: 47%;
   border-radius: 8px;
-  background: var(--secon1, #45C3D2);
+  background: var(--secon1, #088180);
   color: var(--White, #FFF);
   text-align: center;
   font-size: 14px;
@@ -847,7 +847,6 @@
 
 .medicine-list--item .tabMystore {
   border-bottom: none;
-  margin-bottom: 32px;
 }
 .medicine-list--item .tabMystore .nav-item a {
   width: 100% !important;
@@ -861,9 +860,6 @@
 .rv_item-1 {
   padding: 10px;
   border-bottom: 1px solid rgb(214, 214, 214);
-}
-.rv_item-1 .rv-header {
-  margin-bottom: 10px;
 }
 .rv_item-1 .rv-header--left {
   align-items: center;
