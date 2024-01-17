@@ -68,7 +68,7 @@ class AccountApi extends Controller
                 }
 
                 if ($user->token && $user->token != '') {
-                    JWTAuth::invalidate($user->token);
+                    (new MainController())->parsedToken($user->token);
                 }
 
                 $user->verify_code = null;

@@ -79,7 +79,7 @@ class LoginController extends Controller
             $user_id = $request->input('user_id');
             $user = User::find($user_id);
             if ($user->token && $user->token != '') {
-                JWTAuth::invalidate($user->token);
+                (new MainController())->parsedToken($user->token);
             }
             $user->token = null;
             $user->save();
