@@ -4,7 +4,7 @@
 @endsection
 @section('main-content')
     <h3 class="text-center">{{ __('home.Review Doctor Management') }}</h3>
-    <table class="table table-striped" id="tableReviewsDoctorManagement">
+    <table class="table" id="tableReviewsDoctorManagement">
         <thead>
         <tr>
             <th scope="col">#</th>
@@ -16,7 +16,6 @@
         </tr>
         </thead>
         <tbody id="tbodyTableReviewsDoctorManagement">
-
         </tbody>
     </table>
 
@@ -27,34 +26,34 @@
         };
 
         $(document).ready(function () {
-            async function loadReviewsDoctor() {
-                let reviewUrl = `{{ route('api.medical.reviews.doctors.list')  }}`;
-
-                await $.ajax({
-                    url: reviewUrl,
-                    method: "GET",
-                    headers: headers,
-                    success: function (response) {
-                        console.log(response);
-                        renderReviewsDoctor(response);
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    }
-                });
-            }
-
             loadReviewsDoctor();
+        })
 
-            function renderReviewsDoctor(response) {
-                let html = ``;
-                for (let i = 0; i < response.length; i++) {
-                    let data = response[i];
+        async function loadReviewsDoctor() {
+            let reviewUrl = `{{ route('api.medical.reviews.doctors.list')  }}`;
 
-                    let reviewDetailUrl = `{{ route('view.reviews.doctor.detail', ['id'=>':id']) }}`;
-                    reviewDetailUrl = reviewDetailUrl.replace(':id', data.id);
+            await $.ajax({
+                url: reviewUrl,
+                method: "GET",
+                headers: headers,
+                success: function (response) {
+                    renderReviewsDoctor(response);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
 
-                    html = html + `<tr>
+        function renderReviewsDoctor(response) {
+            let html = ``;
+            for (let i = 0; i < response.length; i++) {
+                let data = response[i];
+
+                let reviewDetailUrl = `{{ route('view.reviews.doctor.detail', ['id'=>':id']) }}`;
+                reviewDetailUrl = reviewDetailUrl.replace(':id', data.id);
+
+                html = html + `<tr>
                                         <th scope="row">${i + 1}</th>
                                         <td>${data.title}</td>
                                         <td>${data.number_star}</td>
@@ -65,11 +64,10 @@
                                             <button type="button" class="btn btn-danger" id="btnDelete" onclick="confirmDeleteReviewsDoctor('${data.id}')">{{ __('home.Delete') }}</button>
                                         </td>
                                     </tr>`;
-                }
-                $('#tbodyTableReviewsDoctorManagement').empty().append(html);
             }
-
-        })
+            $('#tbodyTableReviewsDoctorManagement').empty().append(html);
+            loadPaginate('tableReviewsDoctorManagement', 20);
+        }
 
         function confirmDeleteReviewsDoctor(id) {
             if (confirm('Are you sure you want to delete!')) {

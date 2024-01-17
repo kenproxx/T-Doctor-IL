@@ -22,7 +22,6 @@
 
         </tbody>
     </table>
-
     <script>
         let accessToken = `Bearer ` + token;
         let headers = {
@@ -30,33 +29,35 @@
         };
 
         $(document).ready(function () {
-            async function loadReviews() {
-                let reviewUrl = `{{ route('api.backend.reviews.list') }}`;
-
-                await $.ajax({
-                    url: reviewUrl,
-                    method: "GET",
-                    headers: headers,
-                    success: function (response) {
-                        renderReviews(response);
-                    },
-                    error: function (error) {
-                        console.log(error);
-                    }
-                });
-            }
-
             loadReviews();
 
-            function renderReviews(response) {
-                let html = ``;
-                for (let i = 0; i < response.length; i++) {
-                    let data = response[i];
+        })
 
-                    let reviewDetailUrl = `{{ route('view.admin.reviews.detail', ['id'=> ':id']) }}`;
-                    reviewDetailUrl = reviewDetailUrl.replace(':id', '');
+        async function loadReviews() {
+            let reviewUrl = `{{ route('api.backend.reviews.list') }}`;
 
-                    html = html + `<tr>
+            await $.ajax({
+                url: reviewUrl,
+                method: "GET",
+                headers: headers,
+                success: function (response) {
+                    renderReviews(response);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function renderReviews(response) {
+            let html = ``;
+            for (let i = 0; i < response.length; i++) {
+                let data = response[i];
+
+                let reviewDetailUrl = `{{ route('view.admin.reviews.detail', ['id'=> ':id']) }}`;
+                reviewDetailUrl = reviewDetailUrl.replace(':id', '');
+
+                html = html + `<tr>
                                         <th scope="row">${i + 1}</th>
                                         <td>${data.name}</td>
                                         <td>${data.email}</td>
@@ -70,11 +71,10 @@
                                             <button type="button" class="btn btn-danger" id="btnDelete" onclick="confirmDeleteReviews('${data.id}')">{{ __('home.Delete') }}</button>
                                         </td>
                                     </tr>`;
-                }
-                $('#tbodyTableReviewsManagement').empty().append(html);
             }
-
-        })
+            $('#tbodyTableReviewsManagement').empty().append(html);
+            loadPaginate('tableReviewsManagement', 20);
+        }
 
         function confirmDeleteReviews(id) {
             if (confirm('Are you sure you want to delete!')) {
