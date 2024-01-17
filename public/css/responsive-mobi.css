@@ -341,7 +341,7 @@ img {
     border-radius: 60px 0px 16px 0px;
     background: var(--White, #FFF);
     display: flex;
-    padding: 10px 22px;
+    padding: 10px 10px;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -431,6 +431,14 @@ img {
     font-size: 12px;
     font-weight: 400;
   }
+  .container #recruitment-homeNew .button-bottom-right {
+    position: unset !important;
+    display: flex;
+    justify-content: center;
+  }
+  .container #recruitment-homeNew .button-bottom-right .btn-see-all {
+    width: 260px;
+  }
   .container #recruitment-homeNew .main-recruitment--homeNew .main-card--homeNew .content-recruitment--homeNew .text-title--card {
     padding: 0;
   }
@@ -477,6 +485,7 @@ img {
     background: lightgray 50%/cover no-repeat;
     height: 162px;
     object-fit: cover;
+    padding: 0;
   }
   .container .product-itemFlea .img-proFlea.justify-content-center.d-flex a.button-heart i {
     display: flex;

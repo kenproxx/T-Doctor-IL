@@ -457,7 +457,7 @@ img {
                         border-radius: 60px 0px 16px 0px;
                         background: var(--White, #FFF);
                         display: flex;
-                        padding: 10px 22px;
+                        padding: 10px 10px;
                         justify-content: center;
                         align-items: center;
                         gap: 10px;
@@ -615,6 +615,14 @@ img {
                     font-weight: 400;
                 }
             }
+            .button-bottom-right {
+                position: unset !important;
+                display: flex;
+                justify-content: center;
+                .btn-see-all {
+                    width: 260px;
+                }
+            }
 
             .main-recruitment--homeNew {
                 .main-card--homeNew {
@@ -683,6 +691,7 @@ img {
                     background: lightgray 50% / cover no-repeat;
                     height: 162px;
                     object-fit: cover;
+                    padding: 0;
                 }
                 a.button-heart {
                     i{
