@@ -129,6 +129,8 @@
             }
 
     }
+
+    $isAdmin = (new \App\Http\Controllers\MainController())->checkAdmin();
 @endphp
 <body>
 @include('sweetalert::alert')
@@ -341,14 +343,39 @@
                             <i class="bi bi-circle"></i><span>{{ __('home.Selling/Buying') }}</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ route('view.admin.category.index') }}">
-                            <i class="bi bi-circle"></i><span>{{ __('home.Category') }}</span>
-                        </a>
-                    </li>
+                    @if($isAdmin)
+                        <li>
+                            <a href="{{ route('view.admin.category.index') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Category') }}</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
             <!-- End Selling/Buying Nav -->
+
+            <!-- Product Medicine Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-file-medical"></i><span>{{ __('home.Product Medicine') }}</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a href="{{ route('api.backend.product-medicine.index') }}">
+                            <i class="bi bi-circle"></i><span>{{ __('home.Product Medicine') }}</span>
+                        </a>
+                    </li>
+                    @if($isAdmin)
+                        <li>
+                            <a href="{{ route('api.backend.category-product.index') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Category Product') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
+            <!-- End Product Medicine Nav -->
 
             <!-- Order Nav -->
             <li class="nav-item">
@@ -419,6 +446,89 @@
             </li>
             <!-- End Survey Nav -->
             @if(!$isStaff)
+                <!-- News/Events Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-newspaper"></i><span>{{ __('home.New Event') }}</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('api.new-event.index') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.New Event') }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End News/Events Nav -->
+
+                <!-- Examination Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-layout-text-window-reverse"></i><span>{{ __('home.Examination') }}</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        @if($isAdmin)
+                            <li>
+                                <a href="{{ route('homeAdmin.list.doctors') }}">
+                                    <i class="bi bi-circle"></i><span>{{ __('home.Examination') }}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('api.backend.account-register.index') }}">
+                                    <i class="bi bi-circle"></i><span>{{ __('home.Duyệt đăng ký phòng khám') }}</span>
+                                </a>
+                            </li>
+                        @endif
+                        <li>
+                            <a href="{{ route('homeAdmin.list.staff') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Nhân viên') }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Examination Nav -->
+
+                <!-- Booking Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-bar-chart"></i><span>{{ __('home.Booking') }}</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('homeAdmin.list.booking') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Booking') }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Booking Nav -->
+
+                <!-- Start Medical Result Business Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#medical-result-nav" data-bs-toggle="collapse"
+                       href="#">
+                        <i class="bi bi-segmented-nav"></i><span>Medical examination results</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="medical-result-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('view.admin.medical.result.list') }}">
+                                <i class="bi bi-circle"></i><span>List examination results</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('view.admin.medical.result.create') }}">
+                                <i class="bi bi-circle"></i><span>Create examination results</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Medical Result Business Nav -->
+            @endif
+            @if($isAdmin)
                 <!-- Clinics Nav -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#clinics-nav" data-bs-toggle="collapse" href="#">
@@ -482,123 +592,6 @@
                 </li>
                 <!-- End Videos Nav -->
 
-                <!-- Product Medicine Nav -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-file-medical"></i><span>{{ __('home.Product Medicine') }}</span><i
-                            class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="{{ route('api.backend.product-medicine.index') }}">
-                                <i class="bi bi-circle"></i><span>{{ __('home.Product Medicine') }}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('api.backend.category-product.index') }}">
-                                <i class="bi bi-circle"></i><span>{{ __('home.Category Product') }}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- End Product Medicine Nav -->
-
-                <!-- News/Events Nav -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-newspaper"></i><span>{{ __('home.New Event') }}</span><i
-                            class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="{{ route('api.new-event.index') }}">
-                                <i class="bi bi-circle"></i><span>{{ __('home.New Event') }}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- End News/Events Nav -->
-
-                <!-- Examination Nav -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-layout-text-window-reverse"></i><span>{{ __('home.Examination') }}</span><i
-                            class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="{{ route('homeAdmin.list.doctors') }}">
-                                <i class="bi bi-circle"></i><span>{{ __('home.Examination') }}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('api.backend.account-register.index') }}">
-                                <i class="bi bi-circle"></i><span>{{ __('home.Duyệt đăng ký phòng khám') }}</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('homeAdmin.list.staff') }}">
-                                <i class="bi bi-circle"></i><span>{{ __('home.Nhân viên') }}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- End Examination Nav -->
-
-                <!-- Booking Nav -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-bar-chart"></i><span>{{ __('home.Booking') }}</span><i
-                            class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="{{ route('homeAdmin.list.booking') }}">
-                                <i class="bi bi-circle"></i><span>{{ __('home.Booking') }}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- End Booking Nav -->
-
-                <!-- Start Medical Result Nav -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#medical-result-nav" data-bs-toggle="collapse"
-                       href="#">
-                        <i class="bi bi-segmented-nav"></i><span>Medical examination results</span><i
-                            class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="medical-result-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="{{ route('view.admin.medical.result.list') }}">
-                                <i class="bi bi-circle"></i><span>List examination results</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('view.admin.medical.result.create') }}">
-                                <i class="bi bi-circle"></i><span>Create examination results</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- End Medical Result Nav -->
-
-                <!-- Config Nav -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-gem"></i><span>{{ __('home.Cấu hình chung') }}</span><i
-                            class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="{{ route('homeAdmin.list.config') }}">
-                                <i class="bi bi-circle"></i><span>{{ __('home.Cấu hình chung') }}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- End Config Nav -->
-
                 <!-- Start Departments/Symptoms Nav -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#department-symptom-nav" data-bs-toggle="collapse"
@@ -620,11 +613,23 @@
                     </ul>
                 </li>
                 <!-- End Departments/Symptoms Nav -->
-            @endif
-            @php
-                $isAdmin = (new \App\Http\Controllers\MainController())->checkAdmin();
-            @endphp
-            @if($isAdmin)
+
+                <!-- Config Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-gem"></i><span>{{ __('home.Cấu hình chung') }}</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('homeAdmin.list.config') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Cấu hình chung') }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Config Nav -->
+
                 <!-- Start Admin User Nav -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#user-manager-nav" data-bs-toggle="collapse"
@@ -646,7 +651,6 @@
                     </ul>
                 </li>
                 <!-- End Admin User Nav -->
-
             @endif
         @else
             <!-- Start Family Nav -->
@@ -666,6 +670,7 @@
             </li>
             <!-- End Family Nav -->
         @endif
+
         <!-- Start Address Nav -->
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#address-nav" data-bs-toggle="collapse"
@@ -707,6 +712,7 @@
 
         <li class="nav-heading">{{ __('home.Settings') }}</li>
 
+        <!-- Start Profile Page Nav -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('profile') }}">
                 <i class="bi bi-person"></i>
@@ -715,6 +721,7 @@
         </li>
         <!-- End Profile Page Nav -->
 
+        <!-- Start About Page Nav -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('web.users.list.points') }}">
                 <i class="bi bi-play"></i>
@@ -722,9 +729,7 @@
             </a>
         </li>
         <!-- End About Page Nav -->
-
     </ul>
-
 </aside>
 <!-- End Sidebar-->
 

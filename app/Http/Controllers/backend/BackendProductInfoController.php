@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend;
 
 use App\Enums\ProductStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\restapi\MainApi;
 use App\Models\Clinic;
 use App\Models\ProductInfo;
 use App\Models\WishList;
@@ -13,17 +14,30 @@ use Illuminate\Support\Facades\Auth;
 
 class BackendProductInfoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $userId = $request->input('user_id');
+        if (Auth::check()){
+            $userId = Auth::user()->id;
+        }
+
         $products = DB::table('product_infos')
             ->join('provinces', 'provinces.id', '=', 'product_infos.province_id')
             ->where('product_infos.status', '!=', ProductStatus::DELETED)
+            ->where('product_infos.created_by', '=', $userId)
             ->select('product_infos.*', 'provinces.name as province_name')
             ->get();
 
-        if (Auth::check()) {
-            $userId = Auth::user()->id;
+        $isAdmin = (new MainApi())->isAdmin($userId);
+        if ($isAdmin){
+            $products = DB::table('product_infos')
+                ->join('provinces', 'provinces.id', '=', 'product_infos.province_id')
+                ->where('product_infos.status', '!=', ProductStatus::DELETED)
+                ->select('product_infos.*', 'provinces.name as province_name')
+                ->get();
+        }
 
+        if (Auth::check()) {
             $products->each(function ($product) use ($userId) {
                 $isFavorite = WishList::where('product_id', $product->id)
                     ->where('user_id', $userId)
