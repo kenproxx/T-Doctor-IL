@@ -118,6 +118,7 @@ class MedicalFavouriteApi extends Controller
             if ($success) {
                 return response()->json([
                     'status' => true,
+                    'isFavourite' => true,
                     'message' => 'Add to wishlist success'
                 ]);
             }
@@ -130,6 +131,7 @@ class MedicalFavouriteApi extends Controller
             if ($success) {
                 return response()->json([
                     'status' => true,
+                    'isFavourite' => false,
                     'message' => 'Remove from wishlist success'
                 ]);
             }
