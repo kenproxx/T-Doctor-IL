@@ -25,7 +25,7 @@
         }
 
         img {
-            width: auto;
+            max-width: auto;
             height: auto;
         }
 
@@ -1007,15 +1007,25 @@
                                 @if($doctor == '')
                                     <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                                 @else
+                                    @php
+                                        $isFavourite = null;
+                                        if (Auth::check()){
+                                            $isFavourite = \App\Models\MedicalFavourite::where('user_id', Auth::user()->id)
+                                                                ->where('medical_id', $doctor->id)
+                                                                ->first();
+                                        }
+
+                                        $class = !$isFavourite ? 'bi-heart' : 'bi-heart-fill text-danger';
+                                    @endphp
                                     <div class="col-md-3 col-6">
                                         <div class="">
                                             <div class="product-item">
                                                 <div class="img-pro justify-content-center d-flex">
                                                     <img src="{{$doctor->avt}}" alt="">
-                                                    <a class="button-heart" data-favorite="0">
-                                                        <i id="icon-heart" class="bi-heart bi"
-                                                           data-product-id=""
-                                                           onclick=""></i>
+                                                    <a class="button-heart button-doctor-heart"
+                                                       data-doctor="{{$doctor->id}}"
+                                                       data-isFavourite="{{ $isFavourite ? 1 : 0 }}">
+                                                        <i class="bi {{ $class }}"></i>
                                                     </a>
                                                     <s class="icon-chuyen-khoa">
                                                         @php
@@ -1997,26 +2007,83 @@
             "Authorization": accessToken
         };
 
+        $(document).ready(function () {
+            $('.button-doctor-heart').click(function () {
+                let element = $(this);
+                let doctorID = element.data('doctor')
+                doctorWishList(doctorID, element);
+            })
+        })
+
         async function productWishList(productID, type) {
+            loadingMasterPage();
 
-        }
+            let doctorWishListUrl = `{{ route('api.backend.medical.favourites.update.wishlist')  }}`;
 
-        async function doctorWishList(doctorID) {
-            let doctorWishListUrl = `{{ route('api.backend.medical.favourites.create')  }}`;
+            let data = {
+                'user_id': `{{ Auth::check() ? Auth::user()->id : '' }}`,
+                'medical_id': productID
+            };
 
-            const formData = new FormData();
+            let heart = `bi-heart-fill text-danger`;
+            let unHeart = `bi-heart`;
 
             await $.ajax({
                 url: doctorWishListUrl,
                 method: 'POST',
                 headers: headers,
-                data: formData,
+                data: data,
                 success: function (response) {
-                    console.log(response);
-                    alert('Create success!');
+                    isFavourite = response.isFavourite
+                    if (isFavourite === true){
+                        element.find('i').removeClass(unHeart)
+                        element.find('i').addClass(heart)
+                    } else {
+                        element.find('i').removeClass(heart)
+                        element.find('i').addClass(unHeart)
+                    }
+                    loadingMasterPage();
+                    alert(response.message);
                 },
                 error: function (error) {
-                    console.log(error);
+                    loadingMasterPage();
+                    alert('Create error!');
+                }
+            });
+        }
+
+        async function doctorWishList(doctorID, element) {
+            loadingMasterPage();
+
+            let doctorWishListUrl = `{{ route('api.backend.medical.favourites.update.wishlist')  }}`;
+
+            let data = {
+                'user_id': `{{ Auth::check() ? Auth::user()->id : '' }}`,
+                'medical_id': doctorID
+            };
+
+            let heart = `bi-heart-fill text-danger`;
+            let unHeart = `bi-heart`;
+
+            await $.ajax({
+                url: doctorWishListUrl,
+                method: 'POST',
+                headers: headers,
+                data: data,
+                success: function (response) {
+                    isFavourite = response.isFavourite
+                    if (isFavourite === true){
+                        element.find('i').removeClass(unHeart)
+                        element.find('i').addClass(heart)
+                    } else {
+                        element.find('i').removeClass(heart)
+                        element.find('i').addClass(unHeart)
+                    }
+                    loadingMasterPage();
+                    alert(response.message);
+                },
+                error: function (error) {
+                    loadingMasterPage();
                     alert('Create error!');
                 }
             });
