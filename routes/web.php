@@ -276,6 +276,10 @@ Route::middleware(['user.active'])->group(function () {
             Route::post('/vnpay', [CheckoutController::class, 'checkoutByVNPay'])->name('user.checkout.vnpay');
         });
 
+        Route::group(['prefix' => 'web/orders'], function () {
+            Route::get('/list', [\App\Http\Controllers\OrderController::class, 'index'])->name('view.web.orders.index');
+        });
+
         Route::group(['prefix' => 'orders'], function () {
             Route::get('admin/list', [OrderController::class, 'index'])->name('view.admin.orders.index');
             Route::get('admin/detail/{id}', [OrderController::class, 'detail'])->name('view.admin.orders.detail');
