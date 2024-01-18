@@ -5,6 +5,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AddressMapController;
 use App\Http\Controllers\admin\AdminMedicalResultController;
 use App\Http\Controllers\admin\AdminUserController;
+use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\AuthController;
@@ -33,7 +34,6 @@ use App\Http\Controllers\MapController;
 use App\Http\Controllers\MedicalResultController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\NewEventController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PharmaciesController;
 use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\ProfileController;
@@ -274,6 +274,10 @@ Route::middleware(['user.active'])->group(function () {
                 [CheckoutController::class, 'returnCheckout'])->name('return.checkout.payment');
             Route::post('/imm', [CheckoutController::class, 'checkoutByImm'])->name('user.checkout.imm');
             Route::post('/vnpay', [CheckoutController::class, 'checkoutByVNPay'])->name('user.checkout.vnpay');
+        });
+
+        Route::group(['prefix' => 'web/orders'], function () {
+            Route::get('/list', [\App\Http\Controllers\OrderController::class, 'index'])->name('view.web.orders.index');
         });
 
         Route::group(['prefix' => 'orders'], function () {
