@@ -23,39 +23,50 @@
                     </strong></p>
             </div>
             <div class="col-4 pc-hidden">
-                <form action="{{route('flea.market.sell.product')}}" class=" flea-button">
-                    <button class="flea-btn width-88">{{ __('home.Sell my product') }}</button>
-                </form>
+                @if(\Illuminate\Support\Facades\Auth::check())
+                    @if( $id != Auth::user()->id)
+                        <a href="" class="flea-button mobi-text">
+                            {{ __('home.FOLLOW') }}
+                        </a>
+                    @else
+                        <a href="{{route('flea.market.sell.product')}}" class="flea-button mobi-text">
+                            {{ __('home.Sell my product') }}
+                        </a>
+                    @endif
+                @else
+                    <a onclick="alertLogin();" class="flea-button mobi-text">
+                        {{ __('home.FOLLOW') }}
+                    </a>
+                @endif
             </div>
         </div>
         <div class=" margin-info row mt-2">
             @php
                 $count = \App\Models\ProductInfo::where('created_by', $id )->where('status', \App\Enums\ProductStatus::ACTIVE)->count();
             @endphp
-            <div class="col-4 col-md-3 font-12-mobi">{{ __('home.Product') }}: <span>{{$count}}</span></div>
-            <div class="col-4 col-md-3 font-12-mobi">{{ __('home.Sold') }}: <span>1000</span></div>
-            <div class="col-4 col-md-3 font-12-mobi">{{ __('home.Sold out') }}: <span>10</span></div>
-            <div class="col-4 col-md-3 font-12-mobi">{{ __('home.Following') }}: <span>50</span></div>
+            <div class="col-4 col-md-3 p-1 d-flex font-12-mobi">{{ __('home.Product') }}: <span class="font-weight-800">{{$count}}</span></div>
+            <div class="col-4 col-md-3 p-1 d-flex font-12-mobi">{{ __('home.Sold') }}: <span class="font-weight-800">1000</span></div>
+            <div class="col-4 col-md-3 p-1 d-flex font-12-mobi">{{ __('home.Sold out') }}: <span class="font-weight-800">10</span></div>
+            <div class="col-4 col-md-3 p-1 d-flex font-12-mobi">{{ __('home.Following') }}: <span class="font-weight-800">50</span></div>
         </div>
     </div>
     <div class="col-md-2 mobile-hidden">
 
-        <div class="d-flex col-md-4">
+        <div class="d-flex">
             @if(\Illuminate\Support\Facades\Auth::check())
                 @if( $id != Auth::user()->id)
-                    <form class=" flea-button mr-3">
-                        <button class="flea-btn width-88">{{ __('home.FOLLOW') }}</button>
-                    </form>
+                    <a href="" class="flea-button">
+                        {{ __('home.FOLLOW') }}
+                    </a>
                 @else
-                    <form action="{{route('flea.market.sell.product')}}" class=" flea-button mr-3">
-                        <button class="flea-btn width-88">{{ __('home.Sell my product') }}</button>
-                    </form>
+                    <a href="{{route('flea.market.sell.product')}}" class="flea-button">
+                        {{ __('home.Sell my product') }}
+                    </a>
                 @endif
             @else
-                <form onclick="alertLogin();" class=" flea-button mr-3">
-                    <button type="button"
-                            class="flea-btn width-88">{{ __('home.FOLLOW') }}</button>
-                </form>
+                <a onclick="alertLogin();" class="flea-button">
+                    {{ __('home.FOLLOW') }}
+                </a>
             @endif
         </div>
     </div>

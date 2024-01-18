@@ -38,7 +38,7 @@
                         @foreach($galleryArray as $pr_gallery)
                             <div
                                 class="item-detail d-flex justify-content-center  border-radius-1px color-Grey-Dark mr-md-3">
-                                <img style="width: auto; height: 100%" src="{{asset($pr_gallery)}}" alt=""
+                                <img style="width: 53px; height: 100%" src="{{asset($pr_gallery)}}" alt=""
                                      class="border mw-140px">
                             </div>
                         @endforeach

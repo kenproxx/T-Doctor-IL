@@ -2,6 +2,11 @@
 {{--    <p>You have no product to evaluate--}}
 {{--    </p>--}}
 {{--@else--}}
+<style>
+    .fa-stack {
+        width: 1em;
+    }
+</style>
     @foreach($reviewStore as $review)
         <link href="{{ asset('css/reviewitem.css') }}" rel="stylesheet">
         <div class="rv_item-1">
@@ -21,7 +26,7 @@
                     <div>
                         <p>{{$review->created_at}}</p>
                     </div>
-                    <div>
+                    <div class="d-flex justify-content-end align-items-center">
                         @if($review->star_number == 1)
                             <span class="fa fa-stack">
                                                     <i class="fa fa-star cl-yellow"></i></span>

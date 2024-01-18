@@ -15,7 +15,6 @@
   display: flex;
   padding: 24px;
   align-items: center;
-  gap: 24px;
   flex-shrink: 0;
   margin-bottom: 30px;
   overflow: hidden;

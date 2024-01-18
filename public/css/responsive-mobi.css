@@ -2,11 +2,16 @@ img {
   width: 100%;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 575px) {
+  .mt-70 {
+    margin-top: 70px !important;
+  }
+  .mt-24 {
+    margin-top: 24px;
+  }
   .container {
     max-width: 480px;
     width: 100%;
-    margin-top: 50px;
   }
   /* HEADER */
   .d-mb-flex {
@@ -213,7 +218,7 @@ img {
     margin-bottom: 16px;
   }
   .container .recruitment-details .list {
-    height: 100%;
+    max-height: 180px;
     overflow-y: auto;
     padding: 0;
   }
@@ -291,15 +296,82 @@ img {
   }
   .mb-42 {
     margin-top: 30px;
+    margin-bottom: 20px;
+  }
+  .tabMystore {
+    margin-bottom: 8px;
+  }
+  .rv-header {
+    margin-bottom: 0;
   }
   .main-header {
     height: 0;
   }
-  .banner {
-    height: 110px;
-  }
   /* END FLEA MARKET */
   /* NEW HOME */
+  .mobi-text {
+    font-size: 12px !important;
+  }
+  .background-image_HomeNew--departments .container #map-location .title-clinics h2 {
+    font-size: 18px;
+  }
+  .background-image_HomeNew--departments .container #map-location .title-clinics p {
+    font-size: 12px;
+    font-weight: 400;
+  }
+  .background-image_HomeNew--departments .container #map-location .clip-path-container {
+    height: 600px;
+  }
+  .background-image_HomeNew--departments .container #map-location .clip-path-container #allAddressesMap {
+    border-radius: 24px;
+    clip-path: none;
+  }
+  .background-image_HomeNew--departments .container #map-location .text-map--homeNew .mr-3 svg {
+    width: 40px;
+    height: 40px;
+  }
+  .background-image_HomeNew--departments .container #map-location .text-map--homeNew .title--newAddress p {
+    font-size: 12px;
+    font-weight: 400;
+  }
+  .container #find-doctor--homeNew .title-findProduct--homeNew span {
+    font-size: 18px;
+  }
+  .container #find-doctor--homeNew .title-findProduct--homeNew p {
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .container #find-doctor--homeNew #popularProduct .product-item .img_product--homeNew img, .container #find-doctor--homeNew #recommended .product-item .img_product--homeNew img, .container #find-doctor--homeNew #newProducts .product-item .img_product--homeNew img, .container #find-doctor--homeNew #hotDeal .product-item .img_product--homeNew img {
+    border-radius: 16px 16px 70px 0 !important;
+  }
+  .container #find-doctor--homeNew #popularProduct .product-item .SeeDetail, .container #find-doctor--homeNew #recommended .product-item .SeeDetail, .container #find-doctor--homeNew #newProducts .product-item .SeeDetail, .container #find-doctor--homeNew #hotDeal .product-item .SeeDetail {
+    border-radius: 60px 0px 16px 0px;
+    background: var(--White, #FFF);
+    display: flex;
+    padding: 10px 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    font-weight: 800;
+  }
+  .container .titleServiceHomeNew {
+    font-size: 18px;
+  }
+  .container .titleServiceHomeNew a {
+    color: var(--Grey-Dark, #929292);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+  }
+  .container .mainServiceHomeNew .border-HomeNew .w-75 svg {
+    width: 40px;
+    height: 40px;
+  }
+  .container .mainServiceHomeNew .border-HomeNew span {
+    font-size: 18px;
+  }
   .container #find-doctor--homeNew #myTabContent .product-item {
     border-radius: 16px;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -355,6 +427,123 @@ img {
   .container #mentoring .section1-content .content__item .content__item__image {
     width: 100px;
     height: 60px;
+  }
+  .container #find-doctor--homeNew .title-findDoctor--homeNew span {
+    font-size: 18px;
+  }
+  .container #recruitment-homeNew .title-recruitment--homeNew span {
+    font-size: 18px;
+  }
+  .container #recruitment-homeNew .title-recruitment--homeNew p {
+    font-size: 12px;
+    font-weight: 400;
+  }
+  .container #recruitment-homeNew .button-bottom-right {
+    position: unset !important;
+    display: flex;
+    justify-content: center;
+  }
+  .container #recruitment-homeNew .button-bottom-right .btn-see-all {
+    width: 260px;
+  }
+  .container #recruitment-homeNew .main-recruitment--homeNew .main-card--homeNew .content-recruitment--homeNew .text-title--card {
+    padding: 0;
+  }
+  .container #recruitment-homeNew .main-recruitment--homeNew .main-card--homeNew .content-recruitment--homeNew .text-title--card span {
+    font-size: 14px;
+  }
+  .container #recruitment-homeNew .main-recruitment--homeNew .main-card--homeNew .content-recruitment--homeNew .text-title--card .content__item__describe {
+    font-size: 14px;
+    margin: 0;
+  }
+  .container #recruitment-homeNew .main-recruitment--homeNew .main-title-card--homeNew {
+    min-height: 250px;
+    margin-top: 21px;
+    padding: 0;
+  }
+  .container #recruitment-homeNew .main-recruitment--homeNew .main-title-card--homeNew .describe-item {
+    display: flex;
+  }
+  .container #recruitment-homeNew .main-recruitment--homeNew .main-title-card--homeNew .describe-item svg {
+    width: 40px;
+    height: 40px;
+  }
+  .container #recruitment-homeNew .main-recruitment--homeNew .main-title-card--homeNew .describe-item .title-re span {
+    font-size: 16px;
+  }
+  .container #recruitment-homeNew .main-recruitment--homeNew .main-title-card--homeNew .describe-item .title-re p {
+    font-size: 14px;
+    font-weight: 400;
+    padding: 0;
+  }
+  .container .product-itemFlea {
+    border-radius: 16px;
+    border: 1px solid var(--Grey-Medium, #BFBFBF);
+    background: var(--secon1, #088180);
+    box-shadow: 0px 8px 14px 0px rgba(0, 0, 0, 0.25);
+    width: 45% !important;
+    margin: 8px 8px 20px 8px;
+  }
+  .container .product-itemFlea .img-proFlea.justify-content-center.d-flex {
+    position: relative;
+  }
+  .container .product-itemFlea .img-proFlea.justify-content-center.d-flex img {
+    border-radius: 16px 16px 70px 0px;
+    background: lightgray 50%/cover no-repeat;
+    height: 162px;
+    object-fit: cover;
+    padding: 0;
+  }
+  .container .product-itemFlea .img-proFlea.justify-content-center.d-flex a.button-heart i {
+    display: flex;
+    padding: 8px;
+    align-items: flex-start;
+    gap: 10px;
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    border-radius: 51px;
+    background: var(--Light, #EAEAEA);
+  }
+  .container .product-itemFlea .content-proFlea .name-productFlea {
+    font-size: 12px;
+    font-weight: 800;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: #FFFFFF;
+  }
+  .container .product-itemFlea .content-proFlea .name-productFlea a {
+    color: #FFFFFF;
+  }
+  .container .product-itemFlea .content-proFlea .location-proFlea {
+    color: var(--White, #FFF);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+  }
+  .container .product-itemFlea .content-proFlea .prices-proFlea {
+    color: var(--White, #FFF);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+  }
+  .container .product-itemFlea .SeeDetailFlea {
+    border-radius: 60px 0px 16px 0px;
+    background: var(--White, #FFF);
+    display: flex;
+    padding: 10px 22px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: var(--Black, #000);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
   }
   #cCarousel {
     position: relative;
@@ -423,9 +612,19 @@ img {
   }
   /* END NEW HOME */
 }
-@media (min-width: 780px) {
+@media (min-width: 768px) {
+  .mb-42 {
+    margin-top: 30px;
+    margin-bottom: 42px;
+  }
+  .tabMystore {
+    margin-bottom: 32px;
+  }
+  .rv-header {
+    margin-bottom: 10px;
+  }
   .mt-200 {
-    margin-top: 200px;
+    margin-top: 200px !important;
   }
   .pc-hidden {
     display: none !important;
@@ -473,7 +672,7 @@ img {
     margin-bottom: 16px;
   }
   .container .recruitment-details .border-radius-1px img {
-    width: auto;
+    width: 80px;
     height: 383px;
   }
   .container .product-item .img-pro {
@@ -521,6 +720,40 @@ img {
   }
   /* END FLEA MARKET */
   /* NEW HOME */
+  .background-image_HomeNew--departments .container #map-location .clip-path-container {
+    height: 700px;
+  }
+  .background-image_HomeNew--departments .container #map-location .clip-path-container #allAddressesMap {
+    border-radius: 24px;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 84%, 0% 100%, 0% 80%);
+  }
+  .container #find-doctor--homeNew .title-findProduct--homeNew span {
+    font-size: 48px;
+  }
+  .container #find-doctor--homeNew .title-findProduct--homeNew p {
+    font-size: 24px;
+    font-weight: 600;
+  }
+  .container #find-doctor--homeNew #popularProduct .product-item .img_product--homeNew img, .container #find-doctor--homeNew #recommended .product-item .img_product--homeNew img, .container #find-doctor--homeNew #newProducts .product-item .img_product--homeNew img, .container #find-doctor--homeNew #hotDeal .product-item .img_product--homeNew img {
+    border-radius: 24px 24px 100px 0px !important;
+  }
+  .container #find-doctor--homeNew #popularProduct .product-item .SeeDetail, .container #find-doctor--homeNew #recommended .product-item .SeeDetail, .container #find-doctor--homeNew #newProducts .product-item .SeeDetail, .container #find-doctor--homeNew #hotDeal .product-item .SeeDetail {
+    border-radius: 60px 0px 24px 0px;
+    background: var(--White, #FFF);
+    display: flex;
+    padding: 16px 40px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 18px;
+    font-weight: 800;
+  }
+  .container .titleServiceHomeNew {
+    font-size: 32px;
+  }
+  .container .mainServiceHomeNew .border-HomeNew span {
+    font-size: 24px;
+  }
   .container #find-doctor--homeNew #myTabContent .product-item .img-pro {
     height: 100%;
   }
@@ -532,7 +765,7 @@ img {
     height: 30px;
   }
   .container #find-doctor--homeNew #myTabContent .product-item .name-product a.name-product--fleaMarket {
-    min-height: 50px;
+    min-height: 45px;
   }
   .container #find-doctor--homeNew #myTabContent .product-item .location-pro p {
     min-height: 55px;
@@ -560,6 +793,16 @@ img {
     min-width: 173px;
     max-width: 173px;
     height: 137px;
+  }
+  .container #find-doctor--homeNew {
+    margin-top: 20px;
+  }
+  .container #recruitment-homeNew .title-recruitment--homeNew span {
+    font-size: 32px;
+  }
+  .container #recruitment-homeNew .title-recruitment--homeNew p {
+    font-size: 18px;
+    font-weight: 600;
   }
   #cCarousel {
     position: relative;
@@ -630,6 +873,15 @@ img {
     cursor: pointer;
   }
   /* END NEW HOME */
+}
+@media all {
+  .tt-flea {
+    color: var(--Black, #000);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+  }
 }
 
 /*# sourceMappingURL=responsive-mobi.css.map */

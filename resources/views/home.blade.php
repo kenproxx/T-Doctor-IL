@@ -4,10 +4,86 @@
 @extends('layouts.master')
 @section('title', 'Home')
 @section('content')
+    <style>
+        /*d none when size = sm*/
+        @media (max-width: 480px) {
+            .d-sm-block {
+                display: block !important;
+            }
+        }
+
+        /*d block when size = md*/
+        @media (min-width: 481px) {
+            .d-md-block {
+                display: block !important;
+            }
+        }
+
+
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+
+        img {
+            max-width: auto;
+            height: auto;
+        }
+
+        .container {
+            max-width: 1170px;
+            width: 100%;
+            /*margin: auto;*/
+        }
+
+        .carousel {
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .carousel img {
+            padding: 0px 2px;
+        }
+
+        @media screen and (max-width: 1200px) {
+            .container {
+                max-width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 1024px) {
+            .carousel img {
+                width: 100%;
+            }
+        }
+        .slick-initialized .slick-prev {
+            left: 40%;
+            top: 725px;
+        }
+        .slick-initialized .slick-next {
+            right: 40%;
+            top: 725px;
+        }
+        .slick-next:before, .slick-prev:before {
+            font-size: 32px !important;
+            line-height: 1;
+            opacity: .75;
+            color: #000 !important;
+        }
+        .slick-dots {
+            display: none !important;
+        }
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
+    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js') }}"></script>
+    <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js') }}"></script>
+
+
     {{--    <link href="{{ asset('css/home.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/style-home.css') }}" rel="stylesheet">
     @include('layouts.partials.header')
-    <div class="container pb-5" style="margin-top: 168px;">
+    <div class="container pb-md-5 mt-200 mt-70">
         <div class="slide-container">
             <div class="slide">
                 <img src="{{asset('img/homeNew-img/Rectangle 23820.png')}}" alt="">
@@ -28,7 +104,7 @@
             <span class="dot"></span>
         </div>
     </div>
-    <div class="container">
+    <div class="container mt-24">
         <div class="titleServiceHomeNew">{{ __('home.Dịch vụ toàn diện') }}</div>
         <div class="mainServiceHomeNew row">
             <div class="col-md-6">
@@ -697,7 +773,7 @@
                         <h2>{{ __('home.Clinics/Pharmacies') }}</h2>
                         <p>{{ __('home.Find your suitable clinics/pharmacies and book now') }}!</p>
                     </div>
-                    <div class="d-flex clip-path-container" style="height: 700px;">
+                    <div class="d-flex clip-path-container">
                         <div id="allAddressesMap" class="p-2 w-100">
 
                         </div>
@@ -798,7 +874,7 @@
                                     </defs>
                                 </svg>
                             </div>
-                            <div>
+                            <div class="title--newAddress">
                                 <h3>{{ __('home.24/7 AVAILABLE') }}</h3>
                                 <p>{{ __('home.You can find available clinics/pharmacies') }}</p>
                             </div>
@@ -822,7 +898,7 @@
                                     </defs>
                                 </svg>
                             </div>
-                            <div><h3>{{ __('home.HOME CARE SERVICE') }}</h3>
+                            <div class="title--newAddress"><h3>{{ __('home.HOME CARE SERVICE') }}</h3>
                                 <p>{{ __("home.Don't come to us! We will come to you") }}!</p>
                             </div>
                         </div>
@@ -835,7 +911,7 @@
                                         fill="#088180"/>
                                 </svg>
                             </div>
-                            <div><h3>{{ __('home.MANY LOCATION') }}</h3>
+                            <div class="title--newAddress"><h3>{{ __('home.MANY LOCATION') }}</h3>
                                 <p>{{ __('home.More than 1500 Doctors, 1000 Pharmacists, 1000 Hospitals always wait for you') }}</p>
                             </div>
                         </div>
@@ -844,13 +920,18 @@
                 </div>
             </div>
             <div class="">
-                <div class="titleServiceHomeNew">Chuyên khoa khám</div>
+                <div class="titleServiceHomeNew d-flex justify-content-between align-items-center">Chuyên khoa khám <a
+                        class="pc-hidden" href="{{route('home.specialist')}}">see more</a></div>
                 <div class="mainServiceHomeNew row">
                     @php
                         $departments = \App\Models\Department::where('status', \App\Enums\DepartmentStatus::ACTIVE)->get();
+                        $departmentsMobile = \App\Models\Department::where('status', \App\Enums\DepartmentStatus::ACTIVE)->get();
                     @endphp
-                    @foreach($departments as $departmentItem)
-                        <div class="col-md-4">
+                    @foreach($departments as $index => $departmentItem)
+                        @php
+                            $showDesktop = $index > 5;
+                        @endphp
+                        <div class="col-md-4 d-none {{ $showDesktop == true ? 'd-md-block' : 'd-sm-block' }}">
                             <a href="{{route('home.specialist.department',$departmentItem->id)}}">
                                 <div class="border-HomeNew">
                                     <div class="w-75 d-flex align-items-center ">
@@ -1131,10 +1212,10 @@
             <div class="d-md-flex main-recruitment--homeNew justify-content-between">
                 <div class="col-md-6 col-12 pl-0 main-card--homeNew">
                     <div class="d-flex content-recruitment--homeNew">
-                        <div class="col-md-3 p-0">
+                        <div class="col-md-3 col-4 p-0">
                             <img src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
                         </div>
-                        <div class="col-md-9 text-title--card">
+                        <div class="col-md-9 col-8 text-title--card">
                             <span>
                                 {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                             </span>
@@ -1144,10 +1225,10 @@
                         </div>
                     </div>
                     <div class="d-flex content-recruitment--homeNew">
-                        <div class="col-md-3 p-0">
+                        <div class="col-md-3 col-4 p-0">
                             <img src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
                         </div>
-                        <div class="col-md-9 text-title--card">
+                        <div class="col-md-9 col-8 text-title--card">
                             <span>
                                 {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                             </span>
@@ -1157,10 +1238,10 @@
                         </div>
                     </div>
                     <div class="d-flex content-recruitment--homeNew">
-                        <div class="col-md-3 p-0">
+                        <div class="col-md-3 col-4 p-0">
                             <img src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
                         </div>
-                        <div class="col-md-9 text-title--card">
+                        <div class="col-md-9 col-8 text-title--card">
                             <span>
                                 {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                             </span>
@@ -1170,10 +1251,10 @@
                         </div>
                     </div>
                     <div class="d-flex content-recruitment--homeNew">
-                        <div class="col-md-3 p-0">
+                        <div class="col-md-3 col-4 p-0">
                             <img src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
                         </div>
-                        <div class="col-md-9 text-title--card">
+                        <div class="col-md-9 col-8 text-title--card">
                             <span>
                                 {{ __('home.Nhận liền tay voucher khám online trị giá 250k từ Phòng khám Med247') }}
                             </span>
@@ -1224,7 +1305,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <div>
+                            <div class="title-re">
                                 <span>{{ __('home.HIRE CHEAPER') }}</span>
                                 <p>{{ __('home.Only 500000vnđ, you can hire your staffs.') }}</p>
                             </div>
@@ -1265,7 +1346,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <div>
+                            <div class="title-re">
                                 <span>{{ __('home.EASY TO FIND STAFFS') }}</span>
                                 <p>{{ __("home.Through us, find your staffs more easier") }}!</p>
                             </div>
@@ -1303,14 +1384,14 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <div>
+                            <div class="title-re">
                                 <span>{{ __('home.BETTER MATCHING RATE') }}</span>
                                 <p>{{ __('home.Through us, you can hire right person') }}</p>
                             </div>
                         </div>
                     </div>
                     <div class="mt-auto p-2 button-bottom-right">
-                        <button class="btn-see-all ">{{ __('home.See all') }}</button>
+                        <button class="btn-see-all ">{{ __('home.Visit') }}</button>
                     </div>
                 </div>
             </div>
@@ -1319,15 +1400,76 @@
     <div class="banner1 m-0">
         <img src="{{asset('img/icons_logo/Rectangle 23818.png')}}" alt="" style="">
     </div>
+
+
+
     <div class="">
         <div class="background-image_HomeNew" id="find-doctor--homeNew">
             <div class="container pb-5 mt-4">
-                <div class="tab-content mt-4" id="myTabContent">
+<div class="pc-hidden tt-flea">
+    Flea market
+</div>
+                <div class="carousel pc-hidden">
+                    @foreach($productsFlea as $product)
+                        <div class="product-itemFlea">
+                            <div class="img-proFlea justify-content-center d-flex">
+                                <img src="{{$product->thumbnail}}" alt="">
+                                <a class="button-heart" data-favorite="0">
+                                    <i id="icon-heart" class="bi-heart bi"
+                                       data-product-id="${product.id}"
+                                       onclick="addProductToWishList(${product.id})"></i>
+                                </a>
+                            </div>
+                            <div class="content-proFlea p-md-3 p-2">
+                                <div class="">
+                                    <div class="name-productFlea" style="min-height: 55px">
+                                        <a class="name-product--fleaMarket"
+                                           href="{{ route('flea.market.product.detail', $product->id) }}" target="_blank">{{$product->name}}</a>
+                                    </div>
+                                    <div class="location-proFlea">
+                                        @php
+                                            $addressP = \App\Models\Province::where('id', $product->province_id)->value('name');
+                                        @endphp
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="21"
+                                             height="21" viewBox="0 0 21 21" fill="none">
+                                            <g clip-path="url(#clip0_5506_14919)">
+                                                <path
+                                                    d="M4.66602 12.8382C3.12321 13.5188 2.16602 14.4673 2.16602 15.5163C2.16602 17.5873 5.89698 19.2663 10.4993 19.2663C15.1017 19.2663 18.8327 17.5873 18.8327 15.5163C18.8327 14.4673 17.8755 13.5188 16.3327 12.8382M15.4993 7.59961C15.4993 10.986 11.7493 12.5996 10.4993 15.0996C9.24935 12.5996 5.49935 10.986 5.49935 7.59961C5.49935 4.83819 7.73793 2.59961 10.4993 2.59961C13.2608 2.59961 15.4993 4.83819 15.4993 7.59961ZM11.3327 7.59961C11.3327 8.05985 10.9596 8.43294 10.4993 8.43294C10.0391 8.43294 9.66602 8.05985 9.66602 7.59961C9.66602 7.13937 10.0391 6.76628 10.4993 6.76628C10.9596 6.76628 11.3327 7.13937 11.3327 7.59961Z"
+                                                    stroke="white" stroke-width="2"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"/>
+                                            </g>
+                                            <defs>
+                                                <clipPath id="clip0_5506_14919">
+                                                    <rect width="20" height="20" fill="white"
+                                                          transform="translate(0.5 0.933594)"/>
+                                                </clipPath>
+                                            </defs>
+                                        </svg> &nbsp; {{$addressP}}
+                                    </div>
+                                    <div class="prices-proFlea">
+                                        {{number_format($product->price, 0, ',', '.') }} {{$product->price_unit ?? 'VND'}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-end">
+                                <div class="SeeDetailFlea">
+                                    <a href="{{ route('flea.market.product.detail', $product->id) }}"
+                                       target="_blank">{{ __('home.See details') }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+                <div class="tab-content mt-4 header-pc" id="myTabContent">
                     <div class="tab-pane fade show active" id="popularProduct" role="tabpanel"
                          aria-labelledby="popularProduct-tab">
                         <div id="cCarousel">
-                            <div style="z-index: 0;" class="arrow" id="prevFlea"><i class="fa-solid fa-chevron-left"></i></div>
-                            <div style="z-index: 0;" class="arrow" id="nextFlea"><i class="fa-solid fa-chevron-right"></i></div>
+                            <div style="z-index: 0;" class="arrow" id="prevFlea"><i
+                                    class="fa-solid fa-chevron-left"></i></div>
+                            <div style="z-index: 0;" class="arrow" id="nextFlea"><i
+                                    class="fa-solid fa-chevron-right"></i></div>
                             <div id="carousel-vp">
                                 <div id="cCarousel-inner">
                                     @if($productsFlea == '')
@@ -1478,7 +1620,7 @@
                                         <div class="">
                                             <div class="product-item">
                                                 <div
-                                                    class="img-pro h-100 justify-content-center d-flex img_product--homeNew">
+                                                    class="img-pro justify-content-center d-flex img_product--homeNew">
                                                     <img src="{{$product->thumbnail}}" alt="">
                                                     <a class="button-heart" data-favorite="0">
                                                         <i id="icon-heart" class="bi-heart bi"
@@ -1544,7 +1686,7 @@
                                         <div class="">
                                             <div class="product-item">
                                                 <div
-                                                    class="img-pro h-100 justify-content-center d-flex img_product--homeNew">
+                                                    class="img-pro justify-content-center d-flex img_product--homeNew">
                                                     <img src="{{$product->thumbnail}}" alt="">
                                                     <a class="button-heart" data-favorite="0">
                                                         <i id="icon-heart" class="bi-heart bi"
@@ -1626,7 +1768,7 @@
                                         <div class="">
                                             <div class="product-item">
                                                 <div
-                                                    class="img-pro h-100 justify-content-center d-flex img_product--homeNew">
+                                                    class="img-pro justify-content-center d-flex img_product--homeNew">
                                                     <img src="{{$product->thumbnail}}" alt="">
                                                     <a class="button-heart" data-favorite="0">
                                                         <i id="icon-heart" class="bi-heart bi"
@@ -1708,7 +1850,7 @@
                                         <div class="">
                                             <div class="product-item">
                                                 <div
-                                                    class="img-pro h-100 justify-content-center d-flex img_product--homeNew">
+                                                    class="img-pro justify-content-center d-flex img_product--homeNew">
                                                     <img src="{{$product->thumbnail}}" alt="">
                                                     <a class="button-heart" data-favorite="0">
                                                         <i id="icon-heart" class="bi-heart bi"
@@ -1791,6 +1933,22 @@
 
     {{-- SLIDE  --}}
     <script>
+
+        $('.carousel').slick({
+            dots: true,
+            slidesPerRow: 2,
+            rows: 2,
+            responsive: [
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesPerRow: 2,
+                        rows: 2,
+                    }
+                }
+            ]
+        });
+
         let currentSlide = 0;
         const slides = document.querySelectorAll(".slide")
         const dots = document.querySelectorAll('.dot')

@@ -86,6 +86,8 @@ Route::middleware(['user.active'])->group(function () {
     Route::post('forget-password/send',
         [ProfileController::class, 'handleForgetPassword'])->name('user.forget.password.send');
     Route::post('forget-password/check', [ProfileController::class, 'checkOTP'])->name('user.forget.password.check');
+    Route::post('check-valid-otp', [ProfileController::class, 'checkValidOTP'])->name('user.forget.password.check.valid.otp');
+    Route::post('change-password', [ProfileController::class, 'changePassword'])->name('user.forget.password.change.password');
 
     /* Need help? */
     Route::group(['prefix' => 'need-helps'], function () {
