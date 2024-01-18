@@ -55,6 +55,11 @@ class LoginController extends Controller
                 $token = JWTAuth::fromUser($user);
                 $user->token = $token;
                 $user->save();
+
+                if ($user->points > 1000) {
+                    (new MainController())->setCouponForUser($user->id);
+                }
+
                 $response = $user->toArray();
                 $roleUser = RoleUser::where('user_id', $user->id)->first();
                 $role = Role::find($roleUser->role_id);

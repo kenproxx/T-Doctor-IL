@@ -25,7 +25,7 @@
         }
 
         img {
-            max-width: auto;
+            width: auto;
             height: auto;
         }
 
@@ -55,20 +55,24 @@
                 width: 100%;
             }
         }
+
         .slick-initialized .slick-prev {
             left: 40%;
             top: 725px;
         }
+
         .slick-initialized .slick-next {
             right: 40%;
             top: 725px;
         }
+
         .slick-next:before, .slick-prev:before {
             font-size: 32px !important;
             line-height: 1;
             opacity: .75;
             color: #000 !important;
         }
+
         .slick-dots {
             display: none !important;
         }
@@ -78,7 +82,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
     <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js') }}"></script>
     <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js') }}"></script>
-
 
     {{--    <link href="{{ asset('css/home.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/style-home.css') }}" rel="stylesheet">
@@ -965,8 +968,6 @@
         </div>
     </div>
 
-
-
     <div class="bg-homeNew">
         <div class="container pt-3">
             <div id="find-doctor--homeNew">
@@ -1013,8 +1014,8 @@
                                                     <img src="{{$doctor->avt}}" alt="">
                                                     <a class="button-heart" data-favorite="0">
                                                         <i id="icon-heart" class="bi-heart bi"
-                                                           data-product-id="${product.id}"
-                                                           onclick="addProductToWishList(${product.id})"></i>
+                                                           data-product-id=""
+                                                           onclick=""></i>
                                                     </a>
                                                     <s class="icon-chuyen-khoa">
                                                         @php
@@ -1103,8 +1104,8 @@
                                                     <img src="{{$medicine->thumbnail}}" alt="">
                                                     <a class="button-heart" data-favorite="0">
                                                         <i id="icon-heart" class="bi-heart bi"
-                                                           data-product-id="${product.id}"
-                                                           onclick="addProductToWishList({{$medicine->id}})"></i>
+                                                           data-product-id=""
+                                                           onclick=""></i>
                                                     </a>
                                                 </div>
                                                 <div class="content-pro p-md-3 p-2">
@@ -1401,14 +1402,12 @@
         <img src="{{asset('img/icons_logo/Rectangle 23818.png')}}" alt="" style="">
     </div>
 
-
-
     <div class="">
         <div class="background-image_HomeNew" id="find-doctor--homeNew">
             <div class="container pb-5 mt-4">
-<div class="pc-hidden tt-flea">
-    Flea market
-</div>
+                <div class="pc-hidden tt-flea">
+                    Flea market
+                </div>
                 <div class="carousel pc-hidden">
                     @foreach($productsFlea as $product)
                         <div class="product-itemFlea">
@@ -1424,7 +1423,8 @@
                                 <div class="">
                                     <div class="name-productFlea" style="min-height: 55px">
                                         <a class="name-product--fleaMarket"
-                                           href="{{ route('flea.market.product.detail', $product->id) }}" target="_blank">{{$product->name}}</a>
+                                           href="{{ route('flea.market.product.detail', $product->id) }}"
+                                           target="_blank">{{$product->name}}</a>
                                     </div>
                                     <div class="location-proFlea">
                                         @php
@@ -1931,7 +1931,6 @@
         $coordinatesArray = $addresses->toArray();
     @endphp
 
-    {{-- SLIDE  --}}
     <script>
 
         $('.carousel').slick({
@@ -1992,7 +1991,37 @@
         })
 
     </script>
-    {{-- END SLIDE --}}
+    <script>
+        let accessToken = `Bearer ` + token;
+        let headers = {
+            "Authorization": accessToken
+        };
+
+        async function productWishList(productID, type) {
+
+        }
+
+        async function doctorWishList(doctorID) {
+            let doctorWishListUrl = `{{ route('api.backend.medical.favourites.create')  }}`;
+
+            const formData = new FormData();
+
+            await $.ajax({
+                url: doctorWishListUrl,
+                method: 'POST',
+                headers: headers,
+                data: formData,
+                success: function (response) {
+                    console.log(response);
+                    alert('Create success!');
+                },
+                error: function (error) {
+                    console.log(error);
+                    alert('Create error!');
+                }
+            });
+        }
+    </script>
     <script>
         function viewCoupon(id) {
             window.location.href = "/coupon/" + id;
