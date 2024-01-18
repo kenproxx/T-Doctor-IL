@@ -12,10 +12,12 @@ use App\Models\RoleUser;
 use App\Models\SocialUser;
 use App\Models\User;
 use DB;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class MainController extends Controller
 {
@@ -223,6 +225,18 @@ class MainController extends Controller
         Coupon::where('endDate', '>', $nowTime)
             ->where('startDate', '<=', $nowTime)
             ->update(['status' => CouponStatus::ACTIVE]);
+    }
+
+    public function parsedToken($token)
+    {
+//        $parsedToken = JWTAuth::setToken($token)->parseToken();
+//        if ($parsedToken->check()) {
+//            try {
+//                JWTAuth::invalidate($token);
+//            } catch (Exception $exception){
+//
+//            }
+//        }
     }
 
     public function setCouponForUser($userID)

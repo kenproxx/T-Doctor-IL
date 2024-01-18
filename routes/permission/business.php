@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\BackendCategoryController;
+use App\Http\Controllers\backend\BackendNewEventController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::group(['prefix' => 'new-event'], function () {
+    Route::get('index', [BackendNewEventController::class, 'index'])->name('api.new-event.index');
+    Route::get('create', [BackendNewEventController::class, 'create'])->name('api.new-event.create');
+    Route::post('store', [BackendNewEventController::class, 'store'])->name('api.new-event.store');
+    Route::get('edit/{id}', [BackendNewEventController::class, 'edit'])->name('api.new-event.edit');
+    Route::post('update', [BackendNewEventController::class, 'update'])->name('api.new-event.update');
+    Route::post('destroy/{id}', [BackendNewEventController::class, 'destroy'])->name('api.new-event.destroy');
+});
 
 Route::group(['prefix' => 'categories'], function () {
     Route::get('/list', [BackendCategoryController::class, 'getAll'])->name('api.business.categories.list');

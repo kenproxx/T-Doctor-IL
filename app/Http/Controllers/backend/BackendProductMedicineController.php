@@ -4,10 +4,12 @@ namespace App\Http\Controllers\backend;
 
 use App\Enums\online_medicine\OnlineMedicineStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\restapi\MainApi;
 use App\Models\DrugIngredients;
 use App\Models\online_medicine\CategoryProduct;
 use App\Models\online_medicine\ProductMedicine;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BackendProductMedicineController extends Controller
 {
@@ -16,8 +18,18 @@ class BackendProductMedicineController extends Controller
      */
     public function index()
     {
-        $productMedicines = ProductMedicine::where('status', '!=', OnlineMedicineStatus::DELETED)->orderBy('created_at',
-                'DESC')->paginate(20);
+        $user_id = Auth::check() ? Auth::user()->id : '';
+        $isAdmin = (new MainApi())->isAdmin($user_id);
+        if ($isAdmin) {
+            $productMedicines = ProductMedicine::where('status', '!=', OnlineMedicineStatus::DELETED)
+                ->orderBy('created_at', 'DESC')
+                ->paginate(20);
+        } else {
+            $productMedicines = ProductMedicine::where('status', '!=', OnlineMedicineStatus::DELETED)
+                ->where('user_id', $user_id)
+                ->orderBy('created_at', 'DESC')
+                ->paginate(20);
+        }
         return view('admin.product_medicine.index', compact('productMedicines'));
     }
 
@@ -96,7 +108,7 @@ class BackendProductMedicineController extends Controller
         if ($request->hasFile('thumbnail')) {
             $item = $request->file('thumbnail');
             $itemPath = $item->store('product_medicine', 'public');
-            $thumbnail = asset('storage/'.$itemPath);
+            $thumbnail = asset('storage/' . $itemPath);
             $params['thumbnail'] = $thumbnail;
         }
         $productMedicine = ProductMedicine::find($request->input('id'));
@@ -104,7 +116,7 @@ class BackendProductMedicineController extends Controller
         if ($request->hasFile('gallery')) {
             $galleryPaths = array_map(function ($image) {
                 $itemPath = $image->store('gallery', 'public');
-                return asset('storage/'.$itemPath);
+                return asset('storage/' . $itemPath);
             }, $request->file('gallery'));
             $gallery = implode(',', $galleryPaths);
         }
@@ -169,14 +181,14 @@ class BackendProductMedicineController extends Controller
         if ($request->hasFile('thumbnail')) {
             $item = $request->file('thumbnail');
             $itemPath = $item->store('product_medicine', 'public');
-            $thumbnail = asset('storage/'.$itemPath);
+            $thumbnail = asset('storage/' . $itemPath);
             $params['thumbnail'] = $thumbnail;
         }
 
         if ($request->hasFile('gallery')) {
             $galleryPaths = array_map(function ($image) {
                 $itemPath = $image->store('gallery', 'public');
-                return asset('storage/'.$itemPath);
+                return asset('storage/' . $itemPath);
             }, $request->file('gallery'));
             $gallery = implode(',', $galleryPaths);
         } else {

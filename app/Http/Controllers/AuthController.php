@@ -111,7 +111,7 @@ class AuthController extends Controller
             $passwordHash = Hash::make($password);
 
             $user->email = $email;
-            if ($member == \App\Enums\Role::DOCTORS) {
+            if ($type == \App\Enums\Role::MEDICAL) {
                 $name_doctor = $request->input('name_doctor');
                 $contact_phone = $request->input('contact_phone');
                 $experience = $request->input('experience');
@@ -155,12 +155,12 @@ class AuthController extends Controller
             if ($success) {
                 (new MainController())->createRoleUser($member, $username);
 
-                if ($user->member == 'DOCTORS') {
+                if ($user->type == \App\Enums\Role::MEDICAL) {
                     auth()->login($user, true);
                     toast('Register success!', 'success', 'top-left');
                     return redirect()->route('profile');
                 }
-                if ($user->member == 'HOSPITALS') {
+                if ($user->type == \App\Enums\Role::BUSINESS) {
 
                     $openDateTime = Carbon::createFromFormat('Y-m-d H:i', $currentDate->format('Y-m-d') . ' ' . $openDate);
                     $closeDateTime = Carbon::createFromFormat('Y-m-d H:i', $currentDate->format('Y-m-d') . ' ' . $closeDate);
@@ -181,7 +181,7 @@ class AuthController extends Controller
                     $hospital->user_id = $user->id;
                     $hospital->time_work = $time_work;
                     $hospital->status = ClinicStatus::ACTIVE;
-                    $hospital->type = 'HOSPITALS';
+                    $hospital->type = $user->member;
                     $hospital->save();
 
                     $newUser = User::find($user->id);
@@ -293,12 +293,8 @@ class AuthController extends Controller
     {
         if (Auth::check()) {
             $user = Auth::user();
-            if ($user->token) {
-                try {
-                    JWTAuth::invalidate($user->token);
-                } catch (Exception $exception){
-
-                }
+            if ($user->token && $user->token != '') {
+                (new MainController())->parsedToken($user->token);
             }
             $user->token = null;
             $user->save();

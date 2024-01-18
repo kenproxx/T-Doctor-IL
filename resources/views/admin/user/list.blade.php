@@ -6,7 +6,13 @@
     <div class="">
         <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800"> List User </h1>
-        <a href="{{route('view.admin.user.create')}}" class="btn btn-primary mb-3">{{ __('home.Add') }}</a>
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="mb-3 col-md-3">
+                <input class="form-control" id="inputSearchUser" type="text" placeholder="Search.."/>
+            </div>
+            <a href="{{route('view.admin.user.create')}}" class="btn btn-primary mb-3">{{ __('home.Add') }}</a>
+        </div>
+        <br>
         <table class="table" id="tableListUser">
             <thead>
             <tr>
@@ -34,7 +40,7 @@
 
         $(document).ready(function () {
             callListUser();
-        })
+        });
 
         async function callListUser() {
             await $.ajax({
@@ -81,6 +87,7 @@
 
             $('#tbodyListUser').empty().append(html);
             loadPaginate('tableListUser', 20);
+            searchMain('inputSearchUser', 'tableListUser');
         }
 
         function confirmDeleteUser(id) {

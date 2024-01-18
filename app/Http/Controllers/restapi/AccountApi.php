@@ -67,8 +67,8 @@ class AccountApi extends Controller
                     return response((new MainApi())->returnMessage('Verify code incorrect!'), 400);
                 }
 
-                if ($user->token) {
-                    JWTAuth::invalidate($user->token);
+                if ($user->token && $user->token != '') {
+                    (new MainController())->parsedToken($user->token);
                 }
 
                 $user->verify_code = null;
