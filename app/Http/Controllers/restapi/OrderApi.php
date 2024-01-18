@@ -37,9 +37,17 @@ class OrderApi extends Controller
                 $array_products = null;
                 foreach ($order_items as $order_item) {
                     if ($order_item->type_product == TypeProductCart::MEDICINE) {
-                        $product = ProductMedicine::find($order_item->product_id);
+                        $product = DB::table('product_medicines')
+                            ->join('users', 'users.id', '=', 'product_medicines.user_id')
+                            ->where('product_medicines.id', $order_item->product_id)
+                            ->select('product_medicines.*', 'users.username')
+                            ->first();
                     } else {
-                        $product = ProductInfo::find($order_item->product_id);
+                        $product = DB::table('product_infos')
+                            ->join('users', 'users.id', '=', 'product_medicines.created_by')
+                            ->where('product_infos.id', $order_item->product_id)
+                            ->select('product_infos.*', 'users.username')
+                            ->first();
                     }
                     $array_products[] = $product;
                 }
