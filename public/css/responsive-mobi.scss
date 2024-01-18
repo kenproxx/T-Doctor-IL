@@ -291,6 +291,12 @@ img {
                     max-height: 50px;
                     object-fit: cover;
                 }
+                .gallery-detail {
+                    width: 75px;
+                    height: 75px;
+                    object-fit: cover;
+                    border-radius: 6px;
+                }
             }
         }
 
@@ -930,8 +936,15 @@ img {
         .recruitment-details {
             .border-radius-1px {
                 img {
-                    width: 80px;
+                    width: auto;
                     height: 383px;
+                    object-fit: cover;
+                }
+                .gallery-detail {
+                    width: 120px;
+                    height: auto;
+                    object-fit: cover;
+                    border-radius: 6px;
                 }
             }
         }

@@ -235,6 +235,12 @@ img {
     max-height: 50px;
     object-fit: cover;
   }
+  .container .recruitment-details .border-radius-1px .gallery-detail {
+    width: 75px;
+    height: 75px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
   .container .mt-110 {
     margin-top: 0;
   }
@@ -672,8 +678,15 @@ img {
     margin-bottom: 16px;
   }
   .container .recruitment-details .border-radius-1px img {
-    width: 80px;
+    width: auto;
     height: 383px;
+    object-fit: cover;
+  }
+  .container .recruitment-details .border-radius-1px .gallery-detail {
+    width: 120px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 6px;
   }
   .container .product-item .img-pro {
     height: 237px;

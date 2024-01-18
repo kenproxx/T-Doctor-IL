@@ -14,7 +14,7 @@
     @endphp
     <style>
         .selected {
-            border: 2px solid black;
+            border: 0 solid black;
             opacity: 0.5;
         }
     </style>
@@ -38,8 +38,9 @@
                         @foreach($galleryArray as $pr_gallery)
                             <div
                                 class="item-detail d-flex justify-content-center  border-radius-1px color-Grey-Dark mr-md-3">
-                                <img style="width: 53px; height: 100%" src="{{asset($pr_gallery)}}" alt=""
-                                     class="border mw-140px">
+                                <img  src="{{asset($pr_gallery)}}"
+                                     alt=""
+                                     class="border mw-140px gallery-detail">
                             </div>
                         @endforeach
                     </div>
@@ -49,7 +50,8 @@
                         <div>
                             <strong class="flea-prise">{{$pr_json->name}}</strong>
                             <div class="text-content-product">
-                                <strong class="">{{number_format($pr_json->price, 0, ',', '.') }} {{$pr_json->price_unit ?? 'VND'}}</strong>
+                                <strong
+                                    class="">{{number_format($pr_json->price, 0, ',', '.') }} {{$pr_json->price_unit ?? 'VND'}}</strong>
                             </div>
 
                             <p style="color: #929292">{{ __('home.Location') }}:<strong class="flea-prise">

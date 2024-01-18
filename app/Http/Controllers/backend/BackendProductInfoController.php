@@ -17,8 +17,10 @@ class BackendProductInfoController extends Controller
     public function index(Request $request)
     {
         $userId = $request->input('user_id');
-        if (Auth::check()){
-            $userId = Auth::user()->id;
+        if (!$userId) {
+            if (Auth::check()){
+                $userId = Auth::user()->id;
+            }
         }
 
         $products = DB::table('product_infos')

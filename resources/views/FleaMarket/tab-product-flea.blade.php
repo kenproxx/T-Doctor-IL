@@ -63,7 +63,7 @@
         async function callListProduct(token) {
             let accessToken = `Bearer ` + token;
             await $.ajax({
-                url: `{{route('backend.products.list')}}`,
+                url: `{{route('backend.products.list')}}`+'?user_id={{$id}}',
                 method: 'GET',
                 headers: {
                     "Authorization": accessToken
@@ -88,7 +88,6 @@
                 let item = res[i];
                 let adsPlan = item.ads_plan;
                 let userId = `{{ Auth::check() ? Auth::user()->id : null }}`;
-
                 if (userId == item.created_by) {
                     continue;
                 }

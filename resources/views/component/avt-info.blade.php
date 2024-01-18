@@ -6,12 +6,12 @@
         <div class="d-mb-flex">
             <div class="info col-8 pl-0">
                 @php
-                    if (Auth::user() != null) {
-                        $info = Auth::user();
-                    } else {
-                        $info = \App\Models\User::where('id', $id)->first();
-                    }
-                    $address = \App\Models\Province::where('id', $info->province_id)->value('name');
+                        if (Auth::user() != null) {
+                            $info = $user;
+                        } else {
+                            $info = \App\Models\User::where('id', $id)->first();
+                        }
+                        $address = \App\Models\Province::where('id', $info->province_id)->value('name');
                 @endphp
                 <div class="name font-18-mobi">{{$info->name}} {{$info->last_name}}</div>
                 <p class="location-info font-14-mobi">{{ __('home.Location') }}: <strong class="hanoi font-14-mobi">
