@@ -267,7 +267,7 @@ class AuthController extends Controller
                 setCookie('accessToken', $token, $expiration_time, '/');
                 toast('Welcome ' . $user->email, 'success', 'top-left');
 
-                if ($user->points == 1000) {
+                if ($user->points >= 1000) {
                     (new MainController())->setCouponForUser($user->id);
                 }
 
