@@ -31,17 +31,17 @@
                         </div>
                         <div class="d-flex row">
                             @foreach($related as $item)
-                                <div class="col-md-6 d-flex mb-4">
-                                    <a class="w-100" href="{{route('detail.new',$item->id)}}">
-                                        <div class="d-flex border-8px">
-                                            <div class="col-md-3 p-0">
-                                                <img class="w-100" src="{{$item->thumbnail}}"  style="object-fit: cover;border-radius: 8px;height: 111px;">
+                                <div class="col-md-6 padding-news">
+                                    <a href="{{route('detail.new',$item->id)}}">
+                                        <div class="d-flex border-8px w-100">
+                                            <div class="col-md-3 p-0 content__item__image">
+                                                <img class="content__item__image" src="{{$item->thumbnail}}">
                                             </div>
                                             <div class="col-md-9 pr-0">
-                                                <strong class="fs-16px">{{$item->title}}</strong>
-                                                <p class="fs-12px mt-2">{!! $item->short_description !!}</p>
-                                                <div class="d-flex justify-content-end align-items-end">
-                                                    <p>{{ __('home.Read more') }}</p>
+
+                                                <strong class="fs-16px max-2-line-title">{{$item->title}}</strong>
+                                                <div class="max-5-line-title">
+                                                    <div class="fs-12px">{!! $item->short_description !!}</div>
                                                 </div>
                                             </div>
                                         </div>

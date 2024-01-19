@@ -236,6 +236,13 @@
     width: 128px;
     height: 102px;
   }
+  .body-news div, .body-news p, .body-news h2, .body-news h1, .body-news h3, .body-news h4, .body-news h5, .body-news h6, .body-news span, .body-news strong, .body-news small, .body-news li, .body-news ul, .body-news ol, .body-news button, .body-news td, .body-news th, .body-news form, .body-news fieldset, .body-news legend, .body-news textarea, .body-news select, .body-news option, .body-news label, .body-news table, .body-news blockquote, .body-news pre {
+    font-size: 12px !important;
+  }
+  .text-content-news div, .text-content-news p, .text-content-news h2, .text-content-news h1, .text-content-news h3, .text-content-news h4, .text-content-news h5, .text-content-news h6, .text-content-news span, .text-content-news strong, .text-content-news small, .text-content-news li, .text-content-news ul, .text-content-news ol, .text-content-news button, .text-content-news td, .text-content-news th, .text-content-news form, .text-content-news fieldset, .text-content-news legend, .text-content-news textarea, .text-content-news select, .text-content-news option, .text-content-news label, .text-content-news table, .text-content-news blockquote, .text-content-news pre {
+    margin-top: 12px;
+    font-size: 14px !important;
+  }
   .news-content {
     color: #000;
     font-size: 18px;

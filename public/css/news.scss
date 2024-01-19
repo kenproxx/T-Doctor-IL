@@ -235,6 +235,17 @@
         width: 128px;
         height: 102px;
     }
+    .body-news {
+        div,p,h2,h1,h3,h4,h5,h6,span,strong,small,li,ul,ol,button,td,th,form,fieldset,legend,textarea,select,option,label,table,blockquote,pre{
+            font-size: 12px !important;
+        }
+    }
+.text-content-news {
+    div,p,h2,h1,h3,h4,h5,h6,span,strong,small,li,ul,ol,button,td,th,form,fieldset,legend,textarea,select,option,label,table,blockquote,pre{
+        margin-top: 12px;
+        font-size: 14px !important;
+    }
+}
     .news-content {
         color: #000;
         font-size: 18px;
