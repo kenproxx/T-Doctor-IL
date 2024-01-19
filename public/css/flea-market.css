@@ -671,5 +671,68 @@ input[type=range]::-moz-range-thumb {
     line-height: normal;
   }
 }
+.bi-heart-fill {
+  color: red;
+}
+
+.product-item {
+  border-radius: 25px;
+  background: #088180;
+  padding: 0;
+}
+.product-item .img-pro img {
+  border-radius: 24px 24px 0 100px;
+  height: 300px;
+  object-fit: cover;
+}
+.product-item .img-pro i {
+  display: flex;
+  padding: 8px;
+  align-items: flex-start;
+  gap: 10px;
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  border-radius: 51px;
+  background: #EAEAEA;
+}
+.product-item .location-pro {
+  color: #FFFFFF;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+.product-item .prices-pro {
+  color: #FFFFFF;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+}
+.product-item .SeeDetail {
+  display: flex;
+  padding: 16px 40px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 86px 0 36px 0;
+  width: 70%;
+  background: #FFFFFF;
+  border: 0;
+}
+.product-item .img_product--homeNew img {
+  border-radius: 24px 24px 100px 0;
+  background: lightgray 50%/cover no-repeat;
+  height: 300px !important;
+}
+.product-item .content-pro .name-product a {
+  color: #FFFFFF;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+  min-height: 50px;
+}
 
 /*# sourceMappingURL=flea-market.css.map */

@@ -727,6 +727,23 @@
         </li>
         <!-- End Order Member Nav -->
 
+        <!-- Start My Coupons Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#my-coupons-nav" data-bs-toggle="collapse"
+               href="#">
+                <i class="bi bi-cloud"></i><span>My Coupons</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="my-coupons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('web.users.my.coupons.list') }}">
+                        <i class="bi bi-circle"></i><span>List Coupons</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- End My Coupons Nav -->
+
         <li class="nav-heading">{{ __('home.Settings') }}</li>
 
         <!-- Start Profile Page Nav -->

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\CV;
+namespace App\Http\Controllers\ui\Post;
 
 use App\Http\Controllers\Controller;
-use App\Models\CvSkill;
+use App\Models\PostRecruitment;
 use Illuminate\Http\Request;
 
-class CvSkillController extends Controller
+class PostRecruitmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class CvSkillController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CvSkill $cvSkill)
+    public function show(PostRecruitment $postRecruitment)
     {
         //
     }
@@ -43,7 +43,7 @@ class CvSkillController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CvSkill $cvSkill)
+    public function edit(PostRecruitment $postRecruitment)
     {
         //
     }
@@ -51,7 +51,7 @@ class CvSkillController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CvSkill $cvSkill)
+    public function update(Request $request, PostRecruitment $postRecruitment)
     {
         //
     }
@@ -59,7 +59,7 @@ class CvSkillController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CvSkill $cvSkill)
+    public function destroy(PostRecruitment $postRecruitment)
     {
         //
     }

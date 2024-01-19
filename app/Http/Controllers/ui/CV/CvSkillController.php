@@ -1,29 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\frontend;
+namespace App\Http\Controllers\ui\CV;
 
-use App\Enums\NewEventStatus;
 use App\Http\Controllers\Controller;
-use App\Models\NewEvent;
+use App\Models\CvSkill;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class CvSkillController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-//    public function index()
-//    {
-//        $listNewEvent = NewEvent::where('status', NewEventStatus::ACTIVE)
-//            ->orderBy('created_at', 'desc')
-//            ->get();
-//        return view('News-event.News', compact('listNewEvent'));
-//    }
-//
-//    public function detail ()
-//    {
-//        return view('News-event.detail-news');
-//    }
+    public function index()
+    {
+        //
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -44,7 +35,7 @@ class HomeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(CvSkill $cvSkill)
     {
         //
     }
@@ -52,7 +43,7 @@ class HomeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(CvSkill $cvSkill)
     {
         //
     }
@@ -60,7 +51,7 @@ class HomeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, CvSkill $cvSkill)
     {
         //
     }
@@ -68,7 +59,7 @@ class HomeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(CvSkill $cvSkill)
     {
         //
     }

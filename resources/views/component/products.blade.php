@@ -1,8 +1,8 @@
 @php
-    $isFavourite = \App\Models\MedicalFavourite::where([
+    $isFavourite = \App\Models\WishList::where([
                 ['user_id', '=', Auth::user()->id ?? ''],
-                ['medical_id', '=', $medicine->id],
-                ['is_favorite', '=', 1],
+                ['product_id', '=', $medicine->id],
+                ['type_product', '=', \App\Enums\TypeProductCart::MEDICINE],
             ])->first();
 
             $heart = 'bi-heart d-flex';
@@ -55,52 +55,53 @@
         })
     });
 
-    function handleAddMedicineToWishList(id) {
-
+    async function handleAddMedicineToWishList(id) {
+        loadingMasterPage();
         let headers = {
             'Authorization': `Bearer ${token}`
         };
 
         let user_id = `{{ Auth::user()->id ?? ''}}`;
-        console.log(user_id)
-        let url = `{{ route('api.backend.wish.lists.medical.update', ['id' => ':id']) }}`;
-
-        url = url.replace(':id', id);
+        let url = `{{ route('api.backend.wish.lists.medical.update') }}`;
 
         let data = new FormData();
         data.append('user_id', user_id);
         data.append('product_id', id);
         data.append('_token', '{{ csrf_token() }}');
+        data.append('product_type', `{{ \App\Enums\TypeProductCart::MEDICINE }}`);
         if (user_id == '') {
             alert('Bạn cần đăng nhập để thực hiện chức năng này')
+            return;
+        }
 
-        } else {
-            try {
-                $.ajax({
-                    url: url,
-                    method: 'POST',
-                    headers: headers,
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    data: data,
-                    success: function (response) {
-                        let heartIcon = $('#heart-icon-' + id);
-
-                        if (response.is_favorite == true) {
-                            heartIcon.removeClass('bi-heart')
-                            heartIcon.addClass('bi-heart-fill');
-                        } else {
-                            heartIcon.removeClass('bi-heart-fill');
-                            heartIcon.addClass('bi-heart');
-                        }
-                    },
-                    error: function (exception) {
+        try {
+           await $.ajax({
+                url: url,
+                method: 'POST',
+                headers: headers,
+                contentType: false,
+                cache: false,
+                processData: false,
+                data: data,
+                success: function (response) {
+                    let heartIcon = $('#heart-icon-' + id);
+                    if (response.isFavourite == true) {
+                        heartIcon.removeClass('bi-heart')
+                        heartIcon.addClass('bi-heart-fill');
+                    } else {
+                        heartIcon.removeClass('bi-heart-fill');
+                        heartIcon.addClass('bi-heart');
                     }
-                });
-            } catch (error) {
-                throw error;
-            }
+                    loadingMasterPage();
+                },
+                error: function (exception) {
+                    loadingMasterPage();
+                    alert('Create error!')
+                }
+            });
+        } catch (error) {
+            loadingMasterPage();
+            alert('Error, Please try again!')
         }
 
     }

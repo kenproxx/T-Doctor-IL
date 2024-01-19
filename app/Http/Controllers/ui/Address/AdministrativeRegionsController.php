@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\CV;
+namespace App\Http\Controllers\ui\Address;
 
 use App\Http\Controllers\Controller;
-use App\Models\CvEducation;
+use App\Models\AdministrativeRegions;
 use Illuminate\Http\Request;
 
-class CvEducationController extends Controller
+class AdministrativeRegionsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class CvEducationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CvEducation $cvEducation)
+    public function show(AdministrativeRegions $administrativeRegions)
     {
         //
     }
@@ -43,7 +43,7 @@ class CvEducationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CvEducation $cvEducation)
+    public function edit(AdministrativeRegions $administrativeRegions)
     {
         //
     }
@@ -51,7 +51,7 @@ class CvEducationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CvEducation $cvEducation)
+    public function update(Request $request, AdministrativeRegions $administrativeRegions)
     {
         //
     }
@@ -59,7 +59,7 @@ class CvEducationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CvEducation $cvEducation)
+    public function destroy(AdministrativeRegions $administrativeRegions)
     {
         //
     }

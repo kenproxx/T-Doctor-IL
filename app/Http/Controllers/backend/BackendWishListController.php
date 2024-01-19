@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\backend;
 
 use App\Enums\ProductStatus;
+use App\Enums\TypeProductCart;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
-use App\Models\MedicalFavourite;
 use App\Models\ProductInfo;
 use App\Models\User;
 use App\Models\WishList;
@@ -13,7 +13,6 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use function PHPUnit\Framework\isEmpty;
 
 class BackendWishListController extends Controller
 {
@@ -151,50 +150,55 @@ class BackendWishListController extends Controller
 
     }
 
-    public function updateMedical(Request $request, $id)
+    public function updateMedical(Request $request)
     {
         try {
-            $wishList = MedicalFavourite::where('medical_id', $id)->first();
             $userID = $request->input('user_id');
-            $productID = $request->input('product_id');
-            if ($wishList) {
-                $isFavorite = $wishList->is_favorite;
-                $wishList->user_id = $userID;
-                $wishList->medical_id = $productID;
-                $wishList->is_favorite = !$isFavorite;
+            $product_id = $request->input('product_id');
+            $product_type = $request->input('product_type');
 
-                $success = $wishList->save();
+            if (!$product_type) {
+                $product_type = TypeProductCart::FLEA_MARKET;
+            }
+
+            $productFavourite = WishList::where([
+                ['user_id', $userID],
+                ['product_id', $product_id],
+                ['type_product', $product_type]
+            ])->first();
+
+            if (!$productFavourite) {
+                $productFavourite = new WishList();
+                $productFavourite->user_id = $userID;
+                $productFavourite->product_id = $product_id;
+                $productFavourite->type_product = $product_type;
+
+                $success = $productFavourite->save();
                 if ($success) {
-                    return response()->json($wishList);
+                    return response()->json([
+                        'status' => true,
+                        'isFavourite' => true,
+                        'message' => 'Add to wishlist success'
+                    ]);
                 }
-                return response('Update error', 400);
             } else {
-                $wishList = new MedicalFavourite();
-                $wishList->user_id = $userID;
-                $wishList->medical_id = $productID;
-                $wishList->is_favorite = '1';
-
-                $success = $wishList->save();
+                $success = WishList::where([
+                    ['user_id', $userID],
+                    ['product_id', $product_id],
+                    ['type_product', $product_type]
+                ])->delete();
                 if ($success) {
-                    return response()->json($wishList);
+                    return response()->json([
+                        'status' => true,
+                        'isFavourite' => false,
+                        'message' => 'Remove from wishlist success'
+                    ]);
                 }
-                return response('Update error', 400);
             }
-        } catch (Exception $exception) {
-            return response($exception, 400);
-        }
-    }
-
-    public function deleteMultil(Request $request)
-    {
-        $listID = $request->input('listID');
-        $listID = explode(',', $listID);
-        try {
-            $success = WishList::whereIn('id', $listID)->delete();
-            if ($success) {
-                return response('Delete success', 200);
-            }
-            return response('Delete error', 400);
+            return response()->json([
+                'status' => false,
+                'message' => 'Add to wishlist error'
+            ]);
         } catch (Exception $exception) {
             return response($exception, 400);
         }
@@ -211,5 +215,20 @@ class BackendWishListController extends Controller
             return response('Delete error', 400);
         }
         return response('Not found', 404);
+    }
+
+    public function deleteMultil(Request $request)
+    {
+        $listID = $request->input('listID');
+        $listID = explode(',', $listID);
+        try {
+            $success = WishList::whereIn('id', $listID)->delete();
+            if ($success) {
+                return response('Delete success', 200);
+            }
+            return response('Delete error', 400);
+        } catch (Exception $exception) {
+            return response($exception, 400);
+        }
     }
 }

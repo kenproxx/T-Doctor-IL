@@ -13,6 +13,8 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class BackendCouponApplyController extends Controller
 {
@@ -50,6 +52,40 @@ class BackendCouponApplyController extends Controller
         ];
 
         return response()->json($data);
+    }
+
+    public function listMyCoupons(Request $request)
+    {
+        $id = $request->input('user_id') ?? Auth::user()->id;
+        $status = $request->input('status');
+        if ($status) {
+            $couponApplies = DB::table('coupon_applies')
+                ->where('status', $status)
+                ->where('user_id', $id)
+                ->orderByDesc('id')
+                ->cursor()
+                ->map(function ($couponApply) {
+                    $item = (array)$couponApply;
+                    $coupon = Coupon::find($couponApply->coupon_id);
+                    $item['coupon_info'] = $coupon;
+                    return $item;
+                });
+        } else {
+            $couponApplies = DB::table('coupon_applies')
+                ->where('status', '!=', CouponApplyStatus::DELETED)
+                ->where('user_id', $id)
+                ->orderByDesc('id')
+                ->cursor()
+                ->map(function ($couponApply) {
+                    $item = (array)$couponApply;
+                    $coupon = Coupon::find($couponApply->coupon_id);
+                    $item['coupon_info'] = $coupon;
+                    return $item;
+                });
+        }
+
+
+        return response()->json($couponApplies);
     }
 
     public function detail($id)

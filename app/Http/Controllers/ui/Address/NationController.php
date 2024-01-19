@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Address;
+namespace App\Http\Controllers\ui\Address;
 
 use App\Http\Controllers\Controller;
-use App\Models\Commune;
+use App\Models\Nation;
 use Illuminate\Http\Request;
 
-class CommuneController extends Controller
+class NationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class CommuneController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Commune $commune)
+    public function show(Nation $nation)
     {
         //
     }
@@ -43,7 +43,7 @@ class CommuneController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Commune $commune)
+    public function edit(Nation $nation)
     {
         //
     }
@@ -51,7 +51,7 @@ class CommuneController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Commune $commune)
+    public function update(Request $request, Nation $nation)
     {
         //
     }
@@ -59,7 +59,7 @@ class CommuneController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Commune $commune)
+    public function destroy(Nation $nation)
     {
         //
     }

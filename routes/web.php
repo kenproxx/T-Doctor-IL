@@ -47,6 +47,7 @@ use App\Http\Controllers\ShortVideoController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\SymptomController;
 use App\Http\Controllers\TopicVideoController;
+use App\Http\Controllers\ui\MyCouponController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WhatFreeToDay;
 use Illuminate\Support\Facades\Route;
@@ -116,7 +117,7 @@ Route::middleware(['user.active'])->group(function () {
         Route::post('/create', [BackendWishListController::class, 'create'])->name('api.backend.wish.lists.create');
         Route::POST('/update/{id}',
             [BackendWishListController::class, 'update'])->name('api.backend.wish.lists.update');
-        Route::POST('/update-medical/{id}',
+        Route::POST('/update-medical',
             [BackendWishListController::class, 'updateMedical'])->name('api.backend.wish.lists.medical.update');
         Route::get('/reget',
             [BackendWishListController::class, 'reGet'])->name('api.backend.wish.lists.reGet');
@@ -376,6 +377,12 @@ Route::middleware(['user.active'])->group(function () {
         /* User view points */
         Route::group(['prefix' => 'users-points'], function () {
             Route::get('list', [UserController::class, 'listRatingUser'])->name('web.users.list.points');
+        });
+
+        /*  User blade */
+        /* My coupons */
+        Route::group(['prefix' => 'my-coupons'], function () {
+            Route::get('list', [MyCouponController::class, 'listMyCoupons'])->name('web.users.my.coupons.list');
         });
 
         /*  Admin blade */
