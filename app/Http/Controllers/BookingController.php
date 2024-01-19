@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use App\Enums\BookingStatus;
 use App\Enums\ServiceClinicStatus;
 use App\Enums\SurveyType;
+use App\Enums\TypeProductCart;
 use App\Models\Booking;
 use App\Models\BookingResult;
 use App\Models\Clinic;
-use App\Models\MedicalFavourite;
 use App\Models\ServiceClinic;
 use App\Models\SurveyAnswer;
 use App\Models\SurveyAnswerUser;
 use App\Models\SurveyQuestion;
+use App\Models\WishList;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,8 +24,7 @@ class BookingController extends Controller
 
     public function index()
     {
-        if (Auth::check())
-        {
+        if (Auth::check()) {
             $id = Auth::user()->id;
             return view('bookings.listBooking', compact('id'));
         }
@@ -34,12 +34,15 @@ class BookingController extends Controller
     public function resultsDetail($id)
     {
         $resultBooking = BookingResult::where('booking_id', $id)->first();
-        $medical_favourites = MedicalFavourite::where('is_favorite', 1);
+        $medicine_favourites = null;
         if (Auth::check()) {
-            $medical_favourites = MedicalFavourite::where('user_id', Auth::user()->id)->where('is_favorite', 1);
+            $medicine_favourites = WishList::where('user_id', Auth::user()->id)
+                ->where('type_product', TypeProductCart::MEDICINE)
+                ->get();
+
+            $medicine_favourites = json_encode($medicine_favourites->pluck('product_id')->toArray());
         }
-        $medical_favourites = json_encode($medical_favourites->pluck('medical_id')->toArray());
-        return view('bookings.resultBooking', compact('resultBooking', 'medical_favourites'));
+        return view('bookings.resultBooking', compact('resultBooking', 'medicine_favourites'));
     }
 
     public function detailBooking($id)
@@ -162,8 +165,7 @@ class BookingController extends Controller
             }
             alert('Booking error');
             return back('Create error', 400);
-        }
-        catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             alert('Booking error');
             return back($exception, 400);
         }

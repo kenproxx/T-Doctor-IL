@@ -19,7 +19,6 @@
             }
         }
 
-
         *, *:before, *:after {
             box-sizing: border-box;
         }
@@ -1113,7 +1112,7 @@
                                                     class="img-pro justify-content-center d-flex img_product--homeNew">
                                                     <img src="{{$medicine->thumbnail}}" alt="">
                                                     <a class="button-heart" data-favorite="0">
-                                                        <i id="icon-heart" class="bi-heart bi"
+                                                        <i class="bi-heart bi"
                                                            data-product-id=""
                                                            onclick=""></i>
                                                     </a>
@@ -1424,7 +1423,7 @@
                             <div class="img-proFlea justify-content-center d-flex">
                                 <img src="{{$product->thumbnail}}" alt="">
                                 <a class="button-heart" data-favorite="0">
-                                    <i id="icon-heart" class="bi-heart bi"
+                                    <i class="bi-heart bi"
                                        data-product-id="${product.id}"
                                        onclick="addProductToWishList(${product.id})"></i>
                                 </a>
@@ -1486,15 +1485,26 @@
                                         <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                                     @else
                                         @foreach($productsFlea as $product)
+                                            @php
+                                                $isFavourite = null;
+                                                if (Auth::check()){
+                                                    $isFavourite = \App\Models\WishList::where('user_id', Auth::user()->id)
+                                                                        ->where('product_id', $product->id)
+                                                                        ->where('type_product', \App\Enums\TypeProductCart::FLEA_MARKET)
+                                                                        ->first();
+                                                }
+
+                                                $class = !$isFavourite ? 'bi-heart' : 'bi-heart-fill text-danger';
+                                            @endphp
                                             <div class="cCarousel-item">
                                                 <div class="product-item">
                                                     <div
                                                         class="img-pro justify-content-center h-auto d-flex img_product--homeNew">
                                                         <img src="{{$product->thumbnail}}" alt="">
-                                                        <a class="button-heart" data-favorite="0">
-                                                            <i id="icon-heart" class="bi-heart bi"
-                                                               data-product-id="${product.id}"
-                                                               onclick="addProductToWishList(${product.id})"></i>
+                                                        <a class="button-heart button-flea-market-heart"
+                                                           data-product="{{$product->id}}"
+                                                           data-isFavourite="{{ $isFavourite ? 1 : 0 }}">
+                                                            <i class="bi {{ $class }}"></i>
                                                         </a>
                                                     </div>
                                                     <div class="content-pro p-md-3 p-2">
@@ -1626,16 +1636,27 @@
                                 <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                             @else
                                 @foreach($products as $product)
+                                    @php
+                                        $isFavourite = null;
+                                        if (Auth::check()){
+                                            $isFavourite = \App\Models\WishList::where('user_id', Auth::user()->id)
+                                                                ->where('product_id', $product->id)
+                                                                ->where('type_product', \App\Enums\TypeProductCart::MEDICINE)
+                                                                ->first();
+                                        }
+
+                                        $class = !$isFavourite ? 'bi-heart' : 'bi-heart-fill text-danger';
+                                    @endphp
                                     <div class="col-md-3 col-6">
                                         <div class="">
                                             <div class="product-item">
                                                 <div
                                                     class="img-pro justify-content-center d-flex img_product--homeNew">
                                                     <img src="{{$product->thumbnail}}" alt="">
-                                                    <a class="button-heart" data-favorite="0">
-                                                        <i id="icon-heart" class="bi-heart bi"
-                                                           data-product-id="${product.id}"
-                                                           onclick="addProductToWishList(${product.id})"></i>
+                                                    <a class="button-heart button-product-heart"
+                                                       data-product="{{$product->id}}"
+                                                       data-isFavourite="{{ $isFavourite ? 1 : 0 }}">
+                                                        <i class="bi {{ $class }}"></i>
                                                     </a>
                                                 </div>
                                                 <div class="content-pro p-md-3 p-2">
@@ -1692,16 +1713,27 @@
                                 <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                             @else
                                 @foreach($products as $product)
+                                    @php
+                                        $isFavourite = null;
+                                        if (Auth::check()){
+                                            $isFavourite = \App\Models\WishList::where('user_id', Auth::user()->id)
+                                                                ->where('product_id', $product->id)
+                                                                ->where('type_product', \App\Enums\TypeProductCart::MEDICINE)
+                                                                ->first();
+                                        }
+
+                                        $class = !$isFavourite ? 'bi-heart' : 'bi-heart-fill text-danger';
+                                    @endphp
                                     <div class="col-md-3 col-6">
                                         <div class="">
                                             <div class="product-item">
                                                 <div
                                                     class="img-pro justify-content-center d-flex img_product--homeNew">
                                                     <img src="{{$product->thumbnail}}" alt="">
-                                                    <a class="button-heart" data-favorite="0">
-                                                        <i id="icon-heart" class="bi-heart bi"
-                                                           data-product-id="${product.id}"
-                                                           onclick="addProductToWishList(${product.id})"></i>
+                                                    <a class="button-heart button-product-heart"
+                                                       data-product="{{$product->id}}"
+                                                       data-isFavourite="{{ $isFavourite ? 1 : 0 }}">
+                                                        <i class="bi {{ $class }}"></i>
                                                     </a>
                                                 </div>
                                                 <div class="content-pro p-md-3 p-2">
@@ -1774,16 +1806,27 @@
                                 <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                             @else
                                 @foreach($products as $product)
+                                    @php
+                                        $isFavourite = null;
+                                        if (Auth::check()){
+                                            $isFavourite = \App\Models\WishList::where('user_id', Auth::user()->id)
+                                                                ->where('product_id', $product->id)
+                                                                ->where('type_product', \App\Enums\TypeProductCart::MEDICINE)
+                                                                ->first();
+                                        }
+
+                                        $class = !$isFavourite ? 'bi-heart' : 'bi-heart-fill text-danger';
+                                    @endphp
                                     <div class="col-md-3 col-6">
                                         <div class="">
                                             <div class="product-item">
                                                 <div
                                                     class="img-pro justify-content-center d-flex img_product--homeNew">
                                                     <img src="{{$product->thumbnail}}" alt="">
-                                                    <a class="button-heart" data-favorite="0">
-                                                        <i id="icon-heart" class="bi-heart bi"
-                                                           data-product-id="${product.id}"
-                                                           onclick="addProductToWishList(${product.id})"></i>
+                                                    <a class="button-heart button-product-heart"
+                                                       data-product="{{$product->id}}"
+                                                       data-isFavourite="{{ $isFavourite ? 1 : 0 }}">
+                                                        <i class="bi {{ $class }}"></i>
                                                     </a>
                                                 </div>
                                                 <div class="content-pro p-md-3 p-2">
@@ -1856,16 +1899,27 @@
                                 <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                             @else
                                 @foreach($products as $product)
+                                    @php
+                                        $isFavourite = null;
+                                        if (Auth::check()){
+                                            $isFavourite = \App\Models\WishList::where('user_id', Auth::user()->id)
+                                                                ->where('product_id', $product->id)
+                                                                ->where('type_product', \App\Enums\TypeProductCart::MEDICINE)
+                                                                ->first();
+                                        }
+
+                                        $class = !$isFavourite ? 'bi-heart' : 'bi-heart-fill text-danger';
+                                    @endphp
                                     <div class="col-md-3 col-6">
                                         <div class="">
                                             <div class="product-item">
                                                 <div
                                                     class="img-pro justify-content-center d-flex img_product--homeNew">
                                                     <img src="{{$product->thumbnail}}" alt="">
-                                                    <a class="button-heart" data-favorite="0">
-                                                        <i id="icon-heart" class="bi-heart bi"
-                                                           data-product-id="${product.id}"
-                                                           onclick="addProductToWishList(${product.id})"></i>
+                                                    <a class="button-heart button-product-heart"
+                                                       data-product="{{$product->id}}"
+                                                       data-isFavourite="{{ $isFavourite ? 1 : 0 }}">
+                                                        <i class="bi {{ $class }}"></i>
                                                     </a>
                                                 </div>
                                                 <div class="content-pro p-md-3 p-2">
@@ -2013,36 +2067,54 @@
                 let doctorID = element.data('doctor')
                 doctorWishList(doctorID, element);
             })
+
+            $('.button-product-heart').click(function () {
+                let element = $(this);
+                let productID = element.data('product')
+                productWishList(productID, `{{ \App\Enums\TypeProductCart::MEDICINE }}`, element)
+            })
+
+            $('.button-flea-market-heart').click(function () {
+                let element = $(this);
+                let productID = element.data('product')
+                productWishList(productID, `{{ \App\Enums\TypeProductCart::FLEA_MARKET }}`, element)
+            })
         })
 
-        async function productWishList(productID, type) {
+        async function productWishList(productID, type, element) {
             loadingMasterPage();
 
-            let doctorWishListUrl = `{{ route('api.backend.medical.favourites.update.wishlist')  }}`;
+            if (!type) {
+                type = `{{ \App\Enums\TypeProductCart::MEDICINE }}`;
+            }
+
+            let productWishListUrl = `{{ route('api.backend.wish.lists.medical.update')  }}`;
 
             let data = {
                 'user_id': `{{ Auth::check() ? Auth::user()->id : '' }}`,
-                'medical_id': productID
+                'product_id': productID,
+                'product_type': type,
+                '_token': `{{ csrf_token() }}`
             };
 
             let heart = `bi-heart-fill text-danger`;
             let unHeart = `bi-heart`;
 
             await $.ajax({
-                url: doctorWishListUrl,
+                url: productWishListUrl,
                 method: 'POST',
                 headers: headers,
                 data: data,
                 success: function (response) {
+                    loadingMasterPage();
                     isFavourite = response.isFavourite
-                    if (isFavourite === true){
+                    if (isFavourite === true) {
                         element.find('i').removeClass(unHeart)
                         element.find('i').addClass(heart)
                     } else {
                         element.find('i').removeClass(heart)
                         element.find('i').addClass(unHeart)
                     }
-                    loadingMasterPage();
                     alert(response.message);
                 },
                 error: function (error) {
@@ -2072,7 +2144,7 @@
                 data: data,
                 success: function (response) {
                     isFavourite = response.isFavourite
-                    if (isFavourite === true){
+                    if (isFavourite === true) {
                         element.find('i').removeClass(unHeart)
                         element.find('i').addClass(heart)
                     } else {

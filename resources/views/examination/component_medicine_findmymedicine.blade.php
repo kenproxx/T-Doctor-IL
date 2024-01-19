@@ -1,13 +1,16 @@
-@php $isFavourite = \App\Models\MedicalFavourite::where([
-                ['user_id', '=', \Illuminate\Support\Facades\Auth::user()->id ?? ''],
-                ['medical_id', '=', $medicine->id],
-                ['is_favorite', '=', '1']
+@php
+    $isFavourite = \App\Models\WishList::where([
+                ['user_id', '=', Auth::user()->id ?? ''],
+                ['product_id', '=', $medicine->id],
+                ['type_product', '=', \App\Enums\TypeProductCart::MEDICINE],
             ])->first();
 
-            $heart = 'bi-heart';
-            if ($isFavourite){
-                $heart = 'bi-heart-fill';
-            } @endphp
+            $heart = 'bi-heart d-flex';
+            if ($isFavourite == true){
+                $heart = 'bi-heart-fill d-flex';
+            }
+
+@endphp
 
 <div class="col-sm-3 mb-3">
     <div class="m-4">

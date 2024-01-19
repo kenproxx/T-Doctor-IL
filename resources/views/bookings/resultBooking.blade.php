@@ -4,84 +4,7 @@
     @include('layouts.partials.header')
     @include('component.banner')
     <style>
-        .bi-heart-fill {
-            color: red;
-        }
-        .product-item {
-            border-radius: 25px;
-            background: #088180;
-            padding: 0;
 
-            .img-pro {
-                img {
-                    border-radius: 24px 24px 0 100px;
-                    height: 300px;
-                    object-fit: cover;
-                }
-
-                i {
-                    display: flex;
-                    padding: 8px;
-                    align-items: flex-start;
-                    gap: 10px;
-                    position: absolute;
-                    right: 8px;
-                    top: 8px;
-                    border-radius: 51px;
-                    background: #EAEAEA;
-                }
-            }
-
-            .location-pro {
-                color: #FFFFFF;
-                font-size: 16px;
-                font-style: normal;
-                font-weight: 800;
-                line-height: normal;
-            }
-
-            .prices-pro {
-                color: #FFFFFF;
-                font-size: 24px;
-                font-style: normal;
-                font-weight: 800;
-                line-height: normal;
-            }
-
-            .SeeDetail {
-                display: flex;
-                padding: 16px 40px;
-                justify-content: center;
-                align-items: center;
-                gap: 10px;
-                border-radius: 86px 0 36px 0;
-                width: 70%;
-                background: #FFFFFF;
-                border: 0;
-            }
-
-            .img_product--homeNew {
-                img {
-                    border-radius: 24px 24px 100px 0;
-                    background: lightgray 50% / cover no-repeat;
-                    height: 300px !important;
-                }
-
-            }
-
-            .content-pro {
-                .name-product {
-                    a {
-                        color: #FFFFFF;
-                        font-size: 18px;
-                        font-style: normal;
-                        font-weight: 800;
-                        line-height: normal;
-                        min-height: 50px;
-                    }
-                }
-            }
-        }
     </style>
     <div class="container">
         <h1>{{ __('home.Result Detail') }}</h1>
@@ -94,29 +17,26 @@
         </div>
     </div>
     <script>
-        let medical_favourites = `{{ $medical_favourites }}`;
-
-        $(document).ready(function () {
-            callListProduct(token);
-
-            async function callListProduct(token) {
-                let accessToken = `Bearer ` + token;
-                await $.ajax({
-                    url: `{{route('restapi.booking.result.list.medicine',$resultBooking->id)}}`,
-                    method: 'GET',
-                    headers: {
-                        "Authorization": accessToken
-                    },
-                    success: function (response) {
-                        renderMedicine(response);
-                    },
-                    error: function (exception) {
-                        console.log(exception)
-                    }
-                });
-            }
-        });
+        let medicine_favourites = `{{ $medicine_favourites }}`;
         let accessToken = `Bearer ` + token;
+        $(document).ready(function () {
+            callListProduct();
+        });
+        async function callListProduct() {
+            await $.ajax({
+                url: `{{route('restapi.booking.result.list.medicine',$resultBooking->id)}}`,
+                method: 'GET',
+                headers: {
+                    "Authorization": accessToken
+                },
+                success: function (response) {
+                    renderMedicine(response);
+                },
+                error: function (exception) {
+                    console.log(exception)
+                }
+            });
+        }
 
         async function renderMedicine(response) {
             let html = ``;
@@ -159,12 +79,14 @@
 
 
             `;
+
                 function formatCurrency(amount) {
                     const formattedAmount = amount.toString().replace(/,/g, '.');
 
                     return parseFloat(formattedAmount).toLocaleString('de-DE');
                 }
-                nameResult = nameResult + '-' + data.name + '<br> '+ `<div class="p-2"><h4>{{ __('home.ingredient') }}</h4> <div class="pl-3">${data.description}</div> </div>` ;
+
+                nameResult = nameResult + '-' + data.name + '<br> ' + `<div class="p-2"><h4>{{ __('home.ingredient') }}</h4> <div class="pl-3">${data.description}</div> </div>`;
             }
             await $('#resultBookingDetail').empty().append(html);
             await $('#nameResult').empty().append(nameResult);
@@ -176,7 +98,7 @@
                 return 'bi-heart';
             }
 
-            if (medical_favourites.includes(medicineId)) {
+            if (medicine_favourites.includes(medicineId)) {
                 return 'bi-heart-fill';
             }
             return 'bi-heart';
@@ -191,24 +113,23 @@
             })
         });
 
-        function handleAddMedicineToWishList(id) {
-
+        async function handleAddMedicineToWishList(id) {
+            loadingMasterPage();
             let headers = {
                 'Authorization': `Bearer ${token}`
             };
 
             let user_id = `{{ Auth::user()->id ?? ''}}`;
-            let url = `{{ route('api.backend.wish.lists.medical.update', ['id' => ':id']) }}`;
-
-            url = url.replace(':id', id);
+            let url = `{{ route('api.backend.wish.lists.medical.update') }}`;
 
             let data = new FormData();
             data.append('user_id', user_id);
             data.append('product_id', id);
+            data.append('product_type', `{{ \App\Enums\TypeProductCart::MEDICINE }}`);
             data.append('_token', '{{ csrf_token() }}');
 
             try {
-                $.ajax({
+                await $.ajax({
                     url: url,
                     method: 'POST',
                     headers: headers,
@@ -218,20 +139,24 @@
                     data: data,
                     success: function (response) {
                         let heartIcon = $('#heart-icon-' + id);
-
-                        if (response.is_favorite == true) {
+                        if (response.isFavourite == true) {
                             heartIcon.removeClass('bi-heart')
                             heartIcon.addClass('bi-heart-fill');
                         } else {
                             heartIcon.removeClass('bi-heart-fill');
                             heartIcon.addClass('bi-heart');
                         }
+                        loadingMasterPage();
                     },
                     error: function (exception) {
+                        loadingMasterPage();
+                        alert('Create error!')
                     }
                 });
             } catch (error) {
-                throw error;
+                loadingMasterPage();
+                alert('Error, Please try again!')
+
             }
         }
     </script>

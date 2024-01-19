@@ -41,10 +41,6 @@
     </div>
 </div>
 <script>
-    let headers = {
-        'Authorization': `Bearer ${token}`
-    };
-
     $('#btnUploadPrescription').click(function () {
         confirmCreatePrescription();
     });
