@@ -565,7 +565,6 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    padding: 0;
   }
   .container .item-information .nav-header--homeNew ul.nav-fill li.nav-item a.nav-link.active, .container #find-doctor--homeNew .nav-header--homeNew ul.nav-fill li.nav-item a.nav-link.active {
     color: var(--secon1, #088180);

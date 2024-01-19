@@ -59,22 +59,22 @@ class MedicalFavouriteApi extends Controller
             }
 
             if (!$userID || !$medical_id) {
-                return response('User or Medical not empty', 404);
+                return response((new MainApi())->returnMessage('User or Medical not empty'), 404);
             }
 
             $user = User::find($userID);
             if (!$user || $user->status != UserStatus::ACTIVE) {
-                return response('User not found', 404);
+                return response((new MainApi())->returnMessage('User not found'), 404);
             }
 
             $medical = User::find($medical_id);
             if (!$medical) {
-                return response('Medical not found', 404);
+                return response((new MainApi())->returnMessage('Medical not found'), 404);
             }
 
             $exit = MedicalFavourite::where('user_id', $userID)->where('medical_id', $medical_id)->first();
             if ($exit) {
-                return response('Favorite medical has been created', 400);
+                return response((new MainApi())->returnMessage('Favorite medical has been created'), 400);
             }
 
             $medical_favourite = new MedicalFavourite();
@@ -86,7 +86,7 @@ class MedicalFavouriteApi extends Controller
             if ($success) {
                 return response()->json($medical_favourite);
             }
-            return response('Adding favorite medical encountered an error', 400);
+            return response((new MainApi())->returnMessage('Adding favorite medical encountered an error'), 400);
         } catch (Exception $exception) {
             return response($exception, 400);
         }
@@ -97,6 +97,10 @@ class MedicalFavouriteApi extends Controller
         $userID = $request->input('user_id');
         $medical_id = $request->input('medical_id');
         $medical_type = $request->input('medical_type');
+
+        if (!$medical_type) {
+            $medical_type = TypeMedical::DOCTORS;
+        }
 
         $mediFavourite = MedicalFavourite::where([
             ['user_id', $userID],
@@ -114,6 +118,7 @@ class MedicalFavouriteApi extends Controller
             if ($success) {
                 return response()->json([
                     'status' => true,
+                    'isFavourite' => true,
                     'message' => 'Add to wishlist success'
                 ]);
             }
@@ -126,6 +131,7 @@ class MedicalFavouriteApi extends Controller
             if ($success) {
                 return response()->json([
                     'status' => true,
+                    'isFavourite' => false,
                     'message' => 'Remove from wishlist success'
                 ]);
             }

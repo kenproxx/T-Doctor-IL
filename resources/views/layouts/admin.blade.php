@@ -710,6 +710,23 @@
         </li>
         <!-- End Medical Result Nav -->
 
+        <!-- Start Order Member Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#order-member-ui-nav" data-bs-toggle="collapse"
+               href="#">
+                <i class="bi bi-printer"></i><span>{{ __('home.Order Management') }}</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="order-member-ui-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('view.web.orders.index') }}">
+                        <i class="bi bi-circle"></i><span>List</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- End Order Member Nav -->
+
         <li class="nav-heading">{{ __('home.Settings') }}</li>
 
         <!-- Start Profile Page Nav -->
@@ -731,13 +748,13 @@
         <!-- End About Page Nav -->
     </ul>
 </aside>
-<!-- End Sidebar-->
+<!-- End Sidebar -->
 
 <!-- ======= Main ======= -->
 <main id="main" class="main">
     @yield('main-content')
 </main>
-<!-- End -->
+<!-- End Main -->
 
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
@@ -749,6 +766,7 @@
     </div>
 </footer>
 <!-- End Footer -->
+
 @include('components.head.tinymce-config')
 @includeWhen(Auth::check(),'components.head.chat-message' )
 

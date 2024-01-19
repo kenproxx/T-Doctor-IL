@@ -55,20 +55,24 @@
                 width: 100%;
             }
         }
+
         .slick-initialized .slick-prev {
             left: 40%;
             top: 725px;
         }
+
         .slick-initialized .slick-next {
             right: 40%;
             top: 725px;
         }
+
         .slick-next:before, .slick-prev:before {
             font-size: 32px !important;
             line-height: 1;
             opacity: .75;
             color: #000 !important;
         }
+
         .slick-dots {
             display: none !important;
         }
@@ -78,7 +82,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
     <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js') }}"></script>
     <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js') }}"></script>
-
 
     {{--    <link href="{{ asset('css/home.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/style-home.css') }}" rel="stylesheet">
@@ -965,8 +968,6 @@
         </div>
     </div>
 
-
-
     <div class="bg-homeNew">
         <div class="container pt-3">
             <div id="find-doctor--homeNew">
@@ -1006,15 +1007,25 @@
                                 @if($doctor == '')
                                     <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                                 @else
+                                    @php
+                                        $isFavourite = null;
+                                        if (Auth::check()){
+                                            $isFavourite = \App\Models\MedicalFavourite::where('user_id', Auth::user()->id)
+                                                                ->where('medical_id', $doctor->id)
+                                                                ->first();
+                                        }
+
+                                        $class = !$isFavourite ? 'bi-heart' : 'bi-heart-fill text-danger';
+                                    @endphp
                                     <div class="col-md-3 col-6">
                                         <div class="">
                                             <div class="product-item">
                                                 <div class="img-pro justify-content-center d-flex">
                                                     <img src="{{$doctor->avt}}" alt="">
-                                                    <a class="button-heart" data-favorite="0">
-                                                        <i id="icon-heart" class="bi-heart bi"
-                                                           data-product-id="${product.id}"
-                                                           onclick="addProductToWishList(${product.id})"></i>
+                                                    <a class="button-heart button-doctor-heart"
+                                                       data-doctor="{{$doctor->id}}"
+                                                       data-isFavourite="{{ $isFavourite ? 1 : 0 }}">
+                                                        <i class="bi {{ $class }}"></i>
                                                     </a>
                                                     <s class="icon-chuyen-khoa">
                                                         @php
@@ -1103,8 +1114,8 @@
                                                     <img src="{{$medicine->thumbnail}}" alt="">
                                                     <a class="button-heart" data-favorite="0">
                                                         <i id="icon-heart" class="bi-heart bi"
-                                                           data-product-id="${product.id}"
-                                                           onclick="addProductToWishList({{$medicine->id}})"></i>
+                                                           data-product-id=""
+                                                           onclick=""></i>
                                                     </a>
                                                 </div>
                                                 <div class="content-pro p-md-3 p-2">
@@ -1401,14 +1412,12 @@
         <img src="{{asset('img/icons_logo/Rectangle 23818.png')}}" alt="" style="">
     </div>
 
-
-
     <div class="">
         <div class="background-image_HomeNew" id="find-doctor--homeNew">
             <div class="container pb-5 mt-4">
-<div class="pc-hidden tt-flea">
-    Flea market
-</div>
+                <div class="pc-hidden tt-flea">
+                    Flea market
+                </div>
                 <div class="carousel pc-hidden">
                     @foreach($productsFlea as $product)
                         <div class="product-itemFlea">
@@ -1424,7 +1433,8 @@
                                 <div class="">
                                     <div class="name-productFlea" style="min-height: 55px">
                                         <a class="name-product--fleaMarket"
-                                           href="{{ route('flea.market.product.detail', $product->id) }}" target="_blank">{{$product->name}}</a>
+                                           href="{{ route('flea.market.product.detail', $product->id) }}"
+                                           target="_blank">{{$product->name}}</a>
                                     </div>
                                     <div class="location-proFlea">
                                         @php
@@ -1931,7 +1941,6 @@
         $coordinatesArray = $addresses->toArray();
     @endphp
 
-    {{-- SLIDE  --}}
     <script>
 
         $('.carousel').slick({
@@ -1992,7 +2001,94 @@
         })
 
     </script>
-    {{-- END SLIDE --}}
+    <script>
+        let accessToken = `Bearer ` + token;
+        let headers = {
+            "Authorization": accessToken
+        };
+
+        $(document).ready(function () {
+            $('.button-doctor-heart').click(function () {
+                let element = $(this);
+                let doctorID = element.data('doctor')
+                doctorWishList(doctorID, element);
+            })
+        })
+
+        async function productWishList(productID, type) {
+            loadingMasterPage();
+
+            let doctorWishListUrl = `{{ route('api.backend.medical.favourites.update.wishlist')  }}`;
+
+            let data = {
+                'user_id': `{{ Auth::check() ? Auth::user()->id : '' }}`,
+                'medical_id': productID
+            };
+
+            let heart = `bi-heart-fill text-danger`;
+            let unHeart = `bi-heart`;
+
+            await $.ajax({
+                url: doctorWishListUrl,
+                method: 'POST',
+                headers: headers,
+                data: data,
+                success: function (response) {
+                    isFavourite = response.isFavourite
+                    if (isFavourite === true){
+                        element.find('i').removeClass(unHeart)
+                        element.find('i').addClass(heart)
+                    } else {
+                        element.find('i').removeClass(heart)
+                        element.find('i').addClass(unHeart)
+                    }
+                    loadingMasterPage();
+                    alert(response.message);
+                },
+                error: function (error) {
+                    loadingMasterPage();
+                    alert('Create error!');
+                }
+            });
+        }
+
+        async function doctorWishList(doctorID, element) {
+            loadingMasterPage();
+
+            let doctorWishListUrl = `{{ route('api.backend.medical.favourites.update.wishlist')  }}`;
+
+            let data = {
+                'user_id': `{{ Auth::check() ? Auth::user()->id : '' }}`,
+                'medical_id': doctorID
+            };
+
+            let heart = `bi-heart-fill text-danger`;
+            let unHeart = `bi-heart`;
+
+            await $.ajax({
+                url: doctorWishListUrl,
+                method: 'POST',
+                headers: headers,
+                data: data,
+                success: function (response) {
+                    isFavourite = response.isFavourite
+                    if (isFavourite === true){
+                        element.find('i').removeClass(unHeart)
+                        element.find('i').addClass(heart)
+                    } else {
+                        element.find('i').removeClass(heart)
+                        element.find('i').addClass(unHeart)
+                    }
+                    loadingMasterPage();
+                    alert(response.message);
+                },
+                error: function (error) {
+                    loadingMasterPage();
+                    alert('Create error!');
+                }
+            });
+        }
+    </script>
     <script>
         function viewCoupon(id) {
             window.location.href = "/coupon/" + id;

@@ -1,7 +1,13 @@
 @php use App\Http\Middleware\MedicalPermission; @endphp
 @php use Illuminate\Support\Facades\Auth; @endphp
 @php use App\Enums\Role; @endphp
-
+<style>
+    @media screen and (max-width: 575px) {
+        .dropdown-menu.show {
+            left: -85px;
+        }
+    }
+</style>
 <header class="header header-flea mt-0">
     <div class="container">
         <div class="row header-detail mobile-hidden justify-content-between">

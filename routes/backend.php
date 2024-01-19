@@ -3,7 +3,6 @@
 use App\Http\Controllers\backend\BackendCouponApplyController;
 use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\backend\BackendQuestionController;
-use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\restapi\AddressApi;
 use App\Http\Controllers\restapi\BookingApi;
 use App\Http\Controllers\restapi\BusinessFavouriteApi;
@@ -89,8 +88,7 @@ Route::group(['prefix' => 'medical-favourites'], function () {
         [MedicalFavouriteApi::class, 'findByUserIdAndMedicalID'])->name('api.backend.medical.favourites.medical');
     Route::post('create', [MedicalFavouriteApi::class, 'create'])->name('api.backend.medical.favourites.create');
     Route::delete('delete/{id}', [MedicalFavouriteApi::class, 'delete'])->name('api.backend.medical.favourites.delete');
-    Route::post('update-wishlist',
-        [MedicalFavouriteApi::class, 'updateWishListMedical'])->name('api.backend.medical.favourites.update.wishlist');
+    Route::post('update-wishlist', [MedicalFavouriteApi::class, 'updateWishListMedical'])->name('api.backend.medical.favourites.update.wishlist');
 });
 
 Route::group(['prefix' => 'booking'], function () {

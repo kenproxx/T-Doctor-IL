@@ -31,12 +31,12 @@
                 @if($news)
                     <a href="{{route('detail.new',$news->id)}}">
                         <div class="d-flex">
-                            <div class="col-md-5 pl-0">
+                            <div class="pl-0">
                                 <img class="w-100 b-radius-8px" src="{{$news->thumbnail}}">
                             </div>
-                            <div class="col-md-7 pr-0 max-5-line-title">
+                            <div class="col-md-7 pr-0">
                                 <strong class="text-content-product">{{$news->title}}</strong>
-                                <p class="text-gray mt-3">{!! $news->short_description !!}</p>
+                                <p class="text-gray max-5-line-title mt-3">{!! $news->short_description !!}</p>
                             </div>
                         </div>
                     </a>
@@ -50,7 +50,7 @@
                         <div class="col-md-6 padding-news">
                             <a href="{{route('detail.new',$news->id)}}">
                                 <div class="d-flex border-8px w-100">
-                                    <div class="col-md-3 p-0 content__item__image">
+                                    <div class="p-0 content__item__image">
                                         <img class="content__item__image" src="{{$news->thumbnail}}">
                                     </div>
                                     <div class="col-md-9 pr-0">

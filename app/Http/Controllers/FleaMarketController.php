@@ -7,6 +7,7 @@ use App\Enums\ReviewStoreStatus;
 use App\Models\Category;
 use App\Models\ProductInfo;
 use App\Models\ReviewStore;
+use App\Models\User;
 use App\Models\WishList;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -35,7 +36,9 @@ class FleaMarketController extends Controller
      */
     public function productDetail($id)
     {
-        return view('FleaMarket.product_details', compact('id'));
+        $product = ProductInfo::find($id);
+        $userId = User::where('id', $product->created_by)->first();
+        return view('FleaMarket.product_details', compact('id', 'userId'));
     }
 
     /**
@@ -52,10 +55,10 @@ class FleaMarketController extends Controller
      */
     public function myStore()
     {
-        $userId = Auth::user()->id;
-        $reviewStore = ReviewStore::where('store_id', $userId)->where('status', ReviewStoreStatus::APPROVED)->get();
         $id = Auth::user()->id;
-        return view('FleaMarket.my-store', compact('reviewStore', 'id'));
+        $reviewStore = ReviewStore::where('store_id', $id)->where('status', ReviewStoreStatus::APPROVED)->get();
+        $user = User::find($id);
+        return view('FleaMarket.my-store', compact('reviewStore', 'id', 'user'));
     }
 
     /**
@@ -68,8 +71,9 @@ class FleaMarketController extends Controller
 
     public function ShopInfo($id)
     {
+        $user = User::find($id);
         $reviewStore = ReviewStore::where('store_id', $id)->where('status', ReviewStoreStatus::APPROVED)->get();
-        return view('FleaMarket.shop-infor', compact('id', 'reviewStore'));
+        return view('FleaMarket.shop-infor', compact('id', 'reviewStore', 'user'));
     }
 
     /**
