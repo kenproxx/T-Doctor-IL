@@ -3,25 +3,7 @@
 @section('content')
     @include('layouts.partials.header')
     @include('component.banner')
-    <style>
-        .max-2-line-title {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            height: 44px;
-        }
 
-        .max-5-line-title {
-            display: -webkit-box;
-            -webkit-line-clamp: 5;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            min-height: 130px;
-        }
-    </style>
     <div class="recruitment-details ">
         <div class="container">
             @if($listNews && count($listNews) > 0)
@@ -30,13 +12,13 @@
                 @endphp
                 @if($news)
                     <a href="{{route('detail.new',$news->id)}}">
-                        <div class="d-flex">
+                        <div class="d-md-flex">
                             <div class="pl-0">
-                                <img class="w-100 b-radius-8px" src="{{$news->thumbnail}}">
+                                <img class="thumbnail-title b-radius-8px" src="{{$news->thumbnail}}">
                             </div>
-                            <div class="col-md-7 pr-0">
+                            <div class="main-title-news">
                                 <strong class="text-content-product">{{$news->title}}</strong>
-                                <p class="text-gray max-5-line-title mt-3">{!! $news->short_description !!}</p>
+                                <div class="text-gray max-6-line-title mt-md-3">{!! $news->short_description !!}</div>
                             </div>
                         </div>
                     </a>
@@ -57,7 +39,7 @@
 
                                         <strong class="fs-16px max-2-line-title">{{$news->title}}</strong>
                                         <div class="max-5-line-title">
-                                            <p class="fs-12px mt-2">{!! $news->short_description !!}</p>
+                                            <div class="fs-12px">{!! $news->short_description !!}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -89,13 +71,13 @@
                 @endphp
                 @if($Event)
                     <a href="{{route('detail.new',$Event->id)}}">
-                        <div class="d-flex">
+                        <div class="d-md-flex">
                             <div class="col-md-5 pl-0">
-                                <img class="w-100 b-radius-8px" src="{{$Event->thumbnail}}">
+                                <img class="thumbnail-title b-radius-8px" src="{{$Event->thumbnail}}">
                             </div>
-                            <div class="col-md-7 pr-0 max-5-line-title">
+                            <div class="main-title-news">
                                 <strong class="text-content-product">{{$Event->title}}</strong>
-                                <p class="text-gray mt-3">{!! $Event->short_description !!}</p>
+                                <div class="text-gray max-6-line-title mt-md-3">{!! $Event->short_description !!}</div>
                             </div>
                         </div>
                     </a>
@@ -115,7 +97,7 @@
 
                                         <strong class="fs-16px max-2-line-title">{{$event->title}}</strong>
                                         <div class="max-5-line-title">
-                                            <p class="fs-12px mt-2">{!! $event->short_description !!}</p>
+                                            <div class="fs-12px">{!! $event->short_description !!}</div>
                                         </div>
                                     </div>
                                 </div>

@@ -6,20 +6,20 @@
     <div class="recruitment-details ">
         <div class="container">
             <a href="{{route('index.new')}}">
-                <div class="recruitment-details--title mb-30"><i class="fa-solid fa-arrow-left"></i> {{ __('home.News details') }}</div>
+                <div class="recruitment-details--title p-md-2 p-0 mb-md-4"><i class="fa-solid fa-arrow-left"></i> {{ __('home.News details') }}</div>
             </a>
             <div class="d-flex">
                 <div class="col-md-9">
                     <div>
-                        <div class="flea-content">{{$newEvent->title}}</div>
-                        <div class="fs-16px color-Grey-Dark mb-4 mt-2">{{ __('home.Thứ tư, ngày 13-09-2023') }}</div>
+                        <div class="news-content">{{$newEvent->title}}</div>
+                        <div class="fs-16px color-Grey-Dark mb-4 mt-2">{{ \Carbon\Carbon::parse($newEvent->created_at)->format('l, \n\g\à\y j-m-Y') }}</div>
                         <div class="justify-content-center row w-100">
                             <img class="b-radius-8px p-0" src="{{$newEvent->thumbnail}}">
                         </div>
 {{--                        <div class="justify-content-center row mb-4">{!! $newEvent->short_description !!}</div>--}}
                         <div class="mt-md-3">
-                            <strong class="text-content-product">{!! $newEvent->short_description !!}</strong>
-                            <p class="text-gray mt-3">{!! $newEvent->description !!}</p>
+                            <div class="text-content-news">{!! $newEvent->short_description !!}</div>
+                            <div class="text-gray body-news mt-3">{!! $newEvent->description !!}</div>
                         </div>
                     </div>
                     <div class="border-top mt-30">
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 d-none d-md-block">
                     <img class="w-100 mb-4" src="{{asset('img/icons_logo/banner-doc.png')}}">
                     <img class="w-100 mb-4" src="{{asset('img/icons_logo/banner-doc.png')}}">
                     <img class="w-100 mb-4" src="{{asset('img/icons_logo/banner-doc.png')}}">
