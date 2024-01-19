@@ -47,6 +47,7 @@ use App\Http\Controllers\ShortVideoController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\SymptomController;
 use App\Http\Controllers\TopicVideoController;
+use App\Http\Controllers\ui\MyCouponController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WhatFreeToDay;
 use Illuminate\Support\Facades\Route;
@@ -376,6 +377,12 @@ Route::middleware(['user.active'])->group(function () {
         /* User view points */
         Route::group(['prefix' => 'users-points'], function () {
             Route::get('list', [UserController::class, 'listRatingUser'])->name('web.users.list.points');
+        });
+
+        /*  User blade */
+        /* My coupons */
+        Route::group(['prefix' => 'my-coupons'], function () {
+            Route::get('list', [MyCouponController::class, 'listMyCoupons'])->name('web.users.my.coupons.list');
         });
 
         /*  Admin blade */

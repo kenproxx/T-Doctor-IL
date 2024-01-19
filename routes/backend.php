@@ -51,7 +51,8 @@ Route::group(['prefix' => 'coupons-apply'], function () {
         [BackendCouponApplyController::class, 'update'])->name('api.backend.coupons-apply.update');
     Route::delete('/delete/{id}',
         [BackendCouponApplyController::class, 'delete'])->name('api.backend.coupons-apply.delete');
-
+    Route::get('/my-coupons',
+        [BackendCouponApplyController::class, 'listMyCoupons'])->name('api.backend.coupons-apply.my.coupon');
     Route::post('change-status',
         [BackendCouponApplyController::class, 'updateStatus'])->name('api.backend.coupons-apply.update-status');
 });
