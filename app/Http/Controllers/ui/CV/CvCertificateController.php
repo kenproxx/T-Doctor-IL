@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\CV;
+namespace App\Http\Controllers\ui\CV;
 
 use App\Http\Controllers\Controller;
 use App\Models\CvCertificate;

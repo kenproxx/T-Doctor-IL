@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Address;
+namespace App\Http\Controllers\ui\Address;
 
 use App\Http\Controllers\Controller;
-use App\Models\Nation;
+use App\Models\Province;
 use Illuminate\Http\Request;
 
-class NationController extends Controller
+class ProvinceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class NationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Nation $nation)
+    public function show(Province $province)
     {
         //
     }
@@ -43,7 +43,7 @@ class NationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Nation $nation)
+    public function edit(Province $province)
     {
         //
     }
@@ -51,7 +51,7 @@ class NationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Nation $nation)
+    public function update(Request $request, Province $province)
     {
         //
     }
@@ -59,7 +59,7 @@ class NationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Nation $nation)
+    public function destroy(Province $province)
     {
         //
     }

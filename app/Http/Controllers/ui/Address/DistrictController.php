@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Address;
+namespace App\Http\Controllers\ui\Address;
 
 use App\Http\Controllers\Controller;
 use App\Models\District;
