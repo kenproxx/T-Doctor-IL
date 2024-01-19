@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Post;
+namespace App\Http\Controllers\ui\Address;
 
 use App\Http\Controllers\Controller;
-use App\Models\PostRecruitment;
+use App\Models\Commune;
 use Illuminate\Http\Request;
 
-class PostRecruitmentController extends Controller
+class CommuneController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class PostRecruitmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PostRecruitment $postRecruitment)
+    public function show(Commune $commune)
     {
         //
     }
@@ -43,7 +43,7 @@ class PostRecruitmentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PostRecruitment $postRecruitment)
+    public function edit(Commune $commune)
     {
         //
     }
@@ -51,7 +51,7 @@ class PostRecruitmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PostRecruitment $postRecruitment)
+    public function update(Request $request, Commune $commune)
     {
         //
     }
@@ -59,7 +59,7 @@ class PostRecruitmentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PostRecruitment $postRecruitment)
+    public function destroy(Commune $commune)
     {
         //
     }

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\CV;
+namespace App\Http\Controllers\ui\Company;
 
 use App\Http\Controllers\Controller;
-use App\Models\MyCv;
+use App\Models\CompanyUserApplied;
 use Illuminate\Http\Request;
 
-class MyCvController extends Controller
+class CompanyUserAppliedController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class MyCvController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(MyCv $myCv)
+    public function show(CompanyUserApplied $companyUserApplied)
     {
         //
     }
@@ -43,7 +43,7 @@ class MyCvController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(MyCv $myCv)
+    public function edit(CompanyUserApplied $companyUserApplied)
     {
         //
     }
@@ -51,7 +51,7 @@ class MyCvController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, MyCv $myCv)
+    public function update(Request $request, CompanyUserApplied $companyUserApplied)
     {
         //
     }
@@ -59,7 +59,7 @@ class MyCvController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(MyCv $myCv)
+    public function destroy(CompanyUserApplied $companyUserApplied)
     {
         //
     }

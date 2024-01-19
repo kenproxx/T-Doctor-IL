@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Address;
+namespace App\Http\Controllers\ui\CV;
 
 use App\Http\Controllers\Controller;
-use App\Models\Province;
+use App\Models\MyCv;
 use Illuminate\Http\Request;
 
-class ProvinceController extends Controller
+class MyCvController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class ProvinceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Province $province)
+    public function show(MyCv $myCv)
     {
         //
     }
@@ -43,7 +43,7 @@ class ProvinceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Province $province)
+    public function edit(MyCv $myCv)
     {
         //
     }
@@ -51,7 +51,7 @@ class ProvinceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Province $province)
+    public function update(Request $request, MyCv $myCv)
     {
         //
     }
@@ -59,7 +59,7 @@ class ProvinceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Province $province)
+    public function destroy(MyCv $myCv)
     {
         //
     }

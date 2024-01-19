@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Address;
+namespace App\Http\Controllers\ui\Post;
 
 use App\Http\Controllers\Controller;
-use App\Models\AdministrativeRegions;
+use App\Models\PostInfo;
 use Illuminate\Http\Request;
 
-class AdministrativeRegionsController extends Controller
+class PostInfoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class AdministrativeRegionsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(AdministrativeRegions $administrativeRegions)
+    public function show(PostInfo $postInfo)
     {
         //
     }
@@ -43,7 +43,7 @@ class AdministrativeRegionsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(AdministrativeRegions $administrativeRegions)
+    public function edit(PostInfo $postInfo)
     {
         //
     }
@@ -51,7 +51,7 @@ class AdministrativeRegionsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, AdministrativeRegions $administrativeRegions)
+    public function update(Request $request, PostInfo $postInfo)
     {
         //
     }
@@ -59,7 +59,7 @@ class AdministrativeRegionsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(AdministrativeRegions $administrativeRegions)
+    public function destroy(PostInfo $postInfo)
     {
         //
     }

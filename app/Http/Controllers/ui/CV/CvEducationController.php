@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Company;
+namespace App\Http\Controllers\ui\CV;
 
 use App\Http\Controllers\Controller;
-use App\Models\CompanyInfo;
+use App\Models\CvEducation;
 use Illuminate\Http\Request;
 
-class CompanyInfoController extends Controller
+class CvEducationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class CompanyInfoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CompanyInfo $companyInfo)
+    public function show(CvEducation $cvEducation)
     {
         //
     }
@@ -43,7 +43,7 @@ class CompanyInfoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CompanyInfo $companyInfo)
+    public function edit(CvEducation $cvEducation)
     {
         //
     }
@@ -51,7 +51,7 @@ class CompanyInfoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CompanyInfo $companyInfo)
+    public function update(Request $request, CvEducation $cvEducation)
     {
         //
     }
@@ -59,7 +59,7 @@ class CompanyInfoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CompanyInfo $companyInfo)
+    public function destroy(CvEducation $cvEducation)
     {
         //
     }

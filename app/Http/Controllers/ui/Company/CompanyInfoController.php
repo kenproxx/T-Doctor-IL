@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Company;
+namespace App\Http\Controllers\ui\Company;
 
 use App\Http\Controllers\Controller;
-use App\Models\CompanyUserApplied;
+use App\Models\CompanyInfo;
 use Illuminate\Http\Request;
 
-class CompanyUserAppliedController extends Controller
+class CompanyInfoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class CompanyUserAppliedController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(CompanyUserApplied $companyUserApplied)
+    public function show(CompanyInfo $companyInfo)
     {
         //
     }
@@ -43,7 +43,7 @@ class CompanyUserAppliedController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(CompanyUserApplied $companyUserApplied)
+    public function edit(CompanyInfo $companyInfo)
     {
         //
     }
@@ -51,7 +51,7 @@ class CompanyUserAppliedController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, CompanyUserApplied $companyUserApplied)
+    public function update(Request $request, CompanyInfo $companyInfo)
     {
         //
     }
@@ -59,7 +59,7 @@ class CompanyUserAppliedController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(CompanyUserApplied $companyUserApplied)
+    public function destroy(CompanyInfo $companyInfo)
     {
         //
     }

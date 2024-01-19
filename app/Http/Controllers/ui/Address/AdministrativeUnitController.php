@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Post;
+namespace App\Http\Controllers\ui\Address;
 
 use App\Http\Controllers\Controller;
-use App\Models\PostInfo;
+use App\Models\AdministrativeUnit;
 use Illuminate\Http\Request;
 
-class PostInfoController extends Controller
+class AdministrativeUnitController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,7 +35,7 @@ class PostInfoController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PostInfo $postInfo)
+    public function show(AdministrativeUnit $administrativeUnit)
     {
         //
     }
@@ -43,7 +43,7 @@ class PostInfoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(PostInfo $postInfo)
+    public function edit(AdministrativeUnit $administrativeUnit)
     {
         //
     }
@@ -51,7 +51,7 @@ class PostInfoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PostInfo $postInfo)
+    public function update(Request $request, AdministrativeUnit $administrativeUnit)
     {
         //
     }
@@ -59,7 +59,7 @@ class PostInfoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PostInfo $postInfo)
+    public function destroy(AdministrativeUnit $administrativeUnit)
     {
         //
     }
