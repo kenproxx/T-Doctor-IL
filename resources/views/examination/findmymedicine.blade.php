@@ -408,9 +408,7 @@
             </div>
         </div>
         <script>
-
             let name = '';
-
             $(document).ready(function () {
                 $('.medicine-product').on('click', function () {
                     $('.medicine-product').removeClass('active');
@@ -496,8 +494,6 @@
                 document.getElementById('searchForm').submit();
             }
 
-            // script component medicine
-
             $(document).ready(function () {
                 $('.frame.component-medicine .frame-wrapper-heart').on('click', function () {
                     $(this).find('i').toggleClass('bi-heart');
@@ -505,25 +501,23 @@
                 })
             });
 
-            function handleAddMedicineToWishList(id) {
-
+            async function handleAddMedicineToWishList(id) {
+                loadingMasterPage();
                 let headers = {
                     'Authorization': `Bearer ${token}`
                 };
 
                 let user_id = `{{ Auth::user()->id ?? ''}}`;
-                // chèn dữ liệu vào bảng Medical-favourites
-                let url = `{{ route('api.backend.wish.lists.medical.update', ['id' => ':id']) }}`;
-
-                url = url.replace(':id', id);
+                let url = `{{ route('api.backend.wish.lists.medical.update') }}`;
 
                 let data = new FormData();
                 data.append('user_id', user_id);
                 data.append('product_id', id);
+                data.append('product_type', `{{ \App\Enums\TypeProductCart::MEDICINE }}`);
                 data.append('_token', '{{ csrf_token() }}');
 
                 try {
-                    $.ajax({
+                   await $.ajax({
                         url: url,
                         method: 'POST',
                         headers: headers,
@@ -533,20 +527,23 @@
                         data: data,
                         success: function (response) {
                             let heartIcon = $('#heart-icon-' + id);
-
-                            if (response.is_favorite == true) {
+                            if (response.isFavourite == true) {
                                 heartIcon.removeClass('bi-heart')
                                 heartIcon.addClass('bi-heart-fill');
                             } else {
                                 heartIcon.removeClass('bi-heart-fill');
                                 heartIcon.addClass('bi-heart');
                             }
+                            loadingMasterPage();
                         },
                         error: function (exception) {
+                            loadingMasterPage();
+                            alert('Create error!')
                         }
                     });
                 } catch (error) {
-                    throw error;
+                    loadingMasterPage();
+                    alert('Error, Please try again!')
                 }
             }
 
@@ -564,7 +561,7 @@
                 };
 
                 let user_id = `{{ Auth::user()->id ?? ''}}`;
-                // chèn dữ liệu vào bảng Medical-favourites
+
                 let url = `{{ route('api.backend.medical.favourites.update.wishlist') }}`;
 
                 let data = new FormData();
