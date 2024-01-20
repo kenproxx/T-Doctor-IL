@@ -62,7 +62,33 @@ class MedicineController extends Controller
 
     public function wishList()
     {
-        return view('medicine.wishlistMedicine');
+        $medicines = ProductMedicine::where('product_medicines.status', OnlineMedicineStatus::APPROVED)
+            ->leftJoin('users', 'product_medicines.user_id', '=', 'users.id')
+            ->leftJoin('provinces', 'provinces.id', '=', 'users.province_id')
+            ->select('product_medicines.*', 'provinces.name as location_name');
+
+        $medicine10 = $medicines->paginate(10);
+        $medicines = $medicines->paginate(16);
+
+        // count all medicine
+        $countAllMedicine = ProductMedicine::where('product_medicines.status', OnlineMedicineStatus::APPROVED)->count();
+        $categoryMedicines = CategoryProduct::where('status', true)->get();
+
+        //get all product in cart by user_id
+        $carts = null;
+        if (Auth::check()) {
+            $carts = Cart::where('user_id', Auth::user()->id)
+                ->where('type_product', TypeProductCart::MEDICINE)
+                ->get();
+        }
+        $provinces = Province::all();
+        $medical_favourites = MedicalFavourite::where('is_favorite', 1);
+        if (Auth::check()) {
+            $medical_favourites = MedicalFavourite::where('user_id', Auth::user()->id)->where('is_favorite', 1);
+        }
+        $medical_favourites = json_encode($medical_favourites->pluck('medical_id')->toArray());
+
+        return view('medicine.wishlistMedicine', compact('medicines','medicine10', 'categoryMedicines', 'provinces', 'countAllMedicine', 'carts', 'medical_favourites'));
     }
 
     public function searchOnlineMedicine(Request $request)
