@@ -121,23 +121,6 @@
                 @endif
                 @include('component.modal-cart')
             </div>
-            <div class="medicine-search--right row mt-3">
-                <div class="col-md-6 col-6">
-                    <div class="div-wrapper">
-                        <a type="button"
-                            {{--                           data-toggle="modal"--}}
-                            {{--                           data-target="#modalCreatPrescription"--}}
-                        >{{ __('home.Create prescription') }}
-                        </a>
-                    </div>
-                </div>
-                @include('component.modalCreatPrescription')
-                <div class="col-md-6 col-6">
-                    <div class="div-wrapper">
-                        <a href="{{route('medicine.wishList')}}">{{ __('home.Wish list') }}</a>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="medicine-list row">
