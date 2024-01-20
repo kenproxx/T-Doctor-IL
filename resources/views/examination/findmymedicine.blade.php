@@ -212,7 +212,7 @@
         }
 
         .rectangle {
-            height: 273px;
+            /*height: 273px;*/
         }
 
     </style>

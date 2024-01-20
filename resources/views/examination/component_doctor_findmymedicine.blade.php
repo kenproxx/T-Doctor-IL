@@ -57,10 +57,8 @@
         position: relative;
         width: fit-content;
         margin-top: -1px;
-        font-family: var(--body-1-extra-font-family);
         font-weight: var(--body-1-extra-font-weight);
         color: var(--white);
-        font-size: var(--body-1-extra-font-size);
         text-align: center;
         letter-spacing: var(--body-1-extra-letter-spacing);
         line-height: var(--body-1-extra-line-height);
@@ -77,18 +75,14 @@
 
     .find-my-medicine .frame .img {
         position: relative;
-        width: 20px;
-        height: 20px;
     }
 
     .find-my-medicine .frame .text-wrapper-2 {
         position: relative;
         width: fit-content;
         margin-top: -1px;
-        font-family: var(--body-4-extra-font-family);
         font-weight: var(--body-4-extra-font-weight);
         color: var(--white);
-        font-size: var(--body-4-extra-font-size);
         text-align: center;
         letter-spacing: var(--body-4-extra-letter-spacing);
         line-height: var(--body-4-extra-line-height);
@@ -154,10 +148,8 @@
         top: 25px;
         left: 16px;
         transform: rotate(-45deg);
-        font-family: var(--body-1-extra-font-family);
         font-weight: var(--body-1-extra-font-weight);
         color: #ffffff;
-        font-size: var(--body-1-extra-font-size);
         letter-spacing: var(--body-1-extra-letter-spacing);
         line-height: var(--body-1-extra-line-height);
         font-style: var(--body-1-extra-font-style);
@@ -173,16 +165,59 @@
         background: #088180;
         box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.25);
     }
+    .serviceDoctor div, p, h2, h1, h3, h4, h5, h6, span, strong, small,
+    li, ul, ol, button, td, th, form, fieldset, legend, textarea, select,
+    option, label, table, blockquote, pre {
+        color: #FFF;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+    /*mobile*/
+    @media (max-width: 575px) {
+        .serviceDoctor div, p, h2, h1, h3, h4, h5, h6, span, strong, small,
+        li, ul, ol, button, td, th, form, fieldset, legend, textarea, select,
+        option, label, table, blockquote, pre {
+            font-size: 12px ;
+
+        }
+        .find-my-medicine .frame .text-wrapper, .text-wrapper-2, .text-wrapper-3 {
+            font-size: 12px;
+        }
+        .div-2 img {
+            width: 12px;
+            height: 12px;
+        }
+    }
+    /*pc*/
+    @media (min-width: 576px) {
+        .serviceDoctor div, p, h2, h1, h3, h4, h5, h6, span, strong, small,
+        li, ul, ol, button, td, th, form, fieldset, legend, textarea, select,
+        option, label, table, blockquote, pre {
+            font-size: 18px ;
+        }
+        .find-my-medicine .frame .text-wrapper, .text-wrapper-2, .text-wrapper-3 {
+            font-size: 18px;
+        }
+        .div-2 img {
+            width: 20px;
+            height: 20px;
+        }
+    }
+
 </style>
 
-<div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
-    <div class="frame m-4 component-doctor">
+<div class="col-6 col-sm-6 col-md-3 mb-3">
+    <div class="frame component-doctor">
         <img loading="lazy" class="rectangle border-img"
              src="{{asset($pharmacist->avt)}}"/>
         <div class="div mt-3">
             <a target="_blank" class="title-best__doctor" href="{{ route('examination.doctor_info', ['id' => $pharmacist->id]) }}">
                 <div class="text-wrapper">{{ $pharmacist->name ?? __('home.no name') }}</div>
             </a>
+            <div class="div-2 serviceDoctor">
+                {!! $pharmacist->service !!}
+            </div>
             <div class="div-2">
                 @php
                     $province = Province::find($pharmacist->province_id)

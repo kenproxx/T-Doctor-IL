@@ -4,7 +4,8 @@
     @include('layouts.partials.header_3')
     @include('component.banner')
     <div id="examination-scene" class="container ">
-        <div class="d-flex w-100">
+        <div class="d-md-flex d-none
+         w-100">
             <div id="filter" class="box--3 w-100 ">
                 <form action="{{ route('examination.index') }}" method="get" class="row" id="searchForm">
                     <div class="col-sm-2 col">
@@ -62,7 +63,7 @@
                     </div>
                     <div class="col-sm-4 col">
                         <div class="form-group">
-                            <span class="fa fa-search form-control-feedback"></span>
+                            <label for="inputSearchDoctor" class="fa fa-search form-control-feedback"></label>
                             <input type="search" id="inputSearchDoctor" class="form-control"
                                    name="nameSearch"
                                    value="{{ $nameSearch }}"
@@ -74,11 +75,11 @@
         </div>
         <div id="show-doctor">
             <div class="d-flex justify-content-center" style="padding: 12px">
-                <div id="list-title-best" class="list-title d-flex">
+                <div id="list-title-best" class="list-title justify-content-between align-items-center d-flex">
                     <div class="list--doctor p-0">
                         <p>{{ __('home.Best doctor') }}</p>
                     </div>
-                    <div class="ms-auto p-2"><a href="{{route('examination.best_doctor')}}">{{ __('home.See all') }}</a>
+                    <div class="p-md-2 seeAll"><a href="{{route('examination.best_doctor')}}">{{ __('home.See all') }}</a>
                     </div>
                 </div>
             </div>
@@ -94,11 +95,11 @@
 
 
             <div class="d-flex justify-content-center" style="padding: 12px">
-                <div id="list-title-new" class="list-title d-flex">
+                <div id="list-title-new" class="list-title justify-content-between align-items-center d-flex">
                     <div class="list--doctor p-0">
                         <p>{{ __('home.New doctor') }}</p>
                     </div>
-                    <div class="ms-auto p-2"><a href="{{route('examination.new_doctor')}}">{{ __('home.See all') }}</a>
+                    <div class="seeAll p-2"><a href="{{route('examination.new_doctor')}}">{{ __('home.See all') }}</a>
                     </div>
                 </div>
             </div>
@@ -112,11 +113,11 @@
                 @endif
             </div>
             <div class="d-flex justify-content-center" style="padding: 12px;">
-                <div id="list-title-available" class="list-title d-flex">
+                <div id="list-title-available" class="list-title justify-content-between align-items-center d-flex">
                     <div class="list--doctor p-0">
                         <p>{{ __('home.24/7 Available doctor') }}</p>
                     </div>
-                    <div class="ms-auto p-2"><a
+                    <div class="seeAll p-2"><a
                             href="{{route('examination.available_doctor')}}">{{ __('home.See all') }}</a></div>
                 </div>
             </div>
