@@ -546,7 +546,7 @@
                     <div class="col-md-4 col-6">
                         <div class="product-item">
                              <div class="img-pro justify-content-center d-flex img_product--homeNew">
-                                  <img src="${item.thumbnail}" alt="">
+                                  <img src="${item.thumbnail}" alt="" style='height: auto !important'>
                                        ${tab}
                                   </div>
                              <div class="content-pro p-md-3 p-2">
