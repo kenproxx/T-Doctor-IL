@@ -1,12 +1,30 @@
+@php use App\Enums\online_medicine\FilterOnlineMedicine;use App\Enums\online_medicine\ObjectOnlineMedicine;use App\Http\Controllers\MainController;use App\Models\User;use Illuminate\Support\Facades\Auth; @endphp
 @php use App\Enums\TypeCoupon; @endphp
 @extends('layouts.master')
 @section('title', 'What free')
 @section('content')
     @include('layouts.partials.header')
     @include('component.banner')
-
+    <style>
+        @media (max-width: 576px) {
+            #what-free-index .btnModalCart.shopping-bag {
+                margin-right: 0;
+                height: 100%;
+                width: 100%;
+            }
+        }
+    </style>
     <link href="{{ asset('css/whatfree.css') }}" rel="stylesheet">
-    <div class="container">
+    <div class="container" id="what-free-index">
+        <div class=" medicine-search d-block d-sm-none">
+            <div class="medicine-search--center row">
+                <form class="search-box col-12">
+                    <input type="search" name="focus"
+                           placeholder="{{ __('home.Search for anything…') }}" id="search-input" value="">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </form>
+            </div>
+        </div>
 
         <div class="clinics-list">
             <div class="clinics-header margin-bottom-32 border-bottom">
@@ -66,4 +84,5 @@
             </div>
         </div>
     </div>
+
 @endsection
