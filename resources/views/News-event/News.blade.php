@@ -32,10 +32,10 @@
                         <div class="col-md-6 padding-news">
                             <a href="{{route('detail.new',$news->id)}}">
                                 <div class="d-flex border-8px w-100">
-                                    <div class="p-0 content__item__image">
+                                    <div class="p-0 col-md-4 content__item__image">
                                         <img class="content__item__image" src="{{$news->thumbnail}}">
                                     </div>
-                                    <div class="col-md-9 pr-0">
+                                    <div class="col-md-8 pr-0">
 
                                         <strong class="fs-16px max-2-line-title">{{$news->title}}</strong>
                                         <div class="max-5-line-title">
@@ -90,10 +90,10 @@
                         <div class="col-md-6 padding-news">
                             <a href="{{route('detail.new',$event->id)}}">
                                 <div class="d-flex border-8px w-100">
-                                    <div class="col-md-3 p-0 content__item__image">
+                                    <div class="col-md-4 p-0 content__item__image">
                                         <img class="content__item__image" src="{{$event->thumbnail}}">
                                     </div>
-                                    <div class="col-md-9 pr-0">
+                                    <div class="col-md-8 pr-0">
 
                                         <strong class="fs-16px max-2-line-title">{{$event->title}}</strong>
                                         <div class="max-5-line-title">
