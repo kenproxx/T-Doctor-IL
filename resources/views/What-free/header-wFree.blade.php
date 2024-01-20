@@ -1,10 +1,75 @@
+@php use App\Enums\online_medicine\FilterOnlineMedicine;use App\Enums\online_medicine\ObjectOnlineMedicine;use App\Http\Controllers\MainController;use App\Models\User;use Illuminate\Support\Facades\Auth; @endphp
+
 <link rel="stylesheet" href="{{asset('css/clinics-style.css')}}">
-<div class="background-image_Clinics">
+
+<style>
+    .background-img-clinic-mobile {
+        background: url(../img/homeNew-img/background/image_31.png) no-repeat;
+        background-size: 100%;
+        min-height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .shopping-bag {
+        margin-right: 0;
+        height: 100%;
+        width: 100%;
+        position: relative;
+        background: rgba(247, 247, 247, 1);
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+
+        &:focus {
+            border: none;
+        }
+    }
+</style>
+<div class="d-block d-sm-none background-img-clinic-mobile">
+
+</div>
+<div class="container mt-3 d-block d-sm-none" id="header-what-free">
+    <div class="row">
+        <div class="col-10">
+            <div class=" medicine-search ">
+                <div class="medicine-search--center ">
+                    <form class="search-box">
+                        <input type="search" name="focus"
+                               placeholder="{{ __('home.Search for anything…') }}" id="search-input" value="">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <a class="col-2">
+            <button type="button"
+                    class="btnModalCart shopping-bag"  data-bs-toggle="offcanvas"
+                    data-bs-target="#filterNavbar">
+                <i class="bi bi-filter"></i>
+            </button>
+        </a>
+    </div>
+</div>
+
+<div class="background-image_Clinics mb-5 d-none d-sm-flex">
     <div class="container">
-        <div class="d-flex justify-content-center align-items-center mb-150">
+        <div class=" justify-content-center align-items-center mb-5 d-none d-sm-flex">
             <div class="title-list-clinic">Y tế gần bạn</div>
         </div>
-        <div class="border-search-clinics">
+        <div class=" medicine-search d-block d-sm-none">
+            <div class="medicine-search--center row">
+                <form class="search-box col-12">
+                    <input type="search" name="focus"
+                           placeholder="{{ __('home.Search for anything…') }}" id="search-input" value="">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </form>
+            </div>
+        </div>
+        <div class="border-search-clinics d-none d-sm-flex">
             <div class="col-md-12 p-0">
                 <label for="search_input_clinics" class="label-input-clinic">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -49,6 +114,116 @@
     </div>
 
 </div>
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="filterNavbar" aria-labelledby="offcanvasNavbarLabel">
+    <div class="offcanvas-header">
+        <a href="{{route('home')}}" class="offcanvas-title" id="offcanvasNavbarLabel"><img class="w-100"
+                                                                                           src="{{asset('img/icons_logo/logo-new.png')}}"></a>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div class="col-md-3 medicine-list--filter">
+            <div class="filter">
+                <div class="filter-header d-flex justify-content-between">
+                    <div class="text-wrapper">{{ __('home.Filter') }}</div>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="filter-body">
+                    <div class="d-flex item">
+                        <input type="checkbox" name="filter_" value="0" onchange="searchFilterMedicine(this.value)">
+                        <div class="text-all">{{ __('home.All') }}</div>
+                    </div>
+                    <div class="d-flex item">
+                        <input type="checkbox" name="filter_"
+                               value="{{ FilterOnlineMedicine::HEALTH }}"
+                               onchange="searchFilterMedicine(this.value)">
+                        <div class="text">{{ __('home.Heath') }}</div>
+                    </div>
+                    <div class="d-flex item">
+                        <input type="checkbox" name="filter_"
+                               value="{{ FilterOnlineMedicine::BEAUTY }}"
+                               onchange="searchFilterMedicine(this.value)">
+                        <div class="text">{{ __('home.Beauty') }}</div>
+                    </div>
+                    <div class="d-flex item">
+                        <input type="checkbox" name="filter_"
+                               value="{{ FilterOnlineMedicine::PET }}"
+                               onchange="searchFilterMedicine(this.value)">
+                        <div class="text">{{ __('home.Pets') }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="filter">
+                <div class="filter-header d-flex justify-content-between">
+                    <div class="text-wrapper">{{ __('home.Object') }}</div>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="filter-body">
+                    <div class="d-flex item">
+                        <input type="checkbox" value="{{ ObjectOnlineMedicine::KIDS }}"
+                               onchange="objectFilterMedicine(this.value)">
+                        <div class="text">{{ __('home.For kids') }}</div>
+                    </div>
+                    <div class="d-flex item">
+                        <input type="checkbox"
+                               value="{{ ObjectOnlineMedicine::FOR_WOMEN }}"
+                               onchange="objectFilterMedicine(this.value)">
+                        <div class="text">{{ __('home.For women') }}</div>
+                    </div>
+                    <div class="d-flex item">
+                        <input type="checkbox"
+                               value="{{ ObjectOnlineMedicine::FOR_MEN }}"
+                               onchange="objectFilterMedicine(this.value)">
+                        <div class="text">{{ __('home.For men') }}</div>
+                    </div>
+                    <div class="d-flex item">
+                        <input type="checkbox"
+                               value="{{ ObjectOnlineMedicine::FOR_ADULT }}"
+                               onchange="objectFilterMedicine(this.value)">
+                        <div class="text">{{ __('home.For adults') }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="border-radius mt-3 ">
+                <div class="d-flex">
+                    <div class="wrapper">
+                        <header>
+                            <h2>{{ __('home.Price') }}</h2>
+                        </header>
+                        <div class="price-input">
+                            <div class="field">
+                                <input type="number" onchange="performSearch()" id="inputProductMin"
+                                       class="rangePrice input-min" value="0">
+                            </div>
+                            <div class="separator">-</div>
+                            <div class="field">
+                                <input type="number" onchange="performSearch()" id="inputProductMax"
+                                       class="rangePrice input-max" value="0">
+                            </div>
+                        </div>
+                        <div class="slider">
+                            <div class="progress"></div>
+                        </div>
+                        <div class="range-input">
+                            <input type="range" onchange="performSearch()" class="rangePrice range-min" min="0"
+                                   max="10000000" value="2500000" step="1000">
+                            <input type="range" onchange="performSearch()" class="rangePrice range-max" min="0"
+                                   max="10000000" value="7500000" step="1000">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center mt-4">
+                <a  class="add-cv-bt w-100 apply-bt_delete col-6">{{ __('home.Refresh') }}</a>
+                <form  class="col-6 pr-0">
+                    <button type="button" data-bs-dismiss="offcanvas" aria-label="Close"
+                            class="add-cv-bt apply-bt_edit w-100">{{ __('home.Apply') }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     let accessToken = `Bearer ` + token;
 

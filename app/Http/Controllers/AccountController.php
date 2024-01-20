@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\RateLimiter;
+
 class AccountController extends Controller
 {
+
     public function needHelp()
     {
+        RateLimiter::attempt()
         return view('ui.need-helps.need-help');
+
     }
 
     public function accountHelp()
