@@ -46,6 +46,30 @@ class BackendWishListController extends Controller
         return response()->json($wishLists);
     }
 
+    public function getAllByUserID(Request $request)
+    {
+        $user_id = $request->input('user_id');
+        $type_product = $request->input('type_product');
+        $wishLists = DB::table('wish_lists')
+            ->join('product_infos', 'product_infos.id', '=', 'wish_lists.product_id')
+            ->where('wish_lists.user_id', $user_id)
+            ->where('wish_lists.type_product', TypeProductCart::FLEA_MARKET)
+            ->orderByDesc('wish_lists.id')
+            ->select('product_infos.*', 'wish_lists.id as wish_list')
+            ->get();
+        if ($type_product == TypeProductCart::MEDICINE) {
+            $wishLists = DB::table('wish_lists')
+                ->join('product_medicines', 'product_medicines.id', '=', 'wish_lists.product_id')
+                ->where('wish_lists.user_id', $user_id)
+                ->where('wish_lists.type_product', TypeProductCart::MEDICINE)
+                ->orderByDesc('wish_lists.id')
+                ->select('product_medicines.*', 'wish_lists.id as wish_list')
+                ->get();
+        }
+
+        return response()->json($wishLists);
+    }
+
     public function reGet()
     {
         $listWishList = WishList::where('isFavorite', 1);

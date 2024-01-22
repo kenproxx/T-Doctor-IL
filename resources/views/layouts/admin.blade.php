@@ -149,10 +149,10 @@
     </div><!-- End Logo -->
 
     <div class="search-bar">
-        <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <form class="search-form d-flex align-items-center">
             <input type="text" name="query" placeholder="{{ __('home.Search for anything…') }}"
                    title="Enter search keyword">
-            <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            <button type="button" title="Search"><i class="bi bi-search"></i></button>
         </form>
     </div><!-- End Search Bar -->
 
@@ -743,6 +743,33 @@
             </ul>
         </li>
         <!-- End My Coupons Nav -->
+
+        <!-- Start My Favourite Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#my-favourite-nav" data-bs-toggle="collapse"
+               href="#">
+                <i class="bi bi-heart"></i><span>My Favourite</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="my-favourite-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('web.users.my.favourite.businesses') }}">
+                        <i class="bi bi-circle"></i><span>List Business</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('web.users.my.favourite.medicals') }}">
+                        <i class="bi bi-circle"></i><span>List Medical</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('web.users.my.favourite.products') }}">
+                        <i class="bi bi-circle"></i><span>List Products</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- End My Favourite Nav -->
 
         <li class="nav-heading">{{ __('home.Settings') }}</li>
 
