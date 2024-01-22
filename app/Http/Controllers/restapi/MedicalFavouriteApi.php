@@ -16,15 +16,18 @@ class MedicalFavouriteApi extends Controller
     public function getAll(Request $request)
     {
         $userID = $request->input('user_id');
-        $medical_favourites = DB::table('medical_favourites')->join('users', 'users.id', '=',
-            'medical_favourites.medical_id')->where('medical_favourites.user_id',
-            $userID)->select('medical_favourites.*', 'users.name')->cursor()->map(function ($item) {
-            $user = User::find($item->medical_id);
-            /* Convert to array*/
-            $medical_favourite = (array)$item;
-            $medical_favourite['doctor_info'] = $user;
-            return $medical_favourite;
-        });
+        $medical_favourites = DB::table('medical_favourites')
+            ->join('users', 'users.id', '=', 'medical_favourites.medical_id')
+            ->where('medical_favourites.user_id', $userID)
+            ->select('medical_favourites.*', 'users.name')
+            ->cursor()
+            ->map(function ($item) {
+                $user = User::find($item->medical_id);
+                /* Convert to array */
+                $medical_favourite = (array)$item;
+                $medical_favourite['doctor_info'] = $user;
+                return $medical_favourite;
+            });
 
         return response()->json($medical_favourites);
     }

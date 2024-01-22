@@ -27,6 +27,19 @@ class BusinessFavouriteApi extends Controller
         return response()->json($business_favourites);
     }
 
+    public function getAllClinicsByUser(Request $request)
+    {
+        $userID = $request->input('user_id');
+        $business_favourites = DB::table('business_favourites')
+            ->join('users', 'users.id', '=', 'business_favourites.user_id')
+            ->join('clinics', 'clinics.id', '=', 'business_favourites.business_id')
+            ->where('business_favourites.user_id', $userID)
+            ->select('clinics.*')
+            ->get();
+
+        return response()->json($business_favourites);
+    }
+
     public function findByUserIdAndBusinessID(Request $request)
     {
         $userID = $request->input('user_id');
