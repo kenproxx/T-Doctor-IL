@@ -157,17 +157,17 @@ class UserApi extends Controller
                     $itemPath = $item->store('user/avt', 'public');
                     $thumbnail = asset('storage/' . $itemPath);
                 } else {
-                    $thumbnail = '';
+                    $thumbnail = $user->avt;
                 }
 
                 $user->avt = $thumbnail;
                 $success = $user->save();
                 if ($success) {
-                    return response('Change PhoneNumber success!', 200);
+                    return response((new MainApi())->returnMessage('Change Avatar success!'), 200);
                 }
-                return response('Change PhoneNumber error', 400);
+                return response((new MainApi())->returnMessage('Change Avatar error'), 400);
             }
-            return response('User not found', 404);
+            return response((new MainApi())->returnMessage('User not found'), 404);
         } catch (\Exception $exception) {
             return response($exception, 500);
         }
