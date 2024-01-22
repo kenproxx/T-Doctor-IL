@@ -9,41 +9,30 @@
     @if($doctor)
         <div class="container">
             <div id="show_inf">
-                <div id="title" class="d-flex justify-content-center">
+                <div id="title" class="d-flex justify-content-start">
                     <div class="d-flex list-title">
                         <div class="list--doctor p-0">
-                            <a class="back" href="{{route('examination.index')}}"><p><i
+                            <a class="back" href="{{route('examination.index')}}"><p class="align-items-center d-flex"><i
                                         class="bi bi-arrow-left"></i>{{ __('home.Detailed information Doctor') }}</p>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div id="inf-doctor" class="d-flex justify-content-center">
-                    <div id="img_info" style="width: 470px; height: 951px; margin-right: 15px">
-                        <div id="doc" style="margin-bottom: 32px">
+                <div id="inf-doctor" class="d-md-flex d-block justify-content-center mt-2 mt-md-0">
+                    <div id="img_info">
+                        <div id="doc">
                             <img src="{{asset( $doctor->avt )}}">
                         </div>
-                        <div id="qr_code" style="
-                     display: flex;
-                    padding: 24px 67px 24px 66px;
-                    flex-direction: column;
-                    align-items: center;
-                    gap: 24px;
-                    border-radius: 8px;
-                    border: 1px solid #EAEAEA;">
-                            <p style="
-                    color: #000;
-                    font-size: 32px;
-                    font-weight: 800;
-                    ">{{ __("home.Doctor's QR Code") }}</p>
+                        <div id="qr_code">
+                            <p>{{ __("home.Doctor's QR Code") }}</p>
                             <p id="qrContent">
                                 {!! $qrCodes !!}
                             </p>
 
                         </div>
                     </div>
-                    <div id="about" style="width: 670px; height: 670px; margin-left: 15px">
-                        <h5 style="font-size: 48px; font-weight: 800;">{{ $doctor->name }}</h5>
+                    <div id="about">
+                        <h5>{{ $doctor->name }}</h5>
                         <div class="dess">
                             <p>{{ __('home.Hospital') }}: </p>
                             <span> {{ $doctor->hospital }} </span>
@@ -72,7 +61,7 @@
                             <p>{{ __('home.Respond rate') }}: </p>
                             <span>{{ $doctor->response_rate }}%</span>
                         </div>
-                        <div id="opt_btn" class="d-flex">
+                        <div id="opt_btn" class="d-flex justify-content-between justify-content-md-center">
                             <a onclick="handleStartChatWithDoctor('{{ $doctor->id }}')">
                                 <button>{{ __('home.Chat') }}</button>
                             </a>
@@ -88,7 +77,7 @@
                     </div>
                 </div>
                 <div id="review" class="d-flex justify-content-center">
-                    <div class="d-flex list-title">
+                    <div class="d-flex list-title w-100 justify-content-between">
                         <div class="list--doctor p-0">
                             <p>{{ __('home.Review') }}</p>
                         </div>
@@ -140,13 +129,13 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="recruitment-details--btn col-md-6 justify-content-end d-flex">
+                        <div class="recruitment-details--btn col-md-6 justify-content-end d-flex mt-2 mt-md-0">
                             <button type="button" onclick="showOrHidden(0);"
                                     class="btn btn-secondary btnHiddenForm col-md-6">
                                 {{ __('home.CANCEL') }}
                             </button>
                         </div>
-                        <div class="recruitment-details--btn col-md-6 justify-content-start d-flex">
+                        <div class="recruitment-details--btn col-md-6 justify-content-start d-flex mt-2 mt-md-0">
                             <button class="btn col-md-6 btn-send" type="button" onclick="addReview(0);">
                                 {{ __('home.Submit') }}
                             </button>

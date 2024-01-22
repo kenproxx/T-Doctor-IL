@@ -1083,4 +1083,110 @@ section {
   height: 25px;
 }
 
+/* doctor information */
+@media (max-width: 575px) {
+  #show_inf #inf-doctor #img_info {
+    width: 100%;
+    margin: 0;
+  }
+  #show_inf #inf-doctor #img_info #doc {
+    margin-bottom: 32px;
+  }
+  #show_inf #inf-doctor #img_info #qr_code {
+    display: flex;
+    padding: 24px 67px 24px 66px;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    border-radius: 8px;
+    border: 1px solid #EAEAEA;
+  }
+  #show_inf #inf-doctor #img_info #qr_code p {
+    color: #000;
+    font-size: 18px;
+    font-weight: 800;
+  }
+  #show_inf #inf-doctor #about {
+    width: 100%;
+  }
+  #show_inf #inf-doctor #about h5 {
+    font-size: 18px;
+    font-weight: 800;
+  }
+  #show_inf #inf-doctor #about .dess {
+    margin-top: 8px;
+    display: flex;
+  }
+  #show_inf #inf-doctor #about .dess p {
+    color: #929292;
+    font-size: 14px;
+    font-weight: 400;
+  }
+  #show_inf #inf-doctor #about .dess span {
+    color: #000;
+    font-size: 14px;
+    font-weight: 800;
+    margin-left: 8px;
+  }
+  #show_inf #inf-doctor #about .dess span div, #show_inf #inf-doctor #about .dess span p, #show_inf #inf-doctor #about .dess span span, #show_inf #inf-doctor #about .dess span h1, #show_inf #inf-doctor #about .dess span h2, #show_inf #inf-doctor #about .dess span h3, #show_inf #inf-doctor #about .dess span h4, #show_inf #inf-doctor #about .dess span h5, #show_inf #inf-doctor #about .dess span h6 {
+    color: #000;
+    font-size: 14px;
+    font-weight: 800;
+    margin-left: 8px;
+  }
+  #show_inf #review {
+    margin-top: 24px;
+  }
+}
+@media (min-width: 576px) {
+  #show_inf #inf-doctor #img_info {
+    width: 100%;
+    margin-right: 15px;
+  }
+  #show_inf #inf-doctor #img_info #doc {
+    margin-bottom: 32px;
+  }
+  #show_inf #inf-doctor #img_info #qr_code {
+    display: flex;
+    padding: 24px 67px 24px 66px;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    border-radius: 8px;
+    border: 1px solid #EAEAEA;
+  }
+  #show_inf #inf-doctor #img_info #qr_code p {
+    color: #000;
+    font-size: 32px;
+    font-weight: 800;
+  }
+  #show_inf #inf-doctor #about {
+    width: 100%;
+    margin-left: 15px;
+  }
+  #show_inf #inf-doctor #about h5 {
+    font-size: 48px;
+    font-weight: 800;
+  }
+  #show_inf #inf-doctor #about .dess {
+    margin-top: 24px;
+    display: flex;
+  }
+  #show_inf #inf-doctor #about .dess p {
+    color: #929292;
+    font-size: 24px;
+    font-weight: 400;
+  }
+  #show_inf #inf-doctor #about .dess span {
+    color: #000;
+    font-size: 24px;
+    font-weight: 800;
+    margin-left: 10px;
+  }
+  #review {
+    margin-top: 40px;
+  }
+}
+/* end doctor information */
+
 /*# sourceMappingURL=file.css.map */

@@ -222,7 +222,7 @@ return [
     'Respond rate' => 'Tỷ lệ phản hồi',
     'Chat' => 'Trò chuyện',
     'Videocall' => 'Cuộc gọi video',
-    'Review' => 'Đánh ',
+    'Review' => 'Đánh giá',
     'Dịch vụ cực tốt' => 'Dịch vụ cực tốt',
     'My personal doctor' => 'Bác sĩ riêng của tôi',
     'Please login to continue' => 'Đăng nhập để tiếp tục',

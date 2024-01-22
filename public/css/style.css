@@ -974,35 +974,33 @@ span.material-symbols-outlined {
 }
 
 /*info-doc*/
-#show_inf #inf-doctor #about .dess {
-    margin-top: 24px;
-    display: flex;
-}
+/*#show_inf #inf-doctor #about .dess {*/
+/*    margin-top: 24px;*/
+/*    display: flex;*/
+/*}*/
 
-#show_inf #inf-doctor #about .dess p {
-    color: #929292;
-    font-size: 24px;
-    font-weight: 400;
-}
+/*#show_inf #inf-doctor #about .dess p {*/
+/*    color: #929292;*/
+/*    font-size: 24px;*/
+/*    font-weight: 400;*/
+/*}*/
 
-#show_inf #inf-doctor #about .dess span {
-    color: #000;
-    font-size: 24px;
-    font-weight: 800;
-    margin-left: 10px;
-}
+/*#show_inf #inf-doctor #about .dess span {*/
+/*    color: #000;*/
+/*    font-size: 24px;*/
+/*    font-weight: 800;*/
+/*    margin-left: 10px;*/
+/*}*/
 
 #show_inf #inf-doctor #about #opt_btn {
     display: flex;
-    width: 670px;
+    width: 100%;
     align-items: flex-start;
     gap: 30px;
     position: relative;
 }
 
 #show_inf #inf-doctor #about #opt_btn button {
-    width: 203px;
-    height: 50px;
     display: flex;
     padding: 15px 50px;
     justify-content: center;
@@ -1024,9 +1022,9 @@ span.material-symbols-outlined {
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
 
-#show_inf #review {
-    margin-top: 150px;
-}
+/*#show_inf #review {*/
+/*    margin-top: 150px;*/
+/*}*/
 
 #show_inf .rv_doc .rv_ctn {
     width: 100%;
@@ -1241,12 +1239,12 @@ span.material-symbols-outlined {
 }
 
 .has-search .form-control {
-    padding-left: 2.375rem;
-    margin-top: 10px;
-    height: 100%;
-    /*width: 568px;*/
+    padding-left: 3.375rem;
     border-radius: 8px;
+    background: #F3F3F3;
+    height: 48px;
 }
+
 
 .has-search .form-control-feedback {
     position: absolute;
@@ -1258,6 +1256,16 @@ span.material-symbols-outlined {
     pointer-events: none;
     color: #aaa;
     margin-top: 8px;
+}
+.form-control-feedbackSearch {
+    position: absolute;
+    display: block;
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+    padding: 19px;
 }
 
 /*#list-doctor-new{*/

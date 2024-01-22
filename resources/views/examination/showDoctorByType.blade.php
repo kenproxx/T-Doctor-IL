@@ -5,7 +5,7 @@
     @include('component.banner')
     <div class="container">
         <div class="d-flex justify-content-center">
-            <div id="filter" class="d-md-flex d-flex w-100">
+            <div id="filter" class="d-md-flex d-flex w-100 justify-content-between">
                 <div class="d-md-flex d-none flex-fill">
                     <div class="filter_option"><p>{{ __('home.Category') }} <i class="bi bi-chevron-expand"></i></p>
                     </div>
@@ -16,8 +16,8 @@
                     <div class="filter_option"><p>{{ __('home.Experience') }} <i class="bi bi-chevron-expand"></i></p>
                     </div>
                 </div>
-                <div class="form-group has-search">
-                    <span class="fa fa-search form-control-feedback"></span>
+                <div class="form-group has-search position-relative w-100 mr-3 mr-md-0">
+                    <span class="fa fa-search form-control-feedbackSearch p-md-3"></span>
                     <input type="text" class="form-control" placeholder="{{ __('home.Search for anything…') }}">
                 </div>
                 <div class="flex d-md-none">
