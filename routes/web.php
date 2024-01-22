@@ -48,6 +48,7 @@ use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\SymptomController;
 use App\Http\Controllers\TopicVideoController;
 use App\Http\Controllers\ui\MyCouponController;
+use App\Http\Controllers\ui\MyFavouriteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WhatFreeToDay;
 use Illuminate\Support\Facades\Route;
@@ -113,6 +114,7 @@ Route::middleware(['user.active'])->group(function () {
 
     Route::group(['prefix' => 'wish-lists'], function () {
         Route::get('/list', [BackendWishListController::class, 'getAll'])->name('api.backend.wish.lists.list');
+        Route::get('/users', [BackendWishListController::class, 'getAllByUserID'])->name('api.backend.wish.lists.users');
         Route::get('/detail/{id}', [BackendWishListController::class, 'detail'])->name('api.backend.wish.lists.detail');
         Route::post('/create', [BackendWishListController::class, 'create'])->name('api.backend.wish.lists.create');
         Route::POST('/update/{id}',
@@ -383,6 +385,13 @@ Route::middleware(['user.active'])->group(function () {
         /* My coupons */
         Route::group(['prefix' => 'my-coupons'], function () {
             Route::get('list', [MyCouponController::class, 'listMyCoupons'])->name('web.users.my.coupons.list');
+        });
+
+        /* My favourite */
+        Route::group(['prefix' => 'my-favourite'], function () {
+            Route::get('businesses', [MyFavouriteController::class, 'businessFavourite'])->name('web.users.my.favourite.businesses');
+            Route::get('medicals', [MyFavouriteController::class, 'medicalFavourite'])->name('web.users.my.favourite.medicals');
+            Route::get('products', [MyFavouriteController::class, 'productFavourite'])->name('web.users.my.favourite.products');
         });
 
         /*  Admin blade */

@@ -76,6 +76,7 @@ Route::group(['prefix' => 'service-clinics'], function () {
 
 Route::group(['prefix' => 'business-favourites'], function () {
     Route::get('list-by-users', [BusinessFavouriteApi::class, 'getAll'])->name('api.backend.business.favourites.list');
+    Route::get('list-clinics-by-users', [BusinessFavouriteApi::class, 'getAllClinicsByUser'])->name('api.backend.business.favourites.clinics');
     Route::get('list-by-business',
         [BusinessFavouriteApi::class, 'findByUserIdAndBusinessID'])->name('api.backend.business.favourites.business');
     Route::post('create', [BusinessFavouriteApi::class, 'create'])->name('api.backend.business.favourites.create');
