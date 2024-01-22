@@ -206,12 +206,12 @@ class UserApi extends Controller
                 if ($user->email != $email) {
                     $isEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
                     if (!$isEmail) {
-                        return response('Email invalid!', 400);
+                        return response((new MainApi())->returnMessage('Email invalid!'), 400);
                     }
 
                     $oldUser = User::where('email', $email)->first();
                     if ($oldUser) {
-                        return response('Email already exited!', 400);
+                        return response((new MainApi())->returnMessage('Email already exited!'), 400);
                     }
                     $user->email = $email;
                 }
@@ -219,7 +219,7 @@ class UserApi extends Controller
                 if ($user->username != $username) {
                     $oldUser = User::where('username', $username)->first();
                     if ($oldUser) {
-                        return response('Username already exited!', 400);
+                        return response((new MainApi())->returnMessage('Username already exited!'), 400);
                     }
                     $user->username = $username;
                 }
@@ -230,13 +230,13 @@ class UserApi extends Controller
                     $oldPassword = $user->password;
                     $check = Hash::check($current_password, $oldPassword);
                     if (!$check) {
-                        return response('Password incorrect', 400);
+                        return response((new MainApi())->returnMessage('Password incorrect'), 400);
                     }
                     if (strlen($new_password) < 5) {
-                        return response('Password invalid!', 400);
+                        return response((new MainApi())->returnMessage('Password invalid!'), 400);
                     }
                     if ($new_password != $confirm_password) {
-                        return response('New password or new password confirm incorrect', 400);
+                        return response((new MainApi())->returnMessage('New password or new password confirm incorrect'), 400);
                     }
                     $user->password = Hash::make($new_password);
                 }
@@ -251,11 +251,11 @@ class UserApi extends Controller
 
                 $success = $user->save();
                 if ($success) {
-                    return response('Change Information success!', 200);
+                    return response((new MainApi())->returnMessage('Change Information success!'), 200);
                 }
-                return response('Change Information error', 400);
+                return response((new MainApi())->returnMessage('Change Information error'), 400);
             }
-            return response('User not found', 404);
+            return response((new MainApi())->returnMessage('User not found'), 404);
         } catch (\Exception $exception) {
             return response($exception, 500);
         }
