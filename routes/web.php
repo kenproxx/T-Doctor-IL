@@ -80,14 +80,19 @@ Route::middleware(['user.active'])->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->name('registerProcess');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logoutProcess');
 
-    /* Login social */
+    /* Start login social */
     /* Google */
     Route::get('/login-google', [AuthSocialController::class, 'getGoogleSignInUrl'])->name('login.google');
     Route::get('/login-google-callback', [AuthSocialController::class, 'loginCallback'])->name('login.google.callback');
     /* Facebook */
     Route::get('/login-facebook', [AuthSocialController::class, 'getFacebookSignInUrl'])->name('login.facebook');
     Route::get('/login-facebook-callback', [AuthSocialController::class, 'loginFacebookCallback'])->name('login.facebook.callback');
+    /* KakaoTalk */
+    Route::get('/login-kakao', [AuthSocialController::class, 'getKakaoSignInUrl'])->name('login.kakao');
+    Route::get('/login-kakao-callback', [AuthSocialController::class, 'loginKakaoCallback'])->name('login.facebook.kakao');
+
     Route::get('/login-role', [AuthSocialController::class, 'chooseRole'])->name('login.social.choose.role');
+    /* End login social */
 
     Route::post('forget-password/send',
         [ProfileController::class, 'handleForgetPassword'])->name('user.forget.password.send');

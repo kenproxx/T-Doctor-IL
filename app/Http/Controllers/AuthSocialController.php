@@ -17,7 +17,6 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthSocialController extends Controller
 {
-
     public function getGoogleSignInUrl()
     {
         try {
@@ -131,6 +130,74 @@ class AuthSocialController extends Controller
                 $newUser->type = "OTHERS";
                 $newUser->email_verified_at = now();
                 $newUser->avt = $facebookUser->getAvatar();
+
+                $newUser->abouts = '';
+                $newUser->abouts_en = '';
+                $newUser->abouts_lao = '';
+
+                $newUser->save();
+
+                auth()->login($newUser, true);
+                $token = JWTAuth::fromUser($newUser);
+                setcookie("accessToken", $token, time() + 3600 * 24);
+            }
+
+            toast('Register success!', 'success', 'top-left');
+            return redirect()->route('login.social.choose.role');
+        } catch (\Exception $exception) {
+            return $exception;
+        }
+    }
+
+    public function getKakaoSignInUrl()
+    {
+        try {
+            $url = Socialite::driver('kakao')
+                ->stateless()
+                ->redirect()
+                ->getTargetUrl();
+            return redirect($url);
+        } catch (\Exception $exception) {
+            return $exception;
+        }
+    }
+
+    public function loginKakaoCallback(Request $request)
+    {
+        try {
+            $kakaoUser = Socialite::driver('kakao')->stateless()->user();
+
+
+            if ($kakaoUser->getEmail() == null || $kakaoUser->getName() == null) {
+                return redirect()->route('login')->with('error', 'Error');
+            }
+
+            $existingUser = User::where('email', $kakaoUser->email)->first();
+
+            $password = (new MainController())->generateRandomString(8);
+            $passwordHash = Hash::make($password);
+
+            if ($existingUser) {
+                auth()->login($existingUser, true);
+                $token = JWTAuth::fromUser($existingUser);
+                setcookie("accessToken", $token, time() + 3600 * 24);
+                if (!$existingUser->provider_name) {
+                    return redirect(route('profile'));
+                }
+            } else {
+                $newUser = new User;
+                $newUser->provider_name = "facebook";
+                $newUser->provider_id = $kakaoUser->getId();
+                $newUser->name = $kakaoUser->getName();
+                $newUser->last_name = $kakaoUser->getName();
+                $newUser->email = $kakaoUser->getEmail();
+                $newUser->phone = '';
+                $newUser->username = $kakaoUser->getId() . $kakaoUser->getEmail();
+                $newUser->address_code = "";
+                $newUser->password = $passwordHash;
+                $newUser->type = "OTHERS";
+                $newUser->email_verified_at = now();
+                $newUser->avt = $kakaoUser->getAvatar();
 
                 $newUser->abouts = '';
                 $newUser->abouts_en = '';
