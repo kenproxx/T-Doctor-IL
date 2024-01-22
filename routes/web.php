@@ -81,8 +81,12 @@ Route::middleware(['user.active'])->group(function () {
     Route::get('/logout', [AuthController::class, 'logout'])->name('logoutProcess');
 
     /* Login social */
+    /* Google */
     Route::get('/login-google', [AuthSocialController::class, 'getGoogleSignInUrl'])->name('login.google');
     Route::get('/login-google-callback', [AuthSocialController::class, 'loginCallback'])->name('login.google.callback');
+    /* Facebook */
+    Route::get('/login-facebook', [AuthSocialController::class, 'getFacebookSignInUrl'])->name('login.facebook');
+    Route::get('/login-facebook-callback', [AuthSocialController::class, 'loginFacebookCallback'])->name('login.facebook.callback');
     Route::get('/login-role', [AuthSocialController::class, 'chooseRole'])->name('login.social.choose.role');
 
     Route::post('forget-password/send',
