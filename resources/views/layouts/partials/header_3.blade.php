@@ -194,14 +194,18 @@
                                 <div class="line"></div>
                             </div>
                             <div class="form-signin d-flex justify-content-around">
-                                <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/facebook_logo.png')}}" alt=""/></button>
-                                <a href="{{ route('login.google') }}" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/></a>
-                                <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/apple_logo.png')}}" alt=""/></button>
-                                <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/kakao-talk_logo.png')}}" alt=""/></button>
+                                <a href="{{ route('login.facebook') }}" class="login-with-btn">
+                                    <img src="{{asset('img/icons_logo/facebook_logo.png')}}" alt=""/>
+                                </a>
+                                <a href="{{ route('login.google') }}" class="login-with-btn">
+                                    <img src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/>
+                                </a>
+                                <button type="button" class="login-with-btn">
+                                    <img src="{{asset('img/icons_logo/apple_logo.png')}}" alt=""/>
+                                </button>
+                                <button type="button" class="login-with-btn">
+                                    <img src="{{asset('img/icons_logo/kakao-talk_logo.png')}}" alt=""/>
+                                </button>
                             </div>
                             <div class="sign--up d-flex justify-content-center">
                                 <p>{{ __('home.Do not have an account') }}?</p>
@@ -408,14 +412,18 @@
                                 <div class="line"></div>
                             </div>
                             <div class="form-signin" style="display: flex; justify-content: space-around">
-                                <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/facebook_logo.png')}}" alt=""/></button>
-                                <a href="{{ route('login.google') }}" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/></a>
-                                <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/apple_logo.png')}}" alt=""/></button>
-                                <button type="button" class="login-with-btn"><img
-                                        src="{{asset('img/icons_logo/kakao-talk_logo.png')}}" alt=""/></button>
+                                <a href="{{ route('login.facebook') }}" class="login-with-btn">
+                                    <img src="{{asset('img/icons_logo/facebook_logo.png')}}" alt=""/>
+                                </a>
+                                <a href="{{ route('login.google') }}" class="login-with-btn">
+                                    <img src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/>
+                                </a>
+                                <button type="button" class="login-with-btn">
+                                    <img src="{{asset('img/icons_logo/apple_logo.png')}}" alt=""/>
+                                </button>
+                                <button type="button" class="login-with-btn">
+                                    <img src="{{asset('img/icons_logo/kakao-talk_logo.png')}}" alt=""/>
+                                </button>
                             </div>
                             <div class="sign--up d-flex justify-content-center">
                                 <p>{{ __('home.Do you already have an account') }}?</p>
