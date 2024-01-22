@@ -99,7 +99,6 @@ class AuthSocialController extends Controller
         try {
             $facebookUser = Socialite::driver('facebook')->stateless()->user();
 
-
             if ($facebookUser->getEmail() == null || $facebookUser->getName() == null) {
                 return redirect()->route('login')->with('error', 'Error');
             }

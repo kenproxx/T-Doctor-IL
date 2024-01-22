@@ -33,18 +33,19 @@ class DoctorInfoApi extends Controller
         }
         return response()->json($doctorInfos);
     }
+
     public function getDoctor24h(Request $request)
     {
         $size = $request->input('size');
         if ($size && $size > 0 && is_numeric($size)) {
-            $Doctor24hInfos = User::where('time_working_1', '==' ,'00:00-23:59')
-                ->where('time_working_2', '==' ,'T2-CN')
+            $Doctor24hInfos = User::where('time_working_1', '==', '00:00-23:59')
+                ->where('time_working_2', '==', 'T2-CN')
                 ->where('status', UserStatus::ACTIVE)
                 ->where('member', TypeMedical::DOCTORS)
                 ->limit($size)->get();
         } else {
-            $Doctor24hInfos = User::where('time_working_1', '==' ,'00:00-23:59')
-                ->where('time_working_2', '==' ,'T2-CN')
+            $Doctor24hInfos = User::where('time_working_1', '==', '00:00-23:59')
+                ->where('time_working_2', '==', 'T2-CN')
                 ->where('status', UserStatus::ACTIVE)
                 ->where('member', TypeMedical::DOCTORS)->get();
         }
@@ -56,6 +57,13 @@ class DoctorInfoApi extends Controller
         $keyword = $request->input('name');
         $name = (new MainController())->vn_to_str($keyword);
 
+        $listDoctor = $this->findDoctor($name);
+
+        return response()->json($listDoctor);
+    }
+
+    private function findDoctor($name)
+    {
         $listDoctor = User::where('member', TypeMedical::DOCTORS)
             ->where('status', UserStatus::ACTIVE)
             ->when($name, function ($query) use ($name) {
@@ -77,7 +85,7 @@ class DoctorInfoApi extends Controller
             })
             ->orderBy('id', 'desc')
             ->get();
-        return response()->json($listDoctor);
+        return $listDoctor;
     }
 
     public function findByUser($id)
@@ -167,5 +175,25 @@ class DoctorInfoApi extends Controller
 
 
         return response()->json($listUser);
+    }
+
+    public function findDoctorByKeyword(Request $request)
+    {
+        $keyword = $request->input('keyword');
+        $name = (new MainController())->vn_to_str($keyword);
+
+        $listDoctor = $this->findDoctor($name);
+        $html = '';
+
+        foreach ($listDoctor as $pharmacist) {
+            $html .= $this->loadHtmlFormDoctor($pharmacist);
+        }
+
+        return $html;
+    }
+
+    private function loadHtmlFormDoctor($pharmacist)
+    {
+        return view('examination.component_doctor_findmymedicine', compact('pharmacist'));
     }
 }
