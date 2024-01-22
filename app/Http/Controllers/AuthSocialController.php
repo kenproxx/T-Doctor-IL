@@ -107,7 +107,7 @@ class AuthSocialController extends Controller
 
             $existingUser = User::where('email', $facebookUser->email)->first();
 
-            $password = (new HomeController())->generateRandomString(8);
+            $password = (new MainController())->generateRandomString(8);
             $passwordHash = Hash::make($password);
 
             if ($existingUser) {
