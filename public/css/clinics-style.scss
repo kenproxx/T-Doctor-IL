@@ -84,3 +84,38 @@
 
     }
 }
+
+@media (max-width: 575px) {
+        .specialList-clinics {
+            .border-specialList {
+                .content__item {
+                    .specialList-clinics--main {
+                        .title-specialList-clinics {
+                            font-size: 16px;
+                        }
+
+                        .address-specialList-clinics {
+                            .distance {
+                                font-size: 14px;
+                            }
+
+                            .address-clinics {
+                                font-size: 14px;
+                            }
+                        }
+
+                        .time-working {
+                            span {
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+}
+
+@media (min-width: 576px) {
+
+}

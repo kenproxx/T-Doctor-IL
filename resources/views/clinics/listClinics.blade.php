@@ -178,7 +178,7 @@
                     let formattedCloseDate = `${closeDate.getHours()}:${closeDate.getMinutes()}`;
 
                     let html = `
-                    <div class="specialList-clinics col-md-6 mt-5">
+                    <div class="specialList-clinics col-md-6 mt-3">
                         <a href="${urlDetail}">
                             <div class="border-specialList">
                                  <div class="content__item d-flex gap-3">

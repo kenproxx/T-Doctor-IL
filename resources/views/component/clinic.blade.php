@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{{asset('css/clinics-style.css')}}">
 <style>
     .border-specialList {
         border-radius: 16px;
@@ -59,7 +60,7 @@
 
     }
 </style>
-<div class="body m-0 row" id="listClinic">
+<div class="body m-0 d-flex flex-wrap w-100" id="listClinic">
 
 </div>
 <script>
@@ -105,7 +106,7 @@
                 let formattedCloseDate = `${closeDate.getHours()}:${closeDate.getMinutes()}`;
 
                 html = html + `
-                <div class="specialList-clinics col-md-6 mt-5">
+                <div class="specialList-clinics col-md-6 mt-3">
                         <a href="${urlDetail}">
                             <div class="border-specialList">
                                  <div class="content__item d-flex gap-3">
@@ -126,8 +127,9 @@
                             <div class="time-working">
                                  <span class="color-timeWorking">
                                     <span class="fs-14 font-weight-600">${formattedOpenDate} - ${formattedCloseDate}</span>
+                                    <span>/ {{ __('home.Dental Clinic') }}</span>
                                     </span>
-                                    <span>/ {{ __('home.Dental Clinic<') }}/span>
+
                             </div>
                             </div>
                             </div>

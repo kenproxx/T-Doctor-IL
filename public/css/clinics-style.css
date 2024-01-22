@@ -74,4 +74,19 @@
   line-height: normal;
 }
 
+@media (max-width: 575px) {
+  .specialList-clinics .border-specialList .content__item .specialList-clinics--main .title-specialList-clinics {
+    font-size: 16px;
+  }
+  .specialList-clinics .border-specialList .content__item .specialList-clinics--main .address-specialList-clinics .distance {
+    font-size: 14px;
+  }
+  .specialList-clinics .border-specialList .content__item .specialList-clinics--main .address-specialList-clinics .address-clinics {
+    font-size: 14px;
+  }
+  .specialList-clinics .border-specialList .content__item .specialList-clinics--main .time-working span {
+    font-size: 12px;
+  }
+}
+
 /*# sourceMappingURL=clinics-style.css.map */

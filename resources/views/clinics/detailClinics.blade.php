@@ -299,7 +299,7 @@
             let services = ``;
             for (let i = 0; i < response.length; i++) {
                 let data = response[i];
-                services = services + `<div class="d-flex justify-content-between mt-md-2 border-booking-sv align-items-center">
+                services = services + `<div class="d-flex justify-content-between mt-md-2 mt-1 border-booking-sv align-items-center">
                                     <div class="fs-14 font-weight-600">
                                         <span>${data.name}</span>
                                     </div>
@@ -508,7 +508,7 @@
                                      @if(Auth::check())
             <span>{{ __('home.select member family') }}</span>
                                         </div>
-                                        <div>
+                                        <div class="mt-1">
                                         Bản thân
                                         <select class="form-control" name="member_family_id" id="member_family_id">
                                         <option value="">{{ __('home.Bản thân') }}</option>
