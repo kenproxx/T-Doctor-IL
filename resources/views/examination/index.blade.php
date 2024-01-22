@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <div class="col-sm-4 col">
-                        <div class="form-group">
+                        <div class="form-group position-relative">
                             <label for="inputSearchDoctor" class="fa fa-search form-control-feedback"></label>
                             <input type="search" id="inputSearchDoctor" class="form-control"
                                    name="nameSearch"

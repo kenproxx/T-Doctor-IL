@@ -418,8 +418,8 @@ body::-webkit-scrollbar {
 }
 .form-control-feedback {
     position: absolute;
-    top: 24px;
-    z-index: 2;
+    top: 0;
+    /*z-index: 2;*/
     display: block;
     text-align: center;
     pointer-events: none;
@@ -428,7 +428,7 @@ body::-webkit-scrollbar {
 }
 #inputSearchDoctor {
     padding-left: 45px;
-    position: relative;
+    /*position: relative;*/
     margin-top: 24px;
 }
 .flea__item {
@@ -815,7 +815,10 @@ span.material-symbols-outlined {
 }
 
 .filter_option {
-    padding: 15px;
+    padding: 0 24px;
+}
+.filter_option p {
+    display: flex;
 }
 
 #search_position {
