@@ -295,9 +295,9 @@
                                 <button type="button" class="login-with-btn">
                                     <img src="{{asset('img/icons_logo/apple_logo.png')}}" alt=""/>
                                 </button>
-                                <button type="button" class="login-with-btn">
+                                <a href="{{ route('login.kakao') }}" class="login-with-btn">
                                     <img src="{{asset('img/icons_logo/kakao-talk_logo.png')}}" alt=""/>
-                                </button>
+                                </a>
                             </div>
                             <div class="sign--up d-flex justify-content-center">
                                 <p>{{ __('home.Do not have an account') }}?</p>
@@ -517,9 +517,9 @@
                                 <button type="button" class="login-with-btn">
                                     <img src="{{asset('img/icons_logo/apple_logo.png')}}" alt=""/>
                                 </button>
-                                <button type="button" class="login-with-btn">
+                                <a href="{{ route('login.kakao') }}" class="login-with-btn">
                                     <img src="{{asset('img/icons_logo/kakao-talk_logo.png')}}" alt=""/>
-                                </button>
+                                </a>
                             </div>
                             <div class="sign--up d-flex justify-content-center">
                                 <p>{{ __('home.Do you already have an account') }}?</p>
