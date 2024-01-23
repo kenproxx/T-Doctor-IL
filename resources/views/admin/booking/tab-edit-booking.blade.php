@@ -9,14 +9,14 @@
               enctype="multipart/form-data">
             @csrf
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 form-group">
                     <label for="user">{{ __('home.Tên người đăng ký') }}</label>
                     @php
                         $user_name = \Illuminate\Foundation\Auth\User::where('id',$bookings_edit->user_id)->value('name');
                     @endphp
                     <input type="text" class="form-control" id="user" name="user" value="{{$user_name}}" disabled>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 form-group">
                     <label for="clinic_id">{{ __('home.BusinessName') }}</label>
                     @php
                         $clinic_name = \App\Models\Clinic::where('id',$bookings_edit->clinic_id)->value('name');
@@ -44,7 +44,8 @@
                     <ul class="list-service " style="list-style: none; padding-left: 0">
                         @foreach($services as $service)
                             <li class="new-select">
-                                <input onchange="getInputService();" class="service_item" value="{{$service->id}}"
+                                <input disabled onchange="getInputService();" class="service_item"
+                                       value="{{$service->id}}"
                                        id="service_{{$service->id}}"
                                        {{ in_array($service->id, $arrayService) ? 'checked' : '' }}
                                        name="service_item"
@@ -56,44 +57,47 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-3 form-group">
                     <label for="check_in">{{ __('home.Thời gian bắt đầu') }}</label>
-                    <input type="datetime-local" class="form-control" id="check_in" name="check_in"
+                    <input disabled type="datetime-local" class="form-control" id="check_in" name="check_in"
                            value="{{ $bookings_edit->check_in }}">
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 form-group">
                     <label for="check_out">{{ __('home.Thời gian kết thúc') }}</label>
-                    <input type="datetime-local" class="form-control" id="check_out" name="check_out"
+                    <input disabled type="datetime-local" class="form-control" id="check_out" name="check_out"
                            value="{{ $bookings_edit->check_out }}">
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 form-group">
                     <label for="booking_status">{{ __('home.Trạng thái') }}</label>
                     <select class="form-select" id="booking_status" name="status">
                         <option
-                            value="{{ \App\Enums\BookingStatus::PENDING }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::PENDING ? 'selected' : '' }}>
+                                value="{{ \App\Enums\BookingStatus::PENDING }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::PENDING ? 'selected' : '' }}>
                             {{ \App\Enums\BookingStatus::PENDING }}
                         </option>
                         <option
-                            value="{{ \App\Enums\BookingStatus::COMPLETE }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::COMPLETE ? 'selected' : '' }}>
+                                value="{{ \App\Enums\BookingStatus::COMPLETE }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::COMPLETE ? 'selected' : '' }}>
                             {{ \App\Enums\BookingStatus::COMPLETE }}
                         </option>
                         <option
-                            value="{{ \App\Enums\BookingStatus::APPROVED }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::APPROVED ? 'selected' : '' }}>
+                                value="{{ \App\Enums\BookingStatus::APPROVED }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::APPROVED ? 'selected' : '' }}>
                             {{ \App\Enums\BookingStatus::APPROVED }}
                         </option>
                         <option
-                            value="{{ \App\Enums\BookingStatus::CANCEL }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::CANCEL ? 'selected' : '' }}>
+                                value="{{ \App\Enums\BookingStatus::CANCEL }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::CANCEL ? 'selected' : '' }}>
                             {{ \App\Enums\BookingStatus::CANCEL }}
                         </option>
                     </select>
                 </div>
-                <div class=" col-md-3 mt-4">
+                <div class=" col-md-3 form-group mt-4">
                     <label for="services"></label>
                     <input type="checkbox" name="is_result"
                            {{ $bookings_edit->is_result == 1 ? 'checked' : '' }}
                            class="is_result" id="is_result" value="1">
                     <label for="is_result">{{ __('home.Result') }}</label>
                 </div>
+            </div>
+            <div class="row" id="showReasonCancel">
+
             </div>
             <input type="text" name="services" id="services"
                    class="form-control d-none">
@@ -119,7 +123,6 @@
             @endif
         </form>
     </div>
-
     <!-- Modal -->
     <div class="modal fade" id="exampleModalComplete" tabindex="-1" aria-labelledby="exampleModalLabelComplete"
          aria-hidden="true">
@@ -137,7 +140,8 @@
                             <div id="list-service-result">
 
                             </div>
-                            <button type="button" class="btn btn-outline-primary mt-3 btnAddNewResult">{{ __('home.Add new result') }}
+                            <button type="button"
+                                    class="btn btn-outline-primary mt-3 btnAddNewResult">{{ __('home.Add new result') }}
                             </button>
                         </div>
 
@@ -191,14 +195,14 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('home.Close') }}</button>
+                        <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">{{ __('home.Close') }}</button>
                         <button type="button" class="btn btn-primary btnCreate">{{ __('home.create') }}</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -210,7 +214,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{ __('home.Please update status for booking with "Completed" and Select Result to create result') }}!
+                    {{ __('home.Please update status for booking with "Completed" and Select Result to create result') }}
+                    !
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ __('home.Close') }}</button>
@@ -218,6 +223,54 @@
             </div>
         </div>
     </div>
+
+    {{-- Handle JS --}}
+    <script>
+        $(document).ready(function () {
+            let html = `<div class="form-group">
+                    <label for="reason_text">Lí do hủy: </label>
+                    <input type="text" class="form-control" id="reason_text" name="reason_text" value="{{$bookings_edit->reason_cancel}}">
+                    <p class="small text-danger mt-1" id="support_reason">Vui lòng chọn/nhập lý do hủy</p>
+                    <ul class="list-reason " style="list-style: none; padding-left: 0">
+                        @foreach($reasons as $reason)
+            <li class="new-select">
+                <input onchange="changeReason();" class="reason_item"
+                       value="{{$reason}}"
+                                       id="{{$reason}}"
+                                       {{ $reason == 'Other' ? 'checked' : ''}}
+            name="reason_item"
+            type="radio">
+     <label for="{{$reason}}">{{$reason}}</label>
+                            </li>
+                        @endforeach
+            </ul>
+        </div>`;
+            showOrHidden(html);
+            $('#booking_status').change(function () {
+                showOrHidden(html);
+            });
+        })
+
+        function showOrHidden(html) {
+            let value = $('#booking_status').val();
+            if (value === `{{ \App\Enums\BookingStatus::CANCEL }}`) {
+                $('#showReasonCancel').empty().append(html);
+            } else {
+                $('#showReasonCancel').empty();
+            }
+        }
+
+        function changeReason() {
+            let value = $('input[name="reason_item"]:checked').val();
+            if (value !== 'Other') {
+                $('#support_reason').addClass('d-none');
+                $('#reason_text').val(value).prop('disabled', false /* or 'true' to  disabled input */);
+            } else {
+                $('#support_reason').removeClass('d-none');
+                $('#reason_text').val('').prop('disabled', false);
+            }
+        }
+    </script>
     <script>
         let arrayService = [];
         let arrayNameService = [];
@@ -315,7 +368,7 @@
         };
 
         $(document).ready(function () {
-            $(window).on('popstate', function() {
+            $(window).on('popstate', function () {
                 location.reload();
             });
 
@@ -329,7 +382,7 @@
 
             $('.btnGetFile').on('click', function () {
                 let alertMessage = `Vui lòng nhập vào file theo định dạng mẫu đã được viết sẵn! Chúng tôi không khuyến khích bất kì hành động thay đổi định dạng file hoặc cấu trúc dữ liệu trong file vì điều này sẽ ảnh hướng đến việc đọc hiểu dữ liệu.`
-                if (confirm(alertMessage)){
+                if (confirm(alertMessage)) {
                     window.location.href = `{{ route('user.download') }}`;
                 }
             })

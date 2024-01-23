@@ -14,5 +14,6 @@ final class ReasonCancel extends Enum
     const OptionSix = 'Have been examined here before';// Đã từng khám tại đây
     const OptionEight = 'Not enough services provided';// Không đủ dịch vụ cung cấp
     const OptionNine = 'Waited too long';// Chờ quá lâu
+    /* Never edit the key or value of OptionSeven below */
     const OptionSeven = 'Other'; // Khác
 }
