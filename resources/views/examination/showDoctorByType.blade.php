@@ -122,6 +122,7 @@
             loadingMasterPage()
 
             let keyword = $('#inputSearch').val();
+            keyword = keyword.replace(' ', '+');
             let urlSearch = `{{ route('restapi.doctor.info.find') }}` + `?keyword=${keyword}`;
 
             await $.ajax({
