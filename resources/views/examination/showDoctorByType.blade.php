@@ -13,12 +13,14 @@
                     </div>
                     <div class="col filter_option"><p>{{ __('home.Location') }}<i class="bi bi-chevron-expand"></i></p>
                     </div>
-                    <div class="col filter_option"><p>{{ __('home.Experience') }} <i class="bi bi-chevron-expand"></i></p>
+                    <div class="col filter_option"><p>{{ __('home.Experience') }} <i class="bi bi-chevron-expand"></i>
+                        </p>
                     </div>
                 </div>
                 <div class="form-group has-search position-relative w-auto mr-3 mr-md-0">
                     <span class="fa fa-search form-control-feedbackSearch p-md-3"></span>
-                    <input type="text" class="form-control" placeholder="{{ __('home.Search for anything…') }}">
+                    <input type="text" id="inputSearch" onkeypress="processSearchDoctor();" class="form-control"
+                           placeholder="{{ __('home.Search for anything…') }}">
                 </div>
                 <div class="flex d-md-none">
                     <button class="navbar-toggler border-none css-button" type="button" data-bs-toggle="offcanvas"
@@ -36,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <div class="row list-doctor m-auto find-my-medicine">
+        <div class="row list-doctor m-auto find-my-medicine" id="list_doctor">
             @if(count($doctors) > 0)
                 @foreach($doctors as $doctor)
                     @include('examination.component_doctor_findmymedicine', ['pharmacist' => $doctor])
@@ -46,11 +48,10 @@
             @endif
         </div>
 
-        <div class="d-flex justify-content-center align-items-center">
+        <div class="d-flex justify-content-center align-items-center" id="doctor_paginate">
             {{$doctors->links()}}
         </div>
 
-    {{-- model--}}
         <div class="offcanvas offcanvas-end" tabindex="-1" id="filterNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
                 <a href="{{route('home')}}" class="offcanvas-title" id="offcanvasNavbarLabel"><img class="w-100"
@@ -60,14 +61,14 @@
             <div class="offcanvas-body">
                 <div class="border-radius ">
                     <div class="flea-text">{{ __('home.Filter') }}</div>
-{{--                    @foreach($departments as $department)--}}
-{{--                        <div>--}}
-{{--                            <input type="checkbox" onchange="performSearch()" name="category_{{$department->id}}"--}}
-{{--                                   id="category_{{$department->id}}">--}}
-{{--                            <label for="category_{{$department->id}}"--}}
-{{--                                   class="flea-text-gray">{{$department->name}}</label>--}}
-{{--                        </div>--}}
-{{--                    @endforeach--}}
+                    {{--                    @foreach($departments as $department)--}}
+                    {{--                        <div>--}}
+                    {{--                            <input type="checkbox" onchange="performSearch()" name="category_{{$department->id}}"--}}
+                    {{--                                   id="category_{{$department->id}}">--}}
+                    {{--                            <label for="category_{{$department->id}}"--}}
+                    {{--                                   class="flea-text-gray">{{$department->name}}</label>--}}
+                    {{--                        </div>--}}
+                    {{--                    @endforeach--}}
                     <div class="flea-text-sp">{{ __('home.See all categories') }}</div>
                 </div>
                 <div class="border-radius mt-3 ">
@@ -108,4 +109,38 @@
                 </div>
             </div>
         </div>
+    </div>
+    <script>
+        async function processSearchDoctor() {
+            if (event.keyCode === 13 && !event.shiftKey) {
+                await searchDoctor();
+            }
+        }
+
+
+        async function searchDoctor() {
+            loadingMasterPage()
+
+            let keyword = $('#inputSearch').val();
+            let urlSearch = `{{ route('restapi.doctor.info.find') }}` + `?keyword=${keyword}`;
+
+            await $.ajax({
+                url: urlSearch,
+                method: 'GET',
+                success: function (response) {
+                    loadingMasterPage()
+                    renderResponse(response)
+                },
+                error: function (exception) {
+                    console.log(exception);
+                    loadingMasterPage()
+                }
+            });
+        }
+
+        function renderResponse(html) {
+            $('#doctor_paginate').addClass('d-none');
+            $('#list_doctor').html(html);
+        }
+    </script>
 @endsection

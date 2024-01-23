@@ -1,5 +1,5 @@
-@php use App\Models\MedicalFavourite;use App\Models\Province; @endphp
-@php use App\Models\Department;use Illuminate\Support\Facades\Auth; @endphp
+@php use App\Models\Department;use App\Models\MedicalFavourite;use App\Models\Province;use Illuminate\Support\Facades\Auth; @endphp
+@php @endphp
 @php $isFavourite = \App\Models\MedicalFavourite::where([
                 ['user_id', '=', \Illuminate\Support\Facades\Auth::user()->id ?? ''],
                 ['medical_id', '=', $pharmacist->id],
@@ -17,7 +17,8 @@
         <img loading="lazy" class="rectangle border-img"
              src="{{asset($pharmacist->avt)}}"/>
         <div class="div mt-3">
-            <a target="_blank" class="title-best__doctor" href="{{ route('examination.doctor_info', ['id' => $pharmacist->id]) }}">
+            <a target="_blank" class="title-best__doctor"
+               href="{{ route('examination.doctor_info', ['id' => $pharmacist->id]) }}">
                 <div class="text-wrapper">{{ $pharmacist->name ?? __('home.no name') }}</div>
             </a>
             <div class="div-2 serviceDoctor">
