@@ -265,7 +265,6 @@ Route::group(['prefix' => 'bookings'], function () {
     Route::get('list-by-user/{id}', [AdminBookingApi::class, 'getAllByUserId'])->name('api.bookings.getAllByUserId');
     Route::get('detail/{id}', [AdminBookingApi::class, 'detail'])->name('api.bookings.detail');
     Route::post('update/{id}', [AdminBookingApi::class, 'updateStatus'])->name('api.bookings.updateStatus');
-    Route::post('cancel/{id}', [AdminBookingApi::class, 'cancelBooking'])->name('api.bookings.cancel');
     Route::delete('delete/{id}', [AdminBookingApi::class, 'delete'])->name('api.bookings.delete');
 });
 

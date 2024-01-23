@@ -101,7 +101,7 @@
             for (let i = 0; i < res.length; i++) {
                 let item = res[i];
                 console.log(item)
-                let urlDetail = baseUrl.replace(':id', item.id );
+                let urlDetail = baseUrl.replace(':id', item.id);
 
                 let buttonHtml = '';
 
@@ -148,16 +148,20 @@
 
         if (confirmed) {
             let accessToken = `Bearer ` + token;
-            let urlDelete = `{{ route('booking.delete.users', ['id' => ':id']) }}`;
+            let urlDelete = `{{ route('api.backend.booking.cancel', ['id' => ':id']) }}`;
             urlDelete = urlDelete.replace(':id', id);
+
+            let data = {
+                status: `{{ \App\Enums\BookingStatus::DELETE }}`
+            }
 
             await $.ajax({
                 url: urlDelete,
-                method: 'DELETE',
+                method: 'POST',
                 headers: {
                     "Authorization": accessToken,
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
+                data: data,
                 success: function (response) {
                     loadingMasterPage();
                     window.location.reload();
