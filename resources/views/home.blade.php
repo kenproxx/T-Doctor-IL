@@ -2281,31 +2281,31 @@
                     </a>
                     </div>
                     <div class="border-top">
-                        <div class="mt-md-2"><i class="text-gray mr-md-2 fa-solid fa-location-dot"></i>
+                        <div class="mt-md-2 mt-1"><i class="text-gray mr-md-2 fa-solid fa-location-dot"></i>
                             <span class="fs-14 font-weight-600">${location.address_detail}</span>
                         </div>
-                        <div class="mt-md-2">
+                        <div class="mt-md-2 mt-1">
                             <i class="text-gray mr-md-2 fa-regular fa-clock"></i>
                             <span class="fs-14 font-weight-600">
                                 Open: ${formatTime(location.open_date)} - ${formatTime(location.close_date)}
                             </span>
                         </div>
-                        <div class="mt-md-2">
+                        <div class="mt-md-2 mt-1">
                             <i class="text-gray mr-md-2 fa-solid fa-globe"></i>
                             <span class="fs-14 font-weight-600"> ${location.email}</span>
                         </div>
-                        <div class="mt-md-2">
+                        <div class="mt-md-2 mt-1">
                             <i class="text-gray mr-md-2 fa-solid fa-phone-volume"></i> <span
                                 class="fs-14 font-weight-600"> ${location.phone}</span>
                         </div>
-                        <div class="mt-md-2 mb-md-2">
+                        <div class="mt-md-2 mt-1 mb-md-2">
                             <i class="text-gray mr-md-2 fa-solid fa-bookmark"></i> <span
                                 class="fs-14 font-weight-600"> ${location.type}</span>
                         </div>
                         @for($i=0; $i<3; $i++)
                     <div class="border-top mb-md-2">
                         <div
-                            class="d-flex justify-content-between rv-header align-items-center mt-md-2">
+                            class="d-flex justify-content-between rv-header align-items-center mt-md-2 mt-1">
                             <div class="d-flex rv-header--left">
                                 <div class="avt-24 mr-md-2">
                                     <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
@@ -2325,7 +2325,7 @@
 @endfor
                     <div class="border-top">
                         <div
-                            class="d-flex justify-content-between rv-header align-items-center mt-md-2">
+                            class="d-flex justify-content-between rv-header align-items-center mt-md-2 mt-1">
                             <div class="d-flex rv-header--left">
                                 <div class="avt-24 mr-md-2">
                                     <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">

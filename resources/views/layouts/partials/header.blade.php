@@ -1,6 +1,7 @@
 @php use App\Enums\CommonType;use App\Enums\Role;use App\Enums\TypeTimeWork;use App\Http\Middleware\MedicalPermission;use Illuminate\Support\Facades\Auth; @endphp
 
 <link href="{{ asset('css/header.css') }}" rel="stylesheet">
+<link href="{{ asset('css/loginNew.css') }}" rel="stylesheet">
 <header class="container">
     <div class="main-header">
         <div class="before-header d-flex justify-content-between align-items-center">
@@ -249,7 +250,7 @@
         </ul>
     </div>
 </div>
-<div class="modal fade" id="staticBackdrop" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+<div class="modal fade container" id="staticBackdrop" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" id="modal_login">
@@ -269,13 +270,15 @@
                                 <label for="password">{{ __('home.Password') }}</label>
                                 <input id="password" name="password" type="password" placeholder="********">
                             </div>
-                            <div class="form-element">
-                                <input id="remember-me" type="checkbox">
-                                <label for="remember-me">{{ __('home.Remember password') }}</label>
+                            <div class="form-element d-flex justify-content-between align-items-center mt-md-0 mt-2">
+                                <div class="remember-me">
+                                    <input id="remember-me" type="checkbox">
+                                    <label for="remember-me">{{ __('home.Remember password') }}</label>
+                                </div>
                                 <a href="#" data-toggle="modal" data-target="#modalForgetPassword">
                                     {{ __('home.Forgot Password') }}</a>
                             </div>
-                            <div class="form-element text-center">
+                            <div class="form-element text-center d-flex justify-content-center">
                                 <button>{{ __('home.Login') }}</button>
                             </div>
                             <div class="other_sign">
@@ -292,9 +295,9 @@
                                 <a href="{{ route('login.google') }}" class="login-with-btn">
                                     <img src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/>
                                 </a>
-                                <button type="button" class="login-with-btn">
+                                <a type="button" class="login-with-btn">
                                     <img src="{{asset('img/icons_logo/apple_logo.png')}}" alt=""/>
-                                </button>
+                                </a>
                                 <a href="{{ route('login.kakao') }}" class="login-with-btn">
                                     <img src="{{asset('img/icons_logo/kakao-talk_logo.png')}}" alt=""/>
                                 </a>
@@ -311,7 +314,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="modalRegister" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+<div class="modal fade container" id="modalRegister" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" id="modal_register">
@@ -487,7 +490,7 @@
                                             <input id="passwordConfirm" name="passwordConfirm" minlength="8"
                                                    type="password" placeholder="********" required>
                                         </div>
-                                        <div class="form-element">
+                                        <div class="form-element remember-me">
                                             <input id="remember-me" type="checkbox" required>
                                             <label
                                                 for="remember-me">{{ __('home.Agree to Terms of Service and Privacy Policy') }}</label>
@@ -497,7 +500,7 @@
                             </div>
                         </div>
                         <div id="other-option">
-                            <div class="form-element text-center">
+                            <div class="form-element text-center d-flex justify-content-center">
                                 <button type="submit">{{ __('home.Sign Up') }}</button>
                             </div>
                             <div class="other_sign">
@@ -514,9 +517,9 @@
                                 <a href="{{ route('login.google') }}" class="login-with-btn">
                                     <img src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/>
                                 </a>
-                                <button type="button" class="login-with-btn">
+                                <a type="button" class="login-with-btn">
                                     <img src="{{asset('img/icons_logo/apple_logo.png')}}" alt=""/>
-                                </button>
+                                </a>
                                 <a href="{{ route('login.kakao') }}" class="login-with-btn">
                                     <img src="{{asset('img/icons_logo/kakao-talk_logo.png')}}" alt=""/>
                                 </a>
@@ -542,7 +545,7 @@
 <div class="modal modal-xl modal fade" id="modalForgetPassword" data-backdrop="static" data-keyboard="false"
      tabindex="-1" aria-labelledby="modalForgetPasswordLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
-        <div class="modal-content h-80">
+        <div class="modal-content container h-80">
 
             <div class="modal-body">
                 <div class="container-fluid">
