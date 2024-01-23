@@ -96,8 +96,11 @@ class BookingController extends Controller
         $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
         $isAdmin = (new MainController())->checkAdmin();
 
+        $reflector = new \ReflectionClass('App\Enums\ReasonCancel');
+        $reasons = $reflector->getConstants();
+
         if ($owner == Auth::id() || $isAdmin) {
-            return view('admin.booking.tab-edit-booking', compact('bookings_edit', 'isAdmin', 'services'));
+            return view('admin.booking.tab-edit-booking', compact('bookings_edit', 'isAdmin', 'services', 'reasons'));
         } else {
             session()->flash('error', 'You do not have permission.');
             return \redirect()->back();
@@ -176,25 +179,20 @@ class BookingController extends Controller
     {
         try {
             $booking = Booking::find($id);
-            $checkIn = $request->input('check_in');
-            $checkOut = $request->input('check_out');
-            $servicesArray = $request->input('services');
             $status = $request->input('status');
-            if (is_array($servicesArray)) {
-                $servicesAsString = implode(',', $servicesArray);
-            } else {
-                $servicesAsString = $servicesArray;
-            }
             $is_result = $request->input('is_result');
             if (!$is_result) {
                 $is_result = 0;
             }
 
             $booking->is_result = $is_result;
-            $booking->check_in = $checkIn;
-            $booking->check_out = $checkOut;
-            $booking->service = $servicesAsString;
             $booking->status = $status;
+
+            $reason = $request->input('reason_text');
+
+            if ($status == BookingStatus::CANCEL) {
+                $booking->reason_cancel = $reason;
+            }
 
             $success = $booking->save();
             if ($success) {
