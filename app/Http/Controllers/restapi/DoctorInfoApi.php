@@ -183,10 +183,16 @@ class DoctorInfoApi extends Controller
         $name = (new MainController())->vn_to_str($keyword);
 
         $listDoctor = $this->findDoctor($name);
-        $html = '';
+        $html = null;
 
         foreach ($listDoctor as $pharmacist) {
             $html .= $this->loadHtmlFormDoctor($pharmacist);
+        }
+
+        $title = __('home.no data');
+
+        if (!$html) {
+            $html = `<h3 class="no-data text-center">` . $title . `</h3>`;
         }
 
         return $html;
