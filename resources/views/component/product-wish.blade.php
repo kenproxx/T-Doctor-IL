@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="{{asset('css/fleaMarketWishList.css')}}">
+
 <div class="page row" id="listWishList">
 </div>
 <script>
@@ -59,13 +61,13 @@
                 html += `
                         <div class="col-md-3 col-6">
                             <div class="product-item">
-                                <div class="img-pro">
+                                <div class="img-pro img-pro-wishList2">
                                     <img class="b-radius-8px" src="${product.thumbnail}" alt="">
                                     <a class="button-heart" data-favorite="0">
                                         <i id="bi-heart" class="bi bi-heart-fill" style="color: red;" data-product-id="${product.id}" onclick="addProductToWishList()"></i>
                                     </a>
                                 </div>
-                                <div class="content-pro">
+                                <div class="content-pro content-pro-wishList2">
                                     <div class="name-pro">
                                         <a href="${url}">${product.name}</a>
                                     </div>

@@ -511,8 +511,11 @@
 .product-item .img-pro #bi-heart-fill {
   color: rgb(255, 0, 0);
 }
+.product-item .content-pro {
+  padding: 0 10px;
+}
 .product-item .content-pro .name-pro a {
-  color: black;
+  color: #ffffff;
   font-size: 18px;
   font-weight: 800;
   -webkit-line-clamp: 1;
@@ -527,10 +530,12 @@
 .product-item .content-pro .location-pro p {
   margin-left: 5px;
   font-weight: 800;
+  color: #FFFFFF;
 }
 .product-item .content-pro .price-pro {
   font-size: 24px;
   font-weight: 800;
+  color: #FFFFFF;
 }
 
 .clinics-list .clinics-header {

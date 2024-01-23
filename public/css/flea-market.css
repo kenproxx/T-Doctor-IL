@@ -660,7 +660,7 @@ input[type=range]::-moz-range-thumb {
     border-radius: 60px 0px 16px 0px;
     background: var(--White, #FFF);
     display: flex;
-    padding: 16px 40px;
+    padding: 16px 16px;
     justify-content: center;
     align-items: center;
     gap: 10px;

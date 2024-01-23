@@ -10,7 +10,7 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-8">
-                        <div id="title" class="d-flex justify-content-center">
+                        <div id="title" class="d-flex justify-content-start">
                             <div class="list-title">
                                 <div class="list--doctor p-0">
                                     <a class="back" href="{{route('home')}}"><p><i

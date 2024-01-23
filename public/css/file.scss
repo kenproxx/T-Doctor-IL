@@ -636,9 +636,10 @@
     }
 
     .content-pro {
+        padding: 0 10px;
         .name-pro {
             a {
-                color: black;
+                color: #ffffff;
                 font-size: 18px;
                 font-weight: 800;
                 //height: 55px;
@@ -656,12 +657,14 @@
             p {
                 margin-left: 5px;
                 font-weight: 800;
+                color:#FFFFFF;
             }
         }
 
         .price-pro {
             font-size: 24px;
             font-weight: 800;
+            color: #FFFFFF;
         }
     }
 }

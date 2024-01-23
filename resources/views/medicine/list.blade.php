@@ -29,10 +29,12 @@
                 height: 100%;
                 width: 100%;
             }
+
             .content-pro {
                 color: #FFFFFF;
                 padding: 12px;
             }
+
             .content-pro .name-pro a {
                 font-size: 12px;
                 line-height: 24px;
@@ -40,16 +42,19 @@
                 margin-bottom: 8px;
                 color: #FFFFFF !important;
             }
-            .product-item .content-pro .location-pro p{
+
+            .product-item .content-pro .location-pro p {
                 color: #FFFFFF;
             }
 
         }
+
         @media (min-width: 576px) {
             .content-pro {
                 color: #FFFFFF;
                 padding: 12px;
             }
+
             .content-pro .name-pro a {
                 font-size: 16px;
                 line-height: 24px;
@@ -57,18 +62,20 @@
                 margin-bottom: 8px;
                 color: #FFFFFF !important;
             }
-            .product-item .content-pro .location-pro p{
+
+            .product-item .content-pro .location-pro p {
                 color: #FFFFFF;
             }
+
             .SeeDetail {
-                border-radius: 60px 0px 16px 0px;
-                background: var(--White, #FFF);
+                border-radius: 60px 0 16px 0;
+                background: #FFF;
                 display: flex;
                 padding: 16px 18px !important;
                 justify-content: center;
                 align-items: center;
                 gap: 10px;
-                color: var(--Black, #000);
+                color: #000;
                 font-size: 18px;
                 font-style: normal;
                 font-weight: 800;
@@ -421,8 +428,8 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center mt-4">
-                    <a  class="add-cv-bt w-100 apply-bt_delete col-6">{{ __('home.Refresh') }}</a>
-                    <form  class="col-6 pr-0">
+                    <a class="add-cv-bt w-100 apply-bt_delete col-6">{{ __('home.Refresh') }}</a>
+                    <form class="col-6 pr-0">
                         <button type="button" data-bs-dismiss="offcanvas" aria-label="Close"
                                 class="add-cv-bt apply-bt_edit w-100">{{ __('home.Apply') }}</button>
                     </form>

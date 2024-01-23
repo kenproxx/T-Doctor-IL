@@ -2,7 +2,7 @@
 @php use App\Models\online_medicine\ProductMedicine; @endphp
 @php use App\Models\ProductInfo;use Illuminate\Support\Facades\Auth; @endphp
 <link href="{{ asset('css/modalcart.css') }}" rel="stylesheet">
-<div class="modal modal-cart fade container" id="modalCart" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal modal-cart fade" id="modalCart" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -38,7 +38,6 @@
                             </div>
                             <div class="col-3">
                                 <div class="change-quantity">
-
                                     <div class="value-button btnChangeQty" data-type="decrease"
                                          onclick="decreaseQuantity('{{ $cart->id }}')">-
                                     </div>
@@ -47,7 +46,6 @@
                                     <div class="value-button btnChangeQty" data-type="increase"
                                          onclick="increaseQuantity('{{ $cart->id }}')">+
                                     </div>
-
                                 </div>
                             </div>
                             <div class="d-flex align-items-center justify-content-end ">
