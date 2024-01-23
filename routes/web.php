@@ -219,11 +219,8 @@ Route::middleware(['user.active'])->group(function () {
         Route::get('/lists', [BookingController::class, 'index'])->name('booking.list.by.user');
         Route::get('/booking-detail/{id}', [BookingController::class, 'detailBooking'])->name('booking.detail.by.user');
         Route::get('/results-detail/{id}', [BookingController::class, 'resultsDetail'])->name('clinic.detail.results');
-        Route::get('/list-by-users/{id}/{status}',
-            [BookingApi::class, 'getAllBookingByUserId'])->name('booking.list.users');
-        Route::get('/detail/{id}', [BookingApi::class, 'detail'])->name('restapi.booking.detail');
-        Route::delete('/delete-booking/{id}', [BookingApi::class, 'cancelBooking'])->name('booking.delete.users');
-        Route::delete('/cancel-booking/{id}', [BookingApi::class, 'bookingCancel'])->name('booking.ancel.users');
+        Route::get('/list-by-users/{id}/{status}', [BookingApi::class, 'getAllBookingByUserId'])->name('booking.list.users');
+        Route::get('/detail/{id}', [BookingApi::class, 'detail'])->name('restapi.booking.detail');;
         Route::get('/search', [BackendProductInfoController::class, 'search'])->name('backend.booking.search');
         Route::get('get-all-booking', [BookingApi::class, 'getAllBooking'])->name('api.user.booking.get-all');
         Route::post('create-bookingNew', [BookingController::class, 'creatBookingNew'])->name('booking.create.new');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\restapi\admin;
 
 use App\Enums\BookingStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\restapi\MainApi;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 
@@ -72,37 +73,18 @@ class AdminBookingApi extends Controller
         try {
             $booking = Booking::find($id);
             if (!$booking || $booking->status == BookingStatus::DELETE) {
-                return response('Not found!', 404);
+                return response((new MainApi())->returnMessage('Booking not found'), 404);
             }
-            $status = $request->input('status');
-            if (!$status) {
-                $status = BookingStatus::APPROVED;
-            }
+            $status = $request->input('status') ?? BookingStatus::CANCEL;
+            $reason = $request->input('reason');
+
             $booking->status = $status;
-            $success = $booking->save();
-            if ($success) {
-                return response()->json($booking);
-            }
-            return response('Error, Please try again!', 400);
+            $booking->reason_cancel = $reason;
+            $booking->save();
+            return response((new MainApi())->returnMessage( 'Booking status updated successfully'), 200);
+
         } catch (\Exception $exception) {
-            return response($exception, 400);
-        }
-    }
-
-    public function cancelBooking($id, $status)
-    {
-        if ($id) {
-            $booking = Booking::find($id);
-            if ($booking) {
-                $booking->status = $status;
-
-                $booking->save();
-                return response()->json(['message' => 'Booking status updated successfully', 200]);
-            } else {
-                return response()->json(['error' => 'Booking not found'], 404);
-            }
-        } else {
-            return response()->json(['error' => 'Missing booking_id parameter'], 400);
+            return response((new MainApi())->returnMessage('Error, Please try again!'), 400);
         }
     }
 

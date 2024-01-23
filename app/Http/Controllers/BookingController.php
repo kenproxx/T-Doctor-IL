@@ -198,10 +198,10 @@ class BookingController extends Controller
 
             $success = $booking->save();
             if ($success) {
-                alert('Booking success');
+                alert('Update success');
                 return Redirect::route('homeAdmin.list.booking')->with('success', 'Booking success');
             }
-            return response('Create error', 400);
+            return response('Update error', 400);
         } catch (\Exception $exception) {
             return response($exception, 400);
         }

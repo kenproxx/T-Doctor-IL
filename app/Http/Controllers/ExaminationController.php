@@ -92,7 +92,12 @@ class ExaminationController extends Controller
 
         $doctors = $query->paginate($perPage);
         $title = __('home.Best doctor');
-        return view('examination.showDoctorByType', compact('doctors', 'title'));
+
+        $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
+        $provinces = Province::all();
+        $hospitals = Clinic::where('type', TypeBusiness::HOSPITALS)->get();
+        $experiences = User::distinct()->pluck('year_of_experience')->filter()->sort()->toArray();
+        return view('examination.showDoctorByType', compact('doctors', 'title', 'departments', 'provinces', 'hospitals', 'experiences'));
     }
 
     public function newDoctor()
@@ -103,7 +108,13 @@ class ExaminationController extends Controller
 
         $doctors = $query->orderBy('id', 'DESC')->paginate($perPage);
         $title = __('home.New doctor');
-        return view('examination.showDoctorByType', compact('doctors', 'title'));
+
+        $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
+        $provinces = Province::all();
+        $hospitals = Clinic::where('type', TypeBusiness::HOSPITALS)->get();
+        $experiences = User::distinct()->pluck('year_of_experience')->filter()->sort()->toArray();
+
+        return view('examination.showDoctorByType', compact('doctors', 'title', 'departments', 'provinces', 'hospitals', 'experiences'));
     }
 
     public function availableDoctor()
@@ -115,7 +126,12 @@ class ExaminationController extends Controller
         $doctors = $query->where('time_working_1', '00:00-23:59')->where('time_working_2',
             'T2-CN')->paginate($perPage);
         $title = __('home.24/7 Available doctor');
-        return view('examination.showDoctorByType', compact('doctors', 'title'));
+
+        $departments = DoctorDepartment::where('status', DoctorDepartmentStatus::ACTIVE)->get();
+        $provinces = Province::all();
+        $hospitals = Clinic::where('type', TypeBusiness::HOSPITALS)->get();
+        $experiences = User::distinct()->pluck('year_of_experience')->filter()->sort()->toArray();
+        return view('examination.showDoctorByType', compact('doctors', 'title', 'departments', 'provinces', 'hospitals', 'experiences'));
     }
 
     public function findMyMedicine(Request $request)
