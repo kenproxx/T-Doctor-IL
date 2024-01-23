@@ -192,7 +192,7 @@ class DoctorInfoApi extends Controller
         $title = __('home.no data');
 
         if (!$html) {
-            $html = `<h3 class="no-data text-center">` . $title . `</h3>`;
+            $html = '<h3 class="no-data text-center">' . $title . '</h3>';
         }
 
         return $html;
