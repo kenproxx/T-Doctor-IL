@@ -57,17 +57,30 @@ class DoctorInfoApi extends Controller
         $keyword = $request->input('name');
         $name = (new MainController())->vn_to_str($keyword);
 
-        $listDoctor = $this->findDoctor($name);
+        $listDoctor = $this->findDoctor($name, null, null, null, null);
 
         return response()->json($listDoctor);
     }
 
-    private function findDoctor($name)
+    private function findDoctor($name, $department, $province, $hospital, $experience)
     {
         $listDoctor = User::where('member', TypeMedical::DOCTORS)
             ->where('status', UserStatus::ACTIVE)
             ->when($name, function ($query) use ($name) {
                 $query->where(DB::raw('LOWER(users.name)'), 'like', '%' . strtolower($name) . '%');
+            })
+            ->when($department, function ($query) use ($department) {
+                $query->where('users.department_id', $department);
+            })
+            ->when($province, function ($query) use ($province) {
+                $query->where('users.province_id', $province);
+            })
+            ->when($hospital, function ($query) use ($hospital) {
+                $query->join('clinics', 'clinics.user_id', '=', 'users.id')
+                    ->where('clinics.id', $hospital);
+            })
+            ->when($experience, function ($query) use ($experience) {
+                $query->where('users.year_of_experience', $experience);
             })
             ->when($name, function ($query) use ($name) {
                 $departments = Department::where(DB::raw('LOWER(name)'), 'like', '%' . strtolower($name) . '%')->get();
@@ -180,9 +193,15 @@ class DoctorInfoApi extends Controller
     public function findDoctorByKeyword(Request $request)
     {
         $keyword = $request->input('keyword');
+
+        $department = $request->input('department_id');
+        $province = $request->input('province_id');
+        $hospital = $request->input('hospital_id');
+        $experience = $request->input('year_of_experience');
+
         $name = (new MainController())->vn_to_str($keyword);
 
-        $listDoctor = $this->findDoctor($name);
+        $listDoctor = $this->findDoctor($name, $department, $province, $hospital, $experience);
         $html = null;
 
         foreach ($listDoctor as $pharmacist) {
@@ -192,7 +211,7 @@ class DoctorInfoApi extends Controller
         $title = __('home.no data');
 
         if (!$html) {
-            $html = `<h3 class="no-data text-center">` . $title . `</h3>`;
+            $html = '<h3 class="no-data text-center">' . $title . '</h3>';
         }
 
         return $html;

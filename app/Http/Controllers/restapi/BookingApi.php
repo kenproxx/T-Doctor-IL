@@ -85,7 +85,7 @@ class BookingApi extends Controller
             $business_role5->id,
             $business_role6->id,
         ];
-        $role_user = DB::table('role_users')->whereIn('role_id',$array_id)->where('user_id', $id)->first();
+        $role_user = DB::table('role_users')->whereIn('role_id', $array_id)->where('user_id', $id)->first();
         $arrayBookings = null;
         if ($role_user) {
             $clinic = Clinic::where('user_id', $id)->first();
@@ -186,30 +186,19 @@ class BookingApi extends Controller
 
     public function cancelBooking(Request $request, $id)
     {
-        if ($id) {
-            $booking = Booking::find($id);
-            if ($booking) {
-                if ($booking->status == BookingStatus::CANCEL) {
-                    $booking->status = BookingStatus::PENDING;
-                } else {
-                    $booking->status = BookingStatus::CANCEL;
-                }
-
-                $booking->save();
-                return response()->json(['message' => 'Booking status updated successfully']);
-            } else {
-                return response()->json(['error' => 'Booking not found'], 404);
-            }
+        $booking = Booking::find($id);
+        $status = $request->input('status') ?? BookingStatus::CANCEL;
+        $reason = $request->input('reason');
+        if ($booking) {
+            $booking->status = $status;
+            $booking->reason_cancel = $reason;
+            $booking->save();
+            return response()->json(['message' => 'Booking status updated successfully']);
         } else {
-            return response()->json(['error' => 'Missing booking_id parameter'], 400);
+            return response()->json(['error' => 'Booking not found'], 404);
         }
     }
 
-    /**
-     * @param $userId
-     * @param $bookingId
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function bookingCancel($userId, $bookingId, $status)
     {
         if ($userId) {
@@ -236,5 +225,12 @@ class BookingApi extends Controller
         $arrayBookings = Booking::all();
 
         return response()->json($arrayBookings);
+    }
+
+    public function getListReason()
+    {
+        $reflector = new \ReflectionClass('App\Enums\ReasonCancel');
+        $reasons = $reflector->getConstants();
+        return response()->json($reasons);
     }
 }

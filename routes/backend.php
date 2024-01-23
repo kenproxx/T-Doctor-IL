@@ -86,20 +86,18 @@ Route::group(['prefix' => 'business-favourites'], function () {
 
 Route::group(['prefix' => 'medical-favourites'], function () {
     Route::get('list-by-users', [MedicalFavouriteApi::class, 'getAll'])->name('api.backend.medical.favourites.list');
-    Route::get('list-by-medical',
-        [MedicalFavouriteApi::class, 'findByUserIdAndMedicalID'])->name('api.backend.medical.favourites.medical');
+    Route::get('list-by-medical', [MedicalFavouriteApi::class, 'findByUserIdAndMedicalID'])->name('api.backend.medical.favourites.medical');
     Route::post('create', [MedicalFavouriteApi::class, 'create'])->name('api.backend.medical.favourites.create');
     Route::delete('delete/{id}', [MedicalFavouriteApi::class, 'delete'])->name('api.backend.medical.favourites.delete');
     Route::post('update-wishlist', [MedicalFavouriteApi::class, 'updateWishListMedical'])->name('api.backend.medical.favourites.update.wishlist');
 });
 
 Route::group(['prefix' => 'booking'], function () {
-    Route::get('/list-users/{id}/{status}',
-        [BookingApi::class, 'getAllBookingByUserId'])->name('api.booking.list.users');
-    Route::get('/list-clinics/{id}', [BookingApi::class, 'getAllBookingByClinicID'])->name('api.booking.list.clinics');
+    Route::get('list-users/{id}/{status}', [BookingApi::class, 'getAllBookingByUserId'])->name('api.booking.list.users');
+    Route::get('list-clinics/{id}', [BookingApi::class, 'getAllBookingByClinicID'])->name('api.booking.list.clinics');
     Route::post('create', [BookingApi::class, 'createBooking'])->name('api.user.createBooking');
-    Route::post('/cancel/{userId}/{bookingId}/{status}',
-        [BookingApi::class, 'bookingCancel'])->name('api.user.booking.status');
+    Route::post('cancel/{id}', [BookingApi::class, 'cancelBooking'])->name('api.backend.booking.cancel');
+    Route::get('list-reason', [BookingApi::class, 'getListReason'])->name('api.backend.booking.list.reason');
 });
 
 Route::group(['prefix' => 'messages'], function () {
