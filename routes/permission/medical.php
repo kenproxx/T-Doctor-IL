@@ -7,7 +7,6 @@ use App\Http\Controllers\backend\BackendCategoryProductController;
 use App\Http\Controllers\backend\BackendClinicController;
 use App\Http\Controllers\backend\BackendProductInfoController;
 use App\Http\Controllers\backend\BackendProductMedicineController;
-use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\backend\BackendReviewController;
 use App\Http\Controllers\backend\BackendServiceClinicController;
 use App\Http\Controllers\backend\BackendStaffController;
@@ -29,12 +28,9 @@ use App\Http\Controllers\restapi\admin\AdminOrderApi;
 use App\Http\Controllers\restapi\admin\AdminPhamacitisApi;
 use App\Http\Controllers\restapi\admin\AdminPharmacyApi;
 use App\Http\Controllers\restapi\admin\AdminShortVideoApi;
-use App\Http\Controllers\restapi\admin\AdminSurveyApi;
 use App\Http\Controllers\restapi\admin\AdminSymptomsApi;
-use App\Http\Controllers\restapi\CartApi;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StaffController;
-use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -264,7 +260,7 @@ Route::group(['prefix' => 'bookings'], function () {
     Route::get('list-by-clinics/{id}', [AdminBookingApi::class, 'getAllByClinicId'])->name('api.bookings.getAllByClinicId');
     Route::get('list-by-user/{id}', [AdminBookingApi::class, 'getAllByUserId'])->name('api.bookings.getAllByUserId');
     Route::get('detail/{id}', [AdminBookingApi::class, 'detail'])->name('api.bookings.detail');
-    Route::post('update/{id}', [AdminBookingApi::class, 'updateStatus'])->name('api.bookings.updateStatus');
+    Route::post('update/{id}', [AdminBookingApi::class, 'updateStatus'])->name('api.medical.bookings.updateStatus');
     Route::delete('delete/{id}', [AdminBookingApi::class, 'delete'])->name('api.bookings.delete');
 });
 
