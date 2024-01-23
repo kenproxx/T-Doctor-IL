@@ -25,6 +25,17 @@
                 height: 100%;
                 width: 100%;
             }
+
+            .content-pro .name-product a {
+                color: #FFFFFF;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 800;
+                line-height: normal;
+                min-height: 50px;
+            }
+
+
         }
 
         .add-cv-bt {
@@ -72,7 +83,8 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </form>
                 @if(Auth::check())
-                    <button type="button" data-toggle="modal" data-target="#modalCart" class="btnModalCart shopping-bag">
+                    <button type="button" data-toggle="modal" data-target="#modalCart"
+                            class="btnModalCart shopping-bag">
                         <i class="fa-solid fa-bag-shopping"></i>
                         @if($carts && count($carts) > 0)
                             <div class="text-wrapper"> {{ count($carts) }}</div>
@@ -105,7 +117,7 @@
                     </a>
                     <a class="col-2">
                         <button type="button"
-                                class="btnModalCart shopping-bag"  data-bs-toggle="offcanvas"
+                                class="btnModalCart shopping-bag" data-bs-toggle="offcanvas"
                                 data-bs-target="#filterNavbar">
                             <i class="bi bi-filter"></i>
                         </button>
@@ -338,8 +350,8 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-center mt-4">
-                    <a  class="add-cv-bt w-100 apply-bt_delete col-6">{{ __('home.Refresh') }}</a>
-                    <form  class="col-6 pr-0">
+                    <a class="add-cv-bt w-100 apply-bt_delete col-6">{{ __('home.Refresh') }}</a>
+                    <form class="col-6 pr-0">
                         <button type="button" data-bs-dismiss="offcanvas" aria-label="Close"
                                 class="add-cv-bt apply-bt_edit w-100">{{ __('home.Apply') }}</button>
                     </form>

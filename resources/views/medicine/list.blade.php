@@ -23,11 +23,56 @@
             display: flex;
         }
 
-        @media (max-width: 576px) {
+        @media (max-width: 575px) {
             #online-medicine .btnModalCart.shopping-bag {
                 margin-right: 0;
                 height: 100%;
                 width: 100%;
+            }
+            .content-pro {
+                color: #FFFFFF;
+                padding: 12px;
+            }
+            .content-pro .name-pro a {
+                font-size: 12px;
+                line-height: 24px;
+                font-weight: 500;
+                margin-bottom: 8px;
+                color: #FFFFFF !important;
+            }
+            .product-item .content-pro .location-pro p{
+                color: #FFFFFF;
+            }
+
+        }
+        @media (min-width: 576px) {
+            .content-pro {
+                color: #FFFFFF;
+                padding: 12px;
+            }
+            .content-pro .name-pro a {
+                font-size: 16px;
+                line-height: 24px;
+                font-weight: 500;
+                margin-bottom: 8px;
+                color: #FFFFFF !important;
+            }
+            .product-item .content-pro .location-pro p{
+                color: #FFFFFF;
+            }
+            .SeeDetail {
+                border-radius: 60px 0px 16px 0px;
+                background: var(--White, #FFF);
+                display: flex;
+                padding: 16px 18px !important;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                color: var(--Black, #000);
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 800;
+                line-height: normal;
             }
         }
 
@@ -472,29 +517,48 @@
                     let url = `{{ route('medicine.detail', ['id' => ':id']) }}`;
                     url = url.replace(':id', item.id);
                     let isFavoriteClass = isUserWasWishlist(item.id);
-                    html += `<div class="col-md-3">
-                                <div class="product-item">
-                                    <div class="img-pro">
-                                        <img src="${item.thumbnail}" alt="">
-                                           <a class="button-heart" data-favorite="0">
-                                                <i id="heart-icon-${item.id}" class="${isFavoriteClass} bi" data-product-id="${item.id}"
-                                                       onclick="handleAddMedicineToWishList(${item.id})"></i>
-                                           </a>
-                                    </div>
-                                    <div class="content-pro">
-                                        <div class="name-pro">
-                                            <a href="${url}">${item.name}</a>
-                                        </div>
-                                        <div class="location-pro d-flex">
-                                            Location: <p>${item.location_name ?? '{{ __('home.Toàn quốc') }}'}</p>
-                                            <br>
-                                        </div>
-                                        <div class="price-pro">
-                                            ${formatCurrency(item.price ?? 0)} ${item.unit_price ?? 'VND'}
-                                            </div>
-                                        </div>
-                                    </div>
-                            </div>`;
+                    html += `<div class="col-md-3 col-6">
+        <div class="product-item">
+    <div class="img-pro">
+        <img src="${item.thumbnail}" alt="">
+        <a class="button-heart" data-favorite="0">
+            <i id="heart-icon-${item.id}" class="${isFavoriteClass} bi" data-product-id="${item.id}"
+               onclick="handleAddMedicineToWishList(${item.id})"></i>
+        </a>
+    </div>
+    <div class="content-pro">
+        <div class="name-pro">
+            <a href="${url}">${item.name}</a>
+        </div>
+        <div class="location-pro d-flex align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="21"
+                 height="21" viewBox="0 0 21 21" fill="none">
+                <g clip-path="url(#clip0_5506_14919)">
+                    <path
+                        d="M4.66602 12.8382C3.12321 13.5188 2.16602 14.4673 2.16602 15.5163C2.16602 17.5873 5.89698 19.2663 10.4993 19.2663C15.1017 19.2663 18.8327 17.5873 18.8327 15.5163C18.8327 14.4673 17.8755 13.5188 16.3327 12.8382M15.4993 7.59961C15.4993 10.986 11.7493 12.5996 10.4993 15.0996C9.24935 12.5996 5.49935 10.986 5.49935 7.59961C5.49935 4.83819 7.73793 2.59961 10.4993 2.59961C13.2608 2.59961 15.4993 4.83819 15.4993 7.59961ZM11.3327 7.59961C11.3327 8.05985 10.9596 8.43294 10.4993 8.43294C10.0391 8.43294 9.66602 8.05985 9.66602 7.59961C9.66602 7.13937 10.0391 6.76628 10.4993 6.76628C10.9596 6.76628 11.3327 7.13937 11.3327 7.59961Z"
+                        stroke="white" stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"/>
+                </g>
+                <defs>
+                    <clipPath id="clip0_5506_14919">
+                        <rect width="20" height="20" fill="white"
+                              transform="translate(0.5 0.933594)"/>
+                    </clipPath>
+                </defs>
+            </svg> <p>${item.location_name ?? '{{ __('home.Toàn quốc') }}'}</p>
+        </div>
+        <div class="price-pro">
+            ${formatCurrency(item.price ?? 0)} ${item.unit_price ?? 'VND'}
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <div class="SeeDetail">
+                        <a href="{{route('medicine.detail', $medicine->id)}}" target="_blank">{{ __('home.See details') }}</a>
+        </div>
+    </div>
+</div>
+    </div>`;
 
                     function formatCurrency(amount) {
                         const formattedAmount = amount.toString().replace(/,/g, '.');

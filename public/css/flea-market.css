@@ -526,7 +526,7 @@ input[type=range]::-moz-range-thumb {
   .col-md-4.col-6 .product-item .img-pro img {
     border-radius: 16px 16px 70px 0;
     background: lightgray 50%/cover no-repeat;
-    height: 162px;
+    height: 200px !important;
     object-fit: cover;
     padding: 0;
   }
@@ -665,7 +665,7 @@ input[type=range]::-moz-range-thumb {
     align-items: center;
     gap: 10px;
     color: var(--Black, #000);
-    font-size: 24px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 800;
     line-height: normal;
@@ -712,7 +712,7 @@ input[type=range]::-moz-range-thumb {
 }
 .product-item .SeeDetail {
   display: flex;
-  padding: 16px 40px;
+  padding: 16px 16px;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -720,6 +720,13 @@ input[type=range]::-moz-range-thumb {
   width: 70%;
   background: #FFFFFF;
   border: 0;
+}
+.product-item .SeeDetail a {
+  color: var(--Black, #000);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
 }
 .product-item .img_product--homeNew img {
   border-radius: 24px 24px 100px 0;

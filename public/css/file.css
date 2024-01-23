@@ -95,6 +95,17 @@
   width: 100%;
 }
 
+.recruitment-details--text--line {
+  border: 1px solid #BFBFBF;
+  margin: 16px 0;
+}
+
+.recruitment-details--text div, .recruitment-details--text p, .recruitment-details--text span, .recruitment-details--text h1, .recruitment-details--text h2, .recruitment-details--text h3, .recruitment-details--text h4, .recruitment-details--text h5, .recruitment-details--text h6 {
+  color: #000;
+  font-size: 14px;
+  font-weight: 400;
+}
+
 .recruitment-details--title {
   font-size: 32px;
   font-weight: 800;
@@ -137,46 +148,6 @@
   background-color: rgb(255, 255, 255);
   border: 1px solid rgb(234, 234, 234);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-.recruitment-details--content--right .product-details .body .text-wrapper {
-  font-size: 24px;
-  font-weight: 800;
-}
-.recruitment-details--content--right .product-details .body .price {
-  font-size: 32px;
-  font-weight: 800;
-  margin-top: 24px;
-}
-.recruitment-details--content--right .product-details .body .brand-name {
-  margin-top: 24px;
-}
-.recruitment-details--content--right .product-details .body .brand-name .text-wrapper-2 {
-  font-size: 24px;
-  font-weight: 400;
-  margin-right: 10px;
-}
-.recruitment-details--content--right .product-details .body .brand-name .text-wrapper-3 {
-  font-size: 25px;
-  font-weight: 800;
-}
-.recruitment-details--content--right .product-details .button {
-  margin-top: 24px;
-}
-.recruitment-details--content--right .product-details .button button {
-  width: 100%;
-  border: none;
-  font-size: 14px;
-  font-weight: 800;
-  height: 50px;
-}
-.recruitment-details--content--right .product-details .button button.div-wrapper {
-  border-radius: 8px;
-  background: rgb(214, 214, 214);
-}
-.recruitment-details--content--right .product-details .button button.text-wrapper-5 {
-  border-radius: 8px;
-  background: rgb(69, 195, 210);
-  color: white;
 }
 .recruitment-details--content--right .form-1 .div .title {
   font-size: 16px;
@@ -473,6 +444,7 @@
   align-items: center;
   margin-right: 20px;
   border: none;
+  padding: 8px;
 }
 .medicine-search--center .shopping-bag:focus {
   border: none;
@@ -735,68 +707,6 @@
 .detail-clinics iframe {
   width: 100%;
   height: 80vh;
-}
-
-.modal-cart .modal-dialog {
-  max-width: 700px;
-}
-.modal-cart .modal-dialog .modal-content .modal-header {
-  border-bottom: none;
-}
-.modal-cart .modal-dialog .modal-content .modal-header .modal-title {
-  font-size: 24px;
-  font-weight: 800;
-}
-.modal-cart .modal-dialog .modal-content .modal-body {
-  max-height: 75vh;
-  overflow-y: auto;
-  padding: 0 30px;
-  border-bottom: none;
-  display: grid;
-  gap: 16px;
-}
-.modal-cart .modal-dialog .modal-content .modal-body .product-cart {
-  border-radius: 8px;
-  padding: 10px 16px;
-  border: 1px solid rgb(234, 234, 234);
-  align-items: center;
-}
-.modal-cart .modal-dialog .modal-content .modal-body .product-cart .img {
-  width: 100px;
-  height: 100px;
-}
-.modal-cart .modal-dialog .modal-content .modal-body .product-cart .img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.modal-cart .modal-dialog .modal-content .modal-body .product-cart .title .title-name {
-  font-size: 18px;
-  font-weight: 800;
-}
-.modal-cart .modal-dialog .modal-content .modal-body .product-cart .title .price {
-  font-size: 18px;
-  font-weight: 600;
-}
-.modal-cart .modal-dialog .modal-content .modal-footer {
-  border-top: none;
-}
-.modal-cart .modal-dialog .modal-content .modal-footer .cancel {
-  width: 161px;
-  font-size: 14px;
-  font-weight: 800;
-  background: rgb(214, 214, 214);
-  border-radius: 8px;
-  height: 40px;
-}
-.modal-cart .modal-dialog .modal-content .modal-footer .pay {
-  width: 161px;
-  font-size: 14px;
-  font-weight: 800;
-  background: rgb(69, 195, 210);
-  color: white;
-  border-radius: 8px;
-  height: 40px;
 }
 
 .modalCreatPrescription .title {

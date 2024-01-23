@@ -127,11 +127,7 @@ img {
   }
   /* what free/campaign */
   .product-item {
-    padding: 8px;
     margin-bottom: 16px;
-  }
-  .product-item .img-pro {
-    height: 146px;
   }
   .product-item .img-pro img {
     height: 100%;
@@ -236,7 +232,7 @@ img {
     object-fit: cover;
   }
   .container .recruitment-details .border-radius-1px .gallery-detail {
-    width: 75px;
+    width: 100%;
     height: 75px;
     object-fit: cover;
     border-radius: 6px;
@@ -617,6 +613,40 @@ img {
     cursor: pointer;
   }
   /* END NEW HOME */
+  /* medicine detail */
+  .recruitment-details--content--right .product-details .body p {
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+  }
+  .recruitment-details--content--right .product-details .body .price {
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    margin-top: 16px;
+  }
+  .recruitment-details--content--right .product-details .body .brand-name {
+    margin-top: 16px;
+  }
+  .recruitment-details--content--right .product-details .body .brand-name div {
+    font-size: 16px;
+  }
+  .recruitment-details--content--right .product-details .body .brand-name .text-wrapper-2 {
+    color: var(--Grey-Dark, #929292);
+    font-weight: 400;
+    margin-right: 10px;
+  }
+  .recruitment-details--content--right .product-details .body .brand-name .text-wrapper-3 {
+    font-weight: 800;
+  }
+  .recruitment-details--content--right .product-details .body .brand-name #quantity {
+    font-size: 16px;
+  }
+  /* end medicine detail */
 }
 @media (min-width: 768px) {
   .mb-42 {
@@ -886,6 +916,48 @@ img {
     cursor: pointer;
   }
   /* END NEW HOME */
+  /* medicine detail */
+  .product-details .body .text-wrapper {
+    font-size: 24px;
+    font-weight: 800;
+  }
+  .product-details .body .price {
+    font-size: 32px;
+    font-weight: 800;
+    margin-top: 24px;
+  }
+  .product-details .body .brand-name {
+    margin-top: 24px;
+  }
+  .product-details .body .brand-name .text-wrapper-2 {
+    font-size: 24px;
+    font-weight: 400;
+    margin-right: 10px;
+  }
+  .product-details .body .brand-name .text-wrapper-3 {
+    font-size: 25px;
+    font-weight: 800;
+  }
+  .product-details .button {
+    margin-top: 24px;
+  }
+  .product-details .button button {
+    width: 100%;
+    border: none;
+    font-size: 14px;
+    font-weight: 800;
+    height: 50px;
+  }
+  .product-details .button button.div-wrapper {
+    border-radius: 8px;
+    background: rgb(214, 214, 214);
+  }
+  .product-details .button button.text-wrapper-5 {
+    border-radius: 8px;
+    background: rgb(69, 195, 210);
+    color: white;
+  }
+  /* end medicine detail */
 }
 @media all {
   .tt-flea {

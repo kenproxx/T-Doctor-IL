@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\MedicalFavourite;
 use App\Models\online_medicine\CategoryProduct;
 use App\Models\online_medicine\ProductMedicine;
+use App\Models\WishList;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Province;
 use App\Models\User;
@@ -37,12 +38,11 @@ class MedicineController extends Controller
                 ->get();
         }
         $provinces = Province::all();
-        $medical_favourites = MedicalFavourite::where('is_favorite', 1);
+        $medical_favourites = WishList::where('isFavorite', 1);
         if (Auth::check()) {
-            $medical_favourites = MedicalFavourite::where('user_id', Auth::user()->id)->where('is_favorite', 1);
+            $medical_favourites = WishList::where('user_id', Auth::user()->id)->where('isFavorite', 1)->where('type_product', TypeProductCart::MEDICINE);
         }
-        $medical_favourites = json_encode($medical_favourites->pluck('medical_id')->toArray());
-
+        $medical_favourites = json_encode($medical_favourites->pluck('product_id')->toArray());
 
         return view('medicine.list', compact('medicines','medicine10', 'categoryMedicines', 'provinces', 'countAllMedicine', 'carts', 'medical_favourites'));
     }

@@ -114,6 +114,17 @@
     width: 100%;
 }
 
+.recruitment-details--text--line {
+    border: 1px solid #BFBFBF;
+    margin: 16px 0;
+}
+.recruitment-details--text {
+    div, p, span, h1, h2, h3, h4, h5, h6 {
+        color: #000;
+        font-size: 14px;
+        font-weight: 400;
+    }
+}
 .recruitment-details {
     &--title {
         font-size: 32px;
@@ -166,58 +177,7 @@
             border: 1px solid rgba(234, 234, 234, 1);
             box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
-            .product-details {
-                .body {
-                    .text-wrapper {
-                        font-size: 24px;
-                        font-weight: 800;
-                    }
 
-                    .price {
-                        font-size: 32px;
-                        font-weight: 800;
-                        margin-top: 24px;
-                    }
-
-                    .brand-name {
-                        margin-top: 24px;
-
-                        .text-wrapper-2 {
-                            font-size: 24px;
-                            font-weight: 400;
-                            margin-right: 10px;
-                        }
-
-                        .text-wrapper-3 {
-                            font-size: 25px;
-                            font-weight: 800;
-                        }
-                    }
-                }
-
-                .button {
-                    margin-top: 24px;
-
-                    button {
-                        width: 100%;
-                        border: none;
-                        font-size: 14px;
-                        font-weight: 800;
-                        height: 50px;
-
-                        &.div-wrapper {
-                            border-radius: 8px;
-                            background: rgba(214, 214, 214, 1);
-                        }
-
-                        &.text-wrapper-5 {
-                            border-radius: 8px;
-                            background: rgba(69, 195, 210, 1);
-                            color: white;
-                        }
-                    }
-                }
-            }
 
             .form-1 {
                 .div {
@@ -593,6 +553,7 @@
             align-items: center;
             margin-right: 20px;
             border: none;
+            padding: 8px;
 
             &:focus {
                 border: none;
@@ -814,9 +775,11 @@
     }
 
 }
+
 .over-x-hidden {
     overflow-x: hidden;
 }
+
 .button-visitStore {
     border-radius: 8px;
     background: var(--Grey-Light, #D6D6D6);
@@ -828,6 +791,7 @@
     flex: 1 0 0;
     border: 0;
 }
+
 .button-buyNow {
     border-radius: 8px;
     background: var(--secon1, #088180);
@@ -839,6 +803,7 @@
     flex: 1 0 0;
     border: 0;
 }
+
 .clinic-item {
     border: 1px solid rgba(234, 234, 234, 1);
     padding: 10px 14px;
@@ -847,6 +812,7 @@
     display: grid;
     gap: 8px;
     height: 100%;
+
     a {
         font-size: 18px;
         font-weight: 800;
@@ -916,85 +882,7 @@
     }
 }
 
-.modal-cart {
-    .modal-dialog {
-        max-width: 700px;
 
-        .modal-content {
-            .modal-header {
-                border-bottom: none;
-
-                .modal-title {
-                    font-size: 24px;
-                    font-weight: 800;
-                }
-            }
-
-            .modal-body {
-                max-height: 75vh;
-                overflow-y: auto;
-                padding: 0 30px;
-                border-bottom: none;
-                display: grid;
-                gap: 16px;
-
-                .product-cart {
-                    border-radius: 8px;
-                    padding: 10px 16px;
-                    border: 1px solid rgba(234, 234, 234, 1);
-                    align-items: center;
-
-                    .img {
-                        width: 100px;
-                        height: 100px;
-
-                        img {
-                            width: 100%;
-                            height: 100%;
-                            object-fit: cover;
-                        }
-                    }
-
-                    .title {
-                        .title-name {
-                            font-size: 18px;
-                            font-weight: 800;
-                        }
-
-                        .price {
-                            font-size: 18px;
-                            font-weight: 600;
-                        }
-                    }
-                }
-            }
-
-            .modal-footer {
-                border-top: none;
-
-                .cancel {
-                    width: 161px;
-                    font-size: 14px;
-                    font-weight: 800;
-                    background: rgba(214, 214, 214, 1);
-                    border-radius: 8px;
-                    height: 40px;
-                }
-
-                .pay {
-                    width: 161px;
-                    font-size: 14px;
-                    font-weight: 800;
-                    background: rgba(69, 195, 210, 1);
-                    color: white;
-                    border-radius: 8px;
-                    height: 40px;
-
-                }
-            }
-        }
-    }
-}
 
 .modalCreatPrescription {
     .title {
@@ -1308,6 +1196,7 @@ section {
     gap: 10px;
     flex-shrink: 0;
 }
+
 .text-overflow {
     display: -webkit-box;
     line-height: 1.3;
@@ -1319,12 +1208,9 @@ section {
 }
 
 
-
-
-
 /* doctor information */
 @media (max-width: 575px) {
-    #show_inf{
+    #show_inf {
         #inf-doctor {
             #img_info {
                 width: 100%;
@@ -1351,26 +1237,30 @@ section {
                 }
             }
 
-            #about{
+            #about {
                 width: 100%;
                 //height: 670px;
-                h5{
+                h5 {
                     font-size: 18px;
                     font-weight: 800;
                 }
+
                 .dess {
                     margin-top: 8px;
                     display: flex;
-                    p{
+
+                    p {
                         color: #929292;
                         font-size: 14px;
                         font-weight: 400;
                     }
-                    span{
+
+                    span {
                         color: #000;
                         font-size: 14px;
                         font-weight: 800;
                         margin-left: 8px;
+
                         div, p, span, h1, h2, h3, h4, h5, h6 {
                             color: #000;
                             font-size: 14px;
@@ -1381,17 +1271,20 @@ section {
                 }
             }
         }
-        #review{
+
+        #review {
             margin-top: 24px;
         }
     }
 }
+
 @media (min-width: 576px) {
-    #show_inf{
+    #show_inf {
         #inf-doctor {
             #img_info {
                 width: 100%;
                 margin-right: 15px;
+
                 #doc {
                     margin-bottom: 32px;
                 }
@@ -1413,23 +1306,27 @@ section {
                 }
             }
 
-            #about{
+            #about {
                 width: 100%;
                 //height: 670px;
                 margin-left: 15px;
-                h5{
+
+                h5 {
                     font-size: 48px;
                     font-weight: 800;
                 }
+
                 .dess {
                     margin-top: 24px;
                     display: flex;
-                    p{
+
+                    p {
                         color: #929292;
                         font-size: 24px;
                         font-weight: 400;
                     }
-                    span{
+
+                    span {
                         color: #000;
                         font-size: 24px;
                         font-weight: 800;
@@ -1439,7 +1336,7 @@ section {
             }
         }
     }
-    #review{
+    #review {
         margin-top: 40px;
     }
 }

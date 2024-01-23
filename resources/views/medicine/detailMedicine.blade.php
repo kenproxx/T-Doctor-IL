@@ -11,6 +11,12 @@
         $isBusiness = (new MainController())->checkBusiness();
         $isMedical = (new MainController())->checkMedical();
     @endphp
+    <style>
+        .selected {
+            border: 0 solid black;
+            opacity: 0.5;
+        }
+    </style>
     @include('layouts.partials.header')
     @include('component.banner')
     <div class="recruitment-details ">
@@ -35,18 +41,28 @@
             <a href="{{route('medicine')}}" class="recruitment-details--title"><i class="fa-solid fa-arrow-left"></i>
                 {{ __('home.Product details') }}</a>
             <div class="row recruitment-details--content">
-                <div class="col-md-8 recruitment-details--content--left">
-                    <div class="img-main">
-                        <img src="{{asset($medicine->thumbnail)}}" alt="show" class="main">
-                    </div>
-                    <div class="list d-flex">
+                <div class="col-md-8 recruitment-details ">
+                    @if(!empty($medicine->thumbnail))
+                        <div class="d-flex justify-content-center border-radius-1px color-Grey-Dark col-10 col-md-12 p-0">
+                            <img src="{{asset($medicine->thumbnail)}}" alt="show"
+                                 class="main col-10 col-md-12 p-0">
+                        </div>
+                    @else
+                        <img style="width: 100%" src="{{asset('img/flea-market/photo.png')}}" alt="show"
+                             class="main col-10 col-md-12">
+                        <p>{{ __('home.No Thumbnail Available') }}</p>
+                    @endif
                         @php
                             $gallery = $medicine->gallery;
                             $arrayGallery = explode(',', $gallery);
                         @endphp
-                        @foreach($arrayGallery as $item)
-                            <div class="item">
-                                <img src="{{asset($item)}}" alt="">
+                    <div class="list col-2 col-md-12 mt-md-3">
+                        @foreach($arrayGallery as $pr_gallery)
+                            <div
+                                class="item-detail d-flex justify-content-center  border-radius-1px color-Grey-Dark mr-md-3">
+                                <img  src="{{asset($pr_gallery)}}"
+                                      alt=""
+                                      class="border mw-140px gallery-detail">
                             </div>
                         @endforeach
                     </div>
@@ -111,6 +127,7 @@
                     </div>
                 </div>
             </div>
+            <div class="recruitment-details--text--line"></div>
             <div class="recruitment-details--text">
                 {!! $medicine->description !!}
             </div>
@@ -162,6 +179,19 @@
                 }
 
             })
+        })
+    </script>
+    <script>
+        $('.list img').click(function () {
+            $(".main").attr("src", $(this).attr('src'));
+        })
+    </script>
+    <script>
+        $('.list .item-detail img').click(function () {
+            $('.list .item-detail img').removeClass('selected');
+            $(this).removeClass('border');
+            $(this).addClass('selected');
+            $(".main").attr("src", $(this).attr('src'));
         })
     </script>
 @endsection
