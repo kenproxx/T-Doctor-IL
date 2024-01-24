@@ -1,3 +1,38 @@
+@media (max-width: 575px) {
+    .header_comment {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: normal;
+    }
+    .list-group-item {
+        padding: 4px;
+    }
+    .list-group-item a b, .text-red {
+        font-size: 12px;
+    }
+    .cl-select {
+        font-size: 12px;
+    }
+    .textCate {
+        font-size: 12px;
+    }
+    .lin-tip-tht-bi-cc p {
+        font-size: 12px;
+    }
+    .text-cmt {
+        font-size: 10px;
+    }
+}
+@media (min-width: 576px) {
+    .header_comment {
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: normal;
+    }
+}
+
 .comment_list svg {
     position: relative;
     top: -2px;
@@ -7,12 +42,7 @@
     color: red;
 }
 
-.header_comment {
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 800;
-    line-height: normal;
-}
+
 
 .frame {
     display: flex;

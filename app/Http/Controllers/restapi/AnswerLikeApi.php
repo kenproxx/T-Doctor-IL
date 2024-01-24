@@ -5,6 +5,7 @@ namespace App\Http\Controllers\restapi;
 use App\Http\Controllers\Controller;
 use App\Models\Answer;
 use App\Models\AnswerLike;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AnswerLikeApi extends Controller
@@ -17,7 +18,11 @@ class AnswerLikeApi extends Controller
 
             $answer = Answer::find($answer_id);
             if (!$answer) {
-                return response()->json((new MainApi())->returnMessage('Not found!'), 404);
+                return response()->json((new MainApi())->returnMessage('Answer not found!'), 404);
+            }
+            $userCheck = User::find($user_id);
+            if (!$userCheck) {
+                return response()->json((new MainApi())->returnMessage('User not found!'), 404);
             }
 
             $old = AnswerLike::where('user_id', $user_id)->where('answer_id', $answer_id)->first();
@@ -37,8 +42,8 @@ class AnswerLikeApi extends Controller
                 $old->answer_id = $answer_id;
                 $answer->likes = $answer->likes + 1;
             }
-            $answer->save();
             $success = $old->save();
+            $answer->save();
             if ($success) {
                 return response()->json((new MainApi())->returnMessage('Success!'), 200);
             }
