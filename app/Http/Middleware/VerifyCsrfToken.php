@@ -71,5 +71,6 @@ class VerifyCsrfToken extends Middleware
         '/products-medicines/blade-list-prescriptions',
         '/check-valid-otp',
         '/change-password',
+        '/medicine/list',
     ];
 }
