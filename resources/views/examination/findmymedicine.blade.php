@@ -7,6 +7,11 @@
 <link href="{{ asset('css/findmymedicine.css') }}" rel="stylesheet">
 @section('content')
     <style>
+        @media (max-width: 575px) {
+            h3.no-data.text-center {
+                font-size: 16px;
+            }
+        }
 
         .bi-heart-fill {
             color: red;
@@ -50,7 +55,7 @@
             flex-direction: column;
             align-items: flex-start;
             gap: 8px;
-            padding: 0px 0px 0px 16px;
+            padding: 0px 16px;
             position: relative;
             align-self: stretch;
             width: 100%;
@@ -61,7 +66,6 @@
             position: relative;
             width: fit-content;
             margin-top: -1px;
-            font-family: var(--body-1-extra-font-family);
             font-weight: var(--body-1-extra-font-weight);
             color: var(--white);
             font-size: var(--body-1-extra-font-size);
@@ -89,7 +93,6 @@
             position: relative;
             width: fit-content;
             margin-top: -1px;
-            font-family: var(--body-4-extra-font-family);
             font-weight: var(--body-4-extra-font-weight);
             color: var(--white);
             font-size: var(--body-4-extra-font-size);
@@ -102,7 +105,6 @@
         .find-my-medicine-2 .frame .text-wrapper-3 {
             position: relative;
             width: fit-content;
-            font-family: var(--subtitle-1-extra-font-family);
             font-weight: var(--subtitle-1-extra-font-weight);
             color: var(--white);
             font-size: var(--subtitle-1-extra-font-size);
@@ -130,7 +132,6 @@
         .find-my-medicine-2 .frame .text-wrapper-4 {
             position: relative;
             width: fit-content;
-            font-family: var(--subtitle-1-extra-font-family);
             font-weight: var(--subtitle-1-extra-font-weight);
             color: var(--black);
             font-size: var(--subtitle-1-extra-font-size);
@@ -171,7 +172,6 @@
             top: 26px;
             left: 19px;
             transform: rotate(-45deg);
-            font-family: var(--body-1-extra-font-family);
             font-weight: var(--body-1-extra-font-weight);
             color: #ffffff;
             font-size: var(--body-1-extra-font-size);
@@ -264,10 +264,9 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <span class="fa fa-search form-control-feedback"></span>
-                            <label></label>
+                    <div class="col-sm-4 col">
+                        <div class="form-group position-relative">
+                            <label for="inputSearchDoctor" class="fa fa-search form-control-feedback"></label>
                             <input type="search" id="inputSearchDoctor" class="form-control"
                                    name="nameSearch"
                                    value="{{ $nameSearch }}"
@@ -280,7 +279,7 @@
 
             <div id="list-find-my-medicine">
                 <div class="d-flex justify-content-center" style="padding: 12px">
-                    <div class="list-title d-flex">
+                    <div class="list-title w-100 align-items-center justify-content-between d-flex">
                         <div class="list--doctor p-0">
                             <p>{{ __('home.Best Pharmacists') }}</p>
                         </div>
@@ -298,7 +297,7 @@
                     @endif
                 </div>
                 <div class="d-flex justify-content-center" style="padding: 12px">
-                    <div class=" list-title d-flex">
+                    <div class=" list-title w-100 align-items-center justify-content-between  d-flex">
                         <div class="list--doctor p-0">
                             <p>{{ __('home.New Pharmacists') }}</p>
                         </div>
@@ -316,7 +315,7 @@
                     @endif
                 </div>
                 <div class="d-flex justify-content-center" style="padding: 12px">
-                    <div class=" list-title d-flex">
+                    <div class=" list-title w-100 align-items-center justify-content-between d-flex">
                         <div class="list--doctor p-0">
                             <p>{{ __('home.24/7 Available Pharmacists') }}</p>
                         </div>
@@ -335,7 +334,7 @@
                     @endif
                 </div>
                 <div class="d-flex justify-content-center" style="padding: 12px">
-                    <div class=" list-title d-flex">
+                    <div class=" list-title w-100 align-items-center justify-content-between d-flex">
                         <div class="list--doctor p-0">
                             <p>{{ __('home.Hot deal medicine') }}</p>
                         </div>
@@ -353,7 +352,7 @@
                     @endif
                 </div>
                 <div class="d-flex justify-content-center" style="padding: 12px">
-                    <div class=" list-title d-flex">
+                    <div class=" list-title w-100 align-items-center justify-content-between d-flex">
                         <div class="list--doctor p-0">
                             <p>{{ __('home.New medicine') }}</p>
                         </div>
@@ -371,7 +370,7 @@
                     @endif
                 </div>
                 <div class="d-flex justify-content-center" style="padding: 12px">
-                    <div class=" list-title d-flex">
+                    <div class=" list-title w-100 align-items-center justify-content-between d-flex">
                         <div class="list--doctor p-0">
                             <p>{{ __('home.Recommended') }}</p>
                         </div>
@@ -389,7 +388,7 @@
                     @endif
                 </div>
                 <div class="d-flex justify-content-center" style="padding: 12px">
-                    <div class=" list-title d-flex">
+                    <div class=" list-title w-100 align-items-center justify-content-between d-flex">
                         <div class="list--doctor p-0">
                             <p>{{ __('home.Functional Foods') }}</p>
                         </div>
@@ -440,7 +439,7 @@
                     }
                     let listDoctor = `<div class="list-doctor row m-auto"> ${html} </div>`;
                     let showMedicine = ` <div class="d-flex justify-content-center">
-                <div class=" list-title d-flex">
+                <div class=" list-title w-100 align-items-center justify-content-between d-flex">
                     <div class="list--doctor p-0">
                         <p>${medicine.name}</p>
                     </div>

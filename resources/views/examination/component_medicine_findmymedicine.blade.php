@@ -11,9 +11,21 @@
             }
 
 @endphp
-
-<div class="col-sm-3 mb-3">
-    <div class="m-4">
+<style>
+    .frame.component-medicine.w-100 {
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    }
+    @media (max-width: 575px) {
+        .div .div-2 a .text-wrapper {
+            font-size: 12px;
+        }
+        .text-wrapper-2, .text-wrapper-4 {
+            font-size: 12px !important;
+        }
+    }
+</style>
+<div class="col-sm-3 mb-3 col-6">
+    <div class="m-md-4">
         <div class="frame component-medicine w-100">
             <img loading="lazy" class="rectangle border-img"
                  src="{{asset($medicine->thumbnail)}}"/>

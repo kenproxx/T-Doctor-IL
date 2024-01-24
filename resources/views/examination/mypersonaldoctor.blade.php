@@ -11,7 +11,7 @@
     </style>
     <div class="container">
         <div class="d-flex">
-            <div class="col-md-3 mr-2">
+            <div class="col-md-3 mr-2 d-md-block d-none">
                 <div class="">
                     <div class="flea-adv row align-items-center justify-content-center">
                         <div class="">
@@ -92,7 +92,7 @@
                     let route = `{{route('examination.doctor_info', ['id'=>':id'])}}`;
                     route = route.replace(':id', data['id']);
 
-                    html = html + `<div class="col-md-4">
+                    html = html + `<div class="col-md-3 col-6">
                                     <div class="card" >
                                     <i class="bi bi-heart"></i>
                                     <img src="${data.avt}" class="card-img-top" alt="...">
