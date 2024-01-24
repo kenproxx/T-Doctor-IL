@@ -5,7 +5,7 @@
                 <div class="w-200 mb-3"><img src="{{ asset('img/icons_logo/logo-new.png') }}">
                 </div>
                 <p class="address-footer">{{ __('home.V7B07 Shophouse Terra An Hưng, Đường Nguyễn Thanh Bình, Hà Đông, Hà Nội') }}</p>
-                <div class="d-flex mt-3">
+                <div class="d-flex mt-3 overflow-auto ">
                     <a href="#"><svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g filter="url(#filter0_d_18_4306)">
                                 <circle cx="34.7999" cy="21.7999" r="16.7999" fill="#1A202C"/>

@@ -947,7 +947,7 @@ span.material-symbols-outlined {
 
 
 .list-title .list--doctor p {
-    font-size: 32px;
+    /*font-size: 32px;*/
     font-weight: 800;
 }
 
@@ -1005,7 +1005,7 @@ span.material-symbols-outlined {
 
 #show_inf #inf-doctor #about #opt_btn button {
     display: flex;
-    padding: 15px 50px;
+    padding: 16px;
     justify-content: center;
     align-items: center;
     outline: none;
@@ -1043,7 +1043,7 @@ span.material-symbols-outlined {
 
 #show_inf .rv_doc .rv_ctn .user_rv .user p {
     color: black;
-    font-size: 24px;
+    /*font-size: 24px;*/
     font-weight: 800;
 }
 
@@ -1055,7 +1055,7 @@ span.material-symbols-outlined {
 
 #show_inf .rv_doc .rv_ctn .user_rv .time p {
     color: #000;
-    font-size: 14px;
+    /*font-size: 14px;*/
     font-weight: 400;
 }
 
@@ -1066,7 +1066,7 @@ span.material-symbols-outlined {
     float: right;
     margin-top: 8px;
     margin-bottom: 24px;
-    font-size: 16px;
+    /*font-size: 16px;*/
     font-weight: 600;
 }
 

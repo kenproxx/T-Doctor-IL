@@ -12,7 +12,7 @@
                 <div id="title" class="d-flex justify-content-start">
                     <div class="d-flex list-title">
                         <div class="list--doctor p-0">
-                            <a class="back" href="{{route('examination.index')}}"><p class="align-items-center d-flex"><i
+                            <a class="back" href="{{route('examination.index')}}"><p class="align-items-center fs-title-review d-flex"><i
                                         class="bi bi-arrow-left"></i>{{ __('home.Detailed information Doctor') }}</p>
                             </a>
                         </div>
@@ -285,8 +285,8 @@
                                                         <div class="">
                                                             ${itemImg}
                                                         </div>
-                                                        <div class="">
-                                                            <p>${username}</p>
+                                                        <div class="name-user">
+                                                            <p class="name-user-review">${username}</p>
                                                         </div>
 
                                                     </div>
@@ -351,13 +351,13 @@
                                 <div class="">
                                     ${itemImg}
                                 </div>
-                                <div class="">
-                                    <p>${username}</p>
+                                <div class="name-user">
+                                    <p class="name-user-review">${username}</p>
                                 </div>
 
                             </div>
                             <div class="text-end">
-                                <div>${parent.created_at}</div>
+                                <div class="time">${parent.created_at}</div>
                                 <div>${starHtml}</div>
                             </div>
                         </div>
@@ -367,7 +367,7 @@
                             </p>
                             <button onclick="showOrHiddenChild(1, '${parent.id}');" ><i class="bi bi-reply-fill"></i> {{ __('home.Reply') }}</button>
                         </div>
-                        <div class="list-review-child ml-5 mt-5">
+                        <div class="list-review-child ml-md-5 mt-md-5 ml-2 mt-2">
                             ${htmlChild}
                         </div>
                     </div>`;

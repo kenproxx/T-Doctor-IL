@@ -144,7 +144,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type="reset" class="add-cv-bt w-100 apply-bt_delete col-6">
+                        <button type="reset" class="add-cv-bt w-100 apply-bt_delete col-6 mr-1">
                             {{ __('home.Refresh') }}
                         </button>
                         <button type="button" data-bs-dismiss="offcanvas" aria-label="Close"
