@@ -76,7 +76,8 @@
                         </div>
                     </div>
                     <div class="text-wrapper-5">
-                        <button type="button" class="btn mx-2 w-100 h-100" onclick="submitCommentMain()">{{ __('home.comment') }}
+                        <button type="button" class="btn mx-2 w-100 h-100"
+                                onclick="submitCommentMain()">{{ __('home.comment') }}
                         </button>
                     </div>
                 </div>
@@ -90,13 +91,15 @@
                 @endphp
 
                 @if(!Auth::check())
-                    <button type="button" class="btn btn-primary mx-2 button-main" onclick="alertLogin()">{{ __('home.Like') }}</button>
+                    <button type="button" class="btn btn-primary mx-2 button-main"
+                            onclick="alertLogin()">{{ __('home.Like') }}</button>
                 @else
                     <button type="button" class="btn btn-primary mx-2 button-main"
                             onclick="changeEmotion()">{{ $isLike ? ( $isLike->is_like ? 'Dislike' : 'Like' ) : 'Like'}}</button>
                 @endif
                 @if($isMedical)
-                    <button type="button" class="btn btn-primary mx-2 button-main" onclick="replyCommentMain()">{{ __('home.Reply') }}
+                    <button type="button" class="btn btn-primary mx-2 button-main"
+                            onclick="replyCommentMain()">{{ __('home.Reply') }}
                     </button>
                 @endif
             </div>
@@ -148,22 +151,58 @@
                             </button>
                         </div>
                     </div>
+                    <style>
+                        .blue {
+                            color: #007bff;
+                        }
+                        .grey {
+                            color: #929292;
+                        }
+                    </style>
                     <div class="div-5 justify-content-end" id="button-reply-comment-{{ $index }}">
-                        @if($isMedical)
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
-                                 fill="none">
-                                <g clip-path="url(#clip0_1944_12433)">
-                                    <path
-                                        d="M6.66667 4.66808V1.83342C6.66667 1.63275 6.546 1.45142 6.36133 1.37275C6.17733 1.29475 5.962 1.33408 5.81867 1.47475L0.152 6.97475C0.0546667 7.06875 0 7.19808 0 7.33342C0 7.46875 0.0546667 7.59808 0.152 7.69208L5.81867 13.1921C5.96333 13.3321 6.178 13.3714 6.36133 13.2941C6.546 13.2154 6.66667 13.0341 6.66667 12.8334V10.0001H7.612C10.7027 10.0001 13.552 11.6801 15.0473 14.3814L15.0613 14.4067C15.1507 14.5694 15.32 14.6667 15.5 14.6667C15.5413 14.6667 15.5827 14.6621 15.624 14.6514C15.8453 14.5947 16 14.3954 16 14.1667C16 8.98408 11.8287 4.75742 6.66667 4.66808Z"
-                                        fill="#929292"/>
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_1944_12433">
-                                        <rect width="16" height="16" fill="white"/>
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            <div class="text-wrapper-3 reply-comment">{{ __('home.Reply') }}</div>
+                        @php
+                            $checkLike = \App\Models\Answer::where('id', $answer->id)->get();
+                            if ($checkLike) {
+                                $checkLikes = $answer->likes;
+                            }
+                            else {
+                                $checkLikes = 0;
+                            }
+                        $isLikes = \App\Models\AnswerLike::where('answer_id', $answer->id)
+                        ->where('user_id', Auth::user()->id ?? '')
+                        ->where('is_like', 1)
+                        ->first();
+                        if ($isLikes) {
+                            $isLike = 'blue';
+                        }
+                        else {
+                            $isLike = 'grey';
+                        }
+                        @endphp
+                        @if(Auth::check())
+                            <div class="like-cmt"><a
+                                    onclick="updateLikeCmt('{{ Auth::user()->id }}', '{{ $answer->id }}')"><i id="fa-solid-{{$answer->id}}"
+                                        class="fa-solid fa-thumbs-up {{$isLike}}"></i></a>{{$checkLikes}}</div>
+
+                        @else
+                            <div class="like-cmt"><a onclick="alertLogin()"><i
+                                        class="fa-solid fa-thumbs-up"></i></a>{{$checkLikes}}</div>
+                        @endif
+                    @if($isMedical)
+                            <div class="text-wrapper-3 reply-comment">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                                     fill="none">
+                                    <g clip-path="url(#clip0_1944_12433)">
+                                        <path
+                                            d="M6.66667 4.66808V1.83342C6.66667 1.63275 6.546 1.45142 6.36133 1.37275C6.17733 1.29475 5.962 1.33408 5.81867 1.47475L0.152 6.97475C0.0546667 7.06875 0 7.19808 0 7.33342C0 7.46875 0.0546667 7.59808 0.152 7.69208L5.81867 13.1921C5.96333 13.3321 6.178 13.3714 6.36133 13.2941C6.546 13.2154 6.66667 13.0341 6.66667 12.8334V10.0001H7.612C10.7027 10.0001 13.552 11.6801 15.0473 14.3814L15.0613 14.4067C15.1507 14.5694 15.32 14.6667 15.5 14.6667C15.5413 14.6667 15.5827 14.6621 15.624 14.6514C15.8453 14.5947 16 14.3954 16 14.1667C16 8.98408 11.8287 4.75742 6.66667 4.66808Z"
+                                            fill="#929292"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_1944_12433">
+                                            <rect width="16" height="16" fill="white"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>{{ __('home.Reply') }}</div>
                         @endif
                     </div>
                 </div>
@@ -367,5 +406,48 @@
         }
 
     </script>
+    <script>
+        async function updateLikeCmt(user, answer) {
+            console.log(user, answer)
+            loadingMasterPage();
+            let url = '{{ route('api.backend.like.answer') }}';
+            const headers = {
+                'Authorization': `Bearer ${token}`,
+            };
+            const formData = new FormData();
+            formData.append('_token', '{{ csrf_token() }}');
+            formData.append("user_id", user);
+            formData.append("answer_id", answer);
 
+            try {
+                await $.ajax({
+                    url: url,
+                    method: 'POST',
+                    headers: headers,
+                    contentType: false,
+                    cache: false,
+                    data: formData,
+                    processData: false,
+                    success: function (data) {
+
+                        // let heartIcon = $('#fa-solid-' + id);
+                        // if (data.isFavourite == true) {
+                        //     heartIcon.removeClass('gray');
+                        //     heartIcon.addClass('blue');
+                        // } else {
+                        //     heartIcon.removeClass('blue');
+                        //     heartIcon.addClass('gray');
+                        // }
+                        loadingMasterPage();
+                    },
+                    error: function (exception) {
+                        loadingMasterPage();
+                    }
+                });
+            } catch (error) {
+                loadingMasterPage();
+            }
+
+        }
+    </script>
 @endsection

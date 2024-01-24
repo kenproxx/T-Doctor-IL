@@ -315,7 +315,7 @@ class ExaminationController extends Controller
     public function showMentoring($id)
     {
         $question = Question::where('id', $id)->first();
-        $answers = Answer::where('question_id', $id)->get();
+        $answers = Answer::where('question_id', $id)->orderBy('likes','desc')->get();
 
         $calcViewQuestion = CalcViewQuestion::where('question_id', $id)->first();
         if ($calcViewQuestion) {
@@ -327,7 +327,7 @@ class ExaminationController extends Controller
         }
         $calcViewQuestion->save();
 
-        return view('examination.mentoring.detail', compact('question', 'answers'));
+        return view('examination.mentoring.detail', compact('question', 'answers', 'id'));
     }
 
     public function chatWithDoctor($id)
