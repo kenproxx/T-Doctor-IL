@@ -727,6 +727,23 @@
         </li>
         <!-- End Order Member Nav -->
 
+        <!-- Start My Bookings Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#my-bookings-nav" data-bs-toggle="collapse"
+               href="#">
+                <i class="bi bi-book"></i><span>My Bookings</span><i
+                    class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="my-bookings-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="{{ route('web.users.my.bookings.list') }}">
+                        <i class="bi bi-circle"></i><span>List Bookings</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <!-- End My Bookings Nav -->
+
         <!-- Start My Coupons Nav -->
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#my-coupons-nav" data-bs-toggle="collapse"
