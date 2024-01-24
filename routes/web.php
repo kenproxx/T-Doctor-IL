@@ -169,13 +169,9 @@ Route::middleware(['user.active'])->group(function () {
     Route::group(['prefix' => 'questions'], function () {
         Route::get('/get-list', [BackendQuestionController::class, 'custom_getlist'])->name('questions.custome.list');
         Route::get('/list/{id}', [BackendQuestionController::class, 'getListQuestion'])->name('questions.list.filter');
-        Route::get('/user-id/{id}',
-            [BackendQuestionController::class, 'getQuestionByUserId'])->name('questions.list.userid');
+        Route::get('/user-id/{id}', [BackendQuestionController::class, 'getQuestionByUserId'])->name('questions.list.userid');
         Route::get('/detail/{id}', [BackendQuestionController::class, 'detail'])->name('api.backend.questions.detail');
-        Route::get('/{userId}/{categoryId}', [
-            BackendQuestionController::class,
-            'getQuestionByUserIdAndCategoryId'
-        ])->name('questions.list.userid.categoryId');
+        Route::get('/{userId}/{categoryId}', [BackendQuestionController::class, 'getQuestionByUserIdAndCategoryId'])->name('questions.list.userid.categoryId');
     });
 
     Route::group(['prefix' => 'pharmacies'], function () {

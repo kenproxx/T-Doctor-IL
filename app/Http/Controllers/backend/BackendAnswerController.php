@@ -15,9 +15,13 @@ class BackendAnswerController extends Controller
     {
         $status = $request->input('status');
         if (!$status) {
-            $answers = Answer::where('status', '!=', AnswerStatus::DELETED)->get();
+            $answers = Answer::where('status', '!=', AnswerStatus::DELETED)
+                ->orderByDesc('likes')
+                ->get();
         } else {
-            $answers = Answer::where('status', $status)->get();
+            $answers = Answer::where('status', $status)
+                ->orderByDesc('likes')
+                ->get();
         }
         return response()->json($answers);
     }
@@ -26,9 +30,15 @@ class BackendAnswerController extends Controller
     {
         $status = $request->input('status');
         if (!$status) {
-            $answers = Answer::where('status', '!=', AnswerStatus::DELETED)->where('question_id', $id)->get();
+            $answers = Answer::where('status', '!=', AnswerStatus::DELETED)
+                ->where('question_id', $id)
+                ->orderByDesc('likes')
+                ->get();
         } else {
-            $answers = Answer::where('status', $status)->where('question_id', $id)->get();
+            $answers = Answer::where('status', $status)
+                ->orderByDesc('likes')
+                ->where('question_id', $id)
+                ->get();
         }
         return response()->json($answers);
     }
@@ -37,9 +47,15 @@ class BackendAnswerController extends Controller
     {
         $status = $request->input('status');
         if (!$status) {
-            $answers = Answer::where('status', '!=', AnswerStatus::DELETED)->where('answer_parent', $id)->get();
+            $answers = Answer::where('status', '!=', AnswerStatus::DELETED)
+                ->where('answer_parent', $id)
+                ->orderByDesc('likes')
+                ->get();
         } else {
-            $answers = Answer::where('status', $status)->where('question_id', $id)->get();
+            $answers = Answer::where('status', $status)
+                ->where('question_id', $id)
+                ->orderByDesc('likes')
+                ->get();
         }
         return response()->json($answers);
     }
@@ -188,6 +204,11 @@ class BackendAnswerController extends Controller
         } catch (\Exception $exception) {
             return response($exception, 400);
         }
+    }
+
+    public function getAnswerLikeOrDislike()
+    {
+
     }
 
     public function delete($id)
