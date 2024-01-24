@@ -4,6 +4,7 @@ use App\Http\Controllers\backend\BackendCouponApplyController;
 use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\backend\BackendQuestionController;
 use App\Http\Controllers\restapi\AddressApi;
+use App\Http\Controllers\restapi\AnswerLikeApi;
 use App\Http\Controllers\restapi\BookingApi;
 use App\Http\Controllers\restapi\BusinessFavouriteApi;
 use App\Http\Controllers\restapi\CartApi;
@@ -126,4 +127,9 @@ Route::group(['prefix' => 'address-order'], function () {
     Route::post('create', [AddressApi::class, 'create'])->name('api.backend.address.order.create');
     Route::put('update/{id}', [AddressApi::class, 'update'])->name('api.backend.address.order.update');
     Route::delete('delete/{id}', [AddressApi::class, 'delete'])->name('api.backend.address.order.delete');
+});
+
+/* Address api */
+Route::group(['prefix' => 'mentorings'], function () {
+    Route::post('like-answer', [AnswerLikeApi::class, 'handleLikeOrDislike'])->name('api.backend.like.answer');
 });
