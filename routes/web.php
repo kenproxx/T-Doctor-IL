@@ -47,6 +47,7 @@ use App\Http\Controllers\ShortVideoController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\SymptomController;
 use App\Http\Controllers\TopicVideoController;
+use App\Http\Controllers\ui\MyBookingController;
 use App\Http\Controllers\ui\MyCouponController;
 use App\Http\Controllers\ui\MyFavouriteController;
 use App\Http\Controllers\UserController;
@@ -388,6 +389,14 @@ Route::middleware(['user.active'])->group(function () {
         });
 
         /*  User blade */
+        /* My booking */
+        Route::group(['prefix' => 'my-bookings'], function () {
+            Route::get('list', [MyBookingController::class, 'listBooking'])->name('web.users.my.bookings.list');
+            Route::get('detail/{id}', [MyBookingController::class, 'detailBooking'])->name('web.users.my.bookings.detail');
+            Route::get('result/{id}', [MyBookingController::class, 'bookingResult'])->name('web.users.my.bookings.result');
+            Route::get('list-products/{id}', [MyBookingController::class, 'listProductResult'])->name('web.users.my.bookings.products');
+        });
+
         /* My coupons */
         Route::group(['prefix' => 'my-coupons'], function () {
             Route::get('list', [MyCouponController::class, 'listMyCoupons'])->name('web.users.my.coupons.list');
