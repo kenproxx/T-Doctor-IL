@@ -84,9 +84,22 @@ class BackendAnswerController extends Controller
                 $answer->answer_parent = $answer_parent;
             }
 
+            $question = null;
             if ($question_id) {
                 $answer->question_id = $question_id;
+                $question = Question::find($question_id);
+            } else {
+                if ($answer->answer_parent) {
+                    $parent_answer = Answer::find($answer->answer_parent);
+                    $question = Question::find($parent_answer->question_id);
+                }
             }
+
+            if ($question) {
+                $question->score = $question->score + 1;
+                $question->save();
+            }
+
 
             if ($name) {
                 $answer->name = $name;

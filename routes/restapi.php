@@ -25,6 +25,7 @@ use App\Http\Controllers\restapi\ShortVideoApi;
 use App\Http\Controllers\restapi\SurveyApi;
 use App\Http\Controllers\restapi\SymptomsApi;
 use App\Http\Controllers\restapi\TopicVideoApi;
+use App\Http\Controllers\ui\TrendingApi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -208,4 +209,10 @@ Route::group(['prefix' => 'surveys'], function () {
 Route::group(['prefix' => 'api/account'], function () {
     Route::post('/send-verify-code-reset-token', [AccountApi::class, 'sendCode'])->name('restapi.account.send.verify.code.reset.token');
     Route::post('/reset-token/{id}', [AccountApi::class, 'resetTokenLogin'])->name('restapi.account.handle.reset.token');
+});
+
+/* Trending */
+Route::group(['prefix' => 'trending'], function () {
+    Route::get('/list-department', [TrendingApi::class, 'listDepartment'])->name('restapi.trending.list.department');
+    Route::get('/list-topics', [TrendingApi::class, 'listTopicQuestion'])->name('restapi.trending.list.topics');
 });
