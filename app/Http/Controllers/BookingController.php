@@ -6,6 +6,7 @@ use App\Enums\BookingStatus;
 use App\Enums\ServiceClinicStatus;
 use App\Enums\SurveyType;
 use App\Enums\TypeProductCart;
+use App\Http\Controllers\restapi\MainApi;
 use App\Models\Booking;
 use App\Models\BookingResult;
 use App\Models\Clinic;
@@ -17,6 +18,7 @@ use App\Models\WishList;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class BookingController extends Controller
@@ -145,6 +147,18 @@ class BookingController extends Controller
             $booking->member_family_id = $memberFamily;
 
             $clinicID = $booking->clinic_id;
+
+            $clinic = Clinic::find($clinicID);
+            if (!$clinic) {
+                alert('Booking error');
+                return back('Not found');
+            }
+            $department = $clinic->department;
+            $array_department = explode(',', $department);
+            $list_department = DB::table('departments')
+                ->whereIn('id', $array_department)
+                ->update(['score' => DB::raw('score + 2')]);
+
             $servicesAsString = $booking->service;
             $timestamp = $booking->check_in;
             $datetime = $timestamp->addMinutes(30);
@@ -167,10 +181,10 @@ class BookingController extends Controller
                 return back()->with('success', 'Booking success');
             }
             alert('Booking error');
-            return back('Create error', 400);
+            return back('Create error', );
         } catch (\Exception $exception) {
             alert('Booking error');
-            return back($exception, 400);
+            return back();
         }
 
     }

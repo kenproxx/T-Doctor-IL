@@ -42,7 +42,18 @@ class BookingApi extends Controller
                 return response($array, 400);
             }
 
+            $clinic = Clinic::find($clinicID);
+            if (!$clinic) {
+                return response((new MainApi())->returnMessage('Not found!'), 404);
+            }
+
             $success = $booking->save();
+
+            $department = $clinic->department;
+            $array_department = explode(',', $department);
+            $list_department = DB::table('departments')
+                ->whereIn('id', $array_department)
+                ->update(['score' => DB::raw('score + 2')]);
             if ($success) {
                 $response = $booking->toArray();
                 $response['time_convert_checkin'] = date('Y-m-d H:i:s', strtotime($booking->check_in));
