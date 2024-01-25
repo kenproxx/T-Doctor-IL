@@ -13,7 +13,6 @@
                 $isDoctor = true;
             }
         }
-
         $isMedical = (new \App\Http\Controllers\MainController())->checkMedical();
     @endphp
     <div id="mentoring" class="container">
@@ -161,6 +160,10 @@
                     </style>
                     <div class="div-5 justify-content-end" id="button-reply-comment-{{ $index }}">
                         @php
+                        $infoDoctorAnswer = User::where('id', $answer->user_id)->first();
+
+                        $checkCallDoctor = \App\Models\Question::where('id', $question->id)->first();
+                        $userCheck = \App\Models\User::where('id', $checkCallDoctor->user_id)->first();
                             $checkLike = \App\Models\Answer::where('id', $answer->id)->get();
                             if ($checkLike) {
                                 $checkLikes = $answer->likes;
@@ -183,6 +186,20 @@
                             <div class="like-cmt"><a
                                     onclick="updateLikeCmt('{{ Auth::user()->id }}', '{{ $answer->id }}')"><i id="fa-solid-{{$answer->id}}"
                                         class="fa-solid fa-thumbs-up {{$isLike}}"></i></a>{{$checkLikes}}</div>
+                            @if(Auth::user()->id == $userCheck->id)
+                                <div id="opt_btn" class="d-flex justify-content-between justify-content-md-center">
+                                    <a onclick="handleStartChatWithDoctor('{{ $infoDoctorAnswer->id }}')">
+                                        <button>{{ __('home.Chat') }}</button>
+                                    </a>
+                                    <form method="post" action="{{ route('createMeeting') }}" target="_blank">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="user_id_1"
+                                               value="@if(Auth::check()) {{ Auth::user()->id }} @endif">
+                                        <input type="hidden" name="user_id_2" value="{{ $infoDoctorAnswer->id }}">
+                                        <button type="submit">{{ __('home.Videocall') }}</button>
+                                    </form>
+                                </div>
+                            @endif
 
                         @else
                             <div class="like-cmt"><a onclick="alertLogin()"><i
