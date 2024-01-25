@@ -1,9 +1,10 @@
-@extends('layouts.admin')
+@extends('layouts.master')
 @section('title')
     {{ __('home.Detail') }}
 @endsection
-@section('main-content')
-    <!-- Page Heading -->
+@section('content')
+    @include('layouts.partials.header')
+    @include('component.banner')
     <h1 class="h3 mb-4 text-gray-800">{{ __('home.Booking Detail') }}</h1>
     <div class="container-fluid">
         <div class="row">
@@ -67,19 +68,5 @@
                 Result
             </label>
         </div>
-        @if($booking->status == \App\Enums\BookingStatus::CANCEL)
-            <div class="form-group">
-                <label for="reason_cancel">Reason Cancel</label>
-                <input disabled type="text" class="form-control" id="reason_cancel"
-                       value="{{ $booking->reason_cancel }}">
-            </div>
-        @endif
-        @if($booking->is_result == 1 && $booking->status == \App\Enums\BookingStatus::COMPLETE)
-            <div class="d-flex align-items-center justify-content-start w-50">
-                <a href="{{ route('web.users.my.bookings.result', $booking->id) }}" class="btn btn-primary">
-                    View result
-                </a>
-            </div>
-        @endif
     </div>
 @endsection
