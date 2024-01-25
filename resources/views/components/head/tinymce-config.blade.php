@@ -7,7 +7,7 @@
 <script>
     tinymce.init({
         selector: 'textarea:not(div.composer textarea)',
-        plugins: 'image media',
+        plugins: 'link image media',
         toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist | image | table ',
         file_picker_callback: function (cb, value, meta) {
             var input = document.createElement('input');
