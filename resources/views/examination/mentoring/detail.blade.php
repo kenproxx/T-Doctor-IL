@@ -13,7 +13,6 @@
                 $isDoctor = true;
             }
         }
-
         $isMedical = (new \App\Http\Controllers\MainController())->checkMedical();
     @endphp
     <div id="mentoring" class="container">
@@ -63,16 +62,20 @@
                 @endif
             @endif
         </div>
-
+        <style>
+            .d-ch-v-c-c-t-t-l-n-u-wrapper a{
+                text-decoration: underline;
+            }
+        </style>
         <div class="mt-5">
             <div class="frame comment-item mb-3 d-none" id="comment-main">
                 <div class="div-5 ">
                     <div class="frame-wrapper">
                         <div class="div-6 w-100">
                             <img class="img"
-                                 src="https://media.licdn.com/dms/image/D560BAQE96KctT7x-iw/company-logo_200_200/0/1666170056007?e=2147483647&v=beta&t=U-5DmL_mYQaduEYyl0aVlabEvxP6-F5nZE9daao6Wuk"/>
-                            <input type="text" class="form-control text-wrapper-4 w-100 h-100 border-0"
-                                   placeholder="{{ __('home.Enter question here') }}" id="input-comment-main">
+                                 src="https://media.licdn.com/dms/image/D560BAQE96KctT7x-iw/company-logo_200_200/0/1666170056007?e=2147483647&v=beta&t=U-5DmL_mYQaduEYyl0aVlabEvxP6-F5nZE9daao6Wuk" alt=""/>
+                            <textarea type="text" class="form-control text-wrapper-4 w-100 h-100 border-0"
+                                      placeholder="{{ __('home.Enter question here') }}" id="input-comment-main"></textarea>
                         </div>
                     </div>
                     <div class="text-wrapper-5">
@@ -129,20 +132,25 @@
                         </div>
                         <div class="d-ch-v-c-c-t-t-l-n-u-wrapper">
                             <p class="d-ch-v-c-c-t-t-l-n-u">
-                                <span class="text-wrapper-3"
-                                >{{ $answer->content }}</span
-                                >
+                                <span class="text-wrapper-3">{!! $answer->content !!}</span>
                             </p>
                         </div>
                     </div>
+                    <style>
+                        .tox.tox-tinymce {
+                            width: 100%;
+                        }
+                    </style>
                     <div class="div-5" id="reply-comment-{{ $index }}" style="display: none">
                         <div class="frame-wrapper">
                             <div class="div-6 w-100">
-                                <img class="img"
-                                     src="https://media.licdn.com/dms/image/D560BAQE96KctT7x-iw/company-logo_200_200/0/1666170056007?e=2147483647&v=beta&t=U-5DmL_mYQaduEYyl0aVlabEvxP6-F5nZE9daao6Wuk"/>
-                                <input type="text" class="form-control text-wrapper-4 w-100 h-100 border-0"
-                                       id="input-comment-{{ $index }}"
-                                       placeholder="{{ __('home.Enter question here') }}">
+
+                                <label for="input-comment-{{ $index }}">
+                                    <img class="img" src="https://media.licdn.com/dms/image/D560BAQE96KctT7x-iw/company-logo_200_200/0/1666170056007?e=2147483647&v=beta&t=U-5DmL_mYQaduEYyl0aVlabEvxP6-F5nZE9daao6Wuk" alt=""/>
+                                </label>
+                                <textarea type="text" class="form-control text-wrapper-4 w-100 h-100 border-0"
+                                                                                          id="input-comment-{{ $index }}"
+                                                                                          placeholder="{{ __('home.Enter question here') }}"></textarea>
                             </div>
                         </div>
                         <div class="text-wrapper-5">
@@ -161,6 +169,10 @@
                     </style>
                     <div class="div-5 justify-content-end" id="button-reply-comment-{{ $index }}">
                         @php
+                        $infoDoctorAnswer = User::where('id', $answer->user_id)->first();
+
+                        $checkCallDoctor = \App\Models\Question::where('id', $question->id)->first();
+                        $userCheck = \App\Models\User::where('id', $checkCallDoctor->user_id)->first();
                             $checkLike = \App\Models\Answer::where('id', $answer->id)->get();
                             if ($checkLike) {
                                 $checkLikes = $answer->likes;
@@ -183,6 +195,20 @@
                             <div class="like-cmt"><a
                                     onclick="updateLikeCmt('{{ Auth::user()->id }}', '{{ $answer->id }}')"><i id="fa-solid-{{$answer->id}}"
                                         class="fa-solid fa-thumbs-up {{$isLike}}"></i></a>{{$checkLikes}}</div>
+                            @if(Auth::user()->id == $userCheck->id)
+                                <div id="opt_btn" class="d-flex justify-content-between justify-content-md-center">
+                                    <a onclick="handleStartChatWithDoctor('{{ $infoDoctorAnswer->id }}')">
+                                        <button>{{ __('home.Chat') }}</button>
+                                    </a>
+                                    <form method="post" action="{{ route('createMeeting') }}" target="_blank">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="user_id_1"
+                                               value="@if(Auth::check()) {{ Auth::user()->id }} @endif">
+                                        <input type="hidden" name="user_id_2" value="{{ $infoDoctorAnswer->id }}">
+                                        <button type="submit">{{ __('home.Videocall') }}</button>
+                                    </form>
+                                </div>
+                            @endif
 
                         @else
                             <div class="like-cmt"><a onclick="alertLogin()"><i
@@ -287,8 +313,10 @@
             }
 
             const idComment = `input-comment-${id}`;
+            console.log(idComment)
 
-            const commentValue = document.getElementById(idComment).value;
+            const commentValue = tinymce.get(idComment).getContent();
+            console.log(commentValue)
 
             const formData = new FormData();
             formData.append("_token", '{{ csrf_token() }}');
@@ -330,7 +358,7 @@
 
             const idComment = `input-comment-main`;
 
-            const commentValue = document.getElementById(idComment).value;
+            const commentValue = tinymce.get(idComment).getContent();
 
             const formData = new FormData();
             formData.append("_token", '{{ csrf_token() }}');
