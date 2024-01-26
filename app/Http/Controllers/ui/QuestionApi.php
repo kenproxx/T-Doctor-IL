@@ -34,7 +34,7 @@ class QuestionApi extends Controller
 
         }
         $questions = Question::where('category_id', $value)
-            ->where('status', QuestionStatus::DELETED)
+            ->where('status', '!=', QuestionStatus::DELETED)
             ->orderByDesc('score')
             ->get();
 
