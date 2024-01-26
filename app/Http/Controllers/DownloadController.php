@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\BookingResult;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
 class DownloadController extends Controller
@@ -22,6 +21,10 @@ class DownloadController extends Controller
     public function downloadFile($id)
     {
         $result = BookingResult::find($id);
+        if (!$result->prescriptions) {
+            alert()->warning('No prescriptions!');
+            return back();
+        }
         $path = $result->prescriptions;
 
         $file = public_path($path);

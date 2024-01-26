@@ -458,6 +458,12 @@ Route::middleware(['user.active'])->group(function () {
             [DoctorInfoController::class, 'showFromQrCode'])->name('qr.code.show.doctor.info');
     });
 
+    Route::group(['prefix' => 'my-bookings'], function () {
+        Route::get('show/{id}', [MyBookingController::class, 'showBookingQr'])->name('web.users.my.bookings.show');
+        Route::get('generate/{id}', [MyBookingController::class, 'generateQrCode'])->name('web.users.my.bookings.generate');
+        Route::get('download/{id}', [MyBookingController::class, 'downloadQrCode'])->name('web.users.my.bookings.download');
+    });
+
     /* List Api*/
     /* Auth */
     Route::group(['prefix' => 'auth'], function () {

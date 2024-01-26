@@ -42,6 +42,7 @@ class BackendQuestionController extends Controller
             ->cursor()
             ->map(function ($item) use ($user_id) {
                 $like_answer = AnswerLike::where('answer_id', $item->id)
+                    ->where('is_like', 1)
                     ->where('user_id', $user_id)
                     ->first();
 
