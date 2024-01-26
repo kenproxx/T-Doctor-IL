@@ -160,9 +160,9 @@
 }
 
 .frame.comment-item .d-ch-v-c-c-t-t-l-n-u-wrapper {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
+    /*display: flex;*/
+    /*align-items: flex-start;*/
+    /*gap: 10px;*/
     position: relative;
     align-self: stretch;
     width: 100%;
@@ -194,7 +194,7 @@
 .frame.comment-item .frame-wrapper {
     display: flex;
     flex-direction: column;
-    height: 56px;
+    /*height: 56px;*/
     align-items: flex-start;
     justify-content: center;
     gap: 10px;
@@ -203,7 +203,7 @@
     flex: 1;
     flex-grow: 1;
     border-radius: 8px;
-    border: 1px solid;
+    /*border: 1px solid;*/
 }
 
 .frame.comment-item .div-6 {

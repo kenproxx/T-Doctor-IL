@@ -62,16 +62,20 @@
                 @endif
             @endif
         </div>
-
+        <style>
+            .d-ch-v-c-c-t-t-l-n-u-wrapper a{
+                text-decoration: underline;
+            }
+        </style>
         <div class="mt-5">
             <div class="frame comment-item mb-3 d-none" id="comment-main">
                 <div class="div-5 ">
                     <div class="frame-wrapper">
                         <div class="div-6 w-100">
                             <img class="img"
-                                 src="https://media.licdn.com/dms/image/D560BAQE96KctT7x-iw/company-logo_200_200/0/1666170056007?e=2147483647&v=beta&t=U-5DmL_mYQaduEYyl0aVlabEvxP6-F5nZE9daao6Wuk"/>
-                            <input type="text" class="form-control text-wrapper-4 w-100 h-100 border-0"
-                                   placeholder="{{ __('home.Enter question here') }}" id="input-comment-main">
+                                 src="https://media.licdn.com/dms/image/D560BAQE96KctT7x-iw/company-logo_200_200/0/1666170056007?e=2147483647&v=beta&t=U-5DmL_mYQaduEYyl0aVlabEvxP6-F5nZE9daao6Wuk" alt=""/>
+                            <textarea type="text" class="form-control text-wrapper-4 w-100 h-100 border-0"
+                                      placeholder="{{ __('home.Enter question here') }}" id="input-comment-main"></textarea>
                         </div>
                     </div>
                     <div class="text-wrapper-5">
@@ -128,20 +132,25 @@
                         </div>
                         <div class="d-ch-v-c-c-t-t-l-n-u-wrapper">
                             <p class="d-ch-v-c-c-t-t-l-n-u">
-                                <span class="text-wrapper-3"
-                                >{{ $answer->content }}</span
-                                >
+                                <span class="text-wrapper-3">{!! $answer->content !!}</span>
                             </p>
                         </div>
                     </div>
+                    <style>
+                        .tox.tox-tinymce {
+                            width: 100%;
+                        }
+                    </style>
                     <div class="div-5" id="reply-comment-{{ $index }}" style="display: none">
                         <div class="frame-wrapper">
                             <div class="div-6 w-100">
-                                <img class="img"
-                                     src="https://media.licdn.com/dms/image/D560BAQE96KctT7x-iw/company-logo_200_200/0/1666170056007?e=2147483647&v=beta&t=U-5DmL_mYQaduEYyl0aVlabEvxP6-F5nZE9daao6Wuk"/>
-                                <input type="text" class="form-control text-wrapper-4 w-100 h-100 border-0"
-                                       id="input-comment-{{ $index }}"
-                                       placeholder="{{ __('home.Enter question here') }}">
+
+                                <label for="input-comment-{{ $index }}">
+                                    <img class="img" src="https://media.licdn.com/dms/image/D560BAQE96KctT7x-iw/company-logo_200_200/0/1666170056007?e=2147483647&v=beta&t=U-5DmL_mYQaduEYyl0aVlabEvxP6-F5nZE9daao6Wuk" alt=""/>
+                                </label>
+                                <textarea type="text" class="form-control text-wrapper-4 w-100 h-100 border-0"
+                                                                                          id="input-comment-{{ $index }}"
+                                                                                          placeholder="{{ __('home.Enter question here') }}"></textarea>
                             </div>
                         </div>
                         <div class="text-wrapper-5">
@@ -304,8 +313,10 @@
             }
 
             const idComment = `input-comment-${id}`;
+            console.log(idComment)
 
-            const commentValue = document.getElementById(idComment).value;
+            const commentValue = tinymce.get(idComment).getContent();
+            console.log(commentValue)
 
             const formData = new FormData();
             formData.append("_token", '{{ csrf_token() }}');
@@ -347,7 +358,7 @@
 
             const idComment = `input-comment-main`;
 
-            const commentValue = document.getElementById(idComment).value;
+            const commentValue = tinymce.get(idComment).getContent();
 
             const formData = new FormData();
             formData.append("_token", '{{ csrf_token() }}');
