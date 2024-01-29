@@ -231,9 +231,13 @@ class BookingApi extends Controller
         }
     }
 
-    public function getAllBooking()
+    public function getAllBooking($id = null)
     {
         $arrayBookings = Booking::all();
+
+        if ($id) {
+            $arrayBookings = Booking::where('clinic_id', $id)->get();
+        }
 
         return response()->json($arrayBookings);
     }
