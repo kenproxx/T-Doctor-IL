@@ -66,6 +66,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::middleware(['user.active'])->group(function () {
     Route::get('/lang/{locale}', [MainController::class, 'setLanguage'])->name('language');
+    Route::get('test-noti', [\App\Http\Controllers\AlertNotificationController::class, 'pushNoti'])->name('noti.push');
 
     Route::get('/', 'HomeController@index')->name('home');
     Route::group(['prefix' => 'home'], function () {

@@ -85,7 +85,44 @@
     {{--    <link href="{{ asset('css/home.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/style-home.css') }}" rel="stylesheet">
     @include('layouts.partials.header')
+
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script src="{{ asset('build/assets/app.dba56e22.js') }}"></script>
+    <script></script>
     <div class="container pb-md-5 mt-200 mt-70">
+        <button onclick="testNoti()">test</button>
+
+        <script>
+            async function testNoti() {
+                let response = await fetch('{{ route('noti.push') }}')
+                if (response.ok) {
+                    console.log(response.json())
+                }
+            }
+
+            const current_user_id = '{{ Auth::user()->id }}'
+            console.log(current_user_id)
+
+            window.Echo = new Echo({
+                broadcaster: 'pusher',
+                key: '3ac4f810445d089829e8',
+                cluster: 'ap1',
+                encrypted: true,
+            });
+
+            window.Echo.private("notification." + current_user_id).listen('AlertNotification', function (e) {
+                console.log(123)
+            });
+
+            var channelAlertNotify = pusher.subscribe('AlertNotification');
+            // Bind a function to a Event (the full Laravel class)
+            channelAlertNotify.bind('AlertNotification', function (data) {
+                console.log(123)
+            });
+
+        </script>
+
+
         <div class="slide-container">
             <div class="slide">
                 <img src="{{asset('img/homeNew-img/Rectangle 23820.png')}}" alt="">
