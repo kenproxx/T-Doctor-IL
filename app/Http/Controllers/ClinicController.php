@@ -166,8 +166,9 @@ class ClinicController extends Controller
 
         $userID = $request->input('user_id');
         $clinicID = $request->input('clinic_id');
-        $checkOut = $request->input('check_out');
-        $service = $request->input('service');
+        $doctor_id = $request->input('doctor_id');
+        $department_id = $request->input('department_id');
+        $service = $request->input('service') ?? '';
         $memberFamily = $request->input('member_family_id');
         $medical_history = $request->input('medical_history') ?? '';
 
@@ -176,6 +177,9 @@ class ClinicController extends Controller
         } else {
             $servicesAsString = $service;
         }
+
+        $booking->doctor_id = $doctor_id;
+        $booking->department_id = $department_id;
 
         if (is_array($medical_history)) {
             $medical_historyAsString = implode('&&', $medical_history);

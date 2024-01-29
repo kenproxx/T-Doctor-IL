@@ -92,6 +92,8 @@ Route::group(['prefix' => 'doctors-info'], function () {
     Route::get('/my-doctors/{id}', [DoctorInfoApi::class, 'getMyDoctor'])->name('doctors.info.restapi.my.doctor');
     Route::get('/search-doctor', [DoctorInfoApi::class, 'searchDoctor'])->name('api.backend.user.doctor.search');
     Route::get('/find-doctor', [DoctorInfoApi::class, 'findDoctorByKeyword'])->name('restapi.doctor.info.find');
+    Route::get('/list-doctor-clinics', [DoctorInfoApi::class, 'getAllDoctorByClinic'])->name('restapi.list.doctor.clinics');
+    Route::get('/list-doctor-clinics-department', [DoctorInfoApi::class, 'getDoctorByDepartmentIDAndClinicID'])->name('restapi.list.doctor.clinics.department');
 });
 
 Route::group(['prefix' => 'api/doctor-reviews'], function () {

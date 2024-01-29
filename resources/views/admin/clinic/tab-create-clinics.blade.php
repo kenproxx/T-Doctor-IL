@@ -500,15 +500,18 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label for="representative_doctor_text">{{ __('home.Chọn một tùy chọn') }}:</label>
-                        <input type="text" class="form-control" id="representative_doctor_text" name="representative_doctor_text" disabled>
+                        <input type="text" class="form-control" id="representative_doctor_text"
+                               name="representative_doctor_text" disabled>
                         <ul class="list-department bg-white p-3" style="max-height: 300px; overflow: auto">
                             @foreach($doctorLists as $doctor)
                                 <li class="new-select">
-                                    <input onchange="getInputDoctor();" class="representative_doctor_item" value="{{$doctor->id}}"
+                                    <input onchange="getInputDoctor();" class="representative_doctor_item"
+                                           value="{{$doctor->id}}"
                                            id="representative_doctor_{{$doctor->id}}"
                                            name="representative_doctor"
                                            type="checkbox">
-                                    <label for="representative_doctor_{{$doctor->id}}">{{$doctor->username}}({{$doctor->email}})</label>
+                                    <label for="representative_doctor_{{$doctor->id}}">{{$doctor->username}}
+                                        ({{$doctor->email}})</label>
                                 </li>
                             @endforeach
                         </ul>
@@ -652,35 +655,36 @@
                     isValid = false;
                 }
 
-                if (isValid) {
-                    try {
-                        $.ajax({
-                            url: `{{route('api.backend.clinics.create')}}`,
-                            method: 'POST',
-                            headers: headers,
-                            contentType: false,
-                            cache: false,
-                            processData: false,
-                            data: formData,
-                            success: function (response) {
-                                console.log(response);
-                                alert('Create success');
-                                {{--window.location.href = `{{route('homeAdmin.list.clinics')}}`;--}}
-                            },
-                            error: function (xhr) {
-                                if (xhr.status === 400) {
-                                    alert(xhr.responseText);
-                                } else {
-                                    alert('Create error, Please try again!');
-                                }
-                            }
-                        });
-                    } catch (error) {
-                        console.log(error)
-                        alert('Error, Please try again!');
-                    }
-                } else {
+                if (!isValid) {
                     alert('Please enter input require!')
+                    return;
+                }
+
+                try {
+                    $.ajax({
+                        url: `{{route('api.backend.clinics.create')}}`,
+                        method: 'POST',
+                        headers: headers,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: formData,
+                        success: function (response) {
+                            console.log(response);
+                            alert('Create success');
+                            {{--window.location.href = `{{route('homeAdmin.list.clinics')}}`;--}}
+                        },
+                        error: function (xhr) {
+                            if (xhr.status === 400) {
+                                alert(xhr.responseJSON.message);
+                            } else {
+                                alert('Create error, Please try again!');
+                            }
+                        }
+                    });
+                } catch (error) {
+                    console.log(error)
+                    alert('Error, Please try again!');
                 }
             })
         })
