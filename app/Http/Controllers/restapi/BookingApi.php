@@ -25,12 +25,10 @@ class BookingApi extends Controller
             $booking = (new ClinicController())->createBooking($request, $booking);
 
             $clinicID = $booking->clinic_id;
-            $servicesAsString = $booking->service;
             $timestamp = $booking->check_in;
             $datetime = $timestamp->addMinutes(30);
             $familyId = $booking->member_family_id;
             $exitBooking = Booking::where('clinic_id', $clinicID)
-                ->where('service', $servicesAsString)
                 ->where('member_family_id', $familyId)
                 ->where('check_in', '<', $datetime)
                 ->where('status', BookingStatus::APPROVED)
