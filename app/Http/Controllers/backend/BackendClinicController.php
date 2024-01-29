@@ -7,6 +7,7 @@ use App\Enums\TypeBusiness;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\restapi\MainApi;
 use App\Models\Clinic;
 use App\Models\Role;
 use App\Models\RoleUser;
@@ -261,36 +262,30 @@ class BackendClinicController extends Controller
 
             $isEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
             if (!$isEmail) {
-                toast('Email invalid!', 'error', 'top-left');
-                return back();
+                return response((new MainApi())->returnMessage('Email invalid!'), 400);
             }
 
             $oldUser = User::where('email', $email)->first();
             if ($oldUser) {
-                toast('Email already exited!', 'error', 'top-left');
-                return back();
+                return response((new MainApi())->returnMessage('Email already exited!'), 400);
             }
 
             $oldUser = User::where('username', $username)->first();
             if ($oldUser) {
-                toast('Username already exited!', 'error', 'top-left');
-                return back();
+                return response((new MainApi())->returnMessage('Username already exited!'), 400);
             }
 
             $oldUser = User::where('phone', $phone)->first();
             if ($oldUser) {
-                toast('Phone already exited!', 'error', 'top-left');
-                return back();
+                return response((new MainApi())->returnMessage('Phone already exited!'), 400);
             }
 
             if ($password != $passwordConfirm) {
-                toast('Password or Password Confirm incorrect!', 'error', 'top-left');
-                return back();
+                return response((new MainApi())->returnMessage('Password or Password Confirm incorrect!!'), 400);
             }
 
             if (strlen($password) < 5) {
-                toast('Password invalid!', 'error', 'top-left');
-                return back();
+                return response((new MainApi())->returnMessage('Password invalid!'), 400);
             }
 
             $user->email = $email;

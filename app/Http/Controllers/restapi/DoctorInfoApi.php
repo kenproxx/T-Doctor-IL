@@ -221,4 +221,47 @@ class DoctorInfoApi extends Controller
     {
         return view('examination.component_doctor_findmymedicine', compact('pharmacist'));
     }
+
+    public function getAllDoctorByClinic(Request $request)
+    {
+        $clinic_id = $request->input('clinic_id');
+
+        $clinic = Clinic::find($clinic_id);
+        if (!$clinic) {
+            return response((new MainApi())->returnMessage('Not found'), 400);
+        }
+
+        $list_doctor_id = $clinic->representative_doctor;
+        $array_doctor = explode(',', $list_doctor_id);
+
+        $doctorInfos = DB::table('users')->where('status', UserStatus::ACTIVE)
+            ->where('users.member', TypeMedical::DOCTORS)
+            ->whereIn('users.id', $array_doctor)
+            ->orderBy('users.id', 'DESC')
+            ->get();
+
+        return response()->json($doctorInfos);
+    }
+
+    public function getDoctorByDepartmentIDAndClinicID(Request $request)
+    {
+        $department_id = $request->input('department_id');
+        $clinic_id = $request->input('clinic_id');
+
+        $clinic = Clinic::find($clinic_id);
+        if (!$clinic) {
+            return response((new MainApi())->returnMessage('Not found'), 400);
+        }
+
+        $list_doctor_id = $clinic->representative_doctor;
+        $array_doctor = explode(',', $list_doctor_id);
+
+        $doctorInfos = DB::table('users')->where('status', UserStatus::ACTIVE)
+            ->where('users.member', TypeMedical::DOCTORS)
+            ->where('users.department_id', $department_id)
+            ->whereIn('users.id', $array_doctor)
+            ->orderBy('users.id', 'DESC')
+            ->get();
+        return response()->json($doctorInfos);
+    }
 }
