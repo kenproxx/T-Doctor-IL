@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('surveys', function (Blueprint $table) {
-            $table->string('type')->default(SurveyType::BOOL);
+            $table->string('type')->default(SurveyType::MULTIPLE);
         });
     }
 

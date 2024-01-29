@@ -221,7 +221,7 @@ Route::middleware(['user.active'])->group(function () {
         Route::get('/list-by-users/{id}/{status}', [BookingApi::class, 'getAllBookingByUserId'])->name('booking.list.users');
         Route::get('/detail/{id}', [BookingApi::class, 'detail'])->name('restapi.booking.detail');;
         Route::get('/search', [BackendProductInfoController::class, 'search'])->name('backend.booking.search');
-        Route::get('get-all-booking', [BookingApi::class, 'getAllBooking'])->name('api.user.booking.get-all');
+        Route::get('get-all-booking/{id?}', [BookingApi::class, 'getAllBooking'])->name('api.user.booking.get-all');
         Route::post('create-bookingNew', [BookingController::class, 'creatBookingNew'])->name('booking.create.new');
     });
 
