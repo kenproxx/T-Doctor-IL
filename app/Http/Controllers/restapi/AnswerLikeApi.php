@@ -31,6 +31,7 @@ class AnswerLikeApi extends Controller
                     $old->is_like = 0;
 
                     $answer->likes = $answer->likes - 1;
+
                 } else {
                     $old->is_like = 1;
                     $answer->likes = $answer->likes + 1;
@@ -45,7 +46,10 @@ class AnswerLikeApi extends Controller
             $success = $old->save();
             $answer->save();
             if ($success) {
-                return response()->json((new MainApi())->returnMessage('Success!'), 200);
+                return response()->json([
+                    'message' => 'Success!',
+                    'data' => $answer->likes,
+                ], 200);
             }
             return response()->json((new MainApi())->returnMessage('Error!'), 400);
         } catch (\Exception $exception) {
