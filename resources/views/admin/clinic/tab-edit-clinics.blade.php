@@ -392,6 +392,9 @@
                     <input type="text" name="departments" id="departments" class="form-control">
                     <label for="symptoms"></label>
                     <input type="text" name="symptoms" id="symptoms" class="form-control">
+                    <label for="representative_doctor"></label>
+                    <input type="text" name="representative_doctor" id="representative_doctor" value="{{ $clinic->representative_doctor }}"
+                           class="form-control">
                 </div>
             </div>
             <div class="row">
@@ -527,16 +530,29 @@
                     </div>
                 </div>
             </div>
-
+            @php
+                $list_doctor = $clinic->representative_doctor;
+                $array_doctor = explode(',', $list_doctor);
+            @endphp
             <div class="row">
                 <div class="col-md-12">
-                    <label for="representative_doctor">{{ __('home.Chọn một tùy chọn') }}:</label>
-                    <select name="representative_doctor" class="form-select" id="representative_doctor">
-                        @foreach($doctorLists as $kry => $doctor)
-                            <option {{ $doctor->id == $clinic->representative_doctor ? 'selected' : '' }}
-                                    value="{{$doctor->id}}">{{$doctor->name}}</option>
+                    <label for="representative_doctor_text">{{ __('home.Chọn một tùy chọn') }}:</label>
+                    <input type="text" class="form-control" id="representative_doctor_text"
+                           name="representative_doctor_text" disabled>
+                    <ul class="list-department bg-white p-3" style="max-height: 300px; overflow: auto">
+                        @foreach($doctorLists as $doctor)
+                            <li class="new-select">
+                                <input onchange="getInputDoctor();" class="representative_doctor_item"
+                                       value="{{$doctor->id}}"
+                                       {{ in_array($doctor->id, $array_doctor) ? 'checked' : ''}}
+                                       id="representative_doctor_{{$doctor->id}}"
+                                       name="representative_doctor"
+                                       type="checkbox">
+                                <label for="representative_doctor_{{$doctor->id}}">{{$doctor->username}}
+                                    ({{$doctor->email}})</label>
+                            </li>
                         @endforeach
-                    </select>
+                    </ul>
                 </div>
             </div>
 
@@ -721,35 +737,36 @@
                     formData.append('gallery[]', file);
                 }
 
-                if (isValid) {
-                    try {
-                        $.ajax({
-                            url: `{{route('api.backend.clinics.edit',$clinic->id)}}`,
-                            method: 'POST',
-                            headers: headers,
-                            contentType: false,
-                            cache: false,
-                            processData: false,
-                            data: formData,
-                            success: function (response) {
-                                alert('Update success!');
-                                window.location.href = `{{route('homeAdmin.list.clinics')}}`;
-                            },
-                            error: function (xhr) {
-                                if (xhr.status === 400) {
-                                    alert('Update error!');
-                                } else {
-                                    alert('Update error! Please try again!');
-                                }
-                                console.log(xhr);
-                            }
-                        });
-                    } catch (error) {
-                        console.log(error);
-                        alert('Error! Please try again!');
-                    }
-                } else {
+                if (!isValid) {
                     alert('Please enter input require!')
+                    return;
+                }
+
+                try {
+                    $.ajax({
+                        url: `{{route('api.backend.clinics.edit',$clinic->id)}}`,
+                        method: 'POST',
+                        headers: headers,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: formData,
+                        success: function (response) {
+                            alert('Update success!');
+                            window.location.href = `{{route('homeAdmin.list.clinics')}}`;
+                        },
+                        error: function (xhr) {
+                            if (xhr.status === 400) {
+                                alert(xhr.responseJSON.message);
+                            } else {
+                                alert('Update error! Please try again!');
+                            }
+                            console.log(xhr);
+                        }
+                    });
+                } catch (error) {
+                    console.log(error);
+                    alert('Error! Please try again!');
                 }
             })
         })
@@ -1102,6 +1119,28 @@
                 return $(this).val();
             }).get().join(', ');
             $('#hospital_information').val(arrayItem);
+        }
+    </script>
+    <script>
+        let arrayDoctor = [];
+        let arrayNameDoctor = [];
+
+        getInputDoctor();
+
+        function getInputDoctor() {
+            let items = document.getElementsByClassName('representative_doctor_item');
+
+            arrayDoctor = checkArray(arrayDoctor, items);
+            arrayNameDoctor = getListName(arrayNameDoctor, items)
+
+            let listName = arrayNameDoctor.toString();
+            if (listName) {
+                $('#representative_doctor_text').val(listName);
+            }
+
+            arrayDoctor.sort();
+            let value = arrayDoctor.toString();
+            $('#representative_doctor').val(value);
         }
     </script>
 @endsection

@@ -672,7 +672,7 @@
                         success: function (response) {
                             console.log(response);
                             alert('Create success');
-                            {{--window.location.href = `{{route('homeAdmin.list.clinics')}}`;--}}
+                            window.location.href = `{{route('homeAdmin.list.clinics')}}`;
                         },
                         error: function (xhr) {
                             if (xhr.status === 400) {

@@ -163,7 +163,6 @@ class ClinicController extends Controller
 
     public function createBooking(Request $request, $booking)
     {
-
         $userID = $request->input('user_id');
         $clinicID = $request->input('clinic_id');
         $doctor_id = $request->input('doctor_id');
