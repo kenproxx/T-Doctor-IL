@@ -5,6 +5,7 @@ namespace App\Http\Controllers\restapi;
 use App\Enums\DepartmentStatus;
 use App\Enums\SymptomStatus;
 use App\Http\Controllers\Controller;
+use App\Models\Clinic;
 use App\Models\Department;
 use App\Models\Symptom;
 use Illuminate\Http\Request;
@@ -41,5 +42,19 @@ class DepartmentApi extends Controller
             return response('Not found!', 404);
         }
         return response()->json($department);
+    }
+
+    public function getAllByClinic(Request $request)
+    {
+        $clinicID = $request->input('clinic_id');
+        $clinic = Clinic::find($clinicID);
+        if (!$clinic) {
+            return response((new MainApi())->returnMessage('Clinic not found'), 404);
+        }
+
+        $list_department = $clinic->department;
+        $array_department = explode(',', $list_department);
+        $departments = Department::whereIn('id', $array_department)->get();
+        return response()->json($departments);
     }
 }

@@ -163,7 +163,6 @@ class ClinicController extends Controller
 
     public function createBooking(Request $request, $booking)
     {
-
         $userID = $request->input('user_id');
         $clinicID = $request->input('clinic_id');
         $doctor_id = $request->input('doctor_id');
@@ -171,6 +170,7 @@ class ClinicController extends Controller
         $service = $request->input('service') ?? '';
         $memberFamily = $request->input('member_family_id');
         $medical_history = $request->input('medical_history') ?? '';
+        $consulting_form = $request->input('consulting_form');
 
         if (is_array($service)) {
             $servicesAsString = implode(',', $service);
@@ -197,6 +197,7 @@ class ClinicController extends Controller
         $booking->service = $servicesAsString;
         $booking->medical_history = $medical_historyAsString;
         $booking->member_family_id = $memberFamily;
+        $booking->consulting_form = $consulting_form;
 
         return $booking;
     }

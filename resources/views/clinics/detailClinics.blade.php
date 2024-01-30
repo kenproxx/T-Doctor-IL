@@ -10,7 +10,7 @@
 
     <link href="{{ asset('css/detailclinics.css') }}" rel="stylesheet">
 
-{{--    @include('What-free.header-wFree')--}}
+    {{--    @include('What-free.header-wFree')--}}
     <div class="container mt-150">
         @php
             $addresses = \App\Models\Clinic::where('id', $bookings->id)->get();
@@ -322,18 +322,6 @@
                     return;
                 }
 
-                $.ajax({
-                    url: '{{ route('api.survey.get-by-department', $bookings->department) }}',
-                    method: 'GET',
-                    headers: {
-                        "Authorization": accessToken
-                    },
-                    success: function (response) {
-                    },
-                    error: function (exception) {
-                    }
-                });
-
                 let response = await fetch('{{ route('api.survey.get-by-department', $bookings->department) }}', {
                     method: 'GET',
                     headers: {
@@ -398,7 +386,6 @@
         });
 
         function getValueSurvey() {
-
             let arrayResultText = [];
             let arrayResultCheckbox = [];
             let arrayResultRadio = [];
@@ -520,8 +507,23 @@
 @endif
             <div class="border-bottom fs-16px mb-md-3">
             <span>{{ __('home.Main service') }}</span>
+            <div class="mt-1">
+                                        Select Department
+                                          <div id="list-department">
+                                          </div>
+                </div>
                                 </div>
-                               ${service}
+<div class="border-bottom fs-16px mb-md-3">
+            <span>{{ __('home.Doctor Name') }}</span>
+            <div class="mt-1">
+                                        Select Doctor
+                                      <div id="list-doctor">
+                                      <select class="form-control">
+                                            <option value="#">Please choose doctor</option>
+                                       </select>
+                                      </div>
+                </div>
+                                </div>
                                 <div class="border-bottom mt-md-4 fs-16px mb-md-3">
                                     <span>{{ __('home.Information') }}</span>
                                 </div>
@@ -544,6 +546,9 @@
 `;
             $('#modalBooking').empty().append(html);
             loadData();
+            let clinicID = `{{ $bookings->id }}`;
+            await getDepartment(clinicID);
+            await getDoctor(clinicID, $('#department_id').find(':selected').val());
         }
 
         function loadData() {
@@ -629,7 +634,6 @@
                 });
             }
 
-
             $("#datepicker").datepicker({
                 onSelect: function (date) {
                     const container = document.querySelector('.master-container-slots');
@@ -678,5 +682,68 @@
             });
         }
 
+    </script>
+    <script>
+        async function getDoctor(clinic, department) {
+            await $.ajax({
+                url: `{{ route('restapi.list.doctor.clinics.department') }}?clinic_id=${clinic}&department_id=${department}`,
+                method: 'GET',
+                success: function (response) {
+                    console.log(response)
+                    renderDoctor(response);
+                },
+                error: function (exception) {
+                    console.log(exception);
+                }
+            });
+        }
+
+        function renderDoctor(response) {
+            let html = ``;
+
+            for (let i = 0; i < response.length; i++) {
+                let data = response[i];
+                html += `<option value="${data.id}">${data.username}-${data.email}</option>`
+            }
+
+            let main_html = `<select class="form-control"
+                                        name="doctor_id" id="doctor_id">
+                                            ${html}
+                                       </select>`;
+            $('#list-doctor').empty().append(main_html);
+        }
+
+        async function getDepartment(clinic) {
+            await $.ajax({
+                url: `{{ route('restapi.list.departments.clinics') }}?clinic_id=${clinic}`,
+                method: 'GET',
+                success: function (response) {
+                    console.log(response)
+                    renderDepartment(response, clinic);
+                },
+                error: function (exception) {
+                    console.log(exception);
+                }
+            });
+        }
+
+        function renderDepartment(response, clinic) {
+            let html = ``;
+
+            for (let i = 0; i < response.length; i++) {
+                let data = response[i];
+                html += `<option value="${data.id}">${data.name}</option>`
+            }
+
+            if (response.length < 1) {
+                html = `<option value="">No doctor</option>`;
+            }
+
+            let main_html = `<select onchange="getDoctor(${clinic}, $('#department_id').find(':selected').val())" class="form-control"
+                                        name="department_id" id="department_id">
+                                            ${html}
+                                       </select>`;
+            $('#list-department').empty().append(main_html);
+        }
     </script>
 @endsection
