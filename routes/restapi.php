@@ -169,13 +169,14 @@ Route::group(['prefix' => 'products-medicines'], function () {
     Route::get('/detail/{id}', [ProductMedicineApi::class, 'detail'])->name('restapi.get.products.medicines.detail');
     Route::post('/list-prescriptions', [ProductMedicineApi::class, 'getAllProductByExcelFile'])->name('restapi.products.medicines.prescriptions');
     Route::post('/blade-list-prescriptions', [ProductMedicineApi::class, 'getAllProductByExcelFileBlade'])->name('restapi.products.medicines.prescriptions.blade');
-    Route::post ('/by-result/{id}', [ProductMedicineApi::class, 'addProductFromExcelFile'])->name('restapi.get.products.medicines.result');
+    Route::post('/by-result/{id}', [ProductMedicineApi::class, 'addProductFromExcelFile'])->name('restapi.get.products.medicines.result');
 });
 
 Route::group(['prefix' => 'departments'], function () {
     Route::get('/list', [DepartmentApi::class, 'getList'])->name('restapi.departments.list');
     Route::get('/detail/{id}', [DepartmentApi::class, 'detail'])->name('restapi.departments.detail');
     Route::get('/symptoms/{id}', [DepartmentApi::class, 'getBySymptomID'])->name('restapi.departments.symptoms');
+    Route::get('/clinics', [DepartmentApi::class, 'getAllByClinic'])->name('restapi.list.departments.clinics');
 });
 
 Route::group(['prefix' => 'symptoms'], function () {
