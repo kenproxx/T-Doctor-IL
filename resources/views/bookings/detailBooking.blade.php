@@ -20,7 +20,7 @@
                 <div>{{ __('home.clinics') }}: {{$clinic->name}}</div>
                 <div>{{ __('home.Addresses') }}: {{$clinic->address_detail}} - {{$addressC->name}} - {{$addressD->name}}
                     - {{$addressP->name}}</div>
-                <div>{{ __('home.Main service') }}:
+                <div>
 
                     @foreach($service as $item)
                         <div>- {{$item->name}}</div>

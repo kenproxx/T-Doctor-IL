@@ -117,7 +117,7 @@
                             <a href="${urlDetail}">
                               <div>{{ __('home.Thời gian vào') }}: ${item.check_in} </div>
                               <div> {{ __('home.clinics') }}: ${item.clinic_id} </div>
-                              <div>{{ __('home.dịch vụ') }}: ${item.service} </div>
+                              {{--<div>{{ __('home.dịch vụ') }}: ${item.service} </div>--}}
                             </a>
                          </div>
                         <div class="col-md-2">
