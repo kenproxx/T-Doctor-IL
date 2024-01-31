@@ -2,6 +2,13 @@
 
 <link href="{{ asset('css/header.css') }}" rel="stylesheet">
 <link href="{{ asset('css/loginNew.css') }}" rel="stylesheet">
+
+<style>
+    .main-header {
+        z-index: 2 !important;
+    }
+</style>
+
 <header class="container">
     <div class="main-header">
         <div class="before-header d-flex justify-content-between align-items-center">
