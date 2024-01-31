@@ -58,7 +58,7 @@
             @foreach($questions as $index => $question)
                 <div class="col-sm-6 list-group list-group-flush">
                     <span class="list-group-item d-flex justify-content-between align-items-center">
-                        <a href="{{ route('examination.mentoring.show', $question->id) }}"><b>{{ $index + 1 }}  {{ $question->title }}</b></a>
+                        <a href="{{ route('examination.mentoring.show', $question->id) }}"><b class="style-b">{{ $index + 1 }}  {{ $question->title }}</b></a>
                         <span class="text-red">({{ $question->answers_count }})</span>
                     </span>
                 </div>
@@ -202,7 +202,7 @@
                 let url = '{{ route('examination.mentoring.show', ['id' => ':id']) }}';
                 url = url.replace(':id', comment.id);
 
-                str += `<div class="frame border-bottom comment_list">
+                str += `<div class="frame border-bottom comment_list mb-md-3">
                 <div class="frame-wrapper">
                     <div class="div">
                         <div class="div-wrapper">

@@ -11,6 +11,13 @@
     .list-group-item a b, .text-red {
         font-size: 12px;
     }
+    .style-b:hover {
+        font-style: normal;
+        font-weight: 800;
+        line-height: normal;
+        color:  #088180;
+        font-size: 12px;
+    }
     .cl-select {
         font-size: 12px;
     }
@@ -115,6 +122,17 @@
     width: fit-content;
     margin-top: -1px;
     color: #000000;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+}
+.frame .p:hover {
+    color:  #088180;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
 }
 
 .frame .div-3 {
@@ -154,4 +172,14 @@
     margin-left: -0.5px;
     margin-right: -0.5px;
     object-fit: cover;
+}
+
+.textCate {
+    border-radius: 65px;
+    background:  #F3F3F3;
+    display: flex;
+    padding: 4px 17px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }

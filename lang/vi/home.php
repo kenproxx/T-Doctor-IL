@@ -293,7 +293,7 @@ return [
     'Terms & Condition' => 'Terms & Condition',
     'Online Medicine' => 'Mua thuốc trực tuyến',
     'New/Events' => 'Sự kiện mới',
-    'Examination' => 'Thăm khám ',
+    'Examination' => 'Thăm khám',
     'Clinic/Pharmacies' => 'Phòng Khám/ Hiệu thuốc',
     "What's free" => "Voucher",
     'Dashboar' => 'bảng điều khiển',
