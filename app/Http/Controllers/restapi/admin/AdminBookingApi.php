@@ -34,7 +34,7 @@ class AdminBookingApi extends Controller
                 ->orderBy('id', 'desc')
                 ->get();
         } else {
-            $bookings = Booking::where('status', '!=', BookingStatus::CANCEL)
+            $bookings = Booking::where('status', '!=', BookingStatus::DELETE)
                 ->where('clinic_id', $id)
                 ->orderBy('id', 'desc')
                 ->get();
@@ -109,5 +109,22 @@ class AdminBookingApi extends Controller
         } catch (\Exception $exception) {
             return response($exception, 400);
         }
+    }
+
+    public function getAllByDoctorID($id, Request $request)
+    {
+        $status = $request->input('status');
+        if ($status) {
+            $bookings = Booking::where('status', $status)
+                ->where('doctor_id', $id)
+                ->orderBy('id', 'desc')
+                ->get();
+        } else {
+            $bookings = Booking::where('status', '!=', BookingStatus::DELETE)
+                ->where('doctor_id', $id)
+                ->orderBy('id', 'desc')
+                ->get();
+        }
+        return response()->json($bookings);
     }
 }

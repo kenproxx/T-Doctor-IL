@@ -176,7 +176,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label class="form-control-label" for="phone">{{ __('home.PhoneNumber') }}r<span
+                                        <label class="form-control-label" for="phone">{{ __('home.PhoneNumber') }}<span
                                                 class="small text-danger">*</span></label>
                                         <input type="number" id="phone" class="form-control" name="phone"
                                                placeholder="Phone"

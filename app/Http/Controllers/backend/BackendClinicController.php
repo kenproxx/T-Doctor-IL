@@ -310,8 +310,7 @@ class BackendClinicController extends Controller
             $user->status = UserStatus::ACTIVE;
             $user->save();
 
-            $member = \App\Enums\Role::BUSINESS;
-            (new MainController())->createRoleUser($member, $username);
+            (new MainController())->createRoleUser($type, $username);
 
             $clinic->user_id = $user->id;
 
