@@ -32,10 +32,12 @@
                     <th scope="row">{{ $loop->index + 1 }}</th>
                     <td>
                         @php
-                            $user = \App\Models\User::find($item->user_id)->pluck('name')->first();
+                            $user_name = \App\Models\User::find($item->user_id);
                         @endphp
-                        {{$user}}</td>
-                    <td>@php
+                        {{$user_name->name}}
+                    </td>
+                    <td>
+                        @php
                             $clinic = \App\Models\Clinic::where('id',$item->clinic_id)->pluck('name')->first();
                         @endphp
                         {{$clinic}}
