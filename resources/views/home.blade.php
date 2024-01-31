@@ -29,7 +29,7 @@
         }
 
         .container {
-            max-width: 1170px;
+            /*max-width: 1170px;*/
             width: 100%;
             /*margin: auto;*/
         }
@@ -86,7 +86,7 @@
     <link href="{{ asset('css/style-home.css') }}" rel="stylesheet">
     @include('layouts.partials.header')
 
-    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+{{--    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>--}}
     <script src="{{ asset('build/assets/app.dba56e22.js') }}"></script>
     <script></script>
     <div class="container pb-md-5 mt-200 mt-70">
@@ -121,8 +121,6 @@
 {{--            });--}}
 
 {{--        </script>--}}
-
-
         <div class="slide-container">
             <div class="slide">
                 <img src="{{asset('img/homeNew-img/Rectangle 23820.png')}}" alt="">
