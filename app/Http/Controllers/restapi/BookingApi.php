@@ -133,7 +133,7 @@ class BookingApi extends Controller
 
                     $question = SurveyQuestion::find($idQuestion);
 
-                    $typeQuestion = SurveyQuestion::find($idQuestion)->type;
+                    $typeQuestion = SurveyQuestion::find($idQuestion) ? SurveyQuestion::find($idQuestion)->type : '';
 
                     if ($typeQuestion == SurveyType::TEXT) {
                         $pos = strpos($surveyResult, '-');
