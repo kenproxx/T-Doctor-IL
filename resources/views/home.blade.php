@@ -1036,7 +1036,7 @@
                                                 <div class="content-pro p-md-3 p-2">
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
-                                                            <a class="name-product--fleaMarket"
+                                                            <a class="name-product--fleaMarket max-3-line-content"
                                                                href="{{ route('examination.doctor_info', $doctor->id) }}">{{$doctor->name}}</a>
                                                         </div>
                                                         <div class="location-pro d-flex">
@@ -1120,7 +1120,7 @@
                                                 <div class="content-pro p-md-3 p-2">
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
-                                                            <a class="name-product--fleaMarket"
+                                                            <a class="name-product--fleaMarket max-3-line-content"
                                                                href="{{ route('examination.doctor_info', $medicine->id) }}">{{$medicine->name}}</a>
                                                         </div>
                                                         <div class="location-pro">
@@ -1431,7 +1431,7 @@
                             <div class="content-proFlea p-md-3 p-2">
                                 <div class="">
                                     <div class="name-productFlea" style="min-height: 55px">
-                                        <a class="name-product--fleaMarket"
+                                        <a class="name-product--fleaMarket max-3-line-content"
                                            href="{{ route('flea.market.product.detail', $product->id) }}"
                                            target="_blank">{{$product->name}}</a>
                                     </div>
@@ -1510,7 +1510,7 @@
                                                     <div class="content-pro p-md-3 p-2">
                                                         <div class="">
                                                             <div class="name-product" style="min-height: 48px">
-                                                                <a class="name-product--fleaMarket"
+                                                                <a class="name-product--fleaMarket max-3-line-content"
                                                                    href="{{ route('examination.doctor_info', $product->id) }}">{{$product->name}}</a>
                                                             </div>
                                                             <div class="location-pro">
@@ -1662,7 +1662,7 @@
                                                 <div class="content-pro p-md-3 p-2">
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
-                                                            <a class="name-product--fleaMarket"
+                                                            <a class="name-product--fleaMarket max-3-line-content"
                                                                href="{{ route('examination.doctor_info', $product->id) }}">{{$product->name}}</a>
                                                         </div>
                                                         <div class="location-pro">
@@ -1739,7 +1739,7 @@
                                                 <div class="content-pro p-md-3 p-2">
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
-                                                            <a class="name-product--fleaMarket"
+                                                            <a class="name-product--fleaMarket max-3-line-content"
                                                                href="{{ route('examination.doctor_info', $product->id) }}">{{$product->name}}</a>
                                                         </div>
                                                         <div class="location-pro">
@@ -1832,7 +1832,7 @@
                                                 <div class="content-pro p-md-3 p-2">
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
-                                                            <a class="name-product--fleaMarket"
+                                                            <a class="name-product--fleaMarket max-3-line-content"
                                                                href="{{ route('examination.doctor_info', $product->id) }}">{{$product->name}}</a>
                                                         </div>
                                                         <div class="location-pro">
@@ -1925,7 +1925,7 @@
                                                 <div class="content-pro p-md-3 p-2">
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
-                                                            <a class="name-product--fleaMarket"
+                                                            <a class="name-product--fleaMarket max-3-line-content"
                                                                href="{{ route('examination.doctor_info', $product->id) }}">{{$product->name}}</a>
                                                         </div>
                                                         <div class="location-pro">
