@@ -199,7 +199,8 @@ class BookingApi extends Controller
         $status = $request->input('status') ?? BookingStatus::CANCEL;
         $reason = $request->input('reason');
         if ($booking) {
-            $booking->status = $status;
+            $booking->status = $booking->status == BookingStatus::PENDING ? BookingStatus::CANCEL :
+                ($booking->status == BookingStatus::CANCEL ? BookingStatus::PENDING : BookingStatus::CANCEL);
             $booking->reason_cancel = $reason;
             $booking->save();
             return response()->json(['message' => 'Booking status updated successfully']);
