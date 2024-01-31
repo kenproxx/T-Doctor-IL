@@ -144,9 +144,9 @@
 
     async function checkDelete(id) {
         let confirmed = confirm('Are you sure you want to delete this item?');
-        loadingMasterPage();
 
         if (confirmed) {
+            loadingMasterPage();
             let accessToken = `Bearer ` + token;
             let urlDelete = `{{ route('api.backend.booking.cancel', ['id' => ':id']) }}`;
             urlDelete = urlDelete.replace(':id', id);

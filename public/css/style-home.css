@@ -10,7 +10,6 @@
 }
 @media (min-width: 780px) {
   .container {
-    max-width: 1440px;
     width: 100%;
   }
   .container .item-information .nav-header--homeNew ul.nav-fill, .container #find-doctor--homeNew .nav-header--homeNew ul.nav-fill, .container .align-center .nav-header--homeNew ul.nav-fill {
@@ -645,6 +644,14 @@
     display: flex;
     align-items: center;
   }
+}
+.max-3-line-content {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 70px;
 }
 
 /*# sourceMappingURL=style-home.css.map */

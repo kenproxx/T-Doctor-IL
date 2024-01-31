@@ -29,7 +29,7 @@
         }
 
         .container {
-            max-width: 1170px;
+            /*max-width: 1170px;*/
             width: 100%;
             /*margin: auto;*/
         }
@@ -76,6 +76,17 @@
             display: none !important;
         }
 
+        .max-3-line-content {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 70px;
+        }
+
+
+
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css">
@@ -85,7 +96,42 @@
     {{--    <link href="{{ asset('css/home.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/style-home.css') }}" rel="stylesheet">
     @include('layouts.partials.header')
+
+{{--    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>--}}
+    <script src="{{ asset('build/assets/app.dba56e22.js') }}"></script>
+    <script></script>
     <div class="container pb-md-5 mt-200 mt-70">
+{{--        <button onclick="testNoti()">test</button>--}}
+
+{{--        <script>--}}
+{{--            async function testNoti() {--}}
+{{--                let response = await fetch('{{ route('noti.push') }}')--}}
+{{--                if (response.ok) {--}}
+{{--                    console.log(response.json())--}}
+{{--                }--}}
+{{--            }--}}
+
+{{--            const current_user_id = '{{ Auth::user()->id }}'--}}
+{{--            console.log(current_user_id)--}}
+
+{{--            window.Echo = new Echo({--}}
+{{--                broadcaster: 'pusher',--}}
+{{--                key: '3ac4f810445d089829e8',--}}
+{{--                cluster: 'ap1',--}}
+{{--                encrypted: true,--}}
+{{--            });--}}
+
+{{--            window.Echo.private("notification." + current_user_id).listen('AlertNotification', function (e) {--}}
+{{--                console.log(123)--}}
+{{--            });--}}
+
+{{--            var channelAlertNotify = pusher.subscribe('AlertNotification');--}}
+{{--            // Bind a function to a Event (the full Laravel class)--}}
+{{--            channelAlertNotify.bind('AlertNotification', function (data) {--}}
+{{--                console.log(123)--}}
+{{--            });--}}
+
+{{--        </script>--}}
         <div class="slide-container">
             <div class="slide">
                 <img src="{{asset('img/homeNew-img/Rectangle 23820.png')}}" alt="">
@@ -1036,7 +1082,7 @@
                                                 <div class="content-pro p-md-3 p-2">
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
-                                                            <a class="name-product--fleaMarket"
+                                                            <a class="name-product--fleaMarket max-3-line-content"
                                                                href="{{ route('examination.doctor_info', $doctor->id) }}">{{$doctor->name}}</a>
                                                         </div>
                                                         <div class="location-pro d-flex">
@@ -1120,7 +1166,7 @@
                                                 <div class="content-pro p-md-3 p-2">
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
-                                                            <a class="name-product--fleaMarket"
+                                                            <a class="name-product--fleaMarket max-3-line-content"
                                                                href="{{ route('examination.doctor_info', $medicine->id) }}">{{$medicine->name}}</a>
                                                         </div>
                                                         <div class="location-pro">
@@ -1431,7 +1477,7 @@
                             <div class="content-proFlea p-md-3 p-2">
                                 <div class="">
                                     <div class="name-productFlea" style="min-height: 55px">
-                                        <a class="name-product--fleaMarket"
+                                        <a class="name-product--fleaMarket max-3-line-content"
                                            href="{{ route('flea.market.product.detail', $product->id) }}"
                                            target="_blank">{{$product->name}}</a>
                                     </div>
@@ -1510,7 +1556,7 @@
                                                     <div class="content-pro p-md-3 p-2">
                                                         <div class="">
                                                             <div class="name-product" style="min-height: 48px">
-                                                                <a class="name-product--fleaMarket"
+                                                                <a class="name-product--fleaMarket max-3-line-content"
                                                                    href="{{ route('examination.doctor_info', $product->id) }}">{{$product->name}}</a>
                                                             </div>
                                                             <div class="location-pro">
@@ -1662,7 +1708,7 @@
                                                 <div class="content-pro p-md-3 p-2">
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
-                                                            <a class="name-product--fleaMarket"
+                                                            <a class="name-product--fleaMarket max-3-line-content"
                                                                href="{{ route('examination.doctor_info', $product->id) }}">{{$product->name}}</a>
                                                         </div>
                                                         <div class="location-pro">
@@ -1739,7 +1785,7 @@
                                                 <div class="content-pro p-md-3 p-2">
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
-                                                            <a class="name-product--fleaMarket"
+                                                            <a class="name-product--fleaMarket max-3-line-content"
                                                                href="{{ route('examination.doctor_info', $product->id) }}">{{$product->name}}</a>
                                                         </div>
                                                         <div class="location-pro">
@@ -1832,7 +1878,7 @@
                                                 <div class="content-pro p-md-3 p-2">
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
-                                                            <a class="name-product--fleaMarket"
+                                                            <a class="name-product--fleaMarket max-3-line-content"
                                                                href="{{ route('examination.doctor_info', $product->id) }}">{{$product->name}}</a>
                                                         </div>
                                                         <div class="location-pro">
@@ -1925,7 +1971,7 @@
                                                 <div class="content-pro p-md-3 p-2">
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
-                                                            <a class="name-product--fleaMarket"
+                                                            <a class="name-product--fleaMarket max-3-line-content"
                                                                href="{{ route('examination.doctor_info', $product->id) }}">{{$product->name}}</a>
                                                         </div>
                                                         <div class="location-pro">

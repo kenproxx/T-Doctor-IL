@@ -130,6 +130,12 @@ class BackendCouponController extends Controller
     public function create(Request $request)
     {
         try {
+            $exitCoupons = Coupon::where('user_id', Auth::user()->id)->get();
+            foreach ($exitCoupons as $exitCoupon) {
+                if ($exitCoupon->status == CouponStatus::ACTIVE) {
+                    return response('You have an active coupon!', 400);
+                }
+            }
             $coupon = new Coupon();
 
             $this->saveCoupon($coupon, $request);

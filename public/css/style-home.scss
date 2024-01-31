@@ -27,7 +27,7 @@
 
 @media (min-width: 780px) {
     .container {
-        max-width: 1440px;
+        //max-width: 1440px;
         width: 100%;
 
         .item-information, #find-doctor--homeNew, .align-center {
@@ -853,7 +853,13 @@
         display: flex;
         align-items: center;
     }
+}
 
-
-
+.max-3-line-content {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 70px;
 }
