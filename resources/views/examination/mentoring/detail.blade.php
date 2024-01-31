@@ -2,6 +2,11 @@
 @extends('layouts.master')
 @section('title', 'Home')
 @section('content')
+    <style>
+        .tox.tox-tinymce {
+            width: 100%;
+        }
+    </style>
     <link href="{{ asset('css/detail.css') }}" rel="stylesheet">
     @include('layouts.partials.header_3')
     @include('component.banner')
@@ -136,11 +141,7 @@
                             </p>
                         </div>
                     </div>
-                    <style>
-                        .tox.tox-tinymce {
-                            width: 100%;
-                        }
-                    </style>
+
                     <div class="div-5" id="reply-comment-{{ $index }}" style="display: none">
                         <div class="frame-wrapper">
                             <div class="div-6 w-100">
@@ -169,43 +170,48 @@
                     </style>
                     <div class="div-5 justify-content-end" id="button-reply-comment-{{ $index }}">
                         @php
-                        $infoDoctorAnswer = User::where('id', $answer->user_id)->first();
+                            $infoDoctorAnswer = User::where('id', $answer->user_id)->first();
 
-                        $checkCallDoctor = \App\Models\Question::where('id', $question->id)->first();
-                        $userCheck = \App\Models\User::where('id', $checkCallDoctor->user_id)->first();
-                            $checkLike = \App\Models\Answer::where('id', $answer->id)->get();
-                            if ($checkLike) {
-                                $checkLikes = $answer->likes;
+                            $checkCallDoctor = \App\Models\Question::where('id', $question->id)->first();
+                            $userCheck = \App\Models\User::where('id', $checkCallDoctor->user_id)->first();
+                                $checkLike = \App\Models\Answer::where('id', $answer->id)->get();
+                                if ($checkLike) {
+                                    $checkLikes = $answer->likes;
+                                }
+                                else {
+                                    $checkLikes = 0;
+                                }
+                            $isLikes = \App\Models\AnswerLike::where('answer_id', $answer->id)
+                            ->where('user_id', Auth::user()->id ?? '')
+                            ->where('is_like', 1)
+                            ->first();
+                            if ($isLikes) {
+                                $isLike = 'blue';
                             }
                             else {
-                                $checkLikes = 0;
+                                $isLike = 'grey';
                             }
-                        $isLikes = \App\Models\AnswerLike::where('answer_id', $answer->id)
-                        ->where('user_id', Auth::user()->id ?? '')
-                        ->where('is_like', 1)
-                        ->first();
-                        if ($isLikes) {
-                            $isLike = 'blue';
-                        }
-                        else {
-                            $isLike = 'grey';
-                        }
                         @endphp
                         @if(Auth::check())
-                            <div class="like-cmt"><a
-                                    onclick="updateLikeCmt('{{ Auth::user()->id }}', '{{ $answer->id }}')"><i id="fa-solid-{{$answer->id}}"
-                                        class="fa-solid fa-thumbs-up {{$isLike}}"></i></a>{{$checkLikes}}</div>
-                            @if(Auth::user()->id == $userCheck->id)
+                            <div class="like-cmt d-flex">
+                                <a onclick="updateLikeCmt('{{ Auth::user()->id }}', '{{ $answer->id }}' , '{{ $index }}')">
+                                    <i id="fa-solid-{{$answer->id}}" class="fa-solid fa-thumbs-up {{$isLike}}"></i>
+                                </a>
+                                <div class="like-count-{{ $index }}">
+                                    {{$checkLikes}}
+                                </div>
+                            </div>
+                            @if(Auth::user()->id == $userCheck->id && $infoDoctorAnswer != null)
                                 <div id="opt_btn" class="d-flex justify-content-between justify-content-md-center">
-                                    <a onclick="handleStartChatWithDoctor('{{ $infoDoctorAnswer->id }}')">
-                                        <button>{{ __('home.Chat') }}</button>
+                                    <a onclick="handleStartChatWithDoctor('{{ $infoDoctorAnswer->id }}')" class="mr-2">
+                                        <button class="p-1">{{ __('home.Chat') }}</button>
                                     </a>
                                     <form method="post" action="{{ route('createMeeting') }}" target="_blank">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="user_id_1"
                                                value="@if(Auth::check()) {{ Auth::user()->id }} @endif">
                                         <input type="hidden" name="user_id_2" value="{{ $infoDoctorAnswer->id }}">
-                                        <button type="submit">{{ __('home.Videocall') }}</button>
+                                        <button class="p-1" type="submit">{{ __('home.Videocall') }}</button>
                                     </form>
                                 </div>
                             @endif
@@ -435,8 +441,7 @@
 
     </script>
     <script>
-        async function updateLikeCmt(user, answer) {
-            console.log(user, answer)
+        async function updateLikeCmt(user, answer, idComment) {
             loadingMasterPage();
             let url = '{{ route('api.backend.like.answer') }}';
             const headers = {
@@ -448,7 +453,7 @@
             formData.append("answer_id", answer);
 
             try {
-                await $.ajax({
+                const response = await $.ajax({
                     url: url,
                     method: 'POST',
                     headers: headers,
@@ -456,26 +461,19 @@
                     cache: false,
                     data: formData,
                     processData: false,
-                    success: function (data) {
-
-                        // let heartIcon = $('#fa-solid-' + id);
-                        // if (data.isFavourite == true) {
-                        //     heartIcon.removeClass('gray');
-                        //     heartIcon.addClass('blue');
-                        // } else {
-                        //     heartIcon.removeClass('blue');
-                        //     heartIcon.addClass('gray');
-                        // }
-                        loadingMasterPage();
-                    },
-                    error: function (exception) {
-                        loadingMasterPage();
-                    }
                 });
+
+                if (response.message === 'Success!') {
+                    $('.like-cmt').find(`.like-count-${idComment}`).text(response.data);
+                    $('#fa-solid-'+answer).toggleClass('grey');
+                    $('#fa-solid-'+answer).toggleClass('blue');
+                }
             } catch (error) {
+                console.error('Error:', error);
+            } finally {
                 loadingMasterPage();
             }
-
         }
+
     </script>
 @endsection

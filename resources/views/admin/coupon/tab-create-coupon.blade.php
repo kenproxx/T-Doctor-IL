@@ -169,8 +169,11 @@
                                 window.location.href = '{{ route('homeAdmin.list.coupons') }}'
                             },
                             error: function (exception) {
-                                console.log(exception);
-                                alert('Create error!');
+                                if (exception.status === 400) {
+                                    toastr.error(exception.responseText, 'Error');
+                                } else {
+                                    toastr.error('Create error, Please try again!', 'Error');
+                                }
                             }
                         });
                     } catch (error) {

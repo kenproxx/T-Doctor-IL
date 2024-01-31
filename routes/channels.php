@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('messages.{id}', function ($user, $id) {
     return $user->id == (int) $id;
 });
+Broadcast::channel('notification.{id}', function ($user, $id) {
+    return $user->id == (int) $id;
+});

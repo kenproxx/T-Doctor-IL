@@ -46,6 +46,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.textcomplete/1.8.0/jquery.textcomplete.js"></script>
+    @includeWhen(Auth::check(),'components.head.chat-message' )
 
 </head>
 
@@ -159,7 +160,6 @@
 </body>
 @include('components.head.tinymce-config')
 
-@includeWhen(Auth::check(),'components.head.chat-message' )
 
 <script>
     function loadingMasterPage() {

@@ -10,7 +10,6 @@
 }
 @media (min-width: 780px) {
   .container {
-    max-width: 1440px;
     width: 100%;
   }
   .container .item-information .nav-header--homeNew ul.nav-fill, .container #find-doctor--homeNew .nav-header--homeNew ul.nav-fill, .container .align-center .nav-header--homeNew ul.nav-fill {
