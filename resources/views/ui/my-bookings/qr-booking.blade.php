@@ -11,10 +11,10 @@
             {{--                <i class="fa-solid fa-download"></i>--}}
             {{--                Download now--}}
             {{--            </a>--}}
-            <button class="btn btn-outline-success" id="btnDownload2" onclick="download();">
-                <i class="fa-solid fa-download"></i>
-                Download now
-            </button>
+{{--            <button class="btn btn-outline-success" id="btnDownload2" onclick="download();">--}}
+{{--                <i class="fa-solid fa-download"></i>--}}
+{{--                Download now--}}
+{{--            </button>--}}
         </div>
         <div class="d-flex align-items-center justify-content-center" id="htmlContent">
             {!! $qrCodes !!}

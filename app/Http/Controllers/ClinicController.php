@@ -9,6 +9,7 @@ use App\Enums\ReviewStatus;
 use App\Enums\ServiceClinicStatus;
 use App\Enums\SymptomStatus;
 use App\Enums\TypeUser;
+use App\Http\Controllers\restapi\MainApi;
 use App\Models\Booking;
 use App\Models\Clinic;
 use App\Models\Department;
@@ -129,6 +130,11 @@ class ClinicController extends Controller
                 $booking = new Booking();
 
                 $booking = $this->createBooking($request, $booking);
+                $user = User::find($booking->user_id);
+                if (!$user || $user->type == 'MEDICAL' || $user->type == 'BUSINESS') {
+                    alert()->error('Error', 'Not permission!');
+                    return back();
+                }
                 $success = $booking->save();
 
                 $bookingId = $booking->id;

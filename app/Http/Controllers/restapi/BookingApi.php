@@ -45,6 +45,11 @@ class BookingApi extends Controller
                 return response((new MainApi())->returnMessage('Not found!'), 404);
             }
 
+            $user = User::find($booking->user_id);
+            if (!$user || $user->type == 'MEDICAL' || $user->type == 'BUSINESS') {
+                return response((new MainApi())->returnMessage('Not permission!'), 400);
+            }
+
             $success = $booking->save();
 
             $department = $clinic->department;
