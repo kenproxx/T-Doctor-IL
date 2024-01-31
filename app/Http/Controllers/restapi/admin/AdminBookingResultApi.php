@@ -123,7 +123,7 @@ class AdminBookingResultApi extends Controller
 
     private function store($request, $result)
     {
-        $service_name = $request->input('service_result');
+        $service_name = $request->input('service_result') ?? '';
 
         $code = $request->input('code');
         if (!$code) {
