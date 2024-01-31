@@ -20,7 +20,8 @@
                 <th scope="col">{{ __('home.Người đăng ký') }}</th>
                 <th scope="col">{{ __('home.clinics') }}</th>
                 <th scope="col">{{ __('home.giờ vào') }}</th>
-                <th scope="col">{{ __('home.dịch vụ') }}</th>
+                <th scope="col">{{ __('home.Department') }}</th>
+                <th scope="col">{{ __('home.Doctor Name') }}</th>
                 <th scope="col">{{ __('home.Trạng thái') }}</th>
                 <th scope="col">{{ __('home.Thao tác') }}</th>
             </tr>
@@ -41,11 +42,11 @@
                     </td>
                     <td>{{$item->check_in}} </td>
                     @php
-                        $service_name = explode(',', $item->service);
-                        $services = \App\Models\ServiceClinic::whereIn('id', $service_name)->get();
-                        $service_names = $services->pluck('name')->implode(', ');
+                        $doctor = \App\Models\User::find($item->doctor_id);
+                        $department = \App\Models\Department::find($item->department_id);
                     @endphp
-                    <td>{{$service_names}}</td>
+                    <td>{{$department ? $department->name : ''}}</td>
+                    <td>{{$doctor ? $doctor->username : ''}} - {{$doctor ? $doctor->email : ''}}</td>
                     <td>{{$item->status}}</td>
                     <td class="d-flex">
                         <form action="{{ route('web.booking.result.list', $item->id) }}" method="get">

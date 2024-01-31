@@ -9,7 +9,7 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">{{ __('home.ServiceName') }}</th>
+                <th scope="col">{{ __('home.Department') }}</th>
                 <th scope="col">{{ __('home.Code') }}</th>
                 <th scope="col">{{ __('home.CreatedBy') }}</th>
                 <th scope="col">{{ __('home.BusinessName') }}</th>
@@ -22,22 +22,13 @@
                 <tr>
                     <th scope="row"> {{ $loop->index + 1 }}</th>
                     @php
-                        $list_service = $result->service_name;
-                        $array_service = explode(',', $list_service);
-                        $services = \App\Models\ServiceClinic::whereIn('id', $array_service)
-                            ->where('status', \App\Enums\ServiceClinicStatus::ACTIVE)
-                            ->get();
-                        $service_name = null;
-                        foreach ($services as $item){
-                            if ($service_name){
-                                $service_name = $service_name . ', ' . $item->name;
-                            } else {
-                                $service_name = $item->name;
-                            }
-                        }
+                        $booking = \App\Models\Booking::find($result->booking_id);
+                        $business = \App\Models\Clinic::find($booking->clinic_id);
+
+                        $department = \App\Models\Department::find($booking->department_id);
                     @endphp
                     <td>
-                        {{ $service_name }}
+                        {{ $department ? $department->name : '' }}
                     </td>
                     <td>
                         {{ $result->code }}
@@ -50,10 +41,6 @@
                             {{ $created_by->username }}
                         @endif
                     </td>
-                    @php
-                        $booking = \App\Models\Booking::find($result->booking_id);
-                        $business = \App\Models\Clinic::find($booking->clinic_id);
-                    @endphp
                     <td>
                         @if($business)
                             {{ $business->name }}
@@ -65,7 +52,8 @@
                     <td>
                         <div class="d-flex align-items-center">
                             <div class="list-action d-flex align-items-center">
-                                <a href="{{ route('web.booking.result.list.prescriptions', $result->id) }}" class="btn btn-secondary">
+                                <a href="{{ route('web.booking.result.list.prescriptions', $result->id) }}"
+                                   class="btn btn-secondary">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
                             </div>

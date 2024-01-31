@@ -36,11 +36,10 @@ class BookingResultController extends Controller
         if (!$result || $result->status == BookingResultStatus::DELETED) {
             return back();
         }
-        $services = ServiceClinic::where('status', ServiceClinicStatus::ACTIVE)->get();
 
         $value_result = '[' . $result->result . ']';
         $array_result = json_decode($value_result, true);
-        return view('admin.booking.detail-booking-result', compact('result', 'services', 'array_result'));
+        return view('admin.booking.detail-booking-result', compact('result',  'array_result'));
     }
 
     public function getListProduct($id)

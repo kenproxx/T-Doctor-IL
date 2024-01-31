@@ -9,14 +9,14 @@
               enctype="multipart/form-data">
             @csrf
             <div class="row">
-                <div class="col-md-4 form-group">
+                <div class="col-md-3 form-group">
                     <label for="user">{{ __('home.Tên người đăng ký') }}</label>
                     @php
-                        $user_name = \Illuminate\Foundation\Auth\User::where('id',$bookings_edit->user_id)->value('name');
+                        $user_name = \App\Models\User::where('id',$bookings_edit->user_id)->value('name');
                     @endphp
                     <input type="text" class="form-control" id="user" name="user" value="{{$user_name}}" disabled>
                 </div>
-                <div class="col-md-4 form-group">
+                <div class="col-md-3 form-group">
                     <label for="clinic_id">{{ __('home.BusinessName') }}</label>
                     @php
                         $clinic_name = \App\Models\Clinic::where('id',$bookings_edit->clinic_id)->value('name');
@@ -24,36 +24,22 @@
                     <input type="text" class="form-control" id="user" name="clinic_id" value="{{$clinic_name}}"
                            disabled>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="service_text">{{ __('home.dịch vụ') }}</label>
-                    <input type="text" class="form-control" id="service_text" name="service_text" disabled>
+                <div class="col-md-3 form-group">
+                    <label for="department_id">{{ __('home.Department') }}</label>
                     @php
-                        $arrayService = explode(',', $bookings_edit->service);
-                        $list_service_name = \App\Models\ServiceClinic::whereIn('id', $arrayService)
-                            ->where('status', \App\Enums\ServiceClinicStatus::ACTIVE)
-                            ->get();
-                        $names = null;
-                        foreach ($list_service_name as $item){
-                            if ($names){
-                                $names = $names .','. $item->name;
-                            } else {
-                                $names = $item->name;
-                            }
-                        }
+                        $department = \App\Models\Department::find($bookings_edit->department_id);
                     @endphp
-                    <ul class="list-service " style="list-style: none; padding-left: 0">
-                        @foreach($services as $service)
-                            <li class="new-select">
-                                <input disabled onchange="getInputService();" class="service_item"
-                                       value="{{$service->id}}"
-                                       id="service_{{$service->id}}"
-                                       {{ in_array($service->id, $arrayService) ? 'checked' : '' }}
-                                       name="service_item"
-                                       type="checkbox">
-                                <label for="service_{{$service->id}}">{{$service->name}}</label>
-                            </li>
-                        @endforeach
-                    </ul>
+                    <input type="text" class="form-control" id="department_id" name="department_id"
+                           value="{{$department ? $department->name : ''}}" disabled>
+                </div>
+                <div class="col-md-3 form-group">
+                    <label for="doctor_id">{{ __('home.Doctor Name') }}</label>
+                    @php
+                        $doctor = \App\Models\User::where('id',$bookings_edit->doctor_id)->first();
+                    @endphp
+                    <input type="text" class="form-control" id="doctor_id" name="doctor_id"
+                           value="{{$doctor->username}}-{{$doctor->email}}"
+                           disabled>
                 </div>
             </div>
             <div class="row">
@@ -359,7 +345,7 @@
             $('#service_result').val(value);
         }
 
-        getInputServiceName();
+        // getInputServiceName();
     </script>
     <script>
         let accessToken = `Bearer ` + token;
@@ -418,7 +404,7 @@
                     let result_laos = result_laos_list[j].value;
                     let service_result = service_result_list[j].value;
 
-                    if (!result || !result_en || !result_laos || !service_result) {
+                    if (!result || !result_en || !result_laos) {
                         isValid = false;
                     }
 
@@ -432,7 +418,7 @@
                         result: result,
                         result_en: result_en,
                         result_laos: result_laos,
-                        service_result: service_result,
+                        service_result: total_service,
                     }
                     item = JSON.stringify(item);
                     my_array.push(item);
@@ -511,28 +497,12 @@
     </script>
     <script>
         let html = `<div class="service-result-item d-flex align-items-center justify-content-between border p-3">
-                                <div class="service-result">
-                                    <div class="form-group">
-                                        <label for="service_name">{{ __('home.Service Name') }}</label>
-                                        <input type="text" class="form-control" id="service_name" disabled value="{{ $names }}"
-                                               placeholder="Apartment, studio, or floor">
-                                        <ul class="list-service" style="list-style: none; padding-left: 0">
-                                            @foreach($services as $service)
-        <li class="new-select">
-            <input class="service_name_item" data-name="{{$service->name}}"
-                   value="{{$service->id}}" {{ in_array($service->id, $arrayService) ? 'checked' : '' }}
-        name="service_name_item"
-        type="checkbox">
- <label>{{$service->name}}</label>
-                                                                                        </li>
-                                                                                    @endforeach
-        </ul>
-        <div class="d-none">
-            <label for="service_result">{{ __('home.Service Result') }}</label>
+    <div class="row">
+     <div class="form-group">
+            <label for="service_result">{{ __('home.Service Name') }}</label>
             <input type="text" class="form-control service_result" value="{{$bookings_edit->service}}" id="service_result" name="service_result">
         </div>
-    </div>
-    <div class="form-group">
+<div class="form-group">
         <label for="result">{{ __('home.Result') }}</label>
         <input type="text" class="form-control result" id="result" placeholder="{{ __('home.Result') }}">
     </div>
@@ -545,7 +515,7 @@
         <input type="text" class="form-control result_laos" id="result_laos" placeholder="{{ __('home.Result Laos') }}">
     </div>
 </div>
-<div class="action">
+<div class="action mt-3">
     <i class="fa-regular fa-trash-can btnTrash" style="cursor: pointer; font-size: 24px"></i>
 </div>
 </div>`;

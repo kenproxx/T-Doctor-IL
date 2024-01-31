@@ -6,50 +6,16 @@
     <div class="container-fluid">
         <h1 class="h3 mb-4 text-gray-800">{{ __('home.Detail Result') }}</h1>
         <form>
-            @php
-                $arrayServiceName = explode(',', $result->service_name);
-                $list_service_name = \App\Models\ServiceClinic::whereIn('id', $arrayServiceName)
-                    ->where('status', \App\Enums\ServiceClinicStatus::ACTIVE)
-                    ->get();
-                $names = null;
-                foreach ($list_service_name as $item){
-                    if ($names){
-                        $names = $names .','. $item->name;
-                    } else {
-                        $names = $item->name;
-                    }
-                }
-            @endphp
             <div class="list-service-result mt-2 mb-3">
                 <div id="list-service-result">
                     @foreach($array_result as $item)
                         <div class="service-result-item d-flex align-items-center justify-content-between border p-3">
                             <div class="service-result w-75">
                                 <div class="form-group">
-                                    <label for="service_name">{{ __('home.Service Name') }}</label>
-                                    <input type="text" class="form-control" id="service_name" disabled
-                                           placeholder="Apartment, studio, or floor">
-                                    <ul class="list-service" style="list-style: none; padding-left: 0">
-                                        @php
-                                            $arrayService = explode(',', $item['service_result'])
-                                        @endphp
-                                        @foreach($services as $service)
-                                            <li class="new-select">
-                                                <input class="service_name_item" data-name="{{$service->name}}"
-                                                       value="{{$service->id}}"
-                                                       {{ in_array($service->id, $arrayService) ? 'checked' : '' }}
-                                                       name="service_name_item"
-                                                       type="checkbox">
-                                                <label>{{$service->name}}</label>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                    <div class="d-none">
-                                        <label for="service_result">{{ __('home.Service Result') }}</label>
-                                        <input type="text" value="{{ $item['service_result'] }}"
-                                               class="form-control service_result" id="service_result"
-                                               name="service_result">
-                                    </div>
+                                    <label for="service_result">{{ __('home.Service Name') }}</label>
+                                    <input type="text" value="{{ $item['service_result'] }}"
+                                           class="form-control service_result" id="service_result"
+                                           name="service_result">
                                 </div>
                                 <div class="form-group">
                                     <label for="result">{{ __('home.Result') }}</label>
@@ -75,7 +41,8 @@
                         </div>
                     @endforeach
                 </div>
-                <button type="button" class="btn btn-outline-primary mt-3 btnAddNewResult">{{ __('home.Add new result') }}
+                <button type="button"
+                        class="btn btn-outline-primary mt-3 btnAddNewResult">{{ __('home.Add new result') }}
                 </button>
             </div>
 
@@ -228,7 +195,7 @@
             $('#service_result').val(value);
         }
 
-        getInputServiceName();
+        // getInputServiceName();
     </script>
     <script>
         let accessToken = `Bearer ` + token;
@@ -361,29 +328,12 @@
     </script>
     <script>
         let html = `<div class="service-result-item d-flex align-items-center justify-content-between border p-3">
-                                <div class="service-result">
-                                    <div class="form-group">
-                                        <label for="service_name">{{ __('home.Service Name') }}</label>
-                                        <input type="text" class="form-control" id="service_name" disabled
-                                               placeholder="{{ __('home.Apartment, studio, or floor') }}" value="{{ $names }}">
-                                        <ul class="list-service" style="list-style: none; padding-left: 0">
-                                            @foreach($services as $service)
-        <li class="new-select">
-            <input class="service_name_item" data-name="{{$service->name}}"
-                   value="{{$service->id}}" {{ in_array($service->id, $arrayService) ? 'checked' : '' }}
-        name="service_name_item"
-        type="checkbox">
- <label>{{$service->name}}</label>
-                                                                                        </li>
-                                                                                    @endforeach
-        </ul>
-        <div class="d-none">
-            <label for="service_result">{{ __('home.Service Result') }}</label>
-            <input type="text" class="form-control service_result" value="{{$result->service_name}}"
-                id="service_result" name="service_result">
+    <div class="row">
+     <div class="form-group">
+            <label for="service_result">{{ __('home.Service Name') }}</label>
+            <input type="text" class="form-control service_result" value="" id="service_result" name="service_result">
         </div>
-    </div>
-    <div class="form-group">
+<div class="form-group">
         <label for="result">{{ __('home.Result') }}</label>
         <input type="text" class="form-control result" id="result" placeholder="{{ __('home.Result') }}">
     </div>
@@ -396,7 +346,7 @@
         <input type="text" class="form-control result_laos" id="result_laos" placeholder="{{ __('home.Result Laos') }}">
     </div>
 </div>
-<div class="action">
+<div class="action mt-3">
     <i class="fa-regular fa-trash-can btnTrash" style="cursor: pointer; font-size: 24px"></i>
 </div>
 </div>`;
