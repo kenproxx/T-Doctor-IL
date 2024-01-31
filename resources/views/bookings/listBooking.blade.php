@@ -143,7 +143,7 @@
     });
 
     async function checkDelete(id) {
-        let confirmed = confirm('Are you sure you want to delete this item?');
+        let confirmed = confirm('Are you sure?');
 
         if (confirmed) {
             loadingMasterPage();
