@@ -27,17 +27,18 @@
             </div>
         </div>
         @php
-            $service = $booking->service;
-            $array_service = explode(',', $service);
-            $services = \App\Models\ServiceClinic::whereIn('id', $array_service)
-                            ->where('status', \App\Enums\ServiceClinicStatus::ACTIVE)
-                            ->pluck('name')
-                            ->toArray();
-            $list_name = implode(',', $services);
+            $department = \App\Models\Department::find($booking->department_id);
+            $doctor = \App\Models\User::find($booking->doctor_id);
         @endphp
-        <div class="form-group">
-            <label for="service">Service</label>
-            <input disabled type="text" class="form-control" id="service" value="{{ $list_name }}">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="department_id">Department</label>
+                <input disabled type="text" class="form-control" id="department_id" value="{{ $department->name }}">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="doctor_id">Doctor Name</label>
+                <input disabled type="text" class="form-control" id="doctor_id" value="{{ $doctor->username }}">
+            </div>
         </div>
         <div class="form-group">
             <label for="medical_history">Medical History</label>
