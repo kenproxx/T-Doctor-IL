@@ -645,5 +645,13 @@
     align-items: center;
   }
 }
+.max-3-line-content {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 70px;
+}
 
 /*# sourceMappingURL=style-home.css.map */
