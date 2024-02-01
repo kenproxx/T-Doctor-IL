@@ -61,7 +61,7 @@ class CouponController extends Controller
         }
     }
 
-    public function getListCoupon($user_id = null)
+    public function getListCoupon($user_id = null, $status = null)
     {
         $isAdmin = User::isAdmin($user_id);
 
@@ -73,19 +73,31 @@ class CouponController extends Controller
             if (!$clinic) {
                 return response((new MainApi())->returnMessage("Clinic not found"), 404);
             }
-            $coupons = Coupon::where('clinic_id', $clinic->id)->get();
+            $coupons = Coupon::where('clinic_id', $clinic->id);
         }
+
+        if ($status) {
+            $coupons = $coupons->where('status', $status);
+        }
+
+        $coupons = $coupons->get();
 
         return response()->json($coupons);
     }
 
-    public function getListCouponApplied($user_id = null)
+    public function getListCouponApplied($user_id = null, $status = null)
     {
         if ($user_id) {
-            $listCoupon = CouponApply::where('user_id', $user_id)->get();
+            $listCoupon = CouponApply::where('user_id', $user_id);
         } else {
-            $listCoupon = CouponApply::where('user_id', Auth::user()->id)->get();
+            $listCoupon = CouponApply::where('user_id', Auth::user()->id);
         }
+
+        if ($status) {
+            $listCoupon = $listCoupon->where('status', $status);
+        }
+
+        $listCoupon = $listCoupon->get();
 
         return response()->json($listCoupon);
     }
