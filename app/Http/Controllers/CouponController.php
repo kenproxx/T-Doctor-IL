@@ -10,6 +10,7 @@ use App\Models\CouponApply;
 use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CouponController extends Controller
@@ -108,4 +109,26 @@ class CouponController extends Controller
 
         return response()->json($listCoupon);
     }
+
+    public function getListUserAppliedCoupon(Request $request)
+    {
+        $status = $request->status;
+        $coupon_id = $request->coupon_id;
+
+        if (!$coupon_id) {
+            return response((new MainApi())->returnMessage("Coupon not found"), 404);
+        }
+
+        $listCoupon = CouponApply::where('coupon_id', $coupon_id);
+
+        if ($status) {
+            $listCoupon = $listCoupon->where('status', $status);
+        }
+
+
+        $listCoupon = $listCoupon->get();
+
+        return response()->json($listCoupon);
+    }
+
 }

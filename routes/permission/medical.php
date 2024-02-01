@@ -29,6 +29,7 @@ use App\Http\Controllers\restapi\admin\AdminPhamacitisApi;
 use App\Http\Controllers\restapi\admin\AdminPharmacyApi;
 use App\Http\Controllers\restapi\admin\AdminShortVideoApi;
 use App\Http\Controllers\restapi\admin\AdminSymptomsApi;
+use App\Http\Controllers\restapi\ui\MyMedicalApi;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
@@ -88,6 +89,7 @@ Route::group(['prefix' => 'coupon'], function () {
     Route::put('update/{id}', [CouponController::class, 'update'])->name('coupon.update');
     Route::get('get/{user_id?}/{status?}', [CouponController::class, 'getListCoupon'])->name('coupon.get');
     Route::get('get-applied/{user_id?}/{status?}', [CouponController::class, 'getListCouponApplied'])->name('coupon.get.applied');
+    Route::get('get-user-applied-by-coupon', [CouponController::class, 'getListUserAppliedCoupon'])->name('coupon.get.user.applied.by.coupon');
 });
 
 Route::group(['prefix' => 'doctor'], function () {
@@ -320,4 +322,10 @@ Route::group(['prefix' => 'medical-results'], function () {
     Route::post('/create', [AdminMedicalResultApi::class, 'create'])->name('api.medical.medical.result.create');
     Route::post('/update/{id}', [AdminMedicalResultApi::class, 'update'])->name('api.medical.medical.result.update');
     Route::get('/detail/{id}', [AdminMedicalResultApi::class, 'detail'])->name('api.medical.medical.result.detail');
+});
+
+/* My Medical api */
+Route::group(['prefix' => 'my-medical'], function () {
+    Route::post('update', [MyMedicalApi::class, 'updateMedical'])->name('api.backend.my.medical.update');
+    Route::get('show', [MyMedicalApi::class, 'showMedical'])->name('api.backend.my.medical.show');
 });

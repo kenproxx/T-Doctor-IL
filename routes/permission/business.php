@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\backend\BackendCategoryController;
 use App\Http\Controllers\backend\BackendNewEventController;
+use App\Http\Controllers\restapi\ui\MyBusinessApi;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::group(['prefix' => 'new-event'], function () {
     Route::get('index', [BackendNewEventController::class, 'index'])->name('api.new-event.index');
     Route::get('create', [BackendNewEventController::class, 'create'])->name('api.new-event.create');
@@ -32,6 +34,10 @@ Route::group(['prefix' => 'categories'], function () {
     Route::delete('/delete/{id}', [BackendCategoryController::class, 'delete'])->name('api.business.categories.delete');
 });
 
-
+/* My Business api */
+Route::group(['prefix' => 'my-business'], function () {
+    Route::post('update', [MyBusinessApi::class, 'updateBusiness'])->name('api.backend.my.business.update');
+    Route::get('show', [MyBusinessApi::class, 'showBusiness'])->name('api.backend.my.business.show');
+});
 
 
