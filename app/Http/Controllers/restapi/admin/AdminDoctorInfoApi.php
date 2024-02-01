@@ -263,6 +263,7 @@ class AdminDoctorInfoApi extends Controller
 
         $doctor->department_id = $department_id;
         $doctor->symptom_id = $symptom_id;
+        $doctor->identifier = $request->input('identifier') ?? null;
         return $doctor->save();
     }
 

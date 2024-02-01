@@ -3,11 +3,11 @@
 <link href="{{ asset('css/header.css') }}" rel="stylesheet">
 <link href="{{ asset('css/loginNew.css') }}" rel="stylesheet">
 
-<style>
-    .main-header {
-        z-index: 2 !important;
-    }
-</style>
+{{--<style>--}}
+{{--    /*.main-header {*/--}}
+{{--    /*    z-index: 2 !important;*/--}}
+{{--    /*}*/--}}
+{{--</style>--}}
 
 <header class="container">
     <div class="main-header">
@@ -379,6 +379,11 @@
                                                 <label for="name_doctor">{{ __('home.Name') }}</label>
                                                 <input type="text" id="name_doctor" name="name_doctor"
                                                        placeholder="{{ __('home.Name') }}">
+                                            </div>
+                                            <div class="mt-3">
+                                                <label for="identifier">{{ __('home.Mã định danh trên giấy hành nghề') }}</label>
+                                                <input type="text" id="identifier" name="identifier"
+                                                       placeholder="{{ __('home.Mã định danh trên giấy hành nghề') }}">
                                             </div>
                                             <div class="mt-3">
                                                 <label for="contact_phone">{{ __('home.CONTACT INFO') }}</label>
@@ -934,6 +939,7 @@
             if (value == '{{Role::MEDICAL}}') {
                 $('#element-doctor').show();
                 $('#name_doctor').attr('required', true);
+                $('#identifier').attr('required', true);
                 $('#contact_phone').attr('required', true);
                 $('#experience').attr('required', true);
                 $('#hospital').attr('required', true);
@@ -944,6 +950,7 @@
             } else {
                 $('#element-doctor').hide();
                 $('#name_doctor').attr('required', false);
+                $('#identifier').attr('required', false);
                 $('#contact_phone').attr('required', false);
                 $('#experience').attr('required', false);
                 $('#hospital').attr('required', false);

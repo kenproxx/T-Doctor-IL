@@ -60,6 +60,7 @@ class VerifyCsrfToken extends Middleware
         '/api/business-favourites/**',
         '/api/medical-favourites/**',
         '/api/mentorings/**',
+        '/api/prescription-result/**',
         '/orders/**',
         '/booking-result/**',
         'auth/*',
