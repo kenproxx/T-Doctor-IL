@@ -1,8 +1,8 @@
-@php use App\Http\Controllers\MainController; @endphp
-@php use App\Models\User; @endphp
-@php use App\Models\online_medicine\CategoryProduct; @endphp
-@php use Illuminate\Support\Facades\Auth; @endphp
-@php use App\Enums\TypeProductCart; @endphp
+@php use App\Enums\TypeProductCart;use App\Http\Controllers\MainController;use App\Models\online_medicine\CategoryProduct;use App\Models\User;use Illuminate\Support\Facades\Auth; @endphp
+@php @endphp
+@php @endphp
+@php @endphp
+@php @endphp
 @extends('layouts.master')
 @section('title', 'Online Medicine')
 @section('content')
@@ -43,7 +43,8 @@
             <div class="row recruitment-details--content">
                 <div class="col-md-8 recruitment-details ">
                     @if(!empty($medicine->thumbnail))
-                        <div class="d-flex justify-content-center border-radius-1px color-Grey-Dark col-10 col-md-12 p-0">
+                        <div
+                            class="d-flex justify-content-center border-radius-1px color-Grey-Dark col-10 col-md-12 p-0">
                             <img src="{{asset($medicine->thumbnail)}}" alt="show"
                                  class="main col-10 col-md-12 p-0">
                         </div>
@@ -52,17 +53,17 @@
                              class="main col-10 col-md-12">
                         <p>{{ __('home.No Thumbnail Available') }}</p>
                     @endif
-                        @php
-                            $gallery = $medicine->gallery;
-                            $arrayGallery = explode(',', $gallery);
-                        @endphp
+                    @php
+                        $gallery = $medicine->gallery;
+                        $arrayGallery = explode(',', $gallery);
+                    @endphp
                     <div class="list col-2 col-md-12 mt-md-3">
                         @foreach($arrayGallery as $pr_gallery)
                             <div
                                 class="item-detail d-flex justify-content-center  border-radius-1px color-Grey-Dark mr-md-3">
-                                <img  src="{{asset($pr_gallery)}}"
-                                      alt=""
-                                      class="border mw-140px gallery-detail">
+                                <img src="{{asset($pr_gallery)}}"
+                                     alt=""
+                                     class="border mw-140px gallery-detail">
                             </div>
                         @endforeach
                     </div>
@@ -73,12 +74,34 @@
                             <p class="text-wrapper">{{ $medicine->name }}</p>
                             <div
                                 class="price">{{number_format($medicine->price, 0, ',', '.') }} {{$medicine->price_unit ?? 'VND'}}</div>
+                            @php
+                                $user = User::find($medicine->user_id);
+                                $clinic = \App\Models\Clinic::where('user_id', $user->id)->first();
+                                $address = explode(',', $clinic->address);
+                                $addressC = null;
+                                $addressD = null;
+                                $addressP = null;
+
+                                if ($address[count($address) - 1] != ""){
+                                $addressC = \App\Models\Commune::where('id', $address[count($address) - 1])->first()->name;
+                                }
+                                if ($address[count($address) - 2] != ""){
+                                $addressD = \App\Models\District::where('id', $address[count($address) - 2])->first()->name;
+                                }
+                                if ($address[count($address) - 3] != ""){
+                                $addressP = \App\Models\Province::where('id', $address[count($address) - 3])->first()->name;
+                                }
+                                if ($addressC != null && $addressD != null && $addressP != null){
+                                $addressAll =$clinic->address_detail . ' , ' . $addressC . ', ' . $addressD . ', ' . $addressP;
+                                }
+                            @endphp
                             <div class="brand-name d-flex">
-                                <div class="text-wrapper-2">{{ __('home.Location') }}:</div>
-                                @php
-                                    $user = User::find($medicine->user_id)
-                                @endphp
-                                <div class="text-wrapper-3">{{ $user->address_code ?? '' }}</div>
+                                <div class="text-wrapper-2">{{ __('home.Name Pharmacy') }} :&nbsp;<b
+                                        class="text-wrapper-3 text-black">{{ $clinic->name ?? ''}}</b></div>
+                            </div>
+                            <div class="brand-name d-flex">
+                                <div class="text-wrapper-2">{{ __('home.Location') }}:&nbsp;<b
+                                        class="text-wrapper-3 text-black">{{ $addressAll ?? 'Toàn quốc' }}</b></div>
                             </div>
                             <div class="brand-name d-flex">
                                 <div class="text-wrapper-2">{{ __('home.Category') }}:</div>
@@ -118,10 +141,13 @@
                             </div>
                             <div class="col-6">
                                 @if(Auth::check())
+                                    <button id="btnBuyNow"
+                                            class=" button-buyNow btn btn-primary w-100">{{ __('home.Buy now') }}</button>
                                     <button id="btnBuyNow" {{ $prMedicine->quantity == 0 ? 'disabled' : '' }}
                                     class=" button-buyNow btn btn-primary w-100">{{ __('home.Buy now') }}</button>
                                 @else
-                                    <button onclick="alertLogin();" class=" button-buyNow btn btn-primary w-100">{{ __('home.Buy now') }}</button>
+                                    <button onclick="alertLogin();"
+                                            class=" button-buyNow btn btn-primary w-100">{{ __('home.Buy now') }}</button>
                                 @endif
                             </div>
                         </div>

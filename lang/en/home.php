@@ -34,6 +34,7 @@ return [
     'Mentoring' => 'Mentoring',
     'Tiền sử bệnh án' => 'Medical history',
     'Location' => 'Location',
+    'Name Pharmacy' => 'Name Pharmacy',
     'Working time' => 'Working time',
     'Previous' => 'Previous',
     'Next' => 'Next',

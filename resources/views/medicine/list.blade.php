@@ -94,6 +94,17 @@
             border: none;
             margin-top: 24px;
         }
+        .sold-out-overlay {
+            opacity: .5;
+            pointer-events: none;
+        }
+
+        .sold-out-overlay .sold-out-overlay-text {
+            position: absolute;
+            color: black;
+            top: 50%;
+            display: block;
+        }
     </style>
     <div class="medicine container" id="online-medicine">
         <div class="row medicine-search d-none d-sm-flex">
@@ -309,12 +320,12 @@
             <div class="col-md-9 medicine-list--item">
                 <div class="page row" id="content-medicine">
                     @foreach($medicines as $medicine)
-                        <div class="col-md-4 col-6 col-sm-4 col-xl-3 d-none d-sm-block">
+                        <div class="col-md-4 col-6 col-sm-4 col-xl-4 d-none d-sm-block">
                             @include('component.products')
                         </div>
                     @endforeach
                     @foreach($medicine10 as $medicine)
-                        <div class="col-md-4 col-6 col-sm-4 col-xl-3 d-block d-sm-none">
+                        <div class="col-md-4 col-6 col-sm-4 col-xl-4 d-block d-sm-none">
                             @include('component.products')
                         </div>
                     @endforeach
@@ -427,7 +438,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-center mt-4">
+                <div class="d-flex justify-content-center align-items-center mt-4">
                     <a class="add-cv-bt w-100 apply-bt_delete col-6">{{ __('home.Refresh') }}</a>
                     <form class="col-6 pr-0">
                         <button type="button" data-bs-dismiss="offcanvas" aria-label="Close"
@@ -523,11 +534,15 @@
                 data.forEach(async function (item) {
                     let url = `{{ route('medicine.detail', ['id' => ':id']) }}`;
                     url = url.replace(':id', item.id);
+                    let isSoldOut = item.quantity == 0;
                     let isFavoriteClass = isUserWasWishlist(item.id);
                     html += `<div class="col-md-3 col-6">
-        <div class="product-item">
+        <div class="product-item ${ isSoldOut ? 'sold-out-overlay' : '' }">
     <div class="img-pro">
         <img src="${item.thumbnail}" alt="">
+        <div class="${ isSoldOut ? 'sold-out-overlay-text d-flex justify-content-center align-items-center w-100' : 'd-none' } ">
+                <h1>Sold Out</h1>
+            </div>
         <a class="button-heart" data-favorite="0">
             <i id="heart-icon-${item.id}" class="${isFavoriteClass} bi" data-product-id="${item.id}"
                onclick="handleAddMedicineToWishList(${item.id})"></i>
