@@ -160,6 +160,13 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item"
                                href="{{ route('profile') }}">{{ __('home.Trang cá nhân') }}</a>
+                            @if(Auth::user()->type != Role::NORMAL)
+                                <a class="dropdown-item"
+                                   href="{{ route('view.prescription.result.create') }}">Create Prescription</a>
+                            @else
+                                <a class="dropdown-item"
+                                   href="{{ route('view.prescription.result.my.list') }}">My Prescription</a>
+                            @endif
                             <a class="dropdown-item"
                                href="{{route('booking.list.by.user')}}">{{ __('home.My booking') }}</a>
                             <a class="dropdown-item" href="{{route('logoutProcess')}}">{{ __('home.Logout') }}</a>

@@ -451,7 +451,9 @@ Route::middleware(['user.active'])->group(function () {
         });
 
         Route::group(['prefix' => 'ui/prescription-result'], function () {
-            Route::get('list', [PrescriptionResultController::class, 'index'])->name('view.prescription.result.index');
+            Route::get('my-list', [PrescriptionResultController::class, 'myPrescription'])->name('view.prescription.result.my.list');
+            Route::get('detail/{id}', [PrescriptionResultController::class, 'detail'])->name('view.prescription.result.detail');
+            Route::get('list', [PrescriptionResultController::class, 'doctorPrescription'])->name('view.prescription.result.doctor');
             Route::get('create', [PrescriptionResultController::class, 'create'])->name('view.prescription.result.create');
         });
     });

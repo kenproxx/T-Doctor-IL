@@ -142,4 +142,6 @@ Route::group(['prefix' => 'prescription-result'], function () {
     Route::get('user', [PrescriptionResultApi::class, 'listPrescriptionByUser'])->name('api.backend.prescription.result.user');
     Route::get('doctor', [PrescriptionResultApi::class, 'listPrescriptionByDoctor'])->name('api.backend.prescription.result.doctor');
     Route::post('create', [PrescriptionResultApi::class, 'createPrescription'])->name('api.backend.prescription.result.create');
+    Route::post('export', [PrescriptionResultApi::class, 'exportAndDownload'])->name('api.backend.prescription.result.export');
+    Route::post('add-to-cart', [PrescriptionResultApi::class, 'addProductToCart'])->name('api.backend.prescription.result.add.cart');
 });
