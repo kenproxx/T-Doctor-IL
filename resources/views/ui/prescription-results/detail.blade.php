@@ -39,6 +39,11 @@
                                 <input type="number" min="1" class="form-control quantity"
                                        value="{{ $item['quantity'] }}" id="quantity">
                             </div>
+                            <div class="form-group">
+                                <label for="detail_value">Detail</label>
+                                <input type="text" class="form-control detail_value" id="detail_value"
+                                       value="{{ isset($item['note']) ? $item['note'] : '' }}">
+                            </div>
                         </div>
                     </div>
                 @endforeach
