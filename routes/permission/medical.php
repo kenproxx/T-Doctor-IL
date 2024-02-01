@@ -86,6 +86,8 @@ Route::group(['prefix' => 'coupon'], function () {
     Route::get('create', [CouponController::class, 'create'])->name('coupon.create.product');
     Route::get('edit/{id}', [CouponController::class, 'edit'])->name('coupon.edit');
     Route::put('update/{id}', [CouponController::class, 'update'])->name('coupon.update');
+    Route::get('get/{user_id?}', [CouponController::class, 'getListCoupon'])->name('coupon.get');
+    Route::get('get-applied/{user_id?}', [CouponController::class, 'getListCouponApplied'])->name('coupon.get.applied');
 
 });
 Route::group(['prefix' => 'doctor'], function () {

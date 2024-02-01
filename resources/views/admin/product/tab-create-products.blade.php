@@ -91,14 +91,18 @@
                 <input type="file" class="form-control" id="gallery" name="gallery[]" multiple accept="image/*">
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label for="price">{{ __('home.Price') }}</label>
                     <input type="number" required class="form-control" id="price" name="price" value="">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label for="price_unit">{{ __('home.Price Unit') }}</label>
                     <input type="text" class="form-control" id="price_unit" name="price_unit"
                            value="VND" required>
+                </div>
+                <div class="col-md-4">
+                    <label for="price_unit">{{ __('home.Quantity') }}</label>
+                    <input type="text" class="form-control" id="quantity" name="quantity" required>
                 </div>
             </div>
             <div class="row">
