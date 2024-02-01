@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\restapi;
 
 use App\Enums\ClinicStatus;
+use App\Enums\DepartmentStatus;
 use App\Enums\ReviewStatus;
 use App\Enums\TypeBusiness;
 use App\Http\Controllers\Controller;
@@ -233,7 +234,15 @@ class ClinicApi extends Controller
         }
         $user = User::find($clinic->user_id);
         $response = $clinic->toArray();
+
+        $list_department = $clinic->department;
+        $array_department = explode(',', $list_department);
+        $departments = Department::whereIn('id', $array_department)
+            ->where('status', DepartmentStatus::ACTIVE)
+            ->get();
+
         $response['email'] = $user->email;
+        $response['departments'] = $departments;
         return response()->json($response);
     }
 

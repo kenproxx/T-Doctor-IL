@@ -106,9 +106,9 @@
                 let buttonHtml = '';
 
                 if (item.status === 'PENDING') {
-                    buttonHtml = `<a href="#" onclick="checkDelete(${item.id}, 'Delete')">{{ __('home.Cancel') }}</a>`;
+                    buttonHtml = `<a href="#" onclick="checkDelete(${item.id})">{{ __('home.Cancel') }}</a>`;
                 } else if (item.status === 'CANCEL') {
-                    buttonHtml = `<a href="#" onclick="checkDelete(${item.id}, 'Apply')">{{ __('home.Apply') }}</a>`;
+                    buttonHtml = `<a href="#" onclick="checkDelete(${item.id}, 'PENDING')">{{ __('home.Apply') }}</a>`;
                 }
 
                 let productHtml = `
@@ -118,10 +118,10 @@
                               <div>{{ __('home.Thời gian vào') }}: ${item.check_in} </div>
                               <div> {{ __('home.clinics') }}: ${item.clinic_id} </div>
                               {{--<div>{{ __('home.dịch vụ') }}: ${item.service} </div>--}}
-                            </a>
-                         </div>
-                        <div class="col-md-2">
-                            ${buttonHtml}
+                </a>
+             </div>
+            <div class="col-md-2">
+${buttonHtml}
                         </div>
                      </div>
                     `;
@@ -142,7 +142,7 @@
 
     });
 
-    async function checkDelete(id) {
+    async function checkDelete(id, status) {
         let confirmed = confirm('Are you sure?');
 
         if (confirmed) {
@@ -152,7 +152,7 @@
             urlDelete = urlDelete.replace(':id', id);
 
             let data = {
-                status: `{{ \App\Enums\BookingStatus::DELETE }}`
+                status: status ?? `{{ \App\Enums\BookingStatus::CANCEL }}`
             }
 
             await $.ajax({

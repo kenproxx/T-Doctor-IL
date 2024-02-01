@@ -15,20 +15,25 @@ use Illuminate\Support\Facades\Auth;
 class BackendCouponController extends Controller
 {
 
-    public function getAll()
+    public function getAll($type = null)
     {
         if ($this->isAdmin()) {
             $coupons = Coupon::where('status', '!=', CouponStatus::DELETED)
-                ->orderBy('created_at', 'desc')
-                ->get();
+                ->orderBy('created_at', 'desc');
         } else {
             if (Auth::user()->manager_id) {
                 $clinic_id = Clinic::where('user_id', Auth::user()->manager_id)->pluck('id');
             } else {
                 $clinic_id = Clinic::where('user_id', Auth::user()->id)->pluck('id');
             }
-            $coupons = Coupon::whereIn('clinic_id', $clinic_id)->orderBy('created_at', 'desc')->get();
+            $coupons = Coupon::whereIn('clinic_id', $clinic_id)->orderBy('created_at', 'desc');
         }
+
+        if ($type) {
+            $coupons = $coupons->where('type', $type);
+        }
+
+        $coupons = $coupons->get();
 
         return response()->json($coupons);
     }

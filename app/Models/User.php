@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\restapi\MainApi;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
@@ -157,6 +159,27 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public static function isAdmin($user_id = null)
+    {
+        if ($user_id) {
+            $role_user = RoleUser::where('user_id', $user_id)->first();
+        } else {
+            $role_user = RoleUser::where('user_id', Auth::user()->id)->first();
+        }
+
+        if (!$role_user) {
+            return false;
+        }
+
+        $roleNames = Role::where('id', $role_user->role_id)->pluck('name');
+
+        if ($roleNames->contains('ADMIN')) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
