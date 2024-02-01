@@ -19,7 +19,6 @@
         </div>
     @endif
     <form id="form">
-
         @csrf
         <div class="row">
             <div class="col-lg-4">
@@ -47,6 +46,12 @@
                            placeholder="{{ __('home.Last name') }}"
                            value="">
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <label for="identifier">{{ __('home.Mã định danh trên giấy hành nghề') }}</label>
+                <input type="text" class="form-control" id="identifier" name="identifier" value="">
             </div>
         </div>
 
@@ -92,7 +97,7 @@
             {{--                        </div>--}}
             <div class="form-element col-md-4">
                 <label for="workspace">{{ __('home.Workplace') }}</label>
-                <input class="form-control" id="workspace" type="text" name="workspace">
+                <input class="form-control" id="workspace" type="text" name="workspace" required>
             </div>
         </div>
         <div class="row">
@@ -338,7 +343,7 @@
                 const formData = new FormData();
 
                 const fieldNames = [
-                    "specialty", "specialty_en", "specialty_laos", "workspace",
+                    "specialty", "specialty_en", "specialty_laos", "workspace","identifier",
                     "service_price", "service_price_en", "service_price_laos",
                     "detail_address", "detail_address_en", "detail_address_laos",
                     "province_id", "district_id", "commune_id",
