@@ -25,7 +25,7 @@
         .find-my-medicine-2 .frame {
             display: inline-flex;
             flex-direction: column;
-            align-items: flex-end;
+            align-items: center;
             gap: 12px;
             position: relative;
             background-color: #088180;

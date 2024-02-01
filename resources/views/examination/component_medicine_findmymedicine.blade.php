@@ -9,6 +9,7 @@
             if ($isFavourite == true){
                 $heart = 'bi-heart-fill d-flex';
             }
+            $isSoldOut = $medicine->quantity == 0;
 
 @endphp
 <style>
@@ -23,12 +24,28 @@
             font-size: 12px !important;
         }
     }
+
+    .sold-out-overlay {
+        opacity: .5;
+        pointer-events: none;
+    }
+
+    .sold-out-overlay .sold-out-overlay-text {
+        position: absolute;
+        color: black;
+        top: 50%;
+        display: block;
+    }
 </style>
 <div class="col-sm-3 mb-3 col-6">
-    <div class="m-md-4">
+    <div class="m-md-4 {{ $isSoldOut ? 'sold-out-overlay' : '' }}">
         <div class="frame component-medicine w-100">
             <img loading="lazy" class="rectangle border-img"
-                 src="{{asset($medicine->thumbnail)}}"/>
+                 src="{{ asset('img/11111.jpeg') }}">
+            <div class="{{ $isSoldOut ? 'sold-out-overlay-text' : 'd-none' }} ">
+                <h1>Sold Out</h1>
+            </div>
+
             <div class="div">
                 <div class="div-2">
                     <a target="_blank" class="w-100" href="{{ route('medicine.detail', $medicine->id) }}">
@@ -50,6 +67,7 @@
                     </a>
                 </div>
             </div>
+
             @if(Auth::check())
                 <div class="frame-wrapper-heart" onclick="handleAddMedicineToWishList('{{ $medicine->id }}')"><i
                         class="{{ $heart }} bi" id="heart-icon-{{ $medicine->id }}"></i></div>
