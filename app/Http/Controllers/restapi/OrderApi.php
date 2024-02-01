@@ -75,6 +75,19 @@ class OrderApi extends Controller
             $order = Order::find($id);
             if ($order->status == OrderStatus::PROCESSING) {
                 $order->status = OrderStatus::CANCELED;
+
+                $order_items = OrderItem::where('order_id', $order->id)->get();
+                foreach ($order_items as $item) {
+                    $typeProduct = $item->type_product;
+                    if ($typeProduct == TypeProductCart::MEDICINE) {
+                        $product = ProductMedicine::find($item->product_id);
+                    } else {
+                        $product = ProductInfo::find($item->product_id);
+                    }
+                    $product->quantity = $product->quantity + $item->quantity;
+                    $product->save();
+                }
+
                 $success = $order->save();
                 if ($success) {
                     return response('Cancel order success!', 200);
