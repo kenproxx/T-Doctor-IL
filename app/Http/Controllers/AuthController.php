@@ -119,6 +119,7 @@ class AuthController extends Controller
                 $specialized_services = $request->input('specialized_services');
                 $services_info = $request->input('services_info');
                 $user->name = $name_doctor;
+                $user->identifier = $request->input('identifier');
                 $user->phone = $contact_phone;
                 $user->year_of_experience = $experience ?? '';
                 $user->hospital = $hospital ?? '';
@@ -150,7 +151,6 @@ class AuthController extends Controller
             } else {
                 $user->status = UserStatus::ACTIVE;
             }
-
             $success = $user->save();
             if ($success) {
                 (new MainController())->createRoleUser($member, $username);
