@@ -91,7 +91,7 @@ class ContactController extends Controller
         $message = Message::create([
             'from' => $request->sender_id,
             'to' => $request->receiver_id,
-            'text' => 'Bạn chưa tạo đơn thuốc',
+            'text' => 'Bạn chưa có đơn thuốc',
             'uuid_session' => $uuid,
             'type' => $type,
         ]);
@@ -99,7 +99,7 @@ class ContactController extends Controller
         Chat::create([
             'from_user_id' => $request->sender_id,
             'to_user_id' => $request->receiver_id,
-            'chat_message' => 'Bạn chưa tạo đơn thuốc',
+            'chat_message' => 'Bạn chưa có đơn thuốc',
             'message_status' => MessageStatus::UNSEEN,
             'uuid_session' => $uuid,
             'type' => $type,
