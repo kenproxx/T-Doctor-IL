@@ -204,8 +204,7 @@ class BookingApi extends Controller
         $status = $request->input('status') ?? BookingStatus::CANCEL;
         $reason = $request->input('reason');
         if ($booking) {
-            $booking->status = $booking->status == BookingStatus::PENDING ? BookingStatus::CANCEL :
-                ($booking->status == BookingStatus::CANCEL ? BookingStatus::PENDING : BookingStatus::CANCEL);
+            $booking->status = $status;
             $booking->reason_cancel = $reason;
             $booking->save();
             return response()->json(['message' => 'Booking status updated successfully']);
@@ -214,24 +213,19 @@ class BookingApi extends Controller
         }
     }
 
-    public function bookingCancel($userId, $bookingId, $status)
+    public function bookingCancel(Request $request, $id)
     {
-        if ($userId) {
-            $booking = Booking::where([
-                'id' => $bookingId,
-                'user_id' => $userId
-            ])->first();
-            if ($booking) {
-
-                $booking->status = $status;
-                $booking->save();
-
-                return response()->json(['message' => 'Cancellation of booking successfully'], 200);
-            } else {
-                return response()->json(['error' => 'Booking not found'], 414);
-            }
+        $booking = Booking::find($id);
+        $status = $request->input('status') ?? BookingStatus::CANCEL;
+        $reason = $request->input('reason');
+        if ($booking) {
+            $booking->status = $booking->status == BookingStatus::PENDING ? BookingStatus::CANCEL :
+                ($booking->status == BookingStatus::CANCEL ? BookingStatus::PENDING : BookingStatus::CANCEL);
+            $booking->reason_cancel = $reason;
+            $booking->save();
+            return response()->json(['message' => 'Booking status updated successfully']);
         } else {
-            return response()->json(['error' => 'Missing user id parameter'], 400);
+            return response()->json(['error' => 'Booking not found'], 404);
         }
     }
 
