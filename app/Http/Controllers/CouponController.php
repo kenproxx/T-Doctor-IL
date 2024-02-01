@@ -67,14 +67,15 @@ class CouponController extends Controller
 
         if ($isAdmin) {
             $coupons = Coupon::all();
-        } else {
-            // tìm clinic của user nay, nếu có thì lấy ra tất cả các coupon của clinic đó
-            $clinic = Clinic::where('user_id', $user_id)->first();
-            if (!$clinic) {
-                return response((new MainApi())->returnMessage("Clinic not found"), 404);
-            }
-            $coupons = Coupon::where('clinic_id', $clinic->id);
+            return response()->json($coupons);
         }
+
+        // tìm clinic của user nay, nếu có thì lấy ra tất cả các coupon của clinic đó
+        $clinic = Clinic::where('user_id', $user_id)->first();
+        if (!$clinic) {
+            return response((new MainApi())->returnMessage("Clinic not found"), 404);
+        }
+        $coupons = Coupon::where('clinic_id', $clinic->id);
 
         if ($status) {
             $coupons = $coupons->where('status', $status);
