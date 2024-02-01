@@ -127,8 +127,32 @@ class PrescriptionResultApi extends Controller
 
             $medicines = '[' . $prescription->prescriptions . ']';
             $medicines = json_decode($medicines, true);
-            if (is_array($medicines)){
+            if (is_array($medicines)) {
                 return Excel::download(new MedicineExport($medicines), 'prescription.xlsx');
+            }
+            return response((new MainApi())->returnMessage('No prescription!'), 400);
+        } catch (\Exception $exception) {
+            return response((new MainApi())->returnMessage('Error, Please try again!'), 400);
+        }
+    }
+
+    public function uploadExcelFile(Request $request)
+    {
+        try {
+            $prescription_id = $request->input('prescription_id');
+            $prescription = PrescriptionResults::find($prescription_id);
+            if (!$prescription || $prescription->status == PrescriptionResultStatus::DELETED) {
+                return response((new MainApi())->returnMessage('Not found!'), 400);
+            }
+
+            $medicines = '[' . $prescription->prescriptions . ']';
+            $medicines = json_decode($medicines, true);
+            if (is_array($medicines)) {
+                $fileName = 'prescription_' . time() . '.xlsx';
+                $folderPath = 'exports';
+                Excel::store(new MedicineExport($medicines), $folderPath . '/' . $fileName, 'public');
+                $new_file = 'storage/' . $folderPath . '/' . $fileName;
+                return response(['uri' => $new_file]);
             }
             return response((new MainApi())->returnMessage('No prescription!'), 400);
         } catch (\Exception $exception) {
@@ -158,7 +182,7 @@ class PrescriptionResultApi extends Controller
             $fileName = 'prescription_' . time() . '.xlsx';
             $folderPath = 'exports';
 
-            if (is_array($medicines)){
+            if (is_array($medicines)) {
                 Excel::store(new MedicineExport($medicines), $folderPath . '/' . $fileName, 'public');
 
 
@@ -210,7 +234,7 @@ class PrescriptionResultApi extends Controller
                             $count = $count + 1;
                         }
                     }
-                    if ($count > 0){
+                    if ($count > 0) {
                         return response((new MainApi())->returnMessage('Add to cart success!'), 200);
                     }
                     return response((new MainApi())->returnMessage('No product!'), 201);
