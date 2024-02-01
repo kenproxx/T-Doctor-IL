@@ -118,7 +118,7 @@
                     success: function (response) {
                         console.log(response)
                         alert('Create success!')
-                        {{--                        window.location.href = `{{ route('home') }}`;--}}
+                        window.location.href = `{{ route('view.prescription.result.doctor') }}`;
                     },
                     error: function (error) {
                         alert(error.responseJSON.message);
