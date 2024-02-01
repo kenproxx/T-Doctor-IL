@@ -148,6 +148,8 @@ class ProfileController extends Controller
 
         $user->district_id = $district_id[0];
         $user->commune_id = $commune_id[0];
+        $user->workplace = $request->input('workplace') ?? '';
+        $user->identifier = $request->input('identifier') ?? '';
         $user->specialty = $request->input('specialty');
         $user->specialty_en = $request->input('specialty_en');
         $user->specialty_laos = $request->input('specialty_laos');

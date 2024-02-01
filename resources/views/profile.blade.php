@@ -117,9 +117,19 @@
         <div class="col-lg-8 order-lg-1">
 
             <div class="card shadow mb-4">
-
+                @php
+                    if (Auth::user()->member == 'NORMAL') {
+                       $member = 'Người dùng';
+                    } elseif (Auth::user()->member == 'DOCTORS') {
+                        $member = 'Bác sĩ';
+                    } elseif (Auth::user()->member == 'HOSPITALS') {
+                        $member = 'Chủ Bệnh viện';
+                    } else {
+                        $member = 'Admin';
+                    }
+                @endphp
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">{{ __('home.My Account') }}</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">{{ __('home.My Account') }} : {{$member}}</h6>
                 </div>
 
                 <div class="card-body">
@@ -294,8 +304,10 @@
                             </div>
                             @if(Auth::user()->type == 'NORMAL')
                                 <div class="row">
-                                    <div class="col-12"><label for="medical_history">{{ __('home.Tiền sử bệnh án') }}</label>
-                                        <textarea id="medical_history" name="medical_history">{{ old('medical_history', Auth::user()->medical_history) }}</textarea>
+                                    <div class="col-12"><label
+                                            for="medical_history">{{ __('home.Tiền sử bệnh án') }}</label>
+                                        <textarea id="medical_history"
+                                                  name="medical_history">{{ old('medical_history', Auth::user()->medical_history) }}</textarea>
                                     </div>
                                 </div>
                             @endif
@@ -307,7 +319,16 @@
                             @endphp
                             @if($roleItem->name == 'DOCTORS')
                                 <h1>Info doctor</h1>
-
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label for="identifier">{{ __('home.Mã định danh trên giấy hành nghề') }}</label>
+                                        <input type="text" class="form-control" id="identifier" name="identifier" value="{{$doctor->identifier}}">
+                                    </div>
+                                    <div class="form-element col-md-4">
+                                        <label for="workplace">{{ __('home.Workplace') }}</label>
+                                        <input class="form-control" id="workplace" type="text" name="workplace" required value="{{$doctor->workplace}}">
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-4"><label
                                             for="specialty">{{ __('home.chuyên môn việt') }}</label>
