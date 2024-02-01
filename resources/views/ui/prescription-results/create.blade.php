@@ -14,7 +14,7 @@
             <div class="form-group col-md-6">
                 <label for="email_value">{{ __('home.Email') }}</label>
                 <input type="text" class="form-control" id="email_value"
-                       placeholder="{{ __('home.Please enter your email') }}">
+                       placeholder="{{ __('home.E-Mail Address') }}">
             </div>
         </div>
         <div class="list-service-result mt-2 mb-3">

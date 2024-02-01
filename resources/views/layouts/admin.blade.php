@@ -425,6 +425,15 @@
             </li>
             <!-- End Call video Nav -->
 
+            <!-- Start Doctor Prescription Page Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('view.prescription.result.doctor') }}">
+                    <i class="bi bi-music-player"></i>
+                    <span>Doctor Prescription</span>
+                </a>
+            </li>
+            <!-- End Doctor Prescription Page Nav -->
+
             <!-- Survey Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#survey-nav" data-bs-toggle="collapse" href="#">
@@ -505,15 +514,6 @@
                     </ul>
                 </li>
                 <!-- End Booking Nav -->
-
-                <!-- Start Doctor Prescription Page Nav -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" href="{{ route('view.prescription.result.doctor') }}">
-                        <i class="bi bi-music-player"></i>
-                        <span>Doctor Prescription</span>
-                    </a>
-                </li>
-                <!-- End Doctor Prescription Page Nav -->
 
                 <!-- Start Medical Result Business Nav -->
                 <li class="nav-item">
