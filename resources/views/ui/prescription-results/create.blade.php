@@ -9,11 +9,13 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <label for="full_name_value">{{ __('home.Full Name') }}</label>
-                <input type="text" class="form-control full_name" value="" id="full_name_value" name="full_name">
+                <input type="text" class="form-control full_name"
+                       value="{{ $user ? $user->last_name . ' ' . $user->name : '' }}" id="full_name_value"
+                       name="full_name">
             </div>
             <div class="form-group col-md-6">
                 <label for="email_value">{{ __('home.Email') }}</label>
-                <input type="text" class="form-control" id="email_value"
+                <input type="text" class="form-control" id="email_value" value="{{ $user ? $user->email : '' }}"
                        placeholder="{{ __('home.E-Mail Address') }}">
             </div>
         </div>

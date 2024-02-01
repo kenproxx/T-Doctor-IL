@@ -182,4 +182,17 @@ class User extends Authenticatable implements JWTSubject
         }
     }
 
+
+    public static function isNormal()
+    {
+        if (!Auth::check()) {
+            return false;
+        }
+
+        return Auth::user()->type == \App\Enums\Role::NORMAL;
+
+    }
+
+
+
 }

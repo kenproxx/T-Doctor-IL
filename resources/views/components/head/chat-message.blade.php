@@ -454,9 +454,13 @@
                 }
                 html += `<div class="message ">
                         <span >
-                            ${msg.chat_message}
-                        </span>
-                    </div>`
+                            ${msg.chat_message}`
+
+                if ('{{ !\App\Models\User::isNormal() }}') {
+                    html += `, <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.create') }}?user_id=${chatUserId}">tạo ngay?</a>`
+                }
+
+                html += `</span></div>`
                 return;
             }
 
