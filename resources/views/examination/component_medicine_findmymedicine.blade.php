@@ -16,10 +16,12 @@
     .frame.component-medicine.w-100 {
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     }
+
     @media (max-width: 575px) {
         .div .div-2 a .text-wrapper {
             font-size: 12px;
         }
+
         .text-wrapper-2, .text-wrapper-4 {
             font-size: 12px !important;
         }
@@ -41,7 +43,7 @@
     <div class="m-md-4 {{ $isSoldOut ? 'sold-out-overlay' : '' }}">
         <div class="frame component-medicine w-100">
             <img loading="lazy" class="rectangle border-img"
-                 src="{{ asset('img/11111.jpeg') }}">
+                 src="{{asset($medicine->thumbnail)}}"/>
             <div class="{{ $isSoldOut ? 'sold-out-overlay-text' : 'd-none' }} ">
                 <h1>Sold Out</h1>
             </div>
