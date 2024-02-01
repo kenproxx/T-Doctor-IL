@@ -9,12 +9,12 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <label for="full_name_value">{{ __('home.Full Name') }}</label>
-                <input type="text" class="form-control full_name" value="{{ $prescription->full_name }}"
+                <input disabled type="text" class="form-control full_name" value="{{ $prescription->full_name }}"
                        id="full_name_value" name="full_name">
             </div>
             <div class="form-group col-md-6">
                 <label for="email_value">{{ __('home.Email') }}</label>
-                <input type="text" class="form-control" id="email_value" value="{{ $prescription->email }}"
+                <input disabled type="text" class="form-control" id="email_value" value="{{ $prescription->email }}"
                        placeholder="{{ __('home.Please enter your email') }}">
             </div>
         </div>
@@ -25,23 +25,23 @@
                         <div class="row w-75">
                             <div class="form-group">
                                 <label for="medicine_name">Medicine Name</label>
-                                <input type="text" class="form-control medicine_name"
+                                <input disabled type="text" class="form-control medicine_name"
                                        value="{{ $item['medicine_name'] }}" id="medicine_name"
                                        name="medicine_name">
                             </div>
                             <div class="form-group">
                                 <label for="medicine_ingredients">Medicine Ingredients</label>
-                                <input type="text" class="form-control medicine_ingredients"
+                                <input disabled type="text" class="form-control medicine_ingredients"
                                        value="{{ $item['medicine_ingredients'] }}" id="medicine_ingredients">
                             </div>
                             <div class="form-group">
                                 <label for="quantity">{{ __('home.Quantity') }}</label>
-                                <input type="number" min="1" class="form-control quantity"
+                                <input disabled type="number" min="1" class="form-control quantity"
                                        value="{{ $item['quantity'] }}" id="quantity">
                             </div>
                             <div class="form-group">
                                 <label for="detail_value">Detail</label>
-                                <input type="text" class="form-control detail_value" id="detail_value"
+                                <input disabled type="text" class="form-control detail_value" id="detail_value"
                                        value="{{ isset($item['note']) ? $item['note'] : '' }}">
                             </div>
                         </div>
@@ -150,22 +150,22 @@
             }
         }
     </script>
-    {{-- Handle input --}}
+    {{-- Handle input disabled --}}
     <script>
         let html = `<div class="service-result-item d-flex align-items-center justify-content-between border p-3">
                     <div class="row w-75">
                         <div class="form-group">
                             <label for="medicine_name">Medicine Name</label>
-                            <input type="text" class="form-control medicine_name" value="" id="medicine_name"
+                            <input disabled type="text" class="form-control medicine_name" value="" id="medicine_name"
                                    name="medicine_name">
                         </div>
                         <div class="form-group">
                             <label for="medicine_ingredients">Medicine Ingredients</label>
-                            <input type="text" class="form-control medicine_ingredients" id="medicine_ingredients">
+                            <input disabled type="text" class="form-control medicine_ingredients" id="medicine_ingredients">
                         </div>
                         <div class="form-group">
                             <label for="quantity">{{ __('home.Quantity') }}</label>
-                            <input type="number" min="1" class="form-control quantity" id="quantity">
+                            <input disabled type="number" min="1" class="form-control quantity" id="quantity">
                         </div>
                     </div>
                     <div class="action mt-3">
@@ -211,7 +211,7 @@
                         }
                     });
                     $(this).parent().parent().prev().val(my_name);
-                    $(this).parent().parent().next().find('input').val(my_array);
+                    $(this).parent().parent().next().find('input disabled').val(my_array);
                 })
             }
         })
