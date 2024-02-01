@@ -50,6 +50,7 @@ use App\Http\Controllers\TopicVideoController;
 use App\Http\Controllers\ui\MyBookingController;
 use App\Http\Controllers\ui\MyCouponController;
 use App\Http\Controllers\ui\MyFavouriteController;
+use App\Http\Controllers\ui\PrescriptionResultController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WhatFreeToDay;
 use Illuminate\Support\Facades\Route;
@@ -447,6 +448,11 @@ Route::middleware(['user.active'])->group(function () {
             Route::get('list', [AdminMedicalResultController::class, 'list'])->name('view.admin.medical.result.list');
             Route::get('detail/{id}', [AdminMedicalResultController::class, 'detail'])->name('view.admin.medical.result.detail');
             Route::get('create', [AdminMedicalResultController::class, 'create'])->name('view.admin.medical.result.create');
+        });
+
+        Route::group(['prefix' => 'ui/prescription-result'], function () {
+            Route::get('list', [PrescriptionResultController::class, 'index'])->name('view.prescription.result.index');
+            Route::get('create', [PrescriptionResultController::class, 'create'])->name('view.prescription.result.create');
         });
     });
 
