@@ -393,13 +393,19 @@
             })
 
             $('.address_code').on('change', function () {
+                mergeAddress();
+            })
+
+            function mergeAddress() {
                 let province = $('#province').val();
                 let district = $('#district').val();
                 let address_detail = $('#address_detail').val();
 
                 let address = address_detail + '-' + district + '-' + province;
                 $('#value_address').val(address);
-            })
+            }
+
+            mergeAddress();
 
             function calculateTotal() {
                 let listTotal = document.getElementsByClassName('total_product');
