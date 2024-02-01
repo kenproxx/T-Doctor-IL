@@ -39,7 +39,7 @@ class HomeController extends Controller
             setCookie('accessToken', null);
         }
         $coupons = Coupon::where('status', CouponStatus::ACTIVE)->paginate(6);
-        $products = ProductInfo::where('status', ProductStatus::ACTIVE)->paginate(12);
+        $products = ProductMedicine::where('status', OnlineMedicineStatus::APPROVED)->paginate(12);
         $productsFlea = ProductInfo::where('status', ProductStatus::ACTIVE)->get();
         $medicines = ProductMedicine::where('product_medicines.status', OnlineMedicineStatus::APPROVED)
             ->leftJoin('users', 'product_medicines.user_id', '=', 'users.id')

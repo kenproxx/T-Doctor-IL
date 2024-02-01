@@ -1557,7 +1557,7 @@
                                                         <div class="">
                                                             <div class="name-product" style="min-height: 48px">
                                                                 <a class="name-product--fleaMarket max-3-line-content"
-                                                                   href="{{ route('examination.doctor_info', $product->id) }}">{{$product->name}}</a>
+                                                                   href="{{ route('flea.market.product.detail', $product->id) }}">{{$product->name}}</a>
                                                             </div>
                                                             <div class="location-pro">
                                                                 @php
@@ -1709,7 +1709,7 @@
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
                                                             <a class="name-product--fleaMarket max-3-line-content"
-                                                               href="{{ route('examination.doctor_info', $product->id) }}">{{$product->name}}</a>
+                                                               href="{{ route('medicine.detail', $product->id) }}">{{$product->name}}</a>
                                                         </div>
                                                         <div class="location-pro">
                                                             @php
