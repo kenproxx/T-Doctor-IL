@@ -154,19 +154,26 @@ class BackendCouponController extends Controller
     private function saveCoupon($coupon, $request)
     {
         $title = $request->input('title');
-        $title_en = $request->input('title_en');
-        $title_laos = $request->input('title_laos');
-
         $description = $request->input('description');
-        $description_en = $request->input('description_en');
-        $description_laos = $request->input('description_laos');
-
         $short_description = $request->input('short_description');
-        $short_description_en = $request->input('short_description_en');
-        $short_description_laos = $request->input('short_description_laos');
+        $condition = $request->input('condition');
+        $conduct = $request->input('conduct');
+
 
         $startDate = $request->input('startDate');
         $endDate = $request->input('endDate');
+        $start_selective = $request->input('start_selective');
+        $end_selective = $request->input('end_selective');
+        $start_post = $request->input('start_post');
+        $end_post = $request->input('end_post');
+        $start_evaluate = $request->input('start_evaluate');
+        $end_evaluate = $request->input('end_evaluate');
+
+        $is_tiktok = $request->input('is_tiktok');
+        $is_facebook = $request->input('is_facebook');
+        $is_google = $request->input('is_google');
+        $is_youtube = $request->input('is_youtube');
+        $is_instagram = $request->input('is_instagram');
 
         $max_register = $request->input('max_register');
 
@@ -194,20 +201,29 @@ class BackendCouponController extends Controller
             $thumbnail = $coupon->thumbnail;
         }
 
+
         $coupon->title = $title;
-        $coupon->title_en = $title_en;
-        $coupon->title_laos = $title_laos;
-
+        $coupon->condition = $condition;
+        $coupon->conduct = $conduct;
         $coupon->description = $description;
-        $coupon->description_en = $description_en;
-        $coupon->description_laos = $description_laos;
-
         $coupon->short_description = $short_description;
-        $coupon->short_description_en = $short_description_en;
-        $coupon->short_description_laos = $short_description_laos;
+
 
         $coupon->startDate = $startDate;
         $coupon->endDate = $endDate;
+        $coupon->start_selective = $start_selective;
+        $coupon->end_selective = $end_selective;
+        $coupon->start_post = $start_post;
+        $coupon->end_post = $end_post;
+        $coupon->start_evaluate = $start_evaluate;
+        $coupon->end_evaluate = $end_evaluate;
+
+        $coupon->is_tiktok = $is_tiktok ? 1 : 0;
+        $coupon->is_facebook = $is_facebook ? 1 : 0;
+        $coupon->is_google = $is_google ? 1 : 0;
+        $coupon->is_youtube = $is_youtube ? 1 : 0;
+        $coupon->is_instagram = $is_instagram ? 1 : 0;
+
 
         $coupon->max_register = $max_register;
         $coupon->type = $type;
@@ -218,6 +234,7 @@ class BackendCouponController extends Controller
         $coupon->code = $code;
         $coupon->thumbnail = $thumbnail;
         $coupon->clinic_id = $clinic_id;
+
 
         $success = $coupon->save();
     }
