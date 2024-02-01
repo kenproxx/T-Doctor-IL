@@ -88,6 +88,7 @@ Route::group(['prefix' => 'coupon'], function () {
     Route::put('update/{id}', [CouponController::class, 'update'])->name('coupon.update');
     Route::get('get/{user_id?}/{status?}', [CouponController::class, 'getListCoupon'])->name('coupon.get');
     Route::get('get-applied/{user_id?}/{status?}', [CouponController::class, 'getListCouponApplied'])->name('coupon.get.applied');
+    Route::get('get-user-applied-by-coupon', [CouponController::class, 'getListUserAppliedCoupon'])->name('coupon.get.user.applied.by.coupon');
 });
 
 Route::group(['prefix' => 'doctor'], function () {
