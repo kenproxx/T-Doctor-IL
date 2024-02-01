@@ -127,7 +127,10 @@ class PrescriptionResultApi extends Controller
 
             $medicines = '[' . $prescription->prescriptions . ']';
             $medicines = json_decode($medicines, true);
-            return Excel::download(new MedicineExport($medicines), 'prescription.xlsx');
+            if (is_array($medicines)){
+                return Excel::download(new MedicineExport($medicines), 'prescription.xlsx');
+            }
+            return response((new MainApi())->returnMessage('No prescription!'), 400);
         } catch (\Exception $exception) {
             return response((new MainApi())->returnMessage('Error, Please try again!'), 400);
         }
@@ -155,61 +158,63 @@ class PrescriptionResultApi extends Controller
             $fileName = 'prescription_' . time() . '.xlsx';
             $folderPath = 'exports';
 
-            Excel::store(new MedicineExport($medicines), $folderPath . '/' . $fileName, 'public');
+            if (is_array($medicines)){
+                Excel::store(new MedicineExport($medicines), $folderPath . '/' . $fileName, 'public');
 
 
-            $new_file = 'storage/' . $folderPath . '/' . $fileName;
-            $file_excel = public_path($new_file);
+                $new_file = 'storage/' . $folderPath . '/' . $fileName;
+                $file_excel = public_path($new_file);
 
-            if ($file_excel) {
-                $reader = Excel::toCollection(new ExcelImportClass, $file_excel)->first();
+                if ($file_excel) {
+                    $reader = Excel::toCollection(new ExcelImportClass, $file_excel)->first();
 
-                $count = 0;
-                foreach ($reader->skip(1) as $row) {
-                    $nameMedicine = $row[0];
+                    $count = 0;
+                    foreach ($reader->skip(1) as $row) {
+                        $nameMedicine = $row[0];
 
-                    $ingredientMedicine = explode(',', $row[1]);
+                        $ingredientMedicine = explode(',', $row[1]);
 
-                    $quantity = $row[2];
+                        $quantity = $row[2];
 
-                    $product = ProductMedicine::where(function ($query) use ($nameMedicine) {
-                        $query->orWhere('name', 'LIKE', '%' . $this->normalizeString($nameMedicine) . '%');
-                    })
-                        ->where(function ($query) use ($ingredientMedicine) {
-                            $query->orWhere(function ($subQuery) use ($ingredientMedicine) {
-                                foreach ($ingredientMedicine as $item) {
-                                    $subQuery->whereHas('DrugIngredient', function ($q) use ($item) {
-                                        $q->where('component_name', 'LIKE', '%' . $this->normalizeString($item) . '%');
-                                    });
-                                }
-                            });
+                        $product = ProductMedicine::where(function ($query) use ($nameMedicine) {
+                            $query->orWhere('name', 'LIKE', '%' . $this->normalizeString($nameMedicine) . '%');
                         })
-                        ->where('status', OnlineMedicineStatus::APPROVED)
-                        ->first();
-
-                    $typeProduct = TypeProductCart::MEDICINE;
-                    if ($product) {
-                        $cart = Cart::where('user_id', $userID)
-                            ->where('product_id', $product->id)
-                            ->where('type_product', $typeProduct)
+                            ->where(function ($query) use ($ingredientMedicine) {
+                                $query->orWhere(function ($subQuery) use ($ingredientMedicine) {
+                                    foreach ($ingredientMedicine as $item) {
+                                        $subQuery->whereHas('DrugIngredient', function ($q) use ($item) {
+                                            $q->where('component_name', 'LIKE', '%' . $this->normalizeString($item) . '%');
+                                        });
+                                    }
+                                });
+                            })
+                            ->where('status', OnlineMedicineStatus::APPROVED)
                             ->first();
-                        if ($cart) {
-                            $cart->quantity = $cart->quantity + (int)$quantity;
-                        } else {
-                            $cart = new Cart();
-                            $cart->product_id = $product->id;
-                            $cart->quantity = (int)$quantity;
-                            $cart->user_id = $userID;
-                            $cart->type_product = $typeProduct;
+
+                        $typeProduct = TypeProductCart::MEDICINE;
+                        if ($product) {
+                            $cart = Cart::where('user_id', $userID)
+                                ->where('product_id', $product->id)
+                                ->where('type_product', $typeProduct)
+                                ->first();
+                            if ($cart) {
+                                $cart->quantity = $cart->quantity + (int)$quantity;
+                            } else {
+                                $cart = new Cart();
+                                $cart->product_id = $product->id;
+                                $cart->quantity = (int)$quantity;
+                                $cart->user_id = $userID;
+                                $cart->type_product = $typeProduct;
+                            }
+                            $cart->save();
+                            $count = $count + 1;
                         }
-                        $cart->save();
-                        $count = $count + 1;
                     }
+                    if ($count > 0){
+                        return response((new MainApi())->returnMessage('Add to cart success!'), 200);
+                    }
+                    return response((new MainApi())->returnMessage('No product!'), 201);
                 }
-                if ($count > 0){
-                    return response((new MainApi())->returnMessage('Add to cart success!'), 200);
-                }
-                return response((new MainApi())->returnMessage('No product!'), 201);
             }
             return response((new MainApi())->returnMessage('Excel file not found!'), 400);
         } catch (\Exception $exception) {

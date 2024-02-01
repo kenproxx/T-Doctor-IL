@@ -71,20 +71,10 @@
                             $clinic = (array)$item;
                             $clinic['total_services'] = $services->count();
                             $clinic['services'] = $services->toArray();
-                            if ($addressP == null) {
+                            if ($addressC != null && $addressD != null && $addressP != null){
+                                $clinic['addressInfo'] = ', ' . $addressC->name . ', ' . $addressD->name . ', ' . $addressP->name;
+                            } else {
                                 $clinic['addressInfo'] = '';
-                                return $clinic;
-                            }
-                            if ($addressD == null) {
-                                $clinic['addressInfo'] = $addressP['name'];
-                                return $clinic;
-                            }
-                            if ($addressC == null) {
-                                $clinic['addressInfo'] = $addressD['name'] . ',' . $addressP['name'];
-                                return $clinic;
-                            }
-                            if ($clinic['address_detail'] == null){
-                                $clinic['addressInfo'] = $addressC['name'] . ',' . $addressD['name'] . ',' . $addressP['name'];
                             }
                             return $clinic;
                         });

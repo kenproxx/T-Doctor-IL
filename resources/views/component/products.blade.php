@@ -9,12 +9,28 @@
             if ($isFavourite == true){
                 $heart = 'bi-heart-fill d-flex';
             }
+            $isSoldOut = $medicine->quantity == 0;
 
 @endphp
+<style>
+    .sold-out-overlay {
+        opacity: .5;
+        pointer-events: none;
+    }
 
-<div class="product-item">
+    .sold-out-overlay .sold-out-overlay-text {
+        position: absolute;
+        color: black;
+        top: 50%;
+        display: block;
+    }
+</style>
+<div class="product-item {{ $isSoldOut ? 'sold-out-overlay' : '' }}">
     <div class="img-pro">
         <img src="{{asset($medicine->thumbnail)}}" alt="">
+        <div class="{{ $isSoldOut ? 'sold-out-overlay-text d-flex justify-content-center align-items-center w-100' : 'd-none' }} ">
+            <h1>Sold Out</h1>
+        </div>
         <a class="button-heart" data-favorite="0">
             <i id="heart-icon-{{$medicine->id}}" class="{{$heart}} bi" data-product-id="{{$medicine->id}}"
                onclick="handleAddMedicineToWishList({{$medicine->id}})"></i>

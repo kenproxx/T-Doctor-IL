@@ -62,6 +62,7 @@ return [
     'Find my medicine' => 'Tìm thuốc của tôi',
     'Mentoring' => 'Cố vấn',
     'Location' => 'Vị trí',
+    'Name Pharmacy' => 'Tên nhà thuốc',
     'Working time' => 'Thời gian làm việc',
     'Previous' => 'Trước',
     'Next' => 'Kế tiếp',

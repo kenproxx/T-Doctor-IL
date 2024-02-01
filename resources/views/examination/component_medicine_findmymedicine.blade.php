@@ -35,19 +35,21 @@
     .sold-out-overlay .sold-out-overlay-text {
         position: absolute;
         color: black;
-        top: 50%;
+        top: 30%;
         display: block;
     }
 </style>
 <div class="col-sm-3 mb-3 col-6">
-    <div class="m-md-4 {{ $isSoldOut ? 'sold-out-overlay' : '' }}">
+    <div class="m-md-2 {{ $isSoldOut ? 'sold-out-overlay' : '' }}">
         <div class="frame component-medicine w-100">
-            <img loading="lazy" class="rectangle border-img"
-                 src="{{asset($medicine->thumbnail)}}"/>
-            <div class="{{ $isSoldOut ? 'sold-out-overlay-text' : 'd-none' }} ">
-                <h1>Sold Out</h1>
-            </div>
+            <div class="img-pro justify-content-center d-flex img_product--homeNew">
+                    <img loading="lazy" class="rectangle border-img"
+                         src="{{asset($medicine->thumbnail)}}"/>
+                    <div class="{{ $isSoldOut ? 'sold-out-overlay-text d-flex justify-content-center align-items-center w-100' : 'd-none' }} ">
+                        <h1>Sold Out</h1>
+                    </div>
 
+            </div>
             <div class="div">
                 <div class="div-2">
                     <a target="_blank" class="w-100" href="{{ route('medicine.detail', $medicine->id) }}">

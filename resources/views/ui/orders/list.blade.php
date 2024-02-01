@@ -144,10 +144,12 @@
             for (let i = 0; i < response.length; i++) {
                 let data = response[i];
                 let products = ``;
+                let username = ``;
                 let product_item = data.products;
                 let order_item = data.order_items;
-                for (let j = 0; j < product_item.length; j++) {
-                    products = products + `<div class="d-flex align-items-center">
+                if (product_item) {
+                    for (let j = 0; j < product_item.length; j++) {
+                        products = products + `<div class="d-flex align-items-center">
                                 <img src="${product_item[j].thumbnail}"
                                      alt="" class="product-thumbnail">
                                 <div class="product-info">
@@ -164,11 +166,14 @@
                                     </div>
                                 </div>
                             </div>`;
+                    }
+
+                    username = `<b>${product_item[0].username}</b>`;
                 }
 
                 html = html + `<div class="order-item p-2 border mt-2">
                          <div class="shop-info">
-                            <b>${product_item[0].username}</b>
+                            ${username}
                         </div>
                         <div class="order-info">
                             ${products}

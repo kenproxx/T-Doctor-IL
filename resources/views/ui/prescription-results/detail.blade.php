@@ -20,33 +20,35 @@
         </div>
         <div class="list-service-result mt-2 mb-3">
             <div id="list-service-result">
-                @foreach($array_result as $item)
-                    <div class="service-result-item d-flex align-items-center justify-content-between border p-3">
-                        <div class="row w-75">
-                            <div class="form-group">
-                                <label for="medicine_name">Medicine Name</label>
-                                <input disabled type="text" class="form-control medicine_name"
-                                       value="{{ $item['medicine_name'] }}" id="medicine_name"
-                                       name="medicine_name">
-                            </div>
-                            <div class="form-group">
-                                <label for="medicine_ingredients">Medicine Ingredients</label>
-                                <input disabled type="text" class="form-control medicine_ingredients"
-                                       value="{{ $item['medicine_ingredients'] }}" id="medicine_ingredients">
-                            </div>
-                            <div class="form-group">
-                                <label for="quantity">{{ __('home.Quantity') }}</label>
-                                <input disabled type="number" min="1" class="form-control quantity"
-                                       value="{{ $item['quantity'] }}" id="quantity">
-                            </div>
-                            <div class="form-group">
-                                <label for="detail_value">Detail</label>
-                                <input disabled type="text" class="form-control detail_value" id="detail_value"
-                                       value="{{ isset($item['note']) ? $item['note'] : '' }}">
+                @if(is_array($array_result))
+                    @foreach($array_result as $item)
+                        <div class="service-result-item d-flex align-items-center justify-content-between border p-3">
+                            <div class="row w-75">
+                                <div class="form-group">
+                                    <label for="medicine_name">Medicine Name</label>
+                                    <input disabled type="text" class="form-control medicine_name"
+                                           value="{{ $item['medicine_name'] }}" id="medicine_name"
+                                           name="medicine_name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="medicine_ingredients">Medicine Ingredients</label>
+                                    <input disabled type="text" class="form-control medicine_ingredients"
+                                           value="{{ $item['medicine_ingredients'] }}" id="medicine_ingredients">
+                                </div>
+                                <div class="form-group">
+                                    <label for="quantity">{{ __('home.Quantity') }}</label>
+                                    <input disabled type="number" min="1" class="form-control quantity"
+                                           value="{{ $item['quantity'] }}" id="quantity">
+                                </div>
+                                <div class="form-group">
+                                    <label for="detail_value">Detail</label>
+                                    <input disabled type="text" class="form-control detail_value" id="detail_value"
+                                           value="{{ isset($item['note']) ? $item['note'] : '' }}">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                @endif
             </div>
         </div>
         <div class="form-group">

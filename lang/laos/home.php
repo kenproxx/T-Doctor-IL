@@ -61,6 +61,7 @@ return [
     'Find my medicine' => 'ຊອກຫາຢາຂອງຂ້ອຍ',
     'Mentoring' => 'ການໃຫ້ຄຳປຶກສາ',
     'Location' => 'ສະຖານທີ່',
+    'Name Pharmacy' => 'ຊື່ຮ້ານຂາຍຢາ',
     'Working time' => 'ເວລາເຮັດວຽກ',
     'Previous' => 'ທີ່ຜ່ານມາ',
     'Next' => 'ຕໍ່ໄປ',
