@@ -27,10 +27,6 @@
                     class="btn btn-outline-primary mt-3 btnAddNewResult">{{ __('home.Add') }}
             </button>
         </div>
-        <div class="form-group">
-            <label for="notes">{{ __('home.Detail') }}</label>
-            <textarea class="form-control" id="notes" rows="5"></textarea>
-        </div>
         <button type="button" class="btn btn-primary " id="btnCreate">Create</button>
     </div>
     <script>
@@ -98,15 +94,6 @@
 
             itemList.forEach(item => {
                 formData.append(item, my_array.toString());
-            });
-
-            const fieldTextareaTiny = [
-                'notes',
-            ];
-
-            fieldTextareaTiny.forEach(fieldTextarea => {
-                const content = tinymce.get(fieldTextarea).getContent();
-                formData.append(fieldTextarea, content);
             });
 
             try {
