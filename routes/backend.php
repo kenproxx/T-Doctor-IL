@@ -3,6 +3,7 @@
 use App\Http\Controllers\backend\BackendCouponApplyController;
 use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\backend\BackendQuestionController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\restapi\AddressApi;
 use App\Http\Controllers\restapi\AnswerLikeApi;
 use App\Http\Controllers\restapi\BookingApi;
@@ -65,6 +66,7 @@ Route::group(['prefix' => 'coupons'], function () {
     Route::post('/create', [BackendCouponController::class, 'create'])->name('api.backend.coupons.create');
     Route::post('/update/{id}', [BackendCouponController::class, 'update'])->name('api.backend.coupons.update');
     Route::delete('/delete/{id}', [BackendCouponController::class, 'delete'])->name('api.backend.coupons.delete');
+    Route::get('get-applied/{user_id?}/{status?}', [CouponController::class, 'getListCouponApplied'])->name('coupon.get.applied');
 });
 
 Route::group(['prefix' => 'service-clinics'], function () {
