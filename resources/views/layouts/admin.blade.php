@@ -506,6 +506,15 @@
                 </li>
                 <!-- End Booking Nav -->
 
+                <!-- Start Doctor Prescription Page Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="{{ route('view.prescription.result.doctor') }}">
+                        <i class="bi bi-music-player"></i>
+                        <span>Doctor Prescription</span>
+                    </a>
+                </li>
+                <!-- End Doctor Prescription Page Nav -->
+
                 <!-- Start Medical Result Business Nav -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#medical-result-nav" data-bs-toggle="collapse"
@@ -743,6 +752,15 @@
             </ul>
         </li>
         <!-- End My Bookings Nav -->
+
+        <!-- Start My Prescription Page Nav -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="{{ route('view.prescription.result.my.list') }}">
+                <i class="bi bi-magnet"></i>
+                <span>My Prescription</span>
+            </a>
+        </li>
+        <!-- End My Prescription Page Nav -->
 
         <!-- Start My Coupons Nav -->
         <li class="nav-item">
