@@ -208,6 +208,7 @@ class BackendProductInfoController extends Controller
             }
             $status = $request->input('status');
             $userID = $request->input('user_id');
+            $quantity = $request->input('quantity');
 
             $product = new ProductInfo();
 
@@ -230,6 +231,7 @@ class BackendProductInfoController extends Controller
             $product->description_laos = $description_laos;
             $product->status = $status;
             $product->created_by = $userID;
+            $product->quantity = $quantity;
 
             $success = $product->save();
             if ($success) {
@@ -295,6 +297,7 @@ class BackendProductInfoController extends Controller
             $ads_period = $request->input('ads_period');
             $status = $request->input('status');
             $userID = $request->input('user_id');
+            $quantity = $request->input('quantity');
 
             $product->name = $name;
             $product->name_en = $name_en;
@@ -315,6 +318,7 @@ class BackendProductInfoController extends Controller
             $product->description_laos = $description_laos;
             $product->status = $status;
             $product->updated_by = $userID;
+            $product->quantity = $quantity;
 
             $success = $product->save();
             if ($success) {

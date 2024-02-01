@@ -101,8 +101,8 @@
                            value="VND" required>
                 </div>
                 <div class="col-md-4">
-                    <label for="price_unit">{{ __('home.Quantity') }}</label>
-                    <input type="text" class="form-control" id="quantity" name="quantity" required>
+                    <label for="quantity">{{ __('home.Quantity') }}</label>
+                    <input type="number" value="1" class="form-control" id="quantity" name="quantity" required>
                 </div>
             </div>
             <div class="row">
@@ -161,7 +161,8 @@
             const arrField = ['name', 'name_en', 'name_laos',
                 'category_id', 'brand_name', 'brand_name_en',
                 'brand_name_laos', 'province_id', 'price',
-                'price_unit', 'ads_plan', 'ads_period', 'user_id'];
+                'price_unit', 'ads_plan', 'ads_period',
+                'user_id', 'quantity'];
 
             let isValid = true
             /* Tạo fn appendDataForm ở admin blade*/

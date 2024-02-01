@@ -117,14 +117,19 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 form-group">
+                <div class="col-md-4 form-group">
                     <label for="price">{{ __('home.Price') }}</label>
                     <input type="number" class="form-control" id="price" name="price" value="{{$product->price}}">
                 </div>
-                <div class="col-md-6 form-group">
+                <div class="col-md-4 form-group">
                     <label for="price_unit">{{ __('home.Price Unit') }}</label>
                     <input type="text" class="form-control" id="price_unit" name="price_unit"
                            value="{{$product->price_unit}}">
+                </div>
+                <div class="col-md-4 form-group">
+                    <label for="quantity">{{ __('home.Quantity') }}</label>
+                    <input type="text" class="form-control" id="quantity" name="quantity"
+                           value="{{ $product->quantity ?? 0 }}">
                 </div>
             </div>
 
@@ -185,7 +190,9 @@
                 const fieldNames = [
                     "name", "name_en", "category_id", "brand_name",
                     "brand_name_en", "province_id", "price",
-                    "price_unit", "ads_plan", "ads_period", "user_id", "name_laos", "brand_name_laos"
+                    "price_unit", "ads_plan", "ads_period",
+                    "user_id", "name_laos", "brand_name_laos",
+                    'quantity'
                 ];
 
                 let isValid = true
