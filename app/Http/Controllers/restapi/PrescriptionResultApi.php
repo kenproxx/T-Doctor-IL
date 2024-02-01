@@ -2,21 +2,26 @@
 
 namespace App\Http\Controllers\restapi;
 
+use App\Enums\MessageStatus;
 use App\Enums\online_medicine\OnlineMedicineStatus;
 use App\Enums\PrescriptionResultStatus;
 use App\Enums\TypeProductCart;
 use App\Enums\UserStatus;
+use App\Events\NewMessage;
 use App\ExportExcel\MedicineExport;
 use App\Http\Controllers\Controller;
 use App\Imports\ExcelImportClass;
 use App\Models\Cart;
+use App\Models\Chat;
+use App\Models\Message;
 use App\Models\online_medicine\ProductMedicine;
 use App\Models\PrescriptionResults;
 use App\Models\User;
+use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-use function Symfony\Component\String\u;
 
 class PrescriptionResultApi extends Controller
 {
@@ -104,6 +109,8 @@ class PrescriptionResultApi extends Controller
             $prescription_result->notes_laos = $notes_laos;
 
             $prescription_result->status = $status;
+
+            $this->noti_after_create_don_thuoc($email);
 
             $success = $prescription_result->save();
 
@@ -249,5 +256,36 @@ class PrescriptionResultApi extends Controller
     private function normalizeString($str)
     {
         return strtolower(trim($str));
+    }
+
+    private function noti_after_create_don_thuoc($email)
+    {
+        $user = User::where('email', $email)->first();
+
+        if (!$user) {
+            return;
+        }
+
+        $uuid = Uuid::uuid();
+
+        $type = 'DonThuocMoi';
+
+        $message = Message::create([
+            'from' => Auth::id(),
+            'to' => $user->id,
+            'text' => 'Bạn có đơn thuốc',
+            'uuid_session' => $uuid,
+            'type' => $type,
+        ]);
+
+        Chat::create([
+            'from_user_id' => Auth::id(),
+            'to_user_id' => $user->id,
+            'chat_message' => 'Bạn có đơn thuốc',
+            'message_status' => MessageStatus::UNSEEN,
+            'uuid_session' => $uuid,
+            'type' => $type,
+        ]);
+        broadcast(new NewMessage($message));
     }
 }

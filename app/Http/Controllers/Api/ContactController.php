@@ -86,7 +86,7 @@ class ContactController extends Controller
             $uuid = Uuid::uuid();
         }
 
-        $type = 'alert';
+        $type = 'TaoDonThuoc';
 
         $message = Message::create([
             'from' => $request->sender_id,

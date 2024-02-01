@@ -215,13 +215,32 @@
     }
 
     function renderMessageReceive(element) {
-        let html = `<div class="message">
+        let html = '';
+
+        if (element.type == 'DonThuocMoi') {
+            if (!msg.chat_message) {
+                return;
+            }
+            html += `<div class="message ">
+                        <span >
+                            ${msg.chat_message}`
+
+            if ('{{ !\App\Models\User::isNormal() }}') {
+                html += `, <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.create') }}?user_id=${chatUserId}">xem ngay?</a>`
+            }
+
+            html += `</span></div>`
+            return;
+        } else {
+            html = `<div class="message">
                         <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/1_copy.jpg"/>
                         <div class="bubble">
                             ${element.message.text}
                             <div class="corner"></div>
                         </div>
                     </div>`
+        }
+
         $('#chat-messages').append(html);
         autoScrollChatBox();
     }
@@ -448,19 +467,28 @@
 
         let currentUserId = '{{ Auth::check() ? Auth::user()->id : '' }}';
         data.forEach((msg) => {
-            if (msg.type == 'alert') {
+            if (msg.type) {
                 if (!msg.chat_message) {
                     return;
                 }
-                html += `<div class="message ">
-                        <span >
-                            ${msg.chat_message}`
 
-                if ('{{ !\App\Models\User::isNormal() }}') {
-                    html += `, <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.create') }}?user_id=${chatUserId}">tạo ngay?</a>`
+                if (msg.type == 'DonThuocMoi') {
+                    html += `<div class="message ">
+                        <span >
+                            ${msg.chat_message},
+                            <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.my.list') }}">xem ngay?</a>
+                            </span></div>`
+                    return;
                 }
 
-                html += `</span></div>`
+                if ('{{ !\App\Models\User::isNormal() }}' && msg.type == 'TaoDonThuoc') {
+                    html += `<div class="message ">
+                        <span >
+                            ${msg.chat_message},
+                             <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.create') }}?user_id=${chatUserId}">tạo ngay?</a>
+                             </span></div>`
+                }
+
                 return;
             }
 
