@@ -44,11 +44,35 @@ class CartApi extends Controller
                 ->where('product_id', $productID)
                 ->where('type_product', $typeProduct)
                 ->first();
+
+            if ($typeProduct == TypeProductCart::MEDICINE) {
+                $product = ProductMedicine::find($productID);
+            } else {
+                $product = ProductInfo::find($productID);
+            }
+
+            if (!$product) {
+                return response((new MainApi())->returnMessage('Product not found'), 404);
+            }
+
+            if ($product->quantity == 0) {
+                return response((new MainApi())->returnMessage('Product out of stock'), 400);
+            }
+
             if ($cart) {
-                $cart->quantity = $cart->quantity + $quantity;
+                $quantity = $cart->quantity + $quantity;
+                if ($quantity > $product->quantity) {
+                    $quantity = $product->quantity;
+                }
+                $cart->quantity = $quantity;
             } else {
                 $cart = new Cart();
                 $cart->product_id = $productID;
+
+                if ($quantity && $quantity > $product->quantity) {
+                    $quantity = $product->quantity;
+                }
+
                 $cart->quantity = $quantity;
                 $cart->user_id = $userID;
                 $cart->type_product = $typeProduct;
@@ -68,7 +92,21 @@ class CartApi extends Controller
     {
         try {
             $cart = Cart::where('id', $id)->first();
+
+            $typeProduct = $cart->type_product;
+
+            if ($typeProduct == TypeProductCart::MEDICINE) {
+                $product = ProductMedicine::find($cart->product_id);
+            } else {
+                $product = ProductInfo::find($cart->product_id);
+            }
+
             $quantity = $request->input('quantity');
+
+            if ($quantity && $quantity > $product->quantity) {
+                $quantity = $product->quantity;
+            }
+
             $cart->quantity = $quantity;
             $success = $cart->save();
             if ($success) {
