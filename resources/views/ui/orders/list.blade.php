@@ -146,8 +146,10 @@
                 let products = ``;
                 let product_item = data.products;
                 let order_item = data.order_items;
-                for (let j = 0; j < product_item.length; j++) {
-                    products = products + `<div class="d-flex align-items-center">
+                if (product_item){
+                    console.log(product_item)
+                    for (let j = 0; j < product_item.length; j++) {
+                        products = products + `<div class="d-flex align-items-center">
                                 <img src="${product_item[j].thumbnail}"
                                      alt="" class="product-thumbnail">
                                 <div class="product-info">
@@ -164,6 +166,7 @@
                                     </div>
                                 </div>
                             </div>`;
+                    }
                 }
 
                 html = html + `<div class="order-item p-2 border mt-2">
