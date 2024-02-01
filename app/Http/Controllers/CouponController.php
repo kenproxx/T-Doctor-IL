@@ -119,6 +119,12 @@ class CouponController extends Controller
             return response((new MainApi())->returnMessage("Coupon not found"), 404);
         }
 
+        $couponInfo = Coupon::find($coupon_id);
+
+        if ($couponInfo->status == CouponStatus::DELETED) {
+            return response((new MainApi())->returnMessage("Coupon đã bị xóa"), 404);
+        }
+
         $listCoupon = CouponApply::where('coupon_id', $coupon_id);
 
         if ($status) {

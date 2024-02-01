@@ -125,7 +125,7 @@ class BackendCouponController extends Controller
     {
         $coupon = Coupon::find($id);
         if (!$coupon || $coupon->status == CouponStatus::DELETED) {
-            return response('Not found', 404);
+            return response('Coupon đã bị xóa', 404);
         }
         $coupon->views = $coupon->views + 1;
         $coupon->save();
