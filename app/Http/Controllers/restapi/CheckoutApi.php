@@ -82,11 +82,14 @@ class CheckoutApi extends Controller
             $orderItem->product_id = $cart->product_id;
             $orderItem->quantity = $cart->quantity;
             $orderItem->price = $product->price;
+
             $orderItem->type_product = $cart->type_product;
 
             $orderItem->status = OrderItemStatus::ACTIVE;
-
             $orderItem->save();
+
+            $product->quantity -= $cart->quantity;
+            $product->save();
 
             $cart->delete();
         }
