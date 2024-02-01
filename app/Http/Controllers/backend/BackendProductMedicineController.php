@@ -89,7 +89,7 @@ class BackendProductMedicineController extends Controller
     {
         $params = $request->only('name', 'name_en', 'name_laos', 'brand_name', 'brand_name_en', 'brand_name_laos',
             'category_id', 'object_', 'filter_', 'price', 'status', 'description', 'description_en', 'description_laos',
-            'unit_price');
+            'unit_price', 'quantity');
 
         //check name
         if (empty($params['name']) || empty($params['name_en']) || empty($params['name_laos'])) {
@@ -153,7 +153,7 @@ class BackendProductMedicineController extends Controller
     {
         $params = $request->only('name', 'name_en', 'name_laos', 'brand_name', 'brand_name_en', 'brand_name_laos',
             'category_id', 'object_', 'filter_', 'price', 'status', 'description', 'description_en',
-            'description_laos',);
+            'description_laos', 'quantity');
 
         //check name
         if (empty($params['name']) || empty($params['name_en']) || empty($params['name_laos'])) {

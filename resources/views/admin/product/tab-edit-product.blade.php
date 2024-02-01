@@ -128,7 +128,7 @@
                 </div>
                 <div class="col-md-4 form-group">
                     <label for="quantity">{{ __('home.Quantity') }}</label>
-                    <input type="text" class="form-control" id="quantity" name="quantity"
+                    <input type="text" class="form-control" id="quantity" name="quantity" min="0"
                            value="{{ $product->quantity ?? 0 }}">
                 </div>
             </div>

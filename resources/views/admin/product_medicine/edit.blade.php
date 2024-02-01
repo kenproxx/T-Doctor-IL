@@ -169,6 +169,13 @@
                     </select>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="quantity">{{ __('home.Quantity') }}</label>
+                    <input type="number" class="form-control" id="quantity" name="quantity" min="0"
+                           value="{{ $productMedicine->quantity ?? '' }}">
+                </div>
+            </div>
             <input type="hidden" id="id" name="id" value="{{ $productMedicine->id ?? '' }}">
         </div>
     </form>
@@ -189,7 +196,7 @@
                 'name', 'name_en', 'name_laos',
                 'brand_name', 'brand_name_en', 'brand_name_laos',
                 'category_id', 'object_', 'filter_', 'price', 'status', 'id', 'unit_price',
-                'ingredient'
+                'ingredient', 'quantity'
             ]
 
             var filedata = document.getElementById("gallery");

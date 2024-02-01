@@ -102,7 +102,7 @@
                 </div>
                 <div class="col-md-4">
                     <label for="quantity">{{ __('home.Quantity') }}</label>
-                    <input type="number" value="1" class="form-control" id="quantity" name="quantity" required>
+                    <input type="number" value="1" class="form-control" id="quantity" name="quantity" min="0" required>
                 </div>
             </div>
             <div class="row">

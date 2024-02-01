@@ -15,7 +15,7 @@ class ProductMedicine extends Model
         'brand_name', 'brand_name_en', 'brand_name_laos',
         'category_id', 'object_', 'filter_', 'price', 'status',
         'description', 'description_en', 'description_laos',
-        'thumbnail', 'gallery', 'unit_price'
+        'thumbnail', 'gallery', 'unit_price', 'quantity'
     ];
 
     public function DrugIngredient()
