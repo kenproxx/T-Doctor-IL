@@ -14,7 +14,7 @@
             <div class="form-group col-md-6">
                 <label for="email_value">{{ __('home.Email') }}</label>
                 <input type="text" class="form-control" id="email_value"
-                       placeholder="{{ __('home.Please enter your email') }}">
+                       placeholder="{{ __('home.E-Mail Address') }}">
             </div>
         </div>
         <div class="list-service-result mt-2 mb-3">
@@ -72,11 +72,13 @@
             let medicine_name = document.getElementsByClassName('medicine_name');
             let medicine_ingredients = document.getElementsByClassName('medicine_ingredients');
             let quantity = document.getElementsByClassName('quantity');
+            let detail = document.getElementsByClassName('detail_value');
 
             for (let j = 0; j < medicine_name.length; j++) {
                 let name = medicine_name[j].value;
                 let ingredients = medicine_ingredients[j].value;
                 let quantity_value = quantity[j].value;
+                let detail_value = detail[j].value;
 
                 if (!name || !ingredients || !quantity_value) {
                     alert('Please enter medicine name or medicine ingredients or quantity!')
@@ -86,6 +88,7 @@
                     medicine_name: name,
                     medicine_ingredients: ingredients,
                     quantity: quantity_value,
+                    note: detail_value ?? '',
                 }
                 item = JSON.stringify(item);
                 my_array.push(item);
@@ -103,8 +106,6 @@
                 const content = tinymce.get(fieldTextarea).getContent();
                 formData.append(fieldTextarea, content);
             });
-
-            console.log('12')
 
             try {
                 await $.ajax({
@@ -146,6 +147,10 @@
                         <div class="form-group">
                             <label for="quantity">{{ __('home.Quantity') }}</label>
                             <input type="number" min="1" class="form-control quantity" id="quantity">
+                        </div>
+                        <div class="form-group">
+                            <label for="detail_value">Detail</label>
+                            <input type="text" class="form-control detail_value" id="detail_value">
                         </div>
                     </div>
                     <div class="action mt-3">
