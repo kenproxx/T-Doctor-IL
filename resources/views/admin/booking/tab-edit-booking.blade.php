@@ -36,9 +36,13 @@
                     <label for="doctor_id">{{ __('home.Doctor Name') }}</label>
                     @php
                         $doctor = \App\Models\User::where('id',$bookings_edit->doctor_id)->first();
+                        $doctor_info = '';
+                        if ($doctor){
+                            $doctor_info = $doctor->username .'-'.$doctor->email;
+                        }
                     @endphp
                     <input type="text" class="form-control" id="doctor_id" name="doctor_id"
-                           value="{{$doctor->username}}-{{$doctor->email}}"
+                           value="{{$doctor_info}}"
                            disabled>
                 </div>
             </div>
@@ -57,19 +61,19 @@
                     <label for="booking_status">{{ __('home.Trạng thái') }}</label>
                     <select class="form-select" id="booking_status" name="status">
                         <option
-                                value="{{ \App\Enums\BookingStatus::PENDING }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::PENDING ? 'selected' : '' }}>
+                            value="{{ \App\Enums\BookingStatus::PENDING }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::PENDING ? 'selected' : '' }}>
                             {{ \App\Enums\BookingStatus::PENDING }}
                         </option>
                         <option
-                                value="{{ \App\Enums\BookingStatus::COMPLETE }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::COMPLETE ? 'selected' : '' }}>
+                            value="{{ \App\Enums\BookingStatus::COMPLETE }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::COMPLETE ? 'selected' : '' }}>
                             {{ \App\Enums\BookingStatus::COMPLETE }}
                         </option>
                         <option
-                                value="{{ \App\Enums\BookingStatus::APPROVED }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::APPROVED ? 'selected' : '' }}>
+                            value="{{ \App\Enums\BookingStatus::APPROVED }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::APPROVED ? 'selected' : '' }}>
                             {{ \App\Enums\BookingStatus::APPROVED }}
                         </option>
                         <option
-                                value="{{ \App\Enums\BookingStatus::CANCEL }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::CANCEL ? 'selected' : '' }}>
+                            value="{{ \App\Enums\BookingStatus::CANCEL }}" {{ $bookings_edit->status === \App\Enums\BookingStatus::CANCEL ? 'selected' : '' }}>
                             {{ \App\Enums\BookingStatus::CANCEL }}
                         </option>
                     </select>
@@ -88,25 +92,25 @@
             <input type="text" name="services" id="services"
                    class="form-control d-none">
             <button type="submit" class="btn btn-primary up-date-button mt-4">{{ __('home.Save') }}</button>
-            @if($bookings_edit->is_result == 1 && $bookings_edit->status === \App\Enums\BookingStatus::COMPLETE )
-                @php
-                    $old_result = \App\Models\BookingResult::where('booking_id', $bookings_edit->id)->first();
-                @endphp
-                @if($old_result)
-                    <label for="input_old_result"></label>
-                    <input type="text" hidden id="input_old_result" value="{{ $old_result->id }}">
-                @endif
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-success {{ $old_result ? 'btnUnCreate' : '' }} mt-4"
-                        data-toggle="modal"
-                        data-target="{{ $old_result ? '' : '#exampleModalComplete' }}">
-                    {{ __('home.Create result') }}
-                </button>
-            @else
-                <button type="button" class="btn btn-success mt-4" data-toggle="modal" data-target="#exampleModal">
-                    {{ __('home.Create result') }}
-                </button>
-            @endif
+            {{--            @if($bookings_edit->is_result == 1 && $bookings_edit->status === \App\Enums\BookingStatus::COMPLETE )--}}
+            {{--                @php--}}
+            {{--                    $old_result = \App\Models\BookingResult::where('booking_id', $bookings_edit->id)->first();--}}
+            {{--                @endphp--}}
+            {{--                @if($old_result)--}}
+            {{--                    <label for="input_old_result"></label>--}}
+            {{--                    <input type="text" hidden id="input_old_result" value="{{ $old_result->id }}">--}}
+            {{--                @endif--}}
+            {{--                <!-- Button trigger modal -->--}}
+            {{--                <button type="button" class="btn btn-success {{ $old_result ? 'btnUnCreate' : '' }} mt-4"--}}
+            {{--                        data-toggle="modal"--}}
+            {{--                        data-target="{{ $old_result ? '' : '#exampleModalComplete' }}">--}}
+            {{--                    {{ __('home.Create result') }}--}}
+            {{--                </button>--}}
+            {{--            @else--}}
+            {{--                <button type="button" class="btn btn-success mt-4" data-toggle="modal" data-target="#exampleModal">--}}
+            {{--                    {{ __('home.Create result') }}--}}
+            {{--                </button>--}}
+            {{--            @endif--}}
         </form>
     </div>
     <!-- Modal -->

@@ -11,8 +11,10 @@ use App\Http\Controllers\restapi\CartApi;
 use App\Http\Controllers\restapi\CheckoutApi;
 use App\Http\Controllers\restapi\MedicalFavouriteApi;
 use App\Http\Controllers\restapi\MessageApi;
+use App\Http\Controllers\restapi\PrescriptionResultApi;
 use App\Http\Controllers\restapi\ServiceClinicApi;
 use App\Http\Controllers\restapi\SocialUserApi;
+use App\Http\Controllers\restapi\ui\MyBusinessApi;
 use App\Http\Controllers\restapi\UserApi;
 use Illuminate\Support\Facades\Route;
 
@@ -129,7 +131,15 @@ Route::group(['prefix' => 'address-order'], function () {
     Route::delete('delete/{id}', [AddressApi::class, 'delete'])->name('api.backend.address.order.delete');
 });
 
-/* Address api */
+/* Mentoring api */
 Route::group(['prefix' => 'mentorings'], function () {
     Route::post('like-answer', [AnswerLikeApi::class, 'handleLikeOrDislike'])->name('api.backend.like.answer');
+});
+
+/* Prescription result api */
+Route::group(['prefix' => 'prescription-result'], function () {
+    Route::get('list', [PrescriptionResultApi::class, 'listPrescription'])->name('api.backend.prescription.result.list');
+    Route::get('user', [PrescriptionResultApi::class, 'listPrescriptionByUser'])->name('api.backend.prescription.result.user');
+    Route::get('doctor', [PrescriptionResultApi::class, 'listPrescriptionByDoctor'])->name('api.backend.prescription.result.doctor');
+    Route::post('create', [PrescriptionResultApi::class, 'createPrescription'])->name('api.backend.prescription.result.create');
 });
