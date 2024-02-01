@@ -23,6 +23,17 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        .sold-out-overlay {
+            opacity: .5;
+            pointer-events: none;
+        }
+
+        .sold-out-overlay .sold-out-overlay-text {
+            position: absolute;
+            color: black;
+            top: 50%;
+            display: block;
+        }
     </style>
     @include('layouts.partials.headerFleaMarket')
     <body>
@@ -355,14 +366,18 @@
                 let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`;
                 url = url.replace(':id', products[i].id);
                 var product = products[i];
+                var isSoldOut = product.quantity == 0;
                 var adsPlan = product.ads_plan;
                 let isFavoriteClass = isUserWasWishlist(product.id);
 
                 var productHtml = `
     <div class="col-md-4 col-6">
-        <div class="product-item">
+        <div class="product-item ${isSoldOut ? 'sold-out-overlay' : ''}">
              <div class="img-pro justify-content-center d-flex img_product--homeNew">
                   <img src="${product.thumbnail}" alt="">
+                  <div class="${ isSoldOut ? 'sold-out-overlay-text' : 'd-none' } ">
+                <h1>Sold Out</h1>
+            </div>
                        <a class="button-heart" data-favorite="0">
                             <i id="icon-heart-${product.id}" class="${isFavoriteClass} bi" data-product-id="${product.id}" onclick="addProductToWishList(${product.id})"></i>
                        </a>
@@ -529,6 +544,7 @@
                     let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`;
                     url = url.replace(':id', res[i].id);
                     let item = res[i];
+                    var isSoldOut = item.quantity == 0;
                     let adsPlan = item.ads_plan;
                     let userId = `{{ Auth::check() ? Auth::user()->id : null }}`;
 
@@ -544,9 +560,12 @@
                     var html = `
 
                     <div class="col-md-4 col-6">
-                        <div class="product-item">
+                        <div class="product-item ${isSoldOut ? 'sold-out-overlay' : ''}">
                              <div class="img-pro justify-content-center d-flex img_product--homeNew">
                                   <img src="${item.thumbnail}" alt="" >
+                                  <div class="${ isSoldOut ? 'sold-out-overlay-text' : 'd-none' } ">
+                <h1>Sold Out</h1>
+            </div>
                                        ${tab}
                                   </div>
                              <div class="content-pro p-md-3 p-2">
