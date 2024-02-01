@@ -78,6 +78,7 @@
 
     let chatUserId;
     let isShowOpenWidget;
+    let uuid_session;
 
     let currentUserIdChat = '{{ Auth::check() ? Auth::user()->id : '' }}';
 
@@ -263,6 +264,11 @@
 
                 $('#close').unbind("click").click(function () {
                     isShowOpenWidget = false;
+
+                    handleCloseButton(uuid_session);
+
+                    uuid_session = '';
+
                     $("#chat-messages, #profile, #profile p").removeClass("animate");
 
                     setTimeout(function () {
@@ -273,6 +279,29 @@
                     }, 50);
                 });
             });
+        });
+    }
+
+    function handleCloseButton(uuid_session) {
+        let currentUserId = '{{ Auth::check() ? Auth::user()->id : '' }}';
+
+        $.ajax({
+            url: "{{ route('chat.send-message.renew-uuid') }}",
+            type: "POST",
+            dataType: "json",
+            data: {
+                sender_id: currentUserId,
+                receiver_id: chatUserId,
+                text: '',
+                uuid_session: uuid_session,
+                type: uuid_session
+            },
+            success: function (data) {
+                uuid_session = data.uuid_session;
+            },
+            error: function (e) {
+                console.log(e);
+            }
         });
     }
 
@@ -299,6 +328,7 @@
         }
     });
 
+
     function sendMessageChatWidget() {
         let textChat = $('#text-chatMessage').val();
         if (textChat.trim() == '') {
@@ -314,9 +344,12 @@
             data: {
                 sender_id: currentUserId,
                 receiver_id: chatUserId,
-                text: textChat
+                text: textChat,
+                uuid_session: uuid_session
             },
             success: function (data) {
+                uuid_session = data.uuid_session;
+
                 renderMessageFromThisUser(textChat);
                 afterSendMessageChatWidget();
             },
@@ -415,6 +448,18 @@
 
         let currentUserId = '{{ Auth::check() ? Auth::user()->id : '' }}';
         data.forEach((msg) => {
+            if (msg.type == 'alert') {
+                if (!msg.chat_message) {
+                    return;
+                }
+                html += `<div class="message ">
+                        <span >
+                            ${msg.chat_message}
+                        </span>
+                    </div>`
+                return;
+            }
+
             if (!msg.chat_message) {
                 return;
             }

@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Chat;
 use App\Models\Message;
 use App\Models\User;
+use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -53,10 +54,17 @@ class ContactController extends Controller
 
     public function sendNewMessage(Request $request)
     {
+        if ($request->uuid_session) {
+            $uuid = $request->uuid_session;
+        } else {
+            $uuid = Uuid::uuid();
+        }
+
         $message = Message::create([
             'from' => $request->sender_id,
             'to' => $request->receiver_id,
-            'text' => $request->text
+            'text' => $request->text,
+            'uuid_session' => $uuid,
         ]);
 
         Chat::create([
@@ -64,6 +72,37 @@ class ContactController extends Controller
             'to_user_id' => $request->receiver_id,
             'chat_message' => $request->text,
             'message_status' => MessageStatus::UNSEEN,
+            'uuid_session' => $uuid,
+        ]);
+        broadcast(new NewMessage($message));
+        return response()->json($message);
+    }
+
+    public function renewUuidMessage(Request $request)
+    {
+        if ($request->uuid_session) {
+            $uuid = $request->uuid_session;
+        } else {
+            $uuid = Uuid::uuid();
+        }
+
+        $type = 'alert';
+
+        $message = Message::create([
+            'from' => $request->sender_id,
+            'to' => $request->receiver_id,
+            'text' => 'Bạn chưa tạo đơn thuốc, tạo ngay?',
+            'uuid_session' => $uuid,
+            'type' => $type,
+        ]);
+
+        Chat::create([
+            'from_user_id' => $request->sender_id,
+            'to_user_id' => $request->receiver_id,
+            'chat_message' => 'Bạn chưa tạo đơn thuốc, tạo ngay?',
+            'message_status' => MessageStatus::UNSEEN,
+            'uuid_session' => $uuid,
+            'type' => $type,
         ]);
         broadcast(new NewMessage($message));
         return response()->json($message);

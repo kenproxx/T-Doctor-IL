@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
-    protected $fillable = ['to','from','text'];
+    protected $fillable = ['to','from','text', 'uuid_session', 'type'];
 
     public function fromContact()
     {

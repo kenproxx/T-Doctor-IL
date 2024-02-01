@@ -26,3 +26,6 @@ Route::get('/conversation/{id}/{auth_id}', [ContactController::class, 'getMessag
 
 
 Route::post('/conversation/send', [ContactController::class, 'sendNewMessage'])->name('chat.send-message');
+
+
+Route::post('renew-uuid', [ContactController::class, 'renewUuidMessage'])->name('chat.send-message.renew-uuid');
