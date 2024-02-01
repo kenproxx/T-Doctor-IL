@@ -9,11 +9,13 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <label for="full_name_value">{{ __('home.Full Name') }}</label>
-                <input type="text" class="form-control full_name" value="" id="full_name_value" name="full_name">
+                <input type="text" class="form-control full_name"
+                       value="{{ $user ? $user->last_name . ' ' . $user->name : '' }}" id="full_name_value"
+                       name="full_name">
             </div>
             <div class="form-group col-md-6">
                 <label for="email_value">{{ __('home.Email') }}</label>
-                <input type="text" class="form-control" id="email_value"
+                <input type="text" class="form-control" id="email_value" value="{{ $user ? $user->email : '' }}"
                        placeholder="{{ __('home.E-Mail Address') }}">
             </div>
         </div>
@@ -24,10 +26,6 @@
             <button type="button"
                     class="btn btn-outline-primary mt-3 btnAddNewResult">{{ __('home.Add') }}
             </button>
-        </div>
-        <div class="form-group">
-            <label for="notes">{{ __('home.Detail') }}</label>
-            <textarea class="form-control" id="notes" rows="5"></textarea>
         </div>
         <button type="button" class="btn btn-primary " id="btnCreate">Create</button>
     </div>
@@ -96,15 +94,6 @@
 
             itemList.forEach(item => {
                 formData.append(item, my_array.toString());
-            });
-
-            const fieldTextareaTiny = [
-                'notes',
-            ];
-
-            fieldTextareaTiny.forEach(fieldTextarea => {
-                const content = tinymce.get(fieldTextarea).getContent();
-                formData.append(fieldTextarea, content);
             });
 
             try {

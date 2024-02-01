@@ -5,12 +5,17 @@ namespace App\Http\Controllers\ui;
 use App\Enums\PrescriptionResultStatus;
 use App\Http\Controllers\Controller;
 use App\Models\PrescriptionResults;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class PrescriptionResultController extends Controller
 {
-    public function create()
+    public function create(Request $request)
     {
-        return view('ui.prescription-results.create');
+        $user_id = $request->input('user_id');
+        $user = User::find($user_id);
+
+        return view('ui.prescription-results.create', compact('user'));
     }
 
     public function myPrescription()

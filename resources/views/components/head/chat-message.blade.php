@@ -78,6 +78,7 @@
 
     let chatUserId;
     let isShowOpenWidget;
+    let uuid_session;
 
     let currentUserIdChat = '{{ Auth::check() ? Auth::user()->id : '' }}';
 
@@ -214,13 +215,32 @@
     }
 
     function renderMessageReceive(element) {
-        let html = `<div class="message">
+        let html = '';
+
+        if (element.type == 'DonThuocMoi') {
+            if (!msg.chat_message) {
+                return;
+            }
+            html += `<div class="message ">
+                        <span >
+                            ${msg.chat_message}`
+
+            if ('{{ !\App\Models\User::isNormal() }}') {
+                html += `, <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.create') }}?user_id=${chatUserId}">xem ngay?</a>`
+            }
+
+            html += `</span></div>`
+            return;
+        } else {
+            html = `<div class="message">
                         <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/1_copy.jpg"/>
                         <div class="bubble">
                             ${element.message.text}
                             <div class="corner"></div>
                         </div>
                     </div>`
+        }
+
         $('#chat-messages').append(html);
         autoScrollChatBox();
     }
@@ -263,6 +283,11 @@
 
                 $('#close').unbind("click").click(function () {
                     isShowOpenWidget = false;
+
+                    handleCloseButton(uuid_session);
+
+                    uuid_session = '';
+
                     $("#chat-messages, #profile, #profile p").removeClass("animate");
 
                     setTimeout(function () {
@@ -273,6 +298,29 @@
                     }, 50);
                 });
             });
+        });
+    }
+
+    function handleCloseButton(uuid_session) {
+        let currentUserId = '{{ Auth::check() ? Auth::user()->id : '' }}';
+
+        $.ajax({
+            url: "{{ route('chat.send-message.renew-uuid') }}",
+            type: "POST",
+            dataType: "json",
+            data: {
+                sender_id: currentUserId,
+                receiver_id: chatUserId,
+                text: '',
+                uuid_session: uuid_session,
+                type: uuid_session
+            },
+            success: function (data) {
+                uuid_session = data.uuid_session;
+            },
+            error: function (e) {
+                console.log(e);
+            }
         });
     }
 
@@ -299,6 +347,7 @@
         }
     });
 
+
     function sendMessageChatWidget() {
         let textChat = $('#text-chatMessage').val();
         if (textChat.trim() == '') {
@@ -314,9 +363,12 @@
             data: {
                 sender_id: currentUserId,
                 receiver_id: chatUserId,
-                text: textChat
+                text: textChat,
+                uuid_session: uuid_session
             },
             success: function (data) {
+                uuid_session = data.uuid_session;
+
                 renderMessageFromThisUser(textChat);
                 afterSendMessageChatWidget();
             },
@@ -415,6 +467,31 @@
 
         let currentUserId = '{{ Auth::check() ? Auth::user()->id : '' }}';
         data.forEach((msg) => {
+            if (msg.type) {
+                if (!msg.chat_message) {
+                    return;
+                }
+
+                if (msg.type == 'DonThuocMoi') {
+                    html += `<div class="message ">
+                        <span >
+                            ${msg.chat_message},
+                            <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.my.list') }}">xem ngay?</a>
+                            </span></div>`
+                    return;
+                }
+
+                if ('{{ !\App\Models\User::isNormal() }}' && msg.type == 'TaoDonThuoc') {
+                    html += `<div class="message ">
+                        <span >
+                            ${msg.chat_message},
+                             <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.create') }}?user_id=${chatUserId}">tạo ngay?</a>
+                             </span></div>`
+                }
+
+                return;
+            }
+
             if (!msg.chat_message) {
                 return;
             }

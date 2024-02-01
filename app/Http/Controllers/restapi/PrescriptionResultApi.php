@@ -2,21 +2,26 @@
 
 namespace App\Http\Controllers\restapi;
 
+use App\Enums\MessageStatus;
 use App\Enums\online_medicine\OnlineMedicineStatus;
 use App\Enums\PrescriptionResultStatus;
 use App\Enums\TypeProductCart;
 use App\Enums\UserStatus;
+use App\Events\NewMessage;
 use App\ExportExcel\MedicineExport;
 use App\Http\Controllers\Controller;
 use App\Imports\ExcelImportClass;
 use App\Models\Cart;
+use App\Models\Chat;
+use App\Models\Message;
 use App\Models\online_medicine\ProductMedicine;
 use App\Models\PrescriptionResults;
 use App\Models\User;
+use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-use function Symfony\Component\String\u;
 
 class PrescriptionResultApi extends Controller
 {
@@ -105,6 +110,8 @@ class PrescriptionResultApi extends Controller
 
             $prescription_result->status = $status;
 
+            $this->noti_after_create_don_thuoc($email);
+
             $success = $prescription_result->save();
 
             if ($success) {
@@ -127,7 +134,34 @@ class PrescriptionResultApi extends Controller
 
             $medicines = '[' . $prescription->prescriptions . ']';
             $medicines = json_decode($medicines, true);
-            return Excel::download(new MedicineExport($medicines), 'prescription.xlsx');
+            if (is_array($medicines)) {
+                return Excel::download(new MedicineExport($medicines), 'prescription.xlsx');
+            }
+            return response((new MainApi())->returnMessage('No prescription!'), 400);
+        } catch (\Exception $exception) {
+            return response((new MainApi())->returnMessage('Error, Please try again!'), 400);
+        }
+    }
+
+    public function uploadExcelFile(Request $request)
+    {
+        try {
+            $prescription_id = $request->input('prescription_id');
+            $prescription = PrescriptionResults::find($prescription_id);
+            if (!$prescription || $prescription->status == PrescriptionResultStatus::DELETED) {
+                return response((new MainApi())->returnMessage('Not found!'), 400);
+            }
+
+            $medicines = '[' . $prescription->prescriptions . ']';
+            $medicines = json_decode($medicines, true);
+            if (is_array($medicines)) {
+                $fileName = 'prescription_' . time() . '.xlsx';
+                $folderPath = 'exports';
+                Excel::store(new MedicineExport($medicines), $folderPath . '/' . $fileName, 'public');
+                $new_file = 'storage/' . $folderPath . '/' . $fileName;
+                return response(['uri' => $new_file]);
+            }
+            return response((new MainApi())->returnMessage('No prescription!'), 400);
         } catch (\Exception $exception) {
             return response((new MainApi())->returnMessage('Error, Please try again!'), 400);
         }
@@ -155,61 +189,63 @@ class PrescriptionResultApi extends Controller
             $fileName = 'prescription_' . time() . '.xlsx';
             $folderPath = 'exports';
 
-            Excel::store(new MedicineExport($medicines), $folderPath . '/' . $fileName, 'public');
+            if (is_array($medicines)) {
+                Excel::store(new MedicineExport($medicines), $folderPath . '/' . $fileName, 'public');
 
 
-            $new_file = 'storage/' . $folderPath . '/' . $fileName;
-            $file_excel = public_path($new_file);
+                $new_file = 'storage/' . $folderPath . '/' . $fileName;
+                $file_excel = public_path($new_file);
 
-            if ($file_excel) {
-                $reader = Excel::toCollection(new ExcelImportClass, $file_excel)->first();
+                if ($file_excel) {
+                    $reader = Excel::toCollection(new ExcelImportClass, $file_excel)->first();
 
-                $count = 0;
-                foreach ($reader->skip(1) as $row) {
-                    $nameMedicine = $row[0];
+                    $count = 0;
+                    foreach ($reader->skip(1) as $row) {
+                        $nameMedicine = $row[0];
 
-                    $ingredientMedicine = explode(',', $row[1]);
+                        $ingredientMedicine = explode(',', $row[1]);
 
-                    $quantity = $row[2];
+                        $quantity = $row[2];
 
-                    $product = ProductMedicine::where(function ($query) use ($nameMedicine) {
-                        $query->orWhere('name', 'LIKE', '%' . $this->normalizeString($nameMedicine) . '%');
-                    })
-                        ->where(function ($query) use ($ingredientMedicine) {
-                            $query->orWhere(function ($subQuery) use ($ingredientMedicine) {
-                                foreach ($ingredientMedicine as $item) {
-                                    $subQuery->whereHas('DrugIngredient', function ($q) use ($item) {
-                                        $q->where('component_name', 'LIKE', '%' . $this->normalizeString($item) . '%');
-                                    });
-                                }
-                            });
+                        $product = ProductMedicine::where(function ($query) use ($nameMedicine) {
+                            $query->orWhere('name', 'LIKE', '%' . $this->normalizeString($nameMedicine) . '%');
                         })
-                        ->where('status', OnlineMedicineStatus::APPROVED)
-                        ->first();
-
-                    $typeProduct = TypeProductCart::MEDICINE;
-                    if ($product) {
-                        $cart = Cart::where('user_id', $userID)
-                            ->where('product_id', $product->id)
-                            ->where('type_product', $typeProduct)
+                            ->where(function ($query) use ($ingredientMedicine) {
+                                $query->orWhere(function ($subQuery) use ($ingredientMedicine) {
+                                    foreach ($ingredientMedicine as $item) {
+                                        $subQuery->whereHas('DrugIngredient', function ($q) use ($item) {
+                                            $q->where('component_name', 'LIKE', '%' . $this->normalizeString($item) . '%');
+                                        });
+                                    }
+                                });
+                            })
+                            ->where('status', OnlineMedicineStatus::APPROVED)
                             ->first();
-                        if ($cart) {
-                            $cart->quantity = $cart->quantity + (int)$quantity;
-                        } else {
-                            $cart = new Cart();
-                            $cart->product_id = $product->id;
-                            $cart->quantity = (int)$quantity;
-                            $cart->user_id = $userID;
-                            $cart->type_product = $typeProduct;
+
+                        $typeProduct = TypeProductCart::MEDICINE;
+                        if ($product) {
+                            $cart = Cart::where('user_id', $userID)
+                                ->where('product_id', $product->id)
+                                ->where('type_product', $typeProduct)
+                                ->first();
+                            if ($cart) {
+                                $cart->quantity = $cart->quantity + (int)$quantity;
+                            } else {
+                                $cart = new Cart();
+                                $cart->product_id = $product->id;
+                                $cart->quantity = (int)$quantity;
+                                $cart->user_id = $userID;
+                                $cart->type_product = $typeProduct;
+                            }
+                            $cart->save();
+                            $count = $count + 1;
                         }
-                        $cart->save();
-                        $count = $count + 1;
                     }
+                    if ($count > 0) {
+                        return response((new MainApi())->returnMessage('Add to cart success!'), 200);
+                    }
+                    return response((new MainApi())->returnMessage('No product!'), 201);
                 }
-                if ($count > 0){
-                    return response((new MainApi())->returnMessage('Add to cart success!'), 200);
-                }
-                return response((new MainApi())->returnMessage('No product!'), 201);
             }
             return response((new MainApi())->returnMessage('Excel file not found!'), 400);
         } catch (\Exception $exception) {
@@ -220,5 +256,36 @@ class PrescriptionResultApi extends Controller
     private function normalizeString($str)
     {
         return strtolower(trim($str));
+    }
+
+    private function noti_after_create_don_thuoc($email)
+    {
+        $user = User::where('email', $email)->first();
+
+        if (!$user) {
+            return;
+        }
+
+        $uuid = Uuid::uuid();
+
+        $type = 'DonThuocMoi';
+
+        $message = Message::create([
+            'from' => Auth::id(),
+            'to' => $user->id,
+            'text' => 'Bạn có đơn thuốc',
+            'uuid_session' => $uuid,
+            'type' => $type,
+        ]);
+
+        Chat::create([
+            'from_user_id' => Auth::id(),
+            'to_user_id' => $user->id,
+            'chat_message' => 'Bạn có đơn thuốc',
+            'message_status' => MessageStatus::UNSEEN,
+            'uuid_session' => $uuid,
+            'type' => $type,
+        ]);
+        broadcast(new NewMessage($message));
     }
 }

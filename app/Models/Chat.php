@@ -9,7 +9,7 @@ class Chat extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['to_user_id','from_user_id','chat_message'];
+    protected $fillable = ['to_user_id','from_user_id','chat_message', 'uuid_session', 'type'];
 
     public function fromContact()
     {

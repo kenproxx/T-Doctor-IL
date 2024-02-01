@@ -3,6 +3,7 @@
 use App\Http\Controllers\backend\BackendCouponApplyController;
 use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\backend\BackendQuestionController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\restapi\AddressApi;
 use App\Http\Controllers\restapi\AnswerLikeApi;
 use App\Http\Controllers\restapi\BookingApi;
@@ -65,6 +66,7 @@ Route::group(['prefix' => 'coupons'], function () {
     Route::post('/create', [BackendCouponController::class, 'create'])->name('api.backend.coupons.create');
     Route::post('/update/{id}', [BackendCouponController::class, 'update'])->name('api.backend.coupons.update');
     Route::delete('/delete/{id}', [BackendCouponController::class, 'delete'])->name('api.backend.coupons.delete');
+    Route::get('get-applied/{user_id?}/{status?}', [CouponController::class, 'getListCouponApplied'])->name('coupon.get.applied');
 });
 
 Route::group(['prefix' => 'service-clinics'], function () {
@@ -142,6 +144,7 @@ Route::group(['prefix' => 'prescription-result'], function () {
     Route::get('user', [PrescriptionResultApi::class, 'listPrescriptionByUser'])->name('api.backend.prescription.result.user');
     Route::get('doctor', [PrescriptionResultApi::class, 'listPrescriptionByDoctor'])->name('api.backend.prescription.result.doctor');
     Route::post('create', [PrescriptionResultApi::class, 'createPrescription'])->name('api.backend.prescription.result.create');
+    Route::post('upload', [PrescriptionResultApi::class, 'uploadExcelFile'])->name('api.backend.prescription.result.upload');
     Route::post('export', [PrescriptionResultApi::class, 'exportAndDownload'])->name('api.backend.prescription.result.export');
     Route::post('add-to-cart', [PrescriptionResultApi::class, 'addProductToCart'])->name('api.backend.prescription.result.add.cart');
 });
