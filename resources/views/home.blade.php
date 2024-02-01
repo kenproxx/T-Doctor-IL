@@ -85,7 +85,17 @@
             height: 70px;
         }
 
+        .sold-out-overlay {
+            opacity: .5;
+            pointer-events: none;
+        }
 
+        .sold-out-overlay .sold-out-overlay-text {
+            position: absolute;
+            color: black;
+            top: 50%;
+            display: block;
+        }
 
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
@@ -97,41 +107,41 @@
     <link href="{{ asset('css/style-home.css') }}" rel="stylesheet">
     @include('layouts.partials.header')
 
-{{--    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>--}}
+    {{--    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>--}}
     <script src="{{ asset('build/assets/app.dba56e22.js') }}"></script>
     <script></script>
     <div class="container pb-md-5 mt-200 mt-70">
-{{--        <button onclick="testNoti()">test</button>--}}
+        {{--        <button onclick="testNoti()">test</button>--}}
 
-{{--        <script>--}}
-{{--            async function testNoti() {--}}
-{{--                let response = await fetch('{{ route('noti.push') }}')--}}
-{{--                if (response.ok) {--}}
-{{--                    console.log(response.json())--}}
-{{--                }--}}
-{{--            }--}}
+        {{--        <script>--}}
+        {{--            async function testNoti() {--}}
+        {{--                let response = await fetch('{{ route('noti.push') }}')--}}
+        {{--                if (response.ok) {--}}
+        {{--                    console.log(response.json())--}}
+        {{--                }--}}
+        {{--            }--}}
 
-{{--            const current_user_id = '{{ Auth::user()->id }}'--}}
-{{--            console.log(current_user_id)--}}
+        {{--            const current_user_id = '{{ Auth::user()->id }}'--}}
+        {{--            console.log(current_user_id)--}}
 
-{{--            window.Echo = new Echo({--}}
-{{--                broadcaster: 'pusher',--}}
-{{--                key: '3ac4f810445d089829e8',--}}
-{{--                cluster: 'ap1',--}}
-{{--                encrypted: true,--}}
-{{--            });--}}
+        {{--            window.Echo = new Echo({--}}
+        {{--                broadcaster: 'pusher',--}}
+        {{--                key: '3ac4f810445d089829e8',--}}
+        {{--                cluster: 'ap1',--}}
+        {{--                encrypted: true,--}}
+        {{--            });--}}
 
-{{--            window.Echo.private("notification." + current_user_id).listen('AlertNotification', function (e) {--}}
-{{--                console.log(123)--}}
-{{--            });--}}
+        {{--            window.Echo.private("notification." + current_user_id).listen('AlertNotification', function (e) {--}}
+        {{--                console.log(123)--}}
+        {{--            });--}}
 
-{{--            var channelAlertNotify = pusher.subscribe('AlertNotification');--}}
-{{--            // Bind a function to a Event (the full Laravel class)--}}
-{{--            channelAlertNotify.bind('AlertNotification', function (data) {--}}
-{{--                console.log(123)--}}
-{{--            });--}}
+        {{--            var channelAlertNotify = pusher.subscribe('AlertNotification');--}}
+        {{--            // Bind a function to a Event (the full Laravel class)--}}
+        {{--            channelAlertNotify.bind('AlertNotification', function (data) {--}}
+        {{--                console.log(123)--}}
+        {{--            });--}}
 
-{{--        </script>--}}
+        {{--        </script>--}}
         <div class="slide-container">
             <div class="slide">
                 <img src="{{asset('img/homeNew-img/Rectangle 23820.png')}}" alt="">
@@ -1541,8 +1551,9 @@
                                                 }
 
                                                 $class = !$isFavourite ? 'bi-heart' : 'bi-heart-fill text-danger';
+                                                $isSoldOut = $product->quantity == 0
                                             @endphp
-                                            <div class="cCarousel-item">
+                                            <div class="cCarousel-item {{ $isSoldOut ? 'sold-out-overlay' : '' }}">
                                                 <div class="product-item">
                                                     <div
                                                         class="img-pro justify-content-center h-auto d-flex img_product--homeNew">
@@ -1552,6 +1563,9 @@
                                                            data-isFavourite="{{ $isFavourite ? 1 : 0 }}">
                                                             <i class="bi {{ $class }}"></i>
                                                         </a>
+                                                        <div class="{{ $isSoldOut ? 'sold-out-overlay-text' : 'd-none' }} ">
+                                                            <h1>Sold Out</h1>
+                                                        </div>
                                                     </div>
                                                     <div class="content-pro p-md-3 p-2">
                                                         <div class="">
@@ -1591,6 +1605,8 @@
                                                                target="_blank">{{ __('home.See details') }}</a>
                                                         </div>
                                                     </div>
+
+
                                                 </div>
                                             </div>
                                         @endforeach
@@ -1692,10 +1708,11 @@
                                         }
 
                                         $class = !$isFavourite ? 'bi-heart' : 'bi-heart-fill text-danger';
+                                                $isSoldOut = $product->quantity == 0;
                                     @endphp
                                     <div class="col-md-3 col-6">
                                         <div class="">
-                                            <div class="product-item">
+                                            <div class="product-item {{ $isSoldOut ? 'sold-out-overlay' : '' }}">
                                                 <div
                                                     class="img-pro justify-content-center d-flex img_product--homeNew">
                                                     <img src="{{$product->thumbnail}}" alt="">
@@ -1704,6 +1721,9 @@
                                                        data-isFavourite="{{ $isFavourite ? 1 : 0 }}">
                                                         <i class="bi {{ $class }}"></i>
                                                     </a>
+                                                    <div class="{{ $isSoldOut ? 'sold-out-overlay-text' : 'd-none' }} ">
+                                                        <h1>Sold Out</h1>
+                                                    </div>
                                                 </div>
                                                 <div class="content-pro p-md-3 p-2">
                                                     <div class="">
