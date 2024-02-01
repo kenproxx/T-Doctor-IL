@@ -121,7 +121,7 @@ class CouponController extends Controller
 
         $couponInfo = Coupon::find($coupon_id);
 
-        if ($couponInfo->status == CouponStatus::DELETED) {
+        if (!$couponInfo->status || $couponInfo->status == CouponStatus::DELETED) {
             return response((new MainApi())->returnMessage("Coupon đã bị xóa"), 404);
         }
 
