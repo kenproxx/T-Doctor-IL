@@ -19,5 +19,5 @@ final class ShapeProduct extends Enum
     /* Dạng viên nang */
     const CAPSULE = 'CAPSULE';
     /* Dạng khác */
-    const OTHER = 'Other';
+    const OTHER = 'OTHER';
 }
