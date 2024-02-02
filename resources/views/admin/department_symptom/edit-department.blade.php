@@ -10,7 +10,7 @@
                     <div class="card-header">{{ __('home.Edit') }}</div>
 
                     <div class="card-body">
-                        <form action="{{ route('departments.update', $department->id) }}" method="post"
+                        <form action="{{ route('view.admin.department.update', $department->id) }}" method="post"
                               enctype="multipart/form-data">
                             @csrf
 

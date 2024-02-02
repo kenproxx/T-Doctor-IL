@@ -591,7 +591,7 @@
                     </a>
                     <ul id="videos-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
-                            <a href="{{ route('web.videos.list') }}">
+                            <a href="{{ route('view.admin.videos.list') }}">
                                 <i class="bi bi-circle"></i><span>{{ __('home.Short Videos') }}</span>
                             </a>
                         </li>
@@ -613,7 +613,7 @@
                     </a>
                     <ul id="department-symptom-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
-                            <a href="{{ route('department.index') }}">
+                            <a href="{{ route('view.admin.department.index') }}">
                                 <i class="bi bi-circle"></i><span>{{ __('home.departments') }}</span>
                             </a>
                         </li>
@@ -634,7 +634,7 @@
                     </a>
                     <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
-                            <a href="{{ route('homeAdmin.list.config') }}">
+                            <a href="{{ route('view.admin.list.config') }}">
                                 <i class="bi bi-circle"></i><span>{{ __('home.Cấu hình chung') }}</span>
                             </a>
                         </li>
@@ -663,6 +663,23 @@
                     </ul>
                 </li>
                 <!-- End Admin User Nav -->
+
+                <!-- Start Admin Product Medicine Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#product-medicine-manager-nav" data-bs-toggle="collapse"
+                       href="#">
+                        <i class="bi bi-diamond"></i><span>{{ __('home.Product Medicine') }}</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="product-medicine-manager-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('view.admin.home.medicine.list') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.List product medicine') }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Admin Product Medicine Nav -->
             @endif
         @else
             <!-- Start Family Nav -->

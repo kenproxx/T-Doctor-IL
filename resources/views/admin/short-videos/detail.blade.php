@@ -121,7 +121,7 @@
                             data: formDataEdit,
                             success: function () {
                                 alert('success');
-                                window.location.href = `{{route('web.videos.list')}}`;
+                                window.location.href = `{{route('view.admin.videos.list')}}`;
                             },
                             error: function (exception) {
                                 alert('Update error!')
