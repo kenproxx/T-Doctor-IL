@@ -56,7 +56,7 @@
         function renderVideo(response) {
             let html = ``;
             for (let i = 0; i < response.length; i++) {
-                let detail = `{{ route('web.videos.detail', ['id'=>':id']) }}`;
+                let detail = `{{ route('view.admin.videos.detail', ['id'=>':id']) }}`;
                 let data = response[i];
                 detail = detail.replace(':id', data.id);
                 html = html + ` <tr>
