@@ -74,7 +74,7 @@ class DepartmentController extends Controller
         $department->status = $status;
         $department->save();
 
-        return redirect()->route('department.index')->with('success', 'Department update successfully.');
+        return redirect()->route('view.admin.department.index')->with('success', 'Department update successfully.');
     }
 
     public function store(Request $request)
@@ -124,7 +124,7 @@ class DepartmentController extends Controller
         $department->user_id = $user_id;
         $department->save();
 
-        return redirect()->route('department.index')->with('success', 'Department created successfully.');
+        return redirect()->route('view.admin.department.index')->with('success', 'Department created successfully.');
     }
 
     public function destroy($id)
