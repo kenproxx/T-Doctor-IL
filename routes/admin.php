@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\restapi\admin\AdminProductMedicineApi;
 use App\Http\Controllers\restapi\admin\AdminTopicVideoApi;
 use App\Http\Controllers\restapi\admin\AdminUserApi;
 use App\Http\Controllers\restapi\admin\AminServiceClinicApi;
@@ -44,6 +45,10 @@ Route::group(['prefix' => 'topic-videos'], function () {
     Route::post('/create', [AdminTopicVideoApi::class, 'create'])->name('api.admin.topic.videos.create');
     Route::post('/update/{id}', [AdminTopicVideoApi::class, 'update'])->name('api.admin.topic.videos.update');
     Route::delete('/delete/{id}', [AdminTopicVideoApi::class, 'delete'])->name('api.admin.topic.videos.delete');
+});
+
+Route::group(['prefix' => 'products-medicine'], function () {
+    Route::post('/change', [AdminProductMedicineApi::class, 'changeStatus'])->name('api.admin.products.medicine.change');
 });
 
 

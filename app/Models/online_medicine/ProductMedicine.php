@@ -15,11 +15,11 @@ class ProductMedicine extends Model
         'brand_name', 'brand_name_en', 'brand_name_laos',
         'category_id', 'object_', 'filter_', 'price', 'status',
         'description', 'description_en', 'description_laos',
-        'thumbnail', 'gallery', 'unit_price', 'quantity'
+        'thumbnail', 'gallery', 'unit_price', 'quantity', 'is_prescription'
     ];
 
     public function DrugIngredient()
     {
-        return $this->hasMany(DrugIngredients::class,'product_id');
+        return $this->hasMany(DrugIngredients::class, 'product_id');
     }
 }
