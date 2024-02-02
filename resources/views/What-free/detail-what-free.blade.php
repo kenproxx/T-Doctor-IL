@@ -26,13 +26,13 @@
                         @if($coupon->is_facebook == 1)
                             <div class="button-black mr-3">Facebook</div>
                         @endif
-                            @if($coupon->is_instagram == 1)
+                        @if($coupon->is_instagram == 1)
                             <div class="button-black mr-3">Instagram</div>
                         @endif
-                            @if($coupon->is_youtube == 1)
+                        @if($coupon->is_youtube == 1)
                             <div class="button-black mr-3">Youtube</div>
                         @endif
-                            @if($coupon->is_google == 1)
+                        @if($coupon->is_google == 1)
                             <div class="button-black mr-3">Google</div>
                         @endif
                         <div class="button-black mr-3"><i class="fa-solid fa-user-group"> </i>{{ $coupon->registered }}
@@ -73,34 +73,46 @@
                             <div class="text-wrapper-2">{{ $clinic->name ?? '' }}</div>
                         </div>
                         @php
-                                    function isWithinTimeRange($start, $end) {
-                                        $now = time();
-                                        $currentDateTime = new DateTime();
-                                        $currentDateTimeString = $currentDateTime->format('Y-m-d H:i:s');
-                                        return ($start <= $currentDateTimeString && $currentDateTimeString <= $end);
-                                    }
+                            function isWithinTimeRange($start, $end) {
+                                $now = time();
+                                $currentDateTime = new DateTime();
+                                $currentDateTimeString = $currentDateTime->format('Y-m-d H:i:s');
+                                return ($start <= $currentDateTimeString && $currentDateTimeString <= $end);
+                            }
                         @endphp
                         <div class="div-3">
                             <div class="justify-content-between d-flex">
-                                <div class="{{ isWithinTimeRange($coupon->startDate, $coupon->endDate) ? 'bold-text' : '' }}">Thời gian ứng tuyển</div>
+                                <div
+                                    class="{{ isWithinTimeRange($coupon->startDate, $coupon->endDate) ? 'bold-text' : '' }}">
+                                    Thời gian ứng tuyển
+                                </div>
                                 <div
                                     class="{{ isWithinTimeRange($coupon->startDate, $coupon->endDate) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->startDate)->format('d.m') }}
                                     ~ {{ Carbon::parse($coupon->endDate)->format('d.m') }}</div>
                             </div>
                             <div class="justify-content-between d-flex">
-                                <div class="{{ isWithinTimeRange($coupon->start_selective, $coupon->end_selective) ? 'bold-text' : '' }}">Thời gian chọn lọc</div>
+                                <div
+                                    class="{{ isWithinTimeRange($coupon->start_selective, $coupon->end_selective) ? 'bold-text' : '' }}">
+                                    Thời gian chọn lọc
+                                </div>
                                 <div
                                     class="{{ isWithinTimeRange($coupon->start_selective, $coupon->end_selective) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->start_selective)->format('d.m') }}
                                     ~ {{ Carbon::parse($coupon->end_selective)->format('d.m') }}</div>
                             </div>
                             <div class="justify-content-between d-flex">
-                                <div class="{{ isWithinTimeRange($coupon->start_post, $coupon->end_post) ? 'bold-text' : '' }}">Thời gian đăng bài</div>
+                                <div
+                                    class="{{ isWithinTimeRange($coupon->start_post, $coupon->end_post) ? 'bold-text' : '' }}">
+                                    Thời gian đăng bài
+                                </div>
                                 <div
                                     class="{{ isWithinTimeRange($coupon->start_post, $coupon->end_post) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->start_post)->format('d.m') }}
                                     ~ {{ Carbon::parse($coupon->end_post)->format('d.m') }}</div>
                             </div>
                             <div class="justify-content-between d-flex">
-                                <div class="{{ isWithinTimeRange($coupon->start_evaluate, $coupon->end_evaluate) ? 'bold-text' : '' }}">Thời gian đánh giá</div>
+                                <div
+                                    class="{{ isWithinTimeRange($coupon->start_evaluate, $coupon->end_evaluate) ? 'bold-text' : '' }}">
+                                    Thời gian đánh giá
+                                </div>
                                 <div
                                     class="{{ isWithinTimeRange($coupon->start_evaluate, $coupon->end_evaluate) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->start_evaluate)->format('d.m') }}
                                     ~ {{ Carbon::parse($coupon->end_evaluate)->format('d.m') }}</div>
@@ -143,7 +155,9 @@
                         </div>
                         <input type="hidden" value="{{ $coupon->id }}" name="coupon_id" id="coupon_id">
                         <input type="hidden" value="{{ csrf_token() }}" name="_token" id="_token">
-                        <input type="hidden" value="{{ Auth::user()->id }}" name="user_id" id="user_id">
+                        @if(Auth::user())
+                            <input type="hidden" value="{{ Auth::user()->id }}" name="user_id" id="user_id">
+                        @endif
                         <div class="div-7 d-flex justify-content-between">
                             <button class="div-wrapper" id="button-back">{{ __('home.CANCEL') }}</button>
                             <button class="text-wrapper-5 apply-button">{{ __('home.Apply') }}</button>
