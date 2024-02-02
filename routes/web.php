@@ -457,6 +457,7 @@ Route::middleware(['user.active'])->group(function () {
             Route::get('detail/{id}', [PrescriptionResultController::class, 'detail'])->name('view.prescription.result.detail');
             Route::get('list', [PrescriptionResultController::class, 'doctorPrescription'])->name('view.prescription.result.doctor');
             Route::get('create', [PrescriptionResultController::class, 'create'])->name('view.prescription.result.create');
+            Route::get('get-medicine', [PrescriptionResultController::class, 'getListMedicine'])->name('view.prescription.result.get-medicine');
         });
     });
 

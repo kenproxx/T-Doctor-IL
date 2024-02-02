@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ui;
 
 use App\Enums\PrescriptionResultStatus;
 use App\Http\Controllers\Controller;
+use App\Models\online_medicine\ProductMedicine;
 use App\Models\PrescriptionResults;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -14,8 +15,9 @@ class PrescriptionResultController extends Controller
     {
         $user_id = $request->input('user_id');
         $user = User::find($user_id);
+        $listMedicine = ProductMedicine::where('quantity', '>', 0)->get();
 
-        return view('ui.prescription-results.create', compact('user'));
+        return view('ui.prescription-results.create', compact('user', 'listMedicine'));
     }
 
     public function myPrescription()
@@ -26,6 +28,11 @@ class PrescriptionResultController extends Controller
     public function doctorPrescription()
     {
         return view('ui.prescription-results.doctor-prescriptions');
+    }
+    public function getListMedicine(Request $request)
+    {
+        $listMedicine = ProductMedicine::where('quantity', '>', 0)->get();
+        return response()->json($listMedicine);
     }
 
     public function detail($id)
