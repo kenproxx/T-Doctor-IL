@@ -82,13 +82,17 @@ class WidgetChatController extends Controller
         // Lấy danh sách user đã kết nối với user hiện tại qua bảng chat
         $currentUserId = auth()->user()->id;
 
-        $listMessageByUser = Chat::where([
+        $listMessage = Chat::where([
             ['from_user_id', $currentUserId],
             ['to_user_id', $id]
         ])->orWhere([
             ['from_user_id', $id],
             ['to_user_id', $currentUserId]
-        ])->get();
+        ]);
+
+        $listMessage->update(['message_status' => MessageStatus::SEEN]);
+
+        $listMessageByUser = $listMessage->get();
 
         $listMessageByUser = $listMessageByUser->map(function ($item) {
             $item->from_avatar = User::getAvtByID($item->from_user_id);

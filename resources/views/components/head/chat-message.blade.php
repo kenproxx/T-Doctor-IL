@@ -218,9 +218,6 @@
         let html = '';
         element = element.message;
 
-        console.log(element)
-        console.log(element.type)
-
         if (element.type != null) {
             if (!element.text) {
                 return;
@@ -234,12 +231,15 @@
                             </span></div>`
             }
 
-            if ('{{ !\App\Models\User::isNormal() }}' && element.type == 'TaoDonThuoc') {
+            if (element.type == 'TaoDonThuoc') {
                 html = `<div class="message ">
                         <span >
-                            ${element.text},
-                             <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.create') }}?user_id=${chatUserId}">tạo ngay?</a>
-                             </span></div>`
+                            ${element.text}`;
+
+                if ('{{ !\App\Models\User::isNormal() }}') {
+                    html += `, <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.create') }}?user_id=${chatUserId}">tạo ngay?</a>
+                             </span></div>`;
+                }
             }
 
         } else {
@@ -492,12 +492,15 @@
                     return;
                 }
 
-                if ('{{ !\App\Models\User::isNormal() }}' && msg.type == 'TaoDonThuoc') {
+                if (msg.type == 'TaoDonThuoc') {
                     html += `<div class="message ">
                         <span >
-                            ${msg.chat_message},
-                             <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.create') }}?user_id=${chatUserId}">tạo ngay?</a>
-                             </span></div>`
+                            ${msg.chat_message}`;
+
+                    if ('{{ !\App\Models\User::isNormal() }}') {
+                        html += `, <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.create') }}?user_id=${chatUserId}">tạo ngay?</a>`;
+                    }
+                    html += `</span></div>`;
                 }
 
                 return;
