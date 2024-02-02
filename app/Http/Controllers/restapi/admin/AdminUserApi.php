@@ -215,6 +215,7 @@ class AdminUserApi extends Controller
             $user->specialty = $specialized_services ?? '';
             $user->specialty_en = $specialized_services_en ?? '';
             $user->specialty_laos = $specialized_services_laos ?? '';
+            $user->identifier = $request->input('identifier') ?? '';
 
             $user->service = $services_info ?? '';
             $user->service_en = $services_info_en ?? '';
@@ -263,7 +264,6 @@ class AdminUserApi extends Controller
         $user->abouts_en = 'default';
         $user->abouts_lao = 'default';
         $user->status = $status ?? UserStatus::ACTIVE;
-
         return $this->returnArray(200, $user);
     }
 
