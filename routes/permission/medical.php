@@ -51,7 +51,6 @@ Route::group(['prefix' => 'home'], function () {
     Route::get('list-apply-coupon/{id}', [HomeController::class, 'listApplyCoupon'])->name('homeAdmin.list.apply.coupons');
     Route::get('list-doctor', [HomeController::class, 'listDoctor'])->name('homeAdmin.list.doctors');
     Route::get('list-staff', [HomeController::class, 'listStaff'])->name('homeAdmin.list.staff');
-    Route::get('list-config', [HomeController::class, 'listConfig'])->name('homeAdmin.list.config');
     Route::get('list-booking', [HomeController::class, 'listBooking'])->name('homeAdmin.list.booking');
 });
 
@@ -78,9 +77,7 @@ Route::group(['prefix' => 'staffs'], function () {
     Route::get('detail/{id}', [StaffController::class, 'show'])->name('staff.detail');
     Route::get('create', [StaffController::class, 'create'])->name('staff.create');
     Route::get('edit/{id}', [StaffController::class, 'edit'])->name('staff.edit');
-
 });
-
 
 Route::group(['prefix' => 'coupon'], function () {
     Route::get('detail/{id}', [CouponController::class, 'show'])->name('coupon.detail');
@@ -205,7 +202,7 @@ Route::group(['prefix' => 'doctors-departments'], function () {
     Route::get('/detail/{id}', [AdminDoctorDepartmentApi::class, 'getById'])->name('api.backend.doctors.departments.detail');
     Route::get('/user/{id}', [AdminDoctorDepartmentApi::class, 'getAllByUserID'])->name('api.backend.doctors.departments.user');
     Route::post('/create', [AdminDoctorDepartmentApi::class, 'create'])->name('api.backend.doctors.departments.create');
-    Route::put('/update/{id}', [AdminDoctorDepartmentApi::class, 'update'])->name('api.backend.doctors.departments.update');
+    Route::put('/update/{id}', [AdminDoctorDepartmentApi::class, 'update'])->name('api.backend.doctors.view.admin.department.update');
     Route::delete('/delete/{id}', [AdminDoctorDepartmentApi::class, 'delete'])->name('api.backend.doctors.departments.delete');
 });
 
@@ -291,7 +288,7 @@ Route::group(['prefix' => 'departments'], function () {
     Route::get('/list', [AdminDepartmentApi::class, 'getList'])->name('api.medical.departments.list');
     Route::get('/detail/{id}', [AdminDepartmentApi::class, 'detail'])->name('api.medical.departments.detail');
     Route::post('/create', [AdminDepartmentApi::class, 'create'])->name('api.medical.departments.create');
-    Route::post('/update/{id}', [AdminDepartmentApi::class, 'update'])->name('api.medical.departments.update');
+    Route::post('/update/{id}', [AdminDepartmentApi::class, 'update'])->name('api.medical.view.admin.department.update');
     Route::delete('/delete/{id}', [AdminDepartmentApi::class, 'delete'])->name('api.medical.departments.delete');
 });
 

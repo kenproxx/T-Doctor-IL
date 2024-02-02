@@ -263,9 +263,9 @@ Route::middleware(['user.active'])->group(function () {
     });
 
     Route::middleware(['auth'])->group(function () {
-        Route::get('admin/home', [HomeController::class, 'admin'])->name('admin.home');
+        Route::get('web/home', [HomeController::class, 'admin'])->name('admin.home');
 
-        Route::get('admin/chat-unseen', [HomeController::class, 'listMessageUnseen'])->name('admin.list.chat.unseen');
+        Route::get('web/chat-unseen', [HomeController::class, 'listMessageUnseen'])->name('admin.list.chat.unseen');
 
         Route::post('/save-user-login-social',
             [AuthSocialController::class, 'saveUser'])->name('save.user.login.social');
@@ -296,19 +296,9 @@ Route::middleware(['user.active'])->group(function () {
             Route::get('admin/detail/{id}', [OrderController::class, 'detail'])->name('view.admin.orders.detail');
         });
 
-        Route::group(['prefix' => 'reviews'], function () {
-            Route::get('admin/list', [ReviewController::class, 'index'])->name('view.admin.reviews.index');
-            Route::get('admin/detail/{id}', [ReviewController::class, 'detail'])->name('view.admin.reviews.detail');
-        });
-
         Route::group(['prefix' => 'short-video'], function () {
             Route::get('show', [ShortVideoController::class, 'showVideo'])->name('short.videos.show');
             Route::get('show/{id}', [ShortVideoController::class, 'detail'])->name('short.videos.item');
-        });
-
-        Route::group(['prefix' => 'short-video'], function () {
-            Route::get('list', [ShortVideoController::class, 'getList'])->name('web.videos.list');
-            Route::get('detail/{id}', [ShortVideoController::class, 'getById'])->name('web.videos.detail');
         });
 
         Route::group(['prefix' => 'reviews-doctor'], function () {
@@ -329,14 +319,6 @@ Route::middleware(['user.active'])->group(function () {
             Route::get('list', [TopicVideoController::class, 'getList'])->name('user.topic.videos.list');
             Route::get('detail/{id}', [TopicVideoController::class, 'detail'])->name('user.topic.videos.detail');
             Route::get('create', [TopicVideoController::class, 'create'])->name('user.topic.videos.create');
-        });
-
-        Route::group(['prefix' => 'department'], function () {
-            Route::get('list', [DepartmentController::class, 'index'])->name('department.index');
-            Route::get('create', [DepartmentController::class, 'create'])->name('department.create');
-            Route::post('store', [DepartmentController::class, 'store'])->name('departments.store');
-            Route::get('edit/{id}', [DepartmentController::class, 'edit'])->name('departments.edit');
-            Route::post('update/{id}', [DepartmentController::class, 'update'])->name('departments.update');
         });
 
         Route::group(['prefix' => 'symptom'], function () {
@@ -438,13 +420,6 @@ Route::middleware(['user.active'])->group(function () {
             Route::get('create', [AddressController::class, 'create'])->name('view.user.address.create');
         });
 
-        /* Admin user */
-        Route::group(['prefix' => 'admin/user'], function () {
-            Route::get('list', [AdminUserController::class, 'list'])->name('view.admin.user.list');
-            Route::get('detail/{id}', [AdminUserController::class, 'detail'])->name('view.admin.user.detail');
-            Route::get('create', [AdminUserController::class, 'create'])->name('view.admin.user.create');
-        });
-
         /* Admin medical result */
         Route::group(['prefix' => 'medical-result'], function () {
             Route::get('list', [AdminMedicalResultController::class, 'list'])->name('view.admin.medical.result.list');
@@ -473,6 +448,31 @@ Route::middleware(['user.active'])->group(function () {
         Route::get('show/{id}', [MyBookingController::class, 'showBookingQr'])->name('web.users.my.bookings.show');
         Route::get('generate/{id}', [MyBookingController::class, 'generateQrCode'])->name('web.users.my.bookings.generate');
         Route::get('download/{id}', [MyBookingController::class, 'downloadQrCode'])->name('web.users.my.bookings.download');
+    });
+    /* List route for web*/
+    /* Admin */
+    Route::group(['prefix' => 'admin-ui', 'middleware' => ['admin']], function () {
+        require_once __DIR__ . '/authorization/admin.php';
+    });
+
+    /* Business */
+    Route::group(['prefix' => 'route-ui', 'middleware' => ['business']], function () {
+        require_once __DIR__ . '/authorization/business.php';
+    });
+
+    /* Medical */
+    Route::group(['prefix' => 'route-ui', 'middleware' => ['medical']], function () {
+        require_once __DIR__ . '/authorization/medical.php';
+    });
+
+    /* Normal */
+    Route::group(['prefix' => 'route-ui', 'middleware' => 'normal'], function () {
+        require_once __DIR__ . '/authorization/normal.php';
+    });
+
+    /* Authenticate */
+    Route::group(['prefix' => 'route-ui', 'middleware' => 'jwt'], function () {
+        require_once __DIR__ . '/authorization/auth.php';
     });
 
     /* List Api*/

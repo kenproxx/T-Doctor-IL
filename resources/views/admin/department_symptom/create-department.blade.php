@@ -10,7 +10,7 @@
                     <div class="card-header">{{ __('home.Create Department') }}</div>
 
                     <div class="card-body">
-                        <form action="{{ route('departments.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('view.admin.department.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
 
                             <div class="row">
