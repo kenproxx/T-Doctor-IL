@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Enums\online_medicine\OnlineMedicineStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\restapi\MainApi;
+use App\Http\Controllers\TranslateController;
 use App\Models\DrugIngredients;
 use App\Models\online_medicine\CategoryProduct;
 use App\Models\online_medicine\ProductMedicine;
@@ -88,22 +89,32 @@ class BackendProductMedicineController extends Controller
     public function update(Request $request)
     {
         try {
-            $params = $request->only('name', 'name_en', 'name_laos', 'brand_name', 'brand_name_en', 'brand_name_laos',
-                'category_id', 'object_', 'filter_', 'price', 'status', 'description', 'description_en', 'description_laos',
-                'unit_price', 'quantity');
+            $params = $request->only('name', 'brand_name', 'category_id', 'object_', 'filter_',
+                'price', 'status', 'description', 'unit_price', 'quantity');
+
+            $translate = new TranslateController();
 
             //check name
-            if (empty($params['name']) || empty($params['name_en']) || empty($params['name_laos'])) {
+            if (empty($params['name'])) {
                 return response('Tên sản phẩm không được để trống', 400);
             }
+            $params['name'] = $translate->translateText($params['name'], 'vi');
+            $params['name_en'] = $translate->translateText($params['name'], 'en');
+            $params['name_laos'] = $translate->translateText($params['name'], 'lo');
             //check description
-            if (empty($params['description']) || empty($params['description_en']) || empty($params['description_laos'])) {
+            if (empty($params['description'])) {
                 return response('Mô tả sản phẩm không được để trống', 400);
             }
+            $params['description'] = $translate->translateText($params['description'], 'vi');
+            $params['description_en'] = $translate->translateText($params['description'], 'en');
+            $params['description_laos'] = $translate->translateText($params['description'], 'lo');
             //check brand_name
-            if (empty($params['brand_name']) || empty($params['brand_name_en']) || empty($params['brand_name_laos'])) {
+            if (empty($params['brand_name'])) {
                 return response('Tên thương hiệu không được để trống', 400);
             }
+            $params['brand_name'] = $translate->translateText($params['brand_name'], 'vi');
+            $params['brand_name_en'] = $translate->translateText($params['brand_name'], 'en');
+            $params['brand_name_laos'] = $translate->translateText($params['brand_name'], 'lo');
 
             //check thumbnail, nếu rỗng thì không thêm vào
             if ($request->hasFile('thumbnail')) {
@@ -123,6 +134,9 @@ class BackendProductMedicineController extends Controller
             }
 
             $productMedicine->gallery = $gallery;
+
+            $is_prescription = (bool)$request->input('is_prescription');
+            $params['is_prescription'] = $is_prescription;
 
             $productMedicine->fill($params);
 
@@ -145,8 +159,8 @@ class BackendProductMedicineController extends Controller
             } else {
                 return response('Cập nhật sản phẩm thất bại', 400);
             }
-        } catch (\Exception $exception){
-
+        } catch (\Exception $exception) {
+            return response($exception, 400);
         }
     }
 
@@ -156,23 +170,32 @@ class BackendProductMedicineController extends Controller
     public function store(Request $request)
     {
         try {
-            $params = $request->only('name', 'name_en', 'name_laos', 'brand_name', 'brand_name_en', 'brand_name_laos',
-                'category_id', 'object_', 'filter_', 'price', 'status', 'description', 'description_en',
-                'description_laos', 'quantity');
+            $params = $request->only('name', 'brand_name', 'category_id', 'object_', 'filter_',
+                'price', 'status', 'description', 'quantity');
+
+            $translate = new TranslateController();
 
             //check name
-            if (empty($params['name']) || empty($params['name_en']) || empty($params['name_laos'])) {
+            if (empty($params['name'])) {
                 return response('Tên sản phẩm không được để trống', 400);
             }
+            $params['name'] = $translate->translateText($params['name'], 'vi');
+            $params['name_en'] = $translate->translateText($params['name'], 'en');
+            $params['name_laos'] = $translate->translateText($params['name'], 'lo');
             //check description
-            if (empty($params['description']) || empty($params['description_en']) || empty($params['description_laos'])) {
+            if (empty($params['description'])) {
                 return response('Mô tả sản phẩm không được để trống', 400);
             }
+            $params['description'] = $translate->translateText($params['description'], 'vi');
+            $params['description_en'] = $translate->translateText($params['description'], 'en');
+            $params['description_laos'] = $translate->translateText($params['description'], 'lo');
             //check brand_name
-            if (empty($params['brand_name']) || empty($params['brand_name_en']) || empty($params['brand_name_laos'])) {
+            if (empty($params['brand_name'])) {
                 return response('Tên thương hiệu không được để trống', 400);
             }
-
+            $params['brand_name'] = $translate->translateText($params['brand_name'], 'vi');
+            $params['brand_name_en'] = $translate->translateText($params['brand_name'], 'en');
+            $params['brand_name_laos'] = $translate->translateText($params['brand_name'], 'lo');
             //check thumbnail not null
             if (!$request->hasFile('thumbnail')) {
                 return response('Ảnh đại diện không được để trống', 400);
@@ -205,7 +228,10 @@ class BackendProductMedicineController extends Controller
             $productMedicine->gallery = $gallery;
             $productMedicine->user_id = $request->input('user_id');
 
+            $is_prescription = (bool)$request->input('is_prescription');
+
             $params['status'] = OnlineMedicineStatus::PENDING;
+            $params['is_prescription'] = $is_prescription;
 
             $productMedicine->fill($params);
 
@@ -224,7 +250,7 @@ class BackendProductMedicineController extends Controller
             } else {
                 return response((new MainApi())->returnMessage('Thêm sản phẩm thất bại'), 400);
             }
-        } catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return response((new MainApi())->returnMessage('Error, please try again!'), 400);
         }
     }

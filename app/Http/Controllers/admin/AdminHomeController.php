@@ -11,17 +11,15 @@ class AdminHomeController extends Controller
 {
     public function showAllProductMedicine()
     {
-        $products = ProductMedicine::where('status', OnlineMedicineStatus::PENDING)
+        $products = ProductMedicine::where('status', '!=', OnlineMedicineStatus::DELETED)
             ->orderByDesc('id')
             ->get();
         return view('admin.admin.product-medicine.list-products', compact('products'));
     }
 
-    public function detailProductMedicine()
+    public function detailProductMedicine($id)
     {
-        $product = ProductMedicine::where('status', OnlineMedicineStatus::PENDING)
-            ->orderByDesc('id')
-            ->get();
+        $product = ProductMedicine::find($id);
         return view('admin.admin.product-medicine.detail-product', compact('product'));
     }
 }
