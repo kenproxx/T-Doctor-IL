@@ -78,7 +78,7 @@
                 let quantity_value = quantity[j].value;
                 let detail_value = detail[j].value;
 
-                if (!name || !ingredients || !quantity_value) {
+                if (!name && !ingredients) {
                     alert('Please enter medicine name or medicine ingredients or quantity!')
                     return;
                 }
@@ -138,7 +138,7 @@
                             <input type="number" min="1" class="form-control quantity" id="quantity">
                         </div>
                         <div class="form-group">
-                            <label for="detail_value">Detail</label>
+                            <label for="detail_value">Note</label>
                             <input type="text" class="form-control detail_value" id="detail_value">
                         </div>
                     </div>
