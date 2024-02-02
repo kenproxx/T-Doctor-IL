@@ -21,55 +21,25 @@
         @method('POST')
         <div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <label for="name">{{ __('home.Name') }}</label>
                     <input type="text" class="form-control" id="name" name="name"
                            value="{{ $productMedicine->name ?? '' }}">
                 </div>
-                <div class="col-md-4">
-                    <label for="name_en">{{ __('home.name_en') }}</label>
-                    <input type="text" class="form-control" id="name_en" name="name_en"
-                           value="{{ $productMedicine->name_en ?? '' }}">
-                </div>
-                <div class="col-md-4">
-                    <label for="name_laos">{{ __('home.name_laos') }}</label>
-                    <input type="text" class="form-control" id="name_laos" name="name_laos"
-                           value="{{ $productMedicine->name_laos ?? '' }}">
-                </div>
             </div>
 
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-12">
                     <label for="description">{{ __('home.Mô tả dài việt') }}</label>
                     <textarea class="form-control" name="description"
                               id="description">{{ $productMedicine->description ?? '' }}</textarea>
                 </div>
-                <div class="col-sm-4">
-                    <label for="description_en">{{ __('home.Mô tả dài anh') }}</label>
-                    <textarea class="form-control" name="description_en"
-                              id="description_en">{{ $productMedicine->description_en ?? '' }}</textarea>
-                </div>
-                <div class="col-sm-4">
-                    <label for="description_laos">{{ __('home.Mô tả dài lào') }}</label>
-                    <textarea class="form-control" name="description_laos"
-                              id="description_laos">{{ $productMedicine->description_laos ?? '' }}</textarea>
-                </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <label for="brand_name">{{ __('home.Brand Name') }}</label>
                     <input type="text" class="form-control" id="brand_name" name="brand_name"
                            value="{{ $productMedicine->brand_name ?? '' }}">
-                </div>
-                <div class="col-md-4">
-                    <label for="brand_name_en">{{ __('home.Brand Name English') }}</label>
-                    <input type="text" class="form-control" id="brand_name_en" name="brand_name_en"
-                           value="{{ $productMedicine->brand_name_en ?? '' }}">
-                </div>
-                <div class="col-md-4">
-                    <label for="brand_name_laos">{{ __('home.Brand Name Laos') }}</label>
-                    <input type="text" class="form-control" id="brand_name_laos" name="brand_name_laos"
-                           value="{{ $productMedicine->brand_name_laos ?? '' }}">
                 </div>
             </div>
             <div class="row">
@@ -141,11 +111,16 @@
                 @endforeach
             </div>
             <div class="row">
-                <div class="col-sm-12">
+                <div class="col-sm-9">
                     <label for="ingredient">{{ __('home.ingredient') }}</label>
                     <input type="text" class="form-control" id="ingredient" name="ingredient"
                            value="{{ $drugIngredient->component_name ?? '' }}"
                            placeholder="{{ __('home.cac thanh phan thuoc cach nhau boi dau phay') }}">
+                </div>
+                <div class="col-sm-3">
+                    <label for="is_prescription">Is prescription</label>
+                    <input type="checkbox" id="is_prescription" name="is_prescription"
+                        {{ $productMedicine->is_prescription == true ? 'checked' : '' }}>
                 </div>
             </div>
             <div class="row">
@@ -161,7 +136,9 @@
                 </div>
                 <div class="col-md-4">
                     <label for="status">{{ __('home.Status') }}</label>
-                    <select class="form-select" id="status" name="status">
+                    <select class="form-select" id="status" name="status" disabled>
+                        <option
+                            value="{{ OnlineMedicineStatus::PENDING }}" {{ $productMedicine->price == OnlineMedicineStatus::PENDING ? 'selected' : '' }}>{{ OnlineMedicineStatus::PENDING }}</option>
                         <option
                             value="{{ OnlineMedicineStatus::APPROVED }}" {{ $productMedicine->price == OnlineMedicineStatus::APPROVED ? 'selected' : '' }}>{{ OnlineMedicineStatus::APPROVED }}</option>
                         <option
@@ -193,11 +170,14 @@
             const formData = new FormData();
 
             const arrField = [
-                'name', 'name_en', 'name_laos',
-                'brand_name', 'brand_name_en', 'brand_name_laos',
-                'category_id', 'object_', 'filter_', 'price', 'status', 'id', 'unit_price',
-                'ingredient', 'quantity'
+                'name', 'brand_name', 'category_id', 'object_', 'filter_',
+                'price', 'status', 'id', 'unit_price', 'ingredient', 'quantity'
             ]
+
+            let checked = document.getElementById('is_prescription').checked;
+            if (checked) {
+                formData.append('is_prescription', 'true');
+            }
 
             var filedata = document.getElementById("gallery");
             var i = 0, len = filedata.files.length, img, reader, file;
@@ -226,33 +206,33 @@
 
             formData.append('_token', '{{ csrf_token() }}');
 
-            if (isValid) {
-                try {
-                    $.ajax({
-                        url: `{{route('api.backend.product-medicine.update')}}`,
-                        method: 'POST',
-                        headers: headers,
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        data: formData,
-                        success: function (data) {
-                            alert(data);
-                            loadingMasterPage();
-                            window.location.href = `{{route('api.backend.product-medicine.index')}}`;
-                        },
-                        error: function (exception) {
-                            alert(exception.responseText);
-                            loadingMasterPage();
-                        }
-                    });
-                } catch (error) {
-                    loadingMasterPage();
-                    throw error;
-                }
-            } else {
+            if (!isValid) {
                 alert('Please check input require!')
+                return;
+            }
+
+            try {
+                $.ajax({
+                    url: `{{route('api.backend.product-medicine.update')}}`,
+                    method: 'POST',
+                    headers: headers,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    data: formData,
+                    success: function (data) {
+                        alert(data);
+                        loadingMasterPage();
+                        window.location.href = `{{route('api.backend.product-medicine.index')}}`;
+                    },
+                    error: function (exception) {
+                        alert(exception.responseText);
+                        loadingMasterPage();
+                    }
+                });
+            } catch (error) {
                 loadingMasterPage();
+                throw error;
             }
         }
     </script>
