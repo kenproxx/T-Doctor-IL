@@ -93,7 +93,7 @@
 
     window.Echo.private("messages." + currentUserIdChat).listen('NewMessage', function (e) {
         renderMessageReceive(e);
-        handleSeenMessage();
+        // handleSeenMessage();
         calculateTotalMessageUnseen(e);
     });
 
@@ -216,26 +216,37 @@
 
     function renderMessageReceive(element) {
         let html = '';
+        element = element.message;
 
-        if (element.type == 'DonThuocMoi') {
-            if (!msg.chat_message) {
+        if (element.type != null) {
+            if (!element.text) {
                 return;
             }
-            html += `<div class="message ">
-                        <span >
-                            ${msg.chat_message}`
 
-            if ('{{ !\App\Models\User::isNormal() }}') {
-                html += `, <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.create') }}?user_id=${chatUserId}">xem ngay?</a>`
+            if (element.type == 'DonThuocMoi') {
+                html = `<div class="message ">
+                        <span >
+                            ${element.text},
+                            <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.my.list') }}">xem ngay?</a>
+                            </span></div>`
             }
 
-            html += `</span></div>`
-            return;
+            if (element.type == 'TaoDonThuoc') {
+                html = `<div class="message ">
+                        <span >
+                            ${element.text}`;
+
+                if ('{{ !\App\Models\User::isNormal() }}') {
+                    html += `, <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.create') }}?user_id=${chatUserId}">tạo ngay?</a>
+                             </span></div>`;
+                }
+            }
+
         } else {
             html = `<div class="message">
                         <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/245657/1_copy.jpg"/>
                         <div class="bubble">
-                            ${element.message.text}
+                            ${element.text}
                             <div class="corner"></div>
                         </div>
                     </div>`
@@ -251,7 +262,7 @@
                 isShowOpenWidget = true;
 
                 chatUserId = $(this).data('id');
-                handleSeenMessage();
+                // handleSeenMessage();
                 handleStartChat(chatUserId);
                 removeSpanBadges(this);
 
@@ -481,12 +492,15 @@
                     return;
                 }
 
-                if ('{{ !\App\Models\User::isNormal() }}' && msg.type == 'TaoDonThuoc') {
+                if (msg.type == 'TaoDonThuoc') {
                     html += `<div class="message ">
                         <span >
-                            ${msg.chat_message},
-                             <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.create') }}?user_id=${chatUserId}">tạo ngay?</a>
-                             </span></div>`
+                            ${msg.chat_message}`;
+
+                    if ('{{ !\App\Models\User::isNormal() }}') {
+                        html += `, <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.create') }}?user_id=${chatUserId}">tạo ngay?</a>`;
+                    }
+                    html += `</span></div>`;
                 }
 
                 return;
