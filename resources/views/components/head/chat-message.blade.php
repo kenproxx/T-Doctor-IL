@@ -294,16 +294,16 @@
                     <div class="form-group col-md-6">
                         <label for="full_name_value">{{ __('home.Full Name') }}</label>
                         <input type="text" class="form-control full_name"
-{{--                               value="{{ $user ? $user->last_name . ' ' . $user->name : '' }}"--}}
-{{--                               {{ $user ? $user->last_name || $user->name ? 'disabled' : '' : '' }} --}}
+                               {{--                               value="{{ $user ? $user->last_name . ' ' . $user->name : '' }}"--}}
+                               {{--                               {{ $user ? $user->last_name || $user->name ? 'disabled' : '' : '' }} --}}
                                id="full_name_value"
                                name="full_name">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="email_value">{{ __('home.Email') }}</label>
                         <input type="text" class="form-control" id="email_value"
-{{--                               value="{{ $user ? $user->email : '' }}"--}}
-{{--                               {{ $user ? $user->email ? 'disabled' : '' : '' }}--}}
+                               {{--                               value="{{ $user ? $user->email : '' }}"--}}
+                               {{--                               {{ $user ? $user->email ? 'disabled' : '' : '' }}--}}
                                placeholder="{{ __('home.E-Mail Address') }}">
                     </div>
                 </div>
@@ -312,7 +312,8 @@
 
                     </div>
                     <button type="button"
-                            class="btn btn-outline-primary mt-3" onclick="handleAddMedicine_widgetChat()">{{ __('home.Add') }}
+                            class="btn btn-outline-primary mt-3"
+                            onclick="handleAddMedicine_widgetChat()">{{ __('home.Add') }}
                     </button>
                 </div>
                 <button type="button" class="btn btn-primary " onclick="createPrescription_widgetChat()">Create</button>
@@ -893,13 +894,12 @@
                         </div>
                     </div>
                     <div class="action mt-3">
-                        <i class="fa-regular fa-trash-can" onclick="loadTrash_widgetChat()" style="cursor: pointer; font-size: 24px"></i>
+                        <i class="fa-regular fa-trash-can" onclick="loadTrash_widgetChat(this)" style="cursor: pointer; font-size: 24px"></i>
                     </div>
                 </div>`;
 
     function handleAddMedicine_widgetChat() {
         $('#list-service-result').append(html_widgetChat);
-        loadTrash_widgetChat();
         loadData_widgetChat();
     }
 
@@ -1058,15 +1058,12 @@
         elementInputMedicine_widgetChat = element;
     }
 
-    loadTrash_widgetChat();
+    loadData_widgetChat();
 
     function loadTrash_widgetChat(element) {
-            let main = $(element).parent().parent();
-            main.remove();
-
+        $(element).parent().parent().remove();
     }
 
-    loadData_widgetChat();
 
     function loadData_widgetChat() {
         $('.service_name_item').on('click', function () {
