@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\restapi;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\TranslateController;
 use App\Models\Role;
 use App\Models\RoleUser;
 use Illuminate\Http\Request;
@@ -49,6 +50,21 @@ class MainApi extends Controller
             $array_data['status'] = 400;
             $array_data['message'] = $e->getMessage();
             return $array_data;
+        }
+    }
+
+    public function translateLanguage(Request $request)
+    {
+        try {
+            $text = $request->input('text');
+            $language = $request->input('language');
+
+            $translate = new TranslateController();
+
+            $translate_text = $translate->translateText($text, $language ?? 'vi');
+            return response($translate_text);
+        } catch (\Exception $exception) {
+            return response($exception, 400);
         }
     }
 }

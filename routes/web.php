@@ -29,6 +29,7 @@ use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\ExaminationController;
 use App\Http\Controllers\FleaMarketController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ImportController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\MedicalResultController;
@@ -39,6 +40,7 @@ use App\Http\Controllers\ProductInfoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RecruitmentController;
 use App\Http\Controllers\restapi\BookingApi;
+use App\Http\Controllers\restapi\MainApi;
 use App\Http\Controllers\restapi\UserApi;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\ReviewStoreController;
@@ -522,11 +524,12 @@ Route::middleware(['user.active'])->group(function () {
     Route::get('/info-user/{id}', [ProfileController::class, 'infoUser'])->name('info.user');
     Route::get('/department', [DoctorInfoController::class, 'listDepartment'])->name('list.department');
 
-    Route::get('/upload-form', [\App\Http\Controllers\ImportController::class, 'showForm'])->name('upload.form');
-    Route::post('/import-excel', [\App\Http\Controllers\ImportController::class, 'importExcel'])->name('import.excel');
+    Route::get('/upload-form', [ImportController::class, 'showForm'])->name('upload.form');
+    Route::post('/import-excel', [ImportController::class, 'importExcel'])->name('import.excel');
     /*Download*/
     Route::group(['prefix' => 'download'], function () {
         Route::get('', [DownloadController::class, 'getDownload'])->name('user.download');
         Route::get('file/{id}', [DownloadController::class, 'downloadFile'])->name('user.download.file');
     });
 });
+Route::get('test/translate', [MainApi::class, 'translateLanguage']);
