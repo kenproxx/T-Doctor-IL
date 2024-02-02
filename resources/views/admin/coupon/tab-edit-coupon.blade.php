@@ -23,81 +23,57 @@
                 <label for="title">{{ __('home.tiêu đề việt') }}</label>
                 <input type="text" class="form-control" id="title" name="title" value="{{ $coupon->title }}">
             </div>
-            <div class="col-sm-4">
-                <label for="title_en">{{ __('home.tiêu đề anh') }}</label>
-                <input type="text" class="form-control" id="title_en" name="title_en" value="{{ $coupon->title_en }}">
-            </div>
-            <div class="col-sm-4">
-                <label for="title_laos">{{ __('home.tiêu đề lào') }}</label>
-                <input type="text" class="form-control" id="title_laos" name="title_laos"
-                       value="{{ $coupon->title_laos }}">
-            </div>
         </div>
         <div class="row">
-            <div class="col-sm-4">
-                <label for="short_description">{{ __('home.Mô tả ngắn việt') }}</label>
+            <div class="col-sm-6">
+                <label for="short_description">{{ __('home.Phần thưởng') }}</label>
                 <textarea class="form-control" name="short_description"
                           id="short_description">{{ $coupon->short_description }}</textarea>
             </div>
-            <div class="col-sm-4">
-                <label for="short_description_en">{{ __('home.Mô tả ngắn anh') }}</label>
-                <textarea class="form-control" name="short_description_en"
-                          id="short_description_en">{{ $coupon->short_description_en }}</textarea>
+            <div class="col-sm-6">
+                <label for="condition">{{ __('home.Điều khoản và điều kiện') }}</label>
+                <textarea class="form-control" name="condition" id="condition">{{$coupon->condition}}</textarea>
             </div>
-            <div class="col-sm-4">
-                <label for="short_description_laos">{{ __('home.Mô tả ngắn lào') }}</label>
-                <textarea class="form-control" name="short_description_laos"
-                          id="short_description_laos">{{ $coupon->short_description_laos }}</textarea>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <label for="conduct">{{ __('home.Hướng dẫn chiến dịch') }}</label>
+                <textarea class="form-control" name="conduct" id="conduct">{{$coupon->conduct}}</textarea>
+            </div>
+            <div class="col-sm-6">
+                <label for="description">{{ __('home.Yêu cầu nội dung') }}</label>
+                <textarea class="form-control" name="description" id="description">{{$coupon->description}}</textarea>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
-                <label for="description">{{ __('home.Mô tả dài việt') }}</label>
-                <textarea class="form-control" name="description" id="description">{{ $coupon->description }}</textarea>
-            </div>
-            <div class="col-sm-4">
-                <label for="description_en">{{ __('home.Mô tả dài anh') }}</label>
-                <textarea class="form-control" name="description_en"
-                          id="description_en">{{ $coupon->description_en }}</textarea>
-            </div>
-            <div class="col-sm-4">
-                <label for="description_laos">{{ __('home.Mô tả dài lào') }}</label>
-                <textarea class="form-control" name="description_laos"
-                          id="description_laos">{{ $coupon->description_laos }}</textarea>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4">
-                <label for="startDate">{{ __('home.Thời gian bắt đầu') }}</label>
+                <label for="startDate">{{ __('home.Thời gian bắt đầu ứng tuyển') }}</label>
                 <input type="datetime-local" class="form-control" id="startDate" name="startDate"
-                       value="{{ $coupon->startDate }}"></div>
+                       value="{{$coupon->startDate}}"></div>
             <div class="col-sm-4">
-                <label for="endDate">{{ __('home.Thời gian kết thúc') }}</label>
+                <label for="endDate">{{ __('home.Thời gian kết thúc ứng tuyển') }}</label>
                 <input type="datetime-local" class="form-control" id="endDate" name="endDate"
-                       value="{{ $coupon->endDate }}"></div>
+                       value="{{$coupon->startDate}}"></div>
             <div class="col-sm-4">
-                <label for="endDate">{{ __('home.type') }}</label>
+                <label for="type">{{ __('home.type') }}</label>
                 <select class="form-select" id="type" name="type">
                     @foreach(TypeCoupon::getArray() as $value)
-                        <option
-                            {{ $coupon->type == $value ? 'selected' : '' }} value="{{ $value }}">{{ $value }}</option>
+                        <option value="{{ $value }}">{{ $value }}</option>
                     @endforeach
                 </select>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-4">
-                <label for="max_register">{{ __('home.Số lượng đký tối đa') }}</label>
-                <input type="number" class="form-control" id="max_register" name="max_register"
-                       value="{{ $coupon->max_register }}">
-            </div>
+                <label for="start_selective">{{ __('home.	Thời gian bắt đầu chọn lọc') }}</label>
+                <input type="datetime-local" class="form-control" id="start_selective" name="start_selective"
+                       value="{{ $coupon->start_selective }}"></div>
             <div class="col-sm-4">
-                <label for="clinic_id">{{ __('home.Đơn vị áp dụng') }}</label>
-                <select class="form-select" id="clinic_id">
-                    <option selected>{{ __('home.Choose...') }}</option>
-                </select>
-            </div>
-            <div class="col-sm-4"><label for="status">{{ __('home.Trạng thái') }}</label>
+                <label for="end_selective">{{ __('home.Thời gian kết thúc chọn lọc') }}</label>
+                <input type="datetime-local" class="form-control" id="end_selective" name="end_selective"
+                       value="{{$coupon->end_selective}}"></div>
+            <div class="col-sm-4">
+                <label for="status">{{ __('home.Trạng thái') }}</label>
                 <select class="form-select" id="status" name="status" {{ !$isAdmin ? 'disabled' : '' }}>
                     <option
                         value="{{ CouponStatus::ACTIVE }}" {{ $coupon->status === CouponStatus::ACTIVE ? 'selected' : '' }}>
@@ -112,8 +88,66 @@
                         {{ CouponStatus::PENDING }}
                     </option>
                 </select>
-
             </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <label for="start_post">{{ __('home.Thời gian bắt đầu đăng bài') }}</label>
+                <input type="datetime-local" class="form-control" id="start_post" name="start_post"
+                       value="{{$coupon->start_post}}"></div>
+            <div class="col-sm-4">
+                <label for="end_post">{{ __('home.Thời gian kết thúc đăng bài') }}</label>
+                <input type="datetime-local" class="form-control" id="end_post" name="end_post"
+                       value="{{$coupon->end_post}}"></div>
+            <div class="col-sm-4">
+                <label for="max_register">{{ __('home.Số lượng đký tối đa') }}</label>
+                <input type="number" min="1" value="{{$coupon->max_register}}" class="form-control" id="max_register"
+                       name="max_register">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <label for="start_evaluate">{{ __('home.Thời gian bắt đầu đánh giá') }}</label>
+                <input type="datetime-local" class="form-control" id="start_evaluate" name="start_evaluate"
+                       value="{{$coupon->start_evaluate}}"></div>
+            <div class="col-sm-4">
+                <label for="end_evaluate">{{ __('home.Thời gian kết thúc đánh giá') }}</label>
+                <input type="datetime-local" class="form-control" id="end_evaluate" name="end_evaluate"
+                       value="{{$coupon->end_evaluate}}"></div>
+            <div class="col-sm-4">
+                <label for="clinic_id">{{ __('home.Đơn vị áp dụng') }}</label>
+                <select class="form-select" id="clinic_id">
+                    <option selected>{{ __('home.Choose...') }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="is_facebook">{{ __('home.Có phải coupon facebook không') }}</label>
+                <input type="checkbox" class="" id="is_facebook" name="is_facebook"
+                       @if($coupon->is_facebook == 1) checked @endif value="1">
+            </div>
+            <div class="col">
+                <label for="is_google">{{ __('home.Có phải coupon google không') }}</label>
+                <input type="checkbox" class="" id="is_google" name="is_google" @if($coupon->is_google == 1) checked
+                       @endif value="1">
+            </div>
+            <div class="col">
+                <label for="is_youtube">{{ __('home.Có phải coupon youtube không') }}</label>
+                <input type="checkbox" class="" id="is_youtube" name="is_youtube" @if($coupon->is_youtube == 1) checked
+                       @endif value="1">
+            </div>
+            <div class="col">
+                <label for="is_instagram">{{ __('home.Có phải coupon instagram không') }}</label>
+                <input type="checkbox" class="" id="is_instagram" name="is_instagram"
+                       @if($coupon->is_instagram == 1) checked @endif value="1">
+            </div>
+            <div class="col">
+                <label for="is_tiktok">{{ __('home.Có phải coupon tiktok không') }}</label>
+                <input type="checkbox" class="" id="is_tiktok" name="is_tiktok" @if($coupon->is_tiktok == 1) checked
+                       @endif value="1">
+            </div>
+
         </div>
         <div class="row">
             <div class="col-sm-12"><label>{{ __('home.Ảnh bìa') }}</label>
@@ -141,14 +175,24 @@
                 const formData = new FormData();
 
                 const fieldNames = [
-                    "title", "title_en", "title_laos", "startDate", "endDate",
-                    "max_register", "status", "clinic_id", 'type'
+                    "title", "startDate", "endDate",
+                    "max_register", "status", "clinic_id", 'type', 'start_selective',
+                    'end_selective', 'start_post', 'end_post', 'start_evaluate', 'end_evaluate'
                 ];
 
                 const fieldTextareaTiny = [
-                    "short_description", "short_description_en", "short_description_laos",
-                    "description", "description_en", "description_laos"
+                    "short_description", "description", "condition", "conduct",
                 ];
+                const arrFieldEmptyChecked = [
+                    'is_facebook', 'is_google', 'is_youtube', 'is_instagram', 'is_tiktok'
+                ];
+
+                arrFieldEmptyChecked.forEach(data => {
+                    let checked = document.getElementById(data).checked;
+                    if (checked) {
+                        formData.append(data, $(`#${data}`).val());
+                    }
+                });
 
                 let item = $('#max_register');
                 let quantity = item.val();
