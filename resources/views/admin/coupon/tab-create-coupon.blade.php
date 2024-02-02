@@ -137,6 +137,7 @@
                 </div>
             </div>
         </div>
+        <input type="hidden" value="{{ Auth::user()->id }}" name="user_id" id="user_id">
 
         <button type="button" class="btn btn-primary up-date-button mt-md-4">{{ __('home.Save') }}</button>
     </form>
@@ -155,7 +156,7 @@
                 const fieldNames = [
                     "title", "startDate", "endDate",
                     "max_register", "clinic_id", 'type', 'start_selective', 'end_selective',
-                    'start_post', 'end_post', 'start_evaluate', 'end_evaluate', 'status',
+                    'start_post', 'end_post', 'start_evaluate', 'end_evaluate', 'status','user'
 
                 ];
                 const fieldTextareaTiny = [

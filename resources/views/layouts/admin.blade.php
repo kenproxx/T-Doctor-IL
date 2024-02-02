@@ -394,19 +394,22 @@
             <!-- End Order Nav -->
 
             <!-- List Coupon Nav -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#coupon-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-medium"></i><span>{{ __('home.List Coupon') }}</span><i
-                        class="bi bi-chevron-down ms-auto"></i>
-                </a>
-                <ul id="coupon-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                    <li>
-                        <a href="{{ route('homeAdmin.list.coupons') }}">
-                            <i class="bi bi-circle"></i><span>{{ __('home.List Coupon') }}</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+            @if($isAdmin || Auth::user()->member == 'HOSPITALS' || Auth::user()->member == 'PHARMACIES' || Auth::user()->member == 'CLINICS')
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#coupon-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-medium"></i><span>{{ __('home.List Coupon') }}</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="coupon-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('homeAdmin.list.coupons') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.List Coupon') }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
+
             <!-- End List Coupon Nav -->
 
             <!-- Call video Nav -->

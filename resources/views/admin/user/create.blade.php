@@ -231,7 +231,7 @@
 
             const array_empty_normal = ['medical_history',]
 
-            const array_medical = ['specialty', 'specialty_en', 'specialty_laos',
+            const array_medical = ['specialty', 'specialty_en', 'specialty_laos','identifier',
                 'service', 'service_en', 'service_laos', "workspace",
                 'service_price', 'service_price_en', 'service_price_laos',
                 'time_working_1', 'time_working_2', 'apply_for',
@@ -320,6 +320,12 @@
                                 <label for="specialty_laos">{{ __('home.chuyên môn lào') }}</label>
                                 <input type="text" class="form-control" id="specialty_laos" name="specialty_laos"
                                        value="">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label for="identifier">{{ __('home.Mã định danh trên giấy hành nghề') }}</label>
+                                <input type="text" class="form-control" id="identifier" name="identifier" value="">
                             </div>
                         </div>
                         <div class="row">
