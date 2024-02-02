@@ -9,6 +9,8 @@
 8. composer require guzzlehttp/guzzle
 9. composer require laravelcollective/html
 10. composer require maatwebsite/excel
+11. composer require patrickschur/language-detection
+11. composer require stichoza/google-translate-php
 
 [//]: # (Pusher để đẩy thông báo khi có người gọi đến)
 1. composer require pusher/pusher-php-server
