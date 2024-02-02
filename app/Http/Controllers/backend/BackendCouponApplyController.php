@@ -141,17 +141,22 @@ class BackendCouponApplyController extends Controller
                 }
             }
 
-
-            if (!$is_valid){
-                return response((new MainApi())->returnMessage('link social '. $text . ' not empty') , 400);
+            if (!$is_valid) {
+                return response((new MainApi())->returnMessage('link social ' . $text . ' not empty'), 400);
             }
 
             // kiểm tra name, email, phone, content not null
             if (!$name || !$email || !$phone || !$content) {
                 return response((new MainApi())->returnMessage('invalid email or name or phone or content'), 400);
             }
-
-            $link = SocialUser::where('user_id', $user_id)->first($sns_option);
+            foreach ($your_array as $item) {
+                $link = SocialUser::where('user_id', $user_id)->value($item); // Assuming you want to get the value of the field
+                if ($link) {
+                    $your_links[] = $link;
+                }
+                $your_string = implode(', ', $your_array);
+            }
+//            $link = SocialUser::where('user_id', $user_id)->first();
 
             $couponApply->name = $name;
             $couponApply->email = $email;
@@ -159,12 +164,11 @@ class BackendCouponApplyController extends Controller
             $couponApply->content = $content;
             $couponApply->user_id = $user_id;
             $couponApply->coupon_id = $coupon_id;
-            $couponApply->sns_option = $sns_option;
-            $couponApply->link_ = $link[$sns_option];
+            $couponApply->sns_option = $your_string;
+            $couponApply->link_ = implode(', ', $your_links);
             $couponApply->status = CouponApplyStatus::PENDING;
-
             if (!$coupon || $coupon->status != CouponStatus::ACTIVE) {
-                return response('Coupon not found!', 404);
+                return response((new MainApi())->returnMessage('Coupon not found!'), 404);
             }
 
             $coupon->registered = $coupon->registered + 1;
