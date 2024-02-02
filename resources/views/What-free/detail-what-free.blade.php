@@ -131,7 +131,7 @@
                                 </div>
                                 <div class="div-5">
                                     <div class="text-wrapper-3">{{ __('home.Contact number') }}</div>
-                                    <input class="form-control" type="text" name="phone"
+                                    <input class="form-control" type="number" name="phone"
                                            id="phone">
                                 </div>
                             </div>
