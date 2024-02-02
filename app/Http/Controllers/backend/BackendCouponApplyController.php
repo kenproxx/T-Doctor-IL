@@ -4,8 +4,10 @@ namespace App\Http\Controllers\backend;
 
 use App\Enums\CouponApplyStatus;
 use App\Enums\CouponStatus;
+use App\Enums\SocialUserStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\restapi\MainApi;
 use App\Models\Coupon;
 use App\Models\CouponApply;
 use App\Models\SocialUser;
@@ -108,15 +110,45 @@ class BackendCouponApplyController extends Controller
             $content = $request->input('content');
             $user_id = $request->input('user_id');
             $coupon_id = $request->input('coupon_id');
-            $sns_option = $request->input('sns_option');
 
+            $SocialUser = SocialUser::where('user_id', $user_id)
+                ->where('status', SocialUserStatus::ACTIVE)
+                ->first();
+
+            $my_array = null;
+            $instagram = $SocialUser->instagram ? $my_array[] = 'instagram' : 0;
+            $facebook = $SocialUser->facebook ? $my_array[] = 'facebook' : 0;
+            $tiktok = $SocialUser->tiktok ? $my_array[] = 'tiktok' : 0;
+            $youtube = $SocialUser->youtube ? $my_array[] = 'youtube' : 0;
+            $google = $SocialUser->google_review ? $my_array[] = 'google_review' : 0;
+
+            $coupon = Coupon::find($coupon_id);
+
+            $your_array = null;
+            $instagram = $coupon->is_instagram == 1 ? $your_array[] = 'instagram' : 0;
+            $facebook = $coupon->is_facebook == 1 ? $your_array[] = 'facebook' : 0;
+            $tiktok = $coupon->is_tiktok == 1 ? $your_array[] = 'tiktok' : 0;
+            $youtube = $coupon->is_youtube == 1 ? $your_array[] = 'youtube' : 0;
+            $google = $coupon->is_google == 1 ? $your_array[] = 'google_review' : 0;
             //check sns option not null
-            if (!$sns_option) {
-                return response('thiếu thông tin mạng xã hội, hãy vào trang cá nhân để cập nhật', 400);
+            $text = null;
+            $is_valid = true;
+            foreach ($your_array as $item) {
+                if (!in_array($item, $my_array)) {
+                    $is_valid = false;
+                    $text = $item;
+                    break;
+                }
             }
+
+
+            if (!$is_valid){
+                return response((new MainApi())->returnMessage('link social '. $text . ' not empty') , 400);
+            }
+
             // kiểm tra name, email, phone, content not null
             if (!$name || !$email || !$phone || !$content) {
-                return response('Nhập thiếu thông tin rồi', 400);
+                return response((new MainApi())->returnMessage('invalid email or name or phone or content'), 400);
             }
 
             $link = SocialUser::where('user_id', $user_id)->first($sns_option);
@@ -131,7 +163,6 @@ class BackendCouponApplyController extends Controller
             $couponApply->link_ = $link[$sns_option];
             $couponApply->status = CouponApplyStatus::PENDING;
 
-            $coupon = Coupon::find($coupon_id);
             if (!$coupon || $coupon->status != CouponStatus::ACTIVE) {
                 return response('Coupon not found!', 404);
             }

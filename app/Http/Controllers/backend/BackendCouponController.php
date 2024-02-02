@@ -9,6 +9,7 @@ use App\Models\Clinic;
 use App\Models\Coupon;
 use App\Models\Role;
 use App\Models\RoleUser;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -135,15 +136,20 @@ class BackendCouponController extends Controller
     public function create(Request $request)
     {
         try {
-            $exitCoupons = Coupon::where('user_id', Auth::user()->id)->get();
+            $user_id = $request->input('user_id');
+            $user = User::find($user_id);
+            $exitCoupons = Coupon::where('user_id', $user->id)->get();
             foreach ($exitCoupons as $exitCoupon) {
                 if ($exitCoupon->status == CouponStatus::ACTIVE) {
                     return response('You have an active coupon!', 400);
                 }
             }
             $coupon = new Coupon();
+            if ($this->isAdmin() || $user->member == 'HOSPITALS' || $user->member == 'PHARMACIES'
+                || $user->member == 'CLINICS') {
+                $this->saveCoupon($coupon, $request);
+            }
 
-            $this->saveCoupon($coupon, $request);
 
             return response()->json($coupon);
         } catch (\Exception $exception) {

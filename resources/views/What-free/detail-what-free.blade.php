@@ -53,54 +53,7 @@
                     </div>
                     <div class="form-2 d-none" id="form-apply">
                         <div class="div">
-                            @if ($socials)
-                                <div class="text-wrapper">{{ __('home.SNS option') }}</div>
-                                <div class="div-2 d-flex" id="select-sns-apply">
-                                    @if($socials->facebook)
-                                        <div class="button">
-                                            <input type="radio" id="sns_option_1" name="sns_option" value="facebook"/>
-                                            <label class="btn btn-default" for="sns_option_1"><i
-                                                    class="fa-brands fa-facebook w-icon-px"></i></label>
-                                        </div>
-                                    @endif
-                                    @if($socials->instagram)
-                                        <div class="button">
-                                            <input type="radio" id="sns_option_2" name="sns_option" value="instagram"/>
-                                            <label class="btn btn-default" for="sns_option_2"><i
-                                                    class="fa-brands fa-instagram"></i></label>
-                                        </div>
-                                    @endif
-                                    @if($socials->youtube)
-                                        <div class="button">
-                                            <input type="radio" id="sns_option_3" name="sns_option" value="youtube"/>
-                                            <label class="btn btn-default" for="sns_option_3"><i
-                                                    class="fa-brands fa-youtube w-icon-px"></i></label>
-                                        </div>
-                                    @endif
-                                    @if($socials->tiktok)
-                                        <div class="button">
-                                            <input type="radio" id="sns_option_4" name="sns_option" value="tiktok"/>
-                                            <label class="btn btn-default" for="sns_option_4"><i
-                                                    class="fa-brands fa-tiktok w-icon-px"></i></label>
-                                        </div>
-                                    @endif
-                                    @if($socials->google_review)
-                                        <div class="button">
-                                            <input type="radio" id="sns_option_5" name="sns_option"
-                                                   value="google_review"/>
-                                            <label class="btn btn-default" for="sns_option_5"><i
-                                                    class="fa-brands fa-google"></i></label>
-                                        </div>
-                                    @endif
-                                    @if($socials->other)
-                                        <div class="button">
-                                            <input type="radio" id="sns_option_6" name="sns_option" value="other"/>
-                                            <label class="btn btn-default" for="sns_option_6"><i
-                                                    class="fa-solid fa-otter w-icon-px"></i></label>
-                                        </div>
-                                    @endif
-                                </div>
-                            @endif
+
                         </div>
                         <div class="div-3">
                             <div class="text-wrapper">{{ __('home.Applicant information') }}</div>
@@ -129,10 +82,11 @@
                         </div>
                         <input type="hidden" value="{{ $coupon->id }}" name="coupon_id" id="coupon_id">
                         <input type="hidden" value="{{ csrf_token() }}" name="_token" id="_token">
-                        <div class="div-7 d-flex justify-content-between">
-                            <button class="div-wrapper" id="button-back">{{ __('home.CANCEL') }}</button>
-                            <button class="text-wrapper-5 apply-button">{{ __('home.Apply') }}</button>
-                        </div>
+                        <input type="hidden" value="{{ Auth::user()->id }}" name="user_id" id="user_id">
+                            <div class="div-7 d-flex justify-content-between">
+                                <button class="div-wrapper" id="button-back">{{ __('home.CANCEL') }}</button>
+                                <button class="text-wrapper-5 apply-button">{{ __('home.Apply') }}</button>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -171,10 +125,10 @@
                     return;
                 }
 
-                if (!selectedOption) {
-                    alert('Xin cập nhật thông tin SNS và chọn lại');
-                    return;
-                }
+                // if (!selectedOption) {
+                //     alert('Xin cập nhật thông tin SNS và chọn lại');
+                //     return;
+                // }
 
                 if (!token) {
                     alert('{{ __('home.Please login to continue') }}')
@@ -226,7 +180,7 @@
 
                 const content = tinymce.get('content_').getContent();
                 formData.append("content", content);
-                formData.append("sns_option", selectedOption.value);
+                // formData.append("sns_option", selectedOption.value);
 
                 loadingMasterPage();
                 try {
@@ -243,9 +197,9 @@
                             loadingMasterPage();
                             window.location.reload();
                         },
-                        error: function (exception) {
+                        error: function (xhr, status, exception) {
                             loadingMasterPage();
-                            alert(exception.responseText);
+                            alert(xhr.responseJSON.message);
                         }
                     });
                 } catch (error) {
