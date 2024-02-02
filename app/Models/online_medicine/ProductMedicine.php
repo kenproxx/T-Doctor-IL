@@ -17,7 +17,7 @@ class ProductMedicine extends Model
         'description', 'description_en', 'description_laos',
         'thumbnail', 'gallery', 'unit_price', 'quantity', 'is_prescription',
 
-        'shape', 'unit_quanity', 'manufacturing_country', 'manufacturing_company',
+        'shape', 'unit_quantity', 'manufacturing_country', 'manufacturing_company',
         'specifications', 'short_description', 'short_description_en', 'short_description_laos',
         'number_register', 'side_effects', 'uses', 'user_manual',
         'notes', 'preserve', 'proved_by',

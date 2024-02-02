@@ -40,7 +40,11 @@ class BackendProductMedicineController extends Controller
     public function create()
     {
         $categoryProductMedicine = CategoryProduct::where('status', 1)->get();
-        return view('admin.product_medicine.create', compact('categoryProductMedicine'));
+        $reflector = new \ReflectionClass('App\Enums\online_medicine\ShapeProduct');
+        $shapes = $reflector->getConstants();
+        $reflector = new \ReflectionClass('App\Enums\online_medicine\UnitQuantityProduct');
+        $unit_quantity = $reflector->getConstants();
+        return view('admin.product_medicine.create', compact('categoryProductMedicine', 'shapes', 'unit_quantity'));
     }
 
     /**
@@ -90,7 +94,14 @@ class BackendProductMedicineController extends Controller
     {
         try {
             $params = $request->only('name', 'brand_name', 'category_id', 'object_', 'filter_',
-                'price', 'status', 'description', 'unit_price', 'quantity');
+                'price', 'status', 'description', 'unit_price', 'quantity',
+                'manufacturing_country', 'manufacturing_company', 'unit_quantity',
+
+                'short_description', 'short_description',
+                'uses', 'user_manual',
+                'notes', 'preserve', 'side_effects',
+
+                'shape', 'specifications', 'number_register', 'proved_by');
 
             $translate = new TranslateController();
 
@@ -101,6 +112,13 @@ class BackendProductMedicineController extends Controller
             $params['name'] = $translate->translateText($params['name'], 'vi');
             $params['name_en'] = $translate->translateText($params['name'], 'en');
             $params['name_laos'] = $translate->translateText($params['name'], 'lo');
+            //check short_description
+            if (empty($params['short_description'])) {
+                return response('Mô tả sản phẩm không được để trống', 400);
+            }
+            $params['short_description'] = $translate->translateText($params['short_description'], 'vi');
+            $params['short_description_en'] = $translate->translateText($params['short_description'], 'en');
+            $params['short_description_laos'] = $translate->translateText($params['short_description'], 'lo');
             //check description
             if (empty($params['description'])) {
                 return response('Mô tả sản phẩm không được để trống', 400);
@@ -171,7 +189,14 @@ class BackendProductMedicineController extends Controller
     {
         try {
             $params = $request->only('name', 'brand_name', 'category_id', 'object_', 'filter_',
-                'price', 'status', 'description', 'quantity');
+                'price', 'status', 'description', 'unit_price', 'quantity',
+                'manufacturing_country', 'manufacturing_company', 'unit_quantity',
+
+                'short_description', 'short_description',
+                'uses', 'user_manual',
+                'notes', 'preserve', 'side_effects',
+
+                'shape', 'specifications', 'number_register', 'proved_by');
 
             $translate = new TranslateController();
 
@@ -182,6 +207,13 @@ class BackendProductMedicineController extends Controller
             $params['name'] = $translate->translateText($params['name'], 'vi');
             $params['name_en'] = $translate->translateText($params['name'], 'en');
             $params['name_laos'] = $translate->translateText($params['name'], 'lo');
+            //check short_description
+            if (empty($params['short_description'])) {
+                return response('Mô tả sản phẩm không được để trống', 400);
+            }
+            $params['short_description'] = $translate->translateText($params['short_description'], 'vi');
+            $params['short_description_en'] = $translate->translateText($params['short_description'], 'en');
+            $params['short_description_laos'] = $translate->translateText($params['short_description'], 'lo');
             //check description
             if (empty($params['description'])) {
                 return response('Mô tả sản phẩm không được để trống', 400);
@@ -251,7 +283,7 @@ class BackendProductMedicineController extends Controller
                 return response((new MainApi())->returnMessage('Thêm sản phẩm thất bại'), 400);
             }
         } catch (\Exception $exception) {
-            return response((new MainApi())->returnMessage('Error, please try again!'), 400);
+            return response((new MainApi())->returnMessage($exception->getMessage()), 400);
         }
     }
 }
