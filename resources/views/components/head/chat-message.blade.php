@@ -333,8 +333,7 @@
                     <div class="col-sm-4 col">
                         <div class="form-group position-relative">
                             <label for="inputSearchDoctor" class="fa fa-search form-control-feedback"></label>
-                            <input type="search" id="inputSearchDoctor" class="form-control"
-                                   name="nameSearch"
+                            <input type="search" id="inputSearchDoctor" class="form-control" oninput="handleSearchMedicine()"
                                    placeholder="{{ __('home.Search for anything…') }}">
                         </div>
                     </div>
@@ -920,9 +919,9 @@
 
     loadListMedicine();
 
-    function loadListMedicine() {
+    function loadListMedicine(name = '') {
         $.ajax({
-            url: `{{ route('view.prescription.result.get-medicine') }}`,
+            url: `{{ route('view.prescription.result.get-medicine') }}?name_search=${name}`,
             method: 'GET',
             success: function (response) {
                 renderMedicine(response);
@@ -1032,7 +1031,6 @@
         let headers = {
             'Authorization': accessToken,
         };
-        console.log(formData);
 
         try {
             await $.ajax({
@@ -1095,6 +1093,12 @@
             $(this).parent().parent().prev().val(my_name);
             $(this).parent().parent().next().find('input').val(my_array);
         })
+    }
+
+    function handleSearchMedicine() {
+        let inputSearch = $('#inputSearchDoctor').val().toLowerCase();
+
+        loadListMedicine(inputSearch);
     }
 </script>
 

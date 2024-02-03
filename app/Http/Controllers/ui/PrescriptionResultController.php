@@ -31,7 +31,15 @@ class PrescriptionResultController extends Controller
     }
     public function getListMedicine(Request $request)
     {
-        $listMedicine = ProductMedicine::where('quantity', '>', 0)->get();
+        $name_search = $request->input('name_search');
+
+        $listMedicine = ProductMedicine::where('quantity', '>', 0);
+
+        if ($name_search) {
+            $listMedicine = $listMedicine->where('name', 'like', '%' . $name_search . '%');
+        }
+
+        $listMedicine = $listMedicine->get();
         return response()->json($listMedicine);
     }
 
