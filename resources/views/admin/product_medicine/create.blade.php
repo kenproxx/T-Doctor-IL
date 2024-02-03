@@ -94,9 +94,14 @@
             </div>
             <div class="row">
                 <div class="col-sm-9">
-                    <label for="ingredient">{{ __('home.ingredient') }}</label>
-                    <input type="text" class="form-control" id="ingredient" name="ingredient"
-                           placeholder="{{ __('home.cac thanh phan thuoc cach nhau boi dau phay') }}">
+                    <div class="list_product_ingredient">
+
+                    </div>
+                    <div class="action">
+                        <button class="btn btn-outline-primary btnAddNew" type="button">
+                            <i class="fa-solid fa-plus"></i> Create
+                        </button>
+                    </div>
                 </div>
                 <div class="col-sm-3">
                     <label for="is_prescription">Is prescription</label>
@@ -191,7 +196,7 @@
 
             const arrField = [
                 'name', 'brand_name', 'category_id', 'object_', 'filter_',
-                'price', 'status', 'unit_price', 'ingredient', 'quantity',
+                'price', 'status', 'unit_price', 'quantity',
                 'unit_quantity', 'number_register', 'manufacturing_company',
                 'manufacturing_country', 'shape', 'specifications'
             ];
@@ -200,6 +205,30 @@
             if (checked) {
                 formData.append('is_prescription', 'true');
             }
+
+            //'ingredient'
+            let ingredient_names = document.getElementsByName('ingredient_name');
+            let ingredient_quantities = document.getElementsByName('ingredient_quantity');
+
+            let ingredient = null;
+            for (let j = 0; j < ingredient_names.length; j++) {
+                let ingredient_name = ingredient_names[j].value;
+                let ingredient_quantity = ingredient_quantities[j].value;
+
+                if (!ingredient_name || !ingredient_quantity) {
+                    alert('Ingredient name or Ingredient quantity not null')
+                    return;
+                }
+
+                let ingredient_value = ingredient_name + '(' + ingredient_quantity + '%)';
+                if (!ingredient) {
+                    ingredient = ingredient_value;
+                } else {
+                    ingredient = ingredient + ', ' + ingredient_value;
+                }
+            }
+
+            formData.append('ingredient', ingredient);
 
             let isValid = true
             /* Tạo fn appendDataForm ở admin blade*/
@@ -270,6 +299,41 @@
                 loadingMasterPage();
                 throw error;
             }
+        }
+    </script>
+    <script>
+        let html = `<div class="p-3 border mt-3 mb-3 d-flex align-items-center justify-content-between">
+                            <div class="w-75 form-ingredient">
+                                <div class="form-group">
+                                    <label>{{ __('home.ingredient') }}</label>
+                                    <input type="text" class="form-control ingredient_name" name="ingredient_name">
+                                </div>
+                                <div class="form-group">
+                                    <label>{{ __('home.Quantity') }} (Accountable by %)</label>
+                                    <input type="number" class="form-control ingredient_quantity" name="ingredient_quantity">
+                                </div>
+                            </div>
+                            <div class="btn-remove w-25 d-flex align-items-center justify-content-center">
+                                <i class="fa-regular fa-trash-can btnRemove p-3" style="font-size: 24px; cursor: pointer"></i>
+                            </div>
+                        </div>`;
+        $(document).ready(function () {
+            let list_product_ingredient = $('.list_product_ingredient');
+            list_product_ingredient.append(html);
+
+            $('.btnAddNew').on('click', function () {
+                list_product_ingredient.append(html);
+                loadRemove();
+            })
+
+            loadRemove();
+        })
+
+        function loadRemove() {
+            $('.btnRemove').on('click', function () {
+                let parent = $(this).parent().parent();
+                parent.remove();
+            })
         }
     </script>
 @endsection
