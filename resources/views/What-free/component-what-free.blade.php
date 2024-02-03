@@ -41,7 +41,7 @@
             </i>
             <i class="fa-regular fa-clock d-flex align-items-center">
                 <p class="header-center ml-2">
-                    {{ $coupon->endDate }}
+                    {{ $coupon->end_evaluate }}
                 </p>
             </i>
         </div>
