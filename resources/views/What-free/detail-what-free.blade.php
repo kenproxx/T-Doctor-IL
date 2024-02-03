@@ -8,6 +8,22 @@
             font-weight: 800;
             font-size: 18px;
         }
+        .hover-description {
+            color: #333;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        .hover-description:hover {
+            color: #1ed3d2;
+        }
+        .section-description::before {
+            display: block;
+            content: "";
+            margin-top: -200px;
+            height: 200px;
+            visibility: hidden;
+            pointer-events: none;
+        }
     </style>
     <link href="{{ asset('css/detailwhatfree.css') }}" rel="stylesheet">
     @include('layouts.partials.header')
@@ -45,19 +61,19 @@
                     </div>
 
                     <div class="mb-3 mt-30 d-md-flex">
-                        <div class="mb-2 flea-content-product col-md-3">Phần thưởng</div>
+                        <div id="short_description" class="mb-2 section-description flea-content-product col-md-3">Phần thưởng</div>
                         <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->short_description !!}</div>
                     </div>
                     <div class="mb-3 d-md-flex">
-                        <div class="mb-2 flea-content-product col-md-3">Điều khoản và điều kiện</div>
+                        <div id="condition" class="mb-2 section-description flea-content-product col-md-3">Điều khoản và điều kiện</div>
                         <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->condition !!}</div>
                     </div>
                     <div class="mb-3 d-md-flex">
-                        <div class="mb-2 flea-content-product col-md-3">Hướng dẫn chiến dịch</div>
+                        <div id="conduct" class="mb-2 section-description flea-content-product col-md-3">Hướng dẫn chiến dịch</div>
                         <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->conduct !!}</div>
                     </div>
                     <div class="mb-3 d-md-flex">
-                        <div class="mb-2 flea-content-product col-md-3">Yêu cầu nội dung</div>
+                        <div id="description" class="mb-2 section-description flea-content-product col-md-3">Yêu cầu nội dung</div>
                         <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->description !!}</div>
                     </div>
 
@@ -117,8 +133,12 @@
                                     class="{{ isWithinTimeRange($coupon->start_evaluate, $coupon->end_evaluate) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->start_evaluate)->format('d.m') }}
                                     ~ {{ Carbon::parse($coupon->end_evaluate)->format('d.m') }}</div>
                             </div>
+                            <hr>
 
-                            <div class="flea-text-gray color-Grey-Black">{!! $coupon->short_description !!} </div>
+                            <a class="hover-description" href="#short_description">Phần thưởng</a><hr>
+                            <a class="hover-description" href="#condition">Điều khoản và điều kiện</a><hr>
+                            <a class="hover-description" href="#conduct">Hướng dẫn chiến dịch</a><hr>
+                            <a class="hover-description" href="#description">Yêu cầu nội dung</a><hr>
                         </div>
                         <div class="div-7 d-flex justify-content-between">
                             <button id="button-apply" class="text-wrapper-5 w-100">{{ __('home.Apply') }}</button>
