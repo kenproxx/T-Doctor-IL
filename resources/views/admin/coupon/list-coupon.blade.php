@@ -68,7 +68,7 @@
             <th scope="row">${ i + 1 }</th>
             <td>${item.title}</td>
             <td>${item.registered} / ${item.max_register ?? 0}</td>
-            <td>${item.startDate} - ${item.endDate}</td>
+            <td>${item.startDate} - ${item.end_evaluate}</td>
             <td>${item.status}</td>
             <td><a href="${urlView}"> {{ __('home.Xem đơn đăng ký') }} </a> | <a href="${urlEdit}"> {{ __('home.Edit') }}</a> | <a href="#" onclick="checkDelete(${item.id})">{{ __('home.Delete') }}</a></td>
         </tr>`;
