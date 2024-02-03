@@ -164,7 +164,7 @@
                     </div>
                 </div>
                 <div class="col-sm-3">
-                    <label for="is_prescription">Is prescription</label>
+                    <label for="is_prescription">Choose prescription medications(Yes/No)</label>
                     <input type="checkbox" id="is_prescription" name="is_prescription"
                         {{ $productMedicine->is_prescription == true ? 'checked' : '' }}>
                 </div>
