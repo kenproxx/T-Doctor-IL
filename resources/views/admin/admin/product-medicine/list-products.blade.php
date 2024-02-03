@@ -99,7 +99,8 @@
                     <td>
                         <div class="d-flex justify-content-start align-items-center">
                             <div class="w-25 d-flex justify-content-center align-items-center">
-                                <a href="{{ route('api.backend.product-medicine.edit', $product->id) }}" class="btn btn-success mr-3 ml-3">
+                                <a href="{{ route('api.backend.product-medicine.edit', $product->id) }}"
+                                   class="btn btn-success mr-3 ml-3">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
                             </div>
@@ -139,6 +140,7 @@
 
                 let data = {
                     product_id: productID,
+                    user_id: `{{ Auth::user()->id }}`,
                     _token: '{{ csrf_token() }}'
                 }
 

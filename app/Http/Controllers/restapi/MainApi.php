@@ -7,7 +7,6 @@ use App\Http\Controllers\TranslateController;
 use App\Models\Role;
 use App\Models\RoleUser;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class MainApi extends Controller

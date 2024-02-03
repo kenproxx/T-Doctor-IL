@@ -13,6 +13,7 @@ class AdminProductMedicineApi extends Controller
     {
         try {
             $id = $request->input('product_id');
+            $user_id = $request->input('user_id');
             $productMedicine = ProductMedicine::find($id);
 
             if ($productMedicine->status == OnlineMedicineStatus::PENDING) {
@@ -20,6 +21,8 @@ class AdminProductMedicineApi extends Controller
             } else {
                 $productMedicine->status = OnlineMedicineStatus::PENDING;
             }
+
+            $productMedicine->proved_by = $user_id;
             $productMedicine->save();
             return response()->json($productMedicine);
         } catch (\Exception $exception) {

@@ -156,11 +156,11 @@
                 const fieldNames = [
                     "title", "startDate", "endDate",
                     "max_register", "clinic_id", 'type', 'start_selective', 'end_selective',
-                    'start_post', 'end_post', 'start_evaluate', 'end_evaluate', 'status','user_id'
+                    'start_post', 'end_post', 'start_evaluate', 'end_evaluate', 'status', 'user_id'
 
                 ];
                 const fieldTextareaTiny = [
-                    "short_description", "description","condition", "conduct"
+                    "short_description", "description", "condition", "conduct"
                 ];
                 arrFieldEmptyChecked.forEach(data => {
                     let checked = document.getElementById(data).checked;
@@ -177,52 +177,70 @@
                 item.val(quantity);
 
                 let isValid = true
+
+                let checking = true;
+                for (let i = 0; i < fieldTextareaTiny.length; i++) {
+                    let fieldTextarea = fieldTextareaTiny[i];
+                    const content = tinymce.get(fieldTextarea).getContent();
+                    if (!content) {
+                        let labelElement = $(`label[for='${fieldTextarea}']`);
+                        let text = labelElement.text();
+                        if (!text) {
+                            text = 'The input'
+                        }
+                        text = text + ' not empty!'
+                        alert(text);
+                        checking = false;
+                        break;
+                    }
+                    formData.append(fieldTextarea, content);
+                }
+
+                if (!checking) {
+                    return;
+                }
+
                 /* Tạo fn appendDataForm ở admin blade*/
                 isValid = appendDataForm(fieldNames, formData, isValid);
 
-                fieldTextareaTiny.forEach(fieldTextarea => {
-                    const content = tinymce.get(fieldTextarea).getContent();
-                    if (!content) {
-                        isValid = false;
-                    }
-                    formData.append(fieldTextarea, content);
-                });
+                if (!isValid) {
+                    return;
+                }
 
                 formData.append("user_id", '{{ Auth::user()->id }}');
                 let photo = $('#thumbnail')[0].files[0];
                 formData.append('thumbnail', photo);
                 if (!photo) {
+                    alert('Please check input require!')
                     isValid = false;
+                    return;
                 }
 
-                if (isValid) {
-                    try {
-                        $.ajax({
-                            url: `{{route('api.backend.coupons.create')}}`,
-                            method: 'POST',
-                            headers: headers,
-                            contentType: false,
-                            cache: false,
-                            processData: false,
-                            data: formData,
-                            success: function () {
-                                alert('Create success!');
-                                window.location.href = '{{ route('homeAdmin.list.coupons') }}'
-                            },
-                            error: function (exception) {
-                                if (exception.status === 400) {
-                                    toastr.error(exception.responseText, 'Error');
-                                } else {
-                                    toastr.error('Create error, Please try again!', 'Error');
-                                }
+                try {
+                    $.ajax({
+                        url: `{{route('api.backend.coupons.create')}}`,
+                        method: 'POST',
+                        headers: headers,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: formData,
+                        success: function (res) {
+                            console.log(res);
+                            alert('Create success!');
+                            window.location.href = '{{ route('homeAdmin.list.coupons') }}'
+                        },
+                        error: function (exception) {
+                            if (exception.status === 400) {
+                                toastr.error(exception.responseText, 'Error');
+                            } else {
+                                toastr.error('Create error, Please try again!', 'Error');
                             }
-                        });
-                    } catch (error) {
-                        console.log(error);
-                        alert('Error, Please try again!');
-                    }
-                } else {
-                    alert('Please check input require!')
+                        }
+                    });
+                } catch (error) {
+                    console.log(error);
+                    alert('Error, Please try again!');
                 }
             })
         })
