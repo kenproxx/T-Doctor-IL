@@ -12,6 +12,7 @@ use App\Models\RoleUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CouponController extends Controller
 {
@@ -96,14 +97,20 @@ class CouponController extends Controller
     public function getListCouponApplied($user_id = null, $status = null)
     {
         if ($user_id) {
-            $listCoupon = CouponApply::where('user_id', $user_id);
+            $listCoupon = DB::table('coupon_applies')
+                ->where('coupon_applies.user_id', $user_id);
         } else {
-            $listCoupon = CouponApply::where('user_id', Auth::user()->id);
+            $listCoupon = DB::table('coupon_applies')
+                ->where('coupon_applies.user_id', Auth::user()->id);
         }
 
         if ($status) {
-            $listCoupon = $listCoupon->where('status', $status);
+            $listCoupon = $listCoupon->where('coupon_applies.status', $status);
         }
+
+        $listCoupon = $listCoupon->join('coupons', 'coupons.id', '=', 'coupon_applies.coupon_id')
+            ->where('coupons.status', CouponStatus::ACTIVE)
+            ->select('coupon_applies.*');
 
         $listCoupon = $listCoupon->get();
 
