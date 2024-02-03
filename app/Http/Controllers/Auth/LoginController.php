@@ -87,11 +87,41 @@ class LoginController extends Controller
                 (new MainController())->parsedToken($user->token);
             }
             $user->token = null;
+            $user->token_firebase = null;
             $user->save();
             (new MainController())->removeCouponExpiredAndAddCouponActive();
             return response($this->returnMessage('Logout success!'), 200);
         } catch (\Exception $exception) {
             return response($exception, 400);
+        }
+    }
+
+    public function saveTokenFireBase(Request $request)
+    {
+        try {
+            $token = $request->input('token_firebase');
+            $user_id = $request->input('user_id');
+
+            $user = User::find($user_id);
+
+            if (!$user || $user->status == UserStatus::DELETED) {
+                return response($this->returnMessage('User not found!'), 400);
+            }
+
+            if ($user->status == UserStatus::BLOCKED) {
+                return response($this->returnMessage('User have blocked!'), 400);
+            }
+
+            if ($user->status == UserStatus::INACTIVE) {
+                return response($this->returnMessage('User not active!'), 400);
+            }
+
+            $user->token_firebase = $token;
+            $user->save();
+
+            return response()->json($user);
+        } catch (\Exception $exception) {
+            return response($this->returnMessage($exception->getMessage()), 400);
         }
     }
 }

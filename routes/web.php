@@ -481,6 +481,7 @@ Route::middleware(['user.active'])->group(function () {
     Route::group(['prefix' => 'auth'], function () {
         Route::post('/login', [LoginController::class, 'login'])->name('api.user.login');
         Route::post('/logout', [LoginController::class, 'logout'])->name('api.user.logout');
+        Route::post('/save-token', [LoginController::class, 'saveTokenFireBase'])->name('api.user.save.token');
         Route::post('/register', [RegisterController::class, 'register'])->name('api.user.register');
         Route::post('/logout-all', [UserApi::class, 'logout']);
     });
