@@ -53,7 +53,7 @@
             <div class="col-sm-4">
                 <label for="endDate">{{ __('home.Thời gian kết thúc ứng tuyển') }}</label>
                 <input type="datetime-local" class="form-control" id="endDate" name="endDate"
-                       value="{{$coupon->startDate}}"></div>
+                       value="{{$coupon->endDate}}"></div>
             <div class="col-sm-4">
                 <label for="type">{{ __('home.type') }}</label>
                 <select class="form-select" id="type" name="type">
