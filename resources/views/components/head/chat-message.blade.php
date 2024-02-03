@@ -292,20 +292,8 @@
             <form id="prescriptionForm" onsubmit="createPrescription_widgetChat(event)" method="post">
                 @csrf
             <div class="modal-body">
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="full_name_value">{{ __('home.Full Name') }}</label>
-                        <input type="text" class="form-control full_name"
-                               id="full_name_value"
-                               name="full_name">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="email_value">{{ __('home.Email') }}</label>
-                        <input type="text" class="form-control" id="email_value" name="email"
-                               placeholder="{{ __('home.E-Mail Address') }}">
-                    </div>
-                    <input type="hidden" name="created_by" value="{{ Auth::id() }}">
-                </div>
+
+                <input type="hidden" name="created_by" value="{{ Auth::id() }}">
                 <div class="list-service-result mt-2 mb-3">
                     <div id="list-service-result">
 
@@ -978,15 +966,15 @@
         let full_name_value = $('#full_name_value').val();
         let email_value = $('#email_value').val();
 
-        if (!full_name_value) {
-            alert('Please enter full name!')
-            return;
-        }
-
-        if (!email_value) {
-            alert('Please enter email!')
-            return;
-        }
+        // if (!full_name_value) {
+        //     alert('Please enter full name!')
+        //     return;
+        // }
+        //
+        // if (!email_value) {
+        //     alert('Please enter email!')
+        //     return;
+        // }
 
         let form = document.getElementById('prescriptionForm');
         let formData = new FormData(form);
@@ -1026,6 +1014,8 @@
         itemList.forEach(item => {
             formData.append(item, my_array.toString());
         });
+
+        formData.append('chatUserId', chatUserId);
 
         let accessToken = `Bearer ` + token;
         let headers = {
