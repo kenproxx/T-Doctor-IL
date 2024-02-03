@@ -156,7 +156,7 @@
                 const fieldNames = [
                     "title", "startDate", "endDate",
                     "max_register", "clinic_id", 'type', 'start_selective', 'end_selective',
-                    'start_post', 'end_post', 'start_evaluate', 'end_evaluate', 'status','user'
+                    'start_post', 'end_post', 'start_evaluate', 'end_evaluate', 'status','user_id'
 
                 ];
                 const fieldTextareaTiny = [
