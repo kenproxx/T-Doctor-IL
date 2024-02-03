@@ -289,23 +289,22 @@
         <div class="modal-content">
             <div class="modal-header">
             </div>
+            <form id="prescriptionForm" onsubmit="createPrescription_widgetChat(event)" method="post">
+                @csrf
             <div class="modal-body">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label for="full_name_value">{{ __('home.Full Name') }}</label>
                         <input type="text" class="form-control full_name"
-                               {{--                               value="{{ $user ? $user->last_name . ' ' . $user->name : '' }}"--}}
-                               {{--                               {{ $user ? $user->last_name || $user->name ? 'disabled' : '' : '' }} --}}
                                id="full_name_value"
                                name="full_name">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="email_value">{{ __('home.Email') }}</label>
-                        <input type="text" class="form-control" id="email_value"
-                               {{--                               value="{{ $user ? $user->email : '' }}"--}}
-                               {{--                               {{ $user ? $user->email ? 'disabled' : '' : '' }}--}}
+                        <input type="text" class="form-control" id="email_value" name="email"
                                placeholder="{{ __('home.E-Mail Address') }}">
                     </div>
+                    <input type="hidden" name="created_by" value="{{ Auth::id() }}">
                 </div>
                 <div class="list-service-result mt-2 mb-3">
                     <div id="list-service-result">
@@ -316,12 +315,12 @@
                             onclick="handleAddMedicine_widgetChat()">{{ __('home.Add') }}
                     </button>
                 </div>
-                <button type="button" class="btn btn-primary " onclick="createPrescription_widgetChat()">Create</button>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="submit" class="btn btn-primary">Tạo</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
@@ -347,8 +346,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary">Lưu</button>
             </div>
         </div>
     </div>
@@ -877,20 +876,22 @@
                     <div class="row w-75">
                         <div class="form-group">
                             <label for="medicine_name">Medicine Name</label>
-                            <input type="text" class="form-control medicine_name" value="" id="medicine_name"
-                                   name="medicine_name" onclick="handleClickInputMedicine_widgetChat(this)" data-toggle="modal" data-target="#modal-add-medicine" readonly>
+                            <input type="text" class="form-control medicine_name" value=""
+                                   name="medicine_name" onclick="handleClickInputMedicine_widgetChat(this)" data-toggle="modal" data-target="#modal-add-medicine-widget-chat" readonly>
+                        <input type="hidden" name="medicine_id" >
+
                         </div>
                         <div class="form-group">
                             <label for="medicine_ingredients">Medicine Ingredients</label>
-                            <input type="text" class="form-control medicine_ingredients" id="medicine_ingredients">
+                            <input type="text" class="form-control medicine_ingredients" name="medicine_ingredients">
                         </div>
                         <div class="form-group">
                             <label for="quantity">{{ __('home.Quantity') }}</label>
-                            <input type="number" min="1" class="form-control quantity" id="quantity">
+                            <input type="number" min="1" class="form-control quantity" name="quantity">
                         </div>
                         <div class="form-group">
                             <label for="detail_value">Note</label>
-                            <input type="text" class="form-control detail_value" id="detail_value">
+                            <input type="text" class="form-control detail_value" name="detail_value">
                         </div>
                     </div>
                     <div class="action mt-3">
@@ -971,8 +972,9 @@
     }
 
 
-    async function createPrescription_widgetChat() {
-        const formData = new FormData();
+    async function createPrescription_widgetChat(event) {
+        event.preventDefault();
+
 
         let full_name_value = $('#full_name_value').val();
         let email_value = $('#email_value').val();
@@ -987,13 +989,8 @@
             return;
         }
 
-        formData.append('full_name', full_name_value);
-        formData.append('email', email_value);
-        formData.append('created_by', `{{ \Illuminate\Support\Facades\Auth::user()->id }}`);
-
-        const itemList = [
-            'prescriptions',
-        ];
+        let form = document.getElementById('prescriptionForm');
+        let formData = new FormData(form);
 
         let my_array = [];
 
@@ -1008,10 +1005,11 @@
             let quantity_value = quantity[j].value;
             let detail_value = detail[j].value;
 
-            if (!name && !ingredients) {
+            if (!name && !ingredients && !quantity_value) {
                 alert('Please enter medicine name or medicine ingredients or quantity!')
                 return;
             }
+
             let item = {
                 medicine_name: name,
                 medicine_ingredients: ingredients,
@@ -1022,9 +1020,19 @@
             my_array.push(item);
         }
 
+        const itemList = [
+            'prescriptions',
+        ];
+
         itemList.forEach(item => {
             formData.append(item, my_array.toString());
         });
+
+        let accessToken = `Bearer ` + token;
+        let headers = {
+            'Authorization': accessToken,
+        };
+        console.log(formData);
 
         try {
             await $.ajax({
@@ -1036,7 +1044,6 @@
                 processData: false,
                 data: formData,
                 success: function (response) {
-                    console.log(response)
                     alert('Create success!')
                     window.location.href = `{{ route('view.prescription.result.doctor') }}`;
                 },
@@ -1052,6 +1059,7 @@
 
     function handleSelectInputMedicine_widgetChat(id, name) {
         elementInputMedicine_widgetChat.value = name;
+        $(elementInputMedicine_widgetChat).next().val(id);
     }
 
     function handleClickInputMedicine_widgetChat(element) {
