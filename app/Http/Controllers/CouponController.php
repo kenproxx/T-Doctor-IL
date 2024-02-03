@@ -109,7 +109,7 @@ class CouponController extends Controller
         }
 
         $listCoupon = $listCoupon->join('coupons', 'coupons.id', '=', 'coupon_applies.coupon_id')
-            ->where('coupons.status', CouponStatus::ACTIVE)
+            ->where('coupons.status', '!=', CouponStatus::DELETED)
             ->select('coupon_applies.*');
 
         $listCoupon = $listCoupon->get();

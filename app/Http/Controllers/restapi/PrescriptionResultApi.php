@@ -71,8 +71,21 @@ class PrescriptionResultApi extends Controller
     public function createPrescription(Request $request)
     {
         try {
-            $full_name = $request->input('full_name');
-            $email = $request->input('email');
+            $chatUserId = $request->input('chatUserId');
+
+            $email = '';
+            $full_name = '';
+            if ($chatUserId) {
+                $user = User::where('id', $chatUserId)
+                    ->where('status', '!=', UserStatus::DELETED)->first();
+                if ($user) {
+                    $email = $user->email;
+                    $full_name = $user->name ?? 'No name';
+                }
+            } else {
+                $full_name = $request->input('full_name');
+                $email = $request->input('email');
+            }
 
             $user = User::where('email', $email)
                 ->where('status', '!=', UserStatus::DELETED)
@@ -119,8 +132,39 @@ class PrescriptionResultApi extends Controller
             }
             return response((new MainApi())->returnMessage('Error, Create error!'), 400);
         } catch (\Exception $exception) {
-            return response((new MainApi())->returnMessage('Error, Please try again!'), 400);
+            return response((new MainApi())->returnMessage($exception->getMessage()), 400);
         }
+    }
+
+    private function noti_after_create_don_thuoc($email)
+    {
+        $user = User::where('email', $email)->first();
+
+        if (!$user) {
+            return;
+        }
+
+        $uuid = Uuid::uuid();
+
+        $type = 'DonThuocMoi';
+
+        $message = Message::create([
+            'from' => Auth::id(),
+            'to' => $user->id,
+            'text' => 'Bạn có đơn thuốc',
+            'uuid_session' => $uuid,
+            'type' => $type,
+        ]);
+
+        Chat::create([
+            'from_user_id' => Auth::id(),
+            'to_user_id' => $user->id,
+            'chat_message' => 'Bạn có đơn thuốc',
+            'message_status' => MessageStatus::UNSEEN,
+            'uuid_session' => $uuid,
+            'type' => $type,
+        ]);
+        broadcast(new NewMessage($message));
     }
 
     public function exportAndDownload(Request $request)
@@ -256,36 +300,5 @@ class PrescriptionResultApi extends Controller
     private function normalizeString($str)
     {
         return strtolower(trim($str));
-    }
-
-    private function noti_after_create_don_thuoc($email)
-    {
-        $user = User::where('email', $email)->first();
-
-        if (!$user) {
-            return;
-        }
-
-        $uuid = Uuid::uuid();
-
-        $type = 'DonThuocMoi';
-
-        $message = Message::create([
-            'from' => Auth::id(),
-            'to' => $user->id,
-            'text' => 'Bạn có đơn thuốc',
-            'uuid_session' => $uuid,
-            'type' => $type,
-        ]);
-
-        Chat::create([
-            'from_user_id' => Auth::id(),
-            'to_user_id' => $user->id,
-            'chat_message' => 'Bạn có đơn thuốc',
-            'message_status' => MessageStatus::UNSEEN,
-            'uuid_session' => $uuid,
-            'type' => $type,
-        ]);
-        broadcast(new NewMessage($message));
     }
 }

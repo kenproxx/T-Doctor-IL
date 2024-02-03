@@ -63,8 +63,17 @@ class BackendProductMedicineController extends Controller
         $productMedicine = ProductMedicine::find($id);
         $categoryProductMedicine = CategoryProduct::where('status', 1)->get();
         $drugIngredient = DrugIngredients::where('product_id', $id)->first();
+
+        $drugIngredients = $drugIngredient->component_name;
+        $list_drugIngredients = explode(',', $drugIngredients);
+
+        $reflector = new \ReflectionClass('App\Enums\online_medicine\ShapeProduct');
+        $shapes = $reflector->getConstants();
+        $reflector = new \ReflectionClass('App\Enums\online_medicine\UnitQuantityProduct');
+        $unit_quantity = $reflector->getConstants();
         return view('admin.product_medicine.edit',
-            compact('productMedicine', 'categoryProductMedicine', 'drugIngredient'));
+            compact('productMedicine', 'categoryProductMedicine',
+                'drugIngredient', 'shapes', 'unit_quantity', 'list_drugIngredients'));
     }
 
     /**
@@ -173,12 +182,12 @@ class BackendProductMedicineController extends Controller
             }
 
             if ($success) {
-                return response('Cập nhật sản phẩm thành công', 200);
+                return response((new MainApi())->returnMessage('Cập nhật sản phẩm thành công'), 200);
             } else {
-                return response('Cập nhật sản phẩm thất bại', 400);
+                return response((new MainApi())->returnMessage('Cập nhật sản phẩm thất bại'), 400);
             }
         } catch (\Exception $exception) {
-            return response($exception, 400);
+            return response((new MainApi())->returnMessage($exception->getMessage()), 400);
         }
     }
 
@@ -272,7 +281,7 @@ class BackendProductMedicineController extends Controller
             if ($success) {
                 $drugIngredient = new DrugIngredients();
                 $drugIngredient->product_id = $productMedicine->id;
-                $drugIngredient->component_name = ($request->input('ingredient') ?? '');
+                $drugIngredient->component_name = $request->input('ingredient');
 
                 $success = $drugIngredient->save();
             }
