@@ -81,11 +81,9 @@ class MainApi extends Controller
             $user_id = $request->input('user_id');
             $coupon_id = $request->input('coupon_id');
             $exitCouponApply = \App\Models\CouponApply::where('user_id', $user_id)->where('coupon_id', $coupon_id)->first();
-            $is_register = true;
-            $text_exists = null;
+            $is_register = false;
             if ($exitCouponApply) {
-                $is_register = false;
-                $text_exists = 'Coupon has been registered';
+                $is_register = true;
             }
             $user_social = SocialUser::where('user_id', $user_id)
                 ->where('status', SocialUserStatus::ACTIVE)
@@ -128,7 +126,7 @@ class MainApi extends Controller
                 }
             }
 
-            return response(['is_valid' => $is_valid, 'missing' => $text, 'is_register' => $is_register, 'text_exists' => $text_exists]);
+            return response(['is_valid' => $is_valid, 'missing' => $text, 'is_register' => $is_register]);
         } catch (\Exception $exception) {
             return response($exception, 400);
         }
