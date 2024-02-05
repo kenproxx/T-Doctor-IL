@@ -109,8 +109,6 @@
                     }
                 });
             } catch (e) {
-                console.log(e)
-                alert('Error, Please try again!');
             }
         }
 
