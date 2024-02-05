@@ -46,6 +46,16 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-sm-6">
+                <label for="instruction">{{ __('home.Hướng dẫn chi tiết') }}</label>
+                <textarea class="form-control" name="instruction" id="instruction">{{$coupon->instruction}}</textarea>
+            </div>
+            <div class="col-sm-6">
+                <label for="website">{{ __('home.Website') }}</label>
+                <textarea class="form-control" name="website" id="website">{{$coupon->website}}</textarea>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-sm-4">
                 <label for="startDate">{{ __('home.Thời gian bắt đầu ứng tuyển') }}</label>
                 <input type="datetime-local" class="form-control" id="startDate" name="startDate"
@@ -181,7 +191,7 @@
                 ];
 
                 const fieldTextareaTiny = [
-                    "short_description", "description", "condition", "conduct",
+                    "short_description", "description", "condition", "conduct","instruction", "website"
                 ];
                 const arrFieldEmptyChecked = [
                     'is_facebook', 'is_google', 'is_youtube', 'is_instagram', 'is_tiktok'
@@ -203,15 +213,34 @@
 
                 let isValid = true
                 /* Tạo fn appendDataForm ở admin blade*/
-                isValid = appendDataForm(fieldNames, formData, isValid);
-
-                fieldTextareaTiny.forEach(fieldTextarea => {
+                let checking = true;
+                for (let i = 0; i < fieldTextareaTiny.length; i++) {
+                    let fieldTextarea = fieldTextareaTiny[i];
                     const content = tinymce.get(fieldTextarea).getContent();
                     if (!content) {
-                        isValid = false;
+                        let labelElement = $(`label[for='${fieldTextarea}']`);
+                        let text = labelElement.text();
+                        if (!text) {
+                            text = 'The input'
+                        }
+                        text = text + ' not empty!'
+                        alert(text);
+                        checking = false;
+                        break;
                     }
                     formData.append(fieldTextarea, content);
-                });
+                }
+
+                if (!checking) {
+                    return;
+                }
+
+                /* Tạo fn appendDataForm ở admin blade*/
+                isValid = appendDataForm(fieldNames, formData, isValid);
+
+                if (!isValid) {
+                    return;
+                }
 
                 formData.append("user_id", '{{ Auth::user()->id }}');
                 formData.append("thumbnail", $('#thumbnail')[0].files[0]);

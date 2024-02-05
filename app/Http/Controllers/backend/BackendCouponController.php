@@ -164,6 +164,8 @@ class BackendCouponController extends Controller
         $short_description = $request->input('short_description');
         $condition = $request->input('condition');
         $conduct = $request->input('conduct');
+        $instruction = $request->input('instruction');
+        $website = $request->input('website');
 
 
         $startDate = $request->input('startDate');
@@ -213,6 +215,8 @@ class BackendCouponController extends Controller
         $coupon->conduct = $conduct;
         $coupon->description = $description;
         $coupon->short_description = $short_description;
+        $coupon->instruction = $instruction;
+        $coupon->website = $website;
 
 
         $coupon->startDate = $startDate;
