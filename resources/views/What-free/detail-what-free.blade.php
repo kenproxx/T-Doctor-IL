@@ -8,14 +8,17 @@
             font-weight: 800;
             font-size: 18px;
         }
+
         .hover-description {
             color: #333;
             font-weight: 600;
             font-size: 18px;
         }
+
         .hover-description:hover {
             color: #1ed3d2;
         }
+
         .section-description::before {
             display: block;
             content: "";
@@ -50,23 +53,58 @@
                         <img src="{{asset($coupon->thumbnail)}}" style="object-fit: contain; height: 100%" alt="show"
                              class="main">
                     </div>
+                    @if($coupon->short_description != null)
+                        <div class="mb-3 mt-30 d-md-flex">
+                            <div id="short_description" class="mb-2 section-description flea-content-product col-md-3">
+                                Phần thưởng
+                            </div>
+                            <div
+                                class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->short_description !!}</div>
+                        </div>
+                    @endif
+                    @if($coupon->condition != null)
+                        <div class="mb-3 d-md-flex">
+                            <div id="condition" class="mb-2 section-description flea-content-product col-md-3">Điều
+                                khoản và
+                                điều kiện
+                            </div>
+                            <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->condition !!}</div>
+                        </div>
+                    @endif
+                    @if($coupon->conduct != null)
+                        <div class="mb-3 d-md-flex">
+                            <div id="conduct" class="mb-2 section-description flea-content-product col-md-3">Hướng dẫn
+                                chiến
+                                dịch
+                            </div>
+                            <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->conduct !!}</div>
+                        </div>
+                    @endif
+                    @if($coupon->description != null)
+                        <div class="mb-3 d-md-flex">
+                            <div id="description" class="mb-2 section-description flea-content-product col-md-3">Yêu cầu
+                                nội
+                                dung
+                            </div>
+                            <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->description !!}</div>
+                        </div>
+                    @endif
+                    @if($coupon->description != null)
+                        <div class="mb-3 d-md-flex">
+                            <div id="instruction" class="mb-2 section-description flea-content-product col-md-3">Hướng
+                                dẫn chi tiết
+                            </div>
+                            <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->instruction !!}</div>
+                        </div>
+                    @endif
+                    @if($coupon->description != null)
+                        <div class="mb-3 d-md-flex">
+                            <div id="website" class="mb-2 section-description flea-content-product col-md-3">Website
+                            </div>
+                            <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->website !!}</div>
+                        </div>
+                    @endif
 
-                    <div class="mb-3 mt-30 d-md-flex">
-                        <div id="short_description" class="mb-2 section-description flea-content-product col-md-3">Phần thưởng</div>
-                        <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->short_description !!}</div>
-                    </div>
-                    <div class="mb-3 d-md-flex">
-                        <div id="condition" class="mb-2 section-description flea-content-product col-md-3">Điều khoản và điều kiện</div>
-                        <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->condition !!}</div>
-                    </div>
-                    <div class="mb-3 d-md-flex">
-                        <div id="conduct" class="mb-2 section-description flea-content-product col-md-3">Hướng dẫn chiến dịch</div>
-                        <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->conduct !!}</div>
-                    </div>
-                    <div class="mb-3 d-md-flex">
-                        <div id="description" class="mb-2 section-description flea-content-product col-md-3">Yêu cầu nội dung</div>
-                        <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->description !!}</div>
-                    </div>
 
                 </div>
                 <div class="col-md-4 recruitment-details--content--right">
@@ -118,14 +156,86 @@
                             </div>
                             <hr>
 
-                            <a class="hover-description" href="#short_description">Phần thưởng</a><hr>
-                            <a class="hover-description" href="#condition">Điều khoản và điều kiện</a><hr>
-                            <a class="hover-description" href="#conduct">Hướng dẫn chiến dịch</a><hr>
-                            <a class="hover-description" href="#description">Yêu cầu nội dung</a><hr>
+                            @if($coupon->short_description != null)
+                                <a class="hover-description" href="#short_description">Phần thưởng</a>
+                                <hr>
+                            @endif
+
+                            @if($coupon->condition != null)
+                                <a class="hover-description" href="#condition">Điều khoản và điều kiện</a>
+                                <hr>
+                            @endif
+
+                            @if($coupon->conduct != null)
+                                <a class="hover-description" href="#conduct">Hướng dẫn chiến dịch</a>
+                                <hr>
+                            @endif
+
+                            @if($coupon->description != null)
+                                <a class="hover-description" href="#description">Yêu cầu nội dung</a>
+                                <hr>
+                            @endif
+
+                            @if($coupon->instruction != null)
+                                <a class="hover-description" href="#instruction">Hướng dẫn chi tiết</a>
+                                <hr>
+                            @endif
+
+                            @if($coupon->website != null)
+                                <a class="hover-description" href="#website">Website</a>
+                                <hr>
+                            @endif
+
                         </div>
-                        <div class="div-7 d-flex justify-content-between">
-                            <button id="button-apply" class="text-wrapper-5 w-100">{{ __('home.Apply') }}</button>
-                        </div>
+                        @php
+                            if (Auth::check()) {
+                                $SocialUser = \App\Models\SocialUser::where('user_id', Auth::user()->id)
+                                ->where('status', \App\Enums\SocialUserStatus::ACTIVE)
+                                ->first();
+
+                                $my_array = [];
+                                $my_array = array_filter([
+                                    $SocialUser->instagram ? 'instagram' : null,
+                                    $SocialUser->facebook ? 'facebook' : null,
+                                    $SocialUser->tiktok ? 'tiktok' : null,
+                                    $SocialUser->youtube ? 'youtube' : null,
+                                    $SocialUser->google_review ? 'google_review' : null,
+                                ]);
+
+                                $coupon = \App\Models\Coupon::find($coupon->id);
+
+                                $your_array = [];
+                                $your_array = array_filter([
+                                    $coupon->is_instagram == 1 ? 'instagram' : null,
+                                    $coupon->is_facebook == 1 ? 'facebook' : null,
+                                    $coupon->is_tiktok == 1 ? 'tiktok' : null,
+                                    $coupon->is_youtube == 1 ? 'youtube' : null,
+                                    $coupon->is_google == 1 ? 'google_review' : null,
+                                ]);
+
+    // Kiểm tra nếu tất cả các nền tảng yêu cầu bởi phiếu giảm giá được hỗ trợ bởi người dùng
+                                $is_valid = empty(array_diff($your_array, $my_array));
+                                $diff_array = array_diff($your_array, $my_array);
+                                $text = $is_valid ? null : reset($diff_array);
+                            }
+
+                        @endphp
+                        @if($text == null)
+                            <div class="div-7 d-flex justify-content-between">
+                                <button id="button-apply" class="text-wrapper-5 w-100">{{ __('home.Apply') }}</button>
+                            </div>
+                            @else
+                            @if(Auth::check())
+                                <div>Kiểm tra tình trạng truyền thông.
+                                Bạn chưa kết nối với kênh truyền thông {{$text}} cho chiến dịch này.
+                            </div>
+                                <div class="div-7 d-flex justify-content-between">
+
+                                    <a class="text-wrapper-5 w-100" href="{{route('profile')}}">{{ __('home.Update profile') }}</a>
+                                </div>
+                            @endif
+                        @endif
+
                     </div>
                     <div class="form-2 d-none" id="form-apply">
                         <div class="div">
@@ -290,8 +400,8 @@
         const navLink = document.querySelectorAll('a[href^="#"]');
         const header = document.querySelector('header');
 
-        for(let link of navLink){
-            link.onclick = function(e) {
+        for (let link of navLink) {
+            link.onclick = function (e) {
                 e.preventDefault();
                 const hash = link.hash;
                 const section = document.querySelector(hash);
