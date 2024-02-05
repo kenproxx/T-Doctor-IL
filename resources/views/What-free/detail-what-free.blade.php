@@ -27,6 +27,13 @@
             visibility: hidden;
             pointer-events: none;
         }
+        .text-wrapper-55 {
+            padding: 15px;
+            display: flex;
+            background-color: #ded7d7;
+            width: 100%;
+            font-weight: 800;
+        }
     </style>
     <link href="{{ asset('css/detailwhatfree.css') }}" rel="stylesheet">
     @include('layouts.partials.header')
@@ -175,17 +182,6 @@
                                 <a class="hover-description" href="#description">Yêu cầu nội dung</a>
                                 <hr>
                             @endif
-
-                            @if($coupon->instruction != null)
-                                <a class="hover-description" href="#instruction">Hướng dẫn chi tiết</a>
-                                <hr>
-                            @endif
-
-                            @if($coupon->website != null)
-                                <a class="hover-description" href="#website">Website</a>
-                                <hr>
-                            @endif
-
                         </div>
                         @php
                             if (Auth::check()) {
@@ -222,13 +218,20 @@
                         @endphp
                         @if(Auth::check())
                             @if($text == null)
-                            <div class="div-7 d-flex justify-content-between">
-                                <button id="button-apply" class="text-wrapper-5 w-100">{{ __('home.Apply') }}</button>
-                            </div>
-                        @else
-                            @if(Auth::check())
-                                <div>Kiểm tra tình trạng truyền thông.
-                                    Bạn chưa kết nối với kênh truyền thông {{$text}} cho chiến dịch này.
+                                @php
+                                    $exitCouponApply = \App\Models\CouponApply::where('user_id', Auth::user()->id)->where('coupon_id', $coupon->id)->first();
+                                @endphp
+                                @if(!$exitCouponApply)
+                                    <div class="div-7 d-flex justify-content-between">
+                                        <button id="button-apply"
+                                                class="text-wrapper-5 w-100">{{ __('home.Apply') }}</button>
+                                    </div>
+                                @else
+                                    <span class="text-wrapper-55 w-100">{{ __('home.Bạn đã ứng tuyển') }}</span>
+                                @endif
+                            @else
+                                <div class="text-wrapper-55">{{ __('home.Kiểm tra tình trạng truyền thông.') }} {{$text}}
+                                    {{ __('home.Bạn chưa kết nối với kênh truyền thông này.') }}
                                 </div>
                                 <div class="div-7 d-flex justify-content-between">
 
@@ -236,8 +239,6 @@
                                        href="{{route('profile')}}">{{ __('home.Update profile') }}</a>
                                 </div>
                             @endif
-
-                        @endif
                         @else
                             <div class="div-7 d-flex justify-content-between">
                                 <button class="account_control text-wrapper-5 w-100" id="show_login" data-toggle="modal"
@@ -245,9 +246,10 @@
                                 </button>
                             </div>
                         @endif
+                    </div>
+
                             <div class="form-2 d-none" id="form-apply">
                                 <div class="div">
-
                                 </div>
                                 <div class="div-3">
                                     <div class="text-wrapper">{{ __('home.Applicant information') }}</div>
@@ -255,17 +257,17 @@
                                         <div class="div-5">
                                             <div class="text-wrapper-3">{{ __('home.Name') }}</div>
                                             <input class="form-control" type="text" name="name"
-                                                   id="name">
+                                                   id="name" value="{{Auth::user()->name}}">
                                         </div>
                                         <div class="div-5">
                                             <div class="text-wrapper-3">{{ __('home.Email') }}</div>
                                             <input class="form-control" type="text" name="email_"
-                                                   id="email_">
+                                                   id="email_" value="{{Auth::user()->email}}">
                                         </div>
                                         <div class="div-5">
                                             <div class="text-wrapper-3">{{ __('home.Contact number') }}</div>
                                             <input class="form-control" type="number" name="phone"
-                                                   id="phone">
+                                                   id="phone" value="{{Auth::user()->phone}}">
                                         </div>
                                     </div>
                                     <div>
