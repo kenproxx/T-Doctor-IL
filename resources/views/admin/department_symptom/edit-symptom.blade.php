@@ -62,7 +62,7 @@
                             <div class="form-group">
                                 <label for="image">{{ __('home.Ảnh đại diện') }}:</label>
                                 <input type="file" name="image" id="image" class="form-control" accept="image/*">
-                                <img src="{{ asset($symptom->thumbnail) }}" alt="l.l" width="80px">
+                                <img loading="lazy" src="{{ asset($symptom->thumbnail) }}" alt="l.l" width="80px">
                             </div>
 
                             <button type="submit" class="btn btn-primary">{{ __('home.Thêm mới') }}</button>

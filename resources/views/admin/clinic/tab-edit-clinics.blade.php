@@ -264,7 +264,7 @@
                     $galleryArray = explode(',', $clinic->gallery);
                 @endphp
                 @foreach($galleryArray as $productImg)
-                    <img width="50px" src="{{$productImg}}" alt="">
+                    <img loading="lazy" width="50px" src="{{$productImg}}" alt="">
                 @endforeach
             </div>
             <div class="row">

@@ -9,32 +9,32 @@
             <div class="row recruitment-details--content">
                 <div class="col-md-8 recruitment-details--content--left">
                     <div class="img-main">
-                        <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="show" class="main">
+                        <img loading="lazy" src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="show" class="main">
                     </div>
                     <div class="list d-flex">
                         <div class="item">
-                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
+                            <img loading="lazy" src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
                         </div>
                         <div class="item">
-                            <img src="{{asset('/img/favicon.png')}}" alt="">
+                            <img loading="lazy" src="{{asset('/img/favicon.png')}}" alt="">
                         </div>
                         <div class="item">
-                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
+                            <img loading="lazy" src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
                         </div>
                         <div class="item">
-                            <img src="{{asset('/img/favicon.png')}}" alt="">
+                            <img loading="lazy" src="{{asset('/img/favicon.png')}}" alt="">
                         </div>
                         <div class="item">
-                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
+                            <img loading="lazy" src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
                         </div>
                         <div class="item">
-                            <img src="{{asset('/img/favicon.png')}}" alt="">
+                            <img loading="lazy" src="{{asset('/img/favicon.png')}}" alt="">
                         </div>
                         <div class="item">
-                            <img src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
+                            <img loading="lazy" src="{{asset('/img/recruitment/Rectangle 23798.png')}}" alt="">
                         </div>
                         <div class="item">
-                            <img src="{{asset('/img/favicon.png')}}" alt="">
+                            <img loading="lazy" src="{{asset('/img/favicon.png')}}" alt="">
                         </div>
                     </div>
                 </div>
@@ -45,12 +45,12 @@
                             <button class="text-wrapper">{{ __('home.FOLLOW') }}</button>
                         </div>
                         <div class="div-2">
-                            <img class="image" src="{{asset('img/recruitment/logo.png')}}"/>
+                            <img loading="lazy" class="image" src="{{asset('img/recruitment/logo.png')}}"/>
                             <div class="text-wrapper-2">{{ __('home.Bệnh viện bạch mai') }}</div>
                         </div>
                         <div class="div-3">
                             <div class="div-4">
-                                <div class="img-wrapper"><img class="img"
+                                <div class="img-wrapper"><img loading="lazy" class="img"
                                                               src="{{asset('img/recruitment/Vector.png')}}"/></div>
                                 <div class="div-5">
                                     <div class="text-wrapper-3">{{ __('home.Position') }}</div>
@@ -58,7 +58,7 @@
                                 </div>
                             </div>
                             <div class="div-4">
-                                <div class="img-wrapper"><img class="img"
+                                <div class="img-wrapper"><img loading="lazy" class="img"
                                                               src="{{asset('img/recruitment/hourglass-03.png')}}"/>
                                 </div>
                                 <div class="div-5">
@@ -67,7 +67,7 @@
                                 </div>
                             </div>
                             <div class="div-4">
-                                <div class="img-wrapper"><img class="img"
+                                <div class="img-wrapper"><img loading="lazy" class="img"
                                                               src="{{asset('img/recruitment/briefcase.png')}}"/></div>
                                 <div class="div-5">
                                     <div class="text-wrapper-3">{{ __('home.Experience') }}</div>
@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                             <div class="div-4">
-                                <div class="img-wrapper"><img class="img" src="{{asset('img/recruitment/Icon.png')}}"/>
+                                <div class="img-wrapper"><img loading="lazy" class="img" src="{{asset('img/recruitment/Icon.png')}}"/>
                                 </div>
                                 <div class="div-5">
                                     <div class="text-wrapper-3">{{ __('home.Salary') }}</div>
@@ -83,7 +83,7 @@
                                 </div>
                             </div>
                             <div class="div-4">
-                                <div class="img-wrapper"><img class="img" src="{{asset('img/recruitment/clock.png')}}"/>
+                                <div class="img-wrapper"><img loading="lazy" class="img" src="{{asset('img/recruitment/clock.png')}}"/>
                                 </div>
                                 <div class="div-5">
                                     <div class="text-wrapper-3">{{ __('home.Deadline') }}</div>

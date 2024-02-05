@@ -117,7 +117,7 @@
 
 <div class="offcanvas offcanvas-end" tabindex="-1" id="filterNavbar" aria-labelledby="offcanvasNavbarLabel">
     <div class="offcanvas-header">
-        <a href="{{route('home')}}" class="offcanvas-title" id="offcanvasNavbarLabel"><img class="w-100"
+        <a href="{{route('home')}}" class="offcanvas-title" id="offcanvasNavbarLabel"><img loading="lazy" class="w-100"
                                                                                            src="{{asset('img/icons_logo/logo-new.png')}}"></a>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
@@ -292,7 +292,7 @@
             let img = '';
             let gallery = data.gallery;
             let arrayGallery = gallery.split(',');
-            img += `<img class="mr-2 img-item1" src="${arrayGallery[0]}" alt="">`;
+            img += `<img loading="lazy" class="mr-2 img-item1" src="${arrayGallery[0]}" alt="">`;
 
 
             let openDate = new Date(data.open_date);

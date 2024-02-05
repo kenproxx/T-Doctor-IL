@@ -109,7 +109,7 @@
                         $str = $bookings->gallery;
                         $parts = explode(',', $str);
                     @endphp
-                    <img class="b-radius" src="{{$parts[0]}}" alt="img">
+                    <img loading="lazy" class="b-radius" src="{{$parts[0]}}" alt="img">
                 </div>
                 <div class="p-3">
                     <div class="form-group">
@@ -175,14 +175,14 @@
 @if($user_review)
                     <div class="d-flex rv-header--left">
                         <div class="avt-24 mr-md-2">
-                            <img src="{{asset($user_review->avt)}}">
+                            <img loading="lazy" src="{{asset($user_review->avt)}}">
                                                             </div>
                                                             <p class="fs-16px">{{ $user_review->username }}</p>
                                                     </div>
                                                 @else
                     <div class="d-flex rv-header--left">
                         <div class="avt-24 mr-md-2">
-                            <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
+                            <img loading="lazy" src="{{asset('img/detail_doctor/ellipse _14.png')}}">
                                                             </div>
                                                             <p class="fs-16px">Guest</p>
                                                     </div>

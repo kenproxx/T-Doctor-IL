@@ -146,34 +146,34 @@
                 <div class="mt-100">
                     <div class=" row align-items-center justify-content-center">
                         <div class="">
-                            <img src="{{asset('img/image 16.png')}}" alt="">
+                            <img loading="lazy" src="{{asset('img/image 16.png')}}" alt="">
                         </div>
                     </div>
                     <div class=" row align-items-center justify-content-center">
                         <div class="">
-                            <img src="{{asset('img/image 16.png')}}" alt="">
+                            <img loading="lazy" src="{{asset('img/image 16.png')}}" alt="">
                         </div>
                     </div>
                     <div class=" row align-items-center justify-content-center">
                         <div class="">
-                            <img src="{{asset('img/image 16.png')}}" alt="">
+                            <img loading="lazy" src="{{asset('img/image 16.png')}}" alt="">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-9">
-                <div class="img-union"><img src="{{asset('img/flea-market/platinum.png')}}"></div>
+                <div class="img-union"><img loading="lazy" src="{{asset('img/flea-market/platinum.png')}}"></div>
                 <div class="page d-flex flex-wrap" id="productsAdsPlan1"></div>
-                <div class="img-union "><img src="{{asset('img/flea-market/premium.png')}}"></div>
+                <div class="img-union "><img loading="lazy" src="{{asset('img/flea-market/premium.png')}}"></div>
                 <div class="page d-flex flex-wrap" id="productsAdsPlan2"></div>
-                <div class="img-union"><img src="{{asset('img/flea-market/silver.png')}}"></div>
+                <div class="img-union"><img loading="lazy" src="{{asset('img/flea-market/silver.png')}}"></div>
                 <div class="page d-flex flex-wrap" id="productsAdsPlan3"></div>
             </div>
         </div>
         {{-- modal filter --}}
         <div class="offcanvas offcanvas-end" tabindex="-1" id="filterNavbar" aria-labelledby="offcanvasNavbarLabel">
             <div class="offcanvas-header">
-                <a href="{{route('home')}}" class="offcanvas-title" id="offcanvasNavbarLabel"><img class="w-100"
+                <a href="{{route('home')}}" class="offcanvas-title" id="offcanvasNavbarLabel"><img loading="lazy" class="w-100"
                                                                                                    src="{{asset('img/icons_logo/logo-new.png')}}"></a>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
@@ -374,7 +374,7 @@
     <div class="col-md-4 col-6">
         <div class="product-item ${isSoldOut ? 'sold-out-overlay' : ''}">
              <div class="img-pro justify-content-center d-flex img_product--homeNew">
-                  <img src="${product.thumbnail}" alt="">
+                  <img loading="lazy" src="${product.thumbnail}" alt="">
                   <div class="${ isSoldOut ? 'sold-out-overlay-text' : 'd-none' } ">
                 <h1>Sold Out</h1>
             </div>
@@ -562,7 +562,7 @@
                     <div class="col-md-4 col-6">
                         <div class="product-item ${isSoldOut ? 'sold-out-overlay' : ''}">
                              <div class="img-pro justify-content-center d-flex img_product--homeNew">
-                                  <img src="${item.thumbnail}" alt="" >
+                                  <img loading="lazy" src="${item.thumbnail}" alt="" >
                                   <div class="${ isSoldOut ? 'sold-out-overlay-text' : 'd-none' } ">
                 <h1>Sold Out</h1>
             </div>

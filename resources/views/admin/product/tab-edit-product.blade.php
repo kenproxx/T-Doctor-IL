@@ -103,7 +103,7 @@
                 <div class="col-md-6 form-group">
                     <label>{{ __('home.Thumbnail') }}</label>
                     <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*">
-                    <img width="50px" src="{{$product->thumbnail}}" alt="thumbnail">
+                    <img loading="lazy" width="50px" src="{{$product->thumbnail}}" alt="thumbnail">
                 </div>
                 <div class="col-md-6 form-group">
                     <label for="gallery">{{ __('home.gallery') }}</label>
@@ -112,7 +112,7 @@
                         $galleryArray = explode(',', $product->gallery);
                     @endphp
                     @foreach($galleryArray as $productImg)
-                        <img width="50px" src="{{$productImg}}" alt="gallery">
+                        <img loading="lazy" width="50px" src="{{$productImg}}" alt="gallery">
                     @endforeach
                 </div>
             </div>

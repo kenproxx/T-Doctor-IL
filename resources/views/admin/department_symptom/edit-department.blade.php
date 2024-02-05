@@ -51,7 +51,7 @@
                             <div class="form-group">
                                 <label for="image">{{ __('home.Ảnh đại diện') }}:</label>
                                 <input type="file" name="image" id="image" class="form-control" accept="image/*">
-                                <img src="{{ asset($department->thumbnail) }}" alt="" width="80px">
+                                <img loading="lazy" src="{{ asset($department->thumbnail) }}" alt="" width="80px">
                             </div>
 
                             <button type="submit" class="btn btn-primary">{{ __('home.Thêm mới') }}</button>

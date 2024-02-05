@@ -112,7 +112,7 @@
                 <div class="col-md-6">
                     <label for="thumbnail">{{ __('home.Thumbnail') }}</label>
                     <input type="file" class="form-control" id="thumbnail" name="thumbnail" accept="image/*">
-                    <img class="mt-3" src="{{ asset($productMedicine->thumbnail) }}" alt="" width="80px" height="80xp">
+                    <img loading="lazy" class="mt-3" src="{{ asset($productMedicine->thumbnail) }}" alt="" width="80px" height="80xp">
                 </div>
                 <div class="col-md-6">
                     <label for="gallery">{{ __('home.gallery') }}</label>
@@ -122,7 +122,7 @@
                         $arrayGallery = explode(',',$gallery);
                     @endphp
                     @foreach($arrayGallery as $itemGallery)
-                        <img src="{{ asset($itemGallery) }}" alt="" width="80px" height="80xp" class="mr-3 mt-3">
+                        <img loading="lazy" src="{{ asset($itemGallery) }}" alt="" width="80px" height="80xp" class="mr-3 mt-3">
                     @endforeach
                 </div>
             </div>

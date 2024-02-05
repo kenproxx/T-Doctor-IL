@@ -93,7 +93,7 @@
                         @endphp
                         @foreach($galleryArray as $index => $productImg)
                             <div class="image-container pr-2" data-index="{{ $index }}">
-                                <img class="image" width="50px" height="50px" src="{{ $productImg }}" alt="logo">
+                                <img loading="lazy" class="image" width="50px" height="50px" src="{{ $productImg }}" alt="logo">
                             </div>
                         @endforeach
                     </div>
@@ -107,7 +107,7 @@
                         @endphp
                         @foreach($galleryArray as $index => $productImg)
                             <div class="image-container pr-2" data-index="{{ $index }}">
-                                <img class="image" width="50px" height="50px" src="{{ $productImg }}" alt="favicon">
+                                <img loading="lazy" class="image" width="50px" height="50px" src="{{ $productImg }}" alt="favicon">
                             </div>
                         @endforeach
                     </div>
@@ -121,7 +121,7 @@
                         @endphp
                         @foreach($galleryArray as $index => $productImg)
                             <div class="image-container pr-2" data-index="{{ $index }}">
-                                <img class="image" width="50px" height="50px" src="{{ $productImg }}"
+                                <img loading="lazy" class="image" width="50px" height="50px" src="{{ $productImg }}"
                                      alt="Banner quảng cáo">
                             </div>
                         @endforeach

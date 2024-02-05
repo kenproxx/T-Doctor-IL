@@ -9,7 +9,7 @@
         <div class="row header-detail mobile-hidden justify-content-between">
             <div class="col-md-3 header-detail--left d-flex justify-content-around">
                 <a class="logo" href="{{ route('home') }}">
-                    <img src="{{asset('img/icons_logo/logo-new.png')}}" alt="Logo" width="177px" height="42px"
+                    <img loading="lazy" src="{{asset('img/icons_logo/logo-new.png')}}" alt="Logo" width="177px" height="42px"
                          class="d-inline-block align-text-top">
                 </a>
                 <a class="back" href="{{ route('home') }}"><h5><i
@@ -71,7 +71,7 @@
                     </div>
                     <div class="align-items-center row">
                         <a href="{{route('home')}}">
-                            <img class="w-100px" src="{{asset('img/icons_logo/logo-new.png')}}" alt="">
+                            <img loading="lazy" class="w-100px" src="{{asset('img/icons_logo/logo-new.png')}}" alt="">
                         </a>
                     </div>
                     <div class="header-right d-flex align-items-center">
@@ -83,7 +83,7 @@
                                     <div class="d-flex align-items-center mr-2">
                                         {{Auth::user()->name}}
                                     </div>
-                                    <img src="{{asset('img/user-circle.png')}}">
+                                    <img loading="lazy" src="{{asset('img/user-circle.png')}}">
                                 </div>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item"
@@ -113,7 +113,7 @@
 <div class="offcanvas offcanvas-start" tabindex="-1" id="fleaMarketNavbar"
      aria-labelledby="offcanvasNavbarLabel">
     <div class="offcanvas-header">
-        <a href="{{route('home')}}" class="offcanvas-title" id="offcanvasNavbarLabel"><img class="w-100"
+        <a href="{{route('home')}}" class="offcanvas-title" id="offcanvasNavbarLabel"><img loading="lazy" class="w-100"
                                                                                            src="{{asset('img/icons_logo/logo-new.png')}}"
                                                                                            alt=""></a>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -195,16 +195,16 @@
                             </div>
                             <div class="form-signin d-flex justify-content-around">
                                 <a href="{{ route('login.facebook') }}" class="login-with-btn">
-                                    <img src="{{asset('img/icons_logo/facebook_logo.png')}}" alt=""/>
+                                    <img loading="lazy" src="{{asset('img/icons_logo/facebook_logo.png')}}" alt=""/>
                                 </a>
                                 <a href="{{ route('login.google') }}" class="login-with-btn">
-                                    <img src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/>
+                                    <img loading="lazy" src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/>
                                 </a>
                                 <button type="button" class="login-with-btn">
-                                    <img src="{{asset('img/icons_logo/apple_logo.png')}}" alt=""/>
+                                    <img loading="lazy" src="{{asset('img/icons_logo/apple_logo.png')}}" alt=""/>
                                 </button>
                                 <a href="{{ route('login.kakao') }}" class="login-with-btn">
-                                    <img src="{{asset('img/icons_logo/kakao-talk_logo.png')}}" alt=""/>
+                                    <img loading="lazy" src="{{asset('img/icons_logo/kakao-talk_logo.png')}}" alt=""/>
                                 </a>
                             </div>
                             <div class="sign--up d-flex justify-content-center">
@@ -413,16 +413,16 @@
                             </div>
                             <div class="form-signin" style="display: flex; justify-content: space-around">
                                 <a href="{{ route('login.facebook') }}" class="login-with-btn">
-                                    <img src="{{asset('img/icons_logo/facebook_logo.png')}}" alt=""/>
+                                    <img loading="lazy" src="{{asset('img/icons_logo/facebook_logo.png')}}" alt=""/>
                                 </a>
                                 <a href="{{ route('login.google') }}" class="login-with-btn">
-                                    <img src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/>
+                                    <img loading="lazy" src="{{asset('img/icons_logo/google_logo.png')}}" alt=""/>
                                 </a>
                                 <button type="button" class="login-with-btn">
-                                    <img src="{{asset('img/icons_logo/apple_logo.png')}}" alt=""/>
+                                    <img loading="lazy" src="{{asset('img/icons_logo/apple_logo.png')}}" alt=""/>
                                 </button>
                                 <a href="{{ route('login.kakao') }}" class="login-with-btn">
-                                    <img src="{{asset('img/icons_logo/kakao-talk_logo.png')}}" alt=""/>
+                                    <img loading="lazy" src="{{asset('img/icons_logo/kakao-talk_logo.png')}}" alt=""/>
                                 </a>
                             </div>
                             <div class="sign--up d-flex justify-content-center">

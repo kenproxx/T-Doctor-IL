@@ -5,7 +5,7 @@
     <div class="container" style="margin-top: 120px">
         <h3 class="text-center" style="font-weight: 600">Welcome {{$user->name}}</h3>
         <div class="text-center mt-3 mb-3">
-            <img src="{{ $user->avt }}" alt="" style="width:150px;" class="bg-info rounded-circle border">
+            <img loading="lazy" src="{{ $user->avt }}" alt="" style="width:150px;" class="bg-info rounded-circle border">
         </div>
         @if($user->provider_name)
             <form action="{{ route('save.user.login.social') }}" method="POST" enctype="multipart/form-data">

@@ -51,14 +51,10 @@
                 @endif
             </div>
         </div>
-        <div class="form-group">
-            <label for="notes">{{ __('home.Detail') }}</label>
-            <textarea class="form-control" id="notes" rows="5">{{ $prescription->notes }}</textarea>
-        </div>
         <div class="d-flex align-items-center justify-content-end">
             @if(Auth::user()->id == $prescription->user_id)
                 <button type="button" class="btn btn-outline-success mt-3 mr-3" id="btnAddToCart">
-                    Buy now
+                    {{ $prescription->isFirstBuy ? 'Mua lại' : 'Thêm vào giỏ hàng' }}
                 </button>
             @endif
             <button type="button" class="btn btn-outline-primary mt-3 " id="btnConvert">

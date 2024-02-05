@@ -135,11 +135,11 @@ class MainApi extends Controller
     public function sendNotificationFcm(Request $request)
     {
         try {
-            $user_id = $request->input('user_id');
+            $user_email = $request->input('email');
             $data = $request->input('data');
             $notification = $request->input('notification');
 
-            $user = User::find($user_id);
+            $user = User::where('email', $user_email)->first();
 
             if (!$user || $user->status == UserStatus::DELETED) {
                 return response($this->returnMessage('User not found'), 404);

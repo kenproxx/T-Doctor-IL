@@ -51,11 +51,11 @@
             let arrayGallery = gallery.split(',')
             let img = ``;
             for (let j = 0; j < arrayGallery.length; j++) {
-                img = img + `<img class="mr-2 w-auto h-100" src="${arrayGallery[j]}" alt="">`;
+                img = img + `<img loading="lazy" class="mr-2 w-auto h-100" src="${arrayGallery[j]}" alt="">`;
             }
             html = html + `<tr>
             <th scope="row">${rowNumber}</th>
-            <td><img class="mr-2 w-auto h-100" src="${item.thumbnail}" alt=""></td>
+            <td><img loading="lazy" class="mr-2 w-auto h-100" src="${item.thumbnail}" alt=""></td>
             <td>${item.name}</td>
             <td>${item.province_name}</td>
             <td>${item.price} ${item.price_unit}</td>
