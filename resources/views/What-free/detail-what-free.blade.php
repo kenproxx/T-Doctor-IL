@@ -267,7 +267,9 @@
                                 <div class="div-5">
                                     <div class="text-wrapper-3">{{ __('home.Email') }}</div>
                                     <input class="form-control" type="text" name="email_"
-                                           id="email_" value="{{Auth::user()->email}}">
+                                           id="email_" @if(Auth::user() && Auth::user()->email)
+                                               value="{{ Auth::user()->email }}"
+                                    @endif">
                                 </div>
                                 <div class="div-5">
                                     <div class="text-wrapper-3">{{ __('home.Contact number') }}</div>
