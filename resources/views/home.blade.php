@@ -144,13 +144,13 @@
         {{--        </script>--}}
         <div class="slide-container">
             <div class="slide">
-                <img src="{{asset('img/homeNew-img/Rectangle 23820.png')}}" alt="">
+                <img loading="lazy" src="{{asset('img/homeNew-img/Rectangle 23820.png')}}" alt="">
             </div>
             <div class="slide">
-                <img src="{{asset('img/homeNew-img/Rectangle 23821.png')}}" alt="">
+                <img loading="lazy" src="{{asset('img/homeNew-img/Rectangle 23821.png')}}" alt="">
             </div>
             <div class="slide">
-                <img src="{{asset('img/homeNew-img/Rectangle 23822.png')}}" alt="">
+                <img loading="lazy" src="{{asset('img/homeNew-img/Rectangle 23822.png')}}" alt="">
             </div>
 
             <a href="#" class="prev d-none" title="Previous">&#10094</a>
@@ -993,7 +993,7 @@
                             <a href="{{route('home.specialist.department',$departmentItem->id)}}">
                                 <div class="border-HomeNew">
                                     <div class="w-75 d-flex align-items-center ">
-                                        <img src="{{$departmentItem->thumbnail}}" alt="thumbnail">
+                                        <img loading="lazy" src="{{$departmentItem->thumbnail}}" alt="thumbnail">
                                         <span>{{$departmentItem->name}}</span>
                                     </div>
                                     <div class="svg-containerNho">
@@ -1076,7 +1076,7 @@
                                         <div class="">
                                             <div class="product-item">
                                                 <div class="img-pro justify-content-center d-flex">
-                                                    <img src="{{$doctor->avt}}" alt="">
+                                                    <img loading="lazy" src="{{$doctor->avt}}" alt="">
                                                     <a class="button-heart button-doctor-heart"
                                                        data-doctor="{{$doctor->id}}"
                                                        data-isFavourite="{{ $isFavourite ? 1 : 0 }}">
@@ -1086,7 +1086,7 @@
                                                         @php
                                                             $department = \App\Models\Department::where('id',$doctor->department_id)->value('thumbnail');
                                                         @endphp
-                                                        <img src="{{$department}}">
+                                                        <img loading="lazy" src="{{$department}}">
                                                     </s>
                                                 </div>
                                                 <div class="content-pro p-md-3 p-2">
@@ -1166,7 +1166,7 @@
                                             <div class="product-item">
                                                 <div
                                                     class="img-pro justify-content-center d-flex img_product--homeNew">
-                                                    <img src="{{$medicine->thumbnail}}" alt="">
+                                                    <img loading="lazy" src="{{$medicine->thumbnail}}" alt="">
                                                     <a class="button-heart" data-favorite="0">
                                                         <i class="bi-heart bi"
                                                            data-product-id=""
@@ -1267,7 +1267,7 @@
     </div>
 
     <div class="banner1 m-0">
-        <img src="{{asset('img/icons_logo/Rectangle 23814.png')}}" alt="">
+        <img loading="lazy" src="{{asset('img/icons_logo/Rectangle 23814.png')}}" alt="">
     </div>
     <div class="container pb-5 mt-4">
         <div id="recruitment-homeNew" class="">
@@ -1279,7 +1279,7 @@
                 <div class="col-md-6 col-12 pl-0 main-card--homeNew">
                     <div class="d-flex content-recruitment--homeNew">
                         <div class="col-md-3 col-4 p-0">
-                            <img src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
+                            <img loading="lazy" src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
                         </div>
                         <div class="col-md-9 col-8 text-title--card">
                             <span>
@@ -1292,7 +1292,7 @@
                     </div>
                     <div class="d-flex content-recruitment--homeNew">
                         <div class="col-md-3 col-4 p-0">
-                            <img src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
+                            <img loading="lazy" src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
                         </div>
                         <div class="col-md-9 col-8 text-title--card">
                             <span>
@@ -1305,7 +1305,7 @@
                     </div>
                     <div class="d-flex content-recruitment--homeNew">
                         <div class="col-md-3 col-4 p-0">
-                            <img src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
+                            <img loading="lazy" src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
                         </div>
                         <div class="col-md-9 col-8 text-title--card">
                             <span>
@@ -1318,7 +1318,7 @@
                     </div>
                     <div class="d-flex content-recruitment--homeNew">
                         <div class="col-md-3 col-4 p-0">
-                            <img src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
+                            <img loading="lazy" src="{{asset('img/icons_logo/image 1.jpeg')}}" alt=""/>
                         </div>
                         <div class="col-md-9 col-8 text-title--card">
                             <span>
@@ -1464,7 +1464,7 @@
         </div>
     </div>
     <div class="banner1 m-0">
-        <img src="{{asset('img/icons_logo/Rectangle 23818.png')}}" alt="" style="">
+        <img loading="lazy" src="{{asset('img/icons_logo/Rectangle 23818.png')}}" alt="" style="">
     </div>
 
     <div class="">
@@ -1477,7 +1477,7 @@
                     @foreach($productsFlea as $product)
                         <div class="product-itemFlea">
                             <div class="img-proFlea justify-content-center d-flex">
-                                <img src="{{$product->thumbnail}}" alt="">
+                                <img loading="lazy" src="{{$product->thumbnail}}" alt="">
                                 <a class="button-heart" data-favorite="0">
                                     <i class="bi-heart bi"
                                        data-product-id="${product.id}"
@@ -1557,13 +1557,14 @@
                                                 <div class="product-item">
                                                     <div
                                                         class="img-pro justify-content-center h-auto d-flex img_product--homeNew">
-                                                        <img src="{{$product->thumbnail}}" alt="">
+                                                        <img loading="lazy" src="{{$product->thumbnail}}" alt="">
                                                         <a class="button-heart button-flea-market-heart"
                                                            data-product="{{$product->id}}"
                                                            data-isFavourite="{{ $isFavourite ? 1 : 0 }}">
                                                             <i class="bi {{ $class }}"></i>
                                                         </a>
-                                                        <div class="{{ $isSoldOut ? 'sold-out-overlay-text' : 'd-none' }} ">
+                                                        <div
+                                                            class="{{ $isSoldOut ? 'sold-out-overlay-text' : 'd-none' }} ">
                                                             <h1>Sold Out</h1>
                                                         </div>
                                                     </div>
@@ -1620,7 +1621,7 @@
         </div>
     </div>
     <div class="banner1 m-0">
-        <img src="{{asset('img/Rectangle 23815.png')}}" alt="">
+        <img loading="lazy" src="{{asset('img/Rectangle 23815.png')}}" alt="">
     </div>
     <div class="bg-homeNew">
         <div class="container pb-5 pt-3">
@@ -1715,7 +1716,7 @@
                                             <div class="product-item {{ $isSoldOut ? 'sold-out-overlay' : '' }}">
                                                 <div
                                                     class="img-pro justify-content-center d-flex img_product--homeNew">
-                                                    <img src="{{$product->thumbnail}}" alt="">
+                                                    <img loading="lazy" src="{{$product->thumbnail}}" alt="">
                                                     <a class="button-heart button-product-heart"
                                                        data-product="{{$product->id}}"
                                                        data-isFavourite="{{ $isFavourite ? 1 : 0 }}">
@@ -1795,7 +1796,7 @@
                                             <div class="product-item">
                                                 <div
                                                     class="img-pro justify-content-center d-flex img_product--homeNew">
-                                                    <img src="{{$product->thumbnail}}" alt="">
+                                                    <img loading="lazy" src="{{$product->thumbnail}}" alt="">
                                                     <a class="button-heart button-product-heart"
                                                        data-product="{{$product->id}}"
                                                        data-isFavourite="{{ $isFavourite ? 1 : 0 }}">
@@ -1888,7 +1889,7 @@
                                             <div class="product-item">
                                                 <div
                                                     class="img-pro justify-content-center d-flex img_product--homeNew">
-                                                    <img src="{{$product->thumbnail}}" alt="">
+                                                    <img loading="lazy" src="{{$product->thumbnail}}" alt="">
                                                     <a class="button-heart button-product-heart"
                                                        data-product="{{$product->id}}"
                                                        data-isFavourite="{{ $isFavourite ? 1 : 0 }}">
@@ -1981,7 +1982,7 @@
                                             <div class="product-item">
                                                 <div
                                                     class="img-pro justify-content-center d-flex img_product--homeNew">
-                                                    <img src="{{$product->thumbnail}}" alt="">
+                                                    <img loading="lazy" src="{{$product->thumbnail}}" alt="">
                                                     <a class="button-heart button-product-heart"
                                                        data-product="{{$product->id}}"
                                                        data-isFavourite="{{ $isFavourite ? 1 : 0 }}">
@@ -2312,7 +2313,7 @@
                     var infoWindowContent = `<div class="p-0 m-0 tab-pane fade show active background-modal b-radius" id="modalBooking">
                 <div>
 
-                    <img class="b-radius" src="${arrayGallery[0]}" alt="img">
+                    <img loading="lazy" class="b-radius" src="${arrayGallery[0]}" alt="img">
                 </div>
                 <div class="p-md-3 p-2">
                     <div class="form-group">
@@ -2374,7 +2375,7 @@
                             class="d-flex justify-content-between rv-header align-items-center mt-md-2 mt-1">
                             <div class="d-flex rv-header--left">
                                 <div class="avt-24 mr-md-2">
-                                    <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
+                                    <img loading="lazy" src="{{asset('img/detail_doctor/ellipse _14.png')}}">
                                         </div>
                                         <p class="fs-16px">Trần Đình Phi</p>
                                     </div>
@@ -2394,7 +2395,7 @@
                             class="d-flex justify-content-between rv-header align-items-center mt-md-2 mt-1">
                             <div class="d-flex rv-header--left">
                                 <div class="avt-24 mr-md-2">
-                                    <img src="{{asset('img/detail_doctor/ellipse _14.png')}}">
+                                    <img loading="lazy" src="{{asset('img/detail_doctor/ellipse _14.png')}}">
                                     </div>
                                     <p class="fs-16px">Trần Đình Phi</p>
                                 </div>
