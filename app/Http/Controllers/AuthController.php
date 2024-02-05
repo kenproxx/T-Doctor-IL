@@ -297,6 +297,7 @@ class AuthController extends Controller
                 (new MainController())->parsedToken($user->token);
             }
             $user->token = null;
+            $user->token_firebase = null;
             $user->save();
         }
         (new MainController())->removeCouponExpiredAndAddCouponActive();

@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers\restapi;
 
+use App\Enums\Constants;
 use App\Enums\CouponStatus;
 use App\Enums\SocialUserStatus;
+use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\TranslateController;
 use App\Models\Coupon;
 use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\SocialUser;
+use App\Models\User;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -71,7 +75,6 @@ class MainApi extends Controller
         }
     }
 
-
     public function checkCoupon(Request $request)
     {
         try {
@@ -123,5 +126,51 @@ class MainApi extends Controller
         } catch (\Exception $exception) {
             return response($exception, 400);
         }
+    }
+
+    public function sendNotificationFcm(Request $request)
+    {
+        try {
+            $user_id = $request->input('user_id');
+            $data = $request->input('data');
+            $notification = $request->input('notification');
+
+            $user = User::find($user_id);
+
+            if (!$user || $user->status == UserStatus::DELETED) {
+                return response($this->returnMessage('User not found'), 404);
+            }
+
+            $token = $user->token_firebase;
+            if (!$token) {
+                return response($this->returnMessage('Token not found'), 404);
+            }
+
+            $response = $this->sendNotification($token, $data, $notification);
+            $data = $response->getContents();
+            return response($data);
+        } catch (\Exception $exception) {
+            return response($this->returnMessage($exception->getMessage()), 400);
+        }
+    }
+
+    public function sendNotification($device_token, $data, $notification)
+    {
+        $client = new Client();
+        $YOUR_SERVER_KEY = Constants::GG_KEY;
+
+        $response = $client->post('https://fcm.googleapis.com/fcm/send', [
+            'headers' => [
+                'Authorization' => 'key=' . $YOUR_SERVER_KEY,
+                'Content-Type' => 'application/json',
+            ],
+            'json' => [
+                'to' => $device_token,
+                'data' => $data,
+                'notification' => $notification
+            ],
+        ]);
+
+        return $response->getBody();
     }
 }
