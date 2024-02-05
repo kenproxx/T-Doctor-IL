@@ -279,8 +279,10 @@
 
                 <div id="sendmessage">
                     <input type="text" value="Send message..." id="text-chatMessage"/>
-                    <span class="mr-3" data-toggle="modal" data-target="#modal-create-don-thuoc-widget-chat"><i
-                            class="fa-solid fa-plus"></i></span>
+                    @if(!\App\Models\User::isNormal())
+                        <span class="mr-3" data-toggle="modal" data-target="#modal-create-don-thuoc-widget-chat"><i
+                                class="fa-solid fa-plus"></i></span>
+                    @endif
                     <span id="send-chatMessage" onclick="sendMessageChatWidget()"><i
                             class="fa-regular fa-paper-plane"></i></span>
 
