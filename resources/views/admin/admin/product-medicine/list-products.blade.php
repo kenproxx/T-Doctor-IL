@@ -67,27 +67,88 @@
     <div class="">
         <!-- Page Heading -->
         <h1 class="h3 mb-4 text-gray-800"> List Products </h1>
-        <div class="d-flex align-items-center justify-content-between">
+        <div class="mb-3">
+            <div class="row w-100">
+                <div class="col">
+                    <input class="form-control" id="keyword" type="text" onkeypress="processSearchProduct();"
+                           placeholder="Enter name, prescription or ingredients of products"/>
+                </div>
+                <div class="col">
+                    <select id="inputCountry" class="form-select input_filter">
+                        <option value="" selected>Manufacturing Country</option>
+                        @if(is_array($array_country))
+                            @foreach($array_country as $country)
+                                <option value="{{ $country }}">{{ $country }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+                <div class="col">
+                    <select id="inputCompany" class="form-select input_filter">
+                        <option value="" selected>Manufacturing Company</option>
+                        @if(is_array($array_company))
+                            @foreach($array_company as $company)
+                                <option value="{{ $company }}">{{ $company }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
+                <div class="col">
+                    <select id="inputObject" class="form-select input_filter">
+                        <option value="" selected>Object</option>
+                        <option value="1">KIDS</option>
+                        <option value="2">FOR WOMEN</option>
+                        <option value="3">FOR MEN</option>
+                        <option value="4">FOR ADULT</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select id="inputFilter" class="form-select input_filter">
+                        <option value="" selected>Filter</option>
+                        <option value="1">ALL</option>
+                        <option value="2">HEALTH</option>
+                        <option value="3">BEAUTY</option>
+                        <option value="4">PET</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select id="inputCategory" class="form-select input_filter">
+                        <option value="" selected>Category</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col">
+                    <select id="inputCondition" class="form-select input_filter">
+                        <option value="" selected>Condition of products</option>
+                        <option value="in">In stock</option>
+                        <option value="out">Out of stock</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <select id="inputStatus" class="form-select input_filter">
+                        <option value="" selected>Status of products</option>
+                        <option value="APPROVED">APPROVED</option>
+                        <option value="PENDING">PENDING</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row d-flex align-items-center justify-content-end">
             <div class="mb-3 col-md-3">
+                <label for="inputSearchProduct">Search</label>
                 <input class="form-control" id="inputSearchProduct" type="text" placeholder="Search.."/>
             </div>
-            <div class="mb-3 col-md-6">
-                <div class="row">
-                    <div class="col">
-                        <select id="inputCondition" class="form-select input_filter">
-                            <option value="" selected>Condition of products</option>
-                            <option value="in">In stock</option>
-                            <option value="out">Out of stock</option>
-                        </select>
-                    </div>
-                    <div class="col">
-                        <select id="inputStatus" class="form-select input_filter">
-                            <option value="" selected>Status of products</option>
-                            <option value="APPROVED">APPROVED</option>
-                            <option value="PENDING">PENDING</option>
-                        </select>
-                    </div>
-                </div>
+            <div class="mb-3 col-md-1">
+                <label for="inputPaginate">Page: <span class="item_quantity">20</span>/page </label>
+                <select class="form-select" id="inputPaginate">
+                    <option value="10">10 items</option>
+                    <option selected value="20">20 items</option>
+                    <option value="50">50 items</option>
+                    <option value="100">100 items</option>
+                </select>
             </div>
         </div>
         <br>
@@ -153,18 +214,81 @@
             });
 
             $('.input_filter').change(function () {
-                let stock = $('#inputCondition').val();
-                let status = $('#inputStatus').val();
-
-                filterProduct(stock, status);
+                searchProduct();
             });
+
+            changePaginate();
         })
+
+        async function processSearchProduct() {
+            if (event.keyCode === 13 && !event.shiftKey) {
+                await searchProduct();
+            }
+        }
+
+        async function searchProduct() {
+            let search_url = await renderUrlSearch();
+            await callSearchProduct(search_url);
+            await changePaginate();
+        }
+
+        async function renderUrlSearch() {
+            let keyword = $('#keyword').val();
+            let filter = $('#inputFilter').val();
+            let object = $('#inputObject').val();
+            let country = $('#inputCountry').val();
+            let company = $('#inputCompany').val();
+            let category = $('#inputCategory').val();
+            let stock = $('#inputCondition').val();
+            let status = $('#inputStatus').val();
+
+            let search_url = `{{ route('api.admin.products.medicine.search') }}`;
+
+            let keyword_url = `keyword=${keyword}`;
+            let filter_url = `filter=${filter}`;
+            let object_url = `object=${object}`;
+            let country_url = `country=${country}`;
+            let company_url = `company=${company}`;
+            let category_url = `category=${category}`;
+            let stock_url = `stock=${stock}`;
+            let status_url = `status=${status}`;
+
+            search_url = search_url + `?${keyword_url}&${filter_url}&${object_url}&${country_url}&${company_url}&${category_url}&${stock_url}&${status_url}`;
+
+            return search_url;
+        }
+
+        async function changePaginate() {
+            $('#inputPaginate').change(function () {
+                let number = $(this).val();
+                loadPaginate('tableListProduct', number);
+                $('.item_quantity').text(number)
+            });
+        }
+
+        async function callSearchProduct(search_url) {
+            $('.pager').remove();
+            loadingMasterPage();
+
+            await $.ajax({
+                url: search_url,
+                method: 'GET',
+                headers: headers,
+                success: function (response) {
+                    loadingMasterPage();
+                    renderProductFilter(response);
+                },
+                error: function (xhr, status, exception) {
+                    loadingMasterPage();
+                    alert(xhr.responseJSON.message);
+                }
+            });
+        }
 
         async function filterProduct(stock, status) {
             $('.pager').remove();
             loadingMasterPage();
             let filter_url = `{{ route('api.admin.products.medicine.filter') }}` + `?stock=${stock}&status=${status}`;
-            console.log(filter_url);
 
             await $.ajax({
                 url: filter_url,
