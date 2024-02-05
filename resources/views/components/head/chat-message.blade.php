@@ -364,6 +364,7 @@
     let uuid_session;
     let elementInputMedicine_widgetChat;
     let next_elementInputMedicine_widgetChat;
+    let next_elementQuantity_widgetChat;
 
     let currentUserIdChat = '{{ Auth::check() ? Auth::user()->id : '' }}';
 
@@ -956,7 +957,7 @@
                                                     class="text-wrapper-3">${medicine.price} ${medicine.unit_price ?? 'VND'}</div>
                                             </div>
                                             <div class="div-wrapper">
-                                                <a onclick="handleSelectInputMedicine_widgetChat('${medicine.id}', '${medicine.name}')"
+                                                <a onclick="handleSelectInputMedicine_widgetChat('${medicine.id}', '${medicine.name}', '${medicine.quantity}')"
                                                    data-dismiss="modal">
                                                     <div class="text-wrapper-4">{{ __('home.Choose...') }}</div>
                                                 </a>
@@ -1062,14 +1063,17 @@
         }
     }
 
-    function handleSelectInputMedicine_widgetChat(id, name) {
+    function handleSelectInputMedicine_widgetChat(id, name, quantity) {
         elementInputMedicine_widgetChat.value = name;
         next_elementInputMedicine_widgetChat.val(id);
+        next_elementQuantity_widgetChat.attr('max', quantity);
     }
 
     function handleClickInputMedicine_widgetChat(element, nextElement) {
         elementInputMedicine_widgetChat = element;
         next_elementInputMedicine_widgetChat = nextElement;
+        next_elementQuantity_widgetChat = $(element).closest('.form-group').next('.form-group').find('.quantity').val();
+
     }
 
     loadData_widgetChat();

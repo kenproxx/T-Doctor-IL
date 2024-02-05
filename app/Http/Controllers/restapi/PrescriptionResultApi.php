@@ -358,6 +358,7 @@ class PrescriptionResultApi extends Controller
                 }
             }
             if ($count > 0) {
+                $prescription->isFirstBuy = true;
                 return response((new MainApi())->returnMessage(
                     'Thêm sản phẩm vào giỏ hàng thành công!'
                 ), 200);
