@@ -8,19 +8,22 @@
             font-weight: 800;
             font-size: 18px;
         }
+
         .hover-description {
             color: #333;
             font-weight: 600;
             font-size: 18px;
         }
+
         .hover-description:hover {
             color: #1ed3d2;
         }
+
         .section-description::before {
             display: block;
             content: "";
-            margin-top: -200px;
-            height: 200px;
+            margin-top: -80px;
+            height: 80px;
             visibility: hidden;
             pointer-events: none;
         }
@@ -36,46 +39,72 @@
                 <div class="col-md-8 recruitment-details--content--left">
                     <div class="text-content-product">{{ $coupon->title }}</div>
                     <div class="d-flex mt-3 mb-3">
-                        @if($coupon->is_tiktok == 1)
-                            <div class="button-black mr-3">Tiktok</div>
-                        @endif
-                        @if($coupon->is_facebook == 1)
-                            <div class="button-black mr-3">Facebook</div>
-                        @endif
-                        @if($coupon->is_instagram == 1)
-                            <div class="button-black mr-3">Instagram</div>
-                        @endif
-                        @if($coupon->is_youtube == 1)
-                            <div class="button-black mr-3">Youtube</div>
-                        @endif
-                        @if($coupon->is_google == 1)
-                            <div class="button-black mr-3">Google</div>
-                        @endif
+                        @foreach(['tiktok', 'facebook', 'instagram', 'youtube', 'google'] as $platform)
+                            @if($coupon->{"is_$platform"} == 1)
+                                <div class="button-black mr-3">{{ ucfirst($platform) }}</div>
+                            @endif
+                        @endforeach
+
                         <div class="button-black mr-3"><i class="fa-solid fa-user-group"> </i>{{ $coupon->registered }}
                             /{{ $coupon->max_register }}</div>
                         <div class="button-black"><i class="fa-regular fa-eye mr-3"></i>{{ $coupon->views }}</div>
                     </div>
-                    <div class="img-main">
+                    <div class="img-main h-auto">
                         <img src="{{asset($coupon->thumbnail)}}" style="object-fit: contain; height: 100%" alt="show"
                              class="main">
                     </div>
+                    @if($coupon->short_description != null)
+                        <div class="mb-3 mt-30 d-md-flex">
+                            <div id="short_description" class="mb-2 section-description flea-content-product col-md-3">
+                                Phần thưởng
+                            </div>
+                            <div
+                                class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->short_description !!}</div>
+                        </div>
+                    @endif
+                    @if($coupon->condition != null)
+                        <div class="mb-3 d-md-flex">
+                            <div id="condition" class="mb-2 section-description flea-content-product col-md-3">Điều
+                                khoản và
+                                điều kiện
+                            </div>
+                            <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->condition !!}</div>
+                        </div>
+                    @endif
+                    @if($coupon->conduct != null)
+                        <div class="mb-3 d-md-flex">
+                            <div id="conduct" class="mb-2 section-description flea-content-product col-md-3">Hướng dẫn
+                                chiến
+                                dịch
+                            </div>
+                            <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->conduct !!}</div>
+                        </div>
+                    @endif
+                    @if($coupon->description != null)
+                        <div class="mb-3 d-md-flex">
+                            <div id="description" class="mb-2 section-description flea-content-product col-md-3">Yêu cầu
+                                nội
+                                dung
+                            </div>
+                            <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->description !!}</div>
+                        </div>
+                    @endif
+                    @if($coupon->description != null)
+                        <div class="mb-3 d-md-flex">
+                            <div id="instruction" class="mb-2 section-description flea-content-product col-md-3">Hướng
+                                dẫn chi tiết
+                            </div>
+                            <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->instruction !!}</div>
+                        </div>
+                    @endif
+                    @if($coupon->description != null)
+                        <div class="mb-3 d-md-flex">
+                            <div id="website" class="mb-2 section-description flea-content-product col-md-3">Website
+                            </div>
+                            <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->website !!}</div>
+                        </div>
+                    @endif
 
-                    <div class="mb-3 mt-30 d-md-flex">
-                        <div id="short_description" class="mb-2 section-description flea-content-product col-md-3">Phần thưởng</div>
-                        <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->short_description !!}</div>
-                    </div>
-                    <div class="mb-3 d-md-flex">
-                        <div id="condition" class="mb-2 section-description flea-content-product col-md-3">Điều khoản và điều kiện</div>
-                        <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->condition !!}</div>
-                    </div>
-                    <div class="mb-3 d-md-flex">
-                        <div id="conduct" class="mb-2 section-description flea-content-product col-md-3">Hướng dẫn chiến dịch</div>
-                        <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->conduct !!}</div>
-                    </div>
-                    <div class="mb-3 d-md-flex">
-                        <div id="description" class="mb-2 section-description flea-content-product col-md-3">Yêu cầu nội dung</div>
-                        <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->description !!}</div>
-                    </div>
 
                 </div>
                 <div class="col-md-4 recruitment-details--content--right">
@@ -88,61 +117,125 @@
                             <img class="image" src="{{asset('img/recruitment/logo.png')}}"/>
                             <div class="text-wrapper-2">{{ $clinic->name ?? '' }}</div>
                         </div>
-                        @php
-                            function isWithinTimeRange($start, $end) {
-                                $now = time();
-                                $currentDateTime = new DateTime();
-                                $currentDateTimeString = $currentDateTime->format('Y-m-d H:i:s');
-                                return ($start <= $currentDateTimeString && $currentDateTimeString <= $end);
-                            }
-                        @endphp
                         <div class="div-3">
                             <div class="justify-content-between d-flex">
                                 <div
-                                    class="{{ isWithinTimeRange($coupon->startDate, $coupon->endDate) ? 'bold-text' : '' }}">
+                                    class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->startDate, $coupon->endDate) ? 'bold-text' : '' }}">
                                     Thời gian ứng tuyển
                                 </div>
                                 <div
-                                    class="{{ isWithinTimeRange($coupon->startDate, $coupon->endDate) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->startDate)->format('d.m') }}
+                                    class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->startDate, $coupon->endDate) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->startDate)->format('d.m') }}
                                     ~ {{ Carbon::parse($coupon->endDate)->format('d.m') }}</div>
                             </div>
                             <div class="justify-content-between d-flex">
                                 <div
-                                    class="{{ isWithinTimeRange($coupon->start_selective, $coupon->end_selective) ? 'bold-text' : '' }}">
+                                    class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_selective, $coupon->end_selective) ? 'bold-text' : '' }}">
                                     Thời gian chọn lọc
                                 </div>
                                 <div
-                                    class="{{ isWithinTimeRange($coupon->start_selective, $coupon->end_selective) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->start_selective)->format('d.m') }}
+                                    class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_selective, $coupon->end_selective) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->start_selective)->format('d.m') }}
                                     ~ {{ Carbon::parse($coupon->end_selective)->format('d.m') }}</div>
                             </div>
                             <div class="justify-content-between d-flex">
                                 <div
-                                    class="{{ isWithinTimeRange($coupon->start_post, $coupon->end_post) ? 'bold-text' : '' }}">
+                                    class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_post, $coupon->end_post) ? 'bold-text' : '' }}">
                                     Thời gian đăng bài
                                 </div>
                                 <div
-                                    class="{{ isWithinTimeRange($coupon->start_post, $coupon->end_post) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->start_post)->format('d.m') }}
+                                    class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_post, $coupon->end_post) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->start_post)->format('d.m') }}
                                     ~ {{ Carbon::parse($coupon->end_post)->format('d.m') }}</div>
                             </div>
                             <div class="justify-content-between d-flex">
                                 <div
-                                    class="{{ isWithinTimeRange($coupon->start_evaluate, $coupon->end_evaluate) ? 'bold-text' : '' }}">
+                                    class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_evaluate, $coupon->end_evaluate) ? 'bold-text' : '' }}">
                                     Thời gian đánh giá
                                 </div>
                                 <div
-                                    class="{{ isWithinTimeRange($coupon->start_evaluate, $coupon->end_evaluate) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->start_evaluate)->format('d.m') }}
+                                    class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_evaluate, $coupon->end_evaluate) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->start_evaluate)->format('d.m') }}
                                     ~ {{ Carbon::parse($coupon->end_evaluate)->format('d.m') }}</div>
                             </div>
                             <hr>
 
-                            <a class="hover-description" href="#short_description">Phần thưởng</a><hr>
-                            <a class="hover-description" href="#condition">Điều khoản và điều kiện</a><hr>
-                            <a class="hover-description" href="#conduct">Hướng dẫn chiến dịch</a><hr>
-                            <a class="hover-description" href="#description">Yêu cầu nội dung</a><hr>
+                            @if($coupon->short_description != null)
+                                <a class="hover-description" href="#short_description">Phần thưởng</a>
+                                <hr>
+                            @endif
+
+                            @if($coupon->condition != null)
+                                <a class="hover-description" href="#condition">Điều khoản và điều kiện</a>
+                                <hr>
+                            @endif
+
+                            @if($coupon->conduct != null)
+                                <a class="hover-description" href="#conduct">Hướng dẫn chiến dịch</a>
+                                <hr>
+                            @endif
+
+                            @if($coupon->description != null)
+                                <a class="hover-description" href="#description">Yêu cầu nội dung</a>
+                                <hr>
+                            @endif
+
+                            @if($coupon->instruction != null)
+                                <a class="hover-description" href="#instruction">Hướng dẫn chi tiết</a>
+                                <hr>
+                            @endif
+
+                            @if($coupon->website != null)
+                                <a class="hover-description" href="#website">Website</a>
+                                <hr>
+                            @endif
+
                         </div>
-                        <div class="div-7 d-flex justify-content-between">
-                            <button id="button-apply" class="text-wrapper-5 w-100">{{ __('home.Apply') }}</button>
-                        </div>
+                        @php
+                            if (Auth::check()) {
+                                $SocialUser = \App\Models\SocialUser::where('user_id', Auth::user()->id)
+                                ->where('status', \App\Enums\SocialUserStatus::ACTIVE)
+                                ->first();
+
+                                $my_array = [];
+                                $my_array = array_filter([
+                                    $SocialUser->instagram ? 'instagram' : null,
+                                    $SocialUser->facebook ? 'facebook' : null,
+                                    $SocialUser->tiktok ? 'tiktok' : null,
+                                    $SocialUser->youtube ? 'youtube' : null,
+                                    $SocialUser->google_review ? 'google_review' : null,
+                                ]);
+
+                                $coupon = \App\Models\Coupon::find($coupon->id);
+
+                                $your_array = [];
+                                $your_array = array_filter([
+                                    $coupon->is_instagram == 1 ? 'instagram' : null,
+                                    $coupon->is_facebook == 1 ? 'facebook' : null,
+                                    $coupon->is_tiktok == 1 ? 'tiktok' : null,
+                                    $coupon->is_youtube == 1 ? 'youtube' : null,
+                                    $coupon->is_google == 1 ? 'google_review' : null,
+                                ]);
+
+    // Kiểm tra nếu tất cả các nền tảng yêu cầu bởi phiếu giảm giá được hỗ trợ bởi người dùng
+                                $is_valid = empty(array_diff($your_array, $my_array));
+                                $diff_array = array_diff($your_array, $my_array);
+                                $text = $is_valid ? null : reset($diff_array);
+                            }
+
+                        @endphp
+                        @if($text == null)
+                            <div class="div-7 d-flex justify-content-between">
+                                <button id="button-apply" class="text-wrapper-5 w-100">{{ __('home.Apply') }}</button>
+                            </div>
+                            @else
+                            @if(Auth::check())
+                                <div>Kiểm tra tình trạng truyền thông.
+                                Bạn chưa kết nối với kênh truyền thông {{$text}} cho chiến dịch này.
+                            </div>
+                                <div class="div-7 d-flex justify-content-between">
+
+                                    <a class="text-wrapper-5 w-100" href="{{route('profile')}}">{{ __('home.Update profile') }}</a>
+                                </div>
+                            @endif
+                        @endif
+
                     </div>
                     <div class="form-2 d-none" id="form-apply">
                         <div class="div">
@@ -302,5 +395,21 @@
                 }
             });
         })
+    </script>
+    <script>
+        const navLink = document.querySelectorAll('a[href^="#"]');
+        const header = document.querySelector('header');
+
+        for (let link of navLink) {
+            link.onclick = function (e) {
+                e.preventDefault();
+                const hash = link.hash;
+                const section = document.querySelector(hash);
+                const scrollToSection = section.offsetTop - header.offsetHeight;
+                console.log(scrollToSection)
+                window.location.hash = hash;
+                window.scrollTo(50, scrollToSection);
+            }
+        }
     </script>
 @endsection

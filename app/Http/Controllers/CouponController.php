@@ -10,6 +10,8 @@ use App\Models\CouponApply;
 use App\Models\Role;
 use App\Models\RoleUser;
 use App\Models\User;
+use Carbon\Carbon;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -142,6 +144,22 @@ class CouponController extends Controller
         $listCoupon = $listCoupon->get();
 
         return response()->json($listCoupon);
+    }
+
+    public static function checkAndUpdateExpiredStatus()
+    {
+        $now = Carbon::now();
+        $coupons = Coupon::where('end_evaluate', '<', $now)->get();
+        foreach ($coupons as $voucher) {
+            $voucher->status = CouponStatus::DELETED;
+            $voucher->save();
+        }
+    }
+    public static function isWithinTimeRange($start, $end) {
+            $now = time();
+            $currentDateTime = new DateTime();
+            $currentDateTimeString = $currentDateTime->format('Y-m-d H:i:s');
+            return ($start <= $currentDateTimeString && $currentDateTimeString <= $end);
     }
 
 }

@@ -1,3 +1,6 @@
+@php
+    \App\Http\Controllers\CouponController::checkAndUpdateExpiredStatus();
+@endphp
 @extends('layouts.admin')
 @section('title', 'List Coupon')
 @section('main-content')
