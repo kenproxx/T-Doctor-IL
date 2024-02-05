@@ -261,7 +261,7 @@ class UserApi extends Controller
         }
     }
 
-    /* Datatime */
+    /* Temporary function */
     public function logout()
     {
         User::where('token', '!=', null)->update(['token' => null]);

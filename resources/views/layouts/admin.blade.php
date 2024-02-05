@@ -1081,6 +1081,7 @@
             var currentPage = 0;
             var pages = Math.ceil($table.find("tr:not(:has(th))").length / itemsPerPage);
             $table.bind('repaginate', function () {
+                $table.next().empty().show();
                 if (pages > 1) {
                     var pager;
                     if ($table.next().hasClass("pager"))
@@ -1128,10 +1129,12 @@
 
                     if (!$table.next().hasClass("pager"))
                         pager.insertAfter($table);
+                } else {
+                    if ($table.next().hasClass("pager"))
+                        $table.next().empty().hide();
                 }
 
-                $table.find(
-                    'tbody tr:not(:has(th))').hide().slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).show();
+                $table.find('tbody tr:not(:has(th))').hide().slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage).show();
             });
 
             $table.trigger('repaginate');
