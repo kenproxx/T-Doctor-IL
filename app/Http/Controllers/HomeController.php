@@ -131,7 +131,10 @@ class HomeController extends Controller
 
     public function admin()
     {
-        return view('admin.home-admin');
+        $productMedicines = ProductMedicine::where('status', OnlineMedicineStatus::PENDING)->get();
+        $number = count($productMedicines);
+        $isAdmin = (new MainController())->checkAdmin();
+        return view('admin.home-admin', compact('number', 'isAdmin'));
     }
 
     public function listMessageUnseen()

@@ -474,7 +474,7 @@
                                     <div class="frame component-medicine w-100">
                                         <div class="img-pro justify-content-center d-flex img_product--homeNew">
                                             <img loading="lazy" class="rectangle border-img"
-                                                 src="{{asset('img/11111.jpeg')}}"/>
+                                                 src="${medicine.thumbnail}"/>
                                         </div>
                                         <div class="div">
                                             <div class="div-2">

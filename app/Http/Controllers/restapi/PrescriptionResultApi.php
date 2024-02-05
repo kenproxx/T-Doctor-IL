@@ -301,4 +301,59 @@ class PrescriptionResultApi extends Controller
     {
         return strtolower(trim($str));
     }
+
+    public function addProductToCartV2(Request $request)
+    {
+        try {
+            $userID = $request->input('user_id');
+
+            $user = User::find($userID);
+            if (!$user) {
+                return response((new MainApi())->returnMessage('User not found!'), 404);
+            }
+
+            $prescription_id = $request->input('prescription_id');
+            $prescription = PrescriptionResults::find($prescription_id);
+            if (!$prescription || $prescription->status == PrescriptionResultStatus::DELETED) {
+                return response((new MainApi())->returnMessage('Not found!'), 400);
+            }
+
+            $count = 0;
+
+            $medicines = '[' . $prescription->prescriptions . ']';
+            $medicines = json_decode($medicines, true);
+            foreach ($medicines as $row) {
+
+                $product = ProductMedicine::where('id', $row['medicine_id'])
+                    ->where('status', OnlineMedicineStatus::APPROVED)
+                    ->first();
+
+                $typeProduct = TypeProductCart::MEDICINE;
+                if ($product) {
+                    $cart = Cart::where('user_id', $userID)
+                        ->where('product_id', $product->id)
+                        ->where('type_product', $typeProduct)
+                        ->first();
+                    if ($cart) {
+                        $cart->quantity = $cart->quantity + (int)$row['quantity'];
+                    } else {
+                        $cart = new Cart();
+                        $cart->product_id = $product->id;
+                        $cart->quantity = (int)$row['quantity'];
+                        $cart->user_id = $userID;
+                        $cart->type_product = $typeProduct;
+                    }
+                    $cart->save();
+                    $count = $count + 1;
+                }
+            }
+            if ($count > 0) {
+                return response((new MainApi())->returnMessage('Add to cart success!'), 200);
+            }
+            return response((new MainApi())->returnMessage('No product!'), 201);
+        } catch (\Exception $exception) {
+
+            return response((new MainApi())->returnMessage($exception->getMessage()), 400);
+        }
+    }
 }

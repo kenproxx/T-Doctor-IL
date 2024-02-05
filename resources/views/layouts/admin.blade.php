@@ -13,6 +13,8 @@
     <title> @yield('title')</title>
     <meta content="krmedi description" name="description">
     <meta content="krmedi" name="keywords">
+    <link rel="icon" type="image/png"
+          href="{{ asset('img/logo.png') }}">
     <!-- Favicons -->
     <link href="{{ asset('admin/img/favicon.png')}}" rel="icon">
     <link href="{{ asset('admin/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
@@ -363,13 +365,18 @@
                 <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="{{ route('api.backend.product-medicine.index') }}">
-                            <i class="bi bi-circle"></i><span>{{ __('home.Product Medicine') }}</span>
+                            <i class="bi bi-circle"></i><span>{{ __('home.List product medicine') }}</span>
                         </a>
                     </li>
                     @if($isAdmin)
                         <li>
                             <a href="{{ route('api.backend.category-product.index') }}">
                                 <i class="bi bi-circle"></i><span>{{ __('home.Category Product') }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('view.admin.home.medicine.list') }}">
+                                <i class="bi bi-circle"></i><span>Approval Product Medicine</span>
                             </a>
                         </li>
                     @endif
@@ -663,23 +670,6 @@
                     </ul>
                 </li>
                 <!-- End Admin User Nav -->
-
-                <!-- Start Admin Product Medicine Nav -->
-                <li class="nav-item">
-                    <a class="nav-link collapsed" data-bs-target="#product-medicine-manager-nav" data-bs-toggle="collapse"
-                       href="#">
-                        <i class="bi bi-diamond"></i><span>{{ __('home.Product Medicine') }}</span><i
-                            class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="product-medicine-manager-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a href="{{ route('view.admin.home.medicine.list') }}">
-                                <i class="bi bi-circle"></i><span>{{ __('home.List product medicine') }}</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <!-- End Admin Product Medicine Nav -->
             @endif
         @else
             <!-- Start Family Nav -->

@@ -64,8 +64,8 @@
                         @if($categoryProductMedicine)
                             @foreach($categoryProductMedicine as $index => $cateProductMedicine)
                                 <option
-                                    {{ $productMedicine->category_id == $cateProductMedicine->id ? 'selected' : '' }}
-                                    value="{{ $cateProductMedicine->id }}">
+                                        {{ $productMedicine->category_id == $cateProductMedicine->id ? 'selected' : '' }}
+                                        value="{{ $cateProductMedicine->id }}">
                                     {{ $cateProductMedicine->name }}
                                 </option>
                             @endforeach
@@ -76,11 +76,11 @@
                     <label for="object_">{{ __('home.Object') }}</label>
                     <select class="form-select" id="object_" name="object_">
                         <option
-                            {{ $productMedicine->object_ ==ObjectOnlineMedicine::KIDS ? 'selected' : '' }}
-                            value="{{ ObjectOnlineMedicine::KIDS }}">{{ __('home.For kids') }}</option>
+                                {{ $productMedicine->object_ ==ObjectOnlineMedicine::KIDS ? 'selected' : '' }}
+                                value="{{ ObjectOnlineMedicine::KIDS }}">{{ __('home.For kids') }}</option>
                         <option
-                            {{ $productMedicine->object_ == ObjectOnlineMedicine::FOR_WOMEN ? 'selected' : '' }}
-                            value="{{ ObjectOnlineMedicine::FOR_WOMEN }}">{{ __('home.For women') }}
+                                {{ $productMedicine->object_ == ObjectOnlineMedicine::FOR_WOMEN ? 'selected' : '' }}
+                                value="{{ ObjectOnlineMedicine::FOR_WOMEN }}">{{ __('home.For women') }}
                         </option>
                         <option {{ $productMedicine->object_ == ObjectOnlineMedicine::FOR_MEN ? 'selected' : '' }}
                                 value="{{ ObjectOnlineMedicine::FOR_MEN }}">{{ __('home.For men') }}
@@ -94,16 +94,16 @@
                     <label for="filter_">{{ __('home.Filter') }}</label>
                     <select class="form-select" id="filter_" name="filter_">
                         <option
-                            {{ $productMedicine->filter_ == FilterOnlineMedicine::HEALTH ? 'selected' : '' }}
-                            value="{{ FilterOnlineMedicine::HEALTH }}">{{ __('home.Heath') }}
+                                {{ $productMedicine->filter_ == FilterOnlineMedicine::HEALTH ? 'selected' : '' }}
+                                value="{{ FilterOnlineMedicine::HEALTH }}">{{ __('home.Heath') }}
                         </option>
                         <option
-                            {{ $productMedicine->filter_ == FilterOnlineMedicine::BEAUTY ? 'selected' : '' }}
-                            value="{{ FilterOnlineMedicine::BEAUTY }}">{{ __('home.Beauty') }}
+                                {{ $productMedicine->filter_ == FilterOnlineMedicine::BEAUTY ? 'selected' : '' }}
+                                value="{{ FilterOnlineMedicine::BEAUTY }}">{{ __('home.Beauty') }}
                         </option>
                         <option
-                            {{ $productMedicine->filter_ == FilterOnlineMedicine::PET  ? 'selected' : '' }}
-                            value="{{ FilterOnlineMedicine::PET }}">{{ __('home.Pets') }}
+                                {{ $productMedicine->filter_ == FilterOnlineMedicine::PET  ? 'selected' : '' }}
+                                value="{{ FilterOnlineMedicine::PET }}">{{ __('home.Pets') }}
                         </option>
                     </select>
                 </div>
@@ -129,33 +129,37 @@
             <div class="row">
                 <div class="col-sm-9">
                     <div class="list_product_ingredient">
-                        @foreach($list_drugIngredients as $list_drugIngredient)
-                            @php
-                                $array_value = explode('(', $list_drugIngredient);
-                                $percent_one = $array_value[1];
-                                $percent_array = explode('%', $percent_one);
-                            @endphp
-                            <div class="p-3 border mt-3 mb-3 d-flex align-items-center justify-content-between">
-                                <div class="w-75 form-ingredient">
-                                    <div class="form-group">
-                                        <label>{{ __('home.ingredient') }}</label>
-                                        <input type="text" class="form-control ingredient_name"
-                                               value="{{ $array_value[0] }}"
-                                               name="ingredient_name">
+                        @if(is_array($list_drugIngredients))
+                            @foreach($list_drugIngredients as $list_drugIngredient)
+                                @php
+                                    $array_value = explode('(', $list_drugIngredient);
+                                    if (count($array_value) > 1){
+                                        $percent_one = $array_value[1];
+                                        $percent_array = explode('%', $percent_one);
+                                    }
+                                @endphp
+                                <div class="p-3 border mt-3 mb-3 d-flex align-items-center justify-content-between">
+                                    <div class="w-75 form-ingredient">
+                                        <div class="form-group">
+                                            <label>{{ __('home.ingredient') }}</label>
+                                            <input type="text" class="form-control ingredient_name"
+                                                   value="{{ $array_value[0] }}"
+                                                   name="ingredient_name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>{{ __('home.Quantity') }} (Accountable by %)</label>
+                                            <input type="number" class="form-control ingredient_quantity"
+                                                   value="{{ isset($percent_array) ? $percent_array[0] : '' }}"
+                                                   name="ingredient_quantity">
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>{{ __('home.Quantity') }} (Accountable by %)</label>
-                                        <input type="number" class="form-control ingredient_quantity"
-                                               value="{{ $percent_array[0] }}"
-                                               name="ingredient_quantity">
+                                    <div class="btn-remove w-25 d-flex align-items-center justify-content-center">
+                                        <i class="fa-regular fa-trash-can btnRemove p-3"
+                                           style="font-size: 24px; cursor: pointer"></i>
                                     </div>
                                 </div>
-                                <div class="btn-remove w-25 d-flex align-items-center justify-content-center">
-                                    <i class="fa-regular fa-trash-can btnRemove p-3"
-                                       style="font-size: 24px; cursor: pointer"></i>
-                                </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        @endif
                     </div>
                     <div class="action">
                         <button class="btn btn-outline-primary btnAddNew" type="button">
@@ -164,9 +168,9 @@
                     </div>
                 </div>
                 <div class="col-sm-3">
-                    <label for="is_prescription">Is prescription</label>
+                    <label for="is_prescription">Choose prescription medications(Yes/No)</label>
                     <input type="checkbox" id="is_prescription" name="is_prescription"
-                        {{ $productMedicine->is_prescription == true ? 'checked' : '' }}>
+                            {{ $productMedicine->is_prescription ? 'checked' : '' }}>
                 </div>
             </div>
             <div class="row">
@@ -184,11 +188,11 @@
                     <label for="status">{{ __('home.Status') }}</label>
                     <select class="form-select" id="status" name="status" disabled>
                         <option
-                            value="{{ OnlineMedicineStatus::PENDING }}" {{ $productMedicine->price == OnlineMedicineStatus::PENDING ? 'selected' : '' }}>{{ OnlineMedicineStatus::PENDING }}</option>
+                                value="{{ OnlineMedicineStatus::PENDING }}" {{ $productMedicine->price == OnlineMedicineStatus::PENDING ? 'selected' : '' }}>{{ OnlineMedicineStatus::PENDING }}</option>
                         <option
-                            value="{{ OnlineMedicineStatus::APPROVED }}" {{ $productMedicine->price == OnlineMedicineStatus::APPROVED ? 'selected' : '' }}>{{ OnlineMedicineStatus::APPROVED }}</option>
+                                value="{{ OnlineMedicineStatus::APPROVED }}" {{ $productMedicine->price == OnlineMedicineStatus::APPROVED ? 'selected' : '' }}>{{ OnlineMedicineStatus::APPROVED }}</option>
                         <option
-                            value="{{ OnlineMedicineStatus::DELETED }}" {{ $productMedicine->price == OnlineMedicineStatus::DELETED ? 'selected' : '' }}>{{ OnlineMedicineStatus::DELETED }}</option>
+                                value="{{ OnlineMedicineStatus::DELETED }}" {{ $productMedicine->price == OnlineMedicineStatus::DELETED ? 'selected' : '' }}>{{ OnlineMedicineStatus::DELETED }}</option>
                     </select>
                 </div>
             </div>
@@ -203,7 +207,7 @@
                     <select class="form-select" id="unit_quantity" name="unit_quantity">
                         @foreach($unit_quantity as $unit_quantity_item)
                             <option value="{{ $unit_quantity_item }}"
-                                {{ $unit_quantity_item == $productMedicine->unit_quantity ? 'selected' : '' }}>
+                                    {{ $unit_quantity_item == $productMedicine->unit_quantity ? 'selected' : '' }}>
                                 {{ $unit_quantity_item }}
                             </option>
                         @endforeach
@@ -214,7 +218,7 @@
                     <select class="form-select" id="shape" name="shape">
                         @foreach($shapes as $shape)
                             <option value="{{ $shape }}"
-                                {{ $shape == $productMedicine->shape ? 'selected' : '' }}>
+                                    {{ $shape == $productMedicine->shape ? 'selected' : '' }}>
                                 {{ $shape }}
                             </option>
                         @endforeach
@@ -302,6 +306,7 @@
 
                 if (!ingredient_name || !ingredient_quantity) {
                     alert('Ingredient name or Ingredient quantity not null')
+                    loadingMasterPage();
                     return;
                 }
 
@@ -338,22 +343,28 @@
             fieldTextareaTiny.forEach(fieldTextarea => {
                 const content = tinymce.get(fieldTextarea).getContent();
                 if (!content) {
+                    let labelElement = $(`label[for='${fieldTextarea}']`);
+                    let text = labelElement.text();
+                    if (!text) {
+                        text = 'The input'
+                    }
+                    text = text + ' not empty!'
+                    alert(text);
+                    loadingMasterPage();
                     isValid = false;
                 }
                 formData.append(fieldTextarea, content);
             });
+
+            if (!isValid) {
+                return;
+            }
 
             const photo = $('#thumbnail')[0].files[0];
             formData.append('thumbnail', photo);
             formData.append('user_id', '{{ Auth::user()->id }}');
             formData.append('_token', '{{ csrf_token() }}');
             formData.append('proved_by', '{{ Auth::user()->id }}');
-
-            if (!isValid) {
-                alert('Please check input empty!');
-                loadingMasterPage();
-                return;
-            }
 
             try {
                 $.ajax({

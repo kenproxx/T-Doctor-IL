@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\restapi;
 
+use App\Enums\CouponStatus;
+use App\Enums\SocialUserStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\TranslateController;
+use App\Models\Coupon;
 use App\Models\Role;
 use App\Models\RoleUser;
+use App\Models\SocialUser;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -62,6 +66,60 @@ class MainApi extends Controller
 
             $translate_text = $translate->translateText($text, $language ?? 'vi');
             return response($translate_text);
+        } catch (\Exception $exception) {
+            return response($exception, 400);
+        }
+    }
+
+
+    public function checkCoupon(Request $request)
+    {
+        try {
+            $user_id = $request->input('user_id');
+            $coupon_id = $request->input('coupon_id');
+
+            $user_social = SocialUser::where('user_id', $user_id)
+                ->where('status', SocialUserStatus::ACTIVE)
+                ->first();
+            if (!$user_social) {
+                return response($this->returnMessage('User social not found!'), 404);
+            }
+
+            $my_array = null;
+            $instagram = $user_social->instagram ? $my_array[] = 'instagram' : 0;
+            $facebook = $user_social->facebook ? $my_array[] = 'facebook' : 0;
+            $tiktok = $user_social->tiktok ? $my_array[] = 'tiktok' : 0;
+            $youtube = $user_social->youtube ? $my_array[] = 'youtube' : 0;
+            $google = $user_social->google_review ? $my_array[] = 'google_review' : 0;
+
+            $coupon = Coupon::find($coupon_id);
+
+            if (!$coupon || $coupon->status == CouponStatus::DELETED) {
+                return response($this->returnMessage('Coupon not found!'), 404);
+            }
+
+            if ($coupon->status != CouponStatus::ACTIVE) {
+                return response($this->returnMessage('Coupon was expired!'), 404);
+            }
+
+            $your_array = null;
+            $instagram = $coupon->is_instagram == 1 ? $your_array[] = 'instagram' : 0;
+            $facebook = $coupon->is_facebook == 1 ? $your_array[] = 'facebook' : 0;
+            $tiktok = $coupon->is_tiktok == 1 ? $your_array[] = 'tiktok' : 0;
+            $youtube = $coupon->is_youtube == 1 ? $your_array[] = 'youtube' : 0;
+            $google = $coupon->is_google == 1 ? $your_array[] = 'google_review' : 0;
+
+            $text = null;
+            $is_valid = true;
+            foreach ($your_array as $item) {
+                if (!in_array($item, $my_array)) {
+                    $is_valid = false;
+                    $text = $item;
+                    break;
+                }
+            }
+
+            return response(['is_valid' => $is_valid, 'missing' => $text]);
         } catch (\Exception $exception) {
             return response($exception, 400);
         }
