@@ -10,6 +10,7 @@ use App\Http\Controllers\restapi\BookingApi;
 use App\Http\Controllers\restapi\BusinessFavouriteApi;
 use App\Http\Controllers\restapi\CartApi;
 use App\Http\Controllers\restapi\CheckoutApi;
+use App\Http\Controllers\restapi\MainApi;
 use App\Http\Controllers\restapi\MedicalFavouriteApi;
 use App\Http\Controllers\restapi\MessageApi;
 use App\Http\Controllers\restapi\PrescriptionResultApi;
@@ -59,6 +60,7 @@ Route::group(['prefix' => 'coupons-apply'], function () {
         [BackendCouponApplyController::class, 'listMyCoupons'])->name('api.backend.coupons-apply.my.coupon');
     Route::post('change-status',
         [BackendCouponApplyController::class, 'updateStatus'])->name('api.backend.coupons-apply.update-status');
+    Route::post('checking', [MainApi::class, 'checkCoupon']);
 });
 
 Route::group(['prefix' => 'coupons'], function () {

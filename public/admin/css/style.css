@@ -813,13 +813,18 @@ h6 {
 }
 
 .dashboard .revenue-card .card-icon {
-    color: #2eca6a;
-    background: #e0f8e9;
+    color: #ca912e;
+    background: rgba(246, 226, 82, 0.63);
 }
 
 .dashboard .customers-card .card-icon {
     color: #ff771d;
     background: #ffecdf;
+}
+
+.dashboard .product-medicine-card .card-icon {
+    color: #2eca6a;
+    background: #e0f8e9;
 }
 
 /* Activity */
