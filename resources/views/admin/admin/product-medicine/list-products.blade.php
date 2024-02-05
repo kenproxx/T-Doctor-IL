@@ -71,6 +71,24 @@
             <div class="mb-3 col-md-3">
                 <input class="form-control" id="inputSearchProduct" type="text" placeholder="Search.."/>
             </div>
+            <div class="mb-3 col-md-6">
+                <div class="row">
+                    <div class="col">
+                        <select id="inputCondition" class="form-select input_filter">
+                            <option value="" selected>Condition of products</option>
+                            <option value="in">In stock</option>
+                            <option value="out">Out of stock</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <select id="inputStatus" class="form-select input_filter">
+                            <option value="" selected>Status of products</option>
+                            <option value="APPROVED">APPROVED</option>
+                            <option value="PENDING">PENDING</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
         </div>
         <br>
         <table class="table" id="tableListProduct">
@@ -134,42 +152,123 @@
                 changeStatus(product);
             });
 
-            async function changeStatus(productID) {
-                loadingMasterPage();
-                let update_url = `{{ route('api.admin.products.medicine.change') }}`;
+            $('.input_filter').change(function () {
+                let stock = $('#inputCondition').val();
+                let status = $('#inputStatus').val();
 
-                let data = {
-                    product_id: productID,
-                    user_id: `{{ Auth::user()->id }}`,
-                    _token: '{{ csrf_token() }}'
-                }
-
-                try {
-                    await $.ajax({
-                        url: update_url,
-                        method: 'POST',
-                        headers: headers,
-                        data: data,
-                        success: function (response) {
-                            loadingMasterPage();
-                            processChangeStatus(response, productID);
-                        },
-                        error: function (xhr, status, exception) {
-                            loadingMasterPage();
-                            alert(xhr.responseJSON.message);
-                        }
-                    });
-                } catch (e) {
-                    console.log(e)
-                    alert('Error, Please try again!');
-                }
-            }
-
-            function processChangeStatus(product, productID) {
-                let status_text = $('#product_status_' + productID);
-                status_text.text(product.status);
-            }
+                filterProduct(stock, status);
+            });
         })
+
+        async function filterProduct(stock, status) {
+            $('.pager').remove();
+            loadingMasterPage();
+            let filter_url = `{{ route('api.admin.products.medicine.filter') }}` + `?stock=${stock}&status=${status}`;
+            console.log(filter_url);
+
+            await $.ajax({
+                url: filter_url,
+                method: 'GET',
+                headers: headers,
+                success: function (response) {
+                    loadingMasterPage();
+                    renderProductFilter(response);
+                },
+                error: function (xhr, status, exception) {
+                    loadingMasterPage();
+                    alert(xhr.responseJSON.message);
+                }
+            });
+        }
+
+        function renderProductFilter(response) {
+            let checked = null;
+            let html = ``;
+            let total = response.length;
+            for (let i = 0; i < total; i++) {
+                let product = response[i];
+
+                checked = '';
+                if (product.status === 'APPROVED') {
+                    checked = 'checked';
+                } else {
+                    checked = '';
+                }
+
+                let url_detail = `{{ route('api.backend.product-medicine.edit', ['id'=>':id']) }}`;
+                url_detail = url_detail.replace(':id', product.id);
+
+                html += ` <tr>
+                    <td> ${i + 1} </td>
+                    <td> ${product.name} </td>
+                    <td> ${product.price} </td>
+                    <td> ${product.quantity} </td>
+                    <td>
+                        <span id="product_status_${product.id}">
+                            ${product.status}
+                </span>
+            </td>
+            <td>
+                <div class="d-flex justify-content-start align-items-center">
+                    <div class="w-25 d-flex justify-content-center align-items-center">
+                        <a href="${url_detail}"
+                                   class="btn btn-success mr-3 ml-3">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                            </div>
+                            <div class="w-50 d-flex justify-content-center align-items-center">
+                                <label class="switch">
+                                    <input type="checkbox" class="product_action"
+                                          ${checked} data-product="${product.id}">
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>`;
+            }
+            $('#tbodyListProduct').empty().append(html);
+            if (total > 20) {
+                loadPaginate('tableListProduct', 20);
+            }
+            searchMain('inputSearchProduct', 'tableListProduct');
+        }
+
+        async function changeStatus(productID) {
+            loadingMasterPage();
+            let update_url = `{{ route('api.admin.products.medicine.change') }}`;
+
+            let data = {
+                product_id: productID,
+                user_id: `{{ Auth::user()->id }}`,
+                _token: '{{ csrf_token() }}'
+            }
+
+            try {
+                await $.ajax({
+                    url: update_url,
+                    method: 'POST',
+                    headers: headers,
+                    data: data,
+                    success: function (response) {
+                        loadingMasterPage();
+                        processChangeStatus(response, productID);
+                    },
+                    error: function (xhr, status, exception) {
+                        loadingMasterPage();
+                        alert(xhr.responseJSON.message);
+                    }
+                });
+            } catch (e) {
+                console.log(e)
+                alert('Error, Please try again!');
+            }
+        }
+
+        function processChangeStatus(product, productID) {
+            let status_text = $('#product_status_' + productID);
+            status_text.text(product.status);
+        }
     </script>
 @endsection
 

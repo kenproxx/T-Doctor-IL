@@ -48,6 +48,7 @@ Route::group(['prefix' => 'topic-videos'], function () {
 });
 
 Route::group(['prefix' => 'products-medicine'], function () {
+    Route::get('/filter', [AdminProductMedicineApi::class, 'filterProduct'])->name('api.admin.products.medicine.filter');
     Route::post('/change', [AdminProductMedicineApi::class, 'changeStatus'])->name('api.admin.products.medicine.change');
 });
 
