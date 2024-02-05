@@ -43,6 +43,7 @@ class CheckoutApi extends Controller
 
 
         $total = $request->input('total_fee');
+
         $ship = $request->input('shipping_fee');
         $discount = $request->input('discount_fee');
         $totalOrder = $request->input('total_order');
@@ -113,5 +114,42 @@ class CheckoutApi extends Controller
         } catch (\Exception $exception) {
             return response((new MainApi())->returnMessage('Error, Please try again!'), 400);
         }
+    }
+
+    public function calcDiscount(Request $request)
+    {
+        $price = $request->input('price');
+        $user_id = $request->input('user_id');
+
+        $response['status'] = 200;
+        $response['discount'] = 0;
+        $response['price'] = $price;
+        $user = User::find($user_id);
+        if (!$user) {
+            $response['status'] = 404;
+            $response['message'] = 'User not found!';
+            return response((new MainApi())->returnMessage($response['message']),$response['status']);
+        }
+
+        $point = $user->points;
+        $point_to_money = $point * 1000;
+        if ($point > 0) {
+            $point_exchange = 0; /* Tiền thừa*/
+            if ($price < $point_to_money) {
+                $point_money_exchange = $point_to_money - $price;
+                $point_exchange = intval($point_money_exchange / 1000);
+                $discount = $price;
+                $price = 0;
+
+            } else {
+                $discount = $point_to_money;
+                $price = $price - $point_to_money;
+            }
+            $response['point_exchange'] = $point_exchange;
+            $response['discount'] = $discount;
+            $response['price'] = $price;
+        }
+
+        return response()->json($response);
     }
 }

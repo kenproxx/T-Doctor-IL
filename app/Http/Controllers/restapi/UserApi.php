@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\restapi;
 
+use App\Enums\Constants;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
@@ -266,5 +267,22 @@ class UserApi extends Controller
     {
         User::where('token', '!=', null)->update(['token' => null]);
         return response('Logout done!', 200);
+    }
+
+    public function calcPoint(Request $request)
+    {
+        $user_id = $request->input('user_id');
+        $user = User::find($user_id);
+        if (!$user) {
+            return response('User not found!', 404);
+        }
+        $key__ = $request->input('key');
+        $point = $request->input('point');
+        if ($key__ == Constants::KEY_PROJECT) {
+            $user->points = $point;
+            $user->save();
+            return response('Success!', 200);
+        }
+        return response('Key?', 201);
     }
 }

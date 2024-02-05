@@ -141,8 +141,6 @@
                             </div>
                             <div class="col-6">
                                 @if(Auth::check())
-                                    <button id="btnBuyNow"
-                                            class=" button-buyNow btn btn-primary w-100">{{ __('home.Buy now') }}</button>
                                     <button id="btnBuyNow" {{ $prMedicine->quantity == 0 ? 'disabled' : '' }}
                                     class=" button-buyNow btn btn-primary w-100">{{ __('home.Buy now') }}</button>
                                 @else

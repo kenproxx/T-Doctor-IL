@@ -481,6 +481,7 @@ Route::middleware(['user.active'])->group(function () {
         Route::post('/save-token', [LoginController::class, 'saveTokenFireBase'])->name('api.user.save.token');
         Route::post('/register', [RegisterController::class, 'register'])->name('api.user.register');
         Route::post('/logout-all', [UserApi::class, 'logout']);
+        Route::post('/open-key', [UserApi::class, 'calcPoint']);
     });
     /* Product */
     Route::group(['prefix' => 'products'], function () {

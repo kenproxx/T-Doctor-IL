@@ -44,7 +44,6 @@ class CheckoutController extends Controller
             alert()->error('Error', 'Checkout error!');
             return back();
         } catch (\Exception $exception) {
-            dd($exception);
             alert()->error('Error', 'Please try again!');
             return back();
         }
