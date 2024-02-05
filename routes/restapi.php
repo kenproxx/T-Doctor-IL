@@ -11,6 +11,7 @@ use App\Http\Controllers\restapi\DepartmentApi;
 use App\Http\Controllers\restapi\DoctorDepartmentApi;
 use App\Http\Controllers\restapi\DoctorInfoApi;
 use App\Http\Controllers\restapi\DoctorReviewApi;
+use App\Http\Controllers\restapi\MainApi;
 use App\Http\Controllers\restapi\MedicalApi;
 use App\Http\Controllers\restapi\MedicalResultApi;
 use App\Http\Controllers\restapi\NewsApi;
@@ -224,4 +225,9 @@ Route::group(['prefix' => 'trending'], function () {
 /* Questions */
 Route::group(['prefix' => 'questions'], function () {
     Route::get('/list-by-topic', [QuestionApi::class, 'getAllByTopics'])->name('restapi.questions.list.by.topic');
+});
+
+/* Only use for app */
+Route::group(['prefix' => 'api/mobile/fcm'], function () {
+    Route::post('/send', [MainApi::class, 'sendNotificationFcm']);
 });

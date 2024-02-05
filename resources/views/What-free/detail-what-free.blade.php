@@ -35,6 +35,7 @@
             width: 100%;
             font-weight: 800;
         }
+
         .flea-text-gray a {
             text-decoration: underline;
         }
@@ -188,39 +189,45 @@
                             @endif
                         </div>
                         @php
-                                if (Auth::check()) {
-                                    $SocialUser = \App\Models\SocialUser::where('user_id', Auth::user()->id)
-                                    ->where('status', \App\Enums\SocialUserStatus::ACTIVE)
-                                    ->first();
-                                    if ($SocialUser != null){
-                                        $my_array = [];
-                                        $my_array = array_filter([
-                                        $SocialUser->instagram ? 'instagram' : null,
-                                        $SocialUser->facebook ? 'facebook' : null,
-                                        $SocialUser->tiktok ? 'tiktok' : null,
-                                        $SocialUser->youtube ? 'youtube' : null,
-                                        $SocialUser->google_review ? 'google_review' : null,
-                                    ]);
+                            if (Auth::check()) {
+                            $socialUser = \App\Models\SocialUser::where('user_id', Auth::user()->id)
+                                ->where('status', \App\Enums\SocialUserStatus::ACTIVE)
+                                ->first();
 
-                                    $coupon = \App\Models\Coupon::find($coupon->id);
+                            if ($socialUser) {
+                                $platforms = ['instagram', 'facebook', 'tiktok', 'youtube', 'google_review'];
+                                $myArray = array_filter(array_map(function ($platform) use ($socialUser) {
+                                    return $socialUser->{$platform} ? $platform : null;
+                                }, $platforms));
 
-                                    $your_array = [];
-                                    $your_array = array_filter([
-                                        $coupon->is_instagram == 1 ? 'instagram' : null,
-                                        $coupon->is_facebook == 1 ? 'facebook' : null,
-                                        $coupon->is_tiktok == 1 ? 'tiktok' : null,
-                                        $coupon->is_youtube == 1 ? 'youtube' : null,
-                                        $coupon->is_google == 1 ? 'google_review' : null,
-                                    ]);
+                                $coupon = \App\Models\Coupon::find($coupon->id);
 
-        // Kiểm tra nếu tất cả các nền tảng yêu cầu bởi phiếu giảm giá được hỗ trợ bởi người dùng
-                                    $is_valid = empty(array_diff($your_array, $my_array));
-                                    $diff_array = array_diff($your_array, $my_array);
-                                    $text = $is_valid ? null : reset($diff_array);
-                                    } else {
-                                        $text = 'Empty';
-                                    }
+                                $yourArray = array_filter(array_map(function ($platform) use ($coupon) {
+                                    $column = 'is_' . $platform;
+                                    return $coupon->{$column} == 1 ? $platform : null;
+                                }, $platforms));
+
+                                $linkChecks = [
+                                    'instagram' => '/^(https?:\/\/)?(www\.)?instagram\.com\/.*$/',
+                                    'facebook' => '/^(https?:\/\/)?(www\.)?facebook\.com\/.*$/',
+                                    'tiktok' => '/^(https?:\/\/)?(www\.)?tiktok\.com\/.*$/',
+                                    'youtube' => '/^(https?:\/\/)?(www\.)?youtube\.com\/.*$/',
+                                    'google_review' => '/^(https?:\/\/)?(www\.)?google\.com\/.*$/',
+                                ];
+
+                                $isValidLinks = [];
+                                foreach ($linkChecks as $platform => $pattern) {
+                                    $isValidLinks[$platform] = preg_match($pattern, $socialUser->{$platform});
                                 }
+
+                                $isValid = empty(array_diff($yourArray, array_keys(array_filter($isValidLinks))));
+                                $diffArray = array_diff($yourArray, array_keys(array_filter($isValidLinks)));
+                                $text = $isValid ? null : reset($diffArray);
+                            } else {
+                                $text = 'Empty';
+                            }
+                            }
+
                         @endphp
                         @if(Auth::check())
                             @if($text != null)
