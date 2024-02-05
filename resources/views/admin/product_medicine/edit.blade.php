@@ -46,12 +46,12 @@
                            value="{{ $productMedicine->brand_name ?? '' }}">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="number_register">Number Register</label>
+                    <label for="number_register">{{ __('home.Number Register') }}</label>
                     <input type="number" class="form-control" id="number_register"
                            name="number_register" value="{{ $productMedicine->number_register ?? '' }}">
                 </div>
                 <div class="form-group col-md-4">
-                    <label for="specifications">Specifications</label>
+                    <label for="specifications">{{ __('home.Specifications') }}</label>
                     <input type="text" class="form-control" id="specifications"
                            name="specifications" value="{{ $productMedicine->specifications ?? '' }}">
                 </div>
@@ -163,12 +163,12 @@
                     </div>
                     <div class="action">
                         <button class="btn btn-outline-primary btnAddNew" type="button">
-                            <i class="fa-solid fa-plus"></i> Create
+                            <i class="fa-solid fa-plus"></i> {{ __('home.create') }}
                         </button>
                     </div>
                 </div>
                 <div class="col-sm-3">
-                    <label for="is_prescription">Choose prescription medications(Yes/No)</label>
+                    <label for="is_prescription">{{ __('home.Choose prescription medications(Yes/No)') }}</label>
                     <input type="checkbox" id="is_prescription" name="is_prescription"
                             {{ $productMedicine->is_prescription ? 'checked' : '' }}>
                 </div>
@@ -203,7 +203,7 @@
                            value="{{ $productMedicine->quantity ?? '' }}">
                 </div>
                 <div class="col-md-4">
-                    <label for="unit_quantity">Unit Quantity</label>
+                    <label for="unit_quantity">{{ __('home.Unit Quantity') }}</label>
                     <select class="form-select" id="unit_quantity" name="unit_quantity">
                         @foreach($unit_quantity as $unit_quantity_item)
                             <option value="{{ $unit_quantity_item }}"
@@ -214,7 +214,7 @@
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <label for="shape">Shape</label>
+                    <label for="shape">{{ __('home.Shape') }}</label>
                     <select class="form-select" id="shape" name="shape">
                         @foreach($shapes as $shape)
                             <option value="{{ $shape }}"
@@ -227,44 +227,44 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <label for="manufacturing_country">Manufacturing Country</label>
+                    <label for="manufacturing_country">{{ __('home.Manufacturing Country') }}</label>
                     <input type="text" class="form-control" id="manufacturing_country"
                            value="{{ $productMedicine->manufacturing_country }}"
                            name="manufacturing_country">
                 </div>
                 <div class="col-md-6">
-                    <label for="manufacturing_company">Manufacturing Company</label>
+                    <label for="manufacturing_company">{{ __('home.Manufacturing Company') }}</label>
                     <input type="text" class="form-control" id="manufacturing_company"
                            value="{{ $productMedicine->manufacturing_company }}"
                            name="manufacturing_company">
                 </div>
             </div>
             <div class="form-group">
-                <label for="side_effects">Side Effects</label>
+                <label for="side_effects">{{ __('home.Side Effects') }}</label>
                 <textarea class="form-control" name="side_effects" id="side_effects">
                     {{ $productMedicine->side_effects }}
                 </textarea>
             </div>
             <div class="form-group">
-                <label for="uses">Uses</label>
+                <label for="uses">{{ __('home.Uses') }}</label>
                 <textarea class="form-control" name="uses" id="uses">
                      {{ $productMedicine->uses }}
                 </textarea>
             </div>
             <div class="form-group">
-                <label for="user_manual">User Manual</label>
+                <label for="user_manual">{{ __('home.User Manual') }}</label>
                 <textarea class="form-control" name="user_manual" id="user_manual">
                     {{ $productMedicine->uses }}
                 </textarea>
             </div>
             <div class="form-group">
-                <label for="notes">Notes</label>
+                <label for="notes">{{ __('home.Notes') }}</label>
                 <textarea class="form-control" name="notes" id="notes">
                      {{ $productMedicine->notes }}
                 </textarea>
             </div>
             <div class="form-group">
-                <label for="preserve">Preserve</label>
+                <label for="preserve">{{ __('home.Preserve') }}</label>
                 <textarea class="form-control" name="preserve" id="preserve">
                     {{ $productMedicine->preserve }}
                 </textarea>

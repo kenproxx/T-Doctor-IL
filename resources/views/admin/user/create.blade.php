@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('title')
-    Create User
+    {{ __('home.Create User') }}
 @endsection
 @section('main-content')
     <div class="">
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800"> Create User </h1>
+        <h1 class="h3 mb-4 text-gray-800"> {{ __('home.Create User') }} </h1>
         <div class="container-fluid">
             <form method="POST" autocomplete="off" enctype="multipart/form-data">
                 <div class="row">
@@ -13,20 +13,20 @@
                         <label class="form-control-label" for="username">{{ __('home.Username') }}
                             <span class="small text-danger">*</span>
                         </label>
-                        <input type="text" id="username" class="form-control" name="username" placeholder="Username"
+                        <input type="text" id="username" class="form-control" name="username" placeholder="{{ __('home.Username') }}"
                                required value="">
                     </div>
                     <div class="col-md-4 form-group">
                         <label class="form-control-label" for="name">{{ __('home.Name') }}
                             <span class="small text-danger">*</span>
                         </label>
-                        <input type="text" id="name" class="form-control" name="name" placeholder="Name" required
+                        <input type="text" id="name" class="form-control" name="name" placeholder="{{ __('home.Name') }}" required
                                value="">
                     </div>
                     <div class="col-md-4 form-group">
                         <label class="form-control-label" for="last_name">{{ __('home.Last name') }}</label>
                         <input type="text" id="last_name" class="form-control" name="last_name"
-                               placeholder="Last name" required value="">
+                               placeholder="{{ __('home.Last name') }}" required value="">
                     </div>
                 </div>
 
@@ -112,7 +112,7 @@
                     <div class="form-group col-md-3">
                         <label for="type">{{ __('home.Type Account') }}</label>
                         <select id="type" name="type" class="form-select form-control">
-                            <option value="NORMAL">Choose...</option>
+                            <option value="NORMAL">{{ __('home.Choose...') }}</option>
                             <option value="BUSINESS">{{ __('home.BUSINESS') }}</option>
                             <option value="MEDICAL">{{ __('home.MEDICAL') }}</option>
                             <option value="NORMAL">{{ __('home.NORMAL') }}</option>
@@ -129,8 +129,8 @@
                     <div class="form-group col-md-3">
                         <label class="form-control-label" for="status">{{ __('home.Status') }}</label>
                         <select id="status" name="status" class="form-control form-select">
-                            <option value="ACTIVE">ACTIVE</option>
-                            <option value="INACTIVE">INACTIVE</option>
+                            <option value="ACTIVE">{{ __('home.Active') }}</option>
+                            <option value="INACTIVE">{{ __('home.Inactive') }}</option>
                         </select>
                     </div>
                 </div>

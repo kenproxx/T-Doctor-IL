@@ -7,7 +7,7 @@
     <h1 class="h3 mb-4 text-gray-800">{{ __('home.List Booking') }}</h1>
     <div class="d-flex align-items-center justify-content-start">
         <div class="mb-3 col-md-3">
-            <input class="form-control" id="inputSearchBooking" type="text" placeholder="Search.."/>
+            <input class="form-control" id="inputSearchBooking" type="text" placeholder="{{ __('home.Search..') }}"/>
         </div>
     </div>
     <br>

@@ -66,10 +66,10 @@
 @section('main-content')
     <div class="">
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800"> List Products </h1>
+        <h1 class="h3 mb-4 text-gray-800"> {{ __('home.List Products') }} </h1>
         <div class="d-flex align-items-center justify-content-between">
             <div class="mb-3 col-md-3">
-                <input class="form-control" id="inputSearchProduct" type="text" placeholder="Search.."/>
+                <input class="form-control" id="inputSearchProduct" type="text" placeholder="{{ __('home.Search..') }}"/>
             </div>
             <div class="mb-3 col-md-6">
                 <div class="row">

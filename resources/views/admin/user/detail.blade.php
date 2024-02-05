@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('title')
-    Detail User
+    {{ __('home.Detail User') }}
 @endsection
 @section('main-content')
     <div class="">
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800"> Detail User </h1>
+        <h1 class="h3 mb-4 text-gray-800"> {{ __('home.Detail User') }} </h1>
         <div class="container-fluid">
             <form method="POST" autocomplete="off" enctype="multipart/form-data">
                 <div class="row">
@@ -20,13 +20,13 @@
                         <label class="form-control-label" for="name">{{ __('home.Name') }}
                             <span class="small text-danger">*</span>
                         </label>
-                        <input type="text" id="name" class="form-control" name="name" placeholder="Name" required
+                        <input type="text" id="name" class="form-control" name="name" placeholder="{{ __('home.Name') }}" required
                                value="{{ $user->name }}">
                     </div>
                     <div class="col-md-4 form-group">
                         <label class="form-control-label" for="last_name">{{ __('home.Last name') }}</label>
                         <input type="text" id="last_name" class="form-control" name="last_name"
-                               placeholder="Last name" required value="{{ $user->last_name }}">
+                               placeholder="{{ __('home.Last name') }}" required value="{{ $user->last_name }}">
                     </div>
                 </div>
 
@@ -116,7 +116,7 @@
                     <div class="form-group col-md-3">
                         <label for="type">{{ __('home.Type Account') }}</label>
                         <select id="type" name="type" class="form-select form-control">
-                            <option value="NORMAL">Choose...</option>
+                            <option value="NORMAL">{{ __('home.Choose...') }}</option>
                             <option
                                 {{ $user->type == 'BUSINESS' ? 'selected' : '' }} value="BUSINESS">{{ __('home.BUSINESS') }}</option>
                             <option

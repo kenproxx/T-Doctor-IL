@@ -218,9 +218,9 @@
     <script>
         $(document).ready(function () {
             let html = `<div class="form-group">
-                    <label for="reason_text">Lí do hủy: </label>
+                    <label for="reason_text">{{ __('home.Lí do hủy') }}: </label>
                     <input type="text" class="form-control" id="reason_text" name="reason_text" value="{{$bookings_edit->reason_cancel}}">
-                    <p class="small text-danger mt-1" id="support_reason">Vui lòng chọn/nhập lý do hủy</p>
+                    <p class="small text-danger mt-1" id="support_reason">{{ __('home.Vui lòng chọn/nhập lý do hủy') }}</p>
                     <ul class="list-reason " style="list-style: none; padding-left: 0">
                         @foreach($reasons as $reason)
             <li class="new-select">

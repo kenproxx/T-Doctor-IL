@@ -1,14 +1,14 @@
 @extends('layouts.admin')
 @section('title')
-    List User
+    {{ __('home.List User') }}
 @endsection
 @section('main-content')
     <div class="">
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800"> List User </h1>
+        <h1 class="h3 mb-4 text-gray-800">  {{ __('home.List User') }} </h1>
         <div class="d-flex align-items-center justify-content-between">
             <div class="mb-3 col-md-3">
-                <input class="form-control" id="inputSearchUser" type="text" placeholder="Search.."/>
+                <input class="form-control" id="inputSearchUser" type="text" placeholder="{{ __('home.Search..') }}"/>
             </div>
             <a href="{{route('view.admin.user.create')}}" class="btn btn-primary mb-3">{{ __('home.Add') }}</a>
         </div>

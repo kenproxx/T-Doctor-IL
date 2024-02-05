@@ -374,7 +374,7 @@
                         </li>
                         <li>
                             <a href="{{ route('view.admin.home.medicine.list') }}">
-                                <i class="bi bi-circle"></i><span>Approval Product Medicine</span>
+                                <i class="bi bi-circle"></i><span>{{ __('home.Approval Product Medicine') }}</span>
                             </a>
                         </li>
                     @endif
@@ -437,7 +437,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('view.prescription.result.doctor') }}">
                     <i class="bi bi-music-player"></i>
-                    <span>Doctor Prescription</span>
+                    <span>{{ __('home.Doctor Prescription') }}</span>
                 </a>
             </li>
             <!-- End Doctor Prescription Page Nav -->
@@ -527,18 +527,18 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#medical-result-nav" data-bs-toggle="collapse"
                        href="#">
-                        <i class="bi bi-segmented-nav"></i><span>Medical examination results</span><i
+                        <i class="bi bi-segmented-nav"></i><span>{{ __('home.Medical examination results') }}</span><i
                             class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="medical-result-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
                             <a href="{{ route('view.admin.medical.result.list') }}">
-                                <i class="bi bi-circle"></i><span>List examination results</span>
+                                <i class="bi bi-circle"></i><span>{{ __('home.List examination results') }}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('view.admin.medical.result.create') }}">
-                                <i class="bi bi-circle"></i><span>Create examination results</span>
+                                <i class="bi bi-circle"></i><span>{{ __('home.Create examination results') }}</span>
                             </a>
                         </li>
                     </ul>
@@ -714,13 +714,13 @@
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#medical-result-ui-nav" data-bs-toggle="collapse"
                href="#">
-                <i class="bi bi-search"></i><span>Medical examination results</span><i
+                <i class="bi bi-search"></i><span>{{ __('home.Medical examination results') }}</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="medical-result-ui-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="{{ route('web.medical.result.list') }}">
-                        <i class="bi bi-circle"></i><span>Medical examination results</span>
+                        <i class="bi bi-circle"></i><span>{{ __('home.Medical examination results') }}</span>
                     </a>
                 </li>
             </ul>
@@ -748,13 +748,13 @@
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#my-bookings-nav" data-bs-toggle="collapse"
                href="#">
-                <i class="bi bi-book"></i><span>My Bookings</span><i
+                <i class="bi bi-book"></i><span>{{ __('home.My Bookings') }}</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="my-bookings-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="{{ route('web.users.my.bookings.list') }}">
-                        <i class="bi bi-circle"></i><span>List Bookings</span>
+                        <i class="bi bi-circle"></i><span>{{ __('home.List Bookings') }}</span>
                     </a>
                 </li>
             </ul>
@@ -765,7 +765,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('view.prescription.result.my.list') }}">
                 <i class="bi bi-magnet"></i>
-                <span>My Prescription</span>
+                <span>{{ __('home.My Prescription') }}</span>
             </a>
         </li>
         <!-- End My Prescription Page Nav -->
@@ -774,13 +774,13 @@
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#my-coupons-nav" data-bs-toggle="collapse"
                href="#">
-                <i class="bi bi-cloud"></i><span>My Coupons</span><i
+                <i class="bi bi-cloud"></i><span>{{ __('home.My Coupons') }}</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="my-coupons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="{{ route('web.users.my.coupons.list') }}">
-                        <i class="bi bi-circle"></i><span>List Coupons</span>
+                        <i class="bi bi-circle"></i><span>{{ __('home.List Coupons') }}</span>
                     </a>
                 </li>
             </ul>
@@ -791,23 +791,23 @@
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#my-favourite-nav" data-bs-toggle="collapse"
                href="#">
-                <i class="bi bi-heart"></i><span>My Favourite</span><i
+                <i class="bi bi-heart"></i><span>{{ __('home.My Favourite') }}</span><i
                     class="bi bi-chevron-down ms-auto"></i>
             </a>
             <ul id="my-favourite-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                 <li>
                     <a href="{{ route('web.users.my.favourite.businesses') }}">
-                        <i class="bi bi-circle"></i><span>List Business</span>
+                        <i class="bi bi-circle"></i><span>{{ __('home.List Business') }}</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('web.users.my.favourite.medicals') }}">
-                        <i class="bi bi-circle"></i><span>List Medical</span>
+                        <i class="bi bi-circle"></i><span>{{ __('home.List Medical') }}</span>
                     </a>
                 </li>
                 <li>
                     <a href="{{ route('web.users.my.favourite.products') }}">
-                        <i class="bi bi-circle"></i><span>List Products</span>
+                        <i class="bi bi-circle"></i><span>{{ __('home.List Products') }}</span>
                     </a>
                 </li>
             </ul>
@@ -829,7 +829,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('web.users.list.points') }}">
                 <i class="bi bi-play"></i>
-                <span>Member ratings</span>
+                <span>{{ __('home.Member ratings') }}</span>
             </a>
         </li>
         <!-- End About Page Nav -->

@@ -65,7 +65,7 @@
         </div>
         <div class="row">
             <div class="col-sm-4">
-                <label for="start_selective">{{ __('home.	Thời gian bắt đầu chọn lọc') }}</label>
+                <label for="start_selective">{{ __('home.Thời gian bắt đầu chọn lọc') }}</label>
                 <input type="datetime-local" class="form-control" id="start_selective" name="start_selective"
                        value="{{ $coupon->start_selective }}"></div>
             <div class="col-sm-4">
