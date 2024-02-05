@@ -15,11 +15,9 @@ class WhatFreeToDay extends Controller
     public function index()
     {
         $activeCouponsQuery = Coupon::where('status', '=', CouponStatus::ACTIVE);
-
         $now = now('Asia/Ho_Chi_Minh');
         $coupons = $activeCouponsQuery->whereIn('type', TypeCoupon::getArray())->where('end_evaluate', '>',
             $now)->orderBy('created_at', 'desc')->get();
-
         $coupons_freeToDay = $coupons->where('type', TypeCoupon::FREE_TODAY)->take(6);
         $coupons_withMission = $coupons->where('type', TypeCoupon::FREE_MISSION)->take(6);
         $coupons_discount = $coupons->where('type', TypeCoupon::DISCOUNT_SERVICE)->take(6);

@@ -203,15 +203,34 @@
 
                 let isValid = true
                 /* Tạo fn appendDataForm ở admin blade*/
-                isValid = appendDataForm(fieldNames, formData, isValid);
-
-                fieldTextareaTiny.forEach(fieldTextarea => {
+                let checking = true;
+                for (let i = 0; i < fieldTextareaTiny.length; i++) {
+                    let fieldTextarea = fieldTextareaTiny[i];
                     const content = tinymce.get(fieldTextarea).getContent();
                     if (!content) {
-                        isValid = false;
+                        let labelElement = $(`label[for='${fieldTextarea}']`);
+                        let text = labelElement.text();
+                        if (!text) {
+                            text = 'The input'
+                        }
+                        text = text + ' not empty!'
+                        alert(text);
+                        checking = false;
+                        break;
                     }
                     formData.append(fieldTextarea, content);
-                });
+                }
+
+                if (!checking) {
+                    return;
+                }
+
+                /* Tạo fn appendDataForm ở admin blade*/
+                isValid = appendDataForm(fieldNames, formData, isValid);
+
+                if (!isValid) {
+                    return;
+                }
 
                 formData.append("user_id", '{{ Auth::user()->id }}');
                 formData.append("thumbnail", $('#thumbnail')[0].files[0]);

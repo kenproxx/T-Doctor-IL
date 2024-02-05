@@ -1,5 +1,8 @@
 @php use App\Enums\online_medicine\FilterOnlineMedicine;use App\Enums\online_medicine\ObjectOnlineMedicine;use App\Http\Controllers\MainController;use App\Models\User;use Illuminate\Support\Facades\Auth; @endphp
 @php use App\Enums\TypeCoupon; @endphp
+@php
+    \App\Http\Controllers\CouponController::checkAndUpdateExpiredStatus();
+@endphp
 @extends('layouts.master')
 @section('title', 'What free')
 @section('content')

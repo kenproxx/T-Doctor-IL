@@ -19,8 +19,8 @@
         .section-description::before {
             display: block;
             content: "";
-            margin-top: -200px;
-            height: 200px;
+            margin-top: -80px;
+            height: 80px;
             visibility: hidden;
             pointer-events: none;
         }
@@ -36,26 +36,17 @@
                 <div class="col-md-8 recruitment-details--content--left">
                     <div class="text-content-product">{{ $coupon->title }}</div>
                     <div class="d-flex mt-3 mb-3">
-                        @if($coupon->is_tiktok == 1)
-                            <div class="button-black mr-3">Tiktok</div>
-                        @endif
-                        @if($coupon->is_facebook == 1)
-                            <div class="button-black mr-3">Facebook</div>
-                        @endif
-                        @if($coupon->is_instagram == 1)
-                            <div class="button-black mr-3">Instagram</div>
-                        @endif
-                        @if($coupon->is_youtube == 1)
-                            <div class="button-black mr-3">Youtube</div>
-                        @endif
-                        @if($coupon->is_google == 1)
-                            <div class="button-black mr-3">Google</div>
-                        @endif
+                        @foreach(['tiktok', 'facebook', 'instagram', 'youtube', 'google'] as $platform)
+                            @if($coupon->{"is_$platform"} == 1)
+                                <div class="button-black mr-3">{{ ucfirst($platform) }}</div>
+                            @endif
+                        @endforeach
+
                         <div class="button-black mr-3"><i class="fa-solid fa-user-group"> </i>{{ $coupon->registered }}
                             /{{ $coupon->max_register }}</div>
                         <div class="button-black"><i class="fa-regular fa-eye mr-3"></i>{{ $coupon->views }}</div>
                     </div>
-                    <div class="img-main">
+                    <div class="img-main h-auto">
                         <img src="{{asset($coupon->thumbnail)}}" style="object-fit: contain; height: 100%" alt="show"
                              class="main">
                     </div>
@@ -88,49 +79,41 @@
                             <img class="image" src="{{asset('img/recruitment/logo.png')}}"/>
                             <div class="text-wrapper-2">{{ $clinic->name ?? '' }}</div>
                         </div>
-                        @php
-                            function isWithinTimeRange($start, $end) {
-                                $now = time();
-                                $currentDateTime = new DateTime();
-                                $currentDateTimeString = $currentDateTime->format('Y-m-d H:i:s');
-                                return ($start <= $currentDateTimeString && $currentDateTimeString <= $end);
-                            }
-                        @endphp
                         <div class="div-3">
                             <div class="justify-content-between d-flex">
                                 <div
-                                    class="{{ isWithinTimeRange($coupon->startDate, $coupon->endDate) ? 'bold-text' : '' }}">
+                                    class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->startDate, $coupon->endDate) ? 'bold-text' : '' }}">
                                     Thời gian ứng tuyển
                                 </div>
                                 <div
-                                    class="{{ isWithinTimeRange($coupon->startDate, $coupon->endDate) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->startDate)->format('d.m') }}
+                                    class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->startDate, $coupon->endDate) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->startDate)->format('d.m') }}
                                     ~ {{ Carbon::parse($coupon->endDate)->format('d.m') }}</div>
                             </div>
                             <div class="justify-content-between d-flex">
                                 <div
-                                    class="{{ isWithinTimeRange($coupon->start_selective, $coupon->end_selective) ? 'bold-text' : '' }}">
+                                    class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_selective, $coupon->end_selective) ? 'bold-text' : '' }}">
                                     Thời gian chọn lọc
                                 </div>
                                 <div
-                                    class="{{ isWithinTimeRange($coupon->start_selective, $coupon->end_selective) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->start_selective)->format('d.m') }}
+                                    class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_selective, $coupon->end_selective) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->start_selective)->format('d.m') }}
                                     ~ {{ Carbon::parse($coupon->end_selective)->format('d.m') }}</div>
                             </div>
                             <div class="justify-content-between d-flex">
                                 <div
-                                    class="{{ isWithinTimeRange($coupon->start_post, $coupon->end_post) ? 'bold-text' : '' }}">
+                                    class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_post, $coupon->end_post) ? 'bold-text' : '' }}">
                                     Thời gian đăng bài
                                 </div>
                                 <div
-                                    class="{{ isWithinTimeRange($coupon->start_post, $coupon->end_post) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->start_post)->format('d.m') }}
+                                    class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_post, $coupon->end_post) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->start_post)->format('d.m') }}
                                     ~ {{ Carbon::parse($coupon->end_post)->format('d.m') }}</div>
                             </div>
                             <div class="justify-content-between d-flex">
                                 <div
-                                    class="{{ isWithinTimeRange($coupon->start_evaluate, $coupon->end_evaluate) ? 'bold-text' : '' }}">
+                                    class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_evaluate, $coupon->end_evaluate) ? 'bold-text' : '' }}">
                                     Thời gian đánh giá
                                 </div>
                                 <div
-                                    class="{{ isWithinTimeRange($coupon->start_evaluate, $coupon->end_evaluate) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->start_evaluate)->format('d.m') }}
+                                    class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_evaluate, $coupon->end_evaluate) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->start_evaluate)->format('d.m') }}
                                     ~ {{ Carbon::parse($coupon->end_evaluate)->format('d.m') }}</div>
                             </div>
                             <hr>
@@ -302,5 +285,21 @@
                 }
             });
         })
+    </script>
+    <script>
+        const navLink = document.querySelectorAll('a[href^="#"]');
+        const header = document.querySelector('header');
+
+        for(let link of navLink){
+            link.onclick = function(e) {
+                e.preventDefault();
+                const hash = link.hash;
+                const section = document.querySelector(hash);
+                const scrollToSection = section.offsetTop - header.offsetHeight;
+                console.log(scrollToSection)
+                window.location.hash = hash;
+                window.scrollTo(50, scrollToSection);
+            }
+        }
     </script>
 @endsection
