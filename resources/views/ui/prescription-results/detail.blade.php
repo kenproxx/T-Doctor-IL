@@ -89,7 +89,7 @@
 
             try {
                 await $.ajax({
-                    url: `{{ route('api.backend.prescription.result.add.cart') }}`,
+                    url: `{{ route('api.backend.prescription.result.add.cart.v2') }}`,
                     method: 'POST',
                     headers: headers,
                     data: data,

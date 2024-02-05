@@ -286,28 +286,28 @@
 
 <div class="modal fade" id="modal-create-don-thuoc-widget-chat" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-        <div class="modal-content">
+        <div class="modal-content overflow-scroll">
             <div class="modal-header">
             </div>
             <form id="prescriptionForm" onsubmit="createPrescription_widgetChat(event)" method="post">
                 @csrf
-            <div class="modal-body">
+                <div class="modal-body">
 
-                <input type="hidden" name="created_by" value="{{ Auth::id() }}">
-                <div class="list-service-result mt-2 mb-3">
-                    <div id="list-service-result">
+                    <input type="hidden" name="created_by" value="{{ Auth::id() }}">
+                    <div class="list-service-result mt-2 mb-3">
+                        <div id="list-service-result">
 
+                        </div>
+                        <button type="button"
+                                class="btn btn-outline-primary mt-3"
+                                onclick="handleAddMedicine_widgetChat()">{{ __('home.Add') }}
+                        </button>
                     </div>
-                    <button type="button"
-                            class="btn btn-outline-primary mt-3"
-                            onclick="handleAddMedicine_widgetChat()">{{ __('home.Add') }}
-                    </button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="submit" class="btn btn-primary">Tạo</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-primary">Tạo</button>
+                </div>
             </form>
         </div>
     </div>
@@ -321,7 +321,8 @@
                     <div class="col-sm-4 col">
                         <div class="form-group position-relative">
                             <label for="inputSearchDoctor" class="fa fa-search form-control-feedback"></label>
-                            <input type="search" id="inputSearchDoctor" class="form-control" oninput="handleSearchMedicine()"
+                            <input type="search" id="inputSearchDoctor" class="form-control"
+                                   oninput="handleSearchMedicine()"
                                    placeholder="{{ __('home.Search for anything…') }}">
                         </div>
                     </div>
@@ -334,7 +335,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary">Lưu</button>
             </div>
         </div>
     </div>
@@ -352,6 +352,7 @@
     let isShowOpenWidget;
     let uuid_session;
     let elementInputMedicine_widgetChat;
+    let next_elementInputMedicine_widgetChat;
 
     let currentUserIdChat = '{{ Auth::check() ? Auth::user()->id : '' }}';
 
@@ -864,8 +865,8 @@
                         <div class="form-group">
                             <label for="medicine_name">Medicine Name</label>
                             <input type="text" class="form-control medicine_name" value=""
-                                   name="medicine_name" onclick="handleClickInputMedicine_widgetChat(this)" data-toggle="modal" data-target="#modal-add-medicine-widget-chat" readonly>
-                        <input type="hidden" name="medicine_id" >
+                                   name="medicine_name" onclick="handleClickInputMedicine_widgetChat(this, $(this).next('.medicine_id_hidden'))" data-toggle="modal" data-target="#modal-add-medicine-widget-chat" readonly>
+                            <input type="text" hidden class="form-control medicine_id_hidden" name="medicine_id_hidden" value="">
 
                         </div>
                         <div class="form-group">
@@ -931,7 +932,7 @@
                                     <div class="frame component-medicine w-100">
                                         <div class="img-pro justify-content-center d-flex img_product--homeNew">
                                             <img loading="lazy" class="rectangle border-img"
-                                                 src="{{asset('img/11111.jpeg')}}"/>
+                                                 src="${medicine.thumbnail}"/>
                                         </div>
                                         <div class="div">
                                             <div class="div-2">
@@ -962,20 +963,6 @@
     async function createPrescription_widgetChat(event) {
         event.preventDefault();
 
-
-        let full_name_value = $('#full_name_value').val();
-        let email_value = $('#email_value').val();
-
-        // if (!full_name_value) {
-        //     alert('Please enter full name!')
-        //     return;
-        // }
-        //
-        // if (!email_value) {
-        //     alert('Please enter email!')
-        //     return;
-        // }
-
         let form = document.getElementById('prescriptionForm');
         let formData = new FormData(form);
 
@@ -985,12 +972,18 @@
         let medicine_ingredients = document.getElementsByClassName('medicine_ingredients');
         let quantity = document.getElementsByClassName('quantity');
         let detail = document.getElementsByClassName('detail_value');
+        let medicine_id_hidden = document.getElementsByClassName('medicine_id_hidden');
 
         for (let j = 0; j < medicine_name.length; j++) {
             let name = medicine_name[j].value;
             let ingredients = medicine_ingredients[j].value;
             let quantity_value = quantity[j].value;
             let detail_value = detail[j].value;
+
+            let medicine_id_hidden_value = '';
+            if (medicine_id_hidden[j]) {
+                medicine_id_hidden_value = medicine_id_hidden[j].value;
+            }
 
             if (!name && !ingredients && !quantity_value) {
                 alert('Please enter medicine name or medicine ingredients or quantity!')
@@ -1002,6 +995,7 @@
                 medicine_ingredients: ingredients,
                 quantity: quantity_value,
                 note: detail_value ?? '',
+                medicine_id: medicine_id_hidden_value ?? '',
             }
             item = JSON.stringify(item);
             my_array.push(item);
@@ -1047,11 +1041,12 @@
 
     function handleSelectInputMedicine_widgetChat(id, name) {
         elementInputMedicine_widgetChat.value = name;
-        $(elementInputMedicine_widgetChat).next().val(id);
+        next_elementInputMedicine_widgetChat.val(id);
     }
 
-    function handleClickInputMedicine_widgetChat(element) {
+    function handleClickInputMedicine_widgetChat(element, nextElement) {
         elementInputMedicine_widgetChat = element;
+        next_elementInputMedicine_widgetChat = nextElement;
     }
 
     loadData_widgetChat();

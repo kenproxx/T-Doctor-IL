@@ -147,4 +147,5 @@ Route::group(['prefix' => 'prescription-result'], function () {
     Route::post('upload', [PrescriptionResultApi::class, 'uploadExcelFile'])->name('api.backend.prescription.result.upload');
     Route::post('export', [PrescriptionResultApi::class, 'exportAndDownload'])->name('api.backend.prescription.result.export');
     Route::post('add-to-cart', [PrescriptionResultApi::class, 'addProductToCart'])->name('api.backend.prescription.result.add.cart');
+    Route::post('add-to-cart-v2', [PrescriptionResultApi::class, 'addProductToCartV2'])->name('api.backend.prescription.result.add.cart.v2');
 });
