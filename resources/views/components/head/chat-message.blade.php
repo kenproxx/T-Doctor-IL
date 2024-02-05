@@ -1,6 +1,11 @@
 @php use Illuminate\Support\Facades\Auth; @endphp
 
 <link href="{{ asset('css/chatmessage.css') }}" rel="stylesheet">
+
+
+<link rel="stylesheet" href="{{asset('css/flea-market.css')}}">
+
+
 <style>
     .frame.component-medicine.w-100 {
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -274,7 +279,11 @@
 
                 <div id="sendmessage">
                     <input type="text" value="Send message..." id="text-chatMessage"/>
-                    <button id="send-chatMessage" onclick="sendMessageChatWidget()"></button>
+                    <span class="mr-3" data-toggle="modal" data-target="#modal-create-don-thuoc-widget-chat"><i
+                            class="fa-solid fa-plus"></i></span>
+                    <span id="send-chatMessage" onclick="sendMessageChatWidget()"><i
+                            class="fa-regular fa-paper-plane"></i></span>
+
                 </div>
             </div>
 
@@ -968,11 +977,23 @@
 
         let my_array = [];
 
-        let medicine_name = document.getElementsByClassName('medicine_name');
-        let medicine_ingredients = document.getElementsByClassName('medicine_ingredients');
-        let quantity = document.getElementsByClassName('quantity');
-        let detail = document.getElementsByClassName('detail_value');
-        let medicine_id_hidden = document.getElementsByClassName('medicine_id_hidden');
+        // Lấy phần tử cha (div#prescriptionForm)
+        var prescriptionForm = document.getElementById('prescriptionForm');
+
+// Lấy các phần tử con có class 'medicine_name'
+        var medicine_name = prescriptionForm.getElementsByClassName('medicine_name');
+
+// Lấy các phần tử con có class 'medicine_ingredients'
+        var medicine_ingredients = prescriptionForm.getElementsByClassName('medicine_ingredients');
+
+// Lấy các phần tử con có class 'quantity'
+        var quantity = prescriptionForm.getElementsByClassName('quantity');
+
+// Lấy các phần tử con có class 'detail_value'
+        var detail = prescriptionForm.getElementsByClassName('detail_value');
+
+// Lấy các phần tử con có class 'medicine_id_hidden'
+        var medicine_id_hidden = prescriptionForm.getElementsByClassName('medicine_id_hidden');
 
         for (let j = 0; j < medicine_name.length; j++) {
             let name = medicine_name[j].value;

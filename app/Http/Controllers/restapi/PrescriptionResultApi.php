@@ -334,9 +334,19 @@ class PrescriptionResultApi extends Controller
                         ->where('product_id', $product->id)
                         ->where('type_product', $typeProduct)
                         ->first();
+
+                    $quantityProduct = $product->quantity;
+
                     if ($cart) {
+                        if ($cart->quantity + (int)$row['quantity'] > $quantityProduct) {
+                            return response((new MainApi())->returnMessage('Số lượng sản phẩm ' . $product->name . ' không đủ!'), 400);
+                        }
                         $cart->quantity = $cart->quantity + (int)$row['quantity'];
                     } else {
+                        if ((int)$row['quantity'] > $quantityProduct) {
+                            return response((new MainApi())->returnMessage('Số lượng sản phẩm ' . $product->name . ' không đủ!'), 400);
+                        }
+
                         $cart = new Cart();
                         $cart->product_id = $product->id;
                         $cart->quantity = (int)$row['quantity'];
@@ -348,9 +358,13 @@ class PrescriptionResultApi extends Controller
                 }
             }
             if ($count > 0) {
-                return response((new MainApi())->returnMessage('Add to cart success!'), 200);
+                return response((new MainApi())->returnMessage(
+                    'Thêm sản phẩm vào giỏ hàng thành công!'
+                ), 200);
             }
-            return response((new MainApi())->returnMessage('No product!'), 201);
+            return response((new MainApi())->returnMessage(
+                'Không có sản phẩm nào được thêm vào giỏ hàng!'
+            ), 201);
         } catch (\Exception $exception) {
 
             return response((new MainApi())->returnMessage($exception->getMessage()), 400);
