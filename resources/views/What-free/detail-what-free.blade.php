@@ -35,6 +35,9 @@
             width: 100%;
             font-weight: 800;
         }
+        .flea-text-gray a {
+            text-decoration: underline;
+        }
     </style>
     <link href="{{ asset('css/detailwhatfree.css') }}" rel="stylesheet">
     @include('layouts.partials.header')
@@ -185,7 +188,6 @@
                             @endif
                         </div>
                         @php
-                            $text = [];
                                 if (Auth::check()) {
                                     $SocialUser = \App\Models\SocialUser::where('user_id', Auth::user()->id)
                                     ->where('status', \App\Enums\SocialUserStatus::ACTIVE)
@@ -215,11 +217,23 @@
                                     $is_valid = empty(array_diff($your_array, $my_array));
                                     $diff_array = array_diff($your_array, $my_array);
                                     $text = $is_valid ? null : reset($diff_array);
+                                    } else {
+                                        $text = 'Empty';
                                     }
                                 }
                         @endphp
                         @if(Auth::check())
-                            @if($text == null)
+                            @if($text != null)
+                                <div
+                                    class="text-wrapper-55">{{ __('home.Kiểm tra tình trạng truyền thông.') }} {{$text}}
+                                    {{ __('home.Bạn chưa kết nối với kênh truyền thông này.') }}
+                                </div>
+                                <div class="div-7 d-flex justify-content-between">
+
+                                    <a class="text-wrapper-5 w-100"
+                                       href="{{route('profile')}}">{{ __('home.Update profile') }}</a>
+                                </div>
+                            @else
                                 @php
                                     $exitCouponApply = \App\Models\CouponApply::where('user_id', Auth::user()->id)->where('coupon_id', $coupon->id)->first();
                                 @endphp
@@ -231,16 +245,6 @@
                                 @else
                                     <span class="text-wrapper-55 w-100">{{ __('home.Bạn đã ứng tuyển') }}</span>
                                 @endif
-                            @else
-                                <div
-                                    class="text-wrapper-55">{{ __('home.Kiểm tra tình trạng truyền thông.') }} {{$text}}
-                                    {{ __('home.Bạn chưa kết nối với kênh truyền thông này.') }}
-                                </div>
-                                <div class="div-7 d-flex justify-content-between">
-
-                                    <a class="text-wrapper-5 w-100"
-                                       href="{{route('profile')}}">{{ __('home.Update profile') }}</a>
-                                </div>
                             @endif
                         @else
                             <div class="div-7 d-flex justify-content-between">
