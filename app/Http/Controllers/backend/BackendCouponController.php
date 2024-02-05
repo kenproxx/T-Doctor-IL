@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Enums\CouponStatus;
+use App\Enums\TypeCoupon;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MainController;
 use App\Models\Clinic;
@@ -136,12 +137,22 @@ class BackendCouponController extends Controller
     public function create(Request $request)
     {
         try {
+            $type = $request->input('type');
             $user_id = $request->input('user_id');
             $user = User::find($user_id);
-            $exitCoupons = Coupon::where('user_id', $user->id)->get();
-            foreach ($exitCoupons as $exitCoupon) {
-                if ($exitCoupon->status == CouponStatus::ACTIVE) {
-                    return response('You have an active coupon!', 400);
+            $exitCoupons = Coupon::where('user_id', $user_id)->where('status',CouponStatus::ACTIVE)->get();
+            if (!$this->isAdmin()) {
+                foreach ($exitCoupons as $exitCoupon) {
+                    if ($type == $exitCoupon->type && $type== TypeCoupon::FREE_MISSION) {
+                        return response('You have an FREE MISSION coupon!', 400);
+                    }
+                    elseif ($type == $exitCoupon->type && $type== TypeCoupon::FREE_TODAY) {
+
+                        return response('You have an FREE TODAY coupon!', 400);
+                    }
+                    elseif ($type == $exitCoupon->type && $type== TypeCoupon::DISCOUNT_SERVICE) {
+                        return response('You have an DISCOUNT SERVICE coupon!', 400);
+                    }
                 }
             }
             $coupon = new Coupon();
