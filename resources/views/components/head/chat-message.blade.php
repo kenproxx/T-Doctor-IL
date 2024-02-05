@@ -1072,8 +1072,7 @@
     function handleClickInputMedicine_widgetChat(element, nextElement) {
         elementInputMedicine_widgetChat = element;
         next_elementInputMedicine_widgetChat = nextElement;
-        next_elementQuantity_widgetChat = $(element).closest('.form-group').next('.form-group').find('.quantity').val();
-
+        next_elementQuantity_widgetChat = $(element).parents().parents().find('input.quantity');
     }
 
     loadData_widgetChat();
