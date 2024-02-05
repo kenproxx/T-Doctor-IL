@@ -220,196 +220,204 @@
                             }
 
                         @endphp
-                        @if($text == null)
+                        @if(Auth::check())
+                            @if($text == null)
                             <div class="div-7 d-flex justify-content-between">
                                 <button id="button-apply" class="text-wrapper-5 w-100">{{ __('home.Apply') }}</button>
                             </div>
-                            @else
+                        @else
                             @if(Auth::check())
                                 <div>Kiểm tra tình trạng truyền thông.
-                                Bạn chưa kết nối với kênh truyền thông {{$text}} cho chiến dịch này.
-                            </div>
+                                    Bạn chưa kết nối với kênh truyền thông {{$text}} cho chiến dịch này.
+                                </div>
                                 <div class="div-7 d-flex justify-content-between">
 
-                                    <a class="text-wrapper-5 w-100" href="{{route('profile')}}">{{ __('home.Update profile') }}</a>
+                                    <a class="text-wrapper-5 w-100"
+                                       href="{{route('profile')}}">{{ __('home.Update profile') }}</a>
                                 </div>
                             @endif
+
                         @endif
+                        @else
+                            <div class="div-7 d-flex justify-content-between">
+                                <button class="account_control text-wrapper-5 w-100" id="show_login" data-toggle="modal"
+                                        data-target="#staticBackdrop">{{ __('home.Log In') }}
+                                </button>
+                            </div>
+                        @endif
+                            <div class="form-2 d-none" id="form-apply">
+                                <div class="div">
 
-                    </div>
-                    <div class="form-2 d-none" id="form-apply">
-                        <div class="div">
-
-                        </div>
-                        <div class="div-3">
-                            <div class="text-wrapper">{{ __('home.Applicant information') }}</div>
-                            <div class="div-4">
-                                <div class="div-5">
-                                    <div class="text-wrapper-3">{{ __('home.Name') }}</div>
-                                    <input class="form-control" type="text" name="name"
-                                           id="name">
                                 </div>
-                                <div class="div-5">
-                                    <div class="text-wrapper-3">{{ __('home.Email') }}</div>
-                                    <input class="form-control" type="text" name="email_"
-                                           id="email_">
+                                <div class="div-3">
+                                    <div class="text-wrapper">{{ __('home.Applicant information') }}</div>
+                                    <div class="div-4">
+                                        <div class="div-5">
+                                            <div class="text-wrapper-3">{{ __('home.Name') }}</div>
+                                            <input class="form-control" type="text" name="name"
+                                                   id="name">
+                                        </div>
+                                        <div class="div-5">
+                                            <div class="text-wrapper-3">{{ __('home.Email') }}</div>
+                                            <input class="form-control" type="text" name="email_"
+                                                   id="email_">
+                                        </div>
+                                        <div class="div-5">
+                                            <div class="text-wrapper-3">{{ __('home.Contact number') }}</div>
+                                            <input class="form-control" type="number" name="phone"
+                                                   id="phone">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="flea-prise">{{ __('home.Apply motivation') }}</div>
+                                        <textarea class="form-control"
+                                                  name="content" id="content_"></textarea>
+                                    </div>
                                 </div>
-                                <div class="div-5">
-                                    <div class="text-wrapper-3">{{ __('home.Contact number') }}</div>
-                                    <input class="form-control" type="number" name="phone"
-                                           id="phone">
+                                <input type="hidden" value="{{ $coupon->id }}" name="coupon_id" id="coupon_id">
+                                <input type="hidden" value="{{ csrf_token() }}" name="_token" id="_token">
+                                @if(Auth::user())
+                                    <input type="hidden" value="{{ Auth::user()->id }}" name="user_id" id="user_id">
+                                @endif
+                                <div class="div-7 d-flex justify-content-between">
+                                    <button class="div-wrapper" id="button-back">{{ __('home.CANCEL') }}</button>
+                                    <button class="text-wrapper-5 apply-button">{{ __('home.Apply') }}</button>
                                 </div>
                             </div>
-                            <div>
-                                <div class="flea-prise">{{ __('home.Apply motivation') }}</div>
-                                <textarea class="form-control"
-                                          name="content" id="content_"></textarea>
-                            </div>
-                        </div>
-                        <input type="hidden" value="{{ $coupon->id }}" name="coupon_id" id="coupon_id">
-                        <input type="hidden" value="{{ csrf_token() }}" name="_token" id="_token">
-                        @if(Auth::user())
-                            <input type="hidden" value="{{ Auth::user()->id }}" name="user_id" id="user_id">
-                        @endif
-                        <div class="div-7 d-flex justify-content-between">
-                            <button class="div-wrapper" id="button-back">{{ __('home.CANCEL') }}</button>
-                            <button class="text-wrapper-5 apply-button">{{ __('home.Apply') }}</button>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script>
+        <script>
 
-        var selectedOption = document.querySelector('input[name="sns_option"]:checked');
+            var selectedOption = document.querySelector('input[name="sns_option"]:checked');
 
-        // auto checked sns option vị trí đầu tiên
-        if (!selectedOption) {
-            selectedOption = document.querySelector('input[name="sns_option"]');
-            try {
-                selectedOption.checked = true;
-            } catch (e) {
-            }
-
-        }
-
-        $(document).ready(function () {
-            $('#button-apply').on('click', function () {
-                $('#form-hospital').addClass('d-none')
-                $('#form-apply').removeClass('d-none')
-            })
-
-            $('#button-back').on('click', function () {
-                $('#form-hospital').removeClass('d-none')
-                $('#form-apply').addClass('d-none')
-            })
-
-            $('.apply-button').on('click', function () {
-                var selectedOption = document.querySelector('input[name="sns_option"]:checked');
-
-                if ('{{ !Auth::check() }}') {
-                    alert('{{ __('home.Please login to continue') }}')
-                    return;
-                }
-
-                // if (!selectedOption) {
-                //     alert('Xin cập nhật thông tin SNS và chọn lại');
-                //     return;
-                // }
-
-                if (!token) {
-                    alert('{{ __('home.Please login to continue') }}')
-                    return;
-                }
-
-                if (document.getElementById('name').value === '') {
-                    alert('{{ __('home.Please enter your name') }}')
-                    return;
-                }
-
-                if (document.getElementById('email_').value === '') {
-                    alert('{{ __('home.Please enter your email') }}')
-                    return;
-                }
-
-                // check regex email
-                var email = document.getElementById('email_').value;
-                var regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
-                if (!regex.test(email)) {
-                    alert('{{ __('home.Please enter your email correctly') }}')
-                    return;
-                }
-
-                if (document.getElementById('phone').value === '') {
-                    alert('{{ __('home.Please enter your phone') }}')
-                    return;
-                }
-
-                if (tinymce.get('content_').getContent() === '') {
-                    alert('{{ __('home.Please enter your content') }}')
-                    return;
-                }
-
-                const headers = {
-                    'Authorization': `Bearer ${token}`
-                };
-                const formData = new FormData();
-
-                const fieldNames = [
-                    "name", "phone", "coupon_id", "_token"
-                ];
-                fieldNames.forEach(fieldName => {
-                    formData.append(fieldName, $(`#${fieldName}`).val());
-                });
-
-                formData.append("email", $(`#email_`).val());
-                formData.append("user_id", '{{ Auth::user()->id ?? '' }}');
-
-                const content = tinymce.get('content_').getContent();
-                formData.append("content", content);
-
-                loadingMasterPage();
+            // auto checked sns option vị trí đầu tiên
+            if (!selectedOption) {
+                selectedOption = document.querySelector('input[name="sns_option"]');
                 try {
-                    $.ajax({
-                        url: `{{route('api.backend.coupons-apply.create')}}`,
-                        method: 'POST',
-                        headers: headers,
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        data: formData,
-                        success: function () {
-                            alert('success');
-                            loadingMasterPage();
-                            window.location.reload();
-                        },
-                        error: function (xhr, status, exception) {
-                            loadingMasterPage();
-                            alert(xhr.responseJSON.message);
-                        }
-                    });
-                } catch (error) {
-                    loadingMasterPage();
-                    throw error;
+                    selectedOption.checked = true;
+                } catch (e) {
                 }
-            });
-        })
-    </script>
-    <script>
-        const navLink = document.querySelectorAll('a[href^="#"]');
-        const header = document.querySelector('header');
 
-        for (let link of navLink) {
-            link.onclick = function (e) {
-                e.preventDefault();
-                const hash = link.hash;
-                const section = document.querySelector(hash);
-                const scrollToSection = section.offsetTop - header.offsetHeight;
-                console.log(scrollToSection)
-                window.location.hash = hash;
-                window.scrollTo(50, scrollToSection);
             }
-        }
-    </script>
+
+            $(document).ready(function () {
+                $('#button-apply').on('click', function () {
+                    $('#form-hospital').addClass('d-none')
+                    $('#form-apply').removeClass('d-none')
+                })
+
+                $('#button-back').on('click', function () {
+                    $('#form-hospital').removeClass('d-none')
+                    $('#form-apply').addClass('d-none')
+                })
+
+                $('.apply-button').on('click', function () {
+                    var selectedOption = document.querySelector('input[name="sns_option"]:checked');
+
+                    if ('{{ !Auth::check() }}') {
+                        alert('{{ __('home.Please login to continue') }}')
+                        return;
+                    }
+
+                    // if (!selectedOption) {
+                    //     alert('Xin cập nhật thông tin SNS và chọn lại');
+                    //     return;
+                    // }
+
+                    if (!token) {
+                        alert('{{ __('home.Please login to continue') }}')
+                        return;
+                    }
+
+                    if (document.getElementById('name').value === '') {
+                        alert('{{ __('home.Please enter your name') }}')
+                        return;
+                    }
+
+                    if (document.getElementById('email_').value === '') {
+                        alert('{{ __('home.Please enter your email') }}')
+                        return;
+                    }
+
+                    // check regex email
+                    var email = document.getElementById('email_').value;
+                    var regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+                    if (!regex.test(email)) {
+                        alert('{{ __('home.Please enter your email correctly') }}')
+                        return;
+                    }
+
+                    if (document.getElementById('phone').value === '') {
+                        alert('{{ __('home.Please enter your phone') }}')
+                        return;
+                    }
+
+                    if (tinymce.get('content_').getContent() === '') {
+                        alert('{{ __('home.Please enter your content') }}')
+                        return;
+                    }
+
+                    const headers = {
+                        'Authorization': `Bearer ${token}`
+                    };
+                    const formData = new FormData();
+
+                    const fieldNames = [
+                        "name", "phone", "coupon_id", "_token"
+                    ];
+                    fieldNames.forEach(fieldName => {
+                        formData.append(fieldName, $(`#${fieldName}`).val());
+                    });
+
+                    formData.append("email", $(`#email_`).val());
+                    formData.append("user_id", '{{ Auth::user()->id ?? '' }}');
+
+                    const content = tinymce.get('content_').getContent();
+                    formData.append("content", content);
+
+                    loadingMasterPage();
+                    try {
+                        $.ajax({
+                            url: `{{route('api.backend.coupons-apply.create')}}`,
+                            method: 'POST',
+                            headers: headers,
+                            contentType: false,
+                            cache: false,
+                            processData: false,
+                            data: formData,
+                            success: function () {
+                                alert('success');
+                                loadingMasterPage();
+                                window.location.reload();
+                            },
+                            error: function (xhr, status, exception) {
+                                loadingMasterPage();
+                                alert(xhr.responseJSON.message);
+                            }
+                        });
+                    } catch (error) {
+                        loadingMasterPage();
+                        throw error;
+                    }
+                });
+            })
+        </script>
+        <script>
+            const navLink = document.querySelectorAll('a[href^="#"]');
+            const header = document.querySelector('header');
+
+            for (let link of navLink) {
+                link.onclick = function (e) {
+                    e.preventDefault();
+                    const hash = link.hash;
+                    const section = document.querySelector(hash);
+                    const scrollToSection = section.offsetTop - header.offsetHeight;
+                    console.log(scrollToSection)
+                    window.location.hash = hash;
+                    window.scrollTo(50, scrollToSection);
+                }
+            }
+        </script>
 @endsection
