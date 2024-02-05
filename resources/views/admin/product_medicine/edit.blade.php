@@ -129,7 +129,6 @@
             <div class="row">
                 <div class="col-sm-9">
                     <div class="list_product_ingredient">
-                        @dd($list_drugIngredients)
                         @if(is_array($list_drugIngredients))
                             @foreach($list_drugIngredients as $list_drugIngredient)
                                 @php
