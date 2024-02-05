@@ -163,7 +163,7 @@
             <div class="col-sm-12"><label>{{ __('home.Ảnh bìa') }}</label>
                 <div class="box">
 
-                    <div class="js--image-preview"><img src="{{ asset($coupon->thumbnail) }}" class="w-100 h-100"
+                    <div class="js--image-preview"><img loading="lazy" src="{{ asset($coupon->thumbnail) }}" class="w-100 h-100"
                                                         style="object-fit: cover" alt=""></div>
                     <div class="upload-options">
                         <label>

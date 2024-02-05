@@ -32,7 +32,7 @@
 
             <div class="card shadow mb-4">
                 <div class="card-profile-image mt-4 d-flex justify-content-center">
-                    <img class="avatar-user" src="{{ Auth::user()->avt }}" alt=""
+                    <img loading="lazy" class="avatar-user" src="{{ Auth::user()->avt }}" alt=""
                          style="max-width: 100px; max-height: 100px">
                 </div>
                 <div class="card-body">

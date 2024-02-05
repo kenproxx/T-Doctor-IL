@@ -38,7 +38,7 @@
             <div class="col-sm-6">
                 <label for="thumbnail">{{ __('home.Thumbnail') }}</label>
                 <input type="file" class="form-control" id="thumbnail" name="thumbnail">
-                <img src="{{ asset($categoryProduct->thumbnail) }}" alt="" width="80px">
+                <img loading="lazy" src="{{ asset($categoryProduct->thumbnail) }}" alt="" width="80px">
             </div>
             <div class="col-sm-6">
                 <label for="status">{{ __('home.Status') }}</label>

@@ -88,7 +88,7 @@
             <div class="form-group d-flex">
                 @if($array_file)
                     @foreach($array_file as $file)
-                        <img src="{{ asset($file) }}" alt="" style="max-width: 100px; object-fit: cover"
+                        <img loading="lazy" src="{{ asset($file) }}" alt="" style="max-width: 100px; object-fit: cover"
                              class="m-3">
                     @endforeach
                 @endif

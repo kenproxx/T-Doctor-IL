@@ -87,7 +87,7 @@
             let arrayGallery = thumbnail.split(',')
             let img = ``;
             for (let j = 0; j < arrayGallery.length; j++) {
-                img = img + `<img class="mr-2 w-auto h-100" src="${arrayGallery[j]}" alt="">`;
+                img = img + `<img loading="lazy" class="mr-2 w-auto h-100" src="${arrayGallery[j]}" alt="">`;
             }
             html = html + `<tr>
             <th scope="row">${i + 1}</th>

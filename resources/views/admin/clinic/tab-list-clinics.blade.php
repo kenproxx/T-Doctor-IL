@@ -84,7 +84,7 @@
 
             let img = ``;
 
-            img = `<img class="mr-2 w-auto h-100" src="${arrayGallery[0]}" alt="">`;
+            img = `<img loading="lazy" class="mr-2 w-auto h-100" src="${arrayGallery[0]}" alt="">`;
 
 
             html = html + `<tr>

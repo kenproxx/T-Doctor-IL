@@ -37,7 +37,7 @@
             <tr>
                 <th scope="row">{{ $index + 1 }}</th>
                 <td>{{ $productMedicine->name }}</td>
-                <td><img src="{{ $productMedicine->thumb }}" alt="" width="100px"></td>
+                <td><img loading="lazy" src="{{ $productMedicine->thumb }}" alt="" width="100px"></td>
                 <td>
                     @if($productMedicine->object_)
                         {{ ObjectOnlineMedicine::NAME_EN[$productMedicine->object_] }}

@@ -41,7 +41,7 @@
                         {{$symptom->name}}
                     </a>
                 </td>
-                <td><img src="{{ asset($symptom->thumbnail) }}" alt="Image" width="50px"></td>
+                <td><img loading="lazy" src="{{ asset($symptom->thumbnail) }}" alt="Image" width="50px"></td>
                 <td>
                     <div class="d-flex align-items-center">
                         <a href="{{ route('symptom.edit', $symptom->id) }}"

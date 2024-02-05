@@ -62,7 +62,7 @@
                         <div class="button-black"><i class="fa-regular fa-eye mr-3"></i>{{ $coupon->views }}</div>
                     </div>
                     <div class="img-main h-auto">
-                        <img src="{{asset($coupon->thumbnail)}}" style="object-fit: contain; height: 100%" alt="show"
+                        <img loading="lazy" src="{{asset($coupon->thumbnail)}}" style="object-fit: contain; height: 100%" alt="show"
                              class="main">
                     </div>
                     @if($coupon->short_description != null)
@@ -126,7 +126,7 @@
                             <button class="text-wrapper">{{ __('home.FOLLOW') }}</button>
                         </div>
                         <div class="div-2">
-                            <img class="image" src="{{asset('img/recruitment/logo.png')}}"/>
+                            <img loading="lazy" class="image" src="{{asset('img/recruitment/logo.png')}}"/>
                             <div class="text-wrapper-2">{{ $clinic->name ?? '' }}</div>
                         </div>
                         <div class="div-3">

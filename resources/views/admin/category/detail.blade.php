@@ -42,7 +42,7 @@
                     <label for="thumbnail">{{ __('home.Thumbnail') }}</label>
                     <input type="file" class="form-control" id="thumbnail" required>
                     @if($category->thumbnail)
-                        <img src="{{ asset($category->thumbnail) }}" alt="" width="80px">
+                        <img loading="lazy" src="{{ asset($category->thumbnail) }}" alt="" width="80px">
                     @endif
                 </div>
                 <div class="form-group col-md-4">

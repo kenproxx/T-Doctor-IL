@@ -62,7 +62,7 @@
                 <div class="mt-100">
                     <div class=" w-100 row align-items-center justify-content-center">
                         <div class="p-0">
-                            <img src="{{asset('img/image 16.png')}}" alt="" style="height: 682px">
+                            <img loading="lazy" src="{{asset('img/image 16.png')}}" alt="" style="height: 682px">
                         </div>
                     </div>
                 </div>
@@ -220,7 +220,7 @@
                         <div class="col-md-3 col-6">
                             <div class="product-item">
                                 <div class="img-pro">
-                                    <img class="b-radius-8px" src="${product.thumbnail}" alt="">
+                                    <img loading="lazy" class="b-radius-8px" src="${product.thumbnail}" alt="">
                                     <a class="button-heart" data-favorite="0">
                                         <i id="bi-heart" class="bi bi-heart-fill" style="color: red;" data-product-id="${product.id}" onclick="addProductToWishList()"></i>
                                     </a>

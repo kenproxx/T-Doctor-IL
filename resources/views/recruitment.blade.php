@@ -26,7 +26,7 @@
             <div id="recruitment_ctn" class="flex-column">
                 <div id="rank" class="d-flex">
                     <div class="col-10 rank_title p-0">
-                        <img src="{{asset('img/platinum_rank.png')}}" width="398px" height="60px">
+                        <img loading="lazy" src="{{asset('img/platinum_rank.png')}}" width="398px" height="60px">
                         <h2>PLATINUM</h2>
                     </div>
                     <div class="col-1 ms-auto p-2"><a href="">{{ __('home.See all') }}</a></div>
@@ -37,7 +37,7 @@
                         <div id="crd_ctn">
                             <div id="card-image">
                                 <i class="bi bi-heart"></i>
-                                <img src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
+                                <img loading="lazy" src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
                             </div>
                             <div class="card-body">
                                 <div id="time">
@@ -53,7 +53,7 @@
                         <div id="crd_ctn">
                             <div id="card-image">
                                 <i class="bi bi-heart"></i>
-                                <img src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
+                                <img loading="lazy" src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
                             </div>
                             <div class="card-body">
                                 <div id="time">
@@ -69,7 +69,7 @@
                         <div id="crd_ctn">
                             <div id="card-image">
                                 <i class="bi bi-heart"></i>
-                                <img src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
+                                <img loading="lazy" src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
                             </div>
                             <div class="card-body">
                                 <div id="time">
@@ -86,7 +86,7 @@
             <div id="recruitment_ctn" class="flex-column">
                 <div id="rank" class="d-flex">
                     <div class="col-10 rank_title p-0">
-                        <img src="{{asset('img/premium_rank.png')}}" width="398px" height="60px">
+                        <img loading="lazy" src="{{asset('img/premium_rank.png')}}" width="398px" height="60px">
                         <h2>PREMIUM</h2>
                     </div>
                     <div class="col-1 ms-auto p-2"><a href="{{route('recruitment_detail')}}">{{ __('home.See all') }}</a></div>
@@ -96,7 +96,7 @@
                         <div id="crd_ctn">
                             <div id="card-image">
                                 <i class="bi bi-heart"></i>
-                                <img src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
+                                <img loading="lazy" src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
                             </div>
                             <div class="card-body">
                                 <div id="time">
@@ -112,7 +112,7 @@
                         <div id="crd_ctn">
                             <div id="card-image">
                                 <i class="bi bi-heart"></i>
-                                <img src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
+                                <img loading="lazy" src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
                             </div>
                             <div class="card-body">
                                 <div id="time">
@@ -128,7 +128,7 @@
                         <div id="crd_ctn">
                             <div id="card-image">
                                 <i class="bi bi-heart"></i>
-                                <img src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
+                                <img loading="lazy" src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
                             </div>
                             <div class="card-body">
                                 <div id="time">
@@ -145,7 +145,7 @@
             <div id="recruitment_ctn" class="flex-column">
                 <div id="rank" class="d-flex">
                     <div class="col-10 rank_title p-0">
-                        <img src="{{asset('img/silver_rank.png')}}" width="398px" height="60px">
+                        <img loading="lazy" src="{{asset('img/silver_rank.png')}}" width="398px" height="60px">
                         <h2>{{ __('home.Silver') }}</h2>
                     </div>
                     <div class="col-1 ms-auto p-2"><a href="{{route('recruitment_detail')}}">{{ __('home.See all') }}</a></div>
@@ -156,7 +156,7 @@
                         <div id="crd_ctn">
                             <div id="card-image">
                                 <i class="bi bi-heart"></i>
-                                <img src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
+                                <img loading="lazy" src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
                             </div>
                             <div class="card-body">
                                 <div id="time">
@@ -172,7 +172,7 @@
                         <div id="crd_ctn">
                             <div id="card-image">
                                 <i class="bi bi-heart"></i>
-                                <img src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
+                                <img loading="lazy" src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
                             </div>
                             <div class="card-body">
                                 <div id="time">
@@ -188,7 +188,7 @@
                         <div id="crd_ctn">
                             <div id="card-image">
                                 <i class="bi bi-heart"></i>
-                                <img src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
+                                <img loading="lazy" src="{{asset('img/recruitment/Rectangle 23798.png')}}" class="card-img-top" alt="...">
                             </div>
                             <div class="card-body">
                                 <div id="time">

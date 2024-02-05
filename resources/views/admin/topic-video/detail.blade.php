@@ -36,7 +36,7 @@
                 <div class="form-group col-md-4">
                     <label for="thumbnail">{{ __('home.Thumbnail') }}</label>
                     <input type="file" class="form-control" id="thumbnail" name="thumbnail" multiple accept="image/*">
-                    <img width="100px" src="{{$topicVideo->thumbnail}}" alt="thumbnail">
+                    <img loading="lazy" width="100px" src="{{$topicVideo->thumbnail}}" alt="thumbnail">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="status">{{ __('home.Status') }}</label>

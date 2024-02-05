@@ -62,7 +62,7 @@
                         <div class="col-md-3 col-6">
                             <div class="product-item">
                                 <div class="img-pro img-pro-wishList2">
-                                    <img class="b-radius-8px" src="${product.thumbnail}" alt="">
+                                    <img loading="lazy" class="b-radius-8px" src="${product.thumbnail}" alt="">
                                     <a class="button-heart" data-favorite="0">
                                         <i id="bi-heart" class="bi bi-heart-fill" style="color: red;" data-product-id="${product.id}" onclick="addProductToWishList()"></i>
                                     </a>

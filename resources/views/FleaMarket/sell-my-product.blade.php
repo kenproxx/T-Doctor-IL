@@ -110,7 +110,7 @@
                             <div class="p-0 d-flex">
                                 <div id="imagePreview"></div>
                                 <label for="gallery" class="p-0">
-                                    <img class="p-0 img-sell-product"
+                                    <img loading="lazy" class="p-0 img-sell-product"
                                          src="{{asset('img/flea-market/add-photo.png')}}" alt="img">
                                 </label>
                                 <input type="file" id="gallery" name="gallery[]" style="display: none;" multiple
