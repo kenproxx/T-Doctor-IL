@@ -129,33 +129,35 @@
             <div class="row">
                 <div class="col-sm-9">
                     <div class="list_product_ingredient">
-                        @foreach($list_drugIngredients as $list_drugIngredient)
-                            @php
-                                $array_value = explode('(', $list_drugIngredient);
-                                $percent_one = $array_value[1];
-                                $percent_array = explode('%', $percent_one);
-                            @endphp
-                            <div class="p-3 border mt-3 mb-3 d-flex align-items-center justify-content-between">
-                                <div class="w-75 form-ingredient">
-                                    <div class="form-group">
-                                        <label>{{ __('home.ingredient') }}</label>
-                                        <input type="text" class="form-control ingredient_name"
-                                               value="{{ $array_value[0] }}"
-                                               name="ingredient_name">
+                        @if(is_array($list_drugIngredients))
+                            @foreach($list_drugIngredients as $list_drugIngredient)
+                                @php
+                                    $array_value = explode('(', $list_drugIngredient);
+                                    $percent_one = $array_value[1];
+                                    $percent_array = explode('%', $percent_one);
+                                @endphp
+                                <div class="p-3 border mt-3 mb-3 d-flex align-items-center justify-content-between">
+                                    <div class="w-75 form-ingredient">
+                                        <div class="form-group">
+                                            <label>{{ __('home.ingredient') }}</label>
+                                            <input type="text" class="form-control ingredient_name"
+                                                   value="{{ $array_value[0] }}"
+                                                   name="ingredient_name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>{{ __('home.Quantity') }} (Accountable by %)</label>
+                                            <input type="number" class="form-control ingredient_quantity"
+                                                   value="{{ $percent_array[0] }}"
+                                                   name="ingredient_quantity">
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>{{ __('home.Quantity') }} (Accountable by %)</label>
-                                        <input type="number" class="form-control ingredient_quantity"
-                                               value="{{ $percent_array[0] }}"
-                                               name="ingredient_quantity">
+                                    <div class="btn-remove w-25 d-flex align-items-center justify-content-center">
+                                        <i class="fa-regular fa-trash-can btnRemove p-3"
+                                           style="font-size: 24px; cursor: pointer"></i>
                                     </div>
                                 </div>
-                                <div class="btn-remove w-25 d-flex align-items-center justify-content-center">
-                                    <i class="fa-regular fa-trash-can btnRemove p-3"
-                                       style="font-size: 24px; cursor: pointer"></i>
-                                </div>
-                            </div>
-                        @endforeach
+                            @endforeach
+                        @endif
                     </div>
                     <div class="action">
                         <button class="btn btn-outline-primary btnAddNew" type="button">
