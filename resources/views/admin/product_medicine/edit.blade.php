@@ -170,7 +170,7 @@
                 <div class="col-sm-3">
                     <label for="is_prescription">Choose prescription medications(Yes/No)</label>
                     <input type="checkbox" id="is_prescription" name="is_prescription"
-                            {{ $productMedicine->is_prescription == true ? 'checked' : '' }}>
+                            {{ $productMedicine->is_prescription ? 'checked' : '' }}>
                 </div>
             </div>
             <div class="row">
@@ -306,6 +306,7 @@
 
                 if (!ingredient_name || !ingredient_quantity) {
                     alert('Ingredient name or Ingredient quantity not null')
+                    loadingMasterPage();
                     return;
                 }
 
@@ -342,22 +343,28 @@
             fieldTextareaTiny.forEach(fieldTextarea => {
                 const content = tinymce.get(fieldTextarea).getContent();
                 if (!content) {
+                    let labelElement = $(`label[for='${fieldTextarea}']`);
+                    let text = labelElement.text();
+                    if (!text) {
+                        text = 'The input'
+                    }
+                    text = text + ' not empty!'
+                    alert(text);
+                    loadingMasterPage();
                     isValid = false;
                 }
                 formData.append(fieldTextarea, content);
             });
+
+            if (!isValid) {
+                return;
+            }
 
             const photo = $('#thumbnail')[0].files[0];
             formData.append('thumbnail', photo);
             formData.append('user_id', '{{ Auth::user()->id }}');
             formData.append('_token', '{{ csrf_token() }}');
             formData.append('proved_by', '{{ Auth::user()->id }}');
-
-            if (!isValid) {
-                alert('Please check input empty!');
-                loadingMasterPage();
-                return;
-            }
 
             try {
                 $.ajax({
