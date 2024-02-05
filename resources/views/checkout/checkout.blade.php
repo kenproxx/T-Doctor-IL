@@ -424,6 +424,8 @@
                 let shipping = $('#shipping_fee').text();
                 let discount = $('#discount_fee').text();
 
+                console.log(discount);
+
                 let total_order = parseFloat(total) + parseFloat(shipping) - parseFloat(discount);
                 let html = total_order;
                 $('#total_order').text(html);

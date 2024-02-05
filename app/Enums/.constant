@@ -7,5 +7,6 @@ use BenSampo\Enum\Enum;
 final class Constants extends Enum
 {
     const GG_KEY = '';
+    const KEY_PROJECT = 'ILVietnam';
     const Option = 1;
 }

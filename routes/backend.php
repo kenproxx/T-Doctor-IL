@@ -123,6 +123,7 @@ Route::group(['prefix' => 'carts'], function () {
 /* Checkout api */
 Route::group(['prefix' => 'checkout'], function () {
     Route::post('imm', [CheckoutApi::class, 'checkoutByImm']);
+    Route::post('calc-discount', [CheckoutApi::class, 'calcDiscount']);
     Route::get('return-vnpay', [CheckoutApi::class, 'returnCheckoutVNPay']);
 });
 
