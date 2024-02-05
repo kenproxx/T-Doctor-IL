@@ -38,9 +38,17 @@
     <link href="{{ asset('admin/vendor/quill/quill.bubble.css')}}" rel="stylesheet">
     <link href="{{ asset('admin/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
     <link href="{{ asset('admin/vendor/simple-datatables/style.css')}}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
     <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
     <!-- Template Main CSS File -->
     <link href="{{ asset('admin/css/style.css') }}" rel="stylesheet">
+
+
+    {{--////////////////////--}}
+    <link rel="stylesheet" href="{{asset('css/recruitment.css')}}">
 
 </head>
 
