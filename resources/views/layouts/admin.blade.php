@@ -509,22 +509,10 @@
                 <!-- Examination Nav -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-layout-text-window-reverse"></i><span>{{ __('home.Examination') }}</span><i
+                        <i class="bi bi-layout-text-window-reverse"></i><span>Staff Management</span><i
                             class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                        @if($isAdmin)
-                            <li>
-                                <a href="{{ route('homeAdmin.list.doctors') }}">
-                                    <i class="bi bi-circle"></i><span>{{ __('home.Examination') }}</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{{ route('api.backend.account-register.index') }}">
-                                    <i class="bi bi-circle"></i><span>{{ __('home.Duyệt đăng ký phòng khám') }}</span>
-                                </a>
-                            </li>
-                        @endif
                         <li>
                             <a href="{{ route('homeAdmin.list.staff') }}">
                                 <i class="bi bi-circle"></i><span>{{ __('home.Nhân viên') }}</span>
@@ -555,6 +543,27 @@
                     </ul>
                 </li>
                 <!-- End Clinics Nav -->
+
+                <!-- Doctor Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#doctor-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-robot"></i><span>{{ __('home.Doctors') }}</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="doctor-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                        <li>
+                            <a href="{{ route('homeAdmin.list.doctors') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Examination') }}</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('api.backend.account-register.index') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Duyệt đăng ký phòng khám') }}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End Doctor Nav -->
 
                 <!-- Review Nav -->
                 <li class="nav-item">
@@ -701,7 +710,7 @@
                     </li>
                     <li>
                         <a href="{{ route('web.users.my.bookings.list') }}">
-                            <i class="bi bi-circle"></i><span>List Bookings</span>
+                            <i class="bi bi-circle"></i><span>List  My Bookings</span>
                         </a>
                     </li>
                     <li>
@@ -711,22 +720,22 @@
                     </li>
                     <li>
                         <a href="{{ route('web.users.my.coupons.list') }}">
-                            <i class="bi bi-circle"></i><span>List Coupons</span>
+                            <i class="bi bi-circle"></i><span>List My Coupons</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('web.users.my.favourite.businesses') }}">
-                            <i class="bi bi-circle"></i><span>List Business</span>
+                            <i class="bi bi-circle"></i><span>My Business Favourite</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('web.users.my.favourite.medicals') }}">
-                            <i class="bi bi-circle"></i><span>List Medical</span>
+                            <i class="bi bi-circle"></i><span>My Medical Favourite</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('web.users.my.favourite.products') }}">
-                            <i class="bi bi-circle"></i><span>List Products</span>
+                            <i class="bi bi-circle"></i><span>My Product Favourite</span>
                         </a>
                     </li>
                 </ul>
