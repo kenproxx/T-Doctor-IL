@@ -327,14 +327,22 @@
 <div class="modal fade" id="modal-add-medicine-widget-chat" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
         <div class="modal-content">
-            <div class="modal-header row">
-                <form>
-                    <div class="col-sm-4 col">
+            <div class="modal-header ">
+                <form class="row w-100">
+                    <div class="col-sm-6">
                         <div class="form-group position-relative">
-                            <label for="inputSearchDoctor" class="fa fa-search form-control-feedback"></label>
-                            <input type="search" id="inputSearchDoctor" class="form-control"
+                            <label for="inputSearchNameMedicine" class="fa fa-search form-control-feedback"></label>
+                            <input type="search" id="inputSearchNameMedicine" class="form-control"
                                    oninput="handleSearchMedicine()"
-                                   placeholder="{{ __('home.Search for anything…') }}">
+                                   placeholder="Tìm kiếm theo tên thuốc">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group position-relative">
+                            <label for="inputSearchDrugIngredient" class="fa fa-search form-control-feedback"></label>
+                            <input type="search" id="inputSearchDrugIngredient" class="form-control"
+                                   oninput="handleSearchMedicine()"
+                                   placeholder="Tìm kếm theo thành phần thuốc">
                         </div>
                     </div>
                 </form>
@@ -920,9 +928,15 @@
 
     loadListMedicine();
 
-    function loadListMedicine(name = '') {
+    function loadListMedicine() {
+        let inputNameMedicine_Search = $('#inputSearchNameMedicine').val().toLowerCase();
+        let inputDrugIngredient_Search = $('#inputSearchDrugIngredient').val().toLowerCase();
+
+        let url = '{{ route('view.prescription.result.get-medicine') }}'
+        url = url + `?name_search=${inputNameMedicine_Search}&drug_ingredient_search=${inputDrugIngredient_Search}`;
+
         $.ajax({
-            url: `{{ route('view.prescription.result.get-medicine') }}?name_search=${name}`,
+            url: url,
             method: 'GET',
             success: function (response) {
                 renderMedicine(response);
@@ -1107,9 +1121,7 @@
     }
 
     function handleSearchMedicine() {
-        let inputSearch = $('#inputSearchDoctor').val().toLowerCase();
-
-        loadListMedicine(inputSearch);
+        loadListMedicine();
     }
 </script>
 
