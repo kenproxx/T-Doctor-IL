@@ -129,7 +129,12 @@
                     }
                 @endphp
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">{{ __('home.My Account') }} : {{$member}}</h6>
+                    @php
+                        $roleUser = \App\Models\RoleUser::where('user_id',Auth::user()->id)->first();
+                        $roleName = \App\Models\Role::where('id',$roleUser->role_id)->first();
+
+                    @endphp
+                    <h6 class="m-0 font-weight-bold text-primary">{{ __('home.My Account') }} : @if($roleName->name == 'ADMIN')  ADMIN @else {{$member}}  @endif</h6>
                 </div>
 
                 <div class="card-body">
