@@ -54,21 +54,24 @@
 
         function renderPrescription(response) {
             let html = ``;
+            let urlBase = `{{ route('view.prescription.result.detail', ['id'=>':id']) }}`;
             for (let i = 0; i < response.length; i++) {
-                let urlDetail = `{{ route('view.prescription.result.detail', ['id'=>':id']) }}`;
                 let data = response[i];
-                urlDetail = urlDetail.replace(':id', data.id)
+                let urlDetail = urlBase.replace(':id', data.id)
+
                 html = html + `<tr>
                                     <td>${i + 1}</td>
                                     <td>${data.full_name}</td>
                                     <td>${data.email}</td>
                                     <td>${data.created.username}</td>
                                     <td>${data.created.identifier}</td>
-                                    <td>${data.status}</td>
+                                    <td>${data.isFirstBuy ? 'Đã mua' : 'Đơn thuốc mới'}</td>
                                     <td>
-                                         <div class="d-flex align-items-center">
-                                            <a href="${urlDetail}" class="btn btn-primary">
-                                                <i class="fa-solid fa-eye"></i>
+                                            <a href="${urlDetail}" target="_blank" class="color-blue">
+                                                Xem chi tiết
+                                            </a> |
+                                            <a onclick="addToCart(${data.id})" class="color-blue">
+                                                ${data.isFirstBuy ? 'Mua lại' : 'Mua ngay'}
                                             </a>
                                     </td>
                                 </tr>`;
@@ -77,6 +80,37 @@
             $('#tbodyListPrescription').empty().append(html);
             loadPaginate('tableListPrescription', 20);
             searchMain('inputSearchUser', 'tableListPrescription');
+        }
+
+        async function addToCart(id) {
+            loadingMasterPage();
+            let data = {
+                prescription_id: id,
+                user_id: `{{ Auth::user()->id }}`,
+            };
+
+            try {
+                await $.ajax({
+                    url: `{{ route('api.backend.prescription.result.add.cart.v2') }}`,
+                    method: 'POST',
+                    headers: headers,
+                    data: data,
+
+                    success: function (response, textStatus, xhr) {
+                        loadingMasterPage();
+                        alert(response.message);
+                        var statusCode = xhr.status;
+                        if (statusCode === 200) {
+                            window.location.href = `{{ route('user.checkout.index') }}`;
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        loadingMasterPage();
+                        alert(xhr.responseJSON.message);
+                    }
+                });
+            } catch (e) {
+            }
         }
     </script>
 @endsection
