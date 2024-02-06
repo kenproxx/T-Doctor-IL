@@ -288,34 +288,38 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="border-radius mt-3 ">
-                    <div class="d-flex">
-                        <div class="wrapper">
-                            <header>
-                                <h2>{{ __('home.Price') }}</h2>
-                            </header>
-                            <div class="price-input">
-                                <div class="field">
-                                    <input type="number" onkeypress="performSearch()" id="inputProductMin"
-                                           class="rangePrice input-min" value="0">
+                <div class="filter">
+                    <div class="filter-header d-flex justify-content-between">
+                        <div class="text-wrapper">Manufacturing Company</div>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="filter-body">
+                        @if(is_array($array_company))
+                            @foreach($array_company as $company)
+                                <div class="d-flex item">
+                                    <input type="checkbox" value="{{ $company }}"
+                                           onchange="companyMedicine(this.value);">
+                                    <div class="text">{{ $company }}</div>
                                 </div>
-                                <div class="separator">-</div>
-                                <div class="field">
-                                    <input type="number" onkeypress="performSearch()" id="inputProductMax"
-                                           class="rangePrice input-max" value="0">
+                            @endforeach
+                        @endif
+                    </div>
+                </div>
+                <div class="filter">
+                    <div class="filter-header d-flex justify-content-between">
+                        <div class="text-wrapper">Manufacturing Country</div>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                    <div class="filter-body">
+                        @if(is_array($array_country))
+                            @foreach($array_country as $country)
+                                <div class="d-flex item">
+                                    <input type="checkbox" value="{{ $country }}"
+                                           onchange="countryMedicine(this.value);">
+                                    <div class="text">{{ $country }}</div>
                                 </div>
-                            </div>
-                            <div class="slider">
-                                <div class="progress"></div>
-                            </div>
-                            <div class="range-input">
-                                <input type="range" onkeypress="performSearch()" class="rangePrice range-min" min="0"
-                                       max="10000000" value="2500000" step="1000">
-                                <input type="range" onkeypress="performSearch()" class="rangePrice range-max" min="0"
-                                       max="10000000" value="7500000" step="1000">
-                            </div>
-                        </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>
@@ -406,35 +410,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="border-radius mt-3 ">
-                    <div class="d-flex">
-                        <div class="wrapper">
-                            <header>
-                                <h2>{{ __('home.Price') }}</h2>
-                            </header>
-                            <div class="price-input">
-                                <div class="field">
-                                    <input type="number" onkeypress="performSearch()" id="inputProductMin"
-                                           class="rangePrice input-min" value="0">
-                                </div>
-                                <div class="separator">-</div>
-                                <div class="field">
-                                    <input type="number" onkeypress="performSearch()" id="inputProductMax"
-                                           class="rangePrice input-max" value="0">
-                                </div>
-                            </div>
-                            <div class="slider">
-                                <div class="progress"></div>
-                            </div>
-                            <div class="range-input">
-                                <input type="range" onkeypress="performSearch()" class="rangePrice range-min" min="0"
-                                       max="10000000" value="2500000" step="1000">
-                                <input type="range" onkeypress="performSearch()" class="rangePrice range-max" min="0"
-                                       max="10000000" value="7500000" step="1000">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="d-flex justify-content-center align-items-center mt-4">
                     <a class="add-cv-bt w-100 apply-bt_delete col-6">{{ __('home.Refresh') }}</a>
                     <form class="col-6 pr-0">
@@ -470,9 +446,10 @@
     <script>
         let filterMedicine = [];
         let objectMedicine = [];
-        let priceMedicine = [];
         let categoryMedicine = '';
         let locationMedicine = [];
+        let companyMedicineValue = [];
+        let countryMedicineValue = [];
 
         async function masterFilterMedicine() {
             let searchInput = document.getElementById('search-input');
@@ -484,7 +461,8 @@
                 name: searchValue,
                 object: objectMedicine.toString(),
                 filter: filterMedicine.toString(),
-                price: priceMedicine,
+                company: companyMedicineValue.toString(),
+                country: countryMedicineValue.toString(),
                 category: categoryMedicine,
                 location: locationMedicine,
                 status: 'ACTIVE',
@@ -627,6 +605,36 @@
 
         function locationFilterMedicine(value) {
             locationMedicine = value;
+
+            masterFilterMedicine();
+        }
+
+        function countryMedicine(value) {
+            // Kiểm tra xem giá trị có trong mảng hay không
+            var index = countryMedicineValue.indexOf(value);
+
+            if (index === -1) {
+                // Nếu giá trị không có trong mảng, thêm vào mảng
+                countryMedicineValue.push(value);
+            } else {
+                // Nếu giá trị đã có trong mảng, xóa khỏi mảng
+                countryMedicineValue.splice(index, 1);
+            }
+
+            masterFilterMedicine();
+        }
+
+        function companyMedicine(value) {
+            // Kiểm tra xem giá trị có trong mảng hay không
+            var index = companyMedicineValue.indexOf(value);
+
+            if (index === -1) {
+                // Nếu giá trị không có trong mảng, thêm vào mảng
+                companyMedicineValue.push(value);
+            } else {
+                // Nếu giá trị đã có trong mảng, xóa khỏi mảng
+                companyMedicineValue.splice(index, 1);
+            }
 
             masterFilterMedicine();
         }
