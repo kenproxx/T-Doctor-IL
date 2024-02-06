@@ -871,8 +871,8 @@
             html += `<div class="col-sm-6 col-xl-4 mb-3 col-12 find-my-medicine-2">
                                 <div class="m-md-2 ">
                                     <div class="frame component-medicine w-100">
-                                        <div class="img-pro justify-content-center d-flex img_product--homeNew">
-                                            <img loading="lazy" class="rectangle border-img"
+                                        <div class="img-pro justify-content-center d-flex img_product--homeNew w-100">
+                                            <img loading="lazy" class="rectangle border-img w-100"
                                                  src="${medicine.thumbnail}"/>
                                         </div>
                                         <div class="div">
