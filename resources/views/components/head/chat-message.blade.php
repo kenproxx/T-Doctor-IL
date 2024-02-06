@@ -142,8 +142,9 @@
         box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.25);
     }
 
+
     /* General button style */
-    .btn {
+    #widget-chat .btn {
         border: none;
         font-family: 'Lato';
         font-size: inherit;
@@ -159,7 +160,7 @@
         transition: all 0.3s;
     }
 
-    .btn:after {
+    #widget-chat .btn:after {
         content: '';
         position: absolute;
         z-index: -1;
@@ -169,7 +170,7 @@
     }
 
     /* Pseudo elements for icons */
-    .btn:before {
+    #widget-chat .btn:before {
         font-family: 'FontAwesome';
         speak: none;
         font-style: normal;
@@ -182,28 +183,27 @@
     }
 
 
-
-    .btn-sep:before {
-        background: rgba(0,0,0,0.15);
+    #widget-chat .btn-sep:before {
+        background: rgba(0, 0, 0, 0.15);
     }
 
     /* Button 1 */
-    .btn-1 {
+    #widget-chat .btn-1 {
         background: #3498db;
         color: #fff;
         padding-left: 30px;
     }
 
-    .btn-1:hover {
+    #widget-chat .btn-1:hover {
         background: #2980b9;
     }
 
-    .btn-1:active {
+    #widget-chat .btn-1:active {
         background: #2980b9;
         top: 2px;
     }
 
-    .btn-1:before {
+    #widget-chat .btn-1:before {
         position: absolute;
         height: 100%;
         left: 0;
@@ -213,22 +213,22 @@
     }
 
     /* Button 2 */
-    .btn-2 {
+    #widget-chat .btn-2 {
         background: #2ecc71;
         color: #fff;
         padding-left: 30px;
     }
 
-    .btn-2:hover {
+    #widget-chat .btn-2:hover {
         background: #27ae60;
     }
 
-    .btn-2:active {
+    #widget-chat .btn-2:active {
         background: #27ae60;
         top: 2px;
     }
 
-    .btn-2:before {
+    #widget-chat .btn-2:before {
         position: absolute;
         height: 100%;
         left: 0;
@@ -239,11 +239,11 @@
 
     /* Icons */
 
-    .icon-cart:before {
+    #widget-chat .icon-cart:before {
         content: "\f07a";
     }
 
-    .icon-info:before {
+    #widget-chat .icon-info:before {
         content: "\f05a";
     }
 
@@ -1168,7 +1168,7 @@
         next_elementQuantity_widgetChat.attr('max', quantity);
 
         // Thêm sự kiện onchange
-        next_elementQuantity_widgetChat.on('change', function() {
+        next_elementQuantity_widgetChat.on('change', function () {
             // Lấy giá trị hiện tại của next_elementQuantity_widgetChat
             var currentValue = next_elementQuantity_widgetChat.val();
 
