@@ -6,9 +6,9 @@ use App\Enums\SocialUserStatus;
 use App\Http\Controllers\Controller;
 use App\Models\SocialUser;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Exception;
 
 class SocialUserApi extends Controller
 {
@@ -65,14 +65,51 @@ class SocialUserApi extends Controller
         $userID = $request->input('user_id');
 
         $socialUser->user_id = $userID;
+        $linkChecks = [
+            'instagram' => '/^(https?:\/\/)?(www\.)?instagram\.com\/.*$/',
+            'facebook' => '/^(https?:\/\/)?(www\.)?facebook\.com\/.*$/',
+            'tiktok' => '/^(https?:\/\/)?(www\.)?tiktok\.com\/.*$/',
+            'youtube' => '/^(https?:\/\/)?(www\.)?youtube\.com\/.*$/',
+            'google_review' => '/^(https?:\/\/)?(www\.)?google\.com\/.*$/',
+        ];
+        if ($request->input('facebook') != null) {
+            $check_facebook = preg_match($linkChecks['facebook'], $request->input('facebook'));
+            if ($check_facebook == 0) {
+                return response('Invalid facebook link', 400);
+            }
+        }
+        if ($request->input('instagram') != null) {
+            $check_instagram = preg_match($linkChecks['instagram'], $request->input('instagram'));
+            if ($check_instagram == 0) {
+                return response('Invalid instagram link', 400);
+            }
+        }
+        if ($request->input('tiktok') != null) {
+            $check_tiktok = preg_match($linkChecks['tiktok'], $request->input('tiktok'));
+            if ($check_tiktok == 0) {
+                return response('Invalid tiktok link', 400);
+            }
+        }
+        if ($request->input('youtube') != null) {
+            $check_youtube = preg_match($linkChecks['youtube'], $request->input('youtube'));
+            if ($check_youtube == 0) {
+                return response('Invalid youtube link', 400);
+            }
+        }
+        if ($request->input('google_review') != null) {
+            $check_google_review = preg_match($linkChecks['google_review'], $request->input('google_review'));
+            if ($check_google_review == 0) {
+                return response('Invalid google review link', 400);
+            }
+        }
 
-        $socialUser->facebook = $request->input('facebook');
-        $socialUser->instagram = $request->input('instagram');
-
-        $socialUser->youtube = $request->input('youtube');
-        $socialUser->tiktok = $request->input('tiktok');
-
-        $socialUser->google_review = $request->input('google_review');
+//        $socialUser->facebook = $request->input('facebook');
+//        $socialUser->instagram = $request->input('instagram');
+//
+//        $socialUser->youtube = $request->input('youtube');
+//        $socialUser->tiktok = $request->input('tiktok');
+//
+//        $socialUser->google_review = $request->input('google_review');
 
         $socialUser->other = $request->input('other');
 
@@ -147,7 +184,8 @@ class SocialUserApi extends Controller
         }
     }
 
-    public function getSocialByUserId($userId) {
+    public function getSocialByUserId($userId)
+    {
         $data = SocialUser::where('user_id', $userId)->get();
 
         return response()->json($data);
