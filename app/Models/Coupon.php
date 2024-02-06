@@ -17,4 +17,12 @@ class Coupon extends Model
         }
         return '';
     }
+    public static function getNameUser($id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            return $user->name;
+        }
+        return '';
+    }
 }

@@ -1,5 +1,5 @@
-@php use App\Models\Coupon; @endphp
-@php use App\Enums\CouponApplyStatus; @endphp
+@php use App\Enums\CouponApplyStatus;use App\Models\Coupon; @endphp
+@php @endphp
 @extends('layouts.admin')
 @section('title', 'List Coupon')
 @section('main-content')
@@ -27,7 +27,7 @@
                 <tr>
                     <td>{{ ++$index }}</td>
                     <td>{{ Coupon::getNameCoupon($applyCoupon->coupon_id) }}</td>
-                    <td>{{ $applyCoupon->user_id }}</td>
+                    <td>{{ Coupon::getNameUser($applyCoupon->user_id) }}</td>
                     <td>{{ $applyCoupon->email }}</td>
                     <td>{{ $applyCoupon->sns_option }}</td>
                     <td>{{ $applyCoupon->link_ }}</td>
