@@ -518,10 +518,13 @@
             }
 
             if (element.type == 'DonThuocMoi') {
+                let url = `{{ route('view.prescription.result.detail', ['id' => ':id']) }}`;
+                url = url.replace(':id', element.uuid_session);
+
                 html = `<div class="message ">
                         <span >
                             ${element.text},
-                            <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.my.list') }}">xem ngay?</a>
+                            <a class="color-blue" target="_blank" href="${url}">xem ngay?</a>
                             </span></div>`
             }
 

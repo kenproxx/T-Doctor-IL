@@ -122,10 +122,10 @@ class PrescriptionResultApi extends Controller
             $prescription_result->notes_laos = $notes_laos;
 
             $prescription_result->status = $status;
-
-            $this->noti_after_create_don_thuoc($email);
-
             $success = $prescription_result->save();
+
+            $this->noti_after_create_don_thuoc($email, $prescription_result->id);
+
 
             if ($success) {
                 return response()->json($prescription_result);
@@ -136,7 +136,7 @@ class PrescriptionResultApi extends Controller
         }
     }
 
-    private function noti_after_create_don_thuoc($email)
+    private function noti_after_create_don_thuoc($email, $prescription_id)
     {
         $user = User::where('email', $email)->first();
 
@@ -144,15 +144,13 @@ class PrescriptionResultApi extends Controller
             return;
         }
 
-        $uuid = Uuid::uuid();
-
         $type = 'DonThuocMoi';
 
         $message = Message::create([
             'from' => Auth::id(),
             'to' => $user->id,
             'text' => 'Bạn có đơn thuốc',
-            'uuid_session' => $uuid,
+            'uuid_session' => $prescription_id,
             'type' => $type,
         ]);
 
@@ -161,7 +159,7 @@ class PrescriptionResultApi extends Controller
             'to_user_id' => $user->id,
             'chat_message' => 'Bạn có đơn thuốc',
             'message_status' => MessageStatus::UNSEEN,
-            'uuid_session' => $uuid,
+            'uuid_session' => $prescription_id,
             'type' => $type,
         ]);
         broadcast(new NewMessage($message));
