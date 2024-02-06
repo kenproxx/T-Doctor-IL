@@ -1,4 +1,4 @@
-@php use Illuminate\Support\Facades\Auth; @endphp
+@php use Illuminate\Support\Facades\Auth; use \App\Enums\online_medicine\ObjectOnlineMedicine @endphp
 
 <link href="{{ asset('css/chatmessage.css') }}" rel="stylesheet">
 
@@ -355,7 +355,7 @@
         <div class="modal-content">
             <div class="modal-header ">
                 <form class="row w-100">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <div class="form-group position-relative">
                             <label for="inputSearchNameMedicine" class="form-control-feedback"></label>
                             <input type="search" id="inputSearchNameMedicine" class="form-control"
@@ -363,13 +363,23 @@
                                    placeholder="Tìm kiếm theo tên thuốc">
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <div class="form-group position-relative">
                             <label for="inputSearchDrugIngredient" class="form-control-feedback"></label>
                             <input type="search" id="inputSearchDrugIngredient" class="form-control"
                                    oninput="handleSearchMedicine()"
                                    placeholder="Tìm kếm theo thành phần thuốc">
                         </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="form-select position-relative" id="object_search" onchange="handleSearchMedicine()">
+                            <option value="{{ \App\Enums\online_medicine\ObjectOnlineMedicine::KIDS }}">{{ __('home.For kids') }}</option>
+                            <option value="{{ ObjectOnlineMedicine::FOR_WOMEN }}">{{ __('home.For women') }}
+                            </option>
+                            <option value="{{ ObjectOnlineMedicine::FOR_MEN }}">{{ __('home.For men') }}</option>
+                            <option value="{{ ObjectOnlineMedicine::FOR_ADULT }}">{{ __('home.For adults') }}
+                            </option>
+                        </select>
                     </div>
                 </form>
             </div>
@@ -1012,9 +1022,10 @@
     function loadListMedicine() {
         let inputNameMedicine_Search = $('#inputSearchNameMedicine').val().toLowerCase();
         let inputDrugIngredient_Search = $('#inputSearchDrugIngredient').val().toLowerCase();
+        let object_search = $('#object_search').val().toLowerCase();
 
         let url = '{{ route('view.prescription.result.get-medicine') }}'
-        url = url + `?name_search=${inputNameMedicine_Search}&drug_ingredient_search=${inputDrugIngredient_Search}`;
+        url = url + `?name_search=${inputNameMedicine_Search}&drug_ingredient_search=${inputDrugIngredient_Search}&object_search=${object_search}`;
 
         $.ajax({
             url: url,
