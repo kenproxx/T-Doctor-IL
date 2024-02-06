@@ -141,6 +141,112 @@
         background: #088180;
         box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, 0.25);
     }
+
+    /* General button style */
+    .btn {
+        border: none;
+        font-family: 'Lato';
+        font-size: inherit;
+        color: inherit;
+        background: none;
+        cursor: pointer;
+        display: inline-block;
+        letter-spacing: 1px;
+        outline: none;
+        position: relative;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+
+    .btn:after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        -webkit-transition: all 0.3s;
+        -moz-transition: all 0.3s;
+        transition: all 0.3s;
+    }
+
+    /* Pseudo elements for icons */
+    .btn:before {
+        font-family: 'FontAwesome';
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        position: relative;
+        -webkit-font-smoothing: antialiased;
+    }
+
+
+
+    .btn-sep:before {
+        background: rgba(0,0,0,0.15);
+    }
+
+    /* Button 1 */
+    .btn-1 {
+        background: #3498db;
+        color: #fff;
+        padding-left: 30px;
+    }
+
+    .btn-1:hover {
+        background: #2980b9;
+    }
+
+    .btn-1:active {
+        background: #2980b9;
+        top: 2px;
+    }
+
+    .btn-1:before {
+        position: absolute;
+        height: 100%;
+        left: 0;
+        top: 0;
+        line-height: 2;
+        width: 25px;
+    }
+
+    /* Button 2 */
+    .btn-2 {
+        background: #2ecc71;
+        color: #fff;
+        padding-left: 30px;
+    }
+
+    .btn-2:hover {
+        background: #27ae60;
+    }
+
+    .btn-2:active {
+        background: #27ae60;
+        top: 2px;
+    }
+
+    .btn-2:before {
+        position: absolute;
+        height: 100%;
+        left: 0;
+        top: 0;
+        line-height: 2;
+        width: 25px;
+    }
+
+    /* Icons */
+
+    .icon-cart:before {
+        content: "\f07a";
+    }
+
+    .icon-info:before {
+        content: "\f05a";
+    }
+
 </style>
 
 <div id="widget-chat">
@@ -442,11 +548,16 @@
                 let url = `{{ route('view.prescription.result.detail', ['id' => ':id']) }}`;
                 url = url.replace(':id', element.uuid_session);
 
-                html = `<div class="message ">
-                        <span >
-                            ${element.text},
-                            <a class="color-blue" target="_blank" href="${url}">xem ngay?</a>
-                            </span></div>`
+                html = `<div class="mb-3 d-flex justify-content-center">
+                        <a href="${url}">
+                        <button class="btn btn-1 btn-sep icon-info">Xem đơn thuốc</button>
+                        </a>
+                        <a class="ml-2" onclick="addToCart_WidgetChat(${element.uuid_session})">
+                        <button class="btn btn-2 btn-sep icon-cart">Mua thuốc</button>
+                        </a>
+                        </div>`
+
+
             }
 
             if (element.type == 'TaoDonThuoc') {
@@ -702,11 +813,21 @@
                 }
 
                 if (msg.type == 'DonThuocMoi') {
-                    html += `<div class="message ">
-                        <span >
-                            ${msg.chat_message},
-                            <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.my.list') }}">xem ngay?</a>
-                            </span></div>`
+                    console.log(msg)
+                    let url = `{{ route('view.prescription.result.detail', ['id' => ':id']) }}`;
+                    url = url.replace(':id', msg.uuid_session);
+
+                    html += `<div class="mb-3 d-flex justify-content-center">
+                            <a href="${url}">
+
+                            <button class="btn btn-1 btn-sep icon-info">Xem đơn thuốc</button>
+
+                            </a>
+                            <a class="ml-2" onclick="addToCart_WidgetChat(${msg.uuid_session})">
+                            <button class="btn btn-2 btn-sep icon-cart">Mua thuốc</button>
+                            </a>
+                            </div>`;
+
                     return;
                 }
 
@@ -743,6 +864,42 @@
         document.getElementById('chat-messages').innerHTML = html;
         autoScrollChatBox();
     }
+
+    function addToCart_WidgetChat(id) {
+        loadingMasterPage();
+        let data = {
+            prescription_id: id,
+            user_id: `{{ Auth::user()->id }}`,
+        };
+        let accessToken = `Bearer ` + token;
+        let headers = {
+            "Authorization": accessToken
+        };
+
+        try {
+            $.ajax({
+                url: `{{ route('api.backend.prescription.result.add.cart.v2') }}`,
+                method: 'POST',
+                headers: headers,
+                data: data,
+
+                success: function (response, textStatus, xhr) {
+                    loadingMasterPage();
+                    alert(response.message);
+                    var statusCode = xhr.status;
+                    if (statusCode === 200) {
+                        window.location.href = `{{ route('user.checkout.index') }}`;
+                    }
+                },
+                error: function (xhr, status, error) {
+                    loadingMasterPage();
+                    alert(xhr.responseJSON.message);
+                }
+            });
+        } catch (e) {
+        }
+    }
+
 
     function getListUserWasConnect() {
         if (!'{{ Auth::check() }}') {
