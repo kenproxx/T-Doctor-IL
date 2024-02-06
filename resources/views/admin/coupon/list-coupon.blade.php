@@ -7,7 +7,9 @@
     <link href="{{ asset('css/listcoupon.css') }}" rel="stylesheet">
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">{{ __('home.List Coupon') }}</h1>
-    <a href="{{route('coupon.create.product')}}" class="btn btn-primary mb-3">{{ __('home.Add') }}</a>
+    @if(\App\Models\Coupon::isAdmin(Auth::user()->id))
+        <a href="{{route('coupon.create.product')}}" class="btn btn-primary mb-3">{{ __('home.Add') }}</a>
+    @endif
     @if (session('success'))
         <div class="alert alert-success border-left-success alert-dismissible fade show" role="alert">
             {{ session('success') }}
@@ -73,7 +75,7 @@
             <td>${item.registered} / ${item.max_register ?? 0}</td>
             <td>${item.startDate} - ${item.end_evaluate}</td>
             <td>${item.status}</td>
-            <td><a href="${urlView}"> {{ __('home.Xem đơn đăng ký') }} </a> | <a href="${urlEdit}"> {{ __('home.Edit') }}</a> | <a href="#" onclick="checkDelete(${item.id})">{{ __('home.Delete') }}</a></td>
+            <td><a href="${urlView}"> {{ __('home.Xem đơn đăng ký') }} </a> | <a href="${urlEdit}"> {{ __('home.Edit') }}</a>  @if(\App\Models\Coupon::isAdmin(Auth::user()->id))| <a href="#" onclick="checkDelete(${item.id})">{{ __('home.Delete') }}</a> @endif</td>
         </tr>`;
             }
             await $('#ProductsAdmin').empty().append(html);

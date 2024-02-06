@@ -25,4 +25,16 @@ class Coupon extends Model
         }
         return '';
     }
+    public static function isAdmin($id)
+    {
+    $user = User::find($id);
+        if ($user) {
+            $role_user = RoleUser::where('user_id', $user->id)->first();
+            $role = Role::find($role_user->role_id);
+            if ($role->name == 'ADMIN') {
+                return true;
+            }
+        }
+        return false;
+    }
 }
