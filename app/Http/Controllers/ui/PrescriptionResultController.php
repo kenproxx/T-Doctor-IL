@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ui;
 
 use App\Enums\PrescriptionResultStatus;
 use App\Http\Controllers\Controller;
+use App\Models\DrugIngredients;
 use App\Models\online_medicine\ProductMedicine;
 use App\Models\PrescriptionResults;
 use App\Models\User;
@@ -29,11 +30,18 @@ class PrescriptionResultController extends Controller
     {
         return view('ui.prescription-results.doctor-prescriptions');
     }
+
     public function getListMedicine(Request $request)
     {
         $name_search = $request->input('name_search');
+        $drug_ingredient_search = $request->input('drug_ingredient_search');
 
         $listMedicine = ProductMedicine::where('quantity', '>', 0);
+
+        if ($drug_ingredient_search) {
+            $listMedicineId = DrugIngredients::where('component_name', 'like', '%' . $drug_ingredient_search . '%')->pluck('product_id');
+            $listMedicine = $listMedicine->whereIn('id', $listMedicineId);
+        }
 
         if ($name_search) {
             $listMedicine = $listMedicine->where('name', 'like', '%' . $name_search . '%');

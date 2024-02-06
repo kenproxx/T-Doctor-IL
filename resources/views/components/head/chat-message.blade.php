@@ -327,14 +327,22 @@
 <div class="modal fade" id="modal-add-medicine-widget-chat" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
         <div class="modal-content">
-            <div class="modal-header row">
-                <form>
-                    <div class="col-sm-4 col">
+            <div class="modal-header ">
+                <form class="row w-100">
+                    <div class="col-sm-6">
                         <div class="form-group position-relative">
-                            <label for="inputSearchDoctor" class="fa fa-search form-control-feedback"></label>
-                            <input type="search" id="inputSearchDoctor" class="form-control"
+                            <label for="inputSearchNameMedicine" class="fa fa-search form-control-feedback"></label>
+                            <input type="search" id="inputSearchNameMedicine" class="form-control"
                                    oninput="handleSearchMedicine()"
-                                   placeholder="{{ __('home.Search for anything…') }}">
+                                   placeholder="Tìm kiếm theo tên thuốc">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group position-relative">
+                            <label for="inputSearchDrugIngredient" class="fa fa-search form-control-feedback"></label>
+                            <input type="search" id="inputSearchDrugIngredient" class="form-control"
+                                   oninput="handleSearchMedicine()"
+                                   placeholder="Tìm kếm theo thành phần thuốc">
                         </div>
                     </div>
                 </form>
@@ -510,10 +518,13 @@
             }
 
             if (element.type == 'DonThuocMoi') {
+                let url = `{{ route('view.prescription.result.detail', ['id' => ':id']) }}`;
+                url = url.replace(':id', element.uuid_session);
+
                 html = `<div class="message ">
                         <span >
                             ${element.text},
-                            <a class="color-blue" target="_blank" href="{{ route('view.prescription.result.my.list') }}">xem ngay?</a>
+                            <a class="color-blue" target="_blank" href="${url}">xem ngay?</a>
                             </span></div>`
             }
 
@@ -920,9 +931,15 @@
 
     loadListMedicine();
 
-    function loadListMedicine(name = '') {
+    function loadListMedicine() {
+        let inputNameMedicine_Search = $('#inputSearchNameMedicine').val().toLowerCase();
+        let inputDrugIngredient_Search = $('#inputSearchDrugIngredient').val().toLowerCase();
+
+        let url = '{{ route('view.prescription.result.get-medicine') }}'
+        url = url + `?name_search=${inputNameMedicine_Search}&drug_ingredient_search=${inputDrugIngredient_Search}`;
+
         $.ajax({
-            url: `{{ route('view.prescription.result.get-medicine') }}?name_search=${name}`,
+            url: url,
             method: 'GET',
             success: function (response) {
                 renderMedicine(response);
@@ -955,6 +972,8 @@
                                                 </a>
                                                 <div
                                                     class="text-wrapper-3">${medicine.price} ${medicine.unit_price ?? 'VND'}</div>
+                                                <div
+                                                    class="text-wrapper-3">Còn lại: ${medicine.quantity}</div>
                                             </div>
                                             <div class="div-wrapper">
                                                 <a onclick="handleSelectInputMedicine_widgetChat('${medicine.id}', '${medicine.name}', '${medicine.quantity}')"
@@ -1067,6 +1086,23 @@
         elementInputMedicine_widgetChat.value = name;
         next_elementInputMedicine_widgetChat.val(id);
         next_elementQuantity_widgetChat.attr('max', quantity);
+
+        // Thêm sự kiện onchange
+        next_elementQuantity_widgetChat.on('change', function() {
+            // Lấy giá trị hiện tại của next_elementQuantity_widgetChat
+            var currentValue = next_elementQuantity_widgetChat.val();
+
+            // Chuyển đổi giá trị thành số để so sánh
+            currentValue = parseInt(currentValue);
+
+            // Kiểm tra nếu giá trị lớn hơn quantity
+            if (currentValue > quantity) {
+                // Hiển thị cảnh báo
+                alert('Giá trị không thể lớn hơn ' + quantity);
+                // Cài đặt lại giá trị về quantity
+                next_elementQuantity_widgetChat.val(quantity);
+            }
+        });
     }
 
     function handleClickInputMedicine_widgetChat(element, nextElement) {
@@ -1107,9 +1143,7 @@
     }
 
     function handleSearchMedicine() {
-        let inputSearch = $('#inputSearchDoctor').val().toLowerCase();
-
-        loadListMedicine(inputSearch);
+        loadListMedicine();
     }
 </script>
 

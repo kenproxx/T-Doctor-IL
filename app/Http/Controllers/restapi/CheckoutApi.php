@@ -34,7 +34,18 @@ class CheckoutApi extends Controller
 
     public function checkout($request)
     {
+        $discount_price_exchange = $request->input('discount_price_exchange');
+        if ($discount_price_exchange > 999) {
+            $point_exchange = intval($discount_price_exchange / 1000);
+        } else {
+            $point_exchange = 0;
+        }
+
         $userID = $request->input('user_id');
+
+        $user = User::find($userID);
+        $user->points = $point_exchange;
+        $user->save();
 
         $full_name = $request->input('full_name');
         $email = $request->input('email');
@@ -116,6 +127,20 @@ class CheckoutApi extends Controller
         }
     }
 
+    public function showPoint(Request $request)
+    {
+        $user_id = $request->input('user_id');
+        $user = User::find($user_id);
+
+        if (!$user) {
+            return response((new MainApi())->returnMessage('User not found!'), 404);
+        }
+
+        $point = $user->points;
+        $price_discount_max = $point * 1000;
+        return response()->json(['price_discount_max' => $price_discount_max], 200);
+    }
+
     public function calcDiscount(Request $request)
     {
         $price = $request->input('price');
@@ -128,7 +153,7 @@ class CheckoutApi extends Controller
         if (!$user) {
             $response['status'] = 404;
             $response['message'] = 'User not found!';
-            return response((new MainApi())->returnMessage($response['message']),$response['status']);
+            return response((new MainApi())->returnMessage($response['message']), $response['status']);
         }
 
         $point = $user->points;
