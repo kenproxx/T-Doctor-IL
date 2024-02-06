@@ -7,6 +7,14 @@
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     }
 
+    .max-1-line-title-widget-chat {
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     @media (max-width: 575px) {
         .div .div-2 a .text-wrapper {
             font-size: 12px;
@@ -398,12 +406,13 @@
             html += `<div class="friend" data-id=${item.id} data-msg-unseen="${countUnseen}">
                         <img src="${item.avt}"/>
                         <p>
-                            <strong>${item.name}
+                            <strong class="max-1-line-title-widget-chat">${item.name}
                                 <span class="badge badge-light text-black">${countUnseen}</span>
                             </strong>
-                                <br>
                             <span>${item.email}</span>
+
                         </p>
+
                     </div>`;
         });
 
@@ -997,6 +1006,8 @@
     function handleSelectInputMedicine_widgetChat(id, name, quantity) {
         elementInputMedicine_widgetChat.value = name;
         next_elementInputMedicine_widgetChat.val(id);
+        next_elementQuantity_widgetChat.off('change');
+
         next_elementQuantity_widgetChat.attr('max', quantity);
 
         // Thêm sự kiện onchange
