@@ -43,8 +43,22 @@ class MedicineController extends Controller
             $medical_favourites = WishList::where('user_id', Auth::user()->id)->where('isFavorite', 1)->where('type_product', TypeProductCart::MEDICINE);
         }
         $medical_favourites = json_encode($medical_favourites->pluck('product_id')->toArray());
+        $array_company = null;
+        $array_country = null;
+        foreach ($medicines as $product) {
+            if ($product->manufacturing_company) {
+                $array_company[] = $product->manufacturing_company;
+                $array_company = array_unique($array_company);
+            }
 
-        return view('medicine.list', compact('medicines','medicine10', 'categoryMedicines', 'provinces', 'countAllMedicine', 'carts', 'medical_favourites'));
+            if ($product->manufacturing_country) {
+                $array_country[] = $product->manufacturing_country;
+                $array_country = array_unique($array_country);
+            }
+        }
+        return view('medicine.list', compact('medicines', 'medicine10',
+            'categoryMedicines', 'provinces', 'countAllMedicine',
+            'carts', 'medical_favourites', 'array_company', 'array_country'));
     }
 
     public function detail($id)
@@ -88,7 +102,7 @@ class MedicineController extends Controller
         }
         $medical_favourites = json_encode($medical_favourites->pluck('medical_id')->toArray());
 
-        return view('medicine.wishlistMedicine', compact('medicines','medicine10', 'categoryMedicines', 'provinces', 'countAllMedicine', 'carts', 'medical_favourites'));
+        return view('medicine.wishlistMedicine', compact('medicines', 'medicine10', 'categoryMedicines', 'provinces', 'countAllMedicine', 'carts', 'medical_favourites'));
     }
 
     public function searchOnlineMedicine(Request $request)
@@ -96,17 +110,16 @@ class MedicineController extends Controller
         $medicines = ProductMedicine::where('product_medicines.status', OnlineMedicineStatus::APPROVED);
 
         $name = $request->input('name');
+
         $filter = $request->input('filter');
         $object = $request->input('object');
-        $price = $request->input('price');
-        $min_price = $request->input('min_price');
-        $max_price = $request->input('max_price');
+
         $category = $request->input('category');
         $location = $request->input('location');
 
-
-
-        // Tìm kiếm theo filter
+        $company = $request->input('company');
+        $country = $request->input('country');
+        /* Tìm kiếm theo filter */
         $medicines->when($filter, function ($query) use ($filter) {
             $filterValues = explode(',', $filter);
             $ifFilterValuesHasZero = in_array(0, $filterValues);
@@ -115,57 +128,64 @@ class MedicineController extends Controller
             }
         });
 
-        // Tìm kiếm theo object
+        /* Tìm kiếm theo object */
         $medicines->when($object, function ($query) use ($object) {
             $objectValues = explode(',', $object);
             $query->whereIn('object_', $objectValues);
         });
 
-        // Tìm kiếm theo giá
-        $medicines->when($min_price, function ($query) use ($min_price) {
-            $query->where('price', '>=', $min_price);
+        $medicines->when($company, function ($query) use ($company) {
+            $objectValues = explode(',', $company);
+            $query->whereIn('manufacturing_company', $objectValues);
         });
 
-        $medicines->when($max_price, function ($query) use ($max_price) {
-            $query->where('price', '<=', $max_price);
+        $medicines->when($country, function ($query) use ($country) {
+            $objectValues = explode(',', $country);
+            $query->whereIn('manufacturing_country', $objectValues);
         });
 
-        // Tìm kiếm theo category
+//        /* Tìm kiếm theo giá */
+//        $medicines->when($min_price, function ($query) use ($min_price) {
+//            $query->where('price', '>=', $min_price);
+//        });
+//
+//        $medicines->when($max_price, function ($query) use ($max_price) {
+//            $query->where('price', '<=', $max_price);
+//        });
+
+        /* Tìm kiếm theo category */
         $medicines->when($category, function ($query) use ($category) {
             $query->where('category_id', $category);
         });
 
-        // Tìm kiếm theo location
+        /* Tìm kiếm theo location */
         $medicines->when($location, function ($query) use ($location) {
             $query->where('provinces.id', $location);
         });
-        // Tìm kiếm theo tên
+
+        /* Tìm kiếm theo tên */
         $medicines->when($name, function ($query) use ($name) {
-            $query->where(function ($query) use ($name) {
-                $query->orWhere('product_medicines.name', 'like', "%$name%")
-                    ->orWhere('product_medicines.name_en', 'like', "%$name%")
-                    ->orWhere('product_medicines.name_laos', 'like', "%$name%");
+            $query->where(function ($sup_query) use ($name) {
+                $sup_query->where('product_medicines.uses', 'like', '%' . $name . '%')
+                    ->orWhere('product_medicines.specifications', 'like', '%' . $name . '%')
+                    ->orWhere('product_medicines.name', 'like', '%' . $name . '%')
+                    ->orWhere('product_medicines.name_en', 'like', '%' . $name . '%')
+                    ->orWhere('product_medicines.name_laos', 'like', '%' . $name . '%');
             });
+            $query->join('drug_ingredients', 'drug_ingredients.product_id', '=', 'product_medicines.id')
+                ->orWhere('drug_ingredients.component_name', 'like', '%' . $name . '%');
         });
 
-
-        // Join và select
+        /* Join và select */
         $medicines->leftJoin('users', 'product_medicines.user_id', '=', 'users.id')
             ->leftJoin('provinces', 'provinces.id', '=', 'users.province_id')
             ->select('product_medicines.*', 'provinces.name as location_name');
 
-        // Paginate
-        $medicines = $medicines->paginate(15);
-
-        // Trả về kết quả
-        $response = [
-            'min_price' => $min_price,
-            'max_price' => $max_price,
-            'data' => $medicines,
-        ];
+        $medicines = $medicines->distinct()->get();
 
         return response()->json($medicines);
     }
+
     public function searchOnlineMedicineNoPaginate(Request $request)
     {
         $medicines = ProductMedicine::where('product_medicines.status', OnlineMedicineStatus::APPROVED);
@@ -178,7 +198,6 @@ class MedicineController extends Controller
         $max_price = $request->input('max_price');
         $category = $request->input('category');
         $location = $request->input('location');
-
 
 
         // Tìm kiếm theo filter
