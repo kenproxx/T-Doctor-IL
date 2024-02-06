@@ -809,11 +809,11 @@
                     data: formData,
                     success: function () {
                         loadingMasterPage();
-                        alert('Update success');
+                        toastr.success('Update success');
                         window.location.reload();
                     },
                     error: function (exception) {
-                        alert(exception.responseText);
+                        toastr.error('Update fail');
                         loadingMasterPage();
                     }
                 });
