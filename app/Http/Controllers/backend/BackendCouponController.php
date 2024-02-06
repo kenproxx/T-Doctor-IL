@@ -137,29 +137,40 @@ class BackendCouponController extends Controller
     public function create(Request $request)
     {
         try {
-            $type = $request->input('type');
-            $user_id = $request->input('user_id');
-            $user = User::find($user_id);
-            $exitCoupons = Coupon::where('user_id', $user_id)->where('status',CouponStatus::ACTIVE)->get();
-            if (!$this->isAdmin()) {
-                foreach ($exitCoupons as $exitCoupon) {
-                    if ($type == $exitCoupon->type && $type== TypeCoupon::FREE_MISSION) {
-                        return response('You have an FREE MISSION coupon!', 400);
-                    }
-                    elseif ($type == $exitCoupon->type && $type== TypeCoupon::FREE_TODAY) {
 
-                        return response('You have an FREE TODAY coupon!', 400);
-                    }
-                    elseif ($type == $exitCoupon->type && $type== TypeCoupon::DISCOUNT_SERVICE) {
-                        return response('You have an DISCOUNT SERVICE coupon!', 400);
-                    }
-                }
-            }
-            $coupon = new Coupon();
-            if ($this->isAdmin() || $user->member == 'HOSPITALS' || $user->member == 'PHARMACIES'
-                || $user->member == 'CLINICS') {
+            /* admin làm tất :v */
+            if ($this->isAdmin()) {
+                $coupon = new Coupon();
                 $this->saveCoupon($coupon, $request);
+            } else {
+                return response('You do not have permission to create a coupon!', 400);
             }
+
+            /* phân quyền  user nào được đăng coupon */
+//            $type = $request->input('type');
+//            $user_id = $request->input('user_id');
+//            $user = User::find($user_id);
+//            $exitCoupons = Coupon::where('user_id', $user_id)->where('status',CouponStatus::ACTIVE)->get();
+//            if ($this->isAdmin()) {
+//                foreach ($exitCoupons as $exitCoupon) {
+//                    if ($type == $exitCoupon->type && $type== TypeCoupon::FREE_MISSION) {
+//                        return response('You have an FREE MISSION coupon!', 400);
+//                    }
+//                    elseif ($type == $exitCoupon->type && $type== TypeCoupon::FREE_TODAY) {
+//
+//                        return response('You have an FREE TODAY coupon!', 400);
+//                    }
+//                    elseif ($type == $exitCoupon->type && $type== TypeCoupon::DISCOUNT_SERVICE) {
+//                        return response('You have an DISCOUNT SERVICE coupon!', 400);
+//                    }
+//                }
+//            }
+//            $coupon = new Coupon();
+//            if ($this->isAdmin() || $user->member == 'HOSPITALS' || $user->member == 'PHARMACIES'
+//                || $user->member == 'CLINICS') {
+//                $this->saveCoupon($coupon, $request);
+//            }
+
 
 
             return response()->json($coupon);
@@ -263,6 +274,9 @@ class BackendCouponController extends Controller
     public function update(Request $request, $id)
     {
         try {
+            if (!$this->isAdmin()) {
+                return response('You do not have permission to update a coupon!', 400);
+            }
             $coupon = Coupon::find($id);
             if (!$coupon) {
                 return response('Not found!', 404);

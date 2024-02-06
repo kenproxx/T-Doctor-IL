@@ -836,6 +836,7 @@ return [
 // Please enter your name, Please enter your email, Please enter your email correctly, Please enter your phone, Please enter your content
     'Please enter your name' => 'Please enter your name',
     'Please enter your email' => 'Please enter your email',
+    'Please agree to the terms of service and privacy policy' => 'Please agree to the terms of service and privacy policy',
     'Please enter your email correctly' => 'Please enter your email correctly',
     'Please enter your phone' => 'Please enter your phone',
     'Please enter your content' => 'Please enter your content',

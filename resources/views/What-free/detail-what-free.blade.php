@@ -39,6 +39,16 @@
         .flea-text-gray a {
             text-decoration: underline;
         }
+
+        input#remember-me {
+            width: 18px;
+            height: 18px;
+            top: 3px;
+            left: 3px;
+            border: 2px;
+            margin-right: 16px;
+            margin-top: 5px;
+        }
     </style>
     <link href="{{ asset('css/detailwhatfree.css') }}" rel="stylesheet">
     @include('layouts.partials.header')
@@ -62,7 +72,8 @@
                         <div class="button-black"><i class="fa-regular fa-eye mr-3"></i>{{ $coupon->views }}</div>
                     </div>
                     <div class="img-main h-auto">
-                        <img loading="lazy" src="{{asset($coupon->thumbnail)}}" style="object-fit: contain; height: 100%" alt="show"
+                        <img loading="lazy" src="{{asset($coupon->thumbnail)}}"
+                             style="object-fit: contain; height: 100%" alt="show"
                              class="main">
                     </div>
                     @if($coupon->short_description != null)
@@ -290,11 +301,17 @@
                                         @endif>
                                 </div>
                             </div>
-                            <div>
-                                <div class="flea-prise">{{ __('home.Apply motivation') }}</div>
-                                <textarea class="form-control"
-                                          name="content" id="content_"></textarea>
+                            <div class="form-element remember-me d-flex">
+                                <input id="remember-me" type="checkbox" required>
+                                <label class="fs-14 font-weight-800"
+                                       for="remember-me">{{ __('home.Agree to Terms of Service and Privacy Policy') }}</label>
                             </div>
+
+                            {{--                            <div>--}}
+                            {{--                                <div class="flea-prise">{{ __('home.Apply motivation') }}</div>--}}
+                            {{--                                <textarea class="form-control"--}}
+                            {{--                                          name="content" id="content_"></textarea>--}}
+                            {{--                            </div>--}}
                         </div>
                         <input type="hidden" value="{{ $coupon->id }}" name="coupon_id" id="coupon_id">
                         <input type="hidden" value="{{ csrf_token() }}" name="_token" id="_token">
@@ -362,7 +379,11 @@
                     alert('{{ __('home.Please enter your email') }}')
                     return;
                 }
-
+                if (document.getElementById('remember-me').checked === false) {
+                    alert('{{ __('home.Please agree to the terms of service and privacy policy') }}')
+                    return;
+                }
+                console.log(document.getElementById('remember-me').checked === false)
                 // check regex email
                 var email = document.getElementById('email_').value;
                 var regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
@@ -376,10 +397,10 @@
                     return;
                 }
 
-                if (tinymce.get('content_').getContent() === '') {
-                    alert('{{ __('home.Please enter your content') }}')
-                    return;
-                }
+                {{--if (tinymce.get('content_').getContent() === '') {--}}
+                {{--    alert('{{ __('home.Please enter your content') }}')--}}
+                {{--    return;--}}
+                {{--}--}}
 
                 const headers = {
                     'Authorization': `Bearer ${token}`
@@ -396,8 +417,8 @@
                 formData.append("email", $(`#email_`).val());
                 formData.append("user_id", '{{ Auth::user()->id ?? '' }}');
 
-                const content = tinymce.get('content_').getContent();
-                formData.append("content", content);
+                // const content = tinymce.get('content_').getContent();
+                // formData.append("content", content);
 
                 loadingMasterPage();
                 try {

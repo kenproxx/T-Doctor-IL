@@ -823,6 +823,7 @@ return [
 // Please enter your name, Please enter your email, Please enter your email correctly, Please enter your phone, Please enter your content
     'Please enter your name' => 'ກະລຸນາປ້ອນຊື່ຂອງທ່ານ',
     'Please enter your email' => 'ກະລຸນາປ້ອນອີເມວຂອງທ່ານ',
+    'Please agree to the terms of service and privacy policy'=>'ກະລຸນາຍອມຮັບການບໍລິການແລະຂໍ້ມູນສິດທໍາ',
     'Please enter your email correctly' => 'ກະລຸນາປ້ອນອີເມວຂອງທ່ານນຳກັນ',
     'Please enter your phone' => 'ກະລຸນາປ້ອນເບີໂທຂອງທ່ານ',
     'Please enter your content' => 'ກະລຸນາປ້ອນເນື້ອໃນຂອງທ່ານ',
