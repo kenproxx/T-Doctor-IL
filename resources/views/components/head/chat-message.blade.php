@@ -1006,6 +1006,8 @@
     function handleSelectInputMedicine_widgetChat(id, name, quantity) {
         elementInputMedicine_widgetChat.value = name;
         next_elementInputMedicine_widgetChat.val(id);
+        next_elementQuantity_widgetChat.off('change');
+
         next_elementQuantity_widgetChat.attr('max', quantity);
 
         // Thêm sự kiện onchange
