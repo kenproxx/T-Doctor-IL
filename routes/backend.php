@@ -125,6 +125,7 @@ Route::group(['prefix' => 'checkout'], function () {
     Route::post('imm', [CheckoutApi::class, 'checkoutByImm']);
     Route::post('calc-discount', [CheckoutApi::class, 'calcDiscount']);
     Route::get('return-vnpay', [CheckoutApi::class, 'returnCheckoutVNPay']);
+    Route::get('calc-points', [CheckoutApi::class, 'showPoint'])->name('api.backend.checkout.calc.points');
 });
 
 /* Address api */
