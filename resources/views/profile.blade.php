@@ -43,6 +43,26 @@
                                 <h5 class="font-weight-bold">{{  Auth::user()->username }}</h5>
                                 <p>{{  Auth::user()->points }} points</p>
                             </div>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <div class="mr-3 ml-3">
+                                    <a href="#" class="p-2 m-1" style="font-size: 24px">
+                                        <i class="fa-solid fa-book-medical"></i>
+                                    </a>
+                                    <p class="small">Booking</p>
+                                </div>
+                                <div class="mr-3 ml-3">
+                                    <a href="#" class="p-2 m-1" style="font-size: 24px">
+                                        <i class="fa-solid fa-comment-medical"></i>
+                                    </a>
+                                    <p class="small">Mentoring</p>
+                                </div>
+                                <div class="mr-3 ml-3">
+                                    <a href="#" class="p-2 m-1" style="font-size: 24px">
+                                        <i class="fa-solid fa-ticket"></i>
+                                    </a>
+                                    <p class="small">Voucher</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -321,12 +341,15 @@
                                 <h1>Info doctor</h1>
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label for="identifier">{{ __('home.Mã định danh trên giấy hành nghề') }}</label>
-                                        <input type="text" class="form-control" id="identifier" name="identifier" value="{{$doctor->identifier}}">
+                                        <label
+                                            for="identifier">{{ __('home.Mã định danh trên giấy hành nghề') }}</label>
+                                        <input type="text" class="form-control" id="identifier" name="identifier"
+                                               value="{{$doctor->identifier}}">
                                     </div>
                                     <div class="form-element col-md-4">
                                         <label for="workplace">{{ __('home.Workplace') }}</label>
-                                        <input class="form-control" id="workplace" type="text" name="workplace" required value="{{$doctor->workplace}}">
+                                        <input class="form-control" id="workplace" type="text" name="workplace" required
+                                               value="{{$doctor->workplace}}">
                                     </div>
                                 </div>
                                 <div class="row">
