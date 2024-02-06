@@ -2,10 +2,6 @@
 
 <link href="{{ asset('css/chatmessage.css') }}" rel="stylesheet">
 
-
-<link rel="stylesheet" href="{{asset('css/flea-market.css')}}">
-
-
 <style>
     .frame.component-medicine.w-100 {
         box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -16,22 +12,11 @@
             font-size: 12px;
         }
 
-        .text-wrapper-2, .text-wrapper-4 {
+        .text-wrapper-4 {
             font-size: 12px !important;
         }
     }
 
-    .sold-out-overlay {
-        opacity: .5;
-        pointer-events: none;
-    }
-
-    .sold-out-overlay .sold-out-overlay-text {
-        position: absolute;
-        color: black;
-        top: 30%;
-        display: block;
-    }
 
     .find-my-medicine-2 .frame {
         display: inline-flex;
@@ -86,33 +71,6 @@
         font-style: var(--body-1-extra-font-style);
     }
 
-    .find-my-medicine-2 .frame .div-3 {
-        display: inline-flex;
-        align-items: flex-start;
-        gap: 12px;
-        position: relative;
-        flex: 0 0 auto;
-    }
-
-    .find-my-medicine-2 .frame .marker-pin {
-        position: relative;
-        width: 20px;
-        height: 20px;
-    }
-
-    .find-my-medicine-2 .frame .text-wrapper-2 {
-        position: relative;
-        width: fit-content;
-        margin-top: -1px;
-        font-weight: var(--body-4-extra-font-weight);
-        color: var(--white);
-        font-size: var(--body-4-extra-font-size);
-        text-align: center;
-        letter-spacing: var(--body-4-extra-letter-spacing);
-        line-height: var(--body-4-extra-line-height);
-        font-style: var(--body-4-extra-font-style);
-    }
-
     .find-my-medicine-2 .frame .text-wrapper-3 {
         position: relative;
         width: fit-content;
@@ -159,57 +117,11 @@
         left: 225px;
     }
 
-    .find-my-medicine-2 .frame .group {
-        position: absolute;
-        width: 116px;
-        height: 114px;
-        top: -19px;
-        left: -19px;
-    }
-
-    .find-my-medicine-2 .frame .overlap-group {
-        position: relative;
-        width: 95px;
-        height: 95px;
-        top: 19px;
-        left: 19px;
-        background-image: url(https://c.animaapp.com/ItWXPcpR/img/rectangle-23800-2.svg);
-        background-size: 100% 100%;
-    }
-
-    .find-my-medicine-2 .frame .text-wrapper-5 {
-        position: absolute;
-        height: 23px;
-        top: 26px;
-        left: 19px;
-        transform: rotate(-45deg);
-        font-weight: var(--body-1-extra-font-weight);
-        color: #ffffff;
-        font-size: var(--body-1-extra-font-size);
-        letter-spacing: var(--body-1-extra-letter-spacing);
-        line-height: var(--body-1-extra-line-height);
-        font-style: var(--body-1-extra-font-style);
-    }
 
     .find-my-medicine-2 .text-wrapper.text-ellipsis {
         text-overflow: ellipsis;
     }
 
-    .find-my-medicine-2 .frame .frame-wrapper-heart {
-        display: inline-flex;
-        align-items: flex-start;
-        gap: 10px;
-        padding: 8px;
-        position: absolute;
-        top: 8px;
-        right: 8px;
-        background-color: var(--light);
-        border-radius: 51px;
-    }
-
-    .find-my-medicine-2 .frame .frame-wrapper-heart i {
-        font-size: 24px;
-    }
 
     .find-my-medicine-2 .border-img {
         border-radius: 13px 13px 100px 0px;
@@ -331,7 +243,7 @@
                 <form class="row w-100">
                     <div class="col-sm-6">
                         <div class="form-group position-relative">
-                            <label for="inputSearchNameMedicine" class="fa fa-search form-control-feedback"></label>
+                            <label for="inputSearchNameMedicine" class="form-control-feedback"></label>
                             <input type="search" id="inputSearchNameMedicine" class="form-control"
                                    oninput="handleSearchMedicine()"
                                    placeholder="Tìm kiếm theo tên thuốc">
@@ -339,7 +251,7 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group position-relative">
-                            <label for="inputSearchDrugIngredient" class="fa fa-search form-control-feedback"></label>
+                            <label for="inputSearchDrugIngredient" class="form-control-feedback"></label>
                             <input type="search" id="inputSearchDrugIngredient" class="form-control"
                                    oninput="handleSearchMedicine()"
                                    placeholder="Tìm kếm theo thành phần thuốc">
