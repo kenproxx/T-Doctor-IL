@@ -373,6 +373,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group position-relative">
+                            <label for="inputSearchNameMedicine" class="form-control-feedback"></label>
                             <select class="form-select position-relative" id="object_search"
                                     onchange="handleSearchMedicine()">
                                 <option
