@@ -969,6 +969,8 @@
                                                 </a>
                                                 <div
                                                     class="text-wrapper-3">${medicine.price} ${medicine.unit_price ?? 'VND'}</div>
+                                                <div
+                                                    class="text-wrapper-3">Còn lại: ${medicine.quantity}</div>
                                             </div>
                                             <div class="div-wrapper">
                                                 <a onclick="handleSelectInputMedicine_widgetChat('${medicine.id}', '${medicine.name}', '${medicine.quantity}')"
@@ -1081,6 +1083,23 @@
         elementInputMedicine_widgetChat.value = name;
         next_elementInputMedicine_widgetChat.val(id);
         next_elementQuantity_widgetChat.attr('max', quantity);
+
+        // Thêm sự kiện onchange
+        next_elementQuantity_widgetChat.on('change', function() {
+            // Lấy giá trị hiện tại của next_elementQuantity_widgetChat
+            var currentValue = next_elementQuantity_widgetChat.val();
+
+            // Chuyển đổi giá trị thành số để so sánh
+            currentValue = parseInt(currentValue);
+
+            // Kiểm tra nếu giá trị lớn hơn quantity
+            if (currentValue > quantity) {
+                // Hiển thị cảnh báo
+                alert('Giá trị không thể lớn hơn ' + quantity);
+                // Cài đặt lại giá trị về quantity
+                next_elementQuantity_widgetChat.val(quantity);
+            }
+        });
     }
 
     function handleClickInputMedicine_widgetChat(element, nextElement) {
