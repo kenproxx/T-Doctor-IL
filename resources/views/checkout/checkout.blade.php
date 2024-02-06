@@ -510,28 +510,6 @@
             $('#value_address').val(response.address_detail + ', ' + district + ', ' + province);
         }
 
-        async function updatePoint(point) {
-            let urlOpen = `{{ route('api.user.open') }}`;
-
-            let data = {
-                user_id: `{{ Auth::user()->id }}`,
-                key: `{{ \App\Enums\Constants::KEY_PROJECT }}`,
-                point: point,
-            };
-
-            await $.ajax({
-                url: urlOpen,
-                method: 'POST',
-                data: data,
-                success: function (response) {
-                    console.log(response);
-                },
-                error: function (exception) {
-                    console.log(exception);
-                }
-            });
-        }
-
         function mergeAddress() {
             let province = $('#province').val();
             let district = $('#district').val();
