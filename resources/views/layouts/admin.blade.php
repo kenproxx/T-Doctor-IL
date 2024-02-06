@@ -844,21 +844,16 @@
             $('#header-popup-message-unseen').html(`<li class="dropdown-header">
                         {{ __('home.You have no new messages') }}
             </li>`)
+            return;
+        }
 
+        let countUnseen = data[0].total;
+        editBadgesMessageUnseen(countUnseen);
 
-      }
-
-        let countUns
-        a[0].total;
-              editBadgesMessage
-        ntU seen ;
-
-
-         htm  = '';
+        let html = '';
         html += `<li class="dropdown-header">
-                        {{ __('home.You have ') }}
-        ${countUnse n} {{ __(' new messages') }} </
-            i>
+                        {{ __('home.You have ') }} ${countUnseen} {{ __(' new messages') }}
+        </li>`
         data.forEach(function (item) {
             html += `<li>
                         <hr class="dropdown-divider">
@@ -870,12 +865,12 @@
                                 <h4>${item.name_from}</h4>
                                 <p>${item.chat_message}</p>
                                 <p>${item.timeAgo}</p>
-
-
-        iv>
+                            </div>
                         </a>
-
-
+                    </li>`;
+        })
+        $('#header-popup-message-unseen').html(html);
+    }
 
     function editBadgesMessageUnseen(countUnseen) {
         $('#count-message-unseen').text(countUnseen);
