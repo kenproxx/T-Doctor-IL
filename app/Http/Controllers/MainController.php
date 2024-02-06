@@ -219,10 +219,10 @@ class MainController extends Controller
     public function removeCouponExpiredAndAddCouponActive()
     {
         $nowTime = Carbon::now()->addHours(7);
-        Coupon::where('endDate', '<=', $nowTime)
+        Coupon::where('end_evaluate', '<=', $nowTime)
             ->where('status', CouponStatus::ACTIVE)
-            ->update(['status' => CouponStatus::INACTIVE]);
-        Coupon::where('endDate', '>', $nowTime)
+            ->update(['status' => CouponStatus::DELETED]);
+        Coupon::where('end_evaluate', '>', $nowTime)
             ->where('startDate', '<=', $nowTime)
             ->update(['status' => CouponStatus::ACTIVE]);
     }

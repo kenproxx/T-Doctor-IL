@@ -145,7 +145,7 @@
                     } elseif (Auth::user()->member == 'HOSPITALS') {
                         $member = 'Chủ Bệnh viện';
                     } else {
-                        $member = 'Admin';
+                        $member = 'chủ phòng khám';
                     }
                 @endphp
                 <div class="card-header py-3">
@@ -154,7 +154,7 @@
                         $roleName = \App\Models\Role::where('id',$roleUser->role_id)->first();
 
                     @endphp
-                    <h6 class="m-0 font-weight-bold text-primary">{{ __('home.My Account') }} : @if($roleName->name == 'ADMIN')  ADMIN @else {{$member}}  @endif</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">{{ __('home.My Account') }} : @if($roleName->name != 'ADMIN')  {{$member}} @else  ADMIN @endif</h6>
                 </div>
 
                 <div class="card-body">
