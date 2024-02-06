@@ -94,6 +94,7 @@
             border: none;
             margin-top: 24px;
         }
+
         .sold-out-overlay {
             opacity: .5;
             pointer-events: none;
@@ -139,7 +140,8 @@
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </form>
                 @if(Auth::check())
-                    <button type="button" data-toggle="modal" data-target="#modalCart" class="btnModalCart shopping-bag">
+                    <button type="button" data-toggle="modal" data-target="#modalCart"
+                            class="btnModalCart shopping-bag">
                         <i class="fa-solid fa-bag-shopping"></i>
                         @if($carts && count($carts) > 0)
                             <div class="text-wrapper"> {{ count($carts) }}</div>
@@ -189,7 +191,7 @@
                     </a>
                     <a class="col-2">
                         <button type="button"
-                                class="btnModalCart shopping-bag"  data-bs-toggle="offcanvas"
+                                class="btnModalCart shopping-bag" data-bs-toggle="offcanvas"
                                 data-bs-target="#filterNavbar">
                             <i class="bi bi-filter"></i>
                         </button>
@@ -209,8 +211,8 @@
                 <div class="col-md-6 col-6">
                     <div class="div-wrapper">
                         <a type="button"
-{{--                           data-toggle="modal"--}}
-{{--                           data-target="#modalCreatPrescription"--}}
+                            {{--                           data-toggle="modal"--}}
+                            {{--                           data-target="#modalCreatPrescription"--}}
                         >{{ __('home.Create prescription') }}
                         </a>
                     </div>
@@ -330,12 +332,6 @@
                         </div>
                     @endforeach
                 </div>
-                <div class="d-flex justify-content-center d-none d-sm-block">
-                    {{ $medicines->links() }}
-                </div>
-                <div class="d-flex justify-content-center d-block d-sm-none">
-                    {{ $medicine10->links() }}
-                </div>
             </div>
         </div>
 
@@ -448,7 +444,21 @@
             </div>
         </div>
     </div>
+    <script>
+        let medical_favourites = `{{ $medical_favourites }}`;
 
+        function isUserWasWishlist(medicineId) {
+            let isLogin = `{{ Auth::check() }}`;
+            if (!isLogin) {
+                return 'bi-heart';
+            }
+
+            if (medical_favourites.includes(medicineId)) {
+                return 'bi-heart-fill';
+            }
+            return 'bi-heart';
+        }
+    </script>
     <script>
         function performSearch() {
 
@@ -476,7 +486,6 @@
         }
     </script>
     <script>
-        let medical_favourites = `{{ $medical_favourites }}`;
         let filterMedicine = [];
         let objectMedicine = [];
         let priceMedicine = [];
@@ -537,10 +546,10 @@
                     let isSoldOut = item.quantity == 0;
                     let isFavoriteClass = isUserWasWishlist(item.id);
                     html += `<div class="col-md-3 col-6">
-        <div class="product-item ${ isSoldOut ? 'sold-out-overlay' : '' }">
+        <div class="product-item ${isSoldOut ? 'sold-out-overlay' : ''}">
     <div class="img-pro">
         <img src="${item.thumbnail}" alt="">
-        <div class="${ isSoldOut ? 'sold-out-overlay-text d-flex justify-content-center align-items-center w-100' : 'd-none' } ">
+        <div class="${isSoldOut ? 'sold-out-overlay-text d-flex justify-content-center align-items-center w-100' : 'd-none'} ">
                 <h1>Sold Out</h1>
             </div>
         <a class="button-heart" data-favorite="0">
@@ -590,18 +599,6 @@
                 });
             }
             document.getElementById('content-medicine').innerHTML = html;
-        }
-
-        function isUserWasWishlist(medicineId) {
-            let isLogin = `{{ Auth::check() }}`;
-            if (!isLogin) {
-                return 'bi-heart';
-            }
-
-            if (medical_favourites.includes(medicineId)) {
-                return 'bi-heart-fill';
-            }
-            return 'bi-heart';
         }
 
         function searchFilterMedicine(value) {

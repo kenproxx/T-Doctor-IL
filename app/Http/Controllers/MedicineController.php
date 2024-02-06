@@ -23,8 +23,8 @@ class MedicineController extends Controller
             ->leftJoin('provinces', 'provinces.id', '=', 'users.province_id')
             ->select('product_medicines.*', 'provinces.name as location_name');
 
-        $medicine10 = $medicines->paginate(10);
-        $medicines = $medicines->paginate(16);
+        $medicine10 = $medicines->get();
+        $medicines = $medicines->get();
 
         // count all medicine
         $countAllMedicine = ProductMedicine::where('product_medicines.status', OnlineMedicineStatus::APPROVED)->count();
