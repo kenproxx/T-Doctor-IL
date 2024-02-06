@@ -134,11 +134,11 @@
                 </div>
             </div>
             <div class="medicine-search--center col-md-6 row d-flex justify-content-between">
-                <form class="search-box col-md-10">
-                    <input type="search" onkeyup="performSearch()" name="focus"
-                           placeholder="{{ __('home.Search for anything…') }}" id="search-input" value="">
+                <div class="search-box col-md-10">
+                    <input type="search" onkeypress="performSearch()" name="focus"
+                           placeholder="Enter name, prescription or ingredients of products" id="search-input" value="">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                </form>
+                </div>
                 @if(Auth::check())
                     <button type="button" data-toggle="modal" data-target="#modalCart"
                             class="btnModalCart shopping-bag">
@@ -173,13 +173,12 @@
         {{-- filter trong màn hình mobile --}}
         <div class=" medicine-search d-block d-sm-none">
             <div class="medicine-search--center row">
-
                 @if(Auth::check())
-                    <form class="search-box col-md-8 col-8">
-                        <input type="search" onkeyup="performSearch()" name="focus"
+                    <div class="search-box col-md-8 col-8">
+                        <input type="search" onkeypress="performSearch()" name="focus"
                                placeholder="{{ __('home.Search for anything…') }}" id="search-input" value="">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                    </form>
+                    </div>
                     <a class="col-2">
                         <button type="button" data-toggle="modal" data-target="#modalCart"
                                 class="btnModalCart shopping-bag">
@@ -199,11 +198,11 @@
 
                     @include('component.modal-cart')
                 @else
-                    <form class="search-box col-12">
-                        <input type="search" onkeyup="performSearch()" name="focus"
+                    <div class="search-box col-12">
+                        <input type="search" onkeypress="performSearch()" name="focus"
                                placeholder="{{ __('home.Search for anything…') }}" id="search-input" value="">
                         <i class="fa-solid fa-magnifying-glass"></i>
-                    </form>
+                    </div>
                 @endif
                 @include('component.modal-cart')
             </div>
@@ -289,6 +288,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="border-radius mt-3 ">
                     <div class="d-flex">
                         <div class="wrapper">
@@ -297,12 +297,12 @@
                             </header>
                             <div class="price-input">
                                 <div class="field">
-                                    <input type="number" onchange="performSearch()" id="inputProductMin"
+                                    <input type="number" onkeypress="performSearch()" id="inputProductMin"
                                            class="rangePrice input-min" value="0">
                                 </div>
                                 <div class="separator">-</div>
                                 <div class="field">
-                                    <input type="number" onchange="performSearch()" id="inputProductMax"
+                                    <input type="number" onkeypress="performSearch()" id="inputProductMax"
                                            class="rangePrice input-max" value="0">
                                 </div>
                             </div>
@@ -310,9 +310,9 @@
                                 <div class="progress"></div>
                             </div>
                             <div class="range-input">
-                                <input type="range" onchange="performSearch()" class="rangePrice range-min" min="0"
+                                <input type="range" onkeypress="performSearch()" class="rangePrice range-min" min="0"
                                        max="10000000" value="2500000" step="1000">
-                                <input type="range" onchange="performSearch()" class="rangePrice range-max" min="0"
+                                <input type="range" onkeypress="performSearch()" class="rangePrice range-max" min="0"
                                        max="10000000" value="7500000" step="1000">
                             </div>
                         </div>
@@ -338,8 +338,9 @@
     </div>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="filterNavbar" aria-labelledby="offcanvasNavbarLabel">
         <div class="offcanvas-header">
-            <a href="{{route('home')}}" class="offcanvas-title" id="offcanvasNavbarLabel"><img class="w-100"
-                                                                                               src="{{asset('img/icons_logo/logo-new.png')}}"></a>
+            <a href="{{route('home')}}" class="offcanvas-title" id="offcanvasNavbarLabel">
+                <img class="w-100" src="{{asset('img/icons_logo/logo-new.png')}}">
+            </a>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -413,12 +414,12 @@
                             </header>
                             <div class="price-input">
                                 <div class="field">
-                                    <input type="number" onchange="performSearch()" id="inputProductMin"
+                                    <input type="number" onkeypress="performSearch()" id="inputProductMin"
                                            class="rangePrice input-min" value="0">
                                 </div>
                                 <div class="separator">-</div>
                                 <div class="field">
-                                    <input type="number" onchange="performSearch()" id="inputProductMax"
+                                    <input type="number" onkeypress="performSearch()" id="inputProductMax"
                                            class="rangePrice input-max" value="0">
                                 </div>
                             </div>
@@ -426,9 +427,9 @@
                                 <div class="progress"></div>
                             </div>
                             <div class="range-input">
-                                <input type="range" onchange="performSearch()" class="rangePrice range-min" min="0"
+                                <input type="range" onkeypress="performSearch()" class="rangePrice range-min" min="0"
                                        max="10000000" value="2500000" step="1000">
-                                <input type="range" onchange="performSearch()" class="rangePrice range-max" min="0"
+                                <input type="range" onkeypress="performSearch()" class="rangePrice range-max" min="0"
                                        max="10000000" value="7500000" step="1000">
                             </div>
                         </div>
@@ -460,29 +461,10 @@
         }
     </script>
     <script>
-        function performSearch() {
-
-            var searchInput = document.getElementById('search-input');
-            var searchValue = searchInput.value;
-
-            var formData = {
-                name: searchValue,
-                status: 'ACTIVE',
-                min_price: $('#inputProductMin').val(),
-                max_price: $('#inputProductMax').val(),
-            };
-
-            $.ajax({
-                url: `{{route('medicine.search')}}`,
-                method: "POST",
-                data: formData,
-                success: function (response) {
-                    renderJson2Html(response);
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
+        async function performSearch() {
+            if (event.keyCode === 13 && !event.shiftKey) {
+                await masterFilterMedicine();
+            }
         }
     </script>
     <script>
@@ -492,28 +474,29 @@
         let categoryMedicine = '';
         let locationMedicine = [];
 
-        function masterFilterMedicine() {
+        async function masterFilterMedicine() {
+            let searchInput = document.getElementById('search-input');
+            let searchValue = searchInput.value;
 
             loadingMasterPage();
-            const headers = {
-                'Authorization': `Bearer ${token}`
+
+            var data = {
+                name: searchValue,
+                object: objectMedicine.toString(),
+                filter: filterMedicine.toString(),
+                price: priceMedicine,
+                category: categoryMedicine,
+                location: locationMedicine,
+                status: 'ACTIVE',
+                min_price: $('#inputProductMin').val(),
+                max_price: $('#inputProductMax').val(),
             };
-            const formData = new FormData();
-            formData.append('filter', filterMedicine);
-            formData.append('object', objectMedicine);
-            formData.append('price', priceMedicine);
-            formData.append('category', categoryMedicine);
-            formData.append('location', locationMedicine);
 
             try {
-                $.ajax({
+                await $.ajax({
                     url: `{{route('medicine.search')}}`,
-                    method: 'POST',
-                    headers: headers,
-                    contentType: false,
-                    cache: false,
-                    processData: false,
-                    data: formData,
+                    method: "GET",
+                    data: data,
                     success: function (data) {
                         renderJson2Html(data);
                     },
@@ -521,6 +504,7 @@
                     }
                 });
             } catch (error) {
+                loadingMasterPage();
                 throw error;
             }
             setTimeout(function () {
@@ -531,7 +515,7 @@
         function renderJson2Html(data) {
             console.log(data)
             let html = '';
-            data = data.data;
+            // data = data.data;
             document.getElementById('content-medicine').innerHTML = html;
             if (data.length === 0) {
                 html = `<div class="col-md-12">

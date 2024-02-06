@@ -195,7 +195,7 @@ Route::middleware(['user.active'])->group(function () {
         Route::get('/', [MedicineController::class, 'index'])->name('medicine');
         Route::get('/detail/{id}', [MedicineController::class, 'detail'])->name('medicine.detail');
         Route::get('/wish-list', [MedicineController::class, 'wishList'])->name('medicine.wishList');
-        Route::post('search', [MedicineController::class, 'searchOnlineMedicine'])->name('medicine.search');
+        Route::get('search', [MedicineController::class, 'searchOnlineMedicine'])->name('medicine.search');
         Route::post('list', [MedicineController::class, 'searchOnlineMedicineNoPaginate'])->name('medicine.list');
         Route::post('get-name-location',
             [MedicineController::class, 'getLocationByUserId'])->name('medicine.get.name.location.by.user');
@@ -480,7 +480,7 @@ Route::middleware(['user.active'])->group(function () {
         Route::post('/logout', [LoginController::class, 'logout'])->name('api.user.logout');
         Route::post('/save-token', [LoginController::class, 'saveTokenFireBase'])->name('api.user.save.token');
         Route::post('/register', [RegisterController::class, 'register'])->name('api.user.register');
-        Route::post('/logout-all', [UserApi::class, 'logout']);
+        Route::get('/logout-all', [UserApi::class, 'logout']);
         Route::post('/open-key', [UserApi::class, 'calcPoint'])->name('api.user.open');
     });
     /* Product */
