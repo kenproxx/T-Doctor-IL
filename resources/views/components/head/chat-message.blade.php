@@ -372,14 +372,18 @@
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <select class="form-select position-relative" id="object_search" onchange="handleSearchMedicine()">
-                            <option value="{{ \App\Enums\online_medicine\ObjectOnlineMedicine::KIDS }}">{{ __('home.For kids') }}</option>
-                            <option value="{{ ObjectOnlineMedicine::FOR_WOMEN }}">{{ __('home.For women') }}
-                            </option>
-                            <option value="{{ ObjectOnlineMedicine::FOR_MEN }}">{{ __('home.For men') }}</option>
-                            <option value="{{ ObjectOnlineMedicine::FOR_ADULT }}">{{ __('home.For adults') }}
-                            </option>
-                        </select>
+                        <div class="form-group position-relative">
+                            <select class="form-select position-relative" id="object_search"
+                                    onchange="handleSearchMedicine()">
+                                <option
+                                    value="{{ \App\Enums\online_medicine\ObjectOnlineMedicine::KIDS }}">{{ __('home.For kids') }}</option>
+                                <option value="{{ ObjectOnlineMedicine::FOR_WOMEN }}">{{ __('home.For women') }}
+                                </option>
+                                <option value="{{ ObjectOnlineMedicine::FOR_MEN }}">{{ __('home.For men') }}</option>
+                                <option value="{{ ObjectOnlineMedicine::FOR_ADULT }}">{{ __('home.For adults') }}
+                                </option>
+                            </select>
+                        </div>
                     </div>
                 </form>
             </div>
