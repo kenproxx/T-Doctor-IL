@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\restapi;
 
 use App\Enums\AddressStatus;
+use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Address;
+use App\Models\District;
+use App\Models\Province;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -101,6 +105,34 @@ class AddressApi extends Controller
         if (!$address || $address->status == AddressStatus::DELETED) {
             return response((new MainApi())->returnMessage('Not found!'), 404);
         }
+        return response()->json($address);
+    }
+
+    public function getAddressDefault(Request $request)
+    {
+        $user_id = $request->input('user_id');
+        $user = User::find($user_id);
+        if (!$user || $user->status == UserStatus::DELETED) {
+            return response((new MainApi())->returnMessage('User not found!'), 404);
+        }
+        $address = Address::where('user_id', $user->id)
+            ->where('is_default', 1)
+            ->first();
+
+        if (!$address) {
+            $address = Address::where('user_id', $user->id)
+                ->first();
+        }
+
+        if (!$address) {
+            return response((new MainApi())->returnMessage('User not created!'), 404);
+        }
+
+        $province = Province::find($address->province_id);
+        $district = District::find($address->district_id);
+        $address = $address->toArray();
+        $address['province'] = $province ? $province->name : '';
+        $address['district'] = $district ? $district->name : '';
         return response()->json($address);
     }
 
