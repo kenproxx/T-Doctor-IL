@@ -272,6 +272,7 @@
                                 <input id="value_shipping_fee" name="shipping_fee" value="">
                                 <input id="value_discount_fee" name="discount_fee" value="">
                                 <input id="value_total_order" name="total_order" value="">
+                                <input id="discount_price_exchange" name="discount_price_exchange" value="">
                             </div>
                             <div class="mt-5">
                                 <button id="btnOrder" type="button" class="btn w-100 p-2"
@@ -357,111 +358,188 @@
             })
 
             $('#btnOrder').on('click', function () {
-                let method = null;
-                let url = ``;
-                let selectedValue = $('.list-method input[type="radio"]:checked').val();
-                if (selectedValue !== undefined) {
-                    method = selectedValue;
-                }
-                let valueMethod = `{{ \App\Enums\OrderMethod::IMMEDIATE }}`;
-                switch (method) {
-                    case 'vn_pay':
-                        url = `{{route('user.checkout.vnpay')}}`;
-                        valueMethod = `{{ \App\Enums\OrderMethod::ELECTRONIC_WALLET }}`;
-                        break;
-                    case 'paypal':
-                        url = `paypal`;
-                        valueMethod = `{{ \App\Enums\OrderMethod::ELECTRONIC_WALLET }}`;
-                        break;
-                    case 'apple_pay':
-                        url = `apple_pay`;
-                        valueMethod = `{{ \App\Enums\OrderMethod::ELECTRONIC_WALLET }}`;
-                        break;
-                    case 'master_card':
-                        url = `master_card`;
-                        valueMethod = `{{ \App\Enums\OrderMethod::CARD_CREDIT }}`;
-                        break;
-                    default:
-                        url = `{{ route('user.checkout.imm') }}`;
-                        break;
-                }
-
-                $('#order_method').val(valueMethod);
-
-                $('#form_checkout').attr('action', url);
-                $('#realBtnOrder').trigger('click')
+                handleClickBtnOrder();
             })
 
             $('.address_code').on('change', function () {
                 mergeAddress();
             })
 
-            function mergeAddress() {
-                let province = $('#province').val();
-                let district = $('#district').val();
-                let address_detail = $('#address_detail').val();
-
-                let address = address_detail + '-' + district + '-' + province;
-                $('#value_address').val(address);
-            }
-
             mergeAddress();
+        })
 
-            function calculateTotal() {
-                let listTotal = document.getElementsByClassName('total_product');
-                let total = 0;
-                for (let i = 0; i < listTotal.length; i++) {
-                    let itemTotal = listTotal[i];
-                    total = parseFloat(total) + parseFloat(itemTotal.innerText);
-                }
-
-                let unitPrices = document.getElementsByClassName('unit_price')
-                let unitPrice = unitPrices[0].innerText;
-
-                $('.unit_price_product').text(unitPrice);
-                $('#total_fee').text(total);
-
-                let shipping = $('#shipping_fee').text();
-                let discount = $('#discount_fee').text();
-
-                console.log(discount);
-
-                let total_order = parseFloat(total) + parseFloat(shipping) - parseFloat(discount);
-                let html = total_order;
-                $('#total_order').text(html);
-
-                $('#value_total_fee').val(total);
-                $('#value_shipping_fee').val(shipping);
-                $('#value_discount_fee').val(discount);
-                $('#value_total_order').val(total_order);
+        function handleClickBtnOrder() {
+            let method = null;
+            let url = ``;
+            let selectedValue = $('.list-method input[type="radio"]:checked').val();
+            if (selectedValue !== undefined) {
+                method = selectedValue;
+            }
+            let valueMethod = `{{ \App\Enums\OrderMethod::IMMEDIATE }}`;
+            switch (method) {
+                case 'vn_pay':
+                    url = `{{route('user.checkout.vnpay')}}`;
+                    valueMethod = `{{ \App\Enums\OrderMethod::ELECTRONIC_WALLET }}`;
+                    break;
+                case 'paypal':
+                    url = `paypal`;
+                    valueMethod = `{{ \App\Enums\OrderMethod::ELECTRONIC_WALLET }}`;
+                    break;
+                case 'apple_pay':
+                    url = `apple_pay`;
+                    valueMethod = `{{ \App\Enums\OrderMethod::ELECTRONIC_WALLET }}`;
+                    break;
+                case 'master_card':
+                    url = `master_card`;
+                    valueMethod = `{{ \App\Enums\OrderMethod::CARD_CREDIT }}`;
+                    break;
+                default:
+                    url = `{{ route('user.checkout.imm') }}`;
+                    break;
             }
 
-            async function getAddressDetail(id, province, district) {
-                let urlDetail = `{{ route('api.backend.address.order.detail', ['id'=>':id']) }}`;
-                urlDetail = urlDetail.replace(':id', id);
-                await $.ajax({
-                    url: urlDetail,
+            $('#order_method').val(valueMethod);
+            $('#form_checkout').attr('action', url);
+            $('#realBtnOrder').trigger('click')
+
+        }
+
+        async function calculateTotal() {
+            let listTotal = document.getElementsByClassName('total_product');
+            let total = 0;
+            for (let i = 0; i < listTotal.length; i++) {
+                let itemTotal = listTotal[i];
+                total = parseFloat(total) + parseFloat(itemTotal.innerText);
+            }
+
+            let unitPrices = document.getElementsByClassName('unit_price')
+            let unitPrice = unitPrices[0].innerText;
+
+            $('.unit_price_product').text(unitPrice);
+            $('#total_fee').text(total);
+
+            let shipping = $('#shipping_fee').text();
+            let discount_array = await getNumberOfPoints();
+
+            let discount_max = discount_array.price_discount_max;
+
+            let data = processPriceTotal(total, discount_max);
+
+            let discount = data.discount_price_after;
+            let discount_price_exchange = data.discount_price_exchange;
+            $('#discount_fee').text(discount);
+
+            let total_order = parseFloat(total) + parseFloat(shipping) - parseFloat(discount);
+            let html = total_order;
+            $('#total_order').text(html);
+
+            $('#value_total_fee').val(total);
+            $('#value_shipping_fee').val(shipping);
+            $('#value_discount_fee').val(discount);
+            $('#value_total_order').val(total_order);
+            $('#discount_price_exchange').val(discount_price_exchange);
+        }
+
+        function processPriceTotal(total, discount) {
+            let total_price_before = total;
+            let discount_price_before = discount;
+            let discount_price_after = 0;
+            let total_price_after = 0;
+            let total_price_exchange = 0;
+            let discount_price_exchange = 0;
+            total = parseFloat(total);
+            discount = parseFloat(discount);
+
+            if (total > discount) {
+                total_price_exchange = total - discount;
+                discount_price_after = discount;
+                total_price_after = total_price_exchange;
+            } else {
+                discount_price_exchange = discount - total;
+                total_price_after = 0;
+                discount_price_after = total;
+            }
+            let my_array = {
+                total_price_before: total_price_before,
+                discount_price_before: discount_price_before,
+                discount_price_after: discount_price_after,
+                total_price_after: total_price_after,
+                total_price_exchange: total_price_exchange,
+                discount_price_exchange: discount_price_exchange,
+            };
+            return my_array;
+        }
+
+        async function getNumberOfPoints() {
+            let urlCalcPoints = `{{ route('api.backend.checkout.calc.points') }}` + `?user_id={{ Auth::user()->id }}`;
+
+            try {
+                let response = await $.ajax({
+                    url: urlCalcPoints,
                     headers: headers,
                     method: 'GET',
-                    success: function (response) {
-                        console.log(response);
-                        changeAddressFromApi(response, province, district)
-                    },
-                    error: function (exception) {
-                        console.log(exception);
-                    }
                 });
+                return response;
+            } catch (error) {
+                throw error;
             }
+        }
 
-            function changeAddressFromApi(response, province, district) {
-                $('#full_name').val(response.username)
-                $('#phone_number').val(response.phone)
-                $('#province').val(province)
-                $('#district').val(district)
-                $('#address_detail').val(response.address_detail)
-                $('#value_address').val(response.address_detail + ', ' + district + ', ' + province);
-            }
-        })
+        async function getAddressDetail(id, province, district) {
+            let urlDetail = `{{ route('api.backend.address.order.detail', ['id'=>':id']) }}`;
+            urlDetail = urlDetail.replace(':id', id);
+            await $.ajax({
+                url: urlDetail,
+                headers: headers,
+                method: 'GET',
+                success: function (response) {
+                    changeAddressFromApi(response, province, district)
+                },
+                error: function (exception) {
+                    console.log(exception);
+                }
+            });
+        }
+
+        function changeAddressFromApi(response, province, district) {
+            $('#full_name').val(response.username)
+            $('#phone_number').val(response.phone)
+            $('#province').val(province)
+            $('#district').val(district)
+            $('#address_detail').val(response.address_detail)
+            $('#value_address').val(response.address_detail + ', ' + district + ', ' + province);
+        }
+
+        async function updatePoint(point) {
+            let urlOpen = `{{ route('api.user.open') }}`;
+
+            let data = {
+                user_id: `{{ Auth::user()->id }}`,
+                key: `{{ \App\Enums\Constants::KEY_PROJECT }}`,
+                point: point,
+            };
+
+            await $.ajax({
+                url: urlOpen,
+                method: 'POST',
+                data: data,
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (exception) {
+                    console.log(exception);
+                }
+            });
+        }
+
+        function mergeAddress() {
+            let province = $('#province').val();
+            let district = $('#district').val();
+            let address_detail = $('#address_detail').val();
+
+            let address = address_detail + '-' + district + '-' + province;
+            $('#value_address').val(address);
+        }
     </script>
 @endsection
 
