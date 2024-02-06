@@ -146,8 +146,8 @@ class BackendCouponApplyController extends Controller
             }
 
             // kiểm tra name, email, phone, content not null
-            if (!$name || !$email || !$phone || !$content) {
-                return response((new MainApi())->returnMessage('invalid email or name or phone or content'), 400);
+            if (!$name || !$email || !$phone) {
+                return response((new MainApi())->returnMessage('invalid email or name or phone'), 400);
             }
             foreach ($your_array as $item) {
                 $link = SocialUser::where('user_id', $user_id)->value($item); // Assuming you want to get the value of the field
@@ -161,7 +161,7 @@ class BackendCouponApplyController extends Controller
             $couponApply->name = $name;
             $couponApply->email = $email;
             $couponApply->phone = $phone;
-            $couponApply->content = $content;
+//            $couponApply->content = $content;
             $couponApply->user_id = $user_id;
             $couponApply->coupon_id = $coupon_id;
             $couponApply->sns_option = $your_string;
@@ -211,7 +211,7 @@ class BackendCouponApplyController extends Controller
             $couponApply->name = $name;
             $couponApply->email = $email;
             $couponApply->phone = $phone;
-            $couponApply->content = $content;
+//            $couponApply->content = $content;
             $couponApply->user_id = $user_id;
 
             if ($newCheck == false) {
