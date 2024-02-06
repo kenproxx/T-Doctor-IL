@@ -365,6 +365,15 @@
                 mergeAddress();
             })
 
+            $('.inputCheckAddress').change(function () {
+                let checked = document.getElementById('switch').checked;
+                if (checked) {
+                    getAddressDefault();
+                } else {
+                    showAddress();
+                }
+            });
+
             mergeAddress();
         })
 
@@ -510,28 +519,6 @@
             $('#value_address').val(response.address_detail + ', ' + district + ', ' + province);
         }
 
-        async function updatePoint(point) {
-            let urlOpen = `{{ route('api.user.open') }}`;
-
-            let data = {
-                user_id: `{{ Auth::user()->id }}`,
-                key: `{{ \App\Enums\Constants::KEY_PROJECT }}`,
-                point: point,
-            };
-
-            await $.ajax({
-                url: urlOpen,
-                method: 'POST',
-                data: data,
-                success: function (response) {
-                    console.log(response);
-                },
-                error: function (exception) {
-                    console.log(exception);
-                }
-            });
-        }
-
         function mergeAddress() {
             let province = $('#province').val();
             let district = $('#district').val();
@@ -539,6 +526,54 @@
 
             let address = address_detail + '-' + district + '-' + province;
             $('#value_address').val(address);
+        }
+
+        async function getAddressDefault() {
+            let urlDetail = `{{ route('api.backend.address.order.default') }}` + `?user_id={{Auth::user()->id}}`;
+            await $.ajax({
+                url: urlDetail,
+                headers: headers,
+                method: 'GET',
+                success: function (response) {
+                    console.log(response);
+                    renderAddress(response);
+                },
+                error: function (exception) {
+                    console.log(exception);
+                    showAddress();
+                }
+            });
+        }
+
+        function renderAddress(res) {
+            let full_name = res.username;
+            let phone = res.phone;
+            let province = res.province;
+            let district = res.district;
+            let address_detail = res.address_detail;
+
+            let response = {
+                username: full_name,
+                address_detail: address_detail,
+                phone: phone,
+            }
+
+            changeAddressFromApi(response, province, district);
+        }
+
+        function showAddress() {
+            let full_name = `{{ \Illuminate\Support\Facades\Auth::user()->name }}`;
+            let phone = `{{ \Illuminate\Support\Facades\Auth::user()->phone }}`;
+            let province = `{{ isset($province) ?  $province->full_name : ''}}`;
+            let district = `{{ isset($district) ?  $district->full_name : ''}}`;
+            let detail_address = `{{ \Illuminate\Support\Facades\Auth::user()->detail_address }}`;
+
+            let response = {
+                username: full_name,
+                address_detail: detail_address,
+                phone: phone,
+            }
+            changeAddressFromApi(response, province, district);
         }
     </script>
 @endsection

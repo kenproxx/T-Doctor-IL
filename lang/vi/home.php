@@ -360,7 +360,7 @@ return [
     'For kids' => 'Cho trẻ em',
     'For women' => 'Dành cho nữ',
     'For men' => 'Dành cho nam',
-    'For adults' => 'Dnh cho ngươi lớn',
+    'For adults' => 'Dành cho ngươi lớn',
     'News details' => 'Chi tiết tin tức',
     'Thứ tư, ngày 13-09-2023' => 'Thứ tư, ngày 13-09-2023',
     'Related news' => 'Tin tức liên quan',

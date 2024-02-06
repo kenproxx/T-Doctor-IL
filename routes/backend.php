@@ -132,6 +132,7 @@ Route::group(['prefix' => 'checkout'], function () {
 Route::group(['prefix' => 'address-order'], function () {
     Route::get('user/{id}', [AddressApi::class, 'getListByUserID'])->name('api.backend.address.order.user');
     Route::get('detail/{id}', [AddressApi::class, 'detail'])->name('api.backend.address.order.detail');
+    Route::get('default', [AddressApi::class, 'getAddressDefault'])->name('api.backend.address.order.default');
     Route::post('create', [AddressApi::class, 'create'])->name('api.backend.address.order.create');
     Route::put('update/{id}', [AddressApi::class, 'update'])->name('api.backend.address.order.update');
     Route::delete('delete/{id}', [AddressApi::class, 'delete'])->name('api.backend.address.order.delete');

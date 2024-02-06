@@ -35,6 +35,7 @@ class PrescriptionResultController extends Controller
     {
         $name_search = $request->input('name_search');
         $drug_ingredient_search = $request->input('drug_ingredient_search');
+        $object_search = $request->input('object_search');
 
         $listMedicine = ProductMedicine::where('quantity', '>', 0);
 
@@ -45,6 +46,10 @@ class PrescriptionResultController extends Controller
 
         if ($name_search) {
             $listMedicine = $listMedicine->where('name', 'like', '%' . $name_search . '%');
+        }
+
+        if ($object_search) {
+            $listMedicine = $listMedicine->where('object_', $object_search );
         }
 
         $listMedicine = $listMedicine->get();
