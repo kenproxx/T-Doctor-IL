@@ -44,7 +44,7 @@
 
         async function loadOrders() {
             let orderUrl = `{{ route('medical.api.orders.list') }}`;
-            orderUrl = orderUrl + `?user_id={{ Auth::user()->id }}` + `&type={{ \App\Enums\TypeProductCart::FLEA_MARKET }}`;
+            orderUrl = orderUrl + `?user_id={{ Auth::user()->id }}` + `&type={{ \App\Enums\TypeProductCart::MEDICINE }}`;
 
             await $.ajax({
                 url: orderUrl,

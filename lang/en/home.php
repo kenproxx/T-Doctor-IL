@@ -622,6 +622,8 @@ return [
     'Order Method' => 'Order Method',
     'Quantity' => 'Quantity',
     'Order Management' => 'Order Management',
+    'Order Selling/Buying' => 'Order Selling/Buying',
+    'Order Online Shopping' => 'Order Online Shopping',
     'Doctors' => 'Doctors',
     'Pharmacists' => 'Pharmacists',
     'Patients' => 'Patients',

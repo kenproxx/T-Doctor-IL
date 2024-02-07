@@ -608,6 +608,8 @@ return [
     'Order Method' => 'ວິທີການສັ່ງຊື້',
     'Quantity' => 'ປະລິມານ',
     'Order Management' => 'ການຈັດການຄໍາສັ່ງ',
+    'Order Selling/Buying' => 'Order Selling/Buying',
+    'Order Online Shopping' => 'Order Online Shopping',
     'Doctors' => 'ທ່ານໝໍ',
     'Pharmacists' => 'ຮ້ານຂາຍຢາ',
     'Patients' => 'ຄົນເຈັບ',
