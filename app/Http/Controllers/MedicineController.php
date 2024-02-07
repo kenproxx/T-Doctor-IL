@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\online_medicine\OnlineMedicineStatus;
 use App\Enums\TypeProductCart;
 use App\Models\Cart;
+use App\Models\DrugIngredients;
 use App\Models\MedicalFavourite;
 use App\Models\online_medicine\CategoryProduct;
 use App\Models\online_medicine\ProductMedicine;
@@ -262,6 +263,12 @@ class MedicineController extends Controller
         $location_id = $user->province_id;
         $nameLocation = Province::find($location_id)->full_name;
         return response()->json($nameLocation);
+    }
+
+    public function getIngredientsByMedicineId($id)
+    {
+        $ingredients = DrugIngredients::where('product_id', $id)->first('component_name');
+        return response()->json($ingredients);
     }
 
 }

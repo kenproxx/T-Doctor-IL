@@ -197,6 +197,7 @@ Route::middleware(['user.active'])->group(function () {
         Route::get('/wish-list', [MedicineController::class, 'wishList'])->name('medicine.wishList');
         Route::get('search', [MedicineController::class, 'searchOnlineMedicine'])->name('medicine.search');
         Route::post('list', [MedicineController::class, 'searchOnlineMedicineNoPaginate'])->name('medicine.list');
+        Route::get('list/{id}', [MedicineController::class, 'getIngredientsByMedicineId'])->name('medicine.get-ingredients-by-medicine-id');
         Route::post('get-name-location',
             [MedicineController::class, 'getLocationByUserId'])->name('medicine.get.name.location.by.user');
 

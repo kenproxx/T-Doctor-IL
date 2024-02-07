@@ -414,6 +414,7 @@
     let elementInputMedicine_widgetChat;
     let next_elementInputMedicine_widgetChat;
     let next_elementQuantity_widgetChat;
+    let next_elementMedicineIngredients_widgetChat;
 
     let currentUserIdChat = '{{ Auth::check() ? Auth::user()->id : '' }}';
 
@@ -987,7 +988,7 @@
                         </div>
                         <div class="form-group">
                             <label for="medicine_ingredients">Medicine Ingredients</label>
-                            <input type="text" class="form-control medicine_ingredients" name="medicine_ingredients">
+                            <textarea class="form-control medicine_ingredients" readonly name="medicine_ingredients" rows="4"></textarea>
                         </div>
                         <div class="form-group">
                             <label for="quantity">{{ __('home.Quantity') }}</label>
@@ -1070,7 +1071,7 @@
                                                     class="text-wrapper-3">Còn lại: ${medicine.quantity}</div>
                                             </div>
                                             <div class="div-wrapper">
-                                                <a onclick="handleSelectInputMedicine_widgetChat('${medicine.id}', '${medicine.name}', '${medicine.quantity}')"
+                                                <a style="cursor: pointer" onclick="handleSelectInputMedicine_widgetChat('${medicine.id}', '${medicine.name}', '${medicine.quantity}')"
                                                    data-dismiss="modal">
                                                     <div class="text-wrapper-4">{{ __('home.Choose...') }}</div>
                                                 </a>
@@ -1176,7 +1177,7 @@
         }
     }
 
-    function handleSelectInputMedicine_widgetChat(id, name, quantity) {
+    async function handleSelectInputMedicine_widgetChat(id, name, quantity) {
         elementInputMedicine_widgetChat.value = name;
         next_elementInputMedicine_widgetChat.val(id);
         next_elementQuantity_widgetChat.off('change');
@@ -1199,12 +1200,16 @@
                 next_elementQuantity_widgetChat.val(quantity);
             }
         });
+
+        let resultComponent_name = await getIngredientsByMedicineId(id)
+        next_elementMedicineIngredients_widgetChat.val(resultComponent_name.component_name);
     }
 
     function handleClickInputMedicine_widgetChat(element, nextElement) {
         elementInputMedicine_widgetChat = element;
         next_elementInputMedicine_widgetChat = nextElement;
         next_elementQuantity_widgetChat = $(element).parents().parents().find('input.quantity');
+        next_elementMedicineIngredients_widgetChat = $(element).parents().parents().find('textarea.medicine_ingredients');
     }
 
     loadData_widgetChat();
@@ -1240,6 +1245,22 @@
 
     function handleSearchMedicine() {
         loadListMedicine();
+    }
+
+    async function getIngredientsByMedicineId(id) {
+        let url = `{{ route('medicine.get-ingredients-by-medicine-id', ['id' => ':id']) }}`;
+        url = url.replace(':id', id);
+
+        let result = await fetch(url, {
+            method: 'GET',
+        });
+
+        if (result.ok) {
+            let data = await result.json();
+            return data;
+        }
+
+        return {'compoent_name': ''};
     }
 </script>
 

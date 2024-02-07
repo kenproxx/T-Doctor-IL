@@ -17,4 +17,6 @@ class DrugIngredients extends Model
     {
         return $this->belongsTo(ProductMedicine::class, 'product_id');
     }
+
+
 }
