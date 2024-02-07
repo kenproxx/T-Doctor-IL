@@ -460,7 +460,7 @@
                 <!-- Booking Nav -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-bar-chart"></i><span>Online Shopping</span><i
+                        <i class="bi bi-bar-chart"></i><span>{{ __('home.Booking') }}</span><i
                             class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -476,7 +476,7 @@
                 <!-- Booking Nav -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#medicine-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-memory"></i><span>Product Medicine</span><i
+                        <i class="bi bi-memory"></i><span>{{ __('home.Product Medicine') }}</span><i
                             class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="medicine-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -519,7 +519,7 @@
                 <!-- Examination Nav -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-layout-text-window-reverse"></i><span>Staff Management</span><i
+                        <i class="bi bi-layout-text-window-reverse"></i><span>{{ __('home.Nhân viên') }}</span><i
                             class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
