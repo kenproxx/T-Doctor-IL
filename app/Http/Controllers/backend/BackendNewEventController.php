@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Enums\NewEventStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\TranslateController;
 use App\Models\NewEvent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -121,8 +122,18 @@ class BackendNewEventController extends Controller
      */
     public function store(Request $request)
     {
-        $params = $request->only('title', 'title_en', 'title_laos', 'status', 'type',
-            'short_description', 'short_description_en', 'short_description_laos', 'description', 'description_en', 'description_laos');
+        $params = $request->only('title', 'status', 'type',
+            'short_description', 'description');
+
+        $translate = new TranslateController();
+        $params['title_en'] = $translate->translateText($params['title'], 'en');
+        $params['title_laos'] = $translate->translateText($params['title'], 'lo');
+
+        $params['short_description_en'] = $translate->translateText($params['short_description'], 'en');
+        $params['short_description_laos'] = $translate->translateText($params['short_description'], 'lo');
+
+        $params['description_en'] = $translate->translateText($params['description'], 'en');
+        $params['description_laos'] = $translate->translateText($params['description'], 'lo');
 
         /* kiểm tra 1 trong những title, title_en, title_laos phải khác null */
         if ($params['title'] == null || $params['title_en'] == null || $params['title_laos'] == null) {

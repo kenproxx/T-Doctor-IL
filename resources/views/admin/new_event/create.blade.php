@@ -16,47 +16,21 @@
     @endif
     <form enctype="multipart/form-data">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-12">
                 <label for="title">{{ __('home.Title') }} </label>
                 <input type="text" class="form-control" id="title" name="title">
             </div>
-            <div class="col-sm-4">
-                <label for="title_en">{{ __('home.Title Anh') }}</label>
-                <input type="text" class="form-control" id="title_en" name="title_en">
-            </div>
-            <div class="col-sm-4">
-                <label for="title_laos">{{ __('home.Title Lào') }}</label>
-                <input type="text" class="form-control" id="title_laos" name="title_laos">
-            </div>
         </div>
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-12">
                 <label for="short_description">{{ __('home.Mô tả ngắn việt') }}</label>
                 <textarea type="text" class="form-control" id="short_description" name="short_description"></textarea>
             </div>
-            <div class="col-sm-4">
-                <label for="short_description_en">{{ __('home.Mô tả ngắn anh') }}</label>
-                <textarea type="text" class="form-control" id="short_description_en"
-                          name="short_description_en"></textarea>
-            </div>
-            <div class="col-sm-4">
-                <label for="short_description_laos">{{ __('home.Mô tả ngắn lào') }}</label>
-                <textarea type="text" class="form-control" id="short_description_laos"
-                          name="short_description_laos"></textarea>
-            </div>
         </div>
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-12">
                 <label for="description">{{ __('home.Mô tả dài việt') }}</label>
                 <textarea type="text" class="form-control" id="description" name="description"></textarea>
-            </div>
-            <div class="col-sm-4">
-                <label for="description_en">{{ __('home.Mô tả dài anh') }}</label>
-                <textarea type="text" class="form-control" id="description_en" name="description_en"></textarea>
-            </div>
-            <div class="col-sm-4">
-                <label for="description_laos">{{ __('home.Mô tả dài lào') }}</label>
-                <textarea type="text" class="form-control" id="description_laos" name="description_laos"></textarea>
             </div>
         </div>
         <div class="row">
@@ -94,11 +68,11 @@
             };
             const formData = new FormData();
 
-            const arrField = ['title', 'title_en', 'title_laos', 'status', 'type'];
+            const arrField = ['title', 'status', 'type'];
 
             const fieldTextareaTiny = [
-                'short_description', 'short_description_en', 'short_description_laos',
-                'description', 'description_en', 'description_laos',
+                'short_description',
+                'description',
             ];
             fieldTextareaTiny.forEach(fieldTextarea => {
                 const content = tinymce.get(fieldTextarea).getContent();
