@@ -29,8 +29,6 @@
                     <option value="{{ Role::THERAPISTS }}">{{ Role::THERAPISTS }}</option>
                     <option value="{{ Role::ESTHETICIANS }}">{{ Role::ESTHETICIANS }}</option>
                     <option value="{{ Role::NURSES }}">{{ Role::NURSES }}</option>
-                    <option value="{{ Role::PAITENTS }}">{{ Role::PAITENTS }}</option>
-                    <option value="{{ Role::NORMAL_PEOPLE }}">{{ Role::NORMAL_PEOPLE }}</option>
                 </select>
             </div>
             <div>
@@ -49,6 +47,41 @@
                 <label for="password_confirm">{{ __('home.Enter the Password') }}</label>
                 <input type="password" class="form-control" id="password_confirm" name="password_confirm">
             </div>
+            <div>
+                <label for="hospital">{{ __('home.Hospital') }}</label>
+                <input type="text" class="form-control" id="hospital" name="hospital">
+            </div>
+            <div>
+                <label for="specialty">{{ __('home.Specialty') }}</label>
+                <input type="text" class="form-control" id="specialty" name="specialty">
+            </div>
+            <div>
+                <label for="service">{{ __('home.Service Name') }}</label>
+                <input type="text" class="form-control" id="service" name="service">
+            </div>
+            <div>
+                <label for="year_of_experience">{{ __('home.Doctor Experience') }}</label>
+                <input type="number" class="form-control" id="year_of_experience" name="year_of_experience">
+            </div>
+            <div>
+                <label for="identifier">Mã định danh</label>
+                <input type="text" class="form-control" id="identifier" name="identifier">
+            </div>
+            @php
+                $departments = \App\Models\DoctorDepartment::where('status', \App\Enums\DoctorDepartmentStatus::ACTIVE)->get();
+            @endphp
+            <div>
+                <label for="department_id">{{ __('home.Department') }}</label>
+                <select class="form-select" id="department_id" name="department_id">
+                    @foreach($departments as $department)
+                        <option value="{{$department->id}}"> {{$department->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div>
+                <label for="workplace">{{ __('home.Workplace') }}</label>
+                <input type="text" class="form-control" id="workplace" name="workplace">
+            </div>
         </form>
         <div hidden>
             <label for="manager_id"></label><input type="text" class="form-control" id="manager_id" name="manager_id"
@@ -59,43 +92,50 @@
     <script>
         $(document).ready(function () {
             $('.up-date-button').on('click', function () {
-                const headers = {
-                    'Authorization': `Bearer ${token}`
-                };
-                const formData = new FormData();
-
-                const arrField = ['username', 'member', 'email', 'phone', 'password', 'password_confirm', 'manager_id'];
-
-                let isValid = true
-                /* Tạo fn appendDataForm ở admin blade*/
-                isValid = appendDataForm(arrField, formData, isValid);
-
-
-                formData.append('_token', '{{ csrf_token() }}');
-
-                if (isValid){
-                    try {
-                        $.ajax({
-                            url: `{{route('api.backend.staffs.store')}}`,
-                            method: 'POST',
-                            headers: headers,
-                            contentType: false,
-                            cache: false,
-                            processData: false,
-                            data: formData,
-                            success: function () {
-                                alert('Create success!');
-                                window.location.href = `{{route('homeAdmin.list.staff')}}`;
-                            },
-                            error: function (exception) {
-                                alert(exception.responseText);
-                            }
-                        });
-                    } catch (error) {
-                        alert('Create error!');
-                    }
-                }
+                createStaff();
             })
         })
+
+        async function createStaff() {
+            const headers = {
+                'Authorization': `Bearer ${token}`
+            };
+            const formData = new FormData();
+
+            const arrField = ['username', 'member', 'email', 'phone',
+                'hospital', 'specialty', 'service', 'year_of_experience',
+                'identifier', 'department_id', 'workplace',
+                'password', 'password_confirm', 'manager_id'];
+
+            let isValid = true
+            /* Tạo fn appendDataForm ở admin blade*/
+            isValid = appendDataForm(arrField, formData, isValid);
+
+
+            formData.append('_token', '{{ csrf_token() }}');
+
+            if (isValid) {
+                try {
+                    await $.ajax({
+                        url: `{{route('api.backend.staffs.store')}}`,
+                        method: 'POST',
+                        headers: headers,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: formData,
+                        success: function () {
+                            alert('Create success!');
+                            window.location.href = `{{route('homeAdmin.list.staff')}}`;
+                        },
+                        error: function (exception) {
+                            alert(exception.responseText);
+                        }
+                    });
+                } catch (error) {
+                    alert('Create error!');
+                }
+            }
+        }
     </script>
 @endsection
