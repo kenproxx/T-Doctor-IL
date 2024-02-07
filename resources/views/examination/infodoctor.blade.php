@@ -12,7 +12,8 @@
                 <div id="title" class="d-flex justify-content-start">
                     <div class="d-flex list-title">
                         <div class="list--doctor p-0">
-                            <a class="back" href="{{route('examination.index')}}"><p class="align-items-center fs-title-review d-flex"><i
+                            <a class="back" href="{{route('examination.index')}}"><p
+                                    class="align-items-center fs-title-review d-flex"><i
                                         class="bi bi-arrow-left"></i>{{ __('home.Detailed information Doctor') }}</p>
                             </a>
                         </div>
@@ -65,14 +66,14 @@
                             <a onclick="handleStartChatWithDoctor('{{ $doctor->id }}')">
                                 <button>{{ __('home.Chat') }}</button>
                             </a>
-                            <form method="post" action="{{ route('createMeeting') }}" target="_blank">
+                            <form method="post" action="{{ route('createMeeting') }}" target="_blank"
+                                  onsubmit="return checkDoctorOnline()">
                                 {{ csrf_field() }}
                                 <input type="hidden" name="user_id_1"
                                        value="@if(Auth::check()) {{ Auth::user()->id }} @endif">
                                 <input type="hidden" name="user_id_2" value="{{ $doctor->id }}">
                                 <button type="submit">{{ __('home.Videocall') }}</button>
                             </form>
-                            {{--                            <button>{{ __('home.Videocall') }}</button>--}}
                         </div>
                     </div>
                 </div>
@@ -217,6 +218,18 @@
                 } else {
                     alert('Please enter input!')
                 }
+            }
+
+            function checkDoctorOnline() {
+
+                let isOnline = '{{ \Illuminate\Support\Facades\Cache::has('user-is-online|'.$doctor->id) }}';
+
+                if (!isOnline) {
+                    alert('Bác sỹ hiện không online');
+                    return false;
+                }
+
+                return true;
             }
 
             async function getAllReview() {
