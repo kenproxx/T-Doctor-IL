@@ -30,6 +30,15 @@ class BackendStaffController extends Controller
             $password_confirm = $request->input('password_confirm');
             $manager_id = $request->input('manager_id');
 
+            $hospital = $request->input('hospital');
+            $specialty = $request->input('specialty');
+            $service = $request->input('service');
+            $year_of_experience = $request->input('year_of_experience');
+
+            $identifier = $request->input('identifier');
+            $department_id = $request->input('department_id');
+            $workspace = $request->input('workplace');
+
             /* check username không được trống */
             if (!$username) {
                 return response('Username không được trống', 400);
@@ -84,6 +93,15 @@ class BackendStaffController extends Controller
             $user->phone = $phone;
             $user->address_code = '';
 
+            $user->hospital = $hospital;
+            $user->specialty = $specialty;
+            $user->service = $service;
+            $user->year_of_experience = $year_of_experience;
+
+            $user->identifier = $identifier;
+            $user->department_id = $department_id;
+            $user->workplace = $workspace;
+
             $user->abouts = 'default';
             $user->abouts_en = 'default';
             $user->abouts_lao = 'default';
@@ -131,6 +149,15 @@ class BackendStaffController extends Controller
             $password = $request->input('password');
             $password_confirm = $request->input('password_confirm');
             $status = $request->input('status');
+
+            $hospital = $request->input('hospital');
+            $specialty = $request->input('specialty');
+            $service = $request->input('service');
+            $year_of_experience = $request->input('year_of_experience');
+
+            $identifier = $request->input('identifier');
+            $department_id = $request->input('department_id');
+            $workspace = $request->input('workplace');
 
             /* check username không được trống */
             if (!$username) {
@@ -195,6 +222,15 @@ class BackendStaffController extends Controller
             $user->type = $member;
             $user->phone = $phone;
             $user->status = $status;
+
+            $user->hospital = $hospital;
+            $user->specialty = $specialty;
+            $user->service = $service;
+            $user->year_of_experience = $year_of_experience;
+
+            $user->identifier = $identifier;
+            $user->department_id = $department_id;
+            $user->workplace = $workspace;
 
             $success = $user->save();
 
