@@ -18,17 +18,9 @@
     @endif
     <form enctype="multipart/form-data">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-12">
                 <label for="name">{{ __('home.Title') }} </label>
                 <input type="text" class="form-control" id="name" name="name" required>
-            </div>
-            <div class="col-sm-4">
-                <label for="name_en">{{ __('home.Title Anh') }}</label>
-                <input type="text" class="form-control" id="name_en" name="name_en" required>
-            </div>
-            <div class="col-sm-4">
-                <label for="name_laos">{{ __('home.Title Lào') }}</label>
-                <input type="text" class="form-control" id="name_laos" name="name_laos" required>
             </div>
         </div>
         <div class="row">
@@ -59,7 +51,7 @@
             };
             const formData = new FormData();
 
-            const arrField = ['name', 'name_en', 'name_laos', 'status'];
+            const arrField = ['name', 'status'];
 
             let isValid = true
             /* Tạo fn appendDataForm ở admin blade*/

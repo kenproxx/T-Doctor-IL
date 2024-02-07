@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\TranslateController;
 use App\Models\online_medicine\CategoryProduct;
 use Illuminate\Http\Request;
 
@@ -103,12 +104,15 @@ class BackendCategoryProductController extends Controller
      */
     public function store(Request $request)
     {
-        $params = $request->only('name', 'name_en', 'name_laos', 'status',);
+        $params = $request->only('name', 'status',);
 
         // kiểm tra 1 trong những name phải khác null
-        if (empty($params['name']) || empty($params['name_en']) || empty($params['name_laos'])) {
+        if (empty($params['name'])) {
             return response('Tên danh mục không được để trống', 400);
         }
+        $translate = new TranslateController();
+        $params['name_en'] = $translate->translateText($params['name'], 'en');
+        $params['name_laos'] = $translate->translateText($params['name'], 'lo');
 
         if ($request->hasFile('thumbnail')) {
             $item = $request->file('thumbnail');
