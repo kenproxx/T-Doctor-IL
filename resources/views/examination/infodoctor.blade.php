@@ -64,16 +64,22 @@
                         </div>
                         <div id="opt_btn" class="d-flex justify-content-between justify-content-md-center">
                             <a onclick="handleStartChatWithDoctor('{{ $doctor->id }}')">
-                                <button>{{ __('home.Chat') }}</button>
+                                <button class="button">{{ __('home.Chat') }}</button>
                             </a>
-                            <form method="post" action="{{ route('createMeeting') }}" target="_blank"
-                                  onsubmit="return checkDoctorOnline()">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="user_id_1"
-                                       value="@if(Auth::check()) {{ Auth::user()->id }} @endif">
-                                <input type="hidden" name="user_id_2" value="{{ $doctor->id }}">
-                                <button type="submit">{{ __('home.Videocall') }}</button>
-                            </form>
+                            @if($is_online)
+                                <form method="post" action="{{ route('createMeeting') }}" target="_blank"
+                                      onsubmit="return checkDoctorOnline()">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="user_id_1"
+                                           value="@if(Auth::check()) {{ Auth::user()->id }} @endif">
+                                    <input type="hidden" name="user_id_2" value="{{ $doctor->id }}">
+                                    <button type="submit" class="button">{{ __('home.Videocall') }}</button>
+                                </form>
+                            @else
+                                <form onsubmit="return checkDoctorOnline()">
+                                    <button type="button" class="none-btn" disabled>{{ __('home.Videocall') }}</button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>
