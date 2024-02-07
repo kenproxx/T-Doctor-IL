@@ -620,6 +620,8 @@ return [
     'Order Method' => 'Phương thức đặt hàng',
     'Quantity' => 'Số lượng',
     'Order Management' => 'Quản lý đơn hàng',
+    'Order Selling/Buying' => 'Đơn hàng mua/bán',
+    'Order Online Shopping' => 'Đơn mua thuốc trực tuyến ',
     'Doctors' => 'Bác sĩ',
     'Pharmacists' => 'Dược sĩ',
     'Patients' => 'Người bệnh',

@@ -402,15 +402,22 @@
             <!-- Order Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#orders-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-view-list"></i><span>{{ __('home.Order') }}</span><i
+                    <i class="bi bi-view-list"></i><span>{{ __('home.Order Management') }}</span><i
                         class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="orders-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="{{ route('view.admin.orders.index') }}">
-                            <i class="bi bi-circle"></i><span>{{ __('home.Order') }}</span>
+                        <a href="{{ route('view.admin.orders.list') }}">
+                            <i class="bi bi-circle"></i><span>{{ __('home.Order Selling/Buying') }}</span>
                         </a>
                     </li>
+                    @if(!$isStaff)
+                        <li>
+                            <a href="{{ route('view.admin.orders.index') }}">
+                                <i class="bi bi-circle"></i><span>{{ __('home.Order Online Shopping') }}</span>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
             <!-- End Order Nav -->
@@ -460,7 +467,7 @@
                 <!-- Booking Nav -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-bar-chart"></i><span>{{ __('home.Booking') }}</span><i
+                        <i class="bi bi-bar-chart"></i><span>Booking Management</span><i
                             class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -720,7 +727,7 @@
                     </li>
                     <li>
                         <a href="{{ route('web.users.my.bookings.list') }}">
-                            <i class="bi bi-circle"></i><span>List  My Bookings</span>
+                            <i class="bi bi-circle"></i><span>List My Bookings</span>
                         </a>
                     </li>
                     <li>
@@ -730,9 +737,21 @@
                     </li>
                     <li>
                         <a href="{{ route('web.users.my.coupons.list') }}">
-                            <i class="bi bi-circle"></i><span>List My Coupons</span>
+                            <i class="bi bi-circle"></i><span>List My Voucher</span>
                         </a>
                     </li>
+                </ul>
+            </li>
+            <!-- End For you Nav -->
+
+            <!-- Start My Favourite Nav -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#my-favourite-nav" data-bs-toggle="collapse"
+                   href="#">
+                    <i class="bi bi-heart"></i><span>My Favourite</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="my-favourite-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="{{ route('web.users.my.favourite.businesses') }}">
                             <i class="bi bi-circle"></i><span>My Business Favourite</span>
@@ -750,7 +769,7 @@
                     </li>
                 </ul>
             </li>
-            <!-- End For you Nav -->
+            <!-- End My Favourite Nav -->
         @endif
 
         <li class="nav-heading">{{ __('home.Settings') }}</li>

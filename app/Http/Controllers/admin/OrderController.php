@@ -8,9 +8,14 @@ use App\Models\OrderItem;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function list()
     {
         return view('admin.orders.list');
+    }
+
+    public function index()
+    {
+        return view('admin.orders.list_medicine');
     }
 
     public function detail($id)

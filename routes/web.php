@@ -289,7 +289,8 @@ Route::middleware(['user.active'])->group(function () {
         });
 
         Route::group(['prefix' => 'orders'], function () {
-            Route::get('admin/list', [OrderController::class, 'index'])->name('view.admin.orders.index');
+            Route::get('admin/list_medicine', [OrderController::class, 'index'])->name('view.admin.orders.index');
+            Route::get('admin/list_market', [OrderController::class, 'list'])->name('view.admin.orders.list');
             Route::get('admin/detail/{id}', [OrderController::class, 'detail'])->name('view.admin.orders.detail');
         });
 
