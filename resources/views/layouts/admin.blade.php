@@ -469,6 +469,17 @@
                                 <i class="bi bi-circle"></i><span>{{ __('home.Booking') }}</span>
                             </a>
                         </li>
+                    </ul>
+                </li>
+                <!-- End Booking Nav -->
+
+                <!-- Booking Nav -->
+                <li class="nav-item">
+                    <a class="nav-link collapsed" data-bs-target="#medicine-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-memory"></i><span>Product Medicine</span><i
+                            class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="medicine-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
                             <a href="{{ route('api.backend.product-medicine.index') }}">
                                 <i class="bi bi-circle"></i><span>{{ __('home.List product medicine') }}</span>
