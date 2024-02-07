@@ -1,6 +1,7 @@
 @php use App\Models\Department;use App\Models\MedicalFavourite;use App\Models\Province;use Illuminate\Support\Facades\Auth; @endphp
 @php @endphp
-@php $isFavourite = \App\Models\MedicalFavourite::where([
+@php
+    $isFavourite = \App\Models\MedicalFavourite::where([
                 ['user_id', '=', \Illuminate\Support\Facades\Auth::user()->id ?? ''],
                 ['medical_id', '=', $pharmacist->id],
                 ['is_favorite', '=', '1']
@@ -9,7 +10,12 @@
             $heart = 'bi-heart';
             if ($isFavourite){
                 $heart = 'bi-heart-fill';
-            } @endphp
+            }
+    $is_online = false;
+    if (Cache::has('user-is-online|' . $pharmacist->id)){
+        $is_online = true;
+    }
+@endphp
 
 <link href="{{ asset('css/component-doctor.css') }}" rel="stylesheet">
 <div class="col-6 col-sm-6 col-md-3 mb-3">
@@ -19,8 +25,11 @@
         <div class="div mt-3">
             <a target="_blank" class="title-best__doctor"
                href="{{ route('examination.doctor_info', ['id' => $pharmacist->id]) }}">
-                <div class="text-wrapper">{{ $pharmacist->name ?? __('home.no name') }}</div>
+                <div class="text-wrapper">
+                    {{ $pharmacist->name ?? __('home.no name') }}
+                </div>
             </a>
+            <span class="small {{ $is_online ? 'text-white' : '' }}">{{ $is_online ? 'Online' : 'Offline' }}</span>
             <div class="div-2 serviceDoctor">
                 {!! $pharmacist->service !!}
             </div>
@@ -33,8 +42,9 @@
             </div>
             <div class="div-2">
                 <img loading="lazy" class="img" src="{{ asset('img/clock.png') }}"/>
-                <div
-                    class="text-wrapper-2">{{ $pharmacist->time_working_1 ?? '' }} {{ $pharmacist->time_working_2 ?? '' }}</div>
+                <div class="text-wrapper-2">
+                    {{ $pharmacist->time_working_1 ?? '' }} {{ $pharmacist->time_working_2 ?? '' }}
+                </div>
             </div>
         </div>
         @php

@@ -706,7 +706,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#address-nav" data-bs-toggle="collapse"
                    href="#">
-                    <i class="bi bi-card-heading"></i><span>For you</span><i
+                    <i class="bi bi-card-heading"></i><span>Quản lý địa chỉ</span><i
                         class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="address-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -716,55 +716,65 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('web.medical.result.list') }}">
-                            <i class="bi bi-circle"></i><span>Medical examination results</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('view.web.orders.index') }}">
-                            <i class="bi bi-circle"></i><span>List My Order</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('web.users.my.bookings.list') }}">
-                            <i class="bi bi-circle"></i><span>List My Bookings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('view.prescription.result.my.list') }}">
-                            <i class="bi bi-circle"></i><span>My Prescription</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('web.users.my.coupons.list') }}">
-                            <i class="bi bi-circle"></i><span>List My Voucher</span>
+                        <a href="{{ route('view.user.address.create') }}">
+                            <i class="bi bi-circle"></i><span>{{ __('home.Create Address') }}</span>
                         </a>
                     </li>
                 </ul>
             </li>
             <!-- End For you Nav -->
 
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('view.web.orders.index') }}">
+                    <i class="bi bi-ubuntu"></i><span>Đơn hàng của tôi</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('web.users.my.coupons.list') }}">
+                    <i class="bi bi-memory"></i><span>Quản lý voucher</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('web.users.my.bookings.list') }}">
+                    <i class="bi bi-bookmark"></i><span>Quản lý booking</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('view.prescription.result.my.list') }}">
+                    <i class="bi bi-prescription"></i><span>Đơn thuốc của tôi</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('web.medical.result.list') }}">
+                    <i class="bi bi-magic"></i><span>Kết quả khám bệnh</span>
+                </a>
+            </li>
+
             <!-- Start My Favourite Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#my-favourite-nav" data-bs-toggle="collapse"
                    href="#">
-                    <i class="bi bi-heart"></i><span>My Favourite</span><i
+                    <i class="bi bi-heart"></i><span>Danh sách yêu thích</span><i
                         class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="my-favourite-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="{{ route('web.users.my.favourite.businesses') }}">
-                            <i class="bi bi-circle"></i><span>My Business Favourite</span>
+                            <i class="bi bi-circle"></i><span>Bệnh viện yêu thích</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('web.users.my.favourite.medicals') }}">
-                            <i class="bi bi-circle"></i><span>My Medical Favourite</span>
+                            <i class="bi bi-circle"></i><span>Bác sĩ yêu thích</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('web.users.my.favourite.products') }}">
-                            <i class="bi bi-circle"></i><span>My Product Favourite</span>
+                            <i class="bi bi-circle"></i><span>Sản phẩm yêu thích</span>
                         </a>
                     </li>
                 </ul>
@@ -787,7 +797,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('web.users.list.points') }}">
                 <i class="bi bi-play"></i>
-                <span>Member ratings</span>
+                <span>Xếp hạng thành viên</span>
             </a>
         </li>
         <!-- End About Page Nav -->

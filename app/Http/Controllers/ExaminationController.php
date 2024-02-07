@@ -21,6 +21,7 @@ use App\Models\Question;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 
@@ -81,7 +82,11 @@ class ExaminationController extends Controller
         $url = route('qr.code.show.doctor.info', $id);
         $qrCodes = QrCode::size(300)->generate($url);
         $doctor = User::find($id);
-        return view('examination.infodoctor', compact('qrCodes', 'doctor'));
+        $is_online = false;
+        if (Cache::has('user-is-online|' . $id)){
+            $is_online = true;
+        }
+        return view('examination.infodoctor', compact('qrCodes', 'doctor', 'is_online'));
     }
 
     public function bestDoctor()
