@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Enums\ProductStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\restapi\MainApi;
+use App\Http\Controllers\TranslateController;
 use App\Models\Clinic;
 use App\Models\ProductInfo;
 use App\Models\WishList;
@@ -152,18 +153,25 @@ class BackendProductInfoController extends Controller
     {
         try {
             $name = $request->input('name');
-            $name_en = $request->input('name_en');
-            $name_laos = $request->input('name_laos');
+
             if ($name == null) {
                 return response('Name is required', 400);
             }
+
+            $translate = new TranslateController();
+            $name_en = $translate->translateText($request->input('name'), 'en');
+            $name_laos = $translate->translateText($request->input('name'), 'lo');
+
+
             $category_id = $request->input('category_id');
             if ($category_id == null) {
                 return response('Category is required', 400);
             }
+
             $brand_name = $request->input('brand_name');
-            $brand_name_en = $request->input('brand_name_en');
-            $brand_name_laos = $request->input('brand_name_laos');
+            $brand_name_en = $translate->translateText($request->input('brand_name'), 'en');
+            $brand_name_laos = $translate->translateText($request->input('brand_name'), 'lo');
+
             $province_id = $request->input('province_id');
             if ($province_id == null) {
                 return response('Province is required', 400);
@@ -173,8 +181,9 @@ class BackendProductInfoController extends Controller
                 return response('Price is required', 400);
             }
             $description = $request->input('description');
-            $description_en = $request->input('description_en');
-            $description_laos = $request->input('description_laos');
+            $description_en = $translate->translateText($request->input('description'), 'en');
+            $description_laos = $translate->translateText($request->input('description'), 'lo');
+
             if ($description == null) {
                 return response('Description is required', 400);
             }

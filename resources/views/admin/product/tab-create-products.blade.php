@@ -17,45 +17,21 @@
     <form id="form-create-product" action="#" method="post">
         <div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <label for="name">{{ __('home.Name') }}</label>
                     <input type="text" class="form-control" id="name" name="name" required>
-                </div>
-                <div class="col-md-4">
-                    <label for="name_en">{{ __('home.name_en') }}</label>
-                    <input type="text" class="form-control" id="name_en" name="name_en" required>
-                </div>
-                <div class="col-md-4">
-                    <label for="name_laos">{{ __('home.name_laos') }}</label>
-                    <input type="text" class="form-control" id="name_laos" name="name_laos" required>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-sm-4"><label for="description">{{ __('home.Mô tả dài việt') }}</label>
+                <div class="col-sm-12"><label for="description">{{ __('home.Mô tả dài việt') }}</label>
                     <textarea class="form-control" name="description" id="description"></textarea>
-                </div>
-                <div class="col-sm-4"><label for="description_en">{{ __('home.Mô tả dài anh') }}</label>
-                    <textarea class="form-control" name="description_en" id="description_en"></textarea>
-                </div>
-                <div class="col-sm-4"><label for="description_laos">{{ __('home.Mô tả dài lào') }}</label>
-                    <textarea class="form-control" name="description_laos" id="description_laos"></textarea>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <label for="brand_name">{{ __('home.Brand Name') }}</label>
                     <input type="text" class="form-control" id="brand_name" name="brand_name"
-                           value="" required>
-                </div>
-                <div class="col-md-4">
-                    <label for="brand_name_en">{{ __('home.Brand Name English') }}</label>
-                    <input type="text" class="form-control" id="brand_name_en" name="brand_name_en"
-                           value="" required>
-                </div>
-                <div class="col-md-4">
-                    <label for="brand_name_laos">{{ __('home.Brand Name Laos') }}</label>
-                    <input type="text" class="form-control" id="brand_name_laos" name="brand_name_laos"
                            value="" required>
                 </div>
             </div>
@@ -158,9 +134,8 @@
             };
             const formData = new FormData();
 
-            const arrField = ['name', 'name_en', 'name_laos',
-                'category_id', 'brand_name', 'brand_name_en',
-                'brand_name_laos', 'province_id', 'price',
+            const arrField = ['name',
+                'category_id', 'brand_name', 'province_id', 'price',
                 'price_unit', 'ads_plan', 'ads_period',
                 'user_id', 'quantity'];
 
@@ -168,7 +143,7 @@
             /* Tạo fn appendDataForm ở admin blade*/
             isValid = appendDataForm(arrField, formData, isValid);
 
-            const fieldTextareaTiny = ["description", "description_en", "description_laos"];
+            const fieldTextareaTiny = ["description"];
             fieldTextareaTiny.forEach(fieldTextarea => {
                 const content = tinymce.get(fieldTextarea).getContent();
                 if (!content) {
