@@ -75,7 +75,7 @@
             <td>${item.registered} / ${item.max_register ?? 0}</td>
             <td>${item.startDate} - ${item.end_evaluate}</td>
             <td>${item.status}</td>
-            <td><a href="${urlView}"> {{ __('home.Xem đơn đăng ký') }} </a> | <a href="${urlEdit}"> {{ __('home.Edit') }}</a>  @if(\App\Models\Coupon::isAdmin(Auth::user()->id))| <a href="#" onclick="checkDelete(${item.id})">{{ __('home.Delete') }}</a> @endif</td>
+            <td><a href="${urlView}"> {{ __('home.Xem đơn đăng ký') }} </a> | @if(\App\Models\Coupon::isAdmin(Auth::user()->id))<a href="${urlEdit}"> {{ __('home.Edit') }}</a> | <a href="#" onclick="checkDelete(${item.id})">{{ __('home.Delete') }}</a> @endif</td>
         </tr>`;
             }
             await $('#ProductsAdmin').empty().append(html);

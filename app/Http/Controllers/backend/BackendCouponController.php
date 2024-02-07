@@ -28,7 +28,9 @@ class BackendCouponController extends Controller
             } else {
                 $clinic_id = Clinic::where('user_id', Auth::user()->id)->pluck('id');
             }
-            $coupons = Coupon::whereIn('clinic_id', $clinic_id)->orderBy('created_at', 'desc');
+            $coupons = Coupon::whereIn('clinic_id', $clinic_id)
+                ->where('status', '!=', CouponStatus::DELETED)
+                ->orderBy('created_at', 'desc');
         }
 
         if ($type) {
@@ -170,7 +172,6 @@ class BackendCouponController extends Controller
 //                || $user->member == 'CLINICS') {
 //                $this->saveCoupon($coupon, $request);
 //            }
-
 
 
             return response()->json($coupon);
