@@ -58,7 +58,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group has-search position-relative w-auto mt-3 mr-3 mr-md-0">
+                <div class="form-group has-search position-relative w-100 mt-3 mr-3 mr-md-0">
                     <span class="fa fa-search form-control-feedbackSearch p-md-3"></span>
                     <input type="text" id="inputSearch" onkeypress="processSearchDoctor();" class="form-control"
                            placeholder="{{ __('home.Search for anything…') }}">

@@ -8,21 +8,29 @@ use App\Enums\TypeCoupon;
 use App\Models\Clinic;
 use App\Models\Coupon;
 use App\Models\SocialUser;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Auth;
 
 class WhatFreeToDay extends Controller
 {
     public function index()
     {
+        $nameSearch = request('search-input');
         $activeCouponsQuery = Coupon::where('status', '=', CouponStatus::ACTIVE);
         $now = now('Asia/Ho_Chi_Minh');
-        $coupons = $activeCouponsQuery->whereIn('type', TypeCoupon::getArray())->where('end_evaluate', '>',
-            $now)->orderBy('created_at', 'desc')->get();
+        $coupons = $activeCouponsQuery->whereIn('type', TypeCoupon::getArray())
+            ->where('end_evaluate', '>', $now)
+            ->orderBy('created_at', 'desc');
+
+        if (!empty($nameSearch)) {
+            $coupons->where('title', 'LIKE', '%' . $nameSearch . '%');
+        }
+        $coupons = $coupons->get();
         $coupons_freeToDay = $coupons->where('type', TypeCoupon::FREE_TODAY)->take(6);
         $coupons_withMission = $coupons->where('type', TypeCoupon::FREE_MISSION)->take(6);
         $coupons_discount = $coupons->where('type', TypeCoupon::DISCOUNT_SERVICE)->take(6);
 
-        return view('What-free.what-free', compact('coupons_freeToDay', 'coupons_withMission', 'coupons_discount'));
+        return view('What-free.what-free', compact('coupons_freeToDay', 'coupons_withMission', 'coupons_discount', 'nameSearch'));
     }
 
     public function toDay()
