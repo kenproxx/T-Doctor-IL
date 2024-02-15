@@ -156,6 +156,7 @@ return [
     'Please select a date and time' => 'ກະລຸນາເລືອກວັນທີ ແລະເວລາ',
     'Reset' => 'ຣີເຊັດ',
     'Apply' => 'ສະໝັກ',
+    'Đã hết thời gian ứng tuyển' => 'ເວລາການສະໝັກຫຼັງຈາກການສະໝັກ',
     'Sell my product' => 'ຂາຍຜະລິດຕະພັນຂອງຂ້ອຍ',
     'Product' => 'ຜະລິດຕະພັນ',
     'Sold' => 'ຂາຍແລ້ວ',

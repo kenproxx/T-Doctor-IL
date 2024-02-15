@@ -163,6 +163,7 @@ return [
     'Please select a date and time' => 'Please select a date and time',
     'Reset' => 'Reset',
     'Apply' => 'Apply',
+    'Đã hết thời gian ứng tuyển' => 'The application time has expired',
     'Bạn đã ứng tuyển' => 'You have applied',
     'Kiểm tra tình trạng truyền thông.' => 'Check communication status.',
     'Bạn chưa kết nối với kênh truyền thông này.' => 'You have not connected to this communication channel.',

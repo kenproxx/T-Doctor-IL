@@ -157,6 +157,7 @@ return [
     'Please select a date and time' => 'Vui lòng chọn ngày và giờ',
     'Reset' => 'Cài lại',
     'Apply' => 'Áp dụng',
+    'Đã hết thời gian ứng tuyển' => 'Đã hết thời gian ứng tuyển',
     'Sell my product' => 'Bán sản phẩm của tôi',
     'Product' => 'Sản phẩm',
     'Sold' => 'Đã bán',

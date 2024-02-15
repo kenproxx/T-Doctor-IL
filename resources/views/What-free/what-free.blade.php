@@ -22,8 +22,8 @@
         <div class=" medicine-search d-block d-sm-none">
             <div class="medicine-search--center row">
                 <form class="search-box col-12">
-                    <input type="search" name="focus"
-                           placeholder="{{ __('home.Search for anything…') }}" id="search-input" value="">
+                    <input type="search" name="search-input"
+                           placeholder="{{ __('home.Search for anything…') }}" id="search-input" value="{{$nameSearch}}">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </form>
             </div>

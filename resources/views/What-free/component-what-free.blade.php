@@ -27,7 +27,11 @@
                      src="{{asset($coupon->thumbnail)}}">
             </div>
             @php
-                $daysRemaining = \Carbon\Carbon::now()->diffInDays($coupon->end_evaluate);
+            if ($coupon->endDate >= \Carbon\Carbon::now()) {
+                $daysRemaining = \Carbon\Carbon::now()->diffInDays($coupon->endDate);
+            } else {
+                $daysRemaining = 0;
+            }
             @endphp
 
             <div class="d-flex align-items-center  mt-3">
@@ -48,13 +52,13 @@
             <div class="mt-3 flea-content-product max-2-line-title">{{ $coupon->title }}
             </div>
             <div
-                class="text-gray mt-2 text-short-description max-3-line-content">{!! $coupon->short_description !!}
+                    class="text-gray mt-2 text-short-description max-3-line-content">{!! $coupon->short_description !!}
             </div>
         </a>
         <div class="justify-content-between d-flex mt-2">
             <i class="fa-solid fa-user-group d-flex align-items-center">
                 <p
-                    class="flea-content-product ml-2 fs-12">{{ $coupon->registered }}
+                        class="flea-content-product ml-2 fs-12">{{ $coupon->registered }}
                     /{{ $coupon->max_register }}
                 </p>
             </i>

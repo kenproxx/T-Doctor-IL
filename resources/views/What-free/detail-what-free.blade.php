@@ -256,10 +256,17 @@
                                     $exitCouponApply = \App\Models\CouponApply::where('user_id', Auth::user()->id)->where('coupon_id', $coupon->id)->first();
                                 @endphp
                                 @if(!$exitCouponApply)
-                                    <div class="div-7 d-flex justify-content-between">
-                                        <button id="button-apply"
-                                                class="text-wrapper-5 w-100">{{ __('home.Apply') }}</button>
-                                    </div>
+                                    @if($coupon->endDate <= Carbon::now())
+                                        <div class="div-7 d-flex justify-content-between">
+                                            <button class="text-wrapper-5 w-100">{{ __('home.Đã hết thời gian ứng tuyển') }}</button>
+                                        </div>
+                                    @else
+                                        <div class="div-7 d-flex justify-content-between">
+                                            <button id="button-apply"
+                                                    class="text-wrapper-5 w-100">{{ __('home.Apply') }}</button>
+                                        </div>
+                                    @endif
+
                                 @else
                                     <span class="text-wrapper-55 w-100">{{ __('home.Bạn đã ứng tuyển') }}</span>
                                 @endif
