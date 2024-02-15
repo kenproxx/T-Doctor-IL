@@ -112,7 +112,7 @@ class BookingApi extends Controller
                 $arrayBooking = $booking->toArray();
                 $arrayBooking['time_convert_checkin'] = date('Y-m-d H:i:s', strtotime($booking->check_in));
 
-                $survey_answer_user = SurveyAnswerUser::where([['booking_id', $booking->id], ['user_id', $id]])->get();
+                $survey_answer_user = SurveyAnswerUser::where('booking_id', $booking->id)->get();
 
                 $arrQuestion = [];
 
