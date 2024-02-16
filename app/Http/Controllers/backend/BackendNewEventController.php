@@ -82,21 +82,30 @@ class BackendNewEventController extends Controller
      */
     public function update(Request $request)
     {
-        $params = $request->only('title', 'title_en', 'title_laos', 'status', 'type',
-            'short_description', 'short_description_en', 'short_description_laos', 'description', 'description_en', 'description_laos');
+        $params = $request->only('title', 'status', 'type', 'short_description', 'description');
 
         /* kiểm tra 1 trong những title, title_en, title_laos phải khác null */
-        if ($params['title'] == null || $params['title_en'] == null || $params['title_laos'] == null) {
+        if ($params['title'] == null) {
             return response('Vui lòng nhập tiêu đề !!!', 400);
         }
         /* kiểm tra 1 trong những short_description phải khác null */
-        if ($params['short_description'] == null || $params['short_description_en'] == null || $params['short_description_laos'] == null) {
+        if ($params['short_description'] == null) {
             return response('Vui lòng nhập mô tả ngắn !!!', 400);
         }
         /* kiểm tra 1 trong những description phải khác null */
-        if ($params['description'] == null || $params['description_en'] == null || $params['description_laos'] == null) {
+        if ($params['description'] == null) {
             return response('Vui lòng nhập nội dung !!!', 400);
         }
+
+        $translate = new TranslateController();
+        $params['title_en'] = $translate->translateText($params['title'], 'en');
+        $params['title_laos'] = $translate->translateText($params['title'], 'lo');
+
+        $params['short_description_en'] = $translate->translateText($params['short_description'], 'en');
+        $params['short_description_laos'] = $translate->translateText($params['short_description'], 'lo');
+
+        $params['description_en'] = $translate->translateText($params['description'], 'en');
+        $params['description_laos'] = $translate->translateText($params['description'], 'lo');
 
         if ($request->hasFile('thumbnail')) {
             $item = $request->file('thumbnail');

@@ -8,6 +8,7 @@ use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\restapi\MainApi;
+use App\Http\Controllers\TranslateController;
 use App\Models\Clinic;
 use App\Models\Role;
 use App\Models\RoleUser;
@@ -101,14 +102,11 @@ class BackendClinicController extends Controller
             if ($name == null) {
                 return response("Name not null!", 400);
             }
-            $name_en = $request->input('name_en');
-            if ($name_en == null) {
-                return response("Name English not null!", 400);
-            }
-            $name_laos = $request->input('name_laos');
-            if ($name_laos == null) {
-                return response("Name Laos not null!", 400);
-            }
+
+            $translate = new TranslateController();
+            $name_en = $translate->translateText($name, 'en');
+            $name_laos = $translate->translateText($name, 'lo');
+
             $phone = $request->input('phone');
             if ($phone == null) {
                 return response("Phone not null!", 400);
@@ -118,8 +116,10 @@ class BackendClinicController extends Controller
                 return response("Email not null!", 400);
             }
             $address_detail = $request->input('address_detail');
-            $address_detail_en = $request->input('address_detail_en');
-            $address_detail_laos = $request->input('address_detail_laos');
+
+            $address_detail_en = $translate->translateText($address_detail, 'en');
+            $address_detail_laos = $translate->translateText($address_detail, 'lo');
+
             if ($address_detail == null) {
                 return response("Address not null!", 400);
             }
@@ -336,13 +336,18 @@ class BackendClinicController extends Controller
             $clinic = Clinic::find($id);
 
             $name = $request->input('name') ?? $clinic->name;
-            $name_en = $request->input('name_en') ?? $clinic->name_en;
-            $name_laos = $request->input('name_laos') ?? $clinic->name_laos;
+
+            $translate = new TranslateController();
+            $name_en = $translate->translateText($name, 'en');
+            $name_laos = $translate->translateText($name, 'lo');
+
             $phone = $request->input('phone') ?? $clinic->phone;
             $email = $request->input('email') ?? $clinic->email;
             $address_detail = $request->input('address_detail') ?? $clinic->address_detail;
-            $address_detail_en = $request->input('address_detail_en') ?? $clinic->address_detail_en;
-            $detail_address_laos = $request->input('address_detail_laos') ?? $clinic->address_detail_laos;
+
+            $address_detail_en = $translate->translateText($address_detail, 'en');
+            $address_detail_laos = $translate->translateText($address_detail, 'lo');
+
             $nation_id = $request->input('nation_id');
             $province_id = $request->input('province_id');
             $district_id = $request->input('district_id');
@@ -387,7 +392,7 @@ class BackendClinicController extends Controller
             $clinic->longitude = $longitude;
             $clinic->latitude = $latitude;
             $clinic->address_detail = $address_detail;
-            $clinic->address_detail_laos = $detail_address_laos ?? '';
+            $clinic->address_detail_laos = $address_detail_laos ?? '';
             $clinic->address_detail_en = $address_detail_en ?? '';
             $address = [
                 'nation_id' => $nation_id,

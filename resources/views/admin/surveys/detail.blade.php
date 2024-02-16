@@ -85,16 +85,6 @@
                         <input type="text" class="form-control" id="question" maxlength="200" required
                                value="{{ $survey->question }}">
                     </div>
-                    <div class="form-group">
-                        <label for="question_en">{{ __('home.Question EN') }}</label>
-                        <input type="text" class="form-control" maxlength="200" id="question_en" required
-                               value="{{ $survey->question_en }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="question_laos">{{ __('home.Question Laos') }}</label>
-                        <input type="text" class="form-control" maxlength="200" id="question_laos" required
-                               value="{{ $survey->question_laos }}">
-                    </div>
                 </div>
 
                 <div class="row" >
@@ -202,7 +192,7 @@
             const formData = new FormData();
 
             const fieldNames = [
-                "question", "question_en", "question_laos",
+                "question",
                 "department_id", "type",
             ];
 
