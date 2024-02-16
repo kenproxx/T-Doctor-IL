@@ -258,8 +258,11 @@
                                 @if(!$exitCouponApply)
                                     @if($coupon->endDate <= Carbon::now())
                                         <div class="div-7 d-flex justify-content-between">
-                                            <button class="text-wrapper-5 w-100">{{ __('home.Đã hết thời gian ứng tuyển') }}</button>
+                                            <button
+                                                class="text-wrapper-5 w-100">{{ __('home.Đã hết thời gian ứng tuyển') }}</button>
                                         </div>
+                                    @elseif($coupon->startDate >= Carbon::now())
+                                        <div class="text-wrapper-55">{{ __('home.Coupon chưa mở') }}</div>
                                     @else
                                         <div class="div-7 d-flex justify-content-between">
                                             <button id="button-apply"
@@ -278,6 +281,7 @@
                                 </button>
                             </div>
                         @endif
+
                     </div>
 
                     <div class="form-2 d-none" id="form-apply">

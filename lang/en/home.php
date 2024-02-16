@@ -429,6 +429,7 @@ return [
     'Visit information' => 'Visit information',
     'SNS option' => 'SNS option',
     'Applicant information' => 'Applicant information',
+    'Coupon chưa mở' => 'Coupon chưa mở',
     'Contact number' => 'Contact number',
     'Apply motivation' => 'Apply motivation',
     'My campaign' => 'My campaign',

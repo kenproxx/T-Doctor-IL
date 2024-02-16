@@ -422,6 +422,7 @@ return [
     'Visit information' => 'ຢ້ຽມຢາມຂໍ້ມູນ',
     'SNS option' => 'ທາງເລືອກ SNS',
     'Applicant information' => 'ຂໍ້ມູນຜູ້ສະໝັກ',
+    'Coupon chưa mở' => 'ຄູປອງຍັງບໍ່ເປີດ',
     'Contact number' => 'ເບີໂທຕິດຕໍ່',
     'Apply motivation' =>'ນຳໃຊ້ແຮງຈູງໃຈ',
     'My campaign' => 'ແຄມເປນຂອງຂ້ອຍ',
