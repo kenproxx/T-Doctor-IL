@@ -40,7 +40,7 @@
             text-decoration: underline;
         }
 
-        input#remember-me {
+        input#remember-me-check {
             width: 18px;
             height: 18px;
             top: 3px;
@@ -309,9 +309,9 @@
                                 </div>
                             </div>
                             <div class="form-element remember-me d-flex">
-                                <input id="remember-me" type="checkbox" required>
+                                <input id="remember-me-check" type="checkbox" checked>
                                 <label class="fs-14 font-weight-800"
-                                       for="remember-me">{{ __('home.Agree to Terms of Service and Privacy Policy') }}</label>
+                                       for="remember-me-check">{{ __('home.Agree to Terms of Service and Privacy Policy') }}</label>
                             </div>
 
                             {{--                            <div>--}}
@@ -386,11 +386,11 @@
                     alert('{{ __('home.Please enter your email') }}')
                     return;
                 }
-                if (document.getElementById('remember-me').checked === false) {
+
+                if (document.getElementById('remember-me-check').checked === false) {
                     alert('{{ __('home.Please agree to the terms of service and privacy policy') }}')
                     return;
                 }
-                console.log(document.getElementById('remember-me').checked === false)
                 // check regex email
                 var email = document.getElementById('email_').value;
                 var regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
