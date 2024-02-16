@@ -16,41 +16,21 @@
     <form id="form">
         <div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <label for="name">{{ __('home.Name') }}</label>
                     <input type="text" class="form-control" id="name" name="name" maxlength="200"
                            value="{{$product->name}}">
                 </div>
-                <div class="col-md-4">
-                    <label for="name_en">{{ __('home.name_en') }}</label>
-                    <input type="text" class="form-control" id="name_en" name="name_en" maxlength="200"
-                           value="{{$product->name_en}}">
-                </div>
-                <div class="col-md-4">
-                    <label for="name_laos">{{ __('home.name_laos') }}</label>
-                    <input type="text" class="form-control" id="name_laos" name="name_laos" maxlength="200"
-                           value="{{$product->name_laos}}">
-                </div>
-
             </div>
 
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-12">
                     <label for="description">{{ __('home.Mô tả dài việt') }}</label>
                     <textarea class="form-control" name="description"
                               id="description">{{$product->description}}</textarea>
                 </div>
-                <div class="col-sm-4">
-                    <label for="description_en">{{ __('home.Mô tả dài anh') }}</label>
-                    <textarea class="form-control" name="description_en"
-                              id="description_en">{{$product->description_en}}</textarea>
-                </div>
-                <div class="col-sm-4">
-                    <label for="description_laos">{{ __('home.Mô tả dài lào') }}</label>
-                    <textarea class="form-control" name="description_laos"
-                              id="description_laos">{{$product->description_laos}}</textarea>
-                </div>
             </div>
+
             <div class="row">
                 <div class="col-md-4">
                     <label for="brand_name">{{ __('home.Brand Name') }}</label>
@@ -59,21 +39,6 @@
                            value="{{$product->brand_name}}">
                 </div>
                 <div class="col-md-4">
-                    <label for="brand_name_en">{{ __('home.Brand Name English') }}</label>
-                    <input type="text" class="form-control" id="brand_name_en" name="brand_name_en"
-                           maxlength="200"
-                           value="{{$product->brand_name_en}}">
-                </div>
-                <div class="col-md-4">
-                    <label for="brand_name_laos">{{ __('home.Brand Name Laos') }}</label>
-                    <input type="text" class="form-control" id="brand_name_laos" name="brand_name_laos"
-                           maxlength="200"
-                           value="{{$product->brand_name_laos}}">
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
                     <label for="category_id">{{ __('home.Category') }}</label>
                     <select class="form-select" id="category_id" name="category_id">
                         @foreach($categories as $category)
@@ -85,7 +50,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     @php
                         $provinces = \App\Models\Province::find($product->province_id)->get();
                     @endphp
@@ -188,11 +153,8 @@
                 const formDataEdit = new FormData();
 
                 const fieldNames = [
-                    "name", "name_en", "category_id", "brand_name",
-                    "brand_name_en", "province_id", "price",
-                    "price_unit", "ads_plan", "ads_period",
-                    "user_id", "name_laos", "brand_name_laos",
-                    'quantity'
+                    "name", "category_id", "brand_name", "province_id", "price",
+                    "price_unit", "ads_plan", "ads_period", "user_id", 'quantity'
                 ];
 
                 let isValid = true
@@ -200,12 +162,20 @@
                 isValid = appendDataForm(fieldNames, formDataEdit, isValid);
 
                 const fieldTextareaTiny = [
-                    "description", "description_en", "description_laos"
+                    "description",
                 ];
                 fieldTextareaTiny.forEach(fieldTextarea => {
                     const content = tinymce.get(fieldTextarea).getContent();
                     if (!content) {
                         isValid = false;
+                        let labelElement = $(`label[for='${fieldTextarea}']`);
+                        let text = labelElement.text();
+                        if (!text) {
+                            text = 'The input'
+                        }
+                        text = text + ' not empty!'
+                        alert(text);
+                        return;
                     }
                     formDataEdit.append(fieldTextarea, content);
                 });
@@ -223,28 +193,29 @@
                 formDataEdit.append('status', $('#status').val());
 
                 if (isValid) {
-                    try {
-                        $.ajax({
-                            url: `{{route('api.backend.product.updatePost',$product->id)}}`,
-                            method: 'POST',
-                            headers: headers,
-                            contentType: false,
-                            cache: false,
-                            processData: false,
-                            data: formDataEdit,
-                            success: function (response) {
-                                alert('success');
-                                window.location.href = `{{route('homeAdmin.list.product')}}`
-                            },
-                            error: function (exception) {
-                                console.log(exception)
-                            }
-                        });
-                    } catch (error) {
-                        throw error;
-                    }
-                } else {
                     alert('Please check input not empty!')
+                    return;
+                }
+
+                try {
+                    $.ajax({
+                        url: `{{route('api.backend.product.updatePost',$product->id)}}`,
+                        method: 'POST',
+                        headers: headers,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: formDataEdit,
+                        success: function (response) {
+                            alert('success');
+                            window.location.href = `{{route('homeAdmin.list.product')}}`
+                        },
+                        error: function (exception) {
+                            console.log(exception)
+                        }
+                    });
+                } catch (error) {
+                    throw error;
                 }
             })
         })

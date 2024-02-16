@@ -7,34 +7,15 @@
     <div class="container">
         <form>
             <div class="row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-12">
                     <label for="name">{{ __('home.Name') }}</label>
                     <input type="text" class="form-control" id="name" maxlength="200" required>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="name_en">{{ __('home.name_en') }}</label>
-                    <input type="text" class="form-control" maxlength="200" id="name_en" required>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="name_laos">{{ __('home.name_laos') }}</label>
-                    <input type="text" class="form-control" maxlength="200" id="name_laos" required>
-                </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-12">
                     <label for="description">{{ __('home.Description') }}</label>
                     <textarea class="form-control" id="description" placeholder="{{ __('home.Description') }}"
-                              rows="3"></textarea>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="description_en">{{ __('home.Description English') }}</label>
-                    <textarea class="form-control" id="description_en"
-                              placeholder="{{ __('home.Description English') }}"
-                              rows="3"></textarea>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="description_laos">{{ __('home.Description Laos') }}</label>
-                    <textarea class="form-control" id="description_laos" placeholder="{{ __('home.Description Laos') }}"
                               rows="3"></textarea>
                 </div>
             </div>
@@ -48,7 +29,8 @@
                     <select id="parent_id" class="form-select">
                         <option value="0">{{ __('home.Choose...') }}</option>
                         @foreach($categories as $category)
-                            <option value="{{$category->id}}" data-limit="30" class="text-shortcut">{{$category->name}}</option>
+                            <option value="{{$category->id}}" data-limit="30"
+                                    class="text-shortcut">{{$category->name}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -85,20 +67,27 @@
                 const formData = new FormData();
 
                 const fieldNames = [
-                    "name", "name_en", "name_laos",
-                    "parent_id", "status",
+                    "name", "parent_id", "status",
                 ];
 
                 let isValid = true;
                 isValid = appendDataForm(fieldNames, formData, isValid);
 
                 const fieldTextareaTiny = [
-                    'description', 'description_en', 'description_laos',
+                    'description',
                 ];
                 fieldTextareaTiny.forEach(fieldTextarea => {
                     const content = tinymce.get(fieldTextarea).getContent();
                     if (!content) {
                         isValid = false;
+                        let labelElement = $(`label[for='${fieldTextarea}']`);
+                        let text = labelElement.text();
+                        if (!text) {
+                            text = 'The input'
+                        }
+                        text = text + ' not empty!'
+                        alert(text);
+                        return;
                     }
                     formData.append(fieldTextarea, content);
                 });
@@ -107,30 +96,36 @@
                 formData.append("user_id", '{{ Auth::user()->id }}');
                 if (!file) {
                     isValid = false;
+                    let labelElement = $(`label[for='thumbnail`);
+                    let text = labelElement.text();
+                    text = text + ' not empty!'
+                    alert(text);
+                    return;
                 }
                 formData.append("thumbnail", file);
 
-                if (isValid) {
-                    await $.ajax({
-                        url: categoryUrl,
-                        method: 'POST',
-                        headers: headers,
-                        contentType: false,
-                        cache: false,
-                        processData: false,
-                        data: formData,
-                        success: function (response) {
-                            alert('Create success!');
-                            window.location.href = `{{ route('view.admin.category.index') }}`;
-                        },
-                        error: function (error) {
-                            console.log(error);
-                            alert('Create error!');
-                        }
-                    });
-                } else {
+                if (!isValid) {
                     alert('Please check input require!')
+                    return;
                 }
+
+                await $.ajax({
+                    url: categoryUrl,
+                    method: 'POST',
+                    headers: headers,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    data: formData,
+                    success: function (response) {
+                        alert('Create success!');
+                        window.location.href = `{{ route('view.admin.category.index') }}`;
+                    },
+                    error: function (error) {
+                        console.log(error);
+                        alert('Create error!');
+                    }
+                });
             }
         })
     </script>

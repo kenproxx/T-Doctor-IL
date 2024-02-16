@@ -24,23 +24,11 @@
                        value="{{ $categoryProduct->name ?? '' }}">
             </div>
             <div class="col-sm-4">
-                <label for="name_en">{{ __('home.Title Anh') }}</label>
-                <input required type="text" class="form-control" id="name_en" name="name_en"
-                       value="{{ $categoryProduct->name_en ?? '' }}">
-            </div>
-            <div class="col-sm-4">
-                <label for="name_laos">{{ __('home.Title Lào') }}</label>
-                <input required type="text" class="form-control" id="name_laos" name="name_laos"
-                       value="{{ $categoryProduct->name_laos ?? '' }}">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
                 <label for="thumbnail">{{ __('home.Thumbnail') }}</label>
                 <input type="file" class="form-control" id="thumbnail" name="thumbnail">
                 <img loading="lazy" src="{{ asset($categoryProduct->thumbnail) }}" alt="" width="80px">
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <label for="status">{{ __('home.Status') }}</label>
                 <select class="form-select" id="status" name="status">
                     <option
@@ -64,7 +52,7 @@
             };
             const formData = new FormData();
 
-            const arrField = ['name', 'name_en', 'name_laos', 'status', 'id'];
+            const arrField = ['name', 'status', 'id'];
 
             let isValid = true
             /* Tạo fn appendDataForm ở admin blade*/
