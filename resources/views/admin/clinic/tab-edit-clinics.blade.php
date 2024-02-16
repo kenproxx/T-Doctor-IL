@@ -168,18 +168,9 @@
         @method('POST')
         <div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-12">
                     <label for="name">{{ __('home.Name') }}</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{$clinic->name}}">
-                </div>
-                <div class="col-md-4">
-                    <label for="name_en">{{ __('home.name_en') }}</label>
-                    <input type="text" class="form-control" id="name_en" name="name_en" value="{{$clinic->name_en}}">
-                </div>
-                <div class="col-md-4">
-                    <label for="name_laos">{{ __('home.name_laos') }}</label>
-                    <input type="text" class="form-control" id="name_laos" name="name_laos"
-                           value="{{$clinic->name_laos}}">
                 </div>
             </div>
             <div class="row">
@@ -195,20 +186,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-12">
                     <label for="address_detail">{{ __('home.địa chỉ chi tiết việt') }}</label>
                     <input type="text" class="form-control" name="address_detail" id="address_detail"
                            value="{{$clinic->address_detail}}">
-                </div>
-                <div class="col-sm-4">
-                    <label for="address_detail_en">{{ __('home.địa chỉ chi tiết anh') }}</label>
-                    <input type="text" class="form-control" name="address_detail_en" id="address_detail_en"
-                           value="{{$clinic->address_detail_en}}">
-                </div>
-                <div class="col-sm-4">
-                    <label for="address_detail_laos">{{ __('home.địa chỉ chi tiết lào') }}</label>
-                    <input type="text" class="form-control" name="address_detail_laos" id="address_detail_laos"
-                           value="{{$clinic->address_detail_laos}}">
                 </div>
             </div>
             <div class="row">
@@ -696,9 +677,8 @@
                 ];
 
                 const arrField = [
-                    "name", "name_en", "name_laos", "phone", "costs",
-                    "longitude", "latitude", "address_detail", "address_detail_en", "email",
-                    "address_detail_laos", "province_id", "district_id", "commune_id",
+                    "name", "phone", "costs", "longitude", "latitude", "address_detail",
+                    "email", "province_id", "district_id", "commune_id",
                     "open_date", "close_date", "user_id", "time_work", "type", "status",
                     "clinics_service", "departments", "symptoms", "representative_doctor",
                 ];

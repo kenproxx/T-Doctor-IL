@@ -8,6 +8,7 @@ use App\Enums\SurveyType;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\restapi\MainApi;
 use App\Http\Controllers\restapi\SurveyApi;
+use App\Http\Controllers\TranslateController;
 use App\Models\Department;
 use App\Models\SurveyAnswer;
 use App\Models\SurveyAnswerUser;
@@ -61,7 +62,11 @@ class AdminSurveyApi extends Controller
         try {
             $survey = new SurveyQuestion();
 
-            $params = $request->only('question', 'question_en', 'question_laos', 'department_id', 'type');
+            $params = $request->only('question', 'department_id', 'type');
+
+            $translate = new TranslateController();
+            $params['question_en'] = $translate->translateText($params['question'], 'en');
+            $params['question_laos'] = $translate->translateText($params['question'], 'lo');
 
             $department = Department::find($params['department_id']);
             if (!$department || $department->status == DepartmentStatus::DELETED) {
@@ -109,7 +114,11 @@ class AdminSurveyApi extends Controller
         try {
             $survey = SurveyQuestion::find($id);
 
-            $params = $request->only('question', 'question_en', 'question_laos', 'department_id', 'type');
+            $params = $request->only('question', 'department_id', 'type');
+
+            $translate = new TranslateController();
+            $params['question_en'] = $translate->translateText($params['question'], 'en');
+            $params['question_laos'] = $translate->translateText($params['question'], 'lo');
 
             $department = Department::find($params['department_id']);
             if (!$department || $department->status == DepartmentStatus::DELETED) {
