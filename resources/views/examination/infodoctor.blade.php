@@ -67,7 +67,7 @@
                                 <button class="button">{{ __('home.Chat') }}</button>
                             </a>
                             @if($is_online)
-                                <form method="post" action="{{ route('createMeeting') }}" target="_blank"
+                                <form method="post" action="{{ route('agora.call') }}" target="_blank"
                                       onsubmit="return checkDoctorOnline()">
                                     {{ csrf_field() }}
                                     <input type="hidden" name="user_id_1"
@@ -230,12 +230,12 @@
 
                 let isOnline = '{{ \Illuminate\Support\Facades\Cache::has('user-is-online|'.$doctor->id) }}';
 
+                return true;
                 if (!isOnline) {
                     alert('Bác sỹ hiện không online');
                     return false;
                 }
 
-                return true;
             }
 
             async function getAllReview() {

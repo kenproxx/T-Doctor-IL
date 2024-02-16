@@ -18,6 +18,7 @@ use App\Http\Controllers\CalcViewQuestionController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ClinicController;
+use App\Http\Controllers\connect\AgoraChatController;
 use App\Http\Controllers\connect\CallVideoController;
 use App\Http\Controllers\connect\ChatMessageController;
 use App\Http\Controllers\connect\WidgetChatController;
@@ -348,6 +349,13 @@ Route::middleware(['user.active'])->group(function () {
                         'MEETING_ID' => $meetingId
                     ]);
                 })->name('joinMeeting');
+
+
+                Route::get("/agora/test", [AgoraChatController::class, 'index'])->name('agora.index');
+                Route::post("agora/createMeeting", [AgoraChatController::class, 'createMeeting'])->name("agora.createMeeting");
+                Route::post("/agora/call", [AgoraChatController::class, 'handleCallVideo'])->name('agora.call');
+
+
             });
 
             Route::group(['prefix' => 'chat'], function () {
