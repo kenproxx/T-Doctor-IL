@@ -428,6 +428,7 @@ return [
     'Visit information' => 'Thông tin chuyến thăm',
     'SNS option' => 'tùy chọn SNS',
     'Applicant information' => 'Thông tin ứng viên',
+    'Coupon chưa mở' => 'Coupon chưa mở',
     'Contact number' => 'Số liên lạc',
     'Apply motivation' => 'Áp dụng động lực',
     'My campaign' => 'Chiến dịch của tôi',

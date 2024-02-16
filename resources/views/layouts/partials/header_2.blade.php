@@ -8,7 +8,7 @@
                 </a>
                 <a class="back" href="#"><h5><i class="fa-solid fa-angles-left"></i>{{ __('home.Recruitment') }} </h5></a>
             </div>
-            <div class="col-md-4 header-detail--center d-flex justify-content-sm-around">
+            <div class="col-md-5 header-detail--center d-flex justify-content-sm-around">
                 <a class="active" href="#">{{ __('home.My job') }}</a>
                 <a href="{{route('recruitment.apply')}}">{{ __('home.My CV') }}</a>
                 <a href="#">{{ __('home.Match Up') }}</a>

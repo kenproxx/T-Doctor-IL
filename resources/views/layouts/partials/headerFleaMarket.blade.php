@@ -19,7 +19,7 @@
                 <a class="back" href="{{route('home')}}"><h5><i
                             class="fa-solid fa-angles-left"></i>{{ __('home.Flea market') }} </h5></a>
             </div>
-            <div class="col-md-4 header-detail--center d-flex justify-content-sm-around">
+            <div class="col-md-5 header-detail--center d-flex justify-content-sm-around">
                 <a class="active" href="{{route('flea-market.index')}}">{{ __('home.My store') }}</a>
                 <a onclick="checkLoginFl()">{{ __('home.Sell my product') }}</a>
                 <a onclick="checkLoginFlWish()">{{ __('home.Wish list') }}</a>
