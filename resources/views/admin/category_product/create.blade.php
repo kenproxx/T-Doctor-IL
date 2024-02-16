@@ -18,17 +18,15 @@
     @endif
     <form enctype="multipart/form-data">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-4">
                 <label for="name">{{ __('home.Title') }} </label>
                 <input type="text" class="form-control" id="name" name="name" required>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <label for="thumbnail">{{ __('home.Thumbnail') }}</label>
                 <input type="file" class="form-control" id="thumbnail" name="thumbnail" required>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <label for="status">{{ __('home.Status') }}</label>
                 <select class="form-select" id="status" name="status">
                     <option
@@ -41,7 +39,8 @@
             </div>
         </div>
     </form>
-    <button type="button" onclick="submitForm()" class="btn btn-primary up-date-button mt-md-4">{{ __('home.Save') }}</button>
+    <button type="button" onclick="submitForm()"
+            class="btn btn-primary up-date-button mt-md-4">{{ __('home.Save') }}</button>
     <script>
 
         function submitForm() {

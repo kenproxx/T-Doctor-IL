@@ -154,7 +154,12 @@
                         $roleName = \App\Models\Role::where('id',$roleUser->role_id)->first();
 
                     @endphp
-                    <h6 class="m-0 font-weight-bold text-primary">{{ __('home.My Account') }} : @if($roleName->name != 'ADMIN')  {{$member}} @else  ADMIN @endif</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">{{ __('home.My Account') }}
+                        : @if($roleName->name != 'ADMIN')
+                            {{$member}}
+                        @else
+                            ADMIN
+                        @endif</h6>
                 </div>
 
                 <div class="card-body">
@@ -338,11 +343,7 @@
                             @endif
 
                             <!-- Doctor -->
-
-                            @php
-                                $roleItem = Auth::user()->roles()->first();
-                            @endphp
-                            @if($roleItem->name == 'DOCTORS')
+                            @if(Auth::user()->type == 'MEDICAL')
                                 <h1>Info doctor</h1>
                                 <div class="row">
                                     <div class="col-sm-4">
@@ -351,7 +352,7 @@
                                         <input type="text" class="form-control" id="identifier" name="identifier"
                                                value="{{$doctor->identifier}}">
                                     </div>
-                                    <div class="form-element col-md-4">
+                                    <div class="form-group col-md-4">
                                         <label for="workplace">{{ __('home.Workplace') }}</label>
                                         <input class="form-control" id="workplace" type="text" name="workplace" required
                                                value="{{$doctor->workplace}}">
@@ -550,13 +551,13 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="form-element">
+                                    <div class="form-group">
                                         <input name="prescription" type="checkbox" id="prescription"
                                                value="{{ $doctor->prescription == null ? '0' : '1' }}" {{ $doctor->prescription == null ? '' : 'checked' }} >
                                         <label
                                             for="prescription">{{ __('home.prescription') }}</label>
                                     </div>
-                                    <div class="form-element">
+                                    <div class="form-group">
                                         <input name="free" type="checkbox" id="free"
                                                value="{{ $doctor->free == null ? '1' : '0' }}" {{ $doctor->free == null ? '' : 'checked' }}>
                                         <label
@@ -592,6 +593,49 @@
                                             </li>
                                         @endforeach
                                     </ul>
+                                </div>
+                            @endif
+
+                            {{-- Business only --}}
+                            @if(Auth::user()->type == 'BUSINESS')
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="open_date">{{ __('home.Thời gian bắt đầu') }}</label>
+                                        <input class="form-control" id="open_date" name="open_date"
+                                               type="time" placeholder="">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="close_date">{{ __('home.Thời gian kết thúc') }}</label>
+                                        <input class="form-control" id="close_date" name="close_date"
+                                               type="time" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="experienceHospital">{{ __('home.EXPERIENCE') }}</label>
+                                        <input class="form-control" type="number" id="experienceHospital" name="experienceHospital"
+                                               placeholder="{{ __('home.EXPERIENCE') }}">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="time_work">{{ __('home.Time work') }}</label>
+                                        <select class="form-select" id="time_work" name="time_work">
+                                            <option
+                                                value="{{\App\Enums\TypeTimeWork::ALL}}">{{\App\Enums\TypeTimeWork::ALL}}</option>
+                                            <option
+                                                value="{{\App\Enums\TypeTimeWork::NONE}}">{{\App\Enums\TypeTimeWork::NONE}}</option>
+                                            <option
+                                                value="{{\App\Enums\TypeTimeWork::OFFICE_HOURS}}">{{\App\Enums\TypeTimeWork::OFFICE_HOURS}}</option>
+                                            <option
+                                                value="{{\App\Enums\TypeTimeWork::ONLY_AFTERNOON}}">{{\App\Enums\TypeTimeWork::ONLY_MORNING}}</option>
+                                            <option
+                                                value="{{\App\Enums\TypeTimeWork::ONLY_AFTERNOON}}">{{\App\Enums\TypeTimeWork::ONLY_AFTERNOON}}</option>
+                                            <option
+                                                value="{{\App\Enums\TypeTimeWork::OTHER}}">{{\App\Enums\TypeTimeWork::OTHER}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="representative">{{ __('home.REPRESENTATIVE DOCTOR') }}</label>
                                 </div>
                             @endif
                         </div>

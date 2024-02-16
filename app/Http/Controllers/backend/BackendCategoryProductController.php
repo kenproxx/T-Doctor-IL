@@ -70,12 +70,16 @@ class BackendCategoryProductController extends Controller
     public function update(Request $request)
     {
         $id = $request->input('id');
-        $params = $request->only('name', 'name_en', 'name_laos', 'status',);
+        $params = $request->only('name', 'status',);
 
         // kiểm tra 1 trong những name phải khác null
         if (empty($params['name']) || empty($params['name_en']) || empty($params['name_laos'])) {
             return response('Tên danh mục không được để trống', 400);
         }
+
+        $translate = new TranslateController();
+        $params['name_en'] = $translate->translateText($params['name'], 'en');
+        $params['name_laos'] = $translate->translateText($params['name'], 'lo');
 
         $categoryProduct = CategoryProduct::find($id);
 
