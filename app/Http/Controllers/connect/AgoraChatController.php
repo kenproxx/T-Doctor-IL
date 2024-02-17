@@ -56,6 +56,11 @@ class AgoraChatController extends Controller
 
     }
 
+    function makeTokenByUid()
+    {
+        
+    }
+
     function createMeeting(Request $request)
     {
         $user_id_1 = $request->input('user_id_1');
@@ -69,7 +74,7 @@ class AgoraChatController extends Controller
         $agora_chat->user_id_1 = $user_id_1;
         $agora_chat->user_id_2 = $user_id_2;
         $agora_chat->appid = $appid;
-        $agora_chat->uid = rand(1,10000);
+        $agora_chat->uid = Uuid::uuid();
         $agora_chat->token = $token;
         $agora_chat->channel = $channel;
         $agora_chat->save();
@@ -89,7 +94,6 @@ class AgoraChatController extends Controller
             ['user_id_1', $user_id_2],
             ['user_id_2', $user_id_1],
         ])->first();
-        dd($agora_chat);
 
         return view('video-call.index', compact('agora_chat'));
 

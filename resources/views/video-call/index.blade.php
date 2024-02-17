@@ -68,6 +68,8 @@
         channel:'{{ $agora_chat->channel }}',
     }
 
+    console.log('config:', config)
+
     //#3 - Setting tracks for when user joins
     let localTracks = {
         audioTrack:null,
