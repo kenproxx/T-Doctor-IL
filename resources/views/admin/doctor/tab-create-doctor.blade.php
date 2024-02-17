@@ -34,7 +34,8 @@
                 <div class="form-group focused">
                     <label class="form-control-label" for="name">{{ __('home.Name') }}<span
                             class="small text-danger">*</span></label>
-                    <input type="text" id="name" class="form-control" name="name" placeholder="{{ __('home.Name') }}" required
+                    <input type="text" id="name" class="form-control" name="name" placeholder="{{ __('home.Name') }}"
+                           required
                            value="">
                 </div>
             </div>
@@ -122,80 +123,30 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-12 ">
                 <label for="specialty">{{ __('home.chuyên môn việt') }}</label>
                 <input type="text" class="form-control" id="specialty" name="specialty" value="">
             </div>
-            <div class="col-sm-4">
-                <label for="specialty_en">{{ __('home.chuyên môn anh') }}</label>
-                <input type="text" class="form-control" id="specialty_en" name="specialty_en"
-                       value=""></div>
-            <div class="col-sm-4">
-                <label for="specialty_laos">{{ __('home.chuyên môn lào') }}</label>
-                <input type="text" class="form-control" id="specialty_laos" name="specialty_laos"
-                       value=""></div>
         </div>
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <label for="about_vn">{{ __('home.Thông tin giới thiệu (Tiếng Việt)') }}</label>
                 <textarea class="form-control" name="about_vn" id="about_vn"></textarea>
             </div>
-            <div class="col-sm-4">
-                <label for="about_en">{{ __('home.Thông tin giới thiệu (Tiếng Anh)') }}</label>
-                <textarea class="form-control" name="about_en" id="about_en"></textarea>
-            </div>
-            <div class="col-sm-4">
-                <label for="about_laos">{{ __('home.Thông tin giới thiệu (Tiếng Lào)') }}</label>
-                <textarea class="form-control" name="about_laos"
-                          id="about_laos"></textarea>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <label for="service">{{ __('home.Dịch vụ cung cấp việt') }}</label>
                 <textarea class="form-control" name="service" id="service"></textarea>
             </div>
-            <div class="col-sm-4">
-                <label for="service_en">{{ __('home.Dịch vụ cung cấp anh') }}</label>
-                <textarea class="form-control" name="service_en" id="service_en"></textarea>
-            </div>
-            <div class="col-sm-4">
-                <label for="service_laos">{{ __('home.Dịch vụ cung cấp lào') }}</label>
-                <textarea class="form-control" name="service_laos"
-                          id="service_laos"></textarea>
-            </div>
         </div>
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <label for="service_price">{{ __('home.Giá dịch vụ việt') }}</label>
                 <input class="form-control" type="number" min="0" name="service_price" id="service_price"
                        value="">
             </div>
-            <div class="col-sm-4">
-                <label for="service_price_en">{{ __('home.Giá dịch vụ anh') }}</label>
-                <input class="form-control" type="number" min="0" name="service_price_en" id="service_price_en"
-                       value="">
-            </div>
-            <div class="col-sm-4">
-                <label for="service_price_laos">{{ __('home.Giá dịch vụ lào') }}</label>
-                <input class="form-control" type="number" min="0" name="service_price_laos" id="service_price_laos"
-                       value="">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <label for="detail_address">{{ __('home.địa chỉ chi tiết việt') }}</label>
                 <input class="form-control" name="detail_address" id="detail_address"
-                       value="">
-            </div>
-            <div class="col-sm-4">
-                <label for="detail_address_en">{{ __('home.địa chỉ chi tiết anh') }}</label>
-                <input class="form-control" name="detail_address_en" id="detail_address_en"
-                       value="">
-            </div>
-            <div class="col-sm-4">
-                <label for="detail_address_laos">{{ __('home.địa chỉ chi tiết lào') }}</label>
-                <input class="form-control" name="detail_address_laos" id="detail_address_laos"
                        value="">
             </div>
         </div>
@@ -343,12 +294,10 @@
                 const formData = new FormData();
 
                 const fieldNames = [
-                    "specialty", "specialty_en", "specialty_laos", "workspace","identifier",
-                    "service_price", "service_price_en", "service_price_laos",
-                    "detail_address", "detail_address_en", "detail_address_laos",
-                    "province_id", "district_id", "commune_id",
-                    "time_working_1", "time_working_2", "apply_for", "address_code",
-                    "name", "year_of_experience", "status", "department_id", "username", "email", "phone", "last_name", "password", "passwordConfirm", "member", "type"
+                    "specialty", "workspace", "identifier", "service_price", "detail_address",
+                    "province_id", "district_id", "commune_id", "time_working_1", "time_working_2", "apply_for",
+                    "address_code", "name", "year_of_experience", "status", "department_id", "username",
+                    "email", "phone", "last_name", "password", "passwordConfirm", "member", "type"
                 ];
 
                 let isValid = true
@@ -356,13 +305,21 @@
                 isValid = appendDataForm(fieldNames, formData, isValid);
 
                 const fieldTextareaTiny = [
-                    "service", "service_en", "service_laos", "about_vn", "about_en", "about_laos",
+                    "service", "about_vn",
                 ];
 
                 fieldTextareaTiny.forEach(fieldTextarea => {
                     const content = tinymce.get(fieldTextarea).getContent();
                     if (!content) {
                         isValid = false;
+                        let labelElement = $(`label[for='${fieldTextarea}']`);
+                        let text = labelElement.text();
+                        if (!text) {
+                            text = 'The input'
+                        }
+                        text = text + ' not empty!'
+                        alert(text);
+                        return;
                     }
                     formData.append(fieldTextarea, content);
                 });
@@ -372,38 +329,41 @@
                 const photo = $('#avt')[0].files[0];
                 if (!photo) {
                     isValid = false;
+                    alert('Please upload image!');
+                    return;
                 }
                 formData.append('avt', photo);
                 formData.append('_token', '{{ csrf_token() }}');
 
-                if (isValid) {
-                    try {
-                        $.ajax({
-                            url: `{{route('api.backend.doctors.info.create')}}`,
-                            method: 'POST',
-                            headers: headers,
-                            contentType: false,
-                            cache: false,
-                            processData: false,
-                            data: formData,
-                            success: function () {
-                                alert('Create success', 'Success');
-                                window.location.href = '{{ route('homeAdmin.list.doctors') }}';
-                            },
-                            error: function (xhr) {
-                                if (xhr.status === 400) {
-                                    alert(xhr.responseText, 'Error');
-                                } else {
-                                    alert('Create error, Please try again!', 'Error');
-                                }
-                                console.log(xhr);
-                            }
-                        });
-                    } catch (error) {
-                        alert('Create error!');
-                    }
-                } else {
+                if (!isValid) {
                     alert('Please check input valid!');
+                    return;
+                }
+
+                try {
+                    $.ajax({
+                        url: `{{route('api.backend.doctors.info.create')}}`,
+                        method: 'POST',
+                        headers: headers,
+                        contentType: false,
+                        cache: false,
+                        processData: false,
+                        data: formData,
+                        success: function () {
+                            alert('Create success', 'Success');
+                            window.location.href = '{{ route('homeAdmin.list.doctors') }}';
+                        },
+                        error: function (xhr) {
+                            if (xhr.status === 400) {
+                                alert(xhr.responseText, 'Error');
+                            } else {
+                                alert('Create error, Please try again!', 'Error');
+                            }
+                            console.log(xhr);
+                        }
+                    });
+                } catch (error) {
+                    alert('Create error!');
                 }
             })
 

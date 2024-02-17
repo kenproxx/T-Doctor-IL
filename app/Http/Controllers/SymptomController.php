@@ -43,6 +43,9 @@ class SymptomController extends Controller
     public function update(Request $request, $id)
     {
         $symptom = Symptom::find($id);
+
+        $translate = new TranslateController();
+
         $department = $request->input('department');
         if ($request->hasFile('image')) {
             $item = $request->file('image');
@@ -52,8 +55,9 @@ class SymptomController extends Controller
         }
 
         $name = $request->input('name');
-        $name_en = $request->input('name_en');
-        $name_laos = $request->input('name_laos');
+
+        $name_en = $translate->translateText($name, 'en');
+        $name_laos = $translate->translateText($name, 'lo');
 
         if (!$name || !$name_en || !$name_laos) {
             alert()->error('Error', 'Please enter the name input!');
@@ -67,8 +71,9 @@ class SymptomController extends Controller
         $symptom->department_id = $department;
 
         $description = $request->input('description');
-        $description_en = $request->input('description_en');
-        $description_laos = $request->input('description_laos');
+
+        $description_en = $translate->translateText($description, 'en');
+        $description_laos = $translate->translateText($description, 'lo');
 
         if (!$description || !$description_en || !$description_laos) {
             alert()->error('Error', 'Please enter the description input!');
@@ -89,11 +94,14 @@ class SymptomController extends Controller
 
     public function store(Request $request)
     {
+        $name = $request->input('name');
+
         $symptom = new Symptom();
 
-        $name = $request->input('name');
-        $name_en = $request->input('name_en');
-        $name_laos = $request->input('name_laos');
+        $translate = new TranslateController();
+
+        $name_en = $translate->translateText($name, 'en');
+        $name_laos = $translate->translateText($name, 'lo');
 
         if (!$name || !$name_en || !$name_laos) {
             alert()->error('Error', 'Please enter the name input!');
@@ -113,8 +121,8 @@ class SymptomController extends Controller
         $department = $request->input('department');
 
         $description = $request->input('description');
-        $description_en = $request->input('description_en');
-        $description_laos = $request->input('description_laos');
+        $description_en = $translate->translateText($description, 'en');
+        $description_laos = $translate->translateText($description, 'lo');
 
         if (!$description || !$description_en || !$description_laos) {
             alert()->error('Error', 'Please enter the description input!');
