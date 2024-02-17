@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+{{--    <meta http-equiv='X-UA-Compatible' content='IE=edge'>--}}
     <title>Agora Demo</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='{{ asset('agora-video/style.css') }}'>
@@ -20,10 +20,9 @@
 
     <!-- <div id="users-list"></div> -->
 
-    <h1 id="site-title">Ivy Streams</h1>
-    <div id="join-wrapper">
+    <div id="join-wrapper" >
         <input id="username" type="text" placeholder="Enter your name..." />
-        <button id="join-btn">Join Stream</button>
+        <button id="join-btn">Bắt đầu</button>
     </div>
     <div id="user-streams" ></div>
 
@@ -54,6 +53,10 @@
 {{--<script src='{{ asset('agora-video/script.js') }}'></script>--}}
 
 <script>
+    let username = document.getElementById('username');
+
+    username.value = '{{ Auth::user()->name ?? 'default name' }}';
+
     //#1
     let client = AgoraRTC.createClient({mode:'rtc', codec:"vp8"})
 

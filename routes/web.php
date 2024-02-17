@@ -354,6 +354,7 @@ Route::middleware(['user.active'])->group(function () {
                 Route::get("/agora/test", [AgoraChatController::class, 'index'])->name('agora.index');
                 Route::post("agora/createMeeting", [AgoraChatController::class, 'createMeeting'])->name("agora.createMeeting");
                 Route::post("/agora/call", [AgoraChatController::class, 'handleCallVideo'])->name('agora.call');
+                Route::get("agora/joinMeeting", [AgoraChatController::class, 'joinMeeting'])->name("agora.joinMeeting");
 
 
             });

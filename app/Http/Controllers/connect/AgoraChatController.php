@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AgoraChat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Pusher\Pusher;
 
 class AgoraChatController extends Controller
 {
@@ -33,6 +34,23 @@ class AgoraChatController extends Controller
            $agora_chat = $this->createMeeting($request);
         }
 
+        $data['content'] = route('agora.joinMeeting', ['user_id_1' => $user_id_1, 'user_id_2' => $user_id_2]);
+        $data['user_id_1'] = $user_id_1;
+        $data['user_id_2'] = $user_id_2;
+
+        $options = array(
+            'cluster' => 'ap1',
+            'encrypted' => true
+        );
+
+        $PUSHER_APP_KEY = '3ac4f810445d089829e8';
+        $PUSHER_APP_SECRET = 'c6cafb046a45494f80b2';
+        $PUSHER_APP_ID = '1714303';
+
+        $pusher = new Pusher($PUSHER_APP_KEY, $PUSHER_APP_SECRET, $PUSHER_APP_ID, $options);
+
+        $pusher->trigger('send-message', 'send-message', $data);
+
         return view('video-call.index', compact('agora_chat'));
 
     }
@@ -55,6 +73,23 @@ class AgoraChatController extends Controller
         $agora_chat->save();
 
         return $agora_chat;
+    }
+
+    function joinMeeting(Request $request)
+    {
+        $user_id_1 = $request->input('user_id_1');
+        $user_id_2 = $request->input('user_id_2');
+
+        $agora_chat = AgoraChat::where([
+            ['user_id_1', $user_id_1],
+            ['user_id_2', $user_id_2],
+        ])->orWhere([
+            ['user_id_1', $user_id_2],
+            ['user_id_2', $user_id_1],
+        ])->first();
+
+        return view('video-call.index', compact('agora_chat'));
+
     }
 
 }

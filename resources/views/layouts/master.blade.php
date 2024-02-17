@@ -180,9 +180,11 @@
     // Bind a function to a Event (the full Laravel class)
     channel.bind('send-message', function (data) {
         let thisUser = '{{Auth::user()->id ?? ''}}'
-        if (data.to != thisUser) {
+        console.log(data)
+        if (data.user_id_1 != thisUser && data.user_id_2 != thisUser) {
             return;
         }
+        console.log(123)
         $('#modal-call-alert').modal('show')
         document.getElementById('modal-call-alert-label').innerHTML = 'Cuộc gọi từ ' + data.from
 
