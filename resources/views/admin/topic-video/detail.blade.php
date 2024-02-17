@@ -16,20 +16,10 @@
         @endif
         <form>
             <div class="row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-12">
                     <label for="name">{{ __('home.Name') }}</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{ $topicVideo->name }}"
                            required>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="name_en">{{ __('home.name_en') }}</label>
-                    <input type="text" class="form-control" id="name_en" value="{{ $topicVideo->name_en }}"
-                           name="name_en">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="name_laos">{{ __('home.name_laos') }}</label>
-                    <input type="text" class="form-control" id="name_laos" value="{{ $topicVideo->name_laos }}"
-                           name="name_laos">
                 </div>
             </div>
             <div class="row">
@@ -65,15 +55,12 @@
                 };
 
                 formDataEdit.append('name', document.getElementById('name').value);
-                formDataEdit.append('name_en', document.getElementById('name_en').value);
-                formDataEdit.append('name_laos', document.getElementById('name_laos').value);
                 formDataEdit.append('user_id', `{{ Auth::check() ? Auth::user()->id : '' }}`);
                 formDataEdit.append('status', document.getElementById('status').value);
                 const photo = $('#thumbnail')[0].files[0];
                 formDataEdit.append('thumbnail', photo);
 
-                if (document.getElementById('name').value &&
-                    document.getElementById('name_en').value && document.getElementById('name_laos').value) {
+                if (document.getElementById('name').value) {
                     try {
                         $.ajax({
                             url: url,

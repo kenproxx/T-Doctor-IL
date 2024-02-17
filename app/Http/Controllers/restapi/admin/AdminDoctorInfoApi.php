@@ -7,6 +7,7 @@ use App\Enums\TypeMedical;
 use App\Enums\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\TranslateController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -122,6 +123,8 @@ class AdminDoctorInfoApi extends Controller
 
     private function saveDoctorInfo($request, $doctor, $created_by)
     {
+        $translate = new TranslateController();
+
         $email = $request->input('email');
         $username = $request->input('username');
         $password = $request->input('password');
@@ -135,8 +138,9 @@ class AdminDoctorInfoApi extends Controller
         $phone = $request->input('phone');
 
         $specialty = $request->input('specialty');
-        $specialty_en = $request->input('specialty_en');
-        $specialty_laos = $request->input('specialty_laos');
+
+        $specialty_en = $translate->translateText($specialty, 'en');
+        $specialty_laos = $translate->translateText($specialty, 'lo');
 
         $year_of_experience = $request->input('year_of_experience');
 
@@ -153,16 +157,19 @@ class AdminDoctorInfoApi extends Controller
         }
 
         $service = $request->input('service');
-        $service_en = $request->input('service_en');
-        $service_laos = $request->input('service_laos');
+
+        $service_en = $translate->translateText($service, 'en');
+        $service_laos = $translate->translateText($service, 'lo');
 
         $about_vn = $request->input('about_vn');
-        $about_en = $request->input('about_en');
-        $about_lao = $request->input('about_laos');
+
+        $about_en = $translate->translateText($about_vn, 'en');
+        $about_lao = $translate->translateText($about_vn, 'lo');
 
         $service_price = $request->input('service_price');
-        $service_price_en = $request->input('service_price_en');
-        $service_price_laos = $request->input('service_price_laos');
+
+        $service_price_en = $translate->translateText($service_price, 'en');
+        $service_price_laos = $translate->translateText($service_price, 'lo');
 
         $time_working_1 = $request->input('time_working_1');
         $time_working_2 = $request->input('time_working_2');
@@ -181,15 +188,16 @@ class AdminDoctorInfoApi extends Controller
         $commune_id = $communeArray[0];
 
         $detail_address = $request->input('detail_address');
-        $detail_address_en = $request->input('detail_address_en');
-        $detail_address_laos = $request->input('detail_address_laos');
+
+        $detail_address_en = $translate->translateText($detail_address, 'en');
+        $detail_address_laos = $translate->translateText($detail_address, 'lo');
 
         $updated_by = $request->input('updated_by');
         $workspace = $request->input('workspace');
 
         $hospital = $request->input('hospital');
-        $hospital_en = $request->input('hospital_en');
-        $hospital_laos = $request->input('hospital_laos');
+        $hospital_en = $translate->translateText($hospital, 'en');
+        $hospital_laos = $translate->translateText($hospital, 'lo');
 
         $status = $request->input('status');
 

@@ -52,7 +52,8 @@
         <div class="row">
             <div class="col-sm-4">
                 <label for="identifier">{{ __('home.Mã định danh trên giấy hành nghề') }}</label>
-                <input type="text" class="form-control" id="identifier" name="identifier" value="{{ $doctor->identifier }}">
+                <input type="text" class="form-control" id="identifier" name="identifier"
+                       value="{{ $doctor->identifier }}">
             </div>
         </div>
 
@@ -123,68 +124,27 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-12">
                 <label for="specialty">{{ __('home.chuyên môn việt') }}</label>
                 <input type="text" class="form-control" id="specialty" name="specialty" value="{{$doctor->specialty}}">
             </div>
-            <div class="col-sm-4">
-                <label for="specialty_en">{{ __('home.chuyên môn anh') }}</label>
-                <input type="text" class="form-control" id="specialty_en" name="specialty_en"
-                       value="{{$doctor->specialty_en}}">
-            </div>
-            <div class="col-sm-4">
-                <label for="specialty_laos">{{ __('home.chuyên môn lào') }}</label>
-                <input type="text" class="form-control" id="specialty_laos" name="specialty_laos"
-                       value="{{$doctor->specialty_laos}}">
-            </div>
         </div>
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-12">
                 <label for="service">{{ __('home.Dịch vụ cung cấp việt') }}</label>
                 <textarea class="form-control" name="service" id="service">{{$doctor->service}}</textarea>
             </div>
-            <div class="col-sm-4">
-                <label for="service_en">{{ __('home.Dịch vụ cung cấp anh') }}</label>
-                <textarea class="form-control" name="service_en" id="service_en">{{$doctor->service_en}}</textarea>
-            </div>
-            <div class="col-sm-4">
-                <label for="service_laos">{{ __('home.Dịch vụ cung cấp lào') }}</label>
-                <textarea class="form-control" name="service_laos"
-                          id="service_laos">{{$doctor->service_laos}}</textarea>
-            </div>
         </div>
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <label for="service_price">{{ __('home.Giá dịch vụ việt') }}</label>
                 <input class="form-control" type="number" name="service_price" id="service_price"
                        value="{{$doctor->service_price}}">
             </div>
-            <div class="col-sm-4">
-                <label for="service_price_en">{{ __('home.Giá dịch vụ anh') }}</label>
-                <input class="form-control" type="number" name="service_price_en" id="service_price_en"
-                       value="{{$doctor->service_price_en}}">
-            </div>
-            <div class="col-sm-4">
-                <label for="service_price_laos">{{ __('home.Giá dịch vụ lào') }}</label>
-                <input class="form-control" type="number" name="service_price_laos" id="service_price_laos"
-                       value="{{$doctor->service_price_laos}}">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <label for="detail_address">{{ __('home.địa chỉ chi tiết việt') }}</label>
                 <input class="form-control" name="detail_address" id="detail_address"
                        value="{{$doctor->detail_address}}">
-            </div>
-            <div class="col-sm-4">
-                <label for="detail_address_en">{{ __('home.địa chỉ chi tiết anh') }}</label>
-                <input class="form-control" name="detail_address_en" id="detail_address_en"
-                       value="{{$doctor->detail_address_en}}">
-            </div>
-            <div class="col-sm-4">
-                <label for="detail_address_laos">{{ __('home.địa chỉ chi tiết lào') }}</label>
-                <input class="form-control" name="detail_address_laos" id="detail_address_laos"
-                       value="{{$doctor->detail_address_laos}}">
             </div>
         </div>
         <div class="row">
@@ -398,17 +358,9 @@
             <input hidden="" id="update_by" name="update_by" value="{{Auth::user()->id}}">
         </div>
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-12">
                 <label for="about_vn">{{ __('home.About') }}</label>
                 <textarea class="form-control" id="about_vn" rows="3">{{ $doctor->abouts }}</textarea>
-            </div>
-            <div class="col-sm-4">
-                <label for="about_en">{{ __('home.About') }}</label>
-                <textarea class="form-control" id="about_en" rows="3">{{ $doctor->abouts_en }}</textarea>
-            </div>
-            <div class="col-sm-4">
-                <label for="about_laos">{{ __('home.About') }}</label>
-                <textarea class="form-control" id="about_laos" rows="3">{{ $doctor->abouts_lao }}</textarea>
             </div>
         </div>
         <button type="button" class="btn btn-primary up-date-button mt-md-4">Lưu</button>
@@ -424,12 +376,10 @@
                 };
                 const formData = new FormData();
                 const fieldNames = [
-                    "specialty", "specialty_en", "specialty_laos", "workspace","identifier",
-                    "service_price", "service_price_en", "service_price_laos",
-                    "detail_address", "detail_address_en", "detail_address_laos",
-                    "province_id", "district_id", "commune_id",
-                    "time_working_1", "time_working_2", "apply_for", "address_code", "update_by",
-                    "name", "year_of_experience", "status", "department_id", "username", "email", "phone", "last_name", "member", "type"
+                    "specialty", "workspace", "identifier", "service_price", "detail_address",
+                    "province_id", "district_id", "commune_id", "time_working_1", "time_working_2",
+                    "apply_for", "address_code", "update_by", "name", "year_of_experience", "status",
+                    "department_id", "username", "email", "phone", "last_name", "member", "type"
                 ];
 
                 const passwords = [
@@ -437,8 +387,7 @@
                 ];
 
                 const fieldTextareaTiny = [
-                    "service", "service_en", "service_laos",
-                    "about_vn", "about_en", "about_laos",
+                    "service", "about_vn",
                 ];
 
                 passwords.forEach(fieldName => {
@@ -459,6 +408,14 @@
                     const content = tinymce.get(fieldTextarea).getContent();
                     if (!content) {
                         isValid = false;
+                        let labelElement = $(`label[for='${fieldTextarea}']`);
+                        let text = labelElement.text();
+                        if (!text) {
+                            text = 'The input'
+                        }
+                        text = text + ' not empty!'
+                        alert(text);
+                        return;
                     }
                     formData.append(fieldTextarea, content);
                 });
@@ -473,6 +430,7 @@
                     alert('Please check input not empty!')
                     return;
                 }
+
                 try {
                     $.ajax({
                         url: `{{route('api.backend.doctors.info.update.doctor', ['id' => $doctor->id])}}`,

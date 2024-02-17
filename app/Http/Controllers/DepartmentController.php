@@ -36,9 +36,13 @@ class DepartmentController extends Controller
     public function update(Request $request, $id)
     {
         $department = Department::find($id);
+
         $name = $request->input('name');
-        $name_en = $request->input('name_en');
-        $name_laos = $request->input('name_laos');
+
+        $translate = new TranslateController();
+
+        $name_en = $translate->translateText($name, 'en');
+        $name_laos = $translate->translateText($name, 'lo');
 
         if (!$name || !$name_en || !$name_laos) {
             alert()->error('Error', 'Please enter the name input!');
@@ -55,8 +59,9 @@ class DepartmentController extends Controller
         $status = DepartmentStatus::ACTIVE;
 
         $description = $request->input('description');
-        $description_en = $request->input('description_en');
-        $description_laos = $request->input('description_laos');
+
+        $description_en = $translate->translateText($description, 'en');
+        $description_laos = $translate->translateText($description, 'lo');
 
         if (!$description || !$description_en || !$description_laos) {
             alert()->error('Error', 'Please enter the description input!');
@@ -80,9 +85,13 @@ class DepartmentController extends Controller
     public function store(Request $request)
     {
         $department = new Department();
+
+        $translate = new TranslateController();
+
         $name = $request->input('name');
-        $name_en = $request->input('name_en');
-        $name_laos = $request->input('name_laos');
+
+        $name_en = $translate->translateText($name, 'en');
+        $name_laos = $translate->translateText($name, 'lo');
 
         if (!$name || !$name_en || !$name_laos) {
             alert()->error('Error', 'Please enter the name input!');
@@ -99,8 +108,8 @@ class DepartmentController extends Controller
         }
 
         $description = $request->input('description');
-        $description_en = $request->input('description_en');
-        $description_laos = $request->input('description_laos');
+        $description_en = $translate->translateText($description, 'en');
+        $description_laos = $translate->translateText($description, 'lo');
 
         if (!$description || !$description_en || !$description_laos) {
             alert()->error('Error', 'Please enter the description input!');

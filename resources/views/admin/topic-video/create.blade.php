@@ -16,17 +16,9 @@
         @endif
         <form>
             <div class="row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-12">
                     <label for="name">{{ __('home.Name') }}</label>
                     <input type="text" class="form-control" id="name" name="name" required>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="name_en">{{ __('home.name_en') }}</label>
-                    <input type="text" class="form-control" id="name_en" name="name_en">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="name_laos">{{ __('home.name_laos') }}</label>
-                    <input type="text" class="form-control" id="name_laos" name="name_laos">
                 </div>
             </div>
             <div class="row">
@@ -58,15 +50,12 @@
                 };
 
                 formDataCreate.append('name', document.getElementById('name').value);
-                formDataCreate.append('name_en', document.getElementById('name_en').value);
-                formDataCreate.append('name_laos', document.getElementById('name_laos').value);
                 formDataCreate.append('user_id', `{{ Auth::check() ? Auth::user()->id : '' }}`);
                 formDataCreate.append('status', document.getElementById('status').value);
                 let photo = $('#thumbnail')[0].files[0];
                 formDataCreate.append('thumbnail', photo);
 
-                if (document.getElementById('name').value && photo &&
-                    document.getElementById('name_en').value && document.getElementById('name_laos').value) {
+                if (document.getElementById('name').value && photo) {
                     try {
                         $.ajax({
                             url: url,
