@@ -4,6 +4,7 @@ namespace App\Http\Controllers\connect;
 
 use App\Http\Controllers\Controller;
 use App\Models\AgoraChat;
+use Faker\Provider\Uuid;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Pusher\Pusher;
@@ -68,6 +69,7 @@ class AgoraChatController extends Controller
         $agora_chat->user_id_1 = $user_id_1;
         $agora_chat->user_id_2 = $user_id_2;
         $agora_chat->appid = $appid;
+        $agora_chat->uid = Uuid::uuid();
         $agora_chat->token = $token;
         $agora_chat->channel = $channel;
         $agora_chat->save();
@@ -87,6 +89,7 @@ class AgoraChatController extends Controller
             ['user_id_1', $user_id_2],
             ['user_id_2', $user_id_1],
         ])->first();
+        dd($agora_chat);
 
         return view('video-call.index', compact('agora_chat'));
 
