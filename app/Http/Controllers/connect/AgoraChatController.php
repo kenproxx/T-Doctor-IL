@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\AgoraChat;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Pusher\Pusher;
 
 class AgoraChatController extends Controller
@@ -52,20 +53,77 @@ class AgoraChatController extends Controller
 
     }
 
+    function getInfoAgoraForApp(Request $request)
+    {
+        $agora_chat = $this->createMeeting($request);
+
+        return response()->json($agora_chat);
+    }
+
+    function handleRefreshToken(Request $request)
+    {
+        $user_id_1 = $request->input('user_id_1');
+        $user_id_2 = $request->input('user_id_2');
+
+        $agora_chat_1 = AgoraChat::where([
+            ['user_id_1', $user_id_1],
+            ['user_id_2', $user_id_2],
+        ])->first();
+
+        $agora_chat_2 = AgoraChat::where([
+            ['user_id_1', $user_id_2],
+            ['user_id_2', $user_id_1],
+        ])->first();
+
+        $token_1 = $agora_chat_1->token;
+        $token_2 = $agora_chat_2->token;
+
+        if ($token_1 == $token_2) {
+            $token = $this->genNewTokenByChanelName($agora_chat_1->channel);
+            $agora_chat_1->token = $token;
+            $agora_chat_2->token = $token;
+            $agora_chat_1->save();
+            $agora_chat_2->save();
+        }
+    }
+
     function createMeeting(Request $request)
     {
         $user_id_1 = $request->input('user_id_1');
         $user_id_2 = $request->input('user_id_2');
 
-        $appid = '0b47427ee7334417a90ff22c4e537b08';
-        $token = '007eJxTYPB/Vr3nSccEvubr2vmab14b30lz6a3gzmI6XpbzOPGYmJoCg0GSibmJkXlqqrmxsYmJoXmipUFampFRskmqqbF5koFF5I1LqQ2BjAyzOeIZGIGQBYhBfCYwyQwmWaBkXkZiCQMDAHdAIUI=';
-        $channel = 'nhat';
+        $oldAgora = AgoraChat::where([
+            ['user_id_1', $user_id_1],
+            ['user_id_2', $user_id_2],
+        ])->orWhere([
+            ['user_id_1', $user_id_2],
+            ['user_id_2', $user_id_1],
+        ])->first();
 
-        $agora_chat = new AgoraChat();
-        $agora_chat->user_id_1 = $user_id_1;
-        $agora_chat->user_id_2 = $user_id_2;
+
+        $appid = '0b47427ee7334417a90ff22c4e537b08';
+
+        if ($oldAgora) {
+            $token = $oldAgora->token;
+            $channel = $oldAgora->channel;
+        } else {
+            $channel = $user_id_1 . '-' . $user_id_2;
+            $token = $this->genNewTokenByChanelName($channel);
+        }
+
+        $agora_chat = AgoraChat::where([
+            ['user_id_1', $user_id_1],
+            ['user_id_2', $user_id_2],
+        ])->first();
+
+        if (!$agora_chat) {
+            $agora_chat = new AgoraChat();
+            $agora_chat->user_id_1 = $user_id_1;
+            $agora_chat->user_id_2 = $user_id_2;
+        }
+
         $agora_chat->appid = $appid;
-        $agora_chat->uid = $this->stripVN(User::getNameByID($user_id_1) ?? 'Default Name');
+        $agora_chat->uid = $this->stripVN(User::getNameByID($user_id_1));
         $agora_chat->token = $token;
         $agora_chat->channel = $channel;
 
@@ -74,7 +132,48 @@ class AgoraChatController extends Controller
         return $agora_chat;
     }
 
-    function stripVN($str) {
+    function genNewTokenByChanelName($chanelName)
+    {
+        $appIdAgora = '0b47427ee7334417a90ff22c4e537b08';
+        $appCertificateAgora = 'd35960a9bfb146ceb33a3a40c0b9ab3b';
+
+        $response = Http::withHeaders([
+            'authority' => 'agora-token-generator-demo.vercel.app',
+            'accept' => '*/*',
+            'accept-language' => 'vi,en-US;q=0.9,en;q=0.8,vi-VN;q=0.7,ko;q=0.6,ja;q=0.5',
+            'content-type' => 'application/json',
+            'origin' => 'https://agora-token-generator-demo.vercel.app',
+            'referer' => 'https://agora-token-generator-demo.vercel.app/',
+            'sec-ch-ua' => '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
+            'sec-ch-ua-mobile' => '?0',
+            'sec-ch-ua-platform' => '"Windows"',
+            'sec-fetch-dest' => 'empty',
+            'sec-fetch-mode' => 'cors',
+            'sec-fetch-site' => 'same-origin',
+            'user-agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        ])
+            ->post('https://agora-token-generator-demo.vercel.app/api/main?type=rtc', [
+                'appId' => $appIdAgora,
+                'certificate' => $appCertificateAgora,
+                'channel' => $chanelName,
+                'uid' => '',
+                'role' => 'publisher',
+                'expire' => 0,
+            ]);
+
+        // Access response data
+        $responseData = $response->json();
+
+        return $responseData['rtcToken'];
+
+    }
+
+    function stripVN($str)
+    {
+        if (!$str) {
+            return 'Default Name';
+        }
+
         $str = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/", 'a', $str);
         $str = preg_replace("/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/", 'e', $str);
         $str = preg_replace("/(ì|í|ị|ỉ|ĩ)/", 'i', $str);
@@ -90,6 +189,7 @@ class AgoraChatController extends Controller
         $str = preg_replace("/(Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ)/", 'U', $str);
         $str = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", 'Y', $str);
         $str = preg_replace("/(Đ)/", 'D', $str);
+
         return $str;
     }
 
