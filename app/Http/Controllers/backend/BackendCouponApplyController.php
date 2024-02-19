@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\URL;
 
 class BackendCouponApplyController extends Controller
 {
@@ -296,7 +297,7 @@ class BackendCouponApplyController extends Controller
         if ($couponApply->status == CouponApplyStatus::REWARDED) {
             return response('Không thể thay đổi trạng thái của bài đã trao giải', 400);
         }
-        if ($couponApply->status == CouponApplyStatus::PENDING) {
+        if ($couponApply->status == CouponApplyStatus::PENDING || $couponApply->status == CouponApplyStatus::INVALID) {
             $this->sendMailWhenValid($couponApply);
         }
 
@@ -344,7 +345,7 @@ class BackendCouponApplyController extends Controller
         $title = 'Thông báo ứng tuyển thành công';
         $content = 'Chúc mừng bạn đã ứng tuyển thành công.
 Yêu cầu bạn nhập link trong khung thời gian đăng bài để được đánh giá :
-' . route('what.free.reply.link', $couponApply->id);
+' . Url::signedRoute('what.free.reply.link', ['id' => $couponApply->id]);
 
         $listEmail = [];
         array_push($listEmail, $emailNguoiDungApply);

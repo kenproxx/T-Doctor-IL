@@ -5,12 +5,11 @@
     <link href="{{ asset('css/reply-link.css') }}" rel="stylesheet">
     @include('layouts.partials.header')
     @include('component.banner')
-    @auth
         @php
-            $couponApply = \App\Models\CouponApply::where('id', $id)->where('user_id', Auth::user()->id)->first();
+            $couponApply = \App\Models\CouponApply::where('id', $id)->first();
         @endphp
         <div class="container">
-            @if($couponApply != null)
+            @if($couponApply->content == null)
                 <form action="{{route('what.free.reply.link.social',$couponApply->id)}}" method="post">
                     @csrf
                     @method('POST')
@@ -49,17 +48,11 @@
                 </form>
             @else
                 <div class="container d-flex justify-content-center">
-                    <h4>Tài khoản này chưa được ứng tuyển</h4>
+                    <h4>Bạn đã gửi liên kết đăng bài</h4>
 
                 </div>
             @endif
 
-            @else
-                <div class="container d-flex justify-content-center">
-                    <h4>BAN CHƯA ĐĂNG NHẬP</h4>
-
-                </div>
-            @endauth
         </div>
 
 
