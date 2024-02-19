@@ -22,23 +22,23 @@
                             $sns_option = explode(',',$sns_option);
                         @endphp
                         <div>
-                            <label for="link_fb"><b>thông tin review FaceBook</b></label>
+                            <label for="link_fb"><b>Thông tin review FaceBook</b></label>
                             <input class="link-social" type="text" placeholder="Nhập Link" name="link_fb" id="link_fb">
                         </div>
                         <div>
-                            <label for="link_tt"><b>thông tin review Tiktok</b></label>
+                            <label for="link_tt"><b>Thông tin review Tiktok</b></label>
                             <input class="link-social" type="text" placeholder="Nhập Link" name="link_tt" id="link_tt">
                         </div>
                         <div>
-                            <label for="link_ig"><b>thông tin review Instagram</b></label>
+                            <label for="link_ig"><b>Thông tin review Instagram</b></label>
                             <input class="link-social" type="text" placeholder="Nhập Link" name="link_ig" id="link_ig">
                         </div>
                         <div>
-                            <label for="link_yt"><b>thông tin review Youtube</b></label>
+                            <label for="link_yt"><b>Thông tin review Youtube</b></label>
                             <input class="link-social" type="text" placeholder="Nhập Link" name="link_yt" id="link_yt">
                         </div>
                         <div>
-                            <label for="link_gg"><b>thông tin review Google Review</b></label>
+                            <label for="link_gg"><b>Thông tin review Google Review</b></label>
                             <input class="link-social" type="text" placeholder="Nhập Link" name="link_gg" id="link_gg">
                         </div>
                         <div class="clearfix">
