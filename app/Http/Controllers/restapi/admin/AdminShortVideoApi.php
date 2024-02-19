@@ -4,6 +4,7 @@ namespace App\Http\Controllers\restapi\admin;
 
 use App\Enums\ShortVideoStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\TranslateController;
 use App\Models\ShortVideo;
 use Illuminate\Http\Request;
 
@@ -131,14 +132,17 @@ class AdminShortVideoApi extends Controller
     public function update(Request $request, $id)
     {
         try {
+            $translate = new TranslateController();
+
             $video = ShortVideo::find($id);
             if (!$video || $video->status == ShortVideoStatus::DELETED) {
                 return response('Not found!', 404);
             }
 
             $title = $request->input('title');
-            $title_en = $request->input('title_en');
-            $title_laos = $request->input('title_laos');
+
+            $title_en = $translate->translateText($title, 'en');
+            $title_laos = $translate->translateText($title, 'lo');
 
             $views = $request->input('views');
             $shares = $request->input('shares');

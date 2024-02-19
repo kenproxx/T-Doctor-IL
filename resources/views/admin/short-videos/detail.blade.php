@@ -16,20 +16,10 @@
         @endif
         <form>
             <div class="row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-12">
                     <label for="title">{{ __('home.Title') }}</label>
                     <input type="text" class="form-control" id="title" name="title" value="{{ $video->title }}"
                            required>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="title_en">{{ __('home.Title English') }}</label>
-                    <input type="text" class="form-control" id="title_en" value="{{ $video->title_en }}"
-                           name="title_en">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="title_laos">{{ __('home.Title Laos') }}</label>
-                    <input type="text" class="form-control" id="title_laos" value="{{ $video->title_laos }}"
-                           name="title_laos">
                 </div>
             </div>
             <div class="row">
@@ -76,8 +66,10 @@
                 <div class="form-group col-md-3">
                     <label for="status">{{ __('home.Status') }}</label>
                     <select id="status" name="status" class="form-control form-select">
-                        <option {{ $video->status == 'ACTIVE' ? 'selected' : '' }} value="ACTIVE">{{ __('home.Active') }}</option>
-                        <option {{ $video->status == 'INACTIVE' ? 'selected' : '' }} value="INACTIVE">{{ __('home.Inactive') }}
+                        <option
+                            {{ $video->status == 'ACTIVE' ? 'selected' : '' }} value="ACTIVE">{{ __('home.Active') }}</option>
+                        <option
+                            {{ $video->status == 'INACTIVE' ? 'selected' : '' }} value="INACTIVE">{{ __('home.Inactive') }}
                         </option>
                     </select>
                 </div>
@@ -99,12 +91,12 @@
                     'Authorization': `Bearer ${token}`
                 };
 
-                const arrField = ['title', 'title_en', 'title_laos', 'status',
+                const arrField = ['title', 'status',
                     'views', 'shares', 'reactions', 'topic_id'];
 
                 let isValid = true
                 /* Tạo fn appendDataForm ở admin blade*/
-                isValid =  appendDataForm(arrField, formDataEdit, isValid);
+                isValid = appendDataForm(arrField, formDataEdit, isValid);
 
                 const video = $('#file')[0].files[0];
                 formDataEdit.append('file_videos', video);

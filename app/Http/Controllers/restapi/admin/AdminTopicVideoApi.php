@@ -4,6 +4,7 @@ namespace App\Http\Controllers\restapi\admin;
 
 use App\Enums\TopicVideoStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\TranslateController;
 use App\Models\TopicVideo;
 use Illuminate\Http\Request;
 
@@ -75,8 +76,11 @@ class AdminTopicVideoApi extends Controller
     private function saveTopic($request, $topicVideo)
     {
         $name = $request->input('name');
-        $name_en = $request->input('name_en');
-        $name_laos = $request->input('name_laos');
+
+        $translate = new TranslateController();
+
+        $name_en = $translate->translateText($name, 'en');
+        $name_laos = $translate->translateText($name, 'lo');
 
         if ($request->hasFile('thumbnail')) {
             $item = $request->file('thumbnail');

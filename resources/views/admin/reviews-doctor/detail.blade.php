@@ -6,30 +6,14 @@
     <h3 class="text-center">{{ __('home.Detail Review') }}</h3>
     <div class="container">
         <div class="row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-12">
                 <label for="title">{{ __('home.Title') }}</label>
                 <input disabled type="text" class="form-control" id="title" value="{{ $review->title }}">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="title_en">{{ __('home.Title English') }}</label>
-                <input disabled value="{{ $review->title_en }}" type="text" class="form-control" id="title_en">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="title_laos">{{ __('home.Title Laos') }}</label>
-                <input disabled value="{{ $review->title_laos }}" type="text" class="form-control" id="title_laos">
             </div>
         </div>
         <div class="form-group">
             <label for="description">{{ __('home.Description') }}</label>
             <input disabled value="{{ $review->description }}" type="text" class="form-control" id="description">
-        </div>
-        <div class="form-group">
-            <label for="description_en">{{ __('home.Description English') }}</label>
-            <input disabled value="{{ $review->description_en }}" type="text" class="form-control" id="description_en">
-        </div>
-        <div class="form-group">
-            <label for="description_laos">{{ __('home.Description Laos') }}</label>
-            <input disabled value="{{ $review->description_laos }}" type="text" class="form-control" id="description_laos">
         </div>
         <div class="row">
             @if($medical)
