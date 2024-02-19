@@ -296,6 +296,9 @@ class BackendCouponApplyController extends Controller
         if ($couponApply->status == CouponApplyStatus::REWARDED) {
             return response('Không thể thay đổi trạng thái của bài đã trao giải', 400);
         }
+        if ($couponApply->status == CouponApplyStatus::PENDING) {
+            $this->sendMailWhenValid($couponApply);
+        }
 
         if ($status == CouponApplyStatus::REWARDED) {
             if ($couponApply->status == CouponApplyStatus::VALID) {
@@ -328,6 +331,33 @@ class BackendCouponApplyController extends Controller
 
     }
 
+    public function sendMailWhenValid($couponApply)
+    {
+        $coupon = Coupon::where('id', $couponApply->coupon_id)->first();
+        $donViPhatHanh = $coupon->user_id;
+
+        $emailNguoiDungApply = $couponApply->email ?? '';
+        $emailDonViPhatHanh = User::where('id', $donViPhatHanh)->first()->email ?? '';
+        $emailAdmin = '';
+
+        $emailFrom = 'support.il.vietnam@gmail.com';
+        $title = 'Thông báo ứng tuyển thành công';
+        $content = 'Chúc mừng bạn đã ứng tuyển thành công.
+Yêu cầu bạn nhập link trong khung thời gian đăng bài để được đánh giá :
+' . route('what.free.reply.link', $couponApply->id);
+
+        $listEmail = [];
+        array_push($listEmail, $emailNguoiDungApply);
+        array_push($listEmail, $emailDonViPhatHanh);
+        array_push($listEmail, $emailAdmin);
+
+        $mailController = new MailController();
+        foreach ($listEmail as $email) {
+            if ($email) {
+                $mailController->sendEmail($email, $emailFrom, $title, $content);
+            }
+        }
+    }
     public function sendMailWhenReward($couponApply)
     {
         $coupon = Coupon::where('id', $couponApply->coupon_id)->first();

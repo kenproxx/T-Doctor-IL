@@ -259,6 +259,8 @@ Route::middleware(['user.active'])->group(function () {
         Route::get('/campaign', [WhatFreeToDay::class, 'campaign'])->name('what.free.campaign');
 
         Route::get('/see-all/{type}', [WhatFreeToDay::class, 'seeAll'])->name('what.free.see.all');
+        Route::get('/reply/{id}', [WhatFreeToDay::class, 'replyLink'])->name('what.free.reply.link');
+        Route::post('/reply-link/{id}', [WhatFreeToDay::class, 'replyLinkSocial'])->name('what.free.reply.link.social');
     });
 
     Route::middleware(['auth'])->group(function () {

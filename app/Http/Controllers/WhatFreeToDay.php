@@ -7,8 +7,9 @@ use App\Enums\SocialUserStatus;
 use App\Enums\TypeCoupon;
 use App\Models\Clinic;
 use App\Models\Coupon;
+use App\Models\CouponApply;
 use App\Models\SocialUser;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class WhatFreeToDay extends Controller
@@ -57,7 +58,7 @@ class WhatFreeToDay extends Controller
         $clinic = Clinic::where('user_id', $user_id)->first();
         if (Auth::check()) {
             $socials = SocialUser::where('user_id', Auth::user()->id)->where('status',
-                    SocialUserStatus::ACTIVE)->first();
+                SocialUserStatus::ACTIVE)->first();
         } else {
             $socials = '';
         }
@@ -75,10 +76,39 @@ class WhatFreeToDay extends Controller
     {
         $now = now('Asia/Ho_Chi_Minh');
         $coupons = Coupon::where('status', CouponStatus::ACTIVE)->where('type', $type)->where('endDate', '>',
-                $now)->latest('created_at')->paginate(15);
+            $now)->latest('created_at')->paginate(15);
 
         return view('What-free.tab-see-all', compact('coupons'));
     }
 
+    public function replyLink($id)
+    {
+        return view('What-free.reply-mail-coupon-apply', compact( 'id'));
+    }
+    public function replyLinkSocial(Request $request, $id)
+    {
+        $couponApply = CouponApply::find($id);
+
+        if ($couponApply) {
+            $link_fb = $request->input('link_fb');
+            $link_tt = $request->input('link_tt');
+            $link_ig = $request->input('link_ig');
+            $link_yt = $request->input('link_yt');
+            $link_gg = $request->input('link_gg');
+
+            $links = array_filter([$link_fb, $link_tt, $link_ig, $link_yt, $link_gg]);
+
+            $content = implode(', ', $links);
+
+            $couponApply->content = $content;
+
+            $couponApply->save();
+            alert()->success('Thành công', 'Cảm ơn bạn đã tham gia chương trình. Chúng tôi sẽ kiểm tra và thông báo kết quả cho bạn trong thời gian sớm nhất');
+            return redirect()->route('home');
+        } else {
+            alert()->error('Lỗi', 'Không tìm thấy thông tin');
+            return back();
+        }
+    }
 
 }
