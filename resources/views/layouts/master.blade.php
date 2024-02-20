@@ -165,6 +165,38 @@
 @include('components.head.tinymce-config')
 
 
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js";
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+        apiKey: "AIzaSyAW-1uaHUA8tAaA3IQD9ypNkbVzFji88bE",
+        authDomain: "chat-firebase-de134.firebaseapp.com",
+        projectId: "chat-firebase-de134",
+        storageBucket: "chat-firebase-de134.appspot.com",
+        messagingSenderId: "867778569957",
+        appId: "1:867778569957:web:7f3a6b87d83cefd8e8d60c"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    const messaging = getMessaging(app);
+
+    // Lấy push token
+
+    const getTokenMessage = await getToken(app);
+
+    console.log(messaging)
+    console.log(getTokenMessage)
+</script>
+
+
 <script>
     function loadingMasterPage() {
         let overlay = document.getElementsByClassName('loading-overlay-master')[0]

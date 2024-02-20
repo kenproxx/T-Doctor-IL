@@ -74,11 +74,18 @@ class AgoraChatController extends Controller
 
         $appid = '0b47427ee7334417a90ff22c4e537b08';
 
+        $array_email = [ User::getEmailByID($user_id_1), User::getEmailByID($user_id_2) ];
+
+        // sort array email
+        sort($array_email);
+
+
         if ($oldAgora) {
             $token = $oldAgora->token;
             $channel = $oldAgora->channel;
         } else {
-            $channel = $user_id_1 . '-' . $user_id_2;
+            $channel = implode('_', $array_email);
+
             $token = $this->genNewTokenByChanelName($channel);
         }
 
