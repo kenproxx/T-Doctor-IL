@@ -230,11 +230,12 @@
 
                 let isOnline = '{{ \Illuminate\Support\Facades\Cache::has('user-is-online|'.$doctor->id) }}';
 
-                return true;
                 if (!isOnline) {
                     alert('Bác sỹ hiện không online');
                     return false;
                 }
+
+                return true;
 
             }
 
