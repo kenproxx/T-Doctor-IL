@@ -1565,7 +1565,7 @@
                                                         </a>
                                                         <div
                                                             class="{{ $isSoldOut ? 'sold-out-overlay-text' : 'd-none' }} ">
-                                                            <h1>Sold Out</h1>
+                                                            <h1 class="sold-out">Sold Out</h1>
                                                         </div>
                                                     </div>
                                                     <div class="content-pro p-md-3 p-2">
@@ -1723,7 +1723,7 @@
                                                         <i class="bi {{ $class }}"></i>
                                                     </a>
                                                     <div class="{{ $isSoldOut ? 'sold-out-overlay-text' : 'd-none' }} ">
-                                                        <h1>Sold Out</h1>
+                                                        <h1 class="sold-out">Sold Out</h1>
                                                     </div>
                                                 </div>
                                                 <div class="content-pro p-md-3 p-2">
