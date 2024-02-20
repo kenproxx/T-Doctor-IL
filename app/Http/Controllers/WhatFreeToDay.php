@@ -90,11 +90,11 @@ class WhatFreeToDay extends Controller
         $couponApply = CouponApply::find($id);
 
         if ($couponApply) {
-            $link_fb = $request->input('link_fb');
-            $link_tt = $request->input('link_tt');
-            $link_ig = $request->input('link_ig');
-            $link_yt = $request->input('link_yt');
-            $link_gg = $request->input('link_gg');
+            $link_fb = $request->input('facebook');
+            $link_tt = $request->input('tiktok');
+            $link_ig = $request->input('instagram');
+            $link_yt = $request->input('youtube');
+            $link_gg = $request->input('google_review');
 
             $links = array_filter([$link_fb, $link_tt, $link_ig, $link_yt, $link_gg]);
 
