@@ -51,7 +51,7 @@ class AgoraChatController extends Controller
         $pusher->trigger('send-message', 'send-message', $data);
 
         // gui notification den user_id_1
-        $emailUserCall = User::getEmailByID($user_id_1);
+        $emailUserCall = User::getEmailByID($user_id_2);
         $this->sendNotificationToAppByFireBase($emailUserCall);
 
         return view('video-call.index', compact('agora_chat'));
@@ -186,7 +186,7 @@ class AgoraChatController extends Controller
 
         $mainAPi = new MainApi();
 
-        $mainAPi->sendNotificationFcm($request);
+        $response = $mainAPi->sendNotificationFcm($request);
 
     }
 
