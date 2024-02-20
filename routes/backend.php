@@ -3,6 +3,7 @@
 use App\Http\Controllers\backend\BackendCouponApplyController;
 use App\Http\Controllers\backend\BackendCouponController;
 use App\Http\Controllers\backend\BackendQuestionController;
+use App\Http\Controllers\connect\AgoraChatController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\restapi\AddressApi;
 use App\Http\Controllers\restapi\AnswerLikeApi;
@@ -154,3 +155,5 @@ Route::group(['prefix' => 'prescription-result'], function () {
     Route::post('add-to-cart', [PrescriptionResultApi::class, 'addProductToCart'])->name('api.backend.prescription.result.add.cart');
     Route::post('add-to-cart-v2', [PrescriptionResultApi::class, 'addProductToCartV2'])->name('api.backend.prescription.result.add.cart.v2');
 });
+
+Route::get("connect/video/agora/get-token-app", [AgoraChatController::class, 'getInfoAgoraForApp'])->name("agora.get-token-app");
