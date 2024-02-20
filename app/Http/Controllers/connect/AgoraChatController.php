@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\connect;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\restapi\MainApi;
 use App\Models\AgoraChat;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -48,6 +49,10 @@ class AgoraChatController extends Controller
         $pusher = new Pusher($PUSHER_APP_KEY, $PUSHER_APP_SECRET, $PUSHER_APP_ID, $options);
 
         $pusher->trigger('send-message', 'send-message', $data);
+
+        // gui notification den user_id_1
+        $emailUserCall = User::getEmailByID($user_id_1);
+        $this->sendNotificationToAppByFireBase($emailUserCall);
 
         return view('video-call.index', compact('agora_chat'));
 
@@ -157,6 +162,32 @@ class AgoraChatController extends Controller
         $str = preg_replace("/(Đ)/", 'D', $str);
 
         return $str;
+    }
+
+    function sendNotificationToAppByFireBase($email)
+    {
+
+        $notification = [
+            "title" => "Cuộc gọi đến",
+            "body" => "tên người gọi",
+            "android_channel_id" => "callkit_incoming_channel_id"
+        ];
+
+        $data = [
+            "uid" => "Mario",
+            "rtmUid" => "uniqueVideoCallId",
+            "type" => "1",
+            "requestUser" => "APIs.me",
+            "actionType" => "END_REQUEST"
+        ];
+
+        $request = new Request();
+        $request->merge(['email' => $email, 'notification' => $notification, 'data' => $data]);
+
+        $mainAPi = new MainApi();
+
+        $mainAPi->sendNotificationFcm($request);
+
     }
 
     public function getInfoAgoraForApp(Request $request)
