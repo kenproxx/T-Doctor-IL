@@ -53,40 +53,6 @@ class AgoraChatController extends Controller
 
     }
 
-    function getInfoAgoraForApp(Request $request)
-    {
-        $agora_chat = $this->createMeeting($request);
-
-        return response()->json($agora_chat);
-    }
-
-    function handleRefreshToken(Request $request)
-    {
-        $user_id_1 = $request->input('user_id_1');
-        $user_id_2 = $request->input('user_id_2');
-
-        $agora_chat_1 = AgoraChat::where([
-            ['user_id_1', $user_id_1],
-            ['user_id_2', $user_id_2],
-        ])->first();
-
-        $agora_chat_2 = AgoraChat::where([
-            ['user_id_1', $user_id_2],
-            ['user_id_2', $user_id_1],
-        ])->first();
-
-        $token_1 = $agora_chat_1->token;
-        $token_2 = $agora_chat_2->token;
-
-        if ($token_1 == $token_2) {
-            $token = $this->genNewTokenByChanelName($agora_chat_1->channel);
-            $agora_chat_1->token = $token;
-            $agora_chat_2->token = $token;
-            $agora_chat_1->save();
-            $agora_chat_2->save();
-        }
-    }
-
     function createMeeting(Request $request)
     {
         $user_id_1 = $request->input('user_id_1');
@@ -191,6 +157,56 @@ class AgoraChatController extends Controller
         $str = preg_replace("/(Đ)/", 'D', $str);
 
         return $str;
+    }
+
+    public function getInfoAgoraForApp(Request $request)
+    {
+        if ($request->has('email_1')) {
+            $email_1 = $request->input('email_1');
+            $user_1 = User::where('email', $email_1)->first()->id;
+
+            $valuesToAdd = ['user_id_1' => $user_1];
+            $request->merge($valuesToAdd);
+        }
+
+        if ($request->has('email_2')) {
+            $email_2 = $request->input('email_2');
+            $user_2 = User::where('email', $email_2)->first()->id;
+
+            $valuesToAdd = ['user_id_2' => $user_2];
+            $request->merge($valuesToAdd);
+        }
+
+        $agora_chat = $this->createMeeting($request);
+
+        return response()->json($agora_chat);
+    }
+
+    function handleRefreshToken(Request $request)
+    {
+        $user_id_1 = $request->input('user_id_1');
+        $user_id_2 = $request->input('user_id_2');
+
+        $agora_chat_1 = AgoraChat::where([
+            ['user_id_1', $user_id_1],
+            ['user_id_2', $user_id_2],
+        ])->first();
+
+        $agora_chat_2 = AgoraChat::where([
+            ['user_id_1', $user_id_2],
+            ['user_id_2', $user_id_1],
+        ])->first();
+
+        $token_1 = $agora_chat_1->token;
+        $token_2 = $agora_chat_2->token;
+
+        if ($token_1 == $token_2) {
+            $token = $this->genNewTokenByChanelName($agora_chat_1->channel);
+            $agora_chat_1->token = $token;
+            $agora_chat_2->token = $token;
+            $agora_chat_1->save();
+            $agora_chat_2->save();
+        }
     }
 
     function saveTokenByUserId(Request $request)
