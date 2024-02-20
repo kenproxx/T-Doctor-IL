@@ -29,7 +29,7 @@
     <div class="img-pro">
         <img src="{{asset($medicine->thumbnail)}}" alt="">
         <div class="{{ $isSoldOut ? 'sold-out-overlay-text d-flex justify-content-center align-items-center w-100' : 'd-none' }} ">
-            <h1>Sold Out</h1>
+            <h1 class="sold-out">Sold Out</h1>
         </div>
         <a class="button-heart" data-favorite="0">
             <i id="heart-icon-{{$medicine->id}}" class="{{$heart}} bi" data-product-id="{{$medicine->id}}"

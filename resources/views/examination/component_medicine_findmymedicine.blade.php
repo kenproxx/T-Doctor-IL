@@ -46,7 +46,7 @@
                     <img loading="lazy" class="rectangle border-img"
                          src="{{asset($medicine->thumbnail)}}"/>
                     <div class="{{ $isSoldOut ? 'sold-out-overlay-text d-flex justify-content-center align-items-center w-100' : 'd-none' }} ">
-                        <h1>Sold Out</h1>
+                        <h1 class="sold-out">Sold Out</h1>
                     </div>
 
             </div>
