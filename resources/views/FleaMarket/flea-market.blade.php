@@ -376,7 +376,7 @@
              <div class="img-pro justify-content-center d-flex img_product--homeNew">
                   <img loading="lazy" src="${product.thumbnail}" alt="">
                   <div class="${ isSoldOut ? 'sold-out-overlay-text' : 'd-none' } ">
-                <h1 class="sold-out">Sold Out</h1>
+                <h1 class="sold-out">{{__('home.Sold Out')}}</h1>
             </div>
                        <a class="button-heart" data-favorite="0">
                             <i id="icon-heart-${product.id}" class="${isFavoriteClass} bi" data-product-id="${product.id}" onclick="addProductToWishList(${product.id})"></i>
@@ -564,7 +564,7 @@
                              <div class="img-pro justify-content-center d-flex img_product--homeNew">
                                   <img loading="lazy" src="${item.thumbnail}" alt="" >
                                   <div class="${ isSoldOut ? 'sold-out-overlay-text' : 'd-none' } ">
-                <h1 class="sold-out">Sold Out</h1>
+                <h1 class="sold-out">{{__('home.Sold Out')}}</h1>
             </div>
                                        ${tab}
                                   </div>

@@ -136,7 +136,7 @@
             <div class="medicine-search--center col-md-6 row d-flex justify-content-between">
                 <div class="search-box col-md-10">
                     <input type="search" onkeypress="performSearch()" name="focus"
-                           placeholder="Enter name, prescription or ingredients of products" id="search-input" value="">
+                           placeholder="{{__('home.Enter name, prescription or ingredients of products')}}" id="search-input" value="">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </div>
                 @if(Auth::check())
@@ -512,7 +512,7 @@
     <div class="img-pro">
         <img src="${item.thumbnail}" alt="">
         <div class="${isSoldOut ? 'sold-out-overlay-text d-flex justify-content-center align-items-center w-100' : 'd-none'} ">
-                <h1 class="sold-out">Sold Out</h1>
+                <h1 class="sold-out">{{__('home.Sold Out')}}</h1>
             </div>
         <a class="button-heart" data-favorite="0">
             <i id="heart-icon-${item.id}" class="${isFavoriteClass} bi" data-product-id="${item.id}"

@@ -376,7 +376,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <span class="ml-3">Khám chuyên khoa</span></div>
+                            <span class="ml-3">{{ __('home.Khám chuyên khoa') }}</span></div>
                         <div class="svg-containerNho">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none">
@@ -575,7 +575,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <span class="ml-3">Khám từ xa</span></div>
+                            <span class="ml-3">{{__('home.Khám từ xa')}}</span></div>
                         <div class="svg-containerNho">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none">
@@ -612,7 +612,7 @@
                                     </linearGradient>
                                 </defs>
                             </svg>
-                            <span class="ml-3">Tư vẫn sức khoẻ</span></div>
+                            <span class="ml-3">{{__('home.Tư vẫn sức khoẻ')}}</span></div>
                         <div class="svg-containerNho">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none">
@@ -799,7 +799,7 @@
                                     </linearGradient>
                                 </defs>
                             </svg>
-                            <span class="ml-3">Y tế gần bạn</span>
+                            <span class="ml-3">{{__('home.Y tế gần bạn')}}</span>
                         </div>
                         <div class="svg-containerNho">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -978,8 +978,8 @@
                 </div>
             </div>
             <div class="">
-                <div class="titleServiceHomeNew d-flex justify-content-between align-items-center">Chuyên khoa khám <a
-                        class="pc-hidden" href="{{route('home.specialist')}}">see more</a></div>
+                <div class="titleServiceHomeNew d-flex justify-content-between align-items-center">{{__('home.Chuyên khoa khám')}}<a
+                        class="pc-hidden" href="{{route('home.specialist')}}">{{__('home.see more')}}</a></div>
                 <div class="mainServiceHomeNew row">
                     @php
                         $departments = \App\Models\Department::where('status', \App\Enums\DepartmentStatus::ACTIVE)->get();
@@ -1565,7 +1565,7 @@
                                                         </a>
                                                         <div
                                                             class="{{ $isSoldOut ? 'sold-out-overlay-text' : 'd-none' }} ">
-                                                            <h1 class="sold-out">Sold Out</h1>
+                                                            <h1 class="sold-out">{{__('home.Sold Out')}}</h1>
                                                         </div>
                                                     </div>
                                                     <div class="content-pro p-md-3 p-2">
@@ -1723,7 +1723,7 @@
                                                         <i class="bi {{ $class }}"></i>
                                                     </a>
                                                     <div class="{{ $isSoldOut ? 'sold-out-overlay-text' : 'd-none' }} ">
-                                                        <h1 class="sold-out">Sold Out</h1>
+                                                        <h1 class="sold-out">{{__('home.Sold Out')}}</h1>
                                                     </div>
                                                 </div>
                                                 <div class="content-pro p-md-3 p-2">
