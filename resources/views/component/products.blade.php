@@ -36,9 +36,19 @@
                onclick="handleAddMedicineToWishList({{$medicine->id}})"></i>
         </a>
     </div>
+
     <div class="content-pro">
         <div class="name-pro">
-            <a href="{{route('medicine.detail', $medicine->id)}}">{{ $medicine->name }}</a>
+            <a href="{{route('medicine.detail', $medicine->id)}}">
+                @if(locationHelper() == 'vi')
+                    {{ $medicine->name }}
+                @elseif(locationHelper() == 'en')
+                    {{ $medicine->name_en }}
+                @else
+                    {{ $medicine->name_laos }}
+                @endif
+
+            </a>
         </div>
         <div class="location-pro d-flex align-items-center">
             <svg xmlns="http://www.w3.org/2000/svg" width="21"

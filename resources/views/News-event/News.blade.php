@@ -17,8 +17,24 @@
                                 <img class="thumbnail-title b-radius-8px" src="{{$news->thumbnail}}">
                             </div>
                             <div class="main-title-news">
-                                <strong class="text-content-product">{{$news->title}}</strong>
-                                <div class="text-gray max-6-line-title mt-md-3">{!! $news->short_description !!}</div>
+                                <strong class="text-content-product">
+                                    @if(locationHelper() == 'vi')
+                                        {{ ($news->title) }}
+                                    @elseif(locationHelper() == 'en')
+                                        {{ ($news->title_en) }}
+                                    @else
+                                        {{ ($news->title_laos) }}
+                                    @endif
+                                </strong>
+                                <div class="text-gray max-6-line-title mt-md-3">
+                                    @if(locationHelper() == 'vi')
+                                        {!! $news->short_description !!}
+                                    @elseif(locationHelper() == 'en')
+                                        {!! $news->short_description_en !!}
+                                    @else
+                                        {!! $news->short_description_laos !!}
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -37,9 +53,25 @@
                                     </div>
                                     <div class="col-md-8 pr-0">
 
-                                        <strong class="fs-16px max-2-line-title">{{$news->title}}</strong>
+                                        <strong class="fs-16px max-2-line-title">
+                                            @if(locationHelper() == 'vi')
+                                                {{$news->title}}
+                                            @elseif(locationHelper() == 'en')
+                                                {{ $news->title_en }}
+                                            @else
+                                                {{ $news->title_laos }}
+                                            @endif
+                                        </strong>
                                         <div class="max-5-line-title">
-                                            <div class="fs-12px">{!! $news->short_description !!}</div>
+                                            <div class="fs-12px">
+                                                @if(locationHelper() == 'vi')
+                                                    {!! $news->short_description !!}
+                                                @elseif(locationHelper() == 'en')
+                                                    {!! $news->short_description_en !!}
+                                                @else
+                                                    {!! $news->short_description_laos !!}
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -76,8 +108,23 @@
                                 <img class="thumbnail-title b-radius-8px" src="{{$Event->thumbnail}}">
                             </div>
                             <div class="main-title-news">
-                                <strong class="text-content-product">{{$Event->title}}</strong>
-                                <div class="text-gray max-6-line-title mt-md-3">{!! $Event->short_description !!}</div>
+                                <strong class="text-content-product">
+                                    @if(locationHelper() == 'vi')
+                                        {{$Event->title}}
+                                    @elseif(locationHelper() == 'en')
+                                        {{ $Event->title_en }}
+                                    @else
+                                        {{ $Event->title_laos }}
+                                    @endif</strong>
+                                <div class="text-gray max-6-line-title mt-md-3">
+                                    @if(locationHelper() == 'vi')
+                                        {!! $Event->short_description !!}
+                                    @elseif(locationHelper() == 'en')
+                                        {!! $Event->short_description_en !!}
+                                    @else
+                                        {!! $Event->short_description_laos !!}
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </a>
@@ -95,9 +142,25 @@
                                     </div>
                                     <div class="col-md-8 pr-0">
 
-                                        <strong class="fs-16px max-2-line-title">{{$event->title}}</strong>
+                                        <strong class="fs-16px max-2-line-title">
+                                            @if(locationHelper() == 'vi')
+                                                {{$event->title}}
+                                            @elseif(locationHelper() == 'en')
+                                                {{ $event->title_en }}
+                                            @else
+                                                {{ $event->title_laos }}
+                                            @endif
+                                        </strong>
                                         <div class="max-5-line-title">
-                                            <div class="fs-12px">{!! $event->short_description !!}</div>
+                                            <div class="fs-12px">
+                                                @if(locationHelper() == 'vi')
+                                                    {!! $event->short_description !!}
+                                                @elseif(locationHelper() == 'en')
+                                                    {!! $event->short_description_en !!}
+                                                @else
+                                                    {!! $event->short_description_laos !!}
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

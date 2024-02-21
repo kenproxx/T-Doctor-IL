@@ -290,7 +290,7 @@
                 </div>
                 <div class="filter">
                     <div class="filter-header d-flex justify-content-between">
-                        <div class="text-wrapper">Manufacturing Company</div>
+                        <div class="text-wrapper">{{__('home.Manufacturing Company')}}</div>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="filter-body">
@@ -307,7 +307,7 @@
                 </div>
                 <div class="filter">
                     <div class="filter-header d-flex justify-content-between">
-                        <div class="text-wrapper">Manufacturing Country</div>
+                        <div class="text-wrapper">{{__('home.Manufacturing Country')}}</div>
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                     <div class="filter-body">

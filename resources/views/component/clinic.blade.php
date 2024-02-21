@@ -115,7 +115,13 @@
                                       </div>
                                       <div class="specialList-clinics--main w-100">
                                            <div class="title-specialList-clinics">
-                                                ${item.name}
+                                        @if(locationHelper() == 'vi')
+                                                        ${item.name}
+                                                            @elseif(locationHelper() == 'en')
+                                                        ${item.name_en}
+                                                            @else
+                                                        ${item.name_laos}
+                                                            @endif
                                            </div>
                                       <div class="address-specialList-clinics">
                                  <div class="d-flex align-items-center address-clinics">
