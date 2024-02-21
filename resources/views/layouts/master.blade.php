@@ -190,11 +190,26 @@
 
     // Lấy push token
 
-    const getTokenMessage = await getToken(app);
+    const key_pair_fire_base = 'BIKdl-B84phF636aS0ucw5k-KoGPnivJW4L_a9GNf7gyrWBZt--O9KcEzvsLl3h-3_Ld0rT8YFTsuupknvguW9s';
+    // const getTokenMessage = await getToken(messaging, { vapidKey: key_pair_fire_base});
 
     console.log(messaging)
-    console.log(getTokenMessage)
+
+    getToken(messaging, { vapidKey: key_pair_fire_base }).then((currentToken) => {
+        if (currentToken) {
+            console.log('currentToken', currentToken)
+        } else {
+            // Show permission request UI
+            console.log('No registration token available. Request permission to generate one.');
+            // ...
+        }
+    }).catch((err) => {
+        console.log('An error occurred while retrieving token. ', err);
+        // ...
+    });
 </script>
+
+
 
 
 <script>
