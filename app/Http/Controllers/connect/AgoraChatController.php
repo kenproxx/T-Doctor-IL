@@ -189,8 +189,8 @@ class AgoraChatController extends Controller
         $hashUUID = hexdec($hashedValue);
 
         $data = [
-            "uid" => $hashUUID, // cái này em gửi cho anh 1 hash của uuid v4
-            "rtmUid" => $uuid, // cái này là cái uuid vừa gen ra ở bên trên
+            "uid" => $uuid, // cái này em gửi cho anh 1 hash của uuid v4
+            "rtmUid" => $hashUUID, // cái này là cái uuid vừa gen ra ở bên trên
             "type" => "1", // 1 với video, 0 với voice
 
             // thông tin người gọi
