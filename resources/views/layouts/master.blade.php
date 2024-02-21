@@ -166,7 +166,7 @@
 
 <script type="module">
     import {initializeApp} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import {getMessaging, getToken, onMessage} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js";
+    import {getMessaging, getToken} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyAW-1uaHUA8tAaA3IQD9ypNkbVzFji88bE",
@@ -182,12 +182,45 @@
     getToken(messaging, {vapidKey: key_pair_fire_base}).then((currentToken) => {
         if (currentToken) {
             console.log('token: ', currentToken);
+            saveToken(currentToken);
         } else {
             console.log('No registration token available. Request permission to generate one.');
         }
     }).catch((err) => {
         console.log('An error occurred while retrieving token. ', err);
     });
+
+    let accessToken = `Bearer ` + token;
+    let headers = {
+        'Authorization': accessToken
+    };
+
+    async function saveToken(token) {
+        @if(Auth::check() && !Auth::user()->token_firebase)
+            await callSaveToken(token);
+        @endif
+    }
+
+    async function callSaveToken(token) {
+        let saveTokenUrl = `{{ route('api.user.save.token') }}`;
+
+        let data = {
+            'token_firebase': token,
+            'user_id': '{{ Auth::check() ? Auth::user()->id : '' }}'
+        };
+        await $.ajax({
+            url: saveTokenUrl,
+            method: "POST",
+            headers: headers,
+            data: data,
+            success: function (response) {
+                console.log(response)
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
 
     onMessage(messaging, (payload) => {
         console.log('Message received. ', payload);

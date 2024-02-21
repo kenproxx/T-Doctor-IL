@@ -59,7 +59,15 @@
                 {{ __("home.What’s free details") }}</a>
             <div class="row recruitment-details--content">
                 <div class="col-md-8 recruitment-details--content--left">
-                    <div class="text-content-product">{{ $coupon->title }}</div>
+                    <div class="text-content-product">
+                        @if(locationHelper() == 'vi')
+                            {{ $coupon->title }}
+                        @elseif(locationHelper() == 'en')
+                            {{ $coupon->title_en }}
+                        @else
+                            {{ $coupon->title_laos }}
+                        @endif
+                    </div>
                     <div class="d-flex mt-3 mb-3">
                         @foreach(['tiktok', 'facebook', 'instagram', 'youtube', 'google'] as $platform)
                             @if($coupon->{"is_$platform"} == 1)
@@ -82,42 +90,90 @@
                                 {{ __('home.Phần thưởng') }}
                             </div>
                             <div
-                                class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->short_description !!}</div>
+                                class="flea-text-gray color-Grey-Black col-md-9">
+                                @if(locationHelper() == 'vi')
+                                    {!! $coupon->short_description !!}
+                                @elseif(locationHelper() == 'en')
+                                    {!! $coupon->short_description_en !!}
+                                @else
+                                    {!! $coupon->short_description_laos !!}
+                                @endif
+                            </div>
                         </div>
                     @endif
                     @if($coupon->condition != null)
                         <div class="mb-3 d-md-flex">
                             <div id="condition" class="mb-2 section-description flea-content-product col-md-3">{{ __('home.Điều khoản và điều kiện') }}
                             </div>
-                            <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->condition !!}</div>
+                            <div class="flea-text-gray color-Grey-Black col-md-9">
+                                @if(locationHelper() == 'vi')
+                                    {!! $coupon->condition !!}
+                                @elseif(locationHelper() == 'en')
+                                    {!! $coupon->condition_en !!}
+                                @else
+                                    {!! $coupon->condition_laos !!}
+                                @endif
+                            </div>
                         </div>
                     @endif
                     @if($coupon->conduct != null)
                         <div class="mb-3 d-md-flex">
                             <div id="conduct" class="mb-2 section-description flea-content-product col-md-3">{{__('home.Hướng dẫn chiến dịch')}}
                             </div>
-                            <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->conduct !!}</div>
+                            <div class="flea-text-gray color-Grey-Black col-md-9">
+                                @if(locationHelper() == 'vi')
+                                    {!! $coupon->conduct !!}
+                                @elseif(locationHelper() == 'en')
+                                    {!! $coupon->conduct_en !!}
+                                @else
+                                    {!! $coupon->conduct_laos !!}
+                                @endif
+                            </div>
                         </div>
                     @endif
                     @if($coupon->description != null)
                         <div class="mb-3 d-md-flex">
                             <div id="description" class="mb-2 section-description flea-content-product col-md-3">{{ __('home.Yêu cầu nội dung') }}
                             </div>
-                            <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->description !!}</div>
+                            <div class="flea-text-gray color-Grey-Black col-md-9">
+                                @if(locationHelper() == 'vi')
+                                    {!! $coupon->description !!}
+                                @elseif(locationHelper() == 'en')
+                                    {!! $coupon->description_en !!}
+                                @else
+                                    {!! $coupon->description_laos !!}
+                                @endif
+                            </div>
                         </div>
                     @endif
                     @if($coupon->description != null)
                         <div class="mb-3 d-md-flex">
                             <div id="instruction" class="mb-2 section-description flea-content-product col-md-3">{{ __('home.Hướng dẫn chi tiết')}}
                             </div>
-                            <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->instruction !!}</div>
+                            <div class="flea-text-gray color-Grey-Black col-md-9">
+                                @if(locationHelper() == 'vi')
+                                    {!! $coupon->instruction !!}
+                                @elseif(locationHelper() == 'en')
+                                    {!! $coupon->instruction_en !!}
+                                @else
+                                    {!! $coupon->instruction_laos !!}
+                                @endif
+                            </div>
                         </div>
                     @endif
                     @if($coupon->description != null)
                         <div class="mb-3 d-md-flex">
                             <div id="website" class="mb-2 section-description flea-content-product col-md-3">{{__('home.Website')}}
                             </div>
-                            <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->website !!}</div>
+                            <div class="flea-text-gray color-Grey-Black col-md-9">
+                                @if(locationHelper() == 'vi')
+                                    {!! $coupon->website !!}
+                                @elseif(locationHelper() == 'en')
+                                    {!! $coupon->website_en !!}
+                                @else
+                                    {!! $coupon->website_laos !!}
+                                @endif
+                            </div>
                         </div>
                     @endif
 
@@ -131,7 +187,15 @@
                         </div>
                         <div class="div-2">
                             <img loading="lazy" class="image" src="{{asset('img/recruitment/logo.png')}}"/>
-                            <div class="text-wrapper-2">{{ $clinic->name ?? '' }}</div>
+                            <div class="text-wrapper-2">
+                                @if(locationHelper() == 'vi')
+                                    {{ $clinic->name }}
+                                @elseif(locationHelper() == 'en')
+                                    {{ ($clinic->name_en) }}
+                                @else
+                                    {{ $clinic->name_laos }}
+                                @endif
+                            </div>
                         </div>
                         <div class="div-3">
                             <div class="justify-content-between d-flex">
