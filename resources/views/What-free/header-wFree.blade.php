@@ -58,7 +58,7 @@
 <div class="background-image_Clinics mb-5 d-none d-sm-flex">
     <div class="container">
         <div class=" justify-content-center align-items-center mb-5 d-none d-sm-flex">
-            <div class="title-list-clinic">Y tế gần bạn</div>
+            <div class="title-list-clinic">{{__('home.Y tế gần bạn')}}</div>
         </div>
         <div class=" medicine-search d-block d-sm-none">
             <div class="medicine-search--center row">
@@ -85,12 +85,12 @@
             <div class="col-md-12 p-0 d-flex">
                 <div class="col-md-5 pl-0">
                     <select class="form-select_clinics" aria-label="Default select example" id="clinic_specialist">
-                        <option selected>Select specialist</option>
+                        <option selected>{{__('home.Select specialist')}}</option>
                     </select>
                 </div>
                 <div class="col-md-5">
                     <select class="form-select_clinics" aria-label="Default select example" id="clinic_location">
-                        <option selected>Select location</option>
+                        <option selected>{{__('home.Select location')}}</option>
                     </select>
                 </div>
                 <div class="col-md-2 d-flex justify-content-between pr-0">
@@ -105,7 +105,7 @@
                         </div>
                     </a>
                     <div class="search-button--clinics col-md-8 p-0" id="btnSearchClinics" style="cursor: pointer">
-                        Tìm kiếm
+                        {{__('home.Tìm kiếm')}}
                     </div>
                 </div>
             </div>
@@ -354,7 +354,7 @@
 
     function renderSpecialist(response) {
         console.log(response);
-        let html = `<option value="">Select specialist</option>`;
+        let html = `<option value="">{{__('home.Select specialist')}}</option>`;
         for (let i = 0; i < response.length; i++) {
             let data = response[i];
 
@@ -383,7 +383,7 @@
     }
 
     function renderLocation(response) {
-        let html = `<option value="">Select location</option>`;
+        let html = `<option value="">{{__('home.Select location')}}</option>`;
         for (let i = 0; i < response.length; i++) {
             let data = response[i];
 

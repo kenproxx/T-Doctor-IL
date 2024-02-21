@@ -24,7 +24,15 @@
                             <input type="checkbox" value="{{ $category->id }}" name="category"
                                    onchange="callListProduct()">
                             <label style="margin-bottom: 0"
-                                   class="flea-text-gray text-nowrap ml-2">{{ $category->name }}</label>
+                                   class="flea-text-gray text-nowrap ml-2">
+                                @if(locationHelper() == 'vi')
+                                    {{ ($category->name ?? __('home.no name') ) }}
+                                @elseif(locationHelper() == 'en')
+                                    {{ ($category->name_en  ?? __('home.no name') ) }}
+                                @else
+                                    {{ ($category->name_laos ?? $category->name ) }}
+                                @endif
+                            </label>
                         </div>
                     @endforeach
                 </div>

@@ -48,7 +48,15 @@
                 <div class="col-md-4 recruitment-details--content--right">
                     <div class="form-1" id="form-hospital">
                         <div>
-                            <strong class="flea-prise">{{$pr_json->name}}</strong>
+                            <strong class="flea-prise">
+                                @if(locationHelper() == 'vi')
+                                    {{ ($pr_json->name ?? __('home.no name') ) }}
+                                @elseif(locationHelper() == 'en')
+                                    {{ ($pr_json->name_en  ?? __('home.no name') ) }}
+                                @else
+                                    {{ ($pr_json->name_laos ?? __('home.no name') ) }}
+                                @endif
+                            </strong>
                             <div class="text-content-product">
                                 <strong
                                     class="">{{number_format($pr_json->price, 0, ',', '.') }} {{$pr_json->price_unit ?? 'VND'}}</strong>
@@ -56,26 +64,45 @@
 
                             <p style="color: #929292">{{ __('home.Location') }}:<strong class="flea-prise">
                                     @php
-                                        $province = DB::table('provinces')->where('id', $pr_json->province_id)->first()
+                                        $province = DB::table('provinces')->where('id', $pr_json->province_id)->first();
+                                    if(locationHelper() == 'vi')
+                                        $province = DB::table('provinces')->find($pr_json->province_id)->name;
+                                    elseif(locationHelper() == 'en')
+                                        $province = DB::table('provinces')->find($pr_json->province_id)->name_en;
+                                    else
+                                        $province = DB::table('provinces')->find($pr_json->province_id)->name_laos ?? DB::table('provinces')->find($pr_json->province_id)->name;
                                     @endphp
                                     @if(!empty($province))
-                                        {{$province->name}}
+                                        {{$province}}
                                     @else
                                         Null
                                     @endif
                                 </strong></p>
                             <p style="color: #929292">{{ __('home.Category') }}:<strong class="flea-prise">
                                     @php
-                                        $cata_json = DB::table('categories')->where('id', $pr_json->category_id)->first()
+                                    if (locationHelper() == 'vi')
+                                        $cata_json = DB::table('categories')->find($pr_json->category_id)->name;
+                                    elseif (locationHelper() == 'en')
+                                        $cata_json = DB::table('categories')->find($pr_json->category_id)->name_en;
+                                    else
+                                        $cata_json = DB::table('categories')->find($pr_json->category_id)->name_laos ?? DB::table('categories')->find($pr_json->category_id)->name;
                                     @endphp
                                     @if(!empty($cata_json))
-                                        {{$cata_json->name}}
+                                        {{$cata_json}}
                                     @else
                                         Null
                                     @endif
                                 </strong></p>
                             <p style="color: #929292">{{ __('home.Brand name') }}:<strong class="flea-prise">
-                                    {{$pr_json->brand_name}}</strong></p>
+
+                                    @if(locationHelper() == 'vi')
+                                        {{ ($pr_json->brand_name ?? __('home.no name') ) }}
+                                    @elseif(locationHelper() == 'en')
+                                        {{ ($pr_json->brand_name_en  ?? __('home.no name') ) }}
+                                    @else
+                                        {{ ($pr_json->brand_name_laos ?? __('home.no name') ) }}
+                                    @endif
+                                    </strong></p>
                         </div>
                         <div class="div-7 d-flex justify-content-between">
                             @if(Auth::user() == null || Auth::user()->id != $pr_json->created_by)
@@ -105,12 +132,24 @@
 
                     {{-- Start nội dung mô tả (backend)--}}
                     <div class="frame">
-                        <p class="text-content-product">{{$pr_json->name}}</p>
+                        <p class="text-content-product">@if(locationHelper() == 'vi')
+                                {{ ($pr_json->name ?? __('home.no name') ) }}
+                            @elseif(locationHelper() == 'en')
+                                {{ ($pr_json->name_en  ?? __('home.no name') ) }}
+                            @else
+                                {{ ($pr_json->name_laos ?? __('home.no name') ) }}
+                            @endif</p>
                         <div class="div mo-ta">
                             <div class="div-2">
                                 <p class="text-content-product-2">{{ __('home.Product Description') }}</p>
                                 <ul class="list-mo-ta">
-                                    {!!  $pr_json->description!!}
+                                    @if(locationHelper() == 'vi')
+                                        {!! ( $pr_json->description ?? __('home.no name') ) !!}
+                                    @elseif(locationHelper() == 'en')
+                                        {!! ( $pr_json->description_en  ?? __('home.no name') ) !!}
+                                    @else
+                                        {!! ( $pr_json->description_laos ?? __('home.no name') ) !!}
+                                    @endif
                                 </ul>
                             </div>
                             {{-- End nội dung mô tả--}}
