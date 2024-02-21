@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Pusher\Pusher;
+use Ramsey\Uuid\Uuid;
 
 class AgoraChatController extends Controller
 {
@@ -51,8 +52,10 @@ class AgoraChatController extends Controller
         $pusher->trigger('send-message', 'send-message', $data);
 
         // gui notification den user_id_1
-        $emailUserCall = User::getEmailByID($user_id_2);
-        $this->sendNotificationToAppByFireBase($emailUserCall);
+        $userReciveCall = User::find($user_id_2);
+        $userCall = User::find($user_id_1);
+
+        $this->sendNotificationToAppByFireBase($userReciveCall->email, $userCall);
 
         return view('video-call.index', compact('agora_chat'));
 
@@ -74,11 +77,10 @@ class AgoraChatController extends Controller
 
         $appid = '0b47427ee7334417a90ff22c4e537b08';
 
-        $array_email = [ User::getEmailByID($user_id_1), User::getEmailByID($user_id_2) ];
+        $array_email = [User::getEmailByID($user_id_1), User::getEmailByID($user_id_2)];
 
         // sort array email
         sort($array_email);
-
 
         if ($oldAgora) {
             $token = $oldAgora->token;
@@ -171,21 +173,38 @@ class AgoraChatController extends Controller
         return $str;
     }
 
-    function sendNotificationToAppByFireBase($email)
+    function sendNotificationToAppByFireBase($email, $userCall)
     {
 
         $notification = [
             "title" => "Cuộc gọi đến",
-            "body" => "tên người gọi",
+            "body" => $userCall->name ?? "Không rõ",
             "android_channel_id" => "callkit_incoming_channel_id"
         ];
 
+        $uuid = Uuid::uuid4();
+        $hashUUID = \Hash::make($uuid);
+
         $data = [
-            "uid" => "Mario",
-            "rtmUid" => "uniqueVideoCallId",
-            "type" => "1",
-            "requestUser" => "APIs.me",
-            "actionType" => "END_REQUEST"
+            "uid" => $hashUUID, // cái này em gửi cho anh 1 hash của uuid v4
+            "rtmUid" => $uuid, // cái này là cái uuid vừa gen ra ở bên trên
+            "type" => "1", // 1 với video, 0 với voice
+
+            // thông tin người gọi
+            "requestUser" => [
+                "image" => 'https://krmedi.vn/' . $userCall->avatar,
+                "about" => "t",
+                "name" => $userCall->name,
+                "createdAt" => $userCall->created_at,
+                "isOnline" => true,
+                "id" => $userCall->id,
+                "lastActive" => "",
+                "email" => $userCall->email,
+                "pushToken" => $userCall->token_firebase,
+                "role" => "",
+                "departmentId" => "",
+            ],
+            "actionType" => "", // nếu gọi bình thường thì không gửi lên, nếu là huỷ cuộc gọi hoặc kết thúc cuộc gọi mới gửi "END_REQUEST"
         ];
 
         $request = new Request();
@@ -194,7 +213,6 @@ class AgoraChatController extends Controller
         $mainAPi = new MainApi();
 
         $response = $mainAPi->sendNotificationFcm($request);
-
     }
 
     public function getInfoAgoraForApp(Request $request)
