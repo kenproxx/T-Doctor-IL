@@ -61,11 +61,11 @@
             <div
                     class="text-gray mt-2 text-short-description max-3-line-content">
                 @if(locationHelper() == 'vi')
-                    {{ $coupon->short_description }}
+                    {!! $coupon->short_description !!}
                 @elseif(locationHelper() == 'en')
-                    {{ $coupon->short_description_en }}
+                    {!! $coupon->short_description_en !!}
                 @else
-                    {{ $coupon->short_description_laos }}
+                    {!! $coupon->short_description_laos !!}
                 @endif
             </div>
         </a>
