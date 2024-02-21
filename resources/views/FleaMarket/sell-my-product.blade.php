@@ -39,7 +39,15 @@
                                         <select class="ac-choose font-16-mobi mt-2" name="category_id checkValid"
                                                 required id="category_id">
                                             @foreach($category as $item)
-                                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                                <option value="{{$item->id}}">
+                                                    @if(locationHelper() == 'vi')
+                                                        {{ ($item->name ?? __('home.no name') ) }}
+                                                    @elseif(locationHelper() == 'en')
+                                                        {{ ($item->name_en  ?? __('home.no name') ) }}
+                                                    @else
+                                                        {{ ($item->name_laos ?? $item->name ) }}
+                                                    @endif
+                                                    </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -52,7 +60,13 @@
                                                 name="province_idProduct checkValid"
                                                 required>
                                             @foreach($province as $item)
-                                                <option value="{{$item->id}}">{{$item->name}}</option>
+                                                <option value="{{$item->id}}">@if(locationHelper() == 'vi')
+                                                        {{ ($item->name ?? __('home.no name') ) }}
+                                                    @elseif(locationHelper() == 'en')
+                                                        {{ ($item->name_en  ?? __('home.no name') ) }}
+                                                    @else
+                                                        {{ ($item->name_laos ?? $item->name ) }}
+                                                    @endif</option>
                                             @endforeach
                                         </select>
                                     </div>

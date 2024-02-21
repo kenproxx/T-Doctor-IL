@@ -366,6 +366,7 @@
                 let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`;
                 url = url.replace(':id', products[i].id);
                 var product = products[i];
+                let toanQuoc = `{{__('home.Toàn quốc')}}`
                 var isSoldOut = product.quantity == 0;
                 var adsPlan = product.ads_plan;
                 let isFavoriteClass = isUserWasWishlist(product.id);
@@ -386,7 +387,16 @@
              <div class="">
                  <div class="name-product" style="min-height: 48px">
                      <a class="name-product--fleaMarket"
-                     href="${url}">${product.name}</a>
+                     href="${url}">
+
+                     @if(locationHelper() == 'vi')
+                ${product.name}
+                @elseif(locationHelper() == 'en')
+                ${product.name_en}
+                @else
+                ${product.name_laos ?? product.name}
+                @endif
+                </a>
                  </div>
             <div class="location-pro">
                 <svg xmlns="http://www.w3.org/2000/svg" width="21"
@@ -404,7 +414,7 @@
                                   transform="translate(0.5 0.933594)"/>
                         </clipPath>
                     </defs>
-                </svg> &nbsp; ${product.location_name ?? 'Toàn quốc'}
+                </svg> &nbsp; ${product.location_name ?? toanQuoc }
                 </div>
                 <div class="prices-pro">
                     ${formatCurrency(product.price)} ${product.price_unit}
@@ -544,6 +554,7 @@
                     let url = `{{ route('flea.market.product.detail', ['id' => ':id']) }}`;
                     url = url.replace(':id', res[i].id);
                     let item = res[i];
+                    let toanQuoc = `{{__('home.Toàn quốc')}}`
                     var isSoldOut = item.quantity == 0;
                     let adsPlan = item.ads_plan;
                     let userId = `{{ Auth::check() ? Auth::user()->id : null }}`;
@@ -572,7 +583,13 @@
                              <div class="">
                                  <div class="name-product" style="min-height: 48px">
                                      <a class="name-product--fleaMarket"
-                                     href="${url}">${item.name}</a>
+                                     href="${url}">@if(locationHelper() == 'vi')
+                                            ${item.name}
+                                        @elseif(locationHelper() == 'en')
+                                            ${item.name_en}
+                                        @else
+                                            ${item.name_laos ?? item.name}
+                                        @endif</a>
                                  </div>
                             <div class="location-pro">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="21"
@@ -590,7 +607,7 @@
                                                   transform="translate(0.5 0.933594)"/>
                                         </clipPath>
                                     </defs>
-                                </svg> &nbsp; ${item.location_name ?? 'Toàn quốc'}
+                                </svg> &nbsp; ${item.location_name ?? toanQuoc}
                                 </div>
                                 <div class="prices-pro">
                                     ${formatCurrency(item.price)} ${item.price_unit}
