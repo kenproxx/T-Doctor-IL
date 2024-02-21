@@ -194,7 +194,6 @@ class AgoraChatController extends Controller
         $mainAPi = new MainApi();
 
         $response = $mainAPi->sendNotificationFcm($request);
-
     }
 
     public function getInfoAgoraForApp(Request $request)

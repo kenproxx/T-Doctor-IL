@@ -171,7 +171,10 @@ class MainApi extends Controller
             'json' => [
                 'to' => $device_token,
                 'data' => $data,
-                'notification' => $notification
+                'notification' => $notification,
+                'web' => [
+                    'notification' => $notification,
+                ],
             ],
         ]);
 
