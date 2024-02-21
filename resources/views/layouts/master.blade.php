@@ -164,22 +164,10 @@
 </body>
 @include('components.head.tinymce-config')
 
-
 <script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js";
+    import {initializeApp} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import {getMessaging, getToken} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js";
 
-    navigator.serviceWorker.register('{{ asset('firebase-messaging-sw.js') }}').then(function(registration) {
-        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    }).catch(function(err) {
-        console.error('ServiceWorker registration failed: ', err);
-    });
-
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-
-    // Your web app's Firebase configuration
     const firebaseConfig = {
         apiKey: "AIzaSyAW-1uaHUA8tAaA3IQD9ypNkbVzFji88bE",
         authDomain: "chat-firebase-de134.firebaseapp.com",
@@ -188,23 +176,19 @@
         messagingSenderId: "867778569957",
         appId: "1:867778569957:web:7f3a6b87d83cefd8e8d60c"
     };
-
-    // Initialize Firebase
     const app = initializeApp(firebaseConfig);
-
-    const messaging = getMessaging(app);
-
-    // Lấy push token
-
+    const messaging = getMessaging();
     const key_pair_fire_base = 'BIKdl-B84phF636aS0ucw5k-KoGPnivJW4L_a9GNf7gyrWBZt--O9KcEzvsLl3h-3_Ld0rT8YFTsuupknvguW9s';
-    // const getTokenMessage = await getToken(messaging, { vapidKey: key_pair_fire_base});
-
-    let result = getToken(messaging, { vapidKey: key_pair_fire_base })
-
+    getToken(messaging, {vapidKey: key_pair_fire_base}).then((currentToken) => {
+        if (currentToken) {
+            console.log('token: ', currentToken);
+        } else {
+            console.log('No registration token available. Request permission to generate one.');
+        }
+    }).catch((err) => {
+        console.log('An error occurred while retrieving token. ', err);
+    });
 </script>
-
-
-
 
 <script>
     function loadingMasterPage() {
