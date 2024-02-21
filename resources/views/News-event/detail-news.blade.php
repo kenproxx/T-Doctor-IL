@@ -11,15 +11,39 @@
             <div class="d-flex">
                 <div class="col-md-9">
                     <div>
-                        <div class="news-content">{{$newEvent->title}}</div>
+                        <div class="news-content">
+                            @if(locationHelper() == 'vi')
+                                {{$newEvent->title}}
+                            @elseif(locationHelper() == 'en')
+                                {{$newEvent->title_en}}
+                            @else
+                                {{$newEvent->title_laos}}
+                            @endif
+                        </div>
                         <div class="fs-16px color-Grey-Dark mb-4 mt-2">{{ \Carbon\Carbon::parse($newEvent->created_at)->format('l, \n\g\à\y j-m-Y') }}</div>
                         <div class="justify-content-center row w-100">
                             <img class="b-radius-8px p-0" src="{{$newEvent->thumbnail}}">
                         </div>
 {{--                        <div class="justify-content-center row mb-4">{!! $newEvent->short_description !!}</div>--}}
                         <div class="mt-md-3">
-                            <div class="text-content-news">{!! $newEvent->short_description !!}</div>
-                            <div class="text-gray body-news mt-3">{!! $newEvent->description !!}</div>
+                            <div class="text-content-news">
+                                @if(locationHelper() == 'vi')
+                                    {!! $newEvent->short_description !!}
+                                @elseif(locationHelper() == 'en')
+                                    {!! $newEvent->short_description_en !!}
+                                @else
+                                    {!! $newEvent->short_description_laos !!}
+                                @endif
+                            </div>
+                            <div class="text-gray body-news mt-3">
+                                @if(locationHelper() == 'vi')
+                                    {!! $newEvent->description !!}
+                                @elseif(locationHelper() == 'en')
+                                    {!! $newEvent->description_en !!}
+                                @else
+                                    {!! $newEvent->description_laos !!}
+                                @endif
+                            </div>
                         </div>
                     </div>
                     <div class="border-top mt-30">
@@ -39,9 +63,25 @@
                                             </div>
                                             <div class="col-md-8 pr-0">
 
-                                                <strong class="fs-16px max-2-line-title">{{$item->title}}</strong>
+                                                <strong class="fs-16px max-2-line-title">
+                                                    @if(locationHelper() == 'vi')
+                                                        {{$item->title}}
+                                                    @elseif(locationHelper() == 'en')
+                                                        {{ $item->title_en }}
+                                                    @else
+                                                        {{ $item->title_laos }}
+                                                    @endif
+                                                </strong>
                                                 <div class="max-5-line-title">
-                                                    <div class="fs-12px">{!! $item->short_description !!}</div>
+                                                    <div class="fs-12px">
+                                                        @if(locationHelper() == 'vi')
+                                                            {!! $item->short_description !!}
+                                                        @elseif(locationHelper() == 'en')
+                                                            {!! $item->short_description_en !!}
+                                                        @else
+                                                            {!! $item->short_description_laos !!}
+                                                        @endif
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

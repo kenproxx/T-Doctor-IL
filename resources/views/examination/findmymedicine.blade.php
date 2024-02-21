@@ -430,7 +430,15 @@
                             <i class="bi bi-heart"></i>
                             <img loading="lazy" src="${url}${myArray[1]}" class="card-img-top" alt="...">
                             <div class="card-body">
-                                <a href="${mainUrl}"><h5 class="card-title">${item['name']}</h5></a>
+                                <a href="${mainUrl}"><h5 class="card-title">
+                                    @if(locationHelper() == 'vi')
+                                        ${item['name']}
+                                    @elseif(locationHelper() == 'en')
+                                        ${item['name_en']}
+                                    @else
+                                        ${item['name_laos']}
+                                    @endif
+                                </h5></a>
                                 <p class="card-text_1">{{ __('home.Location') }}: <b>${item['address_code']}</b></p>
                                 <p class="card-text_1">Price: <b>${item['price']} ${item['unit_price']}</b></p>
                             </div>

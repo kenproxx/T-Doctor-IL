@@ -58,7 +58,15 @@
             @foreach($questions as $index => $question)
                 <div class="col-sm-6 list-group list-group-flush">
                     <span class="list-group-item d-flex justify-content-between align-items-center">
-                        <a href="{{ route('examination.mentoring.show', $question->id) }}"><b class="style-b">{{ $index + 1 }}  {{ $question->title }}</b></a>
+                        <a href="{{ route('examination.mentoring.show', $question->id) }}"><b class="style-b">{{ $index + 1 }}
+                                @if(locationHelper() == 'vi')
+                                    {{ ($question->title ?? '') }}
+                                @elseif(locationHelper() == 'en')
+                                    {{ ($question->title_en  ?? $question->title ) }}
+                                @else
+                                    {{ ($question->title_laos ?? $question->title ) }}
+                                @endif
+                            </b></a>
                         <span class="text-red">({{ $question->answers_count }})</span>
                     </span>
                 </div>
@@ -209,7 +217,15 @@
                             <div class="text-wrapper textCate">${textCate}</div>
                         </div>
                         <div class="div-2">
-                            <a href="${url}"><div class="lin-tip-tht-bi-cc"><p class="p">${comment.title}</p>
+                            <a href="${url}"><div class="lin-tip-tht-bi-cc"><p class="p">
+                            @if(locationHelper() == 'vi')
+                ${comment.title}
+                @elseif(locationHelper() == 'en')
+                ${comment.title_en ?? comment.title}
+                @else
+                ${comment.title_laos ?? comment.title}
+                @endif
+                </p>
                             </div></a>
                             <div class="row w-100">
                                 <div class="col-sm-2 col text-cmt"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">

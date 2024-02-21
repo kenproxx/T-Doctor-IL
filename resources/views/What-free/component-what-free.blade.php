@@ -44,15 +44,29 @@
                 @endforeach
                 <i class="d-flex align-items-center">
                     <p class="header-center ml-2">
-                        Còn {{ $daysRemaining }} ngày
+                        {{__('home.Còn')}} {{ $daysRemaining }} {{__('home.ngày')}}
                     </p>
                 </i>
             </div>
 
-            <div class="mt-3 flea-content-product max-2-line-title">{{ $coupon->title }}
+            <div class="mt-3 flea-content-product max-2-line-title">
+                @if(locationHelper() == 'vi')
+                    {{ $coupon->title }}
+                @elseif(locationHelper() == 'en')
+                    {{ $coupon->title_en }}
+                @else
+                    {{ $coupon->title_laos }}
+                @endif
             </div>
             <div
-                    class="text-gray mt-2 text-short-description max-3-line-content">{!! $coupon->short_description !!}
+                    class="text-gray mt-2 text-short-description max-3-line-content">
+                @if(locationHelper() == 'vi')
+                    {{ $coupon->short_description }}
+                @elseif(locationHelper() == 'en')
+                    {{ $coupon->short_description_en }}
+                @else
+                    {{ $coupon->short_description_laos }}
+                @endif
             </div>
         </a>
         <div class="justify-content-between d-flex mt-2">
