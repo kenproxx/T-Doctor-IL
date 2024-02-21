@@ -170,6 +170,12 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js";
 
+    navigator.serviceWorker.register('{{ asset('firebase-messaging-sw.js') }}').then(function(registration) {
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }).catch(function(err) {
+        console.error('ServiceWorker registration failed: ', err);
+    });
+
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -193,20 +199,8 @@
     const key_pair_fire_base = 'BIKdl-B84phF636aS0ucw5k-KoGPnivJW4L_a9GNf7gyrWBZt--O9KcEzvsLl3h-3_Ld0rT8YFTsuupknvguW9s';
     // const getTokenMessage = await getToken(messaging, { vapidKey: key_pair_fire_base});
 
-    console.log(messaging)
+    let result = getToken(messaging, { vapidKey: key_pair_fire_base })
 
-    getToken(messaging, { vapidKey: key_pair_fire_base }).then((currentToken) => {
-        if (currentToken) {
-            console.log('currentToken', currentToken)
-        } else {
-            // Show permission request UI
-            console.log('No registration token available. Request permission to generate one.');
-            // ...
-        }
-    }).catch((err) => {
-        console.log('An error occurred while retrieving token. ', err);
-        // ...
-    });
 </script>
 
 
