@@ -51,8 +51,8 @@ class AgoraChatController extends Controller
         $pusher->trigger('send-message', 'send-message', $data);
 
         // gui notification den user_id_1
-        $emailUserCall = User::getEmailByID($user_id_2);
-        $this->sendNotificationToAppByFireBase($emailUserCall);
+        $userCall = User::find($user_id_2);
+        $this->sendNotificationToAppByFireBase($userCall->email, $userCall->name);
 
         return view('video-call.index', compact('agora_chat'));
 
@@ -171,12 +171,12 @@ class AgoraChatController extends Controller
         return $str;
     }
 
-    function sendNotificationToAppByFireBase($email)
+    function sendNotificationToAppByFireBase($email, $name)
     {
 
         $notification = [
             "title" => "Cuộc gọi đến",
-            "body" => "tên người gọi",
+            "body" => $name ?? "Không rõ",
             "android_channel_id" => "callkit_incoming_channel_id"
         ];
 
