@@ -182,12 +182,15 @@ class AgoraChatController extends Controller
             "android_channel_id" => "callkit_incoming_channel_id"
         ];
 
-        $uuid = Uuid::uuid4();
-        $hashUUID = \Hash::make($uuid);
+        $uuid = rand(1000000000, 9999999999);
+
+        // hash uuid to int
+        $hashedValue = hash('sha256', $uuid);
+        $hashUUID = hexdec($hashedValue);
 
         $data = [
-            "uid" => $hashUUID, // cái này em gửi cho anh 1 hash của uuid v4
-            "rtmUid" => $uuid, // cái này là cái uuid vừa gen ra ở bên trên
+            "uid" => $uuid, // cái này em gửi cho anh 1 hash của uuid v4
+            "rtmUid" => $hashUUID, // cái này là cái uuid vừa gen ra ở bên trên
             "type" => "1", // 1 với video, 0 với voice
 
             // thông tin người gọi
@@ -195,12 +198,12 @@ class AgoraChatController extends Controller
                 "image" => 'https://krmedi.vn/' . $userCall->avatar,
                 "about" => "t",
                 "name" => $userCall->name,
-                "createdAt" => "", // $userCall->created_at,
+                "createdAt" => $userCall->created_at,
                 "isOnline" => true,
-                "id" => $userCall->id,
+                "id" => strval($userCall->id),
                 "lastActive" => "",
                 "email" => $userCall->email,
-                "pushToken" => "", // $userCall->token_firebase,
+                "pushToken" => $hashUUID,
                 "role" => "",
                 "departmentId" => "",
             ],

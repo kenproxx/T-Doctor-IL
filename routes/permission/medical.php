@@ -212,7 +212,7 @@ Route::group(['prefix' => 'phamacitis'], function () {
 
 Route::group(['prefix' => 'settings'], function () {
     Route::get('/list', [SettingController::class, 'getAll'])->name('api.backend.setting.list');
-    Route::post('/creat', [SettingController::class, 'create'])->name('api.backend.setting.create');
+    Route::post('/create', [SettingController::class, 'create'])->name('api.backend.setting.create');
     Route::post('/update/{id}', [SettingController::class, 'update'])->name('api.backend.setting.update');
 });
 
