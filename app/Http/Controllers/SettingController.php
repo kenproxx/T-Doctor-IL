@@ -57,13 +57,17 @@ class SettingController extends Controller
 
             $ad_banner_link = $request->file('ad_banner_link');
             $ad_banner_follow = $request->input('ad_banner_follow');
-            $website_description_en = $request->input('website_description_en');
-            $website_description_laos = $request->input('website_description_laos');
+
+            $translate = new TranslateController();
+
+            $website_description = $request->input('website_description');
+
+            $website_description_en = $translate->translateText($website_description, 'en');
+            $website_description_laos = $translate->translateText($website_description, 'lo');
+
             $address = $request->input('address');
             $phone = $request->input('phone');
             $email = $request->input('email');
-            $website_description = $request->input('website_description');
-
 
             $setting = new Setting();
             $setting->logo = $logo;
@@ -80,12 +84,7 @@ class SettingController extends Controller
             $setting->favicon = $favicon;
             $setting->save();
 
-            if ($setting) {
-                alert()->success('Success', 'Create success!');
-                return back();
-            }
-
-            alert()->error('Error', 'Create error!');
+            alert()->success('Success', 'Create success!');
             return back();
         } catch (\Exception $exception) {
             alert()->error('Error', 'Error, Please try again!');
@@ -149,12 +148,17 @@ class SettingController extends Controller
 
             $ad_banner_link = $request->input('ad_banner_link');
             $ad_banner_follow = $request->input('ad_banner_follow');
-            $website_description_en = $request->input('website_description_en');
-            $website_description_laos = $request->input('website_description_laos');
+
+            $translate = new TranslateController();
+
+            $website_description = $request->input('website_description');
+
+            $website_description_en = $translate->translateText($website_description, 'en');
+            $website_description_laos = $translate->translateText($website_description, 'lo');
+
             $address = $request->input('address');
             $phone = $request->input('phone');
             $email = $request->input('email');
-            $website_description = $request->input('website_description');
 
             $setting->logo = $logo;
             $setting->ad_banner_position = $ad_banner_position;
