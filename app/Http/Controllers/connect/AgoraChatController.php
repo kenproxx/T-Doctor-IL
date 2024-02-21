@@ -303,4 +303,27 @@ class AgoraChatController extends Controller
 
     }
 
+    function getPushTokenByUser(Request $request)
+    {
+        $user_id = $request->input('user_id');
+        $user_email = $request->input('user_email');
+        if ($user_id) {
+            $user = User::find($user_id);
+        } else {
+            $user = User::where('email', $user_email)->first();
+        }
+
+        if (!$user) {
+            return response((new MainApi())->returnMessage('User not found'), 500);
+        }
+
+        $result = [
+            'pushToken' => $user->token_firebase ?? '',
+            'id' => $user->id ?? '',
+            'email' => $user->email ?? '',
+        ];
+
+        return response()->json($result);
+    }
+
 }

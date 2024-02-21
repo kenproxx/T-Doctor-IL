@@ -157,3 +157,4 @@ Route::group(['prefix' => 'prescription-result'], function () {
 });
 
 Route::get("connect/video/agora/get-token-app", [AgoraChatController::class, 'getInfoAgoraForApp'])->name("agora.get-token-app");
+Route::get("connect/video/agora/get-push-token-user", [AgoraChatController::class, 'getPushTokenByUser'])->name("agora.get-token-app-user");
