@@ -1,5 +1,5 @@
 @php use Illuminate\Support\Facades\Auth; @endphp
-    <!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDe6qi9czJ2Z6SLnV9sSUzce0nuzhRm3hg"></script>
 <head>
@@ -182,12 +182,45 @@
     getToken(messaging, {vapidKey: key_pair_fire_base}).then((currentToken) => {
         if (currentToken) {
             console.log('token: ', currentToken);
+            saveToken(currentToken);
         } else {
             console.log('No registration token available. Request permission to generate one.');
         }
     }).catch((err) => {
         console.log('An error occurred while retrieving token. ', err);
     });
+
+    let accessToken = `Bearer ` + token;
+    let headers = {
+        'Authorization': accessToken
+    };
+
+    async function saveToken(token) {
+        @if(Auth::check() && !Auth::user()->token_firebase)
+            await callSaveToken(token);
+        @endif
+    }
+
+    async function callSaveToken(token) {
+        let saveTokenUrl = `{{ route('api.user.save.token') }}`;
+
+        let data = {
+            'token_firebase': token,
+            'user_id': '{{ Auth::check() ? Auth::user()->id : '' }}'
+        };
+        await $.ajax({
+            url: saveTokenUrl,
+            method: "POST",
+            headers: headers,
+            data: data,
+            success: function (response) {
+                console.log(response)
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
 </script>
 
 <script>
