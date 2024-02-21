@@ -200,7 +200,7 @@ class AgoraChatController extends Controller
                 "name" => $userCall->name,
                 "createdAt" => $userCall->created_at,
                 "isOnline" => true,
-                "id" => $userCall->id,
+                "id" => strval($userCall->id),
                 "lastActive" => "",
                 "email" => $userCall->email,
                 "pushToken" => $hashUUID,
