@@ -63,10 +63,14 @@
                 </p>
             </i>
             <i>
-                <div style="display: none" class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->startDate, $coupon->endDate) ? 'd-block' : '' }}">Thời gian ứng tuyển</div>
-                <div style="display: none" class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_selective, $coupon->end_selective) ? 'd-block' : '' }}">Thời gian chọn lọc</div>
-                <div style="display: none" class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_post, $coupon->end_post) ? 'd-block' : '' }}">Thời gian đăng bài</div>
-                <div style="display: none" class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_evaluate, $coupon->end_evaluate) ? 'd-block' : '' }}">Thời gian đánh giá</div>
+                <div style="display: none" class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->startDate, $coupon->endDate) ? 'd-block' : '' }}">
+                    {{__('home.Thời gian ứng tuyển')}}</div>
+                <div style="display: none" class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_selective, $coupon->end_selective) ? 'd-block' : '' }}">
+                    {{__('home.Thời gian chọn lọc')}}</div>
+                <div style="display: none" class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_post, $coupon->end_post) ? 'd-block' : '' }}">
+                    {{__('home.Thời gian đăng bài')}}</div>
+                <div style="display: none" class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_evaluate, $coupon->end_evaluate) ? 'd-block' : '' }}">
+                    {{__('home.Thời gian đánh giá')}}</div>
             </i>
         </div>
     </div>

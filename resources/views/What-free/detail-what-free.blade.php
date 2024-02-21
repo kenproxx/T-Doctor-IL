@@ -79,7 +79,7 @@
                     @if($coupon->short_description != null)
                         <div class="mb-3 mt-30 d-md-flex">
                             <div id="short_description" class="mb-2 section-description flea-content-product col-md-3">
-                                Phần thưởng
+                                {{ __('home.Phần thưởng') }}
                             </div>
                             <div
                                 class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->short_description !!}</div>
@@ -87,42 +87,35 @@
                     @endif
                     @if($coupon->condition != null)
                         <div class="mb-3 d-md-flex">
-                            <div id="condition" class="mb-2 section-description flea-content-product col-md-3">Điều
-                                khoản và
-                                điều kiện
+                            <div id="condition" class="mb-2 section-description flea-content-product col-md-3">{{ __('home.Điều khoản và điều kiện') }}
                             </div>
                             <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->condition !!}</div>
                         </div>
                     @endif
                     @if($coupon->conduct != null)
                         <div class="mb-3 d-md-flex">
-                            <div id="conduct" class="mb-2 section-description flea-content-product col-md-3">Hướng dẫn
-                                chiến
-                                dịch
+                            <div id="conduct" class="mb-2 section-description flea-content-product col-md-3">{{__('home.Hướng dẫn chiến dịch')}}
                             </div>
                             <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->conduct !!}</div>
                         </div>
                     @endif
                     @if($coupon->description != null)
                         <div class="mb-3 d-md-flex">
-                            <div id="description" class="mb-2 section-description flea-content-product col-md-3">Yêu cầu
-                                nội
-                                dung
+                            <div id="description" class="mb-2 section-description flea-content-product col-md-3">{{ __('home.Yêu cầu nội dung') }}
                             </div>
                             <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->description !!}</div>
                         </div>
                     @endif
                     @if($coupon->description != null)
                         <div class="mb-3 d-md-flex">
-                            <div id="instruction" class="mb-2 section-description flea-content-product col-md-3">Hướng
-                                dẫn chi tiết
+                            <div id="instruction" class="mb-2 section-description flea-content-product col-md-3">{{ __('home.Hướng dẫn chi tiết')}}
                             </div>
                             <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->instruction !!}</div>
                         </div>
                     @endif
                     @if($coupon->description != null)
                         <div class="mb-3 d-md-flex">
-                            <div id="website" class="mb-2 section-description flea-content-product col-md-3">Website
+                            <div id="website" class="mb-2 section-description flea-content-product col-md-3">{{__('home.Website')}}
                             </div>
                             <div class="flea-text-gray color-Grey-Black col-md-9">{!! $coupon->website !!}</div>
                         </div>
@@ -144,7 +137,7 @@
                             <div class="justify-content-between d-flex">
                                 <div
                                     class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->startDate, $coupon->endDate) ? 'bold-text' : '' }}">
-                                    Thời gian ứng tuyển
+                                    {{__('home.Thời gian ứng tuyển')}}
                                 </div>
                                 <div
                                     class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->startDate, $coupon->endDate) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->startDate)->format('d.m') }}
@@ -153,7 +146,7 @@
                             <div class="justify-content-between d-flex">
                                 <div
                                     class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_selective, $coupon->end_selective) ? 'bold-text' : '' }}">
-                                    Thời gian chọn lọc
+                                    {{__('home.Thời gian chọn lọc')}}
                                 </div>
                                 <div
                                     class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_selective, $coupon->end_selective) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->start_selective)->format('d.m') }}
@@ -162,7 +155,7 @@
                             <div class="justify-content-between d-flex">
                                 <div
                                     class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_post, $coupon->end_post) ? 'bold-text' : '' }}">
-                                    Thời gian đăng bài
+                                    {{__('home.Thời gian đăng bài')}}
                                 </div>
                                 <div
                                     class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_post, $coupon->end_post) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->start_post)->format('d.m') }}
@@ -171,7 +164,7 @@
                             <div class="justify-content-between d-flex">
                                 <div
                                     class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_evaluate, $coupon->end_evaluate) ? 'bold-text' : '' }}">
-                                    Thời gian đánh giá
+                                    {{__('home.Thời gian đánh giá')}}
                                 </div>
                                 <div
                                     class="{{ \App\Http\Controllers\CouponController::isWithinTimeRange($coupon->start_evaluate, $coupon->end_evaluate) ? 'bold-text' : '' }}">{{ Carbon::parse($coupon->start_evaluate)->format('d.m') }}
@@ -180,22 +173,22 @@
                             <hr>
 
                             @if($coupon->short_description != null)
-                                <a class="hover-description" href="#short_description">Phần thưởng</a>
+                                <a class="hover-description" href="#short_description">{{ __('home.Phần thưởng') }}</a>
                                 <hr>
                             @endif
 
                             @if($coupon->condition != null)
-                                <a class="hover-description" href="#condition">Điều khoản và điều kiện</a>
+                                <a class="hover-description" href="#condition">{{ __('home.Điều khoản và điều kiện') }}</a>
                                 <hr>
                             @endif
 
                             @if($coupon->conduct != null)
-                                <a class="hover-description" href="#conduct">Hướng dẫn chiến dịch</a>
+                                <a class="hover-description" href="#conduct">{{__('home.Hướng dẫn chiến dịch')}}</a>
                                 <hr>
                             @endif
 
                             @if($coupon->description != null)
-                                <a class="hover-description" href="#description">Yêu cầu nội dung</a>
+                                <a class="hover-description" href="#description">{{ __('home.Yêu cầu nội dung') }}</a>
                                 <hr>
                             @endif
                         </div>

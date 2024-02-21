@@ -46,7 +46,7 @@
             @endphp
             <div class="col-4 col-md-3 p-1 d-flex font-12-mobi">{{ __('home.Product') }}: <span class="font-weight-800">{{$count}}</span></div>
             <div class="col-4 col-md-3 p-1 d-flex font-12-mobi">{{ __('home.Sold') }}: <span class="font-weight-800">1000</span></div>
-            <div class="col-4 col-md-3 p-1 d-flex font-12-mobi">{{ __('home.Sold out') }}: <span class="font-weight-800">10</span></div>
+            <div class="col-4 col-md-3 p-1 d-flex font-12-mobi">{{ __('home.Sold Out') }}: <span class="font-weight-800">10</span></div>
             <div class="col-4 col-md-3 p-1 d-flex font-12-mobi">{{ __('home.Following') }}: <span class="font-weight-800">50</span></div>
         </div>
     </div>

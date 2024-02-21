@@ -1,5 +1,5 @@
-@php use App\Models\Province;
-
+@php
+    use App\Models\Province;
 @endphp
 @extends('layouts.master')
 @section('title', 'Home')
@@ -376,7 +376,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <span class="ml-3">Khám chuyên khoa</span></div>
+                            <span class="ml-3">{{ __('home.Khám chuyên khoa') }}</span></div>
                         <div class="svg-containerNho">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none">
@@ -575,7 +575,7 @@
                                     </clipPath>
                                 </defs>
                             </svg>
-                            <span class="ml-3">Khám từ xa</span></div>
+                            <span class="ml-3">{{__('home.Khám từ xa')}}</span></div>
                         <div class="svg-containerNho">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none">
@@ -612,7 +612,7 @@
                                     </linearGradient>
                                 </defs>
                             </svg>
-                            <span class="ml-3">Tư vẫn sức khoẻ</span></div>
+                            <span class="ml-3">{{__('home.Tư vẫn sức khoẻ')}}</span></div>
                         <div class="svg-containerNho">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                  fill="none">
@@ -799,7 +799,7 @@
                                     </linearGradient>
                                 </defs>
                             </svg>
-                            <span class="ml-3">Y tế gần bạn</span>
+                            <span class="ml-3">{{__('home.Y tế gần bạn')}}</span>
                         </div>
                         <div class="svg-containerNho">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -978,8 +978,10 @@
                 </div>
             </div>
             <div class="">
-                <div class="titleServiceHomeNew d-flex justify-content-between align-items-center">Chuyên khoa khám <a
-                        class="pc-hidden" href="{{route('home.specialist')}}">see more</a></div>
+                <div
+                    class="titleServiceHomeNew d-flex justify-content-between align-items-center">{{__('home.Chuyên khoa khám')}}
+                    <a
+                        class="pc-hidden" href="{{route('home.specialist')}}">{{__('home.see more')}}</a></div>
                 <div class="mainServiceHomeNew row">
                     @php
                         $departments = \App\Models\Department::where('status', \App\Enums\DepartmentStatus::ACTIVE)->get();
@@ -994,7 +996,15 @@
                                 <div class="border-HomeNew">
                                     <div class="w-75 d-flex align-items-center ">
                                         <img loading="lazy" src="{{$departmentItem->thumbnail}}" alt="thumbnail">
-                                        <span>{{$departmentItem->name}}</span>
+                                        <span>
+                                            @if(locationHelper() == 'vi')
+                                                {{ ($departmentItem->name ?? __('home.no name') ) }}
+                                            @elseif(locationHelper() == 'en')
+                                                {{ ($departmentItem->name_en  ?? __('home.no name') ) }}
+                                            @else
+                                                {{ ($departmentItem->name_laos ?? __('home.no name') ) }}
+                                            @endif
+                                        </span>
                                     </div>
                                     <div class="svg-containerNho">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
@@ -1059,6 +1069,7 @@
                         <div class="row">
 
                             @foreach($doctors as $doctor)
+                                {{--                                @dd($doctor)--}}
                                 @if($doctor == '')
                                     <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
                                 @else
@@ -1069,7 +1080,6 @@
                                                                 ->where('medical_id', $doctor->id)
                                                                 ->first();
                                         }
-
                                         $class = !$isFavourite ? 'bi-heart' : 'bi-heart-fill text-danger';
                                     @endphp
                                     <div class="col-md-3 col-6">
@@ -1096,7 +1106,15 @@
                                                                href="{{ route('examination.doctor_info', $doctor->id) }}">{{$doctor->name}}</a>
                                                         </div>
                                                         <div class="location-pro d-flex">
-                                                            <p>{!! $doctor->service !!}</p>
+                                                            <p>
+                                                                @if(locationHelper() == 'vi')
+                                                                    {!! ($doctor->service ?? __('home.no name') ) !!}
+                                                                @elseif(locationHelper() == 'en')
+                                                                    {!! ($doctor->service_en  ?? __('home.no name') ) !!}
+                                                                @else
+                                                                    {!! ($doctor->service_laos ?? __('home.no name') ) !!}
+                                                                @endif
+                                                            </p>
                                                         </div>
                                                         <div class="price-pro">
                                                             @php
@@ -1104,8 +1122,16 @@
                                                                     $addressP = 'Ha Noi';
                                                                     }
                                                                 else {
-                                                                    $addressP = Province::find($doctor->province_id)->name;
+                                                                    if (locationHelper() == 'vi') {
+                                                                        $addressP = Province::find($doctor->province_id)->name;
                                                                     }
+                                                                    elseif (locationHelper() == 'en') {
+                                                                        $addressP = Province::find($doctor->province_id)->name_en;
+                                                                    }
+                                                                    else {
+                                                                    $addressP = Province::find($doctor->province_id)->name_laos ?? Province::find($doctor->province_id)->name;
+                                                                    }
+                                                                }
                                                             @endphp
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="21"
                                                                  height="21" viewBox="0 0 21 21" fill="none">
@@ -1177,7 +1203,15 @@
                                                     <div class="">
                                                         <div class="name-product" style="height: auto">
                                                             <a class="name-product--fleaMarket max-3-line-content"
-                                                               href="{{ route('examination.doctor_info', $medicine->id) }}">{{$medicine->name}}</a>
+                                                               href="{{ route('examination.doctor_info', $medicine->id) }}">
+                                                                @if(locationHelper() == 'vi')
+                                                                    {{ ($medicine->name ?? __('home.no name') ) }}
+                                                                @elseif(locationHelper() == 'en')
+                                                                    {{ ($medicine->name_en  ?? __('home.no name') ) }}
+                                                                @else
+                                                                    {{ ($medicine->name_laos ?? __('home.no name') ) }}
+                                                                @endif
+                                                            </a>
                                                         </div>
                                                         <div class="location-pro">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="21"
@@ -1195,7 +1229,8 @@
                                                                               transform="translate(0.5 0.933594)"/>
                                                                     </clipPath>
                                                                 </defs>
-                                                            </svg> &nbsp; {{$medicine->location_name}}
+                                                            </svg>
+                                                            {{$medicine->location_name}}
                                                         </div>
                                                         <div class="prices-pro">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="21"
@@ -1489,11 +1524,24 @@
                                     <div class="name-productFlea" style="min-height: 55px">
                                         <a class="name-product--fleaMarket max-3-line-content"
                                            href="{{ route('flea.market.product.detail', $product->id) }}"
-                                           target="_blank">{{$product->name}}</a>
+                                           target="_blank">
+                                            @if(locationHelper() == 'vi')
+                                                {{ ($product->name ?? __('home.no name') ) }}
+                                            @elseif(locationHelper() == 'en')
+                                                {{ ($product->name_en  ?? __('home.no name') ) }}
+                                            @else
+                                                {{ ($product->name_laos ?? __('home.no name') ) }}
+                                            @endif</a>
                                     </div>
                                     <div class="location-proFlea">
                                         @php
-                                            $addressP = \App\Models\Province::where('id', $product->province_id)->value('name');
+                                            if (locationHelper() == 'vi'){
+                                                $addressP = Province::find($product->province_id)->name ?? 'Ha Noi';
+                                            } elseif (locationHelper() == 'en'){
+                                                $addressP = Province::find($product->province_id)->name_en ?? 'Ha Noi';
+                                            } else {
+                                                $addressP = Province::find($product->province_id)->name_laos ?? 'Ha Noi';
+                                            }
                                         @endphp
                                         <svg xmlns="http://www.w3.org/2000/svg" width="21"
                                              height="21" viewBox="0 0 21 21" fill="none">
@@ -1565,7 +1613,7 @@
                                                         </a>
                                                         <div
                                                             class="{{ $isSoldOut ? 'sold-out-overlay-text' : 'd-none' }} ">
-                                                            <h1 class="sold-out">Sold Out</h1>
+                                                            <h1 class="sold-out">{{__('home.Sold Out')}}</h1>
                                                         </div>
                                                     </div>
                                                     <div class="content-pro p-md-3 p-2">
@@ -1576,7 +1624,13 @@
                                                             </div>
                                                             <div class="location-pro">
                                                                 @php
-                                                                    $addressP = \App\Models\Province::where('id', $product->province_id)->value('name');
+                                                                    if (locationHelper() == 'vi'){
+                                                                        $addressP = Province::find($product->province_id)->name ?? 'Ha Noi';
+                                                                    } elseif (locationHelper() == 'en'){
+                                                                        $addressP = Province::find($product->province_id)->name_en ?? 'Ha Noi';
+                                                                    } else {
+                                                                        $addressP = Province::find($product->province_id)->name_laos ?? 'Ha Noi';
+                                                                    }
                                                                 @endphp
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="21"
                                                                      height="21" viewBox="0 0 21 21" fill="none">
@@ -1723,7 +1777,7 @@
                                                         <i class="bi {{ $class }}"></i>
                                                     </a>
                                                     <div class="{{ $isSoldOut ? 'sold-out-overlay-text' : 'd-none' }} ">
-                                                        <h1 class="sold-out">Sold Out</h1>
+                                                        <h1 class="sold-out">{{__('home.Sold Out')}}</h1>
                                                     </div>
                                                 </div>
                                                 <div class="content-pro p-md-3 p-2">
@@ -1734,7 +1788,13 @@
                                                         </div>
                                                         <div class="location-pro">
                                                             @php
-                                                                $addressP = \App\Models\Province::where('id', $product->province_id)->value('name');
+                                                                if (locationHelper() == 'vi'){
+                                                                    $addressP = Province::find($product->province_id)->name ?? 'Ha Noi';
+                                                                } elseif (locationHelper() == 'en'){
+                                                                    $addressP = Province::find($product->province_id)->name_en ?? 'Ha Noi';
+                                                                } else {
+                                                                    $addressP = Province::find($product->province_id)->name_laos ?? 'Ha Noi';
+                                                                }
                                                             @endphp
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="21"
                                                                  height="21" viewBox="0 0 21 21" fill="none">
@@ -1811,7 +1871,13 @@
                                                         </div>
                                                         <div class="location-pro">
                                                             @php
-                                                                $addressP = \App\Models\Province::where('id', $product->province_id)->value('name');
+                                                                if (locationHelper() == 'vi'){
+                                                                     $addressP = Province::find($product->province_id)->name ?? 'Ha Noi';
+                                                                 } elseif (locationHelper() == 'en'){
+                                                                     $addressP = Province::find($product->province_id)->name_en ?? 'Ha Noi';
+                                                                 } else {
+                                                                     $addressP = Province::find($product->province_id)->name_laos ?? 'Ha Noi';
+                                                                 }
                                                             @endphp
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="21"
                                                                  height="21" viewBox="0 0 21 21" fill="none">
@@ -1904,7 +1970,13 @@
                                                         </div>
                                                         <div class="location-pro">
                                                             @php
-                                                                $addressP = \App\Models\Province::where('id', $product->province_id)->value('name');
+                                                                if (locationHelper() == 'vi'){
+                                                                    $addressP = Province::find($product->province_id)->name ?? 'Ha Noi';
+                                                                } elseif (locationHelper() == 'en'){
+                                                                    $addressP = Province::find($product->province_id)->name_en ?? 'Ha Noi';
+                                                                } else {
+                                                                    $addressP = Province::find($product->province_id)->name_laos ?? 'Ha Noi';
+                                                                }
                                                             @endphp
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="21"
                                                                  height="21" viewBox="0 0 21 21" fill="none">
@@ -1997,7 +2069,13 @@
                                                         </div>
                                                         <div class="location-pro">
                                                             @php
-                                                                $addressP = \App\Models\Province::where('id', $product->province_id)->value('name');
+                                                                if (locationHelper() == 'vi'){
+                                                                    $addressP = Province::find($product->province_id)->name ?? 'Ha Noi';
+                                                                } elseif (locationHelper() == 'en'){
+                                                                    $addressP = Province::find($product->province_id)->name_en ?? 'Ha Noi';
+                                                                } else {
+                                                                    $addressP = Province::find($product->province_id)->name_laos ?? 'Ha Noi';
+                                                                }
                                                             @endphp
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="21"
                                                                  height="21" viewBox="0 0 21 21" fill="none">

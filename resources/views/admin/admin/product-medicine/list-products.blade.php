@@ -71,7 +71,7 @@
             <div class="row w-100">
                 <div class="col">
                     <input class="form-control" id="keyword" type="text" onkeypress="processSearchProduct();"
-                           placeholder="Enter name, prescription or ingredients of products"/>
+                           placeholder="{{__('home.Enter name, prescription or ingredients of products')}}"/>
                 </div>
                 <div class="col">
                     <select id="inputCountry" class="form-select input_filter">
