@@ -54,7 +54,7 @@ class AgoraChatController extends Controller
         $userReciveCall = User::find($user_id_2);
         $userCall = User::find($user_id_1);
 
-        $this->sendNotificationToAppByFireBase($userReciveCall->email, $userCall->name);
+        $this->sendNotificationToAppByFireBase($userReciveCall->email, $userCall);
 
         return view('video-call.index', compact('agora_chat'));
 
@@ -80,7 +80,6 @@ class AgoraChatController extends Controller
 
         // sort array email
         sort($array_email);
-
 
         if ($oldAgora) {
             $token = $oldAgora->token;
@@ -173,12 +172,12 @@ class AgoraChatController extends Controller
         return $str;
     }
 
-    function sendNotificationToAppByFireBase($email, $name)
+    function sendNotificationToAppByFireBase($email, $userCall)
     {
 
         $notification = [
             "title" => "Cuộc gọi đến",
-            "body" => $name ?? "Không rõ",
+            "body" => $userCall->name ?? "Không rõ",
             "android_channel_id" => "callkit_incoming_channel_id"
         ];
 
@@ -187,7 +186,8 @@ class AgoraChatController extends Controller
             "rtmUid" => "uniqueVideoCallId",
             "type" => "1",
             "requestUser" => "APIs.me",
-            "actionType" => "END_REQUEST"
+            "actionType" => "END_REQUEST",
+            "userCall" => $userCall
         ];
 
         $request = new Request();
