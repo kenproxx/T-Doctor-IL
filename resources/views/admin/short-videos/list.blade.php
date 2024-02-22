@@ -60,7 +60,13 @@
                 let data = response[i];
                 detail = detail.replace(':id', data.id);
                 html = html + ` <tr>
-                        <td>${data.title}</td>
+                        <td>${data.title}
+                        @if(locationHelper() == 'vi')
+                ${data.title}
+                @else
+                ${data.title_en}
+                @endif
+                        </td>
                         <td>${data.views}</td>
                         <td>${data.shares}</td>
                         <td>${data.reactions}</td>

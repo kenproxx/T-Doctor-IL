@@ -64,7 +64,13 @@
                                         <td>${data.phone}</td>
                                         <td>${data.address}</td>
                                         <td>${data.star}</td>
-                                        <td>${data.content}</td>
+                                        <td>
+                                        @if(locationHelper() == 'vi')
+                                            ${data.content}
+                                            @else
+                                            ${data.content_en}
+                                            @endif
+                                        </td>
                                         <td>${data.status}</td>
                                         <td>
                                             <a href="${reviewDetailUrl + data.id}" class="btn btn-success" >{{ __('home.Detail') }}</a>

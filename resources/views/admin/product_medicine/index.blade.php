@@ -36,7 +36,13 @@
         @foreach($productMedicines as $index => $productMedicine)
             <tr>
                 <th scope="row">{{ $index + 1 }}</th>
-                <td>{{ $productMedicine->name }}</td>
+                <td>
+                    @if(locationHelper() == 'vi')
+                        {{ $productMedicine->name }}
+                    @else
+                        {{ $productMedicine->name_en }}
+                    @endif
+                </td>
                 <td><img loading="lazy" src="{{ $productMedicine->thumb }}" alt="" width="100px"></td>
                 <td>
                     @if($productMedicine->object_)
