@@ -112,7 +112,13 @@
                              <div class="">
                                  <div class="name-product" style="min-height: 48px">
                                      <a class="name-product--fleaMarket"
-                                     href="${url}">${item.name}</a>
+                                     href="${url}">
+                                     @if(locationHelper() == 'vi')
+                                        ${item.name}
+                                    @else
+                                        ${item.name_en}
+                                    @endif
+                                     </a>
                                  </div>
                             <div class="location-pro">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="21"

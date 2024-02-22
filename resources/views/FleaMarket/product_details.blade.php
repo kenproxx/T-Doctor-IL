@@ -51,10 +51,8 @@
                             <strong class="flea-prise">
                                 @if(locationHelper() == 'vi')
                                     {{ ($pr_json->name ?? __('home.no name') ) }}
-                                @elseif(locationHelper() == 'en')
-                                    {{ ($pr_json->name_en  ?? __('home.no name') ) }}
                                 @else
-                                    {{ ($pr_json->name_laos ?? __('home.no name') ) }}
+                                    {{ ($pr_json->name_en  ?? __('home.no name') ) }}
                                 @endif
                             </strong>
                             <div class="text-content-product">
@@ -67,10 +65,8 @@
                                         $province = DB::table('provinces')->where('id', $pr_json->province_id)->first();
                                     if(locationHelper() == 'vi')
                                         $province = DB::table('provinces')->find($pr_json->province_id)->name;
-                                    elseif(locationHelper() == 'en')
-                                        $province = DB::table('provinces')->find($pr_json->province_id)->name_en;
                                     else
-                                        $province = DB::table('provinces')->find($pr_json->province_id)->name_laos ?? DB::table('provinces')->find($pr_json->province_id)->name;
+                                        $province = DB::table('provinces')->find($pr_json->province_id)->name_en;
                                     @endphp
                                     @if(!empty($province))
                                         {{$province}}
@@ -82,10 +78,8 @@
                                     @php
                                     if (locationHelper() == 'vi')
                                         $cata_json = DB::table('categories')->find($pr_json->category_id)->name;
-                                    elseif (locationHelper() == 'en')
-                                        $cata_json = DB::table('categories')->find($pr_json->category_id)->name_en;
                                     else
-                                        $cata_json = DB::table('categories')->find($pr_json->category_id)->name_laos ?? DB::table('categories')->find($pr_json->category_id)->name;
+                                        $cata_json = DB::table('categories')->find($pr_json->category_id)->name_en;
                                     @endphp
                                     @if(!empty($cata_json))
                                         {{$cata_json}}
@@ -97,10 +91,8 @@
 
                                     @if(locationHelper() == 'vi')
                                         {{ ($pr_json->brand_name ?? __('home.no name') ) }}
-                                    @elseif(locationHelper() == 'en')
-                                        {{ ($pr_json->brand_name_en  ?? __('home.no name') ) }}
                                     @else
-                                        {{ ($pr_json->brand_name_laos ?? __('home.no name') ) }}
+                                        {{ ($pr_json->brand_name_en  ?? __('home.no name') ) }}
                                     @endif
                                     </strong></p>
                         </div>
@@ -134,10 +126,8 @@
                     <div class="frame">
                         <p class="text-content-product">@if(locationHelper() == 'vi')
                                 {{ ($pr_json->name ?? __('home.no name') ) }}
-                            @elseif(locationHelper() == 'en')
-                                {{ ($pr_json->name_en  ?? __('home.no name') ) }}
                             @else
-                                {{ ($pr_json->name_laos ?? __('home.no name') ) }}
+                                {{ ($pr_json->name_en  ?? __('home.no name') ) }}
                             @endif</p>
                         <div class="div mo-ta">
                             <div class="div-2">
@@ -145,10 +135,8 @@
                                 <ul class="list-mo-ta">
                                     @if(locationHelper() == 'vi')
                                         {!! ( $pr_json->description ?? __('home.no name') ) !!}
-                                    @elseif(locationHelper() == 'en')
-                                        {!! ( $pr_json->description_en  ?? __('home.no name') ) !!}
                                     @else
-                                        {!! ( $pr_json->description_laos ?? __('home.no name') ) !!}
+                                        {!! ( $pr_json->description_en  ?? __('home.no name') ) !!}
                                     @endif
                                 </ul>
                             </div>

@@ -92,7 +92,12 @@
                 </div>
             </div>
             <div class="">
-                {!! $review->content !!}
+
+                @if(locationHelper() == 'vi')
+                    {!! $review->content !!}
+                @else
+                    {!! $review->content_en !!}
+                @endif
             </div>
         </div>
     @endforeach

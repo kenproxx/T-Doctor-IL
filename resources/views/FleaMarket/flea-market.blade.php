@@ -388,13 +388,10 @@
                  <div class="name-product" style="min-height: 48px">
                      <a class="name-product--fleaMarket"
                      href="${url}">
-
                      @if(locationHelper() == 'vi')
                 ${product.name}
-                @elseif(locationHelper() == 'en')
-                ${product.name_en}
                 @else
-                ${product.name_laos ?? product.name}
+                ${product.name_en}
                 @endif
                 </a>
                  </div>
@@ -585,10 +582,8 @@
                                      <a class="name-product--fleaMarket"
                                      href="${url}">@if(locationHelper() == 'vi')
                                             ${item.name}
-                                        @elseif(locationHelper() == 'en')
-                                            ${item.name_en}
                                         @else
-                                            ${item.name_laos ?? item.name}
+                                            ${item.name_en}
                                         @endif</a>
                                  </div>
                             <div class="location-pro">
