@@ -33,20 +33,16 @@
             <div class="div-2 serviceDoctor">
                 @if(locationHelper() == 'vi')
                     {!! ($pharmacist->service ?? __('home.no name') ) !!}
-                @elseif(locationHelper() == 'en')
-                    {!! ($pharmacist->service_en  ?? __('home.no name') ) !!}
                 @else
-                    {!! ($pharmacist->service_laos ?? __('home.no name') ) !!}
+                    {!! ($pharmacist->service_en  ?? __('home.no name') ) !!}
                 @endif
             </div>
             <div class="div-2">
                 @php
                 if (locationHelper() == 'vi'){
                     $province = Province::find($pharmacist->province_id)->name;
-                }else if (locationHelper() == 'en'){
-                    $province = Province::find($pharmacist->province_id)->name_en;
                 }else{
-                    $province = Province::find($pharmacist->province_id)->name_laos;
+                    $province = Province::find($pharmacist->province_id)->name_en;
                 }
                 @endphp
                 <img loading="lazy" class="img" src="{{ asset('img/location.png') }}"/>

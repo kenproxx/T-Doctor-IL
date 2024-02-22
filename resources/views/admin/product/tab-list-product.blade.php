@@ -56,7 +56,13 @@
             html = html + `<tr>
             <th scope="row">${rowNumber}</th>
             <td><img loading="lazy" class="mr-2 w-auto h-100" src="${item.thumbnail}" alt=""></td>
-            <td>${item.name}</td>
+            <td>
+            @if(locationHelper() == 'vi')
+            ${item.name}
+            @else
+            ${item.name_en}
+            @endif
+            </td>
             <td>${item.province_name}</td>
             <td>${item.price} ${item.price_unit}</td>
             <td><a href="${urlEdit}"> {{ __('home.Edit') }}</a> | <a href="#" onclick="checkDelete(${item.id})">{{ __('home.Delete') }}</a></td>

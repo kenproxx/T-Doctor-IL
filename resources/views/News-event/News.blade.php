@@ -20,19 +20,15 @@
                                 <strong class="text-content-product">
                                     @if(locationHelper() == 'vi')
                                         {{ ($news->title) }}
-                                    @elseif(locationHelper() == 'en')
-                                        {{ ($news->title_en) }}
                                     @else
-                                        {{ ($news->title_laos) }}
+                                        {{ ($news->title_en) }}
                                     @endif
                                 </strong>
                                 <div class="text-gray max-6-line-title mt-md-3">
                                     @if(locationHelper() == 'vi')
                                         {!! $news->short_description !!}
-                                    @elseif(locationHelper() == 'en')
-                                        {!! $news->short_description_en !!}
                                     @else
-                                        {!! $news->short_description_laos !!}
+                                        {!! $news->short_description_en !!}
                                     @endif
                                 </div>
                             </div>
@@ -56,20 +52,16 @@
                                         <strong class="fs-16px max-2-line-title">
                                             @if(locationHelper() == 'vi')
                                                 {{$news->title}}
-                                            @elseif(locationHelper() == 'en')
-                                                {{ $news->title_en }}
                                             @else
-                                                {{ $news->title_laos }}
+                                                {{ $news->title_en }}
                                             @endif
                                         </strong>
                                         <div class="max-5-line-title">
                                             <div class="fs-12px">
                                                 @if(locationHelper() == 'vi')
                                                     {!! $news->short_description !!}
-                                                @elseif(locationHelper() == 'en')
-                                                    {!! $news->short_description_en !!}
                                                 @else
-                                                    {!! $news->short_description_laos !!}
+                                                    {!! $news->short_description_en !!}
                                                 @endif
                                             </div>
                                         </div>
@@ -111,18 +103,14 @@
                                 <strong class="text-content-product">
                                     @if(locationHelper() == 'vi')
                                         {{$Event->title}}
-                                    @elseif(locationHelper() == 'en')
-                                        {{ $Event->title_en }}
                                     @else
-                                        {{ $Event->title_laos }}
+                                        {{ $Event->title_en }}
                                     @endif</strong>
                                 <div class="text-gray max-6-line-title mt-md-3">
                                     @if(locationHelper() == 'vi')
                                         {!! $Event->short_description !!}
-                                    @elseif(locationHelper() == 'en')
-                                        {!! $Event->short_description_en !!}
                                     @else
-                                        {!! $Event->short_description_laos !!}
+                                        {!! $Event->short_description_en !!}
                                     @endif
                                 </div>
                             </div>
@@ -145,20 +133,16 @@
                                         <strong class="fs-16px max-2-line-title">
                                             @if(locationHelper() == 'vi')
                                                 {{$event->title}}
-                                            @elseif(locationHelper() == 'en')
-                                                {{ $event->title_en }}
                                             @else
-                                                {{ $event->title_laos }}
+                                                {{ $event->title_en }}
                                             @endif
                                         </strong>
                                         <div class="max-5-line-title">
                                             <div class="fs-12px">
                                                 @if(locationHelper() == 'vi')
                                                     {!! $event->short_description !!}
-                                                @elseif(locationHelper() == 'en')
-                                                    {!! $event->short_description_en !!}
                                                 @else
-                                                    {!! $event->short_description_laos !!}
+                                                    {!! $event->short_description_en !!}
                                                 @endif
                                             </div>
                                         </div>

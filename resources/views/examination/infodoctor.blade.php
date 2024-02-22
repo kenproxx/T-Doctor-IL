@@ -39,10 +39,8 @@
                             <span>
                                 @if(locationHelper() == 'vi')
                                     {{ ($doctor->hospital ?? __('home.no name') ) }}
-                                @elseif(locationHelper() == 'en')
-                                    {{ ($doctor->hospital_en  ?? __('home.no name') ) }}
                                 @else
-                                    {{ ($doctor->hospital_laos ?? __('home.no name') ) }}
+                                    {{ ($doctor->hospital_en  ?? __('home.no name') ) }}
                                 @endif
                             </span>
                         </div>
@@ -51,10 +49,8 @@
                             <span>
                                 @if(locationHelper() == 'vi')
                                     {{ ($doctor->specialty ?? __('home.no name') ) }}
-                                @elseif(locationHelper() == 'en')
-                                    {{ ($doctor->specialty_en  ?? __('home.no name') ) }}
                                 @else
-                                    {{ ($doctor->specialty_laos ?? __('home.no name') ) }}
+                                    {{ ($doctor->specialty_en  ?? __('home.no name') ) }}
                                 @endif
                             </span>
                         </div>
@@ -67,10 +63,8 @@
                             <span>
                                 @if(locationHelper() == 'vi')
                                     {!! ($doctor->service ?? __('home.no name') ) !!}
-                                @elseif(locationHelper() == 'en')
-                                    {!! ($doctor->service_en  ?? __('home.no name') ) !!}
                                 @else
-                                    {!! ($doctor->service_laos ?? __('home.no name') ) !!}
+                                    {!! ($doctor->service_en  ?? __('home.no name') ) !!}
                                 @endif
                             </span>
                         </div>
@@ -83,10 +77,8 @@
                             <span>
                                 @if(locationHelper() == 'vi')
                                     {{ ($doctor->service_price ?? __('home.no name') ) }}
-                                @elseif(locationHelper() == 'en')
-                                    {{ ($doctor->service_price_en  ?? __('home.no name') ) }}
                                 @else
-                                    {{ ($doctor->service_price_laos ?? __('home.no name') ) }}
+                                    {{ ($doctor->service_price_en  ?? __('home.no name') ) }}
                                 @endif
                             </span>
                         </div>
@@ -348,21 +340,16 @@
                                                     </div>
                                                 </div>
                                                 <div class="cmt flex-column">
-                                                    <p><b>
-@if(locationHelper() == 'vi')
-                            ${child.title}
-                            @elseif(locationHelper() == 'en')
-                            ${child.title_en}
-                            @else
-                            ${child.title_laos}
-                            @endif</b><br>
-                                                       @if(locationHelper() == 'vi')
-                            ${child.description}
-                            @elseif(locationHelper() == 'en')
-                            ${child.description_en}
-                            @else
-                            ${child.description_laos}
-                            @endif
+                                                    <p><b>@if(locationHelper() == 'vi')
+                                                        ${child.title}
+                                                        @else
+                                                        ${child.title_en}
+                                                        @endif</b><br>
+                                                            @if(locationHelper() == 'vi')
+                                                        ${child.description}
+                                                        @else
+                                                        ${child.description_en}
+                                                        @endif
                                                     </p>
                                                 </div>
                                             </div>`;
@@ -429,17 +416,15 @@
                         <div class="cmt flex-column">
                             <p><b>@if(locationHelper() == 'vi')
                     ${parent.title}
-                            @elseif(locationHelper() == 'en')
-                    ${parent.title_en}
                             @else
-                    ${parent.title_laos}
+                    ${parent.title_en}
+
                             @endif</b><br>
                                                        @if(locationHelper() == 'vi')
                     ${parent.description}
-                            @elseif(locationHelper() == 'en')
-                    ${parent.description_en}
                             @else
-                    ${parent.description_laos}
+                    ${parent.description_en}
+
                             @endif
                             </p>
                             <button onclick="showOrHiddenChild(1, '${parent.id}');" ><i class="bi bi-reply-fill"></i> {{ __('home.Reply') }}</button>

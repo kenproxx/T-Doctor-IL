@@ -30,7 +30,13 @@
         @foreach($listNewEvent as $index => $newEvent)
             <tr>
                 <th scope="row">{{ ++$index }}</th>
-                <td>{{ $newEvent->title }}</td>
+                <td>
+                    @if(locationHelper() == 'vi')
+                        {{ $newEvent->title }}
+                    @else
+                        {{ $newEvent->title_en }}
+                    @endif
+                </td>
                 <td>{{ $newEvent->user_id }}</td>
                 <td>{{ $newEvent->status }}</td>
                 <td class="d-flex">

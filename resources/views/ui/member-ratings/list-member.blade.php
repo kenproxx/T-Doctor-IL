@@ -81,7 +81,7 @@
     @include('layouts.partials.header')
     <div class="container pb-5" style="margin-top: 168px;">
         <div class="list-user d-flex justify-content-center align-items-center">
-            <h3 class="">Membership points</h3>
+            <h3 class="">{{ __('home.Membership points') }}</h3>
         </div>
         <table class="table table-striped" id="table-list-user">
             <tbody id="list-user">

@@ -71,7 +71,13 @@
                 <div class="col-md-4 recruitment-details--content--right">
                     <div class="product-details">
                         <div class="body">
-                            <p class="text-wrapper">{{ $medicine->name }}</p>
+                            <p class="text-wrapper">
+                                @if(locationHelper() == 'vi')
+                                    {{ ($medicine->name ?? __('home.no name') ) }}
+                                @else
+                                    {{ ($medicine->name_en  ?? __('home.no name') ) }}
+                                @endif
+                            </p>
                             <div
                                 class="price">{{number_format($medicine->price, 0, ',', '.') }} {{$medicine->price_unit ?? 'VND'}}</div>
                             @php
@@ -112,7 +118,13 @@
                             </div>
                             <div class="brand-name d-flex">
                                 <div class="text-wrapper-2">{{ __('home.Brand name') }}:</div>
-                                <div class="text-wrapper-3">{{ $medicine->brand_name }}</div>
+                                <div class="text-wrapper-3">
+                                    @if(locationHelper() == 'vi')
+                                        {{ ($medicine->brand_name ?? __('home.no name') ) }}
+                                    @else
+                                        {{ ($medicine->brand_name_en  ?? __('home.no name') ) }}
+                                    @endif
+                                </div>
                             </div>
                             <div class="brand-name mt-2 mb-2">
                                 <label class="text-wrapper-2" for="quantity">{{ __('home.Số lượng') }}: </label>
@@ -154,7 +166,11 @@
             </div>
             <div class="recruitment-details--text--line"></div>
             <div class="recruitment-details--text">
-                {!! $medicine->description !!}
+                @if(locationHelper() == 'vi')
+                    {!! $medicine->description !!}
+                @else
+                    {!! $medicine->description_en !!}
+                @endif
             </div>
         </div>
     </div>

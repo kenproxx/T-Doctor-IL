@@ -167,7 +167,13 @@
             @foreach($products as $product)
                 <tr>
                     <td> {{ $loop->index + 1 }} </td>
-                    <td> {{ $product->name }} </td>
+                    <td>
+                        @if(locationHelper() == 'vi')
+                            {{ $product->name }}
+                        @else
+                            {{ $product->name_en }}
+                        @endif
+                    </td>
                     <td> {{ $product->price }} </td>
                     <td> {{ $product->quantity }} </td>
                     <td>

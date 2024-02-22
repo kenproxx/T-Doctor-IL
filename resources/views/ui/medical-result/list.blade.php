@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('title')
-    Medical examination results
+    {{ __('home.Medical examination results') }}
 @endsection
 @section('main-content')
     <div class="">
         <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800"> Medical examination results </h1>
+        <h1 class="h3 mb-4 text-gray-800"> {{ __('home.Medical examination results') }} </h1>
         <table class="table" id="tableListMedical">
             <thead>
             <tr>

@@ -71,7 +71,13 @@
 
                 html = html + `<tr>
             <th scope="row">${ i + 1 }</th>
-            <td>${item.title}</td>
+            <td>
+            @if(locationHelper() == 'vi')
+                ${item.title}
+                @else
+                ${item.title_en}
+                @endif
+            </td>
             <td>${item.registered} / ${item.max_register ?? 0}</td>
             <td>${item.startDate} - ${item.end_evaluate}</td>
             <td>${item.status}</td>

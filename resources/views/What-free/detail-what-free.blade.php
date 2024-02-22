@@ -62,10 +62,8 @@
                     <div class="text-content-product">
                         @if(locationHelper() == 'vi')
                             {{ $coupon->title }}
-                        @elseif(locationHelper() == 'en')
-                            {{ $coupon->title_en }}
                         @else
-                            {{ $coupon->title_laos }}
+                            {{ $coupon->title_en }}
                         @endif
                     </div>
                     <div class="d-flex mt-3 mb-3">
@@ -93,10 +91,8 @@
                                 class="flea-text-gray color-Grey-Black col-md-9">
                                 @if(locationHelper() == 'vi')
                                     {!! $coupon->short_description !!}
-                                @elseif(locationHelper() == 'en')
-                                    {!! $coupon->short_description_en !!}
                                 @else
-                                    {!! $coupon->short_description_laos !!}
+                                    {!! $coupon->short_description_en !!}
                                 @endif
                             </div>
                         </div>
@@ -108,10 +104,8 @@
                             <div class="flea-text-gray color-Grey-Black col-md-9">
                                 @if(locationHelper() == 'vi')
                                     {!! $coupon->condition !!}
-                                @elseif(locationHelper() == 'en')
-                                    {!! $coupon->condition_en !!}
                                 @else
-                                    {!! $coupon->condition_laos !!}
+                                    {!! $coupon->condition_en !!}
                                 @endif
                             </div>
                         </div>
@@ -123,10 +117,8 @@
                             <div class="flea-text-gray color-Grey-Black col-md-9">
                                 @if(locationHelper() == 'vi')
                                     {!! $coupon->conduct !!}
-                                @elseif(locationHelper() == 'en')
-                                    {!! $coupon->conduct_en !!}
                                 @else
-                                    {!! $coupon->conduct_laos !!}
+                                    {!! $coupon->conduct_en !!}
                                 @endif
                             </div>
                         </div>
@@ -138,10 +130,8 @@
                             <div class="flea-text-gray color-Grey-Black col-md-9">
                                 @if(locationHelper() == 'vi')
                                     {!! $coupon->description !!}
-                                @elseif(locationHelper() == 'en')
-                                    {!! $coupon->description_en !!}
                                 @else
-                                    {!! $coupon->description_laos !!}
+                                    {!! $coupon->description_en !!}
                                 @endif
                             </div>
                         </div>
@@ -153,10 +143,8 @@
                             <div class="flea-text-gray color-Grey-Black col-md-9">
                                 @if(locationHelper() == 'vi')
                                     {!! $coupon->instruction !!}
-                                @elseif(locationHelper() == 'en')
-                                    {!! $coupon->instruction_en !!}
                                 @else
-                                    {!! $coupon->instruction_laos !!}
+                                    {!! $coupon->instruction_en !!}
                                 @endif
                             </div>
                         </div>
@@ -168,10 +156,8 @@
                             <div class="flea-text-gray color-Grey-Black col-md-9">
                                 @if(locationHelper() == 'vi')
                                     {!! $coupon->website !!}
-                                @elseif(locationHelper() == 'en')
-                                    {!! $coupon->website_en !!}
                                 @else
-                                    {!! $coupon->website_laos !!}
+                                    {!! $coupon->website_en !!}
                                 @endif
                             </div>
                         </div>
@@ -190,10 +176,8 @@
                             <div class="text-wrapper-2">
                                 @if(locationHelper() == 'vi')
                                     {{ $clinic->name }}
-                                @elseif(locationHelper() == 'en')
-                                    {{ ($clinic->name_en) }}
                                 @else
-                                    {{ $clinic->name_laos }}
+                                    {{ ($clinic->name_en) }}
                                 @endif
                             </div>
                         </div>

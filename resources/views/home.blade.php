@@ -999,10 +999,8 @@
                                         <span>
                                             @if(locationHelper() == 'vi')
                                                 {{ ($departmentItem->name ?? __('home.no name') ) }}
-                                            @elseif(locationHelper() == 'en')
-                                                {{ ($departmentItem->name_en  ?? __('home.no name') ) }}
                                             @else
-                                                {{ ($departmentItem->name_laos ?? __('home.no name') ) }}
+                                                {{ ($departmentItem->name_en  ?? __('home.no name') ) }}
                                             @endif
                                         </span>
                                     </div>
@@ -1109,10 +1107,8 @@
                                                             <p>
                                                                 @if(locationHelper() == 'vi')
                                                                     {!! ($doctor->service ?? __('home.no name') ) !!}
-                                                                @elseif(locationHelper() == 'en')
-                                                                    {!! ($doctor->service_en  ?? __('home.no name') ) !!}
                                                                 @else
-                                                                    {!! ($doctor->service_laos ?? __('home.no name') ) !!}
+                                                                    {!! ($doctor->service_en  ?? __('home.no name') ) !!}
                                                                 @endif
                                                             </p>
                                                         </div>
@@ -1125,11 +1121,8 @@
                                                                     if (locationHelper() == 'vi') {
                                                                         $addressP = Province::find($doctor->province_id)->name;
                                                                     }
-                                                                    elseif (locationHelper() == 'en') {
-                                                                        $addressP = Province::find($doctor->province_id)->name_en;
-                                                                    }
                                                                     else {
-                                                                    $addressP = Province::find($doctor->province_id)->name_laos ?? Province::find($doctor->province_id)->name;
+                                                                        $addressP = Province::find($doctor->province_id)->name_en;
                                                                     }
                                                                 }
                                                             @endphp
@@ -1206,10 +1199,8 @@
                                                                href="{{ route('examination.doctor_info', $medicine->id) }}">
                                                                 @if(locationHelper() == 'vi')
                                                                     {{ ($medicine->name ?? __('home.no name') ) }}
-                                                                @elseif(locationHelper() == 'en')
-                                                                    {{ ($medicine->name_en  ?? __('home.no name') ) }}
                                                                 @else
-                                                                    {{ ($medicine->name_laos ?? __('home.no name') ) }}
+                                                                    {{ ($medicine->name_en  ?? __('home.no name') ) }}
                                                                 @endif
                                                             </a>
                                                         </div>
@@ -1527,20 +1518,16 @@
                                            target="_blank">
                                             @if(locationHelper() == 'vi')
                                                 {{ ($product->name ?? __('home.no name') ) }}
-                                            @elseif(locationHelper() == 'en')
-                                                {{ ($product->name_en  ?? __('home.no name') ) }}
                                             @else
-                                                {{ ($product->name_laos ?? __('home.no name') ) }}
+                                                {{ ($product->name_en  ?? __('home.no name') ) }}
                                             @endif</a>
                                     </div>
                                     <div class="location-proFlea">
                                         @php
                                             if (locationHelper() == 'vi'){
                                                 $addressP = Province::find($product->province_id)->name ?? 'Ha Noi';
-                                            } elseif (locationHelper() == 'en'){
+                                            } else{
                                                 $addressP = Province::find($product->province_id)->name_en ?? 'Ha Noi';
-                                            } else {
-                                                $addressP = Province::find($product->province_id)->name_laos ?? 'Ha Noi';
                                             }
                                         @endphp
                                         <svg xmlns="http://www.w3.org/2000/svg" width="21"
@@ -1625,12 +1612,10 @@
                                                             <div class="location-pro">
                                                                 @php
                                                                     if (locationHelper() == 'vi'){
-                                                                        $addressP = Province::find($product->province_id)->name ?? 'Ha Noi';
-                                                                    } elseif (locationHelper() == 'en'){
-                                                                        $addressP = Province::find($product->province_id)->name_en ?? 'Ha Noi';
-                                                                    } else {
-                                                                        $addressP = Province::find($product->province_id)->name_laos ?? 'Ha Noi';
-                                                                    }
+                                                                    $addressP = Province::find($product->province_id)->name ?? 'Ha Noi';
+                                                                } else{
+                                                                    $addressP = Province::find($product->province_id)->name_en ?? 'Ha Noi';
+                                                                }
                                                                 @endphp
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="21"
                                                                      height="21" viewBox="0 0 21 21" fill="none">
@@ -1790,10 +1775,8 @@
                                                             @php
                                                                 if (locationHelper() == 'vi'){
                                                                     $addressP = Province::find($product->province_id)->name ?? 'Ha Noi';
-                                                                } elseif (locationHelper() == 'en'){
+                                                                } else{
                                                                     $addressP = Province::find($product->province_id)->name_en ?? 'Ha Noi';
-                                                                } else {
-                                                                    $addressP = Province::find($product->province_id)->name_laos ?? 'Ha Noi';
                                                                 }
                                                             @endphp
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="21"
@@ -1872,12 +1855,10 @@
                                                         <div class="location-pro">
                                                             @php
                                                                 if (locationHelper() == 'vi'){
-                                                                     $addressP = Province::find($product->province_id)->name ?? 'Ha Noi';
-                                                                 } elseif (locationHelper() == 'en'){
-                                                                     $addressP = Province::find($product->province_id)->name_en ?? 'Ha Noi';
-                                                                 } else {
-                                                                     $addressP = Province::find($product->province_id)->name_laos ?? 'Ha Noi';
-                                                                 }
+                                                                    $addressP = Province::find($product->province_id)->name ?? 'Ha Noi';
+                                                                } else{
+                                                                    $addressP = Province::find($product->province_id)->name_en ?? 'Ha Noi';
+                                                                }
                                                             @endphp
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="21"
                                                                  height="21" viewBox="0 0 21 21" fill="none">
@@ -1972,10 +1953,8 @@
                                                             @php
                                                                 if (locationHelper() == 'vi'){
                                                                     $addressP = Province::find($product->province_id)->name ?? 'Ha Noi';
-                                                                } elseif (locationHelper() == 'en'){
+                                                                } else{
                                                                     $addressP = Province::find($product->province_id)->name_en ?? 'Ha Noi';
-                                                                } else {
-                                                                    $addressP = Province::find($product->province_id)->name_laos ?? 'Ha Noi';
                                                                 }
                                                             @endphp
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="21"
@@ -2071,10 +2050,8 @@
                                                             @php
                                                                 if (locationHelper() == 'vi'){
                                                                     $addressP = Province::find($product->province_id)->name ?? 'Ha Noi';
-                                                                } elseif (locationHelper() == 'en'){
+                                                                } else{
                                                                     $addressP = Province::find($product->province_id)->name_en ?? 'Ha Noi';
-                                                                } else {
-                                                                    $addressP = Province::find($product->province_id)->name_laos ?? 'Ha Noi';
                                                                 }
                                                             @endphp
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="21"

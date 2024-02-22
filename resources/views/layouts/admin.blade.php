@@ -352,7 +352,7 @@
                         </li>
                         <li>
                             <a href="{{ route('view.admin.home.medicine.list') }}">
-                                <i class="bi bi-circle"></i><span>Approval Product Medicine</span>
+                                <i class="bi bi-circle"></i><span>{{__('home.Approval Product Medicine')}}</span>
                             </a>
                         </li>
                     </ul>
@@ -386,13 +386,13 @@
             <!-- News/Events Nav -->
             <li class="nav-item">
                 <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                    <i class="bi bi-newspaper"></i><span>News/Events</span><i
+                    <i class="bi bi-newspaper"></i><span>{{ __('home.News/Events') }}</span><i
                         class="bi bi-chevron-down ms-auto"></i>
                 </a>
                 <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="{{ route('api.new-event.index') }}">
-                            <i class="bi bi-circle"></i><span>News/Events</span>
+                            <i class="bi bi-circle"></i><span>{{ __('home.News/Events') }}</span>
                         </a>
                     </li>
                 </ul>
@@ -442,7 +442,7 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('view.prescription.result.doctor') }}">
                     <i class="bi bi-music-player"></i>
-                    <span>Doctor Prescription</span>
+                    <span>{{ __('home.Doctor Prescription') }}</span>
                 </a>
             </li>
             <!-- End Doctor Prescription Page Nav -->
@@ -451,7 +451,7 @@
                 <!-- List Coupon Nav -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#coupon-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-medium"></i><span>Free Coupon</span><i
+                        <i class="bi bi-medium"></i><span>{{ __('home.Free Coupon') }}</span><i
                             class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="coupon-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -467,7 +467,7 @@
                 <!-- Booking Nav -->
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-bar-chart"></i><span>Booking Management</span><i
+                        <i class="bi bi-bar-chart"></i><span>{{ __('home.Booking Management') }}</span><i
                             class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
@@ -505,18 +505,18 @@
                 <li class="nav-item">
                     <a class="nav-link collapsed" data-bs-target="#medical-result-nav" data-bs-toggle="collapse"
                        href="#">
-                        <i class="bi bi-segmented-nav"></i><span>Medical examination results</span><i
+                        <i class="bi bi-segmented-nav"></i><span>{{ __('home.Medical examination results') }}</span><i
                             class="bi bi-chevron-down ms-auto"></i>
                     </a>
                     <ul id="medical-result-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                         <li>
                             <a href="{{ route('view.admin.medical.result.list') }}">
-                                <i class="bi bi-circle"></i><span>List examination results</span>
+                                <i class="bi bi-circle"></i><span>{{ __('home.List examination results') }}</span>
                             </a>
                         </li>
                         <li>
                             <a href="{{ route('view.admin.medical.result.create') }}">
-                                <i class="bi bi-circle"></i><span>Create examination results</span>
+                                <i class="bi bi-circle"></i><span>{{ __('home.Create examination results') }}</span>
                             </a>
                         </li>
                     </ul>
@@ -797,7 +797,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="{{ route('web.users.list.points') }}">
                 <i class="bi bi-play"></i>
-                <span>Xếp hạng thành viên</span>
+                <span>{{ __('home.Xếp hạng thành viên') }}</span>
             </a>
         </li>
         <!-- End About Page Nav -->

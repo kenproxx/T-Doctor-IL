@@ -48,19 +48,19 @@
                                     <a href="#" class="p-2 m-1" style="font-size: 24px">
                                         <i class="fa-solid fa-book-medical"></i>
                                     </a>
-                                    <p class="small">Booking</p>
+                                    <p class="small">{{ __('home.Booking') }}</p>
                                 </div>
                                 <div class="mr-3 ml-3">
                                     <a href="#" class="p-2 m-1" style="font-size: 24px">
                                         <i class="fa-solid fa-comment-medical"></i>
                                     </a>
-                                    <p class="small">Mentoring</p>
+                                    <p class="small">{{ __('home.Mentoring') }}</p>
                                 </div>
                                 <div class="mr-3 ml-3">
                                     <a href="#" class="p-2 m-1" style="font-size: 24px">
                                         <i class="fa-solid fa-ticket"></i>
                                     </a>
-                                    <p class="small">Voucher</p>
+                                    <p class="small">{{ __('home.Voucher') }}</p>
                                 </div>
                             </div>
                         </div>
