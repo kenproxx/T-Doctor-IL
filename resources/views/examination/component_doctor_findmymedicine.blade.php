@@ -40,9 +40,9 @@
             <div class="div-2">
                 @php
                 if (locationHelper() == 'vi'){
-                    $province = Province::find($pharmacist->province_id)->name ?? '';
+                    $province = Province::find($pharmacist->province_id)->name ?? 'Ha Noi';
                 }else{
-                    $province = Province::find($pharmacist->province_id)->name_en ?? '';
+                    $province = Province::find($pharmacist->province_id)->name_en ?? 'Ha Noi';
                 }
                 @endphp
                 <img loading="lazy" class="img" src="{{ asset('img/location.png') }}"/>
