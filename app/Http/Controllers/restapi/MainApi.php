@@ -139,6 +139,20 @@ class MainApi extends Controller
             $data = $request->input('data');
             $notification = $request->input('notification');
 
+            $user_email_1 = $data['user_email_1'] ?? '';
+            $user_email_2 = $data['user_email_2'] ?? '';
+
+            $user_1 = User::where('email', $user_email_1)->first();
+            $user_2 = User::where('email', $user_email_2)->first();
+
+            if (!$user_1 || !$user_2) {
+                $link = "";
+            } else {
+                $link = route('agora.joinMeeting', ['user_id_1' => $user_1->id, 'user_id_2' => $user_2->id]);
+            }
+
+            $data['link'] = $link;
+
             $user = User::where('email', $user_email)->first();
 
             if (!$user || $user->status == UserStatus::DELETED) {

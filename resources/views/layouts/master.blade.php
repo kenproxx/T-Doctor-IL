@@ -260,7 +260,10 @@
 
         if (firebase) {
             data.from = data.notification.body;
-            data.content = data.fcmOptions.link;
+            data.content = data.data.link;
+            if (!data.data.link) {
+                return;
+            }
         } else if (data.user_id_1 != thisUser && data.user_id_2 != thisUser) {
             return;
         }
