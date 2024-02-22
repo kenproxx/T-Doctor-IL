@@ -176,8 +176,10 @@
         messagingSenderId: "867778569957",
         appId: "1:867778569957:web:7f3a6b87d83cefd8e8d60c"
     };
+
     const app = initializeApp(firebaseConfig);
     const messaging = getMessaging();
+
     const key_pair_fire_base = 'BIKdl-B84phF636aS0ucw5k-KoGPnivJW4L_a9GNf7gyrWBZt--O9KcEzvsLl3h-3_Ld0rT8YFTsuupknvguW9s';
     getToken(messaging, {vapidKey: key_pair_fire_base}).then((currentToken) => {
         if (currentToken) {
@@ -226,6 +228,12 @@
         console.log('Message received. ', payload);
         // ...
     });
+
+    onMessage(messaging, (payload) => {
+        console.log('Message received. ', payload);
+        // Update the UI to include the received message.
+    });
+
 
 </script>
 <script>
