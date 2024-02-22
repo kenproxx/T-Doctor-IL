@@ -180,11 +180,11 @@ class MainController extends Controller
     public function setLanguage(Request $request, $locale)
     {
         switch ($locale) {
-            case 'laos':
-                $lang = 'laos';
-                break;
             case 'vi':
                 $lang = 'vi';
+                break;
+            case 'laos':
+                $lang = 'laos';
                 break;
             default:
                 $lang = 'en';
