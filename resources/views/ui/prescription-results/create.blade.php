@@ -240,7 +240,7 @@
             </div>
         </div>
         <div class="list-service-result mt-2 mb-3">
-            <div id="list-service-result">
+            <div id="list-service-result-pre">
 
             </div>
             <button type="button"
@@ -396,9 +396,9 @@
                 </div>`;
 
         $(document).ready(function () {
-            $('#list-service-result').append(html);
+            $('#list-service-result-pre').append(html);
             $('.btnAddNewResult').on('click', function () {
-                $('#list-service-result').append(html);
+                $('#list-service-result-pre').append(html);
                 loadTrash();
                 loadData();
             })
