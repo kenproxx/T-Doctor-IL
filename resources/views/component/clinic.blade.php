@@ -117,10 +117,9 @@
                                            <div class="title-specialList-clinics">
                                         @if(locationHelper() == 'vi')
                                                         ${item.name}
-                                                            @elseif(locationHelper() == 'en')
-                                                        ${item.name_en}
                                                             @else
-                                                        ${item.name_laos}
+                                                        ${item.name_en}
+
                                                             @endif
                                            </div>
                                       <div class="address-specialList-clinics">

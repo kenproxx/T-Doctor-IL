@@ -433,10 +433,8 @@
                                 <a href="${mainUrl}"><h5 class="card-title">
                                     @if(locationHelper() == 'vi')
                                         ${item['name']}
-                                    @elseif(locationHelper() == 'en')
-                                        ${item['name_en']}
                                     @else
-                                        ${item['name_laos']}
+                                        ${item['name_en']}
                                     @endif
                                 </h5></a>
                                 <p class="card-text_1">{{ __('home.Location') }}: <b>${item['address_code']}</b></p>

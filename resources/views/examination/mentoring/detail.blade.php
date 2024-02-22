@@ -33,8 +33,19 @@
             </div>
         </a>
         <div class="card-body">
-            <h5 class="card-title">{{ $question->title }}</h5>
-            <p class="card-text">{{ $question->content }}</p>
+            <h5 class="card-title">{{ $question->title }}
+                @if(locationHelper() == 'vi')
+                    {{ ($question->title)}}
+                @else
+                    {{ ($question->title_en) }}
+                @endif
+            </h5>
+            <p class="card-text">
+                @if(locationHelper() == 'vi')
+                    {{ $question->content }}
+                @else
+                    {{$question->content_en}}
+                @endif</p>
         </div>
 
         <div class="frame row justify-content-md-around mentoring-img" id="mentoring-img">
@@ -137,7 +148,11 @@
                         </div>
                         <div class="d-ch-v-c-c-t-t-l-n-u-wrapper">
                             <p class="d-ch-v-c-c-t-t-l-n-u">
-                                <span class="text-wrapper-3">{!! $answer->content !!}</span>
+                                <span class="text-wrapper-3">  @if(locationHelper() == 'vi')
+                                        {!! $answer->content !!}
+                                    @else
+                                       {!! $answer->content_en !!}
+                                    @endif</span>
                             </p>
                         </div>
                     </div>

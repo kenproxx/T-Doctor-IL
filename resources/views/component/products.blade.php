@@ -42,10 +42,8 @@
             <a href="{{route('medicine.detail', $medicine->id)}}">
                 @if(locationHelper() == 'vi')
                     {{ $medicine->name }}
-                @elseif(locationHelper() == 'en')
-                    {{ $medicine->name_en }}
                 @else
-                    {{ $medicine->name_laos }}
+                    {{ $medicine->name_en }}
                 @endif
 
             </a>

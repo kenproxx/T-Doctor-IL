@@ -61,10 +61,8 @@
                         <a href="{{ route('examination.mentoring.show', $question->id) }}"><b class="style-b">{{ $index + 1 }}
                                 @if(locationHelper() == 'vi')
                                     {{ ($question->title ?? '') }}
-                                @elseif(locationHelper() == 'en')
-                                    {{ ($question->title_en  ?? $question->title ) }}
                                 @else
-                                    {{ ($question->title_laos ?? $question->title ) }}
+                                    {{ ($question->title_en  ?? $question->title ) }}
                                 @endif
                             </b></a>
                         <span class="text-red">({{ $question->answers_count }})</span>
@@ -220,10 +218,8 @@
                             <a href="${url}"><div class="lin-tip-tht-bi-cc"><p class="p">
                             @if(locationHelper() == 'vi')
                 ${comment.title}
-                @elseif(locationHelper() == 'en')
-                ${comment.title_en ?? comment.title}
                 @else
-                ${comment.title_laos ?? comment.title}
+                ${comment.title_en ?? comment.title}
                 @endif
                 </p>
                             </div></a>
