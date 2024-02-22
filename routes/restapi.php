@@ -166,6 +166,7 @@ Route::group(['prefix' => 'address'], function () {
 });
 
 Route::group(['prefix' => 'products-medicines'], function () {
+    Route::get('/list', [ProductMedicineApi::class, 'getAllProduct'])->name('restapi.get.products.medicines.list');
     Route::get('/category/{id}', [ProductMedicineApi::class, 'findMedicineByCategory'])->name('restapi.get.products.medicines.category');
     Route::get('/detail/{id}', [ProductMedicineApi::class, 'detail'])->name('restapi.get.products.medicines.detail');
     Route::post('/list-prescriptions', [ProductMedicineApi::class, 'getAllProductByExcelFile'])->name('restapi.products.medicines.prescriptions');
