@@ -196,6 +196,7 @@ class AgoraChatController extends Controller
             "uid" => $uuid, // cái này em gửi cho anh 1 hash của uuid v4
             "rtmUid" => $hashUUID, // cái này là cái uuid vừa gen ra ở bên trên
             "type" => "1", // 1 với video, 0 với voice
+            "startTime" => now()->timestamp, // thời gian bắt đầu cuộc gọi
 
             // thông tin người gọi
             "requestUser" => [
