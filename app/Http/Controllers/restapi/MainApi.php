@@ -194,4 +194,44 @@ class MainApi extends Controller
 
         return $response->getBody();
     }
+
+    public function sendNotificationWeb(Request $request)
+    {
+        try {
+            $client = new Client();
+            $YOUR_SERVER_KEY = Constants::GG_KEY;
+            $device_token = $request->input('token');
+
+            $data = array(
+                'message' => array(
+                    'token' => $device_token,
+                    'notification' => array(
+                        'title' => 'FCM Message',
+                        'body' => 'This is a message from FCM'
+                    ),
+                    'webpush' => array(
+                        'headers' => array(
+                            'Urgency' => 'high'
+                        ),
+                        'notification' => array(
+                            'body' => 'This is a message from FCM to web',
+                            'requireInteraction' => true,
+                            'badge' => '/badge-icon.png'
+                        )
+                    )
+                ));
+            $jsonData = json_encode($data);
+
+            $response = $client->post('https://fcm.googleapis.com/v1/projects/myproject-b5ae1/messages:send', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $YOUR_SERVER_KEY,
+                    'Content-Type' => 'application/json',
+                ],
+                'body' => $jsonData,
+            ]);
+            return $response;
+        } catch (\Exception $exception) {
+            return response($exception, 400);
+        }
+    }
 }
