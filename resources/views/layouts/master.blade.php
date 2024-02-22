@@ -146,7 +146,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modal-call-alert-label">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close btn_close_m" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -154,7 +154,7 @@
                 ...
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Từ chối</button>
+                <button type="button" class="btn btn-secondary btn_close_m" data-dismiss="modal">Từ chối</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal" id="ReceiveCall">Tiếp nhận</button>
             </div>
         </div>
@@ -228,7 +228,13 @@
     });
 
 </script>
-
+<script>
+    $(document).ready(function () {
+        $('.btn_close_m').click(function () {
+            $('#modal-call-alert').modal('toggle')
+        })
+    })
+</script>
 <script>
     function loadingMasterPage() {
         let overlay = document.getElementsByClassName('loading-overlay-master')[0]
@@ -272,6 +278,16 @@
             }
         }
         return isValid;
+    }
+
+    function validInputByID(input) {
+        let labelElement = $(`label[for='${input}']`);
+        let text = labelElement.text();
+        if (!text) {
+            text = 'The input'
+        }
+        text = text + ' not empty!'
+        return text;
     }
 
     function alertLogin() {
