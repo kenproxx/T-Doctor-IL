@@ -166,7 +166,7 @@
 
 <script type="module">
     import {initializeApp} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import {getMessaging, getToken} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js";
+    import {getMessaging, getToken, onMessage} from "https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js";
 
     const firebaseConfig = {
         apiKey: "AIzaSyAW-1uaHUA8tAaA3IQD9ypNkbVzFji88bE",
@@ -196,7 +196,7 @@
     };
 
     async function saveToken(token) {
-        @if(Auth::check() && !Auth::user()->token_firebase)
+        @if(Auth::check() && (!Auth::user()->token_firebase || Auth::user()->token_firebase == '' || Auth::user()->token_firebase == null))
             await callSaveToken(token);
         @endif
     }
