@@ -175,11 +175,15 @@ class AgoraChatController extends Controller
 
     function sendNotificationToAppByFireBase($email, $userCall)
     {
+        $user_id_1 = $userCall->id;
+        $user_id_2 = User::where('email', $email)->first()->id;
+        $content = route('agora.joinMeeting', ['user_id_1' => $user_id_1, 'user_id_2' => $user_id_2]);
 
         $notification = [
             "title" => "Cuộc gọi đến",
             "body" => $userCall->name ?? "Không rõ",
-            "android_channel_id" => "callkit_incoming_channel_id"
+            "android_channel_id" => "callkit_incoming_channel_id",
+            'click_action' => $content,
         ];
 
         $uuid = rand(1000000000, 9999999999);

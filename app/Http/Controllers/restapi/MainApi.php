@@ -139,6 +139,20 @@ class MainApi extends Controller
             $data = $request->input('data');
             $notification = $request->input('notification');
 
+            $user_email_1 = $data['user_email_1'] ?? '';
+            $user_email_2 = $data['user_email_2'] ?? '';
+
+            $user_1 = User::where('email', $user_email_1)->first();
+            $user_2 = User::where('email', $user_email_2)->first();
+
+            if (!$user_1 || !$user_2) {
+                $link = "";
+            } else {
+                $link = route('agora.joinMeeting', ['user_id_1' => $user_1->id, 'user_id_2' => $user_2->id]);
+            }
+
+            $data['link'] = $link;
+
             $user = User::where('email', $user_email)->first();
 
             if (!$user || $user->status == UserStatus::DELETED) {
@@ -179,5 +193,45 @@ class MainApi extends Controller
         ]);
 
         return $response->getBody();
+    }
+
+    public function sendNotificationWeb(Request $request)
+    {
+        try {
+            $client = new Client();
+            $YOUR_SERVER_KEY = Constants::GG_KEY;
+            $device_token = $request->input('token');
+
+            $data = array(
+                'message' => array(
+                    'token' => $device_token,
+                    'notification' => array(
+                        'title' => 'FCM Message',
+                        'body' => 'This is a message from FCM'
+                    ),
+                    'webpush' => array(
+                        'headers' => array(
+                            'Urgency' => 'high'
+                        ),
+                        'notification' => array(
+                            'body' => 'This is a message from FCM to web',
+                            'requireInteraction' => true,
+                            'badge' => '/badge-icon.png'
+                        )
+                    )
+                ));
+            $jsonData = json_encode($data);
+
+            $response = $client->post('https://fcm.googleapis.com/v1/projects/myproject-b5ae1/messages:send', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $YOUR_SERVER_KEY,
+                    'Content-Type' => 'application/json',
+                ],
+                'body' => $jsonData,
+            ]);
+            return $response;
+        } catch (\Exception $exception) {
+            return response($exception, 400);
+        }
     }
 }

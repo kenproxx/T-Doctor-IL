@@ -14,6 +14,28 @@ use Illuminate\Support\Facades\DB;
 
 class ProductMedicineApi extends Controller
 {
+    public function getAllProduct(Request $request)
+    {
+        $keyword = $request->input('keyword');
+
+        $products = DB::table('product_medicines')
+            ->where('product_medicines.status', OnlineMedicineStatus::APPROVED)
+            ->when($keyword, function ($query) use ($keyword) {
+                $query->where(function ($sup_query) use ($keyword) {
+                    $sup_query->where('product_medicines.uses', 'like', '%' . $keyword . '%')
+                        ->orWhere('product_medicines.specifications', 'like', '%' . $keyword . '%')
+                        ->orWhere('product_medicines.name', 'like', '%' . $keyword . '%')
+                        ->orWhere('product_medicines.name_en', 'like', '%' . $keyword . '%')
+                        ->orWhere('product_medicines.name_laos', 'like', '%' . $keyword . '%');
+                });
+                $query->join('drug_ingredients', 'drug_ingredients.product_id', '=', 'product_medicines.id')
+                    ->orWhere('drug_ingredients.component_name', 'like', '%' . $keyword . '%');
+            })
+            ->orderByDesc('product_medicines.id')
+            ->get();
+        return response()->json($products);
+    }
+
     public function findMedicineByCategory($id)
     {
         $productMedicines = DB::table('product_medicines')

@@ -176,8 +176,10 @@
         messagingSenderId: "867778569957",
         appId: "1:867778569957:web:7f3a6b87d83cefd8e8d60c"
     };
+
     const app = initializeApp(firebaseConfig);
     const messaging = getMessaging();
+
     const key_pair_fire_base = 'BIKdl-B84phF636aS0ucw5k-KoGPnivJW4L_a9GNf7gyrWBZt--O9KcEzvsLl3h-3_Ld0rT8YFTsuupknvguW9s';
     getToken(messaging, {vapidKey: key_pair_fire_base}).then((currentToken) => {
         if (currentToken) {
@@ -224,7 +226,8 @@
 
     onMessage(messaging, (payload) => {
         console.log('Message received. ', payload);
-        // ...
+        const isFromFirebase = true;
+        callAlert(payload, isFromFirebase);
     });
 
 </script>
@@ -249,10 +252,22 @@
     var channel = pusher.subscribe('send-message');
     // Bind a function to a Event (the full Laravel class)
     channel.bind('send-message', function (data) {
+        callAlert(data);
+    });
+
+    function callAlert(data, firebase = false) {
         let thisUser = '{{Auth::user()->id ?? ''}}'
-        if (data.user_id_1 != thisUser && data.user_id_2 != thisUser) {
+
+        if (firebase) {
+            data.from = data.notification.body;
+            data.content = data.data.link;
+            if (!data.data.link) {
+                return;
+            }
+        } else if (data.user_id_1 != thisUser && data.user_id_2 != thisUser) {
             return;
         }
+
         $('#modal-call-alert').modal('show')
         document.getElementById('modal-call-alert-label').innerHTML = 'Cuộc gọi từ ' + data.from
 
@@ -260,7 +275,7 @@
             window.open(data.content, '_blank');
             $('#modal-call-alert').modal('hide')
         });
-    });
+    }
 
     function appendDataForm(arrField, formData) {
         let isValid = true;
