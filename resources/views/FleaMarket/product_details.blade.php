@@ -62,7 +62,7 @@
 
                             <p style="color: #929292">{{ __('home.Location') }}:<strong class="flea-prise">
                                     @php
-                                        $province = DB::table('provinces')->where('id', $pr_json->province_id)->first();
+//                                        $province = DB::table('provinces')->where('id', $pr_json->province_id)->first();
                                     if(locationHelper() == 'vi')
                                         $province = DB::table('provinces')->find($pr_json->province_id)->name;
                                     else
