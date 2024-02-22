@@ -230,4 +230,5 @@ Route::group(['prefix' => 'questions'], function () {
 /* Only use for app */
 Route::group(['prefix' => 'api/mobile/fcm'], function () {
     Route::post('/send', [MainApi::class, 'sendNotificationFcm']);
+    Route::post('/send_v2', [MainApi::class, 'sendNotificationWeb']);
 });
