@@ -141,9 +141,9 @@ class ZaloController extends Controller
             $response = $client->post($this->app_url_get_token, [
                 'headers' => [
                     'secret_key' => $this->app_secret,
-                    'Content-Type' => 'application/json',
+                    'Content-Type' => 'application/x-www-form-urlencoded',
                 ],
-                'json' => [
+                'form_params' => [
                     'code' => $code,
                     'app_id' => $this->app_id,
                     'grant_type' => 'authorization_code',
