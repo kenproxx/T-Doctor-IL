@@ -18,8 +18,6 @@ class ZaloController extends Controller
     protected $app_url_permission = 'https://oauth.zaloapp.com/v4/oa/permission';
     protected $app_url_get_token = 'https://oauth.zaloapp.com/v4/oa/access_token';
 
-    protected $app_code;
-
     public function main()
     {
         $config = array(
@@ -41,19 +39,20 @@ class ZaloController extends Controller
     {
         $parameters = $request->all();
         $code = $parameters['code'];
-        $this->app_code = $code;
-//        return redirect(route('home'));
-        return redirect(route('zalo.service.token'));
+
+        $url_redirect = route('zalo.service.token') . '?code=' . $code;
+        return redirect($url_redirect);
     }
 
-    public function getToken()
+    public function getToken(Request $request)
     {
-        $array_token = $this->getAccessToken();
+        $code = $request->input('code');
+        $array_token = $this->getAccessToken($code);
         $accessToken = null;
         if ($array_token['status'] == 200) {
             $accessToken = $array_token['data'];
         }
-        dd($accessToken);
+        dd($array_token);
         return $accessToken;
     }
 
@@ -134,7 +133,7 @@ class ZaloController extends Controller
         return $url . $app_id_url . $redirect_url;
     }
 
-    private function getAccessToken()
+    private function getAccessToken($code)
     {
         $array_value = null;
         try {
@@ -143,7 +142,7 @@ class ZaloController extends Controller
             $url = $this->app_url_get_token;
 
             $data = array(
-                'code' => $this->app_code,
+                'code' => $code,
                 'app_id' => $this->app_id,
                 'grant_type' => 'authorization_code',
             );
@@ -157,7 +156,7 @@ class ZaloController extends Controller
                 'body' => $jsonData,
             ]);
 
-            $array_value['data'] = $response->getBody();
+            $array_value['data'] = $response;
             $array_value['status'] = 200;
             return $array_value;
         } catch (\Exception $exception) {
