@@ -58,11 +58,11 @@
                         </div>
                     </div>
                 @else
-                    <button class="account_control" id="show_login" data-toggle="modal"
+                    <button class="account_control krm-new_bt__login" id="show_login" data-toggle="modal"
                             data-target="#staticBackdrop">{{ __('home.Log In') }}
                     </button>
                     <div style="color: #FFFFFF">/</div>
-                    <button type="button" class="account_control" data-toggle="modal"
+                    <button type="button" class="account_control krm-new_bt__login" data-toggle="modal"
                             data-target="#modalRegister">{{ __('home.Sign Up') }}
                     </button>
                 @endif
@@ -189,7 +189,7 @@
             </div>
         </div>
         <div class="before-header d-flex justify-content-between align-items-center">
-            <div class="header-center d-flex justify-content-between align-content-center w-100 container">
+            <div class="header-center d-flex justify-content-between align-content-center w-100 container mobile-hidden">
                 <a href="{{route('recruitment.index')}}" hidden="">{{ __('home.Recruitment') }}</a>
                 <a href="{{route('flea-market.index')}}">{{ __('home.Flea market') }}</a>
                 <a href="{{route('examination.index')}}">{{ __('home.Examination') }}</a>
