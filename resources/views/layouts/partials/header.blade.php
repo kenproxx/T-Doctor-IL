@@ -70,25 +70,7 @@
             <div class="pr-3 ">
                 <div class="dropdown float-right ">
                     <button class="btn krm-select-national dropdown-toggle  btn-outline-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        @if(locationHelper() == 'vi')
-                            <svg width="24" height="17" viewBox="0 0 24 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <g clip-path="url(#clip0_7408_3209)">
-                                    <g clip-path="url(#clip1_7408_3209)">
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M-1.5 0.5H25.5V16.5H-1.5V0.5Z" fill="#DA251D"/>
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.2906 12.4055L12.1406 10.3211L9.01172 12.4242L10.1719 8.99922L7.04297 6.88359L10.9137 6.85234L12.116 3.43359L13.3359 6.84297L17.2066 6.84609L14.0953 8.98359L15.2871 12.4086L15.2906 12.4055Z" fill="#FFFF00"/>
-                                    </g>
-                                </g>
-                                <defs>
-                                    <clipPath id="clip0_7408_3209">
-                                        <rect y="0.5" width="24" height="16" rx="2" fill="white"/>
-                                    </clipPath>
-                                    <clipPath id="clip1_7408_3209">
-                                        <rect width="24" height="16" fill="white" transform="translate(0 0.5)"/>
-                                    </clipPath>
-                                </defs>
-                            </svg>
-                            VN
-                        @else
+                        @if(locationHelper() == 'en')
                             <svg width="24" height="17" viewBox="0 0 24 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_7408_67)">
                                     <g clip-path="url(#clip1_7408_67)">
@@ -107,6 +89,23 @@
                                     </clipPath>
                                 </defs>
                             </svg> EN
+                        @else
+                            <svg width="24" height="17" viewBox="0 0 24 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_7408_3209)">
+                                    <g clip-path="url(#clip1_7408_3209)">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M-1.5 0.5H25.5V16.5H-1.5V0.5Z" fill="#DA251D"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.2906 12.4055L12.1406 10.3211L9.01172 12.4242L10.1719 8.99922L7.04297 6.88359L10.9137 6.85234L12.116 3.43359L13.3359 6.84297L17.2066 6.84609L14.0953 8.98359L15.2871 12.4086L15.2906 12.4055Z" fill="#FFFF00"/>
+                                    </g>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_7408_3209">
+                                        <rect y="0.5" width="24" height="16" rx="2" fill="white"/>
+                                    </clipPath>
+                                    <clipPath id="clip1_7408_3209">
+                                        <rect width="24" height="16" fill="white" transform="translate(0 0.5)"/>
+                                    </clipPath>
+                                </defs>
+                            </svg> VN
                         @endif
                     </button>
                     <div class="dropdown-menu dropdown-menu-right " style="min-width: 90px" aria-labelledby="dropdownMenuButton">
