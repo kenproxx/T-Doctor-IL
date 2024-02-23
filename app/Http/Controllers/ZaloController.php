@@ -70,14 +70,25 @@ class ZaloController extends Controller
                 'count' => 50
             ])
         ];
+        $zalo = $this->main();
         $accessToken = $_COOKIE['access_token_zalo'] ?? null;
-        $response = $this->main()->get(ZaloEndPoint::API_OA_GET_LIST_FOLLOWER, $accessToken, $data);
+        $response = $zalo->get(ZaloEndPoint::API_OA_GET_LIST_FOLLOWER, $accessToken, $data);
+
         return $response->getDecodedBody();
     }
 
     public function sendMessage(Request $request)
     {
+        $msgBuilder = new MessageBuilder(MessageBuilder::MSG_TYPE_TXT);
+        $msgBuilder->withUserId('5362840405577074889');
+        $msgBuilder->withText('Message Text');
 
+        $msgText = $msgBuilder->build();
+        $zalo = $this->main();
+        $accessToken = $_COOKIE['access_token_zalo'] ?? null;
+        $response = $zalo->post(ZaloEndPoint::API_OA_SEND_CONSULTATION_MESSAGE_V3, $accessToken, $msgText);
+        $result = $response->getDecodedBody();
+        return $result;
     }
 
     public function sendMessagePicture(Request $request)
@@ -85,7 +96,7 @@ class ZaloController extends Controller
 
     }
 
-    public function sendMessageText(Request $request)
+    private function sendMessageText()
     {
 
     }
