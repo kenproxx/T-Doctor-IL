@@ -120,7 +120,7 @@ class ZaloController extends Controller
 
     public function getLoginUrlOA()
     {
-        $url = 'https://oauth.zaloapp.com/v4/permission';
+        $url = 'https://oauth.zaloapp.com/v4/oa/permission';
 
         $codeChallenge = '';
         $state = '';
