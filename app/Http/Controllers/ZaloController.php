@@ -14,12 +14,7 @@ class ZaloController extends Controller
 {
     protected $app_id = '4088853414878610478';
     protected $app_secret = 'T16EKXcI7mgrP3ACX0KY';
-    protected $app_redirect;
-
-    public function __construct()
-    {
-        $this->app_redirect = route('zalo.service.callback');
-    }
+    protected $app_redirect = 'https%3A%2F%2Fkrmedi.vn%2Fzalo-service%2Fcallback';
 
     public function main()
     {
