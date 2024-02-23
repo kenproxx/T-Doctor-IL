@@ -280,7 +280,7 @@
         </ul>
     </div>
 </div>
-<div class="modal fade container" id="staticBackdrop" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+<div class="modal fade" id="staticBackdrop" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" id="modal_login">
@@ -344,7 +344,7 @@
         </div>
     </div>
 </div>
-<div class="modal fade container" id="modalRegister" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
+<div class="modal fade" id="modalRegister" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" id="modal_register">

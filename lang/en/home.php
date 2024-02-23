@@ -63,6 +63,7 @@ return [
     'Previous' => 'Previous',
     'Next' => 'Next',
     'Recruitment' => 'Recruitment',
+    'Phone Number' => 'Phone Number',
     'Hire staffs cheaper, find your staffs faster' => 'Hire staffs cheaper, find your staffs faster',
     'Flea market' => 'Flea market',
     'Buy online' => 'Buy online',

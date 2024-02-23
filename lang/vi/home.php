@@ -90,6 +90,7 @@ return [
     'Previous' => 'Trước',
     'Next' => 'Kế tiếp',
     'Recruitment' => 'Tuyển dụng',
+    'Phone Number' => 'Số điện thoại',
     'Hire staffs cheaper, find your staffs faster' => 'Thuê nhân viên rẻ hơn, tìm nhân viên của bạn nhanh hơn',
     'Flea market' => 'Chợ đồ cũ',
     'Buy online' => 'Mua trực tuyến',
