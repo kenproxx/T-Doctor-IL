@@ -327,6 +327,7 @@ return [
     "What's free" => "Voucher",
     'Dashboar' => 'bảng điều khiển',
     'Trang cá nhân' => 'Trang cá nhân',
+    'Tìm kiếm cơ sở y tế, nhà thuốc, bác sĩ, thuốc, triệu chứng' => 'Tìm kiếm cơ sở y tế, nhà thuốc, bác sĩ, thuốc, triệu chứng',
     'My booking' => 'Đặt phòng của tôi',
     'Logout' => 'Đăng xuất',
     'Log In' => 'Đăng nhập',

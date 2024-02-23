@@ -12,18 +12,45 @@ body::-webkit-scrollbar {
 }
 .main-header {
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-    position: fixed;
-    background: white;
+    position: absolute;
+    background: #088180;
     z-index: 1;
     top: 0;
     right: 0;
     left: 0;
-    height: 150px;
+    /*height: 150px;*/
+}
+.main-header .krm-search-home {
+    width: 550px;
+    height: 48px;
+    border-radius: 130px;
+    padding: 14px 16px 14px 55px;
+    outline: none;
+    border: none;
+}
+.main-header .krm-label-search {
+    position: absolute;
+    padding: 12px 22px;
 }
 
+.main-header .krm-form-header-top {
+    margin: 29px auto;
+}
+.main-header .krm-select-national {
+    background: #FFFFFF;
+    border: none;
+}
+.main-header .krm-select-national {
+    color: black;
+}
+.main-header .krm-name-user {
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+}
 .before-header {
-    padding: 8px 135px;
-    background-color: #F3F3F3;
+    padding: 14px;
+    background-color: #ffffff;
 }
 
 .social-item,
@@ -83,10 +110,10 @@ body::-webkit-scrollbar {
 .header-right .account_control {
     border: none;
     outline: none;
-    background: white;
+    background: #088180;
     font-weight: 800;
     font-size: 16px;
-    color: #45c3d2;
+    color: #FFFFFF;
 }
 
 .banner1 {
