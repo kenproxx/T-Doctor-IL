@@ -551,4 +551,5 @@ Route::group(['prefix' => 'zalo-service'], function () {
     Route::get('auth-verify', [ZaloController::class, 'getAuthCode'])->name('zalo.service.auth.verify');
     Route::get('callback', [ZaloController::class, 'getParameter'])->name('zalo.service.callback');
     Route::get('token', [ZaloController::class, 'getToken'])->name('zalo.service.token');
+    Route::get('follower', [ZaloController::class, 'getFollower'])->name('zalo.service.follower');
 });

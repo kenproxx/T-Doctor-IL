@@ -16,7 +16,8 @@ class ZaloController extends Controller
     protected $app_secret = 'T16EKXcI7mgrP3ACX0KY';
     protected $app_redirect = 'https%3A%2F%2Fkrmedi.vn%2Fzalo-service%2Fcallback';
     protected $app_url_permission = 'https://oauth.zaloapp.com/v4/oa/permission';
-    protected $app_url_get_token = 'https://oauth.zaloapp.com/v4/oa/access_token';
+    protected $app_url_token = 'https://oauth.zaloapp.com/v4/oa/access_token';
+    protected $app_url_get_follower = 'https://openapi.zalo.me/v2.0/oa/getfollowers';
 
     public function main()
     {
@@ -59,6 +60,11 @@ class ZaloController extends Controller
             setCookie('refresh_token_zalo', $array['refresh_token'], $expiration_time, '/');
         }
         return redirect(route('home'));
+    }
+
+    public function getFollower()
+    {
+        return $this->callFollower();
     }
 
     public function sendMessage(Request $request)
@@ -115,6 +121,25 @@ class ZaloController extends Controller
         return $result;
     }
 
+    private function callFollower()
+    {
+        try {
+            $client = new Client();
+
+            $token = $_COOKIE['access_token_zalo'] ?? null;
+
+            $response = $client->get($this->app_url_get_follower, [
+                'headers' => [
+                    'Access_token' => $token
+                ]
+            ]);
+
+            return $response->getBody();
+        } catch (\Exception $exception) {
+            return response($exception, 500);
+        }
+    }
+
     private function getLoginUrlOA()
     {
         $url = $this->app_url_permission;
@@ -135,7 +160,7 @@ class ZaloController extends Controller
         try {
             $client = new Client();
 
-            $response = $client->post($this->app_url_get_token, [
+            $response = $client->post($this->app_url_token, [
                 'headers' => [
                     'secret_key' => $this->app_secret,
                     'Content-Type' => 'application/x-www-form-urlencoded',
