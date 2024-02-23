@@ -130,6 +130,6 @@ class ZaloController extends Controller
         $challenge_url = '&code_challenge=' . $codeChallenge;
         $state_url = '&state=' . $state;
 
-        return $url . $app_id_url . $redirect_url . $challenge_url . $state_url;
+        return $url . $app_id_url . $redirect_url;
     }
 }
