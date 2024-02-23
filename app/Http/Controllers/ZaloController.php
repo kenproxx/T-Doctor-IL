@@ -127,8 +127,7 @@ class ZaloController extends Controller
     {
         $url = 'https://oauth.zaloapp.com/v4/permission';
 
-        $codeVerifier = PKCEUtil::genCodeVerifier();
-        $codeChallenge = PKCEUtil::genCodeChallenge($codeVerifier);
+        $codeChallenge = '';
         $state = '';
 
         $app_id_url = '?app_id=' . $this->app_id;
