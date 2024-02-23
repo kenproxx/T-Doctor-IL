@@ -15,6 +15,10 @@ class ZaloController extends Controller
     protected $app_id = '4088853414878610478';
     protected $app_secret = 'T16EKXcI7mgrP3ACX0KY';
     protected $app_redirect = 'https%3A%2F%2Fkrmedi.vn%2Fzalo-service%2Fcallback';
+    protected $app_url_permission = 'https://oauth.zaloapp.com/v4/oa/permission';
+    protected $app_url_get_token = 'https://oauth.zaloapp.com/v4/oa/access_token';
+
+    protected $app_code;
 
     public function main()
     {
@@ -37,22 +41,19 @@ class ZaloController extends Controller
     {
         $parameters = $request->all();
         $code = $parameters['code'];
-        dd($code);
+        $this->app_code = $code;
+//        return redirect(route('home'));
+        return redirect(route('zalo.service.token'));
     }
 
     public function getToken()
     {
-        $zalo = $this->main();
-        $helper = $zalo->getRedirectLoginHelper();
-
-        $codeVerifier = PKCEUtil::genCodeVerifier();
-        $codeChallenge = PKCEUtil::genCodeChallenge($codeVerifier);
-
-        $loaCallbackUrl = "https://krmedi.vn/";
-        $state = '';
-        $linkOAGrantPermission2App = $helper->getLoginUrlByOA($loaCallbackUrl, $codeChallenge, $state);
-        $zaloToken = $helper->getZaloTokenByOA($codeVerifier);
-        $accessToken = $zaloToken->getAccessToken();
+        $array_token = $this->getAccessToken();
+        $accessToken = null;
+        if ($array_token['status'] == 200) {
+            $accessToken = $array_token['data'];
+        }
+        dd($accessToken);
         return $accessToken;
     }
 
@@ -118,9 +119,9 @@ class ZaloController extends Controller
         return $result;
     }
 
-    public function getLoginUrlOA()
+    private function getLoginUrlOA()
     {
-        $url = 'https://oauth.zaloapp.com/v4/oa/permission';
+        $url = $this->app_url_permission;
 
         $codeChallenge = '';
         $state = '';
@@ -131,5 +132,38 @@ class ZaloController extends Controller
         $state_url = '&state=' . $state;
 
         return $url . $app_id_url . $redirect_url;
+    }
+
+    private function getAccessToken()
+    {
+        $array_value = null;
+        try {
+            $client = new Client();
+
+            $url = $this->app_url_get_token;
+
+            $data = array(
+                'code' => $this->app_code,
+                'app_id' => $this->app_id,
+                'grant_type' => 'authorization_code',
+            );
+            $jsonData = json_encode($data);
+
+            $response = $client->post($url, [
+                'headers' => [
+                    'secret_key' => $this->app_secret,
+                    'Content-Type' => 'application/x-www-form-urlencoded',
+                ],
+                'body' => $jsonData,
+            ]);
+
+            $array_value['data'] = $response->getBody();
+            $array_value['status'] = 200;
+            return $array_value;
+        } catch (\Exception $exception) {
+            $array_value['data'] = $exception->getMessage();
+            $array_value['status'] = 500;
+            return $array_value;
+        }
     }
 }
