@@ -136,14 +136,13 @@ class AgoraChatController extends Controller
                 'appId' => $appIdAgora,
                 'certificate' => $appCertificateAgora,
                 'channel' => $chanelName,
-                'uid' => $uid,
+                'uid' => '',
                 'role' => 'publisher',
                 'expire' => 0,
             ]);
 
         // Access response data
         $responseData = $response->json();
-
         return $responseData['rtcToken'];
 
     }
