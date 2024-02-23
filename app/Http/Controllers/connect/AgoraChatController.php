@@ -9,7 +9,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Pusher\Pusher;
-use Ramsey\Uuid\Uuid;
 
 class AgoraChatController extends Controller
 {
@@ -87,6 +86,7 @@ class AgoraChatController extends Controller
             $channel = $oldAgora->channel;
         } else {
             $channel = implode('_', $array_email);
+            $uuid = rand(0, 10000);
 
             $token = $this->genNewTokenByChanelName($channel);
         }
@@ -103,7 +103,7 @@ class AgoraChatController extends Controller
         }
 
         $agora_chat->appid = $appid;
-        $agora_chat->uid = $this->stripVN(User::getNameByID($user_id_1));
+        $agora_chat->uid = $user_id_1;
         $agora_chat->token = $token;
         $agora_chat->channel = $channel;
 
@@ -143,7 +143,6 @@ class AgoraChatController extends Controller
 
         // Access response data
         $responseData = $response->json();
-
         return $responseData['rtcToken'];
 
     }
@@ -196,6 +195,11 @@ class AgoraChatController extends Controller
             "uid" => $uuid, // cái này em gửi cho anh 1 hash của uuid v4
             "rtmUid" => $hashUUID, // cái này là cái uuid vừa gen ra ở bên trên
             "type" => "1", // 1 với video, 0 với voice
+            "startTime" => now()->timestamp, // thời gian bắt đầu cuộc gọi
+
+            "link" => '',
+            'user_email_1' => '',
+            'user_email_2' => '',
 
             // thông tin người gọi
             "requestUser" => [
