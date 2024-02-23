@@ -53,6 +53,7 @@ use App\Http\Controllers\ui\MyFavouriteController;
 use App\Http\Controllers\ui\PrescriptionResultController;
 use App\Http\Controllers\ui\UserController;
 use App\Http\Controllers\WhatFreeToDay;
+use App\Http\Controllers\ZaloController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -546,3 +547,8 @@ Route::middleware(['user.active'])->group(function () {
     });
 });
 Route::get('test/translate', [MainApi::class, 'translateLanguage']);
+Route::get('test/token', [ZaloController::class, 'getToken']);
+Route::group(['prefix' => 'zalo-service'], function () {
+    Route::get('auth-verify', [ZaloController::class, 'getAuthCode'])->name('zalo.service.auth.verify');
+    Route::get('callback', [ZaloController::class, 'getParameter'])->name('zalo.service.callback');
+});
