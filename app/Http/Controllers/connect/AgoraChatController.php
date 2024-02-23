@@ -7,6 +7,7 @@ use App\Http\Controllers\restapi\MainApi;
 use App\Models\AgoraChat;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Pusher\Pusher;
 
@@ -136,9 +137,9 @@ class AgoraChatController extends Controller
                 'appId' => $appIdAgora,
                 'certificate' => $appCertificateAgora,
                 'channel' => $chanelName,
-                'uid' => '',
+                'uid' => Auth::check() ? Auth::user()->id : '',
                 'role' => 'publisher',
-                'expire' => 0,
+                'expire' => time() + 3600,
             ]);
 
         // Access response data

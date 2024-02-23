@@ -25,6 +25,7 @@ class ZaloController extends Controller
         $this->access_token = $_COOKIE['access_token_zalo'] ?? null;
     }
 
+    /* Create new zalo */
     public function main()
     {
         $config = array(
@@ -36,12 +37,14 @@ class ZaloController extends Controller
         return $zalo;
     }
 
+    /* Get code of my OA */
     public function getAuthCode()
     {
         $url = $this->getLoginUrlOA();
         return redirect($url);
     }
 
+    /* Get code and redirect to url */
     public function getParameter(Request $request)
     {
         $parameters = $request->all();
@@ -51,6 +54,7 @@ class ZaloController extends Controller
         return redirect($url_redirect);
     }
 
+    /* Set code to cookie */
     public function getToken(Request $request)
     {
         $code = $request->input('code');
@@ -68,6 +72,7 @@ class ZaloController extends Controller
         return redirect(route('home'));
     }
 
+    /* Get user follow*/
     public function getFollower()
     {
         $data = [
@@ -83,6 +88,7 @@ class ZaloController extends Controller
         return $response->getDecodedBody();
     }
 
+    /* Send message */
     public function sendMessage(Request $request)
     {
         $user_id = $request->input('user_zalo');
@@ -103,6 +109,7 @@ class ZaloController extends Controller
         return $response->getDecodedBody();
     }
 
+    /* Get profile */
     public function getProfile(Request $request)
     {
         $user_id = $request->input('user_zalo');
