@@ -198,6 +198,10 @@ class AgoraChatController extends Controller
             "type" => "1", // 1 với video, 0 với voice
             "startTime" => now()->timestamp, // thời gian bắt đầu cuộc gọi
 
+            "link" => '',
+            'user_email_1' => '',
+            'user_email_2' => '',
+
             // thông tin người gọi
             "requestUser" => [
                 "image" => 'https://krmedi.vn/' . $userCall->avatar,
