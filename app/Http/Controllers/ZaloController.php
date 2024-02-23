@@ -135,34 +135,30 @@ class ZaloController extends Controller
 
     private function getAccessToken($code)
     {
-        $array_value = null;
         try {
             $client = new Client();
 
-            $url = $this->app_url_get_token;
-
-            $data = array(
-                'code' => $code,
-                'app_id' => $this->app_id,
-                'grant_type' => 'authorization_code',
-            );
-            $jsonData = json_encode($data);
-
-            $response = $client->post($url, [
+            $response = $client->post($this->app_url_get_token, [
                 'headers' => [
                     'secret_key' => $this->app_secret,
-                    'Content-Type' => 'application/x-www-form-urlencoded',
+                    'Content-Type' => 'application/json',
                 ],
-                'body' => $jsonData,
+                'json' => [
+                    'code' => $code,
+                    'app_id' => $this->app_id,
+                    'grant_type' => 'authorization_code',
+                ],
             ]);
 
-            $array_value['data'] = $response;
-            $array_value['status'] = 200;
-            return $array_value;
+            return [
+                'data' => $response,
+                'status' => 200,
+            ];
         } catch (\Exception $exception) {
-            $array_value['data'] = $exception->getMessage();
-            $array_value['status'] = 500;
-            return $array_value;
+            return [
+                'data' => $exception->getMessage(),
+                'status' => 500,
+            ];
         }
     }
 }
