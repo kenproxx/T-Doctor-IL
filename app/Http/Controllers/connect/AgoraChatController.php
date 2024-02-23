@@ -86,8 +86,9 @@ class AgoraChatController extends Controller
             $channel = $oldAgora->channel;
         } else {
             $channel = implode('_', $array_email);
+            $uuid = rand(1000000000, 9999999999);
 
-            $token = $this->genNewTokenByChanelName($channel, $user_id_1);
+            $token = $this->genNewTokenByChanelName($channel, $uuid);
         }
 
         $agora_chat = AgoraChat::where([
