@@ -64,80 +64,30 @@ class ZaloController extends Controller
 
     public function getFollower()
     {
-        return $this->callFollower();
+        $data = [
+            'data' => json_encode([
+                'offset' => 0,
+                'count' => 50
+            ])
+        ];
+        $accessToken = $_COOKIE['access_token_zalo'] ?? null;
+        $response = $this->main()->get(ZaloEndPoint::API_OA_GET_LIST_FOLLOWER, $accessToken, $data);
+        return $response->getDecodedBody();
     }
 
     public function sendMessage(Request $request)
     {
-        $user_id = $request->input('user_id');
-        $message = $request->input('message') ?? 'Message to....';
-        $msgBuilder = new MessageBuilder(MessageBuilder::MSG_TYPE_TXT);
-        $msgBuilder->withUserId($user_id);
-        $msgBuilder->withText($message);
 
-        $msgText = $msgBuilder->build();
-
-        $zalo = $this->main();
-        $accessToken = $this->getToken($request);
-
-        $response = $zalo->post(ZaloEndPoint::API_OA_SEND_CONSULTATION_MESSAGE_V3, $accessToken, $msgText);
-        $result = $response->getDecodedBody();
-        return $result;
     }
 
     public function sendMessagePicture(Request $request)
     {
-        $msgBuilder = new MessageBuilder(MessageBuilder::MSG_TYPE_MEDIA);
-        $msgBuilder->withUserId('user_id');
-        $msgBuilder->withText('Message Image');
-        $msgBuilder->withMediaUrl('https://stc-developers.zdn.vn/images/bg_1.jpg');
 
-        $msgImage = $msgBuilder->build();
-
-        $zalo = $this->main();
-        $accessToken = $this->getToken($request);
-
-        $response = $zalo->post(ZaloEndPoint::API_OA_SEND_CONSULTATION_MESSAGE_V3, $accessToken, $msgImage);
-        $result = $response->getDecodedBody();
-        return $result;
     }
 
-    public function sendMessageText(Request $request, $phone)
+    public function sendMessageText(Request $request)
     {
-        $msgBuilder = new MessageBuilder('text');
-        $msgBuilder->withUserId('494021888309207992');
-        $msgBuilder->withText('Message Text');
 
-        $zalo = $this->main();
-        $accessToken = $this->getToken($request);
-
-        $actionOpenSMS = $msgBuilder->buildActionOpenSMS($phone, 'Message Text');
-        $msgBuilder->withButton('Open SMS', $actionOpenSMS);
-
-        $msgText = $msgBuilder->build();
-
-        $response = $zalo->post(ZaloEndPoint::API_OA_SEND_MESSAGE, $accessToken, $msgText);
-        $result = $response->getDecodedBody();
-        return $result;
-    }
-
-    private function callFollower()
-    {
-        try {
-            $client = new Client();
-
-            $token = $_COOKIE['access_token_zalo'] ?? null;
-
-            $response = $client->get($this->app_url_get_follower, [
-                'headers' => [
-                    'Access_token' => $token
-                ]
-            ]);
-
-            return $response->getBody();
-        } catch (\Exception $exception) {
-            return response($exception, 500);
-        }
     }
 
     private function getLoginUrlOA()
