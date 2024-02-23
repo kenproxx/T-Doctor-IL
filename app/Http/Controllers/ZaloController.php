@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Constants;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -12,12 +13,17 @@ use Zalo\ZaloEndPoint;
 
 class ZaloController extends Controller
 {
-    protected $app_id = '4088853414878610478';
-    protected $app_secret = 'T16EKXcI7mgrP3ACX0KY';
+    protected $app_id = Constants::ID_ZALO_APP;
+    protected $app_secret = Constants::KEY_ZALO_APP;
+    protected $access_token;
     protected $app_redirect = 'https%3A%2F%2Fkrmedi.vn%2Fzalo-service%2Fcallback';
     protected $app_url_permission = 'https://oauth.zaloapp.com/v4/oa/permission';
     protected $app_url_token = 'https://oauth.zaloapp.com/v4/oa/access_token';
-    protected $app_url_get_follower = 'https://openapi.zalo.me/v2.0/oa/getfollowers';
+
+    public function __construct()
+    {
+        $this->access_token = $_COOKIE['access_token_zalo'] ?? null;
+    }
 
     public function main()
     {
@@ -79,26 +85,35 @@ class ZaloController extends Controller
 
     public function sendMessage(Request $request)
     {
+        $user_id = $request->input('user_zalo');
+        $message = $request->input('message');
+        return $this->sendMessageText($user_id, $message);
+    }
+
+    public function sendMessageText($user_id, $message)
+    {
         $msgBuilder = new MessageBuilder(MessageBuilder::MSG_TYPE_TXT);
-        $msgBuilder->withUserId('5362840405577074889');
-        $msgBuilder->withText('Message Text');
+        $msgBuilder->withUserId($user_id);
+        $msgBuilder->withText($message);
 
         $msgText = $msgBuilder->build();
         $zalo = $this->main();
         $accessToken = $_COOKIE['access_token_zalo'] ?? null;
         $response = $zalo->post(ZaloEndPoint::API_OA_SEND_CONSULTATION_MESSAGE_V3, $accessToken, $msgText);
+        return $response->getDecodedBody();
+    }
+
+    public function getProfile(Request $request)
+    {
+        $user_id = $request->input('user_zalo');
+        $data = ['data' => json_encode(array(
+            'user_id' => $user_id
+        ))];
+        $zalo = $this->main();
+        $accessToken = $_COOKIE['access_token_zalo'] ?? null;
+        $response = $zalo->get(ZaloEndPoint::API_OA_GET_USER_PROFILE, $accessToken, $data);
         $result = $response->getDecodedBody();
         return $result;
-    }
-
-    public function sendMessagePicture(Request $request)
-    {
-
-    }
-
-    private function sendMessageText()
-    {
-
     }
 
     private function getLoginUrlOA()
