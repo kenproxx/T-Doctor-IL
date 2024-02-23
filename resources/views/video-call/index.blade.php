@@ -151,48 +151,54 @@
         //Is this place hear strategicly or can I add to end of method?
 
 
-            client.on("user-published", handleUserJoined);
-            client.on("user-left", handleUserLeft);
+        client.on("user-published", handleUserJoined);
+        client.on("user-left", handleUserLeft);
 
 
-            client.enableAudioVolumeIndicator(); // Triggers the "volume-indicator" callback event every two seconds.
-            client.on("volume-indicator", function (evt) {
-                for (let i = 0; evt.length > i; i++) {
-                    let speaker = evt[i].uid
-                    let volume = evt[i].level
-                    if (volume > 0) {
-                        document.getElementById(`volume-${speaker}`).src = '{{ asset('img/assets-video-call/volume-on.svg') }}'
-                    } else {
-                        document.getElementById(`volume-${speaker}`).src = '{{ asset('img/assets-video-call/volume-off.svg') }}'
-                    }
-
-
+        client.enableAudioVolumeIndicator(); // Triggers the "volume-indicator" callback event every two seconds.
+        client.on("volume-indicator", function (evt) {
+            for (let i = 0; evt.length > i; i++) {
+                let speaker = evt[i].uid
+                let volume = evt[i].level
+                if (volume > 0) {
+                    document.getElementById(`volume-${speaker}`).src = '{{ asset('img/assets-video-call/volume-on.svg') }}'
+                } else {
+                    document.getElementById(`volume-${speaker}`).src = '{{ asset('img/assets-video-call/volume-off.svg') }}'
                 }
-            });
 
-            //#6 - Set and get back tracks for local user
-            [config.uid, localTracks.audioTrack, localTracks.videoTrack] = await Promise.all([
-                client.join(config.appid, config.channel, config.token || null, config.uid || null),
-                AgoraRTC.createMicrophoneAudioTrack(),
-                AgoraRTC.createCameraVideoTrack()
 
-            ])
+            }
+        });
 
-            //#7 - Create player and add it to player list
-            let player = `<div class="video-containers" id="video-wrapper-${config.uid}">
+        //#6 - Set and get back tracks for local user
+        [config.uid, localTracks.audioTrack, localTracks.videoTrack] = await Promise.all([
+            client.join(config.appid, config.channel, config.token || null, config.uid || null),
+            AgoraRTC.createMicrophoneAudioTrack(),
+            AgoraRTC.createCameraVideoTrack()
+
+        ])
+
+        client.enableDualStream().then(() => {
+            console.log("Enable Dual stream success!");
+        }).catch(err => {
+            console.log(err);
+        })
+
+        //#7 - Create player and add it to player list
+        let player = `<div class="video-containers" id="video-wrapper-${config.uid}">
                         <p class="user-uid"><img class="volume-icon" id="volume-${config.uid}" src="{{ asset('img/assets-video-call/volume-on.svg') }}" /> ${config.uid}</p>
                         <div class="video-player player" id="stream-${config.uid}"></div>
                   </div>`
 
-            document.getElementById('user-streams').insertAdjacentHTML('beforeend', player);
-            //#8 - Player user stream in div
-            localTracks.videoTrack.play(`stream-${config.uid}`)
+        document.getElementById('user-streams').insertAdjacentHTML('beforeend', player);
+        //#8 - Player user stream in div
+        localTracks.videoTrack.play(`stream-${config.uid}`)
 
 
-            //#9 Add user to user list of names/ids
+        //#9 Add user to user list of names/ids
 
-            //#10 - Publish my local video tracks to entire channel so everyone can see it
-            await client.publish([localTracks.audioTrack, localTracks.videoTrack])
+        //#10 - Publish my local video tracks to entire channel so everyone can see it
+        await client.publish([localTracks.audioTrack, localTracks.videoTrack])
     }
 
 
