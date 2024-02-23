@@ -48,20 +48,17 @@ class ZaloController extends Controller
     {
         $code = $request->input('code');
         $array_token = $this->getAccessToken($code);
-        $accessToken = null;
+        $dataToken = null;
         if ($array_token['status'] == 200) {
-            $accessToken = $array_token['data'];
+            $dataToken = $array_token['data'];
         }
-        dd($array_token);
-        return $accessToken;
-    }
-
-    protected function getParam($url)
-    {
-        $url_components = parse_url($url);
-        $query = $url_components['query'];
-        parse_str($query, $params);
-        return $params;
+        $array = json_decode($dataToken, true);
+        if (isset($array['access_token'])) {
+            $expiration_time = time() + $array['expires_in'];
+            setCookie('access_token_zalo', $array['access_token'], $expiration_time, '/');
+            setCookie('refresh_token_zalo', $array['refresh_token'], $expiration_time, '/');
+        }
+        return redirect(route('home'));
     }
 
     public function sendMessage(Request $request)
@@ -75,14 +72,14 @@ class ZaloController extends Controller
         $msgText = $msgBuilder->build();
 
         $zalo = $this->main();
-        $accessToken = $this->getToken();
+        $accessToken = $this->getToken($request);
 
         $response = $zalo->post(ZaloEndPoint::API_OA_SEND_CONSULTATION_MESSAGE_V3, $accessToken, $msgText);
         $result = $response->getDecodedBody();
         return $result;
     }
 
-    public function sendMessagePicture()
+    public function sendMessagePicture(Request $request)
     {
         $msgBuilder = new MessageBuilder(MessageBuilder::MSG_TYPE_MEDIA);
         $msgBuilder->withUserId('user_id');
@@ -92,21 +89,21 @@ class ZaloController extends Controller
         $msgImage = $msgBuilder->build();
 
         $zalo = $this->main();
-        $accessToken = $this->getToken();
+        $accessToken = $this->getToken($request);
 
         $response = $zalo->post(ZaloEndPoint::API_OA_SEND_CONSULTATION_MESSAGE_V3, $accessToken, $msgImage);
         $result = $response->getDecodedBody();
         return $result;
     }
 
-    public function sendMessageText($phone)
+    public function sendMessageText(Request $request, $phone)
     {
         $msgBuilder = new MessageBuilder('text');
         $msgBuilder->withUserId('494021888309207992');
         $msgBuilder->withText('Message Text');
 
         $zalo = $this->main();
-        $accessToken = $this->getToken();
+        $accessToken = $this->getToken($request);
 
         $actionOpenSMS = $msgBuilder->buildActionOpenSMS($phone, 'Message Text');
         $msgBuilder->withButton('Open SMS', $actionOpenSMS);
@@ -151,7 +148,7 @@ class ZaloController extends Controller
             ]);
 
             return [
-                'data' => $response,
+                'data' => $response->getBody()->getContents(),
                 'status' => 200,
             ];
         } catch (\Exception $exception) {
