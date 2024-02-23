@@ -9,7 +9,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Pusher\Pusher;
-use Ramsey\Uuid\Uuid;
 
 class AgoraChatController extends Controller
 {
@@ -88,7 +87,7 @@ class AgoraChatController extends Controller
         } else {
             $channel = implode('_', $array_email);
 
-            $token = $this->genNewTokenByChanelName($channel);
+            $token = $this->genNewTokenByChanelName($channel, $user_id_1);
         }
 
         $agora_chat = AgoraChat::where([
@@ -103,7 +102,7 @@ class AgoraChatController extends Controller
         }
 
         $agora_chat->appid = $appid;
-        $agora_chat->uid = $this->stripVN(User::getNameByID($user_id_1));
+        $agora_chat->uid = $user_id_1;
         $agora_chat->token = $token;
         $agora_chat->channel = $channel;
 
@@ -112,7 +111,7 @@ class AgoraChatController extends Controller
         return $agora_chat;
     }
 
-    function genNewTokenByChanelName($chanelName)
+    function genNewTokenByChanelName($chanelName, $uid)
     {
         $appIdAgora = '0b47427ee7334417a90ff22c4e537b08';
         $appCertificateAgora = 'd35960a9bfb146ceb33a3a40c0b9ab3b';
@@ -136,7 +135,7 @@ class AgoraChatController extends Controller
                 'appId' => $appIdAgora,
                 'certificate' => $appCertificateAgora,
                 'channel' => $chanelName,
-                'uid' => '',
+                'uid' => $uid,
                 'role' => 'publisher',
                 'expire' => 0,
             ]);
@@ -269,7 +268,7 @@ class AgoraChatController extends Controller
         $token_2 = $agora_chat_2->token;
 
         if ($token_1 == $token_2) {
-            $token = $this->genNewTokenByChanelName($agora_chat_1->channel);
+            $token = $this->genNewTokenByChanelName($agora_chat_1->channel, $user_id_1);
             $agora_chat_1->token = $token;
             $agora_chat_2->token = $token;
             $agora_chat_1->save();
