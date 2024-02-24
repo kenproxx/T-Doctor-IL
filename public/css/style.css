@@ -53,6 +53,9 @@ body::-webkit-scrollbar {
     background-color: #ffffff;
 }
 
+.before-header a {
+    font-weight: 800;
+}
 .social-item,
 .flag-item {
     margin: 0 16px;

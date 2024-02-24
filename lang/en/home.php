@@ -22,7 +22,10 @@ return [
     'Event' => 'Event',
     'Clinics/Pharmacies' => 'Clinics/Pharmacies',
     'Khám chuyên khoa' => 'Specialized examination',
-    'Khám từ xa' => 'Remote examination',
+    'Đặt lịch khám bệnh' => 'Schedule a medical examination',
+    'Thuốc online' => 'Online medicine',
+
+        'Khám từ xa' => 'Remote examination',
     'Tư vẫn sức khoẻ' => 'Health counseling',
     'Y tế gần bạn' => 'Health near you',
     'Chuyên khoa khám' => 'Specialized examination',
