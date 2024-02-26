@@ -84,6 +84,26 @@
             text-overflow: ellipsis;
             height: 70px;
         }
+        .max-3-line-content-home {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 30px;
+            min-height: 30px;
+        }
+        .webkit-line-clamp-newHome p{
+            color: #FFFFFF;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+            -webkit-line-clamp: 3;
+            height: 70px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
 
         .sold-out-overlay {
             opacity: .5;
@@ -106,6 +126,13 @@
             right: 15px;
             top: 45%;
         }
+        .krm-tieuDe-findDoctor {
+            width: 430px;
+            background-color: #F2994A;
+            color: white;
+            border-radius: 0 0 120px 120px;
+            font-size: 24px;
+        }
 
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css">
@@ -113,11 +140,9 @@
     <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js') }}"></script>
     <script src="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js') }}"></script>
 
-    {{--    <link href="{{ asset('css/home.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('css/style-home.css') }}" rel="stylesheet">
     @include('layouts.partials.header')
 
-    {{--    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>--}}
     <script src="{{ asset('build/assets/app.dba56e22.js') }}"></script>
     <div class="container d-flex pb-md-5 mt-200 mt-70">
         <div class="col-md-6 justify-content-center d-flex">
@@ -936,11 +961,132 @@
             </div>
         </div>
     </div>
+    <div class="bg-homeNew">
+        <div class="container pt-3">
+            <div id="find-doctor--homeNew">
+                <div class="title-findDoctor--homeNew d-md-flex justify-content-center">
+                    <div class="py-3 text-center krm-tieuDe-findDoctor">{{ __('home.Find a doctor') }}</div>
+                </div>
+                <div class="tab-content py-4" id="myTabContent">
+                    <div class="tab-pane fade show active" id="available" role="tabpanel"
+                         aria-labelledby="available-tab">
+                        @php
+                            $doctors = \App\Models\User::where('member', \App\Enums\TypeUser::DOCTORS)->paginate(12);
+                        @endphp
+                        <div class="row">
 
-    {{--    <div class="container mt-24">--}}
-    {{--        <div class="titleServiceHomeNew">{{ __('home.Dịch vụ toàn diện') }}</div>--}}
-
-    {{--    </div>--}}
+                            @foreach($doctors as $doctor)
+                                {{--                                @dd($doctor)--}}
+                                @if($doctor == '')
+                                    <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
+                                @else
+                                    @php
+                                        $isFavourite = null;
+                                        if (Auth::check()){
+                                            $isFavourite = \App\Models\MedicalFavourite::where('user_id', Auth::user()->id)
+                                                                ->where('medical_id', $doctor->id)
+                                                                ->first();
+                                        }
+                                        $class = !$isFavourite ? 'bi-heart' : 'bi-heart-fill text-danger';
+                                    @endphp
+                                    <div class="col-md-3 col-6">
+                                        <div class="">
+                                            <div class="product-item">
+                                                <div class="img-pro justify-content-center d-flex">
+                                                    <img loading="lazy" src="{{$doctor->avt}}" alt="">
+                                                    <a class="button-heart button-doctor-heart"
+                                                       data-doctor="{{$doctor->id}}"
+                                                       data-isFavourite="{{ $isFavourite ? 1 : 0 }}">
+                                                        <i class="bi {{ $class }}"></i>
+                                                    </a>
+                                                    <s class="icon-chuyen-khoa">
+                                                        @php
+                                                            $department = \App\Models\Department::where('id',$doctor->department_id)->value('thumbnail');
+                                                        @endphp
+                                                        <img loading="lazy" src="{{$department}}">
+                                                    </s>
+                                                </div>
+                                                <div class="content-pro p-md-3 p-2">
+                                                    <div class="">
+                                                        <div class="name-product" style="height: auto">
+                                                            <a class="max-3-line-content-home"
+                                                               href="{{ route('examination.doctor_info', $doctor->id) }}">{{$doctor->name}}</a>
+                                                        </div>
+                                                        <div class="location-pro webkit-line-clamp-newHome d-flex">
+                                                            <p>
+                                                                @if(locationHelper() == 'vi')
+                                                                    {!! ($doctor->service ?? __('home.no Service Name') ) !!}
+                                                                @else
+                                                                    {!! ($doctor->service_en  ?? __('home.no Service Name') ) !!}
+                                                                @endif
+                                                            </p>
+                                                        </div>
+                                                        <div class="price-pro">
+                                                            @php
+                                                                if ($doctor->province_id == null) {
+                                                                    $addressP = 'Ha Noi';
+                                                                    }
+                                                                else {
+                                                                    if (locationHelper() == 'vi') {
+                                                                        $addressP = Province::find($doctor->province_id)->name;
+                                                                    }
+                                                                    else {
+                                                                        $addressP = Province::find($doctor->province_id)->name_en;
+                                                                    }
+                                                                }
+                                                            @endphp
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="21"
+                                                                 height="21" viewBox="0 0 21 21" fill="none">
+                                                                <g clip-path="url(#clip0_5506_14919)">
+                                                                    <path
+                                                                        d="M4.66602 12.8382C3.12321 13.5188 2.16602 14.4673 2.16602 15.5163C2.16602 17.5873 5.89698 19.2663 10.4993 19.2663C15.1017 19.2663 18.8327 17.5873 18.8327 15.5163C18.8327 14.4673 17.8755 13.5188 16.3327 12.8382M15.4993 7.59961C15.4993 10.986 11.7493 12.5996 10.4993 15.0996C9.24935 12.5996 5.49935 10.986 5.49935 7.59961C5.49935 4.83819 7.73793 2.59961 10.4993 2.59961C13.2608 2.59961 15.4993 4.83819 15.4993 7.59961ZM11.3327 7.59961C11.3327 8.05985 10.9596 8.43294 10.4993 8.43294C10.0391 8.43294 9.66602 8.05985 9.66602 7.59961C9.66602 7.13937 10.0391 6.76628 10.4993 6.76628C10.9596 6.76628 11.3327 7.13937 11.3327 7.59961Z"
+                                                                        stroke="white" stroke-width="2"
+                                                                        stroke-linecap="round"
+                                                                        stroke-linejoin="round"/>
+                                                                </g>
+                                                                <defs>
+                                                                    <clipPath id="clip0_5506_14919">
+                                                                        <rect width="20" height="20" fill="white"
+                                                                              transform="translate(0.5 0.933594)"/>
+                                                                    </clipPath>
+                                                                </defs>
+                                                            </svg> &nbsp;
+                                                            {{$addressP}}
+                                                        </div>
+                                                        <div class="price-pro">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="21"
+                                                                 height="21" viewBox="0 0 21 21" fill="none">
+                                                                <g clip-path="url(#clip0_5506_14923)">
+                                                                    <path
+                                                                        d="M10.4993 5.93294V10.9329L13.8327 12.5996M18.8327 10.9329C18.8327 15.5353 15.1017 19.2663 10.4993 19.2663C5.89698 19.2663 2.16602 15.5353 2.16602 10.9329C2.16602 6.33057 5.89698 2.59961 10.4993 2.59961C15.1017 2.59961 18.8327 6.33057 18.8327 10.9329Z"
+                                                                        stroke="white" stroke-width="2"
+                                                                        stroke-linecap="round"
+                                                                        stroke-linejoin="round"/>
+                                                                </g>
+                                                                <defs>
+                                                                    <clipPath id="clip0_5506_14923">
+                                                                        <rect width="20" height="20" fill="white"
+                                                                              transform="translate(0.5 0.933594)"/>
+                                                                    </clipPath>
+                                                                </defs>
+                                                            </svg> &nbsp; {{$doctor->time_working_1}}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                        <div class="pagination mt-4 d-flex align-items-center justify-content-center">
+                            {{ $doctors->links() }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="background-image_HomeNew--departments">
         <div class="container">
@@ -1150,266 +1296,7 @@
         </div>
     </div>
 
-    <div class="bg-homeNew">
-        <div class="container pt-3">
-            <div id="find-doctor--homeNew">
-                <div class="title-findDoctor--homeNew">
-                    <span class="py-3 text-center">{{ __('home.Find a doctor') }}</span>
-                </div>
-                <div class="d-flex nav-header--homeNew justify-content-center mt-3">
-                    <ul class="nav nav-pills nav-fill d-flex justify-content-between">
-                        <li class="nav-item">
-                            <a class="nav-link active font-14-mobi" id="available-tab" data-toggle="tab"
-                               href="#available"
-                               role="tab" aria-controls="available"
-                               aria-selected="true">{{ __('home.24/7 AVAILABLE') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link font-14-mobi" id="findMedicine-tab" data-toggle="tab"
-                               href="#findMedicine"
-                               role="tab" aria-controls="findMedicine"
-                               aria-selected="false">{{ __('home.Find my medicine') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link font-14-mobi" id="mentoring-tab" data-toggle="tab" href="#mentoring"
-                               role="tab" aria-controls="mentoring"
-                               aria-selected="true">{{ __('home.Mentoring') }}</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="tab-content py-4" id="myTabContent">
-                    <div class="tab-pane fade show active" id="available" role="tabpanel"
-                         aria-labelledby="available-tab">
-                        @php
-                            $doctors = \App\Models\User::where('member', \App\Enums\TypeUser::DOCTORS)->paginate(12);
-                        @endphp
-                        <div class="row">
 
-                            @foreach($doctors as $doctor)
-                                {{--                                @dd($doctor)--}}
-                                @if($doctor == '')
-                                    <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
-                                @else
-                                    @php
-                                        $isFavourite = null;
-                                        if (Auth::check()){
-                                            $isFavourite = \App\Models\MedicalFavourite::where('user_id', Auth::user()->id)
-                                                                ->where('medical_id', $doctor->id)
-                                                                ->first();
-                                        }
-                                        $class = !$isFavourite ? 'bi-heart' : 'bi-heart-fill text-danger';
-                                    @endphp
-                                    <div class="col-md-3 col-6">
-                                        <div class="">
-                                            <div class="product-item">
-                                                <div class="img-pro justify-content-center d-flex">
-                                                    <img loading="lazy" src="{{$doctor->avt}}" alt="">
-                                                    <a class="button-heart button-doctor-heart"
-                                                       data-doctor="{{$doctor->id}}"
-                                                       data-isFavourite="{{ $isFavourite ? 1 : 0 }}">
-                                                        <i class="bi {{ $class }}"></i>
-                                                    </a>
-                                                    <s class="icon-chuyen-khoa">
-                                                        @php
-                                                            $department = \App\Models\Department::where('id',$doctor->department_id)->value('thumbnail');
-                                                        @endphp
-                                                        <img loading="lazy" src="{{$department}}">
-                                                    </s>
-                                                </div>
-                                                <div class="content-pro p-md-3 p-2">
-                                                    <div class="">
-                                                        <div class="name-product" style="height: auto">
-                                                            <a class="name-product--fleaMarket max-3-line-content"
-                                                               href="{{ route('examination.doctor_info', $doctor->id) }}">{{$doctor->name}}</a>
-                                                        </div>
-                                                        <div class="location-pro d-flex">
-                                                            <p>
-                                                                @if(locationHelper() == 'vi')
-                                                                    {!! ($doctor->service ?? __('home.no name') ) !!}
-                                                                @else
-                                                                    {!! ($doctor->service_en  ?? __('home.no name') ) !!}
-                                                                @endif
-                                                            </p>
-                                                        </div>
-                                                        <div class="price-pro">
-                                                            @php
-                                                                if ($doctor->province_id == null) {
-                                                                    $addressP = 'Ha Noi';
-                                                                    }
-                                                                else {
-                                                                    if (locationHelper() == 'vi') {
-                                                                        $addressP = Province::find($doctor->province_id)->name;
-                                                                    }
-                                                                    else {
-                                                                        $addressP = Province::find($doctor->province_id)->name_en;
-                                                                    }
-                                                                }
-                                                            @endphp
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="21"
-                                                                 height="21" viewBox="0 0 21 21" fill="none">
-                                                                <g clip-path="url(#clip0_5506_14919)">
-                                                                    <path
-                                                                        d="M4.66602 12.8382C3.12321 13.5188 2.16602 14.4673 2.16602 15.5163C2.16602 17.5873 5.89698 19.2663 10.4993 19.2663C15.1017 19.2663 18.8327 17.5873 18.8327 15.5163C18.8327 14.4673 17.8755 13.5188 16.3327 12.8382M15.4993 7.59961C15.4993 10.986 11.7493 12.5996 10.4993 15.0996C9.24935 12.5996 5.49935 10.986 5.49935 7.59961C5.49935 4.83819 7.73793 2.59961 10.4993 2.59961C13.2608 2.59961 15.4993 4.83819 15.4993 7.59961ZM11.3327 7.59961C11.3327 8.05985 10.9596 8.43294 10.4993 8.43294C10.0391 8.43294 9.66602 8.05985 9.66602 7.59961C9.66602 7.13937 10.0391 6.76628 10.4993 6.76628C10.9596 6.76628 11.3327 7.13937 11.3327 7.59961Z"
-                                                                        stroke="white" stroke-width="2"
-                                                                        stroke-linecap="round"
-                                                                        stroke-linejoin="round"/>
-                                                                </g>
-                                                                <defs>
-                                                                    <clipPath id="clip0_5506_14919">
-                                                                        <rect width="20" height="20" fill="white"
-                                                                              transform="translate(0.5 0.933594)"/>
-                                                                    </clipPath>
-                                                                </defs>
-                                                            </svg> &nbsp;
-                                                            {{$addressP}}
-                                                        </div>
-                                                        <div class="price-pro">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="21"
-                                                                 height="21" viewBox="0 0 21 21" fill="none">
-                                                                <g clip-path="url(#clip0_5506_14923)">
-                                                                    <path
-                                                                        d="M10.4993 5.93294V10.9329L13.8327 12.5996M18.8327 10.9329C18.8327 15.5353 15.1017 19.2663 10.4993 19.2663C5.89698 19.2663 2.16602 15.5353 2.16602 10.9329C2.16602 6.33057 5.89698 2.59961 10.4993 2.59961C15.1017 2.59961 18.8327 6.33057 18.8327 10.9329Z"
-                                                                        stroke="white" stroke-width="2"
-                                                                        stroke-linecap="round"
-                                                                        stroke-linejoin="round"/>
-                                                                </g>
-                                                                <defs>
-                                                                    <clipPath id="clip0_5506_14923">
-                                                                        <rect width="20" height="20" fill="white"
-                                                                              transform="translate(0.5 0.933594)"/>
-                                                                    </clipPath>
-                                                                </defs>
-                                                            </svg> &nbsp; {{$doctor->time_working_1}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endif
-                            @endforeach
-                        </div>
-                        <div class="pagination mt-4 d-flex align-items-center justify-content-center">
-                            {{ $doctors->links() }}
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="findMedicine" role="tabpanel" aria-labelledby="findMedicine-tab">
-                        <div class="row">
-                            @if($medicines == '')
-                                <h1 class="d-flex align-items-center justify-content-center mt-4">{{ __('home.null') }}</h1>
-                            @else
-                                @foreach($medicines as $medicine)
-                                    <div class="col-md-3 col-6">
-                                        <div class="">
-                                            <div class="product-item">
-                                                <div
-                                                    class="img-pro justify-content-center d-flex img_product--homeNew">
-                                                    <img loading="lazy" src="{{$medicine->thumbnail}}" alt="">
-                                                    <a class="button-heart" data-favorite="0">
-                                                        <i class="bi-heart bi"
-                                                           data-product-id=""
-                                                           onclick=""></i>
-                                                    </a>
-                                                </div>
-                                                <div class="content-pro p-md-3 p-2">
-                                                    <div class="">
-                                                        <div class="name-product" style="height: auto">
-                                                            <a class="name-product--fleaMarket max-3-line-content"
-                                                               href="{{ route('examination.doctor_info', $medicine->id) }}">
-                                                                @if(locationHelper() == 'vi')
-                                                                    {{ ($medicine->name ?? __('home.no name') ) }}
-                                                                @else
-                                                                    {{ ($medicine->name_en  ?? __('home.no name') ) }}
-                                                                @endif
-                                                            </a>
-                                                        </div>
-                                                        <div class="location-pro">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="21"
-                                                                 height="21" viewBox="0 0 21 21" fill="none">
-                                                                <g clip-path="url(#clip0_5506_14919)">
-                                                                    <path
-                                                                        d="M4.66602 12.8382C3.12321 13.5188 2.16602 14.4673 2.16602 15.5163C2.16602 17.5873 5.89698 19.2663 10.4993 19.2663C15.1017 19.2663 18.8327 17.5873 18.8327 15.5163C18.8327 14.4673 17.8755 13.5188 16.3327 12.8382M15.4993 7.59961C15.4993 10.986 11.7493 12.5996 10.4993 15.0996C9.24935 12.5996 5.49935 10.986 5.49935 7.59961C5.49935 4.83819 7.73793 2.59961 10.4993 2.59961C13.2608 2.59961 15.4993 4.83819 15.4993 7.59961ZM11.3327 7.59961C11.3327 8.05985 10.9596 8.43294 10.4993 8.43294C10.0391 8.43294 9.66602 8.05985 9.66602 7.59961C9.66602 7.13937 10.0391 6.76628 10.4993 6.76628C10.9596 6.76628 11.3327 7.13937 11.3327 7.59961Z"
-                                                                        stroke="white" stroke-width="2"
-                                                                        stroke-linecap="round"
-                                                                        stroke-linejoin="round"/>
-                                                                </g>
-                                                                <defs>
-                                                                    <clipPath id="clip0_5506_14919">
-                                                                        <rect width="20" height="20" fill="white"
-                                                                              transform="translate(0.5 0.933594)"/>
-                                                                    </clipPath>
-                                                                </defs>
-                                                            </svg>
-                                                            {{$medicine->location_name}}
-                                                        </div>
-                                                        <div class="prices-pro">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="21"
-                                                                 height="21" viewBox="0 0 21 21" fill="none">
-                                                                <g clip-path="url(#clip0_5506_14923)">
-                                                                    <path
-                                                                        d="M10.4993 5.93294V10.9329L13.8327 12.5996M18.8327 10.9329C18.8327 15.5353 15.1017 19.2663 10.4993 19.2663C5.89698 19.2663 2.16602 15.5353 2.16602 10.9329C2.16602 6.33057 5.89698 2.59961 10.4993 2.59961C15.1017 2.59961 18.8327 6.33057 18.8327 10.9329Z"
-                                                                        stroke="white" stroke-width="2"
-                                                                        stroke-linecap="round"
-                                                                        stroke-linejoin="round"/>
-                                                                </g>
-                                                                <defs>
-                                                                    <clipPath id="clip0_5506_14923">
-                                                                        <rect width="20" height="20" fill="white"
-                                                                              transform="translate(0.5 0.933594)"/>
-                                                                    </clipPath>
-                                                                </defs>
-                                                            </svg>
-                                                            &nbsp;{{number_format($medicine->price, 0, ',', '.') }} {{$medicine->price_unit ?? 'VND'}}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="d-flex justify-content-end">
-                                                    <div class="SeeDetail">
-                                                        <a href="{{ route('medicine.detail', $medicine->id) }}"
-                                                           target="_blank">{{ __('home.See details') }}</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endforeach
-                            @endif
-                        </div>
-                        <div class="pagination mt-4 d-flex align-items-center justify-content-center">
-                            {{ $medicines->links() }}
-                        </div>
-                    </div>
-                    <div class="tab-pane fade " id="mentoring" role="tabpanel" aria-labelledby="mentoring-tab">
-                        <div class="section1-content">
-                            @foreach($questions as $question)
-                                <div class="mb-1">
-                                    <a href="{{ route('examination.mentoring.show', $question->id) }}" target="_blank">
-                                        <div class="content__item d-flex gap-3">
-                                            @php
-                                                $thumbnail = explode(',', $question->gallery_public)[0];
-                                            @endphp
-                                            <img
-                                                class="content__item__image" loading="lazy"
-                                                src="{{ $thumbnail ? asset($thumbnail) : asset('img/icons_logo/image 1.jpeg')}}"
-                                                alt=""
-                                            />
-                                            <div>
-                                                <h6>
-                                                    {{ $question->title }}
-                                                </h6>
-                                                <p class="ellipse-4-line">
-                                                    {!! $question->content !!}</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="banner1 m-0">
         <img loading="lazy" src="{{asset('img/icons_logo/Rectangle 23814.png')}}" alt="">
