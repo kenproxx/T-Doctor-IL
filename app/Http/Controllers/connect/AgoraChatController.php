@@ -137,7 +137,7 @@ class AgoraChatController extends Controller
                 'appId' => $appIdAgora,
                 'certificate' => $appCertificateAgora,
                 'channel' => $chanelName,
-                'uid' => '',
+                'uid' => $user_id_1,
                 'role' => 'publisher',
                 'expire' => time() + 3600,
             ]);
