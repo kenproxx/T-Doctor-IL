@@ -819,6 +819,7 @@ return [
     'List Member' => 'List Member',
     'Detail Result' => 'Detail Result',
     'Service Name' => 'Service Name',
+    'no Service Name' => 'No service Name',
     'Service Result' => 'Service Result',
     'Result' => 'Result',
     'Result En' => 'Result English',
